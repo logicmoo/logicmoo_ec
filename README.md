@@ -305,7 +305,7 @@ Second, ontologies are expected to change, grow and evolve as new domains and te
 
 Upper ontologies should be designed to describe general concepts that can be used across all domains. They have a central role in facilitating interoperability among domain specific ontologies, which are built hierarchically underneath the upper and generic layers, and therefore can be seen as specialization of the more abstract concepts.
 
-![Figure 1](/images/fig1.png)
+![Figure 1](/docs/images/fig1.png)
 
 Figure above presents a subset of the proposed upper ontology. Its development was prompted by our use cases in management and control of complex systems-of-systems, and was inspired by other ontologies such as SUMO (Suggested Upper Mergerd Ontology) (Niles and Pease, 2001), and W3C SSN (Semantic Sensor Network Ontology) (Compton et al., 2012).
 
@@ -318,13 +318,13 @@ The concept of System can be further expanded by a number of attributes, such as
 
 In our knowledge model, a Transition is a Procedural Knowledge concept that determines how to achieve a certain state (Action) given that an agent observes a particular state (Precondition) as being true in the world and there is an ordered list of effect free function calls in that state (Computation). Meanwhile, both Precondition and Action have a Predicate Set that is directly related to the concept of State from the Declarative Knowledge. The Goal State, which is an specification of State, is related to the concepts of Task and Workflow from the Procedural Knowledge. Where a Workflow is defined as sequence of Tasks, which in turn is defined by a sequence of Goal States assigned to a single Agent. 
 
-![Figure 2](/images/fig2.png)
+![Figure 2](/docs/images/fig2.png)
 
 Figure above presents the main elements of the knowledge base modeling.
 
 #### 2.5.3 ITS Domain ontology design principles
 
-![Figure 3](/images/fig3.png)
+![Figure 3](/docs/images/fig3.png)
 
 With the support of the presented upper ontology model, in this section we propose an ITS domain specific ontology, as depicted in Figure above. One of the central concepts within the ITS domain is the Transport Agent, that extends Agent from the upper ontology. The Transport Agent encompasses agents that are capable of transporting some entity, ranging from physical goods to virtual data. Some important concepts from the upper layers that apply to the Transport Agent include Dynamics and Capacity, among others. Transport Agents in turn are strongly related to the Abstract concept of Transportation Mode which defines the type of transportion scenario (e.g., Roads, Rail, Telco).
 
@@ -349,4 +349,5 @@ Another important concept is the Transportation Infrastructure which encompasses
 
 
 If you'd like to be listed as  a Contributor, make a [pull request](https://github.com/TeamSPoon/pddl_valoptic_api/pulls).
+
 
