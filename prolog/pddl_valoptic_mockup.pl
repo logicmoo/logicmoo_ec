@@ -47,7 +47,7 @@
    optic_functions/3, % optic_functions(Opr,Workspace,Functions)
    optic_types/3, % optic_types(Opr,Workspace,Sorts)
    optic_objects/3, % optic_objects(Opr,Workspace,Objects)
-   optic_derived/3, % optic_derived(Opr,Workspace,Fact,Conditions) 
+   optic_derived/4, % optic_derived(Opr,Workspace,Fact,Conditions) 
    optic_axioms/3, % optic_axioms(Opr,Workspace,Axioms)
    optic_action/3, % optic_action(Opr,Workspace,Action)
    optic_action_property/5, % optic_action_property(Opr,Workspace,Action,Prop,Value)
@@ -62,7 +62,7 @@
 check_opr(Workspace,add):- check_workspace(Workspace).
 check_opr(Workspace,del):- check_workspace(Workspace).
 check_opr(Workspace,current):- check_workspace(Workspace).
-check_opr(Workspace,Opr):- throw(opr_missing(Opr)).
+check_opr(_Workspace,Opr):- throw(opr_missing(Opr)).
 
 :- dynamic(current_workspace/1).
 
