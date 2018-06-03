@@ -2,18 +2,17 @@
  
 A SWI-Prolog Pack that lets Prolog code seamlessly use PDDL based planners
 
-Installation using SWI-Prolog 7.1 or later:
+Installation using SWI-Prolog 7.3 or later:
 
-    `?- pack_install('https://github.com/TeamSPoon/pddl_valoptic_api.git').`
- 
+````prolog
+    ?- pack_install('https://github.com/TeamSPoon/pddl_valoptic_api.git').
+```` 
 ![#f03c15](https://placehold.it/15/f03c15/000000?text=+) **TODO**: Andrew Dougherty - Ensure whatever is needed from the interfaces to VAL etc 
 
 
 # Getting Started with PDDL
 
 ![#f03c15](https://placehold.it/15/f03c15/000000?text=+) **NOTICE**: This is a work in progress and is being updated weekly.
-
-Welcome to pddl_valoptic_api, a short guide to getting started with using PDDL.
 
 This guide is designed for first-time readers, people who need refreshers and others, like myself, who sometimes need some syntax sanity-checking.
 
@@ -31,8 +30,8 @@ A world is described by a set of states, each containing a list of **facts** and
 
 There are certain things we need to keep track of in the "world" Workspace. 
 
-- **Objects**: Things in the world that interest us.
-- **Predicates**: Facts that we are interested in (e.g. properties of objects), which can be true or false.
+- **Objects**: Things in the world that interest us. ``` ?- optic_add_objects(+Workspace,+[Objects..]). ```
+- **Predicates**: Facts that we are interested in (e.g. properties of objects), which can be true or false. ``` ?- optic_add_objects(+Workspace,+[Predicates..]). ```
 - **An initial state**: The state of the world that we start in, i.e. things that are true at the start.
 - **Goal specification**: The state of the world we want to end at, i.e. things that we want to be true at the end.
 - **Actions/Operators**: Ways of changing the state of the world, i.e. things that happen that change the facts.

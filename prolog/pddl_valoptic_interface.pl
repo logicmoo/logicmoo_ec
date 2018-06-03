@@ -1,8 +1,8 @@
-/*  Part of Assertion Reader for SWI-Prolog
+/*  Part of Optic Planner interface for SWI-Prolog
 
-    Author:        
-    E-mail:        efmera@gmail.com
-    WWW:           https://github.com/edisonm/pddl_valoptic_api
+    Author:        Andrew Dougherty, Douglas Miles
+    E-mail:        andrewdo@frdcsa.org, logicmoo@gmail.com
+    WWW:           https://github.com/TeamSPoon/pddl_valoptic_api
     Copyright (C): 2017, Process Design Center, Breda, The Netherlands.
     All rights reserved.
 
@@ -40,16 +40,63 @@
 */
 
 :- module(pddl_valoptic_api, [
-  % get_plan(Workspace,Goal,Plan)
-  % add_inits(Workspace,Facts)
-  % add_predicates(Workspace,Predicates)
-  % add_objects(Workspace,Objects)
-  % add_makes_true(Workspace,Conditions,Fact) 
-  % add_makes_false(Workspace,Conditions,Fact)
-  % add_requires(Workspace,Requires)
-  % delete_workspace(Workspace,Objects)
- 
+   optic_workspace/2,   % optic_workspace(Opr,Workspace)
+   optic_requirements/3,   % optic_requirements(Opr,Workspace,Requires)          
+   optic_inits/3, % optic_inits(Opr,Workspace,Facts)
+   optic_predicates/3, % optic_predicates(Opr,Workspace,Predicates)
+   optic_functions/3, % optic_functions(Opr,Workspace,Functions)
+   optic_types/3, % optic_types(Opr,Workspace,Sorts)
+   optic_objects/3, % optic_objects(Opr,Workspace,Objects)
+   optic_derived/3, % optic_derived(Opr,Workspace,Fact,Conditions) 
+   optic_axioms/3, % optic_axioms(Opr,Workspace,Axioms)
+   optic_action/3, % optic_action(Opr,Workspace,Action)
+   optic_action_property/5, % optic_action_property(Opr,Workspace,Action,Prop,Value)
+   optic_copy_workspace/2, % optic_copy_workspace(+Workspace,?NewWorkspace)
+   optic_load_pddl_file/2, % optic_load_pddl_file(+Workspace,+FileName)
+
+   optic_get_plan/3, % optic_get_plan(+Workspace,+Goal,-Plan)
+   optic_apply_step/3, % optic_apply_step(+Workspace,+Step,-NewWorkspace)
+   ensure_optic/0
   ]).
+
+
+optic_opr_missing(Goal):- arg(1,Goal,Opr),arg(2,Goal,Workspace),check_opr(Workpsace,Opr),
+  optic_missing(Goal).
+
+optic_missing(Goal):- throw(optic_missing(Goal)).
+
+
+optic_workspace(Opr,Workspace):- optic_opr_missing(optic_workspace(Opr,Workspace)).
+
+optic_requirements(Opr,Workspace,Requires):- optic_opr_missing(optic_requirements(Opr,Workspace,Requires)).
+   
+optic_inits(Opr,Workspace,Facts):- optic_opr_missing(optic_inits(Opr,Workspace,Facts)).
+
+optic_predicates(Opr,Workspace,Predicates):- optic_opr_missing(optic_predicates(Opr,Workspace,Predicates)).
+
+optic_functions(Opr,Workspace,Functions):-optic_opr_missing(optic_functions(Opr,Workspace,Functions)).
+
+optic_types(Opr,Workspace,Sorts):- optic_opr_missing(optic_types(Opr,Workspace,Sorts)).
+
+optic_objects(Opr,Workspace,Objects):- optic_opr_missing(optic_objects(Opr,Workspace,Objects)).
+
+optic_derived(Opr,Workspace,Fact,Conditions) :- optic_opr_missing(optic_derived(Opr,Workspace,Fact,Conditions)).
+
+optic_axioms(Opr,Workspace,Axioms):- optic_opr_missing(optic_axioms(Opr,Workspace,Axioms)).
+
+optic_action(Opr,Workspace,Action):- optic_opr_missing(optic_action(Opr,Workspace,Action)).
+
+optic_action_property(Opr,Workspace,Action,Prop,Value):- optic_opr_missing(optic_action_property(Opr,Workspace,Action,Prop,Value)).
+
+optic_copy_workspace(Workspace,NewWorkspace):- optic_missing(optic_copy_workspace(Workspace,NewWorkspace)).
+
+optic_load_pddl_file(Workspace,FileName):- optic_missing(optic_load_pddl_file(Workspace,FileName)).
+
+%% optic_get_plan(+Workspace,+Goal,-Plan) is nondet.
+optic_get_plan(Workspace,Goal,Plan):- optic_missing(optic_get_plan(Workspace,Goal,Plan)).
+
+%% optic_apply_step(+Workspace,+Step,-NewWorkspace) is det.
+optic_apply_step(Workspace,Step,NewWorkspace):- optic_missing(optic_apply_step(Workspace,Step,NewWorkspace)).
 
 
 end_of_file.
@@ -74,3 +121,5 @@ end_of_file.
 )
 
 */
+
+

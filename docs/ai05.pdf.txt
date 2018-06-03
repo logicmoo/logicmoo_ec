@@ -25,7 +25,7 @@ them away if we restrict the growth of plans and domain descriptions to be polyn
 These results suggest that adding a reasonable implementation to handle axioms inside the
 planner is beneficial for the performance. Our experiments confirm this suggestion.
 
-Key words: classical planning, PDDL, expressive power
+Key words:classical planning, PDDL, expressive power
 
 
 
@@ -36,7 +36,7 @@ Key words: classical planning, PDDL, expressive power
 It is not uncommon for planners to support derived predicates, whose truth in the
 current state is inferred from that of some basic predicates via some axioms under
 
-  Email addresses: Sylvie.Thiebaux@anu.edu.au (Sylvie Thiébaux),
+  Email addresses:Sylvie.Thiebaux@anu.edu.au (Sylvie Thiébaux),
 hoffmann@mpi-sb.mpg.de (Jörg Hoffmann),
 nebel@informatik.uni-freiburg.de (Bernhard Nebel).
 
@@ -154,11 +154,11 @@ this syntax.
  respectively. Symbols in D are not allowed to appear in the initial state description
  and in atomic effects of actions, but may appear in preconditions, effect contexts,
  and goals. The domain description features a set of axioms A. These have the form
- (: derived (d ?~x) (f ?~x)), where d ∈ D, and where f is a first-order formula built
+ (:derived (d ?~x) (f ?~x)), where d ∈ D, and where f is a first-order formula built
  from predicate symbols in B ∪ D and whose free variables are those in the vector
 ~x.
 
-Intuitively, an axiom (: derived (d ?~x) (f ?~x)) means that when (f ?~x) is true at
+Intuitively, an axiom (:derived (d ?~x) (f ?~x)) means that when (f ?~x) is true at
 the specified arguments in a given state, we should derive that (d ?~x) is true at those
 arguments in that same state. Unlike traditional implications, these derivations are
 not to be contraposed (the negation of f is not derived from the negation of d),
@@ -275,7 +275,7 @@ predicates may be used freely.
 
 Definition 1 An axiom set A is stratified iff there exists a partition (stratification)
 of the set of derived predicates D into (non-empty) subsets {Di , 1 ≤ i ≤ n} such
-that for every di ∈ Di and every axiom (: derived (di ?~x) (f ?~x)) ∈ A:
+that for every di ∈ Di and every axiom (:derived (di ?~x) (f ?~x)) ∈ A:
 
     (1) if dj ∈ Dj appears in NNF(f ?~x), then j ≤ i,
     (2) if dj ∈ Dj appears negated in NNF(f ?~x), then j < i.
@@ -333,7 +333,7 @@ of clear use the negation of holding. The axiom set is stratified and a possible
 stratification is D1 = {above, holding}, D2 = {clear, handempty}.
 
 Note that any stratification {Di , 1 ≤ i ≤ n} of D induces a stratification {Ai , 1 ≤
-i ≤ n} of A in the obvious way: Ai = {(: derived (di ?~x) (fi ?~x)) ∈ A |
+i ≤ n} of A in the obvious way:Ai = {(:derived (di ?~x) (fi ?~x)) ∈ A |
 di ∈ Di }. Note also that when no derived predicate occurs negated in the NNF
 of the antecedent of any axiom, a single stratum suffices. Several planning papers
 have considered this special case (Gazen and Knoblock, 1997; Garagnani, 2000;
@@ -349,7 +349,7 @@ of the axiom set.
 We now spell out the semantics formally. Since we have a finite domain and no
 functions, we identify the objects in the domain with the ground terms (constants)
 that denote them, and states with finite sets of ground atoms, i.e., ground atomic
-formulae. More precisely, a state is taken to be a set of ground basic atoms: the
+formulae. More precisely, a state is taken to be a set of ground basic atoms:the
 derived ones will be treated as elaborate descriptions of the basic state. In order
 to define the semantics, however, we first need to consider an extended notion of
 “state” consisting of a set S of basic atoms and an arbitrary set D of atoms in the
@@ -372,7 +372,7 @@ Definition 2
     hS, Di |= (exists (?~x) (f ?~x)) iff hS, Di |= (f ~t) for some ~t
 
 
-Then, applying axiom a ≡ (: derived (d ?~x) (f ?~x)) in an extended state hS, Di
+Then, applying axiom a ≡ (:derived (d ?~x) (f ?~x)) in an extended state hS, Di
 results in the set [[a]](S, D) of further derived atoms:
                                  n                                       o
 Definition 3       [[a]](S, D) = (d ~t) | hS, Di |= (f ~t), ~t is ground
@@ -427,7 +427,7 @@ Algorithm 1 Stratification
    7.   for each i ∈ D do
    8.      for each j ∈ D do
    9.         R[i, j] ← 0
-  10. for each (: derived (j ?~x) (f ?~x)) ∈ A do
+  10. for each (:derived (j ?~x) (f ?~x)) ∈ A do
   11.      for each i ∈ D do
   12.         if i occurs negatively in NNF(f ?~x) then
   13.             R[i, j] ← 2
@@ -534,9 +534,9 @@ In detail, we will consider the following three variants of axiom languages:
 
 These variations address the following questions:
 
-(1)→(2): Is the capability of using arbitrary quantification and Boolean connectors
+(1)→(2):Is the capability of using arbitrary quantification and Boolean connectors
    important? In particular, is negation in axioms significant?
-(2)→(3): What role does recursion in axioms play?
+(2)→(3):What role does recursion in axioms play?
 
 In the following, we take a PDDLX planning domain description to be a tuple
 ∆ = hB, D, A, Oi, where B is the set of basic predicates, D is the set of derived
@@ -685,7 +685,7 @@ one fixed PDDLX domain description.
 
 An alternating Turing machine (ATM) M is a tuple hQ, Σ, Γ, #, δ, q0 , U, Ai, where
 Q is a finite set of states, Σ is the input alphabet, Γ ⊃ Σ is the tape alphabet,
-# ∈ Γ − Σ is the blank symbol, δ : (Q × Γ) → 2(Q×Γ×{L,R,S}) is the transition
+# ∈ Γ − Σ is the blank symbol, δ :(Q × Γ) → 2(Q×Γ×{L,R,S}) is the transition
 function, q0 ∈ Q is the initial state, U ⊆ Q is the set of universal states, and
 A ⊆ Q is the set of accepting states. All non-accepting, non-universal states are
 called existential. Such a machine is in an accepting configuration if
@@ -760,26 +760,26 @@ In addition, we use the following derived predicates:
 Now we have for every state q and head position i the following rule accounting for
 accepting states:
 
-(: derived (accq,i ?x0 . . .?xn−1 ) (typeq A))
+(:derived (accq,i ?x0 . . .?xn−1 ) (typeq A))
 
 Additionally, for every tuple hq, q 0 , ii we have the following rules:
 
 For 1 ≤ i ≤ n − 1, we have left-movement rules:
-(: derived (accq,i ?x0 . . .?xi−1 ?s ?xi+1 . . .?xn−1 )
+(:derived (accq,i ?x0 . . .?xi−1 ?s ?xi+1 . . .?xn−1 )
     (and
        (typeq E)
        (transq,q0 ?s ?s0 L)
        (accq0 ,i−1 ?x0 . . .?xi−1 ?s0 ?xi+1 . . .?xn−1 )))
 
 For 0 ≤ i ≤ n − 2, we have right-movement rules:
-(: derived (accq,i ?x0 . . .?xi−1 ?s ?xi+1 . . .?xn−1 )
+(:derived (accq,i ?x0 . . .?xi−1 ?s ?xi+1 . . .?xn−1 )
     (and
        (typeq E)
        (transq,q0 ?s ?s0 R)
        (accq0 ,i+1 ?x0 . . .?xi−1 ?s0 ?xi+1 . . .?xn−1 )))
 
 For 0 ≤ i ≤ n − 1, we have stay rules:
-(: derived (accq,i ?x0 . . .?xi−1 ?s ?xi+1 . . .?xn−1 )
+(:derived (accq,i ?x0 . . .?xi−1 ?s ?xi+1 . . .?xn−1 )
     (and
        (typeq E)
        (transq,q0 ?s ?s0 S)
@@ -791,7 +791,7 @@ exists a successor configuration that is accepting.
 The semantics of universal configurations is described with the following rules for
 every tuple hq, ii:
 
-(: derived (accq,i ?x0 . . .?xi−1 ?s ?xi+1 . . .?xn−1 )
+(:derived (accq,i ?x0 . . .?xi−1 ?s ?xi+1 . . .?xn−1 )
     (and
        (typeq U)
        (and
@@ -815,17 +815,17 @@ every tuple hq, ii:
 
 For each tuple hq, i, q 0 , s0 i, we have now the following set of rules:
 
-(: derived (okq,i,q0 ,s0 ,m ?x0 . . .?xi−1 ?s ?xi+1 . . .?xn−1 )
+(:derived (okq,i,q0 ,s0 ,m ?x0 . . .?xi−1 ?s ?xi+1 . . .?xn−1 )
     (notransq,q0 ?s s0 m))
-(: derived (okq,i,q0 ,s0 ,L ?x0 . . .?xi−1 ?s ?xi+1 . . .?xn−1 )
+(:derived (okq,i,q0 ,s0 ,L ?x0 . . .?xi−1 ?s ?xi+1 . . .?xn−1 )
     (and
        (transq,q0 ?s s0 L)
        (accq0 ,i−1 ?x0 . . .?xi−1 s0 ?xi+1 . . .?xn−1 )))
-(: derived (okq,i,q0 ,s0 ,R ?x0 . . .?xi−1 ?s ?xi+1 . . .?xn−1 )
+(:derived (okq,i,q0 ,s0 ,R ?x0 . . .?xi−1 ?s ?xi+1 . . .?xn−1 )
     (and
        (transq,q0 ?s s0 R)
        (accq0 ,i+1 ?x0 . . .?xi−1 s0 ?xi+1 . . .?xn−1 )))
-(: derived (okq,i,q0 ,s0 ,S ?x0 . . .?xi−1 ?s ?xi+1 . . .?xn−1 )
+(:derived (okq,i,q0 ,s0 ,S ?x0 . . .?xi−1 ?s ?xi+1 . . .?xn−1 )
     (and
        (transq,q0 ?s s0 S)
        (accq0 ,i ?x0 . . .?xi−1 s0 ?xi+1 . . .?xn−1 )))
@@ -834,9 +834,9 @@ For each tuple hq, i, q 0 , s0 i, we have now the following set of rules:
 
 Now the only operator we need is the following:
 
-(: action a
-    : parameters (?x0 . . .?xn−1 )
-    : precondition
+(:action a
+    :parameters (?x0 . . .?xn−1 )
+    :precondition
        (and
           (cell0 ?x0 )
           (cell1 ?x1 )
@@ -844,7 +844,7 @@ Now the only operator we need is the following:
               .
           (celln−1 ?xn−1 )
           (acc0,0 ?x0 . . .?xn−1 ))
-    : effect (g))
+    :effect (g))
 
 Let I = hw, M i be an LBATM instance of size n. Let II be the initial planning state
 describing M and w using the basic predicates. It is then clear that the constructed
@@ -931,7 +931,7 @@ have been described by e.g. Gazen and Knoblock (1997) and Garagnani (2000)
 under severe restrictions on the use of negated derived predicates.
 
 Specifically, the former scheme (Gazen and Knoblock, 1997) translates an axiom
-(: derived (d ?~x) (f ?~x)) into an extra “axiom” operator with parameters (?~x)
+(:derived (d ?~x) (f ?~x)) into an extra “axiom” operator with parameters (?~x)
 having the axiom’s antecedent (f ?~x) as precondition and its consequent (d ?~x)
 as effect. It also augments those of the (original) operators which affect any pred-
 icate present in the axiom’s antecedent with the effect (forall ?~x (not(d ?~x)))
@@ -943,7 +943,7 @@ inferring positive derived literals needed in a plan. However, it does not force
 the planner to establish the actual truth of any of the derived predicates. For this
 reason, serious problems arise if negated derived predicates appear anywhere in
 the planning task. For instance consider the PDDLX task B = {a}, D = {b},
-O = {(: action op : parameters () : effect (a))}, A = {(: derived(b)(a))},
+O = {(:action op :parameters () :effect (a))}, A = {(:derived(b)(a))},
 C = ∅, I = ∅, G = (and (a) (not b)). This task is not solvable because estab-
 lishing a also establishes b via the axiom. Yet, the scheme yields a compiled task
 solvable by the plan (op), because nothing forces the planner to execute the axiom
@@ -995,7 +995,7 @@ such that for every PDDLX domain description ∆ = hB, D, A, Oi:
 
 Proof. Figure 4 shows the PDDL instances induced by f. f computes a stratification
 {Ai , 1 ≤ i ≤ n} of the set of axioms A, as explained in Section 2, where in stratum
-i, each axiom ai,j is of the form (: derived (di,j ?~xi,j ) (fi,j ?~xi,j )) for 1 ≤ j ≤|Ai|. f
+i, each axiom ai,j is of the form (:derived (di,j ?~xi,j ) (fi,j ?~xi,j )) for 1 ≤ j ≤|Ai|. f
 
 
                                              20
@@ -1097,15 +1097,15 @@ i, each axiom ai,j is of the form (: derived (di,j ?~xi,j ) (fi,j ?~xi,j )) for 
 
                                                        21
 Fig. 4 PDDL instances induced by f
-        1. (: predicates ; all predicates in B ∪ D
+        1. (:predicates ; all predicates in B ∪ D
         2.                   (done1 ) . . . (donen )
         3.                   (fixed0 ) . . . (fixedn )
         4.                   (new))
             for each i ∈ {1, . . . , n}
-        5. (: action stratumi
-        6. : parameters ()
-        7. : precondition (and (fixedi−1 ) (not (fixedi )))
-        8. : effect (and (donei )
+        5. (:action stratumi
+        6. :parameters ()
+        7. :precondition (and (fixedi−1 ) (not (fixedi )))
+        8. :effect (and (donei )
         9.                       (forall (?~xi,1 )
        10.                            (when (and (fi,1 ?~xi,1 ) (not (di,1 ?~xi,1 )))
        11.                                    (and (di,1 ?~xi,1 ) (new))))
@@ -1113,17 +1113,17 @@ i, each axiom ai,j is of the form (: derived (di,j ?~xi,j ) (fi,j ?~xi,j )) for 
        13.                       (forall (?~xi,|Ai| )
        14.                            (when (and (fi,|Ai| ?~xi,|Ai| ) (not (di,|Ai| ?~xi,|Ai| )))
        15.                                    (and (di,|Ai| ?~xi,|Ai| ) (new))))))
-       16. (: action fixpointi
-       17. : parameters ()
-       18. : precondition (donei )
-       19. : effect (and (when (not(new)) (fixedi ))
+       16. (:action fixpointi
+       17. :parameters ()
+       18. :precondition (donei )
+       19. :effect (and (when (not(new)) (fixedi ))
        20.                       (not(new))
        21.                       (not (donei ))))
             for each o ∈ O
-       22. (: action NAME(o)
-       23. : parameters PARAMETERS(o)
-       24. : precondition (and P RECONDITION(o) (fixedk ))
-       25. : effect (and E FFECT(o)
+       22. (:action NAME(o)
+       23. :parameters PARAMETERS(o)
+       24. :precondition (and P RECONDITION(o) (fixedk ))
+       25. :effect (and E FFECT(o)
        26.                       (not (fixedm )) . . . (not (fixedn ))
        27.                       (not (donem )) . . . (not (donen ))
        28.                       (forall (?~xm,1 ) (not (dm,1 ?~xm,1 )))
@@ -1132,8 +1132,8 @@ i, each axiom ai,j is of the form (: derived (di,j ?~xi,j ) (fi,j ?~xi,j )) for 
             Where k = max({i | some di,j occurs in P RECONDITION(o)} ∪ {0}) and
             m = min({i | a predicate in some fi,j is modified in E FFECT(o)} ∪ {n+1})
 
-       31. (: init I ∪ (fixed0 ))
-       32. (: goal (and G (fixedk )))
+       31. (:init I ∪ (fixed0 ))
+       32. (:goal (and G (fixedk )))
             Where k = max({i | some di,j occurs in G} ∪ {0})
 
 
@@ -1213,13 +1213,13 @@ fixedk beforehand, where k is the highest stratum that the condition refers to.
 
 The observations (I) and (II) follow directly from the construction of f. Observation
 (I) can be seen by induction over k. For k = 0 there is nothing to show. For any
-reachable state Σ0 that contains fixedk+1 , there is a state Σ such that: Σ contains
+reachable state Σ0 that contains fixedk+1 , there is a state Σ such that:Σ contains
 fixedk ; Σ contains no (ground instances of) derived predicates at stratum k + 1; Σ0
 is reached from Σ by applying stratumk+1 actions until a fixpoint occurs (where
 the stratumk+1 actions are interleaved with fixpointk+1 actions, and, possibly,
 augmented actions from O that can not affect the truth of derived predicates at
 strata j ≤ k + 1). Observation (II) can be seen as follows. From a state Σ that
-contains fixedk , one can get to a state Σ0 that contains fixedk+1 by: applying
+contains fixedk , one can get to a state Σ0 that contains fixedk+1 by:applying
 the stratumk+1 action | Dk+1 | times, where Dk+1 denotes the ground instances
 of derived predicates in stratum k + 1 (after that, all possible atoms at this stratum
 are derived); applying fixpointk+1 (to delete new); applying stratumk+1 once (to
@@ -1242,7 +1242,7 @@ the arity of the derived predicates).
 
 
                                          24
-5   Planning: With or Without Axioms?
+5   Planning:With or Without Axioms?
 
 
 
@@ -1259,7 +1259,7 @@ f.
 
 
 
-FFX transforms each axiom (: derived(d ?~    x)(f ?~x)) into an operator with param-
+FFX transforms each axiom (:derived(d ?~    x)(f ?~x)) into an operator with param-
 eters (?~x), precondition (f ?~x) and effect (d ?~x), with a flag set to distinguish it
 from a “normal” operator. During the relaxed planning process that FF performs to
 obtain its heuristic function, the axiom actions are treated as normal actions and
@@ -1301,26 +1301,26 @@ sic and derived predicates; in particular BW with 4 operators is the only common
 benchmark domain we are aware of where the stratification of the axioms requires
 more than one stratum. 10 We experimented with two versions of BW:
 
-1op: The version with a single move operator. on is the only basic predicate, the
+1op:The version with a single move operator. on is the only basic predicate, the
   table being treated as a (special kind of) block. There is a single stratum consist-
   ing of the clear and above derived predicates. Note that above is only used in
   goal descriptions.
-4ops: The version we used earlier as an example with the 4 operators pickup,
+4ops:The version we used earlier as an example with the 4 operators pickup,
   putdown, stack and unstack. The basic predicates are on and ontable, and
   the derived ones are above and holding (stratum 1), as well as clear and
   handempty (stratum 2) whose axiomatisations use the negation of holding.
 
 For each of those versions, we considered 3 types of planning tasks:
 
-strict: A PDDLX task is built from a given pair of BW states as follows. The first
+strict:A PDDLX task is built from a given pair of BW states as follows. The first
    state is taken to be the initial one, and the second is converted into an incom-
    pletely specified goal description by writing “above” whereas one would nor-
    mally have written “on” and omitting the mention of those blocks that would
    normally have been on the table. 11
-loose: A PDDLX task is built from a single BW state by taking it to be the initial
+loose:A PDDLX task is built from a single BW state by taking it to be the initial
    state and asking that any block which is on the table initially end up above all
    those that were initially not.
-one tower: This is the special case of those loose tasks for which the initial state
+one tower:This is the special case of those loose tasks for which the initial state
    has only one tower. In their 1op versions, those tasks are one of the examples
    considered by Davidson and Garagnani (2002).
 
@@ -1343,7 +1343,7 @@ of blocks in the task).
 
                                             26
 Fig. 5 Experimental results for BW with 1 operator
-                                                     BW 1op strict: Run Times                                                                     BW 1op strict: Plan Lengths
+                                                     BW 1op strict:Run Times                                                                     BW 1op strict:Plan Lengths
                           100
                                     FFX                                                                                            FFX
                                     FF+f                                                                                           FF+f
@@ -1366,7 +1366,7 @@ of blocks in the task).
                                                           number n of blocks                                                                            number n of blocks
 
 
-                                                    BW 1op loose: Run Times                                                                       BW 1op loose: Plan Lengths
+                                                    BW 1op loose:Run Times                                                                       BW 1op loose:Plan Lengths
                           100                                                                                            100
                                     FFX                                                                                            FFX
                                     FF+f                                                                                           FF+f
@@ -1389,7 +1389,7 @@ of blocks in the task).
                                                           number n of blocks                                                                            number n of blocks
 
 
-                                                   BW 1op one tower: Run Times                                                                BW 1op one tower: Plan Lengths
+                                                   BW 1op one tower:Run Times                                                                BW 1op one tower:Plan Lengths
                           100
                                     FFX                                                                                  100       FFX
                                     FF+f                                                                                           FF+f
@@ -1438,7 +1438,7 @@ recursive derived predicates away as suggested by Davidson and Garagnani (2002),
 
                                                                                                27
 Fig. 6 Experimental results for BW with 4 operators
-                                                    BW 4ops strict: Run Times                                                                         BW 4ops strict: Plan Lengths
+                                                    BW 4ops strict:Run Times                                                                         BW 4ops strict:Plan Lengths
                           100
                                     FFX                                                                                                  FFX
                                     FF+f                                                                                                 FF+f
@@ -1462,7 +1462,7 @@ recursive derived predicates away as suggested by Davidson and Garagnani (2002),
                                                             number n of blocks                                                                                   number n of blocks
 
 
-                                                    BW 4ops loose: Run Times                                                                          BW 4ops loose: Plan Lengths
+                                                    BW 4ops loose:Run Times                                                                          BW 4ops loose:Plan Lengths
                           100
                                     FFX                                                                                                  FFX
                                     FF+f                                                                                                 FF+f
@@ -1485,7 +1485,7 @@ recursive derived predicates away as suggested by Davidson and Garagnani (2002),
                                                             number n of blocks                                                                                   number n of blocks
 
 
-                                               BW 4ops one tower: Run Times                                                                         BW 4ops one tower: Plan Lengths
+                                               BW 4ops one tower:Run Times                                                                         BW 4ops one tower:Plan Lengths
                           100
                                     FFX                                                                                                  FFX
                                     FF+f                                                                                                 FF+f
@@ -1519,7 +1519,7 @@ by simply substituting their definition for them wherever they occur until no oc
 rence remains. We did not experiment with compiling recursive derived predicates
 as per their method because this requires significant implementation effort and the
 authors were not able to provide us with an implementation at the time of writing
-this paper. Instead, we considered two treatments of the recursive predicates: one
+this paper. Instead, we considered two treatments of the recursive predicates:one
 using axioms and running FFX and the other using compilation via f and running
 the original FF. In 1op domains, the run-times obtained with the former, resp. the
 latter, treatment are similar to those obtained by FFX , resp. by FF+f in Figure 5.
@@ -1585,7 +1585,7 @@ resulting from handling axioms explicitly is undeniable. In contrast to BW, the 
 
 
                                                                       random instances
-                                            PSR: Run Times                                                                       PSR: Plan Lengths
+                                            PSR:Run Times                                                                       PSR:Plan Lengths
                          100                                                                                   70
                                FFX                                                                                  FFX
                                FF+f                                                                            60   FF+f
@@ -1624,7 +1624,7 @@ resulting from handling axioms explicitly is undeniable. In contrast to BW, the 
                                 rural                            7      26           2                         9.67        469.11        6       76
 
 
-length in PSR increases only slowly with n: with our parameters for the random
+length in PSR increases only slowly with n:with our parameters for the random
 instances generation, it is around 5-10 actions for PDDLX instances, and around
 30-60 for the compiled instances (the known instances exhibit similar figures). Yet
 this makes all the difference between what is solvable in reasonable time and what
@@ -1670,9 +1670,9 @@ ple SPIN would return in case of error.
 
 The domain versions we considered are the IPC-4 domain featuring (non-recursive)
 derived predicates and no fluents, and its compilation via f. We experimented with
-the two types of PROMELA planning tasks used in the competition: dining philoso-
+the two types of PROMELA planning tasks used in the competition:dining philoso-
 phers protocol tasks, and optical telegraph protocol tasks. The instances used were
-the same as in the competition: for each number n of processes, we solved the (sin-
+the same as in the competition:for each number n of processes, we solved the (sin-
 gle) corresponding competition instance and recorded the time and plan length for
 FF and FFX .
 
@@ -1692,7 +1692,7 @@ nobody was able to obtain good results there.
 
                                             31
 Fig. 8 Experimental results for PROMELA
-                                       Promela Telegraph: Run Times                                                  Promela Telegraph: Plan Lengths
+                                       Promela Telegraph:Run Times                                                  Promela Telegraph:Plan Lengths
                      120                                                                           100
                                FFX                                                                           FFX
                                FF+f                                                                90        FF+f
@@ -1717,7 +1717,7 @@ nobody was able to obtain good results there.
                                            number n of processes                                                          number n of processes
 
 
-                                      Promela Philosophers: Run Times                                               Promela Philosophers: Plan Lengths
+                                      Promela Philosophers:Run Times                                               Promela Philosophers:Plan Lengths
                      100
                                FFX                                                                           FFX
                                FF+f                                                                100       FF+f
@@ -1808,10 +1808,10 @@ References
 Abiteboul, S., Hall, R., Vianou, V., 1995. Foundations of Databases. Addison Wes-
   ley, Reading, MA.
 Aiello, L. C., Doyle, J., Shapiro, S. (Eds.), 1996. Principles of Knowledge Repre-
-  sentation and Reasoning: Proceedings of the 5th International Conference (KR-
+  sentation and Reasoning:Proceedings of the 5th International Conference (KR-
   96). Morgan Kaufmann, Cambridge, MA.
 Apt, K., Blair, H., Walker, A., 1988. Towards a theory of declarative knowledge.
-  In: Foundations of Deductive Databases and Logic Programming. Morgan Kauf-
+  In:Foundations of Deductive Databases and Logic Programming. Morgan Kauf-
   mann, pp. 89–148.
 Bacchus, F., 2000. Subset of PDDL for the AIPS2000 Planning Competition. The
   AIPS-00 Planning Competition Committee.
@@ -1822,44 +1822,44 @@ Bacchus, F., 2000. Subset of PDDL for the AIPS2000 Planning Competition. The
   Sun, Y., Weld, D., 1995. UCPOP user’s manual. Tech. Rep. 93-09-06d, The Uni-
   versity of Washington, Computer Science Department.
 Bertoli, P., Cimatti, A., Slaney, J., Thiébaux, S., 2002. Solving power supply
-  restoration problems with planning via symbolic model checking. In: Proceed-
+  restoration problems with planning via symbolic model checking. In:Proceed-
   ings of the 15th European Conference on Artificial Intelligence (ECAI-02). Wi-
   ley, Lyon, France, pp. 576–80.
-Bonet, B., Geffner, H., 2001. GPT: a tool for planning with uncertainty and partial
-  information. In: Proceedings IJCAI-01 Workshop on Planning under Uncertainty
+Bonet, B., Geffner, H., 2001. GPT:a tool for planning with uncertainty and partial
+  information. In:Proceedings IJCAI-01 Workshop on Planning under Uncertainty
   and Incomplete Information. pp. 82–87.
-Bonet, B., Thiébaux, S., 2003. GPT meets PSR. In: Giunchiglia, E., Muscettola, N.,
+Bonet, B., Thiébaux, S., 2003. GPT meets PSR. In:Giunchiglia, E., Muscettola, N.,
   Nau, D. (Eds.), Proceedings of the 13th International Conference on Automated
   Planning and Scheduling (ICAPS-03). Trento, Italy, pp. 102–111.
-Brewka, G., Hertzberg, J., 1993. How to do things with worlds: On formalizing
+Brewka, G., Hertzberg, J., 1993. How to do things with worlds:On formalizing
   actions and plans. Journal Logic and Computation 3 (5), 517–532.
 Cadoli, M., Donini, F. M., 1997. A survey on knowledge compilation. AI Commu-
   nications 10 (3,4), 137–150.
 Cadoli, M., Donini, F. M., Liberatore, P., Schaerf, M., 1996. Comparing space ef-
-  ficiency of propositional knowledge representation formalism. In: Aiello et al.
+  ficiency of propositional knowledge representation formalism. In:Aiello et al.
   (1996), pp. 364–373.
 Chandra, A., Kozen, D., Stockmeyer, L., 1981. Alternation. Journal of the Associ-
   ation for Computing Machinery 28 (1), 114–133.
 Dantsin, E., Eiter, T., Gottlob, G., Voronkov, A., 2001. Complexity and expressive
   power of logic programming. ACM Computing Surveys 33 (3), 374–425.
 Davidson, M., Garagnani, M., 2002. Pre-processing planning domains containing
-  language axioms. In: Proceedings of the 21st Workshop of the UK Planning and
+  language axioms. In:Proceedings of the 21st Workshop of the UK Planning and
   Scheduling SIG (PlanSIG-02). pp. 23–34.
-Edelkamp, S., 2003. Promela planning. In: Model Checking Software, 10th Inter-
+Edelkamp, S., 2003. Promela planning. In:Model Checking Software, 10th Inter-
   national SPIN Workshop. Springer-Verlag, Berlin, pp. 197–212.
-Edelkamp, S., Hoffmann, J., 2004. PDDL2.2: The language for the classical part
+Edelkamp, S., Hoffmann, J., 2004. PDDL2.2:The language for the classical part
   of the 4th international planning competition. Tech. Rep. 195, Albert-Ludwigs-
   Universität, Institut für Informatik, Freiburg, Germany.
 Erol, K., Nau, D. S., Subrahmanian, V. S., 1995. Complexity, decidability and unde-
   cidability results for domain-independent planning. Artificial Intelligence 76 (1–
   2), 75–88.
-Fox, M., Long, D., 2003. PDDL2.1: An extension to PDDL for expressing temporal
+Fox, M., Long, D., 2003. PDDL2.1:An extension to PDDL for expressing temporal
   planning domains. Journal of Artificial Intelligence Research 20, 61–124.
 Garagnani, M., 2000. A correct algorithm for efficient planning with preprocessed
-  domain axioms. In: Research and Development in Intelligent Systems XVII.
+  domain axioms. In:Research and Development in Intelligent Systems XVII.
   Springer-Verlag, Berlin, pp. 363–374.
 Gazen, B. C., Knoblock, C., 1997. Combining the expressiveness of UCPOP with
-  the efficiency of Graphplan. In: Steel, S., Alami, R. (Eds.), Recent Advances
+  the efficiency of Graphplan. In:Steel, S., Alami, R. (Eds.), Recent Advances
   in AI Planning. 4th European Conference on Planning (ECP’97). Vol. 1348 of
   Lecture Notes in Artificial Intelligence. Springer-Verlag, Toulouse, France, pp.
   221–233.
@@ -1867,14 +1867,14 @@ Gazen, B. C., Knoblock, C., 1997. Combining the expressiveness of UCPOP with
 
                                         34
 Gogic, G., Kautz, H. A., Papadimitriou, C. H., Selman, B., 1995. The comparative
-  linguistics of knowledge representation. In: IJCAI-95 (1995), pp. 862–869.
+  linguistics of knowledge representation. In:IJCAI-95 (1995), pp. 862–869.
 Gustafsson, J., Doherty, P., 1996. Embracing occlusion in specifying the indirect
-  effects of actions. In: Aiello et al. (1996), pp. 87–98.
-Hoffmann, J., 2002. Local search topology in planning benchmarks: A theoretical
-  analysis. In: Ghallab, M., Hertzberg, J., Traverso, P. (Eds.), Proceedings of the
+  effects of actions. In:Aiello et al. (1996), pp. 87–98.
+Hoffmann, J., 2002. Local search topology in planning benchmarks:A theoretical
+  analysis. In:Ghallab, M., Hertzberg, J., Traverso, P. (Eds.), Proceedings of the
   6th International Conference on Artificial Intelligence Planning and Scheduling
   (AIPS-02). Morgan Kaufmann, Toulouse, France, pp. 92–100.
-Hoffmann, J., Nebel, B., 2001. The FF planning system: Fast plan generation
+Hoffmann, J., Nebel, B., 2001. The FF planning system:Fast plan generation
   through heuristic search. Journal of Artificial Intelligence Research 14, 253–302.
 Holzmann, G., 1997. The model checker Spin. IEEE Transactions on Software En-
   gineering 23 (5), 279–295.
@@ -1882,11 +1882,11 @@ IJCAI-95, 1995. Proceedings of the 14th International Joint Conference on Artifi
   cial Intelligence (IJCAI-95). Montreal, Canada.
 Karp, R. M., Lipton, R. J., 1982. Turing machines that take advice. L’ Ensignement
   Mathématique 28, 191–210.
-Kautz, H. A., Selman, B., 1992. Forming concepts for fast inference. In: Proceed-
+Kautz, H. A., Selman, B., 1992. Forming concepts for fast inference. In:Proceed-
   ings of the 10th National Conference of the American Association for Artificial
   Intelligence (AAAI-92). MIT Press, San Jose, CA, pp. 786–793.
-Lifschitz, V., 1986. On the semantics of STRIPS. In: Georgeff, M. P., Lansky, A.
-  (Eds.), Reasoning about Actions and Plans: Proceedings of the 1986 Workshop.
+Lifschitz, V., 1986. On the semantics of STRIPS. In:Georgeff, M. P., Lansky, A.
+  (Eds.), Reasoning about Actions and Plans:Proceedings of the 1986 Workshop.
   Morgan Kaufmann, Timberline, OR, pp. 1–9.
 Lin, F., 1995. Embracing causality in specifying the indirect effects of actions. In:
   IJCAI-95 (1995), pp. 1985–1993.
@@ -1895,12 +1895,12 @@ Lloyd, J. W., 1984. Foundations of Logic Programming. Springer-Verlag, Berlin,
 Lynch, N. A., 1977. Log space recognition and translation of parenthesis languages.
   Journal of the Association for Computing Machinery 24, 583–590.
 McCain, N., Turner, H., 1995. A causal theory of ramifications and qualifications.
-  In: IJCAI-95 (1995), pp. 1978–1984.
+  In:IJCAI-95 (1995), pp. 1978–1984.
 McDermott, D., 1998. PDDL – the planning domain definition language. Tech.
   Rep. CVC TR-98-003/DCS TR-1165, Yale Center for Computational Vision and
   Control.
-Nau, D., Cao, Y., Lotem, A., Munoz-Avila, H., 1999. SHOP: simple hierarchical
-  ordered planner. In: Proceedings of the 16th International Joint Conference on
+Nau, D., Cao, Y., Lotem, A., Munoz-Avila, H., 1999. SHOP:simple hierarchical
+  ordered planner. In:Proceedings of the 16th International Joint Conference on
   Artificial Intelligence (IJCAI-99). Stockholm, Sweden, pp. 968–975.
 Nebel, B., 2000. On the compilability and expressive power of propositional plan-
   ning formalisms. Journal of Artificial Intelligence Research 12, 271–315.
@@ -1908,22 +1908,22 @@ Sandewall, E., 1994. Features and Fluents. Oxford University Press, Oxford, UK.
 Slaney, J., Thiébaux, S., 2001. Blocks world revisited. Artificial Intelligence 125,
   119–153.
 Thiébaux, S., Cordier, M., Sep. 2001. Supply restoration in power distribution sys-
-  tems — a benchmark for planning under uncertainty. In: Cesta, A., Borrajo, D.
+  tems — a benchmark for planning under uncertainty. In:Cesta, A., Borrajo, D.
   (Eds.), Recent Advances in AI Planning. 6th European Conference on Planning
   (ECP’01). Springer-Verlag, Toledo, Spain, pp. 85–95.
 
 
                                         35
-Thiébaux, S., Hoffmann, J., Nebel, B., 2003. In defence of PDDL axioms. In: Gott-
+Thiébaux, S., Hoffmann, J., Nebel, B., 2003. In defence of PDDL axioms. In:Gott-
   lob, G. (Ed.), Proceedings of the 18th International Joint Conference on Artificial
   Intelligence (IJCAI-03). Acapulco, Mexico, pp. 961–966.
-Vardi, M. Y., 1982. The complexity of relational query languages. In: Proceedings
+Vardi, M. Y., 1982. The complexity of relational query languages. In:Proceedings
   of the 14th ACM Symposium on the Theory of Computation. pp. 137–146.
 Vorobyov, S., Voronkov, A., 1997. Complexity of nonrecursive programs with com-
   plex values. Tech. Rep. MPI-I-97-2-010, Max-Planck-Institut für Informatik,
   Saarbrücken, Germany.
 Winslett, M. S., 1988. Reasoning about action using a possible models approach.
-  In: Proceedings of the 7th National Conference of the American Association for
+  In:Proceedings of the 7th National Conference of the American Association for
   Artificial Intelligence (AAAI-88). Saint Paul, MI, pp. 89–93.
 
 
