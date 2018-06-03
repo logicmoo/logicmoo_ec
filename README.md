@@ -1,9 +1,10 @@
-# Pfc -- forward chaining in Prolog
+# pddl_valoptic_api -- A SWI-Prolog Pack that lets Prolog code seamlessly use PDDL based planners
 
 Installation using SWI-Prolog 7.1 or later:
 
     `?- pack_install('https://github.com/TeamSPoon/pddl_valoptic_api.git').`
-
+ 
+ [TODO] Andrew Dougherty - Ensure whatever is needed from the interfaces to VAL etc 
 
 
 # Getting Started with PDDL
@@ -22,10 +23,6 @@ PDDL one of the few languages designed for the purpose of creating a standard fo
 
 The most popular of PDDL used today are PDDL2.1, which is an extension to PDDL for expressing temporal domains [[2]](http://www.jair.org/papers/paper1129.html); PDDL 3 [[3]](http://www.cs.yale.edu/homes/dvm/papers/pddl-ipc5.pdf) which adds trajectory constraints and preferences to PDDL 2.1, and PDDL+ [[4]](http://www.jair.org/papers/paper2044.html) which allows modelling mixed discrete-continuous domains in PDDL.
 
-## Environment Setup
-
-You can use your own text editor, but I would recommend using [Sublime Text](https://www.sublimetext.com/) with [Package Control](http://packagecontrol.io). This way you can make use of the [myPDDL package](https://github.com/Pold87/myPDDL), which will give you syntax higlighting. 
-
 ## Components of PDDL
 
 Before we start writing PDDL, we need to understand what how to model a "world" in PDDL. 
@@ -40,7 +37,18 @@ There are certain things we need to keep track of in the "world".
 - **Goal specification**: The state of the world we want to end at, i.e. things that we want to be true at the end.
 - **Actions/Operators**: Ways of changing the state of the world, i.e. things that happen that change the facts.
 
-## PDDL Syntax
+## SWI-Prolog Interface
+
+There are certain things we need to keep track of in the "world" Workspace. 
+
+- **Objects**: Things in the world that interest us.
+- **Predicates**: Facts that we are interested in (e.g. properties of objects), which can be true or false.
+- **An initial state**: The state of the world that we start in, i.e. things that are true at the start.
+- **Goal specification**: The state of the world we want to end at, i.e. things that we want to be true at the end.
+- **Actions/Operators**: Ways of changing the state of the world, i.e. things that happen that change the facts.
+
+
+## PDDL Files Syntax
 
 First thing you need to know, PDDL files usually have the extension `.pddl`. 
 
@@ -341,12 +349,6 @@ Another important concept is the Transportation Infrastructure which encompasses
 
 #### 3. References
 
-Davies, J., Studer, R., and Warren, P. (2006). Semantic Web technologies: trends and research in ontology-based systems. JohnWiley & Sons, Chichester,West Sussex, PO19 8SQ, England.
-
-Niles, I. and Pease, A. (2001). Towards a Standard Upper Ontology. In Proceedings of the International Conference on Formal Ontology in Information Systems - Volume 2001, FOIS ’01, pages 2–9, New York, NY, USA. ACM.
-
-Compton, M., Barnaghi, P., Bermudez, L., Garcia-Castro, R., Corcho, O., Cox, S., Graybeal, J., Hauswirth, M., Henson, C., Herzog, A., Huang, V., Janowicz, K., Kelsey, W. D., Phuoc, D. L., Lefort, L., Leggieri, M., Neuhaus, H., Nikolov, A., Page, K., Passant, A., Sheth, A., and Taylor, K. (2012). The SSN ontology of the W3C semantic sensor network incubator group. Web Semantics: Science, Services and Agents on the World Wide Web, 17:25 – 32.
-
 [1] [PDDL's Wikipedia Page](https://en.wikipedia.org/wiki/Planning_Domain_Definition_Language#De_facto_official_versions_of_PDDL)
 
 [2] Fox, M. and Long, D. (2003). PDDL2.1: An Extension to PDDL for Expressing Temporal Planning Domains. [online] Available at: [http://www.jair.org/papers/paper1129.html](http://www.jair.org/papers/paper1129.html) [Accessed 20 Nov. 2017]. 
@@ -355,3 +357,8 @@ Compton, M., Barnaghi, P., Bermudez, L., Garcia-Castro, R., Corcho, O., Cox, S.,
 
 [4] Fox, M. and Long, D. (2006) Modelling Mixed Discrete-Continuous Domains for Planning. Volume 27, pages 235-297. [online] Available at [http://www.jair.org/papers/paper2044.html](http://www.jair.org/papers/paper2044.html)
 
+[5] Davies, J., Studer, R., and Warren, P. (2006). Semantic Web technologies: trends and research in ontology-based systems. JohnWiley & Sons, Chichester,West Sussex, PO19 8SQ, England.
+
+[6] Niles, I. and Pease, A. (2001). Towards a Standard Upper Ontology. In Proceedings of the International Conference on Formal Ontology in Information Systems - Volume 2001, FOIS Â’01, pages 2Â–9, New York, NY, USA. ACM.
+
+[7] Compton, M., Barnaghi, P., Bermudez, L., Garcia-Castro, R., Corcho, O., Cox, S., Graybeal, J., Hauswirth, M., Henson, C., Herzog, A., Huang, V., Janowicz, K., Kelsey, W. D., Phuoc, D. L., Lefort, L., Leggieri, M., Neuhaus, H., Nikolov, A., Page, K., Passant, A., Sheth, A., and Taylor, K. (2012). The SSN ontology of the W3C semantic sensor network incubator group. Web Semantics: Science, Services and Agents on the World Wide Web, 17:25 Â– 32.
