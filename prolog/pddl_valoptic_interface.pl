@@ -39,7 +39,7 @@
 
 */
 
-:- module(pddl_valoptic_api, [
+:- module(pddl_valoptic_interface, [
    optic_workspace/2,   % optic_workspace(Opr,Workspace)
    optic_requirements/3,   % optic_requirements(Opr,Workspace,Requires)          
    optic_inits/3, % optic_inits(Opr,Workspace,Facts)
@@ -59,6 +59,7 @@
    ensure_optic/0
   ]).
 
+check_opr(_Workpsace,_Opr).
 
 optic_opr_missing(Goal):- arg(1,Goal,Opr),arg(2,Goal,Workspace),check_opr(Workpsace,Opr),
   optic_missing(Goal).
@@ -98,6 +99,8 @@ optic_get_plan(Workspace,Goal,Plan):- optic_missing(optic_get_plan(Workspace,Goa
 %% optic_apply_step(+Workspace,+Step,-NewWorkspace) is det.
 optic_apply_step(Workspace,Step,NewWorkspace):- optic_missing(optic_apply_step(Workspace,Step,NewWorkspace)).
 
+
+ensure_optic.
 
 end_of_file.
 
