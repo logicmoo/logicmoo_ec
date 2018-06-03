@@ -39,10 +39,11 @@
 
 */
 
-:- module(pddl_valoptic_api, [
+:- module(optic_api, [
   ]).
 
-:- reexport(pddl_valoptic_interface).
+:- reexport(pddl_valoptic_mockup).
+%:- reexport(pddl_valoptic_interface).
 
 end_of_file.
 

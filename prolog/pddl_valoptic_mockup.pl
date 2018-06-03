@@ -64,11 +64,19 @@ check_opr(Workspace,del):- check_workspace(Workspace).
 check_opr(Workspace,current):- check_workspace(Workspace).
 check_opr(Workspace,Opr):- throw(opr_missing(Opr)).
 
-optic_opr_missing(Goal):- arg(1,Goal,Opr),
-  arg(2,Goal,Workspace),check_opr(Workspace,Opr),
+:- dynamic(current_workspace/1).
+
+check_workspace(Workspace):- current_workspace(Workspace),!.
+check_workspace(Workspace):- asserta(current_workspace(Workspace)).
+
+optic_opr_missing(Goal):- 
+  arg(1,Goal,Opr),
+  arg(2,Goal,Workspace),
+  check_opr(Workspace,Opr),
   optic_missing(Goal).
 
-optic_missing(Goal):- throw(optic_missing(Goal)).
+%optic_missing(Goal):- throw(optic_missing(Goal)).
+optic_missing(Goal):- format('~N~q.~n',[optic_goal(Goal)]).
 
 
 %% optic_workspace(+current,?Workspace) is nondet.
