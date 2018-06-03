@@ -1,10 +1,12 @@
-# pddl_valoptic_api -- A SWI-Prolog Pack that lets Prolog code seamlessly use PDDL based planners
+# pddl_valoptic_api
+ 
+A SWI-Prolog Pack that lets Prolog code seamlessly use PDDL based planners
 
 Installation using SWI-Prolog 7.1 or later:
 
     `?- pack_install('https://github.com/TeamSPoon/pddl_valoptic_api.git').`
  
- [TODO] Andrew Dougherty - Ensure whatever is needed from the interfaces to VAL etc 
+![#f03c15](https://placehold.it/15/f03c15/000000?text=+) **TODO**: Andrew Dougherty - Ensure whatever is needed from the interfaces to VAL etc 
 
 
 # Getting Started with PDDL
@@ -23,21 +25,9 @@ PDDL one of the few languages designed for the purpose of creating a standard fo
 
 The most popular of PDDL used today are PDDL2.1, which is an extension to PDDL for expressing temporal domains [[2]](http://www.jair.org/papers/paper1129.html); PDDL 3 [[3]](http://www.cs.yale.edu/homes/dvm/papers/pddl-ipc5.pdf) which adds trajectory constraints and preferences to PDDL 2.1, and PDDL+ [[4]](http://www.jair.org/papers/paper2044.html) which allows modelling mixed discrete-continuous domains in PDDL.
 
-## Components of PDDL
-
-Before we start writing PDDL, we need to understand what how to model a "world" in PDDL. 
+## SWI-Prolog Interface
 
 A world is described by a set of states, each containing a list of **facts** and/or **objects**. A world begins with an **initial state**, and is governed by a set of rules and constraints that limit which **actions** can be taken in each state, and each action generally represents a transition to a different state. 
-
-There are certain things we need to keep track of in the "world". 
-
-- **Objects**: Things in the world that interest us.
-- **Predicates**: Facts that we are interested in (e.g. properties of objects), which can be true or false.
-- **An initial state**: The state of the world that we start in, i.e. things that are true at the start.
-- **Goal specification**: The state of the world we want to end at, i.e. things that we want to be true at the end.
-- **Actions/Operators**: Ways of changing the state of the world, i.e. things that happen that change the facts.
-
-## SWI-Prolog Interface
 
 There are certain things we need to keep track of in the "world" Workspace. 
 
@@ -47,6 +37,8 @@ There are certain things we need to keep track of in the "world" Workspace.
 - **Goal specification**: The state of the world we want to end at, i.e. things that we want to be true at the end.
 - **Actions/Operators**: Ways of changing the state of the world, i.e. things that happen that change the facts.
 
+
+# Compandium 
 
 ## PDDL Files Syntax
 
@@ -245,7 +237,7 @@ b (2 @ n=3, t=0s, 4300084kb)b (1 @ n=6, t=0s, 4308276kb)
 2: (drop arm cupcake plate) [1]
 ```
 
-#### Exercises:
+### Exercises:
 Here are a few tasks to make it more complex and enforce your understanding.
 - Add a second cupcake on the table, and add it to the goal spec to make sure it's put on the plate as well.
 - Add a unicorn object to the domain, and make the goal for the unicorn to eat the cupcake. The unicorn can only eat the cupcake if it's on the plate.
@@ -299,18 +291,9 @@ TBC
 
 TBC
 
-# Contributions
+### 2.5 Typesystem Structure
 
-- **[Fares Alaboud](http://faresalaboud.me)** (Author)
-- **[Dr. Andrew Coles](http://nms.kcl.ac.uk/andrew.coles)** (Editor)
-
-If you'd like to be listed as  a Contributor, make a [pull request](https://github.com/TeamSPoon/pddl_valoptic_api/pulls).
-
-
-
-#### 2.5 Model Structure
-
-##### 2.5.1 Introduction
+#### 2.5.1 Introduction
 
 The model files are based on an ontology with multiple layers of abstraction. We design our ontology by combining high level concepts and cross-domain relationships borrowed from three areas: CPS; Agent-Based Model (ABM); and Systems-of-Systems (SoS). The proposed ontology consists of an Upper Ontology, which contains the CPS, ABM, and SoS concepts and relations and a general ITS Domain Ontology. The general ITS Domain Ontology can be further referenced from ontologies that instantiate transport-domain specific transitions and states. It is of course possible to extend the upper ontology with ontologies describing other domains than ITS, for example healthcare, energy and utilities, agriculture, etc.
 
@@ -318,7 +301,7 @@ The objective of breaking the ontology into multiple levels is twofold. First, t
 
 Second, ontologies are expected to change, grow and evolve as new domains and techniques are contemplated in them (Davies et al., 2006). Leaving the more abstract and general concepts in an upper layer, and the more specific ones in lower layers, reinforces the idea that altering the most general concepts should be avoided, making them less likely to suffer constant modifications that could lead to unnecessary changes throughout the ontology. This is important because ontologies often reuse and extend other ontologies. Updating an ontology without proper care can potentially corrupt the others depending on it and consequently all the systems that use it.
 
-##### 2.5.2 Upper ontology design principles
+#### 2.5.2 Upper ontology design principles
 
 Upper ontologies should be designed to describe general concepts that can be used across all domains. They have a central role in facilitating interoperability among domain specific ontologies, which are built hierarchically underneath the upper and generic layers, and therefore can be seen as specialization of the more abstract concepts.
 
@@ -339,7 +322,7 @@ In our knowledge model, a Transition is a Procedural Knowledge concept that dete
 
 Figure above presents the main elements of the knowledge base modeling.
 
-##### 2.5.3 ITS Domain ontology design principles
+#### 2.5.3 ITS Domain ontology design principles
 
 ![Figure 3](/images/fig3.png)
 
@@ -347,7 +330,7 @@ With the support of the presented upper ontology model, in this section we propo
 
 Another important concept is the Transportation Infrastructure which encompasses all elements required by a Transportation Mode, such as Routes, Tracks and Transportation Networks. Most elements within the Transportation Infrastructure are extensions of Graph, Arc and Node, abstract concepts from the Upper ontology. Therefore, by using high level graph definitions it is possible to define most of the transportation infrastructure in an ITS Domain. A node inside the transportation infrastructure is referred to as a POI (Point of Interest) and it can be any desired location within the Transportation Network (e.g., a crossing, a specific point in the route, coordinate, a warehouse, a bus stop). A Traffic Semaphore is modeled as a generic Actuator that is used to control and regulate traffic and it can be applied in any transportation scenario. A Transportable Entity encompasses any element that can be transported by a Transport Agent, such as regular Cargo or network Data. A typical Passenger is also a Transportable Entity and extends the upper ontology concept of Human.
 
-#### 3. References
+### 3. References
 
 [1] [PDDL's Wikipedia Page](https://en.wikipedia.org/wiki/Planning_Domain_Definition_Language#De_facto_official_versions_of_PDDL)
 
@@ -359,6 +342,11 @@ Another important concept is the Transportation Infrastructure which encompasses
 
 [5] Davies, J., Studer, R., and Warren, P. (2006). Semantic Web technologies: trends and research in ontology-based systems. JohnWiley & Sons, Chichester,West Sussex, PO19 8SQ, England.
 
-[6] Niles, I. and Pease, A. (2001). Towards a Standard Upper Ontology. In Proceedings of the International Conference on Formal Ontology in Information Systems - Volume 2001, FOIS 01, pages 29, New York, NY, USA. ACM.
+[6] Niles, I. and Pease, A. (2001). Towards a Standard Upper Ontology. In Proceedings of the International Conference on Formal Ontology in Information Systems - Volume 2001, FOIS ?01, pages 2?9, New York, NY, USA. ACM.
 
-[7] Compton, M., Barnaghi, P., Bermudez, L., Garcia-Castro, R., Corcho, O., Cox, S., Graybeal, J., Hauswirth, M., Henson, C., Herzog, A., Huang, V., Janowicz, K., Kelsey, W. D., Phuoc, D. L., Lefort, L., Leggieri, M., Neuhaus, H., Nikolov, A., Page, K., Passant, A., Sheth, A., and Taylor, K. (2012). The SSN ontology of the W3C semantic sensor network incubator group. Web Semantics: Science, Services and Agents on the World Wide Web, 17:25  32.
+[7] Compton, M., Barnaghi, P., Bermudez, L., Garcia-Castro, R., Corcho, O., Cox, S., Graybeal, J., Hauswirth, M., Henson, C., Herzog, A., Huang, V., Janowicz, K., Kelsey, W. D., Phuoc, D. L., Lefort, L., Leggieri, M., Neuhaus, H., Nikolov, A., Page, K., Passant, A., Sheth, A., and Taylor, K. (2012). The SSN ontology of the W3C semantic sensor network incubator group. Web Semantics: Science, Services and Agents on the World Wide Web, 17:25 ? 32.
+
+
+
+If you'd like to be listed as  a Contributor, make a [pull request](https://github.com/TeamSPoon/pddl_valoptic_api/pulls).
+
