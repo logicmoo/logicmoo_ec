@@ -1,3 +1,9 @@
+/*
+
+root@gitlab:/opt/logicmoo_workspace/packs_sys/pddl_valoptic_api# cd t
+root@gitlab:/opt/logicmoo_workspace/packs_sys/pddl_valoptic_api/t# swipl bounty0500_tests.pl
+
+*/
 % DEFINITION OF DELIVERY ROBOT WORLD IN STRIPS NOTATION
 :- use_module(library(pddl_valoptic_api)).
 
