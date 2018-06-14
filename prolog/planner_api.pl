@@ -77,7 +77,7 @@ planner_load_file(W,FileName):- planner_missing(planner_load_file(W,FileName)).
 % rem = Deletes workspace freeing up resources
 % current = Enumerates workspace names
 %
-planner_workspace(Opr,Workspace):- call_settings_data(Opr,current_planner_workspace(Workspace)).
+planner_workspace(Opr,Workspace):- call_settings_data(Opr,ws_data(Workspace,isa,tWorkspace)).
 
 
 %! planner_program(+add,+Program) is det.
@@ -90,73 +90,88 @@ planner_workspace(Opr,Workspace):- call_settings_data(Opr,current_planner_worksp
 %
 planner_program(Opr,Program):- call_settings_data(Opr,current_planner_program(Program)).
 
+
+planner_data_template(current_planner_program(_Program)).
+planner_data_template(ws_data(_W,_P,_D)).
+
 pre_existing_clause(MData,R):- strip_module(MData,M,Data),
-  clause(M:Data,true,R),clause(MCData,true,R),strip_moidule(MCData,_,CData),Data=@=CData,!.
+  clause(M:Data,true,R),clause(MCData,true,R),strip_module(MCData,_,CData),Data=@=CData,!.
+
+:- dynamic(mdata:current_planner_program/1).
+:- dynamic(mdata:ws_data/3).
 
 to_mdata(Data,mdata:BData):- strip_module(Data,_,BData).
 
-call_settings_data(Opr,Data):- to_mdata(Data,MData), call_settings_mdata(Opr,Data).
+call_ws_data_hook(Opr,W,Prop,DataL):- 
+  check_opr(W,Opr),
+  forall(delistify_data(DataL,Data),
+       call_settings_data(Opr,ws_data(W,Prop,Data))).
 
+call_settings_data(Opr,Data):- to_mdata(Data,MData), call_settings_mdata(Opr,MData).
 call_settings_mdata(current,MData):- !, call(MData).
-call_settings_mdata(add,MData):-  !, (pre_existing_clause(MData,_R)->true;asserta(MData)).
+call_settings_mdata(add,MData):-  !, (pre_existing_clause(MData,_R)->true;
+   (asserta(MData),planner_debug(asserta(MData)))).
 call_settings_mdata(rem,MData):- ignore(call(MData)),retractall(MData).
 
-call_data_mockup(Goal):- 
-  Goal=..[Type,Opr,W,Data],
-  check_opr(W,Opr),
-  atom_concat(pd_,Type,Pred),
-  DataPred=..[Pred,W,Data],
-  call_settings_data(Opr,DataPred).
-
+delistify_data(DataL,Data):- is_list(DataL),!,member(Data,DataL).
+delistify_data(Data,Data).
 
 % Manipulate PDDL Workspace Dfault Planner Program
 planner_workspace_program(Opr,W,Program):- 
-  (call_settings_data(Opr,current_planner_workspace_program(W,Program))
+  (call_settings_data(Opr,ws_data(W,program,Program))
    *->true;
    call_settings_data(Opr,current_planner_program(Program))).
   
 
 % Manipulate PDDL Workspace Problem/Domains (:Requirements ...)
-planner_requirement(Opr,W,Require):- call_data_mockup(requirement(Opr,W,Require)).
+planner_requirement(Opr,W,Require):- call_ws_data_hook(Opr,W,requirement,Require).
 
 % Manipulate PDDL Workspace Problem/Domains (:Init ...)
 planner_init(Opr,W,Fact):- 
   glean_objs(Opr,W,Fact),
-  call_data_mockup(init(Opr,W,Fact)).
+  call_ws_data_hook(Opr,W,init,Fact).
 
 % Manipulate PDDL Workspace Problem/Domains (:Predicates ...)
 planner_predicate(Opr,W,Predicate):- 
   glean_types(Opr,W,Predicate),
-  call_data_mockup(predicate(Opr,W,Predicate)).
+  call_ws_data_hook(Opr,W,predicate,Predicate).
 
 % Manipulate PDDL Workspace Problem/Domains (:Functions ...)
 planner_function(Opr,W,Function):- 
   glean_types(Opr,W,Function),
-  call_data_mockup(function(Opr,W,Function)).
+  call_ws_data_hook(Opr,W,function,Function).
 
 % Manipulate PDDL Workspace Problem/Domains (:TYPE ...)
 planner_type(Opr,W,Type):-
   glean_types(Opr,W,Type),
-  call_data_mockup(type(Opr,W,Type)).
+  call_ws_data_hook(Opr,W,type,Type).
 
 % Manipulate PDDL Workspace Problem/Domains (:OBJECTS ...)
 planner_object(Opr,W,Object):- 
   glean_types(Opr,W,Object),
-  call_data_mockup(object(Opr,W,Object)).
+  call_ws_data_hook(Opr,W,object,Object).
 
 % Manipulate a PDDL Workspace Problem/Domains (:derived-predicates ...)
 planner_derived(Opr,W,Fact,Cond) :- Cond==[], !, planner_init(Opr,W,Fact).
 planner_derived(Opr,W,Fact,Condition) :- 
-  call_data_mockup(derived(Opr,W,(Fact:-Condition))).
+  call_ws_data_hook(Opr,W,derived,derived(Fact,Condition)).
 
 
 % Manipulate a PDDL Workspace Problem/Domains (:axiom ...)
-planner_axiom(Opr,W,Axiom):- call_data_mockup(axiom(Opr,W,Axiom)).
+planner_axiom(Opr,W,Axiom):- call_ws_data_hook(Opr,W,axiom,Axiom).
 
 % Manipulate a PDDL Workspace Problem/Domains (:action Action (...Info...))
-planner_action(Opr,W,Action,Info):- check_opr(W,Opr), 
-  glean_types(Opr,W,Action),
-  call_data_mockup(action(Opr,W,act_inf(Action,Info))).
+planner_action(Opr,W,Action,InfoList):- glean_types(Opr,W,Action),   
+   %planner_action_info(Opr,W,Action,InfoList),
+   call_ws_data_hook(Opr,W,action,act_info(Action,InfoList)).
+/*
+planner_action_info(Opr,W,Action,InfoList):- 
+  is_list(InfoList),!,maplist(planner_action(Opr,W,Action),InfoList).
+planner_action_info(Opr,W,Action,Type:Info):-!,
+   call_ws_data_hook(Opr,W,action,act_inf(Action,Type,Info)).
+planner_action_info(Opr,W,Action,Info):-
+   call_ws_data_hook(Opr,W,action,act_inf(Action,meta,Info)).
+*/
 
 %% planner_get_plan(+W,+Goal,-Plan) is nondet.
 planner_get_plan(W,Goal,Plan):-
@@ -167,11 +182,11 @@ planner_get_plan(W,Goal,Plan):-
 planner_get_plan(Planner,W,Goal,Plan):-   
   check_workspace(W),
   ignore(Plan=[s1,s2,s3]),
-  planner_missing(planner_get_plan(W,Goal,Plan)).
+  planner_missing(planner_get_plan(Planner,W,Goal,Plan)).
 
 %% planner_apply_step(+W,+Step,-NewWorkspace) is det.
 planner_apply_step(W,Step,NewWorkspace):-
-  planner_program(current,W,Planner),
+  planner_workspace_program(current,W,Planner),
   planner_apply_step(Planner,W,Step,NewWorkspace).
 
 %% planner_apply_step(+Planner,+W,+Step,-NewWorkspace) is det.
@@ -179,7 +194,7 @@ planner_apply_step(Planner,W,Step,NewWorkspace):-
  check_workspace(W),
  (var(NewWorkspace)->gensym(W,NewWorkspace);true),
  check_workspace(NewWorkspace),
- planner_missing(planner_apply_step(W,Step,NewWorkspace)).
+ planner_missing(planner_apply_step(Planner,W,Step,NewWorkspace)).
 
 
 ensure_external_planners.
@@ -205,10 +220,8 @@ check_opr(W,del):- check_workspace(W).
 check_opr(W,current):- check_workspace(W).
 check_opr(_Workspace,Opr):- throw(opr_missing(Opr)).
 
-:- dynamic(current_workspace/1).
-
-check_workspace(W):- current_workspace(W),!.
-check_workspace(W):- asserta(current_workspace(W)).
+check_workspace(W):- mdata:ws_data(W,isa,tWorkspace),!.
+check_workspace(W):- asserta(mdata:ws_data(W,isa,tWorkspace)).
 
 planner_debug(Info):- format('~N% ~q.~n',[Info]).
 
