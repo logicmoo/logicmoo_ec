@@ -90,9 +90,24 @@ planner_workspace(Opr,Workspace):- call_settings_data(Opr,current_planner_worksp
 %
 planner_program(Opr,Program):- call_settings_data(Opr,current_planner_program(Program)).
 
-call_settings_data(current,Data):- call(t_l_data:Data).
-call_settings_data(add,Data):- asserta(t_l_data:Data).
-call_settings_data(rem,Data):- ignore(call(t_l_data:Data)),retractall(t_l_data:Data).
+pre_existing_clause(MData,R):- strip_module(MData,M,Data),
+  clause(M:Data,true,R),clause(MCData,true,R),strip_moidule(MCData,_,CData),Data=@=CData,!.
+
+to_mdata(Data,mdata:BData):- strip_module(Data,_,BData).
+
+call_settings_data(Opr,Data):- to_mdata(Data,MData), call_settings_mdata(Opr,Data).
+
+call_settings_mdata(current,MData):- !, call(MData).
+call_settings_mdata(add,MData):-  !, (pre_existing_clause(MData,_R)->true;asserta(MData)).
+call_settings_mdata(rem,MData):- ignore(call(MData)),retractall(MData).
+
+call_data_mockup(Goal):- 
+  Goal=..[Type,Opr,W,Data],
+  check_opr(W,Opr),
+  atom_concat(pd_,Type,Pred),
+  DataPred=..[Pred,W,Data],
+  call_settings_data(Opr,DataPred).
+
 
 % Manipulate PDDL Workspace Dfault Planner Program
 planner_workspace_program(Opr,W,Program):- 
@@ -102,46 +117,46 @@ planner_workspace_program(Opr,W,Program):-
   
 
 % Manipulate PDDL Workspace Problem/Domains (:Requirements ...)
-planner_requirement(Opr,W,Require):- call_mockup(planner_requirement(Opr,W,Require)).
+planner_requirement(Opr,W,Require):- call_data_mockup(requirement(Opr,W,Require)).
 
 % Manipulate PDDL Workspace Problem/Domains (:Init ...)
 planner_init(Opr,W,Fact):- 
   glean_objs(Opr,W,Fact),
-  call_mockup(planner_init(Opr,W,Fact)).
+  call_data_mockup(init(Opr,W,Fact)).
 
 % Manipulate PDDL Workspace Problem/Domains (:Predicates ...)
 planner_predicate(Opr,W,Predicate):- 
   glean_types(Opr,W,Predicate),
-  call_mockup(planner_predicate(Opr,W,Predicate)).
+  call_data_mockup(predicate(Opr,W,Predicate)).
 
 % Manipulate PDDL Workspace Problem/Domains (:Functions ...)
 planner_function(Opr,W,Function):- 
   glean_types(Opr,W,Function),
-  call_mockup(planner_function(Opr,W,Function)).
+  call_data_mockup(function(Opr,W,Function)).
 
 % Manipulate PDDL Workspace Problem/Domains (:TYPE ...)
 planner_type(Opr,W,Type):-
   glean_types(Opr,W,Type),
-  call_mockup(planner_type(Opr,W,Type)).
+  call_data_mockup(type(Opr,W,Type)).
 
 % Manipulate PDDL Workspace Problem/Domains (:OBJECTS ...)
 planner_object(Opr,W,Object):- 
   glean_types(Opr,W,Object),
-  call_mockup(planner_object(Opr,W,Object)).
+  call_data_mockup(object(Opr,W,Object)).
 
 % Manipulate a PDDL Workspace Problem/Domains (:derived-predicates ...)
 planner_derived(Opr,W,Fact,Cond) :- Cond==[], !, planner_init(Opr,W,Fact).
 planner_derived(Opr,W,Fact,Condition) :- 
-  call_mockup(planner_derived(Opr,W,Fact,Condition)).
+  call_data_mockup(derived(Opr,W,(Fact:-Condition))).
 
 
 % Manipulate a PDDL Workspace Problem/Domains (:axiom ...)
-planner_axiom(Opr,W,Axiom):- call_mockup(planner_axiom(Opr,W,Axiom)).
+planner_axiom(Opr,W,Axiom):- call_data_mockup(axiom(Opr,W,Axiom)).
 
-% Manipulate a PDDL Workspace Problem/Domains (:action ...)
+% Manipulate a PDDL Workspace Problem/Domains (:action Action (...Info...))
 planner_action(Opr,W,Action,Info):- check_opr(W,Opr), 
   glean_types(Opr,W,Action),
-  call_mockup(planner_action(Opr,W,Action,Info)).
+  call_data_mockup(action(Opr,W,act_inf(Action,Info))).
 
 %% planner_get_plan(+W,+Goal,-Plan) is nondet.
 planner_get_plan(W,Goal,Plan):-
@@ -194,12 +209,6 @@ check_opr(_Workspace,Opr):- throw(opr_missing(Opr)).
 
 check_workspace(W):- current_workspace(W),!.
 check_workspace(W):- asserta(current_workspace(W)).
-
-call_mockup(Goal):- 
-  arg(1,Goal,Opr),
-  arg(2,Goal,W),
-  check_opr(W,Opr),
-  planner_missing(Goal).
 
 planner_debug(Info):- format('~N% ~q.~n',[Info]).
 
