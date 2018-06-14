@@ -7,7 +7,7 @@ root@gitlab:/opt/logicmoo_workspace/packs_sys/planner_api/t# swipl bounty0500_te
 % DEFINITION OF DELIVERY ROBOT WORLD IN STRIPS NOTATION
 :- use_module(library(planner_api)).
 
-:- planner_workspace(add,delrob_problem).
+:- planner_add_workspace(delrob_problem).
 
 :- include(prolog_files/delrob/delrob_strips).
 
@@ -20,7 +20,7 @@ root@gitlab:/opt/logicmoo_workspace/packs_sys/planner_api/t# swipl bounty0500_te
    planner_debug(nextplan=NewPlan),
    assertion(Rest = NewPlan).
 
-:- planner_workspace(add,delrob_repeat).
+:- planner_add_workspace(delrob_repeat).
 
 :- include(prolog_files/delrob/delrob_strips).
 
