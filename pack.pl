@@ -1,9 +1,11 @@
-name(pddl_valoptic_api).
-title('pddl_valoptic_api -- A SWI-Prolog Pack that lets Prolog code seamlessly use PDDL based planners.').
+name(planner_api).
+title('planner_api -- A SWI-Prolog Pack that lets Prolog code seamlessly use planners speaking PDDLish and OCLh').
 version('1.1.118').
-download('https://github.com/edisonm/pddl_valoptic_api.git').
 author( 'Andrew Dougherty', 'andrewdo@frdcsa.org' ).
+author( 'Douglas Miles', 'logicmoo@gmail.com' ).
 packager( 'TeamSPoon/LogicMoo', 'https://github.com/TeamSPoon/' ).
-home('https://github.com/TeamSPoon/pddl_valoptic_api').
+home('https://github.com/TeamSPoon/planner_api').
+download('https://github.com/TeamSPoon/planner_api.git').
 autoload(false).
+requires(logicmoo_utils).
 
