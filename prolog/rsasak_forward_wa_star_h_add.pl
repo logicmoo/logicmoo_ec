@@ -2,8 +2,9 @@
 
 :- style_check(-singleton).
 
+:- style_check(-singleton).
 :- use_module(library(prolog_pack)).
-:- if( \+ prolog_pack:current_pack(logicmoo_planners)).
+:- if( \+ prolog_pack:current_pack(planner_api)).
 :- dynamic   user:file_search_path/2.
 :- multifile user:file_search_path/2.
 :- prolog_load_context(directory,Dir),
@@ -18,9 +19,11 @@
 
 :- if( \+  user:file_search_path(pddl,_) ).
 :- prolog_load_context(directory,Dir),
+   trace,
    must((absolute_file_name('../pddl',Y,[relative_to(Dir),file_type(directory)]),
-   (( \+ user:file_search_path(pddl,Y)) ->asserta(user:file_search_path(pddl,Y));true))).
+   asserta(user:file_search_path(pddl,Y)))).
 :- endif.
+
 
 :- expects_dialect(sicstus).
 :-use_module(library(timeout)).
