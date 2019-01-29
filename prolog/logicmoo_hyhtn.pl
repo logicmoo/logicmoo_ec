@@ -11,19 +11,28 @@
 */
 :-module(logicmoo_hyhtn,[]).
 
+:- style_check(-singleton).
+
 :- use_module(library(prolog_pack)).
-:- if( \+ prolog_pack:current_pack(logicmoo_planners)).
+:- if( \+ prolog_pack:current_pack(planner_api)).
 :- dynamic   user:file_search_path/2.
 :- multifile user:file_search_path/2.
 :- prolog_load_context(directory,Dir),
    DirFor = planner,
    (( \+ user:file_search_path(DirFor,Dir)) ->asserta(user:file_search_path(DirFor,Dir));true),
-   absolute_file_name('../../../../',Y,[relative_to(Dir),file_type(directory)]),
+   absolute_file_name('../..',Y,[relative_to(Dir),file_type(directory)]),
    (( \+ user:file_search_path(pack,Y)) ->asserta(user:file_search_path(pack,Y));true).
-:- initialization(attach_packs,now).
+:- attach_packs.
+:- initialization(attach_packs).
 :- endif.
-% [Required] Load the Logicmoo Library Utils
-:- ensure_loaded(library(logicmoo_utils)).
+
+
+:- if( \+  user:file_search_path(pddl,_) ).
+:- prolog_load_context(directory,Dir),
+   must((absolute_file_name('../pddl',Y,[relative_to(Dir),file_type(directory)]),
+   asserta(user:file_search_path(pddl,Y)))).
+:- endif.
+
 
 do_ss(A,B):-do_ss,!, must(do_ss0(A,B)).
 do_ss(A,A).

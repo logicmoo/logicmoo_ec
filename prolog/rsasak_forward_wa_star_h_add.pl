@@ -2,7 +2,6 @@
 
 :- style_check(-singleton).
 
-:- style_check(-singleton).
 :- use_module(library(prolog_pack)).
 :- if( \+ prolog_pack:current_pack(planner_api)).
 :- dynamic   user:file_search_path/2.
@@ -19,7 +18,6 @@
 
 :- if( \+  user:file_search_path(pddl,_) ).
 :- prolog_load_context(directory,Dir),
-   trace,
    must((absolute_file_name('../pddl',Y,[relative_to(Dir),file_type(directory)]),
    asserta(user:file_search_path(pddl,Y)))).
 :- endif.
