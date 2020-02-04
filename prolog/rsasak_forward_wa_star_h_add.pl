@@ -667,10 +667,11 @@ relax_addb(S, Delta, D, Ps):-
 %   first is a domain file 
 %   second problem file
 %
-
+/*
 :-set_prolog_stack(global, limit(16*10**9)).
 :-set_prolog_stack(local, limit(16*10**9)).
 :-set_prolog_stack(trail, limit(16*10**9)).
+*/
 
 command_line_sas:-
     prolog_flag(argv, [D,P]),!,
