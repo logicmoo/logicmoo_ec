@@ -745,7 +745,7 @@ load_domain(DP):- \+ exists_file(DP),!, forall(filematch(DP,MATCH),((exists_file
 load_domain(DP):-
    format('~q.~n',[load_domain(DP)]),
   directory_file_path(D,_,DP),directory_files(D,RList),   
-   forall(member(T,RList),ignore((directory_file_path(D,T,TP),exists_file(TP),load_file(TP)))).
+   forall(member(T,RList),ignore((directory_file_path(D,T,TP),exists_file(TP),must(call(call,load_file,TP))))).
 
 
 :-export(z2p/2).
