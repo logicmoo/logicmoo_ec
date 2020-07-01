@@ -1,4 +1,4 @@
-:- module(logicmoo_planner,[]).
+:- module(logicmoo_planner,[load_planner_api/0]).
 
 :- style_check(-singleton).
 
@@ -25,7 +25,9 @@
 
 % [Required] Load the Logicmoo Library Utils
 % :- ensure_loaded(library(logicmoo_hyhtn)).
-:- ensure_loaded(library(rsasak_forward_wa_star_h_add)).
+% 
+load_planner_api:- ensure_loaded(library(rsasak_forward_wa_star_h_add)).
+%:- initialization(load_planner, program).
 :- fixup_exports.
 
 
