@@ -2,7 +2,7 @@
 
 %:- set_prolog_flag(gc,true).
 :- op(100,xfy,'=>').
-:- debug.
+%:- debug.
 
 :- style_check(-singleton).
 
