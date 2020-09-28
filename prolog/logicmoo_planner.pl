@@ -3,7 +3,7 @@
 :- style_check(-singleton).
 
 :- use_module(library(prolog_pack)).
-:- if( \+ prolog_pack:current_pack(planner_api)).
+:- if( ( \+ prolog_pack:current_pack(planner_api) , false) ).
 :- dynamic   user:file_search_path/2.
 :- multifile user:file_search_path/2.
 :- prolog_load_context(directory,Dir),
