@@ -1,3 +1,5 @@
+:- expects_dialect(lps).
+
 %%  JindoshRiddle (-Solution)
 %   @param  Solution is a list of houses that satisfy all constraints.
 %   @author Generated puzzle from video game

@@ -1,3 +1,5 @@
+:- expects_dialect(lps).
+
 % iendo de A a B
 % Un problema de búsqueda
 

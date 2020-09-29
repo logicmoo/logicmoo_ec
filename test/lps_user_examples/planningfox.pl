@@ -1,3 +1,5 @@
+:- expects_dialect(lps).
+
 maxTime(6).
 
 fluents  has(X,Y), near(X,Y).

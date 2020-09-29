@@ -1,3 +1,5 @@
+:- expects_dialect(lps).
+
 maxTime(25).
 fluents lightOn, lightOff.
 events switch.

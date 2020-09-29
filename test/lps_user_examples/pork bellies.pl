@@ -1,3 +1,5 @@
+:- expects_dialect(lps).
+
 simulatedRealTimeBeginning('2002-11-01'). 
 simulatedRealTimePerCycle(RTPC) :- minCycleTime(RTPC). 
 maxTime(200).  

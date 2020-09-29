@@ -1,3 +1,5 @@
+:- expects_dialect(lps).
+
 % This won't work on current LPS 
 
 actions row(_Location1,_Location2), transport(_Obj,_Location1,_Location2).

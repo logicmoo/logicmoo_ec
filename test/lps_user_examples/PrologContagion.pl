@@ -1,3 +1,5 @@
+:- expects_dialect(lps).
+
 % Wong exercise, https://twitter.com/mengwong/status/1239445489520504833
 % You need to change infectionInterval (or the dataset) to see contagion
 % TODO: add likelihood

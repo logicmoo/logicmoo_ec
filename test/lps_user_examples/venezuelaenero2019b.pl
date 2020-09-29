@@ -1,3 +1,5 @@
+:- expects_dialect(lps).
+
 % Situacion de Venezuela Enero 2019
 % Modelo B
 % 

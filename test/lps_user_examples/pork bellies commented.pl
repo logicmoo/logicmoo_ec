@@ -1,3 +1,5 @@
+:- expects_dialect(lps).
+
 /** We take Nick Szabo's specification of a pork bellies futures smart contract:
 
   future(rightA="1 round lot pork bellies",

@@ -1,3 +1,5 @@
+:- expects_dialect(lps).
+
 %  Graphviz graph for https://swish.swi-prolog.org or other SWISH server
 %  Documentation in https://swish.swi-prolog.org/example/render_graphviz.swinb
 

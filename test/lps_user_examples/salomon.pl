@@ -1,3 +1,5 @@
+:- expects_dialect(lps).
+
 % Versión historia del Rey Salomón y las dos mujeres (Reyes 3:3-28)
 % Vanessa Marquez Logica B2018
 

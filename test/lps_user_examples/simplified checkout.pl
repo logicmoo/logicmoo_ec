@@ -1,3 +1,5 @@
+:- expects_dialect(lps).
+
 fluents approved/1.
 maxTime(5). 
 actions enter/1, approve/1.

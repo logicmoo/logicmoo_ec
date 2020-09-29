@@ -1,3 +1,5 @@
+:- expects_dialect(lps).
+
 events a, a1, a3.
 actions a11, a31. 
 

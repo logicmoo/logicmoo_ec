@@ -1,3 +1,5 @@
+:- expects_dialect(lps).
+
 maxTime(10).
 
 actions say(_, _), say_1(_, _), valid(_), show(_).

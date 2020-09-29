@@ -1,3 +1,5 @@
+:- expects_dialect(lps).
+
 % Examples from https://nakamotoinstitute.org/contract-language/
 
 % Use for compliance: we'll be checking these events occur properly

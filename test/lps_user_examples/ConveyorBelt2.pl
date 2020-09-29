@@ -1,3 +1,5 @@
+:- expects_dialect(lps).
+
 % Example for https://www.youtube.com/watch?v=5ms_idvN8Tg
 maxTime(60).
 fluents 

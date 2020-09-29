@@ -1,3 +1,5 @@
+:- expects_dialect(lps).
+
 maxTime(20).
 
 fluents     alerta1,alerta2,alerta3.

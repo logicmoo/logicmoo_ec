@@ -1,3 +1,5 @@
+:- expects_dialect(lps).
+
 % eventgraph.pl
 % 
 :- use_rendering(graphviz).

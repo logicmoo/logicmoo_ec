@@ -1,3 +1,5 @@
+:- expects_dialect(lps).
+
 maxTime(10).
 fluents location(_,_).
 

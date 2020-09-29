@@ -1,3 +1,5 @@
+:- expects_dialect(lps).
+
 % Rather then run live, we'll simulate real time by mapping its time points to simulation cycles:
 :- include(system('date_utils.pl')).
 simulatedRealTimeBeginning('2018-05-01'). 

@@ -1,3 +1,5 @@
+:- expects_dialect(lps).
+
 events e1, e2, e3, a1.
 actions a1.
 fluents p.

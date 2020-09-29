@@ -1,3 +1,5 @@
+:- expects_dialect(lps).
+
 /*
 A simple loan formulation where Bob has 5 euros and needs for 50 euros "now" and Alice has 150 euros and needs 165 euros "later". Alice uses the external market rate of risk free bonds of 10% as an expectation for her money value over time. So Bob's need is met by Alice "now" and Alice's need for cash "later" is met by Bob over time. This convergent arrangement of now and later constitutes the core functional construct of the contract. 
 

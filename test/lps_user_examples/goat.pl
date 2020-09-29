@@ -1,3 +1,5 @@
+:- expects_dialect(lps).
+
 maxTime(10).
 actions row(_,_), transport(_,_,__).
 fluents loc(_, _).

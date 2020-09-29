@@ -1,3 +1,5 @@
+:- expects_dialect(lps).
+
 maxTime(15). 
 
 fluents at_pos/2, free/2, visited/2, obstacle/2, life/2, lookingtowards/2.

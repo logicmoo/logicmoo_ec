@@ -1,3 +1,5 @@
+:- expects_dialect(lps).
+
 % un modelo de cambio
 
 actions liberar, invadir, bombardear, sancionar, manipular. 

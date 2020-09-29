@@ -1,3 +1,5 @@
+:- expects_dialect(lps).
+
 % trading.pl
 %
 

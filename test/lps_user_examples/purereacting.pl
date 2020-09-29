@@ -1,3 +1,5 @@
+:- expects_dialect(lps).
+
 maxTime(10). 
 
 events alguien_me_ataca.

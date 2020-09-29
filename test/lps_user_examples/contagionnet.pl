@@ -1,3 +1,5 @@
+:- expects_dialect(lps).
+
 % contagionnet.pl by @jacintodavila
 % A simple program to predict contagion
 % as requested by https://twitter.com/mengwong 

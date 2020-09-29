@@ -1,3 +1,5 @@
+:- expects_dialect(lps).
+
 maxTime(10). 
 
 fluents en/2, libre/2, estuve/2, obstaculo/2, vida/2, mirada/2.

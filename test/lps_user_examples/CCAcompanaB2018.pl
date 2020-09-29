@@ -1,3 +1,5 @@
+:- expects_dialect(lps).
+
 %Definicion de Personas
 persona(claudio).
 persona(vanessa).

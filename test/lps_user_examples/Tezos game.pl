@@ -1,3 +1,5 @@
+:- expects_dialect(lps).
+
 % Tezos Game
 maxTime(10). % Simulate over 10 cycles
 

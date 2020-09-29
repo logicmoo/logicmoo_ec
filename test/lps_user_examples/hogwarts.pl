@@ -1,3 +1,5 @@
+:- expects_dialect(lps).
+
 maxTime(10).
 
 fluents     varita_obedece(X), vivo(X).

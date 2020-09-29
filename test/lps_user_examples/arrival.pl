@@ -1,3 +1,5 @@
+:- expects_dialect(lps).
+
 maxTime(10).
 actions		attack, rob, call_the(Number),
 			repeat_wife_message(Message).

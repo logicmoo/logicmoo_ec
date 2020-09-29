@@ -1,3 +1,5 @@
+:- expects_dialect(lps).
+
 % contagion
 % A simple program to predict contagion
 % as requested by https://twitter.com/mengwong 

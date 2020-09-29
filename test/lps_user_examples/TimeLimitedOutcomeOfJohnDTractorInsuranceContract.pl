@@ -1,3 +1,5 @@
+:- expects_dialect(lps).
+
 :- include('JohnDTractorInsuranceContract.pl').
 	
 % simulate shipment from US to Europe

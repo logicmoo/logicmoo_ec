@@ -1,3 +1,5 @@
+:- expects_dialect(lps).
+
 % Code given by Jan Burse alias "Mostowski Collapse" here:
 % https://stackoverflow.com/questions/63505466/prolog-implementation-of-quines-algorithm-for-classical-propositional-logic-in
 % It was very easy to complete the code to get a full translation of Quine's algorithm.

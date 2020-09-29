@@ -1,3 +1,5 @@
+:- expects_dialect(lps).
+
 /* Accord Project example:
 
  * "Late Delivery and Penalty. In case of delayed delivery

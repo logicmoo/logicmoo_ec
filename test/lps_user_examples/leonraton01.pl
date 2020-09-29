@@ -1,3 +1,5 @@
+:- expects_dialect(lps).
+
 maxTime(18).
 
 fluents león_atrapado, quiero_liberar_al_león, salvar_al_león.

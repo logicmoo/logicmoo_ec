@@ -1,3 +1,5 @@
+:- expects_dialect(lps).
+
 /* Example from Accord Project:
    https://www.accordproject.org/
 

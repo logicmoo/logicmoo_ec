@@ -1,3 +1,5 @@
+:- expects_dialect(lps).
+
 % x-y represents the location at x-coordinate x and y-coordinate y.
 
 

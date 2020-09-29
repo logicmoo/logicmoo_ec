@@ -1,3 +1,5 @@
+:- expects_dialect(lps).
+
 /*2020-06-03T11:16:25: Started log with facts log(SessionStart,OrderInSession,CPUsecondsInSession,What)*/
 log('2020-06-03T11:16:25',1,63.756,'%getMetaQLQueryResults'('8b6a4bbd-6bf7-45b3-a543-a2ca32c42114',application_mod,'ai.haley.mind.inference.HaleyMindInferenceCallback',harborappetitegraphquery,[segments / ['harbor-directory-data'],'InsuranceProvider' / 'http://vital.ai/haley.ai/harbor-directory/HarborInsuranceProvider/insuranceprovider-100212','BusinessCategory' / 'http://vital.ai/harbor-ai/HarborBusinessCategory/FoodServices','ProductCategory' / 'http://vital.ai/harbor-ai/HarborProductCategory/BusinessOwnerPolicy','USState' / 'http://vital.ai/ontology/harbor-ai#US_State_NewYork'],_h6008329)).
 log('2020-06-03T11:16:25',2,63.758,javaMessageReturned).

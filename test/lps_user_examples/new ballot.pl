@@ -1,3 +1,5 @@
+:- expects_dialect(lps).
+
 % Simplified ballot by RAK and MC: 
 % http://solidity.readthedocs.io/en/v0.4.24/solidity-by-example.html
 maxTime(15).

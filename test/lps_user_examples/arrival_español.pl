@@ -1,3 +1,5 @@
+:- expects_dialect(lps).
+
 %maxtime: Numero maximo de estados
 maxTime(10).
 

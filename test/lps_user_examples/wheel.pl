@@ -1,3 +1,5 @@
+:- expects_dialect(lps).
+
 maxTime(30).
 
 fluents wheel/1.

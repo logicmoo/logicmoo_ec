@@ -1,3 +1,5 @@
+:- expects_dialect(lps).
+
 % From http://www.liquidity-lang.org/doc/tutorial/game.html, single player
 % Simple version, not on blockchain
  

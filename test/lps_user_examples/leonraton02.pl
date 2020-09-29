@@ -1,3 +1,5 @@
+:- expects_dialect(lps).
+
 maxTime(6).
 fluents esta(X,Y), cerca(X,Y).
 actions precavido/2, puede/2, salvar/2, liberarlo/2.

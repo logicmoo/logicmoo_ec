@@ -1,3 +1,5 @@
+:- expects_dialect(lps).
+
 /* Bienvenidos a la Programación Lógica */
 
 acompaña(Hijo, Padre).

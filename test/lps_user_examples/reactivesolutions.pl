@@ -1,3 +1,5 @@
+:- expects_dialect(lps).
+
 events b/1.
 
 if true then b(X). 

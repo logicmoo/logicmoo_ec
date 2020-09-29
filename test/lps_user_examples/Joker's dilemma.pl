@@ -1,3 +1,5 @@
+:- expects_dialect(lps).
+
 % Logic Production Systems
 
 % declarations, initial state, observations, reactive rules, logic programs, causal laws

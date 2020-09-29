@@ -1,3 +1,5 @@
+:- expects_dialect(lps).
+
 <div class="notebook">
 
 <div class="nb-cell markdown" name="md1">

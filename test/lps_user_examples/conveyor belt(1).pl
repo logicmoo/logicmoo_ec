@@ -1,3 +1,5 @@
+:- expects_dialect(lps).
+
 maxTime(30).
 fluents normalOperation, started, contents/2, empty/1, location/2.
 initially normalOperation, 

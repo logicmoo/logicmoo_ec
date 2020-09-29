@@ -1,3 +1,5 @@
+:- expects_dialect(lps).
+
 insere_ordenado(N, [], [N]).
       insere_ordenado(N, [P | R], [N, P | R]) :-
           N < P.

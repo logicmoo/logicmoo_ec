@@ -1,3 +1,5 @@
+:- expects_dialect(lps).
+
 % wolf, goat, cabbage and farmer are objects and are located at the south margin.
 % locations are north and south margins.
 % 

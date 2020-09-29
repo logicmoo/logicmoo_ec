@@ -1,3 +1,5 @@
+:- expects_dialect(lps).
+
 /*
 This simplified example is inspired by 
 Zhao, Lihua, Ryutaro Ichise, Zheng Liu, Seiichi Mita, and Yutaka Sasaki. 

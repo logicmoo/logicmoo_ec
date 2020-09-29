@@ -1,3 +1,5 @@
+:- expects_dialect(lps).
+
 % LogicaB2018 Contrato 116
 % Jacinto Dávila
 % partially based on this Syntax https://bitbucket.org/lpsmasters/lps_corner/wiki/Syntax

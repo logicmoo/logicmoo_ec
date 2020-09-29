@@ -1,3 +1,5 @@
+:- expects_dialect(lps).
+
 maxTime(90).
 fluents  
 pouring(_Receptacle), 

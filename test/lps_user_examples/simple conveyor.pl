@@ -1,3 +1,5 @@
+:- expects_dialect(lps).
+
 % This version works correctly.
 
 maxTime(160).

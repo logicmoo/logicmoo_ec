@@ -1,3 +1,5 @@
+:- expects_dialect(lps).
+
 maxTime(10). 
 
 events g/2, gx/1, o.

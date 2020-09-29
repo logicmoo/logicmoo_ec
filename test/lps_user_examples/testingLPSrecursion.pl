@@ -1,3 +1,5 @@
+:- expects_dialect(lps).
+
 % testingLPSrecursion.pl
 % by @jacintodavila
 % 

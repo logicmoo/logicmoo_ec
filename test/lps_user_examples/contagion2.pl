@@ -1,3 +1,5 @@
+:- expects_dialect(lps).
+
 :- include(system('date_utils.pl')). 
 simulatedRealTimeBeginning('2020-03-01'). 
 simulatedRealTimePerCycle(RTPC) :- minCycleTime(RTPC). 

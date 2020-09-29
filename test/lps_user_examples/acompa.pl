@@ -1,3 +1,5 @@
+:- expects_dialect(lps).
+
 /* Estudio de relaciones */
 
 ama(romeo, julieta).

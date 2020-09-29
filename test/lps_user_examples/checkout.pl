@@ -1,3 +1,5 @@
+:- expects_dialect(lps).
+
 maxTime(12).
 fluents  entered_at(Card, Time), authorised(Card, Purchase).
 actions enter_card(Card), authorise(Card, Purchase).

@@ -1,3 +1,5 @@
+:- expects_dialect(lps).
+
 maxTime(6).
 
 fluents 	tiene(X,Y), cerca(X,Y), hambre(X). 

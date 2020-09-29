@@ -1,3 +1,5 @@
+:- expects_dialect(lps).
+
 :- dynamic  located(Party, thirdCountry), 
     decisionPursuantToArticle_45_3(Event),  legallyBindingEnforceableInstrument(Process),
 	bindingCorporateRules(Process),  standardDataProtectionClauses(Process),

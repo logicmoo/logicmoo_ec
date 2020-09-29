@@ -1,3 +1,5 @@
+:- expects_dialect(lps).
+
 maxTime(10).
 actions		transfer(From, To, Amount).
 fluents		balance(Person, Amount).

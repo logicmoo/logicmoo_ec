@@ -1,3 +1,5 @@
+:- expects_dialect(lps).
+
 maxTime(10).
 
 actions pagar(comprador,cantidad,dueño). %Pago por parte del primer agente de la cantidad (x) al segundo agente
