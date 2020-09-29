@@ -6,30 +6,14 @@
 
 :- style_check(-singleton).
 
-:- use_module(library(prolog_pack)).
-:- if( \+ prolog_pack:current_pack(planner_api)).
-:- dynamic   user:file_search_path/2.
-:- multifile user:file_search_path/2.
-:- prolog_load_context(directory,Dir),
-   DirFor = planner,
-   (( \+ user:file_search_path(DirFor,Dir)) ->asserta(user:file_search_path(DirFor,Dir));true),
-   absolute_file_name('../..',Y,[relative_to(Dir),file_type(directory)]),
-   (( \+ user:file_search_path(pack,Y)) ->asserta(user:file_search_path(pack,Y));true).
-:- attach_packs.
-:- initialization(attach_packs).
+:file_search_path(pddl,Y)))).
 :- endif.
-
-
-:- if( \+  user:file_search_path(pddl,_) ).
-:- prolog_load_context(directory,Dir),
-   must((absolute_file_name('../pddl',Y,[relative_to(Dir),file_type(directory)]),
-   asserta(user:file_search_path(pddl,Y)))).
-:- endif.
-
 
 % [Required] Load the Logicmoo Library Utils
 :- ensure_loaded(library(logicmoo_utils)).
 :- ensure_loaded(library(multimodal_dcg)).
+
+:- use_module(logicmoo_planner).
 
 
 :- dynamic(use_local_pddl/0).
