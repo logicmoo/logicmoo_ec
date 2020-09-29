@@ -1,0 +1,462 @@
+:-include(library('ec_planner/ec_test_incl')).
+:-expects_dialect(pfc).
+% Wed, 01 Apr 2020 20:01:02 GMT
+% From ../ecasp/BusRide40-ea.pel:4
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/BusRide2-ea.e',62).
+
+ /*  loading(load_e_pl,
+   	'/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/BusRide40-ea.e').
+ */
+%; BusRide40-ea.e
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/BusRide40-ea.e:2
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/BusRide40-ea.e',3).
+% load foundations/Root.e
+:- load_e('foundations/Root.e', changed).
+:- if(is_e_toplevel).
+:- endif.
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/BusRide40-ea.e:3
+% load foundations/EC.e
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/BusRide40-ea.e',3).
+:- load_e('foundations/EC.e', changed).
+:- if(is_e_toplevel).
+:- endif.
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/BusRide40-ea.e:5
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/BusRide40-ea.e',6).
+% fluent HasTicket()
+fluent(hasTicket).
+==> mpred_prop(hasTicket,fluent).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/BusRide40-ea.e:6
+% fluent OnRed()
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/BusRide40-ea.e',6).
+fluent(onRed).
+==> mpred_prop(onRed,fluent).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/BusRide40-ea.e:7
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/BusRide40-ea.e',8).
+% fluent OnYellow()
+fluent(onYellow).
+==> mpred_prop(onYellow,fluent).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/BusRide40-ea.e:8
+% event Buy()
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/BusRide40-ea.e',8).
+event(buy).
+==> mpred_prop(buy,event).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/BusRide40-ea.e:9
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/BusRide40-ea.e',10).
+% event Board()
+event(board).
+==> mpred_prop(board,event).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/BusRide40-ea.e:10
+% event BoardRed()
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/BusRide40-ea.e',10).
+event(boardRed).
+==> mpred_prop(boardRed,event).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/BusRide40-ea.e:11
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/BusRide40-ea.e',12).
+% event BoardYellow()
+event(boardYellow).
+==> mpred_prop(boardYellow,event).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/BusRide40-ea.e:13
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/BusRide40-ea.e',14).
+% [time]
+% (Happens(Board(),time) -> 
+%  Happens(BoardRed(),time) | Happens(BoardYellow(),time)).
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/BusRide40-ea.e:15
+
+ /*  happens(board, Time) ->
+       (   happens(boardRed, Time)
+       ;   happens(boardYellow, Time)
+       ).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/BusRide40-ea.e',14).
+
+ /*  happens(boardRed, Time) :-
+       not(happens(boardYellow, Time)),
+       happens(board, Time).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/BusRide40-ea.e',14).
+
+ /*  [not(happens(boardYellow, Time)), happens(board, Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          happens(boardRed, Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/BusRide40-ea.e',14).
+axiom(happens(boardRed, Time),
+    [not(happens(boardYellow, Time)), happens(board, Time)]).
+
+ /*  happens(boardYellow, Time) :-
+       not(happens(boardRed, Time)),
+       happens(board, Time).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/BusRide40-ea.e',14).
+
+ /*  [not(happens(boardRed, Time)), happens(board, Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          happens(boardYellow, Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/BusRide40-ea.e',14).
+axiom(happens(boardYellow, Time),
+    [not(happens(boardRed, Time)), happens(board, Time)]).
+
+ /*  not(happens(board, Time)) :-
+       not(happens(boardRed, Time)),
+       not(happens(boardYellow, Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/BusRide40-ea.e',14).
+
+ /*  [not(happens(boardRed, Time)), not(happens(boardYellow, Time))] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          not(happens(board, Time))).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/BusRide40-ea.e',14).
+axiom(not(happens(board, Time)),
+    [not(happens(boardRed, Time)), not(happens(boardYellow, Time))]).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/BusRide40-ea.e:17
+% [time]
+ % (Initiates(Buy(),HasTicket(),time)).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/BusRide40-ea.e',19).
+
+ /*  [] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          initiates(buy, hasTicket, Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/BusRide40-ea.e',19).
+axiom(initiates(buy, hasTicket, Time),
+    []).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/BusRide40-ea.e:20
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/BusRide40-ea.e',21).
+% [time]
+% (HoldsAt(HasTicket(),time) -> 
+%  Initiates(BoardRed(),OnRed(),time)).
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/BusRide40-ea.e:22
+
+ /*  [holds_at(hasTicket, Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          initiates(boardRed, onRed, Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/BusRide40-ea.e',21).
+axiom(initiates(boardRed, onRed, Time),
+    [holds_at(hasTicket, Time)]).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/BusRide40-ea.e:24
+% [time]
+ % (HoldsAt(HasTicket(),time) -> 
+%  Initiates(BoardYellow(),OnYellow(),time)).
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/BusRide40-ea.e:26
+
+ /*  [holds_at(hasTicket, Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          initiates(boardYellow, onYellow, Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/BusRide40-ea.e',26).
+axiom(initiates(boardYellow, onYellow, Time),
+    [holds_at(hasTicket, Time)]).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/BusRide40-ea.e:28
+% [time]
+ % (HoldsAt(OnRed(),time) -> 
+%  !HoldsAt(OnYellow(),time)).
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/BusRide40-ea.e:30
+
+ /*  holds_at(onRed, Time) ->
+       holds_at(neg(onYellow), Time).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/BusRide40-ea.e',30).
+
+ /*  holds_at(neg(onYellow), Time) :-
+       holds_at(onRed, Time).
+ */
+
+ /*  [holds_at(onRed, Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(neg(onYellow), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/BusRide40-ea.e',30).
+axiom(holds_at(neg(onYellow), Time),
+    [holds_at(onRed, Time)]).
+
+ /*  not(holds_at(onRed, Time)) :-
+       not(holds_at(neg(onYellow), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/BusRide40-ea.e',30).
+
+ /*  [holds_at(onYellow, Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(neg(onRed), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/BusRide40-ea.e',30).
+axiom(holds_at(neg(onRed), Time),
+    [holds_at(onYellow, Time)]).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/BusRide40-ea.e:32
+% [time]
+ % (HoldsAt(OnYellow(),time) -> 
+%  !HoldsAt(OnRed(),time)).
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/BusRide40-ea.e:34
+
+ /*  holds_at(onYellow, Time) ->
+       holds_at(neg(onRed), Time).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/BusRide40-ea.e',34).
+
+ /*  holds_at(neg(onRed), Time) :-
+       holds_at(onYellow, Time).
+ */
+
+ /*  [holds_at(onYellow, Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(neg(onRed), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/BusRide40-ea.e',34).
+axiom(holds_at(neg(onRed), Time),
+    [holds_at(onYellow, Time)]).
+
+ /*  not(holds_at(onYellow, Time)) :-
+       not(holds_at(neg(onRed), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/BusRide40-ea.e',34).
+
+ /*  [holds_at(onRed, Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(neg(onYellow), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/BusRide40-ea.e',34).
+axiom(holds_at(neg(onYellow), Time),
+    [holds_at(onRed, Time)]).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/BusRide40-ea.e:36
+% [time]
+ % (HoldsAt(OnRed(),time) -> 
+%  HoldsAt(HasTicket(),time)).
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/BusRide40-ea.e:38
+
+ /*  holds_at(onRed, Time) ->
+       holds_at(hasTicket, Time).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/BusRide40-ea.e',38).
+
+ /*  holds_at(hasTicket, Time) :-
+       holds_at(onRed, Time).
+ */
+
+ /*  [holds_at(onRed, Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(hasTicket, Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/BusRide40-ea.e',38).
+axiom(holds_at(hasTicket, Time),
+    [holds_at(onRed, Time)]).
+
+ /*  not(holds_at(onRed, Time)) :-
+       not(holds_at(hasTicket, Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/BusRide40-ea.e',38).
+
+ /*  [holds_at(neg(hasTicket), Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(neg(onRed), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/BusRide40-ea.e',38).
+axiom(holds_at(neg(onRed), Time),
+    [holds_at(neg(hasTicket), Time)]).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/BusRide40-ea.e:40
+% [time]
+ % (HoldsAt(OnYellow(),time) -> 
+%  HoldsAt(HasTicket(),time)).
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/BusRide40-ea.e:42
+
+ /*  holds_at(onYellow, Time) ->
+       holds_at(hasTicket, Time).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/BusRide40-ea.e',42).
+
+ /*  holds_at(hasTicket, Time) :-
+       holds_at(onYellow, Time).
+ */
+
+ /*  [holds_at(onYellow, Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(hasTicket, Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/BusRide40-ea.e',42).
+axiom(holds_at(hasTicket, Time),
+    [holds_at(onYellow, Time)]).
+
+ /*  not(holds_at(onYellow, Time)) :-
+       not(holds_at(hasTicket, Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/BusRide40-ea.e',42).
+
+ /*  [holds_at(neg(hasTicket), Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(neg(onYellow), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/BusRide40-ea.e',42).
+axiom(holds_at(neg(onYellow), Time),
+    [holds_at(neg(hasTicket), Time)]).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/BusRide40-ea.e:45
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/BusRide40-ea.e',46).
+% !ReleasedAt(HasTicket(),0).
+ %  not(releasedAt(hasTicket,0)).
+
+ /*  [] ->
+       ta(Ta_Param, tvs1=[], tvs2=[], not(releasedAt(hasTicket, 0))).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/BusRide40-ea.e',46).
+axiom(not(releasedAt(hasTicket, 0)),
+    []).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/BusRide40-ea.e:46
+% !ReleasedAt(OnRed(),0).
+ %  not(releasedAt(onRed,0)).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/BusRide40-ea.e',46).
+
+ /*  [] ->
+       ta(Ta_Param, tvs1=[], tvs2=[], not(releasedAt(onRed, 0))).
+ */
+axiom(not(releasedAt(onRed, 0)),
+    []).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/BusRide40-ea.e:47
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/BusRide40-ea.e',48).
+% !ReleasedAt(OnYellow(),0).
+ %  not(releasedAt(onYellow,0)).
+
+ /*  [] ->
+       ta(Ta_Param, tvs1=[], tvs2=[], not(releasedAt(onYellow, 0))).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/BusRide40-ea.e',48).
+axiom(not(releasedAt(onYellow, 0)),
+    []).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/BusRide40-ea.e:49
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/BusRide40-ea.e',50).
+% HoldsAt(OnRed(),38).
+
+ /*  [b(start, Startd38), toffset(start, 38, Startd38), ignore(start+38==Startd38)] ->
+       ta(Ta_Param,
+          tvs1=[start+38],
+          tvs2=[Startd38, start],
+          holds_at(onRed, Startd38)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/BusRide40-ea.e',50).
+axiom(holds_at(onRed, Startd38),
+    [b(start, Startd38), toffset(start, 38, Startd38)]).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/BusRide40-ea.e:51
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/BusRide40-ea.e',52).
+% !HoldsAt(HasTicket(),0).
+
+ /*  [] ->
+       ta(Ta_Param,
+          tvs1=[start],
+          tvs2=[start],
+          holds_at(neg(hasTicket), start)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/BusRide40-ea.e',52).
+axiom(holds_at(neg(hasTicket), start),
+    []).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/BusRide40-ea.e:52
+% Happens(Buy(),24).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/BusRide40-ea.e',52).
+
+ /*  [b(start, Startd24), toffset(start, 24, Startd24), ignore(start+24==Startd24)] ->
+       ta(Ta_Param,
+          tvs1=[start+24],
+          tvs2=[Startd24, start],
+          happens(buy, Startd24)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/BusRide40-ea.e',52).
+axiom(happens(buy, Startd24),
+    [b(start, Startd24), toffset(start, 24, Startd24)]).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/BusRide40-ea.e:53
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/BusRide40-ea.e',54).
+% Happens(Board(),35).
+
+ /*  [b(start, Startd35), toffset(start, 35, Startd35), ignore(start+35==Startd35)] ->
+       ta(Ta_Param,
+          tvs1=[start+35],
+          tvs2=[Startd35, start],
+          happens(board, Startd35)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/BusRide40-ea.e',54).
+axiom(happens(board, Startd35),
+    [b(start, Startd35), toffset(start, 35, Startd35)]).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/BusRide40-ea.e:54
+%; ABDUCED Happens(BoardRed(), 1).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/BusRide40-ea.e:56
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/BusRide40-ea.e',57).
+% completion Happens
+==> completion(happens).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/BusRide40-ea.e:58
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/BusRide40-ea.e',59).
+% range time 0 40
+==> range(time,0,40).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/BusRide40-ea.e:59
+% range offset 1 1
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/BusRide40-ea.e',59).
+==> range(offset,1,1).
+%; End of file.

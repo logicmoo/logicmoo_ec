@@ -1,0 +1,392 @@
+:-include(library('ec_planner/ec_test_incl')).
+:-expects_dialect(pfc).
+% Wed, 01 Apr 2020 20:00:03 GMT
+% From ../examples/Mueller2006/Exercises/TeacherTells.pel:4
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Exercises/SnoozeAlarm.e',112).
+
+ /*  loading(load_e_pl,
+   	'/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Exercises/TeacherTells.e').
+ */
+%;
+%; Copyright (c) 2005 IBM Corporation and others.
+%; All rights reserved. This program and the accompanying materials
+%; are made available under the terms of the Common Public License v1.0
+%; which accompanies this distribution, and is available at
+%; http://www.eclipse.org/legal/cpl-v10.html
+%;
+%; Contributors:
+%; IBM - Initial implementation
+%;
+%; @book{Mueller:2006,
+%;   author = "Erik T. Mueller",
+%;   year = "2006",
+%;   title = "Commonsense Reasoning",
+%;   address = "San Francisco",
+%;   publisher = "Morgan Kaufmann/Elsevier",
+%; }
+%;
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Exercises/TeacherTells.e:19
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Exercises/TeacherTells.e',20).
+% option modeldiff on
+:- set_ec_option(modeldiff, on).
+:- if(is_e_toplevel).
+:- endif.
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Exercises/TeacherTells.e:21
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Exercises/TeacherTells.e',22).
+% load foundations/Root.e
+:- load_e('foundations/Root.e', changed).
+:- if(is_e_toplevel).
+:- endif.
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Exercises/TeacherTells.e:22
+% load foundations/EC.e
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Exercises/TeacherTells.e',22).
+:- load_e('foundations/EC.e', changed).
+:- if(is_e_toplevel).
+:- endif.
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Exercises/TeacherTells.e:24
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Exercises/TeacherTells.e',25).
+% sort agent
+==> sort(agent).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Exercises/TeacherTells.e:25
+% sort room
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Exercises/TeacherTells.e',25).
+==> sort(room).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Exercises/TeacherTells.e:26
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Exercises/TeacherTells.e',27).
+% sort fact
+==> sort(fact).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Exercises/TeacherTells.e:28
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Exercises/TeacherTells.e',29).
+% agent Teacher, Student
+==> t(agent,teacher).
+==> t(agent,student).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Exercises/TeacherTells.e:29
+% room Kitchen, Classroom
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Exercises/TeacherTells.e',29).
+==> t(room,kitchen).
+==> t(room,classroom).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Exercises/TeacherTells.e:30
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Exercises/TeacherTells.e',31).
+% fact Fact1, Fact2
+==> t(fact,fact1).
+==> t(fact,fact2).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Exercises/TeacherTells.e:32
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Exercises/TeacherTells.e',33).
+% fluent InRoom(agent,room)
+fluent(inRoom(agent,room)).
+==> mpred_prop(inRoom(agent,room),fluent).
+==> meta_argtypes(inRoom(agent,room)).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Exercises/TeacherTells.e:33
+% fluent ListeningTo(agent,agent)
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Exercises/TeacherTells.e',33).
+fluent(listeningTo(agent,agent)).
+==> mpred_prop(listeningTo(agent,agent),fluent).
+==> meta_argtypes(listeningTo(agent,agent)).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Exercises/TeacherTells.e:34
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Exercises/TeacherTells.e',35).
+% fluent Know(agent,fact)
+fluent(know(agent,fact)).
+==> mpred_prop(know(agent,fact),fluent).
+==> meta_argtypes(know(agent,fact)).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Exercises/TeacherTells.e:36
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Exercises/TeacherTells.e',37).
+% event Tell(agent,agent,fact)
+event(tell(agent,agent,fact)).
+==> mpred_prop(tell(agent,agent,fact),event).
+==> meta_argtypes(tell(agent,agent,fact)).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Exercises/TeacherTells.e:38
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Exercises/TeacherTells.e',39).
+%; Sigma
+% [agent1,agent2,fact,time]
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Exercises/TeacherTells.e:41
+% (
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Exercises/TeacherTells.e:41
+% {room} HoldsAt(InRoom(agent1,room),time) &
+%         HoldsAt(InRoom(agent2,room),time)) &
+% HoldsAt(ListeningTo(agent2,agent1),time) ->
+% Initiates(Tell(agent1,agent2,fact),Know(agent2,fact),time).
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Exercises/TeacherTells.e:44
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Exercises/TeacherTells.e',41).
+
+ /*  exists([Room],
+    (holds_at(inRoom(Agent1, Room), Time), holds_at(inRoom(Agent2, Room), Time)), holds_at(listeningTo(Agent2, Agent1), Time) ->
+       initiates(tell(Agent1, Agent2, Fact),
+                 know(Agent2, Fact),
+                 Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Exercises/TeacherTells.e',41).
+
+ /*  initiates(tell(Agent1, Agent2, Fact), know(Agent2, Fact), Time) :-
+       ( ( holds_at(inRoom(Agent1, Room), Time),
+           holds_at(inRoom(Agent2, Room), Time)
+         ),
+         holds_at(listeningTo(Agent2, Agent1), Time)
+       ),
+       some(Room,
+            '$kolem_Fn_28'(Agent1, Time, Agent2, Fact)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Exercises/TeacherTells.e',41).
+
+ /*  [holds_at(inRoom(Agent1, Room), Time), holds_at(inRoom(Agent2, Room), Time), holds_at(listeningTo(Agent2, Agent1), Time), some(Room, '$kolem_Fn_28'(Agent1, Time, Agent2, Fact))] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          initiates(tell(Agent1, Agent2, Fact),
+                    know(Agent2, Fact),
+                    Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Exercises/TeacherTells.e',41).
+axiom(initiates(tell(Agent1, Agent2, Fact), know(Agent2, Fact), Time),
+   
+    [ holds_at(inRoom(Agent1, Room), Time),
+      holds_at(inRoom(Agent2, Room), Time),
+      holds_at(listeningTo(Agent2, Agent1), Time),
+      some(Room,
+           '$kolem_Fn_28'(Agent1, Time, Agent2, Fact))
+    ]).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Exercises/TeacherTells.e',41).
+
+ /*  not(holds_at(inRoom(Agent1, Room), Time)) :-
+       holds_at(inRoom(Agent2, Room), Time),
+       holds_at(listeningTo(Agent2, Agent1), Time),
+       not(initiates(tell(Agent1, Agent2, Fact),
+                     know(Agent2, Fact),
+                     Time)),
+       some(Room,
+            '$kolem_Fn_28'(Agent1, Time, Agent2, Fact)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Exercises/TeacherTells.e',41).
+
+ /*  [holds_at(inRoom(Agent2, Room), Time), holds_at(listeningTo(Agent2, Agent1), Time), not(initiates(tell(Agent1, Agent2, Fact), know(Agent2, Fact), Time)), some(Room, '$kolem_Fn_28'(Agent1, Time, Agent2, Fact))] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(neg(inRoom(Agent1, Room)), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Exercises/TeacherTells.e',41).
+axiom(holds_at(neg(inRoom(Agent1, Room)), Time),
+   
+    [ holds_at(inRoom(Agent2, Room), Time),
+      holds_at(listeningTo(Agent2, Agent1), Time),
+      not(initiates(tell(Agent1, Agent2, Fact),
+                    know(Agent2, Fact),
+                    Time)),
+      some(Room,
+           '$kolem_Fn_28'(Agent1, Time, Agent2, Fact))
+    ]).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Exercises/TeacherTells.e',41).
+
+ /*  not(holds_at(inRoom(Agent2, Room), Time)) :-
+       holds_at(inRoom(Agent1, Room), Time),
+       holds_at(listeningTo(Agent2, Agent1), Time),
+       not(initiates(tell(Agent1, Agent2, Fact),
+                     know(Agent2, Fact),
+                     Time)),
+       some(Room,
+            '$kolem_Fn_28'(Agent1, Time, Agent2, Fact)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Exercises/TeacherTells.e',41).
+
+ /*  [holds_at(inRoom(Agent1, Room), Time), holds_at(listeningTo(Agent2, Agent1), Time), not(initiates(tell(Agent1, Agent2, Fact), know(Agent2, Fact), Time)), some(Room, '$kolem_Fn_28'(Agent1, Time, Agent2, Fact))] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(neg(inRoom(Agent2, Room)), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Exercises/TeacherTells.e',41).
+axiom(holds_at(neg(inRoom(Agent2, Room)), Time),
+   
+    [ holds_at(inRoom(Agent1, Room), Time),
+      holds_at(listeningTo(Agent2, Agent1), Time),
+      not(initiates(tell(Agent1, Agent2, Fact),
+                    know(Agent2, Fact),
+                    Time)),
+      some(Room,
+           '$kolem_Fn_28'(Agent1, Time, Agent2, Fact))
+    ]).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Exercises/TeacherTells.e',41).
+
+ /*  not(holds_at(listeningTo(Agent2, Agent1), Time)) :-
+       ( holds_at(inRoom(Agent1, Room), Time),
+         holds_at(inRoom(Agent2, Room), Time)
+       ),
+       not(initiates(tell(Agent1, Agent2, Fact),
+                     know(Agent2, Fact),
+                     Time)),
+       some(Room,
+            '$kolem_Fn_28'(Agent1, Time, Agent2, Fact)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Exercises/TeacherTells.e',41).
+
+ /*  [holds_at(inRoom(Agent1, Room), Time), holds_at(inRoom(Agent2, Room), Time), not(initiates(tell(Agent1, Agent2, Fact), know(Agent2, Fact), Time)), some(Room, '$kolem_Fn_28'(Agent1, Time, Agent2, Fact))] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(neg(listeningTo(Agent2, Agent1)), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Exercises/TeacherTells.e',41).
+axiom(holds_at(neg(listeningTo(Agent2, Agent1)), Time),
+   
+    [ holds_at(inRoom(Agent1, Room), Time),
+      holds_at(inRoom(Agent2, Room), Time),
+      not(initiates(tell(Agent1, Agent2, Fact),
+                    know(Agent2, Fact),
+                    Time)),
+      some(Room,
+           '$kolem_Fn_28'(Agent1, Time, Agent2, Fact))
+    ]).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Exercises/TeacherTells.e:46
+%; Delta
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Exercises/TeacherTells.e:48
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Exercises/TeacherTells.e',49).
+% Happens(Tell(Teacher,Student,Fact1),0).
+
+ /*  [] ->
+       ta(Ta_Param,
+          tvs1=[start],
+          tvs2=[start],
+          happens(tell(teacher, student, fact1), start)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Exercises/TeacherTells.e',49).
+axiom(happens(tell(teacher, student, fact1), start),
+    []).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Exercises/TeacherTells.e:50
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Exercises/TeacherTells.e',51).
+%; Psi
+% [agent,room1,room2,time]
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Exercises/TeacherTells.e:53
+% HoldsAt(InRoom(agent,room1),time) &
+% HoldsAt(InRoom(agent,room2),time) ->
+% room1 = room2.
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Exercises/TeacherTells.e:55
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Exercises/TeacherTells.e',53).
+
+ /*  holds_at(inRoom(Agent, Room1), Time), holds_at(inRoom(Agent, Room2), Time) ->
+       equals(Room1, Room2).
+ */
+
+ /*  not(holds_at(inRoom(Agent, Room1), Time)) :-
+       holds_at(inRoom(Agent, Room2), Time),
+       not(equals(Room1, Room2)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Exercises/TeacherTells.e',53).
+
+ /*  [holds_at(inRoom(Agent, Room2), Time), not(equals(Room1, Room2))] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(neg(inRoom(Agent, Room1)), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Exercises/TeacherTells.e',53).
+axiom(holds_at(neg(inRoom(Agent, Room1)), Time),
+   
+    [ holds_at(inRoom(Agent, Room2), Time),
+      not(equals(Room1, Room2))
+    ]).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Exercises/TeacherTells.e',53).
+
+ /*  not(holds_at(inRoom(Agent, Room2), Time)) :-
+       holds_at(inRoom(Agent, Room1), Time),
+       not(equals(Room1, Room2)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Exercises/TeacherTells.e',53).
+
+ /*  [holds_at(inRoom(Agent, Room1), Time), not(equals(Room1, Room2))] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(neg(inRoom(Agent, Room2)), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Exercises/TeacherTells.e',53).
+axiom(holds_at(neg(inRoom(Agent, Room2)), Time),
+   
+    [ holds_at(inRoom(Agent, Room1), Time),
+      not(equals(Room2, Room1))
+    ]).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Exercises/TeacherTells.e:57
+%; Gamma
+% [agent,fact]
+ % !HoldsAt(Know(agent,fact),0).
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Exercises/TeacherTells.e:59
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Exercises/TeacherTells.e',60).
+
+ /*  [] ->
+       ta(Ta_Param,
+          tvs1=[start],
+          tvs2=[start],
+          holds_at(neg(know(Agent, Fact)), start)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Exercises/TeacherTells.e',60).
+axiom(holds_at(neg(know(Agent, Fact)), start),
+    []).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Exercises/TeacherTells.e:60
+% [agent1,agent2]
+ % HoldsAt(ListeningTo(agent1,agent2),0).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Exercises/TeacherTells.e',60).
+
+ /*  [] ->
+       ta(Ta_Param,
+          tvs1=[start],
+          tvs2=[start],
+          holds_at(listeningTo(Agent1, Agent2), start)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Exercises/TeacherTells.e',60).
+axiom(holds_at(listeningTo(Agent1, Agent2), start),
+    []).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Exercises/TeacherTells.e:61
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Exercises/TeacherTells.e',62).
+% [agent]
+ % HoldsAt(InRoom(agent,Classroom),0).
+
+ /*  [] ->
+       ta(Ta_Param,
+          tvs1=[start],
+          tvs2=[start],
+          holds_at(inRoom(Agent, classroom), start)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Exercises/TeacherTells.e',62).
+axiom(holds_at(inRoom(Agent, classroom), start),
+    []).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Exercises/TeacherTells.e:63
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Exercises/TeacherTells.e',64).
+% completion Happens
+==> completion(happens).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Exercises/TeacherTells.e:65
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Exercises/TeacherTells.e',66).
+% range time 0 1
+==> range(time,0,1).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Exercises/TeacherTells.e:66
+% range offset 1 1
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Exercises/TeacherTells.e',66).
+==> range(offset,1,1).
+%; End of file.

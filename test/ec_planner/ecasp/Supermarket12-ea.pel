@@ -1,0 +1,389 @@
+:-include(library('ec_planner/ec_test_incl')).
+:-expects_dialect(pfc).
+% Wed, 01 Apr 2020 20:01:16 GMT
+% From ../ecasp/Supermarket12-ea.pel:4
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/StuffyRoom40-ea.e',41).
+
+ /*  loading(load_e_pl,
+   	'/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/Supermarket12-ea.e').
+ */
+%; Supermarket12-ea.e
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/Supermarket12-ea.e:2
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/Supermarket12-ea.e',3).
+% load foundations/Root.e
+:- load_e('foundations/Root.e', changed).
+:- if(is_e_toplevel).
+:- endif.
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/Supermarket12-ea.e:3
+% load foundations/EC.e
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/Supermarket12-ea.e',3).
+:- load_e('foundations/EC.e', changed).
+:- if(is_e_toplevel).
+:- endif.
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/Supermarket12-ea.e:5
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/Supermarket12-ea.e',6).
+% event Push()
+event(push).
+==> mpred_prop(push,event).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/Supermarket12-ea.e:6
+% event Pull()
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/Supermarket12-ea.e',6).
+event(pull).
+==> mpred_prop(pull,event).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/Supermarket12-ea.e:7
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/Supermarket12-ea.e',8).
+% fluent Forwards()
+fluent(forwards).
+==> mpred_prop(forwards,fluent).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/Supermarket12-ea.e:8
+% fluent Backwards()
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/Supermarket12-ea.e',8).
+fluent(backwards).
+==> mpred_prop(backwards,fluent).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/Supermarket12-ea.e:9
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/Supermarket12-ea.e',10).
+% fluent Spinning()
+fluent(spinning).
+==> mpred_prop(spinning,fluent).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/Supermarket12-ea.e:11
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/Supermarket12-ea.e',12).
+% [time]
+% (!Happens(Pull(), time) ->
+% Initiates(Push(), Forwards(), time)).
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/Supermarket12-ea.e:13
+
+ /*  [not(happens(pull, Time))] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          initiates(push, forwards, Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/Supermarket12-ea.e',12).
+axiom(initiates(push, forwards, Time),
+    [not(happens(pull, Time))]).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/Supermarket12-ea.e:15
+% [time]
+% (!Happens(Pull(), time) ->
+% Terminates(Push(), Backwards(), time)).
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/Supermarket12-ea.e:17
+
+ /*  [not(happens(pull, Time))] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          terminates(push, backwards, Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/Supermarket12-ea.e',17).
+axiom(terminates(push, backwards, Time),
+    [not(happens(pull, Time))]).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/Supermarket12-ea.e:19
+% [time]
+% (!Happens(Push(), time) ->
+% Initiates(Pull(), Backwards(), time)).
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/Supermarket12-ea.e:21
+
+ /*  [not(happens(push, Time))] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          initiates(pull, backwards, Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/Supermarket12-ea.e',21).
+axiom(initiates(pull, backwards, Time),
+    [not(happens(push, Time))]).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/Supermarket12-ea.e:23
+% [time]
+% (!Happens(Push(), time) ->
+% Terminates(Pull(), Forwards(), time)).
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/Supermarket12-ea.e:25
+
+ /*  [not(happens(push, Time))] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          terminates(pull, forwards, Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/Supermarket12-ea.e',25).
+axiom(terminates(pull, forwards, Time),
+    [not(happens(push, Time))]).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/Supermarket12-ea.e:27
+% [time]
+% (Happens(Push(), time) ->
+% Initiates(Pull(), Spinning(), time)).
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/Supermarket12-ea.e:29
+
+ /*  [holds_at(metreqs(push), Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          requires(push, Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/Supermarket12-ea.e',29).
+axiom(requires(push, Time),
+    [holds_at(metreqs(push), Time)]).
+
+ /*  [initiates(pull, spinning, Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(metreqs(push), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/Supermarket12-ea.e',29).
+axiom(holds_at(metreqs(push), Time),
+    [initiates(pull, spinning, Time)]).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/Supermarket12-ea.e:31
+% [time]
+% (Happens(Push(), time) ->
+% Terminates(Pull(), Forwards(), time)).
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/Supermarket12-ea.e:33
+
+ /*  [holds_at(metreqs(push), Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          requires(push, Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/Supermarket12-ea.e',33).
+axiom(requires(push, Time),
+    [holds_at(metreqs(push), Time)]).
+
+ /*  [terminates(pull, forwards, Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(metreqs(push), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/Supermarket12-ea.e',33).
+axiom(holds_at(metreqs(push), Time),
+    [terminates(pull, forwards, Time)]).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/Supermarket12-ea.e:35
+% [time]
+% (Happens(Push(), time) ->
+% Terminates(Pull(), Backwards(), time)).
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/Supermarket12-ea.e:37
+
+ /*  [holds_at(metreqs(push), Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          requires(push, Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/Supermarket12-ea.e',37).
+axiom(requires(push, Time),
+    [holds_at(metreqs(push), Time)]).
+
+ /*  [terminates(pull, backwards, Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(metreqs(push), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/Supermarket12-ea.e',37).
+axiom(holds_at(metreqs(push), Time),
+    [terminates(pull, backwards, Time)]).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/Supermarket12-ea.e:39
+% [time]
+% (!Happens(Pull(), time) ->
+% Terminates(Push(), Spinning(), time)).
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/Supermarket12-ea.e:41
+
+ /*  [not(happens(pull, Time))] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          terminates(push, spinning, Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/Supermarket12-ea.e',41).
+axiom(terminates(push, spinning, Time),
+    [not(happens(pull, Time))]).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/Supermarket12-ea.e:43
+% [time]
+% (!Happens(Push(), time) ->
+% Terminates(Pull(), Spinning(), time)).
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/Supermarket12-ea.e:45
+
+ /*  [not(happens(push, Time))] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          terminates(pull, spinning, Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/Supermarket12-ea.e',45).
+axiom(terminates(pull, spinning, Time),
+    [not(happens(push, Time))]).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/Supermarket12-ea.e:48
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/Supermarket12-ea.e',49).
+% !ReleasedAt(Forwards(),0).
+ %  not(releasedAt(forwards,0)).
+
+ /*  [] ->
+       ta(Ta_Param, tvs1=[], tvs2=[], not(releasedAt(forwards, 0))).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/Supermarket12-ea.e',49).
+axiom(not(releasedAt(forwards, 0)),
+    []).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/Supermarket12-ea.e:49
+% !ReleasedAt(Backwards(),0).
+ %  not(releasedAt(backwards,0)).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/Supermarket12-ea.e',49).
+
+ /*  [] ->
+       ta(Ta_Param, tvs1=[], tvs2=[], not(releasedAt(backwards, 0))).
+ */
+axiom(not(releasedAt(backwards, 0)),
+    []).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/Supermarket12-ea.e:50
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/Supermarket12-ea.e',51).
+% !ReleasedAt(Spinning(),0).
+ %  not(releasedAt(spinning,0)).
+
+ /*  [] ->
+       ta(Ta_Param, tvs1=[], tvs2=[], not(releasedAt(spinning, 0))).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/Supermarket12-ea.e',51).
+axiom(not(releasedAt(spinning, 0)),
+    []).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/Supermarket12-ea.e:53
+% !HoldsAt(Forwards(), 0).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/Supermarket12-ea.e',53).
+
+ /*  [] ->
+       ta(Ta_Param, tvs1=[start], tvs2=[start], holds_at(neg(forwards), start)).
+ */
+axiom(holds_at(neg(forwards), start),
+    []).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/Supermarket12-ea.e:54
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/Supermarket12-ea.e',55).
+% !HoldsAt(Backwards(), 0).
+
+ /*  [] ->
+       ta(Ta_Param,
+          tvs1=[start],
+          tvs2=[start],
+          holds_at(neg(backwards), start)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/Supermarket12-ea.e',55).
+axiom(holds_at(neg(backwards), start),
+    []).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/Supermarket12-ea.e:55
+% !HoldsAt(Spinning(), 0).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/Supermarket12-ea.e',55).
+
+ /*  [] ->
+       ta(Ta_Param, tvs1=[start], tvs2=[start], holds_at(neg(spinning), start)).
+ */
+axiom(holds_at(neg(spinning), start),
+    []).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/Supermarket12-ea.e:57
+% Happens(Push(), 5).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/Supermarket12-ea.e',57).
+
+ /*  [b(start, Start5), toffset(start, 5, Start5), ignore(start+5==Start5)] ->
+       ta(Ta_Param,
+          tvs1=[start+5],
+          tvs2=[Start5, start],
+          happens(push, Start5)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/Supermarket12-ea.e',57).
+axiom(happens(push, Start5),
+    [b(start, Start5), toffset(start, 5, Start5)]).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/Supermarket12-ea.e:58
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/Supermarket12-ea.e',59).
+% Happens(Pull(), 5).
+
+ /*  [b(start, Start5), toffset(start, 5, Start5), ignore(start+5==Start5)] ->
+       ta(Ta_Param,
+          tvs1=[start+5],
+          tvs2=[Start5, start],
+          happens(pull, Start5)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/Supermarket12-ea.e',59).
+axiom(happens(pull, Start5),
+    [b(start, Start5), toffset(start, 5, Start5)]).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/Supermarket12-ea.e:59
+% Happens(Pull(), 10).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/Supermarket12-ea.e',59).
+
+ /*  [b(start, Startd10), toffset(start, 10, Startd10), ignore(start+10==Startd10)] ->
+       ta(Ta_Param,
+          tvs1=[start+10],
+          tvs2=[Startd10, start],
+          happens(pull, Startd10)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/Supermarket12-ea.e',59).
+axiom(happens(pull, Startd10),
+    [b(start, Startd10), toffset(start, 10, Startd10)]).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/Supermarket12-ea.e:60
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/Supermarket12-ea.e',61).
+% Happens(Push(), 10).
+
+ /*  [b(start, Startd10), toffset(start, 10, Startd10), ignore(start+10==Startd10)] ->
+       ta(Ta_Param,
+          tvs1=[start+10],
+          tvs2=[Startd10, start],
+          happens(push, Startd10)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/Supermarket12-ea.e',61).
+axiom(happens(push, Startd10),
+    [b(start, Startd10), toffset(start, 10, Startd10)]).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/Supermarket12-ea.e:62
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/Supermarket12-ea.e',63).
+% completion Happens
+==> completion(happens).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/Supermarket12-ea.e:64
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/Supermarket12-ea.e',65).
+% range time 0 12
+==> range(time,0,12).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/Supermarket12-ea.e:65
+% range offset 1 1
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/Supermarket12-ea.e',65).
+==> range(offset,1,1).
+%; End of file.

@@ -1,0 +1,242 @@
+:-include(library('ec_planner/ec_test_incl')).
+:-expects_dialect(pfc).
+% Wed, 01 Apr 2020 20:00:00 GMT
+% From ../examples/Mueller2006/Chapter9/RunningAndDriving.pel:4
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter9/RouletteWheel.e',80).
+
+ /*  loading(load_e_pl,
+   	'/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter9/RunningAndDriving.e').
+ */
+%;
+%; Copyright (c) 2005 IBM Corporation and others.
+%; All rights reserved. This program and the accompanying materials
+%; are made available under the terms of the Common Public License v1.0
+%; which accompanies this distribution, and is available at
+%; http://www.eclipse.org/legal/cpl-v10.html
+%;
+%; Contributors:
+%; IBM - Initial implementation
+%;
+%; @book{Mueller:2006,
+%;   author = "Erik T. Mueller",
+%;   year = "2006",
+%;   title = "Commonsense Reasoning",
+%;   address = "San Francisco",
+%;   publisher = "Morgan Kaufmann/Elsevier",
+%; }
+%;
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter9/RunningAndDriving.e:19
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter9/RunningAndDriving.e',20).
+% load foundations/Root.e
+:- load_e('foundations/Root.e', changed).
+:- if(is_e_toplevel).
+:- endif.
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter9/RunningAndDriving.e:20
+% load foundations/EC.e
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter9/RunningAndDriving.e',20).
+:- load_e('foundations/EC.e', changed).
+:- if(is_e_toplevel).
+:- endif.
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter9/RunningAndDriving.e:22
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter9/RunningAndDriving.e',23).
+% sort agent
+==> sort(agent).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter9/RunningAndDriving.e:23
+% sort location
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter9/RunningAndDriving.e',23).
+==> sort(location).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter9/RunningAndDriving.e:25
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter9/RunningAndDriving.e',26).
+% agent James
+==> t(agent,james).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter9/RunningAndDriving.e:26
+% location Bookstore
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter9/RunningAndDriving.e',26).
+==> t(location,bookstore).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter9/RunningAndDriving.e:28
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter9/RunningAndDriving.e',29).
+% fluent Tired(agent)
+fluent(tired(agent)).
+==> mpred_prop(tired(agent),fluent).
+==> meta_argtypes(tired(agent)).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter9/RunningAndDriving.e:30
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter9/RunningAndDriving.e',31).
+% event Go(agent,location)
+event(go(agent,location)).
+==> mpred_prop(go(agent,location),event).
+==> meta_argtypes(go(agent,location)).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter9/RunningAndDriving.e:31
+% event Run(agent,location)
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter9/RunningAndDriving.e',31).
+event(run(agent,location)).
+==> mpred_prop(run(agent,location),event).
+==> meta_argtypes(run(agent,location)).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter9/RunningAndDriving.e:32
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter9/RunningAndDriving.e',33).
+% event Drive(agent,location)
+event(drive(agent,location)).
+==> mpred_prop(drive(agent,location),event).
+==> meta_argtypes(drive(agent,location)).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter9/RunningAndDriving.e:34
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter9/RunningAndDriving.e',35).
+% [agent,location,time]
+% Happens(Go(agent,location),time) ->
+% Happens(Run(agent,location),time) | Happens(Drive(agent,location),time).
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter9/RunningAndDriving.e:36
+
+ /*  happens(go(Agent, Location), Time) ->
+       (   happens(run(Agent, Location), Time)
+       ;   happens(drive(Agent, Location), Time)
+       ).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter9/RunningAndDriving.e',35).
+
+ /*  happens(run(Agent, Location), Time) :-
+       not(happens(drive(Agent, Location), Time)),
+       happens(go(Agent, Location), Time).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter9/RunningAndDriving.e',35).
+
+ /*  [not(happens(drive(Agent, Location), Time)), happens(go(Agent, Location), Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          happens(run(Agent, Location), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter9/RunningAndDriving.e',35).
+axiom(happens(run(Agent, Location), Time),
+   
+    [ not(happens(drive(Agent, Location), Time)),
+      happens(go(Agent, Location), Time)
+    ]).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter9/RunningAndDriving.e',35).
+
+ /*  happens(drive(Agent, Location), Time) :-
+       not(happens(run(Agent, Location), Time)),
+       happens(go(Agent, Location), Time).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter9/RunningAndDriving.e',35).
+
+ /*  [not(happens(run(Agent, Location), Time)), happens(go(Agent, Location), Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          happens(drive(Agent, Location), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter9/RunningAndDriving.e',35).
+axiom(happens(drive(Agent, Location), Time),
+   
+    [ not(happens(run(Agent, Location), Time)),
+      happens(go(Agent, Location), Time)
+    ]).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter9/RunningAndDriving.e',35).
+
+ /*  not(happens(go(Agent, Location), Time)) :-
+       not(happens(run(Agent, Location), Time)),
+       not(happens(drive(Agent, Location), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter9/RunningAndDriving.e',35).
+
+ /*  [not(happens(run(Agent, Location), Time)), not(happens(drive(Agent, Location), Time))] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          not(happens(go(Agent, Location), Time))).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter9/RunningAndDriving.e',35).
+axiom(not(happens(go(Agent, Location), Time)),
+   
+    [ not(happens(run(Agent, Location), Time)),
+      not(happens(drive(Agent, Location), Time))
+    ]).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter9/RunningAndDriving.e:38
+% xor Run, Drive
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter9/RunningAndDriving.e',38).
+==> xor([run,drive]).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter9/RunningAndDriving.e:40
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter9/RunningAndDriving.e',41).
+% [agent,location,time]
+ % Initiates(Run(agent,location),Tired(agent),time).
+
+ /*  [] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          initiates(run(Agent, Location),
+                    tired(Agent),
+                    Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter9/RunningAndDriving.e',41).
+axiom(initiates(run(Agent, Location), tired(Agent), Time),
+    []).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter9/RunningAndDriving.e:42
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter9/RunningAndDriving.e',43).
+% !HoldsAt(Tired(James),0).
+
+ /*  [] ->
+       ta(Ta_Param,
+          tvs1=[start],
+          tvs2=[start],
+          holds_at(neg(tired(james)), start)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter9/RunningAndDriving.e',43).
+axiom(holds_at(neg(tired(james)), start),
+    []).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter9/RunningAndDriving.e:43
+% Happens(Go(James,Bookstore),0).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter9/RunningAndDriving.e',43).
+
+ /*  [] ->
+       ta(Ta_Param,
+          tvs1=[start],
+          tvs2=[start],
+          happens(go(james, bookstore), start)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter9/RunningAndDriving.e',43).
+axiom(happens(go(james, bookstore), start),
+    []).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter9/RunningAndDriving.e:44
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter9/RunningAndDriving.e',45).
+% HoldsAt(Tired(James),1).
+
+ /*  [b(start, Time), ignore(start+1==Time)] ->
+       ta(Ta_Param,
+          tvs1=[start+1],
+          tvs2=[Time, start],
+          holds_at(tired(james), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter9/RunningAndDriving.e',45).
+axiom(holds_at(tired(james), Time),
+    [b(start, Time)]).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter9/RunningAndDriving.e:46
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter9/RunningAndDriving.e',47).
+% range time 0 1
+==> range(time,0,1).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter9/RunningAndDriving.e:47
+% range offset 1 1
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter9/RunningAndDriving.e',47).
+==> range(offset,1,1).
+%; End of file.

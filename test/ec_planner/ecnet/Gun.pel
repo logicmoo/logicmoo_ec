@@ -1,0 +1,811 @@
+:-include(library('ec_planner/ec_test_incl')).
+:-expects_dialect(pfc).
+% Wed, 01 Apr 2020 20:01:51 GMT
+% From ../ecnet/Gun.pel:4
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/GSpace.e',70).
+
+ /*  loading(load_e_pl,
+   	'/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Gun.e').
+ */
+%;
+%; Copyright (c) 2005 IBM Corporation and others.
+%; All rights reserved. This program and the accompanying materials
+%; are made available under the terms of the Common Public License v1.0
+%; which accompanies this distribution, and is available at
+%; http://www.eclipse.org/legal/cpl-v10.html
+%;
+%; Contributors:
+%; IBM - Initial implementation
+%;
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Gun.e:11
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Gun.e',12).
+% fluent Loaded(gun,bullet)
+fluent(loaded(gun,bullet)).
+==> mpred_prop(loaded(gun,bullet),fluent).
+==> meta_argtypes(loaded(gun,bullet)).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Gun.e:12
+% noninertial Loaded
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Gun.e',12).
+==> noninertial(loaded).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Gun.e:14
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Gun.e',15).
+% [gun,bullet,time]
+% HoldsAt(Inside(bullet,gun),time) <->
+% HoldsAt(Loaded(gun,bullet),time).
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Gun.e:16
+
+ /*  holds_at(inside(Bullet, Gun), Time) <->
+       holds_at(loaded(Gun, Bullet), Time).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Gun.e',15).
+
+ /*  [holds_at, inside] <->
+       [holds_at, loaded].
+ */
+
+ /*  holds_at(inside(Bullet, Gun), Time) ->
+       holds_at(loaded(Gun, Bullet), Time).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Gun.e',15).
+
+ /*  holds_at(loaded(Gun, Bullet), Time) :-
+       holds_at(inside(Bullet, Gun), Time).
+ */
+
+ /*  [holds_at(inside(Bullet, Gun), Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(loaded(Gun, Bullet), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Gun.e',15).
+axiom(holds_at(loaded(Gun, Bullet), Time),
+    [holds_at(inside(Bullet, Gun), Time)]).
+
+ /*  not(holds_at(inside(Bullet, Gun), Time)) :-
+       not(holds_at(loaded(Gun, Bullet), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Gun.e',15).
+
+ /*  [holds_at(neg(loaded(Gun, Bullet)), Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(neg(inside(Bullet, Gun)), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Gun.e',15).
+axiom(holds_at(neg(inside(Bullet, Gun)), Time),
+    [holds_at(neg(loaded(Gun, Bullet)), Time)]).
+
+ /*  holds_at(loaded(Gun, Bullet), Time) ->
+       holds_at(inside(Bullet, Gun), Time).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Gun.e',15).
+
+ /*  holds_at(inside(Bullet, Gun), Time) :-
+       holds_at(loaded(Gun, Bullet), Time).
+ */
+
+ /*  [holds_at(loaded(Gun, Bullet), Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(inside(Bullet, Gun), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Gun.e',15).
+axiom(holds_at(inside(Bullet, Gun), Time),
+    [holds_at(loaded(Gun, Bullet), Time)]).
+
+ /*  not(holds_at(loaded(Gun, Bullet), Time)) :-
+       not(holds_at(inside(Bullet, Gun), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Gun.e',15).
+
+ /*  [holds_at(neg(inside(Bullet, Gun)), Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(neg(loaded(Gun, Bullet)), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Gun.e',15).
+axiom(holds_at(neg(loaded(Gun, Bullet)), Time),
+    [holds_at(neg(inside(Bullet, Gun)), Time)]).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Gun.e:18
+% event Shoot(agent,gun,object)
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Gun.e',18).
+event(shoot(agent,gun,object)).
+==> mpred_prop(shoot(agent,gun,object),event).
+==> meta_argtypes(shoot(agent,gun,object)).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Gun.e:20
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Gun.e',21).
+% event ShootInjure(agent,gun,agent)
+event(shootInjure(agent,gun,agent)).
+==> mpred_prop(shootInjure(agent,gun,agent),event).
+==> meta_argtypes(shootInjure(agent,gun,agent)).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Gun.e:22
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Gun.e',23).
+% event ShootKill(agent,gun,agent)
+event(shootKill(agent,gun,agent)).
+==> mpred_prop(shootKill(agent,gun,agent),event).
+==> meta_argtypes(shootKill(agent,gun,agent)).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Gun.e:24
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Gun.e',25).
+% event ShootDamage(agent,gun,physobj)
+event(shootDamage(agent,gun,physobj)).
+==> mpred_prop(shootDamage(agent,gun,physobj),event).
+==> meta_argtypes(shootDamage(agent,gun,physobj)).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Gun.e:26
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Gun.e',27).
+% event ShootDestroy(agent,gun,physobj)
+event(shootDestroy(agent,gun,physobj)).
+==> mpred_prop(shootDestroy(agent,gun,physobj),event).
+==> meta_argtypes(shootDestroy(agent,gun,physobj)).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Gun.e:28
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Gun.e',29).
+% [agent,gun,bullet,object,time]
+% HoldsAt(Inside(bullet,gun),time) ->
+% Terminates(Shoot(agent,gun,object),
+%            Inside(bullet,gun),
+%            time).
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Gun.e:32
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Gun.e',29).
+
+ /*  [holds_at(inside(Bullet, Gun), Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          terminates(shoot(Agent, Gun, Object),
+                     inside(Bullet, Gun),
+                     Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Gun.e',29).
+axiom(terminates(shoot(Agent, Gun, Object), inside(Bullet, Gun), Time),
+    [holds_at(inside(Bullet, Gun), Time)]).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Gun.e:34
+% [agent,gun,bullet,object,location1,location2,time]
+% HoldsAt(Inside(bullet,gun),time) &
+% HoldsAt(At(gun,location1),time) &
+% location1 != location2 ->
+% Terminates(Shoot(agent,gun,object),At(bullet,location2),time).
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Gun.e:38
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Gun.e',36).
+
+ /*  [holds_at(inside(Bullet, Gun), Time), holds_at(at(Gun, Location1), Time), diff(Location1, Location2)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          terminates(shoot(Agent, Gun, Object),
+                     at(Bullet, Location2),
+                     Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Gun.e',36).
+axiom(terminates(shoot(Agent, Gun, Object), at(Bullet, Location2), Time),
+   
+    [ holds_at(inside(Bullet, Gun), Time),
+      holds_at(at(Gun, Location1), Time),
+      diff(Location2, Location1)
+    ]).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Gun.e:40
+% [agent,gun,bullet,object,location,time]
+% HoldsAt(At(object,location),time) &
+% HoldsAt(Inside(bullet,gun),time) ->
+% Initiates(Shoot(agent,gun,object),At(bullet,location),time).
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Gun.e:43
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Gun.e',42).
+
+ /*  [holds_at(at(Object, Location), Time), holds_at(inside(Bullet, Gun), Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          initiates(shoot(Agent, Gun, Object),
+                    at(Bullet, Location),
+                    Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Gun.e',42).
+axiom(initiates(shoot(Agent, Gun, Object), at(Bullet, Location), Time),
+   
+    [ holds_at(at(Object, Location), Time),
+      holds_at(inside(Bullet, Gun), Time)
+    ]).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Gun.e:45
+% [agent,gun,object,time]
+% Happens(Shoot(agent,gun,object),time) ->
+% HoldsAt(Holding(agent,gun),time) &
+% ({bullet} HoldsAt(Loaded(gun,bullet),time)) &
+% ({location} HoldsAt(At(agent,location),time) &
+%             HoldsAt(At(object,location),time)).
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Gun.e:50
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Gun.e',47).
+
+ /*  happens(shoot(Agent, Gun, Object), Time) ->
+       holds_at(holding(Agent, Gun), Time),
+       exists([Bullet], holds_at(loaded(Gun, Bullet), Time)),
+       exists([Location],
+               (holds_at(at(Agent, Location), Time), holds_at(at(Object, Location), Time))).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Gun.e',47).
+
+ /*  not(happens(shoot(Agent, Gun, Object), Time)) :-
+       (   not(holds_at(holding(Agent, Gun), Time))
+       ;   not(holds_at(loaded(Gun, Bullet), Time))
+       ;   not(holds_at(at(Agent, Location), Time))
+       ;   not(holds_at(at(Object, Location), Time))
+       ).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Gun.e',47).
+
+ /*  [(holds_at(neg(holding(Agent, Gun)), Time);holds_at(neg(loaded(Gun, Bullet)), Time);holds_at(neg(at(Agent, Location)), Time);holds_at(neg(at(Object, Location)), Time))] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          not(happens(shoot(Agent, Gun, Object), Time))).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Gun.e',47).
+axiom(not(happens(shoot(Agent, Gun, Object), Time)),
+   
+    [  (holds_at(neg(holding(Agent, Gun)), Time);holds_at(neg(loaded(Gun, Bullet)), Time);holds_at(neg(at(Agent, Location)), Time);holds_at(neg(at(Object, Location)), Time))
+    ]).
+
+ /*  holds_at(holding(Agent, Gun), Time) :-
+       happens(shoot(Agent, Gun, Object), Time).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Gun.e',47).
+
+ /*  [holds_at(metreqs(shoot(Agent, Gun, Object)), Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          requires(shoot(Agent, Gun, Object), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Gun.e',47).
+axiom(requires(shoot(Agent, Gun, Object), Time),
+    [holds_at(metreqs(shoot(Agent, Gun, Object)), Time)]).
+
+ /*  [holds_at(holding(Agent, Gun), Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(metreqs(shoot(Agent, Gun, Object)), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Gun.e',47).
+axiom(holds_at(metreqs(shoot(Agent, Gun, Object)), Time),
+    [holds_at(holding(Agent, Gun), Time)]).
+
+ /*  holds_at(loaded(Gun, Bullet), Time) :-
+       happens(shoot(Agent, Gun, Object), Time).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Gun.e',47).
+
+ /*  [holds_at(metreqs(shoot(Agent, Gun, Object)), Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          requires(shoot(Agent, Gun, Object), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Gun.e',47).
+axiom(requires(shoot(Agent, Gun, Object), Time),
+    [holds_at(metreqs(shoot(Agent, Gun, Object)), Time)]).
+
+ /*  [holds_at(loaded(Gun, Bullet), Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(metreqs(shoot(Agent, Gun, Object)), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Gun.e',47).
+axiom(holds_at(metreqs(shoot(Agent, Gun, Object)), Time),
+    [holds_at(loaded(Gun, Bullet), Time)]).
+
+ /*  holds_at(at(Agent, Location), Time) :-
+       happens(shoot(Agent, Gun, Object), Time).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Gun.e',47).
+
+ /*  [holds_at(metreqs(shoot(Agent, Gun, Object)), Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          requires(shoot(Agent, Gun, Object), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Gun.e',47).
+axiom(requires(shoot(Agent, Gun, Object), Time),
+    [holds_at(metreqs(shoot(Agent, Gun, Object)), Time)]).
+
+ /*  [holds_at(at(Agent, Location), Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(metreqs(shoot(Agent, Gun, Object)), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Gun.e',47).
+axiom(holds_at(metreqs(shoot(Agent, Gun, Object)), Time),
+    [holds_at(at(Agent, Location), Time)]).
+
+ /*  holds_at(at(Object, Location), Time) :-
+       happens(shoot(Agent, Gun, Object), Time).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Gun.e',47).
+
+ /*  [holds_at(metreqs(shoot(Agent, Gun, Object)), Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          requires(shoot(Agent, Gun, Object), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Gun.e',47).
+axiom(requires(shoot(Agent, Gun, Object), Time),
+    [holds_at(metreqs(shoot(Agent, Gun, Object)), Time)]).
+
+ /*  [holds_at(at(Object, Location), Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(metreqs(shoot(Agent, Gun, Object)), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Gun.e',47).
+axiom(holds_at(metreqs(shoot(Agent, Gun, Object)), Time),
+    [holds_at(at(Object, Location), Time)]).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Gun.e:52
+% [agent1,gun,agent2,time]
+% Happens(Shoot(agent1,gun,agent2),time) ->
+% Happens(ShootInjure(agent1,gun,agent2),time) |
+% Happens(ShootKill(agent1,gun,agent2),time).
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Gun.e:55
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Gun.e',54).
+
+ /*  happens(shoot(Agent1, Gun, Agent2), Time) ->
+       (   happens(shootInjure(Agent1, Gun, Agent2), Time)
+       ;   happens(shootKill(Agent1, Gun, Agent2), Time)
+       ).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Gun.e',54).
+
+ /*  happens(shootInjure(Agent1, Gun, Agent2), Time) :-
+       not(happens(shootKill(Agent1, Gun, Agent2), Time)),
+       happens(shoot(Agent1, Gun, Agent2), Time).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Gun.e',54).
+
+ /*  [not(happens(shootKill(Agent1, Gun, Agent2), Time)), happens(shoot(Agent1, Gun, Agent2), Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          happens(shootInjure(Agent1, Gun, Agent2), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Gun.e',54).
+axiom(happens(shootInjure(Agent1, Gun, Agent2), Time),
+   
+    [ not(happens(shootKill(Agent1, Gun, Agent2), Time)),
+      happens(shoot(Agent1, Gun, Agent2), Time)
+    ]).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Gun.e',54).
+
+ /*  happens(shootKill(Agent1, Gun, Agent2), Time) :-
+       not(happens(shootInjure(Agent1, Gun, Agent2), Time)),
+       happens(shoot(Agent1, Gun, Agent2), Time).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Gun.e',54).
+
+ /*  [not(happens(shootInjure(Agent1, Gun, Agent2), Time)), happens(shoot(Agent1, Gun, Agent2), Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          happens(shootKill(Agent1, Gun, Agent2), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Gun.e',54).
+axiom(happens(shootKill(Agent1, Gun, Agent2), Time),
+   
+    [ not(happens(shootInjure(Agent1, Gun, Agent2), Time)),
+      happens(shoot(Agent1, Gun, Agent2), Time)
+    ]).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Gun.e',54).
+
+ /*  not(happens(shoot(Agent1, Gun, Agent2), Time)) :-
+       not(happens(shootInjure(Agent1, Gun, Agent2), Time)),
+       not(happens(shootKill(Agent1, Gun, Agent2), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Gun.e',54).
+
+ /*  [not(happens(shootInjure(Agent1, Gun, Agent2), Time)), not(happens(shootKill(Agent1, Gun, Agent2), Time))] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          not(happens(shoot(Agent1, Gun, Agent2), Time))).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Gun.e',54).
+axiom(not(happens(shoot(Agent1, Gun, Agent2), Time)),
+   
+    [ not(happens(shootInjure(Agent1, Gun, Agent2), Time)),
+      not(happens(shootKill(Agent1, Gun, Agent2), Time))
+    ]).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Gun.e:57
+% [agent1,gun,bullet,agent2,time]
+% HoldsAt(Inside(bullet,gun),time) &
+% Happens(ShootKill(agent1,gun,agent2),time) ->
+% Happens(Kill(bullet,agent2),time).
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Gun.e:60
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Gun.e',59).
+
+ /*  holds_at(inside(Bullet, Gun), Time), happens(shootKill(Agent1, Gun, Agent2), Time) ->
+       happens(kill(Bullet, Agent2), Time).
+ */
+
+ /*  happens(kill(Bullet, Agent2), Time) :-
+       holds_at(inside(Bullet, Gun), Time),
+       happens(shootKill(Agent1, Gun, Agent2), Time).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Gun.e',59).
+
+ /*  [holds_at(inside(Bullet, Gun), Time), happens(shootKill(Agent1, Gun, Agent2), Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          happens(kill(Bullet, Agent2), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Gun.e',59).
+axiom(happens(kill(Bullet, Agent2), Time),
+   
+    [ holds_at(inside(Bullet, Gun), Time),
+      happens(shootKill(Agent1, Gun, Agent2), Time)
+    ]).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Gun.e',59).
+
+ /*  not(holds_at(inside(Bullet, Gun), Time)) :-
+       happens(shootKill(Agent1, Gun, Agent2), Time),
+       not(happens(kill(Bullet, Agent2), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Gun.e',59).
+
+ /*  [happens(shootKill(Agent1, Gun, Agent2), Time), not(happens(kill(Bullet, Agent2), Time))] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(neg(inside(Bullet, Gun)), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Gun.e',59).
+axiom(holds_at(neg(inside(Bullet, Gun)), Time),
+   
+    [ happens(shootKill(Agent1, Gun, Agent2), Time),
+      not(happens(kill(Bullet, Agent2), Time))
+    ]).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Gun.e',59).
+
+ /*  not(happens(shootKill(Agent1, Gun, Agent2), Time)) :-
+       holds_at(inside(Bullet, Gun), Time),
+       not(happens(kill(Bullet, Agent2), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Gun.e',59).
+
+ /*  [holds_at(inside(Bullet, Gun), Time), not(happens(kill(Bullet, Agent2), Time))] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          not(happens(shootKill(Agent1, Gun, Agent2), Time))).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Gun.e',59).
+axiom(not(happens(shootKill(Agent1, Gun, Agent2), Time)),
+   
+    [ holds_at(inside(Bullet, Gun), Time),
+      not(happens(kill(Bullet, Agent2), Time))
+    ]).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Gun.e:62
+% [agent1,gun,bullet,agent2,time]
+% HoldsAt(Inside(bullet,gun),time) &
+% Happens(ShootInjure(agent1,gun,agent2),time) ->
+% Happens(Injure(bullet,agent2),time).
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Gun.e:65
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Gun.e',64).
+
+ /*  holds_at(inside(Bullet, Gun), Time), happens(shootInjure(Agent1, Gun, Agent2), Time) ->
+       happens(injure(Bullet, Agent2), Time).
+ */
+
+ /*  happens(injure(Bullet, Agent2), Time) :-
+       holds_at(inside(Bullet, Gun), Time),
+       happens(shootInjure(Agent1, Gun, Agent2), Time).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Gun.e',64).
+
+ /*  [holds_at(inside(Bullet, Gun), Time), happens(shootInjure(Agent1, Gun, Agent2), Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          happens(injure(Bullet, Agent2), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Gun.e',64).
+axiom(happens(injure(Bullet, Agent2), Time),
+   
+    [ holds_at(inside(Bullet, Gun), Time),
+      happens(shootInjure(Agent1, Gun, Agent2), Time)
+    ]).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Gun.e',64).
+
+ /*  not(holds_at(inside(Bullet, Gun), Time)) :-
+       happens(shootInjure(Agent1, Gun, Agent2), Time),
+       not(happens(injure(Bullet, Agent2), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Gun.e',64).
+
+ /*  [happens(shootInjure(Agent1, Gun, Agent2), Time), not(happens(injure(Bullet, Agent2), Time))] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(neg(inside(Bullet, Gun)), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Gun.e',64).
+axiom(holds_at(neg(inside(Bullet, Gun)), Time),
+   
+    [ happens(shootInjure(Agent1, Gun, Agent2), Time),
+      not(happens(injure(Bullet, Agent2), Time))
+    ]).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Gun.e',64).
+
+ /*  not(happens(shootInjure(Agent1, Gun, Agent2), Time)) :-
+       holds_at(inside(Bullet, Gun), Time),
+       not(happens(injure(Bullet, Agent2), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Gun.e',64).
+
+ /*  [holds_at(inside(Bullet, Gun), Time), not(happens(injure(Bullet, Agent2), Time))] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          not(happens(shootInjure(Agent1, Gun, Agent2),
+                      Time))).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Gun.e',64).
+axiom(not(happens(shootInjure(Agent1, Gun, Agent2), Time)),
+   
+    [ holds_at(inside(Bullet, Gun), Time),
+      not(happens(injure(Bullet, Agent2), Time))
+    ]).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Gun.e:67
+% [agent,gun,physobj,time]
+% Happens(Shoot(agent,gun,physobj),time) ->
+% Happens(ShootDamage(agent,gun,physobj),time) |
+% Happens(ShootDestroy(agent,gun,physobj),time).
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Gun.e:70
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Gun.e',69).
+
+ /*  happens(shoot(Agent, Gun, Physobj), Time) ->
+       (   happens(shootDamage(Agent, Gun, Physobj), Time)
+       ;   happens(shootDestroy(Agent, Gun, Physobj), Time)
+       ).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Gun.e',69).
+
+ /*  happens(shootDamage(Agent, Gun, Physobj), Time) :-
+       not(happens(shootDestroy(Agent, Gun, Physobj), Time)),
+       happens(shoot(Agent, Gun, Physobj), Time).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Gun.e',69).
+
+ /*  [not(happens(shootDestroy(Agent, Gun, Physobj), Time)), happens(shoot(Agent, Gun, Physobj), Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          happens(shootDamage(Agent, Gun, Physobj), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Gun.e',69).
+axiom(happens(shootDamage(Agent, Gun, Physobj), Time),
+   
+    [ not(happens(shootDestroy(Agent, Gun, Physobj),
+                  Time)),
+      happens(shoot(Agent, Gun, Physobj), Time)
+    ]).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Gun.e',69).
+
+ /*  happens(shootDestroy(Agent, Gun, Physobj), Time) :-
+       not(happens(shootDamage(Agent, Gun, Physobj), Time)),
+       happens(shoot(Agent, Gun, Physobj), Time).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Gun.e',69).
+
+ /*  [not(happens(shootDamage(Agent, Gun, Physobj), Time)), happens(shoot(Agent, Gun, Physobj), Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          happens(shootDestroy(Agent, Gun, Physobj), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Gun.e',69).
+axiom(happens(shootDestroy(Agent, Gun, Physobj), Time),
+   
+    [ not(happens(shootDamage(Agent, Gun, Physobj), Time)),
+      happens(shoot(Agent, Gun, Physobj), Time)
+    ]).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Gun.e',69).
+
+ /*  not(happens(shoot(Agent, Gun, Physobj), Time)) :-
+       not(happens(shootDamage(Agent, Gun, Physobj), Time)),
+       not(happens(shootDestroy(Agent, Gun, Physobj), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Gun.e',69).
+
+ /*  [not(happens(shootDamage(Agent, Gun, Physobj), Time)), not(happens(shootDestroy(Agent, Gun, Physobj), Time))] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          not(happens(shoot(Agent, Gun, Physobj), Time))).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Gun.e',69).
+axiom(not(happens(shoot(Agent, Gun, Physobj), Time)),
+   
+    [ not(happens(shootDamage(Agent, Gun, Physobj), Time)),
+      not(happens(shootDestroy(Agent, Gun, Physobj),
+                  Time))
+    ]).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Gun.e:72
+% [agent,gun,bullet,physobj,time]
+% HoldsAt(Inside(bullet,gun),time) &
+% Happens(ShootDamage(agent,gun,physobj),time) ->
+% Happens(Damage(bullet,physobj),time).
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Gun.e:75
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Gun.e',74).
+
+ /*  holds_at(inside(Bullet, Gun), Time), happens(shootDamage(Agent, Gun, Physobj), Time) ->
+       happens(damage(Bullet, Physobj), Time).
+ */
+
+ /*  happens(damage(Bullet, Physobj), Time) :-
+       holds_at(inside(Bullet, Gun), Time),
+       happens(shootDamage(Agent, Gun, Physobj), Time).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Gun.e',74).
+
+ /*  [holds_at(inside(Bullet, Gun), Time), happens(shootDamage(Agent, Gun, Physobj), Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          happens(damage(Bullet, Physobj), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Gun.e',74).
+axiom(happens(damage(Bullet, Physobj), Time),
+   
+    [ holds_at(inside(Bullet, Gun), Time),
+      happens(shootDamage(Agent, Gun, Physobj), Time)
+    ]).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Gun.e',74).
+
+ /*  not(holds_at(inside(Bullet, Gun), Time)) :-
+       happens(shootDamage(Agent, Gun, Physobj), Time),
+       not(happens(damage(Bullet, Physobj), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Gun.e',74).
+
+ /*  [happens(shootDamage(Agent, Gun, Physobj), Time), not(happens(damage(Bullet, Physobj), Time))] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(neg(inside(Bullet, Gun)), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Gun.e',74).
+axiom(holds_at(neg(inside(Bullet, Gun)), Time),
+   
+    [ happens(shootDamage(Agent, Gun, Physobj), Time),
+      not(happens(damage(Bullet, Physobj), Time))
+    ]).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Gun.e',74).
+
+ /*  not(happens(shootDamage(Agent, Gun, Physobj), Time)) :-
+       holds_at(inside(Bullet, Gun), Time),
+       not(happens(damage(Bullet, Physobj), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Gun.e',74).
+
+ /*  [holds_at(inside(Bullet, Gun), Time), not(happens(damage(Bullet, Physobj), Time))] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          not(happens(shootDamage(Agent, Gun, Physobj),
+                      Time))).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Gun.e',74).
+axiom(not(happens(shootDamage(Agent, Gun, Physobj), Time)),
+   
+    [ holds_at(inside(Bullet, Gun), Time),
+      not(happens(damage(Bullet, Physobj), Time))
+    ]).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Gun.e:77
+% [agent,gun,bullet,physobj,time]
+% HoldsAt(Inside(bullet,gun),time) &
+% Happens(ShootDestroy(agent,gun,physobj),time) ->
+% Happens(Destroy(bullet,physobj),time).
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Gun.e:80
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Gun.e',79).
+
+ /*  holds_at(inside(Bullet, Gun), Time), happens(shootDestroy(Agent, Gun, Physobj), Time) ->
+       happens(destroy(Bullet, Physobj), Time).
+ */
+
+ /*  happens(destroy(Bullet, Physobj), Time) :-
+       holds_at(inside(Bullet, Gun), Time),
+       happens(shootDestroy(Agent, Gun, Physobj), Time).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Gun.e',79).
+
+ /*  [holds_at(inside(Bullet, Gun), Time), happens(shootDestroy(Agent, Gun, Physobj), Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          happens(destroy(Bullet, Physobj), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Gun.e',79).
+axiom(happens(destroy(Bullet, Physobj), Time),
+   
+    [ holds_at(inside(Bullet, Gun), Time),
+      happens(shootDestroy(Agent, Gun, Physobj), Time)
+    ]).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Gun.e',79).
+
+ /*  not(holds_at(inside(Bullet, Gun), Time)) :-
+       happens(shootDestroy(Agent, Gun, Physobj), Time),
+       not(happens(destroy(Bullet, Physobj), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Gun.e',79).
+
+ /*  [happens(shootDestroy(Agent, Gun, Physobj), Time), not(happens(destroy(Bullet, Physobj), Time))] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(neg(inside(Bullet, Gun)), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Gun.e',79).
+axiom(holds_at(neg(inside(Bullet, Gun)), Time),
+   
+    [ happens(shootDestroy(Agent, Gun, Physobj), Time),
+      not(happens(destroy(Bullet, Physobj), Time))
+    ]).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Gun.e',79).
+
+ /*  not(happens(shootDestroy(Agent, Gun, Physobj), Time)) :-
+       holds_at(inside(Bullet, Gun), Time),
+       not(happens(destroy(Bullet, Physobj), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Gun.e',79).
+
+ /*  [holds_at(inside(Bullet, Gun), Time), not(happens(destroy(Bullet, Physobj), Time))] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          not(happens(shootDestroy(Agent, Gun, Physobj),
+                      Time))).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Gun.e',79).
+axiom(not(happens(shootDestroy(Agent, Gun, Physobj), Time)),
+   
+    [ holds_at(inside(Bullet, Gun), Time),
+      not(happens(destroy(Bullet, Physobj), Time))
+    ]).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Gun.e:82
+%; End of file.

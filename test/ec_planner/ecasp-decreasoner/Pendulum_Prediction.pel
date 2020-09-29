@@ -1,0 +1,438 @@
+:-include(library('ec_planner/ec_test_incl')).
+:-expects_dialect(pfc).
+% Wed, 01 Apr 2020 20:00:50 GMT
+% From ../decreasoner/Pendulum_Prediction.pel:4
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/KitchenSink_M5.e',101).
+
+ /*  loading(load_e_pl,
+   	'/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Pendulum_Prediction.e').
+ */
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Pendulum_Prediction.e:0
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Pendulum_Prediction.e',1).
+% load foundations/Root.e
+:- load_e('foundations/Root.e', changed).
+:- if(is_e_toplevel).
+:- endif.
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Pendulum_Prediction.e:1
+% load foundations/EC.e
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Pendulum_Prediction.e',1).
+:- load_e('foundations/EC.e', changed).
+:- if(is_e_toplevel).
+:- endif.
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Pendulum_Prediction.e:3
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Pendulum_Prediction.e',4).
+% sort dir
+==> sort(dir).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Pendulum_Prediction.e:4
+% dir Left, Right
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Pendulum_Prediction.e',4).
+==> t(dir,left).
+==> t(dir,right).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Pendulum_Prediction.e:6
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Pendulum_Prediction.e',7).
+% fluent Oscillating()
+fluent(oscillating).
+==> mpred_prop(oscillating,fluent).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Pendulum_Prediction.e:7
+% fluent At(dir)
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Pendulum_Prediction.e',7).
+fluent(at(dir)).
+==> mpred_prop(at(dir),fluent).
+==> meta_argtypes(at(dir)).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Pendulum_Prediction.e:9
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Pendulum_Prediction.e',10).
+% event Hold()
+event(hold).
+==> mpred_prop(hold,event).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Pendulum_Prediction.e:10
+% event Swing()
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Pendulum_Prediction.e',10).
+event(swing).
+==> mpred_prop(swing,event).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Pendulum_Prediction.e:13
+% range time 0 5
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Pendulum_Prediction.e',13).
+==> range(time,0,5).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Pendulum_Prediction.e:14
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Pendulum_Prediction.e',15).
+% range offset 1 3
+==> range(offset,1,3).
+%; State Constraints:
+% [dir1, dir2, time]
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Pendulum_Prediction.e:19
+% (HoldsAt(At(dir1), time) &
+%  HoldsAt(At(dir2), time) ->
+%  dir1=dir2).
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Pendulum_Prediction.e:21
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Pendulum_Prediction.e',19).
+
+ /*  holds_at(at(Dir1), Time), holds_at(at(Dir2), Time) ->
+       equals(Dir1, Dir2).
+ */
+
+ /*  not(holds_at(at(Dir1), Time)) :-
+       holds_at(at(Dir2), Time),
+       not(equals(Dir1, Dir2)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Pendulum_Prediction.e',19).
+
+ /*  [holds_at(at(Dir2), Time), not(equals(Dir1, Dir2))] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(neg(at(Dir1)), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Pendulum_Prediction.e',19).
+axiom(holds_at(neg(at(Dir1)), Time),
+    [holds_at(at(Dir2), Time), not(equals(Dir1, Dir2))]).
+
+ /*  not(holds_at(at(Dir2), Time)) :-
+       holds_at(at(Dir1), Time),
+       not(equals(Dir1, Dir2)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Pendulum_Prediction.e',19).
+
+ /*  [holds_at(at(Dir1), Time), not(equals(Dir1, Dir2))] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(neg(at(Dir2)), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Pendulum_Prediction.e',19).
+axiom(holds_at(neg(at(Dir2)), Time),
+    [holds_at(at(Dir1), Time), not(equals(Dir2, Dir1))]).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Pendulum_Prediction.e:24
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Pendulum_Prediction.e',25).
+%; Effect Axioms:
+% [time]
+% (Initiates(Swing(), Oscillating(), time)).
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Pendulum_Prediction.e:26
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Pendulum_Prediction.e',27).
+
+ /*  [] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          initiates(swing, oscillating, Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Pendulum_Prediction.e',27).
+axiom(initiates(swing, oscillating, Time),
+    []).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Pendulum_Prediction.e:28
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Pendulum_Prediction.e',29).
+% [time, dir]
+% (Releases(Swing(), At(dir), time)).
+
+ /*  [] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          releases(swing, at(Dir), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Pendulum_Prediction.e',29).
+axiom(releases(swing, at(Dir), Time),
+    []).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Pendulum_Prediction.e:31
+% [time,dir]
+% (HoldsAt(At(dir), time) ->
+%  Initiates(Hold(), At(dir), time)).
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Pendulum_Prediction.e:33
+
+ /*  [holds_at(at(Dir), Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          initiates(hold, at(Dir), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Pendulum_Prediction.e',33).
+axiom(initiates(hold, at(Dir), Time),
+    [holds_at(at(Dir), Time)]).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Pendulum_Prediction.e:35
+% [time]
+% (Terminates(Hold(), Oscillating(), time)).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Pendulum_Prediction.e',37).
+
+ /*  [] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          terminates(hold, oscillating, Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Pendulum_Prediction.e',37).
+axiom(terminates(hold, oscillating, Time),
+    []).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Pendulum_Prediction.e:39
+% [time, offset]
+% (HoldsAt(At(Left), time) & (offset % 2!=0) ->
+%  Trajectory(Oscillating(),time,At(Right),offset)).
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Pendulum_Prediction.e:41
+
+ /*  holds_at(at(left), Time), diff(Offset/2, 0) ->
+       trajectory(oscillating, Time, at(right), Offset).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Pendulum_Prediction.e',41).
+
+ /*  trajectory(oscillating, Time, at(right), Offset) :-
+       holds_at(at(left), Time),
+       diff(Offset/2, 0).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Pendulum_Prediction.e',41).
+
+ /*  [holds_at(at(left), Time), diff(Offset/2, 0)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          trajectory(oscillating, Time, at(right), Offset)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Pendulum_Prediction.e',41).
+axiom(trajectory(oscillating, Time, at(right), Offset),
+    [holds_at(at(left), Time), diff(Offset/2, 0)]).
+
+ /*  not(holds_at(at(left), Time)) :-
+       diff(Offset/2, 0),
+       not(trajectory(oscillating, Time, at(right), Offset)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Pendulum_Prediction.e',41).
+
+ /*  [diff(Offset/2, 0), not(trajectory(oscillating, Time, at(right), Offset))] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(neg(at(left)), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Pendulum_Prediction.e',41).
+axiom(holds_at(neg(at(left)), Time),
+   
+    [ diff(Offset/2, 0),
+      not(trajectory(oscillating, Time, at(right), Offset))
+    ]).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Pendulum_Prediction.e:43
+% [time, offset]
+% (HoldsAt(At(Right), time) & (offset % 2!=0) ->
+%  Trajectory(Oscillating(),time,At(Left),offset)).
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Pendulum_Prediction.e:45
+
+ /*  holds_at(at(right), Time), diff(Offset/2, 0) ->
+       trajectory(oscillating, Time, at(left), Offset).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Pendulum_Prediction.e',45).
+
+ /*  trajectory(oscillating, Time, at(left), Offset) :-
+       holds_at(at(right), Time),
+       diff(Offset/2, 0).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Pendulum_Prediction.e',45).
+
+ /*  [holds_at(at(right), Time), diff(Offset/2, 0)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          trajectory(oscillating, Time, at(left), Offset)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Pendulum_Prediction.e',45).
+axiom(trajectory(oscillating, Time, at(left), Offset),
+    [holds_at(at(right), Time), diff(Offset/2, 0)]).
+
+ /*  not(holds_at(at(right), Time)) :-
+       diff(Offset/2, 0),
+       not(trajectory(oscillating, Time, at(left), Offset)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Pendulum_Prediction.e',45).
+
+ /*  [diff(Offset/2, 0), not(trajectory(oscillating, Time, at(left), Offset))] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(neg(at(right)), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Pendulum_Prediction.e',45).
+axiom(holds_at(neg(at(right)), Time),
+   
+    [ diff(Offset/2, 0),
+      not(trajectory(oscillating, Time, at(left), Offset))
+    ]).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Pendulum_Prediction.e:47
+% [time, offset]
+% (HoldsAt(At(Left), time) & (offset % 2=0) ->
+%  Trajectory(Oscillating(),time,At(Left),offset)).
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Pendulum_Prediction.e:49
+
+ /*  holds_at(at(left), Time), equals(Offset/2, 0) ->
+       trajectory(oscillating, Time, at(left), Offset).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Pendulum_Prediction.e',49).
+
+ /*  trajectory(oscillating, Time, at(left), Offset) :-
+       holds_at(at(left), Time),
+       equals(Offset/2, 0).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Pendulum_Prediction.e',49).
+
+ /*  [holds_at(at(left), Time), equals(Offset/2, 0)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          trajectory(oscillating, Time, at(left), Offset)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Pendulum_Prediction.e',49).
+axiom(trajectory(oscillating, Time, at(left), Offset),
+    [holds_at(at(left), Time), equals(Offset/2, 0)]).
+
+ /*  not(holds_at(at(left), Time)) :-
+       equals(Offset/2, 0),
+       not(trajectory(oscillating, Time, at(left), Offset)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Pendulum_Prediction.e',49).
+
+ /*  [equals(Offset/2, 0), not(trajectory(oscillating, Time, at(left), Offset))] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(neg(at(left)), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Pendulum_Prediction.e',49).
+axiom(holds_at(neg(at(left)), Time),
+   
+    [ equals(Offset/2, 0),
+      not(trajectory(oscillating, Time, at(left), Offset))
+    ]).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Pendulum_Prediction.e:51
+% [time, offset]
+% (HoldsAt(At(Right), time) & (offset % 2=0) ->
+%  Trajectory(Oscillating(),time,At(Right),offset)).
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Pendulum_Prediction.e:53
+
+ /*  holds_at(at(right), Time), equals(Offset/2, 0) ->
+       trajectory(oscillating, Time, at(right), Offset).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Pendulum_Prediction.e',53).
+
+ /*  trajectory(oscillating, Time, at(right), Offset) :-
+       holds_at(at(right), Time),
+       equals(Offset/2, 0).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Pendulum_Prediction.e',53).
+
+ /*  [holds_at(at(right), Time), equals(Offset/2, 0)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          trajectory(oscillating, Time, at(right), Offset)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Pendulum_Prediction.e',53).
+axiom(trajectory(oscillating, Time, at(right), Offset),
+    [holds_at(at(right), Time), equals(Offset/2, 0)]).
+
+ /*  not(holds_at(at(right), Time)) :-
+       equals(Offset/2, 0),
+       not(trajectory(oscillating, Time, at(right), Offset)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Pendulum_Prediction.e',53).
+
+ /*  [equals(Offset/2, 0), not(trajectory(oscillating, Time, at(right), Offset))] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(neg(at(right)), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Pendulum_Prediction.e',53).
+axiom(holds_at(neg(at(right)), Time),
+   
+    [ equals(Offset/2, 0),
+      not(trajectory(oscillating, Time, at(right), Offset))
+    ]).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Pendulum_Prediction.e:56
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Pendulum_Prediction.e',57).
+%; Observation
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Pendulum_Prediction.e:57
+% !HoldsAt(Oscillating(),0).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Pendulum_Prediction.e',57).
+
+ /*  [] ->
+       ta(Ta_Param,
+          tvs1=[start],
+          tvs2=[start],
+          holds_at(neg(oscillating), start)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Pendulum_Prediction.e',57).
+axiom(holds_at(neg(oscillating), start),
+    []).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Pendulum_Prediction.e:58
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Pendulum_Prediction.e',59).
+% HoldsAt(At(Left),0).
+
+ /*  [] ->
+       ta(Ta_Param, tvs1=[start], tvs2=[start], holds_at(at(left), start)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Pendulum_Prediction.e',59).
+axiom(holds_at(at(left), start),
+    []).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Pendulum_Prediction.e:60
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Pendulum_Prediction.e',61).
+%; Event Occurrence
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Pendulum_Prediction.e:61
+% Happens(Swing(), 0).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Pendulum_Prediction.e',61).
+
+ /*  [] ->
+       ta(Ta_Param, tvs1=[start], tvs2=[start], happens(swing, start)).
+ */
+axiom(happens(swing, start),
+    []).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Pendulum_Prediction.e:62
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Pendulum_Prediction.e',63).
+% Happens(Hold(), 3).
+
+ /*  [b(start, Start3), toffset(start, 3, Start3), ignore(start+3==Start3)] ->
+       ta(Ta_Param,
+          tvs1=[start+3],
+          tvs2=[Start3, start],
+          happens(hold, Start3)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Pendulum_Prediction.e',63).
+axiom(happens(hold, Start3),
+    [b(start, Start3), toffset(start, 3, Start3)]).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Pendulum_Prediction.e:67
+% completion Happens
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Pendulum_Prediction.e',67).
+==> completion(happens).
+%; end of file

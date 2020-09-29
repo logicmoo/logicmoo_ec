@@ -1,0 +1,583 @@
+:-include(library('ec_planner/ec_test_incl')).
+:-expects_dialect(pfc).
+% Wed, 01 Apr 2020 20:01:34 GMT
+% From ../ecnet/Container.pel:4
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Condition.e',77).
+
+ /*  loading(load_e_pl,
+   	'/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Container.e').
+ */
+%;
+%; Copyright (c) 2005 IBM Corporation and others.
+%; All rights reserved. This program and the accompanying materials
+%; are made available under the terms of the Common Public License v1.0
+%; which accompanies this distribution, and is available at
+%; http://www.eclipse.org/legal/cpl-v10.html
+%;
+%; Contributors:
+%; IBM - Initial implementation
+%;
+%;
+%; Container: container
+%;
+%; linkage to OTSpace(M):
+% [agent,container1,container2,time]
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Container.e:16
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Container.e',17).
+% Happens(TakeOutOf(agent,container1,container2),time) ->
+% HoldsAt(ContainerIsOpen(container2),time).
+
+ /*  happens(takeOutOf(Agent, Container1, Container2), Time) ->
+       holds_at(containerIsOpen(Container2), Time).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Container.e',17).
+
+ /*  holds_at(containerIsOpen(Container2), Time) :-
+       happens(takeOutOf(Agent, Container1, Container2),
+               Time).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Container.e',17).
+
+ /*  [holds_at(metreqs(takeOutOf(Agent, Container1, Container2)), Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          requires(takeOutOf(Agent, Container1, Container2),
+                   Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Container.e',17).
+axiom(requires(takeOutOf(Agent, Container1, Container2), Time),
+   
+    [ holds_at(metreqs(takeOutOf(Agent,
+                                 Container1,
+                                 Container2)),
+               Time)
+    ]).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Container.e',17).
+
+ /*  [holds_at(containerIsOpen(Container2), Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(metreqs(takeOutOf(Agent,
+                                     Container1,
+                                     Container2)),
+                   Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Container.e',17).
+axiom(holds_at(metreqs(takeOutOf(Agent, Container1, Container2)), Time),
+    [holds_at(containerIsOpen(Container2), Time)]).
+
+ /*  not(happens(takeOutOf(Agent, Container1, Container2), Time)) :-
+       not(holds_at(containerIsOpen(Container2), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Container.e',17).
+
+ /*  [holds_at(neg(containerIsOpen(Container2)), Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          not(happens(takeOutOf(Agent, Container1, Container2),
+                      Time))).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Container.e',17).
+axiom(not(happens(takeOutOf(Agent, Container1, Container2), Time)),
+    [holds_at(neg(containerIsOpen(Container2)), Time)]).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Container.e:19
+% [agent,container1,container2,time]
+% Happens(PutInside(agent,container1,container2),time) ->
+% HoldsAt(ContainerIsOpen(container2),time).
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Container.e:21
+
+ /*  happens(putInside(Agent, Container1, Container2), Time) ->
+       holds_at(containerIsOpen(Container2), Time).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Container.e',21).
+
+ /*  holds_at(containerIsOpen(Container2), Time) :-
+       happens(putInside(Agent, Container1, Container2),
+               Time).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Container.e',21).
+
+ /*  [holds_at(metreqs(putInside(Agent, Container1, Container2)), Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          requires(putInside(Agent, Container1, Container2),
+                   Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Container.e',21).
+axiom(requires(putInside(Agent, Container1, Container2), Time),
+   
+    [ holds_at(metreqs(putInside(Agent,
+                                 Container1,
+                                 Container2)),
+               Time)
+    ]).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Container.e',21).
+
+ /*  [holds_at(containerIsOpen(Container2), Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(metreqs(putInside(Agent,
+                                     Container1,
+                                     Container2)),
+                   Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Container.e',21).
+axiom(holds_at(metreqs(putInside(Agent, Container1, Container2)), Time),
+    [holds_at(containerIsOpen(Container2), Time)]).
+
+ /*  not(happens(putInside(Agent, Container1, Container2), Time)) :-
+       not(holds_at(containerIsOpen(Container2), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Container.e',21).
+
+ /*  [holds_at(neg(containerIsOpen(Container2)), Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          not(happens(putInside(Agent, Container1, Container2),
+                      Time))).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Container.e',21).
+axiom(not(happens(putInside(Agent, Container1, Container2), Time)),
+    [holds_at(neg(containerIsOpen(Container2)), Time)]).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Container.e:23
+%; agent opens container.
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Container.e:24
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Container.e',25).
+% event ContainerOpen(agent,container)
+event(containerOpen(agent,container)).
+==> mpred_prop(containerOpen(agent,container),event).
+==> meta_argtypes(containerOpen(agent,container)).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Container.e:26
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Container.e',27).
+%; agent closes container.
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Container.e:27
+% event ContainerClose(agent,container)
+event(containerClose(agent,container)).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Container.e',27).
+==> mpred_prop(containerClose(agent,container),event).
+==> meta_argtypes(containerClose(agent,container)).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Container.e:29
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Container.e',30).
+%; container is open.
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Container.e:30
+% fluent ContainerIsOpen(container)
+fluent(containerIsOpen(container)).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Container.e',30).
+==> mpred_prop(containerIsOpen(container),fluent).
+==> meta_argtypes(containerIsOpen(container)).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Container.e:32
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Container.e',33).
+% fluent ContainerClosed(container)
+fluent(containerClosed(container)).
+==> mpred_prop(containerClosed(container),fluent).
+==> meta_argtypes(containerClosed(container)).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Container.e:33
+% noninertial ContainerClosed
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Container.e',33).
+==> noninertial(containerClosed).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Container.e:35
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Container.e',36).
+% [container,time]
+% HoldsAt(ContainerClosed(container),time) <->
+% !HoldsAt(ContainerIsOpen(container),time).
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Container.e:37
+
+ /*  holds_at(containerClosed(Container), Time) <->
+       holds_at(neg(containerIsOpen(Container)), Time).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Container.e',36).
+
+ /*  [holds_at, containerClosed] <->
+       [holds_at, neg, containerIsOpen].
+ */
+
+ /*  holds_at(containerClosed(Container), Time) ->
+       holds_at(neg(containerIsOpen(Container)), Time).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Container.e',36).
+
+ /*  holds_at(neg(containerIsOpen(Container)), Time) :-
+       holds_at(containerClosed(Container), Time).
+ */
+
+ /*  [holds_at(containerClosed(Container), Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(neg(containerIsOpen(Container)), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Container.e',36).
+axiom(holds_at(neg(containerIsOpen(Container)), Time),
+    [holds_at(containerClosed(Container), Time)]).
+
+ /*  not(holds_at(containerClosed(Container), Time)) :-
+       not(holds_at(neg(containerIsOpen(Container)), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Container.e',36).
+
+ /*  [holds_at(containerIsOpen(Container), Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(neg(containerClosed(Container)), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Container.e',36).
+axiom(holds_at(neg(containerClosed(Container)), Time),
+    [holds_at(containerIsOpen(Container), Time)]).
+
+ /*  holds_at(neg(containerIsOpen(Container)), Time) ->
+       holds_at(containerClosed(Container), Time).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Container.e',36).
+
+ /*  holds_at(containerClosed(Container), Time) :-
+       holds_at(neg(containerIsOpen(Container)), Time).
+ */
+
+ /*  [holds_at(neg(containerIsOpen(Container)), Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(containerClosed(Container), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Container.e',36).
+axiom(holds_at(containerClosed(Container), Time),
+    [holds_at(neg(containerIsOpen(Container)), Time)]).
+
+ /*  not(holds_at(neg(containerIsOpen(Container)), Time)) :-
+       not(holds_at(containerClosed(Container), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Container.e',36).
+
+ /*  [holds_at(neg(containerClosed(Container)), Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(containerIsOpen(Container), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Container.e',36).
+axiom(holds_at(containerIsOpen(Container), Time),
+    [holds_at(neg(containerClosed(Container)), Time)]).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Container.e:39
+%; A precondition axiom states that
+%; for an agent to open a container,
+%; the agent must be awake,
+%; the container must not already be open, and
+%; the agent must be holding the container.
+% [agent,container,time]
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Container.e:45
+% Happens(ContainerOpen(agent,container),time) ->
+% HoldsAt(Awake(agent),time) &
+% !HoldsAt(ContainerIsOpen(container),time) &
+% HoldsAt(Holding(agent,container),time).
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Container.e:48
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Container.e',45).
+
+ /*  happens(containerOpen(Agent, Container), Time) ->
+       holds_at(awake(Agent), Time),
+       holds_at(neg(containerIsOpen(Container)), Time),
+       holds_at(holding(Agent, Container), Time).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Container.e',45).
+
+ /*  not(happens(containerOpen(Agent, Container), Time)) :-
+       (   not(holds_at(awake(Agent), Time))
+       ;   not(holds_at(neg(containerIsOpen(Container)), Time))
+       ;   not(holds_at(holding(Agent, Container), Time))
+       ).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Container.e',45).
+
+ /*  [(holds_at(neg(awake(Agent)), Time);holds_at(containerIsOpen(Container), Time);holds_at(neg(holding(Agent, Container)), Time))] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          not(happens(containerOpen(Agent, Container), Time))).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Container.e',45).
+axiom(not(happens(containerOpen(Agent, Container), Time)),
+   
+    [  (holds_at(neg(awake(Agent)), Time);holds_at(containerIsOpen(Container), Time);holds_at(neg(holding(Agent, Container)), Time))
+    ]).
+
+ /*  holds_at(awake(Agent), Time) :-
+       happens(containerOpen(Agent, Container), Time).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Container.e',45).
+
+ /*  [holds_at(metreqs(containerOpen(Agent, Container)), Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          requires(containerOpen(Agent, Container), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Container.e',45).
+axiom(requires(containerOpen(Agent, Container), Time),
+    [holds_at(metreqs(containerOpen(Agent, Container)), Time)]).
+
+ /*  [holds_at(awake(Agent), Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(metreqs(containerOpen(Agent, Container)),
+                   Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Container.e',45).
+axiom(holds_at(metreqs(containerOpen(Agent, Container)), Time),
+    [holds_at(awake(Agent), Time)]).
+
+ /*  holds_at(neg(containerIsOpen(Container)), Time) :-
+       happens(containerOpen(Agent, Container), Time).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Container.e',45).
+
+ /*  [holds_at(metreqs(containerOpen(Agent, Container)), Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          requires(containerOpen(Agent, Container), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Container.e',45).
+axiom(requires(containerOpen(Agent, Container), Time),
+    [holds_at(metreqs(containerOpen(Agent, Container)), Time)]).
+
+ /*  [holds_at(neg(containerIsOpen(Container)), Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(metreqs(containerOpen(Agent, Container)),
+                   Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Container.e',45).
+axiom(holds_at(metreqs(containerOpen(Agent, Container)), Time),
+    [holds_at(neg(containerIsOpen(Container)), Time)]).
+
+ /*  holds_at(holding(Agent, Container), Time) :-
+       happens(containerOpen(Agent, Container), Time).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Container.e',45).
+
+ /*  [holds_at(metreqs(containerOpen(Agent, Container)), Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          requires(containerOpen(Agent, Container), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Container.e',45).
+axiom(requires(containerOpen(Agent, Container), Time),
+    [holds_at(metreqs(containerOpen(Agent, Container)), Time)]).
+
+ /*  [holds_at(holding(Agent, Container), Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(metreqs(containerOpen(Agent, Container)),
+                   Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Container.e',45).
+axiom(holds_at(metreqs(containerOpen(Agent, Container)), Time),
+    [holds_at(holding(Agent, Container), Time)]).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Container.e:50
+%; An effect axiom states that
+%; if an agent opens a container,
+%; the container will be open:
+% [agent,container,time]
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Container.e:54
+% Initiates(ContainerOpen(agent,container),ContainerIsOpen(container),time).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Container.e',54).
+
+ /*  [] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          initiates(containerOpen(Agent, Container),
+                    containerIsOpen(Container),
+                    Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Container.e',54).
+axiom(initiates(containerOpen(Agent, Container), containerIsOpen(Container), Time),
+    []).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Container.e:56
+%; A precondition axiom states that
+%; for an agent to close a container,
+%; the agent must be awake,
+%; the container must be open, and
+%; the agent must be holding the container.
+% [agent,container,time]
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Container.e:62
+% Happens(ContainerClose(agent,container),time) ->
+% HoldsAt(Awake(agent),time) &
+% HoldsAt(ContainerIsOpen(container),time) &
+% HoldsAt(Holding(agent,container),time).
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Container.e:65
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Container.e',62).
+
+ /*  happens(containerClose(Agent, Container), Time) ->
+       holds_at(awake(Agent), Time),
+       holds_at(containerIsOpen(Container), Time),
+       holds_at(holding(Agent, Container), Time).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Container.e',62).
+
+ /*  not(happens(containerClose(Agent, Container), Time)) :-
+       (   not(holds_at(awake(Agent), Time))
+       ;   not(holds_at(containerIsOpen(Container), Time))
+       ;   not(holds_at(holding(Agent, Container), Time))
+       ).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Container.e',62).
+
+ /*  [(holds_at(neg(awake(Agent)), Time);holds_at(neg(containerIsOpen(Container)), Time);holds_at(neg(holding(Agent, Container)), Time))] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          not(happens(containerClose(Agent, Container), Time))).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Container.e',62).
+axiom(not(happens(containerClose(Agent, Container), Time)),
+   
+    [  (holds_at(neg(awake(Agent)), Time);holds_at(neg(containerIsOpen(Container)), Time);holds_at(neg(holding(Agent, Container)), Time))
+    ]).
+
+ /*  holds_at(awake(Agent), Time) :-
+       happens(containerClose(Agent, Container), Time).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Container.e',62).
+
+ /*  [holds_at(metreqs(containerClose(Agent, Container)), Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          requires(containerClose(Agent, Container), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Container.e',62).
+axiom(requires(containerClose(Agent, Container), Time),
+   
+    [ holds_at(metreqs(containerClose(Agent, Container)),
+               Time)
+    ]).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Container.e',62).
+
+ /*  [holds_at(awake(Agent), Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(metreqs(containerClose(Agent, Container)),
+                   Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Container.e',62).
+axiom(holds_at(metreqs(containerClose(Agent, Container)), Time),
+    [holds_at(awake(Agent), Time)]).
+
+ /*  holds_at(containerIsOpen(Container), Time) :-
+       happens(containerClose(Agent, Container), Time).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Container.e',62).
+
+ /*  [holds_at(metreqs(containerClose(Agent, Container)), Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          requires(containerClose(Agent, Container), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Container.e',62).
+axiom(requires(containerClose(Agent, Container), Time),
+   
+    [ holds_at(metreqs(containerClose(Agent, Container)),
+               Time)
+    ]).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Container.e',62).
+
+ /*  [holds_at(containerIsOpen(Container), Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(metreqs(containerClose(Agent, Container)),
+                   Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Container.e',62).
+axiom(holds_at(metreqs(containerClose(Agent, Container)), Time),
+    [holds_at(containerIsOpen(Container), Time)]).
+
+ /*  holds_at(holding(Agent, Container), Time) :-
+       happens(containerClose(Agent, Container), Time).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Container.e',62).
+
+ /*  [holds_at(metreqs(containerClose(Agent, Container)), Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          requires(containerClose(Agent, Container), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Container.e',62).
+axiom(requires(containerClose(Agent, Container), Time),
+   
+    [ holds_at(metreqs(containerClose(Agent, Container)),
+               Time)
+    ]).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Container.e',62).
+
+ /*  [holds_at(holding(Agent, Container), Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(metreqs(containerClose(Agent, Container)),
+                   Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Container.e',62).
+axiom(holds_at(metreqs(containerClose(Agent, Container)), Time),
+    [holds_at(holding(Agent, Container), Time)]).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Container.e:67
+%; An effect axiom states that
+%; if an agent closes a container,
+%; the container will no longer be open:
+% [agent,container,time]
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Container.e:71
+% Terminates(ContainerClose(agent,container),ContainerIsOpen(container),time).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Container.e',71).
+
+ /*  [] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          terminates(containerClose(Agent, Container),
+                     containerIsOpen(Container),
+                     Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Container.e',71).
+axiom(terminates(containerClose(Agent, Container), containerIsOpen(Container), Time),
+    []).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Container.e:73
+%; End of file.

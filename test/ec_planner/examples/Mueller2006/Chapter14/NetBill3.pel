@@ -1,0 +1,1493 @@
+:-include(library('ec_planner/ec_test_incl')).
+:-expects_dialect(pfc).
+% Wed, 01 Apr 2020 19:59:42 GMT
+% From ../examples/Mueller2006/Chapter14/NetBill3.pel:4
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter14/NetBill2.e',186).
+
+ /*  loading(load_e_pl,
+   	'/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter14/NetBill3.e').
+ */
+%;
+%; Copyright (c) 2005 IBM Corporation and others.
+%; All rights reserved. This program and the accompanying materials
+%; are made available under the terms of the Common Public License v1.0
+%; which accompanies this distribution, and is available at
+%; http://www.eclipse.org/legal/cpl-v10.html
+%;
+%; Contributors:
+%; IBM - Initial implementation
+%;
+%; @inproceedings{SirbuTygar:1995,
+%;   author = "Marvin A. Sirbu and J. D. Tygar",
+%;   year = "1995",
+%;   title = "Net\uppercase{B}ill: An \uppercase{I}nternet commerce system optimized for network delivered services",
+%;   editor = "
+%;   booktitle = "40th \uppercase{IEEE} \uppercase{C}omputer \uppercase{S}ociety \uppercase{I}nternational \uppercase{C}onference",
+%;   pages = "20--25",
+%;   publisher = "
+%;   address = "
+%; }
+%;
+%; @book{Mueller:2006,
+%;   author = "Erik T. Mueller",
+%;   year = "2006",
+%;   title = "Commonsense Reasoning",
+%;   address = "San Francisco",
+%;   publisher = "Morgan Kaufmann/Elsevier",
+%; }
+%;
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter14/NetBill3.e:30
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter14/NetBill3.e',31).
+% option modeldiff on
+:- set_ec_option(modeldiff, on).
+:- if(is_e_toplevel).
+:- endif.
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter14/NetBill3.e:32
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter14/NetBill3.e',33).
+% load foundations/Root.e
+:- load_e('foundations/Root.e', changed).
+:- if(is_e_toplevel).
+:- endif.
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter14/NetBill3.e:33
+% load foundations/EC.e
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter14/NetBill3.e',33).
+:- load_e('foundations/EC.e', changed).
+:- if(is_e_toplevel).
+:- endif.
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter14/NetBill3.e:35
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter14/NetBill3.e',36).
+% sort agent
+==> sort(agent).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter14/NetBill3.e:36
+% agent MusicStore, Jen
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter14/NetBill3.e',36).
+==> t(agent,musicStore).
+==> t(agent,jen).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter14/NetBill3.e:38
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter14/NetBill3.e',39).
+% sort product
+==> sort(product).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter14/NetBill3.e:39
+% product BritneyCD
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter14/NetBill3.e',39).
+==> t(product,britneyCD).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter14/NetBill3.e:41
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter14/NetBill3.e',42).
+% sort f
+==> sort(f).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter14/NetBill3.e:42
+% f PurchaseRequestedJenMusicStoreBritneyCD1
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter14/NetBill3.e',42).
+==> t(f,purchaseRequestedJenMusicStoreBritneyCD1).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter14/NetBill3.e:43
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter14/NetBill3.e',44).
+% f DeliveredMusicStoreJenBritneyCD
+==> t(f,deliveredMusicStoreJenBritneyCD).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter14/NetBill3.e:44
+% f EPOSentJenMusicStore1
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter14/NetBill3.e',44).
+==> t(f,ePOSentJenMusicStore1).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter14/NetBill3.e:46
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter14/NetBill3.e',47).
+% sort amount: integer
+==> subsort(amount,integer).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter14/NetBill3.e:48
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter14/NetBill3.e',49).
+% fluent C(agent,agent,f)
+fluent(c(agent,agent,f)).
+==> mpred_prop(c(agent,agent,f),fluent).
+==> meta_argtypes(c(agent,agent,f)).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter14/NetBill3.e:49
+% fluent CC(agent,agent,f,f)
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter14/NetBill3.e',49).
+fluent(cc(agent,agent,f,f)).
+==> mpred_prop(cc(agent,agent,f,f),fluent).
+==> meta_argtypes(cc(agent,agent,f,f)).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter14/NetBill3.e:51
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter14/NetBill3.e',52).
+% event CreateC(agent,agent,f)
+event(createC(agent,agent,f)).
+==> mpred_prop(createC(agent,agent,f),event).
+==> meta_argtypes(createC(agent,agent,f)).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter14/NetBill3.e:52
+% event CreateCC(agent,agent,f,f)
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter14/NetBill3.e',52).
+event(createCC(agent,agent,f,f)).
+==> mpred_prop(createCC(agent,agent,f,f),event).
+==> meta_argtypes(createCC(agent,agent,f,f)).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter14/NetBill3.e:53
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter14/NetBill3.e',54).
+% event DischargeC(agent,agent,f)
+event(dischargeC(agent,agent,f)).
+==> mpred_prop(dischargeC(agent,agent,f),event).
+==> meta_argtypes(dischargeC(agent,agent,f)).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter14/NetBill3.e:54
+% event DischargeCC(agent,agent,f,f)
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter14/NetBill3.e',54).
+event(dischargeCC(agent,agent,f,f)).
+==> mpred_prop(dischargeCC(agent,agent,f,f),event).
+==> meta_argtypes(dischargeCC(agent,agent,f,f)).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter14/NetBill3.e:56
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter14/NetBill3.e',57).
+% fluent QuoteSent(agent,agent,product,amount)
+fluent(quoteSent(agent,agent,product,amount)).
+==> mpred_prop(quoteSent(agent,agent,product,amount),fluent).
+==> meta_argtypes(quoteSent(agent,agent,product,amount)).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter14/NetBill3.e:57
+% fluent PurchaseRequested(agent,agent,product,amount)
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter14/NetBill3.e',57).
+fluent(purchaseRequested(agent,agent,product,amount)).
+==> mpred_prop(purchaseRequested(agent,agent,product,amount),fluent).
+==> meta_argtypes(purchaseRequested(agent,agent,product,amount)).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter14/NetBill3.e:58
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter14/NetBill3.e',59).
+% fluent Delivered(agent,agent,product)
+fluent(delivered(agent,agent,product)).
+==> mpred_prop(delivered(agent,agent,product),fluent).
+==> meta_argtypes(delivered(agent,agent,product)).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter14/NetBill3.e:59
+% fluent EPOSent(agent,agent,amount)
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter14/NetBill3.e',59).
+fluent(ePOSent(agent,agent,amount)).
+==> mpred_prop(ePOSent(agent,agent,amount),fluent).
+==> meta_argtypes(ePOSent(agent,agent,amount)).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter14/NetBill3.e:61
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter14/NetBill3.e',62).
+% event SendQuote(agent,agent,product,amount)
+event(sendQuote(agent,agent,product,amount)).
+==> mpred_prop(sendQuote(agent,agent,product,amount),event).
+==> meta_argtypes(sendQuote(agent,agent,product,amount)).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter14/NetBill3.e:62
+% event RequestPurchase(agent,agent,product,amount)
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter14/NetBill3.e',62).
+event(requestPurchase(agent,agent,product,amount)).
+==> mpred_prop(requestPurchase(agent,agent,product,amount),event).
+==> meta_argtypes(requestPurchase(agent,agent,product,amount)).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter14/NetBill3.e:63
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter14/NetBill3.e',64).
+% event Deliver(agent,agent,product)
+event(deliver(agent,agent,product)).
+==> mpred_prop(deliver(agent,agent,product),event).
+==> meta_argtypes(deliver(agent,agent,product)).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter14/NetBill3.e:64
+% event SendEPO(agent,agent,amount)
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter14/NetBill3.e',64).
+event(sendEPO(agent,agent,amount)).
+==> mpred_prop(sendEPO(agent,agent,amount),event).
+==> meta_argtypes(sendEPO(agent,agent,amount)).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter14/NetBill3.e:66
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter14/NetBill3.e',67).
+%; Sigma
+% [agent1,agent2,f,time]
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter14/NetBill3.e:69
+% Initiates(CreateC(agent1,agent2,f),C(agent1,agent2,f),time).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter14/NetBill3.e',69).
+
+ /*  [] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          initiates(createC(Agent1, Agent2, F),
+                    c(Agent1, Agent2, F),
+                    Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter14/NetBill3.e',69).
+axiom(initiates(createC(Agent1, Agent2, F), c(Agent1, Agent2, F), Time),
+    []).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter14/NetBill3.e:71
+% [agent1,agent2,f1,f2,time]
+% Initiates(CreateCC(agent1,agent2,f1,f2),CC(agent1,agent2,f1,f2),time).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter14/NetBill3.e',73).
+
+ /*  [] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          initiates(createCC(Agent1, Agent2, F1, F2),
+                    cc(Agent1, Agent2, F1, F2),
+                    Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter14/NetBill3.e',73).
+axiom(initiates(createCC(Agent1, Agent2, F1, F2), cc(Agent1, Agent2, F1, F2), Time),
+    []).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter14/NetBill3.e:74
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter14/NetBill3.e',75).
+% [agent1,agent2,f,time]
+% Terminates(DischargeC(agent1,agent2,f),C(agent1,agent2,f),time).
+
+ /*  [] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          terminates(dischargeC(Agent1, Agent2, F),
+                     c(Agent1, Agent2, F),
+                     Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter14/NetBill3.e',75).
+axiom(terminates(dischargeC(Agent1, Agent2, F), c(Agent1, Agent2, F), Time),
+    []).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter14/NetBill3.e:77
+% [agent1,agent2,f1,f2,time]
+% Terminates(DischargeCC(agent1,agent2,f1,f2),CC(agent1,agent2,f1,f2),time).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter14/NetBill3.e',79).
+
+ /*  [] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          terminates(dischargeCC(Agent1, Agent2, F1, F2),
+                     cc(Agent1, Agent2, F1, F2),
+                     Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter14/NetBill3.e',79).
+axiom(terminates(dischargeCC(Agent1, Agent2, F1, F2), cc(Agent1, Agent2, F1, F2), Time),
+    []).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter14/NetBill3.e:80
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter14/NetBill3.e',81).
+% [agent1,agent2,product,amount,time]
+% Initiates(SendQuote(agent1,agent2,product,amount),
+%           QuoteSent(agent1,agent2,product,amount),
+%           time).
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter14/NetBill3.e:83
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter14/NetBill3.e',81).
+
+ /*  [] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          initiates(sendQuote(Agent1,
+                              Agent2,
+                              Product,
+                              Amount),
+                    quoteSent(Agent1,
+                              Agent2,
+                              Product,
+                              Amount),
+                    Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter14/NetBill3.e',81).
+axiom(initiates(sendQuote(Agent1, Agent2, Product, Amount), quoteSent(Agent1, Agent2, Product, Amount), Time),
+    []).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter14/NetBill3.e:85
+% [agent1,agent2,product,amount,time]
+% Initiates(RequestPurchase(agent1,agent2,product,amount),
+%           PurchaseRequested(agent1,agent2,product,amount),
+%           time).
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter14/NetBill3.e:88
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter14/NetBill3.e',87).
+
+ /*  [] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          initiates(requestPurchase(Agent1,
+                                    Agent2,
+                                    Product,
+                                    Amount),
+                    purchaseRequested(Agent1,
+                                      Agent2,
+                                      Product,
+                                      Amount),
+                    Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter14/NetBill3.e',87).
+axiom(initiates(requestPurchase(Agent1, Agent2, Product, Amount), purchaseRequested(Agent1, Agent2, Product, Amount), Time),
+    []).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter14/NetBill3.e:90
+% [agent1,agent2,product,time]
+% Initiates(Deliver(agent1,agent2,product),
+%           Delivered(agent1,agent2,product),
+%           time).
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter14/NetBill3.e:93
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter14/NetBill3.e',92).
+
+ /*  [] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          initiates(deliver(Agent1, Agent2, Product),
+                    delivered(Agent1, Agent2, Product),
+                    Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter14/NetBill3.e',92).
+axiom(initiates(deliver(Agent1, Agent2, Product), delivered(Agent1, Agent2, Product), Time),
+    []).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter14/NetBill3.e:95
+% [agent1,agent2,amount,time]
+% Initiates(SendEPO(agent1,agent2,amount),
+%           EPOSent(agent1,agent2,amount),
+%           time).
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter14/NetBill3.e:98
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter14/NetBill3.e',97).
+
+ /*  [] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          initiates(sendEPO(Agent1, Agent2, Amount),
+                    ePOSent(Agent1, Agent2, Amount),
+                    Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter14/NetBill3.e',97).
+axiom(initiates(sendEPO(Agent1, Agent2, Amount), ePOSent(Agent1, Agent2, Amount), Time),
+    []).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter14/NetBill3.e:100
+% [agent1,agent2,product,amount,f1,f2,time]
+% agent1=% MusicStore &
+% agent2=Jen &
+% product=BritneyCD &
+% amount=1 &
+% f1=PurchaseRequestedJenMusicStoreBritneyCD1 &
+% f2=DeliveredMusicStoreJenBritneyCD ->
+% Initiates(SendQuote(agent1,agent2,product,amount),
+%           CC(agent1,agent2,f1,f2),
+%           time).
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter14/NetBill3.e:109
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter14/NetBill3.e',102).
+
+ /*  [equals(Agent1, musicStore), equals(Agent2, jen), equals(Product, britneyCD), equals(Amount, 1), equals(F1, purchaseRequestedJenMusicStoreBritneyCD1), equals(F2, deliveredMusicStoreJenBritneyCD)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          initiates(sendQuote(Agent1,
+                              Agent2,
+                              Product,
+                              Amount),
+                    cc(Agent1, Agent2, F1, F2),
+                    Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter14/NetBill3.e',102).
+axiom(initiates(sendQuote(Agent1, Agent2, Product, Amount), cc(Agent1, Agent2, F1, F2), Time),
+   
+    [ equals(Agent1, musicStore),
+      equals(Agent2, jen),
+      equals(Product, britneyCD),
+      equals(Amount, 1),
+      equals(F1, purchaseRequestedJenMusicStoreBritneyCD1),
+      equals(F2, deliveredMusicStoreJenBritneyCD)
+    ]).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter14/NetBill3.e:111
+% [agent1,agent2,product,amount,f1,f2,time]
+% agent1=% Jen &
+% agent2=MusicStore &
+% product=BritneyCD &
+% amount=1 &
+% f1=DeliveredMusicStoreJenBritneyCD &
+% f2=EPOSentJenMusicStore1 &
+% !HoldsAt(Delivered(agent2,agent1,product),time) ->
+% Initiates(RequestPurchase(agent1,agent2,product,amount),
+%           CC(agent1,agent2,f1,f2),
+%           time).
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter14/NetBill3.e:121
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter14/NetBill3.e',113).
+
+ /*  [equals(Agent1, jen), equals(Agent2, musicStore), equals(Product, britneyCD), equals(Amount, 1), equals(F1, deliveredMusicStoreJenBritneyCD), equals(F2, ePOSentJenMusicStore1), holds_at(neg(delivered(Agent2, Agent1, Product)), Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          initiates(requestPurchase(Agent1,
+                                    Agent2,
+                                    Product,
+                                    Amount),
+                    cc(Agent1, Agent2, F1, F2),
+                    Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter14/NetBill3.e',113).
+axiom(initiates(requestPurchase(Agent1, Agent2, Product, Amount), cc(Agent1, Agent2, F1, F2), Time),
+   
+    [ equals(Agent1, jen),
+      equals(Agent2, musicStore),
+      equals(Product, britneyCD),
+      equals(Amount, 1),
+      equals(F1, deliveredMusicStoreJenBritneyCD),
+      equals(F2, ePOSentJenMusicStore1),
+      holds_at(neg(delivered(Agent2, Agent1, Product)),
+               Time)
+    ]).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter14/NetBill3.e:123
+%; Delta
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter14/NetBill3.e:125
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter14/NetBill3.e',126).
+% Delta: 
+next_axiom_uses(delta).
+ 
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter14/NetBill3.e:125
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter14/NetBill3.e',126).
+% [time]
+% HoldsAt(CC(MusicStore,Jen,PurchaseRequestedJenMusicStoreBritneyCD1,DeliveredMusicStoreJenBritneyCD),time) &
+% HoldsAt(PurchaseRequested(Jen,MusicStore,BritneyCD,1),time) ->
+% Happens(CreateC(MusicStore,Jen,DeliveredMusicStoreJenBritneyCD),time).
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter14/NetBill3.e:128
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter14/NetBill3.e',126).
+
+ /*  axiom_uses(delta) ->
+       ( holds_at(cc(musicStore, jen, purchaseRequestedJenMusicStoreBritneyCD1, deliveredMusicStoreJenBritneyCD), Time), holds_at(purchaseRequested(jen, musicStore, britneyCD, 1), Time)->happens(createC(musicStore, jen, deliveredMusicStoreJenBritneyCD), Time)
+       ).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter14/NetBill3.e',126).
+
+ /*  happens(createC(musicStore, jen, deliveredMusicStoreJenBritneyCD), Time) :-
+       ( holds_at(cc(musicStore,
+                     jen,
+                     purchaseRequestedJenMusicStoreBritneyCD1,
+                     deliveredMusicStoreJenBritneyCD),
+                  Time),
+         holds_at(purchaseRequested(jen, musicStore, britneyCD, 1), Time)
+       ),
+       axiom_uses(delta).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter14/NetBill3.e',126).
+
+ /*  [holds_at(cc(musicStore, jen, purchaseRequestedJenMusicStoreBritneyCD1, deliveredMusicStoreJenBritneyCD), Time), holds_at(purchaseRequested(jen, musicStore, britneyCD, 1), Time), axiom_uses(delta, Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          happens(createC(musicStore, jen, deliveredMusicStoreJenBritneyCD),
+                  Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter14/NetBill3.e',126).
+axiom(happens(createC(musicStore, jen, deliveredMusicStoreJenBritneyCD), Time),
+   
+    [ holds_at(cc(musicStore,
+                  jen,
+                  purchaseRequestedJenMusicStoreBritneyCD1,
+                  deliveredMusicStoreJenBritneyCD),
+               Time),
+      holds_at(purchaseRequested(jen, musicStore, britneyCD, 1), Time),
+      axiom_uses(delta, Time)
+    ]).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter14/NetBill3.e',126).
+
+ /*  not(holds_at(cc(musicStore, jen, purchaseRequestedJenMusicStoreBritneyCD1, deliveredMusicStoreJenBritneyCD), Time)) :-
+       holds_at(purchaseRequested(jen, musicStore, britneyCD, 1), Time),
+       not(happens(createC(musicStore, jen, deliveredMusicStoreJenBritneyCD),
+                   Time)),
+       axiom_uses(delta).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter14/NetBill3.e',126).
+
+ /*  [holds_at(purchaseRequested(jen, musicStore, britneyCD, 1), Time), not(happens(createC(musicStore, jen, deliveredMusicStoreJenBritneyCD), Time)), axiom_uses(delta, Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(neg(cc(musicStore,
+                          jen,
+                          purchaseRequestedJenMusicStoreBritneyCD1,
+                          deliveredMusicStoreJenBritneyCD)),
+                   Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter14/NetBill3.e',126).
+axiom(holds_at(neg(cc(musicStore, jen, purchaseRequestedJenMusicStoreBritneyCD1, deliveredMusicStoreJenBritneyCD)), Time),
+   
+    [ holds_at(purchaseRequested(jen, musicStore, britneyCD, 1), Time),
+      not(happens(createC(musicStore, jen, deliveredMusicStoreJenBritneyCD),
+                  Time)),
+      axiom_uses(delta, Time)
+    ]).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter14/NetBill3.e',126).
+
+ /*  not(holds_at(purchaseRequested(jen, musicStore, britneyCD, 1), Time)) :-
+       holds_at(cc(musicStore,
+                   jen,
+                   purchaseRequestedJenMusicStoreBritneyCD1,
+                   deliveredMusicStoreJenBritneyCD),
+                Time),
+       not(happens(createC(musicStore, jen, deliveredMusicStoreJenBritneyCD),
+                   Time)),
+       axiom_uses(delta).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter14/NetBill3.e',126).
+
+ /*  [holds_at(cc(musicStore, jen, purchaseRequestedJenMusicStoreBritneyCD1, deliveredMusicStoreJenBritneyCD), Time), not(happens(createC(musicStore, jen, deliveredMusicStoreJenBritneyCD), Time)), axiom_uses(delta, Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(neg(purchaseRequested(jen, musicStore, britneyCD, 1)), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter14/NetBill3.e',126).
+axiom(holds_at(neg(purchaseRequested(jen, musicStore, britneyCD, 1)), Time),
+   
+    [ holds_at(cc(musicStore,
+                  jen,
+                  purchaseRequestedJenMusicStoreBritneyCD1,
+                  deliveredMusicStoreJenBritneyCD),
+               Time),
+      not(happens(createC(musicStore, jen, deliveredMusicStoreJenBritneyCD),
+                  Time)),
+      axiom_uses(delta, Time)
+    ]).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter14/NetBill3.e',126).
+
+ /*  not(axiom_uses(delta)) :-
+       not(happens(createC(musicStore, jen, deliveredMusicStoreJenBritneyCD),
+                   Time)),
+       holds_at(cc(musicStore,
+                   jen,
+                   purchaseRequestedJenMusicStoreBritneyCD1,
+                   deliveredMusicStoreJenBritneyCD),
+                Time),
+       holds_at(purchaseRequested(jen, musicStore, britneyCD, 1), Time).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter14/NetBill3.e',126).
+
+ /*  fix_axiom_head(Time) ->
+       [not(axiom_uses(delta)), ->, not(axiom_uses(delta, Time))].
+ */
+
+ /*  [not(happens(createC(musicStore, jen, deliveredMusicStoreJenBritneyCD), Time)), holds_at(cc(musicStore, jen, purchaseRequestedJenMusicStoreBritneyCD1, deliveredMusicStoreJenBritneyCD), Time), holds_at(purchaseRequested(jen, musicStore, britneyCD, 1), Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          not(axiom_uses(delta, Time))).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter14/NetBill3.e',126).
+axiom(not(axiom_uses(delta, Time)),
+   
+    [ not(happens(createC(musicStore, jen, deliveredMusicStoreJenBritneyCD),
+                  Time)),
+      holds_at(cc(musicStore,
+                  jen,
+                  purchaseRequestedJenMusicStoreBritneyCD1,
+                  deliveredMusicStoreJenBritneyCD),
+               Time),
+      holds_at(purchaseRequested(jen, musicStore, britneyCD, 1), Time)
+    ]).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter14/NetBill3.e:130
+% Delta: 
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter14/NetBill3.e',130).
+next_axiom_uses(delta).
+ 
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter14/NetBill3.e:130
+% [time]
+% HoldsAt(CC(MusicStore,Jen,PurchaseRequestedJenMusicStoreBritneyCD1,DeliveredMusicStoreJenBritneyCD),time) &
+% HoldsAt(PurchaseRequested(Jen, MusicStore, BritneyCD, 1),time) ->
+% Happens(DischargeCC(MusicStore,Jen,PurchaseRequestedJenMusicStoreBritneyCD1,DeliveredMusicStoreJenBritneyCD),time).
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter14/NetBill3.e:133
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter14/NetBill3.e',132).
+
+ /*  axiom_uses(delta) ->
+       ( holds_at(cc(musicStore, jen, purchaseRequestedJenMusicStoreBritneyCD1, deliveredMusicStoreJenBritneyCD), Time), holds_at(purchaseRequested(jen, musicStore, britneyCD, 1), Time)->happens(dischargeCC(musicStore, jen, purchaseRequestedJenMusicStoreBritneyCD1, deliveredMusicStoreJenBritneyCD), Time)
+       ).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter14/NetBill3.e',132).
+
+ /*  happens(dischargeCC(musicStore, jen, purchaseRequestedJenMusicStoreBritneyCD1, deliveredMusicStoreJenBritneyCD), Time) :-
+       ( holds_at(cc(musicStore,
+                     jen,
+                     purchaseRequestedJenMusicStoreBritneyCD1,
+                     deliveredMusicStoreJenBritneyCD),
+                  Time),
+         holds_at(purchaseRequested(jen, musicStore, britneyCD, 1), Time)
+       ),
+       axiom_uses(delta).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter14/NetBill3.e',132).
+
+ /*  [holds_at(cc(musicStore, jen, purchaseRequestedJenMusicStoreBritneyCD1, deliveredMusicStoreJenBritneyCD), Time), holds_at(purchaseRequested(jen, musicStore, britneyCD, 1), Time), axiom_uses(delta, Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          happens(dischargeCC(musicStore,
+                              jen,
+                              purchaseRequestedJenMusicStoreBritneyCD1,
+                              deliveredMusicStoreJenBritneyCD),
+                  Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter14/NetBill3.e',132).
+axiom(happens(dischargeCC(musicStore, jen, purchaseRequestedJenMusicStoreBritneyCD1, deliveredMusicStoreJenBritneyCD), Time),
+   
+    [ holds_at(cc(musicStore,
+                  jen,
+                  purchaseRequestedJenMusicStoreBritneyCD1,
+                  deliveredMusicStoreJenBritneyCD),
+               Time),
+      holds_at(purchaseRequested(jen, musicStore, britneyCD, 1), Time),
+      axiom_uses(delta, Time)
+    ]).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter14/NetBill3.e',132).
+
+ /*  not(holds_at(cc(musicStore, jen, purchaseRequestedJenMusicStoreBritneyCD1, deliveredMusicStoreJenBritneyCD), Time)) :-
+       holds_at(purchaseRequested(jen, musicStore, britneyCD, 1), Time),
+       not(happens(dischargeCC(musicStore,
+                               jen,
+                               purchaseRequestedJenMusicStoreBritneyCD1,
+                               deliveredMusicStoreJenBritneyCD),
+                   Time)),
+       axiom_uses(delta).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter14/NetBill3.e',132).
+
+ /*  [holds_at(purchaseRequested(jen, musicStore, britneyCD, 1), Time), not(happens(dischargeCC(musicStore, jen, purchaseRequestedJenMusicStoreBritneyCD1, deliveredMusicStoreJenBritneyCD), Time)), axiom_uses(delta, Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(neg(cc(musicStore,
+                          jen,
+                          purchaseRequestedJenMusicStoreBritneyCD1,
+                          deliveredMusicStoreJenBritneyCD)),
+                   Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter14/NetBill3.e',132).
+axiom(holds_at(neg(cc(musicStore, jen, purchaseRequestedJenMusicStoreBritneyCD1, deliveredMusicStoreJenBritneyCD)), Time),
+   
+    [ holds_at(purchaseRequested(jen, musicStore, britneyCD, 1), Time),
+      not(happens(dischargeCC(musicStore,
+                              jen,
+                              purchaseRequestedJenMusicStoreBritneyCD1,
+                              deliveredMusicStoreJenBritneyCD),
+                  Time)),
+      axiom_uses(delta, Time)
+    ]).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter14/NetBill3.e',132).
+
+ /*  not(holds_at(purchaseRequested(jen, musicStore, britneyCD, 1), Time)) :-
+       holds_at(cc(musicStore,
+                   jen,
+                   purchaseRequestedJenMusicStoreBritneyCD1,
+                   deliveredMusicStoreJenBritneyCD),
+                Time),
+       not(happens(dischargeCC(musicStore,
+                               jen,
+                               purchaseRequestedJenMusicStoreBritneyCD1,
+                               deliveredMusicStoreJenBritneyCD),
+                   Time)),
+       axiom_uses(delta).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter14/NetBill3.e',132).
+
+ /*  [holds_at(cc(musicStore, jen, purchaseRequestedJenMusicStoreBritneyCD1, deliveredMusicStoreJenBritneyCD), Time), not(happens(dischargeCC(musicStore, jen, purchaseRequestedJenMusicStoreBritneyCD1, deliveredMusicStoreJenBritneyCD), Time)), axiom_uses(delta, Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(neg(purchaseRequested(jen, musicStore, britneyCD, 1)), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter14/NetBill3.e',132).
+axiom(holds_at(neg(purchaseRequested(jen, musicStore, britneyCD, 1)), Time),
+   
+    [ holds_at(cc(musicStore,
+                  jen,
+                  purchaseRequestedJenMusicStoreBritneyCD1,
+                  deliveredMusicStoreJenBritneyCD),
+               Time),
+      not(happens(dischargeCC(musicStore,
+                              jen,
+                              purchaseRequestedJenMusicStoreBritneyCD1,
+                              deliveredMusicStoreJenBritneyCD),
+                  Time)),
+      axiom_uses(delta, Time)
+    ]).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter14/NetBill3.e',132).
+
+ /*  not(axiom_uses(delta)) :-
+       not(happens(dischargeCC(musicStore,
+                               jen,
+                               purchaseRequestedJenMusicStoreBritneyCD1,
+                               deliveredMusicStoreJenBritneyCD),
+                   Time)),
+       holds_at(cc(musicStore,
+                   jen,
+                   purchaseRequestedJenMusicStoreBritneyCD1,
+                   deliveredMusicStoreJenBritneyCD),
+                Time),
+       holds_at(purchaseRequested(jen, musicStore, britneyCD, 1), Time).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter14/NetBill3.e',132).
+
+ /*  fix_axiom_head(Time) ->
+       [not(axiom_uses(delta)), ->, not(axiom_uses(delta, Time))].
+ */
+
+ /*  [not(happens(dischargeCC(musicStore, jen, purchaseRequestedJenMusicStoreBritneyCD1, deliveredMusicStoreJenBritneyCD), Time)), holds_at(cc(musicStore, jen, purchaseRequestedJenMusicStoreBritneyCD1, deliveredMusicStoreJenBritneyCD), Time), holds_at(purchaseRequested(jen, musicStore, britneyCD, 1), Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          not(axiom_uses(delta, Time))).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter14/NetBill3.e',132).
+axiom(not(axiom_uses(delta, Time)),
+   
+    [ not(happens(dischargeCC(musicStore,
+                              jen,
+                              purchaseRequestedJenMusicStoreBritneyCD1,
+                              deliveredMusicStoreJenBritneyCD),
+                  Time)),
+      holds_at(cc(musicStore,
+                  jen,
+                  purchaseRequestedJenMusicStoreBritneyCD1,
+                  deliveredMusicStoreJenBritneyCD),
+               Time),
+      holds_at(purchaseRequested(jen, musicStore, britneyCD, 1), Time)
+    ]).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter14/NetBill3.e:135
+% Delta: 
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter14/NetBill3.e',135).
+next_axiom_uses(delta).
+ 
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter14/NetBill3.e:135
+% [time]
+% HoldsAt(CC(Jen, MusicStore, DeliveredMusicStoreJenBritneyCD, EPOSentJenMusicStore1),time) &
+% HoldsAt(Delivered(MusicStore,Jen,BritneyCD),time) ->
+% Happens(CreateC(Jen,MusicStore,EPOSentJenMusicStore1),time).
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter14/NetBill3.e:138
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter14/NetBill3.e',137).
+
+ /*  axiom_uses(delta) ->
+       ( holds_at(cc(jen, musicStore, deliveredMusicStoreJenBritneyCD, ePOSentJenMusicStore1), Time), holds_at(delivered(musicStore, jen, britneyCD), Time)->happens(createC(jen, musicStore, ePOSentJenMusicStore1), Time)
+       ).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter14/NetBill3.e',137).
+
+ /*  happens(createC(jen, musicStore, ePOSentJenMusicStore1), Time) :-
+       ( holds_at(cc(jen,
+                     musicStore,
+                     deliveredMusicStoreJenBritneyCD,
+                     ePOSentJenMusicStore1),
+                  Time),
+         holds_at(delivered(musicStore, jen, britneyCD), Time)
+       ),
+       axiom_uses(delta).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter14/NetBill3.e',137).
+
+ /*  [holds_at(cc(jen, musicStore, deliveredMusicStoreJenBritneyCD, ePOSentJenMusicStore1), Time), holds_at(delivered(musicStore, jen, britneyCD), Time), axiom_uses(delta, Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          happens(createC(jen, musicStore, ePOSentJenMusicStore1), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter14/NetBill3.e',137).
+axiom(happens(createC(jen, musicStore, ePOSentJenMusicStore1), Time),
+   
+    [ holds_at(cc(jen,
+                  musicStore,
+                  deliveredMusicStoreJenBritneyCD,
+                  ePOSentJenMusicStore1),
+               Time),
+      holds_at(delivered(musicStore, jen, britneyCD), Time),
+      axiom_uses(delta, Time)
+    ]).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter14/NetBill3.e',137).
+
+ /*  not(holds_at(cc(jen, musicStore, deliveredMusicStoreJenBritneyCD, ePOSentJenMusicStore1), Time)) :-
+       holds_at(delivered(musicStore, jen, britneyCD), Time),
+       not(happens(createC(jen, musicStore, ePOSentJenMusicStore1), Time)),
+       axiom_uses(delta).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter14/NetBill3.e',137).
+
+ /*  [holds_at(delivered(musicStore, jen, britneyCD), Time), not(happens(createC(jen, musicStore, ePOSentJenMusicStore1), Time)), axiom_uses(delta, Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(neg(cc(jen,
+                          musicStore,
+                          deliveredMusicStoreJenBritneyCD,
+                          ePOSentJenMusicStore1)),
+                   Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter14/NetBill3.e',137).
+axiom(holds_at(neg(cc(jen, musicStore, deliveredMusicStoreJenBritneyCD, ePOSentJenMusicStore1)), Time),
+   
+    [ holds_at(delivered(musicStore, jen, britneyCD), Time),
+      not(happens(createC(jen, musicStore, ePOSentJenMusicStore1), Time)),
+      axiom_uses(delta, Time)
+    ]).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter14/NetBill3.e',137).
+
+ /*  not(holds_at(delivered(musicStore, jen, britneyCD), Time)) :-
+       holds_at(cc(jen,
+                   musicStore,
+                   deliveredMusicStoreJenBritneyCD,
+                   ePOSentJenMusicStore1),
+                Time),
+       not(happens(createC(jen, musicStore, ePOSentJenMusicStore1), Time)),
+       axiom_uses(delta).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter14/NetBill3.e',137).
+
+ /*  [holds_at(cc(jen, musicStore, deliveredMusicStoreJenBritneyCD, ePOSentJenMusicStore1), Time), not(happens(createC(jen, musicStore, ePOSentJenMusicStore1), Time)), axiom_uses(delta, Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(neg(delivered(musicStore, jen, britneyCD)), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter14/NetBill3.e',137).
+axiom(holds_at(neg(delivered(musicStore, jen, britneyCD)), Time),
+   
+    [ holds_at(cc(jen,
+                  musicStore,
+                  deliveredMusicStoreJenBritneyCD,
+                  ePOSentJenMusicStore1),
+               Time),
+      not(happens(createC(jen, musicStore, ePOSentJenMusicStore1), Time)),
+      axiom_uses(delta, Time)
+    ]).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter14/NetBill3.e',137).
+
+ /*  not(axiom_uses(delta)) :-
+       not(happens(createC(jen, musicStore, ePOSentJenMusicStore1), Time)),
+       holds_at(cc(jen,
+                   musicStore,
+                   deliveredMusicStoreJenBritneyCD,
+                   ePOSentJenMusicStore1),
+                Time),
+       holds_at(delivered(musicStore, jen, britneyCD), Time).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter14/NetBill3.e',137).
+
+ /*  fix_axiom_head(Time) ->
+       [not(axiom_uses(delta)), ->, not(axiom_uses(delta, Time))].
+ */
+
+ /*  [not(happens(createC(jen, musicStore, ePOSentJenMusicStore1), Time)), holds_at(cc(jen, musicStore, deliveredMusicStoreJenBritneyCD, ePOSentJenMusicStore1), Time), holds_at(delivered(musicStore, jen, britneyCD), Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          not(axiom_uses(delta, Time))).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter14/NetBill3.e',137).
+axiom(not(axiom_uses(delta, Time)),
+   
+    [ not(happens(createC(jen, musicStore, ePOSentJenMusicStore1), Time)),
+      holds_at(cc(jen,
+                  musicStore,
+                  deliveredMusicStoreJenBritneyCD,
+                  ePOSentJenMusicStore1),
+               Time),
+      holds_at(delivered(musicStore, jen, britneyCD), Time)
+    ]).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter14/NetBill3.e:140
+% Delta: 
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter14/NetBill3.e',140).
+next_axiom_uses(delta).
+ 
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter14/NetBill3.e:140
+% [time]
+% HoldsAt(CC(Jen, MusicStore, DeliveredMusicStoreJenBritneyCD, EPOSentJenMusicStore1),time) &
+% HoldsAt(Delivered(MusicStore,Jen,BritneyCD),time) ->
+% Happens(DischargeCC(Jen,MusicStore,DeliveredMusicStoreJenBritneyCD, EPOSentJenMusicStore1),time).
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter14/NetBill3.e:143
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter14/NetBill3.e',142).
+
+ /*  axiom_uses(delta) ->
+       ( holds_at(cc(jen, musicStore, deliveredMusicStoreJenBritneyCD, ePOSentJenMusicStore1), Time), holds_at(delivered(musicStore, jen, britneyCD), Time)->happens(dischargeCC(jen, musicStore, deliveredMusicStoreJenBritneyCD, ePOSentJenMusicStore1), Time)
+       ).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter14/NetBill3.e',142).
+
+ /*  happens(dischargeCC(jen, musicStore, deliveredMusicStoreJenBritneyCD, ePOSentJenMusicStore1), Time) :-
+       ( holds_at(cc(jen,
+                     musicStore,
+                     deliveredMusicStoreJenBritneyCD,
+                     ePOSentJenMusicStore1),
+                  Time),
+         holds_at(delivered(musicStore, jen, britneyCD), Time)
+       ),
+       axiom_uses(delta).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter14/NetBill3.e',142).
+
+ /*  [holds_at(cc(jen, musicStore, deliveredMusicStoreJenBritneyCD, ePOSentJenMusicStore1), Time), holds_at(delivered(musicStore, jen, britneyCD), Time), axiom_uses(delta, Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          happens(dischargeCC(jen,
+                              musicStore,
+                              deliveredMusicStoreJenBritneyCD,
+                              ePOSentJenMusicStore1),
+                  Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter14/NetBill3.e',142).
+axiom(happens(dischargeCC(jen, musicStore, deliveredMusicStoreJenBritneyCD, ePOSentJenMusicStore1), Time),
+   
+    [ holds_at(cc(jen,
+                  musicStore,
+                  deliveredMusicStoreJenBritneyCD,
+                  ePOSentJenMusicStore1),
+               Time),
+      holds_at(delivered(musicStore, jen, britneyCD), Time),
+      axiom_uses(delta, Time)
+    ]).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter14/NetBill3.e',142).
+
+ /*  not(holds_at(cc(jen, musicStore, deliveredMusicStoreJenBritneyCD, ePOSentJenMusicStore1), Time)) :-
+       holds_at(delivered(musicStore, jen, britneyCD), Time),
+       not(happens(dischargeCC(jen,
+                               musicStore,
+                               deliveredMusicStoreJenBritneyCD,
+                               ePOSentJenMusicStore1),
+                   Time)),
+       axiom_uses(delta).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter14/NetBill3.e',142).
+
+ /*  [holds_at(delivered(musicStore, jen, britneyCD), Time), not(happens(dischargeCC(jen, musicStore, deliveredMusicStoreJenBritneyCD, ePOSentJenMusicStore1), Time)), axiom_uses(delta, Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(neg(cc(jen,
+                          musicStore,
+                          deliveredMusicStoreJenBritneyCD,
+                          ePOSentJenMusicStore1)),
+                   Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter14/NetBill3.e',142).
+axiom(holds_at(neg(cc(jen, musicStore, deliveredMusicStoreJenBritneyCD, ePOSentJenMusicStore1)), Time),
+   
+    [ holds_at(delivered(musicStore, jen, britneyCD), Time),
+      not(happens(dischargeCC(jen,
+                              musicStore,
+                              deliveredMusicStoreJenBritneyCD,
+                              ePOSentJenMusicStore1),
+                  Time)),
+      axiom_uses(delta, Time)
+    ]).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter14/NetBill3.e',142).
+
+ /*  not(holds_at(delivered(musicStore, jen, britneyCD), Time)) :-
+       holds_at(cc(jen,
+                   musicStore,
+                   deliveredMusicStoreJenBritneyCD,
+                   ePOSentJenMusicStore1),
+                Time),
+       not(happens(dischargeCC(jen,
+                               musicStore,
+                               deliveredMusicStoreJenBritneyCD,
+                               ePOSentJenMusicStore1),
+                   Time)),
+       axiom_uses(delta).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter14/NetBill3.e',142).
+
+ /*  [holds_at(cc(jen, musicStore, deliveredMusicStoreJenBritneyCD, ePOSentJenMusicStore1), Time), not(happens(dischargeCC(jen, musicStore, deliveredMusicStoreJenBritneyCD, ePOSentJenMusicStore1), Time)), axiom_uses(delta, Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(neg(delivered(musicStore, jen, britneyCD)), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter14/NetBill3.e',142).
+axiom(holds_at(neg(delivered(musicStore, jen, britneyCD)), Time),
+   
+    [ holds_at(cc(jen,
+                  musicStore,
+                  deliveredMusicStoreJenBritneyCD,
+                  ePOSentJenMusicStore1),
+               Time),
+      not(happens(dischargeCC(jen,
+                              musicStore,
+                              deliveredMusicStoreJenBritneyCD,
+                              ePOSentJenMusicStore1),
+                  Time)),
+      axiom_uses(delta, Time)
+    ]).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter14/NetBill3.e',142).
+
+ /*  not(axiom_uses(delta)) :-
+       not(happens(dischargeCC(jen,
+                               musicStore,
+                               deliveredMusicStoreJenBritneyCD,
+                               ePOSentJenMusicStore1),
+                   Time)),
+       holds_at(cc(jen,
+                   musicStore,
+                   deliveredMusicStoreJenBritneyCD,
+                   ePOSentJenMusicStore1),
+                Time),
+       holds_at(delivered(musicStore, jen, britneyCD), Time).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter14/NetBill3.e',142).
+
+ /*  fix_axiom_head(Time) ->
+       [not(axiom_uses(delta)), ->, not(axiom_uses(delta, Time))].
+ */
+
+ /*  [not(happens(dischargeCC(jen, musicStore, deliveredMusicStoreJenBritneyCD, ePOSentJenMusicStore1), Time)), holds_at(cc(jen, musicStore, deliveredMusicStoreJenBritneyCD, ePOSentJenMusicStore1), Time), holds_at(delivered(musicStore, jen, britneyCD), Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          not(axiom_uses(delta, Time))).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter14/NetBill3.e',142).
+axiom(not(axiom_uses(delta, Time)),
+   
+    [ not(happens(dischargeCC(jen,
+                              musicStore,
+                              deliveredMusicStoreJenBritneyCD,
+                              ePOSentJenMusicStore1),
+                  Time)),
+      holds_at(cc(jen,
+                  musicStore,
+                  deliveredMusicStoreJenBritneyCD,
+                  ePOSentJenMusicStore1),
+               Time),
+      holds_at(delivered(musicStore, jen, britneyCD), Time)
+    ]).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter14/NetBill3.e:145
+% Delta: 
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter14/NetBill3.e',145).
+next_axiom_uses(delta).
+ 
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter14/NetBill3.e:145
+% [time]
+% HoldsAt(C(MusicStore,Jen,DeliveredMusicStoreJenBritneyCD),time) &
+% HoldsAt(Delivered(MusicStore,Jen,BritneyCD),time) ->
+% Happens(DischargeC(MusicStore,Jen,DeliveredMusicStoreJenBritneyCD),time).
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter14/NetBill3.e:148
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter14/NetBill3.e',147).
+
+ /*  axiom_uses(delta) ->
+       ( holds_at(c(musicStore, jen, deliveredMusicStoreJenBritneyCD), Time), holds_at(delivered(musicStore, jen, britneyCD), Time)->happens(dischargeC(musicStore, jen, deliveredMusicStoreJenBritneyCD), Time)
+       ).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter14/NetBill3.e',147).
+
+ /*  happens(dischargeC(musicStore, jen, deliveredMusicStoreJenBritneyCD), Time) :-
+       ( holds_at(c(musicStore, jen, deliveredMusicStoreJenBritneyCD), Time),
+         holds_at(delivered(musicStore, jen, britneyCD), Time)
+       ),
+       axiom_uses(delta).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter14/NetBill3.e',147).
+
+ /*  [holds_at(c(musicStore, jen, deliveredMusicStoreJenBritneyCD), Time), holds_at(delivered(musicStore, jen, britneyCD), Time), axiom_uses(delta, Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          happens(dischargeC(musicStore, jen, deliveredMusicStoreJenBritneyCD),
+                  Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter14/NetBill3.e',147).
+axiom(happens(dischargeC(musicStore, jen, deliveredMusicStoreJenBritneyCD), Time),
+   
+    [ holds_at(c(musicStore, jen, deliveredMusicStoreJenBritneyCD), Time),
+      holds_at(delivered(musicStore, jen, britneyCD), Time),
+      axiom_uses(delta, Time)
+    ]).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter14/NetBill3.e',147).
+
+ /*  not(holds_at(c(musicStore, jen, deliveredMusicStoreJenBritneyCD), Time)) :-
+       holds_at(delivered(musicStore, jen, britneyCD), Time),
+       not(happens(dischargeC(musicStore, jen, deliveredMusicStoreJenBritneyCD),
+                   Time)),
+       axiom_uses(delta).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter14/NetBill3.e',147).
+
+ /*  [holds_at(delivered(musicStore, jen, britneyCD), Time), not(happens(dischargeC(musicStore, jen, deliveredMusicStoreJenBritneyCD), Time)), axiom_uses(delta, Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(neg(c(musicStore, jen, deliveredMusicStoreJenBritneyCD)),
+                   Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter14/NetBill3.e',147).
+axiom(holds_at(neg(c(musicStore, jen, deliveredMusicStoreJenBritneyCD)), Time),
+   
+    [ holds_at(delivered(musicStore, jen, britneyCD), Time),
+      not(happens(dischargeC(musicStore, jen, deliveredMusicStoreJenBritneyCD),
+                  Time)),
+      axiom_uses(delta, Time)
+    ]).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter14/NetBill3.e',147).
+
+ /*  not(holds_at(delivered(musicStore, jen, britneyCD), Time)) :-
+       holds_at(c(musicStore, jen, deliveredMusicStoreJenBritneyCD), Time),
+       not(happens(dischargeC(musicStore, jen, deliveredMusicStoreJenBritneyCD),
+                   Time)),
+       axiom_uses(delta).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter14/NetBill3.e',147).
+
+ /*  [holds_at(c(musicStore, jen, deliveredMusicStoreJenBritneyCD), Time), not(happens(dischargeC(musicStore, jen, deliveredMusicStoreJenBritneyCD), Time)), axiom_uses(delta, Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(neg(delivered(musicStore, jen, britneyCD)), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter14/NetBill3.e',147).
+axiom(holds_at(neg(delivered(musicStore, jen, britneyCD)), Time),
+   
+    [ holds_at(c(musicStore, jen, deliveredMusicStoreJenBritneyCD), Time),
+      not(happens(dischargeC(musicStore, jen, deliveredMusicStoreJenBritneyCD),
+                  Time)),
+      axiom_uses(delta, Time)
+    ]).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter14/NetBill3.e',147).
+
+ /*  not(axiom_uses(delta)) :-
+       not(happens(dischargeC(musicStore, jen, deliveredMusicStoreJenBritneyCD),
+                   Time)),
+       holds_at(c(musicStore, jen, deliveredMusicStoreJenBritneyCD), Time),
+       holds_at(delivered(musicStore, jen, britneyCD), Time).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter14/NetBill3.e',147).
+
+ /*  fix_axiom_head(Time) ->
+       [not(axiom_uses(delta)), ->, not(axiom_uses(delta, Time))].
+ */
+
+ /*  [not(happens(dischargeC(musicStore, jen, deliveredMusicStoreJenBritneyCD), Time)), holds_at(c(musicStore, jen, deliveredMusicStoreJenBritneyCD), Time), holds_at(delivered(musicStore, jen, britneyCD), Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          not(axiom_uses(delta, Time))).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter14/NetBill3.e',147).
+axiom(not(axiom_uses(delta, Time)),
+   
+    [ not(happens(dischargeC(musicStore, jen, deliveredMusicStoreJenBritneyCD),
+                  Time)),
+      holds_at(c(musicStore, jen, deliveredMusicStoreJenBritneyCD), Time),
+      holds_at(delivered(musicStore, jen, britneyCD), Time)
+    ]).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter14/NetBill3.e:150
+% Delta: 
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter14/NetBill3.e',150).
+next_axiom_uses(delta).
+ 
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter14/NetBill3.e:150
+% [time]
+% HoldsAt(C(Jen,MusicStore,EPOSentJenMusicStore1),time) &
+% HoldsAt(EPOSent(Jen,MusicStore,1),time) ->
+% Happens(DischargeC(Jen,MusicStore,EPOSentJenMusicStore1),time).
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter14/NetBill3.e:153
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter14/NetBill3.e',152).
+
+ /*  axiom_uses(delta) ->
+       ( holds_at(c(jen, musicStore, ePOSentJenMusicStore1), Time), holds_at(ePOSent(jen, musicStore, 1), Time)->happens(dischargeC(jen, musicStore, ePOSentJenMusicStore1), Time)
+       ).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter14/NetBill3.e',152).
+
+ /*  happens(dischargeC(jen, musicStore, ePOSentJenMusicStore1), Time) :-
+       ( holds_at(c(jen, musicStore, ePOSentJenMusicStore1), Time),
+         holds_at(ePOSent(jen, musicStore, 1), Time)
+       ),
+       axiom_uses(delta).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter14/NetBill3.e',152).
+
+ /*  [holds_at(c(jen, musicStore, ePOSentJenMusicStore1), Time), holds_at(ePOSent(jen, musicStore, 1), Time), axiom_uses(delta, Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          happens(dischargeC(jen, musicStore, ePOSentJenMusicStore1), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter14/NetBill3.e',152).
+axiom(happens(dischargeC(jen, musicStore, ePOSentJenMusicStore1), Time),
+   
+    [ holds_at(c(jen, musicStore, ePOSentJenMusicStore1), Time),
+      holds_at(ePOSent(jen, musicStore, 1), Time),
+      axiom_uses(delta, Time)
+    ]).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter14/NetBill3.e',152).
+
+ /*  not(holds_at(c(jen, musicStore, ePOSentJenMusicStore1), Time)) :-
+       holds_at(ePOSent(jen, musicStore, 1), Time),
+       not(happens(dischargeC(jen, musicStore, ePOSentJenMusicStore1), Time)),
+       axiom_uses(delta).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter14/NetBill3.e',152).
+
+ /*  [holds_at(ePOSent(jen, musicStore, 1), Time), not(happens(dischargeC(jen, musicStore, ePOSentJenMusicStore1), Time)), axiom_uses(delta, Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(neg(c(jen, musicStore, ePOSentJenMusicStore1)), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter14/NetBill3.e',152).
+axiom(holds_at(neg(c(jen, musicStore, ePOSentJenMusicStore1)), Time),
+   
+    [ holds_at(ePOSent(jen, musicStore, 1), Time),
+      not(happens(dischargeC(jen, musicStore, ePOSentJenMusicStore1), Time)),
+      axiom_uses(delta, Time)
+    ]).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter14/NetBill3.e',152).
+
+ /*  not(holds_at(ePOSent(jen, musicStore, 1), Time)) :-
+       holds_at(c(jen, musicStore, ePOSentJenMusicStore1), Time),
+       not(happens(dischargeC(jen, musicStore, ePOSentJenMusicStore1), Time)),
+       axiom_uses(delta).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter14/NetBill3.e',152).
+
+ /*  [holds_at(c(jen, musicStore, ePOSentJenMusicStore1), Time), not(happens(dischargeC(jen, musicStore, ePOSentJenMusicStore1), Time)), axiom_uses(delta, Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(neg(ePOSent(jen, musicStore, 1)), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter14/NetBill3.e',152).
+axiom(holds_at(neg(ePOSent(jen, musicStore, 1)), Time),
+   
+    [ holds_at(c(jen, musicStore, ePOSentJenMusicStore1), Time),
+      not(happens(dischargeC(jen, musicStore, ePOSentJenMusicStore1), Time)),
+      axiom_uses(delta, Time)
+    ]).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter14/NetBill3.e',152).
+
+ /*  not(axiom_uses(delta)) :-
+       not(happens(dischargeC(jen, musicStore, ePOSentJenMusicStore1), Time)),
+       holds_at(c(jen, musicStore, ePOSentJenMusicStore1), Time),
+       holds_at(ePOSent(jen, musicStore, 1), Time).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter14/NetBill3.e',152).
+
+ /*  fix_axiom_head(Time) ->
+       [not(axiom_uses(delta)), ->, not(axiom_uses(delta, Time))].
+ */
+
+ /*  [not(happens(dischargeC(jen, musicStore, ePOSentJenMusicStore1), Time)), holds_at(c(jen, musicStore, ePOSentJenMusicStore1), Time), holds_at(ePOSent(jen, musicStore, 1), Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          not(axiom_uses(delta, Time))).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter14/NetBill3.e',152).
+axiom(not(axiom_uses(delta, Time)),
+   
+    [ not(happens(dischargeC(jen, musicStore, ePOSentJenMusicStore1), Time)),
+      holds_at(c(jen, musicStore, ePOSentJenMusicStore1), Time),
+      holds_at(ePOSent(jen, musicStore, 1), Time)
+    ]).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter14/NetBill3.e:155
+% Delta: 
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter14/NetBill3.e',155).
+next_axiom_uses(delta).
+ 
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter14/NetBill3.e:155
+% Happens(Deliver(MusicStore,Jen,BritneyCD),0).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter14/NetBill3.e',155).
+
+ /*  [axiom_uses(delta, Axiom_uses_Ret)] ->
+       ta(Ta_Param,
+          tvs1=[start],
+          tvs2=[start],
+          happens(deliver(musicStore, jen, britneyCD), start)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter14/NetBill3.e',155).
+axiom(happens(deliver(musicStore, jen, britneyCD), start),
+    [axiom_uses(delta, Axiom_uses_Ret)]).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter14/NetBill3.e:156
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter14/NetBill3.e',157).
+% Delta: 
+next_axiom_uses(delta).
+ 
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter14/NetBill3.e:156
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter14/NetBill3.e',157).
+% Happens(SendEPO(Jen,MusicStore,1),2).
+
+ /*  [axiom_uses(delta, Axiom_uses_Ret), b(start, Start2), toffset(start, 2, Start2), ignore(start+2==Start2)] ->
+       ta(Ta_Param,
+          tvs1=[start+2],
+          tvs2=[Start2, start],
+          happens(sendEPO(jen, musicStore, 1), Start2)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter14/NetBill3.e',157).
+axiom(happens(sendEPO(jen, musicStore, 1), Start2),
+   
+    [ axiom_uses(delta, Axiom_uses_Ret),
+      b(start, Start2),
+      toffset(start, 2, Start2)
+    ]).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter14/NetBill3.e:158
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter14/NetBill3.e',159).
+%; Gamma
+% [agent1,agent2,product,amount]
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter14/NetBill3.e:161
+% !HoldsAt(QuoteSent(agent1,agent2,product,amount),0).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter14/NetBill3.e',161).
+
+ /*  [] ->
+       ta(Ta_Param,
+          tvs1=[start],
+          tvs2=[start],
+          holds_at(neg(quoteSent(Agent1,
+                                 Agent2,
+                                 Product,
+                                 Amount)),
+                   start)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter14/NetBill3.e',161).
+axiom(holds_at(neg(quoteSent(Agent1, Agent2, Product, Amount)), start),
+    []).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter14/NetBill3.e:163
+% [agent1,agent2,product,amount]
+% !HoldsAt(PurchaseRequested(agent1,agent2,product,amount),0).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter14/NetBill3.e',165).
+
+ /*  [] ->
+       ta(Ta_Param,
+          tvs1=[start],
+          tvs2=[start],
+          holds_at(neg(purchaseRequested(Agent1,
+                                         Agent2,
+                                         Product,
+                                         Amount)),
+                   start)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter14/NetBill3.e',165).
+axiom(holds_at(neg(purchaseRequested(Agent1, Agent2, Product, Amount)), start),
+    []).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter14/NetBill3.e:166
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter14/NetBill3.e',167).
+% [agent1,agent2,product]
+% !HoldsAt(Delivered(agent1,agent2,product),0).
+
+ /*  [] ->
+       ta(Ta_Param,
+          tvs1=[start],
+          tvs2=[start],
+          holds_at(neg(delivered(Agent1, Agent2, Product)), start)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter14/NetBill3.e',167).
+axiom(holds_at(neg(delivered(Agent1, Agent2, Product)), start),
+    []).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter14/NetBill3.e:169
+% [agent1,agent2,f]
+% !HoldsAt(C(agent1,agent2,f),0).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter14/NetBill3.e',171).
+
+ /*  [] ->
+       ta(Ta_Param,
+          tvs1=[start],
+          tvs2=[start],
+          holds_at(neg(c(Agent1, Agent2, F)), start)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter14/NetBill3.e',171).
+axiom(holds_at(neg(c(Agent1, Agent2, F)), start),
+    []).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter14/NetBill3.e:172
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter14/NetBill3.e',173).
+% [agent1,agent2,f1,f2]
+% !HoldsAt(CC(agent1,agent2,f1,f2),0).
+
+ /*  [] ->
+       ta(Ta_Param,
+          tvs1=[start],
+          tvs2=[start],
+          holds_at(neg(cc(Agent1, Agent2, F1, F2)), start)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter14/NetBill3.e',173).
+axiom(holds_at(neg(cc(Agent1, Agent2, F1, F2)), start),
+    []).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter14/NetBill3.e:175
+% [agent1,agent2,amount]
+% !HoldsAt(EPOSent(agent1,agent2,amount),0).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter14/NetBill3.e',177).
+
+ /*  [] ->
+       ta(Ta_Param,
+          tvs1=[start],
+          tvs2=[start],
+          holds_at(neg(ePOSent(Agent1, Agent2, Amount)), start)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter14/NetBill3.e',177).
+axiom(holds_at(neg(ePOSent(Agent1, Agent2, Amount)), start),
+    []).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter14/NetBill3.e:178
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter14/NetBill3.e',179).
+% completion Delta Happens
+==> completion(delta).
+==> completion(happens).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter14/NetBill3.e:180
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter14/NetBill3.e',181).
+% range time 0 4
+==> range(time,0,4).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter14/NetBill3.e:181
+% range offset 1 1
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter14/NetBill3.e',181).
+==> range(offset,1,1).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter14/NetBill3.e:182
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter14/NetBill3.e',183).
+% range amount 1 1
+==> range(amount,1,1).
+%; End of file.

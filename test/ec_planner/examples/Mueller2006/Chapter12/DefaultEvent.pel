@@ -1,0 +1,501 @@
+:-include(library('ec_planner/ec_test_incl')).
+:-expects_dialect(pfc).
+% Wed, 01 Apr 2020 19:59:35 GMT
+% From ../examples/Mueller2006/Chapter12/DefaultEvent.pel:4
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter12/BrokenDevice.e',69).
+
+ /*  loading(load_e_pl,
+   	'/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter12/DefaultEvent.e').
+ */
+%;
+%; Copyright (c) 2005 IBM Corporation and others.
+%; All rights reserved. This program and the accompanying materials
+%; are made available under the terms of the Common Public License v1.0
+%; which accompanies this distribution, and is available at
+%; http://www.eclipse.org/legal/cpl-v10.html
+%;
+%; Contributors:
+%; IBM - Initial implementation
+%;
+%; @book{Mueller:2006,
+%;   author = "Erik T. Mueller",
+%;   year = "2006",
+%;   title = "Commonsense Reasoning",
+%;   address = "San Francisco",
+%;   publisher = "Morgan Kaufmann/Elsevier",
+%; }
+%;
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter12/DefaultEvent.e:19
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter12/DefaultEvent.e',20).
+% option modeldiff on
+:- set_ec_option(modeldiff, on).
+:- if(is_e_toplevel).
+:- endif.
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter12/DefaultEvent.e:21
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter12/DefaultEvent.e',22).
+% load foundations/Root.e
+:- load_e('foundations/Root.e', changed).
+:- if(is_e_toplevel).
+:- endif.
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter12/DefaultEvent.e:22
+% load foundations/EC.e
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter12/DefaultEvent.e',22).
+:- load_e('foundations/EC.e', changed).
+:- if(is_e_toplevel).
+:- endif.
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter12/DefaultEvent.e:24
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter12/DefaultEvent.e',25).
+% sort agent
+==> sort(agent).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter12/DefaultEvent.e:25
+% sort clock
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter12/DefaultEvent.e',25).
+==> sort(clock).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter12/DefaultEvent.e:27
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter12/DefaultEvent.e',28).
+% fluent Beeping(clock)
+fluent(beeping(clock)).
+==> mpred_prop(beeping(clock),fluent).
+==> meta_argtypes(beeping(clock)).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter12/DefaultEvent.e:28
+% fluent AlarmTime(clock,time)
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter12/DefaultEvent.e',28).
+fluent(alarmTime(clock,time)).
+==> mpred_prop(alarmTime(clock,time),fluent).
+==> meta_argtypes(alarmTime(clock,time)).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter12/DefaultEvent.e:29
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter12/DefaultEvent.e',30).
+% fluent AlarmOn(clock)
+fluent(alarmOn(clock)).
+==> mpred_prop(alarmOn(clock),fluent).
+==> meta_argtypes(alarmOn(clock)).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter12/DefaultEvent.e:31
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter12/DefaultEvent.e',32).
+% event SetAlarmTime(agent,clock,time)
+event(setAlarmTime(agent,clock,time)).
+==> mpred_prop(setAlarmTime(agent,clock,time),event).
+==> meta_argtypes(setAlarmTime(agent,clock,time)).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter12/DefaultEvent.e:32
+% event StartBeeping(clock)
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter12/DefaultEvent.e',32).
+event(startBeeping(clock)).
+==> mpred_prop(startBeeping(clock),event).
+==> meta_argtypes(startBeeping(clock)).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter12/DefaultEvent.e:33
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter12/DefaultEvent.e',34).
+% event TurnOnAlarm(agent,clock)
+event(turnOnAlarm(agent,clock)).
+==> mpred_prop(turnOnAlarm(agent,clock),event).
+==> meta_argtypes(turnOnAlarm(agent,clock)).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter12/DefaultEvent.e:34
+% event TurnOffAlarm(agent,clock)
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter12/DefaultEvent.e',34).
+event(turnOffAlarm(agent,clock)).
+==> mpred_prop(turnOffAlarm(agent,clock),event).
+==> meta_argtypes(turnOffAlarm(agent,clock)).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter12/DefaultEvent.e:36
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter12/DefaultEvent.e',37).
+% predicate Ab1(clock,time)
+predicate(ab1(clock,time)).
+==> mpred_prop(ab1(clock,time),predicate).
+==> meta_argtypes(ab1(clock,time)).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter12/DefaultEvent.e:38
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter12/DefaultEvent.e',39).
+% agent Nathan
+==> t(agent,nathan).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter12/DefaultEvent.e:39
+% clock Clock
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter12/DefaultEvent.e',39).
+==> t(clock,clock).
+%; Sigma
+% [agent,clock,time1,time2,time]
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter12/DefaultEvent.e:44
+% HoldsAt(AlarmTime(clock,time1),time) &
+% time1!=time2 ->
+% Initiates(SetAlarmTime(agent,clock,time2),AlarmTime(clock,time2),time).
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter12/DefaultEvent.e:46
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter12/DefaultEvent.e',44).
+
+ /*  [holds_at(alarmTime(Clock, Time1), Time), diff(Time1, Time2)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          initiates(setAlarmTime(Agent, Clock, Time2),
+                    alarmTime(Clock, Time2),
+                    Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter12/DefaultEvent.e',44).
+axiom(initiates(setAlarmTime(Agent, Clock, Time2), alarmTime(Clock, Time2), Time),
+   
+    [ holds_at(alarmTime(Clock, Time1), Time),
+      diff(Time2, Time1)
+    ]).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter12/DefaultEvent.e:48
+% [agent,clock,time1,time2,time]
+% HoldsAt(AlarmTime(clock,time1),time) &
+% time1!=time2 ->
+% Terminates(SetAlarmTime(agent,clock,time2),AlarmTime(clock,time1),time).
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter12/DefaultEvent.e:51
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter12/DefaultEvent.e',50).
+
+ /*  [holds_at(alarmTime(Clock, Time1), Time), diff(Time1, Time2)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          terminates(setAlarmTime(Agent, Clock, Time2),
+                     alarmTime(Clock, Time1),
+                     Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter12/DefaultEvent.e',50).
+axiom(terminates(setAlarmTime(Agent, Clock, Time2), alarmTime(Clock, Time1), Time),
+   
+    [ holds_at(alarmTime(Clock, Time1), Time),
+      diff(Time1, Time2)
+    ]).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter12/DefaultEvent.e:53
+% [agent,clock,time]
+% Initiates(TurnOnAlarm(agent,clock),AlarmOn(clock),time).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter12/DefaultEvent.e',55).
+
+ /*  [] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          initiates(turnOnAlarm(Agent, Clock),
+                    alarmOn(Clock),
+                    Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter12/DefaultEvent.e',55).
+axiom(initiates(turnOnAlarm(Agent, Clock), alarmOn(Clock), Time),
+    []).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter12/DefaultEvent.e:56
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter12/DefaultEvent.e',57).
+% [agent,clock,time]
+% Terminates(TurnOffAlarm(agent,clock),AlarmOn(clock),time).
+
+ /*  [] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          terminates(turnOffAlarm(Agent, Clock),
+                     alarmOn(Clock),
+                     Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter12/DefaultEvent.e',57).
+axiom(terminates(turnOffAlarm(Agent, Clock), alarmOn(Clock), Time),
+    []).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter12/DefaultEvent.e:59
+% [clock,time]
+% Initiates(StartBeeping(clock),Beeping(clock),time).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter12/DefaultEvent.e',61).
+
+ /*  [] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          initiates(startBeeping(Clock), beeping(Clock), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter12/DefaultEvent.e',61).
+axiom(initiates(startBeeping(Clock), beeping(Clock), Time),
+    []).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter12/DefaultEvent.e:62
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter12/DefaultEvent.e',63).
+% [agent,clock,time]
+% Terminates(TurnOffAlarm(agent,clock),Beeping(clock),time).
+
+ /*  [] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          terminates(turnOffAlarm(Agent, Clock),
+                     beeping(Clock),
+                     Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter12/DefaultEvent.e',63).
+axiom(terminates(turnOffAlarm(Agent, Clock), beeping(Clock), Time),
+    []).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter12/DefaultEvent.e:65
+%; Delta
+% [clock,time]
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter12/DefaultEvent.e:68
+% HoldsAt(AlarmTime(clock,time),time) &
+% HoldsAt(AlarmOn(clock),time) &
+% !Ab1(clock,time) ->
+% Happens(StartBeeping(clock),time).
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter12/DefaultEvent.e:71
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter12/DefaultEvent.e',68).
+
+ /*  holds_at(alarmTime(Clock, Time), Time), holds_at(alarmOn(Clock), Time), not(ab1(Clock, Time)) ->
+       happens(startBeeping(Clock), Time).
+ */
+
+ /*  happens(startBeeping(Clock), Time) :-
+       holds_at(alarmTime(Clock, Time), Time),
+       holds_at(alarmOn(Clock), Time),
+       not(ab1(Clock, Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter12/DefaultEvent.e',68).
+
+ /*  [holds_at(alarmTime(Clock, Time), Time), holds_at(alarmOn(Clock), Time), not(ab1(Clock, Time))] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          happens(startBeeping(Clock), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter12/DefaultEvent.e',68).
+axiom(happens(startBeeping(Clock), Time),
+   
+    [ holds_at(alarmTime(Clock, Time), Time),
+      holds_at(alarmOn(Clock), Time),
+      not(ab1(Clock, Time))
+    ]).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter12/DefaultEvent.e',68).
+
+ /*  not(holds_at(alarmTime(Clock, Time), Time)) :-
+       ( holds_at(alarmOn(Clock), Time),
+         not(ab1(Clock, Time))
+       ),
+       not(happens(startBeeping(Clock), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter12/DefaultEvent.e',68).
+
+ /*  [holds_at(alarmOn(Clock), Time), not(ab1(Clock, Time)), not(happens(startBeeping(Clock), Time))] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(neg(alarmTime(Clock, Time)), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter12/DefaultEvent.e',68).
+axiom(holds_at(neg(alarmTime(Clock, Time)), Time),
+   
+    [ holds_at(alarmOn(Clock), Time),
+      not(ab1(Clock, Time)),
+      not(happens(startBeeping(Clock), Time))
+    ]).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter12/DefaultEvent.e',68).
+
+ /*  not(holds_at(alarmOn(Clock), Time)) :-
+       not(ab1(Clock, Time)),
+       holds_at(alarmTime(Clock, Time), Time),
+       not(happens(startBeeping(Clock), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter12/DefaultEvent.e',68).
+
+ /*  [not(ab1(Clock, Time)), holds_at(alarmTime(Clock, Time), Time), not(happens(startBeeping(Clock), Time))] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(neg(alarmOn(Clock)), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter12/DefaultEvent.e',68).
+axiom(holds_at(neg(alarmOn(Clock)), Time),
+   
+    [ not(ab1(Clock, Time)),
+      holds_at(alarmTime(Clock, Time), Time),
+      not(happens(startBeeping(Clock), Time))
+    ]).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter12/DefaultEvent.e',68).
+
+ /*  ab1(Clock, Time) :-
+       holds_at(alarmOn(Clock), Time),
+       holds_at(alarmTime(Clock, Time), Time),
+       not(happens(startBeeping(Clock), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter12/DefaultEvent.e',68).
+
+ /*  [holds_at(alarmOn(Clock), Time), holds_at(alarmTime(Clock, Time), Time), not(happens(startBeeping(Clock), Time))] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          ab1(Clock, Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter12/DefaultEvent.e',68).
+axiom(ab1(Clock, Time),
+   
+    [ holds_at(alarmOn(Clock), Time),
+      holds_at(alarmTime(Clock, Time), Time),
+      not(happens(startBeeping(Clock), Time))
+    ]).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter12/DefaultEvent.e:73
+% Happens(SetAlarmTime(Nathan,Clock,2),0).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter12/DefaultEvent.e',73).
+
+ /*  [] ->
+       ta(Ta_Param,
+          tvs1=[start],
+          tvs2=[start],
+          happens(setAlarmTime(nathan, clock, 2), start)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter12/DefaultEvent.e',73).
+axiom(happens(setAlarmTime(nathan, clock, 2), start),
+    []).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter12/DefaultEvent.e:74
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter12/DefaultEvent.e',75).
+% Happens(TurnOnAlarm(Nathan,Clock),1).
+
+ /*  [b(start, Maptime), ignore(start+1==Maptime)] ->
+       ta(Ta_Param,
+          tvs1=[start+1],
+          tvs2=[Maptime, start],
+          happens(turnOnAlarm(nathan, clock), Maptime)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter12/DefaultEvent.e',75).
+axiom(happens(turnOnAlarm(nathan, clock), Maptime),
+    [b(start, Maptime)]).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter12/DefaultEvent.e:76
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter12/DefaultEvent.e',77).
+%; Psi
+% [clock,time1,time2,time]
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter12/DefaultEvent.e:79
+% HoldsAt(AlarmTime(clock,time1),time) &
+% HoldsAt(AlarmTime(clock,time2),time) ->
+% time1=time2.
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter12/DefaultEvent.e:81
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter12/DefaultEvent.e',79).
+
+ /*  holds_at(alarmTime(Clock, Time1), Time), holds_at(alarmTime(Clock, Time2), Time) ->
+       equals(Time1, Time2).
+ */
+
+ /*  not(holds_at(alarmTime(Clock, Time1), Time)) :-
+       holds_at(alarmTime(Clock, Time2), Time),
+       not(equals(Time1, Time2)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter12/DefaultEvent.e',79).
+
+ /*  [holds_at(alarmTime(Clock, Time2), Time), not(equals(Time1, Time2))] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(neg(alarmTime(Clock, Time1)), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter12/DefaultEvent.e',79).
+axiom(holds_at(neg(alarmTime(Clock, Time1)), Time),
+   
+    [ holds_at(alarmTime(Clock, Time2), Time),
+      not(equals(Time1, Time2))
+    ]).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter12/DefaultEvent.e',79).
+
+ /*  not(holds_at(alarmTime(Clock, Time2), Time)) :-
+       holds_at(alarmTime(Clock, Time1), Time),
+       not(equals(Time1, Time2)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter12/DefaultEvent.e',79).
+
+ /*  [holds_at(alarmTime(Clock, Time1), Time), not(equals(Time1, Time2))] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(neg(alarmTime(Clock, Time2)), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter12/DefaultEvent.e',79).
+axiom(holds_at(neg(alarmTime(Clock, Time2)), Time),
+   
+    [ holds_at(alarmTime(Clock, Time1), Time),
+      not(equals(Time2, Time1))
+    ]).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter12/DefaultEvent.e:83
+%; Gamma
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter12/DefaultEvent.e:85
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter12/DefaultEvent.e',86).
+% !HoldsAt(AlarmOn(Clock),0).
+
+ /*  [] ->
+       ta(Ta_Param,
+          tvs1=[start],
+          tvs2=[start],
+          holds_at(neg(alarmOn(clock)), start)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter12/DefaultEvent.e',86).
+axiom(holds_at(neg(alarmOn(clock)), start),
+    []).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter12/DefaultEvent.e:86
+% !HoldsAt(Beeping(Clock),0).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter12/DefaultEvent.e',86).
+
+ /*  [] ->
+       ta(Ta_Param,
+          tvs1=[start],
+          tvs2=[start],
+          holds_at(neg(beeping(clock)), start)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter12/DefaultEvent.e',86).
+axiom(holds_at(neg(beeping(clock)), start),
+    []).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter12/DefaultEvent.e:87
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter12/DefaultEvent.e',88).
+% HoldsAt(AlarmTime(Clock,3),0).
+
+ /*  [] ->
+       ta(Ta_Param,
+          tvs1=[start],
+          tvs2=[start],
+          holds_at(alarmTime(clock, 3), start)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter12/DefaultEvent.e',88).
+axiom(holds_at(alarmTime(clock, 3), start),
+    []).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter12/DefaultEvent.e:89
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter12/DefaultEvent.e',90).
+% completion Happens
+==> completion(happens).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter12/DefaultEvent.e:90
+% completion Theta Ab1
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter12/DefaultEvent.e',90).
+==> completion(theta).
+==> completion(ab1).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter12/DefaultEvent.e:92
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter12/DefaultEvent.e',93).
+% range time 0 3
+==> range(time,0,3).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter12/DefaultEvent.e:93
+% range offset 1 1
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter12/DefaultEvent.e',93).
+==> range(offset,1,1).
+%; End of file.

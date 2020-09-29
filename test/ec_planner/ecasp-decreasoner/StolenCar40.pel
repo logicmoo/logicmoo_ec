@@ -1,0 +1,267 @@
+:-include(library('ec_planner/ec_test_incl')).
+:-expects_dialect(pfc).
+% Wed, 01 Apr 2020 20:00:54 GMT
+% From ../decreasoner/StolenCar40.pel:4
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/StolenCar2.e',56).
+
+ /*  loading(load_e_pl,
+   	'/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/StolenCar40.e').
+ */
+%;
+%; Copyright (c) 2005 IBM Corporation and others.
+%; All rights reserved. This program and the accompanying materials
+%; are made available under the terms of the Common Public License v1.0
+%; which accompanies this distribution, and is available at
+%; http://www.eclipse.org/legal/cpl-v10.html
+%;
+%; Contributors:
+%; IBM - Initial implementation
+%;
+%; @inproceedings{Kautz:1986,
+%;   author = "Henry A. Kautz",
+%;   year = "1986",
+%;   title = "The Logic of Persistence",
+%;   booktitle = "\uppercase{P}roceedings of the \uppercase{F}ifth \uppercase{N}ational \uppercase{C}onference on \uppercase{A}rtificial \uppercase{I}ntelligence",
+%;   pages = "401--405",
+%;   address = "Los Altos, CA",
+%;   publisher = "Morgan Kaufmann",
+%; }
+%;
+%; \fullciteA[p. 359]{Shanahan:1997}
+%;
+%; @book{Shanahan:1997,
+%;   author = "Murray Shanahan",
+%;   year = "1997",
+%;   title = "Solving the Frame Problem",
+%;   address = "Cambridge, MA",
+%;   publisher = "MIT Press",
+%; }
+%;
+%; abduction
+%;
+%; modifications from Shanahan's formulation:
+%; timestamps
+%; added !HoldsAt(CarParked(),0).
+%;
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/StolenCar40.e:37
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/StolenCar40.e',38).
+% load foundations/Root.e
+:- load_e('foundations/Root.e', changed).
+:- if(is_e_toplevel).
+:- endif.
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/StolenCar40.e:38
+% load foundations/EC.e
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/StolenCar40.e',38).
+:- load_e('foundations/EC.e', changed).
+:- if(is_e_toplevel).
+:- endif.
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/StolenCar40.e:40
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/StolenCar40.e',41).
+% event Park()
+event(park).
+==> mpred_prop(park,event).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/StolenCar40.e:41
+% event Steal()
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/StolenCar40.e',41).
+event(steal).
+==> mpred_prop(steal,event).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/StolenCar40.e:42
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/StolenCar40.e',43).
+% fluent CarParked()
+fluent(carParked).
+==> mpred_prop(carParked,fluent).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/StolenCar40.e:44
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/StolenCar40.e',45).
+% [time]
+ % Initiates(Park(),CarParked(),time).
+
+ /*  [] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          initiates(park, carParked, Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/StolenCar40.e',45).
+axiom(initiates(park, carParked, Time),
+    []).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/StolenCar40.e:45
+% [time]
+ % Terminates(Steal(),CarParked(),time).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/StolenCar40.e',45).
+
+ /*  [] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          terminates(steal, carParked, Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/StolenCar40.e',45).
+axiom(terminates(steal, carParked, Time),
+    []).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/StolenCar40.e:47
+% !HoldsAt(CarParked(),0).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/StolenCar40.e',47).
+
+ /*  [] ->
+       ta(Ta_Param,
+          tvs1=[start],
+          tvs2=[start],
+          holds_at(neg(carParked), start)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/StolenCar40.e',47).
+axiom(holds_at(neg(carParked), start),
+    []).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/StolenCar40.e:48
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/StolenCar40.e',49).
+% Happens(Park(),20).
+
+ /*  [b(start, Startd20), toffset(start, 20, Startd20), ignore(start+20==Startd20)] ->
+       ta(Ta_Param,
+          tvs1=[start+20],
+          tvs2=[Startd20, start],
+          happens(park, Startd20)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/StolenCar40.e',49).
+axiom(happens(park, Startd20),
+    [b(start, Startd20), toffset(start, 20, Startd20)]).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/StolenCar40.e:49
+%; ABDUCED Happens(Steal(), 1).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/StolenCar40.e:50
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/StolenCar40.e',51).
+% !HoldsAt(CarParked(),40).
+
+ /*  [b(start, Startd40), toffset(start, 40, Startd40), ignore(start+40==Startd40)] ->
+       ta(Ta_Param,
+          tvs1=[start+40],
+          tvs2=[Startd40, start],
+          holds_at(neg(carParked), Startd40)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/StolenCar40.e',51).
+axiom(holds_at(neg(carParked), Startd40),
+    [b(start, Startd40), toffset(start, 40, Startd40)]).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/StolenCar40.e:53
+%; Action Precondition axiom added
+% [time]
+ % Happens(Steal(),time) -> HoldsAt(CarParked(),time).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/StolenCar40.e',55).
+
+ /*  happens(steal, Time) ->
+       holds_at(carParked, Time).
+ */
+
+ /*  holds_at(carParked, Time) :-
+       happens(steal, Time).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/StolenCar40.e',55).
+
+ /*  [holds_at(metreqs(steal), Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          requires(steal, Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/StolenCar40.e',55).
+axiom(requires(steal, Time),
+    [holds_at(metreqs(steal), Time)]).
+
+ /*  [holds_at(carParked, Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(metreqs(steal), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/StolenCar40.e',55).
+axiom(holds_at(metreqs(steal), Time),
+    [holds_at(carParked, Time)]).
+
+ /*  not(happens(steal, Time)) :-
+       not(holds_at(carParked, Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/StolenCar40.e',55).
+
+ /*  [holds_at(neg(carParked), Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          not(happens(steal, Time))).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/StolenCar40.e',55).
+axiom(not(happens(steal, Time)),
+    [holds_at(neg(carParked), Time)]).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/StolenCar40.e:56
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/StolenCar40.e',57).
+%; Event Occurrence Constraint added
+% [time1, time2]
+ % Happens(Steal(), time1) & time1<time2 ->
+% !Happens(Park(), time2).
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/StolenCar40.e:59
+
+ /*  happens(steal, Time1), Time1<Time2 ->
+       not(happens(park, Time2)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/StolenCar40.e',59).
+
+ /*  not(happens(park, Time2)) :-
+       happens(steal, Time1),
+       comparison(Time1, Time2, <).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/StolenCar40.e',59).
+
+ /*  [happens(steal, Time1), comparison(Time1, Time2, <)] ->
+       ta(Time2,
+          tvs1=[Time1, Time2],
+          tvs2=[Time1, Time2],
+          not(happens(park, Time2))).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/StolenCar40.e',59).
+axiom(not(happens(park, Time2)),
+    [happens(steal, Time1), comparison(Time1, Time2, <)]).
+
+ /*  not(happens(steal, Time1)) :-
+       comparison(Time1, Time2, <),
+       happens(park, Time2).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/StolenCar40.e',59).
+
+ /*  [comparison(Time1, Time2, <), happens(park, Time2)] ->
+       ta(Time1,
+          tvs1=[Time1, Time2],
+          tvs2=[Time1, Time2],
+          not(happens(steal, Time1))).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/StolenCar40.e',59).
+axiom(not(happens(steal, Time1)),
+    [comparison(Time1, Time2, <), happens(park, Time2)]).
+ 
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/StolenCar40.e:61
+% range time 0 40
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/StolenCar40.e',61).
+==> range(time,0,40).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/StolenCar40.e:62
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/StolenCar40.e',63).
+% range offset 1 1
+==> range(offset,1,1).
+%; End of file.

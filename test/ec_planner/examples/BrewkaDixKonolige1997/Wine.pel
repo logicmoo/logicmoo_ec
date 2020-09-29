@@ -1,0 +1,275 @@
+:-include(library('ec_planner/ec_test_incl')).
+:-expects_dialect(pfc).
+% Wed, 01 Apr 2020 20:00:26 GMT
+% From ../examples/BrewkaDixKonolige1997/Wine.pel:4
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Antoniou1997/Student.e',49).
+
+ /*  loading(load_e_pl,
+   	'/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/BrewkaDixKonolige1997/Wine.e').
+ */
+%;
+%; Copyright (c) 2005 IBM Corporation and others.
+%; All rights reserved. This program and the accompanying materials
+%; are made available under the terms of the Common Public License v1.0
+%; which accompanies this distribution, and is available at
+%; http://www.eclipse.org/legal/cpl-v10.html
+%;
+%; Contributors:
+%; IBM - Initial implementation
+%;
+%; reasoning by cases
+%; \fullciteA[p. 45]{BrewkaDixKonolige:1997}
+%;
+%; @book{BrewkaDixKonolige:1997,
+%;   author = "Gerhard Brewka and J{\"{u}}rgen Dix and Kurt Konolige",
+%;   year = "1997",
+%;   title = "Nonmonotonic Reasoning: An Overview",
+%;   address = "Stanford, CA",
+%;   publisher = "CSLI",
+%; }
+%;
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/BrewkaDixKonolige1997/Wine.e:22
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/BrewkaDixKonolige1997/Wine.e',23).
+% load foundations/Root.e
+:- load_e('foundations/Root.e', changed).
+:- if(is_e_toplevel).
+:- endif.
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/BrewkaDixKonolige1997/Wine.e:23
+% load foundations/EC.e
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/BrewkaDixKonolige1997/Wine.e',23).
+:- load_e('foundations/EC.e', changed).
+:- if(is_e_toplevel).
+:- endif.
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/BrewkaDixKonolige1997/Wine.e:25
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/BrewkaDixKonolige1997/Wine.e',26).
+% sort x
+==> sort(x).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/BrewkaDixKonolige1997/Wine.e:26
+% x Person
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/BrewkaDixKonolige1997/Wine.e',26).
+==> t(x,person).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/BrewkaDixKonolige1997/Wine.e:28
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/BrewkaDixKonolige1997/Wine.e',29).
+% predicate LikesWine(x)
+predicate(likesWine(x)).
+==> mpred_prop(likesWine(x),predicate).
+==> meta_argtypes(likesWine(x)).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/BrewkaDixKonolige1997/Wine.e:29
+% predicate Italian(x)
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/BrewkaDixKonolige1997/Wine.e',29).
+predicate(italian(x)).
+==> mpred_prop(italian(x),predicate).
+==> meta_argtypes(italian(x)).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/BrewkaDixKonolige1997/Wine.e:30
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/BrewkaDixKonolige1997/Wine.e',31).
+% predicate French(x)
+predicate(french(x)).
+==> mpred_prop(french(x),predicate).
+==> meta_argtypes(french(x)).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/BrewkaDixKonolige1997/Wine.e:31
+% predicate Ab1(x)
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/BrewkaDixKonolige1997/Wine.e',31).
+predicate(ab1(x)).
+==> mpred_prop(ab1(x),predicate).
+==> meta_argtypes(ab1(x)).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/BrewkaDixKonolige1997/Wine.e:32
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/BrewkaDixKonolige1997/Wine.e',33).
+% predicate Ab2(x)
+predicate(ab2(x)).
+==> mpred_prop(ab2(x),predicate).
+==> meta_argtypes(ab2(x)).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/BrewkaDixKonolige1997/Wine.e:34
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/BrewkaDixKonolige1997/Wine.e',35).
+% [x]
+ % Italian(x) & !Ab1(x) -> LikesWine(x).
+
+ /*  italian(X), not(ab1(X, Ab1_Ret)) ->
+       likesWine(X).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/BrewkaDixKonolige1997/Wine.e',35).
+
+ /*  likesWine(X) :-
+       italian(X),
+       not(ab1(X, Ab1_Ret)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/BrewkaDixKonolige1997/Wine.e',35).
+
+ /*  [italian(X), not(ab1(X, Ab1_Ret))] ->
+       ta(Ta_Param, tvs1=[], tvs2=[], likesWine(X)).
+ */
+axiom(likesWine(X),
+    [italian(X), not(ab1(X, Ab1_Ret))]).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/BrewkaDixKonolige1997/Wine.e',35).
+
+ /*  not(italian(X)) :-
+       not(ab1(X, Ab1_Ret)),
+       not(likesWine(X)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/BrewkaDixKonolige1997/Wine.e',35).
+
+ /*  [not(ab1(X, Ab1_Ret)), not(likesWine(X))] ->
+       ta(Ta_Param3, tvs1=[], tvs2=[], not(italian(X))).
+ */
+axiom(not(italian(X)),
+    [not(ab1(X, Ab1_Ret)), not(likesWine(X))]).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/BrewkaDixKonolige1997/Wine.e',35).
+
+ /*  ab1(X, Ab1_Ret) :-
+       italian(X),
+       not(likesWine(X)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/BrewkaDixKonolige1997/Wine.e',35).
+
+ /*  [italian(X), not(likesWine(X))] ->
+       ta(Ta_Param4, tvs1=[], tvs2=[], ab1(X, Ab1_Ret)).
+ */
+axiom(ab1(X, Ab1_Ret),
+    [italian(X), not(likesWine(X))]).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/BrewkaDixKonolige1997/Wine.e:35
+% [x]
+ % French(x) & !Ab2(x) -> LikesWine(x).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/BrewkaDixKonolige1997/Wine.e',35).
+
+ /*  french(X), not(ab2(X, Ab2_Ret)) ->
+       likesWine(X).
+ */
+
+ /*  likesWine(X) :-
+       french(X),
+       not(ab2(X, Ab2_Ret)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/BrewkaDixKonolige1997/Wine.e',35).
+
+ /*  [french(X), not(ab2(X, Ab2_Ret))] ->
+       ta(Ta_Param, tvs1=[], tvs2=[], likesWine(X)).
+ */
+axiom(likesWine(X),
+    [french(X), not(ab2(X, Ab2_Ret))]).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/BrewkaDixKonolige1997/Wine.e',35).
+
+ /*  not(french(X)) :-
+       not(ab2(X, Ab2_Ret)),
+       not(likesWine(X)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/BrewkaDixKonolige1997/Wine.e',35).
+
+ /*  [not(ab2(X, Ab2_Ret)), not(likesWine(X))] ->
+       ta(Ta_Param3, tvs1=[], tvs2=[], not(french(X))).
+ */
+axiom(not(french(X)),
+    [not(ab2(X, Ab2_Ret)), not(likesWine(X))]).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/BrewkaDixKonolige1997/Wine.e',35).
+
+ /*  ab2(X, Ab2_Ret) :-
+       french(X),
+       not(likesWine(X)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/BrewkaDixKonolige1997/Wine.e',35).
+
+ /*  [french(X), not(likesWine(X))] ->
+       ta(Ta_Param4, tvs1=[], tvs2=[], ab2(X, Ab2_Ret)).
+ */
+axiom(ab2(X, Ab2_Ret),
+    [french(X), not(likesWine(X))]).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/BrewkaDixKonolige1997/Wine.e:36
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/BrewkaDixKonolige1997/Wine.e',37).
+% [x]
+ % Italian(x) -> !French(x).
+
+ /*  italian(X) ->
+       not(french(X)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/BrewkaDixKonolige1997/Wine.e',37).
+
+ /*  not(french(X)) :-
+       italian(X).
+ */
+
+ /*  [italian(X)] ->
+       ta(Ta_Param, tvs1=[], tvs2=[], not(french(X))).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/BrewkaDixKonolige1997/Wine.e',37).
+axiom(not(french(X)),
+    [italian(X)]).
+
+ /*  not(italian(X)) :-
+       french(X).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/BrewkaDixKonolige1997/Wine.e',37).
+
+ /*  [french(X)] ->
+       ta(Ta_Param2, tvs1=[], tvs2=[], not(italian(X))).
+ */
+axiom(not(italian(X)),
+    [french(X)]).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/BrewkaDixKonolige1997/Wine.e:38
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/BrewkaDixKonolige1997/Wine.e',39).
+% Italian(Person) | French(Person).
+
+ /*   (   italian(person)
+      ;   french(person)
+      ).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/BrewkaDixKonolige1997/Wine.e',39).
+
+ /*  italian(person) :-
+       not(french(person)).
+ */
+
+ /*  [not(french(person))] ->
+       ta(Ta_Param, tvs1=[], tvs2=[], italian(person)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/BrewkaDixKonolige1997/Wine.e',39).
+axiom(italian(person),
+    [not(french(person))]).
+
+ /*  french(person) :-
+       not(italian(person)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/BrewkaDixKonolige1997/Wine.e',39).
+
+ /*  [not(italian(person))] ->
+       ta(Ta_Param1, tvs1=[], tvs2=[], french(person)).
+ */
+axiom(french(person),
+    [not(italian(person))]).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/BrewkaDixKonolige1997/Wine.e:40
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/BrewkaDixKonolige1997/Wine.e',41).
+% range time 0 0
+==> range(time,0,0).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/BrewkaDixKonolige1997/Wine.e:41
+% range offset 1 1
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/BrewkaDixKonolige1997/Wine.e',41).
+==> range(offset,1,1).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/BrewkaDixKonolige1997/Wine.e:43
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/BrewkaDixKonolige1997/Wine.e',44).
+% completion Theta Ab1
+==> completion(theta).
+==> completion(ab1).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/BrewkaDixKonolige1997/Wine.e:44
+% completion Theta Ab2
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/BrewkaDixKonolige1997/Wine.e',44).
+==> completion(theta).
+==> completion(ab2).
+%; End of file.

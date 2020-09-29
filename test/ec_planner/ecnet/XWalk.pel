@@ -1,0 +1,1720 @@
+:-include(library('ec_planner/ec_test_incl')).
+:-expects_dialect(pfc).
+% Wed, 01 Apr 2020 20:02:45 GMT
+% From ../ecnet/XWalk.pel:4
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/WritingABook.e',97).
+
+ /*  loading(load_e_pl,
+   	'/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/XWalk.e').
+ */
+%;
+%; Copyright (c) 2005 IBM Corporation and others.
+%; All rights reserved. This program and the accompanying materials
+%; are made available under the terms of the Common Public License v1.0
+%; which accompanies this distribution, and is available at
+%; http://www.eclipse.org/legal/cpl-v10.html
+%;
+%; Contributors:
+%; IBM - Initial implementation
+%;
+%; XWalk: WALK x-schema representation of walking
+%;
+%; @phdthesis{Narayanan:1997,
+%;   author = "Srinivas S. Narayanan",
+%;   year = "1997",
+%;   title = "Knowledge-based Action Representations for Metaphor and Aspect (\uppercase{KARMA})",
+%;   address = "Berkeley, CA",
+%;   school = "University of California, Berkeley",
+%; }
+%;
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/XWalk.e:21
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/XWalk.e',22).
+% option trajectory on
+:- set_ec_option(trajectory, on).
+:- if(is_e_toplevel).
+:- endif.
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/XWalk.e:23
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/XWalk.e',24).
+% sort xschema
+==> sort(xschema).
+%; parameters
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/XWalk.e:27
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/XWalk.e',28).
+% predicate XWalkAgent(xschema,agent)
+predicate(xWalkAgent(xschema,agent)).
+==> mpred_prop(xWalkAgent(xschema,agent),predicate).
+==> meta_argtypes(xWalkAgent(xschema,agent)).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/XWalk.e:28
+% function XWalkRate(xschema): offset ; step duration
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/XWalk.e',28).
+function(xWalkRate(xschema)).
+==> mpred_prop(xWalkRate(xschema),function).
+==> meta_argtypes(xWalkRate(xschema)).
+predicate(xWalkRatePred(xschema,[offset,;,step,duration])).
+==> mpred_prop(xWalkRatePred(xschema,[offset,;,step,duration]),
+	       predicate).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/XWalk.e',28).
+==> meta_argtypes(xWalkRatePred(xschema,[offset,;,step,duration])).
+
+ /*  fix_axiom_head(Time) ->
+       
+       [ functional_predicate(xWalkRate, xWalkRatePred),
+          (->),
+         holds_at(functional_predicate(xWalkRate, xWalkRatePred), Time)
+       ].
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/XWalk.e',28).
+
+ /*  [] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(functional_predicate(xWalkRate, xWalkRatePred), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/XWalk.e',28).
+axiom(holds_at(functional_predicate(xWalkRate, xWalkRatePred), Time),
+    []).
+==> resultIsa(xWalkRate,[offset,;,step,duration]).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/XWalk.e:29
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/XWalk.e',30).
+% function XWalkSize(xschema): offset ; step size
+function(xWalkSize(xschema)).
+==> mpred_prop(xWalkSize(xschema),function).
+==> meta_argtypes(xWalkSize(xschema)).
+predicate(xWalkSizePred(xschema,[offset,;,step,size])).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/XWalk.e',30).
+==> mpred_prop(xWalkSizePred(xschema,[offset,;,step,size]),predicate).
+==> meta_argtypes(xWalkSizePred(xschema,[offset,;,step,size])).
+
+ /*  fix_axiom_head(Time) ->
+       
+       [ functional_predicate(xWalkSize, xWalkSizePred),
+          (->),
+         holds_at(functional_predicate(xWalkSize, xWalkSizePred), Time)
+       ].
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/XWalk.e',30).
+
+ /*  [] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(functional_predicate(xWalkSize, xWalkSizePred), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/XWalk.e',30).
+axiom(holds_at(functional_predicate(xWalkSize, xWalkSizePred), Time),
+    []).
+==> resultIsa(xWalkSize,[offset,;,step,size]).
+%; TTL input lines
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/XWalk.e:33
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/XWalk.e',34).
+% fluent XWalkEnabled(xschema)
+fluent(xWalkEnabled(xschema)).
+==> mpred_prop(xWalkEnabled(xschema),fluent).
+==> meta_argtypes(xWalkEnabled(xschema)).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/XWalk.e:34
+% fluent XWalkGroundStable(xschema)
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/XWalk.e',34).
+fluent(xWalkGroundStable(xschema)).
+==> mpred_prop(xWalkGroundStable(xschema),fluent).
+==> meta_argtypes(xWalkGroundStable(xschema)).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/XWalk.e:35
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/XWalk.e',36).
+% fluent XWalkPosture(xschema)
+fluent(xWalkPosture(xschema)).
+==> mpred_prop(xWalkPosture(xschema),fluent).
+==> meta_argtypes(xWalkPosture(xschema)).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/XWalk.e:36
+% fluent XWalkFootingOK(xschema)
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/XWalk.e',36).
+fluent(xWalkFootingOK(xschema)).
+==> mpred_prop(xWalkFootingOK(xschema),fluent).
+==> meta_argtypes(xWalkFootingOK(xschema)).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/XWalk.e:37
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/XWalk.e',38).
+% noninertial XWalkEnabled, XWalkGroundStable, XWalkPosture, XWalkFootingOK
+==> noninertial(xWalkEnabled).
+==> noninertial(xWalkGroundStable).
+==> noninertial(xWalkPosture).
+==> noninertial(xWalkFootingOK).
+%; fluents
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/XWalk.e:41
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/XWalk.e',42).
+% fluent XWalkDistance(xschema,distance)
+fluent(xWalkDistance(xschema,distance)).
+==> mpred_prop(xWalkDistance(xschema,distance),fluent).
+==> meta_argtypes(xWalkDistance(xschema,distance)).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/XWalk.e:43
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/XWalk.e',44).
+% [xschema,distance1,distance2,time]
+% HoldsAt(XWalkDistance(xschema,distance1),time) &
+% HoldsAt(XWalkDistance(xschema,distance2),time) ->
+% distance1=distance2.
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/XWalk.e:46
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/XWalk.e',44).
+
+ /*  holds_at(xWalkDistance(Xschema, Distance1), Time), holds_at(xWalkDistance(Xschema, Distance2), Time) ->
+       equals(Distance1, Distance2).
+ */
+
+ /*  not(holds_at(xWalkDistance(Xschema, Distance1), Time)) :-
+       holds_at(xWalkDistance(Xschema, Distance2), Time),
+       not(equals(Distance1, Distance2)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/XWalk.e',44).
+
+ /*  [holds_at(xWalkDistance(Xschema, Distance2), Time), not(equals(Distance1, Distance2))] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(neg(xWalkDistance(Xschema, Distance1)), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/XWalk.e',44).
+axiom(holds_at(neg(xWalkDistance(Xschema, Distance1)), Time),
+   
+    [ holds_at(xWalkDistance(Xschema, Distance2), Time),
+      not(equals(Distance1, Distance2))
+    ]).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/XWalk.e',44).
+
+ /*  not(holds_at(xWalkDistance(Xschema, Distance2), Time)) :-
+       holds_at(xWalkDistance(Xschema, Distance1), Time),
+       not(equals(Distance1, Distance2)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/XWalk.e',44).
+
+ /*  [holds_at(xWalkDistance(Xschema, Distance1), Time), not(equals(Distance1, Distance2))] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(neg(xWalkDistance(Xschema, Distance2)), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/XWalk.e',44).
+axiom(holds_at(neg(xWalkDistance(Xschema, Distance2)), Time),
+   
+    [ holds_at(xWalkDistance(Xschema, Distance1), Time),
+      not(equals(Distance2, Distance1))
+    ]).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/XWalk.e:48
+%; logic gate behavior
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/XWalk.e:50
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/XWalk.e',51).
+% fluent XWalkVision(xschema)
+fluent(xWalkVision(xschema)).
+==> mpred_prop(xWalkVision(xschema),fluent).
+==> meta_argtypes(xWalkVision(xschema)).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/XWalk.e:51
+% fluent XWalkVisionOK(xschema)
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/XWalk.e',51).
+fluent(xWalkVisionOK(xschema)).
+==> mpred_prop(xWalkVisionOK(xschema),fluent).
+==> meta_argtypes(xWalkVisionOK(xschema)).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/XWalk.e:52
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/XWalk.e',53).
+% fluent XWalkAtDestination(xschema)
+fluent(xWalkAtDestination(xschema)).
+==> mpred_prop(xWalkAtDestination(xschema),fluent).
+==> meta_argtypes(xWalkAtDestination(xschema)).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/XWalk.e:53
+% fluent XWalkDone(xschema)
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/XWalk.e',53).
+fluent(xWalkDone(xschema)).
+==> mpred_prop(xWalkDone(xschema),fluent).
+==> meta_argtypes(xWalkDone(xschema)).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/XWalk.e:54
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/XWalk.e',55).
+% noninertial XWalkVision, XWalkVisionOK, XWalkAtDestination, XWalkDone
+==> noninertial(xWalkVision).
+==> noninertial(xWalkVisionOK).
+==> noninertial(xWalkAtDestination).
+==> noninertial(xWalkDone).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/XWalk.e:56
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/XWalk.e',57).
+% [xschema,time]
+% HoldsAt(XWalkGroundStable(xschema),time) <->
+% HoldsAt(XWalkVision(xschema),time).
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/XWalk.e:58
+
+ /*  holds_at(xWalkGroundStable(Xschema), Time) <->
+       holds_at(xWalkVision(Xschema), Time).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/XWalk.e',57).
+
+ /*  [holds_at, xWalkGroundStable] <->
+       [holds_at, xWalkVision].
+ */
+
+ /*  holds_at(xWalkGroundStable(Xschema), Time) ->
+       holds_at(xWalkVision(Xschema), Time).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/XWalk.e',57).
+
+ /*  holds_at(xWalkVision(Xschema), Time) :-
+       holds_at(xWalkGroundStable(Xschema), Time).
+ */
+
+ /*  [holds_at(xWalkGroundStable(Xschema), Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(xWalkVision(Xschema), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/XWalk.e',57).
+axiom(holds_at(xWalkVision(Xschema), Time),
+    [holds_at(xWalkGroundStable(Xschema), Time)]).
+
+ /*  not(holds_at(xWalkGroundStable(Xschema), Time)) :-
+       not(holds_at(xWalkVision(Xschema), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/XWalk.e',57).
+
+ /*  [holds_at(neg(xWalkVision(Xschema)), Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(neg(xWalkGroundStable(Xschema)), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/XWalk.e',57).
+axiom(holds_at(neg(xWalkGroundStable(Xschema)), Time),
+    [holds_at(neg(xWalkVision(Xschema)), Time)]).
+
+ /*  holds_at(xWalkVision(Xschema), Time) ->
+       holds_at(xWalkGroundStable(Xschema), Time).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/XWalk.e',57).
+
+ /*  holds_at(xWalkGroundStable(Xschema), Time) :-
+       holds_at(xWalkVision(Xschema), Time).
+ */
+
+ /*  [holds_at(xWalkVision(Xschema), Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(xWalkGroundStable(Xschema), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/XWalk.e',57).
+axiom(holds_at(xWalkGroundStable(Xschema), Time),
+    [holds_at(xWalkVision(Xschema), Time)]).
+
+ /*  not(holds_at(xWalkVision(Xschema), Time)) :-
+       not(holds_at(xWalkGroundStable(Xschema), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/XWalk.e',57).
+
+ /*  [holds_at(neg(xWalkGroundStable(Xschema)), Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(neg(xWalkVision(Xschema)), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/XWalk.e',57).
+axiom(holds_at(neg(xWalkVision(Xschema)), Time),
+    [holds_at(neg(xWalkGroundStable(Xschema)), Time)]).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/XWalk.e:60
+% [xschema,time]
+% HoldsAt(XWalkEnabled(xschema),time) &
+% HoldsAt(XWalkVision(xschema),time) &
+% HoldsAt(XWalkPosture(xschema),time) <->
+% HoldsAt(XWalkVisionOK(xschema),time).
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/XWalk.e:64
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/XWalk.e',62).
+
+ /*  holds_at(xWalkEnabled(Xschema), Time), holds_at(xWalkVision(Xschema), Time), holds_at(xWalkPosture(Xschema), Time) <->
+       holds_at(xWalkVisionOK(Xschema), Time).
+ */
+
+ /*  [holds_at, xWalkEnabled, holds_at, xWalkVision, holds_at, xWalkPosture] <->
+       [holds_at, xWalkVisionOK].
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/XWalk.e',62).
+
+ /*  holds_at(xWalkEnabled(Xschema), Time), holds_at(xWalkVision(Xschema), Time), holds_at(xWalkPosture(Xschema), Time) ->
+       holds_at(xWalkVisionOK(Xschema), Time).
+ */
+
+ /*  holds_at(xWalkVisionOK(Xschema), Time) :-
+       holds_at(xWalkEnabled(Xschema), Time),
+       holds_at(xWalkVision(Xschema), Time),
+       holds_at(xWalkPosture(Xschema), Time).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/XWalk.e',62).
+
+ /*  [holds_at(xWalkEnabled(Xschema), Time), holds_at(xWalkVision(Xschema), Time), holds_at(xWalkPosture(Xschema), Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(xWalkVisionOK(Xschema), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/XWalk.e',62).
+axiom(holds_at(xWalkVisionOK(Xschema), Time),
+   
+    [ holds_at(xWalkEnabled(Xschema), Time),
+      holds_at(xWalkVision(Xschema), Time),
+      holds_at(xWalkPosture(Xschema), Time)
+    ]).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/XWalk.e',62).
+
+ /*  not(holds_at(xWalkEnabled(Xschema), Time)) :-
+       ( holds_at(xWalkVision(Xschema), Time),
+         holds_at(xWalkPosture(Xschema), Time)
+       ),
+       not(holds_at(xWalkVisionOK(Xschema), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/XWalk.e',62).
+
+ /*  [holds_at(xWalkVision(Xschema), Time), holds_at(xWalkPosture(Xschema), Time), holds_at(neg(xWalkVisionOK(Xschema)), Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(neg(xWalkEnabled(Xschema)), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/XWalk.e',62).
+axiom(holds_at(neg(xWalkEnabled(Xschema)), Time),
+   
+    [ holds_at(xWalkVision(Xschema), Time),
+      holds_at(xWalkPosture(Xschema), Time),
+      holds_at(neg(xWalkVisionOK(Xschema)), Time)
+    ]).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/XWalk.e',62).
+
+ /*  not(holds_at(xWalkVision(Xschema), Time)) :-
+       holds_at(xWalkPosture(Xschema), Time),
+       holds_at(xWalkEnabled(Xschema), Time),
+       not(holds_at(xWalkVisionOK(Xschema), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/XWalk.e',62).
+
+ /*  [holds_at(xWalkPosture(Xschema), Time), holds_at(xWalkEnabled(Xschema), Time), holds_at(neg(xWalkVisionOK(Xschema)), Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(neg(xWalkVision(Xschema)), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/XWalk.e',62).
+axiom(holds_at(neg(xWalkVision(Xschema)), Time),
+   
+    [ holds_at(xWalkPosture(Xschema), Time),
+      holds_at(xWalkEnabled(Xschema), Time),
+      holds_at(neg(xWalkVisionOK(Xschema)), Time)
+    ]).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/XWalk.e',62).
+
+ /*  not(holds_at(xWalkPosture(Xschema), Time)) :-
+       holds_at(xWalkVision(Xschema), Time),
+       holds_at(xWalkEnabled(Xschema), Time),
+       not(holds_at(xWalkVisionOK(Xschema), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/XWalk.e',62).
+
+ /*  [holds_at(xWalkVision(Xschema), Time), holds_at(xWalkEnabled(Xschema), Time), holds_at(neg(xWalkVisionOK(Xschema)), Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(neg(xWalkPosture(Xschema)), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/XWalk.e',62).
+axiom(holds_at(neg(xWalkPosture(Xschema)), Time),
+   
+    [ holds_at(xWalkVision(Xschema), Time),
+      holds_at(xWalkEnabled(Xschema), Time),
+      holds_at(neg(xWalkVisionOK(Xschema)), Time)
+    ]).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/XWalk.e',62).
+
+ /*  holds_at(xWalkVisionOK(Xschema), Time) ->
+       holds_at(xWalkEnabled(Xschema), Time),
+       holds_at(xWalkVision(Xschema), Time),
+       holds_at(xWalkPosture(Xschema), Time).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/XWalk.e',62).
+
+ /*  not(holds_at(xWalkVisionOK(Xschema), Time)) :-
+       (   not(holds_at(xWalkEnabled(Xschema), Time))
+       ;   not(holds_at(xWalkVision(Xschema), Time))
+       ;   not(holds_at(xWalkPosture(Xschema), Time))
+       ).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/XWalk.e',62).
+
+ /*  [(holds_at(neg(xWalkEnabled(Xschema)), Time);holds_at(neg(xWalkVision(Xschema)), Time);holds_at(neg(xWalkPosture(Xschema)), Time))] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(neg(xWalkVisionOK(Xschema)), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/XWalk.e',62).
+axiom(holds_at(neg(xWalkVisionOK(Xschema)), Time),
+   
+    [  (holds_at(neg(xWalkEnabled(Xschema)), Time);holds_at(neg(xWalkVision(Xschema)), Time);holds_at(neg(xWalkPosture(Xschema)), Time))
+    ]).
+
+ /*  holds_at(xWalkEnabled(Xschema), Time) :-
+       holds_at(xWalkVisionOK(Xschema), Time).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/XWalk.e',62).
+
+ /*  [holds_at(xWalkVisionOK(Xschema), Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(xWalkEnabled(Xschema), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/XWalk.e',62).
+axiom(holds_at(xWalkEnabled(Xschema), Time),
+    [holds_at(xWalkVisionOK(Xschema), Time)]).
+
+ /*  holds_at(xWalkVision(Xschema), Time) :-
+       holds_at(xWalkVisionOK(Xschema), Time).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/XWalk.e',62).
+
+ /*  [holds_at(xWalkVisionOK(Xschema), Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(xWalkVision(Xschema), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/XWalk.e',62).
+axiom(holds_at(xWalkVision(Xschema), Time),
+    [holds_at(xWalkVisionOK(Xschema), Time)]).
+
+ /*  holds_at(xWalkPosture(Xschema), Time) :-
+       holds_at(xWalkVisionOK(Xschema), Time).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/XWalk.e',62).
+
+ /*  [holds_at(xWalkVisionOK(Xschema), Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(xWalkPosture(Xschema), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/XWalk.e',62).
+axiom(holds_at(xWalkPosture(Xschema), Time),
+    [holds_at(xWalkVisionOK(Xschema), Time)]).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/XWalk.e:66
+% [xschema,time]
+% HoldsAt(XWalkDistance(xschema,0),time) <->
+% HoldsAt(XWalkAtDestination(xschema),time).
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/XWalk.e:68
+
+ /*  holds_at(xWalkDistance(Xschema, 0), Time) <->
+       holds_at(xWalkAtDestination(Xschema), Time).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/XWalk.e',68).
+
+ /*  [holds_at, xWalkDistance] <->
+       [holds_at, xWalkAtDestination].
+ */
+
+ /*  holds_at(xWalkDistance(Xschema, 0), Time) ->
+       holds_at(xWalkAtDestination(Xschema), Time).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/XWalk.e',68).
+
+ /*  holds_at(xWalkAtDestination(Xschema), Time) :-
+       holds_at(xWalkDistance(Xschema, 0), Time).
+ */
+
+ /*  [holds_at(xWalkDistance(Xschema, 0), Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(xWalkAtDestination(Xschema), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/XWalk.e',68).
+axiom(holds_at(xWalkAtDestination(Xschema), Time),
+    [holds_at(xWalkDistance(Xschema, 0), Time)]).
+
+ /*  not(holds_at(xWalkDistance(Xschema, 0), Time)) :-
+       not(holds_at(xWalkAtDestination(Xschema), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/XWalk.e',68).
+
+ /*  [holds_at(neg(xWalkAtDestination(Xschema)), Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(neg(xWalkDistance(Xschema, 0)), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/XWalk.e',68).
+axiom(holds_at(neg(xWalkDistance(Xschema, 0)), Time),
+    [holds_at(neg(xWalkAtDestination(Xschema)), Time)]).
+
+ /*  holds_at(xWalkAtDestination(Xschema), Time) ->
+       holds_at(xWalkDistance(Xschema, 0), Time).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/XWalk.e',68).
+
+ /*  holds_at(xWalkDistance(Xschema, 0), Time) :-
+       holds_at(xWalkAtDestination(Xschema), Time).
+ */
+
+ /*  [holds_at(xWalkAtDestination(Xschema), Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(xWalkDistance(Xschema, 0), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/XWalk.e',68).
+axiom(holds_at(xWalkDistance(Xschema, 0), Time),
+    [holds_at(xWalkAtDestination(Xschema), Time)]).
+
+ /*  not(holds_at(xWalkAtDestination(Xschema), Time)) :-
+       not(holds_at(xWalkDistance(Xschema, 0), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/XWalk.e',68).
+
+ /*  [holds_at(neg(xWalkDistance(Xschema, 0)), Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(neg(xWalkAtDestination(Xschema)), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/XWalk.e',68).
+axiom(holds_at(neg(xWalkAtDestination(Xschema)), Time),
+    [holds_at(neg(xWalkDistance(Xschema, 0)), Time)]).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/XWalk.e:70
+% [xschema,time]
+% HoldsAt(XWalkAtDestination(xschema),time) <->
+% HoldsAt(XWalkDone(xschema),time).
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/XWalk.e:72
+
+ /*  holds_at(xWalkAtDestination(Xschema), Time) <->
+       holds_at(xWalkDone(Xschema), Time).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/XWalk.e',72).
+
+ /*  [holds_at, xWalkAtDestination] <->
+       [holds_at, xWalkDone].
+ */
+
+ /*  holds_at(xWalkAtDestination(Xschema), Time) ->
+       holds_at(xWalkDone(Xschema), Time).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/XWalk.e',72).
+
+ /*  holds_at(xWalkDone(Xschema), Time) :-
+       holds_at(xWalkAtDestination(Xschema), Time).
+ */
+
+ /*  [holds_at(xWalkAtDestination(Xschema), Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(xWalkDone(Xschema), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/XWalk.e',72).
+axiom(holds_at(xWalkDone(Xschema), Time),
+    [holds_at(xWalkAtDestination(Xschema), Time)]).
+
+ /*  not(holds_at(xWalkAtDestination(Xschema), Time)) :-
+       not(holds_at(xWalkDone(Xschema), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/XWalk.e',72).
+
+ /*  [holds_at(neg(xWalkDone(Xschema)), Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(neg(xWalkAtDestination(Xschema)), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/XWalk.e',72).
+axiom(holds_at(neg(xWalkAtDestination(Xschema)), Time),
+    [holds_at(neg(xWalkDone(Xschema)), Time)]).
+
+ /*  holds_at(xWalkDone(Xschema), Time) ->
+       holds_at(xWalkAtDestination(Xschema), Time).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/XWalk.e',72).
+
+ /*  holds_at(xWalkAtDestination(Xschema), Time) :-
+       holds_at(xWalkDone(Xschema), Time).
+ */
+
+ /*  [holds_at(xWalkDone(Xschema), Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(xWalkAtDestination(Xschema), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/XWalk.e',72).
+axiom(holds_at(xWalkAtDestination(Xschema), Time),
+    [holds_at(xWalkDone(Xschema), Time)]).
+
+ /*  not(holds_at(xWalkDone(Xschema), Time)) :-
+       not(holds_at(xWalkAtDestination(Xschema), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/XWalk.e',72).
+
+ /*  [holds_at(neg(xWalkAtDestination(Xschema)), Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(neg(xWalkDone(Xschema)), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/XWalk.e',72).
+axiom(holds_at(neg(xWalkDone(Xschema)), Time),
+    [holds_at(neg(xWalkAtDestination(Xschema)), Time)]).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/XWalk.e:74
+%; durative events
+%; distance is the goal
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/XWalk.e:77
+% fluent XWalkStepping(xschema,distance) 
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/XWalk.e',77).
+fluent(xWalkStepping(xschema,distance)).
+==> mpred_prop(xWalkStepping(xschema,distance),fluent).
+==> meta_argtypes(xWalkStepping(xschema,distance)).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/XWalk.e:78
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/XWalk.e',79).
+% event XWalkSteppingOn(xschema)
+event(xWalkSteppingOn(xschema)).
+==> mpred_prop(xWalkSteppingOn(xschema),event).
+==> meta_argtypes(xWalkSteppingOn(xschema)).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/XWalk.e:79
+% event XWalkSteppingOff(xschema)
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/XWalk.e',79).
+event(xWalkSteppingOff(xschema)).
+==> mpred_prop(xWalkSteppingOff(xschema),event).
+==> meta_argtypes(xWalkSteppingOff(xschema)).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/XWalk.e:81
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/XWalk.e',82).
+% [xschema,distance1,distance2,time]
+% HoldsAt(XWalkDistance(xschema,distance1),time) &
+% distance2 = distance1 - XWalkSize(xschema) ->
+% Initiates(XWalkSteppingOn(xschema),XWalkStepping(xschema,distance2),time).
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/XWalk.e:84
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/XWalk.e',82).
+
+ /*  [holds_at(xWalkDistance(Xschema, Distance1), Time), equals(Distance2, Distance1-xWalkSize(Xschema))] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          initiates(xWalkSteppingOn(Xschema),
+                    xWalkStepping(Xschema, Distance2),
+                    Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/XWalk.e',82).
+axiom(initiates(xWalkSteppingOn(Xschema), xWalkStepping(Xschema, Distance2), Time),
+   
+    [ holds_at(xWalkDistance(Xschema, Distance1), Time),
+      equals(Distance2, Distance1-xWalkSize(Xschema))
+    ]).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/XWalk.e:86
+% [xschema,distance,time]
+% Terminates(XWalkSteppingOff(xschema),XWalkStepping(xschema,distance),time).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/XWalk.e',88).
+
+ /*  [] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          terminates(xWalkSteppingOff(Xschema),
+                     xWalkStepping(Xschema, Distance),
+                     Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/XWalk.e',88).
+axiom(terminates(xWalkSteppingOff(Xschema), xWalkStepping(Xschema, Distance), Time),
+    []).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/XWalk.e:89
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/XWalk.e',90).
+% [xschema,distance,time]
+% Releases(XWalkSteppingOn(xschema),XWalkDistance(xschema,distance),time).
+
+ /*  [] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          releases(xWalkSteppingOn(Xschema),
+                   xWalkDistance(Xschema, Distance),
+                   Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/XWalk.e',90).
+axiom(releases(xWalkSteppingOn(Xschema), xWalkDistance(Xschema, Distance), Time),
+    []).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/XWalk.e:92
+% [xschema,distance1,distance2,time]
+% HoldsAt(XWalkDistance(xschema,distance1),time) &
+% distance1 != distance2 ->
+% Terminates(XWalkSteppingOff(xschema),XWalkDistance(xschema,distance2),time).
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/XWalk.e:95
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/XWalk.e',94).
+
+ /*  [holds_at(xWalkDistance(Xschema, Distance1), Time), diff(Distance1, Distance2)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          terminates(xWalkSteppingOff(Xschema),
+                     xWalkDistance(Xschema, Distance2),
+                     Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/XWalk.e',94).
+axiom(terminates(xWalkSteppingOff(Xschema), xWalkDistance(Xschema, Distance2), Time),
+   
+    [ holds_at(xWalkDistance(Xschema, Distance1), Time),
+      diff(Distance2, Distance1)
+    ]).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/XWalk.e:97
+% [xschema,distance,time]
+% HoldsAt(XWalkDistance(xschema,distance),time) ->
+% Initiates(XWalkSteppingOff(xschema),XWalkDistance(xschema,distance),time).
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/XWalk.e:99
+
+ /*  [holds_at(xWalkDistance(Xschema, Distance), Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          initiates(xWalkSteppingOff(Xschema),
+                    xWalkDistance(Xschema, Distance),
+                    Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/XWalk.e',99).
+axiom(initiates(xWalkSteppingOff(Xschema), xWalkDistance(Xschema, Distance), Time),
+    [holds_at(xWalkDistance(Xschema, Distance), Time)]).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/XWalk.e:101
+% [xschema,distance01,distance02,distance03,offset,time]
+% HoldsAt(XWalkDistance(xschema,distance01),time) &
+% (distance03=(distance01-(offset*(XWalkSize(xschema)/XWalkRate(xschema))))) ->
+% Trajectory(XWalkStepping(xschema,distance02),
+%            time,
+%            XWalkDistance(xschema,distance03),
+%            offset).
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/XWalk.e:107
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/XWalk.e',103).
+
+ /*  holds_at(xWalkDistance(Xschema, Distance01), Time), equals(Distance03, Distance01-Offset*(xWalkSize(Xschema)/xWalkRate(Xschema))) ->
+       trajectory(xWalkStepping(Xschema, Distance02),
+                  Time,
+                  xWalkDistance(Xschema, Distance03),
+                  Offset).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/XWalk.e',103).
+
+ /*  trajectory(xWalkStepping(Xschema, Distance02), Time, xWalkDistance(Xschema, Distance03), Offset) :-
+       holds_at(xWalkDistance(Xschema, Distance01), Time),
+       equals(Distance03,
+              Distance01-Offset*(xWalkSize(Xschema)/xWalkRate(Xschema))).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/XWalk.e',103).
+
+ /*  [holds_at(xWalkDistance(Xschema, Distance01), Time), equals(Distance03, Distance01-Offset*(xWalkSize(Xschema)/xWalkRate(Xschema)))] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          trajectory(xWalkStepping(Xschema, Distance02),
+                     Time,
+                     xWalkDistance(Xschema, Distance03),
+                     Offset)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/XWalk.e',103).
+axiom(trajectory(xWalkStepping(Xschema, Distance02), Time, xWalkDistance(Xschema, Distance03), Offset),
+   
+    [ holds_at(xWalkDistance(Xschema, Distance01), Time),
+      equals(Distance03,
+             Distance01-Offset*(xWalkSize(Xschema)/xWalkRate(Xschema)))
+    ]).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/XWalk.e',103).
+
+ /*  not(holds_at(xWalkDistance(Xschema, Distance01), Time)) :-
+       equals(Distance03,
+              Distance01-Offset*(xWalkSize(Xschema)/xWalkRate(Xschema))),
+       not(trajectory(xWalkStepping(Xschema, Distance02),
+                      Time,
+                      xWalkDistance(Xschema, Distance03),
+                      Offset)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/XWalk.e',103).
+
+ /*  [equals(Distance03, Distance01-Offset*(xWalkSize(Xschema)/xWalkRate(Xschema))), not(trajectory(xWalkStepping(Xschema, Distance02), Time, xWalkDistance(Xschema, Distance03), Offset))] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(neg(xWalkDistance(Xschema, Distance01)), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/XWalk.e',103).
+axiom(holds_at(neg(xWalkDistance(Xschema, Distance01)), Time),
+   
+    [ equals(Distance03,
+             Distance01-Offset*(xWalkSize(Xschema)/xWalkRate(Xschema))),
+      not(trajectory(xWalkStepping(Xschema, Distance02),
+                     Time,
+                     xWalkDistance(Xschema, Distance03),
+                     Offset))
+    ]).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/XWalk.e:109
+% [xschema,distance,time]
+% HoldsAt(XWalkStepping(xschema,distance),time) &
+% HoldsAt(XWalkDistance(xschema,distance),time) ->
+% Happens(XWalkSteppingOff(xschema),time).
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/XWalk.e:112
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/XWalk.e',111).
+
+ /*  holds_at(xWalkStepping(Xschema, Distance), Time), holds_at(xWalkDistance(Xschema, Distance), Time) ->
+       happens(xWalkSteppingOff(Xschema), Time).
+ */
+
+ /*  happens(xWalkSteppingOff(Xschema), Time) :-
+       holds_at(xWalkStepping(Xschema, Distance), Time),
+       holds_at(xWalkDistance(Xschema, Distance), Time).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/XWalk.e',111).
+
+ /*  [holds_at(xWalkStepping(Xschema, Distance), Time), holds_at(xWalkDistance(Xschema, Distance), Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          happens(xWalkSteppingOff(Xschema), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/XWalk.e',111).
+axiom(happens(xWalkSteppingOff(Xschema), Time),
+   
+    [ holds_at(xWalkStepping(Xschema, Distance), Time),
+      holds_at(xWalkDistance(Xschema, Distance), Time)
+    ]).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/XWalk.e',111).
+
+ /*  not(holds_at(xWalkStepping(Xschema, Distance), Time)) :-
+       holds_at(xWalkDistance(Xschema, Distance), Time),
+       not(happens(xWalkSteppingOff(Xschema), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/XWalk.e',111).
+
+ /*  [holds_at(xWalkDistance(Xschema, Distance), Time), not(happens(xWalkSteppingOff(Xschema), Time))] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(neg(xWalkStepping(Xschema, Distance)), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/XWalk.e',111).
+axiom(holds_at(neg(xWalkStepping(Xschema, Distance)), Time),
+   
+    [ holds_at(xWalkDistance(Xschema, Distance), Time),
+      not(happens(xWalkSteppingOff(Xschema), Time))
+    ]).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/XWalk.e',111).
+
+ /*  not(holds_at(xWalkDistance(Xschema, Distance), Time)) :-
+       holds_at(xWalkStepping(Xschema, Distance), Time),
+       not(happens(xWalkSteppingOff(Xschema), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/XWalk.e',111).
+
+ /*  [holds_at(xWalkStepping(Xschema, Distance), Time), not(happens(xWalkSteppingOff(Xschema), Time))] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(neg(xWalkDistance(Xschema, Distance)), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/XWalk.e',111).
+axiom(holds_at(neg(xWalkDistance(Xschema, Distance)), Time),
+   
+    [ holds_at(xWalkStepping(Xschema, Distance), Time),
+      not(happens(xWalkSteppingOff(Xschema), Time))
+    ]).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/XWalk.e:114
+%; punctual events
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/XWalk.e:116
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/XWalk.e',117).
+% event XWalkTestFooting(xschema)
+event(xWalkTestFooting(xschema)).
+==> mpred_prop(xWalkTestFooting(xschema),event).
+==> meta_argtypes(xWalkTestFooting(xschema)).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/XWalk.e:117
+% event XWalkMoveFoot(xschema)
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/XWalk.e',117).
+event(xWalkMoveFoot(xschema)).
+==> mpred_prop(xWalkMoveFoot(xschema),event).
+==> meta_argtypes(xWalkMoveFoot(xschema)).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/XWalk.e:119
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/XWalk.e',120).
+% [xschema,time]
+% Happens(XWalkTestFooting(xschema),time) &
+% !HoldsAt(XWalkFootingOK(xschema),time) ->
+% Happens(XWalkMoveFoot(xschema),time+1).
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/XWalk.e:122
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/XWalk.e',120).
+
+ /*  happens(xWalkTestFooting(Xschema), Time), holds_at(neg(xWalkFootingOK(Xschema)), Time) ->
+       happens(xWalkMoveFoot(Xschema), Time+1).
+ */
+
+ /*  happens(xWalkMoveFoot(Xschema), Time+1) :-
+       happens(xWalkTestFooting(Xschema), Time),
+       holds_at(neg(xWalkFootingOK(Xschema)), Time).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/XWalk.e',120).
+
+ /*  [happens(xWalkTestFooting(Xschema), Time), holds_at(neg(xWalkFootingOK(Xschema)), Time), b(Time, Maptime), ignore(Time+1==Maptime)] ->
+       ta(Time,
+          tvs1=[Time, Time+1],
+          tvs2=[Time, Maptime],
+          happens(xWalkMoveFoot(Xschema), Maptime)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/XWalk.e',120).
+axiom(happens(xWalkMoveFoot(Xschema), Maptime),
+   
+    [ happens(xWalkTestFooting(Xschema), Time),
+      holds_at(neg(xWalkFootingOK(Xschema)), Time),
+      b(Time, Maptime)
+    ]).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/XWalk.e',120).
+
+ /*  not(happens(xWalkTestFooting(Xschema), Time)) :-
+       holds_at(neg(xWalkFootingOK(Xschema)), Time),
+       not(happens(xWalkMoveFoot(Xschema), Time+1)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/XWalk.e',120).
+
+ /*  [holds_at(neg(xWalkFootingOK(Xschema)), Time), not(happens(xWalkMoveFoot(Xschema), Maptime3)), b(Time, Maptime3), ignore(Time+1==Maptime3)] ->
+       ta(Time,
+          tvs1=[Time, Time+1],
+          tvs2=[Time, Maptime3],
+          not(happens(xWalkTestFooting(Xschema), Time))).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/XWalk.e',120).
+axiom(not(happens(xWalkTestFooting(Xschema), Time)),
+   
+    [ holds_at(neg(xWalkFootingOK(Xschema)), Time),
+      not(happens(xWalkMoveFoot(Xschema), Maptime3)),
+      b(Time, Maptime3)
+    ]).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/XWalk.e',120).
+
+ /*  not(holds_at(neg(xWalkFootingOK(Xschema)), Time)) :-
+       happens(xWalkTestFooting(Xschema), Time),
+       not(happens(xWalkMoveFoot(Xschema), Time+1)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/XWalk.e',120).
+
+ /*  [happens(xWalkTestFooting(Xschema), Time), not(happens(xWalkMoveFoot(Xschema), Maptime4)), b(Time, Maptime4), ignore(Time+1==Maptime4)] ->
+       ta(Time,
+          tvs1=[Time, Time+1],
+          tvs2=[Time, Maptime4],
+          holds_at(xWalkFootingOK(Xschema), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/XWalk.e',120).
+axiom(holds_at(xWalkFootingOK(Xschema), Time),
+   
+    [ happens(xWalkTestFooting(Xschema), Time),
+      not(happens(xWalkMoveFoot(Xschema), Maptime4)),
+      b(Time, Maptime4)
+    ]).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/XWalk.e:124
+% [xschema,time]
+% Happens(XWalkMoveFoot(xschema),time) ->
+% Happens(XWalkReadyOn(xschema),time+1).
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/XWalk.e:126
+
+ /*  happens(xWalkMoveFoot(Xschema), Time) ->
+       happens(xWalkReadyOn(Xschema), Time+1).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/XWalk.e',126).
+
+ /*  happens(xWalkReadyOn(Xschema), Time+1) :-
+       happens(xWalkMoveFoot(Xschema), Time).
+ */
+
+ /*  [happens(xWalkMoveFoot(Xschema), Time), b(Time, Maptime), ignore(Time+1==Maptime)] ->
+       ta(Time,
+          tvs1=[Time, Time+1],
+          tvs2=[Time, Maptime],
+          happens(xWalkReadyOn(Xschema), Maptime)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/XWalk.e',126).
+axiom(happens(xWalkReadyOn(Xschema), Maptime),
+   
+    [ happens(xWalkMoveFoot(Xschema), Time),
+      b(Time, Maptime)
+    ]).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/XWalk.e',126).
+
+ /*  not(happens(xWalkMoveFoot(Xschema), Time)) :-
+       not(happens(xWalkReadyOn(Xschema), Time+1)).
+ */
+
+ /*  [not(happens(xWalkReadyOn(Xschema), Maptime3)), b(Time, Maptime3), ignore(Time+1==Maptime3)] ->
+       ta(Time,
+          tvs1=[Time, Time+1],
+          tvs2=[Time, Maptime3],
+          not(happens(xWalkMoveFoot(Xschema), Time))).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/XWalk.e',126).
+axiom(not(happens(xWalkMoveFoot(Xschema), Time)),
+   
+    [ not(happens(xWalkReadyOn(Xschema), Maptime3)),
+      b(Time, Maptime3)
+    ]).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/XWalk.e:128
+%; Petri net behavior
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/XWalk.e:130
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/XWalk.e',131).
+% fluent XWalkReady(xschema)
+fluent(xWalkReady(xschema)).
+==> mpred_prop(xWalkReady(xschema),fluent).
+==> meta_argtypes(xWalkReady(xschema)).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/XWalk.e:131
+% event XWalkReadyOn(xschema)
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/XWalk.e',131).
+event(xWalkReadyOn(xschema)).
+==> mpred_prop(xWalkReadyOn(xschema),event).
+==> meta_argtypes(xWalkReadyOn(xschema)).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/XWalk.e:132
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/XWalk.e',133).
+% event XWalkReadyOff(xschema)
+event(xWalkReadyOff(xschema)).
+==> mpred_prop(xWalkReadyOff(xschema),event).
+==> meta_argtypes(xWalkReadyOff(xschema)).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/XWalk.e:134
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/XWalk.e',135).
+% [xschema,time]
+% HoldsAt(XWalkEnabled(xschema),time) &
+% HoldsAt(XWalkVision(xschema),time) &
+% HoldsAt(XWalkPosture(xschema),time) &
+% !({distance} HoldsAt(XWalkStepping(xschema,distance),time)) & ; !!! pulse
+% !HoldsAt(XWalkReady(xschema),time) ->
+% Happens(XWalkReadyOn(xschema),time).
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/XWalk.e:140
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/XWalk.e',135).
+
+ /*  holds_at(xWalkEnabled(Xschema), Time), holds_at(xWalkVision(Xschema), Time), holds_at(xWalkPosture(Xschema), Time), not(exists([Distance], holds_at(xWalkStepping(Xschema, Distance), Time))), holds_at(neg(xWalkReady(Xschema)), Time) ->
+       happens(xWalkReadyOn(Xschema), Time).
+ */
+
+ /*  happens(xWalkReadyOn(Xschema), Time) :-
+       holds_at(xWalkEnabled(Xschema), Time),
+       holds_at(xWalkVision(Xschema), Time),
+       holds_at(xWalkPosture(Xschema), Time),
+       not(holds_at(xWalkStepping(Xschema, Distance), Time)),
+       holds_at(neg(xWalkReady(Xschema)), Time).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/XWalk.e',135).
+
+ /*  [holds_at(xWalkEnabled(Xschema), Time), holds_at(xWalkVision(Xschema), Time), holds_at(xWalkPosture(Xschema), Time), holds_at(neg(xWalkStepping(Xschema, Distance)), Time), holds_at(neg(xWalkReady(Xschema)), Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          happens(xWalkReadyOn(Xschema), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/XWalk.e',135).
+axiom(happens(xWalkReadyOn(Xschema), Time),
+   
+    [ holds_at(xWalkEnabled(Xschema), Time),
+      holds_at(xWalkVision(Xschema), Time),
+      holds_at(xWalkPosture(Xschema), Time),
+      holds_at(neg(xWalkStepping(Xschema, Distance)), Time),
+      holds_at(neg(xWalkReady(Xschema)), Time)
+    ]).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/XWalk.e',135).
+
+ /*  not(holds_at(xWalkEnabled(Xschema), Time)) :-
+       ( holds_at(xWalkVision(Xschema), Time),
+         holds_at(xWalkPosture(Xschema), Time),
+         not(holds_at(xWalkStepping(Xschema, Distance), Time)),
+         holds_at(neg(xWalkReady(Xschema)), Time)
+       ),
+       not(happens(xWalkReadyOn(Xschema), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/XWalk.e',135).
+
+ /*  [holds_at(xWalkVision(Xschema), Time), holds_at(xWalkPosture(Xschema), Time), holds_at(neg(xWalkStepping(Xschema, Distance)), Time), holds_at(neg(xWalkReady(Xschema)), Time), not(happens(xWalkReadyOn(Xschema), Time))] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(neg(xWalkEnabled(Xschema)), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/XWalk.e',135).
+axiom(holds_at(neg(xWalkEnabled(Xschema)), Time),
+   
+    [ holds_at(xWalkVision(Xschema), Time),
+      holds_at(xWalkPosture(Xschema), Time),
+      holds_at(neg(xWalkStepping(Xschema, Distance)), Time),
+      holds_at(neg(xWalkReady(Xschema)), Time),
+      not(happens(xWalkReadyOn(Xschema), Time))
+    ]).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/XWalk.e',135).
+
+ /*  not(holds_at(xWalkVision(Xschema), Time)) :-
+       ( holds_at(xWalkPosture(Xschema), Time),
+         not(holds_at(xWalkStepping(Xschema, Distance), Time)),
+         holds_at(neg(xWalkReady(Xschema)), Time)
+       ),
+       holds_at(xWalkEnabled(Xschema), Time),
+       not(happens(xWalkReadyOn(Xschema), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/XWalk.e',135).
+
+ /*  [holds_at(xWalkPosture(Xschema), Time), holds_at(neg(xWalkStepping(Xschema, Distance)), Time), holds_at(neg(xWalkReady(Xschema)), Time), holds_at(xWalkEnabled(Xschema), Time), not(happens(xWalkReadyOn(Xschema), Time))] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(neg(xWalkVision(Xschema)), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/XWalk.e',135).
+axiom(holds_at(neg(xWalkVision(Xschema)), Time),
+   
+    [ holds_at(xWalkPosture(Xschema), Time),
+      holds_at(neg(xWalkStepping(Xschema, Distance)), Time),
+      holds_at(neg(xWalkReady(Xschema)), Time),
+      holds_at(xWalkEnabled(Xschema), Time),
+      not(happens(xWalkReadyOn(Xschema), Time))
+    ]).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/XWalk.e',135).
+
+ /*  not(holds_at(xWalkPosture(Xschema), Time)) :-
+       ( not(holds_at(xWalkStepping(Xschema, Distance), Time)),
+         holds_at(neg(xWalkReady(Xschema)), Time)
+       ),
+       holds_at(xWalkVision(Xschema), Time),
+       holds_at(xWalkEnabled(Xschema), Time),
+       not(happens(xWalkReadyOn(Xschema), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/XWalk.e',135).
+
+ /*  [holds_at(neg(xWalkStepping(Xschema, Distance)), Time), holds_at(neg(xWalkReady(Xschema)), Time), holds_at(xWalkVision(Xschema), Time), holds_at(xWalkEnabled(Xschema), Time), not(happens(xWalkReadyOn(Xschema), Time))] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(neg(xWalkPosture(Xschema)), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/XWalk.e',135).
+axiom(holds_at(neg(xWalkPosture(Xschema)), Time),
+   
+    [ holds_at(neg(xWalkStepping(Xschema, Distance)), Time),
+      holds_at(neg(xWalkReady(Xschema)), Time),
+      holds_at(xWalkVision(Xschema), Time),
+      holds_at(xWalkEnabled(Xschema), Time),
+      not(happens(xWalkReadyOn(Xschema), Time))
+    ]).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/XWalk.e',135).
+
+ /*  holds_at(xWalkStepping(Xschema, Distance), Time) :-
+       holds_at(neg(xWalkReady(Xschema)), Time),
+       holds_at(xWalkPosture(Xschema), Time),
+       holds_at(xWalkVision(Xschema), Time),
+       holds_at(xWalkEnabled(Xschema), Time),
+       not(happens(xWalkReadyOn(Xschema), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/XWalk.e',135).
+
+ /*  [holds_at(neg(xWalkReady(Xschema)), Time), holds_at(xWalkPosture(Xschema), Time), holds_at(xWalkVision(Xschema), Time), holds_at(xWalkEnabled(Xschema), Time), not(happens(xWalkReadyOn(Xschema), Time))] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(xWalkStepping(Xschema, Distance), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/XWalk.e',135).
+axiom(holds_at(xWalkStepping(Xschema, Distance), Time),
+   
+    [ holds_at(neg(xWalkReady(Xschema)), Time),
+      holds_at(xWalkPosture(Xschema), Time),
+      holds_at(xWalkVision(Xschema), Time),
+      holds_at(xWalkEnabled(Xschema), Time),
+      not(happens(xWalkReadyOn(Xschema), Time))
+    ]).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/XWalk.e',135).
+
+ /*  not(holds_at(neg(xWalkReady(Xschema)), Time)) :-
+       not(holds_at(xWalkStepping(Xschema, Distance), Time)),
+       holds_at(xWalkPosture(Xschema), Time),
+       holds_at(xWalkVision(Xschema), Time),
+       holds_at(xWalkEnabled(Xschema), Time),
+       not(happens(xWalkReadyOn(Xschema), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/XWalk.e',135).
+
+ /*  [holds_at(neg(xWalkStepping(Xschema, Distance)), Time), holds_at(xWalkPosture(Xschema), Time), holds_at(xWalkVision(Xschema), Time), holds_at(xWalkEnabled(Xschema), Time), not(happens(xWalkReadyOn(Xschema), Time))] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(xWalkReady(Xschema), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/XWalk.e',135).
+axiom(holds_at(xWalkReady(Xschema), Time),
+   
+    [ holds_at(neg(xWalkStepping(Xschema, Distance)), Time),
+      holds_at(xWalkPosture(Xschema), Time),
+      holds_at(xWalkVision(Xschema), Time),
+      holds_at(xWalkEnabled(Xschema), Time),
+      not(happens(xWalkReadyOn(Xschema), Time))
+    ]).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/XWalk.e:142
+% [xschema,time]
+% Initiates(XWalkReadyOn(xschema),XWalkReady(xschema),time).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/XWalk.e',144).
+
+ /*  [] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          initiates(xWalkReadyOn(Xschema),
+                    xWalkReady(Xschema),
+                    Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/XWalk.e',144).
+axiom(initiates(xWalkReadyOn(Xschema), xWalkReady(Xschema), Time),
+    []).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/XWalk.e:145
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/XWalk.e',146).
+% [xschema,time]
+% Terminates(XWalkReadyOff(xschema),XWalkReady(xschema),time).
+
+ /*  [] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          terminates(xWalkReadyOff(Xschema),
+                     xWalkReady(Xschema),
+                     Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/XWalk.e',146).
+axiom(terminates(xWalkReadyOff(Xschema), xWalkReady(Xschema), Time),
+    []).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/XWalk.e:148
+%; bypass_ok
+% [xschema,time]
+% !(
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/XWalk.e:150
+% {distance} HoldsAt(XWalkStepping(xschema,distance),time)) &
+% HoldsAt(XWalkVisionOK(xschema),time) &
+% HoldsAt(XWalkReady(xschema),time) ->
+% Happens(XWalkSteppingOn(xschema),time) &
+% Happens(XWalkReadyOff(xschema),time).
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/XWalk.e:154
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/XWalk.e',150).
+
+ /*  exists([Distance],
+    holds_at(neg(xWalkStepping(Xschema, Distance)), Time), holds_at(xWalkVisionOK(Xschema), Time), holds_at(xWalkReady(Xschema), Time) ->
+       happens(xWalkSteppingOn(Xschema), Time),
+       happens(xWalkReadyOff(Xschema), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/XWalk.e',150).
+
+ /*  not(holds_at(neg(xWalkStepping(Xschema, Distance)), Time)) :-
+       ( holds_at(xWalkVisionOK(Xschema), Time),
+         holds_at(xWalkReady(Xschema), Time)
+       ),
+       (   not(happens(xWalkSteppingOn(Xschema), Time))
+       ;   not(happens(xWalkReadyOff(Xschema), Time))
+       ),
+       some(Distance, '$kolem_Fn_243'(Xschema, Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/XWalk.e',150).
+
+ /*  [holds_at(xWalkVisionOK(Xschema), Time), holds_at(xWalkReady(Xschema), Time),  (not(happens(xWalkSteppingOn(Xschema), Time));not(happens(xWalkReadyOff(Xschema), Time))), some(Distance, '$kolem_Fn_243'(Xschema, Time))] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(xWalkStepping(Xschema, Distance), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/XWalk.e',150).
+axiom(holds_at(xWalkStepping(Xschema, Distance), Time),
+   
+    [ holds_at(xWalkVisionOK(Xschema), Time),
+      holds_at(xWalkReady(Xschema), Time),
+       (not(happens(xWalkSteppingOn(Xschema), Time));not(happens(xWalkReadyOff(Xschema), Time))),
+      some(Distance, '$kolem_Fn_243'(Xschema, Time))
+    ]).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/XWalk.e',150).
+
+ /*  not(holds_at(xWalkVisionOK(Xschema), Time)) :-
+       holds_at(xWalkReady(Xschema), Time),
+       holds_at(neg(xWalkStepping(Xschema, Distance)), Time),
+       (   not(happens(xWalkSteppingOn(Xschema), Time))
+       ;   not(happens(xWalkReadyOff(Xschema), Time))
+       ),
+       some(Distance, '$kolem_Fn_243'(Xschema, Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/XWalk.e',150).
+
+ /*  [holds_at(xWalkReady(Xschema), Time), holds_at(neg(xWalkStepping(Xschema, Distance)), Time),  (not(happens(xWalkSteppingOn(Xschema), Time));not(happens(xWalkReadyOff(Xschema), Time))), some(Distance, '$kolem_Fn_243'(Xschema, Time))] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(neg(xWalkVisionOK(Xschema)), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/XWalk.e',150).
+axiom(holds_at(neg(xWalkVisionOK(Xschema)), Time),
+   
+    [ holds_at(xWalkReady(Xschema), Time),
+      holds_at(neg(xWalkStepping(Xschema, Distance)), Time),
+       (not(happens(xWalkSteppingOn(Xschema), Time));not(happens(xWalkReadyOff(Xschema), Time))),
+      some(Distance, '$kolem_Fn_243'(Xschema, Time))
+    ]).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/XWalk.e',150).
+
+ /*  not(holds_at(xWalkReady(Xschema), Time)) :-
+       holds_at(xWalkVisionOK(Xschema), Time),
+       holds_at(neg(xWalkStepping(Xschema, Distance)), Time),
+       (   not(happens(xWalkSteppingOn(Xschema), Time))
+       ;   not(happens(xWalkReadyOff(Xschema), Time))
+       ),
+       some(Distance, '$kolem_Fn_243'(Xschema, Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/XWalk.e',150).
+
+ /*  [holds_at(xWalkVisionOK(Xschema), Time), holds_at(neg(xWalkStepping(Xschema, Distance)), Time),  (not(happens(xWalkSteppingOn(Xschema), Time));not(happens(xWalkReadyOff(Xschema), Time))), some(Distance, '$kolem_Fn_243'(Xschema, Time))] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(neg(xWalkReady(Xschema)), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/XWalk.e',150).
+axiom(holds_at(neg(xWalkReady(Xschema)), Time),
+   
+    [ holds_at(xWalkVisionOK(Xschema), Time),
+      holds_at(neg(xWalkStepping(Xschema, Distance)), Time),
+       (not(happens(xWalkSteppingOn(Xschema), Time));not(happens(xWalkReadyOff(Xschema), Time))),
+      some(Distance, '$kolem_Fn_243'(Xschema, Time))
+    ]).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/XWalk.e',150).
+
+ /*  happens(xWalkSteppingOn(Xschema), Time) :-
+       ( holds_at(neg(xWalkStepping(Xschema, Distance)), Time),
+         holds_at(xWalkVisionOK(Xschema), Time),
+         holds_at(xWalkReady(Xschema), Time)
+       ),
+       some(Distance, '$kolem_Fn_243'(Xschema, Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/XWalk.e',150).
+
+ /*  [holds_at(neg(xWalkStepping(Xschema, Distance)), Time), holds_at(xWalkVisionOK(Xschema), Time), holds_at(xWalkReady(Xschema), Time), some(Distance, '$kolem_Fn_243'(Xschema, Time))] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          happens(xWalkSteppingOn(Xschema), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/XWalk.e',150).
+axiom(happens(xWalkSteppingOn(Xschema), Time),
+   
+    [ holds_at(neg(xWalkStepping(Xschema, Distance)), Time),
+      holds_at(xWalkVisionOK(Xschema), Time),
+      holds_at(xWalkReady(Xschema), Time),
+      some(Distance, '$kolem_Fn_243'(Xschema, Time))
+    ]).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/XWalk.e',150).
+
+ /*  happens(xWalkReadyOff(Xschema), Time) :-
+       ( holds_at(neg(xWalkStepping(Xschema, Distance)), Time),
+         holds_at(xWalkVisionOK(Xschema), Time),
+         holds_at(xWalkReady(Xschema), Time)
+       ),
+       some(Distance, '$kolem_Fn_243'(Xschema, Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/XWalk.e',150).
+
+ /*  [holds_at(neg(xWalkStepping(Xschema, Distance)), Time), holds_at(xWalkVisionOK(Xschema), Time), holds_at(xWalkReady(Xschema), Time), some(Distance, '$kolem_Fn_243'(Xschema, Time))] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          happens(xWalkReadyOff(Xschema), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/XWalk.e',150).
+axiom(happens(xWalkReadyOff(Xschema), Time),
+   
+    [ holds_at(neg(xWalkStepping(Xschema, Distance)), Time),
+      holds_at(xWalkVisionOK(Xschema), Time),
+      holds_at(xWalkReady(Xschema), Time),
+      some(Distance, '$kolem_Fn_243'(Xschema, Time))
+    ]).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/XWalk.e:156
+%; !bypass_ok
+% [xschema,time]
+% !(
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/XWalk.e:158
+% {distance} HoldsAt(XWalkStepping(xschema,distance),time)) &
+% !HoldsAt(XWalkVisionOK(xschema),time) &
+% HoldsAt(XWalkReady(xschema),time) ->
+% Happens(XWalkTestFooting(xschema),time) &
+% Happens(XWalkReadyOff(xschema),time).
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/XWalk.e:162
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/XWalk.e',158).
+
+ /*  exists([Distance],
+    holds_at(neg(xWalkStepping(Xschema, Distance)), Time), holds_at(neg(xWalkVisionOK(Xschema)), Time), holds_at(xWalkReady(Xschema), Time) ->
+       happens(xWalkTestFooting(Xschema), Time),
+       happens(xWalkReadyOff(Xschema), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/XWalk.e',158).
+
+ /*  not(holds_at(neg(xWalkStepping(Xschema, Distance)), Time)) :-
+       ( holds_at(neg(xWalkVisionOK(Xschema)), Time),
+         holds_at(xWalkReady(Xschema), Time)
+       ),
+       (   not(happens(xWalkTestFooting(Xschema), Time))
+       ;   not(happens(xWalkReadyOff(Xschema), Time))
+       ),
+       some(Distance, '$kolem_Fn_244'(Xschema, Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/XWalk.e',158).
+
+ /*  [holds_at(neg(xWalkVisionOK(Xschema)), Time), holds_at(xWalkReady(Xschema), Time),  (not(happens(xWalkTestFooting(Xschema), Time));not(happens(xWalkReadyOff(Xschema), Time))), some(Distance, '$kolem_Fn_244'(Xschema, Time))] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(xWalkStepping(Xschema, Distance), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/XWalk.e',158).
+axiom(holds_at(xWalkStepping(Xschema, Distance), Time),
+   
+    [ holds_at(neg(xWalkVisionOK(Xschema)), Time),
+      holds_at(xWalkReady(Xschema), Time),
+       (not(happens(xWalkTestFooting(Xschema), Time));not(happens(xWalkReadyOff(Xschema), Time))),
+      some(Distance, '$kolem_Fn_244'(Xschema, Time))
+    ]).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/XWalk.e',158).
+
+ /*  not(holds_at(neg(xWalkVisionOK(Xschema)), Time)) :-
+       holds_at(xWalkReady(Xschema), Time),
+       holds_at(neg(xWalkStepping(Xschema, Distance)), Time),
+       (   not(happens(xWalkTestFooting(Xschema), Time))
+       ;   not(happens(xWalkReadyOff(Xschema), Time))
+       ),
+       some(Distance, '$kolem_Fn_244'(Xschema, Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/XWalk.e',158).
+
+ /*  [holds_at(xWalkReady(Xschema), Time), holds_at(neg(xWalkStepping(Xschema, Distance)), Time),  (not(happens(xWalkTestFooting(Xschema), Time));not(happens(xWalkReadyOff(Xschema), Time))), some(Distance, '$kolem_Fn_244'(Xschema, Time))] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(xWalkVisionOK(Xschema), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/XWalk.e',158).
+axiom(holds_at(xWalkVisionOK(Xschema), Time),
+   
+    [ holds_at(xWalkReady(Xschema), Time),
+      holds_at(neg(xWalkStepping(Xschema, Distance)), Time),
+       (not(happens(xWalkTestFooting(Xschema), Time));not(happens(xWalkReadyOff(Xschema), Time))),
+      some(Distance, '$kolem_Fn_244'(Xschema, Time))
+    ]).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/XWalk.e',158).
+
+ /*  not(holds_at(xWalkReady(Xschema), Time)) :-
+       holds_at(neg(xWalkVisionOK(Xschema)), Time),
+       holds_at(neg(xWalkStepping(Xschema, Distance)), Time),
+       (   not(happens(xWalkTestFooting(Xschema), Time))
+       ;   not(happens(xWalkReadyOff(Xschema), Time))
+       ),
+       some(Distance, '$kolem_Fn_244'(Xschema, Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/XWalk.e',158).
+
+ /*  [holds_at(neg(xWalkVisionOK(Xschema)), Time), holds_at(neg(xWalkStepping(Xschema, Distance)), Time),  (not(happens(xWalkTestFooting(Xschema), Time));not(happens(xWalkReadyOff(Xschema), Time))), some(Distance, '$kolem_Fn_244'(Xschema, Time))] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(neg(xWalkReady(Xschema)), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/XWalk.e',158).
+axiom(holds_at(neg(xWalkReady(Xschema)), Time),
+   
+    [ holds_at(neg(xWalkVisionOK(Xschema)), Time),
+      holds_at(neg(xWalkStepping(Xschema, Distance)), Time),
+       (not(happens(xWalkTestFooting(Xschema), Time));not(happens(xWalkReadyOff(Xschema), Time))),
+      some(Distance, '$kolem_Fn_244'(Xschema, Time))
+    ]).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/XWalk.e',158).
+
+ /*  happens(xWalkTestFooting(Xschema), Time) :-
+       ( holds_at(neg(xWalkStepping(Xschema, Distance)), Time),
+         holds_at(neg(xWalkVisionOK(Xschema)), Time),
+         holds_at(xWalkReady(Xschema), Time)
+       ),
+       some(Distance, '$kolem_Fn_244'(Xschema, Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/XWalk.e',158).
+
+ /*  [holds_at(neg(xWalkStepping(Xschema, Distance)), Time), holds_at(neg(xWalkVisionOK(Xschema)), Time), holds_at(xWalkReady(Xschema), Time), some(Distance, '$kolem_Fn_244'(Xschema, Time))] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          happens(xWalkTestFooting(Xschema), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/XWalk.e',158).
+axiom(happens(xWalkTestFooting(Xschema), Time),
+   
+    [ holds_at(neg(xWalkStepping(Xschema, Distance)), Time),
+      holds_at(neg(xWalkVisionOK(Xschema)), Time),
+      holds_at(xWalkReady(Xschema), Time),
+      some(Distance, '$kolem_Fn_244'(Xschema, Time))
+    ]).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/XWalk.e',158).
+
+ /*  happens(xWalkReadyOff(Xschema), Time) :-
+       ( holds_at(neg(xWalkStepping(Xschema, Distance)), Time),
+         holds_at(neg(xWalkVisionOK(Xschema)), Time),
+         holds_at(xWalkReady(Xschema), Time)
+       ),
+       some(Distance, '$kolem_Fn_244'(Xschema, Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/XWalk.e',158).
+
+ /*  [holds_at(neg(xWalkStepping(Xschema, Distance)), Time), holds_at(neg(xWalkVisionOK(Xschema)), Time), holds_at(xWalkReady(Xschema), Time), some(Distance, '$kolem_Fn_244'(Xschema, Time))] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          happens(xWalkReadyOff(Xschema), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/XWalk.e',158).
+axiom(happens(xWalkReadyOff(Xschema), Time),
+   
+    [ holds_at(neg(xWalkStepping(Xschema, Distance)), Time),
+      holds_at(neg(xWalkVisionOK(Xschema)), Time),
+      holds_at(xWalkReady(Xschema), Time),
+      some(Distance, '$kolem_Fn_244'(Xschema, Time))
+    ]).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/XWalk.e:164
+% [xschema,distance,time]
+% HoldsAt(XWalkStepping(xschema,distance),time) &
+% HoldsAt(XWalkDistance(xschema,distance),time) &
+% (distance > 0) ->
+% Happens(XWalkReadyOn(xschema),time).
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/XWalk.e:168
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/XWalk.e',166).
+
+ /*  holds_at(xWalkStepping(Xschema, Distance), Time), holds_at(xWalkDistance(Xschema, Distance), Time), Distance>0 ->
+       happens(xWalkReadyOn(Xschema), Time).
+ */
+
+ /*  happens(xWalkReadyOn(Xschema), Time) :-
+       holds_at(xWalkStepping(Xschema, Distance), Time),
+       holds_at(xWalkDistance(Xschema, Distance), Time),
+       comparison(Distance, 0, >).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/XWalk.e',166).
+
+ /*  [holds_at(xWalkStepping(Xschema, Distance), Time), holds_at(xWalkDistance(Xschema, Distance), Time), comparison(Distance, 0, >)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          happens(xWalkReadyOn(Xschema), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/XWalk.e',166).
+axiom(happens(xWalkReadyOn(Xschema), Time),
+   
+    [ holds_at(xWalkStepping(Xschema, Distance), Time),
+      holds_at(xWalkDistance(Xschema, Distance), Time),
+      comparison(Distance, 0, >)
+    ]).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/XWalk.e',166).
+
+ /*  not(holds_at(xWalkStepping(Xschema, Distance), Time)) :-
+       ( holds_at(xWalkDistance(Xschema, Distance), Time),
+         comparison(Distance, 0, >)
+       ),
+       not(happens(xWalkReadyOn(Xschema), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/XWalk.e',166).
+
+ /*  [holds_at(xWalkDistance(Xschema, Distance), Time), comparison(Distance, 0, >), not(happens(xWalkReadyOn(Xschema), Time))] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(neg(xWalkStepping(Xschema, Distance)), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/XWalk.e',166).
+axiom(holds_at(neg(xWalkStepping(Xschema, Distance)), Time),
+   
+    [ holds_at(xWalkDistance(Xschema, Distance), Time),
+      comparison(Distance, 0, >),
+      not(happens(xWalkReadyOn(Xschema), Time))
+    ]).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/XWalk.e',166).
+
+ /*  not(holds_at(xWalkDistance(Xschema, Distance), Time)) :-
+       comparison(Distance, 0, >),
+       holds_at(xWalkStepping(Xschema, Distance), Time),
+       not(happens(xWalkReadyOn(Xschema), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/XWalk.e',166).
+
+ /*  [comparison(Distance, 0, >), holds_at(xWalkStepping(Xschema, Distance), Time), not(happens(xWalkReadyOn(Xschema), Time))] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(neg(xWalkDistance(Xschema, Distance)), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/XWalk.e',166).
+axiom(holds_at(neg(xWalkDistance(Xschema, Distance)), Time),
+   
+    [ comparison(Distance, 0, >),
+      holds_at(xWalkStepping(Xschema, Distance), Time),
+      not(happens(xWalkReadyOn(Xschema), Time))
+    ]).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/XWalk.e:170
+%; End of file.

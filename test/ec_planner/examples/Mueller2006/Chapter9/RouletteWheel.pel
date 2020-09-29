@@ -1,0 +1,377 @@
+:-include(library('ec_planner/ec_test_incl')).
+:-expects_dialect(pfc).
+% Wed, 01 Apr 2020 19:59:59 GMT
+% From ../examples/Mueller2006/Chapter9/RouletteWheel.pel:4
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter8/PatHeadRubStomach.e',41).
+
+ /*  loading(load_e_pl,
+   	'/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter9/RouletteWheel.e').
+ */
+%;
+%; Copyright (c) 2005 IBM Corporation and others.
+%; All rights reserved. This program and the accompanying materials
+%; are made available under the terms of the Common Public License v1.0
+%; which accompanies this distribution, and is available at
+%; http://www.eclipse.org/legal/cpl-v10.html
+%;
+%; Contributors:
+%; IBM - Initial implementation
+%;
+%; @book{Mueller:2006,
+%;   author = "Erik T. Mueller",
+%;   year = "2006",
+%;   title = "Commonsense Reasoning",
+%;   address = "San Francisco",
+%;   publisher = "Morgan Kaufmann/Elsevier",
+%; }
+%;
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter9/RouletteWheel.e:19
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter9/RouletteWheel.e',20).
+% option modeldiff on
+:- set_ec_option(modeldiff, on).
+:- if(is_e_toplevel).
+:- endif.
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter9/RouletteWheel.e:21
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter9/RouletteWheel.e',22).
+% load foundations/Root.e
+:- load_e('foundations/Root.e', changed).
+:- if(is_e_toplevel).
+:- endif.
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter9/RouletteWheel.e:22
+% load foundations/EC.e
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter9/RouletteWheel.e',22).
+:- load_e('foundations/EC.e', changed).
+:- if(is_e_toplevel).
+:- endif.
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter9/RouletteWheel.e:24
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter9/RouletteWheel.e',25).
+% sort dealer
+==> sort(dealer).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter9/RouletteWheel.e:25
+% sort wheel
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter9/RouletteWheel.e',25).
+==> sort(wheel).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter9/RouletteWheel.e:26
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter9/RouletteWheel.e',27).
+% sort value: integer
+==> subsort(value,integer).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter9/RouletteWheel.e:28
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter9/RouletteWheel.e',29).
+% wheel Wheel1
+==> t(wheel,wheel1).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter9/RouletteWheel.e:29
+% dealer Dealer1
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter9/RouletteWheel.e',29).
+==> t(dealer,dealer1).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter9/RouletteWheel.e:31
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter9/RouletteWheel.e',32).
+% fluent WheelNumberDeterminer(wheel,value)
+fluent(wheelNumberDeterminer(wheel,value)).
+==> mpred_prop(wheelNumberDeterminer(wheel,value),fluent).
+==> meta_argtypes(wheelNumberDeterminer(wheel,value)).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter9/RouletteWheel.e:32
+% fluent WheelNumber(wheel,value)
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter9/RouletteWheel.e',32).
+fluent(wheelNumber(wheel,value)).
+==> mpred_prop(wheelNumber(wheel,value),fluent).
+==> meta_argtypes(wheelNumber(wheel,value)).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter9/RouletteWheel.e:33
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter9/RouletteWheel.e',34).
+% noninertial WheelNumberDeterminer
+==> noninertial(wheelNumberDeterminer).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter9/RouletteWheel.e:35
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter9/RouletteWheel.e',36).
+% event Spin(dealer,wheel)
+event(spin(dealer,wheel)).
+==> mpred_prop(spin(dealer,wheel),event).
+==> meta_argtypes(spin(dealer,wheel)).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter9/RouletteWheel.e:36
+% event Reset(dealer,wheel)
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter9/RouletteWheel.e',36).
+event(reset(dealer,wheel)).
+==> mpred_prop(reset(dealer,wheel),event).
+==> meta_argtypes(reset(dealer,wheel)).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter9/RouletteWheel.e:38
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter9/RouletteWheel.e',39).
+% [wheel,time]
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter9/RouletteWheel.e:39
+% {value}% HoldsAt(WheelNumberDeterminer(wheel,value),time).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter9/RouletteWheel.e',41).
+
+ /*  exists([Value],
+    holds_at(wheelNumberDeterminer(Wheel,Value),Time)).
+ */
+
+ /*  holds_at(wheelNumberDeterminer(Wheel, Value), Time) :-
+       some(Value, '$kolem_Fn_27'(Wheel, Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter9/RouletteWheel.e',41).
+
+ /*  [some(Value, '$kolem_Fn_27'(Wheel, Time))] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(wheelNumberDeterminer(Wheel, Value), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter9/RouletteWheel.e',41).
+axiom(holds_at(wheelNumberDeterminer(Wheel, Value), Time),
+    [some(Value, '$kolem_Fn_27'(Wheel, Time))]).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter9/RouletteWheel.e:42
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter9/RouletteWheel.e',43).
+% [wheel,value1,value2,time]
+% HoldsAt(WheelNumberDeterminer(wheel,value1),time) &
+% HoldsAt(WheelNumberDeterminer(wheel,value2),time) ->
+% value1=value2.
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter9/RouletteWheel.e:45
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter9/RouletteWheel.e',43).
+
+ /*  holds_at(wheelNumberDeterminer(Wheel, Value1), Time), holds_at(wheelNumberDeterminer(Wheel, Value2), Time) ->
+       equals(Value1, Value2).
+ */
+
+ /*  not(holds_at(wheelNumberDeterminer(Wheel, Value1), Time)) :-
+       holds_at(wheelNumberDeterminer(Wheel, Value2), Time),
+       not(equals(Value1, Value2)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter9/RouletteWheel.e',43).
+
+ /*  [holds_at(wheelNumberDeterminer(Wheel, Value2), Time), not(equals(Value1, Value2))] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(neg(wheelNumberDeterminer(Wheel, Value1)),
+                   Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter9/RouletteWheel.e',43).
+axiom(holds_at(neg(wheelNumberDeterminer(Wheel, Value1)), Time),
+   
+    [ holds_at(wheelNumberDeterminer(Wheel, Value2), Time),
+      not(equals(Value1, Value2))
+    ]).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter9/RouletteWheel.e',43).
+
+ /*  not(holds_at(wheelNumberDeterminer(Wheel, Value2), Time)) :-
+       holds_at(wheelNumberDeterminer(Wheel, Value1), Time),
+       not(equals(Value1, Value2)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter9/RouletteWheel.e',43).
+
+ /*  [holds_at(wheelNumberDeterminer(Wheel, Value1), Time), not(equals(Value1, Value2))] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(neg(wheelNumberDeterminer(Wheel, Value2)),
+                   Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter9/RouletteWheel.e',43).
+axiom(holds_at(neg(wheelNumberDeterminer(Wheel, Value2)), Time),
+   
+    [ holds_at(wheelNumberDeterminer(Wheel, Value1), Time),
+      not(equals(Value2, Value1))
+    ]).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter9/RouletteWheel.e:47
+% [dealer,wheel,value,time]
+% HoldsAt(WheelNumberDeterminer(wheel,value),time) ->
+% Initiates(Spin(dealer,wheel),WheelNumber(wheel,value),time).
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter9/RouletteWheel.e:49
+
+ /*  [holds_at(wheelNumberDeterminer(Wheel, Value), Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          initiates(spin(Dealer, Wheel),
+                    wheelNumber(Wheel, Value),
+                    Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter9/RouletteWheel.e',49).
+axiom(initiates(spin(Dealer, Wheel), wheelNumber(Wheel, Value), Time),
+    [holds_at(wheelNumberDeterminer(Wheel, Value), Time)]).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter9/RouletteWheel.e:51
+% [dealer,wheel,value1,value2,time]
+% HoldsAt(WheelNumber(wheel,value1),time) &
+% HoldsAt(WheelNumberDeterminer(wheel,value2),time) &
+% value1!=value2 ->
+% Terminates(Spin(dealer,wheel),WheelNumber(wheel,value1),time).
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter9/RouletteWheel.e:55
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter9/RouletteWheel.e',53).
+
+ /*  [holds_at(wheelNumber(Wheel, Value1), Time), holds_at(wheelNumberDeterminer(Wheel, Value2), Time), diff(Value1, Value2)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          terminates(spin(Dealer, Wheel),
+                     wheelNumber(Wheel, Value1),
+                     Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter9/RouletteWheel.e',53).
+axiom(terminates(spin(Dealer, Wheel), wheelNumber(Wheel, Value1), Time),
+   
+    [ holds_at(wheelNumber(Wheel, Value1), Time),
+      holds_at(wheelNumberDeterminer(Wheel, Value2), Time),
+      diff(Value1, Value2)
+    ]).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter9/RouletteWheel.e:57
+% [dealer,wheel,value,time]
+% Terminates(Reset(dealer,wheel),WheelNumber(wheel,value),time).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter9/RouletteWheel.e',59).
+
+ /*  [] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          terminates(reset(Dealer, Wheel),
+                     wheelNumber(Wheel, Value),
+                     Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter9/RouletteWheel.e',59).
+axiom(terminates(reset(Dealer, Wheel), wheelNumber(Wheel, Value), Time),
+    []).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter9/RouletteWheel.e:60
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter9/RouletteWheel.e',61).
+% [wheel,value1,value2,time]
+% HoldsAt(WheelNumber(wheel,value1),time) &
+% HoldsAt(WheelNumber(wheel,value2),time) ->
+% value1=value2.
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter9/RouletteWheel.e:63
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter9/RouletteWheel.e',61).
+
+ /*  holds_at(wheelNumber(Wheel, Value1), Time), holds_at(wheelNumber(Wheel, Value2), Time) ->
+       equals(Value1, Value2).
+ */
+
+ /*  not(holds_at(wheelNumber(Wheel, Value1), Time)) :-
+       holds_at(wheelNumber(Wheel, Value2), Time),
+       not(equals(Value1, Value2)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter9/RouletteWheel.e',61).
+
+ /*  [holds_at(wheelNumber(Wheel, Value2), Time), not(equals(Value1, Value2))] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(neg(wheelNumber(Wheel, Value1)), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter9/RouletteWheel.e',61).
+axiom(holds_at(neg(wheelNumber(Wheel, Value1)), Time),
+   
+    [ holds_at(wheelNumber(Wheel, Value2), Time),
+      not(equals(Value1, Value2))
+    ]).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter9/RouletteWheel.e',61).
+
+ /*  not(holds_at(wheelNumber(Wheel, Value2), Time)) :-
+       holds_at(wheelNumber(Wheel, Value1), Time),
+       not(equals(Value1, Value2)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter9/RouletteWheel.e',61).
+
+ /*  [holds_at(wheelNumber(Wheel, Value1), Time), not(equals(Value1, Value2))] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(neg(wheelNumber(Wheel, Value2)), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter9/RouletteWheel.e',61).
+axiom(holds_at(neg(wheelNumber(Wheel, Value2)), Time),
+   
+    [ holds_at(wheelNumber(Wheel, Value1), Time),
+      not(equals(Value2, Value1))
+    ]).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter9/RouletteWheel.e:65
+% [value]
+ % !HoldsAt(WheelNumber(Wheel1,value),0).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter9/RouletteWheel.e',65).
+
+ /*  [] ->
+       ta(Ta_Param,
+          tvs1=[start],
+          tvs2=[start],
+          holds_at(neg(wheelNumber(wheel1, Value)), start)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter9/RouletteWheel.e',65).
+axiom(holds_at(neg(wheelNumber(wheel1, Value)), start),
+    []).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter9/RouletteWheel.e:67
+% Happens(Spin(Dealer1,Wheel1),0).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter9/RouletteWheel.e',67).
+
+ /*  [] ->
+       ta(Ta_Param,
+          tvs1=[start],
+          tvs2=[start],
+          happens(spin(dealer1, wheel1), start)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter9/RouletteWheel.e',67).
+axiom(happens(spin(dealer1, wheel1), start),
+    []).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter9/RouletteWheel.e:68
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter9/RouletteWheel.e',69).
+%;Happens(Reset(Dealer1,Wheel1),1).
+%; added to prune models
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter9/RouletteWheel.e:71
+% HoldsAt(WheelNumberDeterminer(Wheel1, 1),1).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter9/RouletteWheel.e',71).
+
+ /*  [b(start, Time), ignore(start+1==Time)] ->
+       ta(Ta_Param,
+          tvs1=[start+1],
+          tvs2=[Time, start],
+          holds_at(wheelNumberDeterminer(wheel1, 1), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter9/RouletteWheel.e',71).
+axiom(holds_at(wheelNumberDeterminer(wheel1, 1), Time),
+    [b(start, Time)]).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter9/RouletteWheel.e:73
+% completion Happens
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter9/RouletteWheel.e',73).
+==> completion(happens).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter9/RouletteWheel.e:75
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter9/RouletteWheel.e',76).
+% range value 1 3
+==> range(value,1,3).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter9/RouletteWheel.e:76
+% range time 0 1
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter9/RouletteWheel.e',76).
+==> range(time,0,1).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter9/RouletteWheel.e:77
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter9/RouletteWheel.e',78).
+% range offset 1 1
+==> range(offset,1,1).
+%; End of file.

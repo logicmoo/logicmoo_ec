@@ -1,0 +1,246 @@
+:-include(library('ec_planner/ec_test_incl')).
+:-expects_dialect(pfc).
+% Wed, 01 Apr 2020 20:00:37 GMT
+% From ../examples/ReiterCriscuolo1981/NixonDiamond1.pel:4
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2004b/TV2.e',56).
+
+ /*  loading(load_e_pl,
+   	'/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/ReiterCriscuolo1981/NixonDiamond1.e').
+ */
+%;
+%; Copyright (c) 2005 IBM Corporation and others.
+%; All rights reserved. This program and the accompanying materials
+%; are made available under the terms of the Common Public License v1.0
+%; which accompanies this distribution, and is available at
+%; http://www.eclipse.org/legal/cpl-v10.html
+%;
+%; Contributors:
+%; IBM - Initial implementation
+%;
+%; conflicting defaults: showing that inconsistency results
+%; without a cancellation rule
+%; \fullciteA[p. 274]{ReiterCriscuolo:1981}
+%; \fullciteA[pp. 98--99]{McCarthy:1986}
+%;
+%; @inproceedings{ReiterCriscuolo:1981,
+%;   author = "Raymond Reiter and Giovanni Criscuolo",
+%;   year = "1981",
+%;   title = "On interacting defaults",
+%;   booktitle = "\uppercase{P}roceedings of the \uppercase{S}eventh \uppercase{I}nternational \uppercase{J}oint \uppercase{C}onference on \uppercase{A}rtificial \uppercase{I}ntelligence",
+%;   volume = "1",
+%;   pages = "270--276",
+%;   address = "Los Altos, CA",
+%;   publisher = "William Kaufmann",
+%; }
+%;
+%; @article{McCarthy:1986,
+%;   author = "John McCarthy",
+%;   year = "1986",
+%;   title = "Applications of circumscription to formalizing common-sense knowledge",
+%;   journal = "Artificial Intelligence",
+%;   volume = "28",
+%;   pages = "89--116".
+%; }
+%;
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/ReiterCriscuolo1981/NixonDiamond1.e:36
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/ReiterCriscuolo1981/NixonDiamond1.e',37).
+% load foundations/Root.e
+:- load_e('foundations/Root.e', changed).
+:- if(is_e_toplevel).
+:- endif.
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/ReiterCriscuolo1981/NixonDiamond1.e:37
+% load foundations/EC.e
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/ReiterCriscuolo1981/NixonDiamond1.e',37).
+:- load_e('foundations/EC.e', changed).
+:- if(is_e_toplevel).
+:- endif.
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/ReiterCriscuolo1981/NixonDiamond1.e:39
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/ReiterCriscuolo1981/NixonDiamond1.e',40).
+% sort x
+==> sort(x).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/ReiterCriscuolo1981/NixonDiamond1.e:41
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/ReiterCriscuolo1981/NixonDiamond1.e',42).
+% predicate Republican(x)
+predicate(republican(x)).
+==> mpred_prop(republican(x),predicate).
+==> meta_argtypes(republican(x)).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/ReiterCriscuolo1981/NixonDiamond1.e:42
+% predicate Quaker(x)
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/ReiterCriscuolo1981/NixonDiamond1.e',42).
+predicate(quaker(x)).
+==> mpred_prop(quaker(x),predicate).
+==> meta_argtypes(quaker(x)).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/ReiterCriscuolo1981/NixonDiamond1.e:43
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/ReiterCriscuolo1981/NixonDiamond1.e',44).
+% predicate Pacifist(x)
+predicate(pacifist(x)).
+==> mpred_prop(pacifist(x),predicate).
+==> meta_argtypes(pacifist(x)).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/ReiterCriscuolo1981/NixonDiamond1.e:44
+% predicate Ab1(x)
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/ReiterCriscuolo1981/NixonDiamond1.e',44).
+predicate(ab1(x)).
+==> mpred_prop(ab1(x),predicate).
+==> meta_argtypes(ab1(x)).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/ReiterCriscuolo1981/NixonDiamond1.e:45
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/ReiterCriscuolo1981/NixonDiamond1.e',46).
+% predicate Ab2(x)
+predicate(ab2(x)).
+==> mpred_prop(ab2(x),predicate).
+==> meta_argtypes(ab2(x)).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/ReiterCriscuolo1981/NixonDiamond1.e:47
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/ReiterCriscuolo1981/NixonDiamond1.e',48).
+% x John
+==> t(x,john).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/ReiterCriscuolo1981/NixonDiamond1.e:49
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/ReiterCriscuolo1981/NixonDiamond1.e',50).
+% Republican(John).
+
+ /*  [] ->
+       ta(Ta_Param, tvs1=[], tvs2=[], republican(john)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/ReiterCriscuolo1981/NixonDiamond1.e',50).
+axiom(republican(john),
+    []).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/ReiterCriscuolo1981/NixonDiamond1.e:50
+% Quaker(John).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/ReiterCriscuolo1981/NixonDiamond1.e',50).
+
+ /*  [] ->
+       ta(Ta_Param, tvs1=[], tvs2=[], quaker(john)).
+ */
+axiom(quaker(john),
+    []).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/ReiterCriscuolo1981/NixonDiamond1.e:52
+% [x]
+ % Republican(x) & !Ab1(x) -> !Pacifist(x).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/ReiterCriscuolo1981/NixonDiamond1.e',52).
+
+ /*  republican(X), not(ab1(X, Ab1_Ret)) ->
+       not(pacifist(X)).
+ */
+
+ /*  not(pacifist(X)) :-
+       republican(X),
+       not(ab1(X, Ab1_Ret)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/ReiterCriscuolo1981/NixonDiamond1.e',52).
+
+ /*  [republican(X), not(ab1(X, Ab1_Ret))] ->
+       ta(Ta_Param, tvs1=[], tvs2=[], not(pacifist(X))).
+ */
+axiom(not(pacifist(X)),
+    [republican(X), not(ab1(X, Ab1_Ret))]).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/ReiterCriscuolo1981/NixonDiamond1.e',52).
+
+ /*  not(republican(X)) :-
+       not(ab1(X, Ab1_Ret)),
+       pacifist(X).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/ReiterCriscuolo1981/NixonDiamond1.e',52).
+
+ /*  [not(ab1(X, Ab1_Ret)), pacifist(X)] ->
+       ta(Ta_Param3, tvs1=[], tvs2=[], not(republican(X))).
+ */
+axiom(not(republican(X)),
+    [not(ab1(X, Ab1_Ret)), pacifist(X)]).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/ReiterCriscuolo1981/NixonDiamond1.e',52).
+
+ /*  ab1(X, Ab1_Ret) :-
+       republican(X),
+       pacifist(X).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/ReiterCriscuolo1981/NixonDiamond1.e',52).
+
+ /*  [republican(X), pacifist(X)] ->
+       ta(Ta_Param4, tvs1=[], tvs2=[], ab1(X, Ab1_Ret)).
+ */
+axiom(ab1(X, Ab1_Ret),
+    [republican(X), pacifist(X)]).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/ReiterCriscuolo1981/NixonDiamond1.e:53
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/ReiterCriscuolo1981/NixonDiamond1.e',54).
+% [x]
+ % Quaker(x) & !Ab2(x) -> Pacifist(x).
+
+ /*  quaker(X), not(ab2(X, Ab2_Ret)) ->
+       pacifist(X).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/ReiterCriscuolo1981/NixonDiamond1.e',54).
+
+ /*  pacifist(X) :-
+       quaker(X),
+       not(ab2(X, Ab2_Ret)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/ReiterCriscuolo1981/NixonDiamond1.e',54).
+
+ /*  [quaker(X), not(ab2(X, Ab2_Ret))] ->
+       ta(Ta_Param, tvs1=[], tvs2=[], pacifist(X)).
+ */
+axiom(pacifist(X),
+    [quaker(X), not(ab2(X, Ab2_Ret))]).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/ReiterCriscuolo1981/NixonDiamond1.e',54).
+
+ /*  not(quaker(X)) :-
+       not(ab2(X, Ab2_Ret)),
+       not(pacifist(X)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/ReiterCriscuolo1981/NixonDiamond1.e',54).
+
+ /*  [not(ab2(X, Ab2_Ret)), not(pacifist(X))] ->
+       ta(Ta_Param3, tvs1=[], tvs2=[], not(quaker(X))).
+ */
+axiom(not(quaker(X)),
+    [not(ab2(X, Ab2_Ret)), not(pacifist(X))]).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/ReiterCriscuolo1981/NixonDiamond1.e',54).
+
+ /*  ab2(X, Ab2_Ret) :-
+       quaker(X),
+       not(pacifist(X)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/ReiterCriscuolo1981/NixonDiamond1.e',54).
+
+ /*  [quaker(X), not(pacifist(X))] ->
+       ta(Ta_Param4, tvs1=[], tvs2=[], ab2(X, Ab2_Ret)).
+ */
+axiom(ab2(X, Ab2_Ret),
+    [quaker(X), not(pacifist(X))]).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/ReiterCriscuolo1981/NixonDiamond1.e:55
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/ReiterCriscuolo1981/NixonDiamond1.e',56).
+% range time 0 0
+==> range(time,0,0).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/ReiterCriscuolo1981/NixonDiamond1.e:56
+% range offset 1 1
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/ReiterCriscuolo1981/NixonDiamond1.e',56).
+==> range(offset,1,1).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/ReiterCriscuolo1981/NixonDiamond1.e:58
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/ReiterCriscuolo1981/NixonDiamond1.e',59).
+% completion Theta Ab1
+==> completion(theta).
+==> completion(ab1).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/ReiterCriscuolo1981/NixonDiamond1.e:59
+% completion Theta Ab2
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/ReiterCriscuolo1981/NixonDiamond1.e',59).
+==> completion(theta).
+==> completion(ab2).
+%; End of file.

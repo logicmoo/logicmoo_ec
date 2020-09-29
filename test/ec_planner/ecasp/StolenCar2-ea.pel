@@ -1,0 +1,144 @@
+:-include(library('ec_planner/ec_test_incl')).
+:-expects_dialect(pfc).
+% Wed, 01 Apr 2020 20:01:15 GMT
+% From ../ecasp/StolenCar2-ea.pel:4
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/RussianTurkey4-ea.e',31).
+
+ /*  loading(load_e_pl,
+   	'/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/StolenCar2-ea.e').
+ */
+%; StolenCar2-ea.e
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/StolenCar2-ea.e:2
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/StolenCar2-ea.e',3).
+% load foundations/Root.e
+:- load_e('foundations/Root.e', changed).
+:- if(is_e_toplevel).
+:- endif.
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/StolenCar2-ea.e:3
+% load foundations/EC.e
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/StolenCar2-ea.e',3).
+:- load_e('foundations/EC.e', changed).
+:- if(is_e_toplevel).
+:- endif.
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/StolenCar2-ea.e:5
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/StolenCar2-ea.e',6).
+% event Park()
+event(park).
+==> mpred_prop(park,event).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/StolenCar2-ea.e:6
+% event Steal()
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/StolenCar2-ea.e',6).
+event(steal).
+==> mpred_prop(steal,event).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/StolenCar2-ea.e:7
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/StolenCar2-ea.e',8).
+% fluent CarParked()
+fluent(carParked).
+==> mpred_prop(carParked,fluent).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/StolenCar2-ea.e:9
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/StolenCar2-ea.e',10).
+% [time]
+% (Initiates(Park(),CarParked(),time)).
+
+ /*  [] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          initiates(park, carParked, Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/StolenCar2-ea.e',10).
+axiom(initiates(park, carParked, Time),
+    []).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/StolenCar2-ea.e:10
+% [time]
+% (Terminates(Steal(),CarParked(),time)).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/StolenCar2-ea.e',10).
+
+ /*  [] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          terminates(steal, carParked, Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/StolenCar2-ea.e',10).
+axiom(terminates(steal, carParked, Time),
+    []).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/StolenCar2-ea.e:13
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/StolenCar2-ea.e',14).
+% !ReleasedAt(CarParked(),0).
+ %  not(releasedAt(carParked,0)).
+
+ /*  [] ->
+       ta(Ta_Param, tvs1=[], tvs2=[], not(releasedAt(carParked, 0))).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/StolenCar2-ea.e',14).
+axiom(not(releasedAt(carParked, 0)),
+    []).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/StolenCar2-ea.e:15
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/StolenCar2-ea.e',16).
+% !HoldsAt(CarParked(),0).
+
+ /*  [] ->
+       ta(Ta_Param,
+          tvs1=[start],
+          tvs2=[start],
+          holds_at(neg(carParked), start)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/StolenCar2-ea.e',16).
+axiom(holds_at(neg(carParked), start),
+    []).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/StolenCar2-ea.e:16
+% Happens(Park(),0).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/StolenCar2-ea.e',16).
+
+ /*  [] ->
+       ta(Ta_Param, tvs1=[start], tvs2=[start], happens(park, start)).
+ */
+axiom(happens(park, start),
+    []).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/StolenCar2-ea.e:17
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/StolenCar2-ea.e',18).
+%; ABDUCED Happens(Steal(), 1).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/StolenCar2-ea.e:18
+% !HoldsAt(CarParked(),2).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/StolenCar2-ea.e',18).
+
+ /*  [b(start, Start2), toffset(start, 2, Start2), ignore(start+2==Start2)] ->
+       ta(Ta_Param,
+          tvs1=[start+2],
+          tvs2=[Start2, start],
+          holds_at(neg(carParked), Start2)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/StolenCar2-ea.e',18).
+axiom(holds_at(neg(carParked), Start2),
+    [b(start, Start2), toffset(start, 2, Start2)]).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/StolenCar2-ea.e:20
+% range time 0 2
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/StolenCar2-ea.e',20).
+==> range(time,0,2).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/StolenCar2-ea.e:21
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/StolenCar2-ea.e',22).
+% range offset 1 1
+==> range(offset,1,1).
+%; End of file.

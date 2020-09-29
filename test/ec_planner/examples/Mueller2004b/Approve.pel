@@ -1,0 +1,232 @@
+:-include(library('ec_planner/ec_test_incl')).
+:-expects_dialect(pfc).
+% Wed, 01 Apr 2020 20:00:33 GMT
+% From ../examples/Mueller2004b/Approve.pel:4
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2004a/Leaf.e',80).
+
+ /*  loading(load_e_pl,
+   	'/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2004b/Approve.e').
+ */
+%;
+%; Copyright (c) 2005 IBM Corporation and others.
+%; All rights reserved. This program and the accompanying materials
+%; are made available under the terms of the Common Public License v1.0
+%; which accompanies this distribution, and is available at
+%; http://www.eclipse.org/legal/cpl-v10.html
+%;
+%; Contributors:
+%; IBM - Initial implementation
+%;
+%; example of concurrent events with cumulative or canceling effects
+%;
+%; @inproceedings{Mueller:2004b,
+%;   author = "Erik T. Mueller",
+%;   year = "2004",
+%;   title = "A tool for satisfiability-based commonsense reasoning in the event calculus",
+%;   editor = "Valerie Barr and Zdravko Markov",
+%;   booktitle = "\uppercase{P}roceedings of the \uppercase{S}eventeenth \uppercase{I}nternational \uppercase{F}lorida \uppercase{A}rtificial \uppercase{I}ntelligence \uppercase{R}esearch \uppercase{S}ociety \uppercase{C}onference",
+%;   pages = "147--152",
+%;   address = "Menlo Park, CA",
+%;   publisher = "AAAI Press",
+%; }
+%;
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2004b/Approve.e:24
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2004b/Approve.e',25).
+% load foundations/Root.e
+:- load_e('foundations/Root.e', changed).
+:- if(is_e_toplevel).
+:- endif.
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2004b/Approve.e:25
+% load foundations/EC.e
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2004b/Approve.e',25).
+:- load_e('foundations/EC.e', changed).
+:- if(is_e_toplevel).
+:- endif.
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2004b/Approve.e:27
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2004b/Approve.e',28).
+% sort agent
+==> sort(agent).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2004b/Approve.e:29
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2004b/Approve.e',30).
+% event ApproveOf(agent,agent)
+event(approveOf(agent,agent)).
+==> mpred_prop(approveOf(agent,agent),event).
+==> meta_argtypes(approveOf(agent,agent)).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2004b/Approve.e:30
+% event DisapproveOf(agent,agent)
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2004b/Approve.e',30).
+event(disapproveOf(agent,agent)).
+==> mpred_prop(disapproveOf(agent,agent),event).
+==> meta_argtypes(disapproveOf(agent,agent)).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2004b/Approve.e:31
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2004b/Approve.e',32).
+% fluent Happy(agent)
+fluent(happy(agent)).
+==> mpred_prop(happy(agent),fluent).
+==> meta_argtypes(happy(agent)).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2004b/Approve.e:32
+% fluent Confused(agent)
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2004b/Approve.e',32).
+fluent(confused(agent)).
+==> mpred_prop(confused(agent),fluent).
+==> meta_argtypes(confused(agent)).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2004b/Approve.e:34
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2004b/Approve.e',35).
+% [agent1,agent2,time]
+% !Happens(DisapproveOf(agent1,agent2),time) ->
+% Initiates(ApproveOf(agent1,agent2),Happy(agent2),time).
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2004b/Approve.e:36
+
+ /*  [not(happens(disapproveOf(Agent1, Agent2), Time))] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          initiates(approveOf(Agent1, Agent2),
+                    happy(Agent2),
+                    Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2004b/Approve.e',35).
+axiom(initiates(approveOf(Agent1, Agent2), happy(Agent2), Time),
+    [not(happens(disapproveOf(Agent1, Agent2), Time))]).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2004b/Approve.e:38
+% [agent1,agent2,time]
+% !Happens(ApproveOf(agent1,agent2),time) ->
+% Terminates(DisapproveOf(agent1,agent2),Happy(agent2),time).
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2004b/Approve.e:40
+
+ /*  [not(happens(approveOf(Agent1, Agent2), Time))] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          terminates(disapproveOf(Agent1, Agent2),
+                     happy(Agent2),
+                     Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2004b/Approve.e',40).
+axiom(terminates(disapproveOf(Agent1, Agent2), happy(Agent2), Time),
+    [not(happens(approveOf(Agent1, Agent2), Time))]).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2004b/Approve.e:42
+% [agent1,agent2,time]
+% Happens(DisapproveOf(agent1,agent2),time) ->
+% Initiates(ApproveOf(agent1,agent2),Confused(agent2),time).
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2004b/Approve.e:44
+
+ /*  [holds_at(metreqs(disapproveOf(Agent1, Agent2)), Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          requires(disapproveOf(Agent1, Agent2), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2004b/Approve.e',44).
+axiom(requires(disapproveOf(Agent1, Agent2), Time),
+    [holds_at(metreqs(disapproveOf(Agent1, Agent2)), Time)]).
+
+ /*  [initiates(approveOf(Agent1, Agent2), confused(Agent2), Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(metreqs(disapproveOf(Agent1, Agent2)), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2004b/Approve.e',44).
+axiom(holds_at(metreqs(disapproveOf(Agent1, Agent2)), Time),
+   
+    [ initiates(approveOf(Agent1, Agent2),
+                confused(Agent2),
+                Time)
+    ]).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2004b/Approve.e:46
+% agent James, Peter
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2004b/Approve.e',46).
+==> t(agent,james).
+==> t(agent,peter).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2004b/Approve.e:48
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2004b/Approve.e',49).
+% [agent]
+ % !HoldsAt(Happy(agent),0) & !HoldsAt(Confused(agent),0).
+
+ /*   holds_at(neg(happy(Agent)), start),
+      holds_at(neg(confused(Agent)), start).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2004b/Approve.e',49).
+
+ /*  [] ->
+       ta(Ta_Param,
+          tvs1=[start],
+          tvs2=[start],
+          holds_at(neg(happy(Agent)), start)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2004b/Approve.e',49).
+axiom(holds_at(neg(happy(Agent)), start),
+    []).
+
+ /*  [] ->
+       ta(Ta_Param2,
+          tvs1=[start],
+          tvs2=[start],
+          holds_at(neg(confused(Agent)), start)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2004b/Approve.e',49).
+axiom(holds_at(neg(confused(Agent)), start),
+    []).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2004b/Approve.e:50
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2004b/Approve.e',51).
+% Happens(ApproveOf(Peter,James),0).
+
+ /*  [] ->
+       ta(Ta_Param,
+          tvs1=[start],
+          tvs2=[start],
+          happens(approveOf(peter, james), start)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2004b/Approve.e',51).
+axiom(happens(approveOf(peter, james), start),
+    []).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2004b/Approve.e:51
+% Happens(DisapproveOf(Peter,James),0).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2004b/Approve.e',51).
+
+ /*  [] ->
+       ta(Ta_Param,
+          tvs1=[start],
+          tvs2=[start],
+          happens(disapproveOf(peter, james), start)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2004b/Approve.e',51).
+axiom(happens(disapproveOf(peter, james), start),
+    []).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2004b/Approve.e:53
+% completion Happens
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2004b/Approve.e',53).
+==> completion(happens).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2004b/Approve.e:55
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2004b/Approve.e',56).
+% range time 0 1
+==> range(time,0,1).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2004b/Approve.e:56
+% range offset 1 1
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2004b/Approve.e',56).
+==> range(offset,1,1).
+%; End of file.

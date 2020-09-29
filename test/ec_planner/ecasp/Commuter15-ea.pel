@@ -1,0 +1,1296 @@
+:-include(library('ec_planner/ec_test_incl')).
+:-expects_dialect(pfc).
+% Wed, 01 Apr 2020 20:01:04 GMT
+% From ../ecasp/Commuter15-ea.pel:4
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/CoinToss4-ea.e',38).
+
+ /*  loading(load_e_pl,
+   	'/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/Commuter15-ea.e').
+ */
+%;Commuter15-ea.e
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/Commuter15-ea.e:2
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/Commuter15-ea.e',3).
+% load foundations/Root.e
+:- load_e('foundations/Root.e', changed).
+:- if(is_e_toplevel).
+:- endif.
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/Commuter15-ea.e:3
+% load foundations/EC.e
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/Commuter15-ea.e',3).
+:- load_e('foundations/EC.e', changed).
+:- if(is_e_toplevel).
+:- endif.
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/Commuter15-ea.e:5
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/Commuter15-ea.e',6).
+% sort place
+==> sort(place).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/Commuter15-ea.e:6
+% place Work, Home
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/Commuter15-ea.e',6).
+==> t(place,work).
+==> t(place,home).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/Commuter15-ea.e:8
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/Commuter15-ea.e',9).
+% sort station: place
+==> subsort(station,place).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/Commuter15-ea.e:9
+% station HerneHill, Victoria, SouthKen
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/Commuter15-ea.e',9).
+==> t(station,herneHill).
+==> t(station,victoria).
+==> t(station,southKen).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/Commuter15-ea.e:11
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/Commuter15-ea.e',12).
+% fluent At(place)
+fluent(at(place)).
+==> mpred_prop(at(place),fluent).
+==> meta_argtypes(at(place)).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/Commuter15-ea.e:12
+% fluent Train(station, station)
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/Commuter15-ea.e',12).
+fluent(train(station,station)).
+==> mpred_prop(train(station,station),fluent).
+==> meta_argtypes(train(station,station)).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/Commuter15-ea.e:13
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/Commuter15-ea.e',14).
+% event WalkTo(place)
+event(walkTo(place)).
+==> mpred_prop(walkTo(place),event).
+==> meta_argtypes(walkTo(place)).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/Commuter15-ea.e:14
+% event TrainTo(station)
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/Commuter15-ea.e',14).
+event(trainTo(station)).
+==> mpred_prop(trainTo(station),event).
+==> meta_argtypes(trainTo(station)).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/Commuter15-ea.e:15
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/Commuter15-ea.e',16).
+% event GoToWork()
+event(goToWork).
+==> mpred_prop(goToWork,event).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/Commuter15-ea.e:17
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/Commuter15-ea.e',18).
+% [place, time]
+% (Initiates(WalkTo(place), At(place), time)).
+
+ /*  [] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          initiates(walkTo(Place), at(Place), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/Commuter15-ea.e',18).
+axiom(initiates(walkTo(Place), at(Place), Time),
+    []).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/Commuter15-ea.e:20
+% [place1, place2, time]
+% ( place1!=place2 & HoldsAt(At(place1),time) ->
+%   Terminates(WalkTo(place2), At(place1), time) ).
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/Commuter15-ea.e:22
+
+ /*  [diff(Place1, Place2), holds_at(at(Place1), Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          terminates(walkTo(Place2), at(Place1), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/Commuter15-ea.e',22).
+axiom(terminates(walkTo(Place2), at(Place1), Time),
+    [diff(Place1, Place2), holds_at(at(Place1), Time)]).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/Commuter15-ea.e:24
+% [station1, station2, time]
+% ( HoldsAt(Train(station1, station2), time) &
+%   HoldsAt(At(station1), time) ->
+%   Initiates(TrainTo(station2), At(station2), time) ).
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/Commuter15-ea.e:27
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/Commuter15-ea.e',26).
+
+ /*  [holds_at(train(Station1, Station2), Time), holds_at(at(Station1), Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          initiates(trainTo(Station2), at(Station2), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/Commuter15-ea.e',26).
+axiom(initiates(trainTo(Station2), at(Station2), Time),
+   
+    [ holds_at(train(Station1, Station2), Time),
+      holds_at(at(Station1), Time)
+    ]).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/Commuter15-ea.e:29
+% [station1, station2, time]
+% ( HoldsAt(Train(station1, station2), time) &
+%   HoldsAt(At(station1), time) ->
+%   Terminates(TrainTo(station2), At(station1), time) ).
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/Commuter15-ea.e:32
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/Commuter15-ea.e',31).
+
+ /*  [holds_at(train(Station1, Station2), Time), holds_at(at(Station1), Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          terminates(trainTo(Station2), at(Station1), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/Commuter15-ea.e',31).
+axiom(terminates(trainTo(Station2), at(Station1), Time),
+   
+    [ holds_at(train(Station1, Station2), Time),
+      holds_at(at(Station1), Time)
+    ]).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/Commuter15-ea.e:34
+% [time]
+% (Initiates(GoToWork(), At(Work), time)).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/Commuter15-ea.e',34).
+
+ /*  [] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          initiates(goToWork, at(work), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/Commuter15-ea.e',34).
+axiom(initiates(goToWork, at(work), Time),
+    []).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/Commuter15-ea.e:36
+% [place1, time]
+% (HoldsAt(At(place1),time) & place1!=Work
+% ->
+% Terminates(GoToWork(), At(place1), time)).
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/Commuter15-ea.e:39
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/Commuter15-ea.e',38).
+
+ /*  [holds_at(at(Place1), Time), diff(Place1, work)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          terminates(goToWork, at(Place1), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/Commuter15-ea.e',38).
+axiom(terminates(goToWork, at(Place1), Time),
+    [holds_at(at(Place1), Time), diff(Place1, work)]).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/Commuter15-ea.e:42
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/Commuter15-ea.e',43).
+% [time1, time2, time3, time4]
+% ( 
+  Happens3(WalkTo(HerneHill), time1, time1) &
+%   Happens3(TrainTo(Victoria), time2, time2) &
+%   Happens3(TrainTo(SouthKen), time3, time3) &
+%   Happens3(WalkTo(Work), time4, time4) & 
+%   time1<time2 & time2<time3 & time3<time4 &
+%   !Clipped(time1, At(HerneHill), time2) &
+%   !Clipped(time2, At(Victoria), time3) &
+%   !Clipped(time3, At(SouthKen), time4)
+% ->
+%    Happens3(GoToWork(), time1, time4)
+% ).
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/Commuter15-ea.e:54
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/Commuter15-ea.e',43).
+
+ /*  happens3(walkTo(herneHill), Time1, Time1), happens3(trainTo(victoria), Time2, Time2), happens3(trainTo(southKen), Time3, Time3), happens3(walkTo(work), Time4, Time4), Time1<Time2, Time2<Time3, Time3<Time4, not(clipped(Time1, at(herneHill), Time2)), not(clipped(Time2, at(victoria), Time3)), not(clipped(Time3, at(southKen), Time4)) ->
+       happens3(goToWork, Time1, Time4).
+ */
+
+ /*  happens3(goToWork, Time1, Time4) :-
+       happens3(walkTo(herneHill), Time1, Time1),
+       happens3(trainTo(victoria), Time2, Time2),
+       happens3(trainTo(southKen), Time3, Time3),
+       happens3(walkTo(work), Time4, Time4),
+       comparison(Time1, Time2, <),
+       comparison(Time2, Time3, <),
+       comparison(Time3, Time4, <),
+       not(clipped(Time1, at(herneHill), Time2)),
+       not(clipped(Time2, at(victoria), Time3)),
+       not(clipped(Time3, at(southKen), Time4)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/Commuter15-ea.e',43).
+
+ /*  fix_axiom_head(Time2) ->
+       
+       [ happens3(goToWork, Time1, Time4),
+          (->),
+         holds_at(happens3(goToWork, Time1, Time4), Time2)
+       ].
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/Commuter15-ea.e',43).
+
+ /*  fix_axiom_head(Time2) ->
+       
+       [ happens3(walkTo(herneHill), Time1, Time1),
+          (->),
+         holds_at(happens3(walkTo(herneHill), Time1, Time1),
+                  Time2)
+       ].
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/Commuter15-ea.e',43).
+
+ /*  fix_axiom_head(Time2) ->
+       
+       [ happens3(trainTo(victoria), Time2, Time2),
+          (->),
+         holds_at(happens3(trainTo(victoria), Time2, Time2),
+                  Time2)
+       ].
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/Commuter15-ea.e',43).
+
+ /*  fix_axiom_head(Time2) ->
+       
+       [ happens3(trainTo(southKen), Time3, Time3),
+          (->),
+         holds_at(happens3(trainTo(southKen), Time3, Time3),
+                  Time2)
+       ].
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/Commuter15-ea.e',43).
+
+ /*  fix_axiom_head(Time2) ->
+       
+       [ happens3(walkTo(work), Time4, Time4),
+          (->),
+         holds_at(happens3(walkTo(work), Time4, Time4), Time2)
+       ].
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/Commuter15-ea.e',43).
+
+ /*  fix_axiom_head(Time2) ->
+       
+       [ not(clipped(Time1, at(herneHill), Time2)),
+          (->),
+         holds_at(neg(clipped(Time1, at(herneHill), Time2)),
+                  Time2)
+       ].
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/Commuter15-ea.e',43).
+
+ /*  fix_axiom_head(Time2) ->
+       
+       [ not(clipped(Time2, at(victoria), Time3)),
+          (->),
+         holds_at(neg(clipped(Time2, at(victoria), Time3)), Time2)
+       ].
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/Commuter15-ea.e',43).
+
+ /*  fix_axiom_head(Time2) ->
+       
+       [ not(clipped(Time3, at(southKen), Time4)),
+          (->),
+         holds_at(neg(clipped(Time3, at(southKen), Time4)), Time2)
+       ].
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/Commuter15-ea.e',43).
+
+ /*  [holds_at(happens3(walkTo(herneHill), Time1, Time1), Time2), holds_at(happens3(trainTo(victoria), Time2, Time2), Time2), holds_at(happens3(trainTo(southKen), Time3, Time3), Time2), holds_at(happens3(walkTo(work), Time4, Time4), Time2), comparison(Time1, Time2, <), comparison(Time2, Time3, <), comparison(Time3, Time4, <), holds_at(neg(clipped(Time1, at(herneHill), Time2)), Time2), holds_at(neg(clipped(Time2, at(victoria), Time3)), Time2), holds_at(neg(clipped(Time3, at(southKen), Time4)), Time2)] ->
+       ta(Time2,
+          tvs1=[Time2, Time3, Time4],
+          tvs2=[Time2, Time3, Time4],
+          holds_at(happens3(goToWork, Time1, Time4), Time2)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/Commuter15-ea.e',43).
+axiom(holds_at(happens3(goToWork, Time1, Time4), Time2),
+   
+    [ holds_at(happens3(walkTo(herneHill), Time1, Time1),
+               Time2),
+      holds_at(happens3(trainTo(victoria), Time2, Time2),
+               Time2),
+      holds_at(happens3(trainTo(southKen), Time3, Time3),
+               Time2),
+      holds_at(happens3(walkTo(work), Time4, Time4), Time2),
+      comparison(Time1, Time2, <),
+      comparison(Time2, Time3, <),
+      comparison(Time3, Time4, <),
+      holds_at(neg(clipped(Time1, at(herneHill), Time2)),
+               Time2),
+      holds_at(neg(clipped(Time2, at(victoria), Time3)), Time2),
+      holds_at(neg(clipped(Time3, at(southKen), Time4)), Time2)
+    ]).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/Commuter15-ea.e',43).
+
+ /*  not(happens3(walkTo(herneHill), Time1, Time1)) :-
+       ( happens3(trainTo(victoria), Time2, Time2),
+         happens3(trainTo(southKen), Time3, Time3),
+         happens3(walkTo(work), Time4, Time4),
+         comparison(Time1, Time2, <),
+         comparison(Time2, Time3, <),
+         comparison(Time3, Time4, <),
+         not(clipped(Time1, at(herneHill), Time2)),
+         not(clipped(Time2, at(victoria), Time3)),
+         not(clipped(Time3, at(southKen), Time4))
+       ),
+       not(happens3(goToWork, Time1, Time4)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/Commuter15-ea.e',43).
+
+ /*  fix_axiom_head(Time2) ->
+       
+       [ not(happens3(walkTo(herneHill), Time1, Time1)),
+          (->),
+         holds_at(neg(happens3(walkTo(herneHill), Time1, Time1)),
+                  Time2)
+       ].
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/Commuter15-ea.e',43).
+
+ /*  fix_axiom_head(Time2) ->
+       
+       [ happens3(trainTo(victoria), Time2, Time2),
+          (->),
+         holds_at(happens3(trainTo(victoria), Time2, Time2),
+                  Time2)
+       ].
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/Commuter15-ea.e',43).
+
+ /*  fix_axiom_head(Time2) ->
+       
+       [ happens3(trainTo(southKen), Time3, Time3),
+          (->),
+         holds_at(happens3(trainTo(southKen), Time3, Time3),
+                  Time2)
+       ].
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/Commuter15-ea.e',43).
+
+ /*  fix_axiom_head(Time2) ->
+       
+       [ happens3(walkTo(work), Time4, Time4),
+          (->),
+         holds_at(happens3(walkTo(work), Time4, Time4), Time2)
+       ].
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/Commuter15-ea.e',43).
+
+ /*  fix_axiom_head(Time2) ->
+       
+       [ not(clipped(Time1, at(herneHill), Time2)),
+          (->),
+         holds_at(neg(clipped(Time1, at(herneHill), Time2)),
+                  Time2)
+       ].
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/Commuter15-ea.e',43).
+
+ /*  fix_axiom_head(Time2) ->
+       
+       [ not(clipped(Time2, at(victoria), Time3)),
+          (->),
+         holds_at(neg(clipped(Time2, at(victoria), Time3)), Time2)
+       ].
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/Commuter15-ea.e',43).
+
+ /*  fix_axiom_head(Time2) ->
+       
+       [ not(clipped(Time3, at(southKen), Time4)),
+          (->),
+         holds_at(neg(clipped(Time3, at(southKen), Time4)), Time2)
+       ].
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/Commuter15-ea.e',43).
+
+ /*  fix_axiom_head(Time2) ->
+       
+       [ not(happens3(goToWork, Time1, Time4)),
+          (->),
+         holds_at(neg(happens3(goToWork, Time1, Time4)), Time2)
+       ].
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/Commuter15-ea.e',43).
+
+ /*  [holds_at(happens3(trainTo(victoria), Time2, Time2), Time2), holds_at(happens3(trainTo(southKen), Time3, Time3), Time2), holds_at(happens3(walkTo(work), Time4, Time4), Time2), comparison(Time1, Time2, <), comparison(Time2, Time3, <), comparison(Time3, Time4, <), holds_at(neg(clipped(Time1, at(herneHill), Time2)), Time2), holds_at(neg(clipped(Time2, at(victoria), Time3)), Time2), holds_at(neg(clipped(Time3, at(southKen), Time4)), Time2), holds_at(neg(happens3(goToWork, Time1, Time4)), Time2)] ->
+       ta(Time2,
+          tvs1=[Time2, Time3, Time4],
+          tvs2=[Time2, Time3, Time4],
+          holds_at(neg(happens3(walkTo(herneHill), Time1, Time1)),
+                   Time2)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/Commuter15-ea.e',43).
+axiom(holds_at(neg(happens3(walkTo(herneHill), Time1, Time1)), Time2),
+   
+    [ holds_at(happens3(trainTo(victoria), Time2, Time2),
+               Time2),
+      holds_at(happens3(trainTo(southKen), Time3, Time3),
+               Time2),
+      holds_at(happens3(walkTo(work), Time4, Time4), Time2),
+      comparison(Time1, Time2, <),
+      comparison(Time2, Time3, <),
+      comparison(Time3, Time4, <),
+      holds_at(neg(clipped(Time1, at(herneHill), Time2)),
+               Time2),
+      holds_at(neg(clipped(Time2, at(victoria), Time3)), Time2),
+      holds_at(neg(clipped(Time3, at(southKen), Time4)), Time2),
+      holds_at(neg(happens3(goToWork, Time1, Time4)), Time2)
+    ]).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/Commuter15-ea.e',43).
+
+ /*  not(happens3(trainTo(victoria), Time2, Time2)) :-
+       ( happens3(trainTo(southKen), Time3, Time3),
+         happens3(walkTo(work), Time4, Time4),
+         comparison(Time1, Time2, <),
+         comparison(Time2, Time3, <),
+         comparison(Time3, Time4, <),
+         not(clipped(Time1, at(herneHill), Time2)),
+         not(clipped(Time2, at(victoria), Time3)),
+         not(clipped(Time3, at(southKen), Time4))
+       ),
+       happens3(walkTo(herneHill), Time1, Time1),
+       not(happens3(goToWork, Time1, Time4)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/Commuter15-ea.e',43).
+
+ /*  fix_axiom_head(Time2) ->
+       
+       [ not(happens3(trainTo(victoria), Time2, Time2)),
+          (->),
+         holds_at(neg(happens3(trainTo(victoria), Time2, Time2)),
+                  Time2)
+       ].
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/Commuter15-ea.e',43).
+
+ /*  fix_axiom_head(Time2) ->
+       
+       [ happens3(trainTo(southKen), Time3, Time3),
+          (->),
+         holds_at(happens3(trainTo(southKen), Time3, Time3),
+                  Time2)
+       ].
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/Commuter15-ea.e',43).
+
+ /*  fix_axiom_head(Time2) ->
+       
+       [ happens3(walkTo(work), Time4, Time4),
+          (->),
+         holds_at(happens3(walkTo(work), Time4, Time4), Time2)
+       ].
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/Commuter15-ea.e',43).
+
+ /*  fix_axiom_head(Time2) ->
+       
+       [ not(clipped(Time1, at(herneHill), Time2)),
+          (->),
+         holds_at(neg(clipped(Time1, at(herneHill), Time2)),
+                  Time2)
+       ].
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/Commuter15-ea.e',43).
+
+ /*  fix_axiom_head(Time2) ->
+       
+       [ not(clipped(Time2, at(victoria), Time3)),
+          (->),
+         holds_at(neg(clipped(Time2, at(victoria), Time3)), Time2)
+       ].
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/Commuter15-ea.e',43).
+
+ /*  fix_axiom_head(Time2) ->
+       
+       [ not(clipped(Time3, at(southKen), Time4)),
+          (->),
+         holds_at(neg(clipped(Time3, at(southKen), Time4)), Time2)
+       ].
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/Commuter15-ea.e',43).
+
+ /*  fix_axiom_head(Time2) ->
+       
+       [ happens3(walkTo(herneHill), Time1, Time1),
+          (->),
+         holds_at(happens3(walkTo(herneHill), Time1, Time1),
+                  Time2)
+       ].
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/Commuter15-ea.e',43).
+
+ /*  fix_axiom_head(Time2) ->
+       
+       [ not(happens3(goToWork, Time1, Time4)),
+          (->),
+         holds_at(neg(happens3(goToWork, Time1, Time4)), Time2)
+       ].
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/Commuter15-ea.e',43).
+
+ /*  [holds_at(happens3(trainTo(southKen), Time3, Time3), Time2), holds_at(happens3(walkTo(work), Time4, Time4), Time2), comparison(Time1, Time2, <), comparison(Time2, Time3, <), comparison(Time3, Time4, <), holds_at(neg(clipped(Time1, at(herneHill), Time2)), Time2), holds_at(neg(clipped(Time2, at(victoria), Time3)), Time2), holds_at(neg(clipped(Time3, at(southKen), Time4)), Time2), holds_at(happens3(walkTo(herneHill), Time1, Time1), Time2), holds_at(neg(happens3(goToWork, Time1, Time4)), Time2)] ->
+       ta(Time2,
+          tvs1=[Time2, Time3, Time4],
+          tvs2=[Time2, Time3, Time4],
+          holds_at(neg(happens3(trainTo(victoria), Time2, Time2)),
+                   Time2)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/Commuter15-ea.e',43).
+axiom(holds_at(neg(happens3(trainTo(victoria), Time2, Time2)), Time2),
+   
+    [ holds_at(happens3(trainTo(southKen), Time3, Time3),
+               Time2),
+      holds_at(happens3(walkTo(work), Time4, Time4), Time2),
+      comparison(Time1, Time2, <),
+      comparison(Time2, Time3, <),
+      comparison(Time3, Time4, <),
+      holds_at(neg(clipped(Time1, at(herneHill), Time2)),
+               Time2),
+      holds_at(neg(clipped(Time2, at(victoria), Time3)), Time2),
+      holds_at(neg(clipped(Time3, at(southKen), Time4)), Time2),
+      holds_at(happens3(walkTo(herneHill), Time1, Time1),
+               Time2),
+      holds_at(neg(happens3(goToWork, Time1, Time4)), Time2)
+    ]).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/Commuter15-ea.e',43).
+
+ /*  not(happens3(trainTo(southKen), Time3, Time3)) :-
+       ( happens3(walkTo(work), Time4, Time4),
+         comparison(Time1, Time2, <),
+         comparison(Time2, Time3, <),
+         comparison(Time3, Time4, <),
+         not(clipped(Time1, at(herneHill), Time2)),
+         not(clipped(Time2, at(victoria), Time3)),
+         not(clipped(Time3, at(southKen), Time4))
+       ),
+       happens3(trainTo(victoria), Time2, Time2),
+       happens3(walkTo(herneHill), Time1, Time1),
+       not(happens3(goToWork, Time1, Time4)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/Commuter15-ea.e',43).
+
+ /*  fix_axiom_head(Time2) ->
+       
+       [ not(happens3(trainTo(southKen), Time3, Time3)),
+          (->),
+         holds_at(neg(happens3(trainTo(southKen), Time3, Time3)),
+                  Time2)
+       ].
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/Commuter15-ea.e',43).
+
+ /*  fix_axiom_head(Time2) ->
+       
+       [ happens3(walkTo(work), Time4, Time4),
+          (->),
+         holds_at(happens3(walkTo(work), Time4, Time4), Time2)
+       ].
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/Commuter15-ea.e',43).
+
+ /*  fix_axiom_head(Time2) ->
+       
+       [ not(clipped(Time1, at(herneHill), Time2)),
+          (->),
+         holds_at(neg(clipped(Time1, at(herneHill), Time2)),
+                  Time2)
+       ].
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/Commuter15-ea.e',43).
+
+ /*  fix_axiom_head(Time2) ->
+       
+       [ not(clipped(Time2, at(victoria), Time3)),
+          (->),
+         holds_at(neg(clipped(Time2, at(victoria), Time3)), Time2)
+       ].
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/Commuter15-ea.e',43).
+
+ /*  fix_axiom_head(Time2) ->
+       
+       [ not(clipped(Time3, at(southKen), Time4)),
+          (->),
+         holds_at(neg(clipped(Time3, at(southKen), Time4)), Time2)
+       ].
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/Commuter15-ea.e',43).
+
+ /*  fix_axiom_head(Time2) ->
+       
+       [ happens3(trainTo(victoria), Time2, Time2),
+          (->),
+         holds_at(happens3(trainTo(victoria), Time2, Time2),
+                  Time2)
+       ].
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/Commuter15-ea.e',43).
+
+ /*  fix_axiom_head(Time2) ->
+       
+       [ happens3(walkTo(herneHill), Time1, Time1),
+          (->),
+         holds_at(happens3(walkTo(herneHill), Time1, Time1),
+                  Time2)
+       ].
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/Commuter15-ea.e',43).
+
+ /*  fix_axiom_head(Time2) ->
+       
+       [ not(happens3(goToWork, Time1, Time4)),
+          (->),
+         holds_at(neg(happens3(goToWork, Time1, Time4)), Time2)
+       ].
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/Commuter15-ea.e',43).
+
+ /*  [holds_at(happens3(walkTo(work), Time4, Time4), Time2), comparison(Time1, Time2, <), comparison(Time2, Time3, <), comparison(Time3, Time4, <), holds_at(neg(clipped(Time1, at(herneHill), Time2)), Time2), holds_at(neg(clipped(Time2, at(victoria), Time3)), Time2), holds_at(neg(clipped(Time3, at(southKen), Time4)), Time2), holds_at(happens3(trainTo(victoria), Time2, Time2), Time2), holds_at(happens3(walkTo(herneHill), Time1, Time1), Time2), holds_at(neg(happens3(goToWork, Time1, Time4)), Time2)] ->
+       ta(Time2,
+          tvs1=[Time2, Time3, Time4],
+          tvs2=[Time2, Time3, Time4],
+          holds_at(neg(happens3(trainTo(southKen), Time3, Time3)),
+                   Time2)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/Commuter15-ea.e',43).
+axiom(holds_at(neg(happens3(trainTo(southKen), Time3, Time3)), Time2),
+   
+    [ holds_at(happens3(walkTo(work), Time4, Time4), Time2),
+      comparison(Time1, Time2, <),
+      comparison(Time2, Time3, <),
+      comparison(Time3, Time4, <),
+      holds_at(neg(clipped(Time1, at(herneHill), Time2)),
+               Time2),
+      holds_at(neg(clipped(Time2, at(victoria), Time3)), Time2),
+      holds_at(neg(clipped(Time3, at(southKen), Time4)), Time2),
+      holds_at(happens3(trainTo(victoria), Time2, Time2),
+               Time2),
+      holds_at(happens3(walkTo(herneHill), Time1, Time1),
+               Time2),
+      holds_at(neg(happens3(goToWork, Time1, Time4)), Time2)
+    ]).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/Commuter15-ea.e',43).
+
+ /*  not(happens3(walkTo(work), Time4, Time4)) :-
+       ( comparison(Time1, Time2, <),
+         comparison(Time2, Time3, <),
+         comparison(Time3, Time4, <),
+         not(clipped(Time1, at(herneHill), Time2)),
+         not(clipped(Time2, at(victoria), Time3)),
+         not(clipped(Time3, at(southKen), Time4))
+       ),
+       happens3(trainTo(southKen), Time3, Time3),
+       happens3(trainTo(victoria), Time2, Time2),
+       happens3(walkTo(herneHill), Time1, Time1),
+       not(happens3(goToWork, Time1, Time4)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/Commuter15-ea.e',43).
+
+ /*  fix_axiom_head(Time2) ->
+       
+       [ not(happens3(walkTo(work), Time4, Time4)),
+          (->),
+         holds_at(neg(happens3(walkTo(work), Time4, Time4)),
+                  Time2)
+       ].
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/Commuter15-ea.e',43).
+
+ /*  fix_axiom_head(Time2) ->
+       
+       [ not(clipped(Time1, at(herneHill), Time2)),
+          (->),
+         holds_at(neg(clipped(Time1, at(herneHill), Time2)),
+                  Time2)
+       ].
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/Commuter15-ea.e',43).
+
+ /*  fix_axiom_head(Time2) ->
+       
+       [ not(clipped(Time2, at(victoria), Time3)),
+          (->),
+         holds_at(neg(clipped(Time2, at(victoria), Time3)), Time2)
+       ].
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/Commuter15-ea.e',43).
+
+ /*  fix_axiom_head(Time2) ->
+       
+       [ not(clipped(Time3, at(southKen), Time4)),
+          (->),
+         holds_at(neg(clipped(Time3, at(southKen), Time4)), Time2)
+       ].
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/Commuter15-ea.e',43).
+
+ /*  fix_axiom_head(Time2) ->
+       
+       [ happens3(trainTo(southKen), Time3, Time3),
+          (->),
+         holds_at(happens3(trainTo(southKen), Time3, Time3),
+                  Time2)
+       ].
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/Commuter15-ea.e',43).
+
+ /*  fix_axiom_head(Time2) ->
+       
+       [ happens3(trainTo(victoria), Time2, Time2),
+          (->),
+         holds_at(happens3(trainTo(victoria), Time2, Time2),
+                  Time2)
+       ].
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/Commuter15-ea.e',43).
+
+ /*  fix_axiom_head(Time2) ->
+       
+       [ happens3(walkTo(herneHill), Time1, Time1),
+          (->),
+         holds_at(happens3(walkTo(herneHill), Time1, Time1),
+                  Time2)
+       ].
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/Commuter15-ea.e',43).
+
+ /*  fix_axiom_head(Time2) ->
+       
+       [ not(happens3(goToWork, Time1, Time4)),
+          (->),
+         holds_at(neg(happens3(goToWork, Time1, Time4)), Time2)
+       ].
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/Commuter15-ea.e',43).
+
+ /*  [comparison(Time1, Time2, <), comparison(Time2, Time3, <), comparison(Time3, Time4, <), holds_at(neg(clipped(Time1, at(herneHill), Time2)), Time2), holds_at(neg(clipped(Time2, at(victoria), Time3)), Time2), holds_at(neg(clipped(Time3, at(southKen), Time4)), Time2), holds_at(happens3(trainTo(southKen), Time3, Time3), Time2), holds_at(happens3(trainTo(victoria), Time2, Time2), Time2), holds_at(happens3(walkTo(herneHill), Time1, Time1), Time2), holds_at(neg(happens3(goToWork, Time1, Time4)), Time2)] ->
+       ta(Time2,
+          tvs1=[Time2, Time3, Time4],
+          tvs2=[Time2, Time3, Time4],
+          holds_at(neg(happens3(walkTo(work), Time4, Time4)),
+                   Time2)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/Commuter15-ea.e',43).
+axiom(holds_at(neg(happens3(walkTo(work), Time4, Time4)), Time2),
+   
+    [ comparison(Time1, Time2, <),
+      comparison(Time2, Time3, <),
+      comparison(Time3, Time4, <),
+      holds_at(neg(clipped(Time1, at(herneHill), Time2)),
+               Time2),
+      holds_at(neg(clipped(Time2, at(victoria), Time3)), Time2),
+      holds_at(neg(clipped(Time3, at(southKen), Time4)), Time2),
+      holds_at(happens3(trainTo(southKen), Time3, Time3),
+               Time2),
+      holds_at(happens3(trainTo(victoria), Time2, Time2),
+               Time2),
+      holds_at(happens3(walkTo(herneHill), Time1, Time1),
+               Time2),
+      holds_at(neg(happens3(goToWork, Time1, Time4)), Time2)
+    ]).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/Commuter15-ea.e',43).
+
+ /*  clipped(Time1, at(herneHill), Time2) :-
+       ( not(clipped(Time2, at(victoria), Time3)),
+         not(clipped(Time3, at(southKen), Time4))
+       ),
+       comparison(Time3, Time4, <),
+       comparison(Time2, Time3, <),
+       comparison(Time1, Time2, <),
+       happens3(walkTo(work), Time4, Time4),
+       happens3(trainTo(southKen), Time3, Time3),
+       happens3(trainTo(victoria), Time2, Time2),
+       happens3(walkTo(herneHill), Time1, Time1),
+       not(happens3(goToWork, Time1, Time4)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/Commuter15-ea.e',43).
+
+ /*  fix_axiom_head(Time2) ->
+       
+       [ clipped(Time1, at(herneHill), Time2),
+          (->),
+         holds_at(clipped(Time1, at(herneHill), Time2), Time2)
+       ].
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/Commuter15-ea.e',43).
+
+ /*  [holds_at(neg(clipped(Time2, at(victoria), Time3)), Time2), holds_at(neg(clipped(Time3, at(southKen), Time4)), Time2), comparison(Time3, Time4, <), comparison(Time2, Time3, <), comparison(Time1, Time2, <), holds_at(happens3(walkTo(work), Time4, Time4), Time2), holds_at(happens3(trainTo(southKen), Time3, Time3), Time2), holds_at(happens3(trainTo(victoria), Time2, Time2), Time2), holds_at(happens3(walkTo(herneHill), Time1, Time1), Time2), holds_at(neg(happens3(goToWork, Time1, Time4)), Time2)] ->
+       ta(Time2,
+          tvs1=[Time2, Time3, Time4],
+          tvs2=[Time2, Time3, Time4],
+          holds_at(clipped(Time1, at(herneHill), Time2), Time2)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/Commuter15-ea.e',43).
+axiom(holds_at(clipped(Time1, at(herneHill), Time2), Time2),
+   
+    [ holds_at(neg(clipped(Time2, at(victoria), Time3)), Time2),
+      holds_at(neg(clipped(Time3, at(southKen), Time4)), Time2),
+      comparison(Time3, Time4, <),
+      comparison(Time2, Time3, <),
+      comparison(Time1, Time2, <),
+      holds_at(happens3(walkTo(work), Time4, Time4), Time2),
+      holds_at(happens3(trainTo(southKen), Time3, Time3),
+               Time2),
+      holds_at(happens3(trainTo(victoria), Time2, Time2),
+               Time2),
+      holds_at(happens3(walkTo(herneHill), Time1, Time1),
+               Time2),
+      holds_at(neg(happens3(goToWork, Time1, Time4)), Time2)
+    ]).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/Commuter15-ea.e',43).
+
+ /*  clipped(Time2, at(victoria), Time3) :-
+       not(clipped(Time3, at(southKen), Time4)),
+       not(clipped(Time1, at(herneHill), Time2)),
+       comparison(Time3, Time4, <),
+       comparison(Time2, Time3, <),
+       comparison(Time1, Time2, <),
+       happens3(walkTo(work), Time4, Time4),
+       happens3(trainTo(southKen), Time3, Time3),
+       happens3(trainTo(victoria), Time2, Time2),
+       happens3(walkTo(herneHill), Time1, Time1),
+       not(happens3(goToWork, Time1, Time4)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/Commuter15-ea.e',43).
+
+ /*  fix_axiom_head(Time3) ->
+       
+       [ clipped(Time2, at(victoria), Time3),
+          (->),
+         holds_at(clipped(Time2, at(victoria), Time3), Time3)
+       ].
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/Commuter15-ea.e',43).
+
+ /*  [holds_at(neg(clipped(Time3, at(southKen), Time4)), Time3), holds_at(neg(clipped(Time1, at(herneHill), Time2)), Time3), comparison(Time3, Time4, <), comparison(Time2, Time3, <), comparison(Time1, Time2, <), holds_at(happens3(walkTo(work), Time4, Time4), Time3), holds_at(happens3(trainTo(southKen), Time3, Time3), Time3), holds_at(happens3(trainTo(victoria), Time2, Time2), Time3), holds_at(happens3(walkTo(herneHill), Time1, Time1), Time3), holds_at(neg(happens3(goToWork, Time1, Time4)), Time3)] ->
+       ta(Time3,
+          tvs1=[Time2, Time3, Time4],
+          tvs2=[Time2, Time3, Time4],
+          holds_at(clipped(Time2, at(victoria), Time3), Time3)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/Commuter15-ea.e',43).
+axiom(holds_at(clipped(Time2, at(victoria), Time3), Time3),
+   
+    [ holds_at(neg(clipped(Time3, at(southKen), Time4)), Time3),
+      holds_at(neg(clipped(Time1, at(herneHill), Time2)),
+               Time3),
+      comparison(Time3, Time4, <),
+      comparison(Time2, Time3, <),
+      comparison(Time1, Time2, <),
+      holds_at(happens3(walkTo(work), Time4, Time4), Time3),
+      holds_at(happens3(trainTo(southKen), Time3, Time3),
+               Time3),
+      holds_at(happens3(trainTo(victoria), Time2, Time2),
+               Time3),
+      holds_at(happens3(walkTo(herneHill), Time1, Time1),
+               Time3),
+      holds_at(neg(happens3(goToWork, Time1, Time4)), Time3)
+    ]).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/Commuter15-ea.e',43).
+
+ /*  clipped(Time3, at(southKen), Time4) :-
+       not(clipped(Time2, at(victoria), Time3)),
+       not(clipped(Time1, at(herneHill), Time2)),
+       comparison(Time3, Time4, <),
+       comparison(Time2, Time3, <),
+       comparison(Time1, Time2, <),
+       happens3(walkTo(work), Time4, Time4),
+       happens3(trainTo(southKen), Time3, Time3),
+       happens3(trainTo(victoria), Time2, Time2),
+       happens3(walkTo(herneHill), Time1, Time1),
+       not(happens3(goToWork, Time1, Time4)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/Commuter15-ea.e',43).
+
+ /*  fix_axiom_head(Time4) ->
+       
+       [ clipped(Time3, at(southKen), Time4),
+          (->),
+         holds_at(clipped(Time3, at(southKen), Time4), Time4)
+       ].
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/Commuter15-ea.e',43).
+
+ /*  [holds_at(neg(clipped(Time2, at(victoria), Time3)), Time4), holds_at(neg(clipped(Time1, at(herneHill), Time2)), Time4), comparison(Time3, Time4, <), comparison(Time2, Time3, <), comparison(Time1, Time2, <), holds_at(happens3(walkTo(work), Time4, Time4), Time4), holds_at(happens3(trainTo(southKen), Time3, Time3), Time4), holds_at(happens3(trainTo(victoria), Time2, Time2), Time4), holds_at(happens3(walkTo(herneHill), Time1, Time1), Time4), holds_at(neg(happens3(goToWork, Time1, Time4)), Time4)] ->
+       ta(Time4,
+          tvs1=[Time2, Time3, Time4],
+          tvs2=[Time2, Time3, Time4],
+          holds_at(clipped(Time3, at(southKen), Time4), Time4)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/Commuter15-ea.e',43).
+axiom(holds_at(clipped(Time3, at(southKen), Time4), Time4),
+   
+    [ holds_at(neg(clipped(Time2, at(victoria), Time3)), Time4),
+      holds_at(neg(clipped(Time1, at(herneHill), Time2)),
+               Time4),
+      comparison(Time3, Time4, <),
+      comparison(Time2, Time3, <),
+      comparison(Time1, Time2, <),
+      holds_at(happens3(walkTo(work), Time4, Time4), Time4),
+      holds_at(happens3(trainTo(southKen), Time3, Time3),
+               Time4),
+      holds_at(happens3(trainTo(victoria), Time2, Time2),
+               Time4),
+      holds_at(happens3(walkTo(herneHill), Time1, Time1),
+               Time4),
+      holds_at(neg(happens3(goToWork, Time1, Time4)), Time4)
+    ]).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/Commuter15-ea.e:58
+% [time]
+% (HoldsAt(Train(HerneHill, Victoria),time)).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/Commuter15-ea.e',58).
+
+ /*  [] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(train(herneHill, victoria), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/Commuter15-ea.e',58).
+axiom(holds_at(train(herneHill, victoria), Time),
+    []).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/Commuter15-ea.e:59
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/Commuter15-ea.e',60).
+% [time]
+% (HoldsAt(Train(Victoria, SouthKen),time)).
+
+ /*  [] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(train(victoria, southKen), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/Commuter15-ea.e',60).
+axiom(holds_at(train(victoria, southKen), Time),
+    []).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/Commuter15-ea.e:62
+% [place]
+% (!ReleasedAt(At(place), 0)).
+ %  not(releasedAt(at(Place),0)).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/Commuter15-ea.e',62).
+
+ /*  [] ->
+       ta(Ta_Param, tvs1=[], tvs2=[], not(releasedAt(at(Place), 0))).
+ */
+axiom(not(releasedAt(at(Place), 0)),
+    []).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/Commuter15-ea.e:64
+% [station1, station2]
+% (!ReleasedAt(Train(station1, station2), 0)).
+ %  not(releasedAt(train(Station1,Station2),0)).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/Commuter15-ea.e',66).
+
+ /*  [] ->
+       ta(Ta_Param,
+          tvs1=[],
+          tvs2=[],
+          not(releasedAt(train(Station1, Station2), 0))).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/Commuter15-ea.e',66).
+axiom(not(releasedAt(train(Station1, Station2), 0)),
+    []).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/Commuter15-ea.e:67
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/Commuter15-ea.e',68).
+% [place1, place2, time]
+% (HoldsAt(At(place1), time) & HoldsAt(At(place2), time)
+%  -> place1=place2).
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/Commuter15-ea.e:69
+
+ /*  holds_at(at(Place1), Time), holds_at(at(Place2), Time) ->
+       equals(Place1, Place2).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/Commuter15-ea.e',68).
+
+ /*  not(holds_at(at(Place1), Time)) :-
+       holds_at(at(Place2), Time),
+       not(equals(Place1, Place2)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/Commuter15-ea.e',68).
+
+ /*  [holds_at(at(Place2), Time), not(equals(Place1, Place2))] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(neg(at(Place1)), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/Commuter15-ea.e',68).
+axiom(holds_at(neg(at(Place1)), Time),
+   
+    [ holds_at(at(Place2), Time),
+      not(equals(Place1, Place2))
+    ]).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/Commuter15-ea.e',68).
+
+ /*  not(holds_at(at(Place2), Time)) :-
+       holds_at(at(Place1), Time),
+       not(equals(Place1, Place2)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/Commuter15-ea.e',68).
+
+ /*  [holds_at(at(Place1), Time), not(equals(Place1, Place2))] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(neg(at(Place2)), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/Commuter15-ea.e',68).
+axiom(holds_at(neg(at(Place2)), Time),
+   
+    [ holds_at(at(Place1), Time),
+      not(equals(Place2, Place1))
+    ]).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/Commuter15-ea.e:71
+% [station1, station2, time]
+% (HoldsAt(Train(station1, station2), time) -> station1!=station2).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/Commuter15-ea.e',73).
+
+ /*  holds_at(train(Station1, Station2), Time) ->
+       diff(Station1, Station2).
+ */
+
+ /*  not(holds_at(train(Station1, Station2), Time)) :-
+       not(diff(Station1, Station2)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/Commuter15-ea.e',73).
+
+ /*  [equals(Station1, Station2)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(neg(train(Station1, Station2)), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/Commuter15-ea.e',73).
+axiom(holds_at(neg(train(Station1, Station2)), Time),
+    [equals(Station1, Station2)]).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/Commuter15-ea.e:75
+% [station1, station2, time]
+% (station1!=HerneHill & station1!=Victoria
+% -> !HoldsAt(Train(station1,station2),time)).
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/Commuter15-ea.e:77
+
+ /*  diff(Station1, herneHill), diff(Station1, victoria) ->
+       holds_at(neg(train(Station1, Station2)), Time).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/Commuter15-ea.e',77).
+
+ /*  holds_at(neg(train(Station1, Station2)), Time) :-
+       diff(Station1, herneHill),
+       diff(Station1, victoria).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/Commuter15-ea.e',77).
+
+ /*  [diff(Station1, herneHill), diff(Station1, victoria)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(neg(train(Station1, Station2)), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/Commuter15-ea.e',77).
+axiom(holds_at(neg(train(Station1, Station2)), Time),
+    [diff(Station1, herneHill), diff(Station1, victoria)]).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/Commuter15-ea.e:79
+% [station1, station2, time]
+% (station2!=Victoria & station2!=SouthKen
+% -> !HoldsAt(Train(station1,station2),time)).
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/Commuter15-ea.e:81
+
+ /*  diff(Station2, victoria), diff(Station2, southKen) ->
+       holds_at(neg(train(Station1, Station2)), Time).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/Commuter15-ea.e',81).
+
+ /*  holds_at(neg(train(Station1, Station2)), Time) :-
+       diff(Station2, victoria),
+       diff(Station2, southKen).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/Commuter15-ea.e',81).
+
+ /*  [diff(Station2, victoria), diff(Station2, southKen)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(neg(train(Station1, Station2)), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/Commuter15-ea.e',81).
+axiom(holds_at(neg(train(Station1, Station2)), Time),
+    [diff(Station2, victoria), diff(Station2, southKen)]).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/Commuter15-ea.e:83
+% [station1, station2, time]
+% (HoldsAt(Train(station1, station2),time) & 
+%  station1=HerneHill
+%  -> station2!=SouthKen).
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/Commuter15-ea.e:86
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/Commuter15-ea.e',85).
+
+ /*  holds_at(train(Station1, Station2), Time), equals(Station1, herneHill) ->
+       diff(Station2, southKen).
+ */
+
+ /*  not(holds_at(train(Station1, Station2), Time)) :-
+       equals(Station1, herneHill),
+       not(diff(Station2, southKen)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/Commuter15-ea.e',85).
+
+ /*  [equals(Station1, herneHill), equals(Station2, southKen)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(neg(train(Station1, Station2)), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/Commuter15-ea.e',85).
+axiom(holds_at(neg(train(Station1, Station2)), Time),
+    [equals(Station1, herneHill), equals(Station2, southKen)]).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/Commuter15-ea.e:89
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/Commuter15-ea.e',90).
+% HoldsAt(At(Home),0).
+
+ /*  [] ->
+       ta(Ta_Param, tvs1=[start], tvs2=[start], holds_at(at(home), start)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/Commuter15-ea.e',90).
+axiom(holds_at(at(home), start),
+    []).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/Commuter15-ea.e:90
+% Happens3(WalkTo(HerneHill), 1, 1).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/Commuter15-ea.e',90).
+
+ /*  fix_axiom_head(Time) ->
+       
+       [ happens3(walkTo(herneHill), 1, 1),
+          (->),
+         holds_at(happens3(walkTo(herneHill), 1, 1), Time)
+       ].
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/Commuter15-ea.e',90).
+
+ /*  [] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(happens3(walkTo(herneHill), 1, 1), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/Commuter15-ea.e',90).
+axiom(holds_at(happens3(walkTo(herneHill), 1, 1), Time),
+    []).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/Commuter15-ea.e:91
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/Commuter15-ea.e',92).
+% Happens3(TrainTo(Victoria), 6, 6).
+
+ /*  fix_axiom_head(Time) ->
+       
+       [ happens3(trainTo(victoria), 6, 6),
+          (->),
+         holds_at(happens3(trainTo(victoria), 6, 6), Time)
+       ].
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/Commuter15-ea.e',92).
+
+ /*  [] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(happens3(trainTo(victoria), 6, 6), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/Commuter15-ea.e',92).
+axiom(holds_at(happens3(trainTo(victoria), 6, 6), Time),
+    []).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/Commuter15-ea.e:92
+% Happens3(TrainTo(SouthKen), 10, 10).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/Commuter15-ea.e',92).
+
+ /*  fix_axiom_head(Time) ->
+       
+       [ happens3(trainTo(southKen), 10, 10),
+          (->),
+         holds_at(happens3(trainTo(southKen), 10, 10), Time)
+       ].
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/Commuter15-ea.e',92).
+
+ /*  [] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(happens3(trainTo(southKen), 10, 10), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/Commuter15-ea.e',92).
+axiom(holds_at(happens3(trainTo(southKen), 10, 10), Time),
+    []).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/Commuter15-ea.e:93
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/Commuter15-ea.e',94).
+% Happens3(WalkTo(Work), 12, 12).
+
+ /*  fix_axiom_head(Time) ->
+       
+       [ happens3(walkTo(work), 12, 12),
+          (->),
+         holds_at(happens3(walkTo(work), 12, 12), Time)
+       ].
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/Commuter15-ea.e',94).
+
+ /*  [] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(happens3(walkTo(work), 12, 12), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/Commuter15-ea.e',94).
+axiom(holds_at(happens3(walkTo(work), 12, 12), Time),
+    []).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/Commuter15-ea.e:96
+% completion Happens
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/Commuter15-ea.e',96).
+==> completion(happens).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/Commuter15-ea.e:98
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/Commuter15-ea.e',99).
+% range time 0 15
+==> range(time,0,15).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/Commuter15-ea.e:99
+% range offset 1 1
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/Commuter15-ea.e',99).
+==> range(offset,1,1).
+%; End of File

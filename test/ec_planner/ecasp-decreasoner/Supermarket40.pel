@@ -1,0 +1,393 @@
+:-include(library('ec_planner/ec_test_incl')).
+:-expects_dialect(pfc).
+% Wed, 01 Apr 2020 20:00:56 GMT
+% From ../decreasoner/Supermarket40.pel:4
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Supermarket12.e',104).
+
+ /*  loading(load_e_pl,
+   	'/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Supermarket40.e').
+ */
+%;
+%; Copyright (c) 2005 IBM Corporation and others.
+%; All rights reserved. This program and the accompanying materials
+%; are made available under the terms of the Common Public License v1.0
+%; which accompanies this distribution, and is available at
+%; http://www.eclipse.org/legal/cpl-v10.html
+%;
+%; Contributors:
+%; IBM - Initial implementation
+%;
+%; \fullciteA[pp. 302--304]{Shanahan:1997}
+%;
+%; @book{Shanahan:1997,
+%;   author = "Murray Shanahan",
+%;   year = "1997",
+%;   title = "Solving the Frame Problem",
+%;   address = "Cambridge, MA",
+%;   publisher = "MIT Press",
+%; }
+%;
+%; deduction
+%;
+%; modifications from Shanahan's formulation:
+%; reformulated using the method of \fullciteA[pp. 460--461]{MillerShanahan:2002}
+%;
+%; @incollection{MillerShanahan:2002,
+%;   author = "Rob Miller and Murray Shanahan",
+%;   year = "2002",
+%;   title = "Some alternative formulations of the event calculus",
+%;   editor = "Antonis C. Kakas and Fariba Sadri",
+%;   booktitle = "Computational Logic: Logic Programming and Beyond: Essays in Honour of \uppercase{R}obert \uppercase{A}. \uppercase{K}owalski, Part \uppercase{II}",
+%;   series = "Lecture Notes in Computer Science",
+%;   volume = "2408",
+%;   pages = "452--490",
+%;   address = "Berlin",
+%;   publisher = "Springer",
+%; }
+%;
+%; added:
+%; !HoldsAt(Forwards(), 0).
+%; !HoldsAt(Backwards(), 0).
+%; !HoldsAt(Spinning(), 0).
+%;
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Supermarket40.e:44
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Supermarket40.e',45).
+% load foundations/Root.e
+:- load_e('foundations/Root.e', changed).
+:- if(is_e_toplevel).
+:- endif.
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Supermarket40.e:45
+% load foundations/EC.e
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Supermarket40.e',45).
+:- load_e('foundations/EC.e', changed).
+:- if(is_e_toplevel).
+:- endif.
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Supermarket40.e:47
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Supermarket40.e',48).
+% event Push()
+event(push).
+==> mpred_prop(push,event).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Supermarket40.e:48
+% event Pull()
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Supermarket40.e',48).
+event(pull).
+==> mpred_prop(pull,event).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Supermarket40.e:49
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Supermarket40.e',50).
+% fluent Forwards()
+fluent(forwards).
+==> mpred_prop(forwards,fluent).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Supermarket40.e:50
+% fluent Backwards()
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Supermarket40.e',50).
+fluent(backwards).
+==> mpred_prop(backwards,fluent).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Supermarket40.e:51
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Supermarket40.e',52).
+% fluent Spinning()
+fluent(spinning).
+==> mpred_prop(spinning,fluent).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Supermarket40.e:53
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Supermarket40.e',54).
+% [time]
+% !Happens(Pull(), time) ->
+% Initiates(Push(), Forwards(), time).
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Supermarket40.e:55
+
+ /*  [not(happens(pull, Time))] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          initiates(push, forwards, Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Supermarket40.e',54).
+axiom(initiates(push, forwards, Time),
+    [not(happens(pull, Time))]).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Supermarket40.e:57
+% [time]
+% !Happens(Pull(), time) ->
+% Terminates(Push(), Backwards(), time).
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Supermarket40.e:59
+
+ /*  [not(happens(pull, Time))] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          terminates(push, backwards, Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Supermarket40.e',59).
+axiom(terminates(push, backwards, Time),
+    [not(happens(pull, Time))]).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Supermarket40.e:61
+% [time]
+% !Happens(Push(), time) ->
+% Initiates(Pull(), Backwards(), time).
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Supermarket40.e:63
+
+ /*  [not(happens(push, Time))] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          initiates(pull, backwards, Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Supermarket40.e',63).
+axiom(initiates(pull, backwards, Time),
+    [not(happens(push, Time))]).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Supermarket40.e:65
+% [time]
+% !Happens(Push(), time) ->
+% Terminates(Pull(), Forwards(), time).
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Supermarket40.e:67
+
+ /*  [not(happens(push, Time))] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          terminates(pull, forwards, Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Supermarket40.e',67).
+axiom(terminates(pull, forwards, Time),
+    [not(happens(push, Time))]).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Supermarket40.e:69
+% [time]
+% Happens(Push(), time) ->
+% Initiates(Pull(), Spinning(), time).
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Supermarket40.e:71
+
+ /*  [holds_at(metreqs(push), Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          requires(push, Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Supermarket40.e',71).
+axiom(requires(push, Time),
+    [holds_at(metreqs(push), Time)]).
+
+ /*  [initiates(pull, spinning, Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(metreqs(push), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Supermarket40.e',71).
+axiom(holds_at(metreqs(push), Time),
+    [initiates(pull, spinning, Time)]).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Supermarket40.e:73
+% [time]
+% Happens(Push(), time) ->
+% Terminates(Pull(), Forwards(), time).
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Supermarket40.e:75
+
+ /*  [holds_at(metreqs(push), Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          requires(push, Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Supermarket40.e',75).
+axiom(requires(push, Time),
+    [holds_at(metreqs(push), Time)]).
+
+ /*  [terminates(pull, forwards, Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(metreqs(push), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Supermarket40.e',75).
+axiom(holds_at(metreqs(push), Time),
+    [terminates(pull, forwards, Time)]).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Supermarket40.e:77
+% [time]
+% Happens(Push(), time) ->
+% Terminates(Pull(), Backwards(), time).
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Supermarket40.e:79
+
+ /*  [holds_at(metreqs(push), Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          requires(push, Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Supermarket40.e',79).
+axiom(requires(push, Time),
+    [holds_at(metreqs(push), Time)]).
+
+ /*  [terminates(pull, backwards, Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(metreqs(push), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Supermarket40.e',79).
+axiom(holds_at(metreqs(push), Time),
+    [terminates(pull, backwards, Time)]).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Supermarket40.e:81
+% [time]
+% !Happens(Pull(), time) ->
+% Terminates(Push(), Spinning(), time).
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Supermarket40.e:83
+
+ /*  [not(happens(pull, Time))] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          terminates(push, spinning, Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Supermarket40.e',83).
+axiom(terminates(push, spinning, Time),
+    [not(happens(pull, Time))]).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Supermarket40.e:85
+% [time]
+% !Happens(Push(), time) ->
+% Terminates(Pull(), Spinning(), time).
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Supermarket40.e:87
+
+ /*  [not(happens(push, Time))] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          terminates(pull, spinning, Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Supermarket40.e',87).
+axiom(terminates(pull, spinning, Time),
+    [not(happens(push, Time))]).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Supermarket40.e:89
+% !HoldsAt(Forwards(), 0).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Supermarket40.e',89).
+
+ /*  [] ->
+       ta(Ta_Param, tvs1=[start], tvs2=[start], holds_at(neg(forwards), start)).
+ */
+axiom(holds_at(neg(forwards), start),
+    []).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Supermarket40.e:90
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Supermarket40.e',91).
+% !HoldsAt(Backwards(), 0).
+
+ /*  [] ->
+       ta(Ta_Param,
+          tvs1=[start],
+          tvs2=[start],
+          holds_at(neg(backwards), start)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Supermarket40.e',91).
+axiom(holds_at(neg(backwards), start),
+    []).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Supermarket40.e:91
+% !HoldsAt(Spinning(), 0).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Supermarket40.e',91).
+
+ /*  [] ->
+       ta(Ta_Param, tvs1=[start], tvs2=[start], holds_at(neg(spinning), start)).
+ */
+axiom(holds_at(neg(spinning), start),
+    []).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Supermarket40.e:93
+% Happens(Push(), 15).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Supermarket40.e',93).
+
+ /*  [b(start, Startd15), toffset(start, 15, Startd15), ignore(start+15==Startd15)] ->
+       ta(Ta_Param,
+          tvs1=[start+15],
+          tvs2=[Startd15, start],
+          happens(push, Startd15)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Supermarket40.e',93).
+axiom(happens(push, Startd15),
+    [b(start, Startd15), toffset(start, 15, Startd15)]).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Supermarket40.e:94
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Supermarket40.e',95).
+% Happens(Pull(), 15).
+
+ /*  [b(start, Startd15), toffset(start, 15, Startd15), ignore(start+15==Startd15)] ->
+       ta(Ta_Param,
+          tvs1=[start+15],
+          tvs2=[Startd15, start],
+          happens(pull, Startd15)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Supermarket40.e',95).
+axiom(happens(pull, Startd15),
+    [b(start, Startd15), toffset(start, 15, Startd15)]).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Supermarket40.e:95
+% Happens(Pull(), 35).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Supermarket40.e',95).
+
+ /*  [b(start, Startd35), toffset(start, 35, Startd35), ignore(start+35==Startd35)] ->
+       ta(Ta_Param,
+          tvs1=[start+35],
+          tvs2=[Startd35, start],
+          happens(pull, Startd35)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Supermarket40.e',95).
+axiom(happens(pull, Startd35),
+    [b(start, Startd35), toffset(start, 35, Startd35)]).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Supermarket40.e:96
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Supermarket40.e',97).
+% Happens(Push(), 35).
+
+ /*  [b(start, Startd35), toffset(start, 35, Startd35), ignore(start+35==Startd35)] ->
+       ta(Ta_Param,
+          tvs1=[start+35],
+          tvs2=[Startd35, start],
+          happens(push, Startd35)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Supermarket40.e',97).
+axiom(happens(push, Startd35),
+    [b(start, Startd35), toffset(start, 35, Startd35)]).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Supermarket40.e:98
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Supermarket40.e',99).
+% completion Happens
+==> completion(happens).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Supermarket40.e:100
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Supermarket40.e',101).
+% range time 0 40
+==> range(time,0,40).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Supermarket40.e:101
+% range offset 1 1
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Supermarket40.e',101).
+==> range(offset,1,1).
+%; End of file.

@@ -1,0 +1,263 @@
+:-include(library('ec_planner/ec_test_incl')).
+:-expects_dialect(pfc).
+% Wed, 01 Apr 2020 20:02:31 GMT
+% From ../ecnet/Smoke.pel:4
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/SmallFire.e',61).
+
+ /*  loading(load_e_pl,
+   	'/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Smoke.e').
+ */
+%;
+%; Copyright (c) 2005 IBM Corporation and others.
+%; All rights reserved. This program and the accompanying materials
+%; are made available under the terms of the Common Public License v1.0
+%; which accompanies this distribution, and is available at
+%; http://www.eclipse.org/legal/cpl-v10.html
+%;
+%; Contributors:
+%; IBM - Initial implementation
+%;
+%; Smoking: smoking cigarettes and cigars
+%;
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Smoke.e:13
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Smoke.e',14).
+% fluent CraveNicotine(agent)
+fluent(craveNicotine(agent)).
+==> mpred_prop(craveNicotine(agent),fluent).
+==> meta_argtypes(craveNicotine(agent)).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Smoke.e:15
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Smoke.e',16).
+% fluent NicotineCravingSatisfied(agent)
+fluent(nicotineCravingSatisfied(agent)).
+==> mpred_prop(nicotineCravingSatisfied(agent),fluent).
+==> meta_argtypes(nicotineCravingSatisfied(agent)).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Smoke.e:16
+% noninertial NicotineCravingSatisfied
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Smoke.e',16).
+==> noninertial(nicotineCravingSatisfied).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Smoke.e:18
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Smoke.e',19).
+% [agent,time]
+% HoldsAt(CraveNicotine(agent),time) <->
+% !HoldsAt(NicotineCravingSatisfied(agent),time).
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Smoke.e:20
+
+ /*  holds_at(craveNicotine(Agent), Time) <->
+       holds_at(neg(nicotineCravingSatisfied(Agent)), Time).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Smoke.e',19).
+
+ /*  [holds_at, craveNicotine] <->
+       [holds_at, neg, nicotineCravingSatisfied].
+ */
+
+ /*  holds_at(craveNicotine(Agent), Time) ->
+       holds_at(neg(nicotineCravingSatisfied(Agent)), Time).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Smoke.e',19).
+
+ /*  holds_at(neg(nicotineCravingSatisfied(Agent)), Time) :-
+       holds_at(craveNicotine(Agent), Time).
+ */
+
+ /*  [holds_at(craveNicotine(Agent), Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(neg(nicotineCravingSatisfied(Agent)), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Smoke.e',19).
+axiom(holds_at(neg(nicotineCravingSatisfied(Agent)), Time),
+    [holds_at(craveNicotine(Agent), Time)]).
+
+ /*  not(holds_at(craveNicotine(Agent), Time)) :-
+       not(holds_at(neg(nicotineCravingSatisfied(Agent)), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Smoke.e',19).
+
+ /*  [holds_at(nicotineCravingSatisfied(Agent), Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(neg(craveNicotine(Agent)), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Smoke.e',19).
+axiom(holds_at(neg(craveNicotine(Agent)), Time),
+    [holds_at(nicotineCravingSatisfied(Agent), Time)]).
+
+ /*  holds_at(neg(nicotineCravingSatisfied(Agent)), Time) ->
+       holds_at(craveNicotine(Agent), Time).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Smoke.e',19).
+
+ /*  holds_at(craveNicotine(Agent), Time) :-
+       holds_at(neg(nicotineCravingSatisfied(Agent)), Time).
+ */
+
+ /*  [holds_at(neg(nicotineCravingSatisfied(Agent)), Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(craveNicotine(Agent), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Smoke.e',19).
+axiom(holds_at(craveNicotine(Agent), Time),
+    [holds_at(neg(nicotineCravingSatisfied(Agent)), Time)]).
+
+ /*  not(holds_at(neg(nicotineCravingSatisfied(Agent)), Time)) :-
+       not(holds_at(craveNicotine(Agent), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Smoke.e',19).
+
+ /*  [holds_at(neg(craveNicotine(Agent)), Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(nicotineCravingSatisfied(Agent), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Smoke.e',19).
+axiom(holds_at(nicotineCravingSatisfied(Agent), Time),
+    [holds_at(neg(craveNicotine(Agent)), Time)]).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Smoke.e:22
+% event Smoke(agent,cigarette)
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Smoke.e',22).
+event(smoke(agent,cigarette)).
+==> mpred_prop(smoke(agent,cigarette),event).
+==> meta_argtypes(smoke(agent,cigarette)).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Smoke.e:24
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Smoke.e',25).
+% [agent,cigarette,time]
+% Happens(Smoke(agent,cigarette),time) ->
+% HoldsAt(Holding(agent,cigarette),time).
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Smoke.e:26
+
+ /*  happens(smoke(Agent, Cigarette), Time) ->
+       holds_at(holding(Agent, Cigarette), Time).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Smoke.e',25).
+
+ /*  holds_at(holding(Agent, Cigarette), Time) :-
+       happens(smoke(Agent, Cigarette), Time).
+ */
+
+ /*  [holds_at(metreqs(smoke(Agent, Cigarette)), Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          requires(smoke(Agent, Cigarette), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Smoke.e',25).
+axiom(requires(smoke(Agent, Cigarette), Time),
+    [holds_at(metreqs(smoke(Agent, Cigarette)), Time)]).
+
+ /*  [holds_at(holding(Agent, Cigarette), Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(metreqs(smoke(Agent, Cigarette)), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Smoke.e',25).
+axiom(holds_at(metreqs(smoke(Agent, Cigarette)), Time),
+    [holds_at(holding(Agent, Cigarette), Time)]).
+
+ /*  not(happens(smoke(Agent, Cigarette), Time)) :-
+       not(holds_at(holding(Agent, Cigarette), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Smoke.e',25).
+
+ /*  [holds_at(neg(holding(Agent, Cigarette)), Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          not(happens(smoke(Agent, Cigarette), Time))).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Smoke.e',25).
+axiom(not(happens(smoke(Agent, Cigarette), Time)),
+    [holds_at(neg(holding(Agent, Cigarette)), Time)]).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Smoke.e:28
+% [agent,cigarette,time]
+% Terminates(Smoke(agent,cigarette),CraveNicotine(agent),time).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Smoke.e',30).
+
+ /*  [] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          terminates(smoke(Agent, Cigarette),
+                     craveNicotine(Agent),
+                     Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Smoke.e',30).
+axiom(terminates(smoke(Agent, Cigarette), craveNicotine(Agent), Time),
+    []).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Smoke.e:31
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Smoke.e',32).
+% event Puff(agent,cigarette)
+event(puff(agent,cigarette)).
+==> mpred_prop(puff(agent,cigarette),event).
+==> meta_argtypes(puff(agent,cigarette)).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Smoke.e:33
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Smoke.e',34).
+% [agent,cigarette,time]
+% Happens(Puff(agent,cigarette),time) ->
+% Happens(Smoke(agent,cigarette),time).
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Smoke.e:35
+
+ /*  happens(puff(Agent, Cigarette), Time) ->
+       happens(smoke(Agent, Cigarette), Time).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Smoke.e',34).
+
+ /*  happens(smoke(Agent, Cigarette), Time) :-
+       happens(puff(Agent, Cigarette), Time).
+ */
+
+ /*  [happens(puff(Agent, Cigarette), Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          happens(smoke(Agent, Cigarette), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Smoke.e',34).
+axiom(happens(smoke(Agent, Cigarette), Time),
+    [happens(puff(Agent, Cigarette), Time)]).
+
+ /*  not(happens(puff(Agent, Cigarette), Time)) :-
+       not(happens(smoke(Agent, Cigarette), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Smoke.e',34).
+
+ /*  [not(happens(smoke(Agent, Cigarette), Time))] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          not(happens(puff(Agent, Cigarette), Time))).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Smoke.e',34).
+axiom(not(happens(puff(Agent, Cigarette), Time)),
+    [not(happens(smoke(Agent, Cigarette), Time))]).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Smoke.e:37
+% event BlowOutSmoke(agent,smoke)
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Smoke.e',37).
+event(blowOutSmoke(agent,smoke)).
+==> mpred_prop(blowOutSmoke(agent,smoke),event).
+==> meta_argtypes(blowOutSmoke(agent,smoke)).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Smoke.e:39
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Smoke.e',40).
+%; End of file.

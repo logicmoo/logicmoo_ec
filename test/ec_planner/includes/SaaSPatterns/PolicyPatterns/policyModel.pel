@@ -1,0 +1,382 @@
+:-include(library('ec_planner/ec_test_incl')).
+:-expects_dialect(pfc).
+% Wed, 01 Apr 2020 20:00:05 GMT
+% From ../includes/SaaSPatterns/PolicyPatterns/policyModel.pel:4
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Exercises/TelephoneBugs.e',208).
+
+ /*  loading(load_e_pl,
+   	'/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/includes/SaaSPatterns/PolicyPatterns/policyModel.e').
+ */
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/includes/SaaSPatterns/PolicyPatterns/policyModel.e:0
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/includes/SaaSPatterns/PolicyPatterns/policyModel.e',1).
+% event E_policyPermit(policy)
+event(e_policyPermit(policy)).
+==> mpred_prop(e_policyPermit(policy),event).
+==> meta_argtypes(e_policyPermit(policy)).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/includes/SaaSPatterns/PolicyPatterns/policyModel.e:1
+% event E_policyDeny(policy)
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/includes/SaaSPatterns/PolicyPatterns/policyModel.e',1).
+event(e_policyDeny(policy)).
+==> mpred_prop(e_policyDeny(policy),event).
+==> meta_argtypes(e_policyDeny(policy)).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/includes/SaaSPatterns/PolicyPatterns/policyModel.e:2
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/includes/SaaSPatterns/PolicyPatterns/policyModel.e',3).
+% event E_PolicyDoesNotApply(policy)
+event(e_policyDoesNotApply(policy)).
+==> mpred_prop(e_policyDoesNotApply(policy),event).
+==> meta_argtypes(e_policyDoesNotApply(policy)).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/includes/SaaSPatterns/PolicyPatterns/policyModel.e:4
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/includes/SaaSPatterns/PolicyPatterns/policyModel.e',5).
+% fluent F_policyPermitted(policy)
+fluent(f_policyPermitted(policy)).
+==> mpred_prop(f_policyPermitted(policy),fluent).
+==> meta_argtypes(f_policyPermitted(policy)).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/includes/SaaSPatterns/PolicyPatterns/policyModel.e:5
+% fluent F_policyDenied(policy)
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/includes/SaaSPatterns/PolicyPatterns/policyModel.e',5).
+fluent(f_policyDenied(policy)).
+==> mpred_prop(f_policyDenied(policy),fluent).
+==> meta_argtypes(f_policyDenied(policy)).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/includes/SaaSPatterns/PolicyPatterns/policyModel.e:6
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/includes/SaaSPatterns/PolicyPatterns/policyModel.e',7).
+% fluent F_policyNotApplicable(policy)
+fluent(f_policyNotApplicable(policy)).
+==> mpred_prop(f_policyNotApplicable(policy),fluent).
+==> meta_argtypes(f_policyNotApplicable(policy)).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/includes/SaaSPatterns/PolicyPatterns/policyModel.e:8
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/includes/SaaSPatterns/PolicyPatterns/policyModel.e',9).
+% predicate PolicyHasRules(policy,rule)
+predicate(policyHasRules(policy,rule)).
+==> mpred_prop(policyHasRules(policy,rule),predicate).
+==> meta_argtypes(policyHasRules(policy,rule)).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/includes/SaaSPatterns/PolicyPatterns/policyModel.e:11
+% [policy,time]
+ % Initiates(E_policyPermit(policy),F_policyPermitted(policy),time).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/includes/SaaSPatterns/PolicyPatterns/policyModel.e',11).
+
+ /*  [] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          initiates(e_policyPermit(Policy),
+                    f_policyPermitted(Policy),
+                    Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/includes/SaaSPatterns/PolicyPatterns/policyModel.e',11).
+axiom(initiates(e_policyPermit(Policy), f_policyPermitted(Policy), Time),
+    []).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/includes/SaaSPatterns/PolicyPatterns/policyModel.e:12
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/includes/SaaSPatterns/PolicyPatterns/policyModel.e',13).
+% [policy,time]
+ % Initiates(E_policyDeny(policy),F_policyDenied(policy),time).
+
+ /*  [] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          initiates(e_policyDeny(Policy),
+                    f_policyDenied(Policy),
+                    Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/includes/SaaSPatterns/PolicyPatterns/policyModel.e',13).
+axiom(initiates(e_policyDeny(Policy), f_policyDenied(Policy), Time),
+    []).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/includes/SaaSPatterns/PolicyPatterns/policyModel.e:13
+% [policy,time]
+ % Initiates(E_PolicyDoesNotApply(policy),F_policyNotApplicable(policy),time).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/includes/SaaSPatterns/PolicyPatterns/policyModel.e',13).
+
+ /*  [] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          initiates(e_policyDoesNotApply(Policy),
+                    f_policyNotApplicable(Policy),
+                    Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/includes/SaaSPatterns/PolicyPatterns/policyModel.e',13).
+axiom(initiates(e_policyDoesNotApply(Policy), f_policyNotApplicable(Policy), Time),
+    []).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/includes/SaaSPatterns/PolicyPatterns/policyModel.e:17
+%; 'Rule combaning algorithm (stategy) : All Permit'
+% [policy,rule,time]
+ % Happens(E_policyPermit(policy),time) & PolicyHasRules(policy,rule) -> HoldsAt(F_RulePermitted(rule),time).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/includes/SaaSPatterns/PolicyPatterns/policyModel.e',19).
+
+ /*  happens(e_policyPermit(Policy), Time), policyHasRules(Policy, Rule) ->
+       holds_at(f_rulePermitted(Rule), Time).
+ */
+
+ /*  holds_at(f_rulePermitted(Rule), Time) :-
+       happens(e_policyPermit(Policy), Time),
+       policyHasRules(Policy, Rule).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/includes/SaaSPatterns/PolicyPatterns/policyModel.e',19).
+
+ /*  [happens(e_policyPermit(Policy), Time), policyHasRules(Policy, Rule)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(f_rulePermitted(Rule), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/includes/SaaSPatterns/PolicyPatterns/policyModel.e',19).
+axiom(holds_at(f_rulePermitted(Rule), Time),
+   
+    [ happens(e_policyPermit(Policy), Time),
+      policyHasRules(Policy, Rule)
+    ]).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/includes/SaaSPatterns/PolicyPatterns/policyModel.e',19).
+
+ /*  not(happens(e_policyPermit(Policy), Time)) :-
+       policyHasRules(Policy, Rule),
+       not(holds_at(f_rulePermitted(Rule), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/includes/SaaSPatterns/PolicyPatterns/policyModel.e',19).
+
+ /*  [policyHasRules(Policy, Rule), holds_at(neg(f_rulePermitted(Rule)), Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          not(happens(e_policyPermit(Policy), Time))).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/includes/SaaSPatterns/PolicyPatterns/policyModel.e',19).
+axiom(not(happens(e_policyPermit(Policy), Time)),
+   
+    [ policyHasRules(Policy, Rule),
+      holds_at(neg(f_rulePermitted(Rule)), Time)
+    ]).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/includes/SaaSPatterns/PolicyPatterns/policyModel.e',19).
+
+ /*  not(policyHasRules(Policy, Rule)) :-
+       happens(e_policyPermit(Policy), Time),
+       not(holds_at(f_rulePermitted(Rule), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/includes/SaaSPatterns/PolicyPatterns/policyModel.e',19).
+
+ /*  [happens(e_policyPermit(Policy), Time), holds_at(neg(f_rulePermitted(Rule)), Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          not(policyHasRules(Policy, Rule))).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/includes/SaaSPatterns/PolicyPatterns/policyModel.e',19).
+axiom(not(policyHasRules(Policy, Rule)),
+   
+    [ happens(e_policyPermit(Policy), Time),
+      holds_at(neg(f_rulePermitted(Rule)), Time)
+    ]).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/includes/SaaSPatterns/PolicyPatterns/policyModel.e:21
+%; 'Rule combaning algorithm (stategy) : Deny override (s il existe au moin une règle satisfaite)'
+% [policy,time]
+ % Happens(E_policyDeny(policy),time) -> {rule}  PolicyHasRules(policy,rule) & HoldsAt(F_RuleDenied(rule),time).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/includes/SaaSPatterns/PolicyPatterns/policyModel.e',23).
+
+ /*  happens(e_policyDeny(Policy), Time) ->
+       exists([Rule],
+               (policyHasRules(Policy, Rule), holds_at(f_ruleDenied(Rule), Time))).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/includes/SaaSPatterns/PolicyPatterns/policyModel.e',23).
+
+ /*  not(happens(e_policyDeny(Policy), Time)) :-
+       (   not(policyHasRules(Policy, Rule))
+       ;   not(holds_at(f_ruleDenied(Rule), Time))
+       ).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/includes/SaaSPatterns/PolicyPatterns/policyModel.e',23).
+
+ /*  [(not(policyHasRules(Policy, Rule));holds_at(neg(f_ruleDenied(Rule)), Time))] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          not(happens(e_policyDeny(Policy), Time))).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/includes/SaaSPatterns/PolicyPatterns/policyModel.e',23).
+axiom(not(happens(e_policyDeny(Policy), Time)),
+   
+    [  (not(policyHasRules(Policy, Rule));holds_at(neg(f_ruleDenied(Rule)), Time))
+    ]).
+
+ /*  policyHasRules(Policy, Rule) :-
+       happens(e_policyDeny(Policy), Time).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/includes/SaaSPatterns/PolicyPatterns/policyModel.e',23).
+
+ /*  [holds_at(metreqs(e_policyDeny(Policy)), Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          requires(e_policyDeny(Policy), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/includes/SaaSPatterns/PolicyPatterns/policyModel.e',23).
+axiom(requires(e_policyDeny(Policy), Time),
+    [holds_at(metreqs(e_policyDeny(Policy)), Time)]).
+
+ /*  [policyHasRules(Policy, Rule)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(metreqs(e_policyDeny(Policy)), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/includes/SaaSPatterns/PolicyPatterns/policyModel.e',23).
+axiom(holds_at(metreqs(e_policyDeny(Policy)), Time),
+    [policyHasRules(Policy, Rule)]).
+
+ /*  holds_at(f_ruleDenied(Rule), Time) :-
+       happens(e_policyDeny(Policy), Time).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/includes/SaaSPatterns/PolicyPatterns/policyModel.e',23).
+
+ /*  [holds_at(metreqs(e_policyDeny(Policy)), Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          requires(e_policyDeny(Policy), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/includes/SaaSPatterns/PolicyPatterns/policyModel.e',23).
+axiom(requires(e_policyDeny(Policy), Time),
+    [holds_at(metreqs(e_policyDeny(Policy)), Time)]).
+
+ /*  [holds_at(f_ruleDenied(Rule), Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(metreqs(e_policyDeny(Policy)), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/includes/SaaSPatterns/PolicyPatterns/policyModel.e',23).
+axiom(holds_at(metreqs(e_policyDeny(Policy)), Time),
+    [holds_at(f_ruleDenied(Rule), Time)]).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/includes/SaaSPatterns/PolicyPatterns/policyModel.e:25
+%; 'Rule combaning algorithm (stategy) : All not Applicable'
+% [policy,time,rule]
+ % Happens(E_PolicyDoesNotApply(policy),time) & PolicyHasRules(policy,rule) -> HoldsAt(F_RuleNotApplicable(rule),time).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/includes/SaaSPatterns/PolicyPatterns/policyModel.e',27).
+
+ /*  happens(e_policyDoesNotApply(Policy), Time), policyHasRules(Policy, Rule) ->
+       holds_at(f_ruleNotApplicable(Rule), Time).
+ */
+
+ /*  holds_at(f_ruleNotApplicable(Rule), Time) :-
+       happens(e_policyDoesNotApply(Policy), Time),
+       policyHasRules(Policy, Rule).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/includes/SaaSPatterns/PolicyPatterns/policyModel.e',27).
+
+ /*  [happens(e_policyDoesNotApply(Policy), Time), policyHasRules(Policy, Rule)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(f_ruleNotApplicable(Rule), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/includes/SaaSPatterns/PolicyPatterns/policyModel.e',27).
+axiom(holds_at(f_ruleNotApplicable(Rule), Time),
+   
+    [ happens(e_policyDoesNotApply(Policy), Time),
+      policyHasRules(Policy, Rule)
+    ]).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/includes/SaaSPatterns/PolicyPatterns/policyModel.e',27).
+
+ /*  not(happens(e_policyDoesNotApply(Policy), Time)) :-
+       policyHasRules(Policy, Rule),
+       not(holds_at(f_ruleNotApplicable(Rule), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/includes/SaaSPatterns/PolicyPatterns/policyModel.e',27).
+
+ /*  [policyHasRules(Policy, Rule), holds_at(neg(f_ruleNotApplicable(Rule)), Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          not(happens(e_policyDoesNotApply(Policy), Time))).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/includes/SaaSPatterns/PolicyPatterns/policyModel.e',27).
+axiom(not(happens(e_policyDoesNotApply(Policy), Time)),
+   
+    [ policyHasRules(Policy, Rule),
+      holds_at(neg(f_ruleNotApplicable(Rule)), Time)
+    ]).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/includes/SaaSPatterns/PolicyPatterns/policyModel.e',27).
+
+ /*  not(policyHasRules(Policy, Rule)) :-
+       happens(e_policyDoesNotApply(Policy), Time),
+       not(holds_at(f_ruleNotApplicable(Rule), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/includes/SaaSPatterns/PolicyPatterns/policyModel.e',27).
+
+ /*  [happens(e_policyDoesNotApply(Policy), Time), holds_at(neg(f_ruleNotApplicable(Rule)), Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          not(policyHasRules(Policy, Rule))).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/includes/SaaSPatterns/PolicyPatterns/policyModel.e',27).
+axiom(not(policyHasRules(Policy, Rule)),
+   
+    [ happens(e_policyDoesNotApply(Policy), Time),
+      holds_at(neg(f_ruleNotApplicable(Rule)), Time)
+    ]).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/includes/SaaSPatterns/PolicyPatterns/policyModel.e:29
+% [policy]
+% !HoldsAt(F_policyPermitted(policy),0).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/includes/SaaSPatterns/PolicyPatterns/policyModel.e',29).
+
+ /*  [] ->
+       ta(Ta_Param,
+          tvs1=[start],
+          tvs2=[start],
+          holds_at(neg(f_policyPermitted(Policy)), start)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/includes/SaaSPatterns/PolicyPatterns/policyModel.e',29).
+axiom(holds_at(neg(f_policyPermitted(Policy)), start),
+    []).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/includes/SaaSPatterns/PolicyPatterns/policyModel.e:30
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/includes/SaaSPatterns/PolicyPatterns/policyModel.e',31).
+% [policy]
+% !HoldsAt(F_policyDenied(policy),0).
+
+ /*  [] ->
+       ta(Ta_Param,
+          tvs1=[start],
+          tvs2=[start],
+          holds_at(neg(f_policyDenied(Policy)), start)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/includes/SaaSPatterns/PolicyPatterns/policyModel.e',31).
+axiom(holds_at(neg(f_policyDenied(Policy)), start),
+    []).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/includes/SaaSPatterns/PolicyPatterns/policyModel.e:31
+% [policy]
+% !HoldsAt(F_policyNotApplicable(policy),0).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/includes/SaaSPatterns/PolicyPatterns/policyModel.e',31).
+
+ /*  [] ->
+       ta(Ta_Param,
+          tvs1=[start],
+          tvs2=[start],
+          holds_at(neg(f_policyNotApplicable(Policy)), start)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/includes/SaaSPatterns/PolicyPatterns/policyModel.e',31).
+axiom(holds_at(neg(f_policyNotApplicable(Policy)), start),
+    []).

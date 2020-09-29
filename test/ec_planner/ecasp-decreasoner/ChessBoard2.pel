@@ -1,0 +1,289 @@
+:-include(library('ec_planner/ec_test_incl')).
+:-expects_dialect(pfc).
+% Wed, 01 Apr 2020 20:00:41 GMT
+% From ../decreasoner/ChessBoard2.pel:4
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/includes/SaaSPatterns/sorts.e',13).
+
+ /*  loading(load_e_pl,
+   	'/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/ChessBoard2.e').
+ */
+%;
+%; Copyright (c) 2005 IBM Corporation and others.
+%; All rights reserved. This program and the accompanying materials
+%; are made available under the terms of the Common Public License v1.0
+%; which accompanies this distribution, and is available at
+%; http://www.eclipse.org/legal/cpl-v10.html
+%;
+%; Contributors:
+%; IBM - Initial implementation
+%;
+%; due to Raymond Reiter
+%;
+%; @inproceedings{KarthaLifschitz:1994,
+%;   author = "G. Neelakantan Kartha and Vladimir Lifschitz",
+%;   year = "1994",
+%;   title = "Actions with indirect effects (preliminary report)",
+%;   editor = "Jon Doyle and Erik Sandewall and Pietro Torasso",
+%;   booktitle = "\uppercase{P}roceedings of the \uppercase{F}ourth \uppercase{I}nternational \uppercase{C}onference on \uppercase{P}rinciples of \uppercase{K}nowledge \uppercase{R}epresentation and \uppercase{R}easoning",
+%;   pages = "341--350",
+%;   address = "San Francisco",
+%;   publisher = "Morgan Kaufmann",
+%; }
+%;
+%; @incollection{Shanahan:1999,
+%;   author = "Shanahan, Murray",
+%;   year = "1999",
+%;   title = "The Event Calculus explained",
+%;   editor = "Michael J. Wooldridge and Manuela M. Veloso",
+%;   booktitle = "Artificial Intelligence Today: Recent Trends and Developments",
+%;   series = "Lecture Notes in Computer Science",
+%;   volume = "1600",
+%;   pages = "409--430",
+%;   address = "Berlin",
+%;   publisher = "Springer",
+%; }
+%;
+%; model finding
+%;
+%; modifications from Shanahan's formulation:
+%; InitiallyN -> !HoldsAt
+%; pruning of models irrelevant to example
+%; timestamps
+%;
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/ChessBoard2.e:44
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/ChessBoard2.e',45).
+% load foundations/Root.e
+:- load_e('foundations/Root.e', changed).
+:- if(is_e_toplevel).
+:- endif.
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/ChessBoard2.e:45
+% load foundations/EC.e
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/ChessBoard2.e',45).
+:- load_e('foundations/EC.e', changed).
+:- if(is_e_toplevel).
+:- endif.
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/ChessBoard2.e:47
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/ChessBoard2.e',48).
+% event Throw()
+event(throw).
+==> mpred_prop(throw,event).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/ChessBoard2.e:48
+% fluent ItsBlack()
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/ChessBoard2.e',48).
+fluent(itsBlack).
+==> mpred_prop(itsBlack,fluent).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/ChessBoard2.e:49
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/ChessBoard2.e',50).
+% fluent ItsWhite()
+fluent(itsWhite).
+==> mpred_prop(itsWhite,fluent).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/ChessBoard2.e:50
+% fluent OnBlack()
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/ChessBoard2.e',50).
+fluent(onBlack).
+==> mpred_prop(onBlack,fluent).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/ChessBoard2.e:51
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/ChessBoard2.e',52).
+% fluent OnWhite()
+fluent(onWhite).
+==> mpred_prop(onWhite,fluent).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/ChessBoard2.e:52
+% noninertial ItsBlack, ItsWhite
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/ChessBoard2.e',52).
+==> noninertial(itsBlack).
+==> noninertial(itsWhite).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/ChessBoard2.e:54
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/ChessBoard2.e',55).
+% [time]
+% HoldsAt(ItsWhite(),time) ->
+% Initiates(Throw(),OnWhite(),time).
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/ChessBoard2.e:56
+
+ /*  [holds_at(itsWhite, Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          initiates(throw, onWhite, Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/ChessBoard2.e',55).
+axiom(initiates(throw, onWhite, Time),
+    [holds_at(itsWhite, Time)]).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/ChessBoard2.e:58
+% [time]
+% HoldsAt(ItsBlack(),time) ->
+% Initiates(Throw(),OnBlack(),time).
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/ChessBoard2.e:60
+
+ /*  [holds_at(itsBlack, Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          initiates(throw, onBlack, Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/ChessBoard2.e',60).
+axiom(initiates(throw, onBlack, Time),
+    [holds_at(itsBlack, Time)]).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/ChessBoard2.e:62
+% [time]
+ % HoldsAt(ItsWhite(),time) | HoldsAt(ItsBlack(),time).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/ChessBoard2.e',62).
+
+ /*   (   holds_at(itsWhite, Time)
+      ;   holds_at(itsBlack, Time)
+      ).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/ChessBoard2.e',62).
+
+ /*  holds_at(itsWhite, Time) :-
+       not(holds_at(itsBlack, Time)).
+ */
+
+ /*  [holds_at(neg(itsBlack), Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(itsWhite, Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/ChessBoard2.e',62).
+axiom(holds_at(itsWhite, Time),
+    [holds_at(neg(itsBlack), Time)]).
+
+ /*  holds_at(itsBlack, Time) :-
+       not(holds_at(itsWhite, Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/ChessBoard2.e',62).
+
+ /*  [holds_at(neg(itsWhite), Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(itsBlack, Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/ChessBoard2.e',62).
+axiom(holds_at(itsBlack, Time),
+    [holds_at(neg(itsWhite), Time)]).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/ChessBoard2.e:64
+% !HoldsAt(OnWhite(),0).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/ChessBoard2.e',64).
+
+ /*  [] ->
+       ta(Ta_Param, tvs1=[start], tvs2=[start], holds_at(neg(onWhite), start)).
+ */
+axiom(holds_at(neg(onWhite), start),
+    []).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/ChessBoard2.e:65
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/ChessBoard2.e',66).
+% !HoldsAt(OnBlack(),0).
+
+ /*  [] ->
+       ta(Ta_Param, tvs1=[start], tvs2=[start], holds_at(neg(onBlack), start)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/ChessBoard2.e',66).
+axiom(holds_at(neg(onBlack), start),
+    []).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/ChessBoard2.e:66
+% Happens(Throw(),1).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/ChessBoard2.e',66).
+
+ /*  [b(start, Maptime), ignore(start+1==Maptime)] ->
+       ta(Ta_Param,
+          tvs1=[start+1],
+          tvs2=[Maptime, start],
+          happens(throw, Maptime)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/ChessBoard2.e',66).
+axiom(happens(throw, Maptime),
+    [b(start, Maptime)]).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/ChessBoard2.e:68
+%; prune models irrelevant to example:
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/ChessBoard2.e:69
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/ChessBoard2.e',70).
+% HoldsAt(ItsWhite(),0).
+
+ /*  [] ->
+       ta(Ta_Param, tvs1=[start], tvs2=[start], holds_at(itsWhite, start)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/ChessBoard2.e',70).
+axiom(holds_at(itsWhite, start),
+    []).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/ChessBoard2.e:70
+% HoldsAt(ItsBlack(),0).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/ChessBoard2.e',70).
+
+ /*  [] ->
+       ta(Ta_Param, tvs1=[start], tvs2=[start], holds_at(itsBlack, start)).
+ */
+axiom(holds_at(itsBlack, start),
+    []).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/ChessBoard2.e:71
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/ChessBoard2.e',72).
+% HoldsAt(ItsWhite(),2).
+
+ /*  [b(start, Start2), toffset(start, 2, Start2), ignore(start+2==Start2)] ->
+       ta(Ta_Param,
+          tvs1=[start+2],
+          tvs2=[Start2, start],
+          holds_at(itsWhite, Start2)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/ChessBoard2.e',72).
+axiom(holds_at(itsWhite, Start2),
+    [b(start, Start2), toffset(start, 2, Start2)]).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/ChessBoard2.e:72
+% HoldsAt(ItsBlack(),2).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/ChessBoard2.e',72).
+
+ /*  [b(start, Start2), toffset(start, 2, Start2), ignore(start+2==Start2)] ->
+       ta(Ta_Param,
+          tvs1=[start+2],
+          tvs2=[Start2, start],
+          holds_at(itsBlack, Start2)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/ChessBoard2.e',72).
+axiom(holds_at(itsBlack, Start2),
+    [b(start, Start2), toffset(start, 2, Start2)]).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/ChessBoard2.e:74
+% completion Happens
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/ChessBoard2.e',74).
+==> completion(happens).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/ChessBoard2.e:76
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/ChessBoard2.e',77).
+% range time 0 2
+==> range(time,0,2).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/ChessBoard2.e:77
+% range offset 1 1
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/ChessBoard2.e',77).
+==> range(offset,1,1).
+%; End of file.

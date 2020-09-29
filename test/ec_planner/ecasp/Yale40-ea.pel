@@ -1,0 +1,218 @@
+:-include(library('ec_planner/ec_test_incl')).
+:-expects_dialect(pfc).
+% Wed, 01 Apr 2020 20:01:23 GMT
+% From ../ecasp/Yale40-ea.pel:4
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/Yale3-ea.e',32).
+
+ /*  loading(load_e_pl,
+   	'/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/Yale40-ea.e').
+ */
+%; Yale40-ea.e
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/Yale40-ea.e:1
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/Yale40-ea.e',2).
+% option showpred off
+:- set_ec_option(showpred, off).
+:- if(is_e_toplevel).
+:- endif.
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/Yale40-ea.e:3
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/Yale40-ea.e',4).
+% load foundations/Root.e
+:- load_e('foundations/Root.e', changed).
+:- if(is_e_toplevel).
+:- endif.
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/Yale40-ea.e:4
+% load foundations/EC.e
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/Yale40-ea.e',4).
+:- load_e('foundations/EC.e', changed).
+:- if(is_e_toplevel).
+:- endif.
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/Yale40-ea.e:6
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/Yale40-ea.e',7).
+% event Load()
+event(load).
+==> mpred_prop(load,event).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/Yale40-ea.e:7
+% event Shoot()
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/Yale40-ea.e',7).
+event(shoot).
+==> mpred_prop(shoot,event).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/Yale40-ea.e:8
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/Yale40-ea.e',9).
+% event Sneeze()
+event(sneeze).
+==> mpred_prop(sneeze,event).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/Yale40-ea.e:9
+% fluent Loaded()
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/Yale40-ea.e',9).
+fluent(loaded).
+==> mpred_prop(loaded,fluent).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/Yale40-ea.e:10
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/Yale40-ea.e',11).
+% fluent Alive()
+fluent(alive).
+==> mpred_prop(alive,fluent).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/Yale40-ea.e:12
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/Yale40-ea.e',13).
+% [time]
+% (Initiates(Load(),Loaded(),time)).
+
+ /*  [] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          initiates(load, loaded, Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/Yale40-ea.e',13).
+axiom(initiates(load, loaded, Time),
+    []).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/Yale40-ea.e:13
+% [time]
+% (HoldsAt(Loaded(),time) -> Terminates(Shoot(),Alive(),time)).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/Yale40-ea.e',13).
+
+ /*  [holds_at(loaded, Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          terminates(shoot, alive, Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/Yale40-ea.e',13).
+axiom(terminates(shoot, alive, Time),
+    [holds_at(loaded, Time)]).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/Yale40-ea.e:14
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/Yale40-ea.e',15).
+% [time]
+% (Terminates(Shoot(),Loaded(),time)).
+
+ /*  [] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          terminates(shoot, loaded, Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/Yale40-ea.e',15).
+axiom(terminates(shoot, loaded, Time),
+    []).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/Yale40-ea.e:17
+% !ReleasedAt(Loaded(),0).
+ %  not(releasedAt(loaded,0)).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/Yale40-ea.e',17).
+
+ /*  [] ->
+       ta(Ta_Param, tvs1=[], tvs2=[], not(releasedAt(loaded, 0))).
+ */
+axiom(not(releasedAt(loaded, 0)),
+    []).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/Yale40-ea.e:18
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/Yale40-ea.e',19).
+% !ReleasedAt(Alive(),0).
+ %  not(releasedAt(alive,0)).
+
+ /*  [] ->
+       ta(Ta_Param, tvs1=[], tvs2=[], not(releasedAt(alive, 0))).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/Yale40-ea.e',19).
+axiom(not(releasedAt(alive, 0)),
+    []).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/Yale40-ea.e:20
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/Yale40-ea.e',21).
+% HoldsAt(Alive(),0).
+
+ /*  [] ->
+       ta(Ta_Param, tvs1=[start], tvs2=[start], holds_at(alive, start)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/Yale40-ea.e',21).
+axiom(holds_at(alive, start),
+    []).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/Yale40-ea.e:21
+% !HoldsAt(Loaded(),0).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/Yale40-ea.e',21).
+
+ /*  [] ->
+       ta(Ta_Param, tvs1=[start], tvs2=[start], holds_at(neg(loaded), start)).
+ */
+axiom(holds_at(neg(loaded), start),
+    []).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/Yale40-ea.e:22
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/Yale40-ea.e',23).
+% Happens(Load(),10).
+
+ /*  [b(start, Startd10), toffset(start, 10, Startd10), ignore(start+10==Startd10)] ->
+       ta(Ta_Param,
+          tvs1=[start+10],
+          tvs2=[Startd10, start],
+          happens(load, Startd10)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/Yale40-ea.e',23).
+axiom(happens(load, Startd10),
+    [b(start, Startd10), toffset(start, 10, Startd10)]).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/Yale40-ea.e:23
+% Happens(Sneeze(),20).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/Yale40-ea.e',23).
+
+ /*  [b(start, Startd20), toffset(start, 20, Startd20), ignore(start+20==Startd20)] ->
+       ta(Ta_Param,
+          tvs1=[start+20],
+          tvs2=[Startd20, start],
+          happens(sneeze, Startd20)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/Yale40-ea.e',23).
+axiom(happens(sneeze, Startd20),
+    [b(start, Startd20), toffset(start, 20, Startd20)]).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/Yale40-ea.e:24
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/Yale40-ea.e',25).
+% Happens(Shoot(),35).
+
+ /*  [b(start, Startd35), toffset(start, 35, Startd35), ignore(start+35==Startd35)] ->
+       ta(Ta_Param,
+          tvs1=[start+35],
+          tvs2=[Startd35, start],
+          happens(shoot, Startd35)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/Yale40-ea.e',25).
+axiom(happens(shoot, Startd35),
+    [b(start, Startd35), toffset(start, 35, Startd35)]).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/Yale40-ea.e:26
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/Yale40-ea.e',27).
+% completion Happens
+==> completion(happens).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/Yale40-ea.e:28
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/Yale40-ea.e',29).
+% range time 0 40
+==> range(time,0,40).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/Yale40-ea.e:29
+% range offset 1 1
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/Yale40-ea.e',29).
+==> range(offset,1,1).
+%; End of file.

@@ -1,0 +1,229 @@
+:-include(library('ec_planner/ec_test_incl')).
+:-expects_dialect(pfc).
+% Wed, 01 Apr 2020 20:01:01 GMT
+% From ../decreasoner/Yale40.pel:4
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Yale3.e',65).
+
+ /*  loading(load_e_pl,
+   	'/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Yale40.e').
+ */
+%;
+%; Copyright (c) 2005 IBM Corporation and others.
+%; All rights reserved. This program and the accompanying materials
+%; are made available under the terms of the Common Public License v1.0
+%; which accompanies this distribution, and is available at
+%; http://www.eclipse.org/legal/cpl-v10.html
+%;
+%; Contributors:
+%; IBM - Initial implementation
+%;
+%; @article{HanksMcDermott:1987,
+%;   author = "Steve Hanks and Drew V. McDermott",
+%;   year = "1987",
+%;   title = "Nonmonotonic logic and temporal projection",
+%;   journal = "Artificial Intelligence",
+%;   volume = "33",
+%;   number = "3",
+%;   pages = "379--412",
+%; }
+%;
+%; \fullciteA[pp. 322--323]{Shanahan:1997}
+%;
+%; @book{Shanahan:1997,
+%;   author = "Murray Shanahan",
+%;   year = "1997",
+%;   title = "Solving the Frame Problem",
+%;   address = "Cambridge, MA",
+%;   publisher = "MIT Press",
+%; }
+%;
+%; deduction
+%;
+%; modifications from Shanahan's formulation:
+%; InitiallyP -> HoldsAt
+%; timestamps
+%; added [time] Terminates(Shoot(),Loaded(),time).
+%;
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Yale40.e:38
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Yale40.e',39).
+% option showpred off
+:- set_ec_option(showpred, off).
+:- if(is_e_toplevel).
+:- endif.
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Yale40.e:40
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Yale40.e',41).
+% load foundations/Root.e
+:- load_e('foundations/Root.e', changed).
+:- if(is_e_toplevel).
+:- endif.
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Yale40.e:41
+% load foundations/EC.e
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Yale40.e',41).
+:- load_e('foundations/EC.e', changed).
+:- if(is_e_toplevel).
+:- endif.
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Yale40.e:43
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Yale40.e',44).
+% event Load()
+event(load).
+==> mpred_prop(load,event).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Yale40.e:44
+% event Shoot()
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Yale40.e',44).
+event(shoot).
+==> mpred_prop(shoot,event).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Yale40.e:45
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Yale40.e',46).
+% event Sneeze()
+event(sneeze).
+==> mpred_prop(sneeze,event).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Yale40.e:46
+% fluent Loaded()
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Yale40.e',46).
+fluent(loaded).
+==> mpred_prop(loaded,fluent).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Yale40.e:47
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Yale40.e',48).
+% fluent Alive()
+fluent(alive).
+==> mpred_prop(alive,fluent).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Yale40.e:49
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Yale40.e',50).
+% [time]
+ % Initiates(Load(),Loaded(),time).
+
+ /*  [] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          initiates(load, loaded, Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Yale40.e',50).
+axiom(initiates(load, loaded, Time),
+    []).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Yale40.e:50
+% [time]
+ % HoldsAt(Loaded(),time) -> Terminates(Shoot(),Alive(),time).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Yale40.e',50).
+
+ /*  [holds_at(loaded, Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          terminates(shoot, alive, Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Yale40.e',50).
+axiom(terminates(shoot, alive, Time),
+    [holds_at(loaded, Time)]).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Yale40.e:51
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Yale40.e',52).
+% [time]
+ % Terminates(Shoot(),Loaded(),time).
+
+ /*  [] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          terminates(shoot, loaded, Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Yale40.e',52).
+axiom(terminates(shoot, loaded, Time),
+    []).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Yale40.e:53
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Yale40.e',54).
+% HoldsAt(Alive(),0).
+
+ /*  [] ->
+       ta(Ta_Param, tvs1=[start], tvs2=[start], holds_at(alive, start)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Yale40.e',54).
+axiom(holds_at(alive, start),
+    []).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Yale40.e:54
+% !HoldsAt(Loaded(),0).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Yale40.e',54).
+
+ /*  [] ->
+       ta(Ta_Param, tvs1=[start], tvs2=[start], holds_at(neg(loaded), start)).
+ */
+axiom(holds_at(neg(loaded), start),
+    []).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Yale40.e:55
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Yale40.e',56).
+% Happens(Load(),10).
+
+ /*  [b(start, Startd10), toffset(start, 10, Startd10), ignore(start+10==Startd10)] ->
+       ta(Ta_Param,
+          tvs1=[start+10],
+          tvs2=[Startd10, start],
+          happens(load, Startd10)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Yale40.e',56).
+axiom(happens(load, Startd10),
+    [b(start, Startd10), toffset(start, 10, Startd10)]).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Yale40.e:56
+% Happens(Sneeze(),20).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Yale40.e',56).
+
+ /*  [b(start, Startd20), toffset(start, 20, Startd20), ignore(start+20==Startd20)] ->
+       ta(Ta_Param,
+          tvs1=[start+20],
+          tvs2=[Startd20, start],
+          happens(sneeze, Startd20)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Yale40.e',56).
+axiom(happens(sneeze, Startd20),
+    [b(start, Startd20), toffset(start, 20, Startd20)]).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Yale40.e:57
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Yale40.e',58).
+% Happens(Shoot(),35).
+
+ /*  [b(start, Startd35), toffset(start, 35, Startd35), ignore(start+35==Startd35)] ->
+       ta(Ta_Param,
+          tvs1=[start+35],
+          tvs2=[Startd35, start],
+          happens(shoot, Startd35)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Yale40.e',58).
+axiom(happens(shoot, Startd35),
+    [b(start, Startd35), toffset(start, 35, Startd35)]).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Yale40.e:59
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Yale40.e',60).
+% completion Happens
+==> completion(happens).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Yale40.e:61
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Yale40.e',62).
+% range time 0 40
+==> range(time,0,40).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Yale40.e:62
+% range offset 1 1
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Yale40.e',62).
+==> range(offset,1,1).
+%; End of file.

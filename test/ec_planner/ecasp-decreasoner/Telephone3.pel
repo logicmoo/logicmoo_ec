@@ -1,0 +1,797 @@
+:-include(library('ec_planner/ec_test_incl')).
+:-expects_dialect(pfc).
+% Wed, 01 Apr 2020 20:00:56 GMT
+% From ../decreasoner/Telephone3.pel:4
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Supermarket40.e',104).
+
+ /*  loading(load_e_pl,
+   	'/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Telephone3.e').
+ */
+%;
+%; Copyright (c) 2005 IBM Corporation and others.
+%; All rights reserved. This program and the accompanying materials
+%; are made available under the terms of the Common Public License v1.0
+%; which accompanies this distribution, and is available at
+%; http://www.eclipse.org/legal/cpl-v10.html
+%;
+%; Contributors:
+%; IBM - Initial implementation
+%;
+%; @book{Mueller:2006,
+%;   author = "Erik T. Mueller",
+%;   year = "2006",
+%;   title = "Commonsense Reasoning",
+%;   address = "San Francisco",
+%;   publisher = "Morgan Kaufmann/Elsevier",
+%; }
+%;
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Telephone3.e:19
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Telephone3.e',20).
+% load foundations/Root.e
+:- load_e('foundations/Root.e', changed).
+:- if(is_e_toplevel).
+:- endif.
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Telephone3.e:20
+% load foundations/EC.e
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Telephone3.e',20).
+:- load_e('foundations/EC.e', changed).
+:- if(is_e_toplevel).
+:- endif.
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Telephone3.e:22
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Telephone3.e',23).
+% sort agent
+==> sort(agent).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Telephone3.e:23
+% sort phone
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Telephone3.e',23).
+==> sort(phone).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Telephone3.e:25
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Telephone3.e',26).
+% agent Agent1, Agent2
+==> t(agent,agent1).
+==> t(agent,agent2).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Telephone3.e:26
+% phone Phone1, Phone2
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Telephone3.e',26).
+==> t(phone,phone1).
+==> t(phone,phone2).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Telephone3.e:28
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Telephone3.e',29).
+% fluent Ringing(phone,phone)
+fluent(ringing(phone,phone)).
+==> mpred_prop(ringing(phone,phone),fluent).
+==> meta_argtypes(ringing(phone,phone)).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Telephone3.e:29
+% fluent DialTone(phone)
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Telephone3.e',29).
+fluent(dialTone(phone)).
+==> mpred_prop(dialTone(phone),fluent).
+==> meta_argtypes(dialTone(phone)).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Telephone3.e:30
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Telephone3.e',31).
+% fluent BusySignal(phone)
+fluent(busySignal(phone)).
+==> mpred_prop(busySignal(phone),fluent).
+==> meta_argtypes(busySignal(phone)).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Telephone3.e:31
+% fluent Idle(phone)
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Telephone3.e',31).
+fluent(idle(phone)).
+==> mpred_prop(idle(phone),fluent).
+==> meta_argtypes(idle(phone)).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Telephone3.e:32
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Telephone3.e',33).
+% fluent Connected(phone,phone)
+fluent(connected(phone,phone)).
+==> mpred_prop(connected(phone,phone),fluent).
+==> meta_argtypes(connected(phone,phone)).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Telephone3.e:33
+% fluent Disconnected(phone)
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Telephone3.e',33).
+fluent(disconnected(phone)).
+==> mpred_prop(disconnected(phone),fluent).
+==> meta_argtypes(disconnected(phone)).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Telephone3.e:35
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Telephone3.e',36).
+% event PickUp(agent,phone)
+event(pickUp(agent,phone)).
+==> mpred_prop(pickUp(agent,phone),event).
+==> meta_argtypes(pickUp(agent,phone)).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Telephone3.e:36
+% event SetDown(agent,phone)
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Telephone3.e',36).
+event(setDown(agent,phone)).
+==> mpred_prop(setDown(agent,phone),event).
+==> meta_argtypes(setDown(agent,phone)).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Telephone3.e:37
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Telephone3.e',38).
+% event Dial(agent,phone,phone)
+event(dial(agent,phone,phone)).
+==> mpred_prop(dial(agent,phone,phone),event).
+==> meta_argtypes(dial(agent,phone,phone)).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Telephone3.e:39
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Telephone3.e',40).
+%; Sigma
+% [agent,phone,time]
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Telephone3.e:42
+% HoldsAt(Idle(phone),time) ->
+% Initiates(PickUp(agent,phone),DialTone(phone),time).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Telephone3.e',42).
+
+ /*  [holds_at(idle(Phone), Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          initiates(pickUp(Agent, Phone),
+                    dialTone(Phone),
+                    Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Telephone3.e',42).
+axiom(initiates(pickUp(Agent, Phone), dialTone(Phone), Time),
+    [holds_at(idle(Phone), Time)]).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Telephone3.e:45
+% [agent,phone,time]
+% HoldsAt(Idle(phone),time) ->
+% Terminates(PickUp(agent,phone),Idle(phone),time).
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Telephone3.e:47
+
+ /*  [holds_at(idle(Phone), Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          terminates(pickUp(Agent, Phone),
+                     idle(Phone),
+                     Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Telephone3.e',47).
+axiom(terminates(pickUp(Agent, Phone), idle(Phone), Time),
+    [holds_at(idle(Phone), Time)]).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Telephone3.e:49
+% [agent,phone,time]
+% HoldsAt(DialTone(phone),time) ->
+% Initiates(SetDown(agent,phone),Idle(phone),time).
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Telephone3.e:51
+
+ /*  [holds_at(dialTone(Phone), Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          initiates(setDown(Agent, Phone),
+                    idle(Phone),
+                    Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Telephone3.e',51).
+axiom(initiates(setDown(Agent, Phone), idle(Phone), Time),
+    [holds_at(dialTone(Phone), Time)]).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Telephone3.e:53
+% [agent,phone,time]
+% HoldsAt(DialTone(phone),time) ->
+% Terminates(SetDown(agent,phone),DialTone(phone),time).
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Telephone3.e:55
+
+ /*  [holds_at(dialTone(Phone), Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          terminates(setDown(Agent, Phone),
+                     dialTone(Phone),
+                     Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Telephone3.e',55).
+axiom(terminates(setDown(Agent, Phone), dialTone(Phone), Time),
+    [holds_at(dialTone(Phone), Time)]).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Telephone3.e:57
+% [agent,phone1,phone2,time]
+% HoldsAt(DialTone(phone1),time) &
+% HoldsAt(Idle(phone2),time) ->
+% Initiates(Dial(agent,phone1,phone2),Ringing(phone1,phone2),time).
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Telephone3.e:60
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Telephone3.e',59).
+
+ /*  [holds_at(dialTone(Phone1), Time), holds_at(idle(Phone2), Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          initiates(dial(Agent, Phone1, Phone2),
+                    ringing(Phone1, Phone2),
+                    Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Telephone3.e',59).
+axiom(initiates(dial(Agent, Phone1, Phone2), ringing(Phone1, Phone2), Time),
+   
+    [ holds_at(dialTone(Phone1), Time),
+      holds_at(idle(Phone2), Time)
+    ]).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Telephone3.e:62
+% [agent,phone1,phone2,time]
+% HoldsAt(DialTone(phone1),time) &
+% HoldsAt(Idle(phone2),time) ->
+% Terminates(Dial(agent,phone1,phone2),DialTone(phone1),time).
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Telephone3.e:65
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Telephone3.e',64).
+
+ /*  [holds_at(dialTone(Phone1), Time), holds_at(idle(Phone2), Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          terminates(dial(Agent, Phone1, Phone2),
+                     dialTone(Phone1),
+                     Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Telephone3.e',64).
+axiom(terminates(dial(Agent, Phone1, Phone2), dialTone(Phone1), Time),
+   
+    [ holds_at(dialTone(Phone1), Time),
+      holds_at(idle(Phone2), Time)
+    ]).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Telephone3.e:67
+% [agent,phone1,phone2,time]
+% HoldsAt(DialTone(phone1),time) &
+% HoldsAt(Idle(phone2),time) ->
+% Terminates(Dial(agent,phone1,phone2),Idle(phone2),time).
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Telephone3.e:70
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Telephone3.e',69).
+
+ /*  [holds_at(dialTone(Phone1), Time), holds_at(idle(Phone2), Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          terminates(dial(Agent, Phone1, Phone2),
+                     idle(Phone2),
+                     Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Telephone3.e',69).
+axiom(terminates(dial(Agent, Phone1, Phone2), idle(Phone2), Time),
+   
+    [ holds_at(dialTone(Phone1), Time),
+      holds_at(idle(Phone2), Time)
+    ]).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Telephone3.e:72
+% [agent,phone1,phone2,time]
+% HoldsAt(DialTone(phone1),time) &
+% !HoldsAt(Idle(phone2),time) ->
+% Initiates(Dial(agent,phone1,phone2),BusySignal(phone1),time).
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Telephone3.e:75
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Telephone3.e',74).
+
+ /*  [holds_at(dialTone(Phone1), Time), holds_at(neg(idle(Phone2)), Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          initiates(dial(Agent, Phone1, Phone2),
+                    busySignal(Phone1),
+                    Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Telephone3.e',74).
+axiom(initiates(dial(Agent, Phone1, Phone2), busySignal(Phone1), Time),
+   
+    [ holds_at(dialTone(Phone1), Time),
+      holds_at(neg(idle(Phone2)), Time)
+    ]).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Telephone3.e:77
+% [agent,phone1,phone2,time]
+% HoldsAt(DialTone(phone1),time) &
+% !HoldsAt(Idle(phone2),time) ->
+% Terminates(Dial(agent,phone1,phone2),DialTone(phone1),time).
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Telephone3.e:80
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Telephone3.e',79).
+
+ /*  [holds_at(dialTone(Phone1), Time), holds_at(neg(idle(Phone2)), Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          terminates(dial(Agent, Phone1, Phone2),
+                     dialTone(Phone1),
+                     Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Telephone3.e',79).
+axiom(terminates(dial(Agent, Phone1, Phone2), dialTone(Phone1), Time),
+   
+    [ holds_at(dialTone(Phone1), Time),
+      holds_at(neg(idle(Phone2)), Time)
+    ]).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Telephone3.e:82
+% [agent,phone,time]
+% HoldsAt(BusySignal(phone),time) ->
+% Initiates(SetDown(agent,phone),Idle(phone),time).
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Telephone3.e:84
+
+ /*  [holds_at(busySignal(Phone), Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          initiates(setDown(Agent, Phone),
+                    idle(Phone),
+                    Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Telephone3.e',84).
+axiom(initiates(setDown(Agent, Phone), idle(Phone), Time),
+    [holds_at(busySignal(Phone), Time)]).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Telephone3.e:86
+% [agent,phone,time]
+% HoldsAt(BusySignal(phone),time) ->
+% Terminates(SetDown(agent,phone),BusySignal(phone),time).
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Telephone3.e:88
+
+ /*  [holds_at(busySignal(Phone), Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          terminates(setDown(Agent, Phone),
+                     busySignal(Phone),
+                     Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Telephone3.e',88).
+axiom(terminates(setDown(Agent, Phone), busySignal(Phone), Time),
+    [holds_at(busySignal(Phone), Time)]).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Telephone3.e:90
+% [agent,phone1,phone2,time]
+% HoldsAt(Ringing(phone1,phone2),time) ->
+% Initiates(SetDown(agent,phone1),Idle(phone1),time).
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Telephone3.e:92
+
+ /*  [holds_at(ringing(Phone1, Phone2), Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          initiates(setDown(Agent, Phone1),
+                    idle(Phone1),
+                    Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Telephone3.e',92).
+axiom(initiates(setDown(Agent, Phone1), idle(Phone1), Time),
+    [holds_at(ringing(Phone1, Phone2), Time)]).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Telephone3.e:94
+% [agent,phone1,phone2,time]
+% HoldsAt(Ringing(phone1,phone2),time) ->
+% Initiates(SetDown(agent,phone1),Idle(phone2),time).
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Telephone3.e:96
+
+ /*  [holds_at(ringing(Phone1, Phone2), Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          initiates(setDown(Agent, Phone1),
+                    idle(Phone2),
+                    Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Telephone3.e',96).
+axiom(initiates(setDown(Agent, Phone1), idle(Phone2), Time),
+    [holds_at(ringing(Phone1, Phone2), Time)]).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Telephone3.e:98
+% [agent,phone1,phone2,time]
+% HoldsAt(Ringing(phone1,phone2),time) ->
+% Terminates(SetDown(agent,phone1),Ringing(phone1,phone2),time).
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Telephone3.e:100
+
+ /*  [holds_at(ringing(Phone1, Phone2), Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          terminates(setDown(Agent, Phone1),
+                     ringing(Phone1, Phone2),
+                     Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Telephone3.e',100).
+axiom(terminates(setDown(Agent, Phone1), ringing(Phone1, Phone2), Time),
+    [holds_at(ringing(Phone1, Phone2), Time)]).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Telephone3.e:102
+% [agent,phone1,phone2,time]
+% HoldsAt(Ringing(phone1,phone2),time) ->
+% Initiates(PickUp(agent,phone2),Connected(phone1,phone2),time).
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Telephone3.e:104
+
+ /*  [holds_at(ringing(Phone1, Phone2), Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          initiates(pickUp(Agent, Phone2),
+                    connected(Phone1, Phone2),
+                    Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Telephone3.e',104).
+axiom(initiates(pickUp(Agent, Phone2), connected(Phone1, Phone2), Time),
+    [holds_at(ringing(Phone1, Phone2), Time)]).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Telephone3.e:106
+% [agent,phone1,phone2,time]
+% HoldsAt(Ringing(phone1,phone2),time) ->
+% Terminates(PickUp(agent,phone2),Ringing(phone1,phone2),time).
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Telephone3.e:108
+
+ /*  [holds_at(ringing(Phone1, Phone2), Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          terminates(pickUp(Agent, Phone2),
+                     ringing(Phone1, Phone2),
+                     Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Telephone3.e',108).
+axiom(terminates(pickUp(Agent, Phone2), ringing(Phone1, Phone2), Time),
+    [holds_at(ringing(Phone1, Phone2), Time)]).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Telephone3.e:110
+% [agent,phone1,phone2,time]
+% HoldsAt(Connected(phone1,phone2),time) ->
+% Initiates(SetDown(agent,phone1),Idle(phone1),time).
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Telephone3.e:112
+
+ /*  [holds_at(connected(Phone1, Phone2), Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          initiates(setDown(Agent, Phone1),
+                    idle(Phone1),
+                    Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Telephone3.e',112).
+axiom(initiates(setDown(Agent, Phone1), idle(Phone1), Time),
+    [holds_at(connected(Phone1, Phone2), Time)]).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Telephone3.e:114
+% [agent,phone1,phone2,time]
+% HoldsAt(Connected(phone1,phone2),time) ->
+% Initiates(SetDown(agent,phone1),Disconnected(phone2),time).
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Telephone3.e:116
+
+ /*  [holds_at(connected(Phone1, Phone2), Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          initiates(setDown(Agent, Phone1),
+                    disconnected(Phone2),
+                    Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Telephone3.e',116).
+axiom(initiates(setDown(Agent, Phone1), disconnected(Phone2), Time),
+    [holds_at(connected(Phone1, Phone2), Time)]).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Telephone3.e:118
+% [agent,phone1,phone2,time]
+% HoldsAt(Connected(phone1,phone2),time) ->
+% Terminates(SetDown(agent,phone1),Connected(phone1,phone2),time).
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Telephone3.e:120
+
+ /*  [holds_at(connected(Phone1, Phone2), Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          terminates(setDown(Agent, Phone1),
+                     connected(Phone1, Phone2),
+                     Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Telephone3.e',120).
+axiom(terminates(setDown(Agent, Phone1), connected(Phone1, Phone2), Time),
+    [holds_at(connected(Phone1, Phone2), Time)]).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Telephone3.e:122
+% [agent,phone1,phone2,time]
+% HoldsAt(Connected(phone1,phone2),time) ->
+% Initiates(SetDown(agent,phone2),Idle(phone2),time).
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Telephone3.e:124
+
+ /*  [holds_at(connected(Phone1, Phone2), Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          initiates(setDown(Agent, Phone2),
+                    idle(Phone2),
+                    Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Telephone3.e',124).
+axiom(initiates(setDown(Agent, Phone2), idle(Phone2), Time),
+    [holds_at(connected(Phone1, Phone2), Time)]).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Telephone3.e:126
+% [agent,phone1,phone2,time]
+% HoldsAt(Connected(phone1,phone2),time) ->
+% Initiates(SetDown(agent,phone2),Disconnected(phone1),time).
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Telephone3.e:128
+
+ /*  [holds_at(connected(Phone1, Phone2), Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          initiates(setDown(Agent, Phone2),
+                    disconnected(Phone1),
+                    Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Telephone3.e',128).
+axiom(initiates(setDown(Agent, Phone2), disconnected(Phone1), Time),
+    [holds_at(connected(Phone1, Phone2), Time)]).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Telephone3.e:130
+% [agent,phone1,phone2,time]
+% HoldsAt(Connected(phone1,phone2),time) ->
+% Terminates(SetDown(agent,phone2),Connected(phone1,phone2),time).
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Telephone3.e:132
+
+ /*  [holds_at(connected(Phone1, Phone2), Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          terminates(setDown(Agent, Phone2),
+                     connected(Phone1, Phone2),
+                     Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Telephone3.e',132).
+axiom(terminates(setDown(Agent, Phone2), connected(Phone1, Phone2), Time),
+    [holds_at(connected(Phone1, Phone2), Time)]).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Telephone3.e:134
+% [agent,phone,time]
+% HoldsAt(Disconnected(phone),time) ->
+% Initiates(SetDown(agent,phone),Idle(phone),time).
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Telephone3.e:136
+
+ /*  [holds_at(disconnected(Phone), Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          initiates(setDown(Agent, Phone),
+                    idle(Phone),
+                    Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Telephone3.e',136).
+axiom(initiates(setDown(Agent, Phone), idle(Phone), Time),
+    [holds_at(disconnected(Phone), Time)]).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Telephone3.e:138
+% [agent,phone,time]
+% HoldsAt(Disconnected(phone),time) ->
+% Terminates(SetDown(agent,phone),Disconnected(phone),time).
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Telephone3.e:140
+
+ /*  [holds_at(disconnected(Phone), Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          terminates(setDown(Agent, Phone),
+                     disconnected(Phone),
+                     Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Telephone3.e',140).
+axiom(terminates(setDown(Agent, Phone), disconnected(Phone), Time),
+    [holds_at(disconnected(Phone), Time)]).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Telephone3.e:142
+%; Delta
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Telephone3.e:144
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Telephone3.e',145).
+% Delta: 
+next_axiom_uses(delta).
+ 
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Telephone3.e:144
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Telephone3.e',145).
+% Happens(PickUp(Agent1,Phone1),0).
+
+ /*  [axiom_uses(delta, Axiom_uses_Ret)] ->
+       ta(Ta_Param,
+          tvs1=[start],
+          tvs2=[start],
+          happens(pickUp(agent1, phone1), start)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Telephone3.e',145).
+axiom(happens(pickUp(agent1, phone1), start),
+    [axiom_uses(delta, Axiom_uses_Ret)]).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Telephone3.e:145
+% Delta: 
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Telephone3.e',145).
+next_axiom_uses(delta).
+ 
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Telephone3.e:145
+% Happens(Dial(Agent1,Phone1,Phone2),1).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Telephone3.e',145).
+
+ /*  [axiom_uses(delta, Axiom_uses_Ret), b(start, Maptime), ignore(start+1==Maptime)] ->
+       ta(Ta_Param,
+          tvs1=[start+1],
+          tvs2=[Maptime, start],
+          happens(dial(agent1, phone1, phone2), Maptime)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Telephone3.e',145).
+axiom(happens(dial(agent1, phone1, phone2), Maptime),
+    [axiom_uses(delta, Axiom_uses_Ret), b(start, Maptime)]).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Telephone3.e:146
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Telephone3.e',147).
+% Delta: 
+next_axiom_uses(delta).
+ 
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Telephone3.e:146
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Telephone3.e',147).
+% Happens(PickUp(Agent2,Phone2),2).
+
+ /*  [axiom_uses(delta, Axiom_uses_Ret), b(start, Start2), toffset(start, 2, Start2), ignore(start+2==Start2)] ->
+       ta(Ta_Param,
+          tvs1=[start+2],
+          tvs2=[Start2, start],
+          happens(pickUp(agent2, phone2), Start2)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Telephone3.e',147).
+axiom(happens(pickUp(agent2, phone2), Start2),
+   
+    [ axiom_uses(delta, Axiom_uses_Ret),
+      b(start, Start2),
+      toffset(start, 2, Start2)
+    ]).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Telephone3.e:148
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Telephone3.e',149).
+%; Gamma
+% [phone]
+ % HoldsAt(Idle(phone),0).
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Telephone3.e:150
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Telephone3.e',151).
+
+ /*  [] ->
+       ta(Ta_Param,
+          tvs1=[start],
+          tvs2=[start],
+          holds_at(idle(Phone), start)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Telephone3.e',151).
+axiom(holds_at(idle(Phone), start),
+    []).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Telephone3.e:151
+% [phone]
+ % !HoldsAt(DialTone(phone),0).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Telephone3.e',151).
+
+ /*  [] ->
+       ta(Ta_Param,
+          tvs1=[start],
+          tvs2=[start],
+          holds_at(neg(dialTone(Phone)), start)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Telephone3.e',151).
+axiom(holds_at(neg(dialTone(Phone)), start),
+    []).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Telephone3.e:152
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Telephone3.e',153).
+% [phone]
+ % !HoldsAt(BusySignal(phone),0).
+
+ /*  [] ->
+       ta(Ta_Param,
+          tvs1=[start],
+          tvs2=[start],
+          holds_at(neg(busySignal(Phone)), start)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Telephone3.e',153).
+axiom(holds_at(neg(busySignal(Phone)), start),
+    []).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Telephone3.e:153
+% [phone1,phone2]
+ % !HoldsAt(Ringing(phone1,phone2),0).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Telephone3.e',153).
+
+ /*  [] ->
+       ta(Ta_Param,
+          tvs1=[start],
+          tvs2=[start],
+          holds_at(neg(ringing(Phone1, Phone2)), start)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Telephone3.e',153).
+axiom(holds_at(neg(ringing(Phone1, Phone2)), start),
+    []).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Telephone3.e:154
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Telephone3.e',155).
+% [phone1,phone2]
+ % !HoldsAt(Connected(phone1,phone2),0).
+
+ /*  [] ->
+       ta(Ta_Param,
+          tvs1=[start],
+          tvs2=[start],
+          holds_at(neg(connected(Phone1, Phone2)), start)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Telephone3.e',155).
+axiom(holds_at(neg(connected(Phone1, Phone2)), start),
+    []).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Telephone3.e:155
+% [phone]
+ % !HoldsAt(Disconnected(phone),0).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Telephone3.e',155).
+
+ /*  [] ->
+       ta(Ta_Param,
+          tvs1=[start],
+          tvs2=[start],
+          holds_at(neg(disconnected(Phone)), start)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Telephone3.e',155).
+axiom(holds_at(neg(disconnected(Phone)), start),
+    []).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Telephone3.e:157
+% completion Delta Happens
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Telephone3.e',157).
+==> completion(delta).
+==> completion(happens).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Telephone3.e:159
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Telephone3.e',160).
+% range time 0 3
+==> range(time,0,3).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Telephone3.e:160
+% range offset 1 1
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Telephone3.e',160).
+==> range(offset,1,1).
+%; End of file.

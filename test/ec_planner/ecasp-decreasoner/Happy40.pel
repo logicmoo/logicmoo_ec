@@ -1,0 +1,332 @@
+:-include(library('ec_planner/ec_test_incl')).
+:-expects_dialect(pfc).
+% Wed, 01 Apr 2020 20:00:47 GMT
+% From ../decreasoner/Happy40.pel:4
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Happy2.e',65).
+
+ /*  loading(load_e_pl,
+   	'/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Happy40.e').
+ */
+%;
+%; Copyright (c) 2005 IBM Corporation and others.
+%; All rights reserved. This program and the accompanying materials
+%; are made available under the terms of the Common Public License v1.0
+%; which accompanies this distribution, and is available at
+%; http://www.eclipse.org/legal/cpl-v10.html
+%;
+%; Contributors:
+%; IBM - Initial implementation
+%;
+%; @incollection{Shanahan:1999,
+%;   author = "Shanahan, Murray",
+%;   year = "1999",
+%;   title = "The Event Calculus explained",
+%;   editor = "Michael J. Wooldridge and Manuela M. Veloso",
+%;   booktitle = "Artificial Intelligence Today: Recent Trends and Developments",
+%;   series = "Lecture Notes in Computer Science",
+%;   volume = "1600",
+%;   pages = "409--430",
+%;   address = "Berlin",
+%;   publisher = "Springer",
+%; }
+%;
+%; deduction
+%;
+%; modifications from Shanahan's formulation:
+%; InitiallyN -> !HoldsAt
+%; InitiallyP -> HoldsAt
+%; timestamps
+%;
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Happy40.e:31
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Happy40.e',32).
+% load foundations/Root.e
+:- load_e('foundations/Root.e', changed).
+:- if(is_e_toplevel).
+:- endif.
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Happy40.e:32
+% load foundations/EC.e
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Happy40.e',32).
+:- load_e('foundations/EC.e', changed).
+:- if(is_e_toplevel).
+:- endif.
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Happy40.e:34
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Happy40.e',35).
+% sort person
+==> sort(person).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Happy40.e:35
+% event Feed(person)
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Happy40.e',35).
+event(feed(person)).
+==> mpred_prop(feed(person),event).
+==> meta_argtypes(feed(person)).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Happy40.e:36
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Happy40.e',37).
+% event Clothe(person)
+event(clothe(person)).
+==> mpred_prop(clothe(person),event).
+==> meta_argtypes(clothe(person)).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Happy40.e:37
+% fluent Happy(person)
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Happy40.e',37).
+fluent(happy(person)).
+==> mpred_prop(happy(person),fluent).
+==> meta_argtypes(happy(person)).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Happy40.e:38
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Happy40.e',39).
+% fluent Hungry(person)
+fluent(hungry(person)).
+==> mpred_prop(hungry(person),fluent).
+==> meta_argtypes(hungry(person)).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Happy40.e:39
+% fluent Cold(person)
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Happy40.e',39).
+fluent(cold(person)).
+==> mpred_prop(cold(person),fluent).
+==> meta_argtypes(cold(person)).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Happy40.e:40
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Happy40.e',41).
+% noninertial Happy
+==> noninertial(happy).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Happy40.e:42
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Happy40.e',43).
+% [person,time]
+% HoldsAt(Happy(person),time) <->
+% !HoldsAt(Hungry(person),time) &
+% !HoldsAt(Cold(person),time).
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Happy40.e:45
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Happy40.e',43).
+
+ /*  holds_at(happy(Person), Time) <->
+       holds_at(neg(hungry(Person)), Time),
+       holds_at(neg(cold(Person)), Time).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Happy40.e',43).
+
+ /*  [holds_at, happy] <->
+       [holds_at, neg, hungry, holds_at, neg, cold].
+ */
+
+ /*  holds_at(happy(Person), Time) ->
+       holds_at(neg(hungry(Person)), Time),
+       holds_at(neg(cold(Person)), Time).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Happy40.e',43).
+
+ /*  not(holds_at(happy(Person), Time)) :-
+       (   not(holds_at(neg(hungry(Person)), Time))
+       ;   not(holds_at(neg(cold(Person)), Time))
+       ).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Happy40.e',43).
+
+ /*  [(holds_at(hungry(Person), Time);holds_at(cold(Person), Time))] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(neg(happy(Person)), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Happy40.e',43).
+axiom(holds_at(neg(happy(Person)), Time),
+   
+    [  (holds_at(hungry(Person), Time);holds_at(cold(Person), Time))
+    ]).
+
+ /*  holds_at(neg(hungry(Person)), Time) :-
+       holds_at(happy(Person), Time).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Happy40.e',43).
+
+ /*  [holds_at(happy(Person), Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(neg(hungry(Person)), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Happy40.e',43).
+axiom(holds_at(neg(hungry(Person)), Time),
+    [holds_at(happy(Person), Time)]).
+
+ /*  holds_at(neg(cold(Person)), Time) :-
+       holds_at(happy(Person), Time).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Happy40.e',43).
+
+ /*  [holds_at(happy(Person), Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(neg(cold(Person)), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Happy40.e',43).
+axiom(holds_at(neg(cold(Person)), Time),
+    [holds_at(happy(Person), Time)]).
+
+ /*  holds_at(neg(hungry(Person)), Time), holds_at(neg(cold(Person)), Time) ->
+       holds_at(happy(Person), Time).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Happy40.e',43).
+
+ /*  holds_at(happy(Person), Time) :-
+       holds_at(neg(hungry(Person)), Time),
+       holds_at(neg(cold(Person)), Time).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Happy40.e',43).
+
+ /*  [holds_at(neg(hungry(Person)), Time), holds_at(neg(cold(Person)), Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(happy(Person), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Happy40.e',43).
+axiom(holds_at(happy(Person), Time),
+   
+    [ holds_at(neg(hungry(Person)), Time),
+      holds_at(neg(cold(Person)), Time)
+    ]).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Happy40.e',43).
+
+ /*  not(holds_at(neg(hungry(Person)), Time)) :-
+       holds_at(neg(cold(Person)), Time),
+       not(holds_at(happy(Person), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Happy40.e',43).
+
+ /*  [holds_at(neg(cold(Person)), Time), holds_at(neg(happy(Person)), Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(hungry(Person), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Happy40.e',43).
+axiom(holds_at(hungry(Person), Time),
+   
+    [ holds_at(neg(cold(Person)), Time),
+      holds_at(neg(happy(Person)), Time)
+    ]).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Happy40.e',43).
+
+ /*  not(holds_at(neg(cold(Person)), Time)) :-
+       holds_at(neg(hungry(Person)), Time),
+       not(holds_at(happy(Person), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Happy40.e',43).
+
+ /*  [holds_at(neg(hungry(Person)), Time), holds_at(neg(happy(Person)), Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(cold(Person), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Happy40.e',43).
+axiom(holds_at(cold(Person), Time),
+   
+    [ holds_at(neg(hungry(Person)), Time),
+      holds_at(neg(happy(Person)), Time)
+    ]).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Happy40.e:47
+% [person,time]
+% Terminates(Feed(person),Hungry(person),time).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Happy40.e',49).
+
+ /*  [] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          terminates(feed(Person), hungry(Person), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Happy40.e',49).
+axiom(terminates(feed(Person), hungry(Person), Time),
+    []).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Happy40.e:50
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Happy40.e',51).
+% [person,time]
+% Terminates(Clothe(person),Cold(person),time).
+
+ /*  [] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          terminates(clothe(Person), cold(Person), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Happy40.e',51).
+axiom(terminates(clothe(Person), cold(Person), Time),
+    []).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Happy40.e:53
+% person Fred
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Happy40.e',53).
+==> t(person,fred).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Happy40.e:55
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Happy40.e',56).
+% HoldsAt(Hungry(Fred),0).
+
+ /*  [] ->
+       ta(Ta_Param, tvs1=[start], tvs2=[start], holds_at(hungry(fred), start)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Happy40.e',56).
+axiom(holds_at(hungry(fred), start),
+    []).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Happy40.e:56
+% !HoldsAt(Cold(Fred),0).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Happy40.e',56).
+
+ /*  [] ->
+       ta(Ta_Param,
+          tvs1=[start],
+          tvs2=[start],
+          holds_at(neg(cold(fred)), start)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Happy40.e',56).
+axiom(holds_at(neg(cold(fred)), start),
+    []).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Happy40.e:57
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Happy40.e',58).
+% Happens(Feed(Fred),25).
+
+ /*  [b(start, Startd25), toffset(start, 25, Startd25), ignore(start+25==Startd25)] ->
+       ta(Ta_Param,
+          tvs1=[start+25],
+          tvs2=[Startd25, start],
+          happens(feed(fred), Startd25)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Happy40.e',58).
+axiom(happens(feed(fred), Startd25),
+    [b(start, Startd25), toffset(start, 25, Startd25)]).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Happy40.e:59
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Happy40.e',60).
+% completion Happens
+==> completion(happens).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Happy40.e:61
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Happy40.e',62).
+% range time 0 40
+==> range(time,0,40).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Happy40.e:62
+% range offset 1 1
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Happy40.e',62).
+==> range(offset,1,1).
+%; End of file.

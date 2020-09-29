@@ -1,0 +1,358 @@
+:-include(library('ec_planner/ec_test_incl')).
+:-expects_dialect(pfc).
+% Wed, 01 Apr 2020 20:00:55 GMT
+% From ../decreasoner/StuffyRoom40.pel:4
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/StuffyRoom2.e',72).
+
+ /*  loading(load_e_pl,
+   	'/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/StuffyRoom40.e').
+ */
+%;
+%; Copyright (c) 2005 IBM Corporation and others.
+%; All rights reserved. This program and the accompanying materials
+%; are made available under the terms of the Common Public License v1.0
+%; which accompanies this distribution, and is available at
+%; http://www.eclipse.org/legal/cpl-v10.html
+%;
+%; Contributors:
+%; IBM - Initial implementation
+%;
+%; @article{GinsbergSmith:1988a,
+%;   author = "Matthew L. Ginsberg and David E. Smith",
+%;   year = "1988",
+%;   title = "Reasoning about action \uppercase{I}: \uppercase{A} possible worlds approach",
+%;   journal = "Artificial Intelligence",
+%;   volume = "35",
+%;   number = "2",
+%;   pages = "165--195",
+%; }
+%;
+%; \fullciteA[pp. 288--289]{Shanahan:1997}
+%;
+%; @book{Shanahan:1997,
+%;   author = "Murray Shanahan",
+%;   year = "1997",
+%;   title = "Solving the Frame Problem",
+%;   address = "Cambridge, MA",
+%;   publisher = "MIT Press",
+%; }
+%;
+%; deduction
+%;
+%; modifications from Shanahan's formulation:
+%; timestamps
+%; added:
+%; !HoldsAt(Blocked1(),0).
+%; !HoldsAt(Blocked2(),0).
+%;
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/StuffyRoom40.e:40
+% load foundations/Root.e
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/StuffyRoom40.e',40).
+:- load_e('foundations/Root.e', changed).
+:- if(is_e_toplevel).
+:- endif.
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/StuffyRoom40.e:41
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/StuffyRoom40.e',42).
+% load foundations/EC.e
+:- load_e('foundations/EC.e', changed).
+:- if(is_e_toplevel).
+:- endif.
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/StuffyRoom40.e:43
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/StuffyRoom40.e',44).
+% event Close1()
+event(close1).
+==> mpred_prop(close1,event).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/StuffyRoom40.e:44
+% event Close2()
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/StuffyRoom40.e',44).
+event(close2).
+==> mpred_prop(close2,event).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/StuffyRoom40.e:45
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/StuffyRoom40.e',46).
+% event Start()
+event(start).
+==> mpred_prop(start,event).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/StuffyRoom40.e:46
+% fluent Blocked1()
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/StuffyRoom40.e',46).
+fluent(blocked1).
+==> mpred_prop(blocked1,fluent).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/StuffyRoom40.e:47
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/StuffyRoom40.e',48).
+% fluent Blocked2()
+fluent(blocked2).
+==> mpred_prop(blocked2,fluent).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/StuffyRoom40.e:48
+% fluent Stuffy()
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/StuffyRoom40.e',48).
+fluent(stuffy).
+==> mpred_prop(stuffy,fluent).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/StuffyRoom40.e:49
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/StuffyRoom40.e',50).
+% noninertial Stuffy
+==> noninertial(stuffy).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/StuffyRoom40.e:51
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/StuffyRoom40.e',52).
+% [time]
+ % Initiates(Close1(),Blocked1(),time).
+
+ /*  [] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          initiates(close1, blocked1, Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/StuffyRoom40.e',52).
+axiom(initiates(close1, blocked1, Time),
+    []).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/StuffyRoom40.e:52
+% [time]
+ % Initiates(Close2(),Blocked2(),time).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/StuffyRoom40.e',52).
+
+ /*  [] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          initiates(close2, blocked2, Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/StuffyRoom40.e',52).
+axiom(initiates(close2, blocked2, Time),
+    []).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/StuffyRoom40.e:54
+% [time]
+% HoldsAt(Stuffy(),time) <->
+% HoldsAt(Blocked1(),time)&HoldsAt(Blocked2(),time).
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/StuffyRoom40.e:56
+
+ /*  holds_at(stuffy, Time) <->
+       holds_at(blocked1, Time),
+       holds_at(blocked2, Time).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/StuffyRoom40.e',56).
+
+ /*  [holds_at, stuffy] <->
+       [holds_at, blocked1, holds_at, blocked2].
+ */
+
+ /*  holds_at(stuffy, Time) ->
+       holds_at(blocked1, Time),
+       holds_at(blocked2, Time).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/StuffyRoom40.e',56).
+
+ /*  not(holds_at(stuffy, Time)) :-
+       (   not(holds_at(blocked1, Time))
+       ;   not(holds_at(blocked2, Time))
+       ).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/StuffyRoom40.e',56).
+
+ /*  [(holds_at(neg(blocked1), Time);holds_at(neg(blocked2), Time))] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(neg(stuffy), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/StuffyRoom40.e',56).
+axiom(holds_at(neg(stuffy), Time),
+    [(holds_at(neg(blocked1), Time);holds_at(neg(blocked2), Time))]).
+
+ /*  holds_at(blocked1, Time) :-
+       holds_at(stuffy, Time).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/StuffyRoom40.e',56).
+
+ /*  [holds_at(stuffy, Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(blocked1, Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/StuffyRoom40.e',56).
+axiom(holds_at(blocked1, Time),
+    [holds_at(stuffy, Time)]).
+
+ /*  holds_at(blocked2, Time) :-
+       holds_at(stuffy, Time).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/StuffyRoom40.e',56).
+
+ /*  [holds_at(stuffy, Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(blocked2, Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/StuffyRoom40.e',56).
+axiom(holds_at(blocked2, Time),
+    [holds_at(stuffy, Time)]).
+
+ /*  holds_at(blocked1, Time), holds_at(blocked2, Time) ->
+       holds_at(stuffy, Time).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/StuffyRoom40.e',56).
+
+ /*  holds_at(stuffy, Time) :-
+       holds_at(blocked1, Time),
+       holds_at(blocked2, Time).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/StuffyRoom40.e',56).
+
+ /*  [holds_at(blocked1, Time), holds_at(blocked2, Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(stuffy, Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/StuffyRoom40.e',56).
+axiom(holds_at(stuffy, Time),
+    [holds_at(blocked1, Time), holds_at(blocked2, Time)]).
+
+ /*  not(holds_at(blocked1, Time)) :-
+       holds_at(blocked2, Time),
+       not(holds_at(stuffy, Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/StuffyRoom40.e',56).
+
+ /*  [holds_at(blocked2, Time), holds_at(neg(stuffy), Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(neg(blocked1), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/StuffyRoom40.e',56).
+axiom(holds_at(neg(blocked1), Time),
+    [holds_at(blocked2, Time), holds_at(neg(stuffy), Time)]).
+
+ /*  not(holds_at(blocked2, Time)) :-
+       holds_at(blocked1, Time),
+       not(holds_at(stuffy, Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/StuffyRoom40.e',56).
+
+ /*  [holds_at(blocked1, Time), holds_at(neg(stuffy), Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(neg(blocked2), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/StuffyRoom40.e',56).
+axiom(holds_at(neg(blocked2), Time),
+    [holds_at(blocked1, Time), holds_at(neg(stuffy), Time)]).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/StuffyRoom40.e:58
+% [time]
+ % Initiates(Start(),Blocked1(),time).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/StuffyRoom40.e',58).
+
+ /*  [] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          initiates(start, blocked1, Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/StuffyRoom40.e',58).
+axiom(initiates(start, blocked1, Time),
+    []).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/StuffyRoom40.e:59
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/StuffyRoom40.e',60).
+% [time]
+ % Terminates(Start(),Blocked2(),time).
+
+ /*  [] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          terminates(start, blocked2, Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/StuffyRoom40.e',60).
+axiom(terminates(start, blocked2, Time),
+    []).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/StuffyRoom40.e:61
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/StuffyRoom40.e',62).
+% !HoldsAt(Blocked1(),0).
+
+ /*  [] ->
+       ta(Ta_Param, tvs1=[start], tvs2=[start], holds_at(neg(blocked1), start)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/StuffyRoom40.e',62).
+axiom(holds_at(neg(blocked1), start),
+    []).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/StuffyRoom40.e:62
+% !HoldsAt(Blocked2(),0).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/StuffyRoom40.e',62).
+
+ /*  [] ->
+       ta(Ta_Param, tvs1=[start], tvs2=[start], holds_at(neg(blocked2), start)).
+ */
+axiom(holds_at(neg(blocked2), start),
+    []).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/StuffyRoom40.e:63
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/StuffyRoom40.e',64).
+% Happens(Start(),10).
+
+ /*  [b(start, Startd10), toffset(start, 10, Startd10), ignore(start+10==Startd10)] ->
+       ta(Ta_Param,
+          tvs1=[start+10],
+          tvs2=[Startd10, start],
+          happens(start, Startd10)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/StuffyRoom40.e',64).
+axiom(happens(start, Startd10),
+    [b(start, Startd10), toffset(start, 10, Startd10)]).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/StuffyRoom40.e:64
+% Happens(Close2(),20).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/StuffyRoom40.e',64).
+
+ /*  [b(start, Startd20), toffset(start, 20, Startd20), ignore(start+20==Startd20)] ->
+       ta(Ta_Param,
+          tvs1=[start+20],
+          tvs2=[Startd20, start],
+          happens(close2, Startd20)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/StuffyRoom40.e',64).
+axiom(happens(close2, Startd20),
+    [b(start, Startd20), toffset(start, 20, Startd20)]).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/StuffyRoom40.e:66
+% completion Happens
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/StuffyRoom40.e',66).
+==> completion(happens).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/StuffyRoom40.e:68
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/StuffyRoom40.e',69).
+% range time 0 40
+==> range(time,0,40).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/StuffyRoom40.e:69
+% range offset 1 1
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/StuffyRoom40.e',69).
+==> range(offset,1,1).
+%; End of file.

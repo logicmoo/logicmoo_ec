@@ -1,0 +1,221 @@
+:-include(library('ec_planner/ec_test_incl')).
+:-expects_dialect(pfc).
+% Wed, 01 Apr 2020 20:00:42 GMT
+% From ../decreasoner/CoinToss4.pel:4
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/CoinToss40.e',67).
+
+ /*  loading(load_e_pl,
+   	'/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/CoinToss4.e').
+ */
+%;
+%; Copyright (c) 2005 IBM Corporation and others.
+%; All rights reserved. This program and the accompanying materials
+%; are made available under the terms of the Common Public License v1.0
+%; which accompanies this distribution, and is available at
+%; http://www.eclipse.org/legal/cpl-v10.html
+%;
+%; Contributors:
+%; IBM - Initial implementation
+%;
+%; @article{Kartha:1994,
+%;   author = "G. Neelakantan Kartha",
+%;   year = "1994",
+%;   title = "Two counterexamples related to \uppercase{B}aker's approach to the frame problem",
+%;   journal = "Artificial Intelligence",
+%;   volume = "69",
+%;   number = "1--2",
+%;   pages = "379--391",
+%; }
+%;
+%; @incollection{Shanahan:1999,
+%;   author = "Shanahan, Murray",
+%;   year = "1999",
+%;   title = "The Event Calculus explained",
+%;   editor = "Michael J. Wooldridge and Manuela M. Veloso",
+%;   booktitle = "Artificial Intelligence Today: Recent Trends and Developments",
+%;   series = "Lecture Notes in Computer Science",
+%;   volume = "1600",
+%;   pages = "409--430",
+%;   address = "Berlin",
+%;   publisher = "Springer",
+%; }
+%;
+%; model finding
+%;
+%; modifications from Shanahan's formulation:
+%; InitiallyP -> HoldsAt
+%; pruning of models irrelevant to example
+%; timestamps
+%;
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/CoinToss4.e:41
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/CoinToss4.e',42).
+% load foundations/Root.e
+:- load_e('foundations/Root.e', changed).
+:- if(is_e_toplevel).
+:- endif.
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/CoinToss4.e:42
+% load foundations/EC.e
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/CoinToss4.e',42).
+:- load_e('foundations/EC.e', changed).
+:- if(is_e_toplevel).
+:- endif.
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/CoinToss4.e:44
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/CoinToss4.e',45).
+% event Toss()
+event(toss).
+==> mpred_prop(toss,event).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/CoinToss4.e:45
+% fluent ItsHeads()
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/CoinToss4.e',45).
+fluent(itsHeads).
+==> mpred_prop(itsHeads,fluent).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/CoinToss4.e:46
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/CoinToss4.e',47).
+% fluent Heads()
+fluent(heads).
+==> mpred_prop(heads,fluent).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/CoinToss4.e:47
+% noninertial ItsHeads
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/CoinToss4.e',47).
+==> noninertial(itsHeads).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/CoinToss4.e:49
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/CoinToss4.e',50).
+% [time]
+ % HoldsAt(ItsHeads(),time) -> Initiates(Toss(),Heads(),time).
+
+ /*  [holds_at(itsHeads, Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          initiates(toss, heads, Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/CoinToss4.e',50).
+axiom(initiates(toss, heads, Time),
+    [holds_at(itsHeads, Time)]).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/CoinToss4.e:50
+% [time]
+ % !HoldsAt(ItsHeads(),time) -> Terminates(Toss(),Heads(),time).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/CoinToss4.e',50).
+
+ /*  [holds_at(neg(itsHeads), Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          terminates(toss, heads, Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/CoinToss4.e',50).
+axiom(terminates(toss, heads, Time),
+    [holds_at(neg(itsHeads), Time)]).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/CoinToss4.e:52
+% HoldsAt(Heads(),0).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/CoinToss4.e',52).
+
+ /*  [] ->
+       ta(Ta_Param, tvs1=[start], tvs2=[start], holds_at(heads, start)).
+ */
+axiom(holds_at(heads, start),
+    []).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/CoinToss4.e:53
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/CoinToss4.e',54).
+% Happens(Toss(),1).
+
+ /*  [b(start, Maptime), ignore(start+1==Maptime)] ->
+       ta(Ta_Param,
+          tvs1=[start+1],
+          tvs2=[Maptime, start],
+          happens(toss, Maptime)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/CoinToss4.e',54).
+axiom(happens(toss, Maptime),
+    [b(start, Maptime)]).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/CoinToss4.e:54
+% Happens(Toss(),2).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/CoinToss4.e',54).
+
+ /*  [b(start, Start2), toffset(start, 2, Start2), ignore(start+2==Start2)] ->
+       ta(Ta_Param,
+          tvs1=[start+2],
+          tvs2=[Start2, start],
+          happens(toss, Start2)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/CoinToss4.e',54).
+axiom(happens(toss, Start2),
+    [b(start, Start2), toffset(start, 2, Start2)]).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/CoinToss4.e:55
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/CoinToss4.e',56).
+% Happens(Toss(),3).
+
+ /*  [b(start, Start3), toffset(start, 3, Start3), ignore(start+3==Start3)] ->
+       ta(Ta_Param,
+          tvs1=[start+3],
+          tvs2=[Start3, start],
+          happens(toss, Start3)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/CoinToss4.e',56).
+axiom(happens(toss, Start3),
+    [b(start, Start3), toffset(start, 3, Start3)]).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/CoinToss4.e:57
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/CoinToss4.e',58).
+%; prune models irrelevant to example:
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/CoinToss4.e:58
+% HoldsAt(ItsHeads(),0).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/CoinToss4.e',58).
+
+ /*  [] ->
+       ta(Ta_Param, tvs1=[start], tvs2=[start], holds_at(itsHeads, start)).
+ */
+axiom(holds_at(itsHeads, start),
+    []).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/CoinToss4.e:59
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/CoinToss4.e',60).
+% HoldsAt(ItsHeads(),4).
+
+ /*  [b(start, Start4), toffset(start, 4, Start4), ignore(start+4==Start4)] ->
+       ta(Ta_Param,
+          tvs1=[start+4],
+          tvs2=[Start4, start],
+          holds_at(itsHeads, Start4)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/CoinToss4.e',60).
+axiom(holds_at(itsHeads, Start4),
+    [b(start, Start4), toffset(start, 4, Start4)]).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/CoinToss4.e:61
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/CoinToss4.e',62).
+% completion Happens
+==> completion(happens).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/CoinToss4.e:63
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/CoinToss4.e',64).
+% range time 0 4
+==> range(time,0,4).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/CoinToss4.e:64
+% range offset 1 1
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/CoinToss4.e',64).
+==> range(offset,1,1).
+%; End of file.

@@ -1,0 +1,529 @@
+:-include(library('ec_planner/ec_test_incl')).
+:-expects_dialect(pfc).
+% Wed, 01 Apr 2020 20:02:30 GMT
+% From ../ecnet/SmallFire.pel:4
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Sleeping.e',87).
+
+ /*  loading(load_e_pl,
+   	'/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/SmallFire.e').
+ */
+%;
+%; Copyright (c) 2005 IBM Corporation and others.
+%; All rights reserved. This program and the accompanying materials
+%; are made available under the terms of the Common Public License v1.0
+%; which accompanies this distribution, and is available at
+%; http://www.eclipse.org/legal/cpl-v10.html
+%;
+%; Contributors:
+%; IBM - Initial implementation
+%;
+%; SmallFire: matches, lighters, cigarettes, etc.
+%;
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/SmallFire.e:13
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/SmallFire.e',14).
+% event Light(agent,physobj)
+event(light(agent,physobj)).
+==> mpred_prop(light(agent,physobj),event).
+==> meta_argtypes(light(agent,physobj)).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/SmallFire.e:14
+% event LightWith(agent,physobj,physobj)
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/SmallFire.e',14).
+event(lightWith(agent,physobj,physobj)).
+==> mpred_prop(lightWith(agent,physobj,physobj),event).
+==> meta_argtypes(lightWith(agent,physobj,physobj)).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/SmallFire.e:15
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/SmallFire.e',16).
+% event PutOut(agent,physobj)
+event(putOut(agent,physobj)).
+==> mpred_prop(putOut(agent,physobj),event).
+==> meta_argtypes(putOut(agent,physobj)).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/SmallFire.e:16
+% event BlowOut(agent,physobj)
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/SmallFire.e',16).
+event(blowOut(agent,physobj)).
+==> mpred_prop(blowOut(agent,physobj),event).
+==> meta_argtypes(blowOut(agent,physobj)).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/SmallFire.e:17
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/SmallFire.e',18).
+% fluent IsBurning(physobj)
+fluent(isBurning(physobj)).
+==> mpred_prop(isBurning(physobj),fluent).
+==> meta_argtypes(isBurning(physobj)).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/SmallFire.e:19
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/SmallFire.e',20).
+% [agent,physobj1,physobj2,time]
+% HoldsAt(IsBurning(physobj2),time) ->
+% Initiates(LightWith(agent,physobj1,physobj2),
+%           IsBurning(physobj1),
+%           time).
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/SmallFire.e:23
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/SmallFire.e',20).
+
+ /*  [holds_at(isBurning(Physobj2), Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          initiates(lightWith(Agent, Physobj1, Physobj2),
+                    isBurning(Physobj1),
+                    Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/SmallFire.e',20).
+axiom(initiates(lightWith(Agent, Physobj1, Physobj2), isBurning(Physobj1), Time),
+    [holds_at(isBurning(Physobj2), Time)]).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/SmallFire.e:25
+% [agent,physobj1,physobj2,time]
+% Happens(LightWith(agent,physobj1,physobj2),time) ->
+% HoldsAt(Holding(agent,physobj1),time) &
+% HoldsAt(Holding(agent,physobj2),time) &
+% !HoldsAt(IsBurning(physobj1),time).
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/SmallFire.e:29
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/SmallFire.e',27).
+
+ /*  happens(lightWith(Agent, Physobj1, Physobj2), Time) ->
+       holds_at(holding(Agent, Physobj1), Time),
+       holds_at(holding(Agent, Physobj2), Time),
+       holds_at(neg(isBurning(Physobj1)), Time).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/SmallFire.e',27).
+
+ /*  not(happens(lightWith(Agent, Physobj1, Physobj2), Time)) :-
+       (   not(holds_at(holding(Agent, Physobj1), Time))
+       ;   not(holds_at(holding(Agent, Physobj2), Time))
+       ;   not(holds_at(neg(isBurning(Physobj1)), Time))
+       ).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/SmallFire.e',27).
+
+ /*  [(holds_at(neg(holding(Agent, Physobj1)), Time);holds_at(neg(holding(Agent, Physobj2)), Time);holds_at(isBurning(Physobj1), Time))] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          not(happens(lightWith(Agent, Physobj1, Physobj2),
+                      Time))).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/SmallFire.e',27).
+axiom(not(happens(lightWith(Agent, Physobj1, Physobj2), Time)),
+   
+    [  (holds_at(neg(holding(Agent, Physobj1)), Time);holds_at(neg(holding(Agent, Physobj2)), Time);holds_at(isBurning(Physobj1), Time))
+    ]).
+
+ /*  holds_at(holding(Agent, Physobj1), Time) :-
+       happens(lightWith(Agent, Physobj1, Physobj2), Time).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/SmallFire.e',27).
+
+ /*  [holds_at(metreqs(lightWith(Agent, Physobj1, Physobj2)), Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          requires(lightWith(Agent, Physobj1, Physobj2),
+                   Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/SmallFire.e',27).
+axiom(requires(lightWith(Agent, Physobj1, Physobj2), Time),
+   
+    [ holds_at(metreqs(lightWith(Agent, Physobj1, Physobj2)),
+               Time)
+    ]).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/SmallFire.e',27).
+
+ /*  [holds_at(holding(Agent, Physobj1), Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(metreqs(lightWith(Agent, Physobj1, Physobj2)),
+                   Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/SmallFire.e',27).
+axiom(holds_at(metreqs(lightWith(Agent, Physobj1, Physobj2)), Time),
+    [holds_at(holding(Agent, Physobj1), Time)]).
+
+ /*  holds_at(holding(Agent, Physobj2), Time) :-
+       happens(lightWith(Agent, Physobj1, Physobj2), Time).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/SmallFire.e',27).
+
+ /*  [holds_at(metreqs(lightWith(Agent, Physobj1, Physobj2)), Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          requires(lightWith(Agent, Physobj1, Physobj2),
+                   Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/SmallFire.e',27).
+axiom(requires(lightWith(Agent, Physobj1, Physobj2), Time),
+   
+    [ holds_at(metreqs(lightWith(Agent, Physobj1, Physobj2)),
+               Time)
+    ]).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/SmallFire.e',27).
+
+ /*  [holds_at(holding(Agent, Physobj2), Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(metreqs(lightWith(Agent, Physobj1, Physobj2)),
+                   Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/SmallFire.e',27).
+axiom(holds_at(metreqs(lightWith(Agent, Physobj1, Physobj2)), Time),
+    [holds_at(holding(Agent, Physobj2), Time)]).
+
+ /*  holds_at(neg(isBurning(Physobj1)), Time) :-
+       happens(lightWith(Agent, Physobj1, Physobj2), Time).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/SmallFire.e',27).
+
+ /*  [holds_at(metreqs(lightWith(Agent, Physobj1, Physobj2)), Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          requires(lightWith(Agent, Physobj1, Physobj2),
+                   Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/SmallFire.e',27).
+axiom(requires(lightWith(Agent, Physobj1, Physobj2), Time),
+   
+    [ holds_at(metreqs(lightWith(Agent, Physobj1, Physobj2)),
+               Time)
+    ]).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/SmallFire.e',27).
+
+ /*  [holds_at(neg(isBurning(Physobj1)), Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(metreqs(lightWith(Agent, Physobj1, Physobj2)),
+                   Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/SmallFire.e',27).
+axiom(holds_at(metreqs(lightWith(Agent, Physobj1, Physobj2)), Time),
+    [holds_at(neg(isBurning(Physobj1)), Time)]).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/SmallFire.e:31
+% [agent,physobj,time]
+% Initiates(Light(agent,physobj),
+%           IsBurning(physobj),
+%           time).
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/SmallFire.e:34
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/SmallFire.e',33).
+
+ /*  [] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          initiates(light(Agent, Physobj),
+                    isBurning(Physobj),
+                    Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/SmallFire.e',33).
+axiom(initiates(light(Agent, Physobj), isBurning(Physobj), Time),
+    []).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/SmallFire.e:36
+% [agent,physobj,time]
+% Happens(Light(agent,physobj),time) ->
+% HoldsAt(Holding(agent,physobj),time) &
+% !HoldsAt(IsBurning(physobj),time).
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/SmallFire.e:39
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/SmallFire.e',38).
+
+ /*  happens(light(Agent, Physobj), Time) ->
+       holds_at(holding(Agent, Physobj), Time),
+       holds_at(neg(isBurning(Physobj)), Time).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/SmallFire.e',38).
+
+ /*  not(happens(light(Agent, Physobj), Time)) :-
+       (   not(holds_at(holding(Agent, Physobj), Time))
+       ;   not(holds_at(neg(isBurning(Physobj)), Time))
+       ).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/SmallFire.e',38).
+
+ /*  [(holds_at(neg(holding(Agent, Physobj)), Time);holds_at(isBurning(Physobj), Time))] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          not(happens(light(Agent, Physobj), Time))).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/SmallFire.e',38).
+axiom(not(happens(light(Agent, Physobj), Time)),
+   
+    [  (holds_at(neg(holding(Agent, Physobj)), Time);holds_at(isBurning(Physobj), Time))
+    ]).
+
+ /*  holds_at(holding(Agent, Physobj), Time) :-
+       happens(light(Agent, Physobj), Time).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/SmallFire.e',38).
+
+ /*  [holds_at(metreqs(light(Agent, Physobj)), Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          requires(light(Agent, Physobj), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/SmallFire.e',38).
+axiom(requires(light(Agent, Physobj), Time),
+    [holds_at(metreqs(light(Agent, Physobj)), Time)]).
+
+ /*  [holds_at(holding(Agent, Physobj), Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(metreqs(light(Agent, Physobj)), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/SmallFire.e',38).
+axiom(holds_at(metreqs(light(Agent, Physobj)), Time),
+    [holds_at(holding(Agent, Physobj), Time)]).
+
+ /*  holds_at(neg(isBurning(Physobj)), Time) :-
+       happens(light(Agent, Physobj), Time).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/SmallFire.e',38).
+
+ /*  [holds_at(metreqs(light(Agent, Physobj)), Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          requires(light(Agent, Physobj), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/SmallFire.e',38).
+axiom(requires(light(Agent, Physobj), Time),
+    [holds_at(metreqs(light(Agent, Physobj)), Time)]).
+
+ /*  [holds_at(neg(isBurning(Physobj)), Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(metreqs(light(Agent, Physobj)), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/SmallFire.e',38).
+axiom(holds_at(metreqs(light(Agent, Physobj)), Time),
+    [holds_at(neg(isBurning(Physobj)), Time)]).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/SmallFire.e:41
+% [agent,physobj,time]
+% Terminates(PutOut(agent,physobj),
+%            IsBurning(physobj),
+%            time).
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/SmallFire.e:44
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/SmallFire.e',43).
+
+ /*  [] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          terminates(putOut(Agent, Physobj),
+                     isBurning(Physobj),
+                     Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/SmallFire.e',43).
+axiom(terminates(putOut(Agent, Physobj), isBurning(Physobj), Time),
+    []).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/SmallFire.e:46
+% [agent,physobj,time]
+% Happens(PutOut(agent,physobj),time) ->
+% HoldsAt(Holding(agent,physobj),time) &
+% HoldsAt(IsBurning(physobj),time).
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/SmallFire.e:49
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/SmallFire.e',48).
+
+ /*  happens(putOut(Agent, Physobj), Time) ->
+       holds_at(holding(Agent, Physobj), Time),
+       holds_at(isBurning(Physobj), Time).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/SmallFire.e',48).
+
+ /*  not(happens(putOut(Agent, Physobj), Time)) :-
+       (   not(holds_at(holding(Agent, Physobj), Time))
+       ;   not(holds_at(isBurning(Physobj), Time))
+       ).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/SmallFire.e',48).
+
+ /*  [(holds_at(neg(holding(Agent, Physobj)), Time);holds_at(neg(isBurning(Physobj)), Time))] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          not(happens(putOut(Agent, Physobj), Time))).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/SmallFire.e',48).
+axiom(not(happens(putOut(Agent, Physobj), Time)),
+   
+    [  (holds_at(neg(holding(Agent, Physobj)), Time);holds_at(neg(isBurning(Physobj)), Time))
+    ]).
+
+ /*  holds_at(holding(Agent, Physobj), Time) :-
+       happens(putOut(Agent, Physobj), Time).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/SmallFire.e',48).
+
+ /*  [holds_at(metreqs(putOut(Agent, Physobj)), Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          requires(putOut(Agent, Physobj), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/SmallFire.e',48).
+axiom(requires(putOut(Agent, Physobj), Time),
+    [holds_at(metreqs(putOut(Agent, Physobj)), Time)]).
+
+ /*  [holds_at(holding(Agent, Physobj), Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(metreqs(putOut(Agent, Physobj)), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/SmallFire.e',48).
+axiom(holds_at(metreqs(putOut(Agent, Physobj)), Time),
+    [holds_at(holding(Agent, Physobj), Time)]).
+
+ /*  holds_at(isBurning(Physobj), Time) :-
+       happens(putOut(Agent, Physobj), Time).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/SmallFire.e',48).
+
+ /*  [holds_at(metreqs(putOut(Agent, Physobj)), Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          requires(putOut(Agent, Physobj), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/SmallFire.e',48).
+axiom(requires(putOut(Agent, Physobj), Time),
+    [holds_at(metreqs(putOut(Agent, Physobj)), Time)]).
+
+ /*  [holds_at(isBurning(Physobj), Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(metreqs(putOut(Agent, Physobj)), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/SmallFire.e',48).
+axiom(holds_at(metreqs(putOut(Agent, Physobj)), Time),
+    [holds_at(isBurning(Physobj), Time)]).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/SmallFire.e:51
+% [agent,physobj,time]
+% Terminates(BlowOut(agent,physobj),
+%            IsBurning(physobj),
+%            time).
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/SmallFire.e:54
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/SmallFire.e',53).
+
+ /*  [] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          terminates(blowOut(Agent, Physobj),
+                     isBurning(Physobj),
+                     Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/SmallFire.e',53).
+axiom(terminates(blowOut(Agent, Physobj), isBurning(Physobj), Time),
+    []).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/SmallFire.e:56
+% [agent,physobj,time]
+% Happens(BlowOut(agent,physobj),time) ->
+% HoldsAt(Holding(agent,physobj),time) &
+% HoldsAt(IsBurning(physobj),time).
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/SmallFire.e:59
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/SmallFire.e',58).
+
+ /*  happens(blowOut(Agent, Physobj), Time) ->
+       holds_at(holding(Agent, Physobj), Time),
+       holds_at(isBurning(Physobj), Time).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/SmallFire.e',58).
+
+ /*  not(happens(blowOut(Agent, Physobj), Time)) :-
+       (   not(holds_at(holding(Agent, Physobj), Time))
+       ;   not(holds_at(isBurning(Physobj), Time))
+       ).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/SmallFire.e',58).
+
+ /*  [(holds_at(neg(holding(Agent, Physobj)), Time);holds_at(neg(isBurning(Physobj)), Time))] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          not(happens(blowOut(Agent, Physobj), Time))).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/SmallFire.e',58).
+axiom(not(happens(blowOut(Agent, Physobj), Time)),
+   
+    [  (holds_at(neg(holding(Agent, Physobj)), Time);holds_at(neg(isBurning(Physobj)), Time))
+    ]).
+
+ /*  holds_at(holding(Agent, Physobj), Time) :-
+       happens(blowOut(Agent, Physobj), Time).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/SmallFire.e',58).
+
+ /*  [holds_at(metreqs(blowOut(Agent, Physobj)), Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          requires(blowOut(Agent, Physobj), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/SmallFire.e',58).
+axiom(requires(blowOut(Agent, Physobj), Time),
+    [holds_at(metreqs(blowOut(Agent, Physobj)), Time)]).
+
+ /*  [holds_at(holding(Agent, Physobj), Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(metreqs(blowOut(Agent, Physobj)), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/SmallFire.e',58).
+axiom(holds_at(metreqs(blowOut(Agent, Physobj)), Time),
+    [holds_at(holding(Agent, Physobj), Time)]).
+
+ /*  holds_at(isBurning(Physobj), Time) :-
+       happens(blowOut(Agent, Physobj), Time).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/SmallFire.e',58).
+
+ /*  [holds_at(metreqs(blowOut(Agent, Physobj)), Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          requires(blowOut(Agent, Physobj), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/SmallFire.e',58).
+axiom(requires(blowOut(Agent, Physobj), Time),
+    [holds_at(metreqs(blowOut(Agent, Physobj)), Time)]).
+
+ /*  [holds_at(isBurning(Physobj), Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(metreqs(blowOut(Agent, Physobj)), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/SmallFire.e',58).
+axiom(holds_at(metreqs(blowOut(Agent, Physobj)), Time),
+    [holds_at(isBurning(Physobj), Time)]).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/SmallFire.e:61
+%; End of file.

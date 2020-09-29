@@ -1,0 +1,4242 @@
+:-include(library('ec_planner/ec_test_incl')).
+:-expects_dialect(pfc).
+% Wed, 01 Apr 2020 20:02:06 GMT
+% From ../ecnet/RepRest.pel:4
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/ReadingALetter.e',117).
+
+ /*  loading(load_e_pl,
+   	'/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e').
+ */
+%;
+%; Copyright (c) 2005 IBM Corporation and others.
+%; All rights reserved. This program and the accompanying materials
+%; are made available under the terms of the Common Public License v1.0
+%; which accompanies this distribution, and is available at
+%; http://www.eclipse.org/legal/cpl-v10.html
+%;
+%; Contributors:
+%; IBM - Initial implementation
+%;
+%; @article{Mueller:InPress,
+%;   author = "Erik T. Mueller",
+%;   year = "in press",
+%;   title = "Modelling space and time in narratives about restaurants",
+%;   journal = "Literary and Linguistic Computing",
+%; }
+%;
+%;sort boolean
+%;sort integer
+%;reified sort predicate
+%;reified sort function
+%;
+%;sort time: integer
+%;sort offset: integer
+%;
+%;reified sort fluent
+%;reified sort event
+%;
+%;predicate Happens(event,time)
+%;predicate HoldsAt(fluent,time)
+%;predicate ReleasedAt(fluent,time)
+%;predicate Initiates(event,fluent,time)
+%;predicate Terminates(event,fluent,time)
+%;predicate Releases(event,fluent,time)
+%;
+%;sort diameter: integer
+%;
+%;sort object
+%;
+%;sort agent: object
+%;
+%;sort physobj: object
+%;sort bed: physobj
+%;sort snowflake: physobj
+%;sort sky: physobj
+%;
+%;sort stuff: physobj
+%;
+%;sort surface: physobj
+%;sort ground: surface
+%;
+%;sort snow: stuff
+%;sort ball
+%;
+%;sort food: physobj
+%;sort fruit: food
+%;sort orange: fruit
+%;sort salad: food
+%;
+%;sort clothing: physobj
+%;sort scarf: clothing
+%;sort hat: clothing
+%;
+%;sort vegetablematter: physobj
+%;sort coal: vegetablematter
+%;
+%;sort bodypart: physobj
+%;sort hand: bodypart
+%;
+%;sort papertowels: physobj
+%;sort device: physobj
+%;sort electronicdevice: device
+%;sort lamp: electronicdevice
+%;
+%;sort cat: physobj
+%;
+%;sort weapon: physobj
+%;sort gun: weapon
+%;sort bomb: weapon
+%;sort bullet: weapon
+%;
+%;sort location
+%;sort room: location, outside: location
+%;
+%;sort portal
+%;sort door: portal, staircase: portal
+%;sort street: portal
+%;
+%;sort building
+%;
+%;sort fire: object
+%;
+%;sort furniture: physobj
+%;sort chair: furniture
+%;sort table: furniture
+%;
+%;sort menu: physobj
+%;sort bill: physobj
+%;
+%;sort script
+%;
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e:102
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',103).
+% fluent Holding(agent,physobj)
+fluent(holding(agent,physobj)).
+==> mpred_prop(holding(agent,physobj),fluent).
+==> meta_argtypes(holding(agent,physobj)).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e:103
+% event PickUp(agent,physobj)
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',103).
+event(pickUp(agent,physobj)).
+==> mpred_prop(pickUp(agent,physobj),event).
+==> meta_argtypes(pickUp(agent,physobj)).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e:104
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',105).
+% event LetGoOf(agent,physobj)
+event(letGoOf(agent,physobj)).
+==> mpred_prop(letGoOf(agent,physobj),event).
+==> meta_argtypes(letGoOf(agent,physobj)).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e:106
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',107).
+% [agent,physobj,time]
+% Initiates(PickUp(agent,physobj),Holding(agent,physobj),time).
+
+ /*  [] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          initiates(pickUp(Agent, Physobj),
+                    holding(Agent, Physobj),
+                    Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',107).
+axiom(initiates(pickUp(Agent, Physobj), holding(Agent, Physobj), Time),
+    []).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e:109
+% [agent,physobj,time]
+% Happens(PickUp(agent,physobj),time) ->
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e:111
+% {location}% 
+%   HoldsAt(At(agent,location),time) &
+%   HoldsAt(At(physobj,location),time).
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e:113
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',111).
+
+ /*  exists([Location],
+    happens(pickUp(Agent, Physobj), Time) ->
+       holds_at(at(Agent, Location), Time),
+       holds_at(at(Physobj, Location), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',111).
+
+ /*  not(happens(pickUp(Agent, Physobj), Time)) :-
+       (   not(holds_at(at(Agent, Location), Time))
+       ;   not(holds_at(at(Physobj, Location), Time))
+       ),
+       some(Location, '$kolem_Fn_204'(Agent, Physobj, Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',111).
+
+ /*  [(holds_at(neg(at(Agent, Location)), Time);holds_at(neg(at(Physobj, Location)), Time)), some(Location, '$kolem_Fn_204'(Agent, Physobj, Time))] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          not(happens(pickUp(Agent, Physobj), Time))).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',111).
+axiom(not(happens(pickUp(Agent, Physobj), Time)),
+   
+    [  (holds_at(neg(at(Agent, Location)), Time);holds_at(neg(at(Physobj, Location)), Time)),
+      some(Location, '$kolem_Fn_204'(Agent, Physobj, Time))
+    ]).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',111).
+
+ /*  holds_at(at(Agent, Location), Time) :-
+       happens(pickUp(Agent, Physobj), Time),
+       some(Location, '$kolem_Fn_204'(Agent, Physobj, Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',111).
+
+ /*  [happens(pickUp(Agent, Physobj), Time), some(Location, '$kolem_Fn_204'(Agent, Physobj, Time))] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(at(Agent, Location), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',111).
+axiom(holds_at(at(Agent, Location), Time),
+   
+    [ happens(pickUp(Agent, Physobj), Time),
+      some(Location, '$kolem_Fn_204'(Agent, Physobj, Time))
+    ]).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',111).
+
+ /*  holds_at(at(Physobj, Location), Time) :-
+       happens(pickUp(Agent, Physobj), Time),
+       some(Location, '$kolem_Fn_204'(Agent, Physobj, Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',111).
+
+ /*  [happens(pickUp(Agent, Physobj), Time), some(Location, '$kolem_Fn_204'(Agent, Physobj, Time))] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(at(Physobj, Location), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',111).
+axiom(holds_at(at(Physobj, Location), Time),
+   
+    [ happens(pickUp(Agent, Physobj), Time),
+      some(Location, '$kolem_Fn_204'(Agent, Physobj, Time))
+    ]).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e:115
+% [agent,physobj,time]
+% Terminates(LetGoOf(agent,physobj),Holding(agent,physobj),time).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',117).
+
+ /*  [] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          terminates(letGoOf(Agent, Physobj),
+                     holding(Agent, Physobj),
+                     Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',117).
+axiom(terminates(letGoOf(Agent, Physobj), holding(Agent, Physobj), Time),
+    []).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e:118
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',119).
+% [agent,physobj,time]
+% Happens(LetGoOf(agent,physobj),time) ->
+% HoldsAt(Holding(agent,physobj),time).
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e:120
+
+ /*  happens(letGoOf(Agent, Physobj), Time) ->
+       holds_at(holding(Agent, Physobj), Time).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',119).
+
+ /*  holds_at(holding(Agent, Physobj), Time) :-
+       happens(letGoOf(Agent, Physobj), Time).
+ */
+
+ /*  [holds_at(metreqs(letGoOf(Agent, Physobj)), Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          requires(letGoOf(Agent, Physobj), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',119).
+axiom(requires(letGoOf(Agent, Physobj), Time),
+    [holds_at(metreqs(letGoOf(Agent, Physobj)), Time)]).
+
+ /*  [holds_at(holding(Agent, Physobj), Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(metreqs(letGoOf(Agent, Physobj)), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',119).
+axiom(holds_at(metreqs(letGoOf(Agent, Physobj)), Time),
+    [holds_at(holding(Agent, Physobj), Time)]).
+
+ /*  not(happens(letGoOf(Agent, Physobj), Time)) :-
+       not(holds_at(holding(Agent, Physobj), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',119).
+
+ /*  [holds_at(neg(holding(Agent, Physobj)), Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          not(happens(letGoOf(Agent, Physobj), Time))).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',119).
+axiom(not(happens(letGoOf(Agent, Physobj), Time)),
+    [holds_at(neg(holding(Agent, Physobj)), Time)]).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e:122
+% [agent,physobj,location,time]
+% Releases(PickUp(agent,physobj),At(physobj,location),time).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',124).
+
+ /*  [] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          releases(pickUp(Agent, Physobj),
+                   at(Physobj, Location),
+                   Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',124).
+axiom(releases(pickUp(Agent, Physobj), at(Physobj, Location), Time),
+    []).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e:125
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',126).
+% [agent,physobj,location,time]
+% HoldsAt(Holding(agent,physobj),time) &
+% HoldsAt(At(agent,location),time) ->
+% HoldsAt(At(physobj,location),time).
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e:128
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',126).
+
+ /*  holds_at(holding(Agent, Physobj), Time), holds_at(at(Agent, Location), Time) ->
+       holds_at(at(Physobj, Location), Time).
+ */
+
+ /*  holds_at(at(Physobj, Location), Time) :-
+       holds_at(holding(Agent, Physobj), Time),
+       holds_at(at(Agent, Location), Time).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',126).
+
+ /*  [holds_at(holding(Agent, Physobj), Time), holds_at(at(Agent, Location), Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(at(Physobj, Location), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',126).
+axiom(holds_at(at(Physobj, Location), Time),
+   
+    [ holds_at(holding(Agent, Physobj), Time),
+      holds_at(at(Agent, Location), Time)
+    ]).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',126).
+
+ /*  not(holds_at(holding(Agent, Physobj), Time)) :-
+       holds_at(at(Agent, Location), Time),
+       not(holds_at(at(Physobj, Location), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',126).
+
+ /*  [holds_at(at(Agent, Location), Time), holds_at(neg(at(Physobj, Location)), Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(neg(holding(Agent, Physobj)), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',126).
+axiom(holds_at(neg(holding(Agent, Physobj)), Time),
+   
+    [ holds_at(at(Agent, Location), Time),
+      holds_at(neg(at(Physobj, Location)), Time)
+    ]).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',126).
+
+ /*  not(holds_at(at(Agent, Location), Time)) :-
+       holds_at(holding(Agent, Physobj), Time),
+       not(holds_at(at(Physobj, Location), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',126).
+
+ /*  [holds_at(holding(Agent, Physobj), Time), holds_at(neg(at(Physobj, Location)), Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(neg(at(Agent, Location)), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',126).
+axiom(holds_at(neg(at(Agent, Location)), Time),
+   
+    [ holds_at(holding(Agent, Physobj), Time),
+      holds_at(neg(at(Physobj, Location)), Time)
+    ]).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e:130
+%;[agent,physobj,location1,location2,time]
+%;HoldsAt(At(agent,location1),time) &
+%;location1!=location2 ->
+%;Terminates(LetGoOf(agent,physobj),At(physobj,location2),time).
+% [agent,physobj,location,time]
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e:136
+% HoldsAt(At(agent,location),time) ->
+% Initiates(LetGoOf(agent,physobj),At(physobj,location),time).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',136).
+
+ /*  [holds_at(at(Agent, Location), Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          initiates(letGoOf(Agent, Physobj),
+                    at(Physobj, Location),
+                    Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',136).
+axiom(initiates(letGoOf(Agent, Physobj), at(Physobj, Location), Time),
+    [holds_at(at(Agent, Location), Time)]).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e:139
+% fluent On(physobj,physobj)
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',139).
+fluent(on(physobj,physobj)).
+==> mpred_prop(on(physobj,physobj),fluent).
+==> meta_argtypes(on(physobj,physobj)).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e:141
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',142).
+% event PlaceOn(agent,physobj,physobj)
+event(placeOn(agent,physobj,physobj)).
+==> mpred_prop(placeOn(agent,physobj,physobj),event).
+==> meta_argtypes(placeOn(agent,physobj,physobj)).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e:143
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',144).
+% event TakeOffOf(agent,physobj,physobj)
+event(takeOffOf(agent,physobj,physobj)).
+==> mpred_prop(takeOffOf(agent,physobj,physobj),event).
+==> meta_argtypes(takeOffOf(agent,physobj,physobj)).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e:145
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',146).
+% [physobj1,physobj2,time]
+% HoldsAt(On(physobj1,physobj2),time) ->
+% physobj1!=physobj2.
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e:147
+
+ /*  holds_at(on(Physobj1, Physobj2), Time) ->
+       diff(Physobj1, Physobj2).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',146).
+
+ /*  not(holds_at(on(Physobj1, Physobj2), Time)) :-
+       not(diff(Physobj1, Physobj2)).
+ */
+
+ /*  [equals(Physobj1, Physobj2)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(neg(on(Physobj1, Physobj2)), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',146).
+axiom(holds_at(neg(on(Physobj1, Physobj2)), Time),
+    [equals(Physobj1, Physobj2)]).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e:149
+% [physobj1,physobj2,time]
+% HoldsAt(On(physobj1,physobj2),time) ->
+% !HoldsAt(On(physobj2,physobj1),time).
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e:151
+
+ /*  holds_at(on(Physobj1, Physobj2), Time) ->
+       holds_at(neg(on(Physobj2, Physobj1)), Time).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',151).
+
+ /*  holds_at(neg(on(Physobj2, Physobj1)), Time) :-
+       holds_at(on(Physobj1, Physobj2), Time).
+ */
+
+ /*  [holds_at(on(Physobj1, Physobj2), Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(neg(on(Physobj2, Physobj1)), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',151).
+axiom(holds_at(neg(on(Physobj2, Physobj1)), Time),
+    [holds_at(on(Physobj1, Physobj2), Time)]).
+
+ /*  not(holds_at(on(Physobj1, Physobj2), Time)) :-
+       not(holds_at(neg(on(Physobj2, Physobj1)), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',151).
+
+ /*  [holds_at(on(Physobj2, Physobj1), Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(neg(on(Physobj1, Physobj2)), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',151).
+axiom(holds_at(neg(on(Physobj1, Physobj2)), Time),
+    [holds_at(on(Physobj2, Physobj1), Time)]).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e:153
+% [agent,physobj1,physobj2,time]
+% Initiates(PlaceOn(agent,physobj1,physobj2),
+%           On(physobj1,physobj2),time).
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e:155
+
+ /*  [] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          initiates(placeOn(Agent, Physobj1, Physobj2),
+                    on(Physobj1, Physobj2),
+                    Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',155).
+axiom(initiates(placeOn(Agent, Physobj1, Physobj2), on(Physobj1, Physobj2), Time),
+    []).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e:157
+% [agent,physobj1,physobj2,time]
+% Terminates(PlaceOn(agent,physobj1,physobj2),
+%            Holding(agent,physobj1),time).
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e:159
+
+ /*  [] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          terminates(placeOn(Agent, Physobj1, Physobj2),
+                     holding(Agent, Physobj1),
+                     Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',159).
+axiom(terminates(placeOn(Agent, Physobj1, Physobj2), holding(Agent, Physobj1), Time),
+    []).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e:161
+% [agent,physobj1,physobj2,time]
+% Happens(PlaceOn(agent,physobj1,physobj2),time) ->
+% HoldsAt(Holding(agent,physobj1),time) &
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e:164
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',163).
+% {location}% 
+%  HoldsAt(At(agent,location),time) &
+%  HoldsAt(At(physobj2,location),time).
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e:166
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',165).
+
+ /*  exists([Location],
+    happens(placeOn(Agent, Physobj1, Physobj2), Time) ->
+       holds_at(holding(Agent, Physobj1), Time),
+       holds_at(at(Agent, Location), Time),
+       holds_at(at(Physobj2, Location), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',165).
+
+ /*  not(happens(placeOn(Agent, Physobj1, Physobj2), Time)) :-
+       (   not(holds_at(holding(Agent, Physobj1), Time))
+       ;   not(holds_at(at(Agent, Location), Time))
+       ;   not(holds_at(at(Physobj2, Location), Time))
+       ),
+       some(Location,
+            '$kolem_Fn_205'(Agent, Physobj1, Physobj2, Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',165).
+
+ /*  [(holds_at(neg(holding(Agent, Physobj1)), Time);holds_at(neg(at(Agent, Location)), Time);holds_at(neg(at(Physobj2, Location)), Time)), some(Location, '$kolem_Fn_205'(Agent, Physobj1, Physobj2, Time))] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          not(happens(placeOn(Agent, Physobj1, Physobj2),
+                      Time))).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',165).
+axiom(not(happens(placeOn(Agent, Physobj1, Physobj2), Time)),
+   
+    [  (holds_at(neg(holding(Agent, Physobj1)), Time);holds_at(neg(at(Agent, Location)), Time);holds_at(neg(at(Physobj2, Location)), Time)),
+      some(Location,
+           '$kolem_Fn_205'(Agent, Physobj1, Physobj2, Time))
+    ]).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',165).
+
+ /*  holds_at(holding(Agent, Physobj1), Time) :-
+       happens(placeOn(Agent, Physobj1, Physobj2), Time),
+       some(Location,
+            '$kolem_Fn_205'(Agent, Physobj1, Physobj2, Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',165).
+
+ /*  [happens(placeOn(Agent, Physobj1, Physobj2), Time), some(Location, '$kolem_Fn_205'(Agent, Physobj1, Physobj2, Time))] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(holding(Agent, Physobj1), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',165).
+axiom(holds_at(holding(Agent, Physobj1), Time),
+   
+    [ happens(placeOn(Agent, Physobj1, Physobj2), Time),
+      some(Location,
+           '$kolem_Fn_205'(Agent, Physobj1, Physobj2, Time))
+    ]).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',165).
+
+ /*  holds_at(at(Agent, Location), Time) :-
+       happens(placeOn(Agent, Physobj1, Physobj2), Time),
+       some(Location,
+            '$kolem_Fn_205'(Agent, Physobj1, Physobj2, Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',165).
+
+ /*  [happens(placeOn(Agent, Physobj1, Physobj2), Time), some(Location, '$kolem_Fn_205'(Agent, Physobj1, Physobj2, Time))] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(at(Agent, Location), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',165).
+axiom(holds_at(at(Agent, Location), Time),
+   
+    [ happens(placeOn(Agent, Physobj1, Physobj2), Time),
+      some(Location,
+           '$kolem_Fn_205'(Agent, Physobj1, Physobj2, Time))
+    ]).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',165).
+
+ /*  holds_at(at(Physobj2, Location), Time) :-
+       happens(placeOn(Agent, Physobj1, Physobj2), Time),
+       some(Location,
+            '$kolem_Fn_205'(Agent, Physobj1, Physobj2, Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',165).
+
+ /*  [happens(placeOn(Agent, Physobj1, Physobj2), Time), some(Location, '$kolem_Fn_205'(Agent, Physobj1, Physobj2, Time))] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(at(Physobj2, Location), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',165).
+axiom(holds_at(at(Physobj2, Location), Time),
+   
+    [ happens(placeOn(Agent, Physobj1, Physobj2), Time),
+      some(Location,
+           '$kolem_Fn_205'(Agent, Physobj1, Physobj2, Time))
+    ]).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e:168
+% [agent,physobj1,physobj2,time]
+% Terminates(TakeOffOf(agent,physobj1,physobj2),
+%            On(physobj1,physobj2),time).
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e:170
+
+ /*  [] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          terminates(takeOffOf(Agent, Physobj1, Physobj2),
+                     on(Physobj1, Physobj2),
+                     Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',170).
+axiom(terminates(takeOffOf(Agent, Physobj1, Physobj2), on(Physobj1, Physobj2), Time),
+    []).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e:172
+% [agent,physobj1,physobj2,time]
+% Initiates(TakeOffOf(agent,physobj1,physobj2),
+%           Holding(agent,physobj1),time).
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e:174
+
+ /*  [] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          initiates(takeOffOf(Agent, Physobj1, Physobj2),
+                    holding(Agent, Physobj1),
+                    Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',174).
+axiom(initiates(takeOffOf(Agent, Physobj1, Physobj2), holding(Agent, Physobj1), Time),
+    []).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e:176
+% [agent,physobj1,physobj2,location,time]
+% Releases(TakeOffOf(agent,physobj1,physobj2),
+%          At(physobj1,location),
+%          time).
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e:179
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',178).
+
+ /*  [] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          releases(takeOffOf(Agent, Physobj1, Physobj2),
+                   at(Physobj1, Location),
+                   Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',178).
+axiom(releases(takeOffOf(Agent, Physobj1, Physobj2), at(Physobj1, Location), Time),
+    []).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e:181
+% [agent,physobj1,physobj2,time]
+% Happens(TakeOffOf(agent,physobj1,physobj2),time) ->
+% HoldsAt(On(physobj1,physobj2),time) &
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e:184
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',183).
+% {location}% 
+%  HoldsAt(At(agent,location),time) &
+%  HoldsAt(At(physobj1,location),time) &
+%  HoldsAt(At(physobj2,location),time).
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e:187
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',185).
+
+ /*  exists([Location],
+    happens(takeOffOf(Agent, Physobj1, Physobj2), Time) ->
+       holds_at(on(Physobj1, Physobj2), Time),
+       holds_at(at(Agent, Location), Time),
+       holds_at(at(Physobj1, Location), Time),
+       holds_at(at(Physobj2, Location), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',185).
+
+ /*  not(happens(takeOffOf(Agent, Physobj1, Physobj2), Time)) :-
+       (   not(holds_at(on(Physobj1, Physobj2), Time))
+       ;   not(holds_at(at(Agent, Location), Time))
+       ;   not(holds_at(at(Physobj1, Location), Time))
+       ;   not(holds_at(at(Physobj2, Location), Time))
+       ),
+       some(Location,
+            '$kolem_Fn_206'(Agent, Physobj1, Physobj2, Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',185).
+
+ /*  [(holds_at(neg(on(Physobj1, Physobj2)), Time);holds_at(neg(at(Agent, Location)), Time);holds_at(neg(at(Physobj1, Location)), Time);holds_at(neg(at(Physobj2, Location)), Time)), some(Location, '$kolem_Fn_206'(Agent, Physobj1, Physobj2, Time))] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          not(happens(takeOffOf(Agent, Physobj1, Physobj2),
+                      Time))).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',185).
+axiom(not(happens(takeOffOf(Agent, Physobj1, Physobj2), Time)),
+   
+    [  (holds_at(neg(on(Physobj1, Physobj2)), Time);holds_at(neg(at(Agent, Location)), Time);holds_at(neg(at(Physobj1, Location)), Time);holds_at(neg(at(Physobj2, Location)), Time)),
+      some(Location,
+           '$kolem_Fn_206'(Agent, Physobj1, Physobj2, Time))
+    ]).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',185).
+
+ /*  holds_at(on(Physobj1, Physobj2), Time) :-
+       happens(takeOffOf(Agent, Physobj1, Physobj2), Time),
+       some(Location,
+            '$kolem_Fn_206'(Agent, Physobj1, Physobj2, Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',185).
+
+ /*  [happens(takeOffOf(Agent, Physobj1, Physobj2), Time), some(Location, '$kolem_Fn_206'(Agent, Physobj1, Physobj2, Time))] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(on(Physobj1, Physobj2), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',185).
+axiom(holds_at(on(Physobj1, Physobj2), Time),
+   
+    [ happens(takeOffOf(Agent, Physobj1, Physobj2), Time),
+      some(Location,
+           '$kolem_Fn_206'(Agent, Physobj1, Physobj2, Time))
+    ]).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',185).
+
+ /*  holds_at(at(Agent, Location), Time) :-
+       happens(takeOffOf(Agent, Physobj1, Physobj2), Time),
+       some(Location,
+            '$kolem_Fn_206'(Agent, Physobj1, Physobj2, Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',185).
+
+ /*  [happens(takeOffOf(Agent, Physobj1, Physobj2), Time), some(Location, '$kolem_Fn_206'(Agent, Physobj1, Physobj2, Time))] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(at(Agent, Location), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',185).
+axiom(holds_at(at(Agent, Location), Time),
+   
+    [ happens(takeOffOf(Agent, Physobj1, Physobj2), Time),
+      some(Location,
+           '$kolem_Fn_206'(Agent, Physobj1, Physobj2, Time))
+    ]).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',185).
+
+ /*  holds_at(at(Physobj1, Location), Time) :-
+       happens(takeOffOf(Agent, Physobj1, Physobj2), Time),
+       some(Location,
+            '$kolem_Fn_206'(Agent, Physobj1, Physobj2, Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',185).
+
+ /*  [happens(takeOffOf(Agent, Physobj1, Physobj2), Time), some(Location, '$kolem_Fn_206'(Agent, Physobj1, Physobj2, Time))] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(at(Physobj1, Location), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',185).
+axiom(holds_at(at(Physobj1, Location), Time),
+   
+    [ happens(takeOffOf(Agent, Physobj1, Physobj2), Time),
+      some(Location,
+           '$kolem_Fn_206'(Agent, Physobj1, Physobj2, Time))
+    ]).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',185).
+
+ /*  holds_at(at(Physobj2, Location), Time) :-
+       happens(takeOffOf(Agent, Physobj1, Physobj2), Time),
+       some(Location,
+            '$kolem_Fn_206'(Agent, Physobj1, Physobj2, Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',185).
+
+ /*  [happens(takeOffOf(Agent, Physobj1, Physobj2), Time), some(Location, '$kolem_Fn_206'(Agent, Physobj1, Physobj2, Time))] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(at(Physobj2, Location), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',185).
+axiom(holds_at(at(Physobj2, Location), Time),
+   
+    [ happens(takeOffOf(Agent, Physobj1, Physobj2), Time),
+      some(Location,
+           '$kolem_Fn_206'(Agent, Physobj1, Physobj2, Time))
+    ]).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e:189
+% [agent,physobj1,physobj2,location,time]
+% Releases(PlaceOn(agent,physobj1,physobj2),
+%          At(physobj1,location),
+%          time).
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e:192
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',191).
+
+ /*  [] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          releases(placeOn(Agent, Physobj1, Physobj2),
+                   at(Physobj1, Location),
+                   Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',191).
+axiom(releases(placeOn(Agent, Physobj1, Physobj2), at(Physobj1, Location), Time),
+    []).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e:194
+% [physobj1,physobj2,location,time]
+% HoldsAt(On(physobj1,physobj2),time) &
+% HoldsAt(At(physobj2,location),time) ->
+% HoldsAt(At(physobj1,location),time).
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e:197
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',196).
+
+ /*  holds_at(on(Physobj1, Physobj2), Time), holds_at(at(Physobj2, Location), Time) ->
+       holds_at(at(Physobj1, Location), Time).
+ */
+
+ /*  holds_at(at(Physobj1, Location), Time) :-
+       holds_at(on(Physobj1, Physobj2), Time),
+       holds_at(at(Physobj2, Location), Time).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',196).
+
+ /*  [holds_at(on(Physobj1, Physobj2), Time), holds_at(at(Physobj2, Location), Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(at(Physobj1, Location), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',196).
+axiom(holds_at(at(Physobj1, Location), Time),
+   
+    [ holds_at(on(Physobj1, Physobj2), Time),
+      holds_at(at(Physobj2, Location), Time)
+    ]).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',196).
+
+ /*  not(holds_at(on(Physobj1, Physobj2), Time)) :-
+       holds_at(at(Physobj2, Location), Time),
+       not(holds_at(at(Physobj1, Location), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',196).
+
+ /*  [holds_at(at(Physobj2, Location), Time), holds_at(neg(at(Physobj1, Location)), Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(neg(on(Physobj1, Physobj2)), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',196).
+axiom(holds_at(neg(on(Physobj1, Physobj2)), Time),
+   
+    [ holds_at(at(Physobj2, Location), Time),
+      holds_at(neg(at(Physobj1, Location)), Time)
+    ]).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',196).
+
+ /*  not(holds_at(at(Physobj2, Location), Time)) :-
+       holds_at(on(Physobj1, Physobj2), Time),
+       not(holds_at(at(Physobj1, Location), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',196).
+
+ /*  [holds_at(on(Physobj1, Physobj2), Time), holds_at(neg(at(Physobj1, Location)), Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(neg(at(Physobj2, Location)), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',196).
+axiom(holds_at(neg(at(Physobj2, Location)), Time),
+   
+    [ holds_at(on(Physobj1, Physobj2), Time),
+      holds_at(neg(at(Physobj1, Location)), Time)
+    ]).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e:199
+% fluent At(object,location)
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',199).
+fluent(at(object,location)).
+==> mpred_prop(at(object,location),fluent).
+==> meta_argtypes(at(object,location)).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e:201
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',202).
+% [object,time]
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e:202
+% {location} % HoldsAt(At(object,location),time).
+
+ /*  exists([Location],
+    holds_at(at(Object,Location),Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',202).
+
+ /*  holds_at(at(Object, Location), Time) :-
+       some(Location, '$kolem_Fn_207'(Object, Time)).
+ */
+
+ /*  [some(Location, '$kolem_Fn_207'(Object, Time))] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(at(Object, Location), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',202).
+axiom(holds_at(at(Object, Location), Time),
+    [some(Location, '$kolem_Fn_207'(Object, Time))]).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e:204
+% [object,location1,location2,time]
+% HoldsAt(At(object,location1),time) &
+% HoldsAt(At(object,location2),time) ->
+% location1=location2.
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e:207
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',206).
+
+ /*  holds_at(at(Object, Location1), Time), holds_at(at(Object, Location2), Time) ->
+       equals(Location1, Location2).
+ */
+
+ /*  not(holds_at(at(Object, Location1), Time)) :-
+       holds_at(at(Object, Location2), Time),
+       not(equals(Location1, Location2)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',206).
+
+ /*  [holds_at(at(Object, Location2), Time), not(equals(Location1, Location2))] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(neg(at(Object, Location1)), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',206).
+axiom(holds_at(neg(at(Object, Location1)), Time),
+   
+    [ holds_at(at(Object, Location2), Time),
+      not(equals(Location1, Location2))
+    ]).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',206).
+
+ /*  not(holds_at(at(Object, Location2), Time)) :-
+       holds_at(at(Object, Location1), Time),
+       not(equals(Location1, Location2)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',206).
+
+ /*  [holds_at(at(Object, Location1), Time), not(equals(Location1, Location2))] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(neg(at(Object, Location2)), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',206).
+axiom(holds_at(neg(at(Object, Location2)), Time),
+   
+    [ holds_at(at(Object, Location1), Time),
+      not(equals(Location2, Location1))
+    ]).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e:209
+% function Side1(portal): location
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',209).
+function(side1(portal)).
+==> mpred_prop(side1(portal),function).
+==> meta_argtypes(side1(portal)).
+predicate(side1Pred(portal,location)).
+==> mpred_prop(side1Pred(portal,location),predicate).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',209).
+==> meta_argtypes(side1Pred(portal,location)).
+
+ /*  fix_axiom_head(Time) ->
+       
+       [ functional_predicate(side1, side1Pred),
+          (->),
+         holds_at(functional_predicate(side1, side1Pred), Time)
+       ].
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',209).
+
+ /*  [] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(functional_predicate(side1, side1Pred), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',209).
+axiom(holds_at(functional_predicate(side1, side1Pred), Time),
+    []).
+==> resultIsa(side1,location).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e:210
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',211).
+% function Side2(portal): location
+function(side2(portal)).
+==> mpred_prop(side2(portal),function).
+==> meta_argtypes(side2(portal)).
+predicate(side2Pred(portal,location)).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',211).
+==> mpred_prop(side2Pred(portal,location),predicate).
+==> meta_argtypes(side2Pred(portal,location)).
+
+ /*  fix_axiom_head(Time) ->
+       
+       [ functional_predicate(side2, side2Pred),
+          (->),
+         holds_at(functional_predicate(side2, side2Pred), Time)
+       ].
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',211).
+
+ /*  [] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(functional_predicate(side2, side2Pred), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',211).
+axiom(holds_at(functional_predicate(side2, side2Pred), Time),
+    []).
+==> resultIsa(side2,location).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e:212
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',213).
+% fluent NearPortal(object,portal)
+fluent(nearPortal(object,portal)).
+==> mpred_prop(nearPortal(object,portal),fluent).
+==> meta_argtypes(nearPortal(object,portal)).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e:213
+% noninertial NearPortal
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',213).
+==> noninertial(nearPortal).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e:215
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',216).
+% [object,portal,time]
+% HoldsAt(NearPortal(object,portal),time) <->
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e:217
+% {location}% 
+%  (Side1(portal)=location|
+%   Side2(portal)=location) &
+%  HoldsAt(At(object,location),time).
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e:220
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',218).
+
+ /*  exists([Location],
+    holds_at(nearPortal(Object, Portal), Time) <->
+       (   equals(side1(Portal), Location)
+       ;   equals(side2(Portal), Location)
+       ),
+       holds_at(at(Object, Location), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',218).
+
+ /*  not(holds_at(nearPortal(Object, Portal), Time)) :-
+       (   not(equals(side1(Portal), Location)),
+           not(equals(side2(Portal), Location))
+       ;   not(holds_at(at(Object, Location), Time))
+       ),
+       some(Location, '$kolem_Fn_208'(Object, Portal, Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',218).
+
+ /*  [(not(equals(side1(Portal), Location)), not(equals(side2(Portal), Location));holds_at(neg(at(Object, Location)), Time)), some(Location, '$kolem_Fn_208'(Object, Portal, Time))] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(neg(nearPortal(Object, Portal)), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',218).
+axiom(holds_at(neg(nearPortal(Object, Portal)), Time),
+   
+    [  (not(equals(side1(Portal), Location)), not(equals(side2(Portal), Location));holds_at(neg(at(Object, Location)), Time)),
+      some(Location, '$kolem_Fn_208'(Object, Portal, Time))
+    ]).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',218).
+
+ /*  holds_at(at(Object, Location), Time) :-
+       holds_at(nearPortal(Object, Portal), Time),
+       some(Location, '$kolem_Fn_208'(Object, Portal, Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',218).
+
+ /*  [holds_at(nearPortal(Object, Portal), Time), some(Location, '$kolem_Fn_208'(Object, Portal, Time))] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(at(Object, Location), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',218).
+axiom(holds_at(at(Object, Location), Time),
+   
+    [ holds_at(nearPortal(Object, Portal), Time),
+      some(Location, '$kolem_Fn_208'(Object, Portal, Time))
+    ]).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',218).
+
+ /*  holds_at(nearPortal(Object, Portal), Time) :-
+       ( holds_at(at(Object, Location), Time),
+         (   equals(side1(Portal), Location)
+         ;   equals(side2(Portal), Location)
+         )
+       ),
+       some(Location, '$kolem_Fn_208'(Object, Portal, Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',218).
+
+ /*  [holds_at(at(Object, Location), Time),  (equals(side1(Portal), Location);equals(side2(Portal), Location)), some(Location, '$kolem_Fn_208'(Object, Portal, Time))] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(nearPortal(Object, Portal), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',218).
+axiom(holds_at(nearPortal(Object, Portal), Time),
+   
+    [ holds_at(at(Object, Location), Time),
+       (equals(side1(Portal), Location);equals(side2(Portal), Location)),
+      some(Location, '$kolem_Fn_208'(Object, Portal, Time))
+    ]).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',218).
+
+ /*  not(holds_at(at(Object, Location), Time)) :-
+       (   equals(side1(Portal), Location)
+       ;   equals(side2(Portal), Location)
+       ),
+       not(holds_at(nearPortal(Object, Portal), Time)),
+       some(Location, '$kolem_Fn_208'(Object, Portal, Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',218).
+
+ /*  [(equals(side1(Portal), Location);equals(side2(Portal), Location)), holds_at(neg(nearPortal(Object, Portal)), Time), some(Location, '$kolem_Fn_208'(Object, Portal, Time))] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(neg(at(Object, Location)), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',218).
+axiom(holds_at(neg(at(Object, Location)), Time),
+   
+    [  (equals(side1(Portal), Location);equals(side2(Portal), Location)),
+      holds_at(neg(nearPortal(Object, Portal)), Time),
+      some(Location, '$kolem_Fn_208'(Object, Portal, Time))
+    ]).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e:222
+% event WalkThroughDoor12(agent,door)
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',222).
+event(walkThroughDoor12(agent,door)).
+==> mpred_prop(walkThroughDoor12(agent,door),event).
+==> meta_argtypes(walkThroughDoor12(agent,door)).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e:223
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',224).
+% event WalkThroughDoor21(agent,door)
+event(walkThroughDoor21(agent,door)).
+==> mpred_prop(walkThroughDoor21(agent,door),event).
+==> meta_argtypes(walkThroughDoor21(agent,door)).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e:225
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',226).
+% [agent,door,time]
+% Happens(WalkThroughDoor12(agent,door),time) ->
+% HoldsAt(Standing(agent),time) &
+% HoldsAt(At(agent,Side1(door)),time).
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e:228
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',226).
+
+ /*  happens(walkThroughDoor12(Agent, Door), Time) ->
+       holds_at(standing(Agent), Time),
+       holds_at(at(Agent, side1(Door)), Time).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',226).
+
+ /*  not(happens(walkThroughDoor12(Agent, Door), Time)) :-
+       (   not(holds_at(standing(Agent), Time))
+       ;   not(holds_at(at(Agent, side1(Door)), Time))
+       ).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',226).
+
+ /*  [(holds_at(neg(standing(Agent)), Time);holds_at(neg(at(Agent, side1(Door))), Time))] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          not(happens(walkThroughDoor12(Agent, Door), Time))).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',226).
+axiom(not(happens(walkThroughDoor12(Agent, Door), Time)),
+   
+    [  (holds_at(neg(standing(Agent)), Time);holds_at(neg(at(Agent, side1(Door))), Time))
+    ]).
+
+ /*  holds_at(standing(Agent), Time) :-
+       happens(walkThroughDoor12(Agent, Door), Time).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',226).
+
+ /*  [holds_at(metreqs(walkThroughDoor12(Agent, Door)), Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          requires(walkThroughDoor12(Agent, Door), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',226).
+axiom(requires(walkThroughDoor12(Agent, Door), Time),
+    [holds_at(metreqs(walkThroughDoor12(Agent, Door)), Time)]).
+
+ /*  [holds_at(standing(Agent), Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(metreqs(walkThroughDoor12(Agent, Door)), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',226).
+axiom(holds_at(metreqs(walkThroughDoor12(Agent, Door)), Time),
+    [holds_at(standing(Agent), Time)]).
+
+ /*  holds_at(at(Agent, side1(Door)), Time) :-
+       happens(walkThroughDoor12(Agent, Door), Time).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',226).
+
+ /*  [holds_at(metreqs(walkThroughDoor12(Agent, Door)), Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          requires(walkThroughDoor12(Agent, Door), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',226).
+axiom(requires(walkThroughDoor12(Agent, Door), Time),
+    [holds_at(metreqs(walkThroughDoor12(Agent, Door)), Time)]).
+
+ /*  [holds_at(at(Agent, side1(Door)), Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(metreqs(walkThroughDoor12(Agent, Door)), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',226).
+axiom(holds_at(metreqs(walkThroughDoor12(Agent, Door)), Time),
+    [holds_at(at(Agent, side1(Door)), Time)]).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e:230
+% [agent,door,time]
+% Happens(WalkThroughDoor21(agent,door),time) ->
+% HoldsAt(Standing(agent),time) &
+% HoldsAt(At(agent,Side2(door)),time).
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e:233
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',232).
+
+ /*  happens(walkThroughDoor21(Agent, Door), Time) ->
+       holds_at(standing(Agent), Time),
+       holds_at(at(Agent, side2(Door)), Time).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',232).
+
+ /*  not(happens(walkThroughDoor21(Agent, Door), Time)) :-
+       (   not(holds_at(standing(Agent), Time))
+       ;   not(holds_at(at(Agent, side2(Door)), Time))
+       ).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',232).
+
+ /*  [(holds_at(neg(standing(Agent)), Time);holds_at(neg(at(Agent, side2(Door))), Time))] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          not(happens(walkThroughDoor21(Agent, Door), Time))).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',232).
+axiom(not(happens(walkThroughDoor21(Agent, Door), Time)),
+   
+    [  (holds_at(neg(standing(Agent)), Time);holds_at(neg(at(Agent, side2(Door))), Time))
+    ]).
+
+ /*  holds_at(standing(Agent), Time) :-
+       happens(walkThroughDoor21(Agent, Door), Time).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',232).
+
+ /*  [holds_at(metreqs(walkThroughDoor21(Agent, Door)), Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          requires(walkThroughDoor21(Agent, Door), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',232).
+axiom(requires(walkThroughDoor21(Agent, Door), Time),
+    [holds_at(metreqs(walkThroughDoor21(Agent, Door)), Time)]).
+
+ /*  [holds_at(standing(Agent), Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(metreqs(walkThroughDoor21(Agent, Door)), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',232).
+axiom(holds_at(metreqs(walkThroughDoor21(Agent, Door)), Time),
+    [holds_at(standing(Agent), Time)]).
+
+ /*  holds_at(at(Agent, side2(Door)), Time) :-
+       happens(walkThroughDoor21(Agent, Door), Time).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',232).
+
+ /*  [holds_at(metreqs(walkThroughDoor21(Agent, Door)), Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          requires(walkThroughDoor21(Agent, Door), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',232).
+axiom(requires(walkThroughDoor21(Agent, Door), Time),
+    [holds_at(metreqs(walkThroughDoor21(Agent, Door)), Time)]).
+
+ /*  [holds_at(at(Agent, side2(Door)), Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(metreqs(walkThroughDoor21(Agent, Door)), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',232).
+axiom(holds_at(metreqs(walkThroughDoor21(Agent, Door)), Time),
+    [holds_at(at(Agent, side2(Door)), Time)]).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e:235
+% [agent,door,location,time]
+% Side2(door)=location ->
+% Initiates(WalkThroughDoor12(agent,door),At(agent,location),time).
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e:237
+
+ /*  [equals(side2(Door), Location)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          initiates(walkThroughDoor12(Agent, Door),
+                    at(Agent, Location),
+                    Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',237).
+axiom(initiates(walkThroughDoor12(Agent, Door), at(Agent, Location), Time),
+    [equals(side2(Door), Location)]).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e:239
+% [agent,door,location,time]
+% Side1(door)=location ->
+% Initiates(WalkThroughDoor21(agent,door),At(agent,location),time).
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e:241
+
+ /*  [equals(side1(Door), Location)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          initiates(walkThroughDoor21(Agent, Door),
+                    at(Agent, Location),
+                    Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',241).
+axiom(initiates(walkThroughDoor21(Agent, Door), at(Agent, Location), Time),
+    [equals(side1(Door), Location)]).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e:243
+% [agent,door,location,time]
+% Side1(door)=location ->
+% Terminates(WalkThroughDoor12(agent,door),At(agent,location),time).
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e:245
+
+ /*  [equals(side1(Door), Location)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          terminates(walkThroughDoor12(Agent, Door),
+                     at(Agent, Location),
+                     Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',245).
+axiom(terminates(walkThroughDoor12(Agent, Door), at(Agent, Location), Time),
+    [equals(side1(Door), Location)]).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e:247
+% [agent,door,location,time]
+% Side2(door)=location ->
+% Terminates(WalkThroughDoor21(agent,door),At(agent,location),time).
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e:249
+
+ /*  [equals(side2(Door), Location)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          terminates(walkThroughDoor21(Agent, Door),
+                     at(Agent, Location),
+                     Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',249).
+axiom(terminates(walkThroughDoor21(Agent, Door), at(Agent, Location), Time),
+    [equals(side2(Door), Location)]).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e:251
+% fluent Hungry(agent)
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',251).
+fluent(hungry(agent)).
+==> mpred_prop(hungry(agent),fluent).
+==> meta_argtypes(hungry(agent)).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e:253
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',254).
+% fluent Satiated(agent)
+fluent(satiated(agent)).
+==> mpred_prop(satiated(agent),fluent).
+==> meta_argtypes(satiated(agent)).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e:254
+% noninertial Satiated
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',254).
+==> noninertial(satiated).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e:256
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',257).
+% [agent,time]
+ % HoldsAt(Hungry(agent),time) <-> !HoldsAt(Satiated(agent),time).
+
+ /*  holds_at(hungry(Agent), Time) <->
+       holds_at(neg(satiated(Agent)), Time).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',257).
+
+ /*  [holds_at, hungry] <->
+       [holds_at, neg, satiated].
+ */
+
+ /*  holds_at(hungry(Agent), Time) ->
+       holds_at(neg(satiated(Agent)), Time).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',257).
+
+ /*  holds_at(neg(satiated(Agent)), Time) :-
+       holds_at(hungry(Agent), Time).
+ */
+
+ /*  [holds_at(hungry(Agent), Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(neg(satiated(Agent)), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',257).
+axiom(holds_at(neg(satiated(Agent)), Time),
+    [holds_at(hungry(Agent), Time)]).
+
+ /*  not(holds_at(hungry(Agent), Time)) :-
+       not(holds_at(neg(satiated(Agent)), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',257).
+
+ /*  [holds_at(satiated(Agent), Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(neg(hungry(Agent)), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',257).
+axiom(holds_at(neg(hungry(Agent)), Time),
+    [holds_at(satiated(Agent), Time)]).
+
+ /*  holds_at(neg(satiated(Agent)), Time) ->
+       holds_at(hungry(Agent), Time).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',257).
+
+ /*  holds_at(hungry(Agent), Time) :-
+       holds_at(neg(satiated(Agent)), Time).
+ */
+
+ /*  [holds_at(neg(satiated(Agent)), Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(hungry(Agent), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',257).
+axiom(holds_at(hungry(Agent), Time),
+    [holds_at(neg(satiated(Agent)), Time)]).
+
+ /*  not(holds_at(neg(satiated(Agent)), Time)) :-
+       not(holds_at(hungry(Agent), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',257).
+
+ /*  [holds_at(neg(hungry(Agent)), Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(satiated(Agent), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',257).
+axiom(holds_at(satiated(Agent), Time),
+    [holds_at(neg(hungry(Agent)), Time)]).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e:258
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',259).
+% event Eat(agent,food)
+event(eat(agent,food)).
+==> mpred_prop(eat(agent,food),event).
+==> meta_argtypes(eat(agent,food)).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e:260
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',261).
+% [agent,food,time]
+% Happens(Eat(agent,food),time) ->
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e:262
+% {location}% 
+% HoldsAt(At(agent,location),time) &
+% HoldsAt(At(food,location),time).
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e:264
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',263).
+
+ /*  exists([Location],
+    happens(eat(Agent, Food), Time) ->
+       holds_at(at(Agent, Location), Time),
+       holds_at(at(Food, Location), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',263).
+
+ /*  not(happens(eat(Agent, Food), Time)) :-
+       (   not(holds_at(at(Agent, Location), Time))
+       ;   not(holds_at(at(Food, Location), Time))
+       ),
+       some(Location, '$kolem_Fn_209'(Agent, Food, Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',263).
+
+ /*  [(holds_at(neg(at(Agent, Location)), Time);holds_at(neg(at(Food, Location)), Time)), some(Location, '$kolem_Fn_209'(Agent, Food, Time))] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          not(happens(eat(Agent, Food), Time))).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',263).
+axiom(not(happens(eat(Agent, Food), Time)),
+   
+    [  (holds_at(neg(at(Agent, Location)), Time);holds_at(neg(at(Food, Location)), Time)),
+      some(Location, '$kolem_Fn_209'(Agent, Food, Time))
+    ]).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',263).
+
+ /*  holds_at(at(Agent, Location), Time) :-
+       happens(eat(Agent, Food), Time),
+       some(Location, '$kolem_Fn_209'(Agent, Food, Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',263).
+
+ /*  [happens(eat(Agent, Food), Time), some(Location, '$kolem_Fn_209'(Agent, Food, Time))] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(at(Agent, Location), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',263).
+axiom(holds_at(at(Agent, Location), Time),
+   
+    [ happens(eat(Agent, Food), Time),
+      some(Location, '$kolem_Fn_209'(Agent, Food, Time))
+    ]).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',263).
+
+ /*  holds_at(at(Food, Location), Time) :-
+       happens(eat(Agent, Food), Time),
+       some(Location, '$kolem_Fn_209'(Agent, Food, Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',263).
+
+ /*  [happens(eat(Agent, Food), Time), some(Location, '$kolem_Fn_209'(Agent, Food, Time))] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(at(Food, Location), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',263).
+axiom(holds_at(at(Food, Location), Time),
+   
+    [ happens(eat(Agent, Food), Time),
+      some(Location, '$kolem_Fn_209'(Agent, Food, Time))
+    ]).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e:266
+% [agent,food,time]
+% Terminates(Eat(agent,food),Hungry(agent),time).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',268).
+
+ /*  [] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          terminates(eat(Agent, Food), hungry(Agent), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',268).
+axiom(terminates(eat(Agent, Food), hungry(Agent), Time),
+    []).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e:269
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',270).
+% sort restaurant: script
+==> subsort(restaurant,script).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e:270
+% sort waiter: agent
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',270).
+==> subsort(waiter,agent).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e:271
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',272).
+% sort cook: agent
+==> subsort(cook,agent).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e:273
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',274).
+% function BillOf(restaurant): bill
+function(billOf(restaurant)).
+==> mpred_prop(billOf(restaurant),function).
+==> meta_argtypes(billOf(restaurant)).
+predicate(bill(restaurant,bill)).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',274).
+==> mpred_prop(bill(restaurant,bill),predicate).
+==> meta_argtypes(bill(restaurant,bill)).
+
+ /*  fix_axiom_head(Time) ->
+       
+       [ functional_predicate(billOf, bill),
+          (->),
+         holds_at(functional_predicate(billOf, bill), Time)
+       ].
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',274).
+
+ /*  [] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(functional_predicate(billOf, bill), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',274).
+axiom(holds_at(functional_predicate(billOf, bill), Time),
+    []).
+==> resultIsa(billOf,bill).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e:274
+% function CookOf(restaurant): cook
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',274).
+function(cookOf(restaurant)).
+==> mpred_prop(cookOf(restaurant),function).
+==> meta_argtypes(cookOf(restaurant)).
+predicate(cook(restaurant,cook)).
+==> mpred_prop(cook(restaurant,cook),predicate).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',274).
+==> meta_argtypes(cook(restaurant,cook)).
+
+ /*  fix_axiom_head(Time) ->
+       
+       [ functional_predicate(cookOf, cook),
+          (->),
+         holds_at(functional_predicate(cookOf, cook), Time)
+       ].
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',274).
+
+ /*  [] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(functional_predicate(cookOf, cook), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',274).
+axiom(holds_at(functional_predicate(cookOf, cook), Time),
+    []).
+==> resultIsa(cookOf,cook).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e:275
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',276).
+% function TableOf(restaurant): table
+function(tableOf(restaurant)).
+==> mpred_prop(tableOf(restaurant),function).
+==> meta_argtypes(tableOf(restaurant)).
+predicate(table(restaurant,table)).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',276).
+==> mpred_prop(table(restaurant,table),predicate).
+==> meta_argtypes(table(restaurant,table)).
+
+ /*  fix_axiom_head(Time) ->
+       
+       [ functional_predicate(tableOf, table),
+          (->),
+         holds_at(functional_predicate(tableOf, table), Time)
+       ].
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',276).
+
+ /*  [] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(functional_predicate(tableOf, table), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',276).
+axiom(holds_at(functional_predicate(tableOf, table), Time),
+    []).
+==> resultIsa(tableOf,table).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e:276
+% function WaiterOf(restaurant): waiter
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',276).
+function(waiterOf(restaurant)).
+==> mpred_prop(waiterOf(restaurant),function).
+==> meta_argtypes(waiterOf(restaurant)).
+predicate(waiter(restaurant,waiter)).
+==> mpred_prop(waiter(restaurant,waiter),predicate).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',276).
+==> meta_argtypes(waiter(restaurant,waiter)).
+
+ /*  fix_axiom_head(Time) ->
+       
+       [ functional_predicate(waiterOf, waiter),
+          (->),
+         holds_at(functional_predicate(waiterOf, waiter), Time)
+       ].
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',276).
+
+ /*  [] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(functional_predicate(waiterOf, waiter), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',276).
+axiom(holds_at(functional_predicate(waiterOf, waiter), Time),
+    []).
+==> resultIsa(waiterOf,waiter).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e:277
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',278).
+% function KitchenDoorOf(restaurant): door
+function(kitchenDoorOf(restaurant)).
+==> mpred_prop(kitchenDoorOf(restaurant),function).
+==> meta_argtypes(kitchenDoorOf(restaurant)).
+predicate(kitchenDoor(restaurant,door)).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',278).
+==> mpred_prop(kitchenDoor(restaurant,door),predicate).
+==> meta_argtypes(kitchenDoor(restaurant,door)).
+
+ /*  fix_axiom_head(Time) ->
+       
+       [ functional_predicate(kitchenDoorOf, kitchenDoor),
+          (->),
+         holds_at(functional_predicate(kitchenDoorOf, kitchenDoor), Time)
+       ].
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',278).
+
+ /*  [] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(functional_predicate(kitchenDoorOf, kitchenDoor), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',278).
+axiom(holds_at(functional_predicate(kitchenDoorOf, kitchenDoor), Time),
+    []).
+==> resultIsa(kitchenDoorOf,door).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e:279
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',280).
+% fluent BeWaiter0(waiter)
+fluent(beWaiter0(waiter)).
+==> mpred_prop(beWaiter0(waiter),fluent).
+==> meta_argtypes(beWaiter0(waiter)).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e:281
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',282).
+% fluent BeWaiter1(waiter)
+fluent(beWaiter1(waiter)).
+==> mpred_prop(beWaiter1(waiter),fluent).
+==> meta_argtypes(beWaiter1(waiter)).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e:283
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',284).
+% fluent BeWaiter2(waiter)
+fluent(beWaiter2(waiter)).
+==> mpred_prop(beWaiter2(waiter),fluent).
+==> meta_argtypes(beWaiter2(waiter)).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e:285
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',286).
+% fluent BeWaiter3(waiter)
+fluent(beWaiter3(waiter)).
+==> mpred_prop(beWaiter3(waiter),fluent).
+==> meta_argtypes(beWaiter3(waiter)).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e:287
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',288).
+% fluent BeWaiter4(waiter)
+fluent(beWaiter4(waiter)).
+==> mpred_prop(beWaiter4(waiter),fluent).
+==> meta_argtypes(beWaiter4(waiter)).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e:289
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',290).
+% fluent BeWaiter5(waiter)
+fluent(beWaiter5(waiter)).
+==> mpred_prop(beWaiter5(waiter),fluent).
+==> meta_argtypes(beWaiter5(waiter)).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e:291
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',292).
+% fluent BeWaiter6(waiter)
+fluent(beWaiter6(waiter)).
+==> mpred_prop(beWaiter6(waiter),fluent).
+==> meta_argtypes(beWaiter6(waiter)).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e:293
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',294).
+% fluent BeWaiter7(waiter)
+fluent(beWaiter7(waiter)).
+==> mpred_prop(beWaiter7(waiter),fluent).
+==> meta_argtypes(beWaiter7(waiter)).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e:295
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',296).
+% fluent BeWaiter8(waiter)
+fluent(beWaiter8(waiter)).
+==> mpred_prop(beWaiter8(waiter),fluent).
+==> meta_argtypes(beWaiter8(waiter)).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e:297
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',298).
+% fluent BeWaiter9(waiter)
+fluent(beWaiter9(waiter)).
+==> mpred_prop(beWaiter9(waiter),fluent).
+==> meta_argtypes(beWaiter9(waiter)).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e:299
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',300).
+% xor BeWaiter0, BeWaiter1, BeWaiter2, BeWaiter3, BeWaiter4, BeWaiter5, BeWaiter6, BeWaiter7, BeWaiter8, BeWaiter9
+==> xor([ beWaiter0,
+	  beWaiter1,
+	  beWaiter2,
+	  beWaiter3,
+	  beWaiter4,
+	  beWaiter5,
+	  beWaiter6,
+	  beWaiter7,
+	  beWaiter8,
+	  beWaiter9
+	]).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e:301
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',302).
+% [waiter,agent,time]
+% HoldsAt(BeWaiter0(waiter),time) ->
+% Terminates(Greet(waiter,agent),
+%            BeWaiter0(waiter),
+%            time).
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e:305
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',302).
+
+ /*  [holds_at(beWaiter0(Waiter), Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          terminates(greet(Waiter, Agent),
+                     beWaiter0(Waiter),
+                     Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',302).
+axiom(terminates(greet(Waiter, Agent), beWaiter0(Waiter), Time),
+    [holds_at(beWaiter0(Waiter), Time)]).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e:307
+% [waiter,agent,time]
+% HoldsAt(BeWaiter0(waiter),time) ->
+% Initiates(Greet(waiter,agent),
+%           BeWaiter1(waiter),
+%           time).
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e:311
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',309).
+
+ /*  [holds_at(beWaiter0(Waiter), Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          initiates(greet(Waiter, Agent),
+                    beWaiter1(Waiter),
+                    Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',309).
+axiom(initiates(greet(Waiter, Agent), beWaiter1(Waiter), Time),
+    [holds_at(beWaiter0(Waiter), Time)]).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e:313
+% [waiter,agent,food,time]
+% HoldsAt(BeWaiter1(waiter),time) ->
+% Terminates(Order(agent,waiter,food),
+%            BeWaiter1(waiter),
+%            time).
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e:317
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',315).
+
+ /*  [holds_at(beWaiter1(Waiter), Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          terminates(order(Agent, Waiter, Food),
+                     beWaiter1(Waiter),
+                     Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',315).
+axiom(terminates(order(Agent, Waiter, Food), beWaiter1(Waiter), Time),
+    [holds_at(beWaiter1(Waiter), Time)]).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e:319
+% [waiter,agent,food,time]
+% HoldsAt(BeWaiter1(waiter),time) ->
+% Initiates(Order(agent,waiter,food),
+%           BeWaiter2(waiter),
+%           time).
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e:323
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',321).
+
+ /*  [holds_at(beWaiter1(Waiter), Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          initiates(order(Agent, Waiter, Food),
+                    beWaiter2(Waiter),
+                    Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',321).
+axiom(initiates(order(Agent, Waiter, Food), beWaiter2(Waiter), Time),
+    [holds_at(beWaiter1(Waiter), Time)]).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e:325
+% [restaurant,waiter,time]
+% WaiterOf(restaurant)=waiter &
+% HoldsAt(BeWaiter2(waiter),time) ->
+% Happens(WalkThroughDoor12(waiter,KitchenDoorOf(restaurant)),time).
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e:328
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',327).
+
+ /*  equals(waiterOf(Restaurant), Waiter), holds_at(beWaiter2(Waiter), Time) ->
+       happens(walkThroughDoor12(Waiter, kitchenDoorOf(Restaurant)),
+               Time).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',327).
+
+ /*  happens(walkThroughDoor12(Waiter, kitchenDoorOf(Restaurant)), Time) :-
+       equals(waiterOf(Restaurant), Waiter),
+       holds_at(beWaiter2(Waiter), Time).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',327).
+
+ /*  [equals(waiterOf(Restaurant), Waiter), holds_at(beWaiter2(Waiter), Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          happens(walkThroughDoor12(Waiter, kitchenDoorOf(Restaurant)),
+                  Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',327).
+axiom(happens(walkThroughDoor12(Waiter, kitchenDoorOf(Restaurant)), Time),
+   
+    [ equals(waiterOf(Restaurant), Waiter),
+      holds_at(beWaiter2(Waiter), Time)
+    ]).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',327).
+
+ /*  not(holds_at(beWaiter2(Waiter), Time)) :-
+       equals(waiterOf(Restaurant), Waiter),
+       not(happens(walkThroughDoor12(Waiter,
+                                     kitchenDoorOf(Restaurant)),
+                   Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',327).
+
+ /*  [equals(waiterOf(Restaurant), Waiter), not(happens(walkThroughDoor12(Waiter, kitchenDoorOf(Restaurant)), Time))] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(neg(beWaiter2(Waiter)), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',327).
+axiom(holds_at(neg(beWaiter2(Waiter)), Time),
+   
+    [ equals(waiterOf(Restaurant), Waiter),
+      not(happens(walkThroughDoor12(Waiter,
+                                    kitchenDoorOf(Restaurant)),
+                  Time))
+    ]).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e:330
+% [restaurant,waiter,door,time]
+% HoldsAt(BeWaiter2(waiter),time) &
+% WaiterOf(restaurant)=waiter &
+% KitchenDoorOf(restaurant)=door ->
+% Terminates(WalkThroughDoor12(waiter,door),
+%            BeWaiter2(waiter),
+%            time).
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e:336
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',332).
+
+ /*  [holds_at(beWaiter2(Waiter), Time), equals(waiterOf(Restaurant), Waiter), equals(kitchenDoorOf(Restaurant), Door)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          terminates(walkThroughDoor12(Waiter, Door),
+                     beWaiter2(Waiter),
+                     Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',332).
+axiom(terminates(walkThroughDoor12(Waiter, Door), beWaiter2(Waiter), Time),
+   
+    [ holds_at(beWaiter2(Waiter), Time),
+      equals(waiterOf(Restaurant), Waiter),
+      equals(kitchenDoorOf(Restaurant), Door)
+    ]).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e:338
+% [restaurant,waiter,door,time]
+% HoldsAt(BeWaiter2(waiter),time) &
+% WaiterOf(restaurant)=waiter &
+% KitchenDoorOf(restaurant)=door ->
+% Initiates(WalkThroughDoor12(waiter,door),
+%           BeWaiter3(waiter),
+%           time).
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e:344
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',340).
+
+ /*  [holds_at(beWaiter2(Waiter), Time), equals(waiterOf(Restaurant), Waiter), equals(kitchenDoorOf(Restaurant), Door)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          initiates(walkThroughDoor12(Waiter, Door),
+                    beWaiter3(Waiter),
+                    Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',340).
+axiom(initiates(walkThroughDoor12(Waiter, Door), beWaiter3(Waiter), Time),
+   
+    [ holds_at(beWaiter2(Waiter), Time),
+      equals(waiterOf(Restaurant), Waiter),
+      equals(kitchenDoorOf(Restaurant), Door)
+    ]).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e:346
+% [restaurant,food,time]
+% HoldsAt(BeWaiter3(WaiterOf(restaurant)),time) &
+% ({agent} HoldsAt(KnowOrder(WaiterOf(restaurant),agent,food),time)) ->
+% Happens(Order(WaiterOf(restaurant),CookOf(restaurant),food),time).
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e:349
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',348).
+
+ /*  holds_at(beWaiter3(waiterOf(Restaurant)), Time), exists([Agent], holds_at(knowOrder(waiterOf(Restaurant), Agent, Food), Time)) ->
+       happens(order(waiterOf(Restaurant),
+                     cookOf(Restaurant),
+                     Food),
+               Time).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',348).
+
+ /*  happens(order(waiterOf(Restaurant), cookOf(Restaurant), Food), Time) :-
+       holds_at(beWaiter3(waiterOf(Restaurant)), Time),
+       holds_at(knowOrder(waiterOf(Restaurant), Agent, Food),
+                Time).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',348).
+
+ /*  [holds_at(beWaiter3(waiterOf(Restaurant)), Time), holds_at(knowOrder(waiterOf(Restaurant), Agent, Food), Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          happens(order(waiterOf(Restaurant),
+                        cookOf(Restaurant),
+                        Food),
+                  Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',348).
+axiom(happens(order(waiterOf(Restaurant), cookOf(Restaurant), Food), Time),
+   
+    [ holds_at(beWaiter3(waiterOf(Restaurant)), Time),
+      holds_at(knowOrder(waiterOf(Restaurant), Agent, Food),
+               Time)
+    ]).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',348).
+
+ /*  not(holds_at(beWaiter3(waiterOf(Restaurant)), Time)) :-
+       holds_at(knowOrder(waiterOf(Restaurant), Agent, Food),
+                Time),
+       not(happens(order(waiterOf(Restaurant),
+                         cookOf(Restaurant),
+                         Food),
+                   Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',348).
+
+ /*  [holds_at(knowOrder(waiterOf(Restaurant), Agent, Food), Time), not(happens(order(waiterOf(Restaurant), cookOf(Restaurant), Food), Time))] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(neg(beWaiter3(waiterOf(Restaurant))), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',348).
+axiom(holds_at(neg(beWaiter3(waiterOf(Restaurant))), Time),
+   
+    [ holds_at(knowOrder(waiterOf(Restaurant), Agent, Food),
+               Time),
+      not(happens(order(waiterOf(Restaurant),
+                        cookOf(Restaurant),
+                        Food),
+                  Time))
+    ]).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',348).
+
+ /*  not(holds_at(knowOrder(waiterOf(Restaurant), Agent, Food), Time)) :-
+       holds_at(beWaiter3(waiterOf(Restaurant)), Time),
+       not(happens(order(waiterOf(Restaurant),
+                         cookOf(Restaurant),
+                         Food),
+                   Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',348).
+
+ /*  [holds_at(beWaiter3(waiterOf(Restaurant)), Time), not(happens(order(waiterOf(Restaurant), cookOf(Restaurant), Food), Time))] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(neg(knowOrder(waiterOf(Restaurant),
+                                 Agent,
+                                 Food)),
+                   Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',348).
+axiom(holds_at(neg(knowOrder(waiterOf(Restaurant), Agent, Food)), Time),
+   
+    [ holds_at(beWaiter3(waiterOf(Restaurant)), Time),
+      not(happens(order(waiterOf(Restaurant),
+                        cookOf(Restaurant),
+                        Food),
+                  Time))
+    ]).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e:351
+% [restaurant,waiter,cook,food,time]
+% WaiterOf(restaurant)=waiter &
+% CookOf(restaurant)=cook &
+% HoldsAt(BeWaiter3(waiter),time) ->
+% Terminates(Order(waiter,cook,food),
+%            BeWaiter3(waiter),
+%            time).
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e:357
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',353).
+
+ /*  [equals(waiterOf(Restaurant), Waiter), equals(cookOf(Restaurant), Cook), holds_at(beWaiter3(Waiter), Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          terminates(order(Waiter, Cook, Food),
+                     beWaiter3(Waiter),
+                     Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',353).
+axiom(terminates(order(Waiter, Cook, Food), beWaiter3(Waiter), Time),
+   
+    [ equals(waiterOf(Restaurant), Waiter),
+      equals(cookOf(Restaurant), Cook),
+      holds_at(beWaiter3(Waiter), Time)
+    ]).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e:359
+% [restaurant,waiter,cook,food,time]
+% WaiterOf(restaurant)=waiter &
+% CookOf(restaurant)=cook &
+% HoldsAt(BeWaiter3(waiter),time) ->
+% Initiates(Order(waiter,cook,food),
+%           BeWaiter4(waiter),
+%           time).
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e:365
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',361).
+
+ /*  [equals(waiterOf(Restaurant), Waiter), equals(cookOf(Restaurant), Cook), holds_at(beWaiter3(Waiter), Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          initiates(order(Waiter, Cook, Food),
+                    beWaiter4(Waiter),
+                    Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',361).
+axiom(initiates(order(Waiter, Cook, Food), beWaiter4(Waiter), Time),
+   
+    [ equals(waiterOf(Restaurant), Waiter),
+      equals(cookOf(Restaurant), Cook),
+      holds_at(beWaiter3(Waiter), Time)
+    ]).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e:367
+% [waiter,food,time]
+% HoldsAt(BeWaiter4(waiter),time) &
+% ({agent} HoldsAt(KnowOrder(waiter,agent,food),time)) &
+% HoldsAt(FoodPrepared(food),time) ->
+% Happens(PickUp(waiter,food),time).
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e:371
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',369).
+
+ /*  holds_at(beWaiter4(Waiter), Time), exists([Agent], holds_at(knowOrder(Waiter, Agent, Food), Time)), holds_at(foodPrepared(Food), Time) ->
+       happens(pickUp(Waiter, Food), Time).
+ */
+
+ /*  happens(pickUp(Waiter, Food), Time) :-
+       holds_at(beWaiter4(Waiter), Time),
+       holds_at(knowOrder(Waiter, Agent, Food), Time),
+       holds_at(foodPrepared(Food), Time).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',369).
+
+ /*  [holds_at(beWaiter4(Waiter), Time), holds_at(knowOrder(Waiter, Agent, Food), Time), holds_at(foodPrepared(Food), Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          happens(pickUp(Waiter, Food), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',369).
+axiom(happens(pickUp(Waiter, Food), Time),
+   
+    [ holds_at(beWaiter4(Waiter), Time),
+      holds_at(knowOrder(Waiter, Agent, Food), Time),
+      holds_at(foodPrepared(Food), Time)
+    ]).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',369).
+
+ /*  not(holds_at(beWaiter4(Waiter), Time)) :-
+       ( holds_at(knowOrder(Waiter, Agent, Food), Time),
+         holds_at(foodPrepared(Food), Time)
+       ),
+       not(happens(pickUp(Waiter, Food), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',369).
+
+ /*  [holds_at(knowOrder(Waiter, Agent, Food), Time), holds_at(foodPrepared(Food), Time), not(happens(pickUp(Waiter, Food), Time))] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(neg(beWaiter4(Waiter)), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',369).
+axiom(holds_at(neg(beWaiter4(Waiter)), Time),
+   
+    [ holds_at(knowOrder(Waiter, Agent, Food), Time),
+      holds_at(foodPrepared(Food), Time),
+      not(happens(pickUp(Waiter, Food), Time))
+    ]).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',369).
+
+ /*  not(holds_at(knowOrder(Waiter, Agent, Food), Time)) :-
+       holds_at(foodPrepared(Food), Time),
+       holds_at(beWaiter4(Waiter), Time),
+       not(happens(pickUp(Waiter, Food), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',369).
+
+ /*  [holds_at(foodPrepared(Food), Time), holds_at(beWaiter4(Waiter), Time), not(happens(pickUp(Waiter, Food), Time))] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(neg(knowOrder(Waiter, Agent, Food)),
+                   Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',369).
+axiom(holds_at(neg(knowOrder(Waiter, Agent, Food)), Time),
+   
+    [ holds_at(foodPrepared(Food), Time),
+      holds_at(beWaiter4(Waiter), Time),
+      not(happens(pickUp(Waiter, Food), Time))
+    ]).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',369).
+
+ /*  not(holds_at(foodPrepared(Food), Time)) :-
+       holds_at(knowOrder(Waiter, Agent, Food), Time),
+       holds_at(beWaiter4(Waiter), Time),
+       not(happens(pickUp(Waiter, Food), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',369).
+
+ /*  [holds_at(knowOrder(Waiter, Agent, Food), Time), holds_at(beWaiter4(Waiter), Time), not(happens(pickUp(Waiter, Food), Time))] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(neg(foodPrepared(Food)), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',369).
+axiom(holds_at(neg(foodPrepared(Food)), Time),
+   
+    [ holds_at(knowOrder(Waiter, Agent, Food), Time),
+      holds_at(beWaiter4(Waiter), Time),
+      not(happens(pickUp(Waiter, Food), Time))
+    ]).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e:373
+% [waiter,food,time]
+% HoldsAt(BeWaiter4(waiter),time) &
+% ({agent} HoldsAt(KnowOrder(waiter,agent,food),time)) ->
+% Terminates(PickUp(waiter,food),
+%            BeWaiter4(waiter),
+%            time).
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e:378
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',375).
+
+ /*  [holds_at(beWaiter4(Waiter), Time), holds_at(knowOrder(Waiter, Agent, Food), Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          terminates(pickUp(Waiter, Food),
+                     beWaiter4(Waiter),
+                     Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',375).
+axiom(terminates(pickUp(Waiter, Food), beWaiter4(Waiter), Time),
+   
+    [ holds_at(beWaiter4(Waiter), Time),
+      holds_at(knowOrder(Waiter, Agent, Food), Time)
+    ]).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e:380
+% [waiter,food,time]
+% HoldsAt(BeWaiter4(waiter),time) &
+% ({agent} HoldsAt(KnowOrder(waiter,agent,food),time)) ->
+% Initiates(PickUp(waiter,food),
+%           BeWaiter5(waiter),
+%           time).
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e:385
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',382).
+
+ /*  [holds_at(beWaiter4(Waiter), Time), holds_at(knowOrder(Waiter, Agent, Food), Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          initiates(pickUp(Waiter, Food),
+                    beWaiter5(Waiter),
+                    Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',382).
+axiom(initiates(pickUp(Waiter, Food), beWaiter5(Waiter), Time),
+   
+    [ holds_at(beWaiter4(Waiter), Time),
+      holds_at(knowOrder(Waiter, Agent, Food), Time)
+    ]).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e:387
+% [restaurant,waiter,time]
+% WaiterOf(restaurant)=waiter &
+% HoldsAt(BeWaiter5(waiter),time) ->
+% Happens(WalkThroughDoor21(waiter,KitchenDoorOf(restaurant)),time).
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e:390
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',389).
+
+ /*  equals(waiterOf(Restaurant), Waiter), holds_at(beWaiter5(Waiter), Time) ->
+       happens(walkThroughDoor21(Waiter, kitchenDoorOf(Restaurant)),
+               Time).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',389).
+
+ /*  happens(walkThroughDoor21(Waiter, kitchenDoorOf(Restaurant)), Time) :-
+       equals(waiterOf(Restaurant), Waiter),
+       holds_at(beWaiter5(Waiter), Time).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',389).
+
+ /*  [equals(waiterOf(Restaurant), Waiter), holds_at(beWaiter5(Waiter), Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          happens(walkThroughDoor21(Waiter, kitchenDoorOf(Restaurant)),
+                  Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',389).
+axiom(happens(walkThroughDoor21(Waiter, kitchenDoorOf(Restaurant)), Time),
+   
+    [ equals(waiterOf(Restaurant), Waiter),
+      holds_at(beWaiter5(Waiter), Time)
+    ]).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',389).
+
+ /*  not(holds_at(beWaiter5(Waiter), Time)) :-
+       equals(waiterOf(Restaurant), Waiter),
+       not(happens(walkThroughDoor21(Waiter,
+                                     kitchenDoorOf(Restaurant)),
+                   Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',389).
+
+ /*  [equals(waiterOf(Restaurant), Waiter), not(happens(walkThroughDoor21(Waiter, kitchenDoorOf(Restaurant)), Time))] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(neg(beWaiter5(Waiter)), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',389).
+axiom(holds_at(neg(beWaiter5(Waiter)), Time),
+   
+    [ equals(waiterOf(Restaurant), Waiter),
+      not(happens(walkThroughDoor21(Waiter,
+                                    kitchenDoorOf(Restaurant)),
+                  Time))
+    ]).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e:392
+% [restaurant,waiter,door,time]
+% HoldsAt(BeWaiter5(waiter),time) &
+% WaiterOf(restaurant)=waiter &
+% KitchenDoorOf(restaurant)=door ->
+% Terminates(WalkThroughDoor21(waiter,door),
+%            BeWaiter5(waiter),
+%            time).
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e:398
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',394).
+
+ /*  [holds_at(beWaiter5(Waiter), Time), equals(waiterOf(Restaurant), Waiter), equals(kitchenDoorOf(Restaurant), Door)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          terminates(walkThroughDoor21(Waiter, Door),
+                     beWaiter5(Waiter),
+                     Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',394).
+axiom(terminates(walkThroughDoor21(Waiter, Door), beWaiter5(Waiter), Time),
+   
+    [ holds_at(beWaiter5(Waiter), Time),
+      equals(waiterOf(Restaurant), Waiter),
+      equals(kitchenDoorOf(Restaurant), Door)
+    ]).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e:400
+% [restaurant,waiter,door,time]
+% HoldsAt(BeWaiter5(waiter),time) &
+% WaiterOf(restaurant)=waiter &
+% KitchenDoorOf(restaurant)=door ->
+% Initiates(WalkThroughDoor21(waiter,door),
+%           BeWaiter6(waiter),
+%           time).
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e:406
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',402).
+
+ /*  [holds_at(beWaiter5(Waiter), Time), equals(waiterOf(Restaurant), Waiter), equals(kitchenDoorOf(Restaurant), Door)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          initiates(walkThroughDoor21(Waiter, Door),
+                    beWaiter6(Waiter),
+                    Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',402).
+axiom(initiates(walkThroughDoor21(Waiter, Door), beWaiter6(Waiter), Time),
+   
+    [ holds_at(beWaiter5(Waiter), Time),
+      equals(waiterOf(Restaurant), Waiter),
+      equals(kitchenDoorOf(Restaurant), Door)
+    ]).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e:408
+% [restaurant,waiter,table,food,time]
+% WaiterOf(restaurant)=waiter &
+% TableOf(restaurant)=table &
+% HoldsAt(BeWaiter6(waiter),time) &
+% HoldsAt(Holding(waiter,food),time) ->
+% Happens(PlaceOn(waiter,food,table),time).
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e:413
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',410).
+
+ /*  equals(waiterOf(Restaurant), Waiter), equals(tableOf(Restaurant), Table), holds_at(beWaiter6(Waiter), Time), holds_at(holding(Waiter, Food), Time) ->
+       happens(placeOn(Waiter, Food, Table), Time).
+ */
+
+ /*  happens(placeOn(Waiter, Food, Table), Time) :-
+       equals(waiterOf(Restaurant), Waiter),
+       equals(tableOf(Restaurant), Table),
+       holds_at(beWaiter6(Waiter), Time),
+       holds_at(holding(Waiter, Food), Time).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',410).
+
+ /*  [equals(waiterOf(Restaurant), Waiter), equals(tableOf(Restaurant), Table), holds_at(beWaiter6(Waiter), Time), holds_at(holding(Waiter, Food), Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          happens(placeOn(Waiter, Food, Table), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',410).
+axiom(happens(placeOn(Waiter, Food, Table), Time),
+   
+    [ equals(waiterOf(Restaurant), Waiter),
+      equals(tableOf(Restaurant), Table),
+      holds_at(beWaiter6(Waiter), Time),
+      holds_at(holding(Waiter, Food), Time)
+    ]).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',410).
+
+ /*  not(holds_at(beWaiter6(Waiter), Time)) :-
+       holds_at(holding(Waiter, Food), Time),
+       equals(tableOf(Restaurant), Table),
+       equals(waiterOf(Restaurant), Waiter),
+       not(happens(placeOn(Waiter, Food, Table), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',410).
+
+ /*  [holds_at(holding(Waiter, Food), Time), equals(tableOf(Restaurant), Table), equals(waiterOf(Restaurant), Waiter), not(happens(placeOn(Waiter, Food, Table), Time))] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(neg(beWaiter6(Waiter)), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',410).
+axiom(holds_at(neg(beWaiter6(Waiter)), Time),
+   
+    [ holds_at(holding(Waiter, Food), Time),
+      equals(tableOf(Restaurant), Table),
+      equals(waiterOf(Restaurant), Waiter),
+      not(happens(placeOn(Waiter, Food, Table), Time))
+    ]).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',410).
+
+ /*  not(holds_at(holding(Waiter, Food), Time)) :-
+       holds_at(beWaiter6(Waiter), Time),
+       equals(tableOf(Restaurant), Table),
+       equals(waiterOf(Restaurant), Waiter),
+       not(happens(placeOn(Waiter, Food, Table), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',410).
+
+ /*  [holds_at(beWaiter6(Waiter), Time), equals(tableOf(Restaurant), Table), equals(waiterOf(Restaurant), Waiter), not(happens(placeOn(Waiter, Food, Table), Time))] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(neg(holding(Waiter, Food)), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',410).
+axiom(holds_at(neg(holding(Waiter, Food)), Time),
+   
+    [ holds_at(beWaiter6(Waiter), Time),
+      equals(tableOf(Restaurant), Table),
+      equals(waiterOf(Restaurant), Waiter),
+      not(happens(placeOn(Waiter, Food, Table), Time))
+    ]).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e:415
+% [waiter,food,table,time]
+% HoldsAt(BeWaiter6(waiter),time) ->
+% Terminates(PlaceOn(waiter,food,table),
+%            BeWaiter6(waiter),
+%            time).
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e:419
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',417).
+
+ /*  [holds_at(beWaiter6(Waiter), Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          terminates(placeOn(Waiter, Food, Table),
+                     beWaiter6(Waiter),
+                     Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',417).
+axiom(terminates(placeOn(Waiter, Food, Table), beWaiter6(Waiter), Time),
+    [holds_at(beWaiter6(Waiter), Time)]).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e:421
+% [waiter,food,table,time]
+% HoldsAt(BeWaiter6(waiter),time) ->
+% Initiates(PlaceOn(waiter,food,table),
+%           BeWaiter7(waiter),
+%           time).
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e:425
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',423).
+
+ /*  [holds_at(beWaiter6(Waiter), Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          initiates(placeOn(Waiter, Food, Table),
+                    beWaiter7(Waiter),
+                    Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',423).
+axiom(initiates(placeOn(Waiter, Food, Table), beWaiter7(Waiter), Time),
+    [holds_at(beWaiter6(Waiter), Time)]).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e:427
+% [waiter,agent,bill,time]
+% HoldsAt(BeWaiter7(waiter),time) ->
+% Terminates(Request(agent,waiter,bill),
+%            BeWaiter7(waiter),
+%            time).
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e:431
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',429).
+
+ /*  [holds_at(beWaiter7(Waiter), Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          terminates(request(Agent, Waiter, Bill),
+                     beWaiter7(Waiter),
+                     Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',429).
+axiom(terminates(request(Agent, Waiter, Bill), beWaiter7(Waiter), Time),
+    [holds_at(beWaiter7(Waiter), Time)]).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e:433
+% [waiter,agent,bill,time]
+% HoldsAt(BeWaiter7(waiter),time) ->
+% Initiates(Request(agent,waiter,bill),
+%           BeWaiter8(waiter),
+%           time).
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e:437
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',435).
+
+ /*  [holds_at(beWaiter7(Waiter), Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          initiates(request(Agent, Waiter, Bill),
+                    beWaiter8(Waiter),
+                    Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',435).
+axiom(initiates(request(Agent, Waiter, Bill), beWaiter8(Waiter), Time),
+    [holds_at(beWaiter7(Waiter), Time)]).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e:439
+% [restaurant,waiter,bill,time]
+% WaiterOf(restaurant)=waiter &
+% BillOf(restaurant)=bill &
+% HoldsAt(BeWaiter8(waiter),time) ->
+% Happens(PickUp(waiter,bill),time).
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e:443
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',441).
+
+ /*  equals(waiterOf(Restaurant), Waiter), equals(billOf(Restaurant), Bill), holds_at(beWaiter8(Waiter), Time) ->
+       happens(pickUp(Waiter, Bill), Time).
+ */
+
+ /*  happens(pickUp(Waiter, Bill), Time) :-
+       equals(waiterOf(Restaurant), Waiter),
+       equals(billOf(Restaurant), Bill),
+       holds_at(beWaiter8(Waiter), Time).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',441).
+
+ /*  [equals(waiterOf(Restaurant), Waiter), equals(billOf(Restaurant), Bill), holds_at(beWaiter8(Waiter), Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          happens(pickUp(Waiter, Bill), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',441).
+axiom(happens(pickUp(Waiter, Bill), Time),
+   
+    [ equals(waiterOf(Restaurant), Waiter),
+      equals(billOf(Restaurant), Bill),
+      holds_at(beWaiter8(Waiter), Time)
+    ]).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',441).
+
+ /*  not(holds_at(beWaiter8(Waiter), Time)) :-
+       equals(billOf(Restaurant), Bill),
+       equals(waiterOf(Restaurant), Waiter),
+       not(happens(pickUp(Waiter, Bill), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',441).
+
+ /*  [equals(billOf(Restaurant), Bill), equals(waiterOf(Restaurant), Waiter), not(happens(pickUp(Waiter, Bill), Time))] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(neg(beWaiter8(Waiter)), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',441).
+axiom(holds_at(neg(beWaiter8(Waiter)), Time),
+   
+    [ equals(billOf(Restaurant), Bill),
+      equals(waiterOf(Restaurant), Waiter),
+      not(happens(pickUp(Waiter, Bill), Time))
+    ]).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e:445
+% [waiter,bill,time]
+% HoldsAt(BeWaiter8(waiter),time) ->
+% Terminates(PickUp(waiter,bill),
+%            BeWaiter8(waiter),
+%            time).
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e:449
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',447).
+
+ /*  [holds_at(beWaiter8(Waiter), Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          terminates(pickUp(Waiter, Bill),
+                     beWaiter8(Waiter),
+                     Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',447).
+axiom(terminates(pickUp(Waiter, Bill), beWaiter8(Waiter), Time),
+    [holds_at(beWaiter8(Waiter), Time)]).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e:451
+% [waiter,bill,time]
+% HoldsAt(BeWaiter8(waiter),time) ->
+% Initiates(PickUp(waiter,bill),
+%           BeWaiter9(waiter),
+%           time).
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e:455
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',453).
+
+ /*  [holds_at(beWaiter8(Waiter), Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          initiates(pickUp(Waiter, Bill),
+                    beWaiter9(Waiter),
+                    Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',453).
+axiom(initiates(pickUp(Waiter, Bill), beWaiter9(Waiter), Time),
+    [holds_at(beWaiter8(Waiter), Time)]).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e:457
+% [restaurant,waiter,bill,table,time]
+% WaiterOf(restaurant)=waiter &
+% BillOf(restaurant)=bill &
+% TableOf(restaurant)=table &
+% HoldsAt(BeWaiter9(waiter),time) ->
+% Happens(PlaceOn(waiter,bill,table),time).
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e:462
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',459).
+
+ /*  equals(waiterOf(Restaurant), Waiter), equals(billOf(Restaurant), Bill), equals(tableOf(Restaurant), Table), holds_at(beWaiter9(Waiter), Time) ->
+       happens(placeOn(Waiter, Bill, Table), Time).
+ */
+
+ /*  happens(placeOn(Waiter, Bill, Table), Time) :-
+       equals(waiterOf(Restaurant), Waiter),
+       equals(billOf(Restaurant), Bill),
+       equals(tableOf(Restaurant), Table),
+       holds_at(beWaiter9(Waiter), Time).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',459).
+
+ /*  [equals(waiterOf(Restaurant), Waiter), equals(billOf(Restaurant), Bill), equals(tableOf(Restaurant), Table), holds_at(beWaiter9(Waiter), Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          happens(placeOn(Waiter, Bill, Table), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',459).
+axiom(happens(placeOn(Waiter, Bill, Table), Time),
+   
+    [ equals(waiterOf(Restaurant), Waiter),
+      equals(billOf(Restaurant), Bill),
+      equals(tableOf(Restaurant), Table),
+      holds_at(beWaiter9(Waiter), Time)
+    ]).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',459).
+
+ /*  not(holds_at(beWaiter9(Waiter), Time)) :-
+       equals(tableOf(Restaurant), Table),
+       equals(billOf(Restaurant), Bill),
+       equals(waiterOf(Restaurant), Waiter),
+       not(happens(placeOn(Waiter, Bill, Table), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',459).
+
+ /*  [equals(tableOf(Restaurant), Table), equals(billOf(Restaurant), Bill), equals(waiterOf(Restaurant), Waiter), not(happens(placeOn(Waiter, Bill, Table), Time))] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(neg(beWaiter9(Waiter)), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',459).
+axiom(holds_at(neg(beWaiter9(Waiter)), Time),
+   
+    [ equals(tableOf(Restaurant), Table),
+      equals(billOf(Restaurant), Bill),
+      equals(waiterOf(Restaurant), Waiter),
+      not(happens(placeOn(Waiter, Bill, Table), Time))
+    ]).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e:464
+% [waiter,bill,table,time]
+% HoldsAt(BeWaiter9(waiter),time) ->
+% Terminates(PlaceOn(waiter,bill,table),
+%            BeWaiter9(waiter),
+%            time).
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e:468
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',466).
+
+ /*  [holds_at(beWaiter9(Waiter), Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          terminates(placeOn(Waiter, Bill, Table),
+                     beWaiter9(Waiter),
+                     Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',466).
+axiom(terminates(placeOn(Waiter, Bill, Table), beWaiter9(Waiter), Time),
+    [holds_at(beWaiter9(Waiter), Time)]).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e:470
+% [waiter,bill,table,time]
+% HoldsAt(BeWaiter9(waiter),time) ->
+% Initiates(PlaceOn(waiter,bill,table),
+%           BeWaiter0(waiter),
+%           time).
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e:474
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',472).
+
+ /*  [holds_at(beWaiter9(Waiter), Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          initiates(placeOn(Waiter, Bill, Table),
+                    beWaiter0(Waiter),
+                    Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',472).
+axiom(initiates(placeOn(Waiter, Bill, Table), beWaiter0(Waiter), Time),
+    [holds_at(beWaiter9(Waiter), Time)]).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e:476
+% fluent BeCook0(cook)
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',476).
+fluent(beCook0(cook)).
+==> mpred_prop(beCook0(cook),fluent).
+==> meta_argtypes(beCook0(cook)).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e:478
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',479).
+% fluent BeCook1(cook)
+fluent(beCook1(cook)).
+==> mpred_prop(beCook1(cook),fluent).
+==> meta_argtypes(beCook1(cook)).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e:480
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',481).
+% xor BeCook0, BeCook1
+==> xor([beCook0,beCook1]).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e:482
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',483).
+% [cook,agent,food,time]
+% HoldsAt(BeCook0(cook),time) ->
+% Terminates(Order(agent,cook,food),
+%            BeCook0(cook),
+%            time).
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e:486
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',483).
+
+ /*  [holds_at(beCook0(Cook), Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          terminates(order(Agent, Cook, Food),
+                     beCook0(Cook),
+                     Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',483).
+axiom(terminates(order(Agent, Cook, Food), beCook0(Cook), Time),
+    [holds_at(beCook0(Cook), Time)]).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e:488
+% [cook,agent,food,time]
+% HoldsAt(BeCook0(cook),time) ->
+% Initiates(Order(agent,cook,food),
+%           BeCook1(cook),
+%           time).
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e:492
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',490).
+
+ /*  [holds_at(beCook0(Cook), Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          initiates(order(Agent, Cook, Food),
+                    beCook1(Cook),
+                    Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',490).
+axiom(initiates(order(Agent, Cook, Food), beCook1(Cook), Time),
+    [holds_at(beCook0(Cook), Time)]).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e:494
+% event FoodPrepare(agent,food)
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',494).
+event(foodPrepare(agent,food)).
+==> mpred_prop(foodPrepare(agent,food),event).
+==> meta_argtypes(foodPrepare(agent,food)).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e:496
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',497).
+% fluent FoodPrepared(food)
+fluent(foodPrepared(food)).
+==> mpred_prop(foodPrepared(food),fluent).
+==> meta_argtypes(foodPrepared(food)).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e:498
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',499).
+% [agent,food,time]
+% Initiates(FoodPrepare(agent,food),
+%           FoodPrepared(food),
+%           time).
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e:501
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',499).
+
+ /*  [] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          initiates(foodPrepare(Agent, Food),
+                    foodPrepared(Food),
+                    Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',499).
+axiom(initiates(foodPrepare(Agent, Food), foodPrepared(Food), Time),
+    []).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e:503
+% [agent,food,time]
+% Happens(FoodPrepare(agent,food),time) ->
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e:505
+% {location}% 
+% HoldsAt(At(agent,location),time) &
+% HoldsAt(At(food,location),time).
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e:507
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',505).
+
+ /*  exists([Location],
+    happens(foodPrepare(Agent, Food), Time) ->
+       holds_at(at(Agent, Location), Time),
+       holds_at(at(Food, Location), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',505).
+
+ /*  not(happens(foodPrepare(Agent, Food), Time)) :-
+       (   not(holds_at(at(Agent, Location), Time))
+       ;   not(holds_at(at(Food, Location), Time))
+       ),
+       some(Location, '$kolem_Fn_214'(Agent, Food, Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',505).
+
+ /*  [(holds_at(neg(at(Agent, Location)), Time);holds_at(neg(at(Food, Location)), Time)), some(Location, '$kolem_Fn_214'(Agent, Food, Time))] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          not(happens(foodPrepare(Agent, Food), Time))).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',505).
+axiom(not(happens(foodPrepare(Agent, Food), Time)),
+   
+    [  (holds_at(neg(at(Agent, Location)), Time);holds_at(neg(at(Food, Location)), Time)),
+      some(Location, '$kolem_Fn_214'(Agent, Food, Time))
+    ]).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',505).
+
+ /*  holds_at(at(Agent, Location), Time) :-
+       happens(foodPrepare(Agent, Food), Time),
+       some(Location, '$kolem_Fn_214'(Agent, Food, Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',505).
+
+ /*  [happens(foodPrepare(Agent, Food), Time), some(Location, '$kolem_Fn_214'(Agent, Food, Time))] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(at(Agent, Location), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',505).
+axiom(holds_at(at(Agent, Location), Time),
+   
+    [ happens(foodPrepare(Agent, Food), Time),
+      some(Location, '$kolem_Fn_214'(Agent, Food, Time))
+    ]).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',505).
+
+ /*  holds_at(at(Food, Location), Time) :-
+       happens(foodPrepare(Agent, Food), Time),
+       some(Location, '$kolem_Fn_214'(Agent, Food, Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',505).
+
+ /*  [happens(foodPrepare(Agent, Food), Time), some(Location, '$kolem_Fn_214'(Agent, Food, Time))] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(at(Food, Location), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',505).
+axiom(holds_at(at(Food, Location), Time),
+   
+    [ happens(foodPrepare(Agent, Food), Time),
+      some(Location, '$kolem_Fn_214'(Agent, Food, Time))
+    ]).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e:509
+% [cook,agent,food,time]
+% HoldsAt(BeCook1(cook),time) &
+% HoldsAt(KnowOrder(cook,agent,food),time) ->
+% Happens(FoodPrepare(cook,food),time).
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e:512
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',511).
+
+ /*  holds_at(beCook1(Cook), Time), holds_at(knowOrder(Cook, Agent, Food), Time) ->
+       happens(foodPrepare(Cook, Food), Time).
+ */
+
+ /*  happens(foodPrepare(Cook, Food), Time) :-
+       holds_at(beCook1(Cook), Time),
+       holds_at(knowOrder(Cook, Agent, Food), Time).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',511).
+
+ /*  [holds_at(beCook1(Cook), Time), holds_at(knowOrder(Cook, Agent, Food), Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          happens(foodPrepare(Cook, Food), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',511).
+axiom(happens(foodPrepare(Cook, Food), Time),
+   
+    [ holds_at(beCook1(Cook), Time),
+      holds_at(knowOrder(Cook, Agent, Food), Time)
+    ]).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',511).
+
+ /*  not(holds_at(beCook1(Cook), Time)) :-
+       holds_at(knowOrder(Cook, Agent, Food), Time),
+       not(happens(foodPrepare(Cook, Food), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',511).
+
+ /*  [holds_at(knowOrder(Cook, Agent, Food), Time), not(happens(foodPrepare(Cook, Food), Time))] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(neg(beCook1(Cook)), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',511).
+axiom(holds_at(neg(beCook1(Cook)), Time),
+   
+    [ holds_at(knowOrder(Cook, Agent, Food), Time),
+      not(happens(foodPrepare(Cook, Food), Time))
+    ]).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',511).
+
+ /*  not(holds_at(knowOrder(Cook, Agent, Food), Time)) :-
+       holds_at(beCook1(Cook), Time),
+       not(happens(foodPrepare(Cook, Food), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',511).
+
+ /*  [holds_at(beCook1(Cook), Time), not(happens(foodPrepare(Cook, Food), Time))] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(neg(knowOrder(Cook, Agent, Food)), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',511).
+axiom(holds_at(neg(knowOrder(Cook, Agent, Food)), Time),
+   
+    [ holds_at(beCook1(Cook), Time),
+      not(happens(foodPrepare(Cook, Food), Time))
+    ]).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e:514
+% [cook,food,time]
+% HoldsAt(BeCook1(cook),time) ->
+% Terminates(FoodPrepare(cook,food),
+%            BeCook1(cook),
+%            time).
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e:518
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',516).
+
+ /*  [holds_at(beCook1(Cook), Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          terminates(foodPrepare(Cook, Food),
+                     beCook1(Cook),
+                     Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',516).
+axiom(terminates(foodPrepare(Cook, Food), beCook1(Cook), Time),
+    [holds_at(beCook1(Cook), Time)]).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e:520
+% [cook,food,time]
+% HoldsAt(BeCook1(cook),time) ->
+% Initiates(FoodPrepare(cook,food),
+%           BeCook0(cook),
+%           time).
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e:524
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',522).
+
+ /*  [holds_at(beCook1(Cook), Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          initiates(foodPrepare(Cook, Food),
+                    beCook0(Cook),
+                    Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',522).
+axiom(initiates(foodPrepare(Cook, Food), beCook0(Cook), Time),
+    [holds_at(beCook1(Cook), Time)]).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e:526
+% event Pay(agent,agent)
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',526).
+event(pay(agent,agent)).
+==> mpred_prop(pay(agent,agent),event).
+==> meta_argtypes(pay(agent,agent)).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e:528
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',529).
+% event Tip(agent,agent)
+event(tip(agent,agent)).
+==> mpred_prop(tip(agent,agent),event).
+==> meta_argtypes(tip(agent,agent)).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e:530
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',531).
+% [agent,physobj,time]
+% Happens(LieOn(agent,physobj),time) ->
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e:532
+% {room}% 
+%  HoldsAt(At(agent,room),time) &
+%  HoldsAt(At(physobj,room),time).
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e:534
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',533).
+
+ /*  exists([Room],
+    happens(lieOn(Agent, Physobj), Time) ->
+       holds_at(at(Agent, Room), Time),
+       holds_at(at(Physobj, Room), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',533).
+
+ /*  not(happens(lieOn(Agent, Physobj), Time)) :-
+       (   not(holds_at(at(Agent, Room), Time))
+       ;   not(holds_at(at(Physobj, Room), Time))
+       ),
+       some(Room, '$kolem_Fn_215'(Agent, Physobj, Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',533).
+
+ /*  [(holds_at(neg(at(Agent, Room)), Time);holds_at(neg(at(Physobj, Room)), Time)), some(Room, '$kolem_Fn_215'(Agent, Physobj, Time))] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          not(happens(lieOn(Agent, Physobj), Time))).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',533).
+axiom(not(happens(lieOn(Agent, Physobj), Time)),
+   
+    [  (holds_at(neg(at(Agent, Room)), Time);holds_at(neg(at(Physobj, Room)), Time)),
+      some(Room, '$kolem_Fn_215'(Agent, Physobj, Time))
+    ]).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',533).
+
+ /*  holds_at(at(Agent, Room), Time) :-
+       happens(lieOn(Agent, Physobj), Time),
+       some(Room, '$kolem_Fn_215'(Agent, Physobj, Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',533).
+
+ /*  [happens(lieOn(Agent, Physobj), Time), some(Room, '$kolem_Fn_215'(Agent, Physobj, Time))] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(at(Agent, Room), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',533).
+axiom(holds_at(at(Agent, Room), Time),
+   
+    [ happens(lieOn(Agent, Physobj), Time),
+      some(Room, '$kolem_Fn_215'(Agent, Physobj, Time))
+    ]).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',533).
+
+ /*  holds_at(at(Physobj, Room), Time) :-
+       happens(lieOn(Agent, Physobj), Time),
+       some(Room, '$kolem_Fn_215'(Agent, Physobj, Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',533).
+
+ /*  [happens(lieOn(Agent, Physobj), Time), some(Room, '$kolem_Fn_215'(Agent, Physobj, Time))] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(at(Physobj, Room), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',533).
+axiom(holds_at(at(Physobj, Room), Time),
+   
+    [ happens(lieOn(Agent, Physobj), Time),
+      some(Room, '$kolem_Fn_215'(Agent, Physobj, Time))
+    ]).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e:536
+% [agent,physobj,time]
+% Happens(SitOn(agent,physobj),time) ->
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e:538
+% {room}% 
+%  HoldsAt(At(agent,room),time) &
+%  HoldsAt(At(physobj,room),time).
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e:540
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',538).
+
+ /*  exists([Room],
+    happens(sitOn(Agent, Physobj), Time) ->
+       holds_at(at(Agent, Room), Time),
+       holds_at(at(Physobj, Room), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',538).
+
+ /*  not(happens(sitOn(Agent, Physobj), Time)) :-
+       (   not(holds_at(at(Agent, Room), Time))
+       ;   not(holds_at(at(Physobj, Room), Time))
+       ),
+       some(Room, '$kolem_Fn_216'(Agent, Physobj, Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',538).
+
+ /*  [(holds_at(neg(at(Agent, Room)), Time);holds_at(neg(at(Physobj, Room)), Time)), some(Room, '$kolem_Fn_216'(Agent, Physobj, Time))] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          not(happens(sitOn(Agent, Physobj), Time))).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',538).
+axiom(not(happens(sitOn(Agent, Physobj), Time)),
+   
+    [  (holds_at(neg(at(Agent, Room)), Time);holds_at(neg(at(Physobj, Room)), Time)),
+      some(Room, '$kolem_Fn_216'(Agent, Physobj, Time))
+    ]).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',538).
+
+ /*  holds_at(at(Agent, Room), Time) :-
+       happens(sitOn(Agent, Physobj), Time),
+       some(Room, '$kolem_Fn_216'(Agent, Physobj, Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',538).
+
+ /*  [happens(sitOn(Agent, Physobj), Time), some(Room, '$kolem_Fn_216'(Agent, Physobj, Time))] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(at(Agent, Room), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',538).
+axiom(holds_at(at(Agent, Room), Time),
+   
+    [ happens(sitOn(Agent, Physobj), Time),
+      some(Room, '$kolem_Fn_216'(Agent, Physobj, Time))
+    ]).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',538).
+
+ /*  holds_at(at(Physobj, Room), Time) :-
+       happens(sitOn(Agent, Physobj), Time),
+       some(Room, '$kolem_Fn_216'(Agent, Physobj, Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',538).
+
+ /*  [happens(sitOn(Agent, Physobj), Time), some(Room, '$kolem_Fn_216'(Agent, Physobj, Time))] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(at(Physobj, Room), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',538).
+axiom(holds_at(at(Physobj, Room), Time),
+   
+    [ happens(sitOn(Agent, Physobj), Time),
+      some(Room, '$kolem_Fn_216'(Agent, Physobj, Time))
+    ]).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e:542
+% event LieOn(agent,physobj)
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',542).
+event(lieOn(agent,physobj)).
+==> mpred_prop(lieOn(agent,physobj),event).
+==> meta_argtypes(lieOn(agent,physobj)).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e:544
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',545).
+% event SitOn(agent,physobj)
+event(sitOn(agent,physobj)).
+==> mpred_prop(sitOn(agent,physobj),event).
+==> meta_argtypes(sitOn(agent,physobj)).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e:546
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',547).
+% event RiseFrom(agent,physobj)
+event(riseFrom(agent,physobj)).
+==> mpred_prop(riseFrom(agent,physobj),event).
+==> meta_argtypes(riseFrom(agent,physobj)).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e:548
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',549).
+% fluent LyingOn(agent,physobj)
+fluent(lyingOn(agent,physobj)).
+==> mpred_prop(lyingOn(agent,physobj),fluent).
+==> meta_argtypes(lyingOn(agent,physobj)).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e:549
+% fluent SittingOn(agent,physobj)
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',549).
+fluent(sittingOn(agent,physobj)).
+==> mpred_prop(sittingOn(agent,physobj),fluent).
+==> meta_argtypes(sittingOn(agent,physobj)).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e:550
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',551).
+% fluent Standing(agent)
+fluent(standing(agent)).
+==> mpred_prop(standing(agent),fluent).
+==> meta_argtypes(standing(agent)).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e:552
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',553).
+% fluent Lying(agent)
+fluent(lying(agent)).
+==> mpred_prop(lying(agent),fluent).
+==> meta_argtypes(lying(agent)).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e:553
+% fluent Sitting(agent)
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',553).
+fluent(sitting(agent)).
+==> mpred_prop(sitting(agent),fluent).
+==> meta_argtypes(sitting(agent)).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e:554
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',555).
+% noninertial Lying
+==> noninertial(lying).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e:555
+% noninertial Sitting
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',555).
+==> noninertial(sitting).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e:557
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',558).
+% xor Lying, Sitting, Standing
+==> xor([lying,sitting,standing]).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e:559
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',560).
+% [agent,physobj,time]
+% HoldsAt(LyingOn(agent,physobj),time) ->
+% HoldsAt(Lying(agent),time).
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e:561
+
+ /*  holds_at(lyingOn(Agent, Physobj), Time) ->
+       holds_at(lying(Agent), Time).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',560).
+
+ /*  holds_at(lying(Agent), Time) :-
+       holds_at(lyingOn(Agent, Physobj), Time).
+ */
+
+ /*  [holds_at(lyingOn(Agent, Physobj), Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(lying(Agent), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',560).
+axiom(holds_at(lying(Agent), Time),
+    [holds_at(lyingOn(Agent, Physobj), Time)]).
+
+ /*  not(holds_at(lyingOn(Agent, Physobj), Time)) :-
+       not(holds_at(lying(Agent), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',560).
+
+ /*  [holds_at(neg(lying(Agent)), Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(neg(lyingOn(Agent, Physobj)), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',560).
+axiom(holds_at(neg(lyingOn(Agent, Physobj)), Time),
+    [holds_at(neg(lying(Agent)), Time)]).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e:563
+% [agent,physobj,time]
+% HoldsAt(SittingOn(agent,physobj),time) ->
+% HoldsAt(Sitting(agent),time).
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e:565
+
+ /*  holds_at(sittingOn(Agent, Physobj), Time) ->
+       holds_at(sitting(Agent), Time).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',565).
+
+ /*  holds_at(sitting(Agent), Time) :-
+       holds_at(sittingOn(Agent, Physobj), Time).
+ */
+
+ /*  [holds_at(sittingOn(Agent, Physobj), Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(sitting(Agent), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',565).
+axiom(holds_at(sitting(Agent), Time),
+    [holds_at(sittingOn(Agent, Physobj), Time)]).
+
+ /*  not(holds_at(sittingOn(Agent, Physobj), Time)) :-
+       not(holds_at(sitting(Agent), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',565).
+
+ /*  [holds_at(neg(sitting(Agent)), Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(neg(sittingOn(Agent, Physobj)), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',565).
+axiom(holds_at(neg(sittingOn(Agent, Physobj)), Time),
+    [holds_at(neg(sitting(Agent)), Time)]).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e:567
+% [agent,physobj1,physobj2,time]
+% HoldsAt(LyingOn(agent,physobj1),time) &
+% HoldsAt(LyingOn(agent,physobj2),time) ->
+% physobj1=physobj2.
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e:570
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',569).
+
+ /*  holds_at(lyingOn(Agent, Physobj1), Time), holds_at(lyingOn(Agent, Physobj2), Time) ->
+       equals(Physobj1, Physobj2).
+ */
+
+ /*  not(holds_at(lyingOn(Agent, Physobj1), Time)) :-
+       holds_at(lyingOn(Agent, Physobj2), Time),
+       not(equals(Physobj1, Physobj2)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',569).
+
+ /*  [holds_at(lyingOn(Agent, Physobj2), Time), not(equals(Physobj1, Physobj2))] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(neg(lyingOn(Agent, Physobj1)), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',569).
+axiom(holds_at(neg(lyingOn(Agent, Physobj1)), Time),
+   
+    [ holds_at(lyingOn(Agent, Physobj2), Time),
+      not(equals(Physobj1, Physobj2))
+    ]).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',569).
+
+ /*  not(holds_at(lyingOn(Agent, Physobj2), Time)) :-
+       holds_at(lyingOn(Agent, Physobj1), Time),
+       not(equals(Physobj1, Physobj2)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',569).
+
+ /*  [holds_at(lyingOn(Agent, Physobj1), Time), not(equals(Physobj1, Physobj2))] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(neg(lyingOn(Agent, Physobj2)), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',569).
+axiom(holds_at(neg(lyingOn(Agent, Physobj2)), Time),
+   
+    [ holds_at(lyingOn(Agent, Physobj1), Time),
+      not(equals(Physobj2, Physobj1))
+    ]).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e:572
+% [agent,physobj1,physobj2,time]
+% HoldsAt(SittingOn(agent,physobj1),time) &
+% HoldsAt(SittingOn(agent,physobj2),time) ->
+% physobj1=physobj2.
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e:575
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',574).
+
+ /*  holds_at(sittingOn(Agent, Physobj1), Time), holds_at(sittingOn(Agent, Physobj2), Time) ->
+       equals(Physobj1, Physobj2).
+ */
+
+ /*  not(holds_at(sittingOn(Agent, Physobj1), Time)) :-
+       holds_at(sittingOn(Agent, Physobj2), Time),
+       not(equals(Physobj1, Physobj2)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',574).
+
+ /*  [holds_at(sittingOn(Agent, Physobj2), Time), not(equals(Physobj1, Physobj2))] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(neg(sittingOn(Agent, Physobj1)), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',574).
+axiom(holds_at(neg(sittingOn(Agent, Physobj1)), Time),
+   
+    [ holds_at(sittingOn(Agent, Physobj2), Time),
+      not(equals(Physobj1, Physobj2))
+    ]).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',574).
+
+ /*  not(holds_at(sittingOn(Agent, Physobj2), Time)) :-
+       holds_at(sittingOn(Agent, Physobj1), Time),
+       not(equals(Physobj1, Physobj2)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',574).
+
+ /*  [holds_at(sittingOn(Agent, Physobj1), Time), not(equals(Physobj1, Physobj2))] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(neg(sittingOn(Agent, Physobj2)), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',574).
+axiom(holds_at(neg(sittingOn(Agent, Physobj2)), Time),
+   
+    [ holds_at(sittingOn(Agent, Physobj1), Time),
+      not(equals(Physobj2, Physobj1))
+    ]).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e:577
+% [agent,physobj,time]
+% HoldsAt(Standing(agent),time) ->
+% Initiates(LieOn(agent,physobj),
+%           LyingOn(agent,physobj),
+%           time).
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e:581
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',579).
+
+ /*  [holds_at(standing(Agent), Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          initiates(lieOn(Agent, Physobj),
+                    lyingOn(Agent, Physobj),
+                    Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',579).
+axiom(initiates(lieOn(Agent, Physobj), lyingOn(Agent, Physobj), Time),
+    [holds_at(standing(Agent), Time)]).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e:583
+% [agent,physobj,time]
+% Terminates(LieOn(agent,physobj),
+%            Standing(agent),
+%            time).
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e:586
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',585).
+
+ /*  [] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          terminates(lieOn(Agent, Physobj),
+                     standing(Agent),
+                     Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',585).
+axiom(terminates(lieOn(Agent, Physobj), standing(Agent), Time),
+    []).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e:588
+% [agent,physobj,time]
+% HoldsAt(Standing(agent),time) ->
+% Initiates(SitOn(agent,physobj),
+%           SittingOn(agent,physobj),
+%           time).
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e:592
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',590).
+
+ /*  [holds_at(standing(Agent), Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          initiates(sitOn(Agent, Physobj),
+                    sittingOn(Agent, Physobj),
+                    Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',590).
+axiom(initiates(sitOn(Agent, Physobj), sittingOn(Agent, Physobj), Time),
+    [holds_at(standing(Agent), Time)]).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e:594
+% [agent,physobj,time]
+% Terminates(SitOn(agent,physobj),
+%            Standing(agent),
+%            time).
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e:597
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',596).
+
+ /*  [] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          terminates(sitOn(Agent, Physobj),
+                     standing(Agent),
+                     Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',596).
+axiom(terminates(sitOn(Agent, Physobj), standing(Agent), Time),
+    []).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e:599
+% [agent,physobj,time]
+% (HoldsAt(SittingOn(agent,physobj),time) |
+%  HoldsAt(LyingOn(agent,physobj),time)) ->
+% Initiates(RiseFrom(agent,physobj),
+%           Standing(agent),
+%           time).
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e:604
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',601).
+
+ /*  [(holds_at(sittingOn(Agent, Physobj), Time);holds_at(lyingOn(Agent, Physobj), Time))] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          initiates(riseFrom(Agent, Physobj),
+                    standing(Agent),
+                    Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',601).
+axiom(initiates(riseFrom(Agent, Physobj), standing(Agent), Time),
+   
+    [  (holds_at(sittingOn(Agent, Physobj), Time);holds_at(lyingOn(Agent, Physobj), Time))
+    ]).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e:606
+% [agent,physobj,time]
+% HoldsAt(LyingOn(agent,physobj),time) ->
+% Terminates(RiseFrom(agent,physobj),
+%            LyingOn(agent,physobj),
+%            time).
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e:610
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',608).
+
+ /*  [holds_at(lyingOn(Agent, Physobj), Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          terminates(riseFrom(Agent, Physobj),
+                     lyingOn(Agent, Physobj),
+                     Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',608).
+axiom(terminates(riseFrom(Agent, Physobj), lyingOn(Agent, Physobj), Time),
+    [holds_at(lyingOn(Agent, Physobj), Time)]).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e:612
+% [agent,physobj,time]
+% HoldsAt(SittingOn(agent,physobj),time) ->
+% Terminates(RiseFrom(agent,physobj),
+%            SittingOn(agent,physobj),
+%            time).
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e:616
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',614).
+
+ /*  [holds_at(sittingOn(Agent, Physobj), Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          terminates(riseFrom(Agent, Physobj),
+                     sittingOn(Agent, Physobj),
+                     Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',614).
+axiom(terminates(riseFrom(Agent, Physobj), sittingOn(Agent, Physobj), Time),
+    [holds_at(sittingOn(Agent, Physobj), Time)]).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e:618
+% event Greet(agent,agent)
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',618).
+event(greet(agent,agent)).
+==> mpred_prop(greet(agent,agent),event).
+==> meta_argtypes(greet(agent,agent)).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e:620
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',621).
+% event SayGoodbye(agent,agent)
+event(sayGoodbye(agent,agent)).
+==> mpred_prop(sayGoodbye(agent,agent),event).
+==> meta_argtypes(sayGoodbye(agent,agent)).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e:622
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',623).
+% [agent1,agent2,time]
+% Happens(Greet(agent1,agent2),time) ->
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e:624
+% {location}% 
+% HoldsAt(At(agent1,location),time) &
+% HoldsAt(At(agent2,location),time).
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e:626
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',625).
+
+ /*  exists([Location],
+    happens(greet(Agent1, Agent2), Time) ->
+       holds_at(at(Agent1, Location), Time),
+       holds_at(at(Agent2, Location), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',625).
+
+ /*  not(happens(greet(Agent1, Agent2), Time)) :-
+       (   not(holds_at(at(Agent1, Location), Time))
+       ;   not(holds_at(at(Agent2, Location), Time))
+       ),
+       some(Location, '$kolem_Fn_217'(Agent1, Agent2, Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',625).
+
+ /*  [(holds_at(neg(at(Agent1, Location)), Time);holds_at(neg(at(Agent2, Location)), Time)), some(Location, '$kolem_Fn_217'(Agent1, Agent2, Time))] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          not(happens(greet(Agent1, Agent2), Time))).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',625).
+axiom(not(happens(greet(Agent1, Agent2), Time)),
+   
+    [  (holds_at(neg(at(Agent1, Location)), Time);holds_at(neg(at(Agent2, Location)), Time)),
+      some(Location, '$kolem_Fn_217'(Agent1, Agent2, Time))
+    ]).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',625).
+
+ /*  holds_at(at(Agent1, Location), Time) :-
+       happens(greet(Agent1, Agent2), Time),
+       some(Location, '$kolem_Fn_217'(Agent1, Agent2, Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',625).
+
+ /*  [happens(greet(Agent1, Agent2), Time), some(Location, '$kolem_Fn_217'(Agent1, Agent2, Time))] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(at(Agent1, Location), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',625).
+axiom(holds_at(at(Agent1, Location), Time),
+   
+    [ happens(greet(Agent1, Agent2), Time),
+      some(Location, '$kolem_Fn_217'(Agent1, Agent2, Time))
+    ]).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',625).
+
+ /*  holds_at(at(Agent2, Location), Time) :-
+       happens(greet(Agent1, Agent2), Time),
+       some(Location, '$kolem_Fn_217'(Agent1, Agent2, Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',625).
+
+ /*  [happens(greet(Agent1, Agent2), Time), some(Location, '$kolem_Fn_217'(Agent1, Agent2, Time))] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(at(Agent2, Location), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',625).
+axiom(holds_at(at(Agent2, Location), Time),
+   
+    [ happens(greet(Agent1, Agent2), Time),
+      some(Location, '$kolem_Fn_217'(Agent1, Agent2, Time))
+    ]).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e:628
+% [agent1,agent2,time]
+% Happens(SayGoodbye(agent1,agent2),time) ->
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e:630
+% {location}% 
+% HoldsAt(At(agent1,location),time) &
+% HoldsAt(At(agent2,location),time).
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e:632
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',630).
+
+ /*  exists([Location],
+    happens(sayGoodbye(Agent1, Agent2), Time) ->
+       holds_at(at(Agent1, Location), Time),
+       holds_at(at(Agent2, Location), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',630).
+
+ /*  not(happens(sayGoodbye(Agent1, Agent2), Time)) :-
+       (   not(holds_at(at(Agent1, Location), Time))
+       ;   not(holds_at(at(Agent2, Location), Time))
+       ),
+       some(Location, '$kolem_Fn_218'(Agent1, Agent2, Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',630).
+
+ /*  [(holds_at(neg(at(Agent1, Location)), Time);holds_at(neg(at(Agent2, Location)), Time)), some(Location, '$kolem_Fn_218'(Agent1, Agent2, Time))] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          not(happens(sayGoodbye(Agent1, Agent2), Time))).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',630).
+axiom(not(happens(sayGoodbye(Agent1, Agent2), Time)),
+   
+    [  (holds_at(neg(at(Agent1, Location)), Time);holds_at(neg(at(Agent2, Location)), Time)),
+      some(Location, '$kolem_Fn_218'(Agent1, Agent2, Time))
+    ]).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',630).
+
+ /*  holds_at(at(Agent1, Location), Time) :-
+       happens(sayGoodbye(Agent1, Agent2), Time),
+       some(Location, '$kolem_Fn_218'(Agent1, Agent2, Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',630).
+
+ /*  [happens(sayGoodbye(Agent1, Agent2), Time), some(Location, '$kolem_Fn_218'(Agent1, Agent2, Time))] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(at(Agent1, Location), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',630).
+axiom(holds_at(at(Agent1, Location), Time),
+   
+    [ happens(sayGoodbye(Agent1, Agent2), Time),
+      some(Location, '$kolem_Fn_218'(Agent1, Agent2, Time))
+    ]).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',630).
+
+ /*  holds_at(at(Agent2, Location), Time) :-
+       happens(sayGoodbye(Agent1, Agent2), Time),
+       some(Location, '$kolem_Fn_218'(Agent1, Agent2, Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',630).
+
+ /*  [happens(sayGoodbye(Agent1, Agent2), Time), some(Location, '$kolem_Fn_218'(Agent1, Agent2, Time))] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(at(Agent2, Location), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',630).
+axiom(holds_at(at(Agent2, Location), Time),
+   
+    [ happens(sayGoodbye(Agent1, Agent2), Time),
+      some(Location, '$kolem_Fn_218'(Agent1, Agent2, Time))
+    ]).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e:634
+% event Order(agent,agent,physobj)
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',634).
+event(order(agent,agent,physobj)).
+==> mpred_prop(order(agent,agent,physobj),event).
+==> meta_argtypes(order(agent,agent,physobj)).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e:636
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',637).
+% fluent KnowOrder(agent,agent,physobj)
+fluent(knowOrder(agent,agent,physobj)).
+==> mpred_prop(knowOrder(agent,agent,physobj),fluent).
+==> meta_argtypes(knowOrder(agent,agent,physobj)).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e:638
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',639).
+% [agent1,agent2,physobj,time]
+% Initiates(Order(agent1,agent2,physobj),
+%           KnowOrder(agent2,agent1,physobj),
+%           time).
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e:641
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',639).
+
+ /*  [] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          initiates(order(Agent1, Agent2, Physobj),
+                    knowOrder(Agent2, Agent1, Physobj),
+                    Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',639).
+axiom(initiates(order(Agent1, Agent2, Physobj), knowOrder(Agent2, Agent1, Physobj), Time),
+    []).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e:643
+% [agent1,agent2,physobj,time]
+% Happens(Order(agent1,agent2,physobj),time) ->
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e:645
+% {location}% 
+% HoldsAt(At(agent1,location),time) &
+% HoldsAt(At(agent2,location),time).
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e:647
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',645).
+
+ /*  exists([Location],
+    happens(order(Agent1, Agent2, Physobj), Time) ->
+       holds_at(at(Agent1, Location), Time),
+       holds_at(at(Agent2, Location), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',645).
+
+ /*  not(happens(order(Agent1, Agent2, Physobj), Time)) :-
+       (   not(holds_at(at(Agent1, Location), Time))
+       ;   not(holds_at(at(Agent2, Location), Time))
+       ),
+       some(Location,
+            '$kolem_Fn_219'(Agent1, Agent2, Physobj, Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',645).
+
+ /*  [(holds_at(neg(at(Agent1, Location)), Time);holds_at(neg(at(Agent2, Location)), Time)), some(Location, '$kolem_Fn_219'(Agent1, Agent2, Physobj, Time))] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          not(happens(order(Agent1, Agent2, Physobj), Time))).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',645).
+axiom(not(happens(order(Agent1, Agent2, Physobj), Time)),
+   
+    [  (holds_at(neg(at(Agent1, Location)), Time);holds_at(neg(at(Agent2, Location)), Time)),
+      some(Location,
+           '$kolem_Fn_219'(Agent1, Agent2, Physobj, Time))
+    ]).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',645).
+
+ /*  holds_at(at(Agent1, Location), Time) :-
+       happens(order(Agent1, Agent2, Physobj), Time),
+       some(Location,
+            '$kolem_Fn_219'(Agent1, Agent2, Physobj, Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',645).
+
+ /*  [happens(order(Agent1, Agent2, Physobj), Time), some(Location, '$kolem_Fn_219'(Agent1, Agent2, Physobj, Time))] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(at(Agent1, Location), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',645).
+axiom(holds_at(at(Agent1, Location), Time),
+   
+    [ happens(order(Agent1, Agent2, Physobj), Time),
+      some(Location,
+           '$kolem_Fn_219'(Agent1, Agent2, Physobj, Time))
+    ]).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',645).
+
+ /*  holds_at(at(Agent2, Location), Time) :-
+       happens(order(Agent1, Agent2, Physobj), Time),
+       some(Location,
+            '$kolem_Fn_219'(Agent1, Agent2, Physobj, Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',645).
+
+ /*  [happens(order(Agent1, Agent2, Physobj), Time), some(Location, '$kolem_Fn_219'(Agent1, Agent2, Physobj, Time))] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(at(Agent2, Location), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',645).
+axiom(holds_at(at(Agent2, Location), Time),
+   
+    [ happens(order(Agent1, Agent2, Physobj), Time),
+      some(Location,
+           '$kolem_Fn_219'(Agent1, Agent2, Physobj, Time))
+    ]).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e:649
+% event Request(agent,agent,physobj)
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',649).
+event(request(agent,agent,physobj)).
+==> mpred_prop(request(agent,agent,physobj),event).
+==> meta_argtypes(request(agent,agent,physobj)).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e:651
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',652).
+% fluent KnowRequest(agent,agent,physobj)
+fluent(knowRequest(agent,agent,physobj)).
+==> mpred_prop(knowRequest(agent,agent,physobj),fluent).
+==> meta_argtypes(knowRequest(agent,agent,physobj)).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e:653
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',654).
+% [agent1,agent2,physobj,time]
+% Initiates(Request(agent1,agent2,physobj),
+%           KnowRequest(agent2,agent1,physobj),
+%           time).
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e:656
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',654).
+
+ /*  [] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          initiates(request(Agent1, Agent2, Physobj),
+                    knowRequest(Agent2, Agent1, Physobj),
+                    Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',654).
+axiom(initiates(request(Agent1, Agent2, Physobj), knowRequest(Agent2, Agent1, Physobj), Time),
+    []).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e:658
+% [agent1,agent2,physobj,time]
+% Happens(Request(agent1,agent2,physobj),time) ->
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e:660
+% {location}% 
+% HoldsAt(At(agent1,location),time) &
+% HoldsAt(At(agent2,location),time).
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e:662
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',660).
+
+ /*  exists([Location],
+    happens(request(Agent1, Agent2, Physobj), Time) ->
+       holds_at(at(Agent1, Location), Time),
+       holds_at(at(Agent2, Location), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',660).
+
+ /*  not(happens(request(Agent1, Agent2, Physobj), Time)) :-
+       (   not(holds_at(at(Agent1, Location), Time))
+       ;   not(holds_at(at(Agent2, Location), Time))
+       ),
+       some(Location,
+            '$kolem_Fn_220'(Agent1, Agent2, Physobj, Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',660).
+
+ /*  [(holds_at(neg(at(Agent1, Location)), Time);holds_at(neg(at(Agent2, Location)), Time)), some(Location, '$kolem_Fn_220'(Agent1, Agent2, Physobj, Time))] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          not(happens(request(Agent1, Agent2, Physobj),
+                      Time))).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',660).
+axiom(not(happens(request(Agent1, Agent2, Physobj), Time)),
+   
+    [  (holds_at(neg(at(Agent1, Location)), Time);holds_at(neg(at(Agent2, Location)), Time)),
+      some(Location,
+           '$kolem_Fn_220'(Agent1, Agent2, Physobj, Time))
+    ]).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',660).
+
+ /*  holds_at(at(Agent1, Location), Time) :-
+       happens(request(Agent1, Agent2, Physobj), Time),
+       some(Location,
+            '$kolem_Fn_220'(Agent1, Agent2, Physobj, Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',660).
+
+ /*  [happens(request(Agent1, Agent2, Physobj), Time), some(Location, '$kolem_Fn_220'(Agent1, Agent2, Physobj, Time))] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(at(Agent1, Location), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',660).
+axiom(holds_at(at(Agent1, Location), Time),
+   
+    [ happens(request(Agent1, Agent2, Physobj), Time),
+      some(Location,
+           '$kolem_Fn_220'(Agent1, Agent2, Physobj, Time))
+    ]).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',660).
+
+ /*  holds_at(at(Agent2, Location), Time) :-
+       happens(request(Agent1, Agent2, Physobj), Time),
+       some(Location,
+            '$kolem_Fn_220'(Agent1, Agent2, Physobj, Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',660).
+
+ /*  [happens(request(Agent1, Agent2, Physobj), Time), some(Location, '$kolem_Fn_220'(Agent1, Agent2, Physobj, Time))] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(at(Agent2, Location), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',660).
+axiom(holds_at(at(Agent2, Location), Time),
+   
+    [ happens(request(Agent1, Agent2, Physobj), Time),
+      some(Location,
+           '$kolem_Fn_220'(Agent1, Agent2, Physobj, Time))
+    ]).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e:664
+%; End of file.

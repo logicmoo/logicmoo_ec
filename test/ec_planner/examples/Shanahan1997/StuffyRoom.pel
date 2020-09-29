@@ -1,0 +1,355 @@
+:-include(library('ec_planner/ec_test_incl')).
+:-expects_dialect(pfc).
+% Wed, 01 Apr 2020 20:00:39 GMT
+% From ../examples/Shanahan1997/StuffyRoom.pel:4
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Shanahan1997/StolenCar.e',56).
+
+ /*  loading(load_e_pl,
+   	'/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Shanahan1997/StuffyRoom.e').
+ */
+%;
+%; Copyright (c) 2005 IBM Corporation and others.
+%; All rights reserved. This program and the accompanying materials
+%; are made available under the terms of the Common Public License v1.0
+%; which accompanies this distribution, and is available at
+%; http://www.eclipse.org/legal/cpl-v10.html
+%;
+%; Contributors:
+%; IBM - Initial implementation
+%;
+%; @article{GinsbergSmith:1988a,
+%;   author = "Matthew L. Ginsberg and David E. Smith",
+%;   year = "1988",
+%;   title = "Reasoning about action \uppercase{I}: \uppercase{A} possible worlds approach",
+%;   journal = "Artificial Intelligence",
+%;   volume = "35",
+%;   number = "2",
+%;   pages = "165--195",
+%; }
+%;
+%; \fullciteA[pp. 288--289]{Shanahan:1997}
+%;
+%; @book{Shanahan:1997,
+%;   author = "Murray Shanahan",
+%;   year = "1997",
+%;   title = "Solving the Frame Problem",
+%;   address = "Cambridge, MA",
+%;   publisher = "MIT Press",
+%; }
+%;
+%; deduction
+%;
+%; modifications from Shanahan's formulation:
+%; timestamps
+%; added:
+%; !HoldsAt(Blocked1(),0).
+%; !HoldsAt(Blocked2(),0).
+%;
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Shanahan1997/StuffyRoom.e:39
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Shanahan1997/StuffyRoom.e',40).
+% load foundations/Root.e
+:- load_e('foundations/Root.e', changed).
+:- if(is_e_toplevel).
+:- endif.
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Shanahan1997/StuffyRoom.e:40
+% load foundations/EC.e
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Shanahan1997/StuffyRoom.e',40).
+:- load_e('foundations/EC.e', changed).
+:- if(is_e_toplevel).
+:- endif.
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Shanahan1997/StuffyRoom.e:42
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Shanahan1997/StuffyRoom.e',43).
+% event Close1()
+event(close1).
+==> mpred_prop(close1,event).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Shanahan1997/StuffyRoom.e:43
+% event Close2()
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Shanahan1997/StuffyRoom.e',43).
+event(close2).
+==> mpred_prop(close2,event).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Shanahan1997/StuffyRoom.e:44
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Shanahan1997/StuffyRoom.e',45).
+% event Start()
+event(start).
+==> mpred_prop(start,event).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Shanahan1997/StuffyRoom.e:45
+% fluent Blocked1()
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Shanahan1997/StuffyRoom.e',45).
+fluent(blocked1).
+==> mpred_prop(blocked1,fluent).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Shanahan1997/StuffyRoom.e:46
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Shanahan1997/StuffyRoom.e',47).
+% fluent Blocked2()
+fluent(blocked2).
+==> mpred_prop(blocked2,fluent).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Shanahan1997/StuffyRoom.e:47
+% fluent Stuffy()
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Shanahan1997/StuffyRoom.e',47).
+fluent(stuffy).
+==> mpred_prop(stuffy,fluent).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Shanahan1997/StuffyRoom.e:48
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Shanahan1997/StuffyRoom.e',49).
+% noninertial Stuffy
+==> noninertial(stuffy).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Shanahan1997/StuffyRoom.e:50
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Shanahan1997/StuffyRoom.e',51).
+% [time]
+ % Initiates(Close1(),Blocked1(),time).
+
+ /*  [] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          initiates(close1, blocked1, Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Shanahan1997/StuffyRoom.e',51).
+axiom(initiates(close1, blocked1, Time),
+    []).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Shanahan1997/StuffyRoom.e:51
+% [time]
+ % Initiates(Close2(),Blocked2(),time).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Shanahan1997/StuffyRoom.e',51).
+
+ /*  [] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          initiates(close2, blocked2, Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Shanahan1997/StuffyRoom.e',51).
+axiom(initiates(close2, blocked2, Time),
+    []).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Shanahan1997/StuffyRoom.e:53
+% [time]
+% HoldsAt(Stuffy(),time) <->
+% HoldsAt(Blocked1(),time)&HoldsAt(Blocked2(),time).
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Shanahan1997/StuffyRoom.e:55
+
+ /*  holds_at(stuffy, Time) <->
+       holds_at(blocked1, Time),
+       holds_at(blocked2, Time).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Shanahan1997/StuffyRoom.e',55).
+
+ /*  [holds_at, stuffy] <->
+       [holds_at, blocked1, holds_at, blocked2].
+ */
+
+ /*  holds_at(stuffy, Time) ->
+       holds_at(blocked1, Time),
+       holds_at(blocked2, Time).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Shanahan1997/StuffyRoom.e',55).
+
+ /*  not(holds_at(stuffy, Time)) :-
+       (   not(holds_at(blocked1, Time))
+       ;   not(holds_at(blocked2, Time))
+       ).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Shanahan1997/StuffyRoom.e',55).
+
+ /*  [(holds_at(neg(blocked1), Time);holds_at(neg(blocked2), Time))] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(neg(stuffy), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Shanahan1997/StuffyRoom.e',55).
+axiom(holds_at(neg(stuffy), Time),
+    [(holds_at(neg(blocked1), Time);holds_at(neg(blocked2), Time))]).
+
+ /*  holds_at(blocked1, Time) :-
+       holds_at(stuffy, Time).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Shanahan1997/StuffyRoom.e',55).
+
+ /*  [holds_at(stuffy, Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(blocked1, Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Shanahan1997/StuffyRoom.e',55).
+axiom(holds_at(blocked1, Time),
+    [holds_at(stuffy, Time)]).
+
+ /*  holds_at(blocked2, Time) :-
+       holds_at(stuffy, Time).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Shanahan1997/StuffyRoom.e',55).
+
+ /*  [holds_at(stuffy, Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(blocked2, Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Shanahan1997/StuffyRoom.e',55).
+axiom(holds_at(blocked2, Time),
+    [holds_at(stuffy, Time)]).
+
+ /*  holds_at(blocked1, Time), holds_at(blocked2, Time) ->
+       holds_at(stuffy, Time).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Shanahan1997/StuffyRoom.e',55).
+
+ /*  holds_at(stuffy, Time) :-
+       holds_at(blocked1, Time),
+       holds_at(blocked2, Time).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Shanahan1997/StuffyRoom.e',55).
+
+ /*  [holds_at(blocked1, Time), holds_at(blocked2, Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(stuffy, Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Shanahan1997/StuffyRoom.e',55).
+axiom(holds_at(stuffy, Time),
+    [holds_at(blocked1, Time), holds_at(blocked2, Time)]).
+
+ /*  not(holds_at(blocked1, Time)) :-
+       holds_at(blocked2, Time),
+       not(holds_at(stuffy, Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Shanahan1997/StuffyRoom.e',55).
+
+ /*  [holds_at(blocked2, Time), holds_at(neg(stuffy), Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(neg(blocked1), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Shanahan1997/StuffyRoom.e',55).
+axiom(holds_at(neg(blocked1), Time),
+    [holds_at(blocked2, Time), holds_at(neg(stuffy), Time)]).
+
+ /*  not(holds_at(blocked2, Time)) :-
+       holds_at(blocked1, Time),
+       not(holds_at(stuffy, Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Shanahan1997/StuffyRoom.e',55).
+
+ /*  [holds_at(blocked1, Time), holds_at(neg(stuffy), Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(neg(blocked2), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Shanahan1997/StuffyRoom.e',55).
+axiom(holds_at(neg(blocked2), Time),
+    [holds_at(blocked1, Time), holds_at(neg(stuffy), Time)]).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Shanahan1997/StuffyRoom.e:57
+% [time]
+ % Initiates(Start(),Blocked1(),time).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Shanahan1997/StuffyRoom.e',57).
+
+ /*  [] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          initiates(start, blocked1, Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Shanahan1997/StuffyRoom.e',57).
+axiom(initiates(start, blocked1, Time),
+    []).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Shanahan1997/StuffyRoom.e:58
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Shanahan1997/StuffyRoom.e',59).
+% [time]
+ % Terminates(Start(),Blocked2(),time).
+
+ /*  [] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          terminates(start, blocked2, Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Shanahan1997/StuffyRoom.e',59).
+axiom(terminates(start, blocked2, Time),
+    []).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Shanahan1997/StuffyRoom.e:60
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Shanahan1997/StuffyRoom.e',61).
+% !HoldsAt(Blocked1(),0).
+
+ /*  [] ->
+       ta(Ta_Param, tvs1=[start], tvs2=[start], holds_at(neg(blocked1), start)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Shanahan1997/StuffyRoom.e',61).
+axiom(holds_at(neg(blocked1), start),
+    []).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Shanahan1997/StuffyRoom.e:61
+% !HoldsAt(Blocked2(),0).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Shanahan1997/StuffyRoom.e',61).
+
+ /*  [] ->
+       ta(Ta_Param, tvs1=[start], tvs2=[start], holds_at(neg(blocked2), start)).
+ */
+axiom(holds_at(neg(blocked2), start),
+    []).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Shanahan1997/StuffyRoom.e:62
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Shanahan1997/StuffyRoom.e',63).
+% Happens(Start(),0).
+
+ /*  [] ->
+       ta(Ta_Param, tvs1=[start], tvs2=[start], happens(start, start)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Shanahan1997/StuffyRoom.e',63).
+axiom(happens(start, start),
+    []).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Shanahan1997/StuffyRoom.e:63
+% Happens(Close2(),1).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Shanahan1997/StuffyRoom.e',63).
+
+ /*  [b(start, Maptime), ignore(start+1==Maptime)] ->
+       ta(Ta_Param,
+          tvs1=[start+1],
+          tvs2=[Maptime, start],
+          happens(close2, Maptime)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Shanahan1997/StuffyRoom.e',63).
+axiom(happens(close2, Maptime),
+    [b(start, Maptime)]).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Shanahan1997/StuffyRoom.e:65
+% completion Happens
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Shanahan1997/StuffyRoom.e',65).
+==> completion(happens).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Shanahan1997/StuffyRoom.e:67
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Shanahan1997/StuffyRoom.e',68).
+% range time 0 2
+==> range(time,0,2).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Shanahan1997/StuffyRoom.e:68
+% range offset 1 1
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Shanahan1997/StuffyRoom.e',68).
+==> range(offset,1,1).
+%; End of file.

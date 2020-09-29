@@ -1,0 +1,223 @@
+:-include(library('ec_planner/ec_test_incl')).
+:-expects_dialect(pfc).
+% Wed, 01 Apr 2020 20:01:22 GMT
+% From ../ecasp/WalkingTurkey40-ea.pel:4
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/WalkingTurkey3-ea.e',40).
+
+ /*  loading(load_e_pl,
+   	'/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/WalkingTurkey40-ea.e').
+ */
+%; WalkingTurkey40-ea.e
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/WalkingTurkey40-ea.e:1
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/WalkingTurkey40-ea.e',2).
+% load foundations/Root.e
+:- load_e('foundations/Root.e', changed).
+:- if(is_e_toplevel).
+:- endif.
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/WalkingTurkey40-ea.e:2
+% load foundations/EC.e
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/WalkingTurkey40-ea.e',2).
+:- load_e('foundations/EC.e', changed).
+:- if(is_e_toplevel).
+:- endif.
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/WalkingTurkey40-ea.e:4
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/WalkingTurkey40-ea.e',5).
+% fluent Loaded()
+fluent(loaded).
+==> mpred_prop(loaded,fluent).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/WalkingTurkey40-ea.e:5
+% fluent Alive()
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/WalkingTurkey40-ea.e',5).
+fluent(alive).
+==> mpred_prop(alive,fluent).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/WalkingTurkey40-ea.e:6
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/WalkingTurkey40-ea.e',7).
+% fluent Walking()
+fluent(walking).
+==> mpred_prop(walking,fluent).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/WalkingTurkey40-ea.e:7
+% event Load()
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/WalkingTurkey40-ea.e',7).
+event(load).
+==> mpred_prop(load,event).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/WalkingTurkey40-ea.e:8
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/WalkingTurkey40-ea.e',9).
+% event Shoot()
+event(shoot).
+==> mpred_prop(shoot,event).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/WalkingTurkey40-ea.e:10
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/WalkingTurkey40-ea.e',11).
+% [time]
+% (Initiates(Load(), Loaded(), time)).
+
+ /*  [] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          initiates(load, loaded, Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/WalkingTurkey40-ea.e',11).
+axiom(initiates(load, loaded, Time),
+    []).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/WalkingTurkey40-ea.e:13
+% [time]
+% (HoldsAt(Loaded(),time) ->
+%  Terminates(Shoot(), Alive(), time)).
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/WalkingTurkey40-ea.e:15
+
+ /*  [holds_at(loaded, Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          terminates(shoot, alive, Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/WalkingTurkey40-ea.e',15).
+axiom(terminates(shoot, alive, Time),
+    [holds_at(loaded, Time)]).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/WalkingTurkey40-ea.e:17
+%; Effect Constraint
+% [time]
+% (Terminates(Shoot(), Alive(), time) ->
+%  Terminates(Shoot(), Walking(), time)).
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/WalkingTurkey40-ea.e:20
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/WalkingTurkey40-ea.e',19).
+
+ /*  [terminates(shoot, alive, Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          terminates(shoot, walking, Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/WalkingTurkey40-ea.e',19).
+axiom(terminates(shoot, walking, Time),
+    [terminates(shoot, alive, Time)]).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/WalkingTurkey40-ea.e:22
+% !ReleasedAt(Loaded(),0).
+ %  not(releasedAt(loaded,0)).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/WalkingTurkey40-ea.e',22).
+
+ /*  [] ->
+       ta(Ta_Param, tvs1=[], tvs2=[], not(releasedAt(loaded, 0))).
+ */
+axiom(not(releasedAt(loaded, 0)),
+    []).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/WalkingTurkey40-ea.e:23
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/WalkingTurkey40-ea.e',24).
+% !ReleasedAt(Alive(),0).
+ %  not(releasedAt(alive,0)).
+
+ /*  [] ->
+       ta(Ta_Param, tvs1=[], tvs2=[], not(releasedAt(alive, 0))).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/WalkingTurkey40-ea.e',24).
+axiom(not(releasedAt(alive, 0)),
+    []).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/WalkingTurkey40-ea.e:24
+% !ReleasedAt(Walking(),0).
+ %  not(releasedAt(walking,0)).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/WalkingTurkey40-ea.e',24).
+
+ /*  [] ->
+       ta(Ta_Param, tvs1=[], tvs2=[], not(releasedAt(walking, 0))).
+ */
+axiom(not(releasedAt(walking, 0)),
+    []).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/WalkingTurkey40-ea.e:26
+% HoldsAt(Alive(), 0).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/WalkingTurkey40-ea.e',26).
+
+ /*  [] ->
+       ta(Ta_Param, tvs1=[start], tvs2=[start], holds_at(alive, start)).
+ */
+axiom(holds_at(alive, start),
+    []).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/WalkingTurkey40-ea.e:27
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/WalkingTurkey40-ea.e',28).
+% HoldsAt(Loaded(), 0).
+
+ /*  [] ->
+       ta(Ta_Param, tvs1=[start], tvs2=[start], holds_at(loaded, start)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/WalkingTurkey40-ea.e',28).
+axiom(holds_at(loaded, start),
+    []).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/WalkingTurkey40-ea.e:28
+% HoldsAt(Walking(), 0).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/WalkingTurkey40-ea.e',28).
+
+ /*  [] ->
+       ta(Ta_Param, tvs1=[start], tvs2=[start], holds_at(walking, start)).
+ */
+axiom(holds_at(walking, start),
+    []).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/WalkingTurkey40-ea.e:30
+% Happens(Shoot(), 25).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/WalkingTurkey40-ea.e',30).
+
+ /*  [b(start, Startd25), toffset(start, 25, Startd25), ignore(start+25==Startd25)] ->
+       ta(Ta_Param,
+          tvs1=[start+25],
+          tvs2=[Startd25, start],
+          happens(shoot, Startd25)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/WalkingTurkey40-ea.e',30).
+axiom(happens(shoot, Startd25),
+    [b(start, Startd25), toffset(start, 25, Startd25)]).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/WalkingTurkey40-ea.e:32
+% !HoldsAt(Walking(),37).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/WalkingTurkey40-ea.e',32).
+
+ /*  [b(start, Startd37), toffset(start, 37, Startd37), ignore(start+37==Startd37)] ->
+       ta(Ta_Param,
+          tvs1=[start+37],
+          tvs2=[Startd37, start],
+          holds_at(neg(walking), Startd37)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/WalkingTurkey40-ea.e',32).
+axiom(holds_at(neg(walking), Startd37),
+    [b(start, Startd37), toffset(start, 37, Startd37)]).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/WalkingTurkey40-ea.e:34
+% completion Happens
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/WalkingTurkey40-ea.e',34).
+==> completion(happens).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/WalkingTurkey40-ea.e:36
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/WalkingTurkey40-ea.e',37).
+% range time 0 40
+==> range(time,0,40).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/WalkingTurkey40-ea.e:37
+% range offset 1 1
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/WalkingTurkey40-ea.e',37).
+==> range(offset,1,1).
+%; End of file

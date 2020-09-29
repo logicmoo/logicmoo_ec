@@ -1,0 +1,424 @@
+:-include(library('ec_planner/ec_test_incl')).
+:-expects_dialect(pfc).
+% Wed, 01 Apr 2020 20:00:34 GMT
+% From ../examples/Mueller2004b/Leaf.pel:4
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2004b/Approve.e',59).
+
+ /*  loading(load_e_pl,
+   	'/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2004b/Leaf.e').
+ */
+%;
+%; Copyright (c) 2005 IBM Corporation and others.
+%; All rights reserved. This program and the accompanying materials
+%; are made available under the terms of the Common Public License v1.0
+%; which accompanies this distribution, and is available at
+%; http://www.eclipse.org/legal/cpl-v10.html
+%;
+%; Contributors:
+%; IBM - Initial implementation
+%;
+%; @inproceedings{Mueller:2004b,
+%;   author = "Erik T. Mueller",
+%;   year = "2004",
+%;   title = "A tool for satisfiability-based commonsense reasoning in the event calculus",
+%;   editor = "Valerie Barr and Zdravko Markov",
+%;   booktitle = "\uppercase{P}roceedings of the \uppercase{S}eventeenth \uppercase{I}nternational \uppercase{F}lorida \uppercase{A}rtificial \uppercase{I}ntelligence \uppercase{R}esearch \uppercase{S}ociety \uppercase{C}onference",
+%;   pages = "147--152",
+%;   address = "Menlo Park, CA",
+%;   publisher = "AAAI Press",
+%; }
+%;
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2004b/Leaf.e:22
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2004b/Leaf.e',23).
+% option trajectory on
+:- set_ec_option(trajectory, on).
+:- if(is_e_toplevel).
+:- endif.
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2004b/Leaf.e:24
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2004b/Leaf.e',25).
+% load foundations/Root.e
+:- load_e('foundations/Root.e', changed).
+:- if(is_e_toplevel).
+:- endif.
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2004b/Leaf.e:25
+% load foundations/EC.e
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2004b/Leaf.e',25).
+:- load_e('foundations/EC.e', changed).
+:- if(is_e_toplevel).
+:- endif.
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2004b/Leaf.e:27
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2004b/Leaf.e',28).
+% sort object
+==> sort(object).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2004b/Leaf.e:28
+% sort height: integer
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2004b/Leaf.e',28).
+==> subsort(height,integer).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2004b/Leaf.e:30
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2004b/Leaf.e',31).
+% fluent Height(object,height)
+fluent(height(object,height)).
+==> mpred_prop(height(object,height),fluent).
+==> meta_argtypes(height(object,height)).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2004b/Leaf.e:31
+% fluent Falling(object)
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2004b/Leaf.e',31).
+fluent(falling(object)).
+==> mpred_prop(falling(object),fluent).
+==> meta_argtypes(falling(object)).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2004b/Leaf.e:32
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2004b/Leaf.e',33).
+% event StartFalling(object)
+event(startFalling(object)).
+==> mpred_prop(startFalling(object),event).
+==> meta_argtypes(startFalling(object)).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2004b/Leaf.e:33
+% event HitsGround(object)
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2004b/Leaf.e',33).
+event(hitsGround(object)).
+==> mpred_prop(hitsGround(object),event).
+==> meta_argtypes(hitsGround(object)).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2004b/Leaf.e:35
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2004b/Leaf.e',36).
+% [object,height1,height2,time]
+% HoldsAt(Height(object,height1),time) &
+% HoldsAt(Height(object,height2),time) ->
+% height1=height2.
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2004b/Leaf.e:38
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2004b/Leaf.e',36).
+
+ /*  holds_at(height(Object, Height1), Time), holds_at(height(Object, Height2), Time) ->
+       equals(Height1, Height2).
+ */
+
+ /*  not(holds_at(height(Object, Height1), Time)) :-
+       holds_at(height(Object, Height2), Time),
+       not(equals(Height1, Height2)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2004b/Leaf.e',36).
+
+ /*  [holds_at(height(Object, Height2), Time), not(equals(Height1, Height2))] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(neg(height(Object, Height1)), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2004b/Leaf.e',36).
+axiom(holds_at(neg(height(Object, Height1)), Time),
+   
+    [ holds_at(height(Object, Height2), Time),
+      not(equals(Height1, Height2))
+    ]).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2004b/Leaf.e',36).
+
+ /*  not(holds_at(height(Object, Height2), Time)) :-
+       holds_at(height(Object, Height1), Time),
+       not(equals(Height1, Height2)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2004b/Leaf.e',36).
+
+ /*  [holds_at(height(Object, Height1), Time), not(equals(Height1, Height2))] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(neg(height(Object, Height2)), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2004b/Leaf.e',36).
+axiom(holds_at(neg(height(Object, Height2)), Time),
+   
+    [ holds_at(height(Object, Height1), Time),
+      not(equals(Height2, Height1))
+    ]).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2004b/Leaf.e:40
+% [object,time]
+% Initiates(StartFalling(object),Falling(object),time).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2004b/Leaf.e',42).
+
+ /*  [] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          initiates(startFalling(Object), falling(Object), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2004b/Leaf.e',42).
+axiom(initiates(startFalling(Object), falling(Object), Time),
+    []).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2004b/Leaf.e:43
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2004b/Leaf.e',44).
+% [object,height,time]
+% Releases(StartFalling(object),Height(object,height),time).
+
+ /*  [] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          releases(startFalling(Object),
+                   height(Object, Height),
+                   Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2004b/Leaf.e',44).
+axiom(releases(startFalling(Object), height(Object, Height), Time),
+    []).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2004b/Leaf.e:46
+% [object,height1,height2,offset,time]
+% HoldsAt(Height(object,height1),time) &
+% height2=height1-offset ->
+% Trajectory(Falling(object),time,Height(object,height2),offset).
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2004b/Leaf.e:49
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2004b/Leaf.e',48).
+
+ /*  holds_at(height(Object, Height1), Time), equals(Height2, Height1-Offset) ->
+       trajectory(falling(Object),
+                  Time,
+                  height(Object, Height2),
+                  Offset).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2004b/Leaf.e',48).
+
+ /*  trajectory(falling(Object), Time, height(Object, Height2), Offset) :-
+       holds_at(height(Object, Height1), Time),
+       equals(Height2, Height1-Offset).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2004b/Leaf.e',48).
+
+ /*  [holds_at(height(Object, Height1), Time), equals(Height2, Height1-Offset)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          trajectory(falling(Object),
+                     Time,
+                     height(Object, Height2),
+                     Offset)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2004b/Leaf.e',48).
+axiom(trajectory(falling(Object), Time, height(Object, Height2), Offset),
+   
+    [ holds_at(height(Object, Height1), Time),
+      equals(Height2, Height1-Offset)
+    ]).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2004b/Leaf.e',48).
+
+ /*  not(holds_at(height(Object, Height1), Time)) :-
+       equals(Height2, Height1-Offset),
+       not(trajectory(falling(Object),
+                      Time,
+                      height(Object, Height2),
+                      Offset)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2004b/Leaf.e',48).
+
+ /*  [equals(Height2, Height1-Offset), not(trajectory(falling(Object), Time, height(Object, Height2), Offset))] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(neg(height(Object, Height1)), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2004b/Leaf.e',48).
+axiom(holds_at(neg(height(Object, Height1)), Time),
+   
+    [ equals(Height2, Height1-Offset),
+      not(trajectory(falling(Object),
+                     Time,
+                     height(Object, Height2),
+                     Offset))
+    ]).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2004b/Leaf.e:51
+% [object,time]
+% HoldsAt(Falling(object),time) &
+% HoldsAt(Height(object,0),time) ->
+% Happens(HitsGround(object),time).
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2004b/Leaf.e:54
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2004b/Leaf.e',53).
+
+ /*  holds_at(falling(Object), Time), holds_at(height(Object, 0), Time) ->
+       happens(hitsGround(Object), Time).
+ */
+
+ /*  happens(hitsGround(Object), Time) :-
+       holds_at(falling(Object), Time),
+       holds_at(height(Object, 0), Time).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2004b/Leaf.e',53).
+
+ /*  [holds_at(falling(Object), Time), holds_at(height(Object, 0), Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          happens(hitsGround(Object), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2004b/Leaf.e',53).
+axiom(happens(hitsGround(Object), Time),
+   
+    [ holds_at(falling(Object), Time),
+      holds_at(height(Object, 0), Time)
+    ]).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2004b/Leaf.e',53).
+
+ /*  not(holds_at(falling(Object), Time)) :-
+       holds_at(height(Object, 0), Time),
+       not(happens(hitsGround(Object), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2004b/Leaf.e',53).
+
+ /*  [holds_at(height(Object, 0), Time), not(happens(hitsGround(Object), Time))] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(neg(falling(Object)), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2004b/Leaf.e',53).
+axiom(holds_at(neg(falling(Object)), Time),
+   
+    [ holds_at(height(Object, 0), Time),
+      not(happens(hitsGround(Object), Time))
+    ]).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2004b/Leaf.e',53).
+
+ /*  not(holds_at(height(Object, 0), Time)) :-
+       holds_at(falling(Object), Time),
+       not(happens(hitsGround(Object), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2004b/Leaf.e',53).
+
+ /*  [holds_at(falling(Object), Time), not(happens(hitsGround(Object), Time))] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(neg(height(Object, 0)), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2004b/Leaf.e',53).
+axiom(holds_at(neg(height(Object, 0)), Time),
+   
+    [ holds_at(falling(Object), Time),
+      not(happens(hitsGround(Object), Time))
+    ]).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2004b/Leaf.e:56
+%;[object,height1,height2,time]
+%;HoldsAt(Height(object,height1),time) &
+%;height1 != height2 ->
+%;Terminates(HitsGround(object),Height(object,height2),time).
+% [object,height,time]
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2004b/Leaf.e:62
+% HoldsAt(Height(object,height),time) ->
+% Initiates(HitsGround(object),Height(object,height),time).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2004b/Leaf.e',62).
+
+ /*  [holds_at(height(Object, Height), Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          initiates(hitsGround(Object),
+                    height(Object, Height),
+                    Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2004b/Leaf.e',62).
+axiom(initiates(hitsGround(Object), height(Object, Height), Time),
+    [holds_at(height(Object, Height), Time)]).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2004b/Leaf.e:65
+% [object,time]
+% Terminates(HitsGround(object),Falling(object),time).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2004b/Leaf.e',67).
+
+ /*  [] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          terminates(hitsGround(Object), falling(Object), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2004b/Leaf.e',67).
+axiom(terminates(hitsGround(Object), falling(Object), Time),
+    []).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2004b/Leaf.e:68
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2004b/Leaf.e',69).
+% object Leaf
+==> t(object,leaf).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2004b/Leaf.e:70
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2004b/Leaf.e',71).
+% !HoldsAt(Falling(Leaf),0).
+
+ /*  [] ->
+       ta(Ta_Param,
+          tvs1=[start],
+          tvs2=[start],
+          holds_at(neg(falling(leaf)), start)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2004b/Leaf.e',71).
+axiom(holds_at(neg(falling(leaf)), start),
+    []).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2004b/Leaf.e:71
+% HoldsAt(Height(Leaf,4),0).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2004b/Leaf.e',71).
+
+ /*  [] ->
+       ta(Ta_Param,
+          tvs1=[start],
+          tvs2=[start],
+          holds_at(height(leaf, 4), start)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2004b/Leaf.e',71).
+axiom(holds_at(height(leaf, 4), start),
+    []).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2004b/Leaf.e:72
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2004b/Leaf.e',73).
+% Happens(StartFalling(Leaf),2).
+
+ /*  [b(start, Start2), toffset(start, 2, Start2), ignore(start+2==Start2)] ->
+       ta(Ta_Param,
+          tvs1=[start+2],
+          tvs2=[Start2, start],
+          happens(startFalling(leaf), Start2)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2004b/Leaf.e',73).
+axiom(happens(startFalling(leaf), Start2),
+    [b(start, Start2), toffset(start, 2, Start2)]).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2004b/Leaf.e:74
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2004b/Leaf.e',75).
+% completion Happens
+==> completion(happens).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2004b/Leaf.e:76
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2004b/Leaf.e',77).
+% range time 0 7
+==> range(time,0,7).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2004b/Leaf.e:77
+% range offset 1 4
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2004b/Leaf.e',77).
+==> range(offset,1,4).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2004b/Leaf.e:78
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2004b/Leaf.e',79).
+% range height 0 4
+==> range(height,0,4).
+%; End of file.

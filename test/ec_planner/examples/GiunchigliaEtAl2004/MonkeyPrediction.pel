@@ -1,0 +1,131 @@
+:-include(library('ec_planner/ec_test_incl')).
+:-expects_dialect(pfc).
+% Wed, 01 Apr 2020 20:00:31 GMT
+% From ../examples/GiunchigliaEtAl2004/MonkeyPrediction.pel:4
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/GiunchigliaEtAl2004/MonkeyPostdiction.e',37).
+
+ /*  loading(load_e_pl,
+   	'/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/GiunchigliaEtAl2004/MonkeyPrediction.e').
+ */
+%;
+%; Copyright (c) 2005 IBM Corporation and others.
+%; All rights reserved. This program and the accompanying materials
+%; are made available under the terms of the Common Public License v1.0
+%; which accompanies this distribution, and is available at
+%; http://www.eclipse.org/legal/cpl-v10.html
+%;
+%; Contributors:
+%; IBM - Initial implementation
+%;
+%; @article{Giunchiglia:2004,
+%;   author = "Enrico Giunchiglia and Joohyung Lee and Vladimir Lifschitz and Norman C. McCain and Hudson Turner",
+%;   year = "2004",
+%;   title = "Nonmonotonic causal theories",
+%;   journal = "Artificial Intelligence",
+%;   volume = "153",
+%;   pages = "49--104",
+%; }
+%;
+%; deduction
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/GiunchigliaEtAl2004/MonkeyPrediction.e:22
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/GiunchigliaEtAl2004/MonkeyPrediction.e',23).
+% load foundations/Root.e
+:- load_e('foundations/Root.e', changed).
+:- if(is_e_toplevel).
+:- endif.
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/GiunchigliaEtAl2004/MonkeyPrediction.e:23
+% load foundations/EC.e
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/GiunchigliaEtAl2004/MonkeyPrediction.e',23).
+:- load_e('foundations/EC.e', changed).
+:- if(is_e_toplevel).
+:- endif.
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/GiunchigliaEtAl2004/MonkeyPrediction.e:24
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/GiunchigliaEtAl2004/MonkeyPrediction.e',25).
+% load examples/GiunchigliaEtAl2004/MonkeyBananas.e
+:- load_e('examples/GiunchigliaEtAl2004/MonkeyBananas.e', changed).
+:- if(is_e_toplevel).
+:- endif.
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/GiunchigliaEtAl2004/MonkeyPrediction.e:26
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/GiunchigliaEtAl2004/MonkeyPrediction.e',27).
+% HoldsAt(At(Monkey,L1),0).
+
+ /*  [] ->
+       ta(Ta_Param, tvs1=[start], tvs2=[start], holds_at(at(monkey, l1), start)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/GiunchigliaEtAl2004/MonkeyPrediction.e',27).
+axiom(holds_at(at(monkey, l1), start),
+    []).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/GiunchigliaEtAl2004/MonkeyPrediction.e:27
+% HoldsAt(At(Bananas,L2),0).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/GiunchigliaEtAl2004/MonkeyPrediction.e',27).
+
+ /*  [] ->
+       ta(Ta_Param,
+          tvs1=[start],
+          tvs2=[start],
+          holds_at(at(bananas, l2), start)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/GiunchigliaEtAl2004/MonkeyPrediction.e',27).
+axiom(holds_at(at(bananas, l2), start),
+    []).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/GiunchigliaEtAl2004/MonkeyPrediction.e:28
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/GiunchigliaEtAl2004/MonkeyPrediction.e',29).
+% HoldsAt(At(Box,L3),0).
+
+ /*  [] ->
+       ta(Ta_Param, tvs1=[start], tvs2=[start], holds_at(at(box, l3), start)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/GiunchigliaEtAl2004/MonkeyPrediction.e',29).
+axiom(holds_at(at(box, l3), start),
+    []).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/GiunchigliaEtAl2004/MonkeyPrediction.e:29
+% Happens(Walk(L3),0).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/GiunchigliaEtAl2004/MonkeyPrediction.e',29).
+
+ /*  [] ->
+       ta(Ta_Param, tvs1=[start], tvs2=[start], happens(walk(l3), start)).
+ */
+axiom(happens(walk(l3), start),
+    []).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/GiunchigliaEtAl2004/MonkeyPrediction.e:30
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/GiunchigliaEtAl2004/MonkeyPrediction.e',31).
+% Happens(PushBox(L2),1).
+
+ /*  [b(start, Maptime), ignore(start+1==Maptime)] ->
+       ta(Ta_Param,
+          tvs1=[start+1],
+          tvs2=[Maptime, start],
+          happens(pushBox(l2), Maptime)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/GiunchigliaEtAl2004/MonkeyPrediction.e',31).
+axiom(happens(pushBox(l2), Maptime),
+    [b(start, Maptime)]).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/GiunchigliaEtAl2004/MonkeyPrediction.e:32
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/GiunchigliaEtAl2004/MonkeyPrediction.e',33).
+% completion Happens
+==> completion(happens).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/GiunchigliaEtAl2004/MonkeyPrediction.e:34
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/GiunchigliaEtAl2004/MonkeyPrediction.e',35).
+% range time 0 2
+==> range(time,0,2).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/GiunchigliaEtAl2004/MonkeyPrediction.e:35
+% range offset 0 0
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/GiunchigliaEtAl2004/MonkeyPrediction.e',35).
+==> range(offset,0,0).
+%; End of file.

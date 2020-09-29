@@ -1,0 +1,459 @@
+:-include(library('ec_planner/ec_test_incl')).
+:-expects_dialect(pfc).
+% Wed, 01 Apr 2020 20:00:50 GMT
+% From ../decreasoner/KitchenSink_M5.pel:4
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/KitchenSink_M25.e',99).
+
+ /*  loading(load_e_pl,
+   	'/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/KitchenSink_M5.e').
+ */
+%;
+%; Copyright (c) 2005 IBM Corporation and others.
+%; All rights reserved. This program and the accompanying materials
+%; are made available under the terms of the Common Public License v1.0
+%; which accompanies this distribution, and is available at
+%; http://www.eclipse.org/legal/cpl-v10.html
+%;
+%; Contributors:
+%; IBM - Initial implementation
+%;
+%; @inproceedings{Shanahan:1990,
+%;   author = "Murray Shanahan",
+%;   year = "1990",
+%;   title = "Representing continuous change in the event calculus",
+%;   editor = "Luigia Carlucci Aiello",
+%;   booktitle = "\uppercase{P}roceedings of the \uppercase{N}inth \uppercase{E}uropean \uppercase{C}onference on \uppercase{A}rtificial \uppercase{I}ntelligence",
+%;   pages = "598--603",
+%;   address = "London",
+%;   publisher = "Pitman",
+%; }
+%;
+%; \fullciteA[pp. 326--329]{Shanahan:1997}
+%;
+%; @book{Shanahan:1997,
+%;   author = "Murray Shanahan",
+%;   year = "1997",
+%;   title = "Solving the Frame Problem",
+%;   address = "Cambridge, MA",
+%;   publisher = "MIT Press",
+%; }
+%;
+%; deduction
+%;
+%; modifications from Shanahan's formulation:
+%; InitiallyP -> HoldsAt
+%; timestamps
+%; generalized (SkF6)
+%;
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/KitchenSink_M5.e:39
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/KitchenSink_M5.e',40).
+% option trajectory on
+:- set_ec_option(trajectory, on).
+:- if(is_e_toplevel).
+:- endif.
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/KitchenSink_M5.e:41
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/KitchenSink_M5.e',42).
+% load foundations/Root.e
+:- load_e('foundations/Root.e', changed).
+:- if(is_e_toplevel).
+:- endif.
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/KitchenSink_M5.e:42
+% load foundations/EC.e
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/KitchenSink_M5.e',42).
+:- load_e('foundations/EC.e', changed).
+:- if(is_e_toplevel).
+:- endif.
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/KitchenSink_M5.e:44
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/KitchenSink_M5.e',45).
+% sort height: integer
+==> subsort(height,integer).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/KitchenSink_M5.e:46
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/KitchenSink_M5.e',47).
+% event TapOn()
+event(tapOn).
+==> mpred_prop(tapOn,event).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/KitchenSink_M5.e:47
+% event TapOff()
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/KitchenSink_M5.e',47).
+event(tapOff).
+==> mpred_prop(tapOff,event).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/KitchenSink_M5.e:48
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/KitchenSink_M5.e',49).
+% event Overflow()
+event(overflow).
+==> mpred_prop(overflow,event).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/KitchenSink_M5.e:49
+% fluent Filling()
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/KitchenSink_M5.e',49).
+fluent(filling).
+==> mpred_prop(filling,fluent).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/KitchenSink_M5.e:50
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/KitchenSink_M5.e',51).
+% fluent Height(height)
+fluent(height(height)).
+==> mpred_prop(height(height),fluent).
+==> meta_argtypes(height(height)).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/KitchenSink_M5.e:51
+% fluent Spilling()
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/KitchenSink_M5.e',51).
+fluent(spilling).
+==> mpred_prop(spilling,fluent).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/KitchenSink_M5.e:54
+% [time]
+ % Initiates(TapOn(),Filling(),time).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/KitchenSink_M5.e',54).
+
+ /*  [] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          initiates(tapOn, filling, Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/KitchenSink_M5.e',54).
+axiom(initiates(tapOn, filling, Time),
+    []).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/KitchenSink_M5.e:56
+% [time]
+ % Terminates(TapOff(),Filling(),time).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/KitchenSink_M5.e',56).
+
+ /*  [] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          terminates(tapOff, filling, Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/KitchenSink_M5.e',56).
+axiom(terminates(tapOff, filling, Time),
+    []).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/KitchenSink_M5.e:58
+%; should probably add:
+%;[time] Terminates(TapOff(),Spilling(),time).
+% [height,time]
+ 
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/KitchenSink_M5.e:61
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/KitchenSink_M5.e',62).
+% Releases(TapOn(),Height(height),time).
+
+ /*  [] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          releases(tapOn, height(Height), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/KitchenSink_M5.e',62).
+axiom(releases(tapOn, height(Height), Time),
+    []).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/KitchenSink_M5.e:63
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/KitchenSink_M5.e',64).
+% [height,time]
+% HoldsAt(Height(height),time) ->
+% Initiates(TapOff(),Height(height),time).
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/KitchenSink_M5.e:65
+
+ /*  [holds_at(height(Height), Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          initiates(tapOff, height(Height), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/KitchenSink_M5.e',64).
+axiom(initiates(tapOff, height(Height), Time),
+    [holds_at(height(Height), Time)]).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/KitchenSink_M5.e:67
+% [time]
+ % Terminates(Overflow(),Filling(),time).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/KitchenSink_M5.e',67).
+
+ /*  [] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          terminates(overflow, filling, Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/KitchenSink_M5.e',67).
+axiom(terminates(overflow, filling, Time),
+    []).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/KitchenSink_M5.e:69
+% [height,time]
+% HoldsAt(Height(height),time) ->
+% Initiates(Overflow(),Height(height),time).
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/KitchenSink_M5.e:71
+
+ /*  [holds_at(height(Height), Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          initiates(overflow, height(Height), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/KitchenSink_M5.e',71).
+axiom(initiates(overflow, height(Height), Time),
+    [holds_at(height(Height), Time)]).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/KitchenSink_M5.e:73
+% [time]
+ % Initiates(Overflow(),Spilling(),time).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/KitchenSink_M5.e',73).
+
+ /*  [] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          initiates(overflow, spilling, Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/KitchenSink_M5.e',73).
+axiom(initiates(overflow, spilling, Time),
+    []).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/KitchenSink_M5.e:75
+% [height1,height2,offset,time]
+% HoldsAt(Height(height1),time) &
+% height2 = height1 + offset ->
+% Trajectory(Filling(),time,Height(height2),offset).
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/KitchenSink_M5.e:78
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/KitchenSink_M5.e',77).
+
+ /*  holds_at(height(Height1), Time), equals(Height2, Height1+Offset) ->
+       trajectory(filling, Time, height(Height2), Offset).
+ */
+
+ /*  trajectory(filling, Time, height(Height2), Offset) :-
+       holds_at(height(Height1), Time),
+       equals(Height2, Height1+Offset).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/KitchenSink_M5.e',77).
+
+ /*  [holds_at(height(Height1), Time), equals(Height2, Height1+Offset)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          trajectory(filling, Time, height(Height2), Offset)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/KitchenSink_M5.e',77).
+axiom(trajectory(filling, Time, height(Height2), Offset),
+   
+    [ holds_at(height(Height1), Time),
+      equals(Height2, Height1+Offset)
+    ]).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/KitchenSink_M5.e',77).
+
+ /*  not(holds_at(height(Height1), Time)) :-
+       equals(Height2, Height1+Offset),
+       not(trajectory(filling, Time, height(Height2), Offset)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/KitchenSink_M5.e',77).
+
+ /*  [equals(Height2, Height1+Offset), not(trajectory(filling, Time, height(Height2), Offset))] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(neg(height(Height1)), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/KitchenSink_M5.e',77).
+axiom(holds_at(neg(height(Height1)), Time),
+   
+    [ equals(Height2, Height1+Offset),
+      not(trajectory(filling, Time, height(Height2), Offset))
+    ]).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/KitchenSink_M5.e:80
+% [height1,height2,time]
+% HoldsAt(Height(height1),time) &
+% HoldsAt(Height(height2),time) ->
+% height1 = height2.
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/KitchenSink_M5.e:83
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/KitchenSink_M5.e',82).
+
+ /*  holds_at(height(Height1), Time), holds_at(height(Height2), Time) ->
+       equals(Height1, Height2).
+ */
+
+ /*  not(holds_at(height(Height1), Time)) :-
+       holds_at(height(Height2), Time),
+       not(equals(Height1, Height2)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/KitchenSink_M5.e',82).
+
+ /*  [holds_at(height(Height2), Time), not(equals(Height1, Height2))] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(neg(height(Height1)), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/KitchenSink_M5.e',82).
+axiom(holds_at(neg(height(Height1)), Time),
+   
+    [ holds_at(height(Height2), Time),
+      not(equals(Height1, Height2))
+    ]).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/KitchenSink_M5.e',82).
+
+ /*  not(holds_at(height(Height2), Time)) :-
+       holds_at(height(Height1), Time),
+       not(equals(Height1, Height2)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/KitchenSink_M5.e',82).
+
+ /*  [holds_at(height(Height1), Time), not(equals(Height1, Height2))] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(neg(height(Height2)), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/KitchenSink_M5.e',82).
+axiom(holds_at(neg(height(Height2)), Time),
+   
+    [ holds_at(height(Height1), Time),
+      not(equals(Height2, Height1))
+    ]).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/KitchenSink_M5.e:85
+% [time]
+ % HoldsAt(Height(3),time) & HoldsAt(Filling(),time) ->
+% Happens(Overflow(),time).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/KitchenSink_M5.e',85).
+
+ /*  holds_at(height(3), Time), holds_at(filling, Time) ->
+       happens(overflow, Time).
+ */
+
+ /*  happens(overflow, Time) :-
+       holds_at(height(3), Time),
+       holds_at(filling, Time).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/KitchenSink_M5.e',85).
+
+ /*  [holds_at(height(3), Time), holds_at(filling, Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          happens(overflow, Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/KitchenSink_M5.e',85).
+axiom(happens(overflow, Time),
+    [holds_at(height(3), Time), holds_at(filling, Time)]).
+
+ /*  not(holds_at(height(3), Time)) :-
+       holds_at(filling, Time),
+       not(happens(overflow, Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/KitchenSink_M5.e',85).
+
+ /*  [holds_at(filling, Time), not(happens(overflow, Time))] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(neg(height(3)), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/KitchenSink_M5.e',85).
+axiom(holds_at(neg(height(3)), Time),
+    [holds_at(filling, Time), not(happens(overflow, Time))]).
+
+ /*  not(holds_at(filling, Time)) :-
+       holds_at(height(3), Time),
+       not(happens(overflow, Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/KitchenSink_M5.e',85).
+
+ /*  [holds_at(height(3), Time), not(happens(overflow, Time))] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(neg(filling), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/KitchenSink_M5.e',85).
+axiom(holds_at(neg(filling), Time),
+    [holds_at(height(3), Time), not(happens(overflow, Time))]).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/KitchenSink_M5.e:88
+% HoldsAt(Height(0),0).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/KitchenSink_M5.e',88).
+
+ /*  [] ->
+       ta(Ta_Param, tvs1=[start], tvs2=[start], holds_at(height(0), start)).
+ */
+axiom(holds_at(height(0), start),
+    []).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/KitchenSink_M5.e:89
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/KitchenSink_M5.e',90).
+% !HoldsAt(Filling(),0).
+
+ /*  [] ->
+       ta(Ta_Param, tvs1=[start], tvs2=[start], holds_at(neg(filling), start)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/KitchenSink_M5.e',90).
+axiom(holds_at(neg(filling), start),
+    []).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/KitchenSink_M5.e:90
+% !HoldsAt(Spilling(),0).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/KitchenSink_M5.e',90).
+
+ /*  [] ->
+       ta(Ta_Param, tvs1=[start], tvs2=[start], holds_at(neg(spilling), start)).
+ */
+axiom(holds_at(neg(spilling), start),
+    []).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/KitchenSink_M5.e:91
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/KitchenSink_M5.e',92).
+% Happens(TapOn(),0).
+
+ /*  [] ->
+       ta(Ta_Param, tvs1=[start], tvs2=[start], happens(tapOn, start)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/KitchenSink_M5.e',92).
+axiom(happens(tapOn, start),
+    []).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/KitchenSink_M5.e:93
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/KitchenSink_M5.e',94).
+% completion Happens
+==> completion(happens).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/KitchenSink_M5.e:96
+% range time 0 5
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/KitchenSink_M5.e',96).
+==> range(time,0,5).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/KitchenSink_M5.e:97
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/KitchenSink_M5.e',98).
+% range height 0 4
+==> range(height,0,4).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/KitchenSink_M5.e:98
+% range offset 1 4
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/KitchenSink_M5.e',98).
+==> range(offset,1,4).
+%; End of file.

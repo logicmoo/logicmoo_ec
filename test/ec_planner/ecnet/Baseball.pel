@@ -1,0 +1,1701 @@
+:-include(library('ec_planner/ec_test_incl')).
+:-expects_dialect(pfc).
+% Wed, 01 Apr 2020 20:01:29 GMT
+% From ../ecnet/Baseball.pel:4
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Arson.e',87).
+
+ /*  loading(load_e_pl,
+   	'/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Baseball.e').
+ */
+%;
+%; Copyright (c) 2005 IBM Corporation and others.
+%; All rights reserved. This program and the accompanying materials
+%; are made available under the terms of the Common Public License v1.0
+%; which accompanies this distribution, and is available at
+%; http://www.eclipse.org/legal/cpl-v10.html
+%;
+%; Contributors:
+%; IBM - Initial implementation
+%;
+%; @book{EthanAllen:1982,
+%;   author = "Ethan Allen",
+%;   year = "1982",
+%;   title = "Baseball Play and Strategy",
+%;   address = "Robert E. Krieger",
+%;   publisher = "Malabar, FL",
+%;   edition = "Third",
+%; }
+%;
+%; @book{Coombs:1967,
+%;   author = "Jack Coombs",
+%;   year = "1967",
+%;   title = "Baseball",
+%;   address = "Englewood Cliffs, NJ",
+%;   publisher = "Prentice-Hall",
+%;   edition = "4th",
+%;   howpublished = "revised by Danny Litwhiler",
+%; }
+%;
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Baseball.e:30
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Baseball.e',31).
+% sort ballgame
+==> sort(ballgame).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Baseball.e:32
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Baseball.e',33).
+% sort hardball: ball
+==> subsort(hardball,ball).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Baseball.e:34
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Baseball.e',35).
+% sort base: physobj
+==> subsort(base,physobj).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Baseball.e:35
+% sort firstbase: base
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Baseball.e',35).
+==> subsort(firstbase,base).
+%;sort secondbase: base
+%;sort thirdbase: base
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Baseball.e:38
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Baseball.e',39).
+% sort homeplate: base
+==> subsort(homeplate,base).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Baseball.e:40
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Baseball.e',41).
+% sort mound: physobj
+==> subsort(mound,physobj).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Baseball.e:41
+% sort pitchermound: mound
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Baseball.e',41).
+==> subsort(pitchermound,mound).
+%;sort furniture: physobj
+%;sort bench: furniture
+%;sort playerbench: bench
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Baseball.e:47
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Baseball.e',48).
+% sort field: physobj
+==> subsort(field,physobj).
+%;sort shortstoparea: field
+%;sort catcherarea: field
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Baseball.e:52
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Baseball.e',53).
+% sort outfield: field
+==> subsort(outfield,field).
+%;sort leftfield: outfield
+%;sort centerfield: outfield
+%;sort rightfield: outfield
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Baseball.e:57
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Baseball.e',58).
+% function BallOf(ballgame): hardball
+function(ballOf(ballgame)).
+==> mpred_prop(ballOf(ballgame),function).
+==> meta_argtypes(ballOf(ballgame)).
+predicate(ball(ballgame,hardball)).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Baseball.e',58).
+==> mpred_prop(ball(ballgame,hardball),predicate).
+==> meta_argtypes(ball(ballgame,hardball)).
+
+ /*  fix_axiom_head(Time) ->
+       
+       [ functional_predicate(ballOf, ball),
+          (->),
+         holds_at(functional_predicate(ballOf, ball), Time)
+       ].
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Baseball.e',58).
+
+ /*  [] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(functional_predicate(ballOf, ball), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Baseball.e',58).
+axiom(holds_at(functional_predicate(ballOf, ball), Time),
+    []).
+==> resultIsa(ballOf,hardball).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Baseball.e:58
+% function FirstBaseOf(ballgame): firstbase
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Baseball.e',58).
+function(firstBaseOf(ballgame)).
+==> mpred_prop(firstBaseOf(ballgame),function).
+==> meta_argtypes(firstBaseOf(ballgame)).
+predicate(firstBase(ballgame,firstbase)).
+==> mpred_prop(firstBase(ballgame,firstbase),predicate).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Baseball.e',58).
+==> meta_argtypes(firstBase(ballgame,firstbase)).
+
+ /*  fix_axiom_head(Time) ->
+       
+       [ functional_predicate(firstBaseOf, firstBase),
+          (->),
+         holds_at(functional_predicate(firstBaseOf, firstBase), Time)
+       ].
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Baseball.e',58).
+
+ /*  [] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(functional_predicate(firstBaseOf, firstBase), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Baseball.e',58).
+axiom(holds_at(functional_predicate(firstBaseOf, firstBase), Time),
+    []).
+==> resultIsa(firstBaseOf,firstbase).
+%;function SecondBaseOf(ballgame): secondbase
+%;function ThirdBaseOf(ballgame): thirdbase
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Baseball.e:61
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Baseball.e',62).
+% function HomeplateOf(ballgame): homeplate
+function(homeplateOf(ballgame)).
+==> mpred_prop(homeplateOf(ballgame),function).
+==> meta_argtypes(homeplateOf(ballgame)).
+predicate(homeplate(ballgame,homeplate)).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Baseball.e',62).
+==> mpred_prop(homeplate(ballgame,homeplate),predicate).
+==> meta_argtypes(homeplate(ballgame,homeplate)).
+
+ /*  fix_axiom_head(Time) ->
+       
+       [ functional_predicate(homeplateOf, homeplate),
+          (->),
+         holds_at(functional_predicate(homeplateOf, homeplate), Time)
+       ].
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Baseball.e',62).
+
+ /*  [] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(functional_predicate(homeplateOf, homeplate), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Baseball.e',62).
+axiom(holds_at(functional_predicate(homeplateOf, homeplate), Time),
+    []).
+==> resultIsa(homeplateOf,homeplate).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Baseball.e:62
+% function OutfieldOf(ballgame): outfield
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Baseball.e',62).
+function(outfieldOf(ballgame)).
+==> mpred_prop(outfieldOf(ballgame),function).
+==> meta_argtypes(outfieldOf(ballgame)).
+predicate(outfield(ballgame,outfield)).
+==> mpred_prop(outfield(ballgame,outfield),predicate).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Baseball.e',62).
+==> meta_argtypes(outfield(ballgame,outfield)).
+
+ /*  fix_axiom_head(Time) ->
+       
+       [ functional_predicate(outfieldOf, outfield),
+          (->),
+         holds_at(functional_predicate(outfieldOf, outfield), Time)
+       ].
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Baseball.e',62).
+
+ /*  [] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(functional_predicate(outfieldOf, outfield), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Baseball.e',62).
+axiom(holds_at(functional_predicate(outfieldOf, outfield), Time),
+    []).
+==> resultIsa(outfieldOf,outfield).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Baseball.e:63
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Baseball.e',64).
+% function PitchermoundOf(ballgame): pitchermound
+function(pitchermoundOf(ballgame)).
+==> mpred_prop(pitchermoundOf(ballgame),function).
+==> meta_argtypes(pitchermoundOf(ballgame)).
+predicate(pitchermound(ballgame,pitchermound)).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Baseball.e',64).
+==> mpred_prop(pitchermound(ballgame,pitchermound),predicate).
+==> meta_argtypes(pitchermound(ballgame,pitchermound)).
+
+ /*  fix_axiom_head(Time) ->
+       
+       [ functional_predicate(pitchermoundOf, pitchermound),
+          (->),
+         holds_at(functional_predicate(pitchermoundOf, pitchermound), Time)
+       ].
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Baseball.e',64).
+
+ /*  [] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(functional_predicate(pitchermoundOf, pitchermound), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Baseball.e',64).
+axiom(holds_at(functional_predicate(pitchermoundOf, pitchermound), Time),
+    []).
+==> resultIsa(pitchermoundOf,pitchermound).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Baseball.e:64
+% function PlayerbenchOf(ballgame): playerbench
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Baseball.e',64).
+function(playerbenchOf(ballgame)).
+==> mpred_prop(playerbenchOf(ballgame),function).
+==> meta_argtypes(playerbenchOf(ballgame)).
+predicate(playerbench(ballgame,playerbench)).
+==> mpred_prop(playerbench(ballgame,playerbench),predicate).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Baseball.e',64).
+==> meta_argtypes(playerbench(ballgame,playerbench)).
+
+ /*  fix_axiom_head(Time) ->
+       
+       [ functional_predicate(playerbenchOf, playerbench),
+          (->),
+         holds_at(functional_predicate(playerbenchOf, playerbench), Time)
+       ].
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Baseball.e',64).
+
+ /*  [] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(functional_predicate(playerbenchOf, playerbench), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Baseball.e',64).
+axiom(holds_at(functional_predicate(playerbenchOf, playerbench), Time),
+    []).
+==> resultIsa(playerbenchOf,playerbench).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Baseball.e:66
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Baseball.e',67).
+% predicate HomeTeamPlayer(ballgame,agent)
+predicate(homeTeamPlayer(ballgame,agent)).
+==> mpred_prop(homeTeamPlayer(ballgame,agent),predicate).
+==> meta_argtypes(homeTeamPlayer(ballgame,agent)).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Baseball.e:67
+% predicate VisitingTeamPlayer(ballgame,agent)
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Baseball.e',67).
+predicate(visitingTeamPlayer(ballgame,agent)).
+==> mpred_prop(visitingTeamPlayer(ballgame,agent),predicate).
+==> meta_argtypes(visitingTeamPlayer(ballgame,agent)).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Baseball.e:68
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Baseball.e',69).
+% predicate Player(ballgame,agent)
+predicate(player(ballgame,agent)).
+==> mpred_prop(player(ballgame,agent),predicate).
+==> meta_argtypes(player(ballgame,agent)).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Baseball.e:69
+% predicate OnOppositeTeams(ballgame,agent,agent)
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Baseball.e',69).
+predicate(onOppositeTeams(ballgame,agent,agent)).
+==> mpred_prop(onOppositeTeams(ballgame,agent,agent),predicate).
+==> meta_argtypes(onOppositeTeams(ballgame,agent,agent)).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Baseball.e:71
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Baseball.e',72).
+% event Pitch(ballgame,agent,hardball,agent)
+event(pitch(ballgame,agent,hardball,agent)).
+==> mpred_prop(pitch(ballgame,agent,hardball,agent),event).
+==> meta_argtypes(pitch(ballgame,agent,hardball,agent)).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Baseball.e:72
+% event PitchInStrikeZone(ballgame,agent,hardball,agent)
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Baseball.e',72).
+event(pitchInStrikeZone(ballgame,agent,hardball,agent)).
+==> mpred_prop(pitchInStrikeZone(ballgame,agent,hardball,agent),event).
+==> meta_argtypes(pitchInStrikeZone(ballgame,agent,hardball,agent)).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Baseball.e:73
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Baseball.e',74).
+% event PitchOutOfStrikeZone(ballgame,agent,hardball,agent)
+event(pitchOutOfStrikeZone(ballgame,agent,hardball,agent)).
+==> mpred_prop(pitchOutOfStrikeZone(ballgame,agent,hardball,agent),
+	       event).
+==> meta_argtypes(pitchOutOfStrikeZone(ballgame,agent,hardball,agent)).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Baseball.e:74
+% event Swing(ballgame,agent,hardball)
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Baseball.e',74).
+event(swing(ballgame,agent,hardball)).
+==> mpred_prop(swing(ballgame,agent,hardball),event).
+==> meta_argtypes(swing(ballgame,agent,hardball)).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Baseball.e:75
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Baseball.e',76).
+% event SwingMiss(ballgame,agent,hardball)
+event(swingMiss(ballgame,agent,hardball)).
+==> mpred_prop(swingMiss(ballgame,agent,hardball),event).
+==> meta_argtypes(swingMiss(ballgame,agent,hardball)).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Baseball.e:76
+% event SwingHit(ballgame,agent,hardball)
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Baseball.e',76).
+event(swingHit(ballgame,agent,hardball)).
+==> mpred_prop(swingHit(ballgame,agent,hardball),event).
+==> meta_argtypes(swingHit(ballgame,agent,hardball)).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Baseball.e:77
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Baseball.e',78).
+% event SwingHitFair(ballgame,agent,hardball)
+event(swingHitFair(ballgame,agent,hardball)).
+==> mpred_prop(swingHitFair(ballgame,agent,hardball),event).
+==> meta_argtypes(swingHitFair(ballgame,agent,hardball)).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Baseball.e:78
+% event SwingHitFoul(ballgame,agent,hardball)
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Baseball.e',78).
+event(swingHitFoul(ballgame,agent,hardball)).
+==> mpred_prop(swingHitFoul(ballgame,agent,hardball),event).
+==> meta_argtypes(swingHitFoul(ballgame,agent,hardball)).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Baseball.e:79
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Baseball.e',80).
+% event SwingHitFairFly(ballgame,agent,hardball)
+event(swingHitFairFly(ballgame,agent,hardball)).
+==> mpred_prop(swingHitFairFly(ballgame,agent,hardball),event).
+==> meta_argtypes(swingHitFairFly(ballgame,agent,hardball)).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Baseball.e:80
+% event SwingHitFairGround(ballgame,agent,hardball)
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Baseball.e',80).
+event(swingHitFairGround(ballgame,agent,hardball)).
+==> mpred_prop(swingHitFairGround(ballgame,agent,hardball),event).
+==> meta_argtypes(swingHitFairGround(ballgame,agent,hardball)).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Baseball.e:82
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Baseball.e',83).
+% [ballgame,agent]
+% HomeTeamPlayer(ballgame,agent) ->
+% !VisitingTeamPlayer(ballgame,agent).
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Baseball.e:84
+
+ /*  homeTeamPlayer(Ballgame, Agent) ->
+       not(visitingTeamPlayer(Ballgame, Agent)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Baseball.e',83).
+
+ /*  not(visitingTeamPlayer(Ballgame, Agent)) :-
+       homeTeamPlayer(Ballgame, Agent).
+ */
+
+ /*  [homeTeamPlayer(Ballgame, Agent)] ->
+       ta(Ta_Param,
+          tvs1=[],
+          tvs2=[],
+          not(visitingTeamPlayer(Ballgame, Agent))).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Baseball.e',83).
+axiom(not(visitingTeamPlayer(Ballgame, Agent)),
+    [homeTeamPlayer(Ballgame, Agent)]).
+
+ /*  not(homeTeamPlayer(Ballgame, Agent)) :-
+       visitingTeamPlayer(Ballgame, Agent).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Baseball.e',83).
+
+ /*  [visitingTeamPlayer(Ballgame, Agent)] ->
+       ta(Ta_Param3,
+          tvs1=[],
+          tvs2=[],
+          not(homeTeamPlayer(Ballgame, Agent))).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Baseball.e',83).
+axiom(not(homeTeamPlayer(Ballgame, Agent)),
+    [visitingTeamPlayer(Ballgame, Agent)]).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Baseball.e:86
+% [ballgame,agent]
+ % HomeTeamPlayer(ballgame,agent) -> Player(ballgame,agent).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Baseball.e',86).
+
+ /*  homeTeamPlayer(Ballgame, Agent) ->
+       player(Ballgame, Agent).
+ */
+
+ /*  player(Ballgame, Agent) :-
+       homeTeamPlayer(Ballgame, Agent).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Baseball.e',86).
+
+ /*  [homeTeamPlayer(Ballgame, Agent)] ->
+       ta(Ta_Param, tvs1=[], tvs2=[], player(Ballgame, Agent)).
+ */
+axiom(player(Ballgame, Agent),
+    [homeTeamPlayer(Ballgame, Agent)]).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Baseball.e',86).
+
+ /*  not(homeTeamPlayer(Ballgame, Agent)) :-
+       not(player(Ballgame, Agent)).
+ */
+
+ /*  [not(player(Ballgame, Agent))] ->
+       ta(Ta_Param3,
+          tvs1=[],
+          tvs2=[],
+          not(homeTeamPlayer(Ballgame, Agent))).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Baseball.e',86).
+axiom(not(homeTeamPlayer(Ballgame, Agent)),
+    [not(player(Ballgame, Agent))]).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Baseball.e:88
+% [ballgame,agent]
+ % VisitingTeamPlayer(ballgame,agent) -> Player(ballgame,agent).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Baseball.e',88).
+
+ /*  visitingTeamPlayer(Ballgame, Agent) ->
+       player(Ballgame, Agent).
+ */
+
+ /*  player(Ballgame, Agent) :-
+       visitingTeamPlayer(Ballgame, Agent).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Baseball.e',88).
+
+ /*  [visitingTeamPlayer(Ballgame, Agent)] ->
+       ta(Ta_Param, tvs1=[], tvs2=[], player(Ballgame, Agent)).
+ */
+axiom(player(Ballgame, Agent),
+    [visitingTeamPlayer(Ballgame, Agent)]).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Baseball.e',88).
+
+ /*  not(visitingTeamPlayer(Ballgame, Agent)) :-
+       not(player(Ballgame, Agent)).
+ */
+
+ /*  [not(player(Ballgame, Agent))] ->
+       ta(Ta_Param3,
+          tvs1=[],
+          tvs2=[],
+          not(visitingTeamPlayer(Ballgame, Agent))).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Baseball.e',88).
+axiom(not(visitingTeamPlayer(Ballgame, Agent)),
+    [not(player(Ballgame, Agent))]).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Baseball.e:90
+% [ballgame,agent1,agent2]
+% OnOppositeTeams(ballgame,agent1,agent2) <->
+% (HomeTeamPlayer(ballgame,agent1) &
+%  VisitingTeamPlayer(ballgame,agent2)) |
+% (HomeTeamPlayer(ballgame,agent2) &
+%  VisitingTeamPlayer(ballgame,agent1)).
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Baseball.e:95
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Baseball.e',92).
+
+ /*  onOppositeTeams(Ballgame, Agent1, Agent2) <->
+       (   homeTeamPlayer(Ballgame, Agent1),
+           visitingTeamPlayer(Ballgame, Agent2)
+       ;   homeTeamPlayer(Ballgame, Agent2),
+           visitingTeamPlayer(Ballgame, Agent1)
+       ).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Baseball.e',92).
+
+ /*  [onOppositeTeams] <->
+       [;, homeTeamPlayer, visitingTeamPlayer, homeTeamPlayer, visitingTeamPlayer].
+ */
+
+ /*  onOppositeTeams(Ballgame, Agent1, Agent2) ->
+       (   homeTeamPlayer(Ballgame, Agent1),
+           visitingTeamPlayer(Ballgame, Agent2)
+       ;   homeTeamPlayer(Ballgame, Agent2),
+           visitingTeamPlayer(Ballgame, Agent1)
+       ).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Baseball.e',92).
+
+ /*  not(onOppositeTeams(Ballgame, Agent1, Agent2)) :-
+       (   not(homeTeamPlayer(Ballgame, Agent1))
+       ;   not(visitingTeamPlayer(Ballgame, Agent2))
+       ),
+       (   not(homeTeamPlayer(Ballgame, Agent2))
+       ;   not(visitingTeamPlayer(Ballgame, Agent1))
+       ).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Baseball.e',92).
+
+ /*  [(not(homeTeamPlayer(Ballgame, Agent1));not(visitingTeamPlayer(Ballgame, Agent2))),  (not(homeTeamPlayer(Ballgame, Agent2));not(visitingTeamPlayer(Ballgame, Agent1)))] ->
+       ta(Ta_Param,
+          tvs1=[],
+          tvs2=[],
+          not(onOppositeTeams(Ballgame, Agent1, Agent2))).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Baseball.e',92).
+axiom(not(onOppositeTeams(Ballgame, Agent1, Agent2)),
+   
+    [  (not(homeTeamPlayer(Ballgame, Agent1));not(visitingTeamPlayer(Ballgame, Agent2))),
+       (not(homeTeamPlayer(Ballgame, Agent2));not(visitingTeamPlayer(Ballgame, Agent1)))
+    ]).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Baseball.e',92).
+
+ /*  homeTeamPlayer(Ballgame, Agent1) :-
+       (   not(homeTeamPlayer(Ballgame, Agent2))
+       ;   not(visitingTeamPlayer(Ballgame, Agent1))
+       ),
+       onOppositeTeams(Ballgame, Agent1, Agent2).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Baseball.e',92).
+
+ /*  [(not(homeTeamPlayer(Ballgame, Agent2));not(visitingTeamPlayer(Ballgame, Agent1))), onOppositeTeams(Ballgame, Agent1, Agent2)] ->
+       ta(Ta_Param4,
+          tvs1=[],
+          tvs2=[],
+          homeTeamPlayer(Ballgame, Agent1)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Baseball.e',92).
+axiom(homeTeamPlayer(Ballgame, Agent1),
+   
+    [  (not(homeTeamPlayer(Ballgame, Agent2));not(visitingTeamPlayer(Ballgame, Agent1))),
+      onOppositeTeams(Ballgame, Agent1, Agent2)
+    ]).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Baseball.e',92).
+
+ /*  visitingTeamPlayer(Ballgame, Agent2) :-
+       (   not(homeTeamPlayer(Ballgame, Agent2))
+       ;   not(visitingTeamPlayer(Ballgame, Agent1))
+       ),
+       onOppositeTeams(Ballgame, Agent1, Agent2).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Baseball.e',92).
+
+ /*  [(not(homeTeamPlayer(Ballgame, Agent2));not(visitingTeamPlayer(Ballgame, Agent1))), onOppositeTeams(Ballgame, Agent1, Agent2)] ->
+       ta(Ta_Param5,
+          tvs1=[],
+          tvs2=[],
+          visitingTeamPlayer(Ballgame, Agent2)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Baseball.e',92).
+axiom(visitingTeamPlayer(Ballgame, Agent2),
+   
+    [  (not(homeTeamPlayer(Ballgame, Agent2));not(visitingTeamPlayer(Ballgame, Agent1))),
+      onOppositeTeams(Ballgame, Agent1, Agent2)
+    ]).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Baseball.e',92).
+
+ /*  homeTeamPlayer(Ballgame, Agent2) :-
+       (   not(homeTeamPlayer(Ballgame, Agent1))
+       ;   not(visitingTeamPlayer(Ballgame, Agent2))
+       ),
+       onOppositeTeams(Ballgame, Agent1, Agent2).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Baseball.e',92).
+
+ /*  [(not(homeTeamPlayer(Ballgame, Agent1));not(visitingTeamPlayer(Ballgame, Agent2))), onOppositeTeams(Ballgame, Agent1, Agent2)] ->
+       ta(Ta_Param6,
+          tvs1=[],
+          tvs2=[],
+          homeTeamPlayer(Ballgame, Agent2)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Baseball.e',92).
+axiom(homeTeamPlayer(Ballgame, Agent2),
+   
+    [  (not(homeTeamPlayer(Ballgame, Agent1));not(visitingTeamPlayer(Ballgame, Agent2))),
+      onOppositeTeams(Ballgame, Agent1, Agent2)
+    ]).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Baseball.e',92).
+
+ /*  visitingTeamPlayer(Ballgame, Agent1) :-
+       (   not(homeTeamPlayer(Ballgame, Agent1))
+       ;   not(visitingTeamPlayer(Ballgame, Agent2))
+       ),
+       onOppositeTeams(Ballgame, Agent1, Agent2).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Baseball.e',92).
+
+ /*  [(not(homeTeamPlayer(Ballgame, Agent1));not(visitingTeamPlayer(Ballgame, Agent2))), onOppositeTeams(Ballgame, Agent1, Agent2)] ->
+       ta(Ta_Param7,
+          tvs1=[],
+          tvs2=[],
+          visitingTeamPlayer(Ballgame, Agent1)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Baseball.e',92).
+axiom(visitingTeamPlayer(Ballgame, Agent1),
+   
+    [  (not(homeTeamPlayer(Ballgame, Agent1));not(visitingTeamPlayer(Ballgame, Agent2))),
+      onOppositeTeams(Ballgame, Agent1, Agent2)
+    ]).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Baseball.e',92).
+
+ /*  homeTeamPlayer(Ballgame, Agent1), visitingTeamPlayer(Ballgame, Agent2);homeTeamPlayer(Ballgame, Agent2), visitingTeamPlayer(Ballgame, Agent1) ->
+       onOppositeTeams(Ballgame, Agent1, Agent2).
+ */
+
+ /*  onOppositeTeams(Ballgame, Agent1, Agent2) :-
+       (   homeTeamPlayer(Ballgame, Agent1),
+           visitingTeamPlayer(Ballgame, Agent2)
+       ;   homeTeamPlayer(Ballgame, Agent2),
+           visitingTeamPlayer(Ballgame, Agent1)
+       ).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Baseball.e',92).
+
+ /*  [(homeTeamPlayer(Ballgame, Agent1), visitingTeamPlayer(Ballgame, Agent2);homeTeamPlayer(Ballgame, Agent2), visitingTeamPlayer(Ballgame, Agent1))] ->
+       ta(Ta_Param8,
+          tvs1=[],
+          tvs2=[],
+          onOppositeTeams(Ballgame, Agent1, Agent2)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Baseball.e',92).
+axiom(onOppositeTeams(Ballgame, Agent1, Agent2),
+   
+    [  (homeTeamPlayer(Ballgame, Agent1), visitingTeamPlayer(Ballgame, Agent2);homeTeamPlayer(Ballgame, Agent2), visitingTeamPlayer(Ballgame, Agent1))
+    ]).
+
+ /*  not(homeTeamPlayer(Ballgame, Agent1)) :-
+       visitingTeamPlayer(Ballgame, Agent2),
+       not(onOppositeTeams(Ballgame, Agent1, Agent2)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Baseball.e',92).
+
+ /*  [visitingTeamPlayer(Ballgame, Agent2), not(onOppositeTeams(Ballgame, Agent1, Agent2))] ->
+       ta(Ta_Param9,
+          tvs1=[],
+          tvs2=[],
+          not(homeTeamPlayer(Ballgame, Agent1))).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Baseball.e',92).
+axiom(not(homeTeamPlayer(Ballgame, Agent1)),
+   
+    [ visitingTeamPlayer(Ballgame, Agent2),
+      not(onOppositeTeams(Ballgame, Agent1, Agent2))
+    ]).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Baseball.e',92).
+
+ /*  not(visitingTeamPlayer(Ballgame, Agent2)) :-
+       homeTeamPlayer(Ballgame, Agent1),
+       not(onOppositeTeams(Ballgame, Agent1, Agent2)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Baseball.e',92).
+
+ /*  [homeTeamPlayer(Ballgame, Agent1), not(onOppositeTeams(Ballgame, Agent1, Agent2))] ->
+       ta(Ta_Param10,
+          tvs1=[],
+          tvs2=[],
+          not(visitingTeamPlayer(Ballgame, Agent2))).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Baseball.e',92).
+axiom(not(visitingTeamPlayer(Ballgame, Agent2)),
+   
+    [ homeTeamPlayer(Ballgame, Agent1),
+      not(onOppositeTeams(Ballgame, Agent1, Agent2))
+    ]).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Baseball.e',92).
+
+ /*  not(homeTeamPlayer(Ballgame, Agent2)) :-
+       visitingTeamPlayer(Ballgame, Agent1),
+       not(onOppositeTeams(Ballgame, Agent1, Agent2)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Baseball.e',92).
+
+ /*  [visitingTeamPlayer(Ballgame, Agent1), not(onOppositeTeams(Ballgame, Agent1, Agent2))] ->
+       ta(Ta_Param11,
+          tvs1=[],
+          tvs2=[],
+          not(homeTeamPlayer(Ballgame, Agent2))).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Baseball.e',92).
+axiom(not(homeTeamPlayer(Ballgame, Agent2)),
+   
+    [ visitingTeamPlayer(Ballgame, Agent1),
+      not(onOppositeTeams(Ballgame, Agent1, Agent2))
+    ]).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Baseball.e',92).
+
+ /*  not(visitingTeamPlayer(Ballgame, Agent1)) :-
+       homeTeamPlayer(Ballgame, Agent2),
+       not(onOppositeTeams(Ballgame, Agent1, Agent2)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Baseball.e',92).
+
+ /*  [homeTeamPlayer(Ballgame, Agent2), not(onOppositeTeams(Ballgame, Agent1, Agent2))] ->
+       ta(Ta_Param12,
+          tvs1=[],
+          tvs2=[],
+          not(visitingTeamPlayer(Ballgame, Agent1))).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Baseball.e',92).
+axiom(not(visitingTeamPlayer(Ballgame, Agent1)),
+   
+    [ homeTeamPlayer(Ballgame, Agent2),
+      not(onOppositeTeams(Ballgame, Agent1, Agent2))
+    ]).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Baseball.e:97
+% [ballgame,agent1,hardball,agent2,pitchermound,homeplate,time]
+% Happens(Pitch(ballgame,agent1,hardball,agent2),time) &
+% PitchermoundOf(ballgame) = pitchermound &
+% HomeplateOf(ballgame) = homeplate ->
+% HoldsAt(Near(agent1,pitchermound),time) &
+% HoldsAt(Near(agent2,homeplate),time) &
+% OnOppositeTeams(ballgame,agent1,agent2).
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Baseball.e:103
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Baseball.e',99).
+
+ /*  happens(pitch(Ballgame, Agent1, Hardball, Agent2), Time), equals(pitchermoundOf(Ballgame), Pitchermound), equals(homeplateOf(Ballgame), Homeplate) ->
+       holds_at(near(Agent1, Pitchermound), Time),
+       holds_at(near(Agent2, Homeplate), Time),
+       onOppositeTeams(Ballgame, Agent1, Agent2).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Baseball.e',99).
+
+ /*  not(happens(pitch(Ballgame, Agent1, Hardball, Agent2), Time)) :-
+       ( equals(pitchermoundOf(Ballgame), Pitchermound),
+         equals(homeplateOf(Ballgame), Homeplate)
+       ),
+       (   not(holds_at(near(Agent1, Pitchermound), Time))
+       ;   not(holds_at(near(Agent2, Homeplate), Time))
+       ;   not(onOppositeTeams(Ballgame, Agent1, Agent2))
+       ).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Baseball.e',99).
+
+ /*  [equals(pitchermoundOf(Ballgame), Pitchermound), equals(homeplateOf(Ballgame), Homeplate),  (holds_at(neg(near(Agent1, Pitchermound)), Time);holds_at(neg(near(Agent2, Homeplate)), Time);not(onOppositeTeams(Ballgame, Agent1, Agent2)))] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          not(happens(pitch(Ballgame,
+                            Agent1,
+                            Hardball,
+                            Agent2),
+                      Time))).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Baseball.e',99).
+axiom(not(happens(pitch(Ballgame, Agent1, Hardball, Agent2), Time)),
+   
+    [ equals(pitchermoundOf(Ballgame), Pitchermound),
+      equals(homeplateOf(Ballgame), Homeplate),
+       (holds_at(neg(near(Agent1, Pitchermound)), Time);holds_at(neg(near(Agent2, Homeplate)), Time);not(onOppositeTeams(Ballgame, Agent1, Agent2)))
+    ]).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Baseball.e',99).
+
+ /*  holds_at(near(Agent1, Pitchermound), Time) :-
+       happens(pitch(Ballgame, Agent1, Hardball, Agent2),
+               Time),
+       equals(pitchermoundOf(Ballgame), Pitchermound),
+       equals(homeplateOf(Ballgame), Homeplate).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Baseball.e',99).
+
+ /*  [happens(pitch(Ballgame, Agent1, Hardball, Agent2), Time), equals(pitchermoundOf(Ballgame), Pitchermound), equals(homeplateOf(Ballgame), Homeplate)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(near(Agent1, Pitchermound), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Baseball.e',99).
+axiom(holds_at(near(Agent1, Pitchermound), Time),
+   
+    [ happens(pitch(Ballgame, Agent1, Hardball, Agent2),
+              Time),
+      equals(pitchermoundOf(Ballgame), Pitchermound),
+      equals(homeplateOf(Ballgame), Homeplate)
+    ]).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Baseball.e',99).
+
+ /*  holds_at(near(Agent2, Homeplate), Time) :-
+       happens(pitch(Ballgame, Agent1, Hardball, Agent2),
+               Time),
+       equals(pitchermoundOf(Ballgame), Pitchermound),
+       equals(homeplateOf(Ballgame), Homeplate).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Baseball.e',99).
+
+ /*  [happens(pitch(Ballgame, Agent1, Hardball, Agent2), Time), equals(pitchermoundOf(Ballgame), Pitchermound), equals(homeplateOf(Ballgame), Homeplate)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(near(Agent2, Homeplate), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Baseball.e',99).
+axiom(holds_at(near(Agent2, Homeplate), Time),
+   
+    [ happens(pitch(Ballgame, Agent1, Hardball, Agent2),
+              Time),
+      equals(pitchermoundOf(Ballgame), Pitchermound),
+      equals(homeplateOf(Ballgame), Homeplate)
+    ]).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Baseball.e',99).
+
+ /*  onOppositeTeams(Ballgame, Agent1, Agent2) :-
+       happens(pitch(Ballgame, Agent1, Hardball, Agent2),
+               Time),
+       equals(pitchermoundOf(Ballgame), Pitchermound),
+       equals(homeplateOf(Ballgame), Homeplate).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Baseball.e',99).
+
+ /*  [happens(pitch(Ballgame, Agent1, Hardball, Agent2), Time), equals(pitchermoundOf(Ballgame), Pitchermound), equals(homeplateOf(Ballgame), Homeplate)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          onOppositeTeams(Ballgame, Agent1, Agent2)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Baseball.e',99).
+axiom(onOppositeTeams(Ballgame, Agent1, Agent2),
+   
+    [ happens(pitch(Ballgame, Agent1, Hardball, Agent2),
+              Time),
+      equals(pitchermoundOf(Ballgame), Pitchermound),
+      equals(homeplateOf(Ballgame), Homeplate)
+    ]).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Baseball.e:105
+% [ballgame,agent1,agent2,hardball,time]
+% Happens(Pitch(ballgame,agent1,hardball,agent2),time) ->
+% Happens(PitchInStrikeZone(ballgame,agent1,hardball,agent2),time) |
+% Happens(PitchOutOfStrikeZone(ballgame,agent1,hardball,agent2),time).
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Baseball.e:108
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Baseball.e',107).
+
+ /*  happens(pitch(Ballgame, Agent1, Hardball, Agent2), Time) ->
+       (   happens(pitchInStrikeZone(Ballgame,
+                                     Agent1,
+                                     Hardball,
+                                     Agent2),
+                   Time)
+       ;   happens(pitchOutOfStrikeZone(Ballgame,
+                                        Agent1,
+                                        Hardball,
+                                        Agent2),
+                   Time)
+       ).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Baseball.e',107).
+
+ /*  happens(pitchInStrikeZone(Ballgame, Agent1, Hardball, Agent2), Time) :-
+       not(happens(pitchOutOfStrikeZone(Ballgame,
+                                        Agent1,
+                                        Hardball,
+                                        Agent2),
+                   Time)),
+       happens(pitch(Ballgame, Agent1, Hardball, Agent2),
+               Time).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Baseball.e',107).
+
+ /*  [not(happens(pitchOutOfStrikeZone(Ballgame, Agent1, Hardball, Agent2), Time)), happens(pitch(Ballgame, Agent1, Hardball, Agent2), Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          happens(pitchInStrikeZone(Ballgame,
+                                    Agent1,
+                                    Hardball,
+                                    Agent2),
+                  Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Baseball.e',107).
+axiom(happens(pitchInStrikeZone(Ballgame, Agent1, Hardball, Agent2), Time),
+   
+    [ not(happens(pitchOutOfStrikeZone(Ballgame,
+                                       Agent1,
+                                       Hardball,
+                                       Agent2),
+                  Time)),
+      happens(pitch(Ballgame, Agent1, Hardball, Agent2),
+              Time)
+    ]).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Baseball.e',107).
+
+ /*  happens(pitchOutOfStrikeZone(Ballgame, Agent1, Hardball, Agent2), Time) :-
+       not(happens(pitchInStrikeZone(Ballgame,
+                                     Agent1,
+                                     Hardball,
+                                     Agent2),
+                   Time)),
+       happens(pitch(Ballgame, Agent1, Hardball, Agent2),
+               Time).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Baseball.e',107).
+
+ /*  [not(happens(pitchInStrikeZone(Ballgame, Agent1, Hardball, Agent2), Time)), happens(pitch(Ballgame, Agent1, Hardball, Agent2), Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          happens(pitchOutOfStrikeZone(Ballgame,
+                                       Agent1,
+                                       Hardball,
+                                       Agent2),
+                  Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Baseball.e',107).
+axiom(happens(pitchOutOfStrikeZone(Ballgame, Agent1, Hardball, Agent2), Time),
+   
+    [ not(happens(pitchInStrikeZone(Ballgame,
+                                    Agent1,
+                                    Hardball,
+                                    Agent2),
+                  Time)),
+      happens(pitch(Ballgame, Agent1, Hardball, Agent2),
+              Time)
+    ]).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Baseball.e',107).
+
+ /*  not(happens(pitch(Ballgame, Agent1, Hardball, Agent2), Time)) :-
+       not(happens(pitchInStrikeZone(Ballgame,
+                                     Agent1,
+                                     Hardball,
+                                     Agent2),
+                   Time)),
+       not(happens(pitchOutOfStrikeZone(Ballgame,
+                                        Agent1,
+                                        Hardball,
+                                        Agent2),
+                   Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Baseball.e',107).
+
+ /*  [not(happens(pitchInStrikeZone(Ballgame, Agent1, Hardball, Agent2), Time)), not(happens(pitchOutOfStrikeZone(Ballgame, Agent1, Hardball, Agent2), Time))] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          not(happens(pitch(Ballgame,
+                            Agent1,
+                            Hardball,
+                            Agent2),
+                      Time))).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Baseball.e',107).
+axiom(not(happens(pitch(Ballgame, Agent1, Hardball, Agent2), Time)),
+   
+    [ not(happens(pitchInStrikeZone(Ballgame,
+                                    Agent1,
+                                    Hardball,
+                                    Agent2),
+                  Time)),
+      not(happens(pitchOutOfStrikeZone(Ballgame,
+                                       Agent1,
+                                       Hardball,
+                                       Agent2),
+                  Time))
+    ]).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Baseball.e:110
+% [ballgame,agent1,agent2,hardball,time]
+% Happens(PitchInStrikeZone(ballgame,agent1,hardball,agent2),time) ->
+% !Happens(PitchOutOfStrikeZone(ballgame,agent1,hardball,agent2),time).
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Baseball.e:112
+
+ /*  happens(pitchInStrikeZone(Ballgame, Agent1, Hardball, Agent2), Time) ->
+       not(happens(pitchOutOfStrikeZone(Ballgame,
+                                        Agent1,
+                                        Hardball,
+                                        Agent2),
+                   Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Baseball.e',112).
+
+ /*  not(happens(pitchOutOfStrikeZone(Ballgame, Agent1, Hardball, Agent2), Time)) :-
+       happens(pitchInStrikeZone(Ballgame,
+                                 Agent1,
+                                 Hardball,
+                                 Agent2),
+               Time).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Baseball.e',112).
+
+ /*  [happens(pitchInStrikeZone(Ballgame, Agent1, Hardball, Agent2), Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          not(happens(pitchOutOfStrikeZone(Ballgame,
+                                           Agent1,
+                                           Hardball,
+                                           Agent2),
+                      Time))).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Baseball.e',112).
+axiom(not(happens(pitchOutOfStrikeZone(Ballgame, Agent1, Hardball, Agent2), Time)),
+   
+    [ happens(pitchInStrikeZone(Ballgame,
+                                Agent1,
+                                Hardball,
+                                Agent2),
+              Time)
+    ]).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Baseball.e',112).
+
+ /*  not(happens(pitchInStrikeZone(Ballgame, Agent1, Hardball, Agent2), Time)) :-
+       happens(pitchOutOfStrikeZone(Ballgame,
+                                    Agent1,
+                                    Hardball,
+                                    Agent2),
+               Time).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Baseball.e',112).
+
+ /*  [happens(pitchOutOfStrikeZone(Ballgame, Agent1, Hardball, Agent2), Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          not(happens(pitchInStrikeZone(Ballgame,
+                                        Agent1,
+                                        Hardball,
+                                        Agent2),
+                      Time))).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Baseball.e',112).
+axiom(not(happens(pitchInStrikeZone(Ballgame, Agent1, Hardball, Agent2), Time)),
+   
+    [ happens(pitchOutOfStrikeZone(Ballgame,
+                                   Agent1,
+                                   Hardball,
+                                   Agent2),
+              Time)
+    ]).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Baseball.e:114
+% [ballgame,agent1,agent2,hardball,time]
+% Happens(PitchInStrikeZone(ballgame,agent1,hardball,agent2),time) ->
+% Happens(Swing(ballgame,agent2,hardball),time+1).
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Baseball.e:116
+
+ /*  happens(pitchInStrikeZone(Ballgame, Agent1, Hardball, Agent2), Time) ->
+       happens(swing(Ballgame, Agent2, Hardball), Time+1).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Baseball.e',116).
+
+ /*  happens(swing(Ballgame, Agent2, Hardball), Time+1) :-
+       happens(pitchInStrikeZone(Ballgame,
+                                 Agent1,
+                                 Hardball,
+                                 Agent2),
+               Time).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Baseball.e',116).
+
+ /*  [happens(pitchInStrikeZone(Ballgame, Agent1, Hardball, Agent2), Time), b(Time, Maptime), ignore(Time+1==Maptime)] ->
+       ta(Time,
+          tvs1=[Time, Time+1],
+          tvs2=[Time, Maptime],
+          happens(swing(Ballgame, Agent2, Hardball),
+                  Maptime)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Baseball.e',116).
+axiom(happens(swing(Ballgame, Agent2, Hardball), Maptime),
+   
+    [ happens(pitchInStrikeZone(Ballgame,
+                                Agent1,
+                                Hardball,
+                                Agent2),
+              Time),
+      b(Time, Maptime)
+    ]).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Baseball.e',116).
+
+ /*  not(happens(pitchInStrikeZone(Ballgame, Agent1, Hardball, Agent2), Time)) :-
+       not(happens(swing(Ballgame, Agent2, Hardball),
+                   Time+1)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Baseball.e',116).
+
+ /*  [not(happens(swing(Ballgame, Agent2, Hardball), Maptime6)), b(Time, Maptime6), ignore(Time+1==Maptime6)] ->
+       ta(Time,
+          tvs1=[Time, Time+1],
+          tvs2=[Time, Maptime6],
+          not(happens(pitchInStrikeZone(Ballgame,
+                                        Agent1,
+                                        Hardball,
+                                        Agent2),
+                      Time))).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Baseball.e',116).
+axiom(not(happens(pitchInStrikeZone(Ballgame, Agent1, Hardball, Agent2), Time)),
+   
+    [ not(happens(swing(Ballgame, Agent2, Hardball),
+                  Maptime6)),
+      b(Time, Maptime6)
+    ]).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Baseball.e:118
+% [ballgame,agent,hardball,time]
+% Happens(Swing(ballgame,agent,hardball),time) ->
+% Happens(SwingHit(ballgame,agent,hardball),time) |
+% Happens(SwingMiss(ballgame,agent,hardball),time).
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Baseball.e:121
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Baseball.e',120).
+
+ /*  happens(swing(Ballgame, Agent, Hardball), Time) ->
+       (   happens(swingHit(Ballgame, Agent, Hardball),
+                   Time)
+       ;   happens(swingMiss(Ballgame, Agent, Hardball),
+                   Time)
+       ).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Baseball.e',120).
+
+ /*  happens(swingHit(Ballgame, Agent, Hardball), Time) :-
+       not(happens(swingMiss(Ballgame, Agent, Hardball),
+                   Time)),
+       happens(swing(Ballgame, Agent, Hardball), Time).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Baseball.e',120).
+
+ /*  [not(happens(swingMiss(Ballgame, Agent, Hardball), Time)), happens(swing(Ballgame, Agent, Hardball), Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          happens(swingHit(Ballgame, Agent, Hardball), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Baseball.e',120).
+axiom(happens(swingHit(Ballgame, Agent, Hardball), Time),
+   
+    [ not(happens(swingMiss(Ballgame, Agent, Hardball),
+                  Time)),
+      happens(swing(Ballgame, Agent, Hardball), Time)
+    ]).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Baseball.e',120).
+
+ /*  happens(swingMiss(Ballgame, Agent, Hardball), Time) :-
+       not(happens(swingHit(Ballgame, Agent, Hardball),
+                   Time)),
+       happens(swing(Ballgame, Agent, Hardball), Time).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Baseball.e',120).
+
+ /*  [not(happens(swingHit(Ballgame, Agent, Hardball), Time)), happens(swing(Ballgame, Agent, Hardball), Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          happens(swingMiss(Ballgame, Agent, Hardball),
+                  Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Baseball.e',120).
+axiom(happens(swingMiss(Ballgame, Agent, Hardball), Time),
+   
+    [ not(happens(swingHit(Ballgame, Agent, Hardball),
+                  Time)),
+      happens(swing(Ballgame, Agent, Hardball), Time)
+    ]).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Baseball.e',120).
+
+ /*  not(happens(swing(Ballgame, Agent, Hardball), Time)) :-
+       not(happens(swingHit(Ballgame, Agent, Hardball),
+                   Time)),
+       not(happens(swingMiss(Ballgame, Agent, Hardball),
+                   Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Baseball.e',120).
+
+ /*  [not(happens(swingHit(Ballgame, Agent, Hardball), Time)), not(happens(swingMiss(Ballgame, Agent, Hardball), Time))] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          not(happens(swing(Ballgame, Agent, Hardball),
+                      Time))).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Baseball.e',120).
+axiom(not(happens(swing(Ballgame, Agent, Hardball), Time)),
+   
+    [ not(happens(swingHit(Ballgame, Agent, Hardball),
+                  Time)),
+      not(happens(swingMiss(Ballgame, Agent, Hardball),
+                  Time))
+    ]).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Baseball.e:123
+% [ballgame,agent,hardball,time]
+% Happens(SwingHit(ballgame,agent,hardball),time) ->
+% !Happens(SwingMiss(ballgame,agent,hardball),time).
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Baseball.e:125
+
+ /*  happens(swingHit(Ballgame, Agent, Hardball), Time) ->
+       not(happens(swingMiss(Ballgame, Agent, Hardball),
+                   Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Baseball.e',125).
+
+ /*  not(happens(swingMiss(Ballgame, Agent, Hardball), Time)) :-
+       happens(swingHit(Ballgame, Agent, Hardball), Time).
+ */
+
+ /*  [happens(swingHit(Ballgame, Agent, Hardball), Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          not(happens(swingMiss(Ballgame, Agent, Hardball),
+                      Time))).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Baseball.e',125).
+axiom(not(happens(swingMiss(Ballgame, Agent, Hardball), Time)),
+    [happens(swingHit(Ballgame, Agent, Hardball), Time)]).
+
+ /*  not(happens(swingHit(Ballgame, Agent, Hardball), Time)) :-
+       happens(swingMiss(Ballgame, Agent, Hardball), Time).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Baseball.e',125).
+
+ /*  [happens(swingMiss(Ballgame, Agent, Hardball), Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          not(happens(swingHit(Ballgame, Agent, Hardball),
+                      Time))).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Baseball.e',125).
+axiom(not(happens(swingHit(Ballgame, Agent, Hardball), Time)),
+    [happens(swingMiss(Ballgame, Agent, Hardball), Time)]).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Baseball.e:127
+% [ballgame,agent,hardball,time]
+% Happens(SwingHit(ballgame,agent,hardball),time) ->
+% Happens(SwingHitFair(ballgame,agent,hardball),time) |
+% Happens(SwingHitFoul(ballgame,agent,hardball),time).
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Baseball.e:130
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Baseball.e',129).
+
+ /*  happens(swingHit(Ballgame, Agent, Hardball), Time) ->
+       (   happens(swingHitFair(Ballgame, Agent, Hardball),
+                   Time)
+       ;   happens(swingHitFoul(Ballgame, Agent, Hardball),
+                   Time)
+       ).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Baseball.e',129).
+
+ /*  happens(swingHitFair(Ballgame, Agent, Hardball), Time) :-
+       not(happens(swingHitFoul(Ballgame, Agent, Hardball),
+                   Time)),
+       happens(swingHit(Ballgame, Agent, Hardball), Time).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Baseball.e',129).
+
+ /*  [not(happens(swingHitFoul(Ballgame, Agent, Hardball), Time)), happens(swingHit(Ballgame, Agent, Hardball), Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          happens(swingHitFair(Ballgame, Agent, Hardball),
+                  Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Baseball.e',129).
+axiom(happens(swingHitFair(Ballgame, Agent, Hardball), Time),
+   
+    [ not(happens(swingHitFoul(Ballgame, Agent, Hardball),
+                  Time)),
+      happens(swingHit(Ballgame, Agent, Hardball), Time)
+    ]).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Baseball.e',129).
+
+ /*  happens(swingHitFoul(Ballgame, Agent, Hardball), Time) :-
+       not(happens(swingHitFair(Ballgame, Agent, Hardball),
+                   Time)),
+       happens(swingHit(Ballgame, Agent, Hardball), Time).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Baseball.e',129).
+
+ /*  [not(happens(swingHitFair(Ballgame, Agent, Hardball), Time)), happens(swingHit(Ballgame, Agent, Hardball), Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          happens(swingHitFoul(Ballgame, Agent, Hardball),
+                  Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Baseball.e',129).
+axiom(happens(swingHitFoul(Ballgame, Agent, Hardball), Time),
+   
+    [ not(happens(swingHitFair(Ballgame, Agent, Hardball),
+                  Time)),
+      happens(swingHit(Ballgame, Agent, Hardball), Time)
+    ]).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Baseball.e',129).
+
+ /*  not(happens(swingHit(Ballgame, Agent, Hardball), Time)) :-
+       not(happens(swingHitFair(Ballgame, Agent, Hardball),
+                   Time)),
+       not(happens(swingHitFoul(Ballgame, Agent, Hardball),
+                   Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Baseball.e',129).
+
+ /*  [not(happens(swingHitFair(Ballgame, Agent, Hardball), Time)), not(happens(swingHitFoul(Ballgame, Agent, Hardball), Time))] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          not(happens(swingHit(Ballgame, Agent, Hardball),
+                      Time))).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Baseball.e',129).
+axiom(not(happens(swingHit(Ballgame, Agent, Hardball), Time)),
+   
+    [ not(happens(swingHitFair(Ballgame, Agent, Hardball),
+                  Time)),
+      not(happens(swingHitFoul(Ballgame, Agent, Hardball),
+                  Time))
+    ]).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Baseball.e:132
+% [ballgame,agent,hardball,time]
+% Happens(SwingHitFair(ballgame,agent,hardball),time) ->
+% !Happens(SwingHitFoul(ballgame,agent,hardball),time).
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Baseball.e:134
+
+ /*  happens(swingHitFair(Ballgame, Agent, Hardball), Time) ->
+       not(happens(swingHitFoul(Ballgame, Agent, Hardball),
+                   Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Baseball.e',134).
+
+ /*  not(happens(swingHitFoul(Ballgame, Agent, Hardball), Time)) :-
+       happens(swingHitFair(Ballgame, Agent, Hardball),
+               Time).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Baseball.e',134).
+
+ /*  [happens(swingHitFair(Ballgame, Agent, Hardball), Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          not(happens(swingHitFoul(Ballgame, Agent, Hardball),
+                      Time))).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Baseball.e',134).
+axiom(not(happens(swingHitFoul(Ballgame, Agent, Hardball), Time)),
+   
+    [ happens(swingHitFair(Ballgame, Agent, Hardball),
+              Time)
+    ]).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Baseball.e',134).
+
+ /*  not(happens(swingHitFair(Ballgame, Agent, Hardball), Time)) :-
+       happens(swingHitFoul(Ballgame, Agent, Hardball),
+               Time).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Baseball.e',134).
+
+ /*  [happens(swingHitFoul(Ballgame, Agent, Hardball), Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          not(happens(swingHitFair(Ballgame, Agent, Hardball),
+                      Time))).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Baseball.e',134).
+axiom(not(happens(swingHitFair(Ballgame, Agent, Hardball), Time)),
+   
+    [ happens(swingHitFoul(Ballgame, Agent, Hardball),
+              Time)
+    ]).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Baseball.e:136
+% [ballgame,agent,hardball,time]
+% Happens(SwingHitFair(ballgame,agent,hardball),time) ->
+% Happens(SwingHitFairFly(ballgame,agent,hardball),time) |
+% Happens(SwingHitFairGround(ballgame,agent,hardball),time).
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Baseball.e:139
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Baseball.e',138).
+
+ /*  happens(swingHitFair(Ballgame, Agent, Hardball), Time) ->
+       (   happens(swingHitFairFly(Ballgame, Agent, Hardball),
+                   Time)
+       ;   happens(swingHitFairGround(Ballgame, Agent, Hardball),
+                   Time)
+       ).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Baseball.e',138).
+
+ /*  happens(swingHitFairFly(Ballgame, Agent, Hardball), Time) :-
+       not(happens(swingHitFairGround(Ballgame, Agent, Hardball),
+                   Time)),
+       happens(swingHitFair(Ballgame, Agent, Hardball),
+               Time).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Baseball.e',138).
+
+ /*  [not(happens(swingHitFairGround(Ballgame, Agent, Hardball), Time)), happens(swingHitFair(Ballgame, Agent, Hardball), Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          happens(swingHitFairFly(Ballgame, Agent, Hardball),
+                  Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Baseball.e',138).
+axiom(happens(swingHitFairFly(Ballgame, Agent, Hardball), Time),
+   
+    [ not(happens(swingHitFairGround(Ballgame,
+                                     Agent,
+                                     Hardball),
+                  Time)),
+      happens(swingHitFair(Ballgame, Agent, Hardball),
+              Time)
+    ]).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Baseball.e',138).
+
+ /*  happens(swingHitFairGround(Ballgame, Agent, Hardball), Time) :-
+       not(happens(swingHitFairFly(Ballgame, Agent, Hardball),
+                   Time)),
+       happens(swingHitFair(Ballgame, Agent, Hardball),
+               Time).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Baseball.e',138).
+
+ /*  [not(happens(swingHitFairFly(Ballgame, Agent, Hardball), Time)), happens(swingHitFair(Ballgame, Agent, Hardball), Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          happens(swingHitFairGround(Ballgame, Agent, Hardball),
+                  Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Baseball.e',138).
+axiom(happens(swingHitFairGround(Ballgame, Agent, Hardball), Time),
+   
+    [ not(happens(swingHitFairFly(Ballgame, Agent, Hardball),
+                  Time)),
+      happens(swingHitFair(Ballgame, Agent, Hardball),
+              Time)
+    ]).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Baseball.e',138).
+
+ /*  not(happens(swingHitFair(Ballgame, Agent, Hardball), Time)) :-
+       not(happens(swingHitFairFly(Ballgame, Agent, Hardball),
+                   Time)),
+       not(happens(swingHitFairGround(Ballgame, Agent, Hardball),
+                   Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Baseball.e',138).
+
+ /*  [not(happens(swingHitFairFly(Ballgame, Agent, Hardball), Time)), not(happens(swingHitFairGround(Ballgame, Agent, Hardball), Time))] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          not(happens(swingHitFair(Ballgame, Agent, Hardball),
+                      Time))).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Baseball.e',138).
+axiom(not(happens(swingHitFair(Ballgame, Agent, Hardball), Time)),
+   
+    [ not(happens(swingHitFairFly(Ballgame, Agent, Hardball),
+                  Time)),
+      not(happens(swingHitFairGround(Ballgame,
+                                     Agent,
+                                     Hardball),
+                  Time))
+    ]).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Baseball.e:141
+% [ballgame,agent,hardball,time]
+% Happens(SwingHitFairFly(ballgame,agent,hardball),time) ->
+% Happens(SwingHitFairGround(ballgame,agent,hardball),time).
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Baseball.e:143
+
+ /*  happens(swingHitFairFly(Ballgame, Agent, Hardball), Time) ->
+       happens(swingHitFairGround(Ballgame, Agent, Hardball),
+               Time).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Baseball.e',143).
+
+ /*  happens(swingHitFairGround(Ballgame, Agent, Hardball), Time) :-
+       happens(swingHitFairFly(Ballgame, Agent, Hardball),
+               Time).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Baseball.e',143).
+
+ /*  [happens(swingHitFairFly(Ballgame, Agent, Hardball), Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          happens(swingHitFairGround(Ballgame, Agent, Hardball),
+                  Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Baseball.e',143).
+axiom(happens(swingHitFairGround(Ballgame, Agent, Hardball), Time),
+   
+    [ happens(swingHitFairFly(Ballgame, Agent, Hardball),
+              Time)
+    ]).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Baseball.e',143).
+
+ /*  not(happens(swingHitFairFly(Ballgame, Agent, Hardball), Time)) :-
+       not(happens(swingHitFairGround(Ballgame, Agent, Hardball),
+                   Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Baseball.e',143).
+
+ /*  [not(happens(swingHitFairGround(Ballgame, Agent, Hardball), Time))] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          not(happens(swingHitFairFly(Ballgame, Agent, Hardball),
+                      Time))).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Baseball.e',143).
+axiom(not(happens(swingHitFairFly(Ballgame, Agent, Hardball), Time)),
+   
+    [ not(happens(swingHitFairGround(Ballgame,
+                                     Agent,
+                                     Hardball),
+                  Time))
+    ]).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Baseball.e:145
+% [ballgame,agent,hardball,homeplate,firstbase,time]
+% Happens(SwingHit(ballgame,agent,hardball),time) &
+% HomeplateOf(ballgame) = homeplate &
+% FirstBaseOf(ballgame) = firstbase ->
+% Happens(RunFromTo(agent,homeplate,firstbase),time).
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Baseball.e:149
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Baseball.e',147).
+
+ /*  happens(swingHit(Ballgame, Agent, Hardball), Time), equals(homeplateOf(Ballgame), Homeplate), equals(firstBaseOf(Ballgame), Firstbase) ->
+       happens(runFromTo(Agent, Homeplate, Firstbase), Time).
+ */
+
+ /*  happens(runFromTo(Agent, Homeplate, Firstbase), Time) :-
+       happens(swingHit(Ballgame, Agent, Hardball), Time),
+       equals(homeplateOf(Ballgame), Homeplate),
+       equals(firstBaseOf(Ballgame), Firstbase).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Baseball.e',147).
+
+ /*  [happens(swingHit(Ballgame, Agent, Hardball), Time), equals(homeplateOf(Ballgame), Homeplate), equals(firstBaseOf(Ballgame), Firstbase)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          happens(runFromTo(Agent, Homeplate, Firstbase),
+                  Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Baseball.e',147).
+axiom(happens(runFromTo(Agent, Homeplate, Firstbase), Time),
+   
+    [ happens(swingHit(Ballgame, Agent, Hardball), Time),
+      equals(homeplateOf(Ballgame), Homeplate),
+      equals(firstBaseOf(Ballgame), Firstbase)
+    ]).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Baseball.e',147).
+
+ /*  not(happens(swingHit(Ballgame, Agent, Hardball), Time)) :-
+       ( equals(homeplateOf(Ballgame), Homeplate),
+         equals(firstBaseOf(Ballgame), Firstbase)
+       ),
+       not(happens(runFromTo(Agent, Homeplate, Firstbase),
+                   Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Baseball.e',147).
+
+ /*  [equals(homeplateOf(Ballgame), Homeplate), equals(firstBaseOf(Ballgame), Firstbase), not(happens(runFromTo(Agent, Homeplate, Firstbase), Time))] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          not(happens(swingHit(Ballgame, Agent, Hardball),
+                      Time))).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Baseball.e',147).
+axiom(not(happens(swingHit(Ballgame, Agent, Hardball), Time)),
+   
+    [ equals(homeplateOf(Ballgame), Homeplate),
+      equals(firstBaseOf(Ballgame), Firstbase),
+      not(happens(runFromTo(Agent, Homeplate, Firstbase),
+                  Time))
+    ]).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Baseball.e:151
+% [ballgame,agent,hardball,homeplate,outfield,time]
+% HomeplateOf(ballgame) = homeplate &
+% OutfieldOf(ballgame) = outfield &
+% Happens(SwingHitFairFly(ballgame,agent,hardball),time) ->
+% Happens(HitFromTo(agent,hardball,homeplate,outfield),time).
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Baseball.e:155
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Baseball.e',153).
+
+ /*  equals(homeplateOf(Ballgame), Homeplate), equals(outfieldOf(Ballgame), Outfield), happens(swingHitFairFly(Ballgame, Agent, Hardball), Time) ->
+       happens(hitFromTo(Agent,
+                         Hardball,
+                         Homeplate,
+                         Outfield),
+               Time).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Baseball.e',153).
+
+ /*  happens(hitFromTo(Agent, Hardball, Homeplate, Outfield), Time) :-
+       equals(homeplateOf(Ballgame), Homeplate),
+       equals(outfieldOf(Ballgame), Outfield),
+       happens(swingHitFairFly(Ballgame, Agent, Hardball),
+               Time).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Baseball.e',153).
+
+ /*  [equals(homeplateOf(Ballgame), Homeplate), equals(outfieldOf(Ballgame), Outfield), happens(swingHitFairFly(Ballgame, Agent, Hardball), Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          happens(hitFromTo(Agent,
+                            Hardball,
+                            Homeplate,
+                            Outfield),
+                  Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Baseball.e',153).
+axiom(happens(hitFromTo(Agent, Hardball, Homeplate, Outfield), Time),
+   
+    [ equals(homeplateOf(Ballgame), Homeplate),
+      equals(outfieldOf(Ballgame), Outfield),
+      happens(swingHitFairFly(Ballgame, Agent, Hardball),
+              Time)
+    ]).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Baseball.e',153).
+
+ /*  not(happens(swingHitFairFly(Ballgame, Agent, Hardball), Time)) :-
+       equals(outfieldOf(Ballgame), Outfield),
+       equals(homeplateOf(Ballgame), Homeplate),
+       not(happens(hitFromTo(Agent,
+                             Hardball,
+                             Homeplate,
+                             Outfield),
+                   Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Baseball.e',153).
+
+ /*  [equals(outfieldOf(Ballgame), Outfield), equals(homeplateOf(Ballgame), Homeplate), not(happens(hitFromTo(Agent, Hardball, Homeplate, Outfield), Time))] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          not(happens(swingHitFairFly(Ballgame, Agent, Hardball),
+                      Time))).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Baseball.e',153).
+axiom(not(happens(swingHitFairFly(Ballgame, Agent, Hardball), Time)),
+   
+    [ equals(outfieldOf(Ballgame), Outfield),
+      equals(homeplateOf(Ballgame), Homeplate),
+      not(happens(hitFromTo(Agent,
+                            Hardball,
+                            Homeplate,
+                            Outfield),
+                  Time))
+    ]).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Baseball.e:157
+%; End of file.

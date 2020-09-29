@@ -1,0 +1,542 @@
+:-include(library('ec_planner/ec_test_incl')).
+:-expects_dialect(pfc).
+% Wed, 01 Apr 2020 20:00:59 GMT
+% From ../decreasoner/ThielscherCircuit1.pel:4
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/Telephone40.e',163).
+
+ /*  loading(load_e_pl,
+   	'/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/ThielscherCircuit1.e').
+ */
+%;
+%; Copyright (c) 2005 IBM Corporation and others.
+%; All rights reserved. This program and the accompanying materials
+%; are made available under the terms of the Common Public License v1.0
+%; which accompanies this distribution, and is available at
+%; http://www.eclipse.org/legal/cpl-v10.html
+%;
+%; Contributors:
+%; IBM - Initial implementation
+%;
+%; @article{Thielscher:1997,
+%;   author = "Michael Thielscher",
+%;   year = "1997",
+%;   title = "Ramification and causality",
+%;   journal = "Artificial Intelligence",
+%;   volume = "89",
+%;   pages = "317--364",
+%; }
+%;
+%; @incollection{Shanahan:1999,
+%;   author = "Shanahan, Murray",
+%;   year = "1999",
+%;   title = "The Event Calculus explained",
+%;   editor = "Michael J. Wooldridge and Manuela M. Veloso",
+%;   booktitle = "Artificial Intelligence Today: Recent Trends and Developments",
+%;   series = "Lecture Notes in Computer Science",
+%;   volume = "1600",
+%;   pages = "409--430",
+%;   address = "Berlin",
+%;   publisher = "Springer",
+%; }
+%;
+%; deduction
+%;
+%; modifications from Shanahan's formulation:
+%; timestamps
+%;
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/ThielscherCircuit1.e:38
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/ThielscherCircuit1.e',39).
+% option renaming off
+:- set_ec_option(renaming, off).
+:- if(is_e_toplevel).
+:- endif.
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/ThielscherCircuit1.e:40
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/ThielscherCircuit1.e',41).
+% load foundations/Root.e
+:- load_e('foundations/Root.e', changed).
+:- if(is_e_toplevel).
+:- endif.
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/ThielscherCircuit1.e:41
+% load foundations/EC.e
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/ThielscherCircuit1.e',41).
+:- load_e('foundations/EC.e', changed).
+:- if(is_e_toplevel).
+:- endif.
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/ThielscherCircuit1.e:42
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/ThielscherCircuit1.e',43).
+% load foundations/ECCausal.e
+:- load_e('foundations/ECCausal.e', changed).
+:- if(is_e_toplevel).
+:- endif.
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/ThielscherCircuit1.e:44
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/ThielscherCircuit1.e',45).
+% event LightOn()
+event(lightOn).
+==> mpred_prop(lightOn,event).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/ThielscherCircuit1.e:45
+% event Close1()
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/ThielscherCircuit1.e',45).
+event(close1).
+==> mpred_prop(close1,event).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/ThielscherCircuit1.e:46
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/ThielscherCircuit1.e',47).
+% event Open2()
+event(open2).
+==> mpred_prop(open2,event).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/ThielscherCircuit1.e:47
+% event CloseRelay()
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/ThielscherCircuit1.e',47).
+event(closeRelay).
+==> mpred_prop(closeRelay,event).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/ThielscherCircuit1.e:49
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/ThielscherCircuit1.e',50).
+% fluent Light()
+fluent(light).
+==> mpred_prop(light,fluent).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/ThielscherCircuit1.e:50
+% fluent Switch1()
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/ThielscherCircuit1.e',50).
+fluent(switch1).
+==> mpred_prop(switch1,fluent).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/ThielscherCircuit1.e:51
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/ThielscherCircuit1.e',52).
+% fluent Switch2()
+fluent(switch2).
+==> mpred_prop(switch2,fluent).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/ThielscherCircuit1.e:52
+% fluent Switch3()
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/ThielscherCircuit1.e',52).
+fluent(switch3).
+==> mpred_prop(switch3,fluent).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/ThielscherCircuit1.e:53
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/ThielscherCircuit1.e',54).
+% fluent Relay()
+fluent(relay).
+==> mpred_prop(relay,fluent).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/ThielscherCircuit1.e:55
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/ThielscherCircuit1.e',56).
+% [time]
+% Stopped(Light(),time) &
+% Initiated(Switch1(),time) &
+% Initiated(Switch2(),time) ->
+% Happens(LightOn(),time).
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/ThielscherCircuit1.e:59
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/ThielscherCircuit1.e',56).
+
+ /*  stopped(light, Time), initiated(switch1, Time), initiated(switch2, Time) ->
+       happens(lightOn, Time).
+ */
+
+ /*  happens(lightOn, Time) :-
+       stopped(light, Time),
+       initiated(switch1, Time),
+       initiated(switch2, Time).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/ThielscherCircuit1.e',56).
+
+ /*  [stopped(light, Time), initiated(switch1, Time), initiated(switch2, Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          happens(lightOn, Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/ThielscherCircuit1.e',56).
+axiom(happens(lightOn, Time),
+   
+    [ stopped(light, Time),
+      initiated(switch1, Time),
+      initiated(switch2, Time)
+    ]).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/ThielscherCircuit1.e',56).
+
+ /*  not(stopped(light, Time)) :-
+       ( initiated(switch1, Time),
+         initiated(switch2, Time)
+       ),
+       not(happens(lightOn, Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/ThielscherCircuit1.e',56).
+
+ /*  [initiated(switch1, Time), initiated(switch2, Time), not(happens(lightOn, Time))] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          not(stopped(light, Time))).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/ThielscherCircuit1.e',56).
+axiom(not(stopped(light, Time)),
+   
+    [ initiated(switch1, Time),
+      initiated(switch2, Time),
+      not(happens(lightOn, Time))
+    ]).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/ThielscherCircuit1.e',56).
+
+ /*  not(initiated(switch1, Time)) :-
+       initiated(switch2, Time),
+       stopped(light, Time),
+       not(happens(lightOn, Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/ThielscherCircuit1.e',56).
+
+ /*  [initiated(switch2, Time), stopped(light, Time), not(happens(lightOn, Time))] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          not(initiated(switch1, Time))).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/ThielscherCircuit1.e',56).
+axiom(not(initiated(switch1, Time)),
+   
+    [ initiated(switch2, Time),
+      stopped(light, Time),
+      not(happens(lightOn, Time))
+    ]).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/ThielscherCircuit1.e',56).
+
+ /*  not(initiated(switch2, Time)) :-
+       initiated(switch1, Time),
+       stopped(light, Time),
+       not(happens(lightOn, Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/ThielscherCircuit1.e',56).
+
+ /*  [initiated(switch1, Time), stopped(light, Time), not(happens(lightOn, Time))] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          not(initiated(switch2, Time))).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/ThielscherCircuit1.e',56).
+axiom(not(initiated(switch2, Time)),
+   
+    [ initiated(switch1, Time),
+      stopped(light, Time),
+      not(happens(lightOn, Time))
+    ]).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/ThielscherCircuit1.e:61
+% [time]
+% Started(Switch2(),time) &
+% Initiated(Relay(),time) ->
+% Happens(Open2(),time).
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/ThielscherCircuit1.e:64
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/ThielscherCircuit1.e',63).
+
+ /*  started(switch2, Time), initiated(relay, Time) ->
+       happens(open2, Time).
+ */
+
+ /*  happens(open2, Time) :-
+       started(switch2, Time),
+       initiated(relay, Time).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/ThielscherCircuit1.e',63).
+
+ /*  [started(switch2, Time), initiated(relay, Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          happens(open2, Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/ThielscherCircuit1.e',63).
+axiom(happens(open2, Time),
+    [started(switch2, Time), initiated(relay, Time)]).
+
+ /*  not(started(switch2, Time)) :-
+       initiated(relay, Time),
+       not(happens(open2, Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/ThielscherCircuit1.e',63).
+
+ /*  [initiated(relay, Time), not(happens(open2, Time))] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          not(started(switch2, Time))).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/ThielscherCircuit1.e',63).
+axiom(not(started(switch2, Time)),
+    [initiated(relay, Time), not(happens(open2, Time))]).
+
+ /*  not(initiated(relay, Time)) :-
+       started(switch2, Time),
+       not(happens(open2, Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/ThielscherCircuit1.e',63).
+
+ /*  [started(switch2, Time), not(happens(open2, Time))] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          not(initiated(relay, Time))).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/ThielscherCircuit1.e',63).
+axiom(not(initiated(relay, Time)),
+    [started(switch2, Time), not(happens(open2, Time))]).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/ThielscherCircuit1.e:66
+% [time]
+% Stopped(Relay(),time) &
+% Initiated(Switch1(),time) &
+% Initiated(Switch3(),time) ->
+% Happens(CloseRelay(),time).
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/ThielscherCircuit1.e:70
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/ThielscherCircuit1.e',68).
+
+ /*  stopped(relay, Time), initiated(switch1, Time), initiated(switch3, Time) ->
+       happens(closeRelay, Time).
+ */
+
+ /*  happens(closeRelay, Time) :-
+       stopped(relay, Time),
+       initiated(switch1, Time),
+       initiated(switch3, Time).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/ThielscherCircuit1.e',68).
+
+ /*  [stopped(relay, Time), initiated(switch1, Time), initiated(switch3, Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          happens(closeRelay, Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/ThielscherCircuit1.e',68).
+axiom(happens(closeRelay, Time),
+   
+    [ stopped(relay, Time),
+      initiated(switch1, Time),
+      initiated(switch3, Time)
+    ]).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/ThielscherCircuit1.e',68).
+
+ /*  not(stopped(relay, Time)) :-
+       ( initiated(switch1, Time),
+         initiated(switch3, Time)
+       ),
+       not(happens(closeRelay, Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/ThielscherCircuit1.e',68).
+
+ /*  [initiated(switch1, Time), initiated(switch3, Time), not(happens(closeRelay, Time))] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          not(stopped(relay, Time))).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/ThielscherCircuit1.e',68).
+axiom(not(stopped(relay, Time)),
+   
+    [ initiated(switch1, Time),
+      initiated(switch3, Time),
+      not(happens(closeRelay, Time))
+    ]).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/ThielscherCircuit1.e',68).
+
+ /*  not(initiated(switch1, Time)) :-
+       initiated(switch3, Time),
+       stopped(relay, Time),
+       not(happens(closeRelay, Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/ThielscherCircuit1.e',68).
+
+ /*  [initiated(switch3, Time), stopped(relay, Time), not(happens(closeRelay, Time))] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          not(initiated(switch1, Time))).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/ThielscherCircuit1.e',68).
+axiom(not(initiated(switch1, Time)),
+   
+    [ initiated(switch3, Time),
+      stopped(relay, Time),
+      not(happens(closeRelay, Time))
+    ]).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/ThielscherCircuit1.e',68).
+
+ /*  not(initiated(switch3, Time)) :-
+       initiated(switch1, Time),
+       stopped(relay, Time),
+       not(happens(closeRelay, Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/ThielscherCircuit1.e',68).
+
+ /*  [initiated(switch1, Time), stopped(relay, Time), not(happens(closeRelay, Time))] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          not(initiated(switch3, Time))).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/ThielscherCircuit1.e',68).
+axiom(not(initiated(switch3, Time)),
+   
+    [ initiated(switch1, Time),
+      stopped(relay, Time),
+      not(happens(closeRelay, Time))
+    ]).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/ThielscherCircuit1.e:72
+% [time]
+ % Initiates(LightOn(),Light(),time).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/ThielscherCircuit1.e',72).
+
+ /*  [] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          initiates(lightOn, light, Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/ThielscherCircuit1.e',72).
+axiom(initiates(lightOn, light, Time),
+    []).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/ThielscherCircuit1.e:74
+% [time]
+ % Terminates(Open2(),Switch2(),time).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/ThielscherCircuit1.e',74).
+
+ /*  [] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          terminates(open2, switch2, Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/ThielscherCircuit1.e',74).
+axiom(terminates(open2, switch2, Time),
+    []).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/ThielscherCircuit1.e:76
+% [time]
+ % Initiates(CloseRelay(),Relay(),time).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/ThielscherCircuit1.e',76).
+
+ /*  [] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          initiates(closeRelay, relay, Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/ThielscherCircuit1.e',76).
+axiom(initiates(closeRelay, relay, Time),
+    []).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/ThielscherCircuit1.e:78
+% [time]
+ % Initiates(Close1(),Switch1(),time).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/ThielscherCircuit1.e',78).
+
+ /*  [] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          initiates(close1, switch1, Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/ThielscherCircuit1.e',78).
+axiom(initiates(close1, switch1, Time),
+    []).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/ThielscherCircuit1.e:80
+% !HoldsAt(Switch1(),0).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/ThielscherCircuit1.e',80).
+
+ /*  [] ->
+       ta(Ta_Param, tvs1=[start], tvs2=[start], holds_at(neg(switch1), start)).
+ */
+axiom(holds_at(neg(switch1), start),
+    []).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/ThielscherCircuit1.e:81
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/ThielscherCircuit1.e',82).
+% HoldsAt(Switch2(),0).
+
+ /*  [] ->
+       ta(Ta_Param, tvs1=[start], tvs2=[start], holds_at(switch2, start)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/ThielscherCircuit1.e',82).
+axiom(holds_at(switch2, start),
+    []).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/ThielscherCircuit1.e:82
+% HoldsAt(Switch3(),0).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/ThielscherCircuit1.e',82).
+
+ /*  [] ->
+       ta(Ta_Param, tvs1=[start], tvs2=[start], holds_at(switch3, start)).
+ */
+axiom(holds_at(switch3, start),
+    []).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/ThielscherCircuit1.e:83
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/ThielscherCircuit1.e',84).
+% !HoldsAt(Relay(),0).
+
+ /*  [] ->
+       ta(Ta_Param, tvs1=[start], tvs2=[start], holds_at(neg(relay), start)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/ThielscherCircuit1.e',84).
+axiom(holds_at(neg(relay), start),
+    []).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/ThielscherCircuit1.e:84
+% !HoldsAt(Light(),0).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/ThielscherCircuit1.e',84).
+
+ /*  [] ->
+       ta(Ta_Param, tvs1=[start], tvs2=[start], holds_at(neg(light), start)).
+ */
+axiom(holds_at(neg(light), start),
+    []).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/ThielscherCircuit1.e:86
+% Happens(Close1(),0).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/ThielscherCircuit1.e',86).
+
+ /*  [] ->
+       ta(Ta_Param, tvs1=[start], tvs2=[start], happens(close1, start)).
+ */
+axiom(happens(close1, start),
+    []).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/ThielscherCircuit1.e:88
+% completion Happens
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/ThielscherCircuit1.e',88).
+==> completion(happens).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/ThielscherCircuit1.e:90
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/ThielscherCircuit1.e',91).
+% range time 0 1
+==> range(time,0,1).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/ThielscherCircuit1.e:91
+% range offset 1 1
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/ThielscherCircuit1.e',91).
+==> range(offset,1,1).
+%; End of file.

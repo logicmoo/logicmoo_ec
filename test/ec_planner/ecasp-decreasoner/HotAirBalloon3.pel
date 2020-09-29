@@ -1,0 +1,477 @@
+:-include(library('ec_planner/ec_test_incl')).
+:-expects_dialect(pfc).
+% Wed, 01 Apr 2020 20:00:48 GMT
+% From ../decreasoner/HotAirBalloon3.pel:4
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/HotAirBalloon20.e',94).
+
+ /*  loading(load_e_pl,
+   	'/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/HotAirBalloon3.e').
+ */
+%;
+%; Copyright (c) 2005 IBM Corporation and others.
+%; All rights reserved. This program and the accompanying materials
+%; are made available under the terms of the Common Public License v1.0
+%; which accompanies this distribution, and is available at
+%; http://www.eclipse.org/legal/cpl-v10.html
+%;
+%; Contributors:
+%; IBM - Initial implementation
+%;
+%; @article{MillerShanahan:1999,
+%;   author = "Rob Miller and Murray Shanahan",
+%;   year = "1999",
+%;   title = "The event calculus in classical logic---\uppercase{A}lternative axiomatisations",
+%;   journal = "Link{\"{o}}ping Electronic Articles in Computer and Information Science",
+%;   volume = "4",
+%;   number = "016",
+%; }
+%;
+%; @book{Mueller:2006,
+%;   author = "Erik T. Mueller",
+%;   year = "2006",
+%;   title = "Commonsense Reasoning",
+%;   address = "San Francisco",
+%;   publisher = "Morgan Kaufmann/Elsevier",
+%; }
+%;
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/HotAirBalloon3.e:29
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/HotAirBalloon3.e',30).
+% option encoding 3
+:- set_ec_option(encoding, 3).
+:- if(is_e_toplevel).
+:- endif.
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/HotAirBalloon3.e:30
+% option trajectory on
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/HotAirBalloon3.e',30).
+:- set_ec_option(trajectory, on).
+:- if(is_e_toplevel).
+:- endif.
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/HotAirBalloon3.e:32
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/HotAirBalloon3.e',33).
+% load foundations/Root.e
+:- load_e('foundations/Root.e', changed).
+:- if(is_e_toplevel).
+:- endif.
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/HotAirBalloon3.e:33
+% load foundations/EC.e
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/HotAirBalloon3.e',33).
+:- load_e('foundations/EC.e', changed).
+:- if(is_e_toplevel).
+:- endif.
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/HotAirBalloon3.e:35
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/HotAirBalloon3.e',36).
+% sort balloon
+==> sort(balloon).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/HotAirBalloon3.e:36
+% sort agent
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/HotAirBalloon3.e',36).
+==> sort(agent).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/HotAirBalloon3.e:37
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/HotAirBalloon3.e',38).
+% sort height: integer
+==> subsort(height,integer).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/HotAirBalloon3.e:39
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/HotAirBalloon3.e',40).
+% agent Nathan
+==> t(agent,nathan).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/HotAirBalloon3.e:40
+% balloon Balloon
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/HotAirBalloon3.e',40).
+==> t(balloon,balloon).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/HotAirBalloon3.e:42
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/HotAirBalloon3.e',43).
+% fluent HeaterOn(balloon)
+fluent(heaterOn(balloon)).
+==> mpred_prop(heaterOn(balloon),fluent).
+==> meta_argtypes(heaterOn(balloon)).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/HotAirBalloon3.e:43
+% fluent Height(balloon,height)
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/HotAirBalloon3.e',43).
+fluent(height(balloon,height)).
+==> mpred_prop(height(balloon,height),fluent).
+==> meta_argtypes(height(balloon,height)).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/HotAirBalloon3.e:44
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/HotAirBalloon3.e',45).
+% noninertial Height
+==> noninertial(height).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/HotAirBalloon3.e:46
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/HotAirBalloon3.e',47).
+% event TurnOnHeater(agent,balloon)
+event(turnOnHeater(agent,balloon)).
+==> mpred_prop(turnOnHeater(agent,balloon),event).
+==> meta_argtypes(turnOnHeater(agent,balloon)).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/HotAirBalloon3.e:47
+% event TurnOffHeater(agent,balloon)
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/HotAirBalloon3.e',47).
+event(turnOffHeater(agent,balloon)).
+==> mpred_prop(turnOffHeater(agent,balloon),event).
+==> meta_argtypes(turnOffHeater(agent,balloon)).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/HotAirBalloon3.e:49
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/HotAirBalloon3.e',50).
+%; Sigma
+% [agent,balloon,time]
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/HotAirBalloon3.e:52
+% Initiates(TurnOnHeater(agent,balloon),HeaterOn(balloon),time).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/HotAirBalloon3.e',52).
+
+ /*  [] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          initiates(turnOnHeater(Agent, Balloon),
+                    heaterOn(Balloon),
+                    Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/HotAirBalloon3.e',52).
+axiom(initiates(turnOnHeater(Agent, Balloon), heaterOn(Balloon), Time),
+    []).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/HotAirBalloon3.e:54
+% [agent,balloon,time]
+% Terminates(TurnOffHeater(agent,balloon),HeaterOn(balloon),time).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/HotAirBalloon3.e',56).
+
+ /*  [] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          terminates(turnOffHeater(Agent, Balloon),
+                     heaterOn(Balloon),
+                     Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/HotAirBalloon3.e',56).
+axiom(terminates(turnOffHeater(Agent, Balloon), heaterOn(Balloon), Time),
+    []).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/HotAirBalloon3.e:57
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/HotAirBalloon3.e',58).
+%; Delta
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/HotAirBalloon3.e:59
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/HotAirBalloon3.e',60).
+% Delta: 
+next_axiom_uses(delta).
+ 
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/HotAirBalloon3.e:59
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/HotAirBalloon3.e',60).
+% Happens(TurnOnHeater(Nathan,Balloon),0).
+
+ /*  [axiom_uses(delta, Axiom_uses_Ret)] ->
+       ta(Ta_Param,
+          tvs1=[start],
+          tvs2=[start],
+          happens(turnOnHeater(nathan, balloon), start)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/HotAirBalloon3.e',60).
+axiom(happens(turnOnHeater(nathan, balloon), start),
+    [axiom_uses(delta, Axiom_uses_Ret)]).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/HotAirBalloon3.e:60
+% Delta: 
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/HotAirBalloon3.e',60).
+next_axiom_uses(delta).
+ 
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/HotAirBalloon3.e:60
+% Happens(TurnOffHeater(Nathan,Balloon),2).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/HotAirBalloon3.e',60).
+
+ /*  [axiom_uses(delta, Axiom_uses_Ret), b(start, Start2), toffset(start, 2, Start2), ignore(start+2==Start2)] ->
+       ta(Ta_Param,
+          tvs1=[start+2],
+          tvs2=[Start2, start],
+          happens(turnOffHeater(nathan, balloon), Start2)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/HotAirBalloon3.e',60).
+axiom(happens(turnOffHeater(nathan, balloon), Start2),
+   
+    [ axiom_uses(delta, Axiom_uses_Ret),
+      b(start, Start2),
+      toffset(start, 2, Start2)
+    ]).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/HotAirBalloon3.e:62
+%; Psi
+% [balloon,height1,height2,time]
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/HotAirBalloon3.e:65
+% HoldsAt(Height(balloon,height1),time) &
+% HoldsAt(Height(balloon,height2),time) ->
+% height1=height2.
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/HotAirBalloon3.e:67
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/HotAirBalloon3.e',65).
+
+ /*  holds_at(height(Balloon, Height1), Time), holds_at(height(Balloon, Height2), Time) ->
+       equals(Height1, Height2).
+ */
+
+ /*  not(holds_at(height(Balloon, Height1), Time)) :-
+       holds_at(height(Balloon, Height2), Time),
+       not(equals(Height1, Height2)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/HotAirBalloon3.e',65).
+
+ /*  [holds_at(height(Balloon, Height2), Time), not(equals(Height1, Height2))] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(neg(height(Balloon, Height1)), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/HotAirBalloon3.e',65).
+axiom(holds_at(neg(height(Balloon, Height1)), Time),
+   
+    [ holds_at(height(Balloon, Height2), Time),
+      not(equals(Height1, Height2))
+    ]).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/HotAirBalloon3.e',65).
+
+ /*  not(holds_at(height(Balloon, Height2), Time)) :-
+       holds_at(height(Balloon, Height1), Time),
+       not(equals(Height1, Height2)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/HotAirBalloon3.e',65).
+
+ /*  [holds_at(height(Balloon, Height1), Time), not(equals(Height1, Height2))] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(neg(height(Balloon, Height2)), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/HotAirBalloon3.e',65).
+axiom(holds_at(neg(height(Balloon, Height2)), Time),
+   
+    [ holds_at(height(Balloon, Height1), Time),
+      not(equals(Height2, Height1))
+    ]).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/HotAirBalloon3.e:69
+%; Pi
+% [balloon,height1,height2,offset,time]
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/HotAirBalloon3.e:72
+% HoldsAt(Height(balloon,height1),time) &
+% height2 = (height1 + offset) ->
+% Trajectory(HeaterOn(balloon),time,Height(balloon,height2),offset).
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/HotAirBalloon3.e:74
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/HotAirBalloon3.e',72).
+
+ /*  holds_at(height(Balloon, Height1), Time), equals(Height2, Height1+Offset) ->
+       trajectory(heaterOn(Balloon),
+                  Time,
+                  height(Balloon, Height2),
+                  Offset).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/HotAirBalloon3.e',72).
+
+ /*  trajectory(heaterOn(Balloon), Time, height(Balloon, Height2), Offset) :-
+       holds_at(height(Balloon, Height1), Time),
+       equals(Height2, Height1+Offset).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/HotAirBalloon3.e',72).
+
+ /*  [holds_at(height(Balloon, Height1), Time), equals(Height2, Height1+Offset)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          trajectory(heaterOn(Balloon),
+                     Time,
+                     height(Balloon, Height2),
+                     Offset)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/HotAirBalloon3.e',72).
+axiom(trajectory(heaterOn(Balloon), Time, height(Balloon, Height2), Offset),
+   
+    [ holds_at(height(Balloon, Height1), Time),
+      equals(Height2, Height1+Offset)
+    ]).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/HotAirBalloon3.e',72).
+
+ /*  not(holds_at(height(Balloon, Height1), Time)) :-
+       equals(Height2, Height1+Offset),
+       not(trajectory(heaterOn(Balloon),
+                      Time,
+                      height(Balloon, Height2),
+                      Offset)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/HotAirBalloon3.e',72).
+
+ /*  [equals(Height2, Height1+Offset), not(trajectory(heaterOn(Balloon), Time, height(Balloon, Height2), Offset))] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(neg(height(Balloon, Height1)), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/HotAirBalloon3.e',72).
+axiom(holds_at(neg(height(Balloon, Height1)), Time),
+   
+    [ equals(Height2, Height1+Offset),
+      not(trajectory(heaterOn(Balloon),
+                     Time,
+                     height(Balloon, Height2),
+                     Offset))
+    ]).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/HotAirBalloon3.e:76
+% [balloon,height1,height2,offset,time]
+% HoldsAt(Height(balloon,height1),time) &
+% height2 = (height1 - offset) ->
+% AntiTrajectory(HeaterOn(balloon),time,Height(balloon,height2),offset).
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/HotAirBalloon3.e:79
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/HotAirBalloon3.e',78).
+
+ /*  holds_at(height(Balloon, Height1), Time), equals(Height2, Height1-Offset) ->
+       antiTrajectory(heaterOn(Balloon),
+                      Time,
+                      height(Balloon, Height2),
+                      Offset).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/HotAirBalloon3.e',78).
+
+ /*  antiTrajectory(heaterOn(Balloon), Time, height(Balloon, Height2), Offset) :-
+       holds_at(height(Balloon, Height1), Time),
+       equals(Height2, Height1-Offset).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/HotAirBalloon3.e',78).
+
+ /*  fix_axiom_head(Time) ->
+       
+       [ antiTrajectory(heaterOn(Balloon),
+                        Time,
+                        height(Balloon, Height2),
+                        Offset),
+          (->),
+         holds_at(antiTrajectory(heaterOn(Balloon),
+                                 Time,
+                                 height(Balloon, Height2),
+                                 Offset),
+                  Time)
+       ].
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/HotAirBalloon3.e',78).
+
+ /*  [holds_at(height(Balloon, Height1), Time), equals(Height2, Height1-Offset)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(antiTrajectory(heaterOn(Balloon),
+                                  Time,
+                                  height(Balloon, Height2),
+                                  Offset),
+                   Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/HotAirBalloon3.e',78).
+axiom(holds_at(antiTrajectory(heaterOn(Balloon), Time, height(Balloon, Height2), Offset), Time),
+   
+    [ holds_at(height(Balloon, Height1), Time),
+      equals(Height2, Height1-Offset)
+    ]).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/HotAirBalloon3.e',78).
+
+ /*  not(holds_at(height(Balloon, Height1), Time)) :-
+       equals(Height2, Height1-Offset),
+       not(antiTrajectory(heaterOn(Balloon),
+                          Time,
+                          height(Balloon, Height2),
+                          Offset)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/HotAirBalloon3.e',78).
+
+ /*  [equals(Height2, Height1-Offset), holds_at(neg(antiTrajectory(heaterOn(Balloon), Time, height(Balloon, Height2), Offset)), Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(neg(height(Balloon, Height1)), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/HotAirBalloon3.e',78).
+axiom(holds_at(neg(height(Balloon, Height1)), Time),
+   
+    [ equals(Height2, Height1-Offset),
+      holds_at(neg(antiTrajectory(heaterOn(Balloon),
+                                  Time,
+                                  height(Balloon, Height2),
+                                  Offset)),
+               Time)
+    ]).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/HotAirBalloon3.e:81
+%; Gamma
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/HotAirBalloon3.e:83
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/HotAirBalloon3.e',84).
+% HoldsAt(Height(Balloon,0),0).
+
+ /*  [] ->
+       ta(Ta_Param,
+          tvs1=[start],
+          tvs2=[start],
+          holds_at(height(balloon, 0), start)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/HotAirBalloon3.e',84).
+axiom(holds_at(height(balloon, 0), start),
+    []).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/HotAirBalloon3.e:85
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/HotAirBalloon3.e',86).
+%; added:
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/HotAirBalloon3.e:86
+% !HoldsAt(HeaterOn(Balloon),0).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/HotAirBalloon3.e',86).
+
+ /*  [] ->
+       ta(Ta_Param,
+          tvs1=[start],
+          tvs2=[start],
+          holds_at(neg(heaterOn(balloon)), start)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/HotAirBalloon3.e',86).
+axiom(holds_at(neg(heaterOn(balloon)), start),
+    []).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/HotAirBalloon3.e:88
+% completion Delta Happens
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/HotAirBalloon3.e',88).
+==> completion(delta).
+==> completion(happens).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/HotAirBalloon3.e:90
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/HotAirBalloon3.e',91).
+% range time 0 3
+==> range(time,0,3).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/HotAirBalloon3.e:91
+% range height 0 2
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/HotAirBalloon3.e',91).
+==> range(height,0,2).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/HotAirBalloon3.e:92
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/decreasoner/HotAirBalloon3.e',93).
+% range offset 1 2
+==> range(offset,1,2).
+%; End of file.

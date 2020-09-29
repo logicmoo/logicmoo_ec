@@ -1,0 +1,1627 @@
+:-include(library('ec_planner/ec_test_incl')).
+:-expects_dialect(pfc).
+% Wed, 01 Apr 2020 20:02:12 GMT
+% From ../ecnet/Restaurant.pel:4
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RepRest.e',664).
+
+ /*  loading(load_e_pl,
+   	'/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Restaurant.e').
+ */
+%;
+%; Copyright (c) 2005 IBM Corporation and others.
+%; All rights reserved. This program and the accompanying materials
+%; are made available under the terms of the Common Public License v1.0
+%; which accompanies this distribution, and is available at
+%; http://www.eclipse.org/legal/cpl-v10.html
+%;
+%; Contributors:
+%; IBM - Initial implementation
+%;
+
+% sort restaurant: script
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Restaurant.e',11).
+==> subsort(restaurant,script).
+
+% sort waiter: agent
+==> subsort(waiter,agent).
+
+% sort cook: agent
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Restaurant.e',13).
+==> subsort(cook,agent).
+
+% function BillOf(restaurant): bill
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Restaurant.e',15).
+function(billOf(restaurant)).
+==> mpred_prop(billOf(restaurant),function).
+==> meta_argtypes(billOf(restaurant)).
+predicate(bill(restaurant,bill)).
+==> mpred_prop(bill(restaurant,bill),predicate).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Restaurant.e',15).
+==> meta_argtypes(bill(restaurant,bill)).
+
+ /*  fix_axiom_head(Time) ->
+       
+       [ functional_predicate(billOf, bill),
+          (->),
+         holds_at(functional_predicate(billOf, bill), Time)
+       ].
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Restaurant.e',15).
+
+ /*  [] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(functional_predicate(billOf, bill), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Restaurant.e',15).
+axiom(holds_at(functional_predicate(billOf, bill), Time),
+    []).
+==> resultIsa(billOf,bill).
+
+% function CookOf(restaurant): cook
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Restaurant.e',15).
+function(cookOf(restaurant)).
+==> mpred_prop(cookOf(restaurant),function).
+==> meta_argtypes(cookOf(restaurant)).
+predicate(cook(restaurant,cook)).
+==> mpred_prop(cook(restaurant,cook),predicate).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Restaurant.e',15).
+==> meta_argtypes(cook(restaurant,cook)).
+
+ /*  fix_axiom_head(Time) ->
+       
+       [ functional_predicate(cookOf, cook),
+          (->),
+         holds_at(functional_predicate(cookOf, cook), Time)
+       ].
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Restaurant.e',15).
+
+ /*  [] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(functional_predicate(cookOf, cook), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Restaurant.e',15).
+axiom(holds_at(functional_predicate(cookOf, cook), Time),
+    []).
+==> resultIsa(cookOf,cook).
+
+% function TableOf(restaurant): table
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Restaurant.e',17).
+function(tableOf(restaurant)).
+==> mpred_prop(tableOf(restaurant),function).
+==> meta_argtypes(tableOf(restaurant)).
+predicate(table(restaurant,table)).
+==> mpred_prop(table(restaurant,table),predicate).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Restaurant.e',17).
+==> meta_argtypes(table(restaurant,table)).
+
+ /*  fix_axiom_head(Time) ->
+       
+       [ functional_predicate(tableOf, table),
+          (->),
+         holds_at(functional_predicate(tableOf, table), Time)
+       ].
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Restaurant.e',17).
+
+ /*  [] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(functional_predicate(tableOf, table), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Restaurant.e',17).
+axiom(holds_at(functional_predicate(tableOf, table), Time),
+    []).
+==> resultIsa(tableOf,table).
+
+% function WaiterOf(restaurant): waiter
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Restaurant.e',17).
+function(waiterOf(restaurant)).
+==> mpred_prop(waiterOf(restaurant),function).
+==> meta_argtypes(waiterOf(restaurant)).
+predicate(waiter(restaurant,waiter)).
+==> mpred_prop(waiter(restaurant,waiter),predicate).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Restaurant.e',17).
+==> meta_argtypes(waiter(restaurant,waiter)).
+
+ /*  fix_axiom_head(Time) ->
+       
+       [ functional_predicate(waiterOf, waiter),
+          (->),
+         holds_at(functional_predicate(waiterOf, waiter), Time)
+       ].
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Restaurant.e',17).
+
+ /*  [] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(functional_predicate(waiterOf, waiter), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Restaurant.e',17).
+axiom(holds_at(functional_predicate(waiterOf, waiter), Time),
+    []).
+==> resultIsa(waiterOf,waiter).
+
+% function KitchenDoorOf(restaurant): door
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Restaurant.e',19).
+function(kitchenDoorOf(restaurant)).
+==> mpred_prop(kitchenDoorOf(restaurant),function).
+==> meta_argtypes(kitchenDoorOf(restaurant)).
+predicate(kitchenDoor(restaurant,door)).
+==> mpred_prop(kitchenDoor(restaurant,door),predicate).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Restaurant.e',19).
+==> meta_argtypes(kitchenDoor(restaurant,door)).
+
+ /*  fix_axiom_head(Time) ->
+       
+       [ functional_predicate(kitchenDoorOf, kitchenDoor),
+          (->),
+         holds_at(functional_predicate(kitchenDoorOf, kitchenDoor), Time)
+       ].
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Restaurant.e',19).
+
+ /*  [] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(functional_predicate(kitchenDoorOf, kitchenDoor), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Restaurant.e',19).
+axiom(holds_at(functional_predicate(kitchenDoorOf, kitchenDoor), Time),
+    []).
+==> resultIsa(kitchenDoorOf,door).
+%; awaiting customer/waiter has set down bill on customer's table
+
+% fluent BeWaiter0(waiter)
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Restaurant.e',21).
+fluent(beWaiter0(waiter)).
+==> mpred_prop(beWaiter0(waiter),fluent).
+==> meta_argtypes(beWaiter0(waiter)).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Restaurant.e:23
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Restaurant.e',24).
+%; awaiting customer order
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Restaurant.e:24
+% fluent BeWaiter1(waiter)
+fluent(beWaiter1(waiter)).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Restaurant.e',24).
+==> mpred_prop(beWaiter1(waiter),fluent).
+==> meta_argtypes(beWaiter1(waiter)).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Restaurant.e:26
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Restaurant.e',27).
+%; has customer order
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Restaurant.e:27
+% fluent BeWaiter2(waiter)
+fluent(beWaiter2(waiter)).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Restaurant.e',27).
+==> mpred_prop(beWaiter2(waiter),fluent).
+==> meta_argtypes(beWaiter2(waiter)).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Restaurant.e:29
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Restaurant.e',30).
+%; in kitchen
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Restaurant.e:30
+% fluent BeWaiter3(waiter)
+fluent(beWaiter3(waiter)).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Restaurant.e',30).
+==> mpred_prop(beWaiter3(waiter),fluent).
+==> meta_argtypes(beWaiter3(waiter)).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Restaurant.e:32
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Restaurant.e',33).
+%; awaiting preparation of order
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Restaurant.e:33
+% fluent BeWaiter4(waiter)
+fluent(beWaiter4(waiter)).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Restaurant.e',33).
+==> mpred_prop(beWaiter4(waiter),fluent).
+==> meta_argtypes(beWaiter4(waiter)).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Restaurant.e:35
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Restaurant.e',36).
+%; has order
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Restaurant.e:36
+% fluent BeWaiter5(waiter)
+fluent(beWaiter5(waiter)).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Restaurant.e',36).
+==> mpred_prop(beWaiter5(waiter),fluent).
+==> meta_argtypes(beWaiter5(waiter)).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Restaurant.e:38
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Restaurant.e',39).
+%; back in dining room
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Restaurant.e:39
+% fluent BeWaiter6(waiter)
+fluent(beWaiter6(waiter)).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Restaurant.e',39).
+==> mpred_prop(beWaiter6(waiter),fluent).
+==> meta_argtypes(beWaiter6(waiter)).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Restaurant.e:41
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Restaurant.e',42).
+%; order delivered to customer (can ask if all is OK)
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Restaurant.e:42
+% fluent BeWaiter7(waiter)
+fluent(beWaiter7(waiter)).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Restaurant.e',42).
+==> mpred_prop(beWaiter7(waiter),fluent).
+==> meta_argtypes(beWaiter7(waiter)).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Restaurant.e:44
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Restaurant.e',45).
+%; customer has requested bill
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Restaurant.e:45
+% fluent BeWaiter8(waiter)
+fluent(beWaiter8(waiter)).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Restaurant.e',45).
+==> mpred_prop(beWaiter8(waiter),fluent).
+==> meta_argtypes(beWaiter8(waiter)).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Restaurant.e:47
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Restaurant.e',48).
+%; waiter is holding bill
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Restaurant.e:48
+% fluent BeWaiter9(waiter)
+fluent(beWaiter9(waiter)).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Restaurant.e',48).
+==> mpred_prop(beWaiter9(waiter),fluent).
+==> meta_argtypes(beWaiter9(waiter)).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Restaurant.e:50
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Restaurant.e',51).
+% xor BeWaiter0, BeWaiter1, BeWaiter2, BeWaiter3, BeWaiter4, BeWaiter5, BeWaiter6, BeWaiter7, BeWaiter8, BeWaiter9
+==> xor([ beWaiter0,
+	  beWaiter1,
+	  beWaiter2,
+	  beWaiter3,
+	  beWaiter4,
+	  beWaiter5,
+	  beWaiter6,
+	  beWaiter7,
+	  beWaiter8,
+	  beWaiter9
+	]).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Restaurant.e:52
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Restaurant.e',53).
+% [waiter,agent,time]
+% HoldsAt(BeWaiter0(waiter),time) ->
+% Terminates(Greet(waiter,agent),
+%            BeWaiter0(waiter),
+%            time).
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Restaurant.e:56
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Restaurant.e',53).
+
+ /*  [holds_at(beWaiter0(Waiter), Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          terminates(greet(Waiter, Agent),
+                     beWaiter0(Waiter),
+                     Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Restaurant.e',53).
+axiom(terminates(greet(Waiter, Agent), beWaiter0(Waiter), Time),
+    [holds_at(beWaiter0(Waiter), Time)]).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Restaurant.e:58
+% [waiter,agent,time]
+% HoldsAt(BeWaiter0(waiter),time) ->
+% Initiates(Greet(waiter,agent),
+%           BeWaiter1(waiter),
+%           time).
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Restaurant.e:62
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Restaurant.e',60).
+
+ /*  [holds_at(beWaiter0(Waiter), Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          initiates(greet(Waiter, Agent),
+                    beWaiter1(Waiter),
+                    Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Restaurant.e',60).
+axiom(initiates(greet(Waiter, Agent), beWaiter1(Waiter), Time),
+    [holds_at(beWaiter0(Waiter), Time)]).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Restaurant.e:64
+% [waiter,agent,food,time]
+% HoldsAt(BeWaiter1(waiter),time) ->
+% Terminates(Order(agent,waiter,food),
+%            BeWaiter1(waiter),
+%            time).
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Restaurant.e:68
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Restaurant.e',66).
+
+ /*  [holds_at(beWaiter1(Waiter), Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          terminates(order(Agent, Waiter, Food),
+                     beWaiter1(Waiter),
+                     Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Restaurant.e',66).
+axiom(terminates(order(Agent, Waiter, Food), beWaiter1(Waiter), Time),
+    [holds_at(beWaiter1(Waiter), Time)]).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Restaurant.e:70
+% [waiter,agent,food,time]
+% HoldsAt(BeWaiter1(waiter),time) ->
+% Initiates(Order(agent,waiter,food),
+%           BeWaiter2(waiter),
+%           time).
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Restaurant.e:74
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Restaurant.e',72).
+
+ /*  [holds_at(beWaiter1(Waiter), Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          initiates(order(Agent, Waiter, Food),
+                    beWaiter2(Waiter),
+                    Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Restaurant.e',72).
+axiom(initiates(order(Agent, Waiter, Food), beWaiter2(Waiter), Time),
+    [holds_at(beWaiter1(Waiter), Time)]).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Restaurant.e:76
+% [restaurant,waiter,time]
+% WaiterOf(restaurant)=waiter &
+% HoldsAt(BeWaiter2(waiter),time) ->
+% Happens(WalkThroughDoor12(waiter,KitchenDoorOf(restaurant)),time).
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Restaurant.e:79
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Restaurant.e',78).
+
+ /*  equals(waiterOf(Restaurant), Waiter), holds_at(beWaiter2(Waiter), Time) ->
+       happens(walkThroughDoor12(Waiter, kitchenDoorOf(Restaurant)),
+               Time).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Restaurant.e',78).
+
+ /*  happens(walkThroughDoor12(Waiter, kitchenDoorOf(Restaurant)), Time) :-
+       equals(waiterOf(Restaurant), Waiter),
+       holds_at(beWaiter2(Waiter), Time).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Restaurant.e',78).
+
+ /*  [equals(waiterOf(Restaurant), Waiter), holds_at(beWaiter2(Waiter), Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          happens(walkThroughDoor12(Waiter, kitchenDoorOf(Restaurant)),
+                  Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Restaurant.e',78).
+axiom(happens(walkThroughDoor12(Waiter, kitchenDoorOf(Restaurant)), Time),
+   
+    [ equals(waiterOf(Restaurant), Waiter),
+      holds_at(beWaiter2(Waiter), Time)
+    ]).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Restaurant.e',78).
+
+ /*  not(holds_at(beWaiter2(Waiter), Time)) :-
+       equals(waiterOf(Restaurant), Waiter),
+       not(happens(walkThroughDoor12(Waiter,
+                                     kitchenDoorOf(Restaurant)),
+                   Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Restaurant.e',78).
+
+ /*  [equals(waiterOf(Restaurant), Waiter), not(happens(walkThroughDoor12(Waiter, kitchenDoorOf(Restaurant)), Time))] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(neg(beWaiter2(Waiter)), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Restaurant.e',78).
+axiom(holds_at(neg(beWaiter2(Waiter)), Time),
+   
+    [ equals(waiterOf(Restaurant), Waiter),
+      not(happens(walkThroughDoor12(Waiter,
+                                    kitchenDoorOf(Restaurant)),
+                  Time))
+    ]).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Restaurant.e:81
+% [restaurant,waiter,door,time]
+% HoldsAt(BeWaiter2(waiter),time) &
+% WaiterOf(restaurant)=waiter &
+% KitchenDoorOf(restaurant)=door ->
+% Terminates(WalkThroughDoor12(waiter,door),
+%            BeWaiter2(waiter),
+%            time).
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Restaurant.e:87
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Restaurant.e',83).
+
+ /*  [holds_at(beWaiter2(Waiter), Time), equals(waiterOf(Restaurant), Waiter), equals(kitchenDoorOf(Restaurant), Door)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          terminates(walkThroughDoor12(Waiter, Door),
+                     beWaiter2(Waiter),
+                     Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Restaurant.e',83).
+axiom(terminates(walkThroughDoor12(Waiter, Door), beWaiter2(Waiter), Time),
+   
+    [ holds_at(beWaiter2(Waiter), Time),
+      equals(waiterOf(Restaurant), Waiter),
+      equals(kitchenDoorOf(Restaurant), Door)
+    ]).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Restaurant.e:89
+% [restaurant,waiter,door,time]
+% HoldsAt(BeWaiter2(waiter),time) &
+% WaiterOf(restaurant)=waiter &
+% KitchenDoorOf(restaurant)=door ->
+% Initiates(WalkThroughDoor12(waiter,door),
+%           BeWaiter3(waiter),
+%           time).
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Restaurant.e:95
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Restaurant.e',91).
+
+ /*  [holds_at(beWaiter2(Waiter), Time), equals(waiterOf(Restaurant), Waiter), equals(kitchenDoorOf(Restaurant), Door)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          initiates(walkThroughDoor12(Waiter, Door),
+                    beWaiter3(Waiter),
+                    Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Restaurant.e',91).
+axiom(initiates(walkThroughDoor12(Waiter, Door), beWaiter3(Waiter), Time),
+   
+    [ holds_at(beWaiter2(Waiter), Time),
+      equals(waiterOf(Restaurant), Waiter),
+      equals(kitchenDoorOf(Restaurant), Door)
+    ]).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Restaurant.e:97
+% [restaurant,food,time]
+% HoldsAt(BeWaiter3(WaiterOf(restaurant)),time) &
+% ({agent} HoldsAt(KnowOrder(WaiterOf(restaurant),agent,food),time)) ->
+% Happens(Order(WaiterOf(restaurant),CookOf(restaurant),food),time).
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Restaurant.e:100
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Restaurant.e',99).
+
+ /*  holds_at(beWaiter3(waiterOf(Restaurant)), Time), exists([Agent], holds_at(knowOrder(waiterOf(Restaurant), Agent, Food), Time)) ->
+       happens(order(waiterOf(Restaurant),
+                     cookOf(Restaurant),
+                     Food),
+               Time).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Restaurant.e',99).
+
+ /*  happens(order(waiterOf(Restaurant), cookOf(Restaurant), Food), Time) :-
+       holds_at(beWaiter3(waiterOf(Restaurant)), Time),
+       holds_at(knowOrder(waiterOf(Restaurant), Agent, Food),
+                Time).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Restaurant.e',99).
+
+ /*  [holds_at(beWaiter3(waiterOf(Restaurant)), Time), holds_at(knowOrder(waiterOf(Restaurant), Agent, Food), Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          happens(order(waiterOf(Restaurant),
+                        cookOf(Restaurant),
+                        Food),
+                  Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Restaurant.e',99).
+axiom(happens(order(waiterOf(Restaurant), cookOf(Restaurant), Food), Time),
+   
+    [ holds_at(beWaiter3(waiterOf(Restaurant)), Time),
+      holds_at(knowOrder(waiterOf(Restaurant), Agent, Food),
+               Time)
+    ]).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Restaurant.e',99).
+
+ /*  not(holds_at(beWaiter3(waiterOf(Restaurant)), Time)) :-
+       holds_at(knowOrder(waiterOf(Restaurant), Agent, Food),
+                Time),
+       not(happens(order(waiterOf(Restaurant),
+                         cookOf(Restaurant),
+                         Food),
+                   Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Restaurant.e',99).
+
+ /*  [holds_at(knowOrder(waiterOf(Restaurant), Agent, Food), Time), not(happens(order(waiterOf(Restaurant), cookOf(Restaurant), Food), Time))] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(neg(beWaiter3(waiterOf(Restaurant))), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Restaurant.e',99).
+axiom(holds_at(neg(beWaiter3(waiterOf(Restaurant))), Time),
+   
+    [ holds_at(knowOrder(waiterOf(Restaurant), Agent, Food),
+               Time),
+      not(happens(order(waiterOf(Restaurant),
+                        cookOf(Restaurant),
+                        Food),
+                  Time))
+    ]).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Restaurant.e',99).
+
+ /*  not(holds_at(knowOrder(waiterOf(Restaurant), Agent, Food), Time)) :-
+       holds_at(beWaiter3(waiterOf(Restaurant)), Time),
+       not(happens(order(waiterOf(Restaurant),
+                         cookOf(Restaurant),
+                         Food),
+                   Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Restaurant.e',99).
+
+ /*  [holds_at(beWaiter3(waiterOf(Restaurant)), Time), not(happens(order(waiterOf(Restaurant), cookOf(Restaurant), Food), Time))] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(neg(knowOrder(waiterOf(Restaurant),
+                                 Agent,
+                                 Food)),
+                   Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Restaurant.e',99).
+axiom(holds_at(neg(knowOrder(waiterOf(Restaurant), Agent, Food)), Time),
+   
+    [ holds_at(beWaiter3(waiterOf(Restaurant)), Time),
+      not(happens(order(waiterOf(Restaurant),
+                        cookOf(Restaurant),
+                        Food),
+                  Time))
+    ]).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Restaurant.e:102
+% [restaurant,waiter,cook,food,time]
+% WaiterOf(restaurant)=waiter &
+% CookOf(restaurant)=cook &
+% HoldsAt(BeWaiter3(waiter),time) ->
+% Terminates(Order(waiter,cook,food),
+%            BeWaiter3(waiter),
+%            time).
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Restaurant.e:108
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Restaurant.e',104).
+
+ /*  [equals(waiterOf(Restaurant), Waiter), equals(cookOf(Restaurant), Cook), holds_at(beWaiter3(Waiter), Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          terminates(order(Waiter, Cook, Food),
+                     beWaiter3(Waiter),
+                     Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Restaurant.e',104).
+axiom(terminates(order(Waiter, Cook, Food), beWaiter3(Waiter), Time),
+   
+    [ equals(waiterOf(Restaurant), Waiter),
+      equals(cookOf(Restaurant), Cook),
+      holds_at(beWaiter3(Waiter), Time)
+    ]).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Restaurant.e:110
+% [restaurant,waiter,cook,food,time]
+% WaiterOf(restaurant)=waiter &
+% CookOf(restaurant)=cook &
+% HoldsAt(BeWaiter3(waiter),time) ->
+% Initiates(Order(waiter,cook,food),
+%           BeWaiter4(waiter),
+%           time).
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Restaurant.e:116
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Restaurant.e',112).
+
+ /*  [equals(waiterOf(Restaurant), Waiter), equals(cookOf(Restaurant), Cook), holds_at(beWaiter3(Waiter), Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          initiates(order(Waiter, Cook, Food),
+                    beWaiter4(Waiter),
+                    Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Restaurant.e',112).
+axiom(initiates(order(Waiter, Cook, Food), beWaiter4(Waiter), Time),
+   
+    [ equals(waiterOf(Restaurant), Waiter),
+      equals(cookOf(Restaurant), Cook),
+      holds_at(beWaiter3(Waiter), Time)
+    ]).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Restaurant.e:118
+% [waiter,food,time]
+% HoldsAt(BeWaiter4(waiter),time) &
+% ({agent} HoldsAt(KnowOrder(waiter,agent,food),time)) &
+% HoldsAt(FoodPrepared(food),time) ->
+% Happens(PickUp(waiter,food),time).
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Restaurant.e:122
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Restaurant.e',120).
+
+ /*  holds_at(beWaiter4(Waiter), Time), exists([Agent], holds_at(knowOrder(Waiter, Agent, Food), Time)), holds_at(foodPrepared(Food), Time) ->
+       happens(pickUp(Waiter, Food), Time).
+ */
+
+ /*  happens(pickUp(Waiter, Food), Time) :-
+       holds_at(beWaiter4(Waiter), Time),
+       holds_at(knowOrder(Waiter, Agent, Food), Time),
+       holds_at(foodPrepared(Food), Time).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Restaurant.e',120).
+
+ /*  [holds_at(beWaiter4(Waiter), Time), holds_at(knowOrder(Waiter, Agent, Food), Time), holds_at(foodPrepared(Food), Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          happens(pickUp(Waiter, Food), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Restaurant.e',120).
+axiom(happens(pickUp(Waiter, Food), Time),
+   
+    [ holds_at(beWaiter4(Waiter), Time),
+      holds_at(knowOrder(Waiter, Agent, Food), Time),
+      holds_at(foodPrepared(Food), Time)
+    ]).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Restaurant.e',120).
+
+ /*  not(holds_at(beWaiter4(Waiter), Time)) :-
+       ( holds_at(knowOrder(Waiter, Agent, Food), Time),
+         holds_at(foodPrepared(Food), Time)
+       ),
+       not(happens(pickUp(Waiter, Food), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Restaurant.e',120).
+
+ /*  [holds_at(knowOrder(Waiter, Agent, Food), Time), holds_at(foodPrepared(Food), Time), not(happens(pickUp(Waiter, Food), Time))] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(neg(beWaiter4(Waiter)), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Restaurant.e',120).
+axiom(holds_at(neg(beWaiter4(Waiter)), Time),
+   
+    [ holds_at(knowOrder(Waiter, Agent, Food), Time),
+      holds_at(foodPrepared(Food), Time),
+      not(happens(pickUp(Waiter, Food), Time))
+    ]).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Restaurant.e',120).
+
+ /*  not(holds_at(knowOrder(Waiter, Agent, Food), Time)) :-
+       holds_at(foodPrepared(Food), Time),
+       holds_at(beWaiter4(Waiter), Time),
+       not(happens(pickUp(Waiter, Food), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Restaurant.e',120).
+
+ /*  [holds_at(foodPrepared(Food), Time), holds_at(beWaiter4(Waiter), Time), not(happens(pickUp(Waiter, Food), Time))] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(neg(knowOrder(Waiter, Agent, Food)),
+                   Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Restaurant.e',120).
+axiom(holds_at(neg(knowOrder(Waiter, Agent, Food)), Time),
+   
+    [ holds_at(foodPrepared(Food), Time),
+      holds_at(beWaiter4(Waiter), Time),
+      not(happens(pickUp(Waiter, Food), Time))
+    ]).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Restaurant.e',120).
+
+ /*  not(holds_at(foodPrepared(Food), Time)) :-
+       holds_at(knowOrder(Waiter, Agent, Food), Time),
+       holds_at(beWaiter4(Waiter), Time),
+       not(happens(pickUp(Waiter, Food), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Restaurant.e',120).
+
+ /*  [holds_at(knowOrder(Waiter, Agent, Food), Time), holds_at(beWaiter4(Waiter), Time), not(happens(pickUp(Waiter, Food), Time))] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(neg(foodPrepared(Food)), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Restaurant.e',120).
+axiom(holds_at(neg(foodPrepared(Food)), Time),
+   
+    [ holds_at(knowOrder(Waiter, Agent, Food), Time),
+      holds_at(beWaiter4(Waiter), Time),
+      not(happens(pickUp(Waiter, Food), Time))
+    ]).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Restaurant.e:124
+% [waiter,food,time]
+% HoldsAt(BeWaiter4(waiter),time) &
+% ({agent} HoldsAt(KnowOrder(waiter,agent,food),time)) ->
+% Terminates(PickUp(waiter,food),
+%            BeWaiter4(waiter),
+%            time).
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Restaurant.e:129
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Restaurant.e',126).
+
+ /*  [holds_at(beWaiter4(Waiter), Time), holds_at(knowOrder(Waiter, Agent, Food), Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          terminates(pickUp(Waiter, Food),
+                     beWaiter4(Waiter),
+                     Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Restaurant.e',126).
+axiom(terminates(pickUp(Waiter, Food), beWaiter4(Waiter), Time),
+   
+    [ holds_at(beWaiter4(Waiter), Time),
+      holds_at(knowOrder(Waiter, Agent, Food), Time)
+    ]).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Restaurant.e:131
+% [waiter,food,time]
+% HoldsAt(BeWaiter4(waiter),time) &
+% ({agent} HoldsAt(KnowOrder(waiter,agent,food),time)) ->
+% Initiates(PickUp(waiter,food),
+%           BeWaiter5(waiter),
+%           time).
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Restaurant.e:136
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Restaurant.e',133).
+
+ /*  [holds_at(beWaiter4(Waiter), Time), holds_at(knowOrder(Waiter, Agent, Food), Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          initiates(pickUp(Waiter, Food),
+                    beWaiter5(Waiter),
+                    Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Restaurant.e',133).
+axiom(initiates(pickUp(Waiter, Food), beWaiter5(Waiter), Time),
+   
+    [ holds_at(beWaiter4(Waiter), Time),
+      holds_at(knowOrder(Waiter, Agent, Food), Time)
+    ]).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Restaurant.e:138
+% [restaurant,waiter,time]
+% WaiterOf(restaurant)=waiter &
+% HoldsAt(BeWaiter5(waiter),time) ->
+% Happens(WalkThroughDoor21(waiter,KitchenDoorOf(restaurant)),time).
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Restaurant.e:141
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Restaurant.e',140).
+
+ /*  equals(waiterOf(Restaurant), Waiter), holds_at(beWaiter5(Waiter), Time) ->
+       happens(walkThroughDoor21(Waiter, kitchenDoorOf(Restaurant)),
+               Time).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Restaurant.e',140).
+
+ /*  happens(walkThroughDoor21(Waiter, kitchenDoorOf(Restaurant)), Time) :-
+       equals(waiterOf(Restaurant), Waiter),
+       holds_at(beWaiter5(Waiter), Time).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Restaurant.e',140).
+
+ /*  [equals(waiterOf(Restaurant), Waiter), holds_at(beWaiter5(Waiter), Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          happens(walkThroughDoor21(Waiter, kitchenDoorOf(Restaurant)),
+                  Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Restaurant.e',140).
+axiom(happens(walkThroughDoor21(Waiter, kitchenDoorOf(Restaurant)), Time),
+   
+    [ equals(waiterOf(Restaurant), Waiter),
+      holds_at(beWaiter5(Waiter), Time)
+    ]).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Restaurant.e',140).
+
+ /*  not(holds_at(beWaiter5(Waiter), Time)) :-
+       equals(waiterOf(Restaurant), Waiter),
+       not(happens(walkThroughDoor21(Waiter,
+                                     kitchenDoorOf(Restaurant)),
+                   Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Restaurant.e',140).
+
+ /*  [equals(waiterOf(Restaurant), Waiter), not(happens(walkThroughDoor21(Waiter, kitchenDoorOf(Restaurant)), Time))] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(neg(beWaiter5(Waiter)), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Restaurant.e',140).
+axiom(holds_at(neg(beWaiter5(Waiter)), Time),
+   
+    [ equals(waiterOf(Restaurant), Waiter),
+      not(happens(walkThroughDoor21(Waiter,
+                                    kitchenDoorOf(Restaurant)),
+                  Time))
+    ]).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Restaurant.e:143
+% [restaurant,waiter,door,time]
+% HoldsAt(BeWaiter5(waiter),time) &
+% WaiterOf(restaurant)=waiter &
+% KitchenDoorOf(restaurant)=door ->
+% Terminates(WalkThroughDoor21(waiter,door),
+%            BeWaiter5(waiter),
+%            time).
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Restaurant.e:149
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Restaurant.e',145).
+
+ /*  [holds_at(beWaiter5(Waiter), Time), equals(waiterOf(Restaurant), Waiter), equals(kitchenDoorOf(Restaurant), Door)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          terminates(walkThroughDoor21(Waiter, Door),
+                     beWaiter5(Waiter),
+                     Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Restaurant.e',145).
+axiom(terminates(walkThroughDoor21(Waiter, Door), beWaiter5(Waiter), Time),
+   
+    [ holds_at(beWaiter5(Waiter), Time),
+      equals(waiterOf(Restaurant), Waiter),
+      equals(kitchenDoorOf(Restaurant), Door)
+    ]).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Restaurant.e:151
+% [restaurant,waiter,door,time]
+% HoldsAt(BeWaiter5(waiter),time) &
+% WaiterOf(restaurant)=waiter &
+% KitchenDoorOf(restaurant)=door ->
+% Initiates(WalkThroughDoor21(waiter,door),
+%           BeWaiter6(waiter),
+%           time).
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Restaurant.e:157
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Restaurant.e',153).
+
+ /*  [holds_at(beWaiter5(Waiter), Time), equals(waiterOf(Restaurant), Waiter), equals(kitchenDoorOf(Restaurant), Door)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          initiates(walkThroughDoor21(Waiter, Door),
+                    beWaiter6(Waiter),
+                    Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Restaurant.e',153).
+axiom(initiates(walkThroughDoor21(Waiter, Door), beWaiter6(Waiter), Time),
+   
+    [ holds_at(beWaiter5(Waiter), Time),
+      equals(waiterOf(Restaurant), Waiter),
+      equals(kitchenDoorOf(Restaurant), Door)
+    ]).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Restaurant.e:159
+% [restaurant,waiter,table,food,time]
+% WaiterOf(restaurant)=waiter &
+% TableOf(restaurant)=table &
+% HoldsAt(BeWaiter6(waiter),time) &
+% HoldsAt(Holding(waiter,food),time) ->
+% Happens(PlaceOn(waiter,food,table),time).
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Restaurant.e:164
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Restaurant.e',161).
+
+ /*  equals(waiterOf(Restaurant), Waiter), equals(tableOf(Restaurant), Table), holds_at(beWaiter6(Waiter), Time), holds_at(holding(Waiter, Food), Time) ->
+       happens(placeOn(Waiter, Food, Table), Time).
+ */
+
+ /*  happens(placeOn(Waiter, Food, Table), Time) :-
+       equals(waiterOf(Restaurant), Waiter),
+       equals(tableOf(Restaurant), Table),
+       holds_at(beWaiter6(Waiter), Time),
+       holds_at(holding(Waiter, Food), Time).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Restaurant.e',161).
+
+ /*  [equals(waiterOf(Restaurant), Waiter), equals(tableOf(Restaurant), Table), holds_at(beWaiter6(Waiter), Time), holds_at(holding(Waiter, Food), Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          happens(placeOn(Waiter, Food, Table), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Restaurant.e',161).
+axiom(happens(placeOn(Waiter, Food, Table), Time),
+   
+    [ equals(waiterOf(Restaurant), Waiter),
+      equals(tableOf(Restaurant), Table),
+      holds_at(beWaiter6(Waiter), Time),
+      holds_at(holding(Waiter, Food), Time)
+    ]).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Restaurant.e',161).
+
+ /*  not(holds_at(beWaiter6(Waiter), Time)) :-
+       holds_at(holding(Waiter, Food), Time),
+       equals(tableOf(Restaurant), Table),
+       equals(waiterOf(Restaurant), Waiter),
+       not(happens(placeOn(Waiter, Food, Table), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Restaurant.e',161).
+
+ /*  [holds_at(holding(Waiter, Food), Time), equals(tableOf(Restaurant), Table), equals(waiterOf(Restaurant), Waiter), not(happens(placeOn(Waiter, Food, Table), Time))] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(neg(beWaiter6(Waiter)), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Restaurant.e',161).
+axiom(holds_at(neg(beWaiter6(Waiter)), Time),
+   
+    [ holds_at(holding(Waiter, Food), Time),
+      equals(tableOf(Restaurant), Table),
+      equals(waiterOf(Restaurant), Waiter),
+      not(happens(placeOn(Waiter, Food, Table), Time))
+    ]).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Restaurant.e',161).
+
+ /*  not(holds_at(holding(Waiter, Food), Time)) :-
+       holds_at(beWaiter6(Waiter), Time),
+       equals(tableOf(Restaurant), Table),
+       equals(waiterOf(Restaurant), Waiter),
+       not(happens(placeOn(Waiter, Food, Table), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Restaurant.e',161).
+
+ /*  [holds_at(beWaiter6(Waiter), Time), equals(tableOf(Restaurant), Table), equals(waiterOf(Restaurant), Waiter), not(happens(placeOn(Waiter, Food, Table), Time))] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(neg(holding(Waiter, Food)), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Restaurant.e',161).
+axiom(holds_at(neg(holding(Waiter, Food)), Time),
+   
+    [ holds_at(beWaiter6(Waiter), Time),
+      equals(tableOf(Restaurant), Table),
+      equals(waiterOf(Restaurant), Waiter),
+      not(happens(placeOn(Waiter, Food, Table), Time))
+    ]).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Restaurant.e:166
+% [waiter,food,table,time]
+% HoldsAt(BeWaiter6(waiter),time) ->
+% Terminates(PlaceOn(waiter,food,table),
+%            BeWaiter6(waiter),
+%            time).
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Restaurant.e:170
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Restaurant.e',168).
+
+ /*  [holds_at(beWaiter6(Waiter), Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          terminates(placeOn(Waiter, Food, Table),
+                     beWaiter6(Waiter),
+                     Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Restaurant.e',168).
+axiom(terminates(placeOn(Waiter, Food, Table), beWaiter6(Waiter), Time),
+    [holds_at(beWaiter6(Waiter), Time)]).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Restaurant.e:172
+% [waiter,food,table,time]
+% HoldsAt(BeWaiter6(waiter),time) ->
+% Initiates(PlaceOn(waiter,food,table),
+%           BeWaiter7(waiter),
+%           time).
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Restaurant.e:176
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Restaurant.e',174).
+
+ /*  [holds_at(beWaiter6(Waiter), Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          initiates(placeOn(Waiter, Food, Table),
+                    beWaiter7(Waiter),
+                    Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Restaurant.e',174).
+axiom(initiates(placeOn(Waiter, Food, Table), beWaiter7(Waiter), Time),
+    [holds_at(beWaiter6(Waiter), Time)]).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Restaurant.e:178
+% [waiter,agent,bill,time]
+% HoldsAt(BeWaiter7(waiter),time) ->
+% Terminates(Request(agent,waiter,bill),
+%            BeWaiter7(waiter),
+%            time).
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Restaurant.e:182
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Restaurant.e',180).
+
+ /*  [holds_at(beWaiter7(Waiter), Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          terminates(request(Agent, Waiter, Bill),
+                     beWaiter7(Waiter),
+                     Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Restaurant.e',180).
+axiom(terminates(request(Agent, Waiter, Bill), beWaiter7(Waiter), Time),
+    [holds_at(beWaiter7(Waiter), Time)]).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Restaurant.e:184
+% [waiter,agent,bill,time]
+% HoldsAt(BeWaiter7(waiter),time) ->
+% Initiates(Request(agent,waiter,bill),
+%           BeWaiter8(waiter),
+%           time).
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Restaurant.e:188
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Restaurant.e',186).
+
+ /*  [holds_at(beWaiter7(Waiter), Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          initiates(request(Agent, Waiter, Bill),
+                    beWaiter8(Waiter),
+                    Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Restaurant.e',186).
+axiom(initiates(request(Agent, Waiter, Bill), beWaiter8(Waiter), Time),
+    [holds_at(beWaiter7(Waiter), Time)]).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Restaurant.e:190
+% [restaurant,waiter,bill,time]
+% WaiterOf(restaurant)=waiter &
+% BillOf(restaurant)=bill &
+% HoldsAt(BeWaiter8(waiter),time) ->
+% Happens(PickUp(waiter,bill),time).
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Restaurant.e:194
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Restaurant.e',192).
+
+ /*  equals(waiterOf(Restaurant), Waiter), equals(billOf(Restaurant), Bill), holds_at(beWaiter8(Waiter), Time) ->
+       happens(pickUp(Waiter, Bill), Time).
+ */
+
+ /*  happens(pickUp(Waiter, Bill), Time) :-
+       equals(waiterOf(Restaurant), Waiter),
+       equals(billOf(Restaurant), Bill),
+       holds_at(beWaiter8(Waiter), Time).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Restaurant.e',192).
+
+ /*  [equals(waiterOf(Restaurant), Waiter), equals(billOf(Restaurant), Bill), holds_at(beWaiter8(Waiter), Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          happens(pickUp(Waiter, Bill), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Restaurant.e',192).
+axiom(happens(pickUp(Waiter, Bill), Time),
+   
+    [ equals(waiterOf(Restaurant), Waiter),
+      equals(billOf(Restaurant), Bill),
+      holds_at(beWaiter8(Waiter), Time)
+    ]).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Restaurant.e',192).
+
+ /*  not(holds_at(beWaiter8(Waiter), Time)) :-
+       equals(billOf(Restaurant), Bill),
+       equals(waiterOf(Restaurant), Waiter),
+       not(happens(pickUp(Waiter, Bill), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Restaurant.e',192).
+
+ /*  [equals(billOf(Restaurant), Bill), equals(waiterOf(Restaurant), Waiter), not(happens(pickUp(Waiter, Bill), Time))] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(neg(beWaiter8(Waiter)), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Restaurant.e',192).
+axiom(holds_at(neg(beWaiter8(Waiter)), Time),
+   
+    [ equals(billOf(Restaurant), Bill),
+      equals(waiterOf(Restaurant), Waiter),
+      not(happens(pickUp(Waiter, Bill), Time))
+    ]).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Restaurant.e:196
+% [waiter,bill,time]
+% HoldsAt(BeWaiter8(waiter),time) ->
+% Terminates(PickUp(waiter,bill),
+%            BeWaiter8(waiter),
+%            time).
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Restaurant.e:200
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Restaurant.e',198).
+
+ /*  [holds_at(beWaiter8(Waiter), Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          terminates(pickUp(Waiter, Bill),
+                     beWaiter8(Waiter),
+                     Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Restaurant.e',198).
+axiom(terminates(pickUp(Waiter, Bill), beWaiter8(Waiter), Time),
+    [holds_at(beWaiter8(Waiter), Time)]).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Restaurant.e:202
+% [waiter,bill,time]
+% HoldsAt(BeWaiter8(waiter),time) ->
+% Initiates(PickUp(waiter,bill),
+%           BeWaiter9(waiter),
+%           time).
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Restaurant.e:206
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Restaurant.e',204).
+
+ /*  [holds_at(beWaiter8(Waiter), Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          initiates(pickUp(Waiter, Bill),
+                    beWaiter9(Waiter),
+                    Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Restaurant.e',204).
+axiom(initiates(pickUp(Waiter, Bill), beWaiter9(Waiter), Time),
+    [holds_at(beWaiter8(Waiter), Time)]).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Restaurant.e:208
+% [restaurant,waiter,bill,table,time]
+% WaiterOf(restaurant)=waiter &
+% BillOf(restaurant)=bill &
+% TableOf(restaurant)=table &
+% HoldsAt(BeWaiter9(waiter),time) ->
+% Happens(PlaceOn(waiter,bill,table),time).
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Restaurant.e:213
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Restaurant.e',210).
+
+ /*  equals(waiterOf(Restaurant), Waiter), equals(billOf(Restaurant), Bill), equals(tableOf(Restaurant), Table), holds_at(beWaiter9(Waiter), Time) ->
+       happens(placeOn(Waiter, Bill, Table), Time).
+ */
+
+ /*  happens(placeOn(Waiter, Bill, Table), Time) :-
+       equals(waiterOf(Restaurant), Waiter),
+       equals(billOf(Restaurant), Bill),
+       equals(tableOf(Restaurant), Table),
+       holds_at(beWaiter9(Waiter), Time).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Restaurant.e',210).
+
+ /*  [equals(waiterOf(Restaurant), Waiter), equals(billOf(Restaurant), Bill), equals(tableOf(Restaurant), Table), holds_at(beWaiter9(Waiter), Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          happens(placeOn(Waiter, Bill, Table), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Restaurant.e',210).
+axiom(happens(placeOn(Waiter, Bill, Table), Time),
+   
+    [ equals(waiterOf(Restaurant), Waiter),
+      equals(billOf(Restaurant), Bill),
+      equals(tableOf(Restaurant), Table),
+      holds_at(beWaiter9(Waiter), Time)
+    ]).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Restaurant.e',210).
+
+ /*  not(holds_at(beWaiter9(Waiter), Time)) :-
+       equals(tableOf(Restaurant), Table),
+       equals(billOf(Restaurant), Bill),
+       equals(waiterOf(Restaurant), Waiter),
+       not(happens(placeOn(Waiter, Bill, Table), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Restaurant.e',210).
+
+ /*  [equals(tableOf(Restaurant), Table), equals(billOf(Restaurant), Bill), equals(waiterOf(Restaurant), Waiter), not(happens(placeOn(Waiter, Bill, Table), Time))] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(neg(beWaiter9(Waiter)), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Restaurant.e',210).
+axiom(holds_at(neg(beWaiter9(Waiter)), Time),
+   
+    [ equals(tableOf(Restaurant), Table),
+      equals(billOf(Restaurant), Bill),
+      equals(waiterOf(Restaurant), Waiter),
+      not(happens(placeOn(Waiter, Bill, Table), Time))
+    ]).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Restaurant.e:215
+% [waiter,bill,table,time]
+% HoldsAt(BeWaiter9(waiter),time) ->
+% Terminates(PlaceOn(waiter,bill,table),
+%            BeWaiter9(waiter),
+%            time).
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Restaurant.e:219
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Restaurant.e',217).
+
+ /*  [holds_at(beWaiter9(Waiter), Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          terminates(placeOn(Waiter, Bill, Table),
+                     beWaiter9(Waiter),
+                     Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Restaurant.e',217).
+axiom(terminates(placeOn(Waiter, Bill, Table), beWaiter9(Waiter), Time),
+    [holds_at(beWaiter9(Waiter), Time)]).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Restaurant.e:221
+% [waiter,bill,table,time]
+% HoldsAt(BeWaiter9(waiter),time) ->
+% Initiates(PlaceOn(waiter,bill,table),
+%           BeWaiter0(waiter),
+%           time).
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Restaurant.e:225
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Restaurant.e',223).
+
+ /*  [holds_at(beWaiter9(Waiter), Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          initiates(placeOn(Waiter, Bill, Table),
+                    beWaiter0(Waiter),
+                    Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Restaurant.e',223).
+axiom(initiates(placeOn(Waiter, Bill, Table), beWaiter0(Waiter), Time),
+    [holds_at(beWaiter9(Waiter), Time)]).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Restaurant.e:227
+%; awaiting next waiter order
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Restaurant.e:228
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Restaurant.e',229).
+% fluent BeCook0(cook)
+fluent(beCook0(cook)).
+==> mpred_prop(beCook0(cook),fluent).
+==> meta_argtypes(beCook0(cook)).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Restaurant.e:230
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Restaurant.e',231).
+%; waiter order received
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Restaurant.e:231
+% fluent BeCook1(cook)
+fluent(beCook1(cook)).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Restaurant.e',231).
+==> mpred_prop(beCook1(cook),fluent).
+==> meta_argtypes(beCook1(cook)).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Restaurant.e:233
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Restaurant.e',234).
+% xor BeCook0, BeCook1
+==> xor([beCook0,beCook1]).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Restaurant.e:235
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Restaurant.e',236).
+% [cook,agent,food,time]
+% HoldsAt(BeCook0(cook),time) ->
+% Terminates(Order(agent,cook,food),
+%            BeCook0(cook),
+%            time).
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Restaurant.e:239
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Restaurant.e',236).
+
+ /*  [holds_at(beCook0(Cook), Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          terminates(order(Agent, Cook, Food),
+                     beCook0(Cook),
+                     Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Restaurant.e',236).
+axiom(terminates(order(Agent, Cook, Food), beCook0(Cook), Time),
+    [holds_at(beCook0(Cook), Time)]).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Restaurant.e:241
+% [cook,agent,food,time]
+% HoldsAt(BeCook0(cook),time) ->
+% Initiates(Order(agent,cook,food),
+%           BeCook1(cook),
+%           time).
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Restaurant.e:245
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Restaurant.e',243).
+
+ /*  [holds_at(beCook0(Cook), Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          initiates(order(Agent, Cook, Food),
+                    beCook1(Cook),
+                    Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Restaurant.e',243).
+axiom(initiates(order(Agent, Cook, Food), beCook1(Cook), Time),
+    [holds_at(beCook0(Cook), Time)]).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Restaurant.e:247
+% event FoodPrepare(agent,food)
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Restaurant.e',247).
+event(foodPrepare(agent,food)).
+==> mpred_prop(foodPrepare(agent,food),event).
+==> meta_argtypes(foodPrepare(agent,food)).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Restaurant.e:249
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Restaurant.e',250).
+% fluent FoodPrepared(food)
+fluent(foodPrepared(food)).
+==> mpred_prop(foodPrepared(food),fluent).
+==> meta_argtypes(foodPrepared(food)).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Restaurant.e:251
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Restaurant.e',252).
+% [agent,food,time]
+% Initiates(FoodPrepare(agent,food),
+%           FoodPrepared(food),
+%           time).
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Restaurant.e:254
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Restaurant.e',252).
+
+ /*  [] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          initiates(foodPrepare(Agent, Food),
+                    foodPrepared(Food),
+                    Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Restaurant.e',252).
+axiom(initiates(foodPrepare(Agent, Food), foodPrepared(Food), Time),
+    []).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Restaurant.e:256
+% [agent,food,time]
+% Happens(FoodPrepare(agent,food),time) ->
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Restaurant.e:258
+% {location}% 
+% HoldsAt(At(agent,location),time) &
+% HoldsAt(At(food,location),time).
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Restaurant.e:260
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Restaurant.e',258).
+
+ /*  exists([Location],
+    happens(foodPrepare(Agent, Food), Time) ->
+       holds_at(at(Agent, Location), Time),
+       holds_at(at(Food, Location), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Restaurant.e',258).
+
+ /*  not(happens(foodPrepare(Agent, Food), Time)) :-
+       (   not(holds_at(at(Agent, Location), Time))
+       ;   not(holds_at(at(Food, Location), Time))
+       ),
+       some(Location, '$kolem_Fn_225'(Agent, Food, Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Restaurant.e',258).
+
+ /*  [(holds_at(neg(at(Agent, Location)), Time);holds_at(neg(at(Food, Location)), Time)), some(Location, '$kolem_Fn_225'(Agent, Food, Time))] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          not(happens(foodPrepare(Agent, Food), Time))).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Restaurant.e',258).
+axiom(not(happens(foodPrepare(Agent, Food), Time)),
+   
+    [  (holds_at(neg(at(Agent, Location)), Time);holds_at(neg(at(Food, Location)), Time)),
+      some(Location, '$kolem_Fn_225'(Agent, Food, Time))
+    ]).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Restaurant.e',258).
+
+ /*  holds_at(at(Agent, Location), Time) :-
+       happens(foodPrepare(Agent, Food), Time),
+       some(Location, '$kolem_Fn_225'(Agent, Food, Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Restaurant.e',258).
+
+ /*  [happens(foodPrepare(Agent, Food), Time), some(Location, '$kolem_Fn_225'(Agent, Food, Time))] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(at(Agent, Location), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Restaurant.e',258).
+axiom(holds_at(at(Agent, Location), Time),
+   
+    [ happens(foodPrepare(Agent, Food), Time),
+      some(Location, '$kolem_Fn_225'(Agent, Food, Time))
+    ]).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Restaurant.e',258).
+
+ /*  holds_at(at(Food, Location), Time) :-
+       happens(foodPrepare(Agent, Food), Time),
+       some(Location, '$kolem_Fn_225'(Agent, Food, Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Restaurant.e',258).
+
+ /*  [happens(foodPrepare(Agent, Food), Time), some(Location, '$kolem_Fn_225'(Agent, Food, Time))] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(at(Food, Location), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Restaurant.e',258).
+axiom(holds_at(at(Food, Location), Time),
+   
+    [ happens(foodPrepare(Agent, Food), Time),
+      some(Location, '$kolem_Fn_225'(Agent, Food, Time))
+    ]).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Restaurant.e:262
+% [cook,agent,food,time]
+% HoldsAt(BeCook1(cook),time) &
+% HoldsAt(KnowOrder(cook,agent,food),time) ->
+% Happens(FoodPrepare(cook,food),time).
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Restaurant.e:265
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Restaurant.e',264).
+
+ /*  holds_at(beCook1(Cook), Time), holds_at(knowOrder(Cook, Agent, Food), Time) ->
+       happens(foodPrepare(Cook, Food), Time).
+ */
+
+ /*  happens(foodPrepare(Cook, Food), Time) :-
+       holds_at(beCook1(Cook), Time),
+       holds_at(knowOrder(Cook, Agent, Food), Time).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Restaurant.e',264).
+
+ /*  [holds_at(beCook1(Cook), Time), holds_at(knowOrder(Cook, Agent, Food), Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          happens(foodPrepare(Cook, Food), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Restaurant.e',264).
+axiom(happens(foodPrepare(Cook, Food), Time),
+   
+    [ holds_at(beCook1(Cook), Time),
+      holds_at(knowOrder(Cook, Agent, Food), Time)
+    ]).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Restaurant.e',264).
+
+ /*  not(holds_at(beCook1(Cook), Time)) :-
+       holds_at(knowOrder(Cook, Agent, Food), Time),
+       not(happens(foodPrepare(Cook, Food), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Restaurant.e',264).
+
+ /*  [holds_at(knowOrder(Cook, Agent, Food), Time), not(happens(foodPrepare(Cook, Food), Time))] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(neg(beCook1(Cook)), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Restaurant.e',264).
+axiom(holds_at(neg(beCook1(Cook)), Time),
+   
+    [ holds_at(knowOrder(Cook, Agent, Food), Time),
+      not(happens(foodPrepare(Cook, Food), Time))
+    ]).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Restaurant.e',264).
+
+ /*  not(holds_at(knowOrder(Cook, Agent, Food), Time)) :-
+       holds_at(beCook1(Cook), Time),
+       not(happens(foodPrepare(Cook, Food), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Restaurant.e',264).
+
+ /*  [holds_at(beCook1(Cook), Time), not(happens(foodPrepare(Cook, Food), Time))] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(neg(knowOrder(Cook, Agent, Food)), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Restaurant.e',264).
+axiom(holds_at(neg(knowOrder(Cook, Agent, Food)), Time),
+   
+    [ holds_at(beCook1(Cook), Time),
+      not(happens(foodPrepare(Cook, Food), Time))
+    ]).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Restaurant.e:267
+% [cook,food,time]
+% HoldsAt(BeCook1(cook),time) ->
+% Terminates(FoodPrepare(cook,food),
+%            BeCook1(cook),
+%            time).
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Restaurant.e:271
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Restaurant.e',269).
+
+ /*  [holds_at(beCook1(Cook), Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          terminates(foodPrepare(Cook, Food),
+                     beCook1(Cook),
+                     Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Restaurant.e',269).
+axiom(terminates(foodPrepare(Cook, Food), beCook1(Cook), Time),
+    [holds_at(beCook1(Cook), Time)]).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Restaurant.e:273
+% [cook,food,time]
+% HoldsAt(BeCook1(cook),time) ->
+% Initiates(FoodPrepare(cook,food),
+%           BeCook0(cook),
+%           time).
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Restaurant.e:277
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Restaurant.e',275).
+
+ /*  [holds_at(beCook1(Cook), Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          initiates(foodPrepare(Cook, Food),
+                    beCook0(Cook),
+                    Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Restaurant.e',275).
+axiom(initiates(foodPrepare(Cook, Food), beCook0(Cook), Time),
+    [holds_at(beCook1(Cook), Time)]).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Restaurant.e:279
+%; End of file.

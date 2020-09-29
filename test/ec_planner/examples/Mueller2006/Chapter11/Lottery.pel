@@ -1,0 +1,1014 @@
+:-include(library('ec_planner/ec_test_incl')).
+:-expects_dialect(pfc).
+% Wed, 01 Apr 2020 19:59:34 GMT
+% From ../examples/Mueller2006/Chapter11/Lottery.pel:4
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter11/HungryCat.e',284).
+
+ /*  loading(load_e_pl,
+   	'/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter11/Lottery.e').
+ */
+%;
+%; Copyright (c) 2005 IBM Corporation and others.
+%; All rights reserved. This program and the accompanying materials
+%; are made available under the terms of the Common Public License v1.0
+%; which accompanies this distribution, and is available at
+%; http://www.eclipse.org/legal/cpl-v10.html
+%;
+%; Contributors:
+%; IBM - Initial implementation
+%;
+%; @book{OrtonyCloreCollins:1988,
+%;   author = "Andrew Ortony and Gerald L. Clore and Allan M. Collins",
+%;   year = "1988",
+%;   title = "The Cognitive Structure of Emotions",
+%;   address = "Cambridge",
+%;   publisher = "Cambridge University Press",
+%; }
+%;
+%; @book{Mueller:2006,
+%;   author = "Erik T. Mueller",
+%;   year = "2006",
+%;   title = "Commonsense Reasoning",
+%;   address = "San Francisco",
+%;   publisher = "Morgan Kaufmann/Elsevier",
+%; }
+%;
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter11/Lottery.e:27
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter11/Lottery.e',28).
+% option modeldiff on
+:- set_ec_option(modeldiff, on).
+:- if(is_e_toplevel).
+:- endif.
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter11/Lottery.e:29
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter11/Lottery.e',30).
+% load foundations/Root.e
+:- load_e('foundations/Root.e', changed).
+:- if(is_e_toplevel).
+:- endif.
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter11/Lottery.e:30
+% load foundations/EC.e
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter11/Lottery.e',30).
+:- load_e('foundations/EC.e', changed).
+:- if(is_e_toplevel).
+:- endif.
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter11/Lottery.e:32
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter11/Lottery.e',33).
+% sort agent
+==> sort(agent).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter11/Lottery.e:33
+% sort aboutevent
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter11/Lottery.e',33).
+==> sort(aboutevent).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter11/Lottery.e:34
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter11/Lottery.e',35).
+% sort desirability: integer
+==> subsort(desirability,integer).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter11/Lottery.e:36
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter11/Lottery.e',37).
+% agent Kate, Lisa
+==> t(agent,kate).
+==> t(agent,lisa).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter11/Lottery.e:37
+% aboutevent WinLotteryKate, WinLotteryLisa
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter11/Lottery.e',37).
+==> t(aboutevent,winLotteryKate).
+==> t(aboutevent,winLotteryLisa).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter11/Lottery.e:39
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter11/Lottery.e',40).
+% fluent Joy(agent,aboutevent)
+fluent(joy(agent,aboutevent)).
+==> mpred_prop(joy(agent,aboutevent),fluent).
+==> meta_argtypes(joy(agent,aboutevent)).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter11/Lottery.e:40
+% fluent Desirability(agent,agent,aboutevent,desirability)
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter11/Lottery.e',40).
+fluent(desirability(agent,agent,aboutevent,desirability)).
+==> mpred_prop(desirability(agent,agent,aboutevent,desirability),
+	       fluent).
+==> meta_argtypes(desirability(agent,agent,aboutevent,desirability)).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter11/Lottery.e:41
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter11/Lottery.e',42).
+% fluent Believe(agent,aboutevent)
+fluent(believe(agent,aboutevent)).
+==> mpred_prop(believe(agent,aboutevent),fluent).
+==> meta_argtypes(believe(agent,aboutevent)).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter11/Lottery.e:42
+% fluent Like(agent,agent)
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter11/Lottery.e',42).
+fluent(like(agent,agent)).
+==> mpred_prop(like(agent,agent),fluent).
+==> meta_argtypes(like(agent,agent)).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter11/Lottery.e:43
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter11/Lottery.e',44).
+% fluent HappyFor(agent,agent,aboutevent)
+fluent(happyFor(agent,agent,aboutevent)).
+==> mpred_prop(happyFor(agent,agent,aboutevent),fluent).
+==> meta_argtypes(happyFor(agent,agent,aboutevent)).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter11/Lottery.e:45
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter11/Lottery.e',46).
+% event WinLottery(agent)
+event(winLottery(agent)).
+==> mpred_prop(winLottery(agent),event).
+==> meta_argtypes(winLottery(agent)).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter11/Lottery.e:46
+% event AddJoy(agent,aboutevent)
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter11/Lottery.e',46).
+event(addJoy(agent,aboutevent)).
+==> mpred_prop(addJoy(agent,aboutevent),event).
+==> meta_argtypes(addJoy(agent,aboutevent)).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter11/Lottery.e:47
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter11/Lottery.e',48).
+% event AddHappyFor(agent,agent,aboutevent)
+event(addHappyFor(agent,agent,aboutevent)).
+==> mpred_prop(addHappyFor(agent,agent,aboutevent),event).
+==> meta_argtypes(addHappyFor(agent,agent,aboutevent)).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter11/Lottery.e:49
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter11/Lottery.e',50).
+%; Sigma
+% [agent,aboutevent,time]
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter11/Lottery.e:52
+% Initiates(AddJoy(agent,aboutevent),Joy(agent,aboutevent),time).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter11/Lottery.e',52).
+
+ /*  [] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          initiates(addJoy(Agent, Aboutevent),
+                    joy(Agent, Aboutevent),
+                    Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter11/Lottery.e',52).
+axiom(initiates(addJoy(Agent, Aboutevent), joy(Agent, Aboutevent), Time),
+    []).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter11/Lottery.e:54
+% [agent1,agent2,aboutevent,time]
+% Initiates(AddHappyFor(agent1,agent2,aboutevent),
+%           HappyFor(agent1,agent2,aboutevent),
+%           time).
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter11/Lottery.e:57
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter11/Lottery.e',56).
+
+ /*  [] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          initiates(addHappyFor(Agent1, Agent2, Aboutevent),
+                    happyFor(Agent1, Agent2, Aboutevent),
+                    Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter11/Lottery.e',56).
+axiom(initiates(addHappyFor(Agent1, Agent2, Aboutevent), happyFor(Agent1, Agent2, Aboutevent), Time),
+    []).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter11/Lottery.e:59
+% [agent1,agent2,aboutevent,time]
+% (agent1=Kate & aboutevent=WinLotteryKate) |
+% (agent1=Lisa & aboutevent=WinLotteryLisa) ->
+% Initiates(WinLottery(agent1),Believe(agent2,aboutevent),time).
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter11/Lottery.e:62
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter11/Lottery.e',61).
+
+ /*  [(equals(Agent1, kate), equals(Aboutevent, winLotteryKate);equals(Agent1, lisa), equals(Aboutevent, winLotteryLisa))] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          initiates(winLottery(Agent1),
+                    believe(Agent2, Aboutevent),
+                    Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter11/Lottery.e',61).
+axiom(initiates(winLottery(Agent1), believe(Agent2, Aboutevent), Time),
+   
+    [  (equals(Agent1, kate), equals(Aboutevent, winLotteryKate);equals(Agent1, lisa), equals(Aboutevent, winLotteryLisa))
+    ]).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter11/Lottery.e:64
+%; Delta
+% [agent,aboutevent,desirability,time]
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter11/Lottery.e:67
+% !HoldsAt(Joy(agent,aboutevent),time) &
+% HoldsAt(Desirability(agent,agent,aboutevent,desirability),time) &
+% desirability=1 &
+% HoldsAt(Believe(agent,aboutevent),time) ->
+% Happens(AddJoy(agent,aboutevent),time).
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter11/Lottery.e:71
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter11/Lottery.e',67).
+
+ /*  holds_at(neg(joy(Agent, Aboutevent)), Time), holds_at(desirability(Agent, Agent, Aboutevent, Desirability), Time), equals(Desirability, 1), holds_at(believe(Agent, Aboutevent), Time) ->
+       happens(addJoy(Agent, Aboutevent), Time).
+ */
+
+ /*  happens(addJoy(Agent, Aboutevent), Time) :-
+       holds_at(neg(joy(Agent, Aboutevent)), Time),
+       holds_at(desirability(Agent,
+                             Agent,
+                             Aboutevent,
+                             Desirability),
+                Time),
+       equals(Desirability, 1),
+       holds_at(believe(Agent, Aboutevent), Time).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter11/Lottery.e',67).
+
+ /*  [holds_at(neg(joy(Agent, Aboutevent)), Time), holds_at(desirability(Agent, Agent, Aboutevent, Desirability), Time), equals(Desirability, 1), holds_at(believe(Agent, Aboutevent), Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          happens(addJoy(Agent, Aboutevent), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter11/Lottery.e',67).
+axiom(happens(addJoy(Agent, Aboutevent), Time),
+   
+    [ holds_at(neg(joy(Agent, Aboutevent)), Time),
+      holds_at(desirability(Agent,
+                            Agent,
+                            Aboutevent,
+                            Desirability),
+               Time),
+      equals(Desirability, 1),
+      holds_at(believe(Agent, Aboutevent), Time)
+    ]).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter11/Lottery.e',67).
+
+ /*  not(holds_at(neg(joy(Agent, Aboutevent)), Time)) :-
+       ( holds_at(desirability(Agent,
+                               Agent,
+                               Aboutevent,
+                               Desirability),
+                  Time),
+         equals(Desirability, 1),
+         holds_at(believe(Agent, Aboutevent), Time)
+       ),
+       not(happens(addJoy(Agent, Aboutevent), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter11/Lottery.e',67).
+
+ /*  [holds_at(desirability(Agent, Agent, Aboutevent, Desirability), Time), equals(Desirability, 1), holds_at(believe(Agent, Aboutevent), Time), not(happens(addJoy(Agent, Aboutevent), Time))] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(joy(Agent, Aboutevent), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter11/Lottery.e',67).
+axiom(holds_at(joy(Agent, Aboutevent), Time),
+   
+    [ holds_at(desirability(Agent,
+                            Agent,
+                            Aboutevent,
+                            Desirability),
+               Time),
+      equals(Desirability, 1),
+      holds_at(believe(Agent, Aboutevent), Time),
+      not(happens(addJoy(Agent, Aboutevent), Time))
+    ]).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter11/Lottery.e',67).
+
+ /*  not(holds_at(desirability(Agent, Agent, Aboutevent, Desirability), Time)) :-
+       ( equals(Desirability, 1),
+         holds_at(believe(Agent, Aboutevent), Time)
+       ),
+       holds_at(neg(joy(Agent, Aboutevent)), Time),
+       not(happens(addJoy(Agent, Aboutevent), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter11/Lottery.e',67).
+
+ /*  [equals(Desirability, 1), holds_at(believe(Agent, Aboutevent), Time), holds_at(neg(joy(Agent, Aboutevent)), Time), not(happens(addJoy(Agent, Aboutevent), Time))] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(neg(desirability(Agent,
+                                    Agent,
+                                    Aboutevent,
+                                    Desirability)),
+                   Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter11/Lottery.e',67).
+axiom(holds_at(neg(desirability(Agent, Agent, Aboutevent, Desirability)), Time),
+   
+    [ equals(Desirability, 1),
+      holds_at(believe(Agent, Aboutevent), Time),
+      holds_at(neg(joy(Agent, Aboutevent)), Time),
+      not(happens(addJoy(Agent, Aboutevent), Time))
+    ]).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter11/Lottery.e',67).
+
+ /*  not(holds_at(believe(Agent, Aboutevent), Time)) :-
+       equals(Desirability, 1),
+       holds_at(desirability(Agent,
+                             Agent,
+                             Aboutevent,
+                             Desirability),
+                Time),
+       holds_at(neg(joy(Agent, Aboutevent)), Time),
+       not(happens(addJoy(Agent, Aboutevent), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter11/Lottery.e',67).
+
+ /*  [equals(Desirability, 1), holds_at(desirability(Agent, Agent, Aboutevent, Desirability), Time), holds_at(neg(joy(Agent, Aboutevent)), Time), not(happens(addJoy(Agent, Aboutevent), Time))] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(neg(believe(Agent, Aboutevent)), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter11/Lottery.e',67).
+axiom(holds_at(neg(believe(Agent, Aboutevent)), Time),
+   
+    [ equals(Desirability, 1),
+      holds_at(desirability(Agent,
+                            Agent,
+                            Aboutevent,
+                            Desirability),
+               Time),
+      holds_at(neg(joy(Agent, Aboutevent)), Time),
+      not(happens(addJoy(Agent, Aboutevent), Time))
+    ]).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter11/Lottery.e:73
+% [agent1,agent2,aboutevent,desirability1,desirability2,time]
+% !HoldsAt(HappyFor(agent1,agent2,aboutevent),time) &
+% HoldsAt(Desirability(agent1,agent2,aboutevent,desirability1),time) &
+% desirability1=1 &
+% HoldsAt(Desirability(agent1,agent1,aboutevent,desirability2),time) &
+% desirability2=1 &
+% HoldsAt(Like(agent1,agent2),time) &
+% HoldsAt(Believe(agent1,aboutevent),time) &
+% agent1 != agent2 ->
+% Happens(AddHappyFor(agent1,agent2,aboutevent),time).
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter11/Lottery.e:82
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter11/Lottery.e',75).
+
+ /*  holds_at(neg(happyFor(Agent1, Agent2, Aboutevent)), Time), holds_at(desirability(Agent1, Agent2, Aboutevent, Desirability1), Time), equals(Desirability1, 1), holds_at(desirability(Agent1, Agent1, Aboutevent, Desirability2), Time), equals(Desirability2, 1), holds_at(like(Agent1, Agent2), Time), holds_at(believe(Agent1, Aboutevent), Time), diff(Agent1, Agent2) ->
+       happens(addHappyFor(Agent1, Agent2, Aboutevent),
+               Time).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter11/Lottery.e',75).
+
+ /*  happens(addHappyFor(Agent1, Agent2, Aboutevent), Time) :-
+       holds_at(neg(happyFor(Agent1, Agent2, Aboutevent)),
+                Time),
+       holds_at(desirability(Agent1,
+                             Agent2,
+                             Aboutevent,
+                             Desirability1),
+                Time),
+       equals(Desirability1, 1),
+       holds_at(desirability(Agent1,
+                             Agent1,
+                             Aboutevent,
+                             Desirability2),
+                Time),
+       equals(Desirability2, 1),
+       holds_at(like(Agent1, Agent2), Time),
+       holds_at(believe(Agent1, Aboutevent), Time),
+       diff(Agent1, Agent2).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter11/Lottery.e',75).
+
+ /*  [holds_at(neg(happyFor(Agent1, Agent2, Aboutevent)), Time), holds_at(desirability(Agent1, Agent2, Aboutevent, Desirability1), Time), equals(Desirability1, 1), holds_at(desirability(Agent1, Agent1, Aboutevent, Desirability2), Time), equals(Desirability2, 1), holds_at(like(Agent1, Agent2), Time), holds_at(believe(Agent1, Aboutevent), Time), diff(Agent1, Agent2)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          happens(addHappyFor(Agent1, Agent2, Aboutevent),
+                  Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter11/Lottery.e',75).
+axiom(happens(addHappyFor(Agent1, Agent2, Aboutevent), Time),
+   
+    [ holds_at(neg(happyFor(Agent1, Agent2, Aboutevent)),
+               Time),
+      holds_at(desirability(Agent1,
+                            Agent2,
+                            Aboutevent,
+                            Desirability1),
+               Time),
+      equals(Desirability1, 1),
+      holds_at(desirability(Agent1,
+                            Agent1,
+                            Aboutevent,
+                            Desirability2),
+               Time),
+      equals(Desirability2, 1),
+      holds_at(like(Agent1, Agent2), Time),
+      holds_at(believe(Agent1, Aboutevent), Time),
+      diff(Agent1, Agent2)
+    ]).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter11/Lottery.e',75).
+
+ /*  not(holds_at(neg(happyFor(Agent1, Agent2, Aboutevent)), Time)) :-
+       ( holds_at(desirability(Agent1,
+                               Agent2,
+                               Aboutevent,
+                               Desirability1),
+                  Time),
+         equals(Desirability1, 1),
+         holds_at(desirability(Agent1,
+                               Agent1,
+                               Aboutevent,
+                               Desirability2),
+                  Time),
+         equals(Desirability2, 1),
+         holds_at(like(Agent1, Agent2), Time),
+         holds_at(believe(Agent1, Aboutevent), Time),
+         diff(Agent1, Agent2)
+       ),
+       not(happens(addHappyFor(Agent1, Agent2, Aboutevent),
+                   Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter11/Lottery.e',75).
+
+ /*  [holds_at(desirability(Agent1, Agent2, Aboutevent, Desirability1), Time), equals(Desirability1, 1), holds_at(desirability(Agent1, Agent1, Aboutevent, Desirability2), Time), equals(Desirability2, 1), holds_at(like(Agent1, Agent2), Time), holds_at(believe(Agent1, Aboutevent), Time), diff(Agent1, Agent2), not(happens(addHappyFor(Agent1, Agent2, Aboutevent), Time))] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(happyFor(Agent1, Agent2, Aboutevent),
+                   Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter11/Lottery.e',75).
+axiom(holds_at(happyFor(Agent1, Agent2, Aboutevent), Time),
+   
+    [ holds_at(desirability(Agent1,
+                            Agent2,
+                            Aboutevent,
+                            Desirability1),
+               Time),
+      equals(Desirability1, 1),
+      holds_at(desirability(Agent1,
+                            Agent1,
+                            Aboutevent,
+                            Desirability2),
+               Time),
+      equals(Desirability2, 1),
+      holds_at(like(Agent1, Agent2), Time),
+      holds_at(believe(Agent1, Aboutevent), Time),
+      diff(Agent1, Agent2),
+      not(happens(addHappyFor(Agent1, Agent2, Aboutevent),
+                  Time))
+    ]).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter11/Lottery.e',75).
+
+ /*  not(holds_at(desirability(Agent1, Agent2, Aboutevent, Desirability1), Time)) :-
+       ( equals(Desirability1, 1),
+         holds_at(desirability(Agent1,
+                               Agent1,
+                               Aboutevent,
+                               Desirability2),
+                  Time),
+         equals(Desirability2, 1),
+         holds_at(like(Agent1, Agent2), Time),
+         holds_at(believe(Agent1, Aboutevent), Time),
+         diff(Agent1, Agent2)
+       ),
+       holds_at(neg(happyFor(Agent1, Agent2, Aboutevent)),
+                Time),
+       not(happens(addHappyFor(Agent1, Agent2, Aboutevent),
+                   Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter11/Lottery.e',75).
+
+ /*  [equals(Desirability1, 1), holds_at(desirability(Agent1, Agent1, Aboutevent, Desirability2), Time), equals(Desirability2, 1), holds_at(like(Agent1, Agent2), Time), holds_at(believe(Agent1, Aboutevent), Time), diff(Agent1, Agent2), holds_at(neg(happyFor(Agent1, Agent2, Aboutevent)), Time), not(happens(addHappyFor(Agent1, Agent2, Aboutevent), Time))] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(neg(desirability(Agent1,
+                                    Agent2,
+                                    Aboutevent,
+                                    Desirability1)),
+                   Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter11/Lottery.e',75).
+axiom(holds_at(neg(desirability(Agent1, Agent2, Aboutevent, Desirability1)), Time),
+   
+    [ equals(Desirability1, 1),
+      holds_at(desirability(Agent1,
+                            Agent1,
+                            Aboutevent,
+                            Desirability2),
+               Time),
+      equals(Desirability2, 1),
+      holds_at(like(Agent1, Agent2), Time),
+      holds_at(believe(Agent1, Aboutevent), Time),
+      diff(Agent1, Agent2),
+      holds_at(neg(happyFor(Agent1, Agent2, Aboutevent)),
+               Time),
+      not(happens(addHappyFor(Agent1, Agent2, Aboutevent),
+                  Time))
+    ]).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter11/Lottery.e',75).
+
+ /*  not(holds_at(desirability(Agent1, Agent1, Aboutevent, Desirability2), Time)) :-
+       ( equals(Desirability2, 1),
+         holds_at(like(Agent1, Agent2), Time),
+         holds_at(believe(Agent1, Aboutevent), Time),
+         diff(Agent1, Agent2)
+       ),
+       equals(Desirability1, 1),
+       holds_at(desirability(Agent1,
+                             Agent2,
+                             Aboutevent,
+                             Desirability1),
+                Time),
+       holds_at(neg(happyFor(Agent1, Agent2, Aboutevent)),
+                Time),
+       not(happens(addHappyFor(Agent1, Agent2, Aboutevent),
+                   Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter11/Lottery.e',75).
+
+ /*  [equals(Desirability2, 1), holds_at(like(Agent1, Agent2), Time), holds_at(believe(Agent1, Aboutevent), Time), diff(Agent1, Agent2), equals(Desirability1, 1), holds_at(desirability(Agent1, Agent2, Aboutevent, Desirability1), Time), holds_at(neg(happyFor(Agent1, Agent2, Aboutevent)), Time), not(happens(addHappyFor(Agent1, Agent2, Aboutevent), Time))] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(neg(desirability(Agent1,
+                                    Agent1,
+                                    Aboutevent,
+                                    Desirability2)),
+                   Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter11/Lottery.e',75).
+axiom(holds_at(neg(desirability(Agent1, Agent1, Aboutevent, Desirability2)), Time),
+   
+    [ equals(Desirability2, 1),
+      holds_at(like(Agent1, Agent2), Time),
+      holds_at(believe(Agent1, Aboutevent), Time),
+      diff(Agent1, Agent2),
+      equals(Desirability1, 1),
+      holds_at(desirability(Agent1,
+                            Agent2,
+                            Aboutevent,
+                            Desirability1),
+               Time),
+      holds_at(neg(happyFor(Agent1, Agent2, Aboutevent)),
+               Time),
+      not(happens(addHappyFor(Agent1, Agent2, Aboutevent),
+                  Time))
+    ]).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter11/Lottery.e',75).
+
+ /*  not(holds_at(like(Agent1, Agent2), Time)) :-
+       ( holds_at(believe(Agent1, Aboutevent), Time),
+         diff(Agent1, Agent2)
+       ),
+       equals(Desirability2, 1),
+       holds_at(desirability(Agent1,
+                             Agent1,
+                             Aboutevent,
+                             Desirability2),
+                Time),
+       equals(Desirability1, 1),
+       holds_at(desirability(Agent1,
+                             Agent2,
+                             Aboutevent,
+                             Desirability1),
+                Time),
+       holds_at(neg(happyFor(Agent1, Agent2, Aboutevent)),
+                Time),
+       not(happens(addHappyFor(Agent1, Agent2, Aboutevent),
+                   Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter11/Lottery.e',75).
+
+ /*  [holds_at(believe(Agent1, Aboutevent), Time), diff(Agent1, Agent2), equals(Desirability2, 1), holds_at(desirability(Agent1, Agent1, Aboutevent, Desirability2), Time), equals(Desirability1, 1), holds_at(desirability(Agent1, Agent2, Aboutevent, Desirability1), Time), holds_at(neg(happyFor(Agent1, Agent2, Aboutevent)), Time), not(happens(addHappyFor(Agent1, Agent2, Aboutevent), Time))] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(neg(like(Agent1, Agent2)), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter11/Lottery.e',75).
+axiom(holds_at(neg(like(Agent1, Agent2)), Time),
+   
+    [ holds_at(believe(Agent1, Aboutevent), Time),
+      diff(Agent1, Agent2),
+      equals(Desirability2, 1),
+      holds_at(desirability(Agent1,
+                            Agent1,
+                            Aboutevent,
+                            Desirability2),
+               Time),
+      equals(Desirability1, 1),
+      holds_at(desirability(Agent1,
+                            Agent2,
+                            Aboutevent,
+                            Desirability1),
+               Time),
+      holds_at(neg(happyFor(Agent1, Agent2, Aboutevent)),
+               Time),
+      not(happens(addHappyFor(Agent1, Agent2, Aboutevent),
+                  Time))
+    ]).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter11/Lottery.e',75).
+
+ /*  not(holds_at(believe(Agent1, Aboutevent), Time)) :-
+       diff(Agent1, Agent2),
+       holds_at(like(Agent1, Agent2), Time),
+       equals(Desirability2, 1),
+       holds_at(desirability(Agent1,
+                             Agent1,
+                             Aboutevent,
+                             Desirability2),
+                Time),
+       equals(Desirability1, 1),
+       holds_at(desirability(Agent1,
+                             Agent2,
+                             Aboutevent,
+                             Desirability1),
+                Time),
+       holds_at(neg(happyFor(Agent1, Agent2, Aboutevent)),
+                Time),
+       not(happens(addHappyFor(Agent1, Agent2, Aboutevent),
+                   Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter11/Lottery.e',75).
+
+ /*  [diff(Agent1, Agent2), holds_at(like(Agent1, Agent2), Time), equals(Desirability2, 1), holds_at(desirability(Agent1, Agent1, Aboutevent, Desirability2), Time), equals(Desirability1, 1), holds_at(desirability(Agent1, Agent2, Aboutevent, Desirability1), Time), holds_at(neg(happyFor(Agent1, Agent2, Aboutevent)), Time), not(happens(addHappyFor(Agent1, Agent2, Aboutevent), Time))] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(neg(believe(Agent1, Aboutevent)), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter11/Lottery.e',75).
+axiom(holds_at(neg(believe(Agent1, Aboutevent)), Time),
+   
+    [ diff(Agent1, Agent2),
+      holds_at(like(Agent1, Agent2), Time),
+      equals(Desirability2, 1),
+      holds_at(desirability(Agent1,
+                            Agent1,
+                            Aboutevent,
+                            Desirability2),
+               Time),
+      equals(Desirability1, 1),
+      holds_at(desirability(Agent1,
+                            Agent2,
+                            Aboutevent,
+                            Desirability1),
+               Time),
+      holds_at(neg(happyFor(Agent1, Agent2, Aboutevent)),
+               Time),
+      not(happens(addHappyFor(Agent1, Agent2, Aboutevent),
+                  Time))
+    ]).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter11/Lottery.e:84
+% Happens(WinLottery(Kate),0).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter11/Lottery.e',84).
+
+ /*  [] ->
+       ta(Ta_Param,
+          tvs1=[start],
+          tvs2=[start],
+          happens(winLottery(kate), start)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter11/Lottery.e',84).
+axiom(happens(winLottery(kate), start),
+    []).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter11/Lottery.e:86
+%; Psi
+% [agent1,agent2,aboutevent,desirability1,desirability2,time]
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter11/Lottery.e:89
+% HoldsAt(Desirability(agent1,agent2,aboutevent,desirability1),time) &
+% HoldsAt(Desirability(agent1,agent2,aboutevent,desirability2),time) ->
+% desirability1 = desirability2.
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter11/Lottery.e:91
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter11/Lottery.e',89).
+
+ /*  holds_at(desirability(Agent1, Agent2, Aboutevent, Desirability1), Time), holds_at(desirability(Agent1, Agent2, Aboutevent, Desirability2), Time) ->
+       equals(Desirability1, Desirability2).
+ */
+
+ /*  not(holds_at(desirability(Agent1, Agent2, Aboutevent, Desirability1), Time)) :-
+       holds_at(desirability(Agent1,
+                             Agent2,
+                             Aboutevent,
+                             Desirability2),
+                Time),
+       not(equals(Desirability1, Desirability2)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter11/Lottery.e',89).
+
+ /*  [holds_at(desirability(Agent1, Agent2, Aboutevent, Desirability2), Time), not(equals(Desirability1, Desirability2))] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(neg(desirability(Agent1,
+                                    Agent2,
+                                    Aboutevent,
+                                    Desirability1)),
+                   Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter11/Lottery.e',89).
+axiom(holds_at(neg(desirability(Agent1, Agent2, Aboutevent, Desirability1)), Time),
+   
+    [ holds_at(desirability(Agent1,
+                            Agent2,
+                            Aboutevent,
+                            Desirability2),
+               Time),
+      not(equals(Desirability1, Desirability2))
+    ]).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter11/Lottery.e',89).
+
+ /*  not(holds_at(desirability(Agent1, Agent2, Aboutevent, Desirability2), Time)) :-
+       holds_at(desirability(Agent1,
+                             Agent2,
+                             Aboutevent,
+                             Desirability1),
+                Time),
+       not(equals(Desirability1, Desirability2)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter11/Lottery.e',89).
+
+ /*  [holds_at(desirability(Agent1, Agent2, Aboutevent, Desirability1), Time), not(equals(Desirability1, Desirability2))] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(neg(desirability(Agent1,
+                                    Agent2,
+                                    Aboutevent,
+                                    Desirability2)),
+                   Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter11/Lottery.e',89).
+axiom(holds_at(neg(desirability(Agent1, Agent2, Aboutevent, Desirability2)), Time),
+   
+    [ holds_at(desirability(Agent1,
+                            Agent2,
+                            Aboutevent,
+                            Desirability1),
+               Time),
+      not(equals(Desirability2, Desirability1))
+    ]).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter11/Lottery.e:93
+%; Gamma
+% [agent,aboutevent]
+ % !HoldsAt(Joy(agent,aboutevent),0).
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter11/Lottery.e:95
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter11/Lottery.e',96).
+
+ /*  [] ->
+       ta(Ta_Param,
+          tvs1=[start],
+          tvs2=[start],
+          holds_at(neg(joy(Agent, Aboutevent)), start)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter11/Lottery.e',96).
+axiom(holds_at(neg(joy(Agent, Aboutevent)), start),
+    []).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter11/Lottery.e:96
+% [agent1,agent2,aboutevent]
+ % !HoldsAt(HappyFor(agent1,agent2,aboutevent),0).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter11/Lottery.e',96).
+
+ /*  [] ->
+       ta(Ta_Param,
+          tvs1=[start],
+          tvs2=[start],
+          holds_at(neg(happyFor(Agent1, Agent2, Aboutevent)),
+                   start)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter11/Lottery.e',96).
+axiom(holds_at(neg(happyFor(Agent1, Agent2, Aboutevent)), start),
+    []).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter11/Lottery.e:97
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter11/Lottery.e',98).
+% [aboutevent]
+ % !HoldsAt(Believe(Kate,aboutevent),0).
+
+ /*  [] ->
+       ta(Ta_Param,
+          tvs1=[start],
+          tvs2=[start],
+          holds_at(neg(believe(kate, Aboutevent)), start)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter11/Lottery.e',98).
+axiom(holds_at(neg(believe(kate, Aboutevent)), start),
+    []).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter11/Lottery.e:98
+% [aboutevent]
+ % !HoldsAt(Believe(Lisa,aboutevent),0).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter11/Lottery.e',98).
+
+ /*  [] ->
+       ta(Ta_Param,
+          tvs1=[start],
+          tvs2=[start],
+          holds_at(neg(believe(lisa, Aboutevent)), start)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter11/Lottery.e',98).
+axiom(holds_at(neg(believe(lisa, Aboutevent)), start),
+    []).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter11/Lottery.e:99
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter11/Lottery.e',100).
+% [agent1,agent2,time]
+ % HoldsAt(Like(agent1,agent2),time).
+
+ /*  [] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(like(Agent1, Agent2), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter11/Lottery.e',100).
+axiom(holds_at(like(Agent1, Agent2), Time),
+    []).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter11/Lottery.e:101
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter11/Lottery.e',102).
+% [time]
+ % HoldsAt(Desirability(Lisa,Kate,WinLotteryKate,1),time).
+
+ /*  [] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(desirability(lisa, kate, winLotteryKate, 1), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter11/Lottery.e',102).
+axiom(holds_at(desirability(lisa, kate, winLotteryKate, 1), Time),
+    []).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter11/Lottery.e:102
+% [time]
+ % HoldsAt(Desirability(Kate,Kate,WinLotteryKate,1),time).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter11/Lottery.e',102).
+
+ /*  [] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(desirability(kate, kate, winLotteryKate, 1), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter11/Lottery.e',102).
+axiom(holds_at(desirability(kate, kate, winLotteryKate, 1), Time),
+    []).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter11/Lottery.e:103
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter11/Lottery.e',104).
+% [time]
+ % HoldsAt(Desirability(Lisa,Lisa,WinLotteryKate,1),time).
+
+ /*  [] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(desirability(lisa, lisa, winLotteryKate, 1), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter11/Lottery.e',104).
+axiom(holds_at(desirability(lisa, lisa, winLotteryKate, 1), Time),
+    []).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter11/Lottery.e:104
+% [time]
+ % HoldsAt(Desirability(Kate,Kate,WinLotteryLisa,0),time).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter11/Lottery.e',104).
+
+ /*  [] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(desirability(kate, kate, winLotteryLisa, 0), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter11/Lottery.e',104).
+axiom(holds_at(desirability(kate, kate, winLotteryLisa, 0), Time),
+    []).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter11/Lottery.e:105
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter11/Lottery.e',106).
+% [time]
+ % HoldsAt(Desirability(Kate,Lisa,WinLotteryLisa,0),time).
+
+ /*  [] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(desirability(kate, lisa, winLotteryLisa, 0), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter11/Lottery.e',106).
+axiom(holds_at(desirability(kate, lisa, winLotteryLisa, 0), Time),
+    []).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter11/Lottery.e:106
+% [time]
+ % HoldsAt(Desirability(Kate,Kate,WinLotteryLisa,0),time).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter11/Lottery.e',106).
+
+ /*  [] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(desirability(kate, kate, winLotteryLisa, 0), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter11/Lottery.e',106).
+axiom(holds_at(desirability(kate, kate, winLotteryLisa, 0), Time),
+    []).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter11/Lottery.e:107
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter11/Lottery.e',108).
+% [time]
+ % HoldsAt(Desirability(Kate,Lisa,WinLotteryKate,0),time).
+
+ /*  [] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(desirability(kate, lisa, winLotteryKate, 0), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter11/Lottery.e',108).
+axiom(holds_at(desirability(kate, lisa, winLotteryKate, 0), Time),
+    []).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter11/Lottery.e:108
+% [time]
+ % HoldsAt(Desirability(Lisa,Lisa,WinLotteryLisa,0),time).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter11/Lottery.e',108).
+
+ /*  [] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(desirability(lisa, lisa, winLotteryLisa, 0), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter11/Lottery.e',108).
+axiom(holds_at(desirability(lisa, lisa, winLotteryLisa, 0), Time),
+    []).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter11/Lottery.e:109
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter11/Lottery.e',110).
+% [time]
+ % HoldsAt(Desirability(Lisa,Kate,WinLotteryLisa,1),time).
+
+ /*  [] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(desirability(lisa, kate, winLotteryLisa, 1), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter11/Lottery.e',110).
+axiom(holds_at(desirability(lisa, kate, winLotteryLisa, 1), Time),
+    []).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter11/Lottery.e:111
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter11/Lottery.e',112).
+% completion Happens
+==> completion(happens).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter11/Lottery.e:113
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter11/Lottery.e',114).
+% range time 0 3
+==> range(time,0,3).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter11/Lottery.e:114
+% range desirability -1 1
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter11/Lottery.e',114).
+==> range(desirability,-1,1).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter11/Lottery.e:115
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter11/Lottery.e',116).
+% range offset 1 1
+==> range(offset,1,1).
+%; End of file.

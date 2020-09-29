@@ -1,0 +1,2542 @@
+:-include(library('ec_planner/ec_test_incl')).
+:-expects_dialect(pfc).
+% Wed, 01 Apr 2020 20:02:22 GMT
+% From ../ecnet/RTSpace.pel:4
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RidingInACarriage.e',185).
+
+ /*  loading(load_e_pl,
+   	'/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e').
+ */
+%;
+%; Copyright (c) 2005 IBM Corporation and others.
+%; All rights reserved. This program and the accompanying materials
+%; are made available under the terms of the Common Public License v1.0
+%; which accompanies this distribution, and is available at
+%; http://www.eclipse.org/legal/cpl-v10.html
+%;
+%; Contributors:
+%; IBM - Initial implementation
+%;
+%; RTSpace: room-scale topological space
+%;
+%; We use topological and metric representations of space,
+%; at two levels of granularity---room-scale and object-scale.
+%; The RTSpace representation deals with topological space at
+%; the scale of rooms and outdoor locations.
+%; This representation of space consists of locations, which
+%; are connected by portals. There are two types of locations:
+%; rooms and outside areas (outsides).
+%;
+%; object is at location.
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e:22
+% fluent At(object,location)
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e',22).
+fluent(at(object,location)).
+==> mpred_prop(at(object,location),fluent).
+==> meta_argtypes(at(object,location)).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e:23
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e',24).
+% manualrelease At
+
+ /*  fix_axiom_head(Time) ->
+       [manualrelease(at), ->, holds_at(manualrelease(at), Time)].
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e',24).
+
+ /*  [] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(manualrelease(at), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e',24).
+axiom(holds_at(manualrelease(at), Time),
+    []).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e:25
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e',26).
+% [object1,location,time]
+% (
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e:26
+% {object2} PartOf(object1,object2)) ->
+% ReleasedAt(At(object1,location),time).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e',26).
+
+ /*  exists([Object2],
+    partOf(Object1, Object2) ->
+       releasedAt(at(Object1, Location), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e',26).
+
+ /*  releasedAt(at(Object1, Location), Time) :-
+       partOf(Object1, Object2),
+       some(Object2, '$kolem_Fn_228'(Object1, Location, Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e',26).
+
+ /*  [partOf(Object1, Object2), some(Object2, '$kolem_Fn_228'(Object1, Location, Time))] ->
+       ta(Ta_Param,
+          tvs1=[],
+          tvs2=[],
+          releasedAt(at(Object1, Location), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e',26).
+axiom(releasedAt(at(Object1, Location), Time),
+   
+    [ partOf(Object1, Object2),
+      some(Object2,
+           '$kolem_Fn_228'(Object1, Location, Time))
+    ]).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e',26).
+
+ /*  not(partOf(Object1, Object2)) :-
+       not(releasedAt(at(Object1, Location), Time)),
+       some(Object2, '$kolem_Fn_228'(Object1, Location, Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e',26).
+
+ /*  [not(releasedAt(at(Object1, Location), Time)), some(Object2, '$kolem_Fn_228'(Object1, Location, Time))] ->
+       ta(Ta_Param6,
+          tvs1=[],
+          tvs2=[],
+          not(partOf(Object1, Object2))).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e',26).
+axiom(not(partOf(Object1, Object2)),
+   
+    [ not(releasedAt(at(Object1, Location), Time)),
+      some(Object2,
+           '$kolem_Fn_228'(Object1, Location, Time))
+    ]).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e:29
+%; A state constraint says that an object
+%; is at one location at a time:
+% [object,location1,location2,time]
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e:32
+% HoldsAt(At(object,location1),time) &
+% HoldsAt(At(object,location2),time) ->
+% location1=location2.
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e:34
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e',32).
+
+ /*  holds_at(at(Object, Location1), Time), holds_at(at(Object, Location2), Time) ->
+       equals(Location1, Location2).
+ */
+
+ /*  not(holds_at(at(Object, Location1), Time)) :-
+       holds_at(at(Object, Location2), Time),
+       not(equals(Location1, Location2)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e',32).
+
+ /*  [holds_at(at(Object, Location2), Time), not(equals(Location1, Location2))] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(neg(at(Object, Location1)), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e',32).
+axiom(holds_at(neg(at(Object, Location1)), Time),
+   
+    [ holds_at(at(Object, Location2), Time),
+      not(equals(Location1, Location2))
+    ]).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e',32).
+
+ /*  not(holds_at(at(Object, Location2), Time)) :-
+       holds_at(at(Object, Location1), Time),
+       not(equals(Location1, Location2)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e',32).
+
+ /*  [holds_at(at(Object, Location1), Time), not(equals(Location1, Location2))] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(neg(at(Object, Location2)), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e',32).
+axiom(holds_at(neg(at(Object, Location2)), Time),
+   
+    [ holds_at(at(Object, Location1), Time),
+      not(equals(Location2, Location1))
+    ]).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e:36
+%; connectivity
+%; Side one of portal is location.
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e:39
+% function Side1(portal): location
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e',39).
+function(side1(portal)).
+==> mpred_prop(side1(portal),function).
+==> meta_argtypes(side1(portal)).
+predicate(side1Pred(portal,location)).
+==> mpred_prop(side1Pred(portal,location),predicate).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e',39).
+==> meta_argtypes(side1Pred(portal,location)).
+
+ /*  fix_axiom_head(Time) ->
+       
+       [ functional_predicate(side1, side1Pred),
+          (->),
+         holds_at(functional_predicate(side1, side1Pred), Time)
+       ].
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e',39).
+
+ /*  [] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(functional_predicate(side1, side1Pred), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e',39).
+axiom(holds_at(functional_predicate(side1, side1Pred), Time),
+    []).
+==> resultIsa(side1,location).
+%; Side two of portal is location.
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e:41
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e',42).
+% function Side2(portal): location
+function(side2(portal)).
+==> mpred_prop(side2(portal),function).
+==> meta_argtypes(side2(portal)).
+predicate(side2Pred(portal,location)).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e',42).
+==> mpred_prop(side2Pred(portal,location),predicate).
+==> meta_argtypes(side2Pred(portal,location)).
+
+ /*  fix_axiom_head(Time) ->
+       
+       [ functional_predicate(side2, side2Pred),
+          (->),
+         holds_at(functional_predicate(side2, side2Pred), Time)
+       ].
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e',42).
+
+ /*  [] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(functional_predicate(side2, side2Pred), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e',42).
+axiom(holds_at(functional_predicate(side2, side2Pred), Time),
+    []).
+==> resultIsa(side2,location).
+%; The building of room is building.
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e:44
+% function BuildingOf(room): building
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e',44).
+function(buildingOf(room)).
+==> mpred_prop(buildingOf(room),function).
+==> meta_argtypes(buildingOf(room)).
+predicate(building(room,building)).
+==> mpred_prop(building(room,building),predicate).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e',44).
+==> meta_argtypes(building(room,building)).
+
+ /*  fix_axiom_head(Time) ->
+       
+       [ functional_predicate(buildingOf, building),
+          (->),
+         holds_at(functional_predicate(buildingOf, building), Time)
+       ].
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e',44).
+
+ /*  [] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(functional_predicate(buildingOf, building), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e',44).
+axiom(holds_at(functional_predicate(buildingOf, building), Time),
+    []).
+==> resultIsa(buildingOf,building).
+%; object is at a location that has portal.
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e:47
+% fluent NearPortal(object,portal)
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e',47).
+fluent(nearPortal(object,portal)).
+==> mpred_prop(nearPortal(object,portal),fluent).
+==> meta_argtypes(nearPortal(object,portal)).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e:48
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e',49).
+% noninertial NearPortal
+==> noninertial(nearPortal).
+%; A state constraint says that an object is near
+%; a portal if and only if there is a location such that
+%; the object is at the location and one of the sides
+%; of the portal is the location:
+% [object,portal,time]
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e:55
+% HoldsAt(NearPortal(object,portal),time) <->
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e:56
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e',55).
+% {location}% 
+%  (Side1(portal)=location|
+%   Side2(portal)=location) &
+%  HoldsAt(At(object,location),time).
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e:59
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e',57).
+
+ /*  exists([Location],
+    holds_at(nearPortal(Object, Portal), Time) <->
+       (   equals(side1(Portal), Location)
+       ;   equals(side2(Portal), Location)
+       ),
+       holds_at(at(Object, Location), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e',57).
+
+ /*  not(holds_at(nearPortal(Object, Portal), Time)) :-
+       (   not(equals(side1(Portal), Location)),
+           not(equals(side2(Portal), Location))
+       ;   not(holds_at(at(Object, Location), Time))
+       ),
+       some(Location, '$kolem_Fn_229'(Object, Portal, Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e',57).
+
+ /*  [(not(equals(side1(Portal), Location)), not(equals(side2(Portal), Location));holds_at(neg(at(Object, Location)), Time)), some(Location, '$kolem_Fn_229'(Object, Portal, Time))] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(neg(nearPortal(Object, Portal)), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e',57).
+axiom(holds_at(neg(nearPortal(Object, Portal)), Time),
+   
+    [  (not(equals(side1(Portal), Location)), not(equals(side2(Portal), Location));holds_at(neg(at(Object, Location)), Time)),
+      some(Location, '$kolem_Fn_229'(Object, Portal, Time))
+    ]).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e',57).
+
+ /*  holds_at(at(Object, Location), Time) :-
+       holds_at(nearPortal(Object, Portal), Time),
+       some(Location, '$kolem_Fn_229'(Object, Portal, Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e',57).
+
+ /*  [holds_at(nearPortal(Object, Portal), Time), some(Location, '$kolem_Fn_229'(Object, Portal, Time))] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(at(Object, Location), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e',57).
+axiom(holds_at(at(Object, Location), Time),
+   
+    [ holds_at(nearPortal(Object, Portal), Time),
+      some(Location, '$kolem_Fn_229'(Object, Portal, Time))
+    ]).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e',57).
+
+ /*  holds_at(nearPortal(Object, Portal), Time) :-
+       ( holds_at(at(Object, Location), Time),
+         (   equals(side1(Portal), Location)
+         ;   equals(side2(Portal), Location)
+         )
+       ),
+       some(Location, '$kolem_Fn_229'(Object, Portal, Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e',57).
+
+ /*  [holds_at(at(Object, Location), Time),  (equals(side1(Portal), Location);equals(side2(Portal), Location)), some(Location, '$kolem_Fn_229'(Object, Portal, Time))] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(nearPortal(Object, Portal), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e',57).
+axiom(holds_at(nearPortal(Object, Portal), Time),
+   
+    [ holds_at(at(Object, Location), Time),
+       (equals(side1(Portal), Location);equals(side2(Portal), Location)),
+      some(Location, '$kolem_Fn_229'(Object, Portal, Time))
+    ]).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e',57).
+
+ /*  not(holds_at(at(Object, Location), Time)) :-
+       (   equals(side1(Portal), Location)
+       ;   equals(side2(Portal), Location)
+       ),
+       not(holds_at(nearPortal(Object, Portal), Time)),
+       some(Location, '$kolem_Fn_229'(Object, Portal, Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e',57).
+
+ /*  [(equals(side1(Portal), Location);equals(side2(Portal), Location)), holds_at(neg(nearPortal(Object, Portal)), Time), some(Location, '$kolem_Fn_229'(Object, Portal, Time))] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(neg(at(Object, Location)), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e',57).
+axiom(holds_at(neg(at(Object, Location)), Time),
+   
+    [  (equals(side1(Portal), Location);equals(side2(Portal), Location)),
+      holds_at(neg(nearPortal(Object, Portal)), Time),
+      some(Location, '$kolem_Fn_229'(Object, Portal, Time))
+    ]).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e:61
+%; locking and unlocking doors
+%; agent unlocks door.
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e:64
+% event DoorUnlock(agent,door)
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e',64).
+event(doorUnlock(agent,door)).
+==> mpred_prop(doorUnlock(agent,door),event).
+==> meta_argtypes(doorUnlock(agent,door)).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e:65
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e',64).
+%; agent locks door.
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e:66
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e',67).
+% event DoorLock(agent,door)
+event(doorLock(agent,door)).
+==> mpred_prop(doorLock(agent,door),event).
+==> meta_argtypes(doorLock(agent,door)).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e:67
+%; door is unlocked.
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e:68
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e',69).
+% fluent DoorUnlocked(door)
+fluent(doorUnlocked(door)).
+==> mpred_prop(doorUnlocked(door),fluent).
+==> meta_argtypes(doorUnlocked(door)).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e:70
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e',71).
+%; A precondition axiom states that
+%; for an agent to unlock a door,
+%; the agent must be awake,
+%; the door must not already be unlocked, and
+%; the agent must be near the door:
+% [agent,door,time]
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e:76
+% Happens(DoorUnlock(agent,door),time) ->
+% HoldsAt(Awake(agent),time) &
+% !HoldsAt(DoorUnlocked(door),time) &
+% HoldsAt(NearPortal(agent,door),time).
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e:79
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e',76).
+
+ /*  happens(doorUnlock(Agent, Door), Time) ->
+       holds_at(awake(Agent), Time),
+       holds_at(neg(doorUnlocked(Door)), Time),
+       holds_at(nearPortal(Agent, Door), Time).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e',76).
+
+ /*  not(happens(doorUnlock(Agent, Door), Time)) :-
+       (   not(holds_at(awake(Agent), Time))
+       ;   not(holds_at(neg(doorUnlocked(Door)), Time))
+       ;   not(holds_at(nearPortal(Agent, Door), Time))
+       ).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e',76).
+
+ /*  [(holds_at(neg(awake(Agent)), Time);holds_at(doorUnlocked(Door), Time);holds_at(neg(nearPortal(Agent, Door)), Time))] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          not(happens(doorUnlock(Agent, Door), Time))).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e',76).
+axiom(not(happens(doorUnlock(Agent, Door), Time)),
+   
+    [  (holds_at(neg(awake(Agent)), Time);holds_at(doorUnlocked(Door), Time);holds_at(neg(nearPortal(Agent, Door)), Time))
+    ]).
+
+ /*  holds_at(awake(Agent), Time) :-
+       happens(doorUnlock(Agent, Door), Time).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e',76).
+
+ /*  [holds_at(metreqs(doorUnlock(Agent, Door)), Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          requires(doorUnlock(Agent, Door), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e',76).
+axiom(requires(doorUnlock(Agent, Door), Time),
+    [holds_at(metreqs(doorUnlock(Agent, Door)), Time)]).
+
+ /*  [holds_at(awake(Agent), Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(metreqs(doorUnlock(Agent, Door)), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e',76).
+axiom(holds_at(metreqs(doorUnlock(Agent, Door)), Time),
+    [holds_at(awake(Agent), Time)]).
+
+ /*  holds_at(neg(doorUnlocked(Door)), Time) :-
+       happens(doorUnlock(Agent, Door), Time).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e',76).
+
+ /*  [holds_at(metreqs(doorUnlock(Agent, Door)), Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          requires(doorUnlock(Agent, Door), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e',76).
+axiom(requires(doorUnlock(Agent, Door), Time),
+    [holds_at(metreqs(doorUnlock(Agent, Door)), Time)]).
+
+ /*  [holds_at(neg(doorUnlocked(Door)), Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(metreqs(doorUnlock(Agent, Door)), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e',76).
+axiom(holds_at(metreqs(doorUnlock(Agent, Door)), Time),
+    [holds_at(neg(doorUnlocked(Door)), Time)]).
+
+ /*  holds_at(nearPortal(Agent, Door), Time) :-
+       happens(doorUnlock(Agent, Door), Time).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e',76).
+
+ /*  [holds_at(metreqs(doorUnlock(Agent, Door)), Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          requires(doorUnlock(Agent, Door), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e',76).
+axiom(requires(doorUnlock(Agent, Door), Time),
+    [holds_at(metreqs(doorUnlock(Agent, Door)), Time)]).
+
+ /*  [holds_at(nearPortal(Agent, Door), Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(metreqs(doorUnlock(Agent, Door)), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e',76).
+axiom(holds_at(metreqs(doorUnlock(Agent, Door)), Time),
+    [holds_at(nearPortal(Agent, Door), Time)]).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e:81
+%; An effect axiom states that
+%; if an agent unlocks a door,
+%; the door will be unlocked:
+% [agent,door,time]
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e:85
+% Initiates(DoorUnlock(agent,door),DoorUnlocked(door),time).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e',85).
+
+ /*  [] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          initiates(doorUnlock(Agent, Door),
+                    doorUnlocked(Door),
+                    Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e',85).
+axiom(initiates(doorUnlock(Agent, Door), doorUnlocked(Door), Time),
+    []).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e:87
+%; A precondition axiom states that
+%; for an agent to lock a door,
+%; the agent must be awake,
+%; the door must be unlocked, and
+%; the agent must be near the door:
+% [agent,door,time]
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e:93
+% Happens(DoorLock(agent,door),time) ->
+% HoldsAt(Awake(agent),time) &
+% HoldsAt(DoorUnlocked(door),time) &
+% HoldsAt(NearPortal(agent,door),time).
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e:96
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e',93).
+
+ /*  happens(doorLock(Agent, Door), Time) ->
+       holds_at(awake(Agent), Time),
+       holds_at(doorUnlocked(Door), Time),
+       holds_at(nearPortal(Agent, Door), Time).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e',93).
+
+ /*  not(happens(doorLock(Agent, Door), Time)) :-
+       (   not(holds_at(awake(Agent), Time))
+       ;   not(holds_at(doorUnlocked(Door), Time))
+       ;   not(holds_at(nearPortal(Agent, Door), Time))
+       ).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e',93).
+
+ /*  [(holds_at(neg(awake(Agent)), Time);holds_at(neg(doorUnlocked(Door)), Time);holds_at(neg(nearPortal(Agent, Door)), Time))] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          not(happens(doorLock(Agent, Door), Time))).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e',93).
+axiom(not(happens(doorLock(Agent, Door), Time)),
+   
+    [  (holds_at(neg(awake(Agent)), Time);holds_at(neg(doorUnlocked(Door)), Time);holds_at(neg(nearPortal(Agent, Door)), Time))
+    ]).
+
+ /*  holds_at(awake(Agent), Time) :-
+       happens(doorLock(Agent, Door), Time).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e',93).
+
+ /*  [holds_at(metreqs(doorLock(Agent, Door)), Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          requires(doorLock(Agent, Door), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e',93).
+axiom(requires(doorLock(Agent, Door), Time),
+    [holds_at(metreqs(doorLock(Agent, Door)), Time)]).
+
+ /*  [holds_at(awake(Agent), Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(metreqs(doorLock(Agent, Door)), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e',93).
+axiom(holds_at(metreqs(doorLock(Agent, Door)), Time),
+    [holds_at(awake(Agent), Time)]).
+
+ /*  holds_at(doorUnlocked(Door), Time) :-
+       happens(doorLock(Agent, Door), Time).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e',93).
+
+ /*  [holds_at(metreqs(doorLock(Agent, Door)), Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          requires(doorLock(Agent, Door), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e',93).
+axiom(requires(doorLock(Agent, Door), Time),
+    [holds_at(metreqs(doorLock(Agent, Door)), Time)]).
+
+ /*  [holds_at(doorUnlocked(Door), Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(metreqs(doorLock(Agent, Door)), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e',93).
+axiom(holds_at(metreqs(doorLock(Agent, Door)), Time),
+    [holds_at(doorUnlocked(Door), Time)]).
+
+ /*  holds_at(nearPortal(Agent, Door), Time) :-
+       happens(doorLock(Agent, Door), Time).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e',93).
+
+ /*  [holds_at(metreqs(doorLock(Agent, Door)), Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          requires(doorLock(Agent, Door), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e',93).
+axiom(requires(doorLock(Agent, Door), Time),
+    [holds_at(metreqs(doorLock(Agent, Door)), Time)]).
+
+ /*  [holds_at(nearPortal(Agent, Door), Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(metreqs(doorLock(Agent, Door)), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e',93).
+axiom(holds_at(metreqs(doorLock(Agent, Door)), Time),
+    [holds_at(nearPortal(Agent, Door), Time)]).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e:98
+%; An effect axiom states that
+%; if an agent locks a door,
+%; the door will no longer be unlocked.
+% [agent,door,time]
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e:102
+% Terminates(DoorLock(agent,door),DoorUnlocked(door),time).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e',102).
+
+ /*  [] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          terminates(doorLock(Agent, Door),
+                     doorUnlocked(Door),
+                     Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e',102).
+axiom(terminates(doorLock(Agent, Door), doorUnlocked(Door), Time),
+    []).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e:104
+%; A state constraint says that if a door is open,
+%; it is unlocked:
+% [door,time]
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e:107
+% HoldsAt(DoorIsOpen(door),time) -> HoldsAt(DoorUnlocked(door),time).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e',107).
+
+ /*  holds_at(doorIsOpen(Door), Time) ->
+       holds_at(doorUnlocked(Door), Time).
+ */
+
+ /*  holds_at(doorUnlocked(Door), Time) :-
+       holds_at(doorIsOpen(Door), Time).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e',107).
+
+ /*  [holds_at(doorIsOpen(Door), Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(doorUnlocked(Door), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e',107).
+axiom(holds_at(doorUnlocked(Door), Time),
+    [holds_at(doorIsOpen(Door), Time)]).
+
+ /*  not(holds_at(doorIsOpen(Door), Time)) :-
+       not(holds_at(doorUnlocked(Door), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e',107).
+
+ /*  [holds_at(neg(doorUnlocked(Door)), Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(neg(doorIsOpen(Door)), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e',107).
+axiom(holds_at(neg(doorIsOpen(Door)), Time),
+    [holds_at(neg(doorUnlocked(Door)), Time)]).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e:109
+%; opening and closing doors
+%; agent opens door.
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e:112
+% event DoorOpen(agent,door)
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e',112).
+event(doorOpen(agent,door)).
+==> mpred_prop(doorOpen(agent,door),event).
+==> meta_argtypes(doorOpen(agent,door)).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e:113
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e',112).
+%; agent closes door.
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e:114
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e',115).
+% event DoorClose(agent,door)
+event(doorClose(agent,door)).
+==> mpred_prop(doorClose(agent,door),event).
+==> meta_argtypes(doorClose(agent,door)).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e:115
+%; door is open.
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e:116
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e',117).
+% fluent DoorIsOpen(door)
+fluent(doorIsOpen(door)).
+==> mpred_prop(doorIsOpen(door),fluent).
+==> meta_argtypes(doorIsOpen(door)).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e:118
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e',119).
+%; A precondition axiom states that
+%; for an agent to open a door,
+%; the agent must be awake,
+%; the door must not already be open,
+%; the door must be unlocked, and
+%; the agent must be near the door:
+% [agent,door,time]
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e:125
+% Happens(DoorOpen(agent,door),time) ->
+% HoldsAt(Awake(agent),time) &
+% !HoldsAt(DoorIsOpen(door),time) &
+% HoldsAt(DoorUnlocked(door),time) &
+% HoldsAt(NearPortal(agent,door),time).
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e:129
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e',125).
+
+ /*  happens(doorOpen(Agent, Door), Time) ->
+       holds_at(awake(Agent), Time),
+       holds_at(neg(doorIsOpen(Door)), Time),
+       holds_at(doorUnlocked(Door), Time),
+       holds_at(nearPortal(Agent, Door), Time).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e',125).
+
+ /*  not(happens(doorOpen(Agent, Door), Time)) :-
+       (   not(holds_at(awake(Agent), Time))
+       ;   not(holds_at(neg(doorIsOpen(Door)), Time))
+       ;   not(holds_at(doorUnlocked(Door), Time))
+       ;   not(holds_at(nearPortal(Agent, Door), Time))
+       ).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e',125).
+
+ /*  [(holds_at(neg(awake(Agent)), Time);holds_at(doorIsOpen(Door), Time);holds_at(neg(doorUnlocked(Door)), Time);holds_at(neg(nearPortal(Agent, Door)), Time))] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          not(happens(doorOpen(Agent, Door), Time))).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e',125).
+axiom(not(happens(doorOpen(Agent, Door), Time)),
+   
+    [  (holds_at(neg(awake(Agent)), Time);holds_at(doorIsOpen(Door), Time);holds_at(neg(doorUnlocked(Door)), Time);holds_at(neg(nearPortal(Agent, Door)), Time))
+    ]).
+
+ /*  holds_at(awake(Agent), Time) :-
+       happens(doorOpen(Agent, Door), Time).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e',125).
+
+ /*  [holds_at(metreqs(doorOpen(Agent, Door)), Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          requires(doorOpen(Agent, Door), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e',125).
+axiom(requires(doorOpen(Agent, Door), Time),
+    [holds_at(metreqs(doorOpen(Agent, Door)), Time)]).
+
+ /*  [holds_at(awake(Agent), Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(metreqs(doorOpen(Agent, Door)), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e',125).
+axiom(holds_at(metreqs(doorOpen(Agent, Door)), Time),
+    [holds_at(awake(Agent), Time)]).
+
+ /*  holds_at(neg(doorIsOpen(Door)), Time) :-
+       happens(doorOpen(Agent, Door), Time).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e',125).
+
+ /*  [holds_at(metreqs(doorOpen(Agent, Door)), Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          requires(doorOpen(Agent, Door), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e',125).
+axiom(requires(doorOpen(Agent, Door), Time),
+    [holds_at(metreqs(doorOpen(Agent, Door)), Time)]).
+
+ /*  [holds_at(neg(doorIsOpen(Door)), Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(metreqs(doorOpen(Agent, Door)), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e',125).
+axiom(holds_at(metreqs(doorOpen(Agent, Door)), Time),
+    [holds_at(neg(doorIsOpen(Door)), Time)]).
+
+ /*  holds_at(doorUnlocked(Door), Time) :-
+       happens(doorOpen(Agent, Door), Time).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e',125).
+
+ /*  [holds_at(metreqs(doorOpen(Agent, Door)), Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          requires(doorOpen(Agent, Door), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e',125).
+axiom(requires(doorOpen(Agent, Door), Time),
+    [holds_at(metreqs(doorOpen(Agent, Door)), Time)]).
+
+ /*  [holds_at(doorUnlocked(Door), Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(metreqs(doorOpen(Agent, Door)), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e',125).
+axiom(holds_at(metreqs(doorOpen(Agent, Door)), Time),
+    [holds_at(doorUnlocked(Door), Time)]).
+
+ /*  holds_at(nearPortal(Agent, Door), Time) :-
+       happens(doorOpen(Agent, Door), Time).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e',125).
+
+ /*  [holds_at(metreqs(doorOpen(Agent, Door)), Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          requires(doorOpen(Agent, Door), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e',125).
+axiom(requires(doorOpen(Agent, Door), Time),
+    [holds_at(metreqs(doorOpen(Agent, Door)), Time)]).
+
+ /*  [holds_at(nearPortal(Agent, Door), Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(metreqs(doorOpen(Agent, Door)), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e',125).
+axiom(holds_at(metreqs(doorOpen(Agent, Door)), Time),
+    [holds_at(nearPortal(Agent, Door), Time)]).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e:131
+%; An effect axiom states that
+%; if an agent opens a door,
+%; the door will be open:
+% [agent,door,time]
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e:135
+% Initiates(DoorOpen(agent,door),DoorIsOpen(door),time).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e',135).
+
+ /*  [] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          initiates(doorOpen(Agent, Door),
+                    doorIsOpen(Door),
+                    Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e',135).
+axiom(initiates(doorOpen(Agent, Door), doorIsOpen(Door), Time),
+    []).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e:137
+%; A precondition axiom states that
+%; for an agent to close a door,
+%; the agent must be awake,
+%; the door must be open,
+%; the door must be unlocked, and
+%; the agent must be near the door:
+% [agent,door,time]
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e:144
+% Happens(DoorClose(agent,door),time) ->
+% HoldsAt(Awake(agent),time) &
+% HoldsAt(DoorIsOpen(door),time) &
+% HoldsAt(DoorUnlocked(door),time) &
+% HoldsAt(NearPortal(agent,door),time).
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e:148
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e',144).
+
+ /*  happens(doorClose(Agent, Door), Time) ->
+       holds_at(awake(Agent), Time),
+       holds_at(doorIsOpen(Door), Time),
+       holds_at(doorUnlocked(Door), Time),
+       holds_at(nearPortal(Agent, Door), Time).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e',144).
+
+ /*  not(happens(doorClose(Agent, Door), Time)) :-
+       (   not(holds_at(awake(Agent), Time))
+       ;   not(holds_at(doorIsOpen(Door), Time))
+       ;   not(holds_at(doorUnlocked(Door), Time))
+       ;   not(holds_at(nearPortal(Agent, Door), Time))
+       ).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e',144).
+
+ /*  [(holds_at(neg(awake(Agent)), Time);holds_at(neg(doorIsOpen(Door)), Time);holds_at(neg(doorUnlocked(Door)), Time);holds_at(neg(nearPortal(Agent, Door)), Time))] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          not(happens(doorClose(Agent, Door), Time))).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e',144).
+axiom(not(happens(doorClose(Agent, Door), Time)),
+   
+    [  (holds_at(neg(awake(Agent)), Time);holds_at(neg(doorIsOpen(Door)), Time);holds_at(neg(doorUnlocked(Door)), Time);holds_at(neg(nearPortal(Agent, Door)), Time))
+    ]).
+
+ /*  holds_at(awake(Agent), Time) :-
+       happens(doorClose(Agent, Door), Time).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e',144).
+
+ /*  [holds_at(metreqs(doorClose(Agent, Door)), Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          requires(doorClose(Agent, Door), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e',144).
+axiom(requires(doorClose(Agent, Door), Time),
+    [holds_at(metreqs(doorClose(Agent, Door)), Time)]).
+
+ /*  [holds_at(awake(Agent), Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(metreqs(doorClose(Agent, Door)), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e',144).
+axiom(holds_at(metreqs(doorClose(Agent, Door)), Time),
+    [holds_at(awake(Agent), Time)]).
+
+ /*  holds_at(doorIsOpen(Door), Time) :-
+       happens(doorClose(Agent, Door), Time).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e',144).
+
+ /*  [holds_at(metreqs(doorClose(Agent, Door)), Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          requires(doorClose(Agent, Door), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e',144).
+axiom(requires(doorClose(Agent, Door), Time),
+    [holds_at(metreqs(doorClose(Agent, Door)), Time)]).
+
+ /*  [holds_at(doorIsOpen(Door), Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(metreqs(doorClose(Agent, Door)), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e',144).
+axiom(holds_at(metreqs(doorClose(Agent, Door)), Time),
+    [holds_at(doorIsOpen(Door), Time)]).
+
+ /*  holds_at(doorUnlocked(Door), Time) :-
+       happens(doorClose(Agent, Door), Time).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e',144).
+
+ /*  [holds_at(metreqs(doorClose(Agent, Door)), Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          requires(doorClose(Agent, Door), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e',144).
+axiom(requires(doorClose(Agent, Door), Time),
+    [holds_at(metreqs(doorClose(Agent, Door)), Time)]).
+
+ /*  [holds_at(doorUnlocked(Door), Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(metreqs(doorClose(Agent, Door)), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e',144).
+axiom(holds_at(metreqs(doorClose(Agent, Door)), Time),
+    [holds_at(doorUnlocked(Door), Time)]).
+
+ /*  holds_at(nearPortal(Agent, Door), Time) :-
+       happens(doorClose(Agent, Door), Time).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e',144).
+
+ /*  [holds_at(metreqs(doorClose(Agent, Door)), Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          requires(doorClose(Agent, Door), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e',144).
+axiom(requires(doorClose(Agent, Door), Time),
+    [holds_at(metreqs(doorClose(Agent, Door)), Time)]).
+
+ /*  [holds_at(nearPortal(Agent, Door), Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(metreqs(doorClose(Agent, Door)), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e',144).
+axiom(holds_at(metreqs(doorClose(Agent, Door)), Time),
+    [holds_at(nearPortal(Agent, Door), Time)]).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e:150
+%; An effect axiom states that
+%; if an agent closes a door,
+%; the door will no longer be open:
+% [agent,door,time]
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e:154
+% Terminates(DoorClose(agent,door),DoorIsOpen(door),time).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e',154).
+
+ /*  [] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          terminates(doorClose(Agent, Door),
+                     doorIsOpen(Door),
+                     Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e',154).
+axiom(terminates(doorClose(Agent, Door), doorIsOpen(Door), Time),
+    []).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e:156
+%; passing through doors
+%; agent walks through side one of door.
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e:159
+% event WalkThroughDoor12(agent,door)
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e',159).
+event(walkThroughDoor12(agent,door)).
+==> mpred_prop(walkThroughDoor12(agent,door),event).
+==> meta_argtypes(walkThroughDoor12(agent,door)).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e:160
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e',159).
+%; agent walks through side two of door.
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e:161
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e',162).
+% event WalkThroughDoor21(agent,door)
+event(walkThroughDoor21(agent,door)).
+==> mpred_prop(walkThroughDoor21(agent,door),event).
+==> meta_argtypes(walkThroughDoor21(agent,door)).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e:163
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e',164).
+%; Precondition axioms state that
+%; for an agent to walk through a side of a door,
+%; the agent must be awake and standing,
+%; the door must be open, and
+%; the agent must be at the side of the door that
+%; the agent walks through:
+% [agent,door,time]
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e:170
+% Happens(WalkThroughDoor12(agent,door),time) ->
+% HoldsAt(Awake(agent),time) &
+% HoldsAt(Standing(agent),time) &
+% HoldsAt(DoorIsOpen(door),time) &
+% HoldsAt(At(agent,Side1(door)),time).
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e:174
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e',170).
+
+ /*  happens(walkThroughDoor12(Agent, Door), Time) ->
+       holds_at(awake(Agent), Time),
+       holds_at(standing(Agent), Time),
+       holds_at(doorIsOpen(Door), Time),
+       holds_at(at(Agent, side1(Door)), Time).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e',170).
+
+ /*  not(happens(walkThroughDoor12(Agent, Door), Time)) :-
+       (   not(holds_at(awake(Agent), Time))
+       ;   not(holds_at(standing(Agent), Time))
+       ;   not(holds_at(doorIsOpen(Door), Time))
+       ;   not(holds_at(at(Agent, side1(Door)), Time))
+       ).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e',170).
+
+ /*  [(holds_at(neg(awake(Agent)), Time);holds_at(neg(standing(Agent)), Time);holds_at(neg(doorIsOpen(Door)), Time);holds_at(neg(at(Agent, side1(Door))), Time))] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          not(happens(walkThroughDoor12(Agent, Door), Time))).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e',170).
+axiom(not(happens(walkThroughDoor12(Agent, Door), Time)),
+   
+    [  (holds_at(neg(awake(Agent)), Time);holds_at(neg(standing(Agent)), Time);holds_at(neg(doorIsOpen(Door)), Time);holds_at(neg(at(Agent, side1(Door))), Time))
+    ]).
+
+ /*  holds_at(awake(Agent), Time) :-
+       happens(walkThroughDoor12(Agent, Door), Time).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e',170).
+
+ /*  [holds_at(metreqs(walkThroughDoor12(Agent, Door)), Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          requires(walkThroughDoor12(Agent, Door), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e',170).
+axiom(requires(walkThroughDoor12(Agent, Door), Time),
+    [holds_at(metreqs(walkThroughDoor12(Agent, Door)), Time)]).
+
+ /*  [holds_at(awake(Agent), Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(metreqs(walkThroughDoor12(Agent, Door)), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e',170).
+axiom(holds_at(metreqs(walkThroughDoor12(Agent, Door)), Time),
+    [holds_at(awake(Agent), Time)]).
+
+ /*  holds_at(standing(Agent), Time) :-
+       happens(walkThroughDoor12(Agent, Door), Time).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e',170).
+
+ /*  [holds_at(metreqs(walkThroughDoor12(Agent, Door)), Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          requires(walkThroughDoor12(Agent, Door), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e',170).
+axiom(requires(walkThroughDoor12(Agent, Door), Time),
+    [holds_at(metreqs(walkThroughDoor12(Agent, Door)), Time)]).
+
+ /*  [holds_at(standing(Agent), Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(metreqs(walkThroughDoor12(Agent, Door)), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e',170).
+axiom(holds_at(metreqs(walkThroughDoor12(Agent, Door)), Time),
+    [holds_at(standing(Agent), Time)]).
+
+ /*  holds_at(doorIsOpen(Door), Time) :-
+       happens(walkThroughDoor12(Agent, Door), Time).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e',170).
+
+ /*  [holds_at(metreqs(walkThroughDoor12(Agent, Door)), Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          requires(walkThroughDoor12(Agent, Door), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e',170).
+axiom(requires(walkThroughDoor12(Agent, Door), Time),
+    [holds_at(metreqs(walkThroughDoor12(Agent, Door)), Time)]).
+
+ /*  [holds_at(doorIsOpen(Door), Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(metreqs(walkThroughDoor12(Agent, Door)), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e',170).
+axiom(holds_at(metreqs(walkThroughDoor12(Agent, Door)), Time),
+    [holds_at(doorIsOpen(Door), Time)]).
+
+ /*  holds_at(at(Agent, side1(Door)), Time) :-
+       happens(walkThroughDoor12(Agent, Door), Time).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e',170).
+
+ /*  [holds_at(metreqs(walkThroughDoor12(Agent, Door)), Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          requires(walkThroughDoor12(Agent, Door), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e',170).
+axiom(requires(walkThroughDoor12(Agent, Door), Time),
+    [holds_at(metreqs(walkThroughDoor12(Agent, Door)), Time)]).
+
+ /*  [holds_at(at(Agent, side1(Door)), Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(metreqs(walkThroughDoor12(Agent, Door)), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e',170).
+axiom(holds_at(metreqs(walkThroughDoor12(Agent, Door)), Time),
+    [holds_at(at(Agent, side1(Door)), Time)]).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e:176
+% [agent,door,time]
+% Happens(WalkThroughDoor21(agent,door),time) ->
+% HoldsAt(Awake(agent),time) &
+% HoldsAt(Standing(agent),time) &
+% HoldsAt(DoorIsOpen(door),time) &
+% HoldsAt(At(agent,Side2(door)),time).
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e:181
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e',178).
+
+ /*  happens(walkThroughDoor21(Agent, Door), Time) ->
+       holds_at(awake(Agent), Time),
+       holds_at(standing(Agent), Time),
+       holds_at(doorIsOpen(Door), Time),
+       holds_at(at(Agent, side2(Door)), Time).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e',178).
+
+ /*  not(happens(walkThroughDoor21(Agent, Door), Time)) :-
+       (   not(holds_at(awake(Agent), Time))
+       ;   not(holds_at(standing(Agent), Time))
+       ;   not(holds_at(doorIsOpen(Door), Time))
+       ;   not(holds_at(at(Agent, side2(Door)), Time))
+       ).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e',178).
+
+ /*  [(holds_at(neg(awake(Agent)), Time);holds_at(neg(standing(Agent)), Time);holds_at(neg(doorIsOpen(Door)), Time);holds_at(neg(at(Agent, side2(Door))), Time))] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          not(happens(walkThroughDoor21(Agent, Door), Time))).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e',178).
+axiom(not(happens(walkThroughDoor21(Agent, Door), Time)),
+   
+    [  (holds_at(neg(awake(Agent)), Time);holds_at(neg(standing(Agent)), Time);holds_at(neg(doorIsOpen(Door)), Time);holds_at(neg(at(Agent, side2(Door))), Time))
+    ]).
+
+ /*  holds_at(awake(Agent), Time) :-
+       happens(walkThroughDoor21(Agent, Door), Time).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e',178).
+
+ /*  [holds_at(metreqs(walkThroughDoor21(Agent, Door)), Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          requires(walkThroughDoor21(Agent, Door), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e',178).
+axiom(requires(walkThroughDoor21(Agent, Door), Time),
+    [holds_at(metreqs(walkThroughDoor21(Agent, Door)), Time)]).
+
+ /*  [holds_at(awake(Agent), Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(metreqs(walkThroughDoor21(Agent, Door)), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e',178).
+axiom(holds_at(metreqs(walkThroughDoor21(Agent, Door)), Time),
+    [holds_at(awake(Agent), Time)]).
+
+ /*  holds_at(standing(Agent), Time) :-
+       happens(walkThroughDoor21(Agent, Door), Time).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e',178).
+
+ /*  [holds_at(metreqs(walkThroughDoor21(Agent, Door)), Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          requires(walkThroughDoor21(Agent, Door), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e',178).
+axiom(requires(walkThroughDoor21(Agent, Door), Time),
+    [holds_at(metreqs(walkThroughDoor21(Agent, Door)), Time)]).
+
+ /*  [holds_at(standing(Agent), Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(metreqs(walkThroughDoor21(Agent, Door)), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e',178).
+axiom(holds_at(metreqs(walkThroughDoor21(Agent, Door)), Time),
+    [holds_at(standing(Agent), Time)]).
+
+ /*  holds_at(doorIsOpen(Door), Time) :-
+       happens(walkThroughDoor21(Agent, Door), Time).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e',178).
+
+ /*  [holds_at(metreqs(walkThroughDoor21(Agent, Door)), Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          requires(walkThroughDoor21(Agent, Door), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e',178).
+axiom(requires(walkThroughDoor21(Agent, Door), Time),
+    [holds_at(metreqs(walkThroughDoor21(Agent, Door)), Time)]).
+
+ /*  [holds_at(doorIsOpen(Door), Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(metreqs(walkThroughDoor21(Agent, Door)), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e',178).
+axiom(holds_at(metreqs(walkThroughDoor21(Agent, Door)), Time),
+    [holds_at(doorIsOpen(Door), Time)]).
+
+ /*  holds_at(at(Agent, side2(Door)), Time) :-
+       happens(walkThroughDoor21(Agent, Door), Time).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e',178).
+
+ /*  [holds_at(metreqs(walkThroughDoor21(Agent, Door)), Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          requires(walkThroughDoor21(Agent, Door), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e',178).
+axiom(requires(walkThroughDoor21(Agent, Door), Time),
+    [holds_at(metreqs(walkThroughDoor21(Agent, Door)), Time)]).
+
+ /*  [holds_at(at(Agent, side2(Door)), Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(metreqs(walkThroughDoor21(Agent, Door)), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e',178).
+axiom(holds_at(metreqs(walkThroughDoor21(Agent, Door)), Time),
+    [holds_at(at(Agent, side2(Door)), Time)]).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e:183
+%; Effect axioms state that
+%; if an agent walks through one side of a door,
+%; the agent will be at the other side of the door:
+% [agent,door,location,time]
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e:187
+% Side2(door)=location ->
+% Initiates(WalkThroughDoor12(agent,door),At(agent,location),time).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e',187).
+
+ /*  [equals(side2(Door), Location)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          initiates(walkThroughDoor12(Agent, Door),
+                    at(Agent, Location),
+                    Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e',187).
+axiom(initiates(walkThroughDoor12(Agent, Door), at(Agent, Location), Time),
+    [equals(side2(Door), Location)]).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e:190
+% [agent,door,location,time]
+% Side1(door)=location ->
+% Initiates(WalkThroughDoor21(agent,door),At(agent,location),time).
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e:192
+
+ /*  [equals(side1(Door), Location)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          initiates(walkThroughDoor21(Agent, Door),
+                    at(Agent, Location),
+                    Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e',192).
+axiom(initiates(walkThroughDoor21(Agent, Door), at(Agent, Location), Time),
+    [equals(side1(Door), Location)]).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e:194
+% [agent,door,location,time]
+% Side1(door)=location ->
+% Terminates(WalkThroughDoor12(agent,door),At(agent,location),time).
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e:196
+
+ /*  [equals(side1(Door), Location)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          terminates(walkThroughDoor12(Agent, Door),
+                     at(Agent, Location),
+                     Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e',196).
+axiom(terminates(walkThroughDoor12(Agent, Door), at(Agent, Location), Time),
+    [equals(side1(Door), Location)]).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e:198
+% [agent,door,location,time]
+% Side2(door)=location ->
+% Terminates(WalkThroughDoor21(agent,door),At(agent,location),time).
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e:200
+
+ /*  [equals(side2(Door), Location)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          terminates(walkThroughDoor21(Agent, Door),
+                     at(Agent, Location),
+                     Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e',200).
+axiom(terminates(walkThroughDoor21(Agent, Door), at(Agent, Location), Time),
+    [equals(side2(Door), Location)]).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e:202
+%; walking from one end of a street to another
+%; agent walks from the first end of street to the second end.
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e:205
+% event WalkStreet12(agent,street)
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e',205).
+event(walkStreet12(agent,street)).
+==> mpred_prop(walkStreet12(agent,street),event).
+==> meta_argtypes(walkStreet12(agent,street)).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e:206
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e',205).
+%; agent walks from the second end of street to the first end.
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e:207
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e',208).
+% event WalkStreet21(agent,street)
+event(walkStreet21(agent,street)).
+==> mpred_prop(walkStreet21(agent,street),event).
+==> meta_argtypes(walkStreet21(agent,street)).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e:209
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e',210).
+%; Precondition axioms state that
+%; for an agent to walk from one end of a street to another,
+%; the agent must be awake,
+%; the agent must be standing, and
+%; the agent must be at the first end of the street:
+% [agent,street,time]
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e:215
+% Happens(WalkStreet12(agent,street),time) ->
+% HoldsAt(Awake(agent),time) &
+% HoldsAt(Standing(agent),time) &
+% HoldsAt(At(agent,Side1(street)),time).
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e:218
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e',215).
+
+ /*  happens(walkStreet12(Agent, Street), Time) ->
+       holds_at(awake(Agent), Time),
+       holds_at(standing(Agent), Time),
+       holds_at(at(Agent, side1(Street)), Time).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e',215).
+
+ /*  not(happens(walkStreet12(Agent, Street), Time)) :-
+       (   not(holds_at(awake(Agent), Time))
+       ;   not(holds_at(standing(Agent), Time))
+       ;   not(holds_at(at(Agent, side1(Street)), Time))
+       ).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e',215).
+
+ /*  [(holds_at(neg(awake(Agent)), Time);holds_at(neg(standing(Agent)), Time);holds_at(neg(at(Agent, side1(Street))), Time))] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          not(happens(walkStreet12(Agent, Street), Time))).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e',215).
+axiom(not(happens(walkStreet12(Agent, Street), Time)),
+   
+    [  (holds_at(neg(awake(Agent)), Time);holds_at(neg(standing(Agent)), Time);holds_at(neg(at(Agent, side1(Street))), Time))
+    ]).
+
+ /*  holds_at(awake(Agent), Time) :-
+       happens(walkStreet12(Agent, Street), Time).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e',215).
+
+ /*  [holds_at(metreqs(walkStreet12(Agent, Street)), Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          requires(walkStreet12(Agent, Street), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e',215).
+axiom(requires(walkStreet12(Agent, Street), Time),
+    [holds_at(metreqs(walkStreet12(Agent, Street)), Time)]).
+
+ /*  [holds_at(awake(Agent), Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(metreqs(walkStreet12(Agent, Street)), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e',215).
+axiom(holds_at(metreqs(walkStreet12(Agent, Street)), Time),
+    [holds_at(awake(Agent), Time)]).
+
+ /*  holds_at(standing(Agent), Time) :-
+       happens(walkStreet12(Agent, Street), Time).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e',215).
+
+ /*  [holds_at(metreqs(walkStreet12(Agent, Street)), Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          requires(walkStreet12(Agent, Street), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e',215).
+axiom(requires(walkStreet12(Agent, Street), Time),
+    [holds_at(metreqs(walkStreet12(Agent, Street)), Time)]).
+
+ /*  [holds_at(standing(Agent), Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(metreqs(walkStreet12(Agent, Street)), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e',215).
+axiom(holds_at(metreqs(walkStreet12(Agent, Street)), Time),
+    [holds_at(standing(Agent), Time)]).
+
+ /*  holds_at(at(Agent, side1(Street)), Time) :-
+       happens(walkStreet12(Agent, Street), Time).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e',215).
+
+ /*  [holds_at(metreqs(walkStreet12(Agent, Street)), Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          requires(walkStreet12(Agent, Street), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e',215).
+axiom(requires(walkStreet12(Agent, Street), Time),
+    [holds_at(metreqs(walkStreet12(Agent, Street)), Time)]).
+
+ /*  [holds_at(at(Agent, side1(Street)), Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(metreqs(walkStreet12(Agent, Street)), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e',215).
+axiom(holds_at(metreqs(walkStreet12(Agent, Street)), Time),
+    [holds_at(at(Agent, side1(Street)), Time)]).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e:220
+% [agent,street,time]
+% Happens(WalkStreet21(agent,street),time) ->
+% HoldsAt(Awake(agent),time) &
+% HoldsAt(Standing(agent),time) &
+% HoldsAt(At(agent,Side2(street)),time).
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e:224
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e',222).
+
+ /*  happens(walkStreet21(Agent, Street), Time) ->
+       holds_at(awake(Agent), Time),
+       holds_at(standing(Agent), Time),
+       holds_at(at(Agent, side2(Street)), Time).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e',222).
+
+ /*  not(happens(walkStreet21(Agent, Street), Time)) :-
+       (   not(holds_at(awake(Agent), Time))
+       ;   not(holds_at(standing(Agent), Time))
+       ;   not(holds_at(at(Agent, side2(Street)), Time))
+       ).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e',222).
+
+ /*  [(holds_at(neg(awake(Agent)), Time);holds_at(neg(standing(Agent)), Time);holds_at(neg(at(Agent, side2(Street))), Time))] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          not(happens(walkStreet21(Agent, Street), Time))).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e',222).
+axiom(not(happens(walkStreet21(Agent, Street), Time)),
+   
+    [  (holds_at(neg(awake(Agent)), Time);holds_at(neg(standing(Agent)), Time);holds_at(neg(at(Agent, side2(Street))), Time))
+    ]).
+
+ /*  holds_at(awake(Agent), Time) :-
+       happens(walkStreet21(Agent, Street), Time).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e',222).
+
+ /*  [holds_at(metreqs(walkStreet21(Agent, Street)), Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          requires(walkStreet21(Agent, Street), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e',222).
+axiom(requires(walkStreet21(Agent, Street), Time),
+    [holds_at(metreqs(walkStreet21(Agent, Street)), Time)]).
+
+ /*  [holds_at(awake(Agent), Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(metreqs(walkStreet21(Agent, Street)), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e',222).
+axiom(holds_at(metreqs(walkStreet21(Agent, Street)), Time),
+    [holds_at(awake(Agent), Time)]).
+
+ /*  holds_at(standing(Agent), Time) :-
+       happens(walkStreet21(Agent, Street), Time).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e',222).
+
+ /*  [holds_at(metreqs(walkStreet21(Agent, Street)), Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          requires(walkStreet21(Agent, Street), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e',222).
+axiom(requires(walkStreet21(Agent, Street), Time),
+    [holds_at(metreqs(walkStreet21(Agent, Street)), Time)]).
+
+ /*  [holds_at(standing(Agent), Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(metreqs(walkStreet21(Agent, Street)), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e',222).
+axiom(holds_at(metreqs(walkStreet21(Agent, Street)), Time),
+    [holds_at(standing(Agent), Time)]).
+
+ /*  holds_at(at(Agent, side2(Street)), Time) :-
+       happens(walkStreet21(Agent, Street), Time).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e',222).
+
+ /*  [holds_at(metreqs(walkStreet21(Agent, Street)), Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          requires(walkStreet21(Agent, Street), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e',222).
+axiom(requires(walkStreet21(Agent, Street), Time),
+    [holds_at(metreqs(walkStreet21(Agent, Street)), Time)]).
+
+ /*  [holds_at(at(Agent, side2(Street)), Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(metreqs(walkStreet21(Agent, Street)), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e',222).
+axiom(holds_at(metreqs(walkStreet21(Agent, Street)), Time),
+    [holds_at(at(Agent, side2(Street)), Time)]).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e:226
+%; Effect axioms state that
+%; if an agent walks from one end of a street to another,
+%; the agent will be at the other end of the street:
+% [agent,street,location,time]
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e:230
+% Side2(street)=location ->
+% Initiates(WalkStreet12(agent,street),At(agent,location),time).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e',230).
+
+ /*  [equals(side2(Street), Location)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          initiates(walkStreet12(Agent, Street),
+                    at(Agent, Location),
+                    Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e',230).
+axiom(initiates(walkStreet12(Agent, Street), at(Agent, Location), Time),
+    [equals(side2(Street), Location)]).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e:233
+% [agent,street,location,time]
+% Side1(street)=location ->
+% Initiates(WalkStreet21(agent,street),At(agent,location),time).
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e:235
+
+ /*  [equals(side1(Street), Location)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          initiates(walkStreet21(Agent, Street),
+                    at(Agent, Location),
+                    Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e',235).
+axiom(initiates(walkStreet21(Agent, Street), at(Agent, Location), Time),
+    [equals(side1(Street), Location)]).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e:237
+% [agent,street,location,time]
+% Side1(street)=location ->
+% Terminates(WalkStreet12(agent,street),At(agent,location),time).
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e:239
+
+ /*  [equals(side1(Street), Location)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          terminates(walkStreet12(Agent, Street),
+                     at(Agent, Location),
+                     Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e',239).
+axiom(terminates(walkStreet12(Agent, Street), at(Agent, Location), Time),
+    [equals(side1(Street), Location)]).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e:241
+% [agent,street,location,time]
+% Side2(street)=location ->
+% Terminates(WalkStreet21(agent,street),At(agent,location),time).
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e:243
+
+ /*  [equals(side2(Street), Location)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          terminates(walkStreet21(Agent, Street),
+                     at(Agent, Location),
+                     Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e',243).
+axiom(terminates(walkStreet21(Agent, Street), at(Agent, Location), Time),
+    [equals(side2(Street), Location)]).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e:245
+%; floors
+%; The floor of room is integer.
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e:248
+% function Floor(room): integer
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e',248).
+function(floor(room)).
+==> mpred_prop(floor(room),function).
+==> meta_argtypes(floor(room)).
+predicate(floorPred(room,integer)).
+==> mpred_prop(floorPred(room,integer),predicate).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e',248).
+==> meta_argtypes(floorPred(room,integer)).
+
+ /*  fix_axiom_head(Time) ->
+       
+       [ functional_predicate(floor, floorPred),
+          (->),
+         holds_at(functional_predicate(floor, floorPred), Time)
+       ].
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e',248).
+
+ /*  [] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(functional_predicate(floor, floorPred), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e',248).
+axiom(holds_at(functional_predicate(floor, floorPred), Time),
+    []).
+==> resultIsa(floor,integer).
+%; walking up and down staircases
+%; agent walks down staircase.
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e:253
+% event WalkDownStaircase(agent,staircase)
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e',253).
+event(walkDownStaircase(agent,staircase)).
+==> mpred_prop(walkDownStaircase(agent,staircase),event).
+==> meta_argtypes(walkDownStaircase(agent,staircase)).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e:254
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e',253).
+%; agent walks up staircase.
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e:255
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e',256).
+% event WalkUpStaircase(agent,staircase)
+event(walkUpStaircase(agent,staircase)).
+==> mpred_prop(walkUpStaircase(agent,staircase),event).
+==> meta_argtypes(walkUpStaircase(agent,staircase)).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e:257
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e',258).
+%; Precondition axioms state that
+%; for an agent to walk down (up) a staircase,
+%; the agent must be awake, standing, and
+%; at the top (bottom) of the staircase:
+% [agent,staircase,time]
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e:262
+% Happens(WalkDownStaircase(agent,staircase),time) ->
+% HoldsAt(Awake(agent),time) &
+% HoldsAt(Standing(agent),time) &
+% HoldsAt(At(agent,Side2(staircase)),time).
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e:265
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e',262).
+
+ /*  happens(walkDownStaircase(Agent, Staircase), Time) ->
+       holds_at(awake(Agent), Time),
+       holds_at(standing(Agent), Time),
+       holds_at(at(Agent, side2(Staircase)), Time).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e',262).
+
+ /*  not(happens(walkDownStaircase(Agent, Staircase), Time)) :-
+       (   not(holds_at(awake(Agent), Time))
+       ;   not(holds_at(standing(Agent), Time))
+       ;   not(holds_at(at(Agent, side2(Staircase)), Time))
+       ).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e',262).
+
+ /*  [(holds_at(neg(awake(Agent)), Time);holds_at(neg(standing(Agent)), Time);holds_at(neg(at(Agent, side2(Staircase))), Time))] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          not(happens(walkDownStaircase(Agent, Staircase), Time))).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e',262).
+axiom(not(happens(walkDownStaircase(Agent, Staircase), Time)),
+   
+    [  (holds_at(neg(awake(Agent)), Time);holds_at(neg(standing(Agent)), Time);holds_at(neg(at(Agent, side2(Staircase))), Time))
+    ]).
+
+ /*  holds_at(awake(Agent), Time) :-
+       happens(walkDownStaircase(Agent, Staircase), Time).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e',262).
+
+ /*  [holds_at(metreqs(walkDownStaircase(Agent, Staircase)), Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          requires(walkDownStaircase(Agent, Staircase), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e',262).
+axiom(requires(walkDownStaircase(Agent, Staircase), Time),
+   
+    [ holds_at(metreqs(walkDownStaircase(Agent, Staircase)),
+               Time)
+    ]).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e',262).
+
+ /*  [holds_at(awake(Agent), Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(metreqs(walkDownStaircase(Agent, Staircase)),
+                   Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e',262).
+axiom(holds_at(metreqs(walkDownStaircase(Agent, Staircase)), Time),
+    [holds_at(awake(Agent), Time)]).
+
+ /*  holds_at(standing(Agent), Time) :-
+       happens(walkDownStaircase(Agent, Staircase), Time).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e',262).
+
+ /*  [holds_at(metreqs(walkDownStaircase(Agent, Staircase)), Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          requires(walkDownStaircase(Agent, Staircase), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e',262).
+axiom(requires(walkDownStaircase(Agent, Staircase), Time),
+   
+    [ holds_at(metreqs(walkDownStaircase(Agent, Staircase)),
+               Time)
+    ]).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e',262).
+
+ /*  [holds_at(standing(Agent), Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(metreqs(walkDownStaircase(Agent, Staircase)),
+                   Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e',262).
+axiom(holds_at(metreqs(walkDownStaircase(Agent, Staircase)), Time),
+    [holds_at(standing(Agent), Time)]).
+
+ /*  holds_at(at(Agent, side2(Staircase)), Time) :-
+       happens(walkDownStaircase(Agent, Staircase), Time).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e',262).
+
+ /*  [holds_at(metreqs(walkDownStaircase(Agent, Staircase)), Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          requires(walkDownStaircase(Agent, Staircase), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e',262).
+axiom(requires(walkDownStaircase(Agent, Staircase), Time),
+   
+    [ holds_at(metreqs(walkDownStaircase(Agent, Staircase)),
+               Time)
+    ]).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e',262).
+
+ /*  [holds_at(at(Agent, side2(Staircase)), Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(metreqs(walkDownStaircase(Agent, Staircase)),
+                   Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e',262).
+axiom(holds_at(metreqs(walkDownStaircase(Agent, Staircase)), Time),
+    [holds_at(at(Agent, side2(Staircase)), Time)]).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e:267
+% [agent,staircase,time]
+% Happens(WalkUpStaircase(agent,staircase),time) ->
+% HoldsAt(Awake(agent),time) &
+% HoldsAt(Standing(agent),time) &
+% HoldsAt(At(agent,Side1(staircase)),time).
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e:271
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e',269).
+
+ /*  happens(walkUpStaircase(Agent, Staircase), Time) ->
+       holds_at(awake(Agent), Time),
+       holds_at(standing(Agent), Time),
+       holds_at(at(Agent, side1(Staircase)), Time).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e',269).
+
+ /*  not(happens(walkUpStaircase(Agent, Staircase), Time)) :-
+       (   not(holds_at(awake(Agent), Time))
+       ;   not(holds_at(standing(Agent), Time))
+       ;   not(holds_at(at(Agent, side1(Staircase)), Time))
+       ).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e',269).
+
+ /*  [(holds_at(neg(awake(Agent)), Time);holds_at(neg(standing(Agent)), Time);holds_at(neg(at(Agent, side1(Staircase))), Time))] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          not(happens(walkUpStaircase(Agent, Staircase), Time))).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e',269).
+axiom(not(happens(walkUpStaircase(Agent, Staircase), Time)),
+   
+    [  (holds_at(neg(awake(Agent)), Time);holds_at(neg(standing(Agent)), Time);holds_at(neg(at(Agent, side1(Staircase))), Time))
+    ]).
+
+ /*  holds_at(awake(Agent), Time) :-
+       happens(walkUpStaircase(Agent, Staircase), Time).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e',269).
+
+ /*  [holds_at(metreqs(walkUpStaircase(Agent, Staircase)), Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          requires(walkUpStaircase(Agent, Staircase), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e',269).
+axiom(requires(walkUpStaircase(Agent, Staircase), Time),
+   
+    [ holds_at(metreqs(walkUpStaircase(Agent, Staircase)),
+               Time)
+    ]).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e',269).
+
+ /*  [holds_at(awake(Agent), Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(metreqs(walkUpStaircase(Agent, Staircase)),
+                   Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e',269).
+axiom(holds_at(metreqs(walkUpStaircase(Agent, Staircase)), Time),
+    [holds_at(awake(Agent), Time)]).
+
+ /*  holds_at(standing(Agent), Time) :-
+       happens(walkUpStaircase(Agent, Staircase), Time).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e',269).
+
+ /*  [holds_at(metreqs(walkUpStaircase(Agent, Staircase)), Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          requires(walkUpStaircase(Agent, Staircase), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e',269).
+axiom(requires(walkUpStaircase(Agent, Staircase), Time),
+   
+    [ holds_at(metreqs(walkUpStaircase(Agent, Staircase)),
+               Time)
+    ]).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e',269).
+
+ /*  [holds_at(standing(Agent), Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(metreqs(walkUpStaircase(Agent, Staircase)),
+                   Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e',269).
+axiom(holds_at(metreqs(walkUpStaircase(Agent, Staircase)), Time),
+    [holds_at(standing(Agent), Time)]).
+
+ /*  holds_at(at(Agent, side1(Staircase)), Time) :-
+       happens(walkUpStaircase(Agent, Staircase), Time).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e',269).
+
+ /*  [holds_at(metreqs(walkUpStaircase(Agent, Staircase)), Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          requires(walkUpStaircase(Agent, Staircase), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e',269).
+axiom(requires(walkUpStaircase(Agent, Staircase), Time),
+   
+    [ holds_at(metreqs(walkUpStaircase(Agent, Staircase)),
+               Time)
+    ]).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e',269).
+
+ /*  [holds_at(at(Agent, side1(Staircase)), Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(metreqs(walkUpStaircase(Agent, Staircase)),
+                   Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e',269).
+axiom(holds_at(metreqs(walkUpStaircase(Agent, Staircase)), Time),
+    [holds_at(at(Agent, side1(Staircase)), Time)]).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e:273
+%; Effect axioms state that
+%; if an agent walks down (up) a staircase,
+%; the agent will be at the bottom (top) of the staircase:
+% [agent,staircase,room,time]
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e:277
+% Side1(staircase)=room ->
+% Initiates(WalkDownStaircase(agent,staircase),At(agent,room),time).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e',277).
+
+ /*  [equals(side1(Staircase), Room)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          initiates(walkDownStaircase(Agent, Staircase),
+                    at(Agent, Room),
+                    Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e',277).
+axiom(initiates(walkDownStaircase(Agent, Staircase), at(Agent, Room), Time),
+    [equals(side1(Staircase), Room)]).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e:280
+% [agent,staircase,room,time]
+% Side2(staircase)=room ->
+% Terminates(WalkDownStaircase(agent,staircase),At(agent,room),time).
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e:282
+
+ /*  [equals(side2(Staircase), Room)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          terminates(walkDownStaircase(Agent, Staircase),
+                     at(Agent, Room),
+                     Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e',282).
+axiom(terminates(walkDownStaircase(Agent, Staircase), at(Agent, Room), Time),
+    [equals(side2(Staircase), Room)]).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e:284
+% [agent,staircase,room,time]
+% Side2(staircase)=room ->
+% Initiates(WalkUpStaircase(agent,staircase),At(agent,room),time).
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e:286
+
+ /*  [equals(side2(Staircase), Room)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          initiates(walkUpStaircase(Agent, Staircase),
+                    at(Agent, Room),
+                    Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e',286).
+axiom(initiates(walkUpStaircase(Agent, Staircase), at(Agent, Room), Time),
+    [equals(side2(Staircase), Room)]).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e:288
+% [agent,staircase,room,time]
+% Side1(staircase)=room ->
+% Terminates(WalkUpStaircase(agent,staircase),At(agent,room),time).
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e:290
+
+ /*  [equals(side1(Staircase), Room)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          terminates(walkUpStaircase(Agent, Staircase),
+                     at(Agent, Room),
+                     Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e',290).
+axiom(terminates(walkUpStaircase(Agent, Staircase), at(Agent, Room), Time),
+    [equals(side1(Staircase), Room)]).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e:292
+%; A state constraint says that if an agent is outside,
+%; the agent is dressed.
+% [agent,outside,time]
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e:295
+% HoldsAt(At(agent,outside),time) ->
+% HoldsAt(Dressed(agent),time).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e',295).
+
+ /*  holds_at(at(Agent, Outside), Time) ->
+       holds_at(dressed(Agent), Time).
+ */
+
+ /*  holds_at(dressed(Agent), Time) :-
+       holds_at(at(Agent, Outside), Time).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e',295).
+
+ /*  [holds_at(at(Agent, Outside), Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(dressed(Agent), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e',295).
+axiom(holds_at(dressed(Agent), Time),
+    [holds_at(at(Agent, Outside), Time)]).
+
+ /*  not(holds_at(at(Agent, Outside), Time)) :-
+       not(holds_at(dressed(Agent), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e',295).
+
+ /*  [holds_at(neg(dressed(Agent)), Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(neg(at(Agent, Outside)), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e',295).
+axiom(holds_at(neg(at(Agent, Outside)), Time),
+    [holds_at(neg(dressed(Agent)), Time)]).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e:298
+%; room looks out onto outside.
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e:299
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e',300).
+% function LookOutOnto(room): outside
+function(lookOutOnto(room)).
+==> mpred_prop(lookOutOnto(room),function).
+==> meta_argtypes(lookOutOnto(room)).
+predicate(lookOutOntoPred(room,outside)).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e',300).
+==> mpred_prop(lookOutOntoPred(room,outside),predicate).
+==> meta_argtypes(lookOutOntoPred(room,outside)).
+
+ /*  fix_axiom_head(Time) ->
+       
+       [ functional_predicate(lookOutOnto, lookOutOntoPred),
+          (->),
+         holds_at(functional_predicate(lookOutOnto, lookOutOntoPred), Time)
+       ].
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e',300).
+
+ /*  [] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(functional_predicate(lookOutOnto, lookOutOntoPred), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e',300).
+axiom(holds_at(functional_predicate(lookOutOnto, lookOutOntoPred), Time),
+    []).
+==> resultIsa(lookOutOnto,outside).
+%; location1 is adjacent to location2.
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e:302
+% predicate Adjacent(location,location)
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e',302).
+predicate(adjacent(location,location)).
+==> mpred_prop(adjacent(location,location),predicate).
+==> meta_argtypes(adjacent(location,location)).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e:304
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e',305).
+%; A state constraint says that
+%; two locations are adjacent if and only if
+%; they have a portal in common:
+% [location1,location2]
+ 
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e:307
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e',308).
+% Adjacent(location1,location2) <->
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e:308
+% {portal}% 
+% (Side1(portal)=location1 &
+%  Side2(portal)=location2) |
+% (Side2(portal)=location1 &
+%  Side1(portal)=location2).
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e:312
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e',308).
+
+ /*  exists([Portal],
+    adjacent(Location1, Location2) <->
+       (   equals(side1(Portal), Location1),
+           equals(side2(Portal), Location2)
+       ;   equals(side2(Portal), Location1),
+           equals(side1(Portal), Location2)
+       )).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e',308).
+
+ /*  adjacent(Location1, Location2) :-
+       (   equals(side1(Portal), Location1),
+           equals(side2(Portal), Location2)
+       ;   equals(side2(Portal), Location1),
+           equals(side1(Portal), Location2)
+       ),
+       some(Portal, '$kolem_Fn_230'(Location1, Location2)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e',308).
+
+ /*  [(equals(side1(Portal), Location1), equals(side2(Portal), Location2);equals(side2(Portal), Location1), equals(side1(Portal), Location2)), some(Portal, '$kolem_Fn_230'(Location1, Location2))] ->
+       ta(Ta_Param,
+          tvs1=[],
+          tvs2=[],
+          adjacent(Location1, Location2)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e',308).
+axiom(adjacent(Location1, Location2),
+   
+    [  (equals(side1(Portal), Location1), equals(side2(Portal), Location2);equals(side2(Portal), Location1), equals(side1(Portal), Location2)),
+      some(Portal, '$kolem_Fn_230'(Location1, Location2))
+    ]).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e',308).
+
+ /*  not(adjacent(Location1, Location2)) :-
+       ( (   not(equals(side1(Portal), Location1))
+         ;   not(equals(side2(Portal), Location2))
+         ),
+         (   not(equals(side2(Portal), Location1))
+         ;   not(equals(side1(Portal), Location2))
+         )
+       ),
+       some(Portal, '$kolem_Fn_230'(Location1, Location2)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e',308).
+
+ /*  [(not(equals(side1(Portal), Location1));not(equals(side2(Portal), Location2))),  (not(equals(side2(Portal), Location1));not(equals(side1(Portal), Location2))), some(Portal, '$kolem_Fn_230'(Location1, Location2))] ->
+       ta(Ta_Param5,
+          tvs1=[],
+          tvs2=[],
+          not(adjacent(Location1, Location2))).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e',308).
+axiom(not(adjacent(Location1, Location2)),
+   
+    [  (not(equals(side1(Portal), Location1));not(equals(side2(Portal), Location2))),
+       (not(equals(side2(Portal), Location1));not(equals(side1(Portal), Location2))),
+      some(Portal, '$kolem_Fn_230'(Location1, Location2))
+    ]).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e:314
+%; The ground of outside is ground.
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e:315
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e',316).
+% function GroundOf(outside): ground
+function(groundOf(outside)).
+==> mpred_prop(groundOf(outside),function).
+==> meta_argtypes(groundOf(outside)).
+predicate(ground(outside,ground)).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e',316).
+==> mpred_prop(ground(outside,ground),predicate).
+==> meta_argtypes(ground(outside,ground)).
+
+ /*  fix_axiom_head(Time) ->
+       
+       [ functional_predicate(groundOf, ground),
+          (->),
+         holds_at(functional_predicate(groundOf, ground), Time)
+       ].
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e',316).
+
+ /*  [] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(functional_predicate(groundOf, ground), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e',316).
+axiom(holds_at(functional_predicate(groundOf, ground), Time),
+    []).
+==> resultIsa(groundOf,ground).
+%; The sky of outside is sky.
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e:317
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e',318).
+% function SkyOf(outside): sky
+function(skyOf(outside)).
+==> mpred_prop(skyOf(outside),function).
+==> meta_argtypes(skyOf(outside)).
+predicate(sky(outside,sky)).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e',318).
+==> mpred_prop(sky(outside,sky),predicate).
+==> meta_argtypes(sky(outside,sky)).
+
+ /*  fix_axiom_head(Time) ->
+       
+       [ functional_predicate(skyOf, sky),
+          (->),
+         holds_at(functional_predicate(skyOf, sky), Time)
+       ].
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e',318).
+
+ /*  [] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(functional_predicate(skyOf, sky), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e',318).
+axiom(holds_at(functional_predicate(skyOf, sky), Time),
+    []).
+==> resultIsa(skyOf,sky).
+%; State constraints fix the location of ground and sky:
+% [outside,ground,time]
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e:321
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e',322).
+% GroundOf(outside) = ground ->
+% HoldsAt(At(ground,outside),time).
+
+ /*  equals(groundOf(Outside), Ground) ->
+       holds_at(at(Ground, Outside), Time).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e',322).
+
+ /*  holds_at(at(Ground, Outside), Time) :-
+       equals(groundOf(Outside), Ground).
+ */
+
+ /*  [equals(groundOf(Outside), Ground)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(at(Ground, Outside), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e',322).
+axiom(holds_at(at(Ground, Outside), Time),
+    [equals(groundOf(Outside), Ground)]).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e:324
+% [outside,sky,time]
+% SkyOf(outside) = sky ->
+% HoldsAt(At(sky,outside),time).
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e:326
+
+ /*  equals(skyOf(Outside), Sky) ->
+       holds_at(at(Sky, Outside), Time).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e',326).
+
+ /*  holds_at(at(Sky, Outside), Time) :-
+       equals(skyOf(Outside), Sky).
+ */
+
+ /*  [equals(skyOf(Outside), Sky)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(at(Sky, Outside), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e',326).
+axiom(holds_at(at(Sky, Outside), Time),
+    [equals(skyOf(Outside), Sky)]).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/RTSpace.e:328
+%; End of file.

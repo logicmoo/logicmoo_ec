@@ -1,0 +1,475 @@
+:-include(library('ec_planner/ec_test_incl')).
+:-expects_dialect(pfc).
+% Wed, 01 Apr 2020 19:59:52 GMT
+% From ../examples/Mueller2006/Chapter6/CarryingABook2.pel:4
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter6/CarryingABook1.e',96).
+
+ /*  loading(load_e_pl,
+   	'/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter6/CarryingABook2.e').
+ */
+%;
+%; Copyright (c) 2005 IBM Corporation and others.
+%; All rights reserved. This program and the accompanying materials
+%; are made available under the terms of the Common Public License v1.0
+%; which accompanies this distribution, and is available at
+%; http://www.eclipse.org/legal/cpl-v10.html
+%;
+%; Contributors:
+%; IBM - Initial implementation
+%;
+%; Example: Carrying a Book (Release Axioms and State Constraints)
+%;
+%; @book{Mueller:2006,
+%;   author = "Erik T. Mueller",
+%;   year = "2006",
+%;   title = "Commonsense Reasoning",
+%;   address = "San Francisco",
+%;   publisher = "Morgan Kaufmann/Elsevier",
+%; }
+%;
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter6/CarryingABook2.e:21
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter6/CarryingABook2.e',22).
+% load foundations/Root.e
+:- load_e('foundations/Root.e', changed).
+:- if(is_e_toplevel).
+:- endif.
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter6/CarryingABook2.e:22
+% load foundations/EC.e
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter6/CarryingABook2.e',22).
+:- load_e('foundations/EC.e', changed).
+:- if(is_e_toplevel).
+:- endif.
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter6/CarryingABook2.e:24
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter6/CarryingABook2.e',25).
+% sort object
+==> sort(object).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter6/CarryingABook2.e:25
+% sort agent: object
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter6/CarryingABook2.e',25).
+==> subsort(agent,object).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter6/CarryingABook2.e:26
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter6/CarryingABook2.e',27).
+% sort room
+==> sort(room).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter6/CarryingABook2.e:28
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter6/CarryingABook2.e',29).
+% object Book
+==> t(object,book).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter6/CarryingABook2.e:29
+% agent Nathan
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter6/CarryingABook2.e',29).
+==> t(agent,nathan).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter6/CarryingABook2.e:30
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter6/CarryingABook2.e',31).
+% room LivingRoom, Kitchen
+==> t(room,livingRoom).
+==> t(room,kitchen).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter6/CarryingABook2.e:32
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter6/CarryingABook2.e',33).
+% event LetGoOf(agent,object)
+event(letGoOf(agent,object)).
+==> mpred_prop(letGoOf(agent,object),event).
+==> meta_argtypes(letGoOf(agent,object)).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter6/CarryingABook2.e:33
+% event PickUp(agent,object)
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter6/CarryingABook2.e',33).
+event(pickUp(agent,object)).
+==> mpred_prop(pickUp(agent,object),event).
+==> meta_argtypes(pickUp(agent,object)).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter6/CarryingABook2.e:34
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter6/CarryingABook2.e',35).
+% event Walk(agent,room,room)
+event(walk(agent,room,room)).
+==> mpred_prop(walk(agent,room,room),event).
+==> meta_argtypes(walk(agent,room,room)).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter6/CarryingABook2.e:36
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter6/CarryingABook2.e',37).
+% fluent InRoom(object,room)
+fluent(inRoom(object,room)).
+==> mpred_prop(inRoom(object,room),fluent).
+==> meta_argtypes(inRoom(object,room)).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter6/CarryingABook2.e:37
+% fluent Holding(agent,object)
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter6/CarryingABook2.e',37).
+fluent(holding(agent,object)).
+==> mpred_prop(holding(agent,object),fluent).
+==> meta_argtypes(holding(agent,object)).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter6/CarryingABook2.e:39
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter6/CarryingABook2.e',40).
+%; Sigma
+% [agent,room1,room2,time]
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter6/CarryingABook2.e:42
+% Initiates(Walk(agent,room1,room2),InRoom(agent,room2),time).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter6/CarryingABook2.e',42).
+
+ /*  [] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          initiates(walk(Agent, Room1, Room2),
+                    inRoom(Agent, Room2),
+                    Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter6/CarryingABook2.e',42).
+axiom(initiates(walk(Agent, Room1, Room2), inRoom(Agent, Room2), Time),
+    []).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter6/CarryingABook2.e:44
+% [agent,room1,room2,time]
+% room1!=% room2 ->
+% Terminates(Walk(agent,room1,room2),InRoom(agent,room1),time).
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter6/CarryingABook2.e:46
+
+ /*  [diff(Room1, Room2)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          terminates(walk(Agent, Room1, Room2),
+                     inRoom(Agent, Room1),
+                     Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter6/CarryingABook2.e',46).
+axiom(terminates(walk(Agent, Room1, Room2), inRoom(Agent, Room1), Time),
+    [diff(Room1, Room2)]).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter6/CarryingABook2.e:48
+% [agent,object,room,time]
+% HoldsAt(InRoom(agent,room),time) &
+% HoldsAt(InRoom(object,room),time) ->
+% Initiates(PickUp(agent,object),Holding(agent,object),time).
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter6/CarryingABook2.e:51
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter6/CarryingABook2.e',50).
+
+ /*  [holds_at(inRoom(Agent, Room), Time), holds_at(inRoom(Object, Room), Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          initiates(pickUp(Agent, Object),
+                    holding(Agent, Object),
+                    Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter6/CarryingABook2.e',50).
+axiom(initiates(pickUp(Agent, Object), holding(Agent, Object), Time),
+   
+    [ holds_at(inRoom(Agent, Room), Time),
+      holds_at(inRoom(Object, Room), Time)
+    ]).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter6/CarryingABook2.e:53
+% [agent,object,time]
+% HoldsAt(Holding(agent,object),time) ->
+% Terminates(LetGoOf(agent,object),Holding(agent,object),time).
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter6/CarryingABook2.e:55
+
+ /*  [holds_at(holding(Agent, Object), Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          terminates(letGoOf(Agent, Object),
+                     holding(Agent, Object),
+                     Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter6/CarryingABook2.e',55).
+axiom(terminates(letGoOf(Agent, Object), holding(Agent, Object), Time),
+    [holds_at(holding(Agent, Object), Time)]).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter6/CarryingABook2.e:57
+% [agent,object,room,time]
+% Releases(PickUp(agent,object),InRoom(object,room),time).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter6/CarryingABook2.e',59).
+
+ /*  [] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          releases(pickUp(Agent, Object),
+                   inRoom(Object, Room),
+                   Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter6/CarryingABook2.e',59).
+axiom(releases(pickUp(Agent, Object), inRoom(Object, Room), Time),
+    []).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter6/CarryingABook2.e:60
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter6/CarryingABook2.e',61).
+% [agent,object,room,time]
+% HoldsAt(InRoom(agent,room),time) ->
+% Initiates(LetGoOf(agent,object),InRoom(object,room),time).
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter6/CarryingABook2.e:62
+
+ /*  [holds_at(inRoom(Agent, Room), Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          initiates(letGoOf(Agent, Object),
+                    inRoom(Object, Room),
+                    Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter6/CarryingABook2.e',61).
+axiom(initiates(letGoOf(Agent, Object), inRoom(Object, Room), Time),
+    [holds_at(inRoom(Agent, Room), Time)]).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter6/CarryingABook2.e:64
+%; Delta
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter6/CarryingABook2.e:66
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter6/CarryingABook2.e',67).
+% Happens(PickUp(Nathan,Book),0).
+
+ /*  [] ->
+       ta(Ta_Param,
+          tvs1=[start],
+          tvs2=[start],
+          happens(pickUp(nathan, book), start)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter6/CarryingABook2.e',67).
+axiom(happens(pickUp(nathan, book), start),
+    []).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter6/CarryingABook2.e:67
+% Happens(Walk(Nathan,LivingRoom,Kitchen),1).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter6/CarryingABook2.e',67).
+
+ /*  [b(start, Maptime), ignore(start+1==Maptime)] ->
+       ta(Ta_Param,
+          tvs1=[start+1],
+          tvs2=[Maptime, start],
+          happens(walk(nathan, livingRoom, kitchen), Maptime)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter6/CarryingABook2.e',67).
+axiom(happens(walk(nathan, livingRoom, kitchen), Maptime),
+    [b(start, Maptime)]).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter6/CarryingABook2.e:69
+%; Psi
+% [object,room1,room2,time]
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter6/CarryingABook2.e:72
+% HoldsAt(InRoom(object,room1),time) &
+% HoldsAt(InRoom(object,room2),time) ->
+% room1=room2.
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter6/CarryingABook2.e:74
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter6/CarryingABook2.e',72).
+
+ /*  holds_at(inRoom(Object, Room1), Time), holds_at(inRoom(Object, Room2), Time) ->
+       equals(Room1, Room2).
+ */
+
+ /*  not(holds_at(inRoom(Object, Room1), Time)) :-
+       holds_at(inRoom(Object, Room2), Time),
+       not(equals(Room1, Room2)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter6/CarryingABook2.e',72).
+
+ /*  [holds_at(inRoom(Object, Room2), Time), not(equals(Room1, Room2))] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(neg(inRoom(Object, Room1)), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter6/CarryingABook2.e',72).
+axiom(holds_at(neg(inRoom(Object, Room1)), Time),
+   
+    [ holds_at(inRoom(Object, Room2), Time),
+      not(equals(Room1, Room2))
+    ]).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter6/CarryingABook2.e',72).
+
+ /*  not(holds_at(inRoom(Object, Room2), Time)) :-
+       holds_at(inRoom(Object, Room1), Time),
+       not(equals(Room1, Room2)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter6/CarryingABook2.e',72).
+
+ /*  [holds_at(inRoom(Object, Room1), Time), not(equals(Room1, Room2))] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(neg(inRoom(Object, Room2)), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter6/CarryingABook2.e',72).
+axiom(holds_at(neg(inRoom(Object, Room2)), Time),
+   
+    [ holds_at(inRoom(Object, Room1), Time),
+      not(equals(Room2, Room1))
+    ]).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter6/CarryingABook2.e:76
+% [agent,object,room,time]
+% HoldsAt(Holding(agent,object),time) &
+% HoldsAt(InRoom(agent,room),time) ->
+% HoldsAt(InRoom(object,room),time).
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter6/CarryingABook2.e:79
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter6/CarryingABook2.e',78).
+
+ /*  holds_at(holding(Agent, Object), Time), holds_at(inRoom(Agent, Room), Time) ->
+       holds_at(inRoom(Object, Room), Time).
+ */
+
+ /*  holds_at(inRoom(Object, Room), Time) :-
+       holds_at(holding(Agent, Object), Time),
+       holds_at(inRoom(Agent, Room), Time).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter6/CarryingABook2.e',78).
+
+ /*  [holds_at(holding(Agent, Object), Time), holds_at(inRoom(Agent, Room), Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(inRoom(Object, Room), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter6/CarryingABook2.e',78).
+axiom(holds_at(inRoom(Object, Room), Time),
+   
+    [ holds_at(holding(Agent, Object), Time),
+      holds_at(inRoom(Agent, Room), Time)
+    ]).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter6/CarryingABook2.e',78).
+
+ /*  not(holds_at(holding(Agent, Object), Time)) :-
+       holds_at(inRoom(Agent, Room), Time),
+       not(holds_at(inRoom(Object, Room), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter6/CarryingABook2.e',78).
+
+ /*  [holds_at(inRoom(Agent, Room), Time), holds_at(neg(inRoom(Object, Room)), Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(neg(holding(Agent, Object)), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter6/CarryingABook2.e',78).
+axiom(holds_at(neg(holding(Agent, Object)), Time),
+   
+    [ holds_at(inRoom(Agent, Room), Time),
+      holds_at(neg(inRoom(Object, Room)), Time)
+    ]).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter6/CarryingABook2.e',78).
+
+ /*  not(holds_at(inRoom(Agent, Room), Time)) :-
+       holds_at(holding(Agent, Object), Time),
+       not(holds_at(inRoom(Object, Room), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter6/CarryingABook2.e',78).
+
+ /*  [holds_at(holding(Agent, Object), Time), holds_at(neg(inRoom(Object, Room)), Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(neg(inRoom(Agent, Room)), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter6/CarryingABook2.e',78).
+axiom(holds_at(neg(inRoom(Agent, Room)), Time),
+   
+    [ holds_at(holding(Agent, Object), Time),
+      holds_at(neg(inRoom(Object, Room)), Time)
+    ]).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter6/CarryingABook2.e:81
+%; Gamma
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter6/CarryingABook2.e:83
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter6/CarryingABook2.e',84).
+% HoldsAt(InRoom(Nathan,LivingRoom),0).
+
+ /*  [] ->
+       ta(Ta_Param,
+          tvs1=[start],
+          tvs2=[start],
+          holds_at(inRoom(nathan, livingRoom), start)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter6/CarryingABook2.e',84).
+axiom(holds_at(inRoom(nathan, livingRoom), start),
+    []).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter6/CarryingABook2.e:84
+% HoldsAt(InRoom(Book,LivingRoom),0).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter6/CarryingABook2.e',84).
+
+ /*  [] ->
+       ta(Ta_Param,
+          tvs1=[start],
+          tvs2=[start],
+          holds_at(inRoom(book, livingRoom), start)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter6/CarryingABook2.e',84).
+axiom(holds_at(inRoom(book, livingRoom), start),
+    []).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter6/CarryingABook2.e:86
+%; added:
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter6/CarryingABook2.e:87
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter6/CarryingABook2.e',88).
+% !HoldsAt(Holding(Nathan,Book),0).
+
+ /*  [] ->
+       ta(Ta_Param,
+          tvs1=[start],
+          tvs2=[start],
+          holds_at(neg(holding(nathan, book)), start)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter6/CarryingABook2.e',88).
+axiom(holds_at(neg(holding(nathan, book)), start),
+    []).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter6/CarryingABook2.e:88
+% [agent,time]
+ % !HoldsAt(Holding(agent,agent),time).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter6/CarryingABook2.e',88).
+
+ /*  [] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(neg(holding(Agent, Agent)), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter6/CarryingABook2.e',88).
+axiom(holds_at(neg(holding(Agent, Agent)), Time),
+    []).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter6/CarryingABook2.e:90
+% completion Happens
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter6/CarryingABook2.e',90).
+==> completion(happens).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter6/CarryingABook2.e:92
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter6/CarryingABook2.e',93).
+% range time 0 2
+==> range(time,0,2).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter6/CarryingABook2.e:93
+% range offset 1 1
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter6/CarryingABook2.e',93).
+==> range(offset,1,1).
+%; End of file.

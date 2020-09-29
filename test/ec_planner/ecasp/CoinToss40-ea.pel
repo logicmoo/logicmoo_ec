@@ -1,0 +1,204 @@
+:-include(library('ec_planner/ec_test_incl')).
+:-expects_dialect(pfc).
+% Wed, 01 Apr 2020 20:01:03 GMT
+% From ../ecasp/CoinToss40-ea.pel:4
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/ChessBoard40-ea.e',51).
+
+ /*  loading(load_e_pl,
+   	'/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/CoinToss40-ea.e').
+ */
+%; CoinToss40-ea.e
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/CoinToss40-ea.e:2
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/CoinToss40-ea.e',3).
+% load foundations/Root.e
+:- load_e('foundations/Root.e', changed).
+:- if(is_e_toplevel).
+:- endif.
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/CoinToss40-ea.e:3
+% load foundations/EC.e
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/CoinToss40-ea.e',3).
+:- load_e('foundations/EC.e', changed).
+:- if(is_e_toplevel).
+:- endif.
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/CoinToss40-ea.e:5
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/CoinToss40-ea.e',6).
+% event Toss()
+event(toss).
+==> mpred_prop(toss,event).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/CoinToss40-ea.e:6
+% fluent ItsHeads()
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/CoinToss40-ea.e',6).
+fluent(itsHeads).
+==> mpred_prop(itsHeads,fluent).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/CoinToss40-ea.e:7
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/CoinToss40-ea.e',8).
+% fluent Heads()
+fluent(heads).
+==> mpred_prop(heads,fluent).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/CoinToss40-ea.e:9
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/CoinToss40-ea.e',10).
+% [time]
+ % (HoldsAt(ItsHeads(),time) -> Initiates(Toss(),Heads(),time)).
+
+ /*  [holds_at(itsHeads, Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          initiates(toss, heads, Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/CoinToss40-ea.e',10).
+axiom(initiates(toss, heads, Time),
+    [holds_at(itsHeads, Time)]).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/CoinToss40-ea.e:12
+% [time]
+ % (!HoldsAt(ItsHeads(),time) -> Terminates(Toss(),Heads(),time)).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/CoinToss40-ea.e',14).
+
+ /*  [holds_at(neg(itsHeads), Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          terminates(toss, heads, Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/CoinToss40-ea.e',14).
+axiom(terminates(toss, heads, Time),
+    [holds_at(neg(itsHeads), Time)]).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/CoinToss40-ea.e:16
+%;noninertial ItsHeads
+% [time]
+% (ReleasedAt(ItsHeads(),time)).
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/CoinToss40-ea.e:18
+
+ /*  [] ->
+       ta(Ta_Param, tvs1=[], tvs2=[], releasedAt(itsHeads, Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/CoinToss40-ea.e',18).
+axiom(releasedAt(itsHeads, Time),
+    []).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/CoinToss40-ea.e:20
+% !ReleasedAt(Heads(),0).
+ %  not(releasedAt(heads,0)).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/CoinToss40-ea.e',20).
+
+ /*  [] ->
+       ta(Ta_Param, tvs1=[], tvs2=[], not(releasedAt(heads, 0))).
+ */
+axiom(not(releasedAt(heads, 0)),
+    []).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/CoinToss40-ea.e:23
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/CoinToss40-ea.e',24).
+% HoldsAt(Heads(),0).
+
+ /*  [] ->
+       ta(Ta_Param, tvs1=[start], tvs2=[start], holds_at(heads, start)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/CoinToss40-ea.e',24).
+axiom(holds_at(heads, start),
+    []).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/CoinToss40-ea.e:24
+% Happens(Toss(),10).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/CoinToss40-ea.e',24).
+
+ /*  [b(start, Startd10), toffset(start, 10, Startd10), ignore(start+10==Startd10)] ->
+       ta(Ta_Param,
+          tvs1=[start+10],
+          tvs2=[Startd10, start],
+          happens(toss, Startd10)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/CoinToss40-ea.e',24).
+axiom(happens(toss, Startd10),
+    [b(start, Startd10), toffset(start, 10, Startd10)]).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/CoinToss40-ea.e:25
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/CoinToss40-ea.e',26).
+% Happens(Toss(),20).
+
+ /*  [b(start, Startd20), toffset(start, 20, Startd20), ignore(start+20==Startd20)] ->
+       ta(Ta_Param,
+          tvs1=[start+20],
+          tvs2=[Startd20, start],
+          happens(toss, Startd20)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/CoinToss40-ea.e',26).
+axiom(happens(toss, Startd20),
+    [b(start, Startd20), toffset(start, 20, Startd20)]).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/CoinToss40-ea.e:26
+% Happens(Toss(),30).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/CoinToss40-ea.e',26).
+
+ /*  [b(start, Startd30), toffset(start, 30, Startd30), ignore(start+30==Startd30)] ->
+       ta(Ta_Param,
+          tvs1=[start+30],
+          tvs2=[Startd30, start],
+          happens(toss, Startd30)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/CoinToss40-ea.e',26).
+axiom(happens(toss, Startd30),
+    [b(start, Startd30), toffset(start, 30, Startd30)]).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/CoinToss40-ea.e:28
+%; prune models irrelevant to example:
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/CoinToss40-ea.e:29
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/CoinToss40-ea.e',30).
+% HoldsAt(ItsHeads(),0).
+
+ /*  [] ->
+       ta(Ta_Param, tvs1=[start], tvs2=[start], holds_at(itsHeads, start)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/CoinToss40-ea.e',30).
+axiom(holds_at(itsHeads, start),
+    []).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/CoinToss40-ea.e:30
+% HoldsAt(ItsHeads(),40).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/CoinToss40-ea.e',30).
+
+ /*  [b(start, Startd40), toffset(start, 40, Startd40), ignore(start+40==Startd40)] ->
+       ta(Ta_Param,
+          tvs1=[start+40],
+          tvs2=[Startd40, start],
+          holds_at(itsHeads, Startd40)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/CoinToss40-ea.e',30).
+axiom(holds_at(itsHeads, Startd40),
+    [b(start, Startd40), toffset(start, 40, Startd40)]).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/CoinToss40-ea.e:32
+% completion Happens
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/CoinToss40-ea.e',32).
+==> completion(happens).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/CoinToss40-ea.e:34
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/CoinToss40-ea.e',35).
+% range time 0 40
+==> range(time,0,40).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/CoinToss40-ea.e:35
+% range offset 1 1
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/CoinToss40-ea.e',35).
+==> range(offset,1,1).
+%; End of file.

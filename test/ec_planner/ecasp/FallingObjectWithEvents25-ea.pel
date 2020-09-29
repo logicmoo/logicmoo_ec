@@ -1,0 +1,451 @@
+:-include(library('ec_planner/ec_test_incl')).
+:-expects_dialect(pfc).
+% Wed, 01 Apr 2020 20:01:08 GMT
+% From ../ecasp/FallingObjectWithEvents25-ea.pel:4
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/FallingObjectWithEvents20-ea.e',75).
+
+ /*  loading(load_e_pl,
+   	'/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/FallingObjectWithEvents25-ea.e').
+ */
+%; FallingObjectWithEvents25-ea.e
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/FallingObjectWithEvents25-ea.e:1
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/FallingObjectWithEvents25-ea.e',2).
+% load foundations/Root.e
+:- load_e('foundations/Root.e', changed).
+:- if(is_e_toplevel).
+:- endif.
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/FallingObjectWithEvents25-ea.e:2
+% load foundations/EC.e
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/FallingObjectWithEvents25-ea.e',2).
+:- load_e('foundations/EC.e', changed).
+:- if(is_e_toplevel).
+:- endif.
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/FallingObjectWithEvents25-ea.e:4
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/FallingObjectWithEvents25-ea.e',5).
+% sort object
+==> sort(object).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/FallingObjectWithEvents25-ea.e:5
+% sort agent
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/FallingObjectWithEvents25-ea.e',5).
+==> sort(agent).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/FallingObjectWithEvents25-ea.e:6
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/FallingObjectWithEvents25-ea.e',7).
+% sort height: integer
+==> subsort(height,integer).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/FallingObjectWithEvents25-ea.e:8
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/FallingObjectWithEvents25-ea.e',9).
+% agent Nathan
+==> t(agent,nathan).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/FallingObjectWithEvents25-ea.e:9
+% object Apple
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/FallingObjectWithEvents25-ea.e',9).
+==> t(object,apple).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/FallingObjectWithEvents25-ea.e:11
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/FallingObjectWithEvents25-ea.e',12).
+% fluent Falling(object)
+fluent(falling(object)).
+==> mpred_prop(falling(object),fluent).
+==> meta_argtypes(falling(object)).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/FallingObjectWithEvents25-ea.e:12
+% fluent Height(object,height)
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/FallingObjectWithEvents25-ea.e',12).
+fluent(height(object,height)).
+==> mpred_prop(height(object,height),fluent).
+==> meta_argtypes(height(object,height)).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/FallingObjectWithEvents25-ea.e:14
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/FallingObjectWithEvents25-ea.e',15).
+% event Drop(agent,object)
+event(drop(agent,object)).
+==> mpred_prop(drop(agent,object),event).
+==> meta_argtypes(drop(agent,object)).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/FallingObjectWithEvents25-ea.e:15
+% event HitGround(object)
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/FallingObjectWithEvents25-ea.e',15).
+event(hitGround(object)).
+==> mpred_prop(hitGround(object),event).
+==> meta_argtypes(hitGround(object)).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/FallingObjectWithEvents25-ea.e:17
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/FallingObjectWithEvents25-ea.e',18).
+%; Sigma
+% [agent,object,time]
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/FallingObjectWithEvents25-ea.e:20
+% Initiates(Drop(agent,object),Falling(object),time).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/FallingObjectWithEvents25-ea.e',20).
+
+ /*  [] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          initiates(drop(Agent, Object),
+                    falling(Object),
+                    Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/FallingObjectWithEvents25-ea.e',20).
+axiom(initiates(drop(Agent, Object), falling(Object), Time),
+    []).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/FallingObjectWithEvents25-ea.e:22
+% [agent,object,height,time]
+% Releases(Drop(agent,object),Height(object,height),time).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/FallingObjectWithEvents25-ea.e',24).
+
+ /*  [] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          releases(drop(Agent, Object),
+                   height(Object, Height),
+                   Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/FallingObjectWithEvents25-ea.e',24).
+axiom(releases(drop(Agent, Object), height(Object, Height), Time),
+    []).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/FallingObjectWithEvents25-ea.e:25
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/FallingObjectWithEvents25-ea.e',26).
+% [object,time]
+% Terminates(HitGround(object),Falling(object),time).
+
+ /*  [] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          terminates(hitGround(Object), falling(Object), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/FallingObjectWithEvents25-ea.e',26).
+axiom(terminates(hitGround(Object), falling(Object), Time),
+    []).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/FallingObjectWithEvents25-ea.e:28
+% [object,height,time]
+% (HoldsAt(Height(object,height),time) ->
+% Initiates(HitGround(object),Height(object,height),time)).
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/FallingObjectWithEvents25-ea.e:30
+
+ /*  [holds_at(height(Object, Height), Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          initiates(hitGround(Object),
+                    height(Object, Height),
+                    Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/FallingObjectWithEvents25-ea.e',30).
+axiom(initiates(hitGround(Object), height(Object, Height), Time),
+    [holds_at(height(Object, Height), Time)]).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/FallingObjectWithEvents25-ea.e:32
+%; Delta
+% [object,time]
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/FallingObjectWithEvents25-ea.e:35
+% (HoldsAt(Falling(object),time) &
+% HoldsAt(Height(object,0),time) ->
+% Happens(HitGround(object),time)).
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/FallingObjectWithEvents25-ea.e:37
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/FallingObjectWithEvents25-ea.e',35).
+
+ /*  holds_at(falling(Object), Time), holds_at(height(Object, 0), Time) ->
+       happens(hitGround(Object), Time).
+ */
+
+ /*  happens(hitGround(Object), Time) :-
+       holds_at(falling(Object), Time),
+       holds_at(height(Object, 0), Time).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/FallingObjectWithEvents25-ea.e',35).
+
+ /*  [holds_at(falling(Object), Time), holds_at(height(Object, 0), Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          happens(hitGround(Object), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/FallingObjectWithEvents25-ea.e',35).
+axiom(happens(hitGround(Object), Time),
+   
+    [ holds_at(falling(Object), Time),
+      holds_at(height(Object, 0), Time)
+    ]).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/FallingObjectWithEvents25-ea.e',35).
+
+ /*  not(holds_at(falling(Object), Time)) :-
+       holds_at(height(Object, 0), Time),
+       not(happens(hitGround(Object), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/FallingObjectWithEvents25-ea.e',35).
+
+ /*  [holds_at(height(Object, 0), Time), not(happens(hitGround(Object), Time))] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(neg(falling(Object)), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/FallingObjectWithEvents25-ea.e',35).
+axiom(holds_at(neg(falling(Object)), Time),
+   
+    [ holds_at(height(Object, 0), Time),
+      not(happens(hitGround(Object), Time))
+    ]).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/FallingObjectWithEvents25-ea.e',35).
+
+ /*  not(holds_at(height(Object, 0), Time)) :-
+       holds_at(falling(Object), Time),
+       not(happens(hitGround(Object), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/FallingObjectWithEvents25-ea.e',35).
+
+ /*  [holds_at(falling(Object), Time), not(happens(hitGround(Object), Time))] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(neg(height(Object, 0)), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/FallingObjectWithEvents25-ea.e',35).
+axiom(holds_at(neg(height(Object, 0)), Time),
+   
+    [ holds_at(falling(Object), Time),
+      not(happens(hitGround(Object), Time))
+    ]).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/FallingObjectWithEvents25-ea.e:39
+% Happens(Drop(Nathan,Apple),18).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/FallingObjectWithEvents25-ea.e',39).
+
+ /*  [b(start, Startd18), toffset(start, 18, Startd18), ignore(start+18==Startd18)] ->
+       ta(Ta_Param,
+          tvs1=[start+18],
+          tvs2=[Startd18, start],
+          happens(drop(nathan, apple), Startd18)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/FallingObjectWithEvents25-ea.e',39).
+axiom(happens(drop(nathan, apple), Startd18),
+    [b(start, Startd18), toffset(start, 18, Startd18)]).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/FallingObjectWithEvents25-ea.e:41
+%; Psi
+% [object,height1,height2,time]
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/FallingObjectWithEvents25-ea.e:44
+% (HoldsAt(Height(object,height1),time) &
+% HoldsAt(Height(object,height2),time) ->
+% height1=height2).
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/FallingObjectWithEvents25-ea.e:46
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/FallingObjectWithEvents25-ea.e',44).
+
+ /*  holds_at(height(Object, Height1), Time), holds_at(height(Object, Height2), Time) ->
+       equals(Height1, Height2).
+ */
+
+ /*  not(holds_at(height(Object, Height1), Time)) :-
+       holds_at(height(Object, Height2), Time),
+       not(equals(Height1, Height2)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/FallingObjectWithEvents25-ea.e',44).
+
+ /*  [holds_at(height(Object, Height2), Time), not(equals(Height1, Height2))] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(neg(height(Object, Height1)), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/FallingObjectWithEvents25-ea.e',44).
+axiom(holds_at(neg(height(Object, Height1)), Time),
+   
+    [ holds_at(height(Object, Height2), Time),
+      not(equals(Height1, Height2))
+    ]).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/FallingObjectWithEvents25-ea.e',44).
+
+ /*  not(holds_at(height(Object, Height2), Time)) :-
+       holds_at(height(Object, Height1), Time),
+       not(equals(Height1, Height2)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/FallingObjectWithEvents25-ea.e',44).
+
+ /*  [holds_at(height(Object, Height1), Time), not(equals(Height1, Height2))] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(neg(height(Object, Height2)), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/FallingObjectWithEvents25-ea.e',44).
+axiom(holds_at(neg(height(Object, Height2)), Time),
+   
+    [ holds_at(height(Object, Height1), Time),
+      not(equals(Height2, Height1))
+    ]).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/FallingObjectWithEvents25-ea.e:48
+%; Pi
+% [object,height1,height2,offset,time]
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/FallingObjectWithEvents25-ea.e:51
+% (HoldsAt(Height(object,height1),time) &
+% height2 = (height1 - offset) ->
+% Trajectory(Falling(object),time,Height(object,height2),offset)).
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/FallingObjectWithEvents25-ea.e:53
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/FallingObjectWithEvents25-ea.e',51).
+
+ /*  holds_at(height(Object, Height1), Time), equals(Height2, Height1-Offset) ->
+       trajectory(falling(Object),
+                  Time,
+                  height(Object, Height2),
+                  Offset).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/FallingObjectWithEvents25-ea.e',51).
+
+ /*  trajectory(falling(Object), Time, height(Object, Height2), Offset) :-
+       holds_at(height(Object, Height1), Time),
+       equals(Height2, Height1-Offset).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/FallingObjectWithEvents25-ea.e',51).
+
+ /*  [holds_at(height(Object, Height1), Time), equals(Height2, Height1-Offset)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          trajectory(falling(Object),
+                     Time,
+                     height(Object, Height2),
+                     Offset)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/FallingObjectWithEvents25-ea.e',51).
+axiom(trajectory(falling(Object), Time, height(Object, Height2), Offset),
+   
+    [ holds_at(height(Object, Height1), Time),
+      equals(Height2, Height1-Offset)
+    ]).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/FallingObjectWithEvents25-ea.e',51).
+
+ /*  not(holds_at(height(Object, Height1), Time)) :-
+       equals(Height2, Height1-Offset),
+       not(trajectory(falling(Object),
+                      Time,
+                      height(Object, Height2),
+                      Offset)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/FallingObjectWithEvents25-ea.e',51).
+
+ /*  [equals(Height2, Height1-Offset), not(trajectory(falling(Object), Time, height(Object, Height2), Offset))] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(neg(height(Object, Height1)), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/FallingObjectWithEvents25-ea.e',51).
+axiom(holds_at(neg(height(Object, Height1)), Time),
+   
+    [ equals(Height2, Height1-Offset),
+      not(trajectory(falling(Object),
+                     Time,
+                     height(Object, Height2),
+                     Offset))
+    ]).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/FallingObjectWithEvents25-ea.e:55
+%; Gamma
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/FallingObjectWithEvents25-ea.e:57
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/FallingObjectWithEvents25-ea.e',58).
+% !HoldsAt(Falling(Apple),0).
+
+ /*  [] ->
+       ta(Ta_Param,
+          tvs1=[start],
+          tvs2=[start],
+          holds_at(neg(falling(apple)), start)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/FallingObjectWithEvents25-ea.e',58).
+axiom(holds_at(neg(falling(apple)), start),
+    []).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/FallingObjectWithEvents25-ea.e:58
+% HoldsAt(Height(Apple,3),18).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/FallingObjectWithEvents25-ea.e',58).
+
+ /*  [b(start, Startd18), toffset(start, 18, Startd18), ignore(start+18==Startd18)] ->
+       ta(Ta_Param,
+          tvs1=[start+18],
+          tvs2=[Startd18, start],
+          holds_at(height(apple, 3), Startd18)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/FallingObjectWithEvents25-ea.e',58).
+axiom(holds_at(height(apple, 3), Startd18),
+    [b(start, Startd18), toffset(start, 18, Startd18)]).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/FallingObjectWithEvents25-ea.e:60
+% [object]
+% !ReleasedAt(Falling(object),0).
+ %  not(releasedAt(falling(Object),0)).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/FallingObjectWithEvents25-ea.e',62).
+
+ /*  [] ->
+       ta(Ta_Param,
+          tvs1=[],
+          tvs2=[],
+          not(releasedAt(falling(Object), 0))).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/FallingObjectWithEvents25-ea.e',62).
+axiom(not(releasedAt(falling(Object), 0)),
+    []).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/FallingObjectWithEvents25-ea.e:63
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/FallingObjectWithEvents25-ea.e',64).
+% [object,height]
+% !ReleasedAt(Height(object,height),0).
+ %  not(releasedAt(height(Object,Height),0)).
+
+ /*  [] ->
+       ta(Ta_Param,
+          tvs1=[],
+          tvs2=[],
+          not(releasedAt(height(Object, Height), 0))).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/FallingObjectWithEvents25-ea.e',64).
+axiom(not(releasedAt(height(Object, Height), 0)),
+    []).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/FallingObjectWithEvents25-ea.e:67
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/FallingObjectWithEvents25-ea.e',68).
+% completion Happens
+==> completion(happens).
+%;completion Delta Happens
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/FallingObjectWithEvents25-ea.e:70
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/FallingObjectWithEvents25-ea.e',71).
+% range time 0 25
+==> range(time,0,25).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/FallingObjectWithEvents25-ea.e:71
+% range height 0 18
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/FallingObjectWithEvents25-ea.e',71).
+==> range(height,0,18).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/FallingObjectWithEvents25-ea.e:72
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/FallingObjectWithEvents25-ea.e',73).
+% range offset 1 18
+==> range(offset,1,18).
+%; End of file.

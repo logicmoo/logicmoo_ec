@@ -1,0 +1,309 @@
+:-include(library('ec_planner/ec_test_incl')).
+:-expects_dialect(pfc).
+% Wed, 01 Apr 2020 20:01:04 GMT
+% From ../ecasp/DeadOrAlive3-ea.pel:4
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/Commuter15-ea.e',102).
+
+ /*  loading(load_e_pl,
+   	'/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/DeadOrAlive3-ea.e').
+ */
+%; DeadOrAlive3-ea.e
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/DeadOrAlive3-ea.e:2
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/DeadOrAlive3-ea.e',3).
+% load foundations/Root.e
+:- load_e('foundations/Root.e', changed).
+:- if(is_e_toplevel).
+:- endif.
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/DeadOrAlive3-ea.e:3
+% load foundations/EC.e
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/DeadOrAlive3-ea.e',3).
+:- load_e('foundations/EC.e', changed).
+:- if(is_e_toplevel).
+:- endif.
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/DeadOrAlive3-ea.e:5
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/DeadOrAlive3-ea.e',6).
+% event Load()
+event(load).
+==> mpred_prop(load,event).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/DeadOrAlive3-ea.e:6
+% event Shoot()
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/DeadOrAlive3-ea.e',6).
+event(shoot).
+==> mpred_prop(shoot,event).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/DeadOrAlive3-ea.e:7
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/DeadOrAlive3-ea.e',8).
+% event Sneeze()
+event(sneeze).
+==> mpred_prop(sneeze,event).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/DeadOrAlive3-ea.e:8
+% fluent Loaded()
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/DeadOrAlive3-ea.e',8).
+fluent(loaded).
+==> mpred_prop(loaded,fluent).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/DeadOrAlive3-ea.e:9
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/DeadOrAlive3-ea.e',10).
+% fluent Alive()
+fluent(alive).
+==> mpred_prop(alive,fluent).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/DeadOrAlive3-ea.e:10
+% fluent Dead()
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/DeadOrAlive3-ea.e',10).
+fluent(dead).
+==> mpred_prop(dead,fluent).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/DeadOrAlive3-ea.e:12
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/DeadOrAlive3-ea.e',13).
+% [time]
+ % (Initiates(Load(),Loaded(),time)).
+
+ /*  [] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          initiates(load, loaded, Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/DeadOrAlive3-ea.e',13).
+axiom(initiates(load, loaded, Time),
+    []).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/DeadOrAlive3-ea.e:15
+% [time]
+ % (HoldsAt(Loaded(),time) -> Terminates(Shoot(),Alive(),time)).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/DeadOrAlive3-ea.e',17).
+
+ /*  [holds_at(loaded, Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          terminates(shoot, alive, Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/DeadOrAlive3-ea.e',17).
+axiom(terminates(shoot, alive, Time),
+    [holds_at(loaded, Time)]).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/DeadOrAlive3-ea.e:18
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/DeadOrAlive3-ea.e',19).
+% [time]
+% (Terminates(Shoot(),Loaded(),time)).
+
+ /*  [] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          terminates(shoot, loaded, Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/DeadOrAlive3-ea.e',19).
+axiom(terminates(shoot, loaded, Time),
+    []).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/DeadOrAlive3-ea.e:21
+% [time]
+ % (HoldsAt(Dead(),time) <-> !HoldsAt(Alive(),time)).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/DeadOrAlive3-ea.e',23).
+
+ /*  holds_at(dead, Time) <->
+       holds_at(neg(alive), Time).
+ */
+
+ /*  [holds_at, dead] <->
+       [holds_at, neg, alive].
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/DeadOrAlive3-ea.e',23).
+
+ /*  holds_at(dead, Time) ->
+       holds_at(neg(alive), Time).
+ */
+
+ /*  holds_at(neg(alive), Time) :-
+       holds_at(dead, Time).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/DeadOrAlive3-ea.e',23).
+
+ /*  [holds_at(dead, Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(neg(alive), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/DeadOrAlive3-ea.e',23).
+axiom(holds_at(neg(alive), Time),
+    [holds_at(dead, Time)]).
+
+ /*  not(holds_at(dead, Time)) :-
+       not(holds_at(neg(alive), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/DeadOrAlive3-ea.e',23).
+
+ /*  [holds_at(alive, Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(neg(dead), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/DeadOrAlive3-ea.e',23).
+axiom(holds_at(neg(dead), Time),
+    [holds_at(alive, Time)]).
+
+ /*  holds_at(neg(alive), Time) ->
+       holds_at(dead, Time).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/DeadOrAlive3-ea.e',23).
+
+ /*  holds_at(dead, Time) :-
+       holds_at(neg(alive), Time).
+ */
+
+ /*  [holds_at(neg(alive), Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(dead, Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/DeadOrAlive3-ea.e',23).
+axiom(holds_at(dead, Time),
+    [holds_at(neg(alive), Time)]).
+
+ /*  not(holds_at(neg(alive), Time)) :-
+       not(holds_at(dead, Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/DeadOrAlive3-ea.e',23).
+
+ /*  [holds_at(neg(dead), Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(alive, Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/DeadOrAlive3-ea.e',23).
+axiom(holds_at(alive, Time),
+    [holds_at(neg(dead), Time)]).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/DeadOrAlive3-ea.e:25
+% [time]
+% (ReleasedAt(Dead(),time)).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/DeadOrAlive3-ea.e',27).
+
+ /*  [] ->
+       ta(Ta_Param, tvs1=[], tvs2=[], releasedAt(dead, Time)).
+ */
+axiom(releasedAt(dead, Time),
+    []).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/DeadOrAlive3-ea.e:28
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/DeadOrAlive3-ea.e',29).
+% !ReleasedAt(Loaded(),0).
+ %  not(releasedAt(loaded,0)).
+
+ /*  [] ->
+       ta(Ta_Param, tvs1=[], tvs2=[], not(releasedAt(loaded, 0))).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/DeadOrAlive3-ea.e',29).
+axiom(not(releasedAt(loaded, 0)),
+    []).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/DeadOrAlive3-ea.e:29
+% !ReleasedAt(Alive(),0).
+ %  not(releasedAt(alive,0)).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/DeadOrAlive3-ea.e',29).
+
+ /*  [] ->
+       ta(Ta_Param, tvs1=[], tvs2=[], not(releasedAt(alive, 0))).
+ */
+axiom(not(releasedAt(alive, 0)),
+    []).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/DeadOrAlive3-ea.e:32
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/DeadOrAlive3-ea.e',33).
+% HoldsAt(Alive(),0).
+
+ /*  [] ->
+       ta(Ta_Param, tvs1=[start], tvs2=[start], holds_at(alive, start)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/DeadOrAlive3-ea.e',33).
+axiom(holds_at(alive, start),
+    []).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/DeadOrAlive3-ea.e:33
+% !HoldsAt(Loaded(),0).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/DeadOrAlive3-ea.e',33).
+
+ /*  [] ->
+       ta(Ta_Param, tvs1=[start], tvs2=[start], holds_at(neg(loaded), start)).
+ */
+axiom(holds_at(neg(loaded), start),
+    []).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/DeadOrAlive3-ea.e:34
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/DeadOrAlive3-ea.e',35).
+% Happens(Load(),0).
+
+ /*  [] ->
+       ta(Ta_Param, tvs1=[start], tvs2=[start], happens(load, start)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/DeadOrAlive3-ea.e',35).
+axiom(happens(load, start),
+    []).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/DeadOrAlive3-ea.e:35
+% Happens(Sneeze(),1).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/DeadOrAlive3-ea.e',35).
+
+ /*  [b(start, Maptime), ignore(start+1==Maptime)] ->
+       ta(Ta_Param,
+          tvs1=[start+1],
+          tvs2=[Maptime, start],
+          happens(sneeze, Maptime)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/DeadOrAlive3-ea.e',35).
+axiom(happens(sneeze, Maptime),
+    [b(start, Maptime)]).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/DeadOrAlive3-ea.e:36
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/DeadOrAlive3-ea.e',37).
+% Happens(Shoot(),2).
+
+ /*  [b(start, Start2), toffset(start, 2, Start2), ignore(start+2==Start2)] ->
+       ta(Ta_Param,
+          tvs1=[start+2],
+          tvs2=[Start2, start],
+          happens(shoot, Start2)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/DeadOrAlive3-ea.e',37).
+axiom(happens(shoot, Start2),
+    [b(start, Start2), toffset(start, 2, Start2)]).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/DeadOrAlive3-ea.e:38
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/DeadOrAlive3-ea.e',39).
+% completion Happens
+==> completion(happens).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/DeadOrAlive3-ea.e:40
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/DeadOrAlive3-ea.e',41).
+% range time 0 3
+==> range(time,0,3).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/DeadOrAlive3-ea.e:41
+% range offset 1 1
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecasp/DeadOrAlive3-ea.e',41).
+==> range(offset,1,1).
+%; End of file.

@@ -1,0 +1,855 @@
+:-include(library('ec_planner/ec_test_incl')).
+:-expects_dialect(pfc).
+% Wed, 01 Apr 2020 20:01:53 GMT
+% From ../ecnet/IPRel.pel:4
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/HungerNeed.e',32).
+
+ /*  loading(load_e_pl,
+   	'/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/IPRel.e').
+ */
+%;
+%; Copyright (c) 2005 IBM Corporation and others.
+%; All rights reserved. This program and the accompanying materials
+%; are made available under the terms of the Common Public License v1.0
+%; which accompanies this distribution, and is available at
+%; http://www.eclipse.org/legal/cpl-v10.html
+%;
+%; Contributors:
+%; IBM - Initial implementation
+%;
+%; IPRel: interpersonal relations
+%;
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/IPRel.e:13
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/IPRel.e',14).
+% fluent FriendOf(agent,agent)
+fluent(friendOf(agent,agent)).
+==> mpred_prop(friendOf(agent,agent),fluent).
+==> meta_argtypes(friendOf(agent,agent)).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/IPRel.e:15
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/IPRel.e',16).
+% fluent NeutralOf(agent,agent)
+fluent(neutralOf(agent,agent)).
+==> mpred_prop(neutralOf(agent,agent),fluent).
+==> meta_argtypes(neutralOf(agent,agent)).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/IPRel.e:17
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/IPRel.e',18).
+% fluent EnemyOf(agent,agent)
+fluent(enemyOf(agent,agent)).
+==> mpred_prop(enemyOf(agent,agent),fluent).
+==> meta_argtypes(enemyOf(agent,agent)).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/IPRel.e:19
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/IPRel.e',20).
+% event BecomeFriends(agent,agent)
+event(becomeFriends(agent,agent)).
+==> mpred_prop(becomeFriends(agent,agent),event).
+==> meta_argtypes(becomeFriends(agent,agent)).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/IPRel.e:20
+% event BecomeNeutral(agent,agent)
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/IPRel.e',20).
+event(becomeNeutral(agent,agent)).
+==> mpred_prop(becomeNeutral(agent,agent),event).
+==> meta_argtypes(becomeNeutral(agent,agent)).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/IPRel.e:21
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/IPRel.e',22).
+% event BecomeEnemies(agent,agent)
+event(becomeEnemies(agent,agent)).
+==> mpred_prop(becomeEnemies(agent,agent),event).
+==> meta_argtypes(becomeEnemies(agent,agent)).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/IPRel.e:23
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/IPRel.e',24).
+% [agent1,agent2,time]
+% HoldsAt(FriendOf(agent1,agent2),time) ->
+% !Holds(EnemyOf(agent1,agent2),time).
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/IPRel.e:25
+
+ /*  holds_at(friendOf(Agent1, Agent2), Time) ->
+       not(holds(enemyOf(Agent1, Agent2), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/IPRel.e',24).
+
+ /*  not(holds(enemyOf(Agent1, Agent2), Time)) :-
+       holds_at(friendOf(Agent1, Agent2), Time).
+ */
+
+ /*  fix_axiom_head(Time) ->
+       
+       [ not(holds(enemyOf(Agent1, Agent2), Time)),
+          (->),
+         holds_at(neg(holds(enemyOf(Agent1, Agent2), Time)),
+                  Time)
+       ].
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/IPRel.e',24).
+
+ /*  [holds_at(friendOf(Agent1, Agent2), Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(neg(holds(enemyOf(Agent1, Agent2), Time)),
+                   Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/IPRel.e',24).
+axiom(holds_at(neg(holds(enemyOf(Agent1, Agent2), Time)), Time),
+    [holds_at(friendOf(Agent1, Agent2), Time)]).
+
+ /*  not(holds_at(friendOf(Agent1, Agent2), Time)) :-
+       holds(enemyOf(Agent1, Agent2), Time).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/IPRel.e',24).
+
+ /*  [holds_at(holds(enemyOf(Agent1, Agent2), Time), Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(neg(friendOf(Agent1, Agent2)), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/IPRel.e',24).
+axiom(holds_at(neg(friendOf(Agent1, Agent2)), Time),
+   
+    [ holds_at(holds(enemyOf(Agent1, Agent2), Time),
+               Time)
+    ]).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/IPRel.e:27
+% [agent1,agent2,time]
+% HoldsAt(NeutralOf(agent1,agent2),time) ->
+% !Holds(EnemyOf(agent1,agent2),time).
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/IPRel.e:29
+
+ /*  holds_at(neutralOf(Agent1, Agent2), Time) ->
+       not(holds(enemyOf(Agent1, Agent2), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/IPRel.e',29).
+
+ /*  not(holds(enemyOf(Agent1, Agent2), Time)) :-
+       holds_at(neutralOf(Agent1, Agent2), Time).
+ */
+
+ /*  fix_axiom_head(Time) ->
+       
+       [ not(holds(enemyOf(Agent1, Agent2), Time)),
+          (->),
+         holds_at(neg(holds(enemyOf(Agent1, Agent2), Time)),
+                  Time)
+       ].
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/IPRel.e',29).
+
+ /*  [holds_at(neutralOf(Agent1, Agent2), Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(neg(holds(enemyOf(Agent1, Agent2), Time)),
+                   Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/IPRel.e',29).
+axiom(holds_at(neg(holds(enemyOf(Agent1, Agent2), Time)), Time),
+    [holds_at(neutralOf(Agent1, Agent2), Time)]).
+
+ /*  not(holds_at(neutralOf(Agent1, Agent2), Time)) :-
+       holds(enemyOf(Agent1, Agent2), Time).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/IPRel.e',29).
+
+ /*  [holds_at(holds(enemyOf(Agent1, Agent2), Time), Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(neg(neutralOf(Agent1, Agent2)), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/IPRel.e',29).
+axiom(holds_at(neg(neutralOf(Agent1, Agent2)), Time),
+   
+    [ holds_at(holds(enemyOf(Agent1, Agent2), Time),
+               Time)
+    ]).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/IPRel.e:31
+% [agent1,agent2,time]
+% HoldsAt(FriendOf(agent1,agent2),time) ->
+% HoldsAt(FriendOf(agent2,agent1),time).
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/IPRel.e:33
+
+ /*  holds_at(friendOf(Agent1, Agent2), Time) ->
+       holds_at(friendOf(Agent2, Agent1), Time).
+ */
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/IPRel.e:35
+% [agent1,agent2,time]
+% HoldsAt(NeutralOf(agent1,agent2),time) ->
+% HoldsAt(NeutralOf(agent2,agent1),time).
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/IPRel.e:37
+
+ /*  holds_at(neutralOf(Agent1, Agent2), Time) ->
+       holds_at(neutralOf(Agent2, Agent1), Time).
+ */
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/IPRel.e:39
+% [agent1,agent2,time]
+% HoldsAt(EnemyOf(agent1,agent2),time) ->
+% HoldsAt(EnemyOf(agent2,agent1),time).
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/IPRel.e:41
+
+ /*  holds_at(enemyOf(Agent1, Agent2), Time) ->
+       holds_at(enemyOf(Agent2, Agent1), Time).
+ */
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/IPRel.e:43
+% [agent1,agent2,time]
+% Initiates(BecomeFriends(agent1,agent2),FriendOf(agent1,agent2),time).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/IPRel.e',45).
+
+ /*  [] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          initiates(becomeFriends(Agent1, Agent2),
+                    friendOf(Agent1, Agent2),
+                    Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/IPRel.e',45).
+axiom(initiates(becomeFriends(Agent1, Agent2), friendOf(Agent1, Agent2), Time),
+    []).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/IPRel.e:46
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/IPRel.e',47).
+% [agent1,agent2,time]
+% Initiates(BecomeFriends(agent1,agent2),FriendOf(agent2,agent1),time).
+
+ /*  [] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          initiates(becomeFriends(Agent1, Agent2),
+                    friendOf(Agent2, Agent1),
+                    Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/IPRel.e',47).
+axiom(initiates(becomeFriends(Agent1, Agent2), friendOf(Agent2, Agent1), Time),
+    []).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/IPRel.e:49
+% [agent1,agent2,time]
+% Terminates(BecomeFriends(agent1,agent2),NeutralOf(agent1,agent2),time).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/IPRel.e',51).
+
+ /*  [] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          terminates(becomeFriends(Agent1, Agent2),
+                     neutralOf(Agent1, Agent2),
+                     Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/IPRel.e',51).
+axiom(terminates(becomeFriends(Agent1, Agent2), neutralOf(Agent1, Agent2), Time),
+    []).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/IPRel.e:52
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/IPRel.e',53).
+% [agent1,agent2,time]
+% Terminates(BecomeFriends(agent1,agent2),NeutralOf(agent2,agent1),time).
+
+ /*  [] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          terminates(becomeFriends(Agent1, Agent2),
+                     neutralOf(Agent2, Agent1),
+                     Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/IPRel.e',53).
+axiom(terminates(becomeFriends(Agent1, Agent2), neutralOf(Agent2, Agent1), Time),
+    []).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/IPRel.e:55
+% [agent1,agent2,time]
+% Terminates(BecomeFriends(agent1,agent2),EnemyOf(agent1,agent2),time).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/IPRel.e',57).
+
+ /*  [] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          terminates(becomeFriends(Agent1, Agent2),
+                     enemyOf(Agent1, Agent2),
+                     Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/IPRel.e',57).
+axiom(terminates(becomeFriends(Agent1, Agent2), enemyOf(Agent1, Agent2), Time),
+    []).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/IPRel.e:58
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/IPRel.e',59).
+% [agent1,agent2,time]
+% Terminates(BecomeFriends(agent1,agent2),EnemyOf(agent2,agent1),time).
+
+ /*  [] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          terminates(becomeFriends(Agent1, Agent2),
+                     enemyOf(Agent2, Agent1),
+                     Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/IPRel.e',59).
+axiom(terminates(becomeFriends(Agent1, Agent2), enemyOf(Agent2, Agent1), Time),
+    []).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/IPRel.e:61
+% [agent1,agent2,time]
+% Initiates(BecomeEnemies(agent1,agent2),EnemyOf(agent1,agent2),time).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/IPRel.e',63).
+
+ /*  [] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          initiates(becomeEnemies(Agent1, Agent2),
+                    enemyOf(Agent1, Agent2),
+                    Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/IPRel.e',63).
+axiom(initiates(becomeEnemies(Agent1, Agent2), enemyOf(Agent1, Agent2), Time),
+    []).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/IPRel.e:64
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/IPRel.e',65).
+% [agent1,agent2,time]
+% Initiates(BecomeEnemies(agent1,agent2),EnemyOf(agent2,agent1),time).
+
+ /*  [] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          initiates(becomeEnemies(Agent1, Agent2),
+                    enemyOf(Agent2, Agent1),
+                    Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/IPRel.e',65).
+axiom(initiates(becomeEnemies(Agent1, Agent2), enemyOf(Agent2, Agent1), Time),
+    []).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/IPRel.e:67
+% [agent1,agent2,time]
+% Terminates(BecomeEnemies(agent1,agent2),NeutralOf(agent1,agent2),time).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/IPRel.e',69).
+
+ /*  [] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          terminates(becomeEnemies(Agent1, Agent2),
+                     neutralOf(Agent1, Agent2),
+                     Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/IPRel.e',69).
+axiom(terminates(becomeEnemies(Agent1, Agent2), neutralOf(Agent1, Agent2), Time),
+    []).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/IPRel.e:70
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/IPRel.e',71).
+% [agent1,agent2,time]
+% Terminates(BecomeEnemies(agent1,agent2),NeutralOf(agent2,agent1),time).
+
+ /*  [] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          terminates(becomeEnemies(Agent1, Agent2),
+                     neutralOf(Agent2, Agent1),
+                     Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/IPRel.e',71).
+axiom(terminates(becomeEnemies(Agent1, Agent2), neutralOf(Agent2, Agent1), Time),
+    []).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/IPRel.e:73
+% [agent1,agent2,time]
+% Terminates(BecomeEnemies(agent1,agent2),FriendOf(agent1,agent2),time).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/IPRel.e',75).
+
+ /*  [] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          terminates(becomeEnemies(Agent1, Agent2),
+                     friendOf(Agent1, Agent2),
+                     Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/IPRel.e',75).
+axiom(terminates(becomeEnemies(Agent1, Agent2), friendOf(Agent1, Agent2), Time),
+    []).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/IPRel.e:76
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/IPRel.e',77).
+% [agent1,agent2,time]
+% Terminates(BecomeEnemies(agent1,agent2),FriendOf(agent2,agent1),time).
+
+ /*  [] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          terminates(becomeEnemies(Agent1, Agent2),
+                     friendOf(Agent2, Agent1),
+                     Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/IPRel.e',77).
+axiom(terminates(becomeEnemies(Agent1, Agent2), friendOf(Agent2, Agent1), Time),
+    []).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/IPRel.e:79
+% [agent1,agent2,time]
+% Initiates(BecomeNeutral(agent1,agent2),NeutralOf(agent1,agent2),time).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/IPRel.e',81).
+
+ /*  [] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          initiates(becomeNeutral(Agent1, Agent2),
+                    neutralOf(Agent1, Agent2),
+                    Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/IPRel.e',81).
+axiom(initiates(becomeNeutral(Agent1, Agent2), neutralOf(Agent1, Agent2), Time),
+    []).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/IPRel.e:82
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/IPRel.e',83).
+% [agent1,agent2,time]
+% Initiates(BecomeNeutral(agent1,agent2),NeutralOf(agent2,agent1),time).
+
+ /*  [] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          initiates(becomeNeutral(Agent1, Agent2),
+                    neutralOf(Agent2, Agent1),
+                    Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/IPRel.e',83).
+axiom(initiates(becomeNeutral(Agent1, Agent2), neutralOf(Agent2, Agent1), Time),
+    []).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/IPRel.e:85
+% [agent1,agent2,time]
+% Terminates(BecomeNeutral(agent1,agent2),FriendOf(agent1,agent2),time).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/IPRel.e',87).
+
+ /*  [] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          terminates(becomeNeutral(Agent1, Agent2),
+                     friendOf(Agent1, Agent2),
+                     Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/IPRel.e',87).
+axiom(terminates(becomeNeutral(Agent1, Agent2), friendOf(Agent1, Agent2), Time),
+    []).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/IPRel.e:88
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/IPRel.e',89).
+% [agent1,agent2,time]
+% Terminates(BecomeNeutral(agent1,agent2),FriendOf(agent2,agent1),time).
+
+ /*  [] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          terminates(becomeNeutral(Agent1, Agent2),
+                     friendOf(Agent2, Agent1),
+                     Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/IPRel.e',89).
+axiom(terminates(becomeNeutral(Agent1, Agent2), friendOf(Agent2, Agent1), Time),
+    []).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/IPRel.e:91
+% [agent1,agent2,time]
+% Terminates(BecomeNeutral(agent1,agent2),EnemyOf(agent1,agent2),time).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/IPRel.e',93).
+
+ /*  [] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          terminates(becomeNeutral(Agent1, Agent2),
+                     enemyOf(Agent1, Agent2),
+                     Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/IPRel.e',93).
+axiom(terminates(becomeNeutral(Agent1, Agent2), enemyOf(Agent1, Agent2), Time),
+    []).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/IPRel.e:94
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/IPRel.e',95).
+% [agent1,agent2,time]
+% Terminates(BecomeNeutral(agent1,agent2),EnemyOf(agent2,agent1),time).
+
+ /*  [] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          terminates(becomeNeutral(Agent1, Agent2),
+                     enemyOf(Agent2, Agent1),
+                     Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/IPRel.e',95).
+axiom(terminates(becomeNeutral(Agent1, Agent2), enemyOf(Agent2, Agent1), Time),
+    []).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/IPRel.e:97
+% [agent1,agent2,time]
+% HoldsAt(FriendOf(agent1,agent2),time) ->
+% HoldsAt(Like(agent1,agent2),time).
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/IPRel.e:99
+
+ /*  holds_at(friendOf(Agent1, Agent2), Time) ->
+       holds_at(like(Agent1, Agent2), Time).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/IPRel.e',99).
+
+ /*  holds_at(like(Agent1, Agent2), Time) :-
+       holds_at(friendOf(Agent1, Agent2), Time).
+ */
+
+ /*  [holds_at(friendOf(Agent1, Agent2), Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(like(Agent1, Agent2), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/IPRel.e',99).
+axiom(holds_at(like(Agent1, Agent2), Time),
+    [holds_at(friendOf(Agent1, Agent2), Time)]).
+
+ /*  not(holds_at(friendOf(Agent1, Agent2), Time)) :-
+       not(holds_at(like(Agent1, Agent2), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/IPRel.e',99).
+
+ /*  [holds_at(neg(like(Agent1, Agent2)), Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(neg(friendOf(Agent1, Agent2)), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/IPRel.e',99).
+axiom(holds_at(neg(friendOf(Agent1, Agent2)), Time),
+    [holds_at(neg(like(Agent1, Agent2)), Time)]).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/IPRel.e:101
+% [agent1,agent2,time]
+% HoldsAt(EnemyOf(agent1,agent2),time) ->
+% HoldsAt(Dislike(agent1,agent2),time).
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/IPRel.e:103
+
+ /*  holds_at(enemyOf(Agent1, Agent2), Time) ->
+       holds_at(dislike(Agent1, Agent2), Time).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/IPRel.e',103).
+
+ /*  holds_at(dislike(Agent1, Agent2), Time) :-
+       holds_at(enemyOf(Agent1, Agent2), Time).
+ */
+
+ /*  [holds_at(enemyOf(Agent1, Agent2), Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(dislike(Agent1, Agent2), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/IPRel.e',103).
+axiom(holds_at(dislike(Agent1, Agent2), Time),
+    [holds_at(enemyOf(Agent1, Agent2), Time)]).
+
+ /*  not(holds_at(enemyOf(Agent1, Agent2), Time)) :-
+       not(holds_at(dislike(Agent1, Agent2), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/IPRel.e',103).
+
+ /*  [holds_at(neg(dislike(Agent1, Agent2)), Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(neg(enemyOf(Agent1, Agent2)), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/IPRel.e',103).
+axiom(holds_at(neg(enemyOf(Agent1, Agent2)), Time),
+    [holds_at(neg(dislike(Agent1, Agent2)), Time)]).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/IPRel.e:105
+% fluent AcquaintanceOf(agent,agent)
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/IPRel.e',105).
+fluent(acquaintanceOf(agent,agent)).
+==> mpred_prop(acquaintanceOf(agent,agent),fluent).
+==> meta_argtypes(acquaintanceOf(agent,agent)).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/IPRel.e:107
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/IPRel.e',108).
+% [agent,time]
+ % HoldsAt(AcquaintanceOf(agent,agent),time).
+
+ /*  [] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(acquaintanceOf(Agent, Agent), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/IPRel.e',108).
+axiom(holds_at(acquaintanceOf(Agent, Agent), Time),
+    []).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/IPRel.e:109
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/IPRel.e',110).
+% [agent1,agent2,time]
+% HoldsAt(AcquaintanceOf(agent1,agent2),time) ->
+% HoldsAt(AcquaintanceOf(agent2,agent1),time).
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/IPRel.e:111
+
+ /*  holds_at(acquaintanceOf(Agent1, Agent2), Time) ->
+       holds_at(acquaintanceOf(Agent2, Agent1), Time).
+ */
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/IPRel.e:113
+% event Introduce(agent,agent)
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/IPRel.e',113).
+event(introduce(agent,agent)).
+==> mpred_prop(introduce(agent,agent),event).
+==> meta_argtypes(introduce(agent,agent)).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/IPRel.e:115
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/IPRel.e',116).
+% [agent1,agent2,time]
+% Initiates(Introduce(agent1,agent2),
+%           AcquaintanceOf(agent1,agent2),
+%           time).
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/IPRel.e:118
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/IPRel.e',116).
+
+ /*  [] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          initiates(introduce(Agent1, Agent2),
+                    acquaintanceOf(Agent1, Agent2),
+                    Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/IPRel.e',116).
+axiom(initiates(introduce(Agent1, Agent2), acquaintanceOf(Agent1, Agent2), Time),
+    []).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/IPRel.e:120
+% [agent1,agent2,time]
+% Initiates(Introduce(agent1,agent2),
+%           AcquaintanceOf(agent2,agent1),
+%           time).
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/IPRel.e:123
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/IPRel.e',122).
+
+ /*  [] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          initiates(introduce(Agent1, Agent2),
+                    acquaintanceOf(Agent2, Agent1),
+                    Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/IPRel.e',122).
+axiom(initiates(introduce(Agent1, Agent2), acquaintanceOf(Agent2, Agent1), Time),
+    []).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/IPRel.e:125
+% event IntroduceMutual(agent,agent,agent)
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/IPRel.e',125).
+event(introduceMutual(agent,agent,agent)).
+==> mpred_prop(introduceMutual(agent,agent,agent),event).
+==> meta_argtypes(introduceMutual(agent,agent,agent)).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/IPRel.e:127
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/IPRel.e',128).
+% [agent1,agent2,agent3,time]
+% Initiates(IntroduceMutual(agent1,agent2,agent3),
+%           AcquaintanceOf(agent2,agent3),
+%           time).
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/IPRel.e:130
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/IPRel.e',128).
+
+ /*  [] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          initiates(introduceMutual(Agent1, Agent2, Agent3),
+                    acquaintanceOf(Agent2, Agent3),
+                    Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/IPRel.e',128).
+axiom(initiates(introduceMutual(Agent1, Agent2, Agent3), acquaintanceOf(Agent2, Agent3), Time),
+    []).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/IPRel.e:132
+% [agent1,agent2,agent3,time]
+% Initiates(IntroduceMutual(agent1,agent2,agent3),
+%           AcquaintanceOf(agent3,agent2),
+%           time).
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/IPRel.e:135
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/IPRel.e',134).
+
+ /*  [] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          initiates(introduceMutual(Agent1, Agent2, Agent3),
+                    acquaintanceOf(Agent3, Agent2),
+                    Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/IPRel.e',134).
+axiom(initiates(introduceMutual(Agent1, Agent2, Agent3), acquaintanceOf(Agent3, Agent2), Time),
+    []).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/IPRel.e:137
+% [agent1,agent2,agent3,time]
+% Happens(IntroduceMutual(agent1,agent2,agent3),time) ->
+% HoldsAt(AcquaintanceOf(agent1,agent2),time) &
+% HoldsAt(AcquaintanceOf(agent1,agent3),time).
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/IPRel.e:140
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/IPRel.e',139).
+
+ /*  happens(introduceMutual(Agent1, Agent2, Agent3), Time) ->
+       holds_at(acquaintanceOf(Agent1, Agent2), Time),
+       holds_at(acquaintanceOf(Agent1, Agent3), Time).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/IPRel.e',139).
+
+ /*  not(happens(introduceMutual(Agent1, Agent2, Agent3), Time)) :-
+       (   not(holds_at(acquaintanceOf(Agent1, Agent2), Time))
+       ;   not(holds_at(acquaintanceOf(Agent1, Agent3), Time))
+       ).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/IPRel.e',139).
+
+ /*  [(holds_at(neg(acquaintanceOf(Agent1, Agent2)), Time);holds_at(neg(acquaintanceOf(Agent1, Agent3)), Time))] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          not(happens(introduceMutual(Agent1, Agent2, Agent3),
+                      Time))).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/IPRel.e',139).
+axiom(not(happens(introduceMutual(Agent1, Agent2, Agent3), Time)),
+   
+    [  (holds_at(neg(acquaintanceOf(Agent1, Agent2)), Time);holds_at(neg(acquaintanceOf(Agent1, Agent3)), Time))
+    ]).
+
+ /*  holds_at(acquaintanceOf(Agent1, Agent2), Time) :-
+       happens(introduceMutual(Agent1, Agent2, Agent3),
+               Time).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/IPRel.e',139).
+
+ /*  [holds_at(metreqs(introduceMutual(Agent1, Agent2, Agent3)), Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          requires(introduceMutual(Agent1, Agent2, Agent3),
+                   Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/IPRel.e',139).
+axiom(requires(introduceMutual(Agent1, Agent2, Agent3), Time),
+   
+    [ holds_at(metreqs(introduceMutual(Agent1, Agent2, Agent3)),
+               Time)
+    ]).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/IPRel.e',139).
+
+ /*  [holds_at(acquaintanceOf(Agent1, Agent2), Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(metreqs(introduceMutual(Agent1,
+                                           Agent2,
+                                           Agent3)),
+                   Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/IPRel.e',139).
+axiom(holds_at(metreqs(introduceMutual(Agent1, Agent2, Agent3)), Time),
+    [holds_at(acquaintanceOf(Agent1, Agent2), Time)]).
+
+ /*  holds_at(acquaintanceOf(Agent1, Agent3), Time) :-
+       happens(introduceMutual(Agent1, Agent2, Agent3),
+               Time).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/IPRel.e',139).
+
+ /*  [holds_at(metreqs(introduceMutual(Agent1, Agent2, Agent3)), Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          requires(introduceMutual(Agent1, Agent2, Agent3),
+                   Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/IPRel.e',139).
+axiom(requires(introduceMutual(Agent1, Agent2, Agent3), Time),
+   
+    [ holds_at(metreqs(introduceMutual(Agent1, Agent2, Agent3)),
+               Time)
+    ]).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/IPRel.e',139).
+
+ /*  [holds_at(acquaintanceOf(Agent1, Agent3), Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(metreqs(introduceMutual(Agent1,
+                                           Agent2,
+                                           Agent3)),
+                   Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/IPRel.e',139).
+axiom(holds_at(metreqs(introduceMutual(Agent1, Agent2, Agent3)), Time),
+    [holds_at(acquaintanceOf(Agent1, Agent3), Time)]).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/IPRel.e:142
+%; End of file.

@@ -1,0 +1,454 @@
+:-include(library('ec_planner/ec_test_incl')).
+:-expects_dialect(pfc).
+% Wed, 01 Apr 2020 20:00:06 GMT
+% From ../includes/SaaSPatterns/RulesPatterns/ruleModel.pel:4
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/includes/SaaSPatterns/RulesPatterns/ConditionsVerification.e',13).
+
+ /*  loading(load_e_pl,
+   	'/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/includes/SaaSPatterns/RulesPatterns/ruleModel.e').
+ */
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/includes/SaaSPatterns/RulesPatterns/ruleModel.e:0
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/includes/SaaSPatterns/RulesPatterns/ruleModel.e',1).
+% fluent F_RuleEffectPermitted(rule); prédéfinies
+fluent(f_ruleEffectPermitted(rule)).
+==> mpred_prop(f_ruleEffectPermitted(rule),fluent).
+==> meta_argtypes(f_ruleEffectPermitted(rule)).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/includes/SaaSPatterns/RulesPatterns/ruleModel.e:1
+% fluent F_RuleEffectNOTpermitted(rule) ;prédéfinies
+% 
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/includes/SaaSPatterns/RulesPatterns/ruleModel.e:3
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/includes/SaaSPatterns/RulesPatterns/ruleModel.e',1).
+fluent(f_ruleEffectNOTpermitted(rule)).
+==> mpred_prop(f_ruleEffectNOTpermitted(rule),fluent).
+==> meta_argtypes(f_ruleEffectNOTpermitted(rule)).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/includes/SaaSPatterns/RulesPatterns/ruleModel.e:4
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/includes/SaaSPatterns/RulesPatterns/ruleModel.e',5).
+% fluent F_RuleDenied(rule)
+fluent(f_ruleDenied(rule)).
+==> mpred_prop(f_ruleDenied(rule),fluent).
+==> meta_argtypes(f_ruleDenied(rule)).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/includes/SaaSPatterns/RulesPatterns/ruleModel.e:5
+% fluent F_RulePermitted(rule)
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/includes/SaaSPatterns/RulesPatterns/ruleModel.e',5).
+fluent(f_rulePermitted(rule)).
+==> mpred_prop(f_rulePermitted(rule),fluent).
+==> meta_argtypes(f_rulePermitted(rule)).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/includes/SaaSPatterns/RulesPatterns/ruleModel.e:6
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/includes/SaaSPatterns/RulesPatterns/ruleModel.e',7).
+% fluent F_RuleNotApplicable(rule)
+fluent(f_ruleNotApplicable(rule)).
+==> mpred_prop(f_ruleNotApplicable(rule),fluent).
+==> meta_argtypes(f_ruleNotApplicable(rule)).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/includes/SaaSPatterns/RulesPatterns/ruleModel.e:10
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/includes/SaaSPatterns/RulesPatterns/ruleModel.e',11).
+% event Epermit(rule)
+event(epermit(rule)).
+==> mpred_prop(epermit(rule),event).
+==> meta_argtypes(epermit(rule)).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/includes/SaaSPatterns/RulesPatterns/ruleModel.e:11
+% event EDeny(rule)
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/includes/SaaSPatterns/RulesPatterns/ruleModel.e',11).
+event(eDeny(rule)).
+==> mpred_prop(eDeny(rule),event).
+==> meta_argtypes(eDeny(rule)).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/includes/SaaSPatterns/RulesPatterns/ruleModel.e:12
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/includes/SaaSPatterns/RulesPatterns/ruleModel.e',13).
+% event ERuleDoesNotApply(rule)
+event(eRuleDoesNotApply(rule)).
+==> mpred_prop(eRuleDoesNotApply(rule),event).
+==> meta_argtypes(eRuleDoesNotApply(rule)).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/includes/SaaSPatterns/RulesPatterns/ruleModel.e:15
+% [rule,time]
+ % Initiates(EDeny(rule),F_RuleDenied(rule),time).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/includes/SaaSPatterns/RulesPatterns/ruleModel.e',15).
+
+ /*  [] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          initiates(eDeny(Rule), f_ruleDenied(Rule), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/includes/SaaSPatterns/RulesPatterns/ruleModel.e',15).
+axiom(initiates(eDeny(Rule), f_ruleDenied(Rule), Time),
+    []).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/includes/SaaSPatterns/RulesPatterns/ruleModel.e:16
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/includes/SaaSPatterns/RulesPatterns/ruleModel.e',17).
+% [rule,time]
+ % Initiates(Epermit(rule),F_RulePermitted(rule),time).
+
+ /*  [] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          initiates(epermit(Rule), f_rulePermitted(Rule), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/includes/SaaSPatterns/RulesPatterns/ruleModel.e',17).
+axiom(initiates(epermit(Rule), f_rulePermitted(Rule), Time),
+    []).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/includes/SaaSPatterns/RulesPatterns/ruleModel.e:17
+% [rule,time]
+ % Initiates(ERuleDoesNotApply(rule),F_RuleNotApplicable(rule),time).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/includes/SaaSPatterns/RulesPatterns/ruleModel.e',17).
+
+ /*  [] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          initiates(eRuleDoesNotApply(Rule),
+                    f_ruleNotApplicable(Rule),
+                    Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/includes/SaaSPatterns/RulesPatterns/ruleModel.e',17).
+axiom(initiates(eRuleDoesNotApply(Rule), f_ruleNotApplicable(Rule), Time),
+    []).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/includes/SaaSPatterns/RulesPatterns/ruleModel.e:20
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/includes/SaaSPatterns/RulesPatterns/ruleModel.e',21).
+% [rule,time]
+ % Happens(EDeny(rule),time) -> HoldsAt(F_TargetHolds(rule),time)
+%                                             & HoldsAt(F_ConditionSatisfied(rule),time)
+%                                             & HoldsAt(F_RuleEffectNOTpermitted(rule),time).
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/includes/SaaSPatterns/RulesPatterns/ruleModel.e:22
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/includes/SaaSPatterns/RulesPatterns/ruleModel.e',21).
+
+ /*  happens(eDeny(Rule), Time) ->
+       holds_at(f_targetHolds(Rule), Time),
+       holds_at(f_conditionSatisfied(Rule), Time),
+       holds_at(f_ruleEffectNOTpermitted(Rule), Time).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/includes/SaaSPatterns/RulesPatterns/ruleModel.e',21).
+
+ /*  not(happens(eDeny(Rule), Time)) :-
+       (   not(holds_at(f_targetHolds(Rule), Time))
+       ;   not(holds_at(f_conditionSatisfied(Rule), Time))
+       ;   not(holds_at(f_ruleEffectNOTpermitted(Rule), Time))
+       ).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/includes/SaaSPatterns/RulesPatterns/ruleModel.e',21).
+
+ /*  [(holds_at(neg(f_targetHolds(Rule)), Time);holds_at(neg(f_conditionSatisfied(Rule)), Time);holds_at(neg(f_ruleEffectNOTpermitted(Rule)), Time))] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          not(happens(eDeny(Rule), Time))).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/includes/SaaSPatterns/RulesPatterns/ruleModel.e',21).
+axiom(not(happens(eDeny(Rule), Time)),
+   
+    [  (holds_at(neg(f_targetHolds(Rule)), Time);holds_at(neg(f_conditionSatisfied(Rule)), Time);holds_at(neg(f_ruleEffectNOTpermitted(Rule)), Time))
+    ]).
+
+ /*  holds_at(f_targetHolds(Rule), Time) :-
+       happens(eDeny(Rule), Time).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/includes/SaaSPatterns/RulesPatterns/ruleModel.e',21).
+
+ /*  [holds_at(metreqs(eDeny(Rule)), Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          requires(eDeny(Rule), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/includes/SaaSPatterns/RulesPatterns/ruleModel.e',21).
+axiom(requires(eDeny(Rule), Time),
+    [holds_at(metreqs(eDeny(Rule)), Time)]).
+
+ /*  [holds_at(f_targetHolds(Rule), Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(metreqs(eDeny(Rule)), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/includes/SaaSPatterns/RulesPatterns/ruleModel.e',21).
+axiom(holds_at(metreqs(eDeny(Rule)), Time),
+    [holds_at(f_targetHolds(Rule), Time)]).
+
+ /*  holds_at(f_conditionSatisfied(Rule), Time) :-
+       happens(eDeny(Rule), Time).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/includes/SaaSPatterns/RulesPatterns/ruleModel.e',21).
+
+ /*  [holds_at(metreqs(eDeny(Rule)), Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          requires(eDeny(Rule), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/includes/SaaSPatterns/RulesPatterns/ruleModel.e',21).
+axiom(requires(eDeny(Rule), Time),
+    [holds_at(metreqs(eDeny(Rule)), Time)]).
+
+ /*  [holds_at(f_conditionSatisfied(Rule), Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(metreqs(eDeny(Rule)), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/includes/SaaSPatterns/RulesPatterns/ruleModel.e',21).
+axiom(holds_at(metreqs(eDeny(Rule)), Time),
+    [holds_at(f_conditionSatisfied(Rule), Time)]).
+
+ /*  holds_at(f_ruleEffectNOTpermitted(Rule), Time) :-
+       happens(eDeny(Rule), Time).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/includes/SaaSPatterns/RulesPatterns/ruleModel.e',21).
+
+ /*  [holds_at(metreqs(eDeny(Rule)), Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          requires(eDeny(Rule), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/includes/SaaSPatterns/RulesPatterns/ruleModel.e',21).
+axiom(requires(eDeny(Rule), Time),
+    [holds_at(metreqs(eDeny(Rule)), Time)]).
+
+ /*  [holds_at(f_ruleEffectNOTpermitted(Rule), Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(metreqs(eDeny(Rule)), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/includes/SaaSPatterns/RulesPatterns/ruleModel.e',21).
+axiom(holds_at(metreqs(eDeny(Rule)), Time),
+    [holds_at(f_ruleEffectNOTpermitted(Rule), Time)]).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/includes/SaaSPatterns/RulesPatterns/ruleModel.e:25
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/includes/SaaSPatterns/RulesPatterns/ruleModel.e',26).
+% [rule,time]
+ % Happens(Epermit(rule),time) -> HoldsAt(F_TargetHolds(rule),time)
+%                                             & HoldsAt(F_ConditionSatisfied(rule),time)
+%                                             & HoldsAt(F_RuleEffectPermitted(rule),time).
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/includes/SaaSPatterns/RulesPatterns/ruleModel.e:27
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/includes/SaaSPatterns/RulesPatterns/ruleModel.e',26).
+
+ /*  happens(epermit(Rule), Time) ->
+       holds_at(f_targetHolds(Rule), Time),
+       holds_at(f_conditionSatisfied(Rule), Time),
+       holds_at(f_ruleEffectPermitted(Rule), Time).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/includes/SaaSPatterns/RulesPatterns/ruleModel.e',26).
+
+ /*  not(happens(epermit(Rule), Time)) :-
+       (   not(holds_at(f_targetHolds(Rule), Time))
+       ;   not(holds_at(f_conditionSatisfied(Rule), Time))
+       ;   not(holds_at(f_ruleEffectPermitted(Rule), Time))
+       ).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/includes/SaaSPatterns/RulesPatterns/ruleModel.e',26).
+
+ /*  [(holds_at(neg(f_targetHolds(Rule)), Time);holds_at(neg(f_conditionSatisfied(Rule)), Time);holds_at(neg(f_ruleEffectPermitted(Rule)), Time))] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          not(happens(epermit(Rule), Time))).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/includes/SaaSPatterns/RulesPatterns/ruleModel.e',26).
+axiom(not(happens(epermit(Rule), Time)),
+   
+    [  (holds_at(neg(f_targetHolds(Rule)), Time);holds_at(neg(f_conditionSatisfied(Rule)), Time);holds_at(neg(f_ruleEffectPermitted(Rule)), Time))
+    ]).
+
+ /*  holds_at(f_targetHolds(Rule), Time) :-
+       happens(epermit(Rule), Time).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/includes/SaaSPatterns/RulesPatterns/ruleModel.e',26).
+
+ /*  [holds_at(metreqs(epermit(Rule)), Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          requires(epermit(Rule), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/includes/SaaSPatterns/RulesPatterns/ruleModel.e',26).
+axiom(requires(epermit(Rule), Time),
+    [holds_at(metreqs(epermit(Rule)), Time)]).
+
+ /*  [holds_at(f_targetHolds(Rule), Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(metreqs(epermit(Rule)), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/includes/SaaSPatterns/RulesPatterns/ruleModel.e',26).
+axiom(holds_at(metreqs(epermit(Rule)), Time),
+    [holds_at(f_targetHolds(Rule), Time)]).
+
+ /*  holds_at(f_conditionSatisfied(Rule), Time) :-
+       happens(epermit(Rule), Time).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/includes/SaaSPatterns/RulesPatterns/ruleModel.e',26).
+
+ /*  [holds_at(metreqs(epermit(Rule)), Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          requires(epermit(Rule), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/includes/SaaSPatterns/RulesPatterns/ruleModel.e',26).
+axiom(requires(epermit(Rule), Time),
+    [holds_at(metreqs(epermit(Rule)), Time)]).
+
+ /*  [holds_at(f_conditionSatisfied(Rule), Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(metreqs(epermit(Rule)), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/includes/SaaSPatterns/RulesPatterns/ruleModel.e',26).
+axiom(holds_at(metreqs(epermit(Rule)), Time),
+    [holds_at(f_conditionSatisfied(Rule), Time)]).
+
+ /*  holds_at(f_ruleEffectPermitted(Rule), Time) :-
+       happens(epermit(Rule), Time).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/includes/SaaSPatterns/RulesPatterns/ruleModel.e',26).
+
+ /*  [holds_at(metreqs(epermit(Rule)), Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          requires(epermit(Rule), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/includes/SaaSPatterns/RulesPatterns/ruleModel.e',26).
+axiom(requires(epermit(Rule), Time),
+    [holds_at(metreqs(epermit(Rule)), Time)]).
+
+ /*  [holds_at(f_ruleEffectPermitted(Rule), Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(metreqs(epermit(Rule)), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/includes/SaaSPatterns/RulesPatterns/ruleModel.e',26).
+axiom(holds_at(metreqs(epermit(Rule)), Time),
+    [holds_at(f_ruleEffectPermitted(Rule), Time)]).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/includes/SaaSPatterns/RulesPatterns/ruleModel.e:29
+% [rule,time]
+ % Happens(ERuleDoesNotApply(rule),time) -> HoldsAt(F_TargetDoesntHolds(rule),time).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/includes/SaaSPatterns/RulesPatterns/ruleModel.e',29).
+
+ /*  happens(eRuleDoesNotApply(Rule), Time) ->
+       holds_at(f_targetDoesntHolds(Rule), Time).
+ */
+
+ /*  holds_at(f_targetDoesntHolds(Rule), Time) :-
+       happens(eRuleDoesNotApply(Rule), Time).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/includes/SaaSPatterns/RulesPatterns/ruleModel.e',29).
+
+ /*  [holds_at(metreqs(eRuleDoesNotApply(Rule)), Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          requires(eRuleDoesNotApply(Rule), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/includes/SaaSPatterns/RulesPatterns/ruleModel.e',29).
+axiom(requires(eRuleDoesNotApply(Rule), Time),
+    [holds_at(metreqs(eRuleDoesNotApply(Rule)), Time)]).
+
+ /*  [holds_at(f_targetDoesntHolds(Rule), Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(metreqs(eRuleDoesNotApply(Rule)), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/includes/SaaSPatterns/RulesPatterns/ruleModel.e',29).
+axiom(holds_at(metreqs(eRuleDoesNotApply(Rule)), Time),
+    [holds_at(f_targetDoesntHolds(Rule), Time)]).
+
+ /*  not(happens(eRuleDoesNotApply(Rule), Time)) :-
+       not(holds_at(f_targetDoesntHolds(Rule), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/includes/SaaSPatterns/RulesPatterns/ruleModel.e',29).
+
+ /*  [holds_at(neg(f_targetDoesntHolds(Rule)), Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          not(happens(eRuleDoesNotApply(Rule), Time))).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/includes/SaaSPatterns/RulesPatterns/ruleModel.e',29).
+axiom(not(happens(eRuleDoesNotApply(Rule), Time)),
+    [holds_at(neg(f_targetDoesntHolds(Rule)), Time)]).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/includes/SaaSPatterns/RulesPatterns/ruleModel.e:33
+% [rule]
+ % !HoldsAt(F_RulePermitted(rule),0).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/includes/SaaSPatterns/RulesPatterns/ruleModel.e',33).
+
+ /*  [] ->
+       ta(Ta_Param,
+          tvs1=[start],
+          tvs2=[start],
+          holds_at(neg(f_rulePermitted(Rule)), start)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/includes/SaaSPatterns/RulesPatterns/ruleModel.e',33).
+axiom(holds_at(neg(f_rulePermitted(Rule)), start),
+    []).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/includes/SaaSPatterns/RulesPatterns/ruleModel.e:34
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/includes/SaaSPatterns/RulesPatterns/ruleModel.e',35).
+% [rule]
+ % !HoldsAt(F_RuleDenied(rule),0).
+
+ /*  [] ->
+       ta(Ta_Param,
+          tvs1=[start],
+          tvs2=[start],
+          holds_at(neg(f_ruleDenied(Rule)), start)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/includes/SaaSPatterns/RulesPatterns/ruleModel.e',35).
+axiom(holds_at(neg(f_ruleDenied(Rule)), start),
+    []).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/includes/SaaSPatterns/RulesPatterns/ruleModel.e:35
+% [rule]
+ % !HoldsAt(F_RuleNotApplicable(rule),0).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/includes/SaaSPatterns/RulesPatterns/ruleModel.e',35).
+
+ /*  [] ->
+       ta(Ta_Param,
+          tvs1=[start],
+          tvs2=[start],
+          holds_at(neg(f_ruleNotApplicable(Rule)), start)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/includes/SaaSPatterns/RulesPatterns/ruleModel.e',35).
+axiom(holds_at(neg(f_ruleNotApplicable(Rule)), start),
+    []).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/includes/SaaSPatterns/RulesPatterns/ruleModel.e:40
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/includes/SaaSPatterns/RulesPatterns/ruleModel.e',41).
+%;********************************************************************************************************************
+%;--------------------------------------------------------------------------------------------------------------------
+%;********************************************************************************************************************
+%;[rule] HoldsAt(F_RulePermitted(rule),3) | HoldsAt(F_RuleDenied(rule),3).
+%;[rule,time] Happens(RuleDeny(rule), time) |  Happens(RulePermit(rule), time) -> time=2.
+%;[rule,time,ruleeffect] Happens(EDeny(rule),time) -> HoldsAt(F_TargetHolds(rule),time)
+                                                %;    & HoldsAt(F_ConditionSatisfied(rule),time)
+                                                %;    & ruleeffect=Deny.
+%;[rule,time,ruleeffect] Happens(Epermit(rule),time) -> HoldsAt(F_TargetHolds(rule),time)
+                                               %;    & HoldsAt(F_ConditionSatisfied(rule),time)
+                                               %;    & ruleeffect=Permit.

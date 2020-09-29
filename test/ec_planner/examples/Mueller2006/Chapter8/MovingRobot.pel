@@ -1,0 +1,649 @@
+:-include(library('ec_planner/ec_test_incl')).
+:-expects_dialect(pfc).
+% Wed, 01 Apr 2020 19:59:58 GMT
+% From ../examples/Mueller2006/Chapter8/MovingRobot.pel:4
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter8/CameraWithFlash.e',58).
+
+ /*  loading(load_e_pl,
+   	'/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter8/MovingRobot.e').
+ */
+%;
+%; Copyright (c) 2005 IBM Corporation and others.
+%; All rights reserved. This program and the accompanying materials
+%; are made available under the terms of the Common Public License v1.0
+%; which accompanies this distribution, and is available at
+%; http://www.eclipse.org/legal/cpl-v10.html
+%;
+%; Contributors:
+%; IBM - Initial implementation
+%;
+%; @inproceedings{Shanahan:1996,
+%;   author = "Murray Shanahan",
+%;   year = "1996",
+%;   title = "Robotics and the common sense informatic situation",
+%;   editor = "Wolfgang Wahlster",
+%;   booktitle = "\uppercase{P}roceedings of the \uppercase{T}welfth \uppercase{E}uropean \uppercase{C}onference on \uppercase{A}rtificial \uppercase{I}ntelligence",
+%;   pages = "684--688",
+%;   address = "Chichester, UK",
+%;   publisher = "John Wiley",
+%; }
+%;
+%; @book{Mueller:2006,
+%;   author = "Erik T. Mueller",
+%;   year = "2006",
+%;   title = "Commonsense Reasoning",
+%;   address = "San Francisco",
+%;   publisher = "Morgan Kaufmann/Elsevier",
+%; }
+%;
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter8/MovingRobot.e:30
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter8/MovingRobot.e',31).
+% option renaming off
+:- set_ec_option(renaming, off).
+:- if(is_e_toplevel).
+:- endif.
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter8/MovingRobot.e:32
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter8/MovingRobot.e',33).
+% load foundations/Root.e
+:- load_e('foundations/Root.e', changed).
+:- if(is_e_toplevel).
+:- endif.
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter8/MovingRobot.e:33
+% load foundations/EC.e
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter8/MovingRobot.e',33).
+:- load_e('foundations/EC.e', changed).
+:- if(is_e_toplevel).
+:- endif.
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter8/MovingRobot.e:35
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter8/MovingRobot.e',36).
+% sort coord: integer
+==> subsort(coord,integer).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter8/MovingRobot.e:37
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter8/MovingRobot.e',38).
+% sort direction: integer
+==> subsort(direction,integer).
+%; 0 -> 0, 1 -> 90, 2 -> 180, 3 -> 370
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter8/MovingRobot.e:40
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter8/MovingRobot.e',41).
+% sort robot
+==> sort(robot).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter8/MovingRobot.e:42
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter8/MovingRobot.e',43).
+% robot Robot1
+==> t(robot,robot1).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter8/MovingRobot.e:44
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter8/MovingRobot.e',45).
+% function Sin(direction): coord
+function(sin(direction)).
+==> mpred_prop(sin(direction),function).
+==> meta_argtypes(sin(direction)).
+predicate(sinPred(direction,coord)).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter8/MovingRobot.e',45).
+==> mpred_prop(sinPred(direction,coord),predicate).
+==> meta_argtypes(sinPred(direction,coord)).
+
+ /*  fix_axiom_head(Time) ->
+       
+       [ functional_predicate(sin, sinPred),
+          (->),
+         holds_at(functional_predicate(sin, sinPred), Time)
+       ].
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter8/MovingRobot.e',45).
+
+ /*  [] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(functional_predicate(sin, sinPred), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter8/MovingRobot.e',45).
+axiom(holds_at(functional_predicate(sin, sinPred), Time),
+    []).
+==> resultIsa(sin,coord).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter8/MovingRobot.e:45
+% function Cos(direction): coord
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter8/MovingRobot.e',45).
+function(cos(direction)).
+==> mpred_prop(cos(direction),function).
+==> meta_argtypes(cos(direction)).
+predicate(cosPred(direction,coord)).
+==> mpred_prop(cosPred(direction,coord),predicate).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter8/MovingRobot.e',45).
+==> meta_argtypes(cosPred(direction,coord)).
+
+ /*  fix_axiom_head(Time) ->
+       
+       [ functional_predicate(cos, cosPred),
+          (->),
+         holds_at(functional_predicate(cos, cosPred), Time)
+       ].
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter8/MovingRobot.e',45).
+
+ /*  [] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(functional_predicate(cos, cosPred), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter8/MovingRobot.e',45).
+axiom(holds_at(functional_predicate(cos, cosPred), Time),
+    []).
+==> resultIsa(cos,coord).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter8/MovingRobot.e:47
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter8/MovingRobot.e',48).
+% Sin(0)=0.
+
+ /*  [] ->
+       ta(Ta_Param, tvs1=[], tvs2=[], equals(sin(0), 0)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter8/MovingRobot.e',48).
+axiom(equals(sin(0), 0),
+    []).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter8/MovingRobot.e:48
+% Sin(1)=1.
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter8/MovingRobot.e',48).
+
+ /*  [] ->
+       ta(Ta_Param, tvs1=[], tvs2=[], equals(sin(1), 1)).
+ */
+axiom(equals(sin(1), 1),
+    []).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter8/MovingRobot.e:49
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter8/MovingRobot.e',50).
+% Sin(2)=2.
+
+ /*  [] ->
+       ta(Ta_Param, tvs1=[], tvs2=[], equals(sin(2), 2)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter8/MovingRobot.e',50).
+axiom(equals(sin(2), 2),
+    []).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter8/MovingRobot.e:50
+% Sin(3)=3.
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter8/MovingRobot.e',50).
+
+ /*  [] ->
+       ta(Ta_Param, tvs1=[], tvs2=[], equals(sin(3), 3)).
+ */
+axiom(equals(sin(3), 3),
+    []).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter8/MovingRobot.e:52
+% Cos(0)=1.
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter8/MovingRobot.e',52).
+
+ /*  [] ->
+       ta(Ta_Param, tvs1=[], tvs2=[], equals(cos(0), 1)).
+ */
+axiom(equals(cos(0), 1),
+    []).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter8/MovingRobot.e:53
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter8/MovingRobot.e',54).
+% Cos(1)=2.
+
+ /*  [] ->
+       ta(Ta_Param, tvs1=[], tvs2=[], equals(cos(1), 2)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter8/MovingRobot.e',54).
+axiom(equals(cos(1), 2),
+    []).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter8/MovingRobot.e:54
+% Cos(2)=3.
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter8/MovingRobot.e',54).
+
+ /*  [] ->
+       ta(Ta_Param, tvs1=[], tvs2=[], equals(cos(2), 3)).
+ */
+axiom(equals(cos(2), 3),
+    []).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter8/MovingRobot.e:55
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter8/MovingRobot.e',56).
+% Cos(3)=4.
+
+ /*  [] ->
+       ta(Ta_Param, tvs1=[], tvs2=[], equals(cos(3), 4)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter8/MovingRobot.e',56).
+axiom(equals(cos(3), 4),
+    []).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter8/MovingRobot.e:57
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter8/MovingRobot.e',58).
+% fluent Direction(robot,direction)
+fluent(direction(robot,direction)).
+==> mpred_prop(direction(robot,direction),fluent).
+==> meta_argtypes(direction(robot,direction)).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter8/MovingRobot.e:58
+% fluent Location(robot,coord,coord)
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter8/MovingRobot.e',58).
+fluent(location(robot,coord,coord)).
+==> mpred_prop(location(robot,coord,coord),fluent).
+==> meta_argtypes(location(robot,coord,coord)).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter8/MovingRobot.e:60
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter8/MovingRobot.e',61).
+% event MoveLeftWheel(robot)
+event(moveLeftWheel(robot)).
+==> mpred_prop(moveLeftWheel(robot),event).
+==> meta_argtypes(moveLeftWheel(robot)).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter8/MovingRobot.e:61
+% event MoveRightWheel(robot)
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter8/MovingRobot.e',61).
+event(moveRightWheel(robot)).
+==> mpred_prop(moveRightWheel(robot),event).
+==> meta_argtypes(moveRightWheel(robot)).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter8/MovingRobot.e:63
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter8/MovingRobot.e',64).
+%; Sigma
+% [robot,direction1,direction2,time]
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter8/MovingRobot.e:66
+% !Happens(MoveRightWheel(robot),time) &
+% HoldsAt(Direction(robot,direction1),time) &
+% direction2 = (direction1-1)->
+% Initiates(MoveLeftWheel(robot),Direction(robot,direction2),time).
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter8/MovingRobot.e:69
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter8/MovingRobot.e',66).
+
+ /*  [not(happens(moveRightWheel(Robot), Time)), holds_at(direction(Robot, Direction1), Time), equals(Direction2, Direction1-1)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          initiates(moveLeftWheel(Robot),
+                    direction(Robot, Direction2),
+                    Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter8/MovingRobot.e',66).
+axiom(initiates(moveLeftWheel(Robot), direction(Robot, Direction2), Time),
+   
+    [ not(happens(moveRightWheel(Robot), Time)),
+      holds_at(direction(Robot, Direction1), Time),
+      equals(Direction2, Direction1-1)
+    ]).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter8/MovingRobot.e:71
+% [robot,direction,time]
+% !Happens(MoveRightWheel(robot),time) &
+% HoldsAt(Direction(robot,direction),time) ->
+% Terminates(MoveLeftWheel(robot),Direction(robot,direction),time).
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter8/MovingRobot.e:74
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter8/MovingRobot.e',73).
+
+ /*  [not(happens(moveRightWheel(Robot), Time)), holds_at(direction(Robot, Direction), Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          terminates(moveLeftWheel(Robot),
+                     direction(Robot, Direction),
+                     Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter8/MovingRobot.e',73).
+axiom(terminates(moveLeftWheel(Robot), direction(Robot, Direction), Time),
+   
+    [ not(happens(moveRightWheel(Robot), Time)),
+      holds_at(direction(Robot, Direction), Time)
+    ]).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter8/MovingRobot.e:76
+% [robot,direction1,direction2,time]
+% !Happens(MoveLeftWheel(robot),time) &
+% HoldsAt(Direction(robot,direction1),time) &
+% direction2 = (direction1+1)->
+% Initiates(MoveRightWheel(robot),Direction(robot,direction2),time).
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter8/MovingRobot.e:80
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter8/MovingRobot.e',78).
+
+ /*  [not(happens(moveLeftWheel(Robot), Time)), holds_at(direction(Robot, Direction1), Time), equals(Direction2, Direction1+1)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          initiates(moveRightWheel(Robot),
+                    direction(Robot, Direction2),
+                    Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter8/MovingRobot.e',78).
+axiom(initiates(moveRightWheel(Robot), direction(Robot, Direction2), Time),
+   
+    [ not(happens(moveLeftWheel(Robot), Time)),
+      holds_at(direction(Robot, Direction1), Time),
+      equals(Direction2, Direction1+1)
+    ]).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter8/MovingRobot.e:82
+% [robot,direction,time]
+% !Happens(MoveLeftWheel(robot),time) &
+% HoldsAt(Direction(robot,direction),time) ->
+% Terminates(MoveRightWheel(robot),Direction(robot,direction),time).
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter8/MovingRobot.e:85
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter8/MovingRobot.e',84).
+
+ /*  [not(happens(moveLeftWheel(Robot), Time)), holds_at(direction(Robot, Direction), Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          terminates(moveRightWheel(Robot),
+                     direction(Robot, Direction),
+                     Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter8/MovingRobot.e',84).
+axiom(terminates(moveRightWheel(Robot), direction(Robot, Direction), Time),
+   
+    [ not(happens(moveLeftWheel(Robot), Time)),
+      holds_at(direction(Robot, Direction), Time)
+    ]).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter8/MovingRobot.e:87
+% [robot,direction,coord1,coord2,coord3,coord4,time]
+% Happens(MoveLeftWheel(robot),time) &
+% HoldsAt(Location(robot,coord1,coord2),time) &
+% HoldsAt(Direction(robot,direction),time) &
+% coord3 = coord1+Cos(direction) &
+% coord4 = coord2+Sin(direction) ->
+% Initiates(MoveRightWheel(robot),
+%           Location(robot,coord3,coord4),
+%           time).
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter8/MovingRobot.e:95
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter8/MovingRobot.e',89).
+
+ /*  [happens(moveLeftWheel(Robot), Time), holds_at(location(Robot, Coord1, Coord2), Time), holds_at(direction(Robot, Direction), Time), equals(Coord3, Coord1+cos(Direction)), equals(Coord4, Coord2+sin(Direction))] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          initiates(moveRightWheel(Robot),
+                    location(Robot, Coord3, Coord4),
+                    Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter8/MovingRobot.e',89).
+axiom(initiates(moveRightWheel(Robot), location(Robot, Coord3, Coord4), Time),
+   
+    [ happens(moveLeftWheel(Robot), Time),
+      holds_at(location(Robot, Coord1, Coord2), Time),
+      holds_at(direction(Robot, Direction), Time),
+      equals(Coord3, Coord1+cos(Direction)),
+      equals(Coord4, Coord2+sin(Direction))
+    ]).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter8/MovingRobot.e:97
+% [robot,coord1,coord2,time]
+% Happens(MoveLeftWheel(robot),time) &
+% HoldsAt(Location(robot,coord1,coord2),time) ->
+%; FIX: Direction not needed!!
+%; HoldsAt(Direction(robot,direction),time) ->
+% Terminates(MoveRightWheel(robot),Location(robot,coord1,coord2),time).
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter8/MovingRobot.e:102
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter8/MovingRobot.e',99).
+
+ /*  [happens(moveLeftWheel(Robot), Time), holds_at(location(Robot, Coord1, Coord2), Time)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          terminates(moveRightWheel(Robot),
+                     location(Robot, Coord1, Coord2),
+                     Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter8/MovingRobot.e',99).
+axiom(terminates(moveRightWheel(Robot), location(Robot, Coord1, Coord2), Time),
+   
+    [ happens(moveLeftWheel(Robot), Time),
+      holds_at(location(Robot, Coord1, Coord2), Time)
+    ]).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter8/MovingRobot.e:104
+%; Delta
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter8/MovingRobot.e:106
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter8/MovingRobot.e',107).
+% Happens(MoveRightWheel(Robot1),0).
+
+ /*  [] ->
+       ta(Ta_Param,
+          tvs1=[start],
+          tvs2=[start],
+          happens(moveRightWheel(robot1), start)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter8/MovingRobot.e',107).
+axiom(happens(moveRightWheel(robot1), start),
+    []).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter8/MovingRobot.e:107
+% Happens(MoveLeftWheel(Robot1),1).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter8/MovingRobot.e',107).
+
+ /*  [b(start, Maptime), ignore(start+1==Maptime)] ->
+       ta(Ta_Param,
+          tvs1=[start+1],
+          tvs2=[Maptime, start],
+          happens(moveLeftWheel(robot1), Maptime)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter8/MovingRobot.e',107).
+axiom(happens(moveLeftWheel(robot1), Maptime),
+    [b(start, Maptime)]).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter8/MovingRobot.e:108
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter8/MovingRobot.e',109).
+% Happens(MoveRightWheel(Robot1),1).
+
+ /*  [b(start, Maptime), ignore(start+1==Maptime)] ->
+       ta(Ta_Param,
+          tvs1=[start+1],
+          tvs2=[Maptime, start],
+          happens(moveRightWheel(robot1), Maptime)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter8/MovingRobot.e',109).
+axiom(happens(moveRightWheel(robot1), Maptime),
+    [b(start, Maptime)]).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter8/MovingRobot.e:110
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter8/MovingRobot.e',111).
+%; Psi
+% [robot,coord1,coord2,coord3,coord4,time]
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter8/MovingRobot.e:114
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter8/MovingRobot.e',115).
+% HoldsAt(Location(robot,coord1,coord2),time) &
+% HoldsAt(Location(robot,coord3,coord4),time) ->
+% coord1=coord3 &
+% coord2=coord4.
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter8/MovingRobot.e:117
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter8/MovingRobot.e',115).
+
+ /*  holds_at(location(Robot, Coord1, Coord2), Time), holds_at(location(Robot, Coord3, Coord4), Time) ->
+       equals(Coord1, Coord3),
+       equals(Coord2, Coord4).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter8/MovingRobot.e',115).
+
+ /*  not(holds_at(location(Robot, Coord1, Coord2), Time)) :-
+       holds_at(location(Robot, Coord3, Coord4), Time),
+       (   not(equals(Coord1, Coord3))
+       ;   not(equals(Coord2, Coord4))
+       ).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter8/MovingRobot.e',115).
+
+ /*  [holds_at(location(Robot, Coord3, Coord4), Time),  (not(equals(Coord1, Coord3));not(equals(Coord2, Coord4)))] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(neg(location(Robot, Coord1, Coord2)),
+                   Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter8/MovingRobot.e',115).
+axiom(holds_at(neg(location(Robot, Coord1, Coord2)), Time),
+   
+    [ holds_at(location(Robot, Coord3, Coord4), Time),
+       (not(equals(Coord1, Coord3));not(equals(Coord2, Coord4)))
+    ]).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter8/MovingRobot.e',115).
+
+ /*  not(holds_at(location(Robot, Coord3, Coord4), Time)) :-
+       holds_at(location(Robot, Coord1, Coord2), Time),
+       (   not(equals(Coord1, Coord3))
+       ;   not(equals(Coord2, Coord4))
+       ).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter8/MovingRobot.e',115).
+
+ /*  [holds_at(location(Robot, Coord1, Coord2), Time),  (not(equals(Coord1, Coord3));not(equals(Coord2, Coord4)))] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(neg(location(Robot, Coord3, Coord4)),
+                   Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter8/MovingRobot.e',115).
+axiom(holds_at(neg(location(Robot, Coord3, Coord4)), Time),
+   
+    [ holds_at(location(Robot, Coord1, Coord2), Time),
+       (not(equals(Coord3, Coord1));not(equals(Coord4, Coord2)))
+    ]).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter8/MovingRobot.e:119
+% [robot,direction1,direction2,time]
+% HoldsAt(Direction(robot,direction1),time) &
+% HoldsAt(Direction(robot,direction2),time) ->
+% direction1=direction2.
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter8/MovingRobot.e:122
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter8/MovingRobot.e',121).
+
+ /*  holds_at(direction(Robot, Direction1), Time), holds_at(direction(Robot, Direction2), Time) ->
+       equals(Direction1, Direction2).
+ */
+
+ /*  not(holds_at(direction(Robot, Direction1), Time)) :-
+       holds_at(direction(Robot, Direction2), Time),
+       not(equals(Direction1, Direction2)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter8/MovingRobot.e',121).
+
+ /*  [holds_at(direction(Robot, Direction2), Time), not(equals(Direction1, Direction2))] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(neg(direction(Robot, Direction1)), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter8/MovingRobot.e',121).
+axiom(holds_at(neg(direction(Robot, Direction1)), Time),
+   
+    [ holds_at(direction(Robot, Direction2), Time),
+      not(equals(Direction1, Direction2))
+    ]).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter8/MovingRobot.e',121).
+
+ /*  not(holds_at(direction(Robot, Direction2), Time)) :-
+       holds_at(direction(Robot, Direction1), Time),
+       not(equals(Direction1, Direction2)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter8/MovingRobot.e',121).
+
+ /*  [holds_at(direction(Robot, Direction1), Time), not(equals(Direction1, Direction2))] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          holds_at(neg(direction(Robot, Direction2)), Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter8/MovingRobot.e',121).
+axiom(holds_at(neg(direction(Robot, Direction2)), Time),
+   
+    [ holds_at(direction(Robot, Direction1), Time),
+      not(equals(Direction2, Direction1))
+    ]).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter8/MovingRobot.e:124
+%; Gamma
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter8/MovingRobot.e:126
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter8/MovingRobot.e',127).
+% HoldsAt(Location(Robot1,0,0),0).
+
+ /*  [] ->
+       ta(Ta_Param,
+          tvs1=[start],
+          tvs2=[start],
+          holds_at(location(robot1, 0, 0), start)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter8/MovingRobot.e',127).
+axiom(holds_at(location(robot1, 0, 0), start),
+    []).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter8/MovingRobot.e:127
+% HoldsAt(Direction(Robot1,0),0).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter8/MovingRobot.e',127).
+
+ /*  [] ->
+       ta(Ta_Param,
+          tvs1=[start],
+          tvs2=[start],
+          holds_at(direction(robot1, 0), start)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter8/MovingRobot.e',127).
+axiom(holds_at(direction(robot1, 0), start),
+    []).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter8/MovingRobot.e:129
+% completion Happens
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter8/MovingRobot.e',129).
+==> completion(happens).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter8/MovingRobot.e:131
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter8/MovingRobot.e',132).
+% range time 0 3
+==> range(time,0,3).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter8/MovingRobot.e:132
+% range coord 0 3
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter8/MovingRobot.e',132).
+==> range(coord,0,3).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter8/MovingRobot.e:133
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter8/MovingRobot.e',134).
+% range direction 0 3
+==> range(direction,0,3).
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter8/MovingRobot.e:134
+% range offset 1 1
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/examples/Mueller2006/Chapter8/MovingRobot.e',134).
+==> range(offset,1,1).
+%; End of file.

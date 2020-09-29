@@ -1,0 +1,205 @@
+:-include(library('ec_planner/ec_test_incl')).
+:-expects_dialect(pfc).
+% Wed, 01 Apr 2020 20:02:44 GMT
+% From ../ecnet/Vision.pel:4
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Vehicle.e',371).
+
+ /*  loading(load_e_pl,
+   	'/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Vision.e').
+ */
+%;
+%; Copyright (c) 2005 IBM Corporation and others.
+%; All rights reserved. This program and the accompanying materials
+%; are made available under the terms of the Common Public License v1.0
+%; which accompanies this distribution, and is available at
+%; http://www.eclipse.org/legal/cpl-v10.html
+%;
+%; Contributors:
+%; IBM - Initial implementation
+%;
+%; The Vision representation deals with some simple aspects
+%; of vision.
+%;
+%; agent looks at object.
+
+% event LookAt(agent,object)
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Vision.e',15).
+event(lookAt(agent,object)).
+==> mpred_prop(lookAt(agent,object),event).
+==> meta_argtypes(lookAt(agent,object)).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Vision.e:17
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Vision.e',18).
+%; agent sees object.
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Vision.e:18
+% fluent See(agent,object)
+fluent(see(agent,object)).
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Vision.e',18).
+==> mpred_prop(see(agent,object),fluent).
+==> meta_argtypes(see(agent,object)).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Vision.e:20
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Vision.e',21).
+%; An effect axiom states that if an agent looks at
+%; an object, the agent will see the object:
+% [agent,object,time]
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Vision.e:23
+% Initiates(LookAt(agent,object),
+%           See(agent,object),
+%           time).
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Vision.e:25
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Vision.e',23).
+
+ /*  [] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          initiates(lookAt(Agent, Object),
+                    see(Agent, Object),
+                    Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Vision.e',23).
+axiom(initiates(lookAt(Agent, Object), see(Agent, Object), Time),
+    []).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Vision.e:27
+%; A precondition axiom states that for
+%; an agent to look at an object,
+%; there must be a location such that
+%; the agent is at the location and
+%; the object is at the location, or
+%; there must be a door such that
+%; the agent is near the door,
+%; the object is near the door, and
+%; the door is open:
+%;[agent,object,time]
+%;Happens(LookAt(agent,object),time) ->
+%;({location}
+%; HoldsAt(At(agent,location),time) &
+%; HoldsAt(At(object,location),time))|
+%;({door}
+%; HoldsAt(NearPortal(agent,door),time) &
+%; HoldsAt(NearPortal(object,door),time) &
+%; HoldsAt(DoorIsOpen(door),time)).
+%; An effect axiom states that if an agent
+%; looks at an object, the agent will no longer
+%; see other objects:
+% [agent,object1,object2,time]
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Vision.e:50
+% object1!=% object2 ->
+% Terminates(LookAt(agent,object1),
+%            See(agent,object2),
+%            time).
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Vision.e:53
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Vision.e',50).
+
+ /*  [diff(Object1, Object2)] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          terminates(lookAt(Agent, Object1),
+                     see(Agent, Object2),
+                     Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Vision.e',50).
+axiom(terminates(lookAt(Agent, Object1), see(Agent, Object2), Time),
+    [diff(Object1, Object2)]).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Vision.e:55
+%; Several effect axioms state that if an
+%; agent walks through a door, up a staircase, or down a staircase,
+%; the agent no longer sees an object:
+% [agent,door,object,time]
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Vision.e:59
+% Terminates(WalkThroughDoor12(agent,door),
+%            See(agent,object),
+%            time).
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Vision.e:61
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Vision.e',59).
+
+ /*  [] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          terminates(walkThroughDoor12(Agent, Door),
+                     see(Agent, Object),
+                     Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Vision.e',59).
+axiom(terminates(walkThroughDoor12(Agent, Door), see(Agent, Object), Time),
+    []).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Vision.e:62
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Vision.e',63).
+% [agent,door,object,time]
+% Terminates(WalkThroughDoor21(agent,door),
+%            See(agent,object),
+%            time).
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Vision.e:65
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Vision.e',63).
+
+ /*  [] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          terminates(walkThroughDoor21(Agent, Door),
+                     see(Agent, Object),
+                     Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Vision.e',63).
+axiom(terminates(walkThroughDoor21(Agent, Door), see(Agent, Object), Time),
+    []).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Vision.e:66
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Vision.e',67).
+% [agent,door,object,time]
+% Terminates(WalkUpStaircase(agent,door),
+%            See(agent,object),
+%            time).
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Vision.e:69
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Vision.e',67).
+
+ /*  [] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          terminates(walkUpStaircase(Agent, Door),
+                     see(Agent, Object),
+                     Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Vision.e',67).
+axiom(terminates(walkUpStaircase(Agent, Door), see(Agent, Object), Time),
+    []).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Vision.e:70
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Vision.e',71).
+% [agent,door,object,time]
+% Terminates(WalkDownStaircase(agent,door),
+%            See(agent,object),
+%            time).
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Vision.e:73
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Vision.e',71).
+
+ /*  [] ->
+       ta(Time,
+          tvs1=[Time],
+          tvs2=[Time],
+          terminates(walkDownStaircase(Agent, Door),
+                     see(Agent, Object),
+                     Time)).
+ */
+:-was_s_l('/opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Vision.e',71).
+axiom(terminates(walkDownStaircase(Agent, Door), see(Agent, Object), Time),
+    []).
+
+
+% From /opt/logicmoo_workspace/packs_sys/logicmoo_nlu/prolog/ec_planner/ecnet/Vision.e:75
+%; End of file.
