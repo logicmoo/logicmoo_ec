@@ -1,5 +1,8 @@
 :- expects_dialect(lps).
 
+end_of_file.
+% @TODO unbreak
+
 :- include(system('date_utils.pl')). 
 simulatedRealTimeBeginning('2020-03-01'). 
 simulatedRealTimePerCycle(RTPC) :- minCycleTime(RTPC). 

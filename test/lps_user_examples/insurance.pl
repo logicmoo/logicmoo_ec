@@ -14,6 +14,10 @@ insurancePayment(goodsInsured, principal, t1, t2) =
         when choiceOf(Holder)
             to Holder principal
 */
+
+end_of_file.
+% @TODO unbreak
+
 :- include(system('date_utils.pl')). 
 
 % Rather then run live, we'll simulate real time by mapping its time points to simulation cycles:

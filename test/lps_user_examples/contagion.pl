@@ -1,5 +1,8 @@
 :- expects_dialect(lps).
 
+end_of_file.
+% @TODO unbreak
+
 % contagion
 % A simple program to predict contagion
 % as requested by https://twitter.com/mengwong 

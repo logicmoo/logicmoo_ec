@@ -1,5 +1,8 @@
 :- expects_dialect(lps).
 
+end_of_file.
+% @TODO unbreak
+
 % consolidated loan example.
 
 :- include(system('date_utils.pl')).  

@@ -1,5 +1,8 @@
 :- expects_dialect(lps).
 
+end_of_file.
+% @TODO unbreak
+
 :- include(system('date_utils.pl')).  
 
 simulatedRealTimeBeginning('2014-05-31'). % The date of the initial state at cycle 1.

@@ -23,13 +23,8 @@
     
 
 */
-:- module(ec_reader,[convert_e/1, set_ec_option/2, verbatum_functor/1, builtin_pred/1, e_to_ecalc/3, s_l/2,
-   echo_format/1, 
-   e_reader_test/0,
-   e_reader_test/1,
-   e_reader_testf/0,
-   e_reader_testf/1,
-   echo_format/2]).
+:- module(ec_reader,[convert_e/1, set_ec_option/2, verbatum_functor/1, builtin_pred/1, e_to_pl/3, s_l/2,
+   echo_format/1, echo_format/2]).
 
 
 
@@ -85,8 +80,9 @@ is_quantifier_type(X,Y):- atom(X), is_quantifier_type(_,X),Y=X.
 
 % used by ec_loader
 
-:- meta_predicate e_to_ecalc(1,+,+), e_to_ecalc(1,+,+).
+:- meta_predicate e_to_pl(1,+,+), e_to_pl(1,+,+).
 :- meta_predicate map_callables(2,*,*).
+:- meta_predicate in_space_cmt(0).
 :- meta_predicate process_e_stream(1,*).
 :- meta_predicate ec_on_read(1,*).
 :- meta_predicate e_io(1,*).
@@ -118,9 +114,9 @@ e_reader_test:- with_e_sample_tests(convert_e(user_output)).
 e_reader_test(Files):- with_abs_paths(convert_e(user_output),Files).
 
 :- export(e_reader_testf/0).
-e_reader_testf:- with_e_sample_tests(convert_e(outdir('.', ep))).
+e_reader_testf:- with_e_sample_tests(convert_e(outdir('.', pro))).
 :- export(e_reader_testf/1).
-e_reader_testf(Files):- with_abs_paths(convert_e(outdir('.', ep)),Files).
+e_reader_testf(Files):- with_abs_paths(convert_e(outdir('.', pro)),Files).
 
 
 
@@ -195,76 +191,71 @@ calc_where_to(outdir(Dir, Ext), InputNameE, OutputFile):-
 :- set_ec_option(overwrite_translated_files,false).
 
 :- export(should_update/1).
-should_update(OutputName):- is_filename(OutputName), \+ exists_file(OutputName), !.
+should_update(OutputName):- \+ exists_file(OutputName), !.
 should_update(_):- etmp:ec_option(overwrite_translated_files,always),!.
 
 :- export(include_e/1).
-include_e(F):- e_to_ecalc(do_convert_e, current_output, F).
+include_e(F):- e_to_pl(do_convert_e, current_output, F).
 
 
 :- export(convert_e/1).
-convert_e(F):- convert_e(outdir('.', ep), F).
+convert_e(F):- convert_e(outdir('.', pro), F).
 :- export(convert_e/2).
-convert_e(Out, F):- e_to_ecalc(do_convert_e, Out, F).
-:- export(convert_e/2).
-convert_e(Pred, Out, F):- e_to_ecalc(Pred, Out, F).
-
+convert_e(Out, F):- e_to_pl(do_convert_e, Out, F).
 
 :- export(is_filename/1).
 is_filename(F):- atom(F), \+ is_stream(F),
   (exists_file(F);is_absolute_file_name(F)).
 
-%e_to_ecalc(Why, Out, F):- dmsg(e_to_ecalc(Why, Out, F)), fail.
+%e_to_pl(Why, Out, F):- dmsg(e_to_pl(Why, Out, F)), fail.
 
-e_to_ecalc(Why, OutputName, Ins):- wdmsg(e_to_ecalc(Why, OutputName, Ins)),fail.
-
-e_to_ecalc(Why, Out, F):- compound(Out), Out=outdir(Dir), !, e_to_ecalc(Why, outdir(Dir, ep), F).
-e_to_ecalc(Why, Out, F):- nonvar(F), \+ is_stream(F), \+ is_filename(F), needs_resolve_local_files(F, L), !, maplist(e_to_ecalc(Why, Out), L).  
+e_to_pl(Why, Out, F):- compound(Out), Out=outdir(Dir), !, e_to_pl(Why, outdir(Dir, pro), F).
+e_to_pl(Why, Out, F):- nonvar(F), \+ is_stream(F), \+ is_filename(F), needs_resolve_local_files(F, L), !, maplist(e_to_pl(Why, Out), L).  
 
 % wildcard input file  "./foo*.e"
-e_to_ecalc(Why, Out, F):- atom(F), \+ is_stream(F), \+ is_filename(F), 
-   expand_file_name(F, L), L\==[], [F]\==L, !, maplist(e_to_ecalc(Why, Out), L).
+e_to_pl(Why, Out, F):- atom(F), \+ is_stream(F), \+ is_filename(F), 
+   expand_file_name(F, L), L\==[], [F]\==L, !, maplist(e_to_pl(Why, Out), L).
 
 % wildcard input file  logical(./foo*.e).
-e_to_ecalc(Why, Out, F):-  \+ is_stream(F), \+ is_filename(F),
+e_to_pl(Why, Out, F):-  \+ is_stream(F), \+ is_filename(F),
    findall(N, absolute_file_name(F, N, [file_type(txt), file_errors(fail), expand(false), solutions(all)]), L), 
-   L\=[F], !, maplist(e_to_ecalc(Why, Out), L).
+   L\=[F], !, maplist(e_to_pl(Why, Out), L).
 
 % Out is a misdirected stream
-e_to_ecalc(Why, Outs, Ins):- 
+e_to_pl(Why, Outs, Ins):- 
    atomic(Outs), is_stream(Outs),
    assertion(stream_property(Outs, output)), 
    \+ current_output(Outs), !,
    with_output_to(Outs, 
-    e_to_ecalc(Why,current_output, Ins)),!.
+    e_to_pl(current_output, Why, Ins)),!.
 
 % Out is like a wildcard stream (but we have a real filename)
-e_to_ecalc(Why, outdir(Dir, Ext), F):- is_filename(F), !, 
+e_to_pl(Why, outdir(Dir, Ext), F):- is_filename(F), !, 
    calc_where_to(outdir(Dir, Ext), F, OutputName),
-   e_to_ecalc(Why, OutputName, F).
+   e_to_pl(Why, OutputName, F).
 
 % Out is like a wildcard stream (calc a real filename)
-e_to_ecalc(Why, outdir(Dir, Ext), Ins):- must(is_stream(Ins)), !, 
+e_to_pl(Why, outdir(Dir, Ext), Ins):- must(is_stream(Ins)), !, 
    must(stream_property(Ins, file(InputName))),
    calc_where_to(outdir(Dir, Ext), InputName, OutputName),
-   e_to_ecalc(Why, OutputName, Ins).
+   e_to_pl(Why, OutputName, Ins).
 
 % Out is a filename not neding update
-e_to_ecalc(Why, OutputName, _Ins):- is_filename(OutputName), 
+e_to_pl(Why, OutputName, _Ins):- is_filename(OutputName), 
    \+ should_update(OutputName),
    raise_translation_event(Why,skipped,OutputName),
    raise_translation_event(Why,ready,OutputName), !.
 
-e_to_ecalc(Why, Out, F):- is_filename(F), !, 
+e_to_pl(Why, Out, F):- is_filename(F), !, 
   absolute_file_name(F,AF),
     locally(b_setval('$ec_input_file',AF),
       setup_call_cleanup(
         open(F, read, Ins),    
-         e_to_ecalc(Why, Out, Ins),
+         e_to_pl(Why, Out, Ins),
         close(Ins))),!.
 
 % Out is a filename not currently loadable 
-e_to_ecalc(Why, OutputName, Ins):-  \+ is_stream(OutputName),  !,
+e_to_pl(Why, OutputName, Ins):-  \+ is_stream(OutputName), !,
    assertion(is_stream(Ins)), assertion(stream_property(Ins, input)),
    must(should_update(OutputName)),
    raise_translation_event(Why,unskipped,OutputName),
@@ -274,12 +265,12 @@ e_to_ecalc(Why, OutputName, Ins):-  \+ is_stream(OutputName),  !,
        (raise_translation_event(Why,begining,OutputName),
          nb_setval('$ec_output_stream',Outs),
          format(Outs,'~N~q.~n',[:- expects_dialect(ecalc)]),
-         e_to_ecalc(Why, current_output, Ins),
+         e_to_pl(Why, current_output, Ins),
           raise_translation_event(Why,ending,OutputName))),
      (nb_setval('$ec_output_stream',[]),close(Outs))),
    raise_translation_event(Why,ready,OutputName).
 
-e_to_ecalc(Why, Out, Ins):- 
+e_to_pl(Why, Out, Ins):- 
       assertion(current_output(Out)),       
       e_io(Why, Ins).
 
@@ -650,11 +641,10 @@ ec_on_each_read(Why, NonlistF, E):- univ_safe(Cmp , [NonlistF, E]), ec_on_read(W
 %must(G):- tracing, !, notrace(G).
 %must(G):- call(G)->true;(trace,ignore(rtrace(G)),break).
 
-on_convert_ele(Var):- var(Var), !, throw(var_on_convert_ele(Var)).
 on_convert_ele(translate(Event, Outfile)):- !, must((mention_s_l, echo_format('~N% translate: ~w  File: ~w ~n',[Event, Outfile]))).
 on_convert_ele(include(S0)):- resolve_local_files(S0,SS), !, maplist(include_e, SS), !.
 %on_convert_ele(load(S0)):- resolve_local_files(S0,SS), !, maplist(load_e, SS), !.  
-on_convert_ele(end_of_file):-!.
+on_convert_ele(end_of_file).
 on_convert_ele(SS):- must(echo_format('~N')), must(pprint_ecp(e,SS)).
 
 

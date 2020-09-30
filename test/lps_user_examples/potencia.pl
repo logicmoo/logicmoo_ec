@@ -1,5 +1,7 @@
 :- expects_dialect(lps).
 
+end_of_file.
+
 % System predicates defining simulation of real time:
 :- include(system('date_utils.pl')). 
 

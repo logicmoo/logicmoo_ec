@@ -5,6 +5,7 @@ simulatedRealTimePerCycle(RTPC) :- minCycleTime(RTPC).
 maxTime(200).  
 maxRealTime(M) :- M is 24*3600*90. % 90 days   NOT WORKING???
 minCycleTime(Min) :- Min is 3600*12. % just 2 LPS cycles per calendar day
+
 :- include(system('date_utils.pl')). 
 
 events contract(_Obligation), to(_Agent,_Right), fulfil(_Obligation).

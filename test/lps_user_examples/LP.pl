@@ -5,4 +5,4 @@ insere_ordenado(N, [], [N]).
           N < P.
       insere_ordenado(N, [P | R], [P | Temp]) :-
           N >= P,
-          insere_ordenadoN, R, Temp).
+          insere_ordenado(N, R, Temp).

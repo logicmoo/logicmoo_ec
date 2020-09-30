@@ -1,3 +1,6 @@
+
+end_of_file.
+% @TODO unbreak
 :- expects_dialect(lps).
 
 /* Example from Accord Project:
