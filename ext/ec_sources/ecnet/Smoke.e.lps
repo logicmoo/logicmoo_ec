@@ -1,0 +1,157 @@
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/SmallFire.e',61).
+% translate: unskipped  File: /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoke.e.lps 
+:-include(library('ec_planner/ec_test_incl')).
+:-expects_dialect(lps).
+% translate: begining  File: /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoke.e.lps 
+% Wed, 07 Oct 2020 09:38:14 GMT File: <stream>(0x5557c8fe5b00)%;
+%; Copyright (c) 2005 IBM Corporation and others.
+%; All rights reserved. This program and the accompanying materials
+%; are made available under the terms of the Common Public License v1.0
+%; which accompanies this distribution, and is available at
+%; http://www.eclipse.org/legal/cpl-v10.html
+%;
+%; Contributors:
+%; IBM - Initial implementation
+%;
+%; Smoking: smoking cigarettes and cigars
+%;
+
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Smoke.e',14).
+% fluent CraveNicotine(agent)
+ %  fluent(craveNicotine(agent)).
+ %  fluent(craveNicotine(agent)).
+fluents([craveNicotine/1]).
+mpred_prop(craveNicotine(agent),fluent).
+
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Smoke.e',16).
+% fluent NicotineCravingSatisfied(agent)
+ %  fluent(nicotineCravingSatisfied(agent)).
+ %  fluent(nicotineCravingSatisfied(agent)).
+fluents([nicotineCravingSatisfied/1]).
+mpred_prop(nicotineCravingSatisfied(agent),fluent).
+
+% noninertial NicotineCravingSatisfied
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Smoke.e',16).
+noninertial(nicotineCravingSatisfied).
+
+
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Smoke.e',19).
+% [agent,time]
+% HoldsAt(CraveNicotine(agent),time) <->
+% !HoldsAt(NicotineCravingSatisfied(agent),time).
+
+ /*  holds_at(craveNicotine(Agent), Time) <->
+       holds_at(neg(nicotineCravingSatisfied(Agent)), Time).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Smoke.e',19).
+
+ /*  holds_at(craveNicotine(Agent), Time) ->
+       holds_at(neg(nicotineCravingSatisfied(Agent)), Time).
+ */
+then(if(at(craveNicotine(Agent),Time)),
+     at(not(nicotineCravingSatisfied(Agent)),Time)).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Smoke.e',19).
+
+ /*  reactive_rule([holds(craveNicotine(Agent),Time)],
+   	      [ holds(not(nicotineCravingSatisfied(Agent)),
+   		      Time)
+   	      ]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Smoke.e',19).
+
+ /*  holds_at(neg(nicotineCravingSatisfied(Agent)), Time) ->
+       holds_at(craveNicotine(Agent), Time).
+ */
+then(if(at(not(nicotineCravingSatisfied(Agent)),Time)),
+     at(craveNicotine(Agent),Time)).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Smoke.e',19).
+
+ /*  reactive_rule([ holds(not(nicotineCravingSatisfied(Agent)),
+   		      Time)
+   	      ],
+   	      [holds(craveNicotine(Agent),Time)]).
+ */
+
+% event Smoke(agent,cigarette)
+ %  event(smoke(agent,cigarette)).
+ %  event(smoke(agent,cigarette)).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Smoke.e',22).
+actions([smoke/2]).
+mpred_prop(smoke(agent,cigarette),event).
+
+
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Smoke.e',25).
+% [agent,cigarette,time]
+% Happens(Smoke(agent,cigarette),time) ->
+% HoldsAt(Holding(agent,cigarette),time).
+
+ /*  happens(smoke(Agent, Cigarette), Time) ->
+       holds_at(holding(Agent, Cigarette), Time).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Smoke.e',25).
+then(if(happens(smoke(Agent,Cigarette),Time)),
+     at(holding(Agent,Cigarette),Time)).
+
+ /*  reactive_rule([happens(smoke(Agent,Cigarette),Time)],
+   	      [holds(holding(Agent,Cigarette),Time)]).
+ */
+
+
+% [agent,cigarette,time]
+% Terminates(Smoke(agent,cigarette),CraveNicotine(agent),time).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Smoke.e',30).
+
+ /*  axiom(terminates(smoke(Agent, Cigarette), craveNicotine(Agent), Time),
+       []).
+ */
+
+ /*  terminates(smoke(Cravenicotine,Smoke),
+   	   craveNicotine(Cravenicotine),
+   	   Terminates).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Smoke.e',30).
+terminates(smoke(Cravenicotine,Smoke),
+	   craveNicotine(Cravenicotine)).
+
+ /*  terminated(happens(smoke(Cravenicotine,Smoke),
+   		   Time_From,
+   		   Time_Until),
+   	   craveNicotine(Cravenicotine),
+   	   []).
+ */
+
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Smoke.e',32).
+% event Puff(agent,cigarette)
+ %  event(puff(agent,cigarette)).
+ %  event(puff(agent,cigarette)).
+actions([puff/2]).
+mpred_prop(puff(agent,cigarette),event).
+
+
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Smoke.e',34).
+% [agent,cigarette,time]
+% Happens(Puff(agent,cigarette),time) ->
+% Happens(Smoke(agent,cigarette),time).
+
+ /*  happens(puff(Agent, Cigarette), Time) ->
+       happens(smoke(Agent, Cigarette), Time).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Smoke.e',34).
+then(if(happens(puff(Agent,Cigarette),Time)),
+     happens(smoke(Agent,Cigarette),Time)).
+
+ /*  reactive_rule([happens(puff(Agent,Cigarette),Time)],
+   	      [happens(smoke(Agent,Cigarette),Time)]).
+ */
+
+% event BlowOutSmoke(agent,smoke)
+ %  event(blowOutSmoke(agent,smoke)).
+ %  event(blowOutSmoke(agent,smoke)).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Smoke.e',37).
+actions([blowOutSmoke/2]).
+mpred_prop(blowOutSmoke(agent,smoke),event).
+
+
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Smoke.e',40).
+%; End of file.
+% translate: ending  File: /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoke.e.lps 

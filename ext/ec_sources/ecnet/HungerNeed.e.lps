@@ -1,0 +1,255 @@
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/HandTo.e',30).
+% translate: unskipped  File: /pack/logicmoo_ec/ext/ec_sources/ecnet/HungerNeed.e.lps 
+:-include(library('ec_planner/ec_test_incl')).
+:-expects_dialect(lps).
+% translate: begining  File: /pack/logicmoo_ec/ext/ec_sources/ecnet/HungerNeed.e.lps 
+% Wed, 07 Oct 2020 09:35:27 GMT File: <stream>(0x5557c8ecd400)
+
+
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/HandTo.e',30).
+%;
+%; Copyright (c) 2005 IBM Corporation and others.
+%; All rights reserved. This program and the accompanying materials
+%; are made available under the terms of the Common Public License v1.0
+%; which accompanies this distribution, and is available at
+%; http://www.eclipse.org/legal/cpl-v10.html
+%;
+%; Contributors:
+%; IBM - Initial implementation
+%;
+%; hunger need
+%;
+
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/HungerNeed.e',14).
+% fluent Hungry(agent)
+ %  fluent(hungry(agent)).
+ %  fluent(hungry(agent)).
+fluents([hungry/1]).
+mpred_prop(hungry(agent),fluent).
+
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/HungerNeed.e',16).
+% fluent Satiated(agent)
+ %  fluent(satiated(agent)).
+ %  fluent(satiated(agent)).
+fluents([satiated/1]).
+mpred_prop(satiated(agent),fluent).
+
+% noninertial Satiated
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/HungerNeed.e',16).
+noninertial(satiated).
+
+
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/HungerNeed.e',19).
+% [agent,time]
+ % HoldsAt(Hungry(agent),time) <-> !HoldsAt(Satiated(agent),time).
+
+ /*  holds_at(hungry(Agent), Time) <->
+       holds_at(neg(satiated(Agent)), Time).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/HungerNeed.e',19).
+
+ /*  holds_at(hungry(Agent), Time) ->
+       holds_at(neg(satiated(Agent)), Time).
+ */
+then(if(at(hungry(Agent),Time)),
+     at(not(satiated(Agent)),Time)).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/HungerNeed.e',19).
+
+ /*  reactive_rule([holds(hungry(Agent),Time)],
+   	      [holds(not(satiated(Agent)),Time)]).
+ */
+
+ /*  holds_at(neg(satiated(Agent)), Time) ->
+       holds_at(hungry(Agent), Time).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/HungerNeed.e',19).
+then(if(at(not(satiated(Agent)),Time)),
+     at(hungry(Agent),Time)).
+
+ /*  reactive_rule([holds(not(satiated(Agent)),Time)],
+   	      [holds(hungry(Agent),Time)]).
+ */
+
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/HungerNeed.e',21).
+% event Eat(agent,food)
+ %  event(eat(agent,food)).
+ %  event(eat(agent,food)).
+actions([eat/2]).
+mpred_prop(eat(agent,food),event).
+
+
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/HungerNeed.e',23).
+% [agent,food,time]
+% Happens(Eat(agent,food),time) ->
+% {location}% 
+% HoldsAt(At(agent,location),time) &
+% HoldsAt(At(food,location),time).
+ %  clausify_pnf=exists([Location],  (happens(eat(Agent, Food), Time)->holds_at(at(Agent, Location), Time), holds_at(at(Food, Location), Time))).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/HungerNeed.e',25).
+
+ /*  not(happens(eat(Agent, Food), Time)) :-
+       (   not(holds_at(at(Agent, Exists_Location), Time))
+       ;   not(holds_at(at(Food, Exists_Location), Time))
+       ),
+       some(Exists_Location,
+            '$kolem_Fn_42'(Agent, Food, Time)).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/HungerNeed.e',25).
+
+ /*  fix_axiom_head(Time) ->
+       [ not(happens(eat(Agent, Food), Time)),
+          (->),
+         not(eat(Agent, Food))
+       ].
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/HungerNeed.e',25).
+
+ /*  axiom(not(eat(Agent, Food)),
+       [  (not(at(Agent, Exists_Location));not(at(Food, Exists_Location))),
+         some(Exists_Location,
+              '$kolem_Fn_42'(Agent, Food, Time))
+       ]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/HungerNeed.e',25).
+
+ /*  (   (   not(at(Kolem_Fn_42P_Num3_V, Tloc))
+       ;   not(at(Eat, Tloc))
+       ),
+       some(Tloc,
+            '$kolem_Fn_42'(Kolem_Fn_42P_Num3_V, Eat, Kolem_Fn_42))
+   ->  not(eat(Kolem_Fn_42P_Num3_V, Eat))
+   ).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/HungerNeed.e',25).
+then(if(((not(loc_at(Kolem_Fn_42P_Num3_V, Tloc));not(loc_at(Eat, Tloc))), some(Tloc, '$kolem_Fn_42'(Kolem_Fn_42P_Num3_V, Eat, Kolem_Fn_42)))), not(eat(Kolem_Fn_42P_Num3_V, Eat))).
+
+ /*   reactive_rule([  (not(loc_at(Kolem_Fn_42P_Num3_V, Tloc));not(loc_at(Eat, Tloc))),
+                      some(Tloc,
+                           '$kolem_Fn_42'(Kolem_Fn_42P_Num3_V,
+                                          Eat,
+                                          Kolem_Fn_42))
+                    ],
+                    [not(eat(Kolem_Fn_42P_Num3_V, Eat))]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/HungerNeed.e',25).
+
+ /*  holds_at(at(Agent, Exists_Location), Time) :-
+       happens(eat(Agent, Food), Time),
+       some(Exists_Location,
+            '$kolem_Fn_42'(Agent, Food, Time)).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/HungerNeed.e',25).
+
+ /*  fix_axiom_head(Time) ->
+       [ holds_at(at(Agent, Exists_Location), Time),
+          (->),
+         at(Agent, Exists_Location)
+       ].
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/HungerNeed.e',25).
+
+ /*  axiom(at(Agent, Exists_Location),
+       [ eat(Agent, Food),
+         some(Exists_Location,
+              '$kolem_Fn_42'(Agent, Food, Time))
+       ]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/HungerNeed.e',25).
+
+ /*  (   eat(Kolem_Fn_42P_Num3_V12, Eat10),
+       some(Tloc9,
+            '$kolem_Fn_42'(Kolem_Fn_42P_Num3_V12,
+                           Eat10,
+                           Kolem_Fn_4211))
+   ->  at(Kolem_Fn_42P_Num3_V12, Tloc9)
+   ).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/HungerNeed.e',25).
+then(if((eat(Kolem_Fn_42P_Num3_V12, Eat10), some(Tloc9, '$kolem_Fn_42'(Kolem_Fn_42P_Num3_V12, Eat10, Kolem_Fn_4211)))), loc_at(Kolem_Fn_42P_Num3_V12, Tloc9)).
+
+ /*  reactive_rule([ happens(eat(Kolem_Fn_42P_Num3_V12,Eat10),
+   			Time_From,
+   			Time_Until),
+   		some(Tloc9,
+   		     '$kolem_Fn_42'(Kolem_Fn_42P_Num3_V12,
+   				    Eat10,
+   				    Kolem_Fn_4211))
+   	      ],
+   	      [ holds(loc_at(Kolem_Fn_42P_Num3_V12,Tloc9),
+   		      Holds)
+   	      ]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/HungerNeed.e',25).
+
+ /*  holds_at(at(Food, Exists_Location), Time) :-
+       happens(eat(Agent, Food), Time),
+       some(Exists_Location,
+            '$kolem_Fn_42'(Agent, Food, Time)).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/HungerNeed.e',25).
+
+ /*  fix_axiom_head(Time) ->
+       [ holds_at(at(Food, Exists_Location), Time),
+          (->),
+         at(Food, Exists_Location)
+       ].
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/HungerNeed.e',25).
+
+ /*  axiom(at(Food, Exists_Location),
+       [ eat(Agent, Food),
+         some(Exists_Location,
+              '$kolem_Fn_42'(Agent, Food, Time))
+       ]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/HungerNeed.e',25).
+
+ /*  (   eat(Kolem_Fn_42P_Num3_V19, Eat17),
+       some(Tloc16,
+            '$kolem_Fn_42'(Kolem_Fn_42P_Num3_V19,
+                           Eat17,
+                           Kolem_Fn_4218))
+   ->  at(Eat17, Tloc16)
+   ).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/HungerNeed.e',25).
+then(if((eat(Kolem_Fn_42P_Num3_V19, Eat17), some(Tloc16, '$kolem_Fn_42'(Kolem_Fn_42P_Num3_V19, Eat17, Kolem_Fn_4218)))), loc_at(Eat17, Tloc16)).
+
+ /*  reactive_rule([ happens(eat(Kolem_Fn_42P_Num3_V19,Eat17),
+   			Time_From20,
+   			Time_Until21),
+   		some(Tloc16,
+   		     '$kolem_Fn_42'(Kolem_Fn_42P_Num3_V19,
+   				    Eat17,
+   				    Kolem_Fn_4218))
+   	      ],
+   	      [holds(loc_at(Eat17,Tloc16),Holds22)]).
+ */
+
+
+% [agent,food,time]
+% Terminates(Eat(agent,food),Hungry(agent),time).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/HungerNeed.e',30).
+
+ /*  axiom(terminates(eat(Agent, Food), hungry(Agent), Time),
+       []).
+ */
+
+ /*  terminates(eat(Hungry,Eat),
+   	   hungry(Hungry),
+   	   Terminates).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/HungerNeed.e',30).
+terminates(eat(Hungry,Eat),hungry(Hungry)).
+
+ /*  terminated(happens(eat(Hungry,Eat),
+   		   Time_From,
+   		   Time_Until),
+   	   hungry(Hungry),
+   	   []).
+ */
+
+
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/HungerNeed.e',32).
+%; End of file.
+% translate: ending  File: /pack/logicmoo_ec/ext/ec_sources/ecnet/HungerNeed.e.lps 

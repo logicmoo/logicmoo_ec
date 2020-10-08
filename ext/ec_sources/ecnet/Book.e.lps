@@ -1,0 +1,327 @@
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Bomb.e',183).
+% translate: unskipped  File: /pack/logicmoo_ec/ext/ec_sources/ecnet/Book.e.lps 
+:-include(library('ec_planner/ec_test_incl')).
+:-expects_dialect(lps).
+% translate: begining  File: /pack/logicmoo_ec/ext/ec_sources/ecnet/Book.e.lps 
+% Wed, 07 Oct 2020 20:49:14 GMT File: <stream>(0x55afae0ceb00)%;
+%; Copyright (c) 2005 IBM Corporation and others.
+%; All rights reserved. This program and the accompanying materials
+%; are made available under the terms of the Common Public License v1.0
+%; which accompanies this distribution, and is available at
+%; http://www.eclipse.org/legal/cpl-v10.html
+%;
+%; Contributors:
+%; IBM - Initial implementation
+%;
+%; Book: book (a sort of device)
+%;
+
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Book.e',14).
+% sort page: integer
+subsort(page,integer).
+%; agent opens book to page.
+
+% event BookOpenTo(agent,book,page)
+ %  event(bookOpenTo(agent,book,page)).
+ %  event(bookOpenTo(agent,book,page)).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Book.e',16).
+actions([bookOpenTo/3]).
+mpred_prop(bookOpenTo(agent,book,page),event).
+
+
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Book.e',19).
+%; agent closes book.
+
+% event BookClose(agent,book)
+ %  event(bookClose(agent,book)).
+ %  event(bookClose(agent,book)).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Book.e',19).
+actions([bookClose/2]).
+mpred_prop(bookClose(agent,book),event).
+
+
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Book.e',22).
+%; book is open to page.
+
+% fluent BookIsOpenTo(book,page)
+ %  fluent(bookIsOpenTo(book,page)).
+ %  fluent(bookIsOpenTo(book,page)).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Book.e',22).
+fluents([bookIsOpenTo/2]).
+mpred_prop(bookIsOpenTo(book,page),fluent).
+
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Book.e',25).
+% fluent BookClosed(book)
+ %  fluent(bookClosed(book)).
+ %  fluent(bookClosed(book)).
+fluents([bookClosed/1]).
+mpred_prop(bookClosed(book),fluent).
+
+% noninertial BookClosed
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Book.e',25).
+noninertial(bookClosed).
+%; agent turns page of book to page.
+
+% event BookTurnPageTo(agent,book,page)
+ %  event(bookTurnPageTo(agent,book,page)).
+ %  event(bookTurnPageTo(agent,book,page)).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Book.e',28).
+actions([bookTurnPageTo/3]).
+mpred_prop(bookTurnPageTo(agent,book,page),event).
+
+
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Book.e',31).
+% [book,page1,page2,time]
+% HoldsAt(BookIsOpenTo(book,page1),time) &
+% HoldsAt(BookIsOpenTo(book,page2),time) ->
+% page1=page2.
+
+ /*  (   holds_at(bookIsOpenTo(Book, Page1), Time),
+       holds_at(bookIsOpenTo(Book, Page2), Time)
+   ->  equals(Page1, Page2)
+   ).
+ */
+if bookIsOpenTo(Book, Page1)at Time, bookIsOpenTo(Book, Page2)at Time then equals(Page1, Page2).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Book.e',31).
+
+ /*  reactive_rule([ holds(bookIsOpenTo(Book,Page1),Time),
+   		holds(bookIsOpenTo(Book,Page2),Time)
+   	      ],
+   	      [equals(Page1,Page2)]).
+ */
+
+
+% [book,time]
+% HoldsAt(BookClosed(book),time) <->
+% !{page} HoldsAt(BookIsOpenTo(book,page),time).
+
+ /*  holds_at(bookClosed(Book), Time) <->
+       not(exists([Page],
+                  holds_at(bookIsOpenTo(Book, Page), Time))).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Book.e',37).
+
+ /*  holds_at(bookClosed(Book), Time) ->
+       not(exists([Page],
+                  holds_at(bookIsOpenTo(Book, Page), Time))).
+ */
+if bookClosed(Book)at Time then not (bookIsOpenTo(Book, Page)at Time).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Book.e',37).
+
+ /*  reactive_rule([holds(bookClosed(Book),Time)],
+   	      [ holds(not(bookIsOpenTo(Book,Page)),
+   		      Time)
+   	      ]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Book.e',37).
+
+ /*  not(exists([Page], holds_at(bookIsOpenTo(Book, Page), Time))) ->
+       holds_at(bookClosed(Book), Time).
+ */
+if not (bookIsOpenTo(Book, Page)at Time)then bookClosed(Book)at Time.
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Book.e',37).
+
+ /*  reactive_rule([ holds(not(bookIsOpenTo(Book,Page)),
+   		      Time)
+   	      ],
+   	      [holds(bookClosed(Book),Time)]).
+ */
+
+
+%; A precondition axiom states that
+%; for an agent to open a book to a page,
+%; the agent must be awake,
+%; the book must be closed, and
+%; the agent must be holding the book.
+% [agent,book,page,time]
+% Happens(BookOpenTo(agent,book,page),time) ->
+% HoldsAt(Awake(agent),time) &
+% HoldsAt(BookClosed(book),time) &
+% HoldsAt(Holding(agent,book),time).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Book.e',45).
+
+ /*  (   happens(bookOpenTo(Agent, Book, Page), Time)
+   ->  holds_at(awake(Agent), Time),
+       holds_at(bookClosed(Book), Time),
+       holds_at(holding(Agent, Book), Time)
+   ).
+ */
+if happens(bookOpenTo(Agent, Book, Page), Time)then awake(Agent)at Time, bookClosed(Book)at Time, holding(Agent, Book)at Time.
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Book.e',45).
+
+ /*  reactive_rule([ happens(bookOpenTo(Agent,Book,Page),
+   			Time)
+   	      ],
+   	      [ holds(awake(Agent),Time),
+   		holds(bookClosed(Book),Time),
+   		holds(holding(Agent,Book),Time)
+   	      ]).
+ */
+
+
+%; An effect axiom states that
+%; if an agent opens a book to a page,
+%; the book will be open to the page:
+% [agent,book,page,time]
+% Initiates(BookOpenTo(agent,book,page),BookIsOpenTo(book,page),time).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Book.e',54).
+
+ /*  axiom(initiates(bookOpenTo(Agent, Book, Page), bookIsOpenTo(Book, Page), Time),
+       []).
+ */
+
+ /*  initiates(bookOpenTo(BookopentoP_Num3_V,A,Bookopento),
+   	  bookIsOpenTo(A,Bookopento),
+   	  Initiates).
+ */
+bookOpenTo(BookopentoP_Num3_V, A, Bookopento)initiates bookIsOpenTo(A, Bookopento).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Book.e',54).
+
+ /*  initiated(happens(bookOpenTo(BookopentoP_Num3_V,
+   			     A,
+   			     Bookopento),
+   		  Time_From,
+   		  Time_Until),
+   	  bookIsOpenTo(A,Bookopento),
+   	  []).
+ */
+
+
+%; A precondition axiom states that
+%; for an agent to close a book,
+%; the agent must be awake,
+%; the book must not already be closed, and
+%; the agent must be holding the book.
+% [agent,book,time]
+% Happens(BookClose(agent,book),time) ->
+% HoldsAt(Awake(agent),time) &
+% !HoldsAt(BookClosed(book),time) &
+% HoldsAt(Holding(agent,book),time).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Book.e',62).
+
+ /*  (   happens(bookClose(Agent, Book), Time)
+   ->  holds_at(awake(Agent), Time),
+       holds_at(neg(bookClosed(Book)), Time),
+       holds_at(holding(Agent, Book), Time)
+   ).
+ */
+if happens(bookClose(Agent, Book), Time)then awake(Agent)at Time, not bookClosed(Book)at Time, holding(Agent, Book)at Time.
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Book.e',62).
+
+ /*  reactive_rule([happens(bookClose(Agent,Book),Time)],
+   	      [ holds(awake(Agent),Time),
+   		holds(not(bookClosed(Book)),Time),
+   		holds(holding(Agent,Book),Time)
+   	      ]).
+ */
+
+
+%; An effect axiom states that
+%; if an agent closes a book,
+%; the book will no longer be open:
+% [agent,book,page,time]
+% Terminates(BookClose(agent,book),BookIsOpenTo(book,page),time).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Book.e',71).
+
+ /*  axiom(terminates(bookClose(Agent, Book), bookIsOpenTo(Book, Page), Time),
+       []).
+ */
+
+ /*  terminates(bookClose(_,Bookclose),
+   	   bookIsOpenTo(Bookclose,Bookisopento),
+   	   Terminates).
+ */
+bookClose(_, Bookclose)terminates bookIsOpenTo(Bookclose, Bookisopento).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Book.e',71).
+
+ /*  terminated(happens(bookClose(_,Bookclose),
+   		   Time_From,
+   		   Time_Until),
+   	   bookIsOpenTo(Bookclose,Bookisopento),
+   	   []).
+ */
+
+
+% [agent,book,page,time]
+% Happens(BookTurnPageTo(agent,book,page),time) ->
+% HoldsAt(Awake(agent),time) &
+% ({page1} page1 != page & HoldsAt(BookIsOpenTo(book,page1),time)) &
+% HoldsAt(Holding(agent,book),time).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Book.e',75).
+
+ /*  (   happens(bookTurnPageTo(Agent, Book, Page), Time)
+   ->  holds_at(awake(Agent), Time),
+       exists([Page1],
+               (diff(Page1, Page), holds_at(bookIsOpenTo(Book, Page1), Time))),
+       holds_at(holding(Agent, Book), Time)
+   ).
+ */
+if happens(bookTurnPageTo(Agent, Book, Page), Time)then awake(Agent)at Time, exists([Page1],  (diff(Page1, Page), bookIsOpenTo(Book, Page1)at Time)), holding(Agent, Book)at Time.
+ %  reactive_rule([happens(bookTurnPageTo(Agent, Book, Page), Time)], [holds(awake(Agent), Time), exists([Page1],  (diff(Page1, Page), at(bookIsOpenTo(Book, Page1), Time))), holds(holding(Agent, Book), Time)]).
+
+
+% [agent,book,page,time]
+% Initiates(BookTurnPageTo(agent,book,page),BookIsOpenTo(book,page),time).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Book.e',81).
+
+ /*  axiom(initiates(bookTurnPageTo(Agent, Book, Page), bookIsOpenTo(Book, Page), Time),
+       []).
+ */
+
+ /*  initiates(bookTurnPageTo(BookturnpagetoP_Num3_V,
+   			 A,
+   			 Bookturnpageto),
+   	  bookIsOpenTo(A,Bookturnpageto),
+   	  Initiates).
+ */
+bookTurnPageTo(BookturnpagetoP_Num3_V, A, Bookturnpageto)initiates bookIsOpenTo(A, Bookturnpageto).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Book.e',81).
+
+ /*  initiated(happens(bookTurnPageTo(BookturnpagetoP_Num3_V,
+   				 A,
+   				 Bookturnpageto),
+   		  Time_From,
+   		  Time_Until),
+   	  bookIsOpenTo(A,Bookturnpageto),
+   	  []).
+ */
+
+
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Book.e',83).
+% [agent,book,page1,page2,time]
+% HoldsAt(BookIsOpenTo(book,page1),time) &
+% page1 != page2 ->
+% Terminates(BookTurnPageTo(agent,book,page2),BookIsOpenTo(book,page1),time).
+
+ /*  axiom(terminates(bookTurnPageTo(Agent, Book, Page2), bookIsOpenTo(Book, Page1), Time),
+       [bookIsOpenTo(Book, Page1), diff(Page1, Page2)]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Book.e',83).
+
+ /*  (   bookIsOpenTo(A, Bookisopento),
+       diff(Bookisopento, Diff)
+   ->  terminates(bookTurnPageTo(BookturnpagetoP_Num3_V, A, Diff),
+                  bookIsOpenTo(A, Bookisopento),
+                  Terminates)
+   ).
+ */
+if bookIsOpenTo(A, Bookisopento), diff(Bookisopento, Diff)then terminates(bookTurnPageTo(BookturnpagetoP_Num3_V, A, Diff), bookIsOpenTo(A, Bookisopento)at Terminates, _).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Book.e',83).
+
+ /*  reactive_rule([ holds(bookIsOpenTo(A,Bookisopento),
+   		      Holds),
+   		diff(Bookisopento,Diff)
+   	      ],
+   	      [ terminates(bookTurnPageTo(BookturnpagetoP_Num3_V,
+   					  A,
+   					  Diff),
+   			   at(bookIsOpenTo(A,Bookisopento),
+   			      Terminates),
+   			   Terminates10)
+   	      ]).
+ */
+
+
+%; End of file.
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Book.e',87).
+% translate: ending  File: /pack/logicmoo_ec/ext/ec_sources/ecnet/Book.e.lps 

@@ -316,6 +316,7 @@ predicate Adjacent(location,location)
 function GroundOf(outside): ground
 ; The sky of outside is sky.
 function SkyOf(outside): sky
+ 
 
 ; State constraints fix the location of ground and sky:
 [outside,ground,time]

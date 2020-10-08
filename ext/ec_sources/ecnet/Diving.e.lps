@@ -1,0 +1,3373 @@
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/CTime.e',43).
+% translate: unskipped  File: /pack/logicmoo_ec/ext/ec_sources/ecnet/Diving.e.lps 
+:-include(library('ec_planner/ec_test_incl')).
+:-expects_dialect(lps).
+% translate: begining  File: /pack/logicmoo_ec/ext/ec_sources/ecnet/Diving.e.lps 
+% Wed, 07 Oct 2020 20:49:17 GMT File: <stream>(0x55afae0ce700)%;
+%; Copyright (c) 2005 IBM Corporation and others.
+%; All rights reserved. This program and the accompanying materials
+%; are made available under the terms of the Common Public License v1.0
+%; which accompanies this distribution, and is available at
+%; http://www.eclipse.org/legal/cpl-v10.html
+%;
+%; Contributors:
+%; IBM - Initial implementation
+%;
+%; scuba diving
+%;
+
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Diving.e',14).
+% sort object
+sort(object).
+
+% sort agent: object
+subsort(agent,object).
+
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Diving.e',16).
+% sort diver: agent
+subsort(diver,agent).
+
+% sort depth: integer
+subsort(depth,integer).
+
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Diving.e',18).
+% sort boat: object
+subsort(boat,object).
+%; reference line, anchor line, shotline, SMB line, ...
+
+% sort line: object
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Diving.e',20).
+subsort(line,object).
+
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Diving.e',23).
+% sort equipment: object
+subsort(equipment,object).
+
+% sort weight: equipment
+subsort(weight,equipment).
+
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Diving.e',25).
+% sort fin: equipment
+subsort(fin,equipment).
+
+% sort airtank: equipment
+subsort(airtank,equipment).
+%; buoyancy compensator (BC)
+%; buoyancy control device (BCD)
+
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Diving.e',30).
+% sort computer: equipment
+subsort(computer,equipment).
+
+% sort bc: equipment
+subsort(bc,equipment).
+
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Diving.e',33).
+% fluent AtDepth(object,depth)
+ %  fluent(atDepth(object,depth)).
+ %  fluent(atDepth(object,depth)).
+fluents([atDepth/2]).
+mpred_prop(atDepth(object,depth),fluent).
+
+
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Diving.e',35).
+% [object,depth1,depth2,time]
+% HoldsAt(AtDepth(object,depth1),time) &
+% HoldsAt(AtDepth(object,depth2),time) ->
+% depth1 = depth2.
+
+ /*  (   holds_at(atDepth(Object, Depth1), Time),
+       holds_at(atDepth(Object, Depth2), Time)
+   ->  equals(Depth1, Depth2)
+   ).
+ */
+if atDepth(Object, Depth1)at Time, atDepth(Object, Depth2)at Time then equals(Depth1, Depth2).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Diving.e',35).
+
+ /*  reactive_rule([ holds(atDepth(Object,Depth1),Time),
+   		holds(atDepth(Object,Depth2),Time)
+   	      ],
+   	      [equals(Depth1,Depth2)]).
+ */
+
+% event Ascend(diver,depth)
+ %  event(ascend(diver,depth)).
+ %  event(ascend(diver,depth)).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Diving.e',39).
+events([ascend/2]).
+mpred_prop(ascend(diver,depth),event).
+
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Diving.e',42).
+% event Descend(diver,depth)
+ %  event(descend(diver,depth)).
+ %  event(descend(diver,depth)).
+events([descend/2]).
+mpred_prop(descend(diver,depth),event).
+
+
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Diving.e',44).
+% [diver,depth1,depth2,time]
+% HoldsAt(AtDepth(diver,depth1),time) &
+% Happens(Descend(diver,depth2),time) ->
+% depth2>depth1.
+
+ /*  (   holds_at(atDepth(Diver, Depth1), Time),
+       happens(descend(Diver, Depth2), Time)
+   ->  Depth2>Depth1
+   ).
+ */
+if atDepth(Diver, Depth1)at Time, happens(descend(Diver, Depth2), Time)then Depth2>Depth1.
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Diving.e',44).
+
+ /*  reactive_rule([ holds(atDepth(Diver,Depth1),Time),
+   		happens(descend(Diver,Depth2),Time)
+   	      ],
+   	      [Depth2>Depth1]).
+ */
+
+
+% [diver,depth1,depth2,time]
+% HoldsAt(AtDepth(diver,depth1),time) &
+% Happens(Ascend(diver,depth2),time) ->
+% depth2<depth1.
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Diving.e',50).
+
+ /*  (   holds_at(atDepth(Diver, Depth1), Time),
+       happens(ascend(Diver, Depth2), Time)
+   ->  Depth2<Depth1
+   ).
+ */
+if atDepth(Diver, Depth1)at Time, happens(ascend(Diver, Depth2), Time)then Depth2<Depth1.
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Diving.e',50).
+
+ /*  reactive_rule([ holds(atDepth(Diver,Depth1),Time),
+   		happens(ascend(Diver,Depth2),Time)
+   	      ],
+   	      [Depth2<Depth1]).
+ */
+
+
+% [diver,depth,time]
+% Initiates(Descend(diver,depth),AtDepth(diver,depth),time).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Diving.e',55).
+
+ /*  axiom(initiates(descend(Diver, Depth), atDepth(Diver, Depth), Time),
+       []).
+ */
+
+ /*  initiates(descend(A,Descend),
+   	  atDepth(A,Descend),
+   	  Initiates).
+ */
+descend(A, Descend)initiates atDepth(A, Descend).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Diving.e',55).
+
+ /*  initiated(happens(descend(A,Descend),
+   		  Time_From,
+   		  Time_Until),
+   	  atDepth(A,Descend),
+   	  []).
+ */
+
+
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Diving.e',57).
+% [diver,depth1,depth2,time]
+% HoldsAt(AtDepth(diver,depth1),time) ->
+% Terminates(Descend(diver,depth2),AtDepth(diver,depth1),time).
+
+ /*  axiom(terminates(descend(Diver, Depth2), atDepth(Diver, Depth1), Time),
+       [atDepth(Diver, Depth1)]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Diving.e',57).
+
+ /*  atDepth(A, Atdepth) ->
+       terminates(descend(A, Descend),
+                  atDepth(A, Atdepth),
+                  Terminates).
+ */
+if atDepth(A, Atdepth)then terminates(descend(A, Descend), atDepth(A, Atdepth)at Terminates, _).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Diving.e',57).
+
+ /*  reactive_rule([holds(atDepth(A,Atdepth),Holds)],
+   	      [ terminates(descend(A,Descend),
+   			   at(atDepth(A,Atdepth),
+   			      Terminates),
+   			   Terminates8)
+   	      ]).
+ */
+
+
+% [diver,depth,time]
+% Initiates(Ascend(diver,depth),AtDepth(diver,depth),time).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Diving.e',62).
+
+ /*  axiom(initiates(ascend(Diver, Depth), atDepth(Diver, Depth), Time),
+       []).
+ */
+
+ /*  initiates(ascend(A,Ascend),
+   	  atDepth(A,Ascend),
+   	  Initiates).
+ */
+ascend(A, Ascend)initiates atDepth(A, Ascend).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Diving.e',62).
+
+ /*  initiated(happens(ascend(A,Ascend),
+   		  Time_From,
+   		  Time_Until),
+   	  atDepth(A,Ascend),
+   	  []).
+ */
+
+
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Diving.e',64).
+% [diver,depth1,depth2,time]
+% HoldsAt(AtDepth(diver,depth1),time) ->
+% Terminates(Ascend(diver,depth2),AtDepth(diver,depth1),time).
+
+ /*  axiom(terminates(ascend(Diver, Depth2), atDepth(Diver, Depth1), Time),
+       [atDepth(Diver, Depth1)]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Diving.e',64).
+
+ /*  atDepth(A, Atdepth) ->
+       terminates(ascend(A, Ascend),
+                  atDepth(A, Atdepth),
+                  Terminates).
+ */
+if atDepth(A, Atdepth)then terminates(ascend(A, Ascend), atDepth(A, Atdepth)at Terminates, _).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Diving.e',64).
+
+ /*  reactive_rule([holds(atDepth(A,Atdepth),Holds)],
+   	      [ terminates(ascend(A,Ascend),
+   			   at(atDepth(A,Atdepth),
+   			      Terminates),
+   			   Terminates8)
+   	      ]).
+ */
+
+% fluent Wearing(diver,equipment)
+ %  fluent(wearing(diver,equipment)).
+ %  fluent(wearing(diver,equipment)).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Diving.e',67).
+fluents([wearing/2]).
+mpred_prop(wearing(diver,equipment),fluent).
+
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Diving.e',70).
+% event PutOn(diver,equipment)
+ %  event(putOn(diver,equipment)).
+ %  event(putOn(diver,equipment)).
+events([putOn/2]).
+mpred_prop(putOn(diver,equipment),event).
+
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Diving.e',72).
+% event TakeOff(diver,equipment)
+ %  event(takeOff(diver,equipment)).
+ %  event(takeOff(diver,equipment)).
+events([takeOff/2]).
+mpred_prop(takeOff(diver,equipment),event).
+
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Diving.e',74).
+% event Lose(diver,equipment)
+ %  event(lose(diver,equipment)).
+ %  event(lose(diver,equipment)).
+events([lose/2]).
+mpred_prop(lose(diver,equipment),event).
+
+
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Diving.e',76).
+% [diver,equipment,depth,time]
+% Releases(PutOn(diver,equipment),AtDepth(equipment,depth),time).
+
+ /*  axiom(releases(putOn(Diver, Equipment), atDepth(Equipment, Depth), Time),
+       []).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Diving.e',76).
+releases(putOn(_,Puton),
+	 atDepth(Puton,Atdepth),
+	 Releases).
+
+
+% [diver,equipment,time]
+% Releases(PutOn(diver,equipment),UnderWater(equipment),time).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Diving.e',80).
+
+ /*  axiom(releases(putOn(Diver, Equipment), underWater(Equipment), Time),
+       []).
+ */
+releases(putOn(_,Puton),
+	 underWater(Puton),
+	 Releases).
+
+
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Diving.e',82).
+% [diver,equipment,time]
+% Happens(PutOn(diver,equipment),time) ->
+% !{diver1} HoldsAt(Wearing(diver1,equipment),time).
+
+ /*  happens(putOn(Diver, Equipment), Time) ->
+       not(exists([Diver1],
+                  holds_at(wearing(Diver1, Equipment), Time))).
+ */
+if happens(putOn(Diver, Equipment), Time)then not (wearing(Diver1, Equipment)at Time).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Diving.e',82).
+
+ /*  reactive_rule([happens(putOn(Diver,Equipment),Time)],
+   	      [ holds(not(wearing(Diver1,Equipment)),
+   		      Time)
+   	      ]).
+ */
+
+
+% [diver,depth,equipment,time]
+% HoldsAt(Wearing(diver,equipment),time) ->
+% (HoldsAt(AtDepth(diver,depth),time) <->
+%  HoldsAt(AtDepth(equipment,depth),time)).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Diving.e',87).
+
+ /*  holds_at(wearing(Diver, Equipment), Time) ->
+       ( holds_at(atDepth(Diver, Depth), Time)<->holds_at(atDepth(Equipment, Depth), Time)
+       ).
+ */
+if wearing(Diver, Equipment)at Time then [(if atDepth(Diver, Depth)at Time then atDepth(Equipment, Depth)at Time),  (if atDepth(Equipment, Depth)at Time then atDepth(Diver, Depth)at Time)].
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Diving.e',87).
+
+ /*  reactive_rule([holds(wearing(Diver,Equipment),Time)],
+   	      [ [ then(if(at(atDepth(Diver,Depth),
+   			     Time)),
+   		       at(atDepth(Equipment,Depth),
+   			  Time)),
+   		  then(if(at(atDepth(Equipment,Depth),
+   			     Time)),
+   		       at(atDepth(Diver,Depth),Time))
+   		]
+   	      ]).
+ */
+
+
+% [diver,depth,object,time]
+% HoldsAt(Holding(diver,object),time) ->
+% (HoldsAt(AtDepth(diver,depth),time) <->
+%  HoldsAt(AtDepth(object,depth),time)).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Diving.e',92).
+
+ /*  holds_at(holding(Diver, Object), Time) ->
+       ( holds_at(atDepth(Diver, Depth), Time)<->holds_at(atDepth(Object, Depth), Time)
+       ).
+ */
+if holding(Diver, Object)at Time then [(if atDepth(Diver, Depth)at Time then atDepth(Object, Depth)at Time),  (if atDepth(Object, Depth)at Time then atDepth(Diver, Depth)at Time)].
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Diving.e',92).
+
+ /*  reactive_rule([holds(holding(Diver,Object),Time)],
+   	      [ [ then(if(at(atDepth(Diver,Depth),
+   			     Time)),
+   		       at(atDepth(Object,Depth),Time)),
+   		  then(if(at(atDepth(Object,Depth),
+   			     Time)),
+   		       at(atDepth(Diver,Depth),Time))
+   		]
+   	      ]).
+ */
+
+
+% [diver,equipment,time]
+% HoldsAt(Wearing(diver,equipment),time) ->
+% (HoldsAt(UnderWater(diver),time) <->
+%  HoldsAt(UnderWater(equipment),time)).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Diving.e',97).
+
+ /*  holds_at(wearing(Diver, Equipment), Time) ->
+       ( holds_at(underWater(Diver), Time)<->holds_at(underWater(Equipment), Time)
+       ).
+ */
+if wearing(Diver, Equipment)at Time then [(if underWater(Diver)at Time then underWater(Equipment)at Time),  (if underWater(Equipment)at Time then underWater(Diver)at Time)].
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Diving.e',97).
+
+ /*  reactive_rule([holds(wearing(Diver,Equipment),Time)],
+   	      [ [ then(if(at(underWater(Diver),Time)),
+   		       at(underWater(Equipment),Time)),
+   		  then(if(at(underWater(Equipment),Time)),
+   		       at(underWater(Diver),Time))
+   		]
+   	      ]).
+ */
+
+
+% [diver,object,time]
+% HoldsAt(Holding(diver,object),time) ->
+% (HoldsAt(UnderWater(diver),time) <->
+%  HoldsAt(UnderWater(object),time)).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Diving.e',102).
+
+ /*  holds_at(holding(Diver, Object), Time) ->
+       ( holds_at(underWater(Diver), Time)<->holds_at(underWater(Object), Time)
+       ).
+ */
+if holding(Diver, Object)at Time then [(if underWater(Diver)at Time then underWater(Object)at Time),  (if underWater(Object)at Time then underWater(Diver)at Time)].
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Diving.e',102).
+
+ /*  reactive_rule([holds(holding(Diver,Object),Time)],
+   	      [ [ then(if(at(underWater(Diver),Time)),
+   		       at(underWater(Object),Time)),
+   		  then(if(at(underWater(Object),Time)),
+   		       at(underWater(Diver),Time))
+   		]
+   	      ]).
+ */
+
+
+% [diver,depth,equipment,time]
+% HoldsAt(AtDepth(diver,depth),time) &
+% HoldsAt(Wearing(diver,equipment),time) ->
+% Initiates(TakeOff(diver,equipment),AtDepth(equipment,depth),time).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Diving.e',107).
+
+ /*  axiom(initiates(takeOff(Diver, Equipment), atDepth(Equipment, Depth), Time),
+       [atDepth(Diver, Depth), wearing(Diver, Equipment)]).
+ */
+
+ /*  (   atDepth(A, Atdepth),
+       wearing(A, Wearing)
+   ->  initiates(takeOff(A, Wearing),
+                 atDepth(Wearing, Atdepth),
+                 Initiates)
+   ).
+ */
+if atDepth(A, Atdepth), wearing(A, Wearing)then initiates(takeOff(A, Wearing), atDepth(Wearing, Atdepth)at Initiates, _).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Diving.e',107).
+
+ /*  reactive_rule([ holds(atDepth(A,Atdepth),Holds),
+   		holds(wearing(A,Wearing),Holds)
+   	      ],
+   	      [ initiates(takeOff(A,Wearing),
+   			  at(atDepth(Wearing,Atdepth),
+   			     Initiates),
+   			  Initiates8)
+   	      ]).
+ */
+
+
+% [diver,depth,equipment,time]
+% !HoldsAt(AtDepth(diver,depth),time) &
+% HoldsAt(Wearing(diver,equipment),time) ->
+% Terminates(TakeOff(diver,equipment),AtDepth(equipment,depth),time).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Diving.e',112).
+
+ /*  axiom(terminates(takeOff(Diver, Equipment), atDepth(Equipment, Depth), Time),
+       [ not(atDepth(Diver, Depth)),
+         wearing(Diver, Equipment)
+       ]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Diving.e',112).
+
+ /*  (   not(atDepth(A, Atdepth)),
+       wearing(A, Wearing)
+   ->  terminates(takeOff(A, Wearing),
+                  atDepth(Wearing, Atdepth),
+                  Terminates)
+   ).
+ */
+if not atDepth(A, Atdepth), wearing(A, Wearing)then terminates(takeOff(A, Wearing), atDepth(Wearing, Atdepth)at Terminates, _).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Diving.e',112).
+
+ /*  reactive_rule([ holds(not(atDepth(A,Atdepth)),Holds),
+   		holds(wearing(A,Wearing),Holds)
+   	      ],
+   	      [ terminates(takeOff(A,Wearing),
+   			   at(atDepth(Wearing,Atdepth),
+   			      Terminates),
+   			   Terminates8)
+   	      ]).
+ */
+
+
+% [diver,equipment,time]
+% HoldsAt(UnderWater(diver),time) ->
+% Initiates(TakeOff(diver,equipment),UnderWater(equipment),time).
+
+ /*  axiom(initiates(takeOff(Diver, Equipment), underWater(Equipment), Time),
+       [underWater(Diver)]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Diving.e',117).
+
+ /*  underWater(Underwater) ->
+       initiates(takeOff(Underwater, Takeoff),
+                 underWater(Takeoff),
+                 Initiates).
+ */
+if underWater(Underwater)then initiates(takeOff(Underwater, Takeoff), underWater(Takeoff)at Initiates, _).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Diving.e',117).
+
+ /*  reactive_rule([holds(underWater(Underwater),Holds)],
+   	      [ initiates(takeOff(Underwater,Takeoff),
+   			  at(underWater(Takeoff),Initiates),
+   			  Initiates7)
+   	      ]).
+ */
+
+
+% [diver,equipment,time]
+% !HoldsAt(UnderWater(diver),time) ->
+% Terminates(TakeOff(diver,equipment),UnderWater(equipment),time).
+
+ /*  axiom(terminates(takeOff(Diver, Equipment), underWater(Equipment), Time),
+       [not(underWater(Diver))]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Diving.e',121).
+
+ /*  not(underWater(Underwater)) ->
+       terminates(takeOff(Underwater, Takeoff),
+                  underWater(Takeoff),
+                  Terminates).
+ */
+if not underWater(Underwater)then terminates(takeOff(Underwater, Takeoff), underWater(Takeoff)at Terminates, _).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Diving.e',121).
+
+ /*  reactive_rule([holds(not(underWater(Underwater)),Holds)],
+   	      [ terminates(takeOff(Underwater,Takeoff),
+   			   at(underWater(Takeoff),
+   			      Terminates),
+   			   Terminates7)
+   	      ]).
+ */
+
+
+% [diver,equipment,depth,time]
+% HoldsAt(AtDepth(diver,depth),time) &
+% HoldsAt(Wearing(diver,equipment),time) ->
+% Initiates(Lose(diver,equipment),AtDepth(equipment,depth),time).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Diving.e',125).
+
+ /*  axiom(initiates(lose(Diver, Equipment), atDepth(Equipment, Depth), Time),
+       [atDepth(Diver, Depth), wearing(Diver, Equipment)]).
+ */
+
+ /*  (   atDepth(A, Atdepth),
+       wearing(A, Wearing)
+   ->  initiates(lose(A, Wearing),
+                 atDepth(Wearing, Atdepth),
+                 Initiates)
+   ).
+ */
+if atDepth(A, Atdepth), wearing(A, Wearing)then initiates(lose(A, Wearing), atDepth(Wearing, Atdepth)at Initiates, _).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Diving.e',125).
+
+ /*  reactive_rule([ holds(atDepth(A,Atdepth),Holds),
+   		holds(wearing(A,Wearing),Holds)
+   	      ],
+   	      [ initiates(lose(A,Wearing),
+   			  at(atDepth(Wearing,Atdepth),
+   			     Initiates),
+   			  Initiates8)
+   	      ]).
+ */
+
+
+% [diver,equipment,depth,time]
+% !HoldsAt(AtDepth(diver,depth),time) &
+% HoldsAt(Wearing(diver,equipment),time) ->
+% Terminates(Lose(diver,equipment),AtDepth(equipment,depth),time).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Diving.e',130).
+
+ /*  axiom(terminates(lose(Diver, Equipment), atDepth(Equipment, Depth), Time),
+       [ not(atDepth(Diver, Depth)),
+         wearing(Diver, Equipment)
+       ]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Diving.e',130).
+
+ /*  (   not(atDepth(A, Atdepth)),
+       wearing(A, Wearing)
+   ->  terminates(lose(A, Wearing),
+                  atDepth(Wearing, Atdepth),
+                  Terminates)
+   ).
+ */
+if not atDepth(A, Atdepth), wearing(A, Wearing)then terminates(lose(A, Wearing), atDepth(Wearing, Atdepth)at Terminates, _).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Diving.e',130).
+
+ /*  reactive_rule([ holds(not(atDepth(A,Atdepth)),Holds),
+   		holds(wearing(A,Wearing),Holds)
+   	      ],
+   	      [ terminates(lose(A,Wearing),
+   			   at(atDepth(Wearing,Atdepth),
+   			      Terminates),
+   			   Terminates8)
+   	      ]).
+ */
+
+
+% [diver,equipment,time]
+% HoldsAt(UnderWater(diver),time) ->
+% Initiates(Lose(diver,equipment),UnderWater(equipment),time).
+
+ /*  axiom(initiates(lose(Diver, Equipment), underWater(Equipment), Time),
+       [underWater(Diver)]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Diving.e',135).
+
+ /*  underWater(Underwater) ->
+       initiates(lose(Underwater, Lose),
+                 underWater(Lose),
+                 Initiates).
+ */
+if underWater(Underwater)then initiates(lose(Underwater, Lose), underWater(Lose)at Initiates, _).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Diving.e',135).
+
+ /*  reactive_rule([holds(underWater(Underwater),Holds)],
+   	      [ initiates(lose(Underwater,Lose),
+   			  at(underWater(Lose),Initiates),
+   			  Initiates7)
+   	      ]).
+ */
+
+
+% [diver,equipment,time]
+% !HoldsAt(UnderWater(diver),time) ->
+% Terminates(Lose(diver,equipment),UnderWater(equipment),time).
+
+ /*  axiom(terminates(lose(Diver, Equipment), underWater(Equipment), Time),
+       [not(underWater(Diver))]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Diving.e',139).
+
+ /*  not(underWater(Underwater)) ->
+       terminates(lose(Underwater, Lose),
+                  underWater(Lose),
+                  Terminates).
+ */
+if not underWater(Underwater)then terminates(lose(Underwater, Lose), underWater(Lose)at Terminates, _).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Diving.e',139).
+
+ /*  reactive_rule([holds(not(underWater(Underwater)),Holds)],
+   	      [ terminates(lose(Underwater,Lose),
+   			   at(underWater(Lose),Terminates),
+   			   Terminates7)
+   	      ]).
+ */
+
+% fluent Holding(diver,object)
+ %  fluent(holding(diver,object)).
+ %  fluent(holding(diver,object)).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Diving.e',141).
+fluents([holding/2]).
+mpred_prop(holding(diver,object),fluent).
+
+
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Diving.e',144).
+% [diver1,diver2,time]
+% HoldsAt(Holding(diver1,diver2),time) ->
+% !HoldsAt(Holding(diver2,diver1),time).
+
+ /*  holds_at(holding(Diver1, Diver2), Time) ->
+       holds_at(neg(holding(Diver2, Diver1)), Time).
+ */
+if holding(Diver1, Diver2)at Time then not holding(Diver2, Diver1)at Time.
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Diving.e',144).
+
+ /*  reactive_rule([holds(holding(Diver1,Diver2),Time)],
+   	      [ holds(not(holding(Diver2,Diver1)),
+   		      Time)
+   	      ]).
+ */
+
+% event Grab(diver,object)
+ %  event(grab(diver,object)).
+ %  event(grab(diver,object)).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Diving.e',147).
+events([grab/2]).
+mpred_prop(grab(diver,object),event).
+
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Diving.e',150).
+% event LetGoOf(diver,object)
+ %  event(letGoOf(diver,object)).
+ %  event(letGoOf(diver,object)).
+events([letGoOf/2]).
+mpred_prop(letGoOf(diver,object),event).
+
+
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Diving.e',152).
+% [diver,object,time]
+% Initiates(Grab(diver,object),Holding(diver,object),time).
+
+ /*  axiom(initiates(grab(Diver, Object), holding(Diver, Object), Time),
+       []).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Diving.e',152).
+
+ /*  initiates(grab(A,Grab),
+   	  holding(A,Grab),
+   	  Initiates).
+ */
+grab(A, Grab)initiates holding(A, Grab).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Diving.e',152).
+
+ /*  initiated(happens(grab(A,Grab),
+   		  Time_From,
+   		  Time_Until),
+   	  holding(A,Grab),
+   	  []).
+ */
+
+
+% [diver,object,time]
+% Terminates(LetGoOf(diver,object),Holding(diver,object),time).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Diving.e',156).
+
+ /*  axiom(terminates(letGoOf(Diver, Object), holding(Diver, Object), Time),
+       []).
+ */
+
+ /*  terminates(letGoOf(A,Letgoof),
+   	   holding(A,Letgoof),
+   	   Terminates).
+ */
+letGoOf(A, Letgoof)terminates holding(A, Letgoof).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Diving.e',156).
+
+ /*  terminated(happens(letGoOf(A,Letgoof),
+   		   Time_From,
+   		   Time_Until),
+   	   holding(A,Letgoof),
+   	   []).
+ */
+
+
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Diving.e',158).
+% [diver,object,depth,time]
+% Releases(Grab(diver,object),AtDepth(object,depth),time).
+
+ /*  axiom(releases(grab(Diver, Object), atDepth(Object, Depth), Time),
+       []).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Diving.e',158).
+releases(grab(_,Grab),
+	 atDepth(Grab,Atdepth),
+	 Releases).
+
+
+% [diver,object,time]
+% Releases(Grab(diver,object),UnderWater(object),time).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Diving.e',162).
+
+ /*  axiom(releases(grab(Diver, Object), underWater(Object), Time),
+       []).
+ */
+releases(grab(_,Grab),
+	 underWater(Grab),
+	 Releases).
+
+
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Diving.e',164).
+% [diver,object,depth,time]
+% HoldsAt(AtDepth(diver,depth),time) &
+% HoldsAt(Holding(diver,object),time) ->
+% Initiates(LetGoOf(diver,object),AtDepth(object,depth),time).
+
+ /*  axiom(initiates(letGoOf(Diver, Object), atDepth(Object, Depth), Time),
+       [atDepth(Diver, Depth), holding(Diver, Object)]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Diving.e',164).
+
+ /*  (   atDepth(A, Atdepth),
+       holding(A, Holding)
+   ->  initiates(letGoOf(A, Holding),
+                 atDepth(Holding, Atdepth),
+                 Initiates)
+   ).
+ */
+if atDepth(A, Atdepth), holding(A, Holding)then initiates(letGoOf(A, Holding), atDepth(Holding, Atdepth)at Initiates, _).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Diving.e',164).
+
+ /*  reactive_rule([ holds(atDepth(A,Atdepth),Holds),
+   		holds(holding(A,Holding),Holds)
+   	      ],
+   	      [ initiates(letGoOf(A,Holding),
+   			  at(atDepth(Holding,Atdepth),
+   			     Initiates),
+   			  Initiates8)
+   	      ]).
+ */
+
+
+% [diver,object,depth,time]
+% !HoldsAt(AtDepth(diver,depth),time) &
+% HoldsAt(Holding(diver,object),time) ->
+% Terminates(LetGoOf(diver,object),AtDepth(object,depth),time).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Diving.e',170).
+
+ /*  axiom(terminates(letGoOf(Diver, Object), atDepth(Object, Depth), Time),
+       [not(atDepth(Diver, Depth)), holding(Diver, Object)]).
+ */
+
+ /*  (   not(atDepth(A, Atdepth)),
+       holding(A, Holding)
+   ->  terminates(letGoOf(A, Holding),
+                  atDepth(Holding, Atdepth),
+                  Terminates)
+   ).
+ */
+if not atDepth(A, Atdepth), holding(A, Holding)then terminates(letGoOf(A, Holding), atDepth(Holding, Atdepth)at Terminates, _).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Diving.e',170).
+
+ /*  reactive_rule([ holds(not(atDepth(A,Atdepth)),Holds),
+   		holds(holding(A,Holding),Holds)
+   	      ],
+   	      [ terminates(letGoOf(A,Holding),
+   			   at(atDepth(Holding,Atdepth),
+   			      Terminates),
+   			   Terminates8)
+   	      ]).
+ */
+
+
+% [diver,object,time]
+% HoldsAt(UnderWater(diver),time) ->
+% Initiates(LetGoOf(diver,object),UnderWater(object),time).
+
+ /*  axiom(initiates(letGoOf(Diver, Object), underWater(Object), Time),
+       [underWater(Diver)]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Diving.e',175).
+
+ /*  underWater(Underwater) ->
+       initiates(letGoOf(Underwater, Letgoof),
+                 underWater(Letgoof),
+                 Initiates).
+ */
+if underWater(Underwater)then initiates(letGoOf(Underwater, Letgoof), underWater(Letgoof)at Initiates, _).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Diving.e',175).
+
+ /*  reactive_rule([holds(underWater(Underwater),Holds)],
+   	      [ initiates(letGoOf(Underwater,Letgoof),
+   			  at(underWater(Letgoof),Initiates),
+   			  Initiates7)
+   	      ]).
+ */
+
+
+% [diver,object,time]
+% !HoldsAt(UnderWater(diver),time) ->
+% Terminates(LetGoOf(diver,object),UnderWater(object),time).
+
+ /*  axiom(terminates(letGoOf(Diver, Object), underWater(Object), Time),
+       [not(underWater(Diver))]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Diving.e',179).
+
+ /*  not(underWater(Underwater)) ->
+       terminates(letGoOf(Underwater, Letgoof),
+                  underWater(Letgoof),
+                  Terminates).
+ */
+if not underWater(Underwater)then terminates(letGoOf(Underwater, Letgoof), underWater(Letgoof)at Terminates, _).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Diving.e',179).
+
+ /*  reactive_rule([holds(not(underWater(Underwater)),Holds)],
+   	      [ terminates(letGoOf(Underwater,Letgoof),
+   			   at(underWater(Letgoof),
+   			      Terminates),
+   			   Terminates7)
+   	      ]).
+ */
+
+
+% [diver,equipment,time]
+% Initiates(PutOn(diver,equipment),Wearing(diver,equipment),time).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Diving.e',183).
+
+ /*  axiom(initiates(putOn(Diver, Equipment), wearing(Diver, Equipment), Time),
+       []).
+ */
+
+ /*  initiates(putOn(A,Puton),
+   	  wearing(A,Puton),
+   	  Initiates).
+ */
+putOn(A, Puton)initiates wearing(A, Puton).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Diving.e',183).
+
+ /*  initiated(happens(putOn(A,Puton),
+   		  Time_From,
+   		  Time_Until),
+   	  wearing(A,Puton),
+   	  []).
+ */
+
+
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Diving.e',185).
+% [diver,equipment,time]
+% Happens(PutOn(diver,equipment),time) ->
+% !HoldsAt(UnderWater(diver),time).
+
+ /*  happens(putOn(Diver, Equipment), Time) ->
+       holds_at(neg(underWater(Diver)), Time).
+ */
+if happens(putOn(Diver, Equipment), Time)then not underWater(Diver)at Time.
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Diving.e',185).
+
+ /*  reactive_rule([happens(putOn(Diver,Equipment),Time)],
+   	      [holds(not(underWater(Diver)),Time)]).
+ */
+
+
+% [diver,equipment,time]
+% Terminates(TakeOff(diver,equipment),Wearing(diver,equipment),time).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Diving.e',190).
+
+ /*  axiom(terminates(takeOff(Diver, Equipment), wearing(Diver, Equipment), Time),
+       []).
+ */
+
+ /*  terminates(takeOff(A,Takeoff),
+   	   wearing(A,Takeoff),
+   	   Terminates).
+ */
+takeOff(A, Takeoff)terminates wearing(A, Takeoff).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Diving.e',190).
+
+ /*  terminated(happens(takeOff(A,Takeoff),
+   		   Time_From,
+   		   Time_Until),
+   	   wearing(A,Takeoff),
+   	   []).
+ */
+
+
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Diving.e',192).
+% [diver,equipment,time]
+% Terminates(Lose(diver,equipment),Wearing(diver,equipment),time).
+
+ /*  axiom(terminates(lose(Diver, Equipment), wearing(Diver, Equipment), Time),
+       []).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Diving.e',192).
+
+ /*  terminates(lose(A,Lose),
+   	   wearing(A,Lose),
+   	   Terminates).
+ */
+lose(A, Lose)terminates wearing(A, Lose).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Diving.e',192).
+
+ /*  terminated(happens(lose(A,Lose),
+   		   Time_From,
+   		   Time_Until),
+   	   wearing(A,Lose),
+   	   []).
+ */
+
+% fluent Vertical(diver)
+ %  fluent(vertical(diver)).
+ %  fluent(vertical(diver)).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Diving.e',194).
+fluents([vertical/1]).
+mpred_prop(vertical(diver),fluent).
+
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Diving.e',197).
+% fluent HorizontalDown(diver)
+ %  fluent(horizontalDown(diver)).
+ %  fluent(horizontalDown(diver)).
+fluents([horizontalDown/1]).
+mpred_prop(horizontalDown(diver),fluent).
+
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Diving.e',199).
+% fluent Inverted(diver)
+ %  fluent(inverted(diver)).
+ %  fluent(inverted(diver)).
+fluents([inverted/1]).
+mpred_prop(inverted(diver),fluent).
+
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Diving.e',201).
+% fluent HorizontalUp(diver)
+ %  fluent(horizontalUp(diver)).
+ %  fluent(horizontalUp(diver)).
+fluents([horizontalUp/1]).
+mpred_prop(horizontalUp(diver),fluent).
+
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Diving.e',203).
+% xor Vertical, HorizontalDown, Inverted, HorizontalUp
+ %  ==>xor[vertical,horizontalDown,inverted,horizontalUp].
+==>xor[vertical,horizontalDown,inverted,horizontalUp].
+
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Diving.e',205).
+% event RotatePitch(diver)
+ %  event(rotatePitch(diver)).
+ %  event(rotatePitch(diver)).
+events([rotatePitch/1]).
+mpred_prop(rotatePitch(diver),event).
+
+
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Diving.e',207).
+% [diver,time]
+% HoldsAt(Vertical(diver),time) ->
+% Initiates(RotatePitch(diver),HorizontalDown(diver),time).
+
+ /*  axiom(initiates(rotatePitch(Diver), horizontalDown(Diver), Time),
+       [vertical(Diver)]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Diving.e',207).
+
+ /*  vertical(Vertical) ->
+       initiates(rotatePitch(Vertical),
+                 horizontalDown(Vertical),
+                 Initiates).
+ */
+if vertical(Vertical)then initiates(rotatePitch(Vertical), horizontalDown(Vertical)at Initiates, _).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Diving.e',207).
+
+ /*  reactive_rule([holds(vertical(Vertical),Holds)],
+   	      [ initiates(rotatePitch(Vertical),
+   			  at(horizontalDown(Vertical),
+   			     Initiates),
+   			  Initiates5)
+   	      ]).
+ */
+
+
+% [diver,time]
+% HoldsAt(HorizontalDown(diver),time) ->
+% Initiates(RotatePitch(diver),Inverted(diver),time).
+
+ /*  axiom(initiates(rotatePitch(Diver), inverted(Diver), Time),
+       [horizontalDown(Diver)]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Diving.e',212).
+
+ /*  horizontalDown(Horizontaldown) ->
+       initiates(rotatePitch(Horizontaldown),
+                 inverted(Horizontaldown),
+                 Initiates).
+ */
+if horizontalDown(Horizontaldown)then initiates(rotatePitch(Horizontaldown), inverted(Horizontaldown)at Initiates, _).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Diving.e',212).
+
+ /*  reactive_rule([holds(horizontalDown(Horizontaldown),Holds)],
+   	      [ initiates(rotatePitch(Horizontaldown),
+   			  at(inverted(Horizontaldown),
+   			     Initiates),
+   			  Initiates5)
+   	      ]).
+ */
+
+
+% [diver,time]
+% HoldsAt(HorizontalDown(diver),time) ->
+% Terminates(RotatePitch(diver),HorizontalDown(diver),time).
+
+ /*  axiom(terminates(rotatePitch(Diver), horizontalDown(Diver), Time),
+       [horizontalDown(Diver)]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Diving.e',216).
+
+ /*  horizontalDown(Horizontaldown) ->
+       terminates(rotatePitch(Horizontaldown),
+                  horizontalDown(Horizontaldown),
+                  Terminates).
+ */
+if horizontalDown(Horizontaldown)then terminates(rotatePitch(Horizontaldown), horizontalDown(Horizontaldown)at Terminates, _).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Diving.e',216).
+
+ /*  reactive_rule([holds(horizontalDown(Horizontaldown),Holds)],
+   	      [ terminates(rotatePitch(Horizontaldown),
+   			   at(horizontalDown(Horizontaldown),
+   			      Terminates),
+   			   Terminates5)
+   	      ]).
+ */
+
+
+% [diver,time]
+% HoldsAt(Inverted(diver),time) ->
+% Initiates(RotatePitch(diver),HorizontalUp(diver),time).
+
+ /*  axiom(initiates(rotatePitch(Diver), horizontalUp(Diver), Time),
+       [inverted(Diver)]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Diving.e',220).
+
+ /*  inverted(Inverted) ->
+       initiates(rotatePitch(Inverted),
+                 horizontalUp(Inverted),
+                 Initiates).
+ */
+if inverted(Inverted)then initiates(rotatePitch(Inverted), horizontalUp(Inverted)at Initiates, _).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Diving.e',220).
+
+ /*  reactive_rule([inverted(Inverted)],
+   	      [ initiates(rotatePitch(Inverted),
+   			  at(horizontalUp(Inverted),
+   			     Initiates),
+   			  Initiates4)
+   	      ]).
+ */
+
+
+% [diver,time]
+% HoldsAt(Inverted(diver),time) ->
+% Terminates(RotatePitch(diver),Inverted(diver),time).
+
+ /*  axiom(terminates(rotatePitch(Diver), inverted(Diver), Time),
+       [inverted(Diver)]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Diving.e',224).
+
+ /*  inverted(Inverted) ->
+       terminates(rotatePitch(Inverted),
+                  inverted(Inverted),
+                  Terminates).
+ */
+if inverted(Inverted)then terminates(rotatePitch(Inverted), inverted(Inverted)at Terminates, _).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Diving.e',224).
+
+ /*  reactive_rule([inverted(Inverted)],
+   	      [ terminates(rotatePitch(Inverted),
+   			   at(inverted(Inverted),
+   			      Terminates),
+   			   Terminates4)
+   	      ]).
+ */
+
+
+% [diver,time]
+% HoldsAt(HorizontalUp(diver),time) ->
+% Initiates(RotatePitch(diver),Vertical(diver),time).
+
+ /*  axiom(initiates(rotatePitch(Diver), vertical(Diver), Time),
+       [horizontalUp(Diver)]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Diving.e',228).
+
+ /*  horizontalUp(Horizontalup) ->
+       initiates(rotatePitch(Horizontalup),
+                 vertical(Horizontalup),
+                 Initiates).
+ */
+if horizontalUp(Horizontalup)then initiates(rotatePitch(Horizontalup), vertical(Horizontalup)at Initiates, _).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Diving.e',228).
+
+ /*  reactive_rule([horizontalUp(Horizontalup)],
+   	      [ initiates(rotatePitch(Horizontalup),
+   			  at(vertical(Horizontalup),
+   			     Initiates),
+   			  Initiates4)
+   	      ]).
+ */
+
+
+% [diver,time]
+% HoldsAt(HorizontalUp(diver),time) ->
+% Terminates(RotatePitch(diver),HorizontalUp(diver),time).
+
+ /*  axiom(terminates(rotatePitch(Diver), horizontalUp(Diver), Time),
+       [horizontalUp(Diver)]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Diving.e',232).
+
+ /*  horizontalUp(Horizontalup) ->
+       terminates(rotatePitch(Horizontalup),
+                  horizontalUp(Horizontalup),
+                  Terminates).
+ */
+if horizontalUp(Horizontalup)then terminates(rotatePitch(Horizontalup), horizontalUp(Horizontalup)at Terminates, _).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Diving.e',232).
+
+ /*  reactive_rule([horizontalUp(Horizontalup)],
+   	      [ terminates(rotatePitch(Horizontalup),
+   			   at(horizontalUp(Horizontalup),
+   			      Terminates),
+   			   Terminates4)
+   	      ]).
+ */
+
+% event RotateYaw(diver)
+ %  event(rotateYaw(diver)).
+ %  event(rotateYaw(diver)).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Diving.e',234).
+events([rotateYaw/1]).
+mpred_prop(rotateYaw(diver),event).
+
+
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Diving.e',237).
+%; try taking out Holding condition here
+% [diver,time]
+% Happens(Ascend1(diver),time) &
+% !Happens(RapidAscendToSurface(diver),time) &
+% !({diver1} HoldsAt(Holding(diver,diver1),time)) ->
+% Happens(RotateYaw(diver),time).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Diving.e',239).
+
+ /*  (   happens(ascend1(Diver), Time),
+       not(happens(rapidAscendToSurface(Diver), Time)),
+       not(exists([Diver1],
+                  holds_at(holding(Diver, Diver1), Time)))
+   ->  happens(rotateYaw(Diver), Time)
+   ).
+ */
+if happens(ascend1(Diver), Time), not happens(rapidAscendToSurface(Diver), Time), not (holding(Diver, Diver1)at Time)then happens(rotateYaw(Diver), Time).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Diving.e',239).
+
+ /*  reactive_rule([ happens(ascend1(Diver),Time),
+   		not(happens(rapidAscendToSurface(Diver),
+   			    Time)),
+   		holds(not(holding(Diver,Diver1)),
+   		      Time)
+   	      ],
+   	      [happens(rotateYaw(Diver),Time)]).
+ */
+
+% fluent UnderWater(object)
+ %  fluent(underWater(object)).
+ %  fluent(underWater(object)).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Diving.e',243).
+fluents([underWater/1]).
+mpred_prop(underWater(object),fluent).
+
+
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Diving.e',246).
+% [object,depth,time]
+% depth>% 0 &
+% HoldsAt(AtDepth(object,depth),time) ->
+% HoldsAt(UnderWater(object),time).
+
+ /*  (   Depth>0,
+       holds_at(atDepth(Object, Depth), Time)
+   ->  holds_at(underWater(Object), Time)
+   ).
+ */
+if Depth>0, atDepth(Object, Depth)at Time then underWater(Object)at Time.
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Diving.e',246).
+
+ /*  reactive_rule([ Depth>0,
+   		holds(atDepth(Object,Depth),Time)
+   	      ],
+   	      [holds(underWater(Object),Time)]).
+ */
+
+% event EnterWater(object)
+ %  event(enterWater(object)).
+ %  event(enterWater(object)).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Diving.e',250).
+events([enterWater/1]).
+mpred_prop(enterWater(object),event).
+
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Diving.e',253).
+% event Surface(object)
+ %  event(surface(object)).
+ %  event(surface(object)).
+events([surface/1]).
+mpred_prop(surface(object),event).
+
+
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Diving.e',255).
+% [object,time]
+% Initiates(EnterWater(object),UnderWater(object),time).
+
+ /*  axiom(initiates(enterWater(Object), underWater(Object), Time),
+       []).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Diving.e',255).
+
+ /*  initiates(enterWater(Enterwater),
+   	  underWater(Enterwater),
+   	  Initiates).
+ */
+enterWater(Enterwater)initiates underWater(Enterwater).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Diving.e',255).
+
+ /*  initiated(happens(enterWater(Enterwater),
+   		  Time_From,
+   		  Time_Until),
+   	  underWater(Enterwater),
+   	  []).
+ */
+
+
+% [diver,time]
+% Happens(EnterWater(diver),time) ->
+% !{diver1} HoldsAt(Holding(diver1,diver),time).
+
+ /*  happens(enterWater(Diver), Time) ->
+       not(exists([Diver1],
+                  holds_at(holding(Diver1, Diver), Time))).
+ */
+if happens(enterWater(Diver), Time)then not (holding(Diver1, Diver)at Time).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Diving.e',259).
+
+ /*  reactive_rule([happens(enterWater(Diver),Time)],
+   	      [ holds(not(holding(Diver1,Diver)),
+   		      Time)
+   	      ]).
+ */
+
+
+% [object,depth,time]
+% depth=% 0 ->
+% Initiates(EnterWater(object),AtDepth(object,depth),time).
+
+ /*  axiom(initiates(enterWater(Object), atDepth(Object, Depth), Time),
+       [equals(Depth, 0)]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Diving.e',263).
+
+ /*  equals(Atdepth, 0) ->
+       initiates(enterWater(Enterwater),
+                 atDepth(Enterwater, Atdepth),
+                 Initiates).
+ */
+if equals(0, Atdepth)then initiates(enterWater(Enterwater), atDepth(Enterwater, Atdepth)at Initiates, _).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Diving.e',263).
+
+ /*  reactive_rule([equals(0,Atdepth)],
+   	      [ initiates(enterWater(Enterwater),
+   			  at(atDepth(Enterwater,Atdepth),
+   			     Initiates),
+   			  Initiates6)
+   	      ]).
+ */
+
+
+% [object,time]
+% Terminates(Surface(object),UnderWater(object),time).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Diving.e',267).
+
+ /*  axiom(terminates(surface(Object), underWater(Object), Time),
+       []).
+ */
+
+ /*  terminates(surface(Surface),
+   	   underWater(Surface),
+   	   Terminates).
+ */
+surface(Surface)terminates underWater(Surface).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Diving.e',267).
+
+ /*  terminated(happens(surface(Surface),
+   		   Time_From,
+   		   Time_Until),
+   	   underWater(Surface),
+   	   []).
+ */
+
+
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Diving.e',269).
+% [diver,time]
+% Terminates(Surface(diver),PositivelyBuoyant(diver),time).
+
+ /*  axiom(terminates(surface(Diver), positivelyBuoyant(Diver), Time),
+       []).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Diving.e',269).
+
+ /*  terminates(surface(Surface),
+   	   positivelyBuoyant(Surface),
+   	   Terminates).
+ */
+surface(Surface)terminates positivelyBuoyant(Surface).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Diving.e',269).
+
+ /*  terminated(happens(surface(Surface),
+   		   Time_From,
+   		   Time_Until),
+   	   positivelyBuoyant(Surface),
+   	   []).
+ */
+
+
+% [diver,time]
+% Terminates(Surface(diver),NegativelyBuoyant(diver),time).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Diving.e',273).
+
+ /*  axiom(terminates(surface(Diver), negativelyBuoyant(Diver), Time),
+       []).
+ */
+
+ /*  terminates(surface(Surface),
+   	   negativelyBuoyant(Surface),
+   	   Terminates).
+ */
+surface(Surface)terminates negativelyBuoyant(Surface).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Diving.e',273).
+
+ /*  terminated(happens(surface(Surface),
+   		   Time_From,
+   		   Time_Until),
+   	   negativelyBuoyant(Surface),
+   	   []).
+ */
+
+
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Diving.e',275).
+% [diver,time]
+% Terminates(Surface(diver),NeutrallyBuoyant(diver),time).
+
+ /*  axiom(terminates(surface(Diver), neutrallyBuoyant(Diver), Time),
+       []).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Diving.e',275).
+
+ /*  terminates(surface(Surface),
+   	   neutrallyBuoyant(Surface),
+   	   Terminates).
+ */
+surface(Surface)terminates neutrallyBuoyant(Surface).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Diving.e',275).
+
+ /*  terminated(happens(surface(Surface),
+   		   Time_From,
+   		   Time_Until),
+   	   neutrallyBuoyant(Surface),
+   	   []).
+ */
+
+
+% [object,depth,time]
+% Terminates(Surface(object),AtDepth(object,depth),time).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Diving.e',279).
+
+ /*  axiom(terminates(surface(Object), atDepth(Object, Depth), Time),
+       []).
+ */
+
+ /*  terminates(surface(Surface),
+   	   atDepth(Surface,Atdepth),
+   	   Terminates).
+ */
+surface(Surface)terminates atDepth(Surface, Atdepth).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Diving.e',279).
+
+ /*  terminated(happens(surface(Surface),
+   		   Time_From,
+   		   Time_Until),
+   	   atDepth(Surface,Atdepth),
+   	   []).
+ */
+
+
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Diving.e',281).
+% [diver,time]
+ % Happens(EnterWater(diver),time) ->
+% HoldsAt(Vertical(diver),time).
+
+ /*  happens(enterWater(Diver), Time) ->
+       holds_at(vertical(Diver), Time).
+ */
+if happens(enterWater(Diver), Time)then vertical(Diver)at Time.
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Diving.e',281).
+
+ /*  reactive_rule([happens(enterWater(Diver),Time)],
+   	      [holds(vertical(Diver),Time)]).
+ */
+
+% fluent StandingOn(diver,boat)
+ %  fluent(standingOn(diver,boat)).
+ %  fluent(standingOn(diver,boat)).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Diving.e',283).
+fluents([standingOn/2]).
+mpred_prop(standingOn(diver,boat),fluent).
+
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Diving.e',286).
+% event StandOn(diver,boat)
+ %  event(standOn(diver,boat)).
+ %  event(standOn(diver,boat)).
+events([standOn/2]).
+mpred_prop(standOn(diver,boat),event).
+
+
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Diving.e',288).
+% [diver,boat,time]
+% Terminates(EnterWater(diver),StandingOn(diver,boat),time).
+
+ /*  axiom(terminates(enterWater(Diver), standingOn(Diver, Boat), Time),
+       []).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Diving.e',288).
+
+ /*  terminates(enterWater(Enterwater),
+   	   standingOn(Enterwater,Standingon),
+   	   Terminates).
+ */
+enterWater(Enterwater)terminates standingOn(Enterwater, Standingon).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Diving.e',288).
+
+ /*  terminated(happens(enterWater(Enterwater),
+   		   Time_From,
+   		   Time_Until),
+   	   standingOn(Enterwater,Standingon),
+   	   []).
+ */
+
+
+% [diver,boat,time]
+% Initiates(StandOn(diver,boat),StandingOn(diver,boat),time).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Diving.e',292).
+
+ /*  axiom(initiates(standOn(Diver, Boat), standingOn(Diver, Boat), Time),
+       []).
+ */
+
+ /*  initiates(standOn(A,Standon),
+   	  standingOn(A,Standon),
+   	  Initiates).
+ */
+standOn(A, Standon)initiates standingOn(A, Standon).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Diving.e',292).
+
+ /*  initiated(happens(standOn(A,Standon),
+   		  Time_From,
+   		  Time_Until),
+   	  standingOn(A,Standon),
+   	  []).
+ */
+
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Diving.e',294).
+% fluent PositivelyBuoyant(diver)
+ %  fluent(positivelyBuoyant(diver)).
+ %  fluent(positivelyBuoyant(diver)).
+fluents([positivelyBuoyant/1]).
+mpred_prop(positivelyBuoyant(diver),fluent).
+
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Diving.e',296).
+% fluent NeutrallyBuoyant(diver)
+ %  fluent(neutrallyBuoyant(diver)).
+ %  fluent(neutrallyBuoyant(diver)).
+fluents([neutrallyBuoyant/1]).
+mpred_prop(neutrallyBuoyant(diver),fluent).
+
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Diving.e',298).
+% fluent NegativelyBuoyant(diver)
+ %  fluent(negativelyBuoyant(diver)).
+ %  fluent(negativelyBuoyant(diver)).
+fluents([negativelyBuoyant/1]).
+mpred_prop(negativelyBuoyant(diver),fluent).
+
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Diving.e',300).
+% mutex PositivelyBuoyant, NeutrallyBuoyant, NegativelyBuoyant
+
+ /*  axiom(mutex(positivelyBuoyant),
+       []).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Diving.e',300).
+mutex(positivelyBuoyant).
+
+ /*  axiom(mutex(neutrallyBuoyant),
+       []).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Diving.e',300).
+mutex(neutrallyBuoyant).
+
+ /*  axiom(mutex(negativelyBuoyant),
+       []).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Diving.e',300).
+mutex(negativelyBuoyant).
+
+
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Diving.e',302).
+% [diver,time]
+% HoldsAt(PositivelyBuoyant(diver),time) ->
+% HoldsAt(UnderWater(diver),time).
+
+ /*  holds_at(positivelyBuoyant(Diver), Time) ->
+       holds_at(underWater(Diver), Time).
+ */
+if positivelyBuoyant(Diver)at Time then underWater(Diver)at Time.
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Diving.e',302).
+
+ /*  reactive_rule([holds(positivelyBuoyant(Diver),Time)],
+   	      [holds(underWater(Diver),Time)]).
+ */
+
+
+% [diver,time]
+% HoldsAt(NeutrallyBuoyant(diver),time) ->
+% HoldsAt(UnderWater(diver),time).
+
+ /*  holds_at(neutrallyBuoyant(Diver), Time) ->
+       holds_at(underWater(Diver), Time).
+ */
+if neutrallyBuoyant(Diver)at Time then underWater(Diver)at Time.
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Diving.e',307).
+
+ /*  reactive_rule([holds(neutrallyBuoyant(Diver),Time)],
+   	      [holds(underWater(Diver),Time)]).
+ */
+
+
+% [diver,time]
+% HoldsAt(NegativelyBuoyant(diver),time) ->
+% HoldsAt(UnderWater(diver),time).
+
+ /*  holds_at(negativelyBuoyant(Diver), Time) ->
+       holds_at(underWater(Diver), Time).
+ */
+if negativelyBuoyant(Diver)at Time then underWater(Diver)at Time.
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Diving.e',311).
+
+ /*  reactive_rule([holds(negativelyBuoyant(Diver),Time)],
+   	      [holds(underWater(Diver),Time)]).
+ */
+
+% event PressDeflateButton(diver,bc)
+ %  event(pressDeflateButton(diver,bc)).
+ %  event(pressDeflateButton(diver,bc)).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Diving.e',313).
+events([pressDeflateButton/2]).
+mpred_prop(pressDeflateButton(diver,bc),event).
+
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Diving.e',316).
+% event PressDumpButton(diver,bc)
+ %  event(pressDumpButton(diver,bc)).
+ %  event(pressDumpButton(diver,bc)).
+events([pressDumpButton/2]).
+mpred_prop(pressDumpButton(diver,bc),event).
+
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Diving.e',318).
+% event PressInflateButton(diver,bc)
+ %  event(pressInflateButton(diver,bc)).
+ %  event(pressInflateButton(diver,bc)).
+events([pressInflateButton/2]).
+mpred_prop(pressInflateButton(diver,bc),event).
+
+
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Diving.e',320).
+% [diver,bc,time]
+% Happens(PressDeflateButton(diver,bc),time) ->
+% HoldsAt(Vertical(diver),time) &
+% HoldsAt(UnderWater(bc),time).
+
+ /*  (   happens(pressDeflateButton(Diver, Bc), Time)
+   ->  holds_at(vertical(Diver), Time),
+       holds_at(underWater(Bc), Time)
+   ).
+ */
+if happens(pressDeflateButton(Diver, Bc), Time)then vertical(Diver)at Time, underWater(Bc)at Time.
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Diving.e',320).
+
+ /*  reactive_rule([ happens(pressDeflateButton(Diver,Bc),
+   			Time)
+   	      ],
+   	      [ holds(vertical(Diver),Time),
+   		holds(underWater(Bc),Time)
+   	      ]).
+ */
+
+
+% [diver,bc,time]
+% Happens(PressDumpButton(diver,bc),time) ->
+% HoldsAt(Vertical(diver),time) &
+% HoldsAt(UnderWater(bc),time).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Diving.e',326).
+
+ /*  (   happens(pressDumpButton(Diver, Bc), Time)
+   ->  holds_at(vertical(Diver), Time),
+       holds_at(underWater(Bc), Time)
+   ).
+ */
+if happens(pressDumpButton(Diver, Bc), Time)then vertical(Diver)at Time, underWater(Bc)at Time.
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Diving.e',326).
+
+ /*  reactive_rule([ happens(pressDumpButton(Diver,Bc),
+   			Time)
+   	      ],
+   	      [ holds(vertical(Diver),Time),
+   		holds(underWater(Bc),Time)
+   	      ]).
+ */
+
+
+% [diver,bc,time]
+ % Happens(PressDumpButton(diver,bc),time) ->
+% HoldsAt(UncontrolledBuoyancy(diver),time).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Diving.e',329).
+
+ /*  happens(pressDumpButton(Diver, Bc), Time) ->
+       holds_at(uncontrolledBuoyancy(Diver), Time).
+ */
+if happens(pressDumpButton(Diver, Bc), Time)then uncontrolledBuoyancy(Diver)at Time.
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Diving.e',329).
+
+ /*  reactive_rule([ happens(pressDumpButton(Diver,Bc),
+   			Time)
+   	      ],
+   	      [holds(uncontrolledBuoyancy(Diver),Time)]).
+ */
+
+
+% [diver,bc,time]
+% HoldsAt(Wearing(diver,bc),time) ->
+% Initiates(PressDeflateButton(diver,bc),NegativelyBuoyant(diver),time).
+
+ /*  axiom(initiates(pressDeflateButton(Diver, Bc), negativelyBuoyant(Diver), Time),
+       [wearing(Diver, Bc)]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Diving.e',334).
+
+ /*  wearing(Negativelybuoyant, Wearing) ->
+       initiates(pressDeflateButton(Negativelybuoyant, Wearing),
+                 negativelyBuoyant(Negativelybuoyant),
+                 Initiates).
+ */
+if wearing(Negativelybuoyant, Wearing)then initiates(pressDeflateButton(Negativelybuoyant, Wearing), negativelyBuoyant(Negativelybuoyant)at Initiates, _).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Diving.e',334).
+
+ /*  reactive_rule([ holds(wearing(Negativelybuoyant,Wearing),
+   		      Holds)
+   	      ],
+   	      [ initiates(pressDeflateButton(Negativelybuoyant,
+   					     Wearing),
+   			  at(negativelyBuoyant(Negativelybuoyant),
+   			     Initiates),
+   			  Initiates7)
+   	      ]).
+ */
+
+
+% [diver,bc,time]
+% HoldsAt(Wearing(diver,bc),time) ->
+% Terminates(PressDeflateButton(diver,bc),NeutrallyBuoyant(diver),time).
+
+ /*  axiom(terminates(pressDeflateButton(Diver, Bc), neutrallyBuoyant(Diver), Time),
+       [wearing(Diver, Bc)]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Diving.e',338).
+
+ /*  wearing(Neutrallybuoyant, Wearing) ->
+       terminates(pressDeflateButton(Neutrallybuoyant, Wearing),
+                  neutrallyBuoyant(Neutrallybuoyant),
+                  Terminates).
+ */
+if wearing(Neutrallybuoyant, Wearing)then terminates(pressDeflateButton(Neutrallybuoyant, Wearing), neutrallyBuoyant(Neutrallybuoyant)at Terminates, _).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Diving.e',338).
+
+ /*  reactive_rule([ holds(wearing(Neutrallybuoyant,Wearing),
+   		      Holds)
+   	      ],
+   	      [ terminates(pressDeflateButton(Neutrallybuoyant,
+   					      Wearing),
+   			   at(neutrallyBuoyant(Neutrallybuoyant),
+   			      Terminates),
+   			   Terminates7)
+   	      ]).
+ */
+
+
+% [diver,bc,time]
+% HoldsAt(Wearing(diver,bc),time) ->
+% Terminates(PressDeflateButton(diver,bc),PositivelyBuoyant(diver),time).
+
+ /*  axiom(terminates(pressDeflateButton(Diver, Bc), positivelyBuoyant(Diver), Time),
+       [wearing(Diver, Bc)]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Diving.e',342).
+
+ /*  wearing(Positivelybuoyant, Wearing) ->
+       terminates(pressDeflateButton(Positivelybuoyant, Wearing),
+                  positivelyBuoyant(Positivelybuoyant),
+                  Terminates).
+ */
+if wearing(Positivelybuoyant, Wearing)then terminates(pressDeflateButton(Positivelybuoyant, Wearing), positivelyBuoyant(Positivelybuoyant)at Terminates, _).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Diving.e',342).
+
+ /*  reactive_rule([ holds(wearing(Positivelybuoyant,Wearing),
+   		      Holds)
+   	      ],
+   	      [ terminates(pressDeflateButton(Positivelybuoyant,
+   					      Wearing),
+   			   at(positivelyBuoyant(Positivelybuoyant),
+   			      Terminates),
+   			   Terminates7)
+   	      ]).
+ */
+
+
+% [diver,bc,time]
+% HoldsAt(Wearing(diver,bc),time) ->
+% Initiates(PressDumpButton(diver,bc),NegativelyBuoyant(diver),time).
+
+ /*  axiom(initiates(pressDumpButton(Diver, Bc), negativelyBuoyant(Diver), Time),
+       [wearing(Diver, Bc)]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Diving.e',346).
+
+ /*  wearing(Negativelybuoyant, Wearing) ->
+       initiates(pressDumpButton(Negativelybuoyant, Wearing),
+                 negativelyBuoyant(Negativelybuoyant),
+                 Initiates).
+ */
+if wearing(Negativelybuoyant, Wearing)then initiates(pressDumpButton(Negativelybuoyant, Wearing), negativelyBuoyant(Negativelybuoyant)at Initiates, _).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Diving.e',346).
+
+ /*  reactive_rule([ holds(wearing(Negativelybuoyant,Wearing),
+   		      Holds)
+   	      ],
+   	      [ initiates(pressDumpButton(Negativelybuoyant,
+   					  Wearing),
+   			  at(negativelyBuoyant(Negativelybuoyant),
+   			     Initiates),
+   			  Initiates7)
+   	      ]).
+ */
+
+
+% [diver,bc,time]
+% HoldsAt(Wearing(diver,bc),time) ->
+% Terminates(PressDumpButton(diver,bc),NeutrallyBuoyant(diver),time).
+
+ /*  axiom(terminates(pressDumpButton(Diver, Bc), neutrallyBuoyant(Diver), Time),
+       [wearing(Diver, Bc)]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Diving.e',350).
+
+ /*  wearing(Neutrallybuoyant, Wearing) ->
+       terminates(pressDumpButton(Neutrallybuoyant, Wearing),
+                  neutrallyBuoyant(Neutrallybuoyant),
+                  Terminates).
+ */
+if wearing(Neutrallybuoyant, Wearing)then terminates(pressDumpButton(Neutrallybuoyant, Wearing), neutrallyBuoyant(Neutrallybuoyant)at Terminates, _).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Diving.e',350).
+
+ /*  reactive_rule([ holds(wearing(Neutrallybuoyant,Wearing),
+   		      Holds)
+   	      ],
+   	      [ terminates(pressDumpButton(Neutrallybuoyant,
+   					   Wearing),
+   			   at(neutrallyBuoyant(Neutrallybuoyant),
+   			      Terminates),
+   			   Terminates7)
+   	      ]).
+ */
+
+
+% [diver,bc,time]
+% HoldsAt(Wearing(diver,bc),time) ->
+% Terminates(PressDumpButton(diver,bc),PositivelyBuoyant(diver),time).
+
+ /*  axiom(terminates(pressDumpButton(Diver, Bc), positivelyBuoyant(Diver), Time),
+       [wearing(Diver, Bc)]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Diving.e',354).
+
+ /*  wearing(Positivelybuoyant, Wearing) ->
+       terminates(pressDumpButton(Positivelybuoyant, Wearing),
+                  positivelyBuoyant(Positivelybuoyant),
+                  Terminates).
+ */
+if wearing(Positivelybuoyant, Wearing)then terminates(pressDumpButton(Positivelybuoyant, Wearing), positivelyBuoyant(Positivelybuoyant)at Terminates, _).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Diving.e',354).
+
+ /*  reactive_rule([ holds(wearing(Positivelybuoyant,Wearing),
+   		      Holds)
+   	      ],
+   	      [ terminates(pressDumpButton(Positivelybuoyant,
+   					   Wearing),
+   			   at(positivelyBuoyant(Positivelybuoyant),
+   			      Terminates),
+   			   Terminates7)
+   	      ]).
+ */
+
+
+% [diver,bc,time]
+% HoldsAt(Wearing(diver,bc),time) ->
+% Initiates(PressInflateButton(diver,bc),NeutrallyBuoyant(diver),time).
+
+ /*  axiom(initiates(pressInflateButton(Diver, Bc), neutrallyBuoyant(Diver), Time),
+       [wearing(Diver, Bc)]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Diving.e',358).
+
+ /*  wearing(Neutrallybuoyant, Wearing) ->
+       initiates(pressInflateButton(Neutrallybuoyant, Wearing),
+                 neutrallyBuoyant(Neutrallybuoyant),
+                 Initiates).
+ */
+if wearing(Neutrallybuoyant, Wearing)then initiates(pressInflateButton(Neutrallybuoyant, Wearing), neutrallyBuoyant(Neutrallybuoyant)at Initiates, _).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Diving.e',358).
+
+ /*  reactive_rule([ holds(wearing(Neutrallybuoyant,Wearing),
+   		      Holds)
+   	      ],
+   	      [ initiates(pressInflateButton(Neutrallybuoyant,
+   					     Wearing),
+   			  at(neutrallyBuoyant(Neutrallybuoyant),
+   			     Initiates),
+   			  Initiates7)
+   	      ]).
+ */
+
+
+% [diver,bc,time]
+% HoldsAt(Wearing(diver,bc),time) ->
+% Terminates(PressInflateButton(diver,bc),PositivelyBuoyant(diver),time).
+
+ /*  axiom(terminates(pressInflateButton(Diver, Bc), positivelyBuoyant(Diver), Time),
+       [wearing(Diver, Bc)]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Diving.e',362).
+
+ /*  wearing(Positivelybuoyant, Wearing) ->
+       terminates(pressInflateButton(Positivelybuoyant, Wearing),
+                  positivelyBuoyant(Positivelybuoyant),
+                  Terminates).
+ */
+if wearing(Positivelybuoyant, Wearing)then terminates(pressInflateButton(Positivelybuoyant, Wearing), positivelyBuoyant(Positivelybuoyant)at Terminates, _).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Diving.e',362).
+
+ /*  reactive_rule([ holds(wearing(Positivelybuoyant,Wearing),
+   		      Holds)
+   	      ],
+   	      [ terminates(pressInflateButton(Positivelybuoyant,
+   					      Wearing),
+   			   at(positivelyBuoyant(Positivelybuoyant),
+   			      Terminates),
+   			   Terminates7)
+   	      ]).
+ */
+
+
+% [diver,bc,time]
+% HoldsAt(Wearing(diver,bc),time) ->
+% Terminates(PressInflateButton(diver,bc),NegativelyBuoyant(diver),time).
+
+ /*  axiom(terminates(pressInflateButton(Diver, Bc), negativelyBuoyant(Diver), Time),
+       [wearing(Diver, Bc)]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Diving.e',366).
+
+ /*  wearing(Negativelybuoyant, Wearing) ->
+       terminates(pressInflateButton(Negativelybuoyant, Wearing),
+                  negativelyBuoyant(Negativelybuoyant),
+                  Terminates).
+ */
+if wearing(Negativelybuoyant, Wearing)then terminates(pressInflateButton(Negativelybuoyant, Wearing), negativelyBuoyant(Negativelybuoyant)at Terminates, _).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Diving.e',366).
+
+ /*  reactive_rule([ holds(wearing(Negativelybuoyant,Wearing),
+   		      Holds)
+   	      ],
+   	      [ terminates(pressInflateButton(Negativelybuoyant,
+   					      Wearing),
+   			   at(negativelyBuoyant(Negativelybuoyant),
+   			      Terminates),
+   			   Terminates7)
+   	      ]).
+ */
+
+
+% [diver,weight,time]
+% HoldsAt(Wearing(diver,weight),time) ->
+% Initiates(TakeOff(diver,weight),PositivelyBuoyant(diver),time).
+
+ /*  axiom(initiates(takeOff(Diver, Weight), positivelyBuoyant(Diver), Time),
+       [wearing(Diver, Weight)]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Diving.e',370).
+
+ /*  wearing(Positivelybuoyant, Wearing) ->
+       initiates(takeOff(Positivelybuoyant, Wearing),
+                 positivelyBuoyant(Positivelybuoyant),
+                 Initiates).
+ */
+if wearing(Positivelybuoyant, Wearing)then initiates(takeOff(Positivelybuoyant, Wearing), positivelyBuoyant(Positivelybuoyant)at Initiates, _).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Diving.e',370).
+
+ /*  reactive_rule([ holds(wearing(Positivelybuoyant,Wearing),
+   		      Holds)
+   	      ],
+   	      [ initiates(takeOff(Positivelybuoyant,
+   				  Wearing),
+   			  at(positivelyBuoyant(Positivelybuoyant),
+   			     Initiates),
+   			  Initiates7)
+   	      ]).
+ */
+
+
+% [diver,weight,time]
+% HoldsAt(Wearing(diver,weight),time) ->
+% Terminates(TakeOff(diver,weight),NegativelyBuoyant(diver),time).
+
+ /*  axiom(terminates(takeOff(Diver, Weight), negativelyBuoyant(Diver), Time),
+       [wearing(Diver, Weight)]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Diving.e',374).
+
+ /*  wearing(Negativelybuoyant, Wearing) ->
+       terminates(takeOff(Negativelybuoyant, Wearing),
+                  negativelyBuoyant(Negativelybuoyant),
+                  Terminates).
+ */
+if wearing(Negativelybuoyant, Wearing)then terminates(takeOff(Negativelybuoyant, Wearing), negativelyBuoyant(Negativelybuoyant)at Terminates, _).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Diving.e',374).
+
+ /*  reactive_rule([ holds(wearing(Negativelybuoyant,Wearing),
+   		      Holds)
+   	      ],
+   	      [ terminates(takeOff(Negativelybuoyant,
+   				   Wearing),
+   			   at(negativelyBuoyant(Negativelybuoyant),
+   			      Terminates),
+   			   Terminates7)
+   	      ]).
+ */
+
+
+% [diver,weight,time]
+% HoldsAt(Wearing(diver,weight),time) ->
+% Terminates(TakeOff(diver,weight),NeutrallyBuoyant(diver),time).
+
+ /*  axiom(terminates(takeOff(Diver, Weight), neutrallyBuoyant(Diver), Time),
+       [wearing(Diver, Weight)]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Diving.e',378).
+
+ /*  wearing(Neutrallybuoyant, Wearing) ->
+       terminates(takeOff(Neutrallybuoyant, Wearing),
+                  neutrallyBuoyant(Neutrallybuoyant),
+                  Terminates).
+ */
+if wearing(Neutrallybuoyant, Wearing)then terminates(takeOff(Neutrallybuoyant, Wearing), neutrallyBuoyant(Neutrallybuoyant)at Terminates, _).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Diving.e',378).
+
+ /*  reactive_rule([ holds(wearing(Neutrallybuoyant,Wearing),
+   		      Holds)
+   	      ],
+   	      [ terminates(takeOff(Neutrallybuoyant,
+   				   Wearing),
+   			   at(neutrallyBuoyant(Neutrallybuoyant),
+   			      Terminates),
+   			   Terminates7)
+   	      ]).
+ */
+
+% fluent UncontrolledBuoyancy(diver)
+ %  fluent(uncontrolledBuoyancy(diver)).
+ %  fluent(uncontrolledBuoyancy(diver)).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Diving.e',380).
+fluents([uncontrolledBuoyancy/1]).
+mpred_prop(uncontrolledBuoyancy(diver),fluent).
+
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Diving.e',383).
+% event LoseBuoyancyControl(diver)
+ %  event(loseBuoyancyControl(diver)).
+ %  event(loseBuoyancyControl(diver)).
+events([loseBuoyancyControl/1]).
+mpred_prop(loseBuoyancyControl(diver),event).
+
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Diving.e',385).
+% predicate IsInexperiencedDiver(diver)
+ %  predicate(isInexperiencedDiver(diver)).
+ %  predicate(isInexperiencedDiver(diver)).
+predicates([isInexperiencedDiver/1]).
+mpred_prop(isInexperiencedDiver(diver),predicate).
+
+
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Diving.e',387).
+% [diver,time]
+% Happens(LoseBuoyancyControl(diver),time) ->
+% IsInexperiencedDiver(diver).
+
+ /*  happens(loseBuoyancyControl(Diver), Time) ->
+       isInexperiencedDiver(Diver).
+ */
+if happens(loseBuoyancyControl(Diver), Time)then isInexperiencedDiver(Diver).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Diving.e',387).
+
+ /*  reactive_rule([happens(loseBuoyancyControl(Diver),Time)],
+   	      [isInexperiencedDiver(Diver)]).
+ */
+
+
+% [diver,time]
+% Initiates(LoseBuoyancyControl(diver),UncontrolledBuoyancy(diver),time).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Diving.e',392).
+
+ /*  axiom(initiates(loseBuoyancyControl(Diver), uncontrolledBuoyancy(Diver), Time),
+       []).
+ */
+
+ /*  initiates(loseBuoyancyControl(Losebuoyancycontrol),
+   	  uncontrolledBuoyancy(Losebuoyancycontrol),
+   	  Initiates).
+ */
+loseBuoyancyControl(Losebuoyancycontrol)initiates uncontrolledBuoyancy(Losebuoyancycontrol).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Diving.e',392).
+
+ /*  initiated(happens(loseBuoyancyControl(Losebuoyancycontrol),
+   		  Time_From,
+   		  Time_Until),
+   	  uncontrolledBuoyancy(Losebuoyancycontrol),
+   	  []).
+ */
+
+
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Diving.e',394).
+% [diver,time]
+% Initiates(LoseBuoyancyControl(diver),PositivelyBuoyant(diver),time).
+
+ /*  axiom(initiates(loseBuoyancyControl(Diver), positivelyBuoyant(Diver), Time),
+       []).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Diving.e',394).
+
+ /*  initiates(loseBuoyancyControl(Losebuoyancycontrol),
+   	  positivelyBuoyant(Losebuoyancycontrol),
+   	  Initiates).
+ */
+loseBuoyancyControl(Losebuoyancycontrol)initiates positivelyBuoyant(Losebuoyancycontrol).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Diving.e',394).
+
+ /*  initiated(happens(loseBuoyancyControl(Losebuoyancycontrol),
+   		  Time_From,
+   		  Time_Until),
+   	  positivelyBuoyant(Losebuoyancycontrol),
+   	  []).
+ */
+
+
+% [diver,time]
+% Terminates(LoseBuoyancyControl(diver),NegativelyBuoyant(diver),time).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Diving.e',398).
+
+ /*  axiom(terminates(loseBuoyancyControl(Diver), negativelyBuoyant(Diver), Time),
+       []).
+ */
+
+ /*  terminates(loseBuoyancyControl(Losebuoyancycontrol),
+   	   negativelyBuoyant(Losebuoyancycontrol),
+   	   Terminates).
+ */
+loseBuoyancyControl(Losebuoyancycontrol)terminates negativelyBuoyant(Losebuoyancycontrol).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Diving.e',398).
+
+ /*  terminated(happens(loseBuoyancyControl(Losebuoyancycontrol),
+   		   Time_From,
+   		   Time_Until),
+   	   negativelyBuoyant(Losebuoyancycontrol),
+   	   []).
+ */
+
+
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Diving.e',400).
+% [diver,time]
+% Terminates(LoseBuoyancyControl(diver),NeutrallyBuoyant(diver),time).
+
+ /*  axiom(terminates(loseBuoyancyControl(Diver), neutrallyBuoyant(Diver), Time),
+       []).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Diving.e',400).
+
+ /*  terminates(loseBuoyancyControl(Losebuoyancycontrol),
+   	   neutrallyBuoyant(Losebuoyancycontrol),
+   	   Terminates).
+ */
+loseBuoyancyControl(Losebuoyancycontrol)terminates neutrallyBuoyant(Losebuoyancycontrol).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Diving.e',400).
+
+ /*  terminated(happens(loseBuoyancyControl(Losebuoyancycontrol),
+   		   Time_From,
+   		   Time_Until),
+   	   neutrallyBuoyant(Losebuoyancycontrol),
+   	   []).
+ */
+
+
+%; determining fluent
+
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Diving.e',404).
+% fluent AscendDescendAmount(diver,depth)
+ %  fluent(ascendDescendAmount(diver,depth)).
+ %  fluent(ascendDescendAmount(diver,depth)).
+fluents([ascendDescendAmount/2]).
+mpred_prop(ascendDescendAmount(diver,depth),fluent).
+
+% noninertial AscendDescendAmount
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Diving.e',404).
+noninertial(ascendDescendAmount).
+
+
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Diving.e',407).
+% [diver,depth1,depth2,time]
+% HoldsAt(AscendDescendAmount(diver,depth1),time) &
+% HoldsAt(AscendDescendAmount(diver,depth2),time) ->
+% depth1=depth2.
+
+ /*  (   holds_at(ascendDescendAmount(Diver, Depth1), Time),
+       holds_at(ascendDescendAmount(Diver, Depth2), Time)
+   ->  equals(Depth1, Depth2)
+   ).
+ */
+if ascendDescendAmount(Diver, Depth1)at Time, ascendDescendAmount(Diver, Depth2)at Time then equals(Depth1, Depth2).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Diving.e',407).
+
+ /*  reactive_rule([ holds(ascendDescendAmount(Diver,Depth1),
+   		      Time),
+   		holds(ascendDescendAmount(Diver,Depth2),
+   		      Time)
+   	      ],
+   	      [equals(Depth1,Depth2)]).
+ */
+
+
+% [diver,depth,time]
+% Happens(Descend(diver,depth),time) ->
+% HoldsAt(NegativelyBuoyant(diver),time) &
+% ({depth1}
+%  HoldsAt(AscendDescendAmount(diver,depth1),time) &
+%  HoldsAt(AtDepth(diver,depth-depth1),time)).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Diving.e',413).
+
+ /*  (   happens(descend(Diver, Depth), Time)
+   ->  holds_at(negativelyBuoyant(Diver), Time),
+       exists([Depth1],
+               (holds_at(ascendDescendAmount(Diver, Depth1), Time), holds_at(atDepth(Diver, Depth-Depth1), Time)))
+   ).
+ */
+if happens(descend(Diver, Depth), Time)then negativelyBuoyant(Diver)at Time, exists([Depth1],  (ascendDescendAmount(Diver, Depth1)at Time, atDepth(Diver, Depth-Depth1)at Time)).
+ %  reactive_rule([happens(descend(Diver, Depth), Time)], [holds(negativelyBuoyant(Diver), Time), exists([Depth1],  (at(ascendDescendAmount(Diver, Depth1), Time), at(atDepth(Diver, Depth-Depth1), Time)))]).
+
+% event KickUp(diver)
+ %  event(kickUp(diver)).
+ %  event(kickUp(diver)).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Diving.e',418).
+events([kickUp/1]).
+mpred_prop(kickUp(diver),event).
+
+
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Diving.e',421).
+% [diver,depth,time]
+% Happens(Ascend(diver,depth),time) ->
+% (HoldsAt(PositivelyBuoyant(diver),time) |
+%  (HoldsAt(NeutrallyBuoyant(diver),time) & Happens(KickUp(diver),time))) &
+% ({depth1}
+%  HoldsAt(AscendDescendAmount(diver,depth1),time) &
+%  HoldsAt(AtDepth(diver,depth+depth1),time)).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Diving.e',421).
+
+ /*  (   happens(ascend(Diver, Depth), Time)
+   ->  (   holds_at(positivelyBuoyant(Diver), Time)
+       ;   holds_at(neutrallyBuoyant(Diver), Time),
+           happens(kickUp(Diver), Time)
+       ),
+       exists([Depth1],
+               (holds_at(ascendDescendAmount(Diver, Depth1), Time), holds_at(atDepth(Diver, Depth+Depth1), Time)))
+   ).
+ */
+if happens(ascend(Diver, Depth), Time)then(positivelyBuoyant(Diver)at Time;neutrallyBuoyant(Diver)at Time, happens(kickUp(Diver), Time)), exists([Depth1],  (ascendDescendAmount(Diver, Depth1)at Time, atDepth(Diver, Depth+Depth1)at Time)).
+ %  reactive_rule([happens(ascend(Diver, Depth), Time)], [(at(positivelyBuoyant(Diver), Time);at(neutrallyBuoyant(Diver), Time), happens(kickUp(Diver), Time)), exists([Depth1],  (at(ascendDescendAmount(Diver, Depth1), Time), at(atDepth(Diver, Depth+Depth1), Time)))]).
+
+
+% [diver,time]
+% Happens(KickUp(diver),time) ->
+% HoldsAt(Vertical(diver),time).
+
+ /*  happens(kickUp(Diver), Time) ->
+       holds_at(vertical(Diver), Time).
+ */
+if happens(kickUp(Diver), Time)then vertical(Diver)at Time.
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Diving.e',430).
+
+ /*  reactive_rule([happens(kickUp(Diver),Time)],
+   	      [holds(vertical(Diver),Time)]).
+ */
+
+% event SwimAround(diver)
+ %  event(swimAround(diver)).
+ %  event(swimAround(diver)).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Diving.e',432).
+events([swimAround/1]).
+mpred_prop(swimAround(diver),event).
+
+
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Diving.e',435).
+% [diver,time]
+% Happens(SwimAround(diver),time) ->
+% HoldsAt(HorizontalDown(diver),time).
+
+ /*  happens(swimAround(Diver), Time) ->
+       holds_at(horizontalDown(Diver), Time).
+ */
+if happens(swimAround(Diver), Time)then horizontalDown(Diver)at Time.
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Diving.e',435).
+
+ /*  reactive_rule([happens(swimAround(Diver),Time)],
+   	      [holds(horizontalDown(Diver),Time)]).
+ */
+
+
+%; signaling
+
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Diving.e',441).
+% event SignalDescend(diver,diver)
+ %  event(signalDescend(diver,diver)).
+ %  event(signalDescend(diver,diver)).
+events([signalDescend/2]).
+mpred_prop(signalDescend(diver,diver),event).
+
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Diving.e',443).
+% event SignalOutOfTime(diver,diver)
+ %  event(signalOutOfTime(diver,diver)).
+ %  event(signalOutOfTime(diver,diver)).
+events([signalOutOfTime/2]).
+mpred_prop(signalOutOfTime(diver,diver),event).
+
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Diving.e',445).
+% event SignalAscend(diver,diver)
+ %  event(signalAscend(diver,diver)).
+ %  event(signalAscend(diver,diver)).
+events([signalAscend/2]).
+mpred_prop(signalAscend(diver,diver),event).
+
+
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Diving.e',447).
+%;[diver1,diver2,time]
+%;Happens(SignalAscend(diver1,diver2),time) ->
+%;Happens(SignalOutOfTime(diver1,diver2),time-1).
+%;[diver1,diver2,time]
+%;Happens(SignalDescend(diver1,diver2),time) ->
+%;HoldsAt(See(diver1,diver2),time) &
+%;HoldsAt(See(diver2,diver1),time).
+%;[diver1,diver2,time]
+%;Happens(SignalOutOfTime(diver1,diver2),time) ->
+%;HoldsAt(See(diver1,diver2),time) &
+%;HoldsAt(See(diver2,diver1),time).
+%;[diver1,diver2,time]
+%;Happens(SignalAscend(diver1,diver2),time) ->
+%;HoldsAt(See(diver1,diver2),time) &
+%;HoldsAt(See(diver2,diver1),time).
+%;event LookAt(agent,object)
+%;fluent See(agent,object)
+%;[agent,object,time]
+%;Initiates(LookAt(agent,object),See(agent,object),time).
+%;[agent,object1,object2,time]
+%;object1!=object2 ->
+%;Terminates(LookAt(agent,object1),
+%;           See(agent,object2),
+%;           time).
+
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Diving.e',479).
+% event Descend1(diver)
+ %  event(descend1(diver)).
+ %  event(descend1(diver)).
+events([descend1/1]).
+mpred_prop(descend1(diver),event).
+
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Diving.e',481).
+% event Ascend1(diver)
+ %  event(ascend1(diver)).
+ %  event(ascend1(diver)).
+events([ascend1/1]).
+mpred_prop(ascend1(diver),event).
+
+
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Diving.e',483).
+%;[diver,object,time]
+%;Terminates(Descend1(diver),See(diver,object),time).
+%;[diver,object,time]
+%;Terminates(Ascend1(diver),See(diver,object),time).
+%;[diver,object,time]
+%;Terminates(RotateYaw(diver),See(diver,object),time).
+
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Diving.e',492).
+% event RapidAscendToSurface(diver)
+ %  event(rapidAscendToSurface(diver)).
+ %  event(rapidAscendToSurface(diver)).
+events([rapidAscendToSurface/1]).
+mpred_prop(rapidAscendToSurface(diver),event).
+
+
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Diving.e',494).
+% [diver,time]
+% Happens(Descend1(diver),time) <->
+% ({depth} Happens(Descend(diver,depth),time)).
+
+ /*  happens(descend1(Diver), Time) <->
+       exists([Depth], happens(descend(Diver, Depth), Time)).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Diving.e',494).
+
+ /*  happens(descend1(Diver), Time) ->
+       exists([Depth], happens(descend(Diver, Depth), Time)).
+ */
+if happens(descend1(Diver), Time)then exists([Depth], happens(descend(Diver, Depth), Time)).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Diving.e',494).
+
+ /*  reactive_rule([happens(descend1(Diver),Time)],
+   	      [ exists([Depth],
+   		       happens(descend(Diver,Depth),
+   			       Time))
+   	      ]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Diving.e',494).
+
+ /*  exists([Depth], happens(descend(Diver, Depth), Time)) ->
+       happens(descend1(Diver), Time).
+ */
+if exists([Depth], happens(descend(Diver, Depth), Time))then happens(descend1(Diver), Time).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Diving.e',494).
+
+ /*  reactive_rule([ exists([Depth],
+   		       happens(descend(Diver,Depth),
+   			       Time))
+   	      ],
+   	      [happens(descend1(Diver),Time)]).
+ */
+
+
+% [diver,time]
+% Happens(Ascend1(diver),time) <->
+% ({depth} Happens(Ascend(diver,depth),time)).
+
+ /*  happens(ascend1(Diver), Time) <->
+       exists([Depth], happens(ascend(Diver, Depth), Time)).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Diving.e',499).
+
+ /*  happens(ascend1(Diver), Time) ->
+       exists([Depth], happens(ascend(Diver, Depth), Time)).
+ */
+if happens(ascend1(Diver), Time)then exists([Depth], happens(ascend(Diver, Depth), Time)).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Diving.e',499).
+
+ /*  reactive_rule([happens(ascend1(Diver),Time)],
+   	      [ exists([Depth],
+   		       happens(ascend(Diver,Depth),
+   			       Time))
+   	      ]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Diving.e',499).
+
+ /*  exists([Depth], happens(ascend(Diver, Depth), Time)) ->
+       happens(ascend1(Diver), Time).
+ */
+if exists([Depth], happens(ascend(Diver, Depth), Time))then happens(ascend1(Diver), Time).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Diving.e',499).
+
+ /*  reactive_rule([ exists([Depth],
+   		       happens(ascend(Diver,Depth),
+   			       Time))
+   	      ],
+   	      [happens(ascend1(Diver),Time)]).
+ */
+
+
+% [diver,time]
+% Happens(RapidAscendToSurface(diver),time) ->
+% Happens(Ascend(diver,0),time).
+
+ /*  happens(rapidAscendToSurface(Diver), Time) ->
+       happens(ascend(Diver, 0), Time).
+ */
+if happens(rapidAscendToSurface(Diver), Time)then happens(ascend(Diver, 0), Time).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Diving.e',503).
+
+ /*  reactive_rule([happens(rapidAscendToSurface(Diver),Time)],
+   	      [happens(ascend(Diver,0),Time)]).
+ */
+
+% event AscendLine(diver,line)
+ %  event(ascendLine(diver,line)).
+ %  event(ascendLine(diver,line)).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Diving.e',505).
+events([ascendLine/2]).
+mpred_prop(ascendLine(diver,line),event).
+
+
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Diving.e',508).
+% [diver,line,time]
+% Happens(AscendLine(diver,line),time) ->
+% Happens(Ascend1(diver),time).
+
+ /*  happens(ascendLine(Diver, Line), Time) ->
+       happens(ascend1(Diver), Time).
+ */
+if happens(ascendLine(Diver, Line), Time)then happens(ascend1(Diver), Time).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Diving.e',508).
+
+ /*  reactive_rule([happens(ascendLine(Diver,Line),Time)],
+   	      [happens(ascend1(Diver),Time)]).
+ */
+
+% fluent Disoriented(diver)
+ %  fluent(disoriented(diver)).
+ %  fluent(disoriented(diver)).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Diving.e',511).
+fluents([disoriented/1]).
+mpred_prop(disoriented(diver),fluent).
+
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Diving.e',514).
+% event BecomeDisoriented(diver)
+ %  event(becomeDisoriented(diver)).
+ %  event(becomeDisoriented(diver)).
+events([becomeDisoriented/1]).
+mpred_prop(becomeDisoriented(diver),event).
+
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Diving.e',516).
+% event BecomeReoriented(diver)
+ %  event(becomeReoriented(diver)).
+ %  event(becomeReoriented(diver)).
+events([becomeReoriented/1]).
+mpred_prop(becomeReoriented(diver),event).
+
+
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Diving.e',518).
+% [diver,time]
+% Initiates(BecomeDisoriented(diver),Disoriented(diver),time).
+
+ /*  axiom(initiates(becomeDisoriented(Diver), disoriented(Diver), Time),
+       []).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Diving.e',518).
+
+ /*  initiates(becomeDisoriented(Becomedisoriented),
+   	  disoriented(Becomedisoriented),
+   	  Initiates).
+ */
+becomeDisoriented(Becomedisoriented)initiates disoriented(Becomedisoriented).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Diving.e',518).
+
+ /*  initiated(happens(becomeDisoriented(Becomedisoriented),
+   		  Time_From,
+   		  Time_Until),
+   	  disoriented(Becomedisoriented),
+   	  []).
+ */
+
+
+% [diver,time]
+% Terminates(BecomeReoriented(diver),Disoriented(diver),time).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Diving.e',522).
+
+ /*  axiom(terminates(becomeReoriented(Diver), disoriented(Diver), Time),
+       []).
+ */
+
+ /*  terminates(becomeReoriented(Becomereoriented),
+   	   disoriented(Becomereoriented),
+   	   Terminates).
+ */
+becomeReoriented(Becomereoriented)terminates disoriented(Becomereoriented).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Diving.e',522).
+
+ /*  terminated(happens(becomeReoriented(Becomereoriented),
+   		   Time_From,
+   		   Time_Until),
+   	   disoriented(Becomereoriented),
+   	   []).
+ */
+
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Diving.e',524).
+% fluent DisturbedSilt()
+ %  fluent(disturbedSilt).
+ %  fluent(disturbedSilt).
+fluents([disturbedSilt/0]).
+mpred_prop(disturbedSilt,fluent).
+
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Diving.e',526).
+% event DisturbSilt(diver)
+ %  event(disturbSilt(diver)).
+ %  event(disturbSilt(diver)).
+events([disturbSilt/1]).
+mpred_prop(disturbSilt(diver),event).
+
+
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Diving.e',528).
+% [diver,time]
+% Initiates(DisturbSilt(diver),DisturbedSilt(),time).
+
+ /*  axiom(initiates(disturbSilt(Diver), disturbedSilt, Time),
+       []).
+ */
+ %  initiates(disturbSilt(Disturbsilt),disturbedSilt,Initiates).
+disturbSilt(Disturbsilt)initiates disturbedSilt.
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Diving.e',528).
+
+ /*  initiated(happens(disturbSilt(Disturbsilt),
+   		  Time_From,
+   		  Time_Until),
+   	  disturbedSilt,
+   	  []).
+ */
+
+
+% [diver,time]
+% Happens(BecomeDisoriented(diver),time) ->
+% (!HoldsAt(DisturbedSilt(),time-1) &
+%  HoldsAt(DisturbedSilt(),time)).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Diving.e',532).
+
+ /*  (   happens(becomeDisoriented(Diver), Time)
+   ->  holds_at(neg(disturbedSilt), Time-1),
+       holds_at(disturbedSilt, Time)
+   ).
+ */
+if happens(becomeDisoriented(Diver), Time)then not disturbedSilt at Time-1, disturbedSilt at Time.
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Diving.e',532).
+
+ /*  reactive_rule([happens(becomeDisoriented(Diver),Time)],
+   	      [ holds(not(disturbedSilt),Time-1),
+   		holds(disturbedSilt,Time)
+   	      ]).
+ */
+
+% event Panic(diver)
+ %  event(panic(diver)).
+ %  event(panic(diver)).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Diving.e',535).
+events([panic/1]).
+mpred_prop(panic(diver),event).
+
+
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Diving.e',538).
+% [diver,time]
+ % Happens(Panic(diver),time) ->
+% HoldsAt(Disoriented(diver),time) |
+% HoldsAt(UncontrolledBuoyancy(diver),time) |
+% ({equipment} Happens(Lose(diver,equipment),time-1)) |
+% Happens(Vomit(diver),time-1).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Diving.e',538).
+
+ /*  happens(panic(Diver), Time) ->
+       (   holds_at(disoriented(Diver), Time)
+       ;   holds_at(uncontrolledBuoyancy(Diver), Time)
+       ;   exists([Equipment],
+                  happens(lose(Diver, Equipment), Time-1))
+       ;   happens(vomit(Diver), Time-1)
+       ).
+ */
+if happens(panic(Diver), Time)then disoriented(Diver)at Time;uncontrolledBuoyancy(Diver)at Time;exists([Equipment],  (observe lose(Diver, Equipment)at Time-1));observe vomit(Diver)at Time-1.
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Diving.e',538).
+
+ /*   reactive_rule([happens(panic(Diver), Time)],
+                    [  (at(disoriented(Diver), Time);at(uncontrolledBuoyancy(Diver), Time);exists([Equipment], observe(at(lose(Diver, Equipment), Time-1)));observe(at(vomit(Diver), Time-1)))
+                    ]).
+ */
+
+% event Vomit(diver)
+ %  event(vomit(diver)).
+ %  event(vomit(diver)).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Diving.e',543).
+events([vomit/1]).
+mpred_prop(vomit(diver),event).
+
+
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Diving.e',546).
+%; conditions
+
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Diving.e',548).
+% fluent Unconscious(diver)
+ %  fluent(unconscious(diver)).
+ %  fluent(unconscious(diver)).
+fluents([unconscious/1]).
+mpred_prop(unconscious(diver),fluent).
+
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Diving.e',550).
+% event GoUnconscious(diver)
+ %  event(goUnconscious(diver)).
+ %  event(goUnconscious(diver)).
+events([goUnconscious/1]).
+mpred_prop(goUnconscious(diver),event).
+
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Diving.e',552).
+% event RegainConsciousness(diver)
+ %  event(regainConsciousness(diver)).
+ %  event(regainConsciousness(diver)).
+events([regainConsciousness/1]).
+mpred_prop(regainConsciousness(diver),event).
+
+
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Diving.e',554).
+% [diver,time]
+% Initiates(GoUnconscious(diver),Unconscious(diver),time).
+
+ /*  axiom(initiates(goUnconscious(Diver), unconscious(Diver), Time),
+       []).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Diving.e',554).
+
+ /*  initiates(goUnconscious(Gounconscious),
+   	  unconscious(Gounconscious),
+   	  Initiates).
+ */
+goUnconscious(Gounconscious)initiates unconscious(Gounconscious).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Diving.e',554).
+
+ /*  initiated(happens(goUnconscious(Gounconscious),
+   		  Time_From,
+   		  Time_Until),
+   	  unconscious(Gounconscious),
+   	  []).
+ */
+
+
+% [diver,time]
+% Terminates(RegainConsciousness(diver),Unconscious(diver),time).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Diving.e',558).
+
+ /*  axiom(terminates(regainConsciousness(Diver), unconscious(Diver), Time),
+       []).
+ */
+
+ /*  terminates(regainConsciousness(Regainconsciousness),
+   	   unconscious(Regainconsciousness),
+   	   Terminates).
+ */
+regainConsciousness(Regainconsciousness)terminates unconscious(Regainconsciousness).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Diving.e',558).
+
+ /*  terminated(happens(regainConsciousness(Regainconsciousness),
+   		   Time_From,
+   		   Time_Until),
+   	   unconscious(Regainconsciousness),
+   	   []).
+ */
+
+
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Diving.e',560).
+% [diver,time]
+% Happens(GoUnconscious(diver),time) ->
+% Happens(RapidAscendToSurface(diver),time).
+
+ /*  happens(goUnconscious(Diver), Time) ->
+       happens(rapidAscendToSurface(Diver), Time).
+ */
+if happens(goUnconscious(Diver), Time)then happens(rapidAscendToSurface(Diver), Time).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Diving.e',560).
+
+ /*  reactive_rule([happens(goUnconscious(Diver),Time)],
+   	      [happens(rapidAscendToSurface(Diver),Time)]).
+ */
+
+% fluent HasEarPain(diver)
+ %  fluent(hasEarPain(diver)).
+ %  fluent(hasEarPain(diver)).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Diving.e',563).
+fluents([hasEarPain/1]).
+mpred_prop(hasEarPain(diver),fluent).
+
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Diving.e',566).
+% event StartEarPain(diver)
+ %  event(startEarPain(diver)).
+ %  event(startEarPain(diver)).
+events([startEarPain/1]).
+mpred_prop(startEarPain(diver),event).
+
+
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Diving.e',568).
+% [diver,time]
+ % Initiates(StartEarPain(diver),HasEarPain(diver),time).
+
+ /*  axiom(initiates(startEarPain(Diver), hasEarPain(Diver), Time),
+       []).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Diving.e',568).
+
+ /*  initiates(startEarPain(Startearpain),
+   	  hasEarPain(Startearpain),
+   	  Initiates).
+ */
+startEarPain(Startearpain)initiates hasEarPain(Startearpain).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Diving.e',568).
+
+ /*  initiated(happens(startEarPain(Startearpain),
+   		  Time_From,
+   		  Time_Until),
+   	  hasEarPain(Startearpain),
+   	  []).
+ */
+
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Diving.e',570).
+% fluent HasRupturedEardrum(diver)
+ %  fluent(hasRupturedEardrum(diver)).
+ %  fluent(hasRupturedEardrum(diver)).
+fluents([hasRupturedEardrum/1]).
+mpred_prop(hasRupturedEardrum(diver),fluent).
+
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Diving.e',572).
+% event RuptureEardrum(diver)
+ %  event(ruptureEardrum(diver)).
+ %  event(ruptureEardrum(diver)).
+events([ruptureEardrum/1]).
+mpred_prop(ruptureEardrum(diver),event).
+
+
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Diving.e',574).
+% [diver,time]
+% Initiates(RuptureEardrum(diver),HasRupturedEardrum(diver),time).
+
+ /*  axiom(initiates(ruptureEardrum(Diver), hasRupturedEardrum(Diver), Time),
+       []).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Diving.e',574).
+
+ /*  initiates(ruptureEardrum(Ruptureeardrum),
+   	  hasRupturedEardrum(Ruptureeardrum),
+   	  Initiates).
+ */
+ruptureEardrum(Ruptureeardrum)initiates hasRupturedEardrum(Ruptureeardrum).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Diving.e',574).
+
+ /*  initiated(happens(ruptureEardrum(Ruptureeardrum),
+   		  Time_From,
+   		  Time_Until),
+   	  hasRupturedEardrum(Ruptureeardrum),
+   	  []).
+ */
+
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Diving.e',576).
+% fluent ConditionOK(diver)
+ %  fluent(conditionOK(diver)).
+ %  fluent(conditionOK(diver)).
+fluents([conditionOK/1]).
+mpred_prop(conditionOK(diver),fluent).
+
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Diving.e',578).
+% fluent HasDecompressionIllness(diver)
+ %  fluent(hasDecompressionIllness(diver)).
+ %  fluent(hasDecompressionIllness(diver)).
+fluents([hasDecompressionIllness/1]).
+mpred_prop(hasDecompressionIllness(diver),fluent).
+
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Diving.e',580).
+% event StartDecompressionIllness(diver)
+ %  event(startDecompressionIllness(diver)).
+ %  event(startDecompressionIllness(diver)).
+events([startDecompressionIllness/1]).
+mpred_prop(startDecompressionIllness(diver),event).
+
+
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Diving.e',582).
+% [diver,time]
+% Initiates(StartDecompressionIllness(diver),
+%           HasDecompressionIllness(diver),
+%           time).
+
+ /*  axiom(initiates(startDecompressionIllness(Diver), hasDecompressionIllness(Diver), Time),
+       []).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Diving.e',582).
+
+ /*  initiates(startDecompressionIllness(Startdecompressionillness),
+   	  hasDecompressionIllness(Startdecompressionillness),
+   	  Initiates).
+ */
+startDecompressionIllness(Startdecompressionillness)initiates hasDecompressionIllness(Startdecompressionillness).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Diving.e',582).
+
+ /*  initiated(happens(startDecompressionIllness(Startdecompressionillness),
+   		  Time_From,
+   		  Time_Until),
+   	  hasDecompressionIllness(Startdecompressionillness),
+   	  []).
+ */
+
+% fluent SignalingDecompress(computer,diver)
+ %  fluent(signalingDecompress(computer,diver)).
+ %  fluent(signalingDecompress(computer,diver)).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Diving.e',586).
+fluents([signalingDecompress/2]).
+mpred_prop(signalingDecompress(computer,diver),fluent).
+
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Diving.e',589).
+% fluent SignalingLowOnAir(computer,airtank,diver)
+ %  fluent(signalingLowOnAir(computer,airtank,diver)).
+ %  fluent(signalingLowOnAir(computer,airtank,diver)).
+fluents([signalingLowOnAir/3]).
+mpred_prop(signalingLowOnAir(computer,airtank,diver),fluent).
+
+
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Diving.e',591).
+% [computer,airtank,diver,time]
+% HoldsAt(SignalingLowOnAir(computer,airtank,diver),time) ->
+% HoldsAt(LowOnAir(airtank),time).
+
+ /*  holds_at(signalingLowOnAir(Computer, Airtank, Diver), Time) ->
+       holds_at(lowOnAir(Airtank), Time).
+ */
+if signalingLowOnAir(Computer, Airtank, Diver)at Time then lowOnAir(Airtank)at Time.
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Diving.e',591).
+
+ /*  reactive_rule([ holds(signalingLowOnAir(Computer,
+   					Airtank,
+   					Diver),
+   		      Time)
+   	      ],
+   	      [holds(lowOnAir(Airtank),Time)]).
+ */
+
+
+% [computer,diver,time]
+% HoldsAt(SignalingDecompress(computer,diver),time) ->
+% !{time1} time1<time & Happens(Decompress(diver),time1).
+
+ /*  (   holds_at(signalingDecompress(Computer, Diver), Time)
+   ->  not(exists([Time1],
+                   (Time1<Time, happens(decompress(Diver), Time1))))
+   ).
+ */
+if signalingDecompress(Computer, Diver)at Time then not (Time1<Time, happens(decompress(Diver), Time1)).
+ %  reactive_rule([holds(signalingDecompress(Computer, Diver), Time)], [not((Time1<Time, happens(decompress(Diver), Time1)))]).
+
+% event Decompress(diver)
+ %  event(decompress(diver)).
+ %  event(decompress(diver)).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Diving.e',598).
+events([decompress/1]).
+mpred_prop(decompress(diver),event).
+
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Diving.e',601).
+% event EqualizeEars(diver)
+ %  event(equalizeEars(diver)).
+ %  event(equalizeEars(diver)).
+events([equalizeEars/1]).
+mpred_prop(equalizeEars(diver),event).
+
+
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Diving.e',603).
+% [diver,time]
+% (Happens(Descend1(diver),time) | Happens(Ascend1(diver),time)) &
+% !Happens(EqualizeEars(diver),time) ->
+% Happens(StartEarPain(diver),time) &
+% Happens(RuptureEardrum(diver),time).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Diving.e',603).
+
+ /*  (   (   happens(descend1(Diver), Time)
+       ;   happens(ascend1(Diver), Time)
+       ),
+       not(happens(equalizeEars(Diver), Time))
+   ->  happens(startEarPain(Diver), Time),
+       happens(ruptureEardrum(Diver), Time)
+   ).
+ */
+if (happens(descend1(Diver), Time);happens(ascend1(Diver), Time)), not happens(equalizeEars(Diver), Time)then happens(startEarPain(Diver), Time), happens(ruptureEardrum(Diver), Time).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Diving.e',603).
+
+ /*   reactive_rule([  (happens(descend1(Diver), Time);happens(ascend1(Diver), Time)),
+                      not(happens(equalizeEars(Diver), Time))
+                    ],
+                    [ happens(startEarPain(Diver), Time),
+                      happens(ruptureEardrum(Diver), Time)
+                    ]).
+ */
+
+
+% [diver,time]
+% Happens(Ascend1(diver),time) &
+% !Happens(Decompress(diver),time) ->
+% Happens(StartDecompressionIllness(diver),time).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Diving.e',610).
+
+ /*  (   happens(ascend1(Diver), Time),
+       not(happens(decompress(Diver), Time))
+   ->  happens(startDecompressionIllness(Diver), Time)
+   ).
+ */
+if happens(ascend1(Diver), Time), not happens(decompress(Diver), Time)then happens(startDecompressionIllness(Diver), Time).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Diving.e',610).
+
+ /*  reactive_rule([ happens(ascend1(Diver),Time),
+   		not(happens(decompress(Diver),Time))
+   	      ],
+   	      [ happens(startDecompressionIllness(Diver),
+   			Time)
+   	      ]).
+ */
+
+
+% [diver1,diver2,time]
+% HoldsAt(Holding(diver1,diver2),time) &
+% Happens(Ascend1(diver1),time) &
+% !Happens(Decompress(diver2),time) ->
+% Happens(StartDecompressionIllness(diver2),time).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Diving.e',615).
+
+ /*  (   holds_at(holding(Diver1, Diver2), Time),
+       happens(ascend1(Diver1), Time),
+       not(happens(decompress(Diver2), Time))
+   ->  happens(startDecompressionIllness(Diver2), Time)
+   ).
+ */
+if holding(Diver1, Diver2)at Time, happens(ascend1(Diver1), Time), not happens(decompress(Diver2), Time)then happens(startDecompressionIllness(Diver2), Time).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Diving.e',615).
+
+ /*  reactive_rule([ holds(holding(Diver1,Diver2),Time),
+   		happens(ascend1(Diver1),Time),
+   		not(happens(decompress(Diver2),Time))
+   	      ],
+   	      [ happens(startDecompressionIllness(Diver2),
+   			Time)
+   	      ]).
+ */
+
+
+% [diver,time]
+% Happens(Decompress(diver),time) ->
+% ({depth} depth>0 & HoldsAt(AtDepth(diver,depth),time)) &
+% !HoldsAt(UncontrolledBuoyancy(diver),time).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Diving.e',621).
+
+ /*  (   happens(decompress(Diver), Time)
+   ->  exists([Depth],
+               (Depth>0, holds_at(atDepth(Diver, Depth), Time))),
+       holds_at(neg(uncontrolledBuoyancy(Diver)), Time)
+   ).
+ */
+if happens(decompress(Diver), Time)then exists([Depth],  (Depth>0, atDepth(Diver, Depth)at Time)), not uncontrolledBuoyancy(Diver)at Time.
+ %  reactive_rule([happens(decompress(Diver), Time)], [exists([Depth],  (Depth>0, at(atDepth(Diver, Depth), Time))), holds(not(uncontrolledBuoyancy(Diver)), Time)]).
+
+% fluent HasHeadache(diver)
+ %  fluent(hasHeadache(diver)).
+ %  fluent(hasHeadache(diver)).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Diving.e',624).
+fluents([hasHeadache/1]).
+mpred_prop(hasHeadache(diver),fluent).
+
+
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Diving.e',627).
+% [diver,time]
+% HoldsAt(ConditionOK(diver),time) ->
+% !HoldsAt(Unconscious(diver),time) &
+% !HoldsAt(HasEarPain(diver),time) &
+% !HoldsAt(HasRupturedEardrum(diver),time) &
+% !HoldsAt(HasDecompressionIllness(diver),time) &
+% !HoldsAt(HasHeadache(diver),time).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Diving.e',627).
+
+ /*  (   holds_at(conditionOK(Diver), Time)
+   ->  holds_at(neg(unconscious(Diver)), Time),
+       holds_at(neg(hasEarPain(Diver)), Time),
+       holds_at(neg(hasRupturedEardrum(Diver)), Time),
+       holds_at(neg(hasDecompressionIllness(Diver)), Time),
+       holds_at(neg(hasHeadache(Diver)), Time)
+   ).
+ */
+if conditionOK(Diver)at Time then not unconscious(Diver)at Time, not hasEarPain(Diver)at Time, not hasRupturedEardrum(Diver)at Time, not hasDecompressionIllness(Diver)at Time, not hasHeadache(Diver)at Time.
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Diving.e',627).
+
+ /*  reactive_rule([holds(conditionOK(Diver),Time)],
+   	      [ holds(not(unconscious(Diver)),Time),
+   		holds(not(hasEarPain(Diver)),Time),
+   		holds(not(hasRupturedEardrum(Diver)),Time),
+   		holds(not(hasDecompressionIllness(Diver)),
+   		      Time),
+   		holds(not(hasHeadache(Diver)),Time)
+   	      ]).
+ */
+
+% event BeAirlifted(diver)
+ %  event(beAirlifted(diver)).
+ %  event(beAirlifted(diver)).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Diving.e',634).
+events([beAirlifted/1]).
+mpred_prop(beAirlifted(diver),event).
+
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Diving.e',637).
+% event TakeInWater(diver)
+ %  event(takeInWater(diver)).
+ %  event(takeInWater(diver)).
+events([takeInWater/1]).
+mpred_prop(takeInWater(diver),event).
+
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Diving.e',639).
+% fluent LowOnAir(airtank)
+ %  fluent(lowOnAir(airtank)).
+ %  fluent(lowOnAir(airtank)).
+fluents([lowOnAir/1]).
+mpred_prop(lowOnAir(airtank),fluent).
+
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Diving.e',641).
+% event BecomeLowOnAir(airtank)
+ %  event(becomeLowOnAir(airtank)).
+ %  event(becomeLowOnAir(airtank)).
+events([becomeLowOnAir/1]).
+mpred_prop(becomeLowOnAir(airtank),event).
+
+
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Diving.e',643).
+% [airtank,time]
+% Initiates(BecomeLowOnAir(airtank),LowOnAir(airtank),time).
+
+ /*  axiom(initiates(becomeLowOnAir(Airtank), lowOnAir(Airtank), Time),
+       []).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Diving.e',643).
+
+ /*  initiates(becomeLowOnAir(Becomelowonair),
+   	  lowOnAir(Becomelowonair),
+   	  Initiates).
+ */
+becomeLowOnAir(Becomelowonair)initiates lowOnAir(Becomelowonair).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Diving.e',643).
+
+ /*  initiated(happens(becomeLowOnAir(Becomelowonair),
+   		  Time_From,
+   		  Time_Until),
+   	  lowOnAir(Becomelowonair),
+   	  []).
+ */
+
+
+%; initial state
+% [diver]
+ % HoldsAt(ConditionOK(diver),0).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Diving.e',647).
+
+ /*  axiom(initially(conditionOK(Diver)),
+       []).
+ */
+initially conditionOK(_).
+ %  initial_state([conditionOK(Conditionok)]).
+
+
+% [diver]
+ % HoldsAt(Vertical(diver),0).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Diving.e',647).
+
+ /*  axiom(initially(vertical(Diver)),
+       []).
+ */
+initially vertical(_).
+ %  initial_state([vertical(Vertical)]).
+
+
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Diving.e',649).
+% !HoldsAt(DisturbedSilt(),0).
+
+ /*  axiom(initially(neg(disturbedSilt)),
+       []).
+ */
+ %  initially(neg(disturbedSilt)).
+initially not disturbedSilt.
+ %  initial_state([not(disturbedSilt)]).
+
+
+% [diver]
+ % !HoldsAt(UncontrolledBuoyancy(diver),0).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Diving.e',649).
+
+ /*  axiom(initially(neg(uncontrolledBuoyancy(Diver))),
+       []).
+ */
+ %  initially(neg(uncontrolledBuoyancy(Uncontrolledbuoyancy))).
+initially not uncontrolledBuoyancy(Uncontrolledbuoyancy).
+ %  initial_state([not(uncontrolledBuoyancy(Uncontrolledbuoyancy))]).
+
+
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Diving.e',651).
+% [diver]
+ % !HoldsAt(Disoriented(diver),0).
+
+ /*  axiom(initially(neg(disoriented(Diver))),
+       []).
+ */
+ %  initially(neg(disoriented(Disoriented))).
+initially not disoriented(Disoriented).
+ %  initial_state([not(disoriented(Disoriented))]).
+
+
+% [diver]
+ % !HoldsAt(PositivelyBuoyant(diver),0) &
+%         !HoldsAt(NeutrallyBuoyant(diver),0) &
+%         !HoldsAt(NegativelyBuoyant(diver),0).
+ %  clausify_pnf=(initially(neg(positivelyBuoyant(Diver))), initially(neg(neutrallyBuoyant(Diver))), initially(neg(negativelyBuoyant(Diver)))).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Diving.e',651).
+
+ /*  axiom(initially(neg(positivelyBuoyant(Diver))),
+       []).
+ */
+ %  initially(neg(positivelyBuoyant(Positivelybuoyant))).
+initially not positivelyBuoyant(Positivelybuoyant).
+ %  initial_state([not(positivelyBuoyant(Positivelybuoyant))]).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Diving.e',651).
+
+ /*  axiom(initially(neg(neutrallyBuoyant(Diver))),
+       []).
+ */
+ %  initially(neg(neutrallyBuoyant(Neutrallybuoyant))).
+initially not neutrallyBuoyant(Neutrallybuoyant).
+ %  initial_state([not(neutrallyBuoyant(Neutrallybuoyant))]).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Diving.e',651).
+
+ /*  axiom(initially(neg(negativelyBuoyant(Diver))),
+       []).
+ */
+ %  initially(neg(negativelyBuoyant(Negativelybuoyant))).
+initially not negativelyBuoyant(Negativelybuoyant).
+ %  initial_state([not(negativelyBuoyant(Negativelybuoyant))]).
+
+
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Diving.e',655).
+% [diver,object]
+ % !HoldsAt(Wearing(diver,object),0).
+
+ /*  axiom(initially(neg(wearing(Diver, Object))),
+       []).
+ */
+ %  initially(neg(wearing(_,Wearing))).
+initially not wearing(_, Wearing).
+ %  initial_state([not(wearing(_,Wearing))]).
+
+
+% [diver,object]
+ % !HoldsAt(Holding(diver,object),0).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Diving.e',655).
+
+ /*  axiom(initially(neg(holding(Diver, Object))),
+       []).
+ */
+ %  initially(neg(holding(_,Holding))).
+initially not holding(_, Holding).
+ %  initial_state([not(holding(_,Holding))]).
+
+
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Diving.e',657).
+% [diver1,diver2]
+ % !HoldsAt(Separated(diver1,diver2),0).
+
+ /*  axiom(initially(neg(separated(Diver1, Diver2))),
+       []).
+ */
+ %  initially(neg(separated(_,Separated))).
+initially not separated(_, Separated).
+ %  initial_state([not(separated(_,Separated))]).
+
+
+%;[agent,object] !HoldsAt(See(agent,object),0).
+
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Diving.e',660).
+% fluent Separated(diver,diver)
+ %  fluent(separated(diver,diver)).
+ %  fluent(separated(diver,diver)).
+fluents([separated/2]).
+mpred_prop(separated(diver,diver),fluent).
+
+
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Diving.e',662).
+% [diver1,diver2,time]
+% HoldsAt(Separated(diver1,diver2),time) ->
+% HoldsAt(Separated(diver2,diver1),time).
+
+ /*  holds_at(separated(Diver1, Diver2), Time) ->
+       holds_at(separated(Diver2, Diver1), Time).
+ */
+if separated(Diver1, Diver2)at Time then separated(Diver2, Diver1)at Time.
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Diving.e',662).
+
+ /*  reactive_rule([holds(separated(Diver1,Diver2),Time)],
+   	      [holds(separated(Diver2,Diver1),Time)]).
+ */
+
+% event BecomeSeparated(diver,diver)
+ %  event(becomeSeparated(diver,diver)).
+ %  event(becomeSeparated(diver,diver)).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Diving.e',665).
+events([becomeSeparated/2]).
+mpred_prop(becomeSeparated(diver,diver),event).
+
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Diving.e',668).
+% event BeReunitedWith(diver,diver)
+ %  event(beReunitedWith(diver,diver)).
+ %  event(beReunitedWith(diver,diver)).
+events([beReunitedWith/2]).
+mpred_prop(beReunitedWith(diver,diver),event).
+
+
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Diving.e',670).
+% [diver1,diver2,time]
+% Initiates(BecomeSeparated(diver1,diver2),Separated(diver1,diver2),time).
+
+ /*  axiom(initiates(becomeSeparated(Diver1, Diver2), separated(Diver1, Diver2), Time),
+       []).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Diving.e',670).
+
+ /*  initiates(becomeSeparated(A,Becomeseparated),
+   	  separated(A,Becomeseparated),
+   	  Initiates).
+ */
+becomeSeparated(A, Becomeseparated)initiates separated(A, Becomeseparated).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Diving.e',670).
+
+ /*  initiated(happens(becomeSeparated(A,Becomeseparated),
+   		  Time_From,
+   		  Time_Until),
+   	  separated(A,Becomeseparated),
+   	  []).
+ */
+
+
+% [diver1,diver2,time]
+% Initiates(BecomeSeparated(diver1,diver2),Separated(diver2,diver1),time).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Diving.e',674).
+
+ /*  axiom(initiates(becomeSeparated(Diver1, Diver2), separated(Diver2, Diver1), Time),
+       []).
+ */
+
+ /*  initiates(becomeSeparated(Separated,Becomeseparated),
+   	  separated(Becomeseparated,Separated),
+   	  Initiates).
+ */
+becomeSeparated(Separated, Becomeseparated)initiates separated(Becomeseparated, Separated).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Diving.e',674).
+
+ /*  initiated(happens(becomeSeparated(Separated,
+   				  Becomeseparated),
+   		  Time_From,
+   		  Time_Until),
+   	  separated(Becomeseparated,Separated),
+   	  []).
+ */
+
+
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Diving.e',676).
+% [diver1,diver2,time]
+% Terminates(BeReunitedWith(diver1,diver2),Separated(diver1,diver2),time).
+
+ /*  axiom(terminates(beReunitedWith(Diver1, Diver2), separated(Diver1, Diver2), Time),
+       []).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Diving.e',676).
+
+ /*  terminates(beReunitedWith(A,Bereunitedwith),
+   	   separated(A,Bereunitedwith),
+   	   Terminates).
+ */
+beReunitedWith(A, Bereunitedwith)terminates separated(A, Bereunitedwith).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Diving.e',676).
+
+ /*  terminated(happens(beReunitedWith(A,Bereunitedwith),
+   		   Time_From,
+   		   Time_Until),
+   	   separated(A,Bereunitedwith),
+   	   []).
+ */
+
+
+% [diver1,diver2,time]
+% Terminates(BeReunitedWith(diver1,diver2),Separated(diver2,diver1),time).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Diving.e',680).
+
+ /*  axiom(terminates(beReunitedWith(Diver1, Diver2), separated(Diver2, Diver1), Time),
+       []).
+ */
+
+ /*  terminates(beReunitedWith(Separated,Bereunitedwith),
+   	   separated(Bereunitedwith,Separated),
+   	   Terminates).
+ */
+beReunitedWith(Separated, Bereunitedwith)terminates separated(Bereunitedwith, Separated).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Diving.e',680).
+
+ /*  terminated(happens(beReunitedWith(Separated,Bereunitedwith),
+   		   Time_From,
+   		   Time_Until),
+   	   separated(Bereunitedwith,Separated),
+   	   []).
+ */
+
+
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Diving.e',682).
+%; End of file.
+% translate: ending  File: /pack/logicmoo_ec/ext/ec_sources/ecnet/Diving.e.lps 

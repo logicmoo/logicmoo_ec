@@ -1,0 +1,249 @@
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Condition.e',77).
+% translate: unskipped  File: /pack/logicmoo_ec/ext/ec_sources/ecnet/Container.e.lps 
+:-include(library('ec_planner/ec_test_incl')).
+:-expects_dialect(lps).
+% translate: begining  File: /pack/logicmoo_ec/ext/ec_sources/ecnet/Container.e.lps 
+% Wed, 07 Oct 2020 20:49:16 GMT File: <stream>(0x55afaca48100)%;
+%; Copyright (c) 2005 IBM Corporation and others.
+%; All rights reserved. This program and the accompanying materials
+%; are made available under the terms of the Common Public License v1.0
+%; which accompanies this distribution, and is available at
+%; http://www.eclipse.org/legal/cpl-v10.html
+%;
+%; Contributors:
+%; IBM - Initial implementation
+%;
+%;
+%; Container: container
+%;
+%; linkage to OTSpace(M):
+% [agent,container1,container2,time]
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Container.e',17).
+% Happens(TakeOutOf(agent,container1,container2),time) ->
+% HoldsAt(ContainerIsOpen(container2),time).
+
+ /*  happens(takeOutOf(Agent, Container1, Container2), Time) ->
+       holds_at(containerIsOpen(Container2), Time).
+ */
+if happens(takeOutOf(Agent, Container1, Container2), Time)then containerIsOpen(Container2)at Time.
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Container.e',17).
+
+ /*  reactive_rule([ happens(takeOutOf(Agent,
+   				  Container1,
+   				  Container2),
+   			Time)
+   	      ],
+   	      [holds(containerIsOpen(Container2),Time)]).
+ */
+
+
+% [agent,container1,container2,time]
+% Happens(PutInside(agent,container1,container2),time) ->
+% HoldsAt(ContainerIsOpen(container2),time).
+
+ /*  happens(putInside(Agent, Container1, Container2), Time) ->
+       holds_at(containerIsOpen(Container2), Time).
+ */
+if happens(putInside(Agent, Container1, Container2), Time)then containerIsOpen(Container2)at Time.
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Container.e',21).
+
+ /*  reactive_rule([ happens(putInside(Agent,
+   				  Container1,
+   				  Container2),
+   			Time)
+   	      ],
+   	      [holds(containerIsOpen(Container2),Time)]).
+ */
+
+
+%; agent opens container.
+
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Container.e',25).
+% event ContainerOpen(agent,container)
+ %  event(containerOpen(agent,container)).
+ %  event(containerOpen(agent,container)).
+actions([containerOpen/2]).
+mpred_prop(containerOpen(agent,container),event).
+
+
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Container.e',27).
+%; agent closes container.
+
+% event ContainerClose(agent,container)
+ %  event(containerClose(agent,container)).
+ %  event(containerClose(agent,container)).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Container.e',27).
+actions([containerClose/2]).
+mpred_prop(containerClose(agent,container),event).
+
+
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Container.e',30).
+%; container is open.
+
+% fluent ContainerIsOpen(container)
+ %  fluent(containerIsOpen(container)).
+ %  fluent(containerIsOpen(container)).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Container.e',30).
+fluents([containerIsOpen/1]).
+mpred_prop(containerIsOpen(container),fluent).
+
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Container.e',33).
+% fluent ContainerClosed(container)
+ %  fluent(containerClosed(container)).
+ %  fluent(containerClosed(container)).
+fluents([containerClosed/1]).
+mpred_prop(containerClosed(container),fluent).
+
+% noninertial ContainerClosed
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Container.e',33).
+noninertial(containerClosed).
+
+
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Container.e',36).
+% [container,time]
+% HoldsAt(ContainerClosed(container),time) <->
+% !HoldsAt(ContainerIsOpen(container),time).
+
+ /*  holds_at(containerClosed(Container), Time) <->
+       holds_at(neg(containerIsOpen(Container)), Time).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Container.e',36).
+
+ /*  holds_at(containerClosed(Container), Time) ->
+       holds_at(neg(containerIsOpen(Container)), Time).
+ */
+if containerClosed(Container)at Time then not containerIsOpen(Container)at Time.
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Container.e',36).
+
+ /*  reactive_rule([holds(containerClosed(Container),Time)],
+   	      [holds(not(containerIsOpen(Container)),Time)]).
+ */
+
+ /*  holds_at(neg(containerIsOpen(Container)), Time) ->
+       holds_at(containerClosed(Container), Time).
+ */
+if not containerIsOpen(Container)at Time then containerClosed(Container)at Time.
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Container.e',36).
+
+ /*  reactive_rule([holds(not(containerIsOpen(Container)),Time)],
+   	      [holds(containerClosed(Container),Time)]).
+ */
+
+
+%; A precondition axiom states that
+%; for an agent to open a container,
+%; the agent must be awake,
+%; the container must not already be open, and
+%; the agent must be holding the container.
+% [agent,container,time]
+% Happens(ContainerOpen(agent,container),time) ->
+% HoldsAt(Awake(agent),time) &
+% !HoldsAt(ContainerIsOpen(container),time) &
+% HoldsAt(Holding(agent,container),time).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Container.e',45).
+
+ /*  (   happens(containerOpen(Agent, Container), Time)
+   ->  holds_at(awake(Agent), Time),
+       holds_at(neg(containerIsOpen(Container)), Time),
+       holds_at(holding(Agent, Container), Time)
+   ).
+ */
+if happens(containerOpen(Agent, Container), Time)then awake(Agent)at Time, not containerIsOpen(Container)at Time, holding(Agent, Container)at Time.
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Container.e',45).
+
+ /*  reactive_rule([ happens(containerOpen(Agent,Container),
+   			Time)
+   	      ],
+   	      [ holds(awake(Agent),Time),
+   		holds(not(containerIsOpen(Container)),Time),
+   		holds(holding(Agent,Container),Time)
+   	      ]).
+ */
+
+
+%; An effect axiom states that
+%; if an agent opens a container,
+%; the container will be open:
+% [agent,container,time]
+% Initiates(ContainerOpen(agent,container),ContainerIsOpen(container),time).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Container.e',54).
+
+ /*  axiom(initiates(containerOpen(Agent, Container), containerIsOpen(Container), Time),
+       []).
+ */
+
+ /*  initiates(containerOpen(_,Containeropen),
+   	  containerIsOpen(Containeropen),
+   	  Initiates).
+ */
+containerOpen(_, Containeropen)initiates containerIsOpen(Containeropen).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Container.e',54).
+
+ /*  initiated(happens(containerOpen(_,Containeropen),
+   		  Time_From,
+   		  Time_Until),
+   	  containerIsOpen(Containeropen),
+   	  []).
+ */
+
+
+%; A precondition axiom states that
+%; for an agent to close a container,
+%; the agent must be awake,
+%; the container must be open, and
+%; the agent must be holding the container.
+% [agent,container,time]
+% Happens(ContainerClose(agent,container),time) ->
+% HoldsAt(Awake(agent),time) &
+% HoldsAt(ContainerIsOpen(container),time) &
+% HoldsAt(Holding(agent,container),time).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Container.e',62).
+
+ /*  (   happens(containerClose(Agent, Container), Time)
+   ->  holds_at(awake(Agent), Time),
+       holds_at(containerIsOpen(Container), Time),
+       holds_at(holding(Agent, Container), Time)
+   ).
+ */
+if happens(containerClose(Agent, Container), Time)then awake(Agent)at Time, containerIsOpen(Container)at Time, holding(Agent, Container)at Time.
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Container.e',62).
+
+ /*  reactive_rule([ happens(containerClose(Agent,Container),
+   			Time)
+   	      ],
+   	      [ holds(awake(Agent),Time),
+   		holds(containerIsOpen(Container),Time),
+   		holds(holding(Agent,Container),Time)
+   	      ]).
+ */
+
+
+%; An effect axiom states that
+%; if an agent closes a container,
+%; the container will no longer be open:
+% [agent,container,time]
+% Terminates(ContainerClose(agent,container),ContainerIsOpen(container),time).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Container.e',71).
+
+ /*  axiom(terminates(containerClose(Agent, Container), containerIsOpen(Container), Time),
+       []).
+ */
+
+ /*  terminates(containerClose(_,Containerclose),
+   	   containerIsOpen(Containerclose),
+   	   Terminates).
+ */
+containerClose(_, Containerclose)terminates containerIsOpen(Containerclose).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Container.e',71).
+
+ /*  terminated(happens(containerClose(_,Containerclose),
+   		   Time_From,
+   		   Time_Until),
+   	   containerIsOpen(Containerclose),
+   	   []).
+ */
+
+
+%; End of file.
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Container.e',73).
+% translate: ending  File: /pack/logicmoo_ec/ext/ec_sources/ecnet/Container.e.lps 

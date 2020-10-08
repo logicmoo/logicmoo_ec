@@ -1,0 +1,4755 @@
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/ReadingALetter.e',117).
+% translate: unskipped  File: /pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e.lps 
+:-include(library('ec_planner/ec_test_incl')).
+:-expects_dialect(lps).
+% translate: begining  File: /pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e.lps 
+% Wed, 07 Oct 2020 09:36:48 GMT File: <stream>(0x5557c8f01900)%;
+%; Copyright (c) 2005 IBM Corporation and others.
+%; All rights reserved. This program and the accompanying materials
+%; are made available under the terms of the Common Public License v1.0
+%; which accompanies this distribution, and is available at
+%; http://www.eclipse.org/legal/cpl-v10.html
+%;
+%; Contributors:
+%; IBM - Initial implementation
+%;
+%; @article{Mueller:InPress,
+%;   author = "Erik T. Mueller",
+%;   year = "in press",
+%;   title = "Modelling space and time in narratives about restaurants",
+%;   journal = "Literary and Linguistic Computing",
+%; }
+%;
+%;sort boolean
+%;sort integer
+%;reified sort predicate
+%;reified sort function
+%;
+%;sort time: integer
+%;sort offset: integer
+%;
+%;reified sort fluent
+%;reified sort event
+%;
+%;predicate Happens(event,time)
+%;predicate HoldsAt(fluent,time)
+%;predicate ReleasedAt(fluent,time)
+%;predicate Initiates(event,fluent,time)
+%;predicate Terminates(event,fluent,time)
+%;predicate Releases(event,fluent,time)
+%;
+%;sort diameter: integer
+%;
+%;sort object
+%;
+%;sort agent: object
+%;
+%;sort physobj: object
+%;sort bed: physobj
+%;sort snowflake: physobj
+%;sort sky: physobj
+%;
+%;sort stuff: physobj
+%;
+%;sort surface: physobj
+%;sort ground: surface
+%;
+%;sort snow: stuff
+%;sort ball
+%;
+%;sort food: physobj
+%;sort fruit: food
+%;sort orange: fruit
+%;sort salad: food
+%;
+%;sort clothing: physobj
+%;sort scarf: clothing
+%;sort hat: clothing
+%;
+%;sort vegetablematter: physobj
+%;sort coal: vegetablematter
+%;
+%;sort bodypart: physobj
+%;sort hand: bodypart
+%;
+%;sort papertowels: physobj
+%;sort device: physobj
+%;sort electronicdevice: device
+%;sort lamp: electronicdevice
+%;
+%;sort cat: physobj
+%;
+%;sort weapon: physobj
+%;sort gun: weapon
+%;sort bomb: weapon
+%;sort bullet: weapon
+%;
+%;sort location
+%;sort room: location, outside: location
+%;
+%;sort portal
+%;sort door: portal, staircase: portal
+%;sort street: portal
+%;
+%;sort building
+%;
+%;sort fire: object
+%;
+%;sort furniture: physobj
+%;sort chair: furniture
+%;sort table: furniture
+%;
+%;sort menu: physobj
+%;sort bill: physobj
+%;
+%;sort script
+%;
+
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',103).
+% fluent Holding(agent,physobj)
+ %  fluent(holding(agent,physobj)).
+ %  fluent(holding(agent,physobj)).
+fluents([holding/2]).
+mpred_prop(holding(agent,physobj),fluent).
+
+% event PickUp(agent,physobj)
+ %  event(pickUp(agent,physobj)).
+ %  event(pickUp(agent,physobj)).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',103).
+actions([pickUp/2]).
+mpred_prop(pickUp(agent,physobj),event).
+
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',105).
+% event LetGoOf(agent,physobj)
+ %  event(letGoOf(agent,physobj)).
+ %  event(letGoOf(agent,physobj)).
+actions([letGoOf/2]).
+mpred_prop(letGoOf(agent,physobj),event).
+
+
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',107).
+% [agent,physobj,time]
+% Initiates(PickUp(agent,physobj),Holding(agent,physobj),time).
+
+ /*  axiom(initiates(pickUp(Agent, Physobj), holding(Agent, Physobj), Time),
+       []).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',107).
+
+ /*  initiates(pickUp(A,Pickup),
+   	  holding(A,Pickup),
+   	  Initiates).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',107).
+initiates(pickUp(A,Pickup),holding(A,Pickup)).
+
+ /*  initiated(happens(pickUp(A,Pickup),
+   		  Time_From,
+   		  Time_Until),
+   	  holding(A,Pickup),
+   	  []).
+ */
+
+
+% [agent,physobj,time]
+% Happens(PickUp(agent,physobj),time) ->
+% {location}% 
+%   HoldsAt(At(agent,location),time) &
+%   HoldsAt(At(physobj,location),time).
+ %  clausify_pnf=exists([Location],  (happens(pickUp(Agent, Physobj), Time)->holds_at(at(Agent, Location), Time), holds_at(at(Physobj, Location), Time))).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',111).
+
+ /*  not(happens(pickUp(Agent, Physobj), Time)) :-
+       (   not(holds_at(at(Agent, Exists_Location), Time))
+       ;   not(holds_at(at(Physobj, Exists_Location), Time))
+       ),
+       some(Exists_Location,
+            '$kolem_Fn_109'(Agent, Physobj, Time)).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',111).
+
+ /*  fix_axiom_head(Time) ->
+       [ not(happens(pickUp(Agent, Physobj), Time)),
+          (->),
+         not(pickUp(Agent, Physobj))
+       ].
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',111).
+
+ /*  axiom(not(pickUp(Agent, Physobj)),
+       [  (not(at(Agent, Exists_Location));not(at(Physobj, Exists_Location))),
+         some(Exists_Location,
+              '$kolem_Fn_109'(Agent, Physobj, Time))
+       ]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',111).
+
+ /*  (   (   not(at(Kolem_Fn_109P_Num3_V, Tloc))
+       ;   not(at(Pickup, Tloc))
+       ),
+       some(Tloc,
+            '$kolem_Fn_109'(Kolem_Fn_109P_Num3_V,
+                            Pickup,
+                            Kolem_Fn_109))
+   ->  not(pickUp(Kolem_Fn_109P_Num3_V, Pickup))
+   ).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',111).
+then(if(((not(loc_at(Kolem_Fn_109P_Num3_V, Tloc));not(loc_at(Pickup, Tloc))), some(Tloc, '$kolem_Fn_109'(Kolem_Fn_109P_Num3_V, Pickup, Kolem_Fn_109)))), not(pickUp(Kolem_Fn_109P_Num3_V, Pickup))).
+
+ /*   reactive_rule([  (not(loc_at(Kolem_Fn_109P_Num3_V, Tloc));not(loc_at(Pickup, Tloc))),
+                      some(Tloc,
+                           '$kolem_Fn_109'(Kolem_Fn_109P_Num3_V,
+                                           Pickup,
+                                           Kolem_Fn_109))
+                    ],
+                    [not(pickUp(Kolem_Fn_109P_Num3_V, Pickup))]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',111).
+
+ /*  holds_at(at(Agent, Exists_Location), Time) :-
+       happens(pickUp(Agent, Physobj), Time),
+       some(Exists_Location,
+            '$kolem_Fn_109'(Agent, Physobj, Time)).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',111).
+
+ /*  fix_axiom_head(Time) ->
+       [ holds_at(at(Agent, Exists_Location), Time),
+          (->),
+         at(Agent, Exists_Location)
+       ].
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',111).
+
+ /*  axiom(at(Agent, Exists_Location),
+       [ pickUp(Agent, Physobj),
+         some(Exists_Location,
+              '$kolem_Fn_109'(Agent, Physobj, Time))
+       ]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',111).
+
+ /*  (   pickUp(Kolem_Fn_109P_Num3_V12, Pickup10),
+       some(Tloc9,
+            '$kolem_Fn_109'(Kolem_Fn_109P_Num3_V12,
+                            Pickup10,
+                            Kolem_Fn_10911))
+   ->  at(Kolem_Fn_109P_Num3_V12, Tloc9)
+   ).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',111).
+then(if((pickUp(Kolem_Fn_109P_Num3_V12, Pickup10), some(Tloc9, '$kolem_Fn_109'(Kolem_Fn_109P_Num3_V12, Pickup10, Kolem_Fn_10911)))), loc_at(Kolem_Fn_109P_Num3_V12, Tloc9)).
+
+ /*  reactive_rule([ happens(pickUp(Kolem_Fn_109P_Num3_V12,
+   			       Pickup10),
+   			Time_From,
+   			Time_Until),
+   		some(Tloc9,
+   		     '$kolem_Fn_109'(Kolem_Fn_109P_Num3_V12,
+   				     Pickup10,
+   				     Kolem_Fn_10911))
+   	      ],
+   	      [ holds(loc_at(Kolem_Fn_109P_Num3_V12,Tloc9),
+   		      Holds)
+   	      ]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',111).
+
+ /*  holds_at(at(Physobj, Exists_Location), Time) :-
+       happens(pickUp(Agent, Physobj), Time),
+       some(Exists_Location,
+            '$kolem_Fn_109'(Agent, Physobj, Time)).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',111).
+
+ /*  fix_axiom_head(Time) ->
+       [ holds_at(at(Physobj, Exists_Location), Time),
+          (->),
+         at(Physobj, Exists_Location)
+       ].
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',111).
+
+ /*  axiom(at(Physobj, Exists_Location),
+       [ pickUp(Agent, Physobj),
+         some(Exists_Location,
+              '$kolem_Fn_109'(Agent, Physobj, Time))
+       ]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',111).
+
+ /*  (   pickUp(Kolem_Fn_109P_Num3_V19, Pickup17),
+       some(Tloc16,
+            '$kolem_Fn_109'(Kolem_Fn_109P_Num3_V19,
+                            Pickup17,
+                            Kolem_Fn_10918))
+   ->  at(Pickup17, Tloc16)
+   ).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',111).
+then(if((pickUp(Kolem_Fn_109P_Num3_V19, Pickup17), some(Tloc16, '$kolem_Fn_109'(Kolem_Fn_109P_Num3_V19, Pickup17, Kolem_Fn_10918)))), loc_at(Pickup17, Tloc16)).
+
+ /*  reactive_rule([ happens(pickUp(Kolem_Fn_109P_Num3_V19,
+   			       Pickup17),
+   			Time_From20,
+   			Time_Until21),
+   		some(Tloc16,
+   		     '$kolem_Fn_109'(Kolem_Fn_109P_Num3_V19,
+   				     Pickup17,
+   				     Kolem_Fn_10918))
+   	      ],
+   	      [ holds(loc_at(Pickup17,Tloc16),
+   		      Holds22)
+   	      ]).
+ */
+
+
+% [agent,physobj,time]
+% Terminates(LetGoOf(agent,physobj),Holding(agent,physobj),time).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',117).
+
+ /*  axiom(terminates(letGoOf(Agent, Physobj), holding(Agent, Physobj), Time),
+       []).
+ */
+
+ /*  terminates(letGoOf(A,Letgoof),
+   	   holding(A,Letgoof),
+   	   Terminates).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',117).
+terminates(letGoOf(A,Letgoof),
+	   holding(A,Letgoof)).
+
+ /*  terminated(happens(letGoOf(A,Letgoof),
+   		   Time_From,
+   		   Time_Until),
+   	   holding(A,Letgoof),
+   	   []).
+ */
+
+
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',119).
+% [agent,physobj,time]
+% Happens(LetGoOf(agent,physobj),time) ->
+% HoldsAt(Holding(agent,physobj),time).
+
+ /*  happens(letGoOf(Agent, Physobj), Time) ->
+       holds_at(holding(Agent, Physobj), Time).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',119).
+then(if(happens(letGoOf(Agent,Physobj),Time)),
+     at(holding(Agent,Physobj),Time)).
+
+ /*  reactive_rule([happens(letGoOf(Agent,Physobj),Time)],
+   	      [holds(holding(Agent,Physobj),Time)]).
+ */
+
+
+% [agent,physobj,location,time]
+% Releases(PickUp(agent,physobj),At(physobj,location),time).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',124).
+
+ /*  axiom(releases(pickUp(Agent, Physobj), at(Physobj, Location), Time),
+       []).
+ */
+
+ /*  releases(pickUp(_,Pickup),
+   	 at(Pickup,Tloc),
+   	 Releases).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',124).
+releases(pickUp(_,Pickup),
+	 loc_at(Pickup,Tloc),
+	 Releases).
+
+
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',126).
+% [agent,physobj,location,time]
+% HoldsAt(Holding(agent,physobj),time) &
+% HoldsAt(At(agent,location),time) ->
+% HoldsAt(At(physobj,location),time).
+
+ /*  (   holds_at(holding(Agent, Physobj), Time),
+       holds_at(at(Agent, Location), Time)
+   ->  holds_at(at(Physobj, Location), Time)
+   ).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',126).
+then(if((at(holding(Agent, Physobj), Time), at(loc_at(Agent, Location), Time))), at(loc_at(Physobj, Location), Time)).
+
+ /*  reactive_rule([ holds(holding(Agent,Physobj),Time),
+   		holds(loc_at(Agent,Location),Time)
+   	      ],
+   	      [holds(loc_at(Physobj,Location),Time)]).
+ */
+
+
+%;[agent,physobj,location1,location2,time]
+%;HoldsAt(At(agent,location1),time) &
+%;location1!=location2 ->
+%;Terminates(LetGoOf(agent,physobj),At(physobj,location2),time).
+% [agent,physobj,location,time]
+% HoldsAt(At(agent,location),time) ->
+% Initiates(LetGoOf(agent,physobj),At(physobj,location),time).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',136).
+
+ /*  axiom(initiates(letGoOf(Agent, Physobj), at(Physobj, Location), Time),
+       [at(Agent, Location)]).
+ */
+
+ /*  at(A, Tloc) ->
+       initiates(letGoOf(A, Letgoof),
+                 at(Letgoof, Tloc),
+                 Initiates).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',136).
+then(if(loc_at(A,Tloc)),
+     initiates(letGoOf(A,Letgoof),
+	       at(loc_at(Letgoof,Tloc),Initiates),
+	       Initiates7)).
+
+ /*  reactive_rule([holds(loc_at(A,Tloc),Holds)],
+   	      [ initiates(letGoOf(A,Letgoof),
+   			  at(loc_at(Letgoof,Tloc),
+   			     Initiates),
+   			  Initiates7)
+   	      ]).
+ */
+
+% fluent On(physobj,physobj)
+ %  fluent(on(physobj,physobj)).
+ %  fluent(on(physobj,physobj)).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',139).
+fluents([on/2]).
+mpred_prop(on(physobj,physobj),fluent).
+
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',142).
+% event PlaceOn(agent,physobj,physobj)
+ %  event(placeOn(agent,physobj,physobj)).
+ %  event(placeOn(agent,physobj,physobj)).
+actions([placeOn/3]).
+mpred_prop(placeOn(agent,physobj,physobj),event).
+
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',144).
+% event TakeOffOf(agent,physobj,physobj)
+ %  event(takeOffOf(agent,physobj,physobj)).
+ %  event(takeOffOf(agent,physobj,physobj)).
+actions([takeOffOf/3]).
+mpred_prop(takeOffOf(agent,physobj,physobj),event).
+
+
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',146).
+% [physobj1,physobj2,time]
+% HoldsAt(On(physobj1,physobj2),time) ->
+% physobj1!=physobj2.
+
+ /*  holds_at(on(Physobj1, Physobj2), Time) ->
+       diff(Physobj1, Physobj2).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',146).
+then(if(at(on(Physobj1,Physobj2),Time)),
+     diff(Physobj1,Physobj2)).
+
+ /*  reactive_rule([holds(on(Physobj1,Physobj2),Time)],
+   	      [diff(Physobj1,Physobj2)]).
+ */
+
+
+% [physobj1,physobj2,time]
+% HoldsAt(On(physobj1,physobj2),time) ->
+% !HoldsAt(On(physobj2,physobj1),time).
+
+ /*  holds_at(on(Physobj1, Physobj2), Time) ->
+       holds_at(neg(on(Physobj2, Physobj1)), Time).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',151).
+then(if(at(on(Physobj1,Physobj2),Time)),
+     at(not(on(Physobj2,Physobj1)),Time)).
+
+ /*  reactive_rule([holds(on(Physobj1,Physobj2),Time)],
+   	      [ holds(not(on(Physobj2,Physobj1)),
+   		      Time)
+   	      ]).
+ */
+
+
+% [agent,physobj1,physobj2,time]
+% Initiates(PlaceOn(agent,physobj1,physobj2),
+%           On(physobj1,physobj2),time).
+
+ /*  axiom(initiates(placeOn(Agent, Physobj1, Physobj2), on(Physobj1, Physobj2), Time),
+       []).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',155).
+
+ /*  initiates(placeOn(PlaceonP_Num3_V,A,Placeon),
+   	  on(A,Placeon),
+   	  Initiates).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',155).
+initiates(placeOn(PlaceonP_Num3_V,A,Placeon),
+	  on(A,Placeon)).
+
+ /*  initiated(happens(placeOn(PlaceonP_Num3_V,A,Placeon),
+   		  Time_From,
+   		  Time_Until),
+   	  on(A,Placeon),
+   	  []).
+ */
+
+
+% [agent,physobj1,physobj2,time]
+% Terminates(PlaceOn(agent,physobj1,physobj2),
+%            Holding(agent,physobj1),time).
+
+ /*  axiom(terminates(placeOn(Agent, Physobj1, Physobj2), holding(Agent, Physobj1), Time),
+       []).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',159).
+
+ /*  terminates(placeOn(PlaceonP_Num3_V,Holding,Placeon),
+   	   holding(PlaceonP_Num3_V,Holding),
+   	   Terminates).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',159).
+terminates(placeOn(PlaceonP_Num3_V,Holding,Placeon),
+	   holding(PlaceonP_Num3_V,Holding)).
+
+ /*  terminated(happens(placeOn(PlaceonP_Num3_V,
+   			   Holding,
+   			   Placeon),
+   		   Time_From,
+   		   Time_Until),
+   	   holding(PlaceonP_Num3_V,Holding),
+   	   []).
+ */
+
+
+% [agent,physobj1,physobj2,time]
+% Happens(PlaceOn(agent,physobj1,physobj2),time) ->
+% HoldsAt(Holding(agent,physobj1),time) &
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',163).
+% {location}% 
+%  HoldsAt(At(agent,location),time) &
+%  HoldsAt(At(physobj2,location),time).
+ %  clausify_pnf=exists([Location],  (happens(placeOn(Agent, Physobj1, Physobj2), Time)->holds_at(holding(Agent, Physobj1), Time), holds_at(at(Agent, Location), Time), holds_at(at(Physobj2, Location), Time))).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',165).
+
+ /*  not(happens(placeOn(Agent, Physobj1, Physobj2), Time)) :-
+       (   not(holds_at(holding(Agent, Physobj1), Time))
+       ;   not(holds_at(at(Agent, Exists_Location), Time))
+       ;   not(holds_at(at(Physobj2, Exists_Location), Time))
+       ),
+       some(Exists_Location,
+            '$kolem_Fn_110'(Agent, Physobj1, Physobj2, Time)).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',165).
+
+ /*  fix_axiom_head(Time) ->
+       [ not(happens(placeOn(Agent, Physobj1, Physobj2),
+                     Time)),
+          (->),
+         not(placeOn(Agent, Physobj1, Physobj2))
+       ].
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',165).
+
+ /*  axiom(not(placeOn(Agent, Physobj1, Physobj2)),
+       [  (not(holding(Agent, Physobj1));not(at(Agent, Exists_Location));not(at(Physobj2, Exists_Location))),
+         some(Exists_Location,
+              '$kolem_Fn_110'(Agent, Physobj1, Physobj2, Time))
+       ]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',165).
+
+ /*  (   (   not(holding(Kolem_Fn_110P_Num4_V, Holding))
+       ;   not(at(Kolem_Fn_110P_Num4_V, Tloc))
+       ;   not(at(Placeon, Tloc))
+       ),
+       some(Tloc,
+            '$kolem_Fn_110'(Kolem_Fn_110P_Num4_V,
+                            Holding,
+                            Placeon,
+                            Kolem_Fn_110))
+   ->  not(placeOn(Kolem_Fn_110P_Num4_V, Holding, Placeon))
+   ).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',165).
+then(if(((not(holding(Kolem_Fn_110P_Num4_V, Holding));not(loc_at(Kolem_Fn_110P_Num4_V, Tloc));not(loc_at(Placeon, Tloc))), some(Tloc, '$kolem_Fn_110'(Kolem_Fn_110P_Num4_V, Holding, Placeon, Kolem_Fn_110)))), not(placeOn(Kolem_Fn_110P_Num4_V, Holding, Placeon))).
+
+ /*   reactive_rule([  (not(holding(Kolem_Fn_110P_Num4_V, Holding));not(loc_at(Kolem_Fn_110P_Num4_V, Tloc));not(loc_at(Placeon, Tloc))),
+                      some(Tloc,
+                           '$kolem_Fn_110'(Kolem_Fn_110P_Num4_V,
+                                           Holding,
+                                           Placeon,
+                                           Kolem_Fn_110))
+                    ],
+                    [ not(placeOn(Kolem_Fn_110P_Num4_V,
+                                  Holding,
+                                  Placeon))
+                    ]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',165).
+
+ /*  holds_at(holding(Agent, Physobj1), Time) :-
+       happens(placeOn(Agent, Physobj1, Physobj2), Time),
+       some(Exists_Location,
+            '$kolem_Fn_110'(Agent, Physobj1, Physobj2, Time)).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',165).
+
+ /*  fix_axiom_head(Time) ->
+       [ holds_at(holding(Agent, Physobj1), Time),
+          (->),
+         holding(Agent, Physobj1)
+       ].
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',165).
+
+ /*  axiom(holding(Agent, Physobj1),
+       [ placeOn(Agent, Physobj1, Physobj2),
+         some(Exists_Location,
+              '$kolem_Fn_110'(Agent, Physobj1, Physobj2, Time))
+       ]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',165).
+
+ /*  (   placeOn(PlaceonP_Num3_V, Holding14, Placeon11),
+       some(_,
+            '$kolem_Fn_110'(PlaceonP_Num3_V,
+                            Holding14,
+                            Placeon11,
+                            Kolem_Fn_11013))
+   ->  holding(PlaceonP_Num3_V, Holding14)
+   ).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',165).
+then(if((placeOn(PlaceonP_Num3_V, Holding14, Placeon11), some(_, '$kolem_Fn_110'(PlaceonP_Num3_V, Holding14, Placeon11, Kolem_Fn_11013)))), holding(PlaceonP_Num3_V, Holding14)).
+
+ /*  reactive_rule([ happens(placeOn(PlaceonP_Num3_V,
+   				Holding14,
+   				Placeon11),
+   			Time_From,
+   			Time_Until),
+   		some(_,
+   		     '$kolem_Fn_110'(PlaceonP_Num3_V,
+   				     Holding14,
+   				     Placeon11,
+   				     Kolem_Fn_11013))
+   	      ],
+   	      [ holds(holding(PlaceonP_Num3_V,Holding14),
+   		      Holds)
+   	      ]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',165).
+
+ /*  holds_at(at(Agent, Exists_Location), Time) :-
+       happens(placeOn(Agent, Physobj1, Physobj2), Time),
+       some(Exists_Location,
+            '$kolem_Fn_110'(Agent, Physobj1, Physobj2, Time)).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',165).
+
+ /*  fix_axiom_head(Time) ->
+       [ holds_at(at(Agent, Exists_Location), Time),
+          (->),
+         at(Agent, Exists_Location)
+       ].
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',165).
+
+ /*  axiom(at(Agent, Exists_Location),
+       [ placeOn(Agent, Physobj1, Physobj2),
+         some(Exists_Location,
+              '$kolem_Fn_110'(Agent, Physobj1, Physobj2, Time))
+       ]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',165).
+
+ /*  (   placeOn(PlaceonP_Num3_V20, A, Placeon19),
+       some(Tloc18,
+            '$kolem_Fn_110'(PlaceonP_Num3_V20,
+                            A,
+                            Placeon19,
+                            Kolem_Fn_11021))
+   ->  at(PlaceonP_Num3_V20, Tloc18)
+   ).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',165).
+then(if((placeOn(PlaceonP_Num3_V20, A, Placeon19), some(Tloc18, '$kolem_Fn_110'(PlaceonP_Num3_V20, A, Placeon19, Kolem_Fn_11021)))), loc_at(PlaceonP_Num3_V20, Tloc18)).
+
+ /*  reactive_rule([ happens(placeOn(PlaceonP_Num3_V20,
+   				A,
+   				Placeon19),
+   			Time_From22,
+   			Time_Until23),
+   		some(Tloc18,
+   		     '$kolem_Fn_110'(PlaceonP_Num3_V20,
+   				     A,
+   				     Placeon19,
+   				     Kolem_Fn_11021))
+   	      ],
+   	      [ holds(loc_at(PlaceonP_Num3_V20,Tloc18),
+   		      Holds24)
+   	      ]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',165).
+
+ /*  holds_at(at(Physobj2, Exists_Location), Time) :-
+       happens(placeOn(Agent, Physobj1, Physobj2), Time),
+       some(Exists_Location,
+            '$kolem_Fn_110'(Agent, Physobj1, Physobj2, Time)).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',165).
+
+ /*  fix_axiom_head(Time) ->
+       [ holds_at(at(Physobj2, Exists_Location), Time),
+          (->),
+         at(Physobj2, Exists_Location)
+       ].
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',165).
+
+ /*  axiom(at(Physobj2, Exists_Location),
+       [ placeOn(Agent, Physobj1, Physobj2),
+         some(Exists_Location,
+              '$kolem_Fn_110'(Agent, Physobj1, Physobj2, Time))
+       ]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',165).
+
+ /*  (   placeOn(PlaceonP_Num3_V27, A, Placeon26),
+       some(Tloc25,
+            '$kolem_Fn_110'(PlaceonP_Num3_V27,
+                            A,
+                            Placeon26,
+                            Kolem_Fn_11028))
+   ->  at(Placeon26, Tloc25)
+   ).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',165).
+then(if((placeOn(PlaceonP_Num3_V27, A, Placeon26), some(Tloc25, '$kolem_Fn_110'(PlaceonP_Num3_V27, A, Placeon26, Kolem_Fn_11028)))), loc_at(Placeon26, Tloc25)).
+
+ /*  reactive_rule([ happens(placeOn(PlaceonP_Num3_V27,
+   				A,
+   				Placeon26),
+   			Time_From29,
+   			Time_Until30),
+   		some(Tloc25,
+   		     '$kolem_Fn_110'(PlaceonP_Num3_V27,
+   				     A,
+   				     Placeon26,
+   				     Kolem_Fn_11028))
+   	      ],
+   	      [ holds(loc_at(Placeon26,Tloc25),
+   		      Holds31)
+   	      ]).
+ */
+
+
+% [agent,physobj1,physobj2,time]
+% Terminates(TakeOffOf(agent,physobj1,physobj2),
+%            On(physobj1,physobj2),time).
+
+ /*  axiom(terminates(takeOffOf(Agent, Physobj1, Physobj2), on(Physobj1, Physobj2), Time),
+       []).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',170).
+
+ /*  terminates(takeOffOf(TakeoffofP_Num3_V,A,Takeoffof),
+   	   on(A,Takeoffof),
+   	   Terminates).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',170).
+terminates(takeOffOf(TakeoffofP_Num3_V,A,Takeoffof),
+	   on(A,Takeoffof)).
+
+ /*  terminated(happens(takeOffOf(TakeoffofP_Num3_V,
+   			     A,
+   			     Takeoffof),
+   		   Time_From,
+   		   Time_Until),
+   	   on(A,Takeoffof),
+   	   []).
+ */
+
+
+% [agent,physobj1,physobj2,time]
+% Initiates(TakeOffOf(agent,physobj1,physobj2),
+%           Holding(agent,physobj1),time).
+
+ /*  axiom(initiates(takeOffOf(Agent, Physobj1, Physobj2), holding(Agent, Physobj1), Time),
+       []).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',174).
+
+ /*  initiates(takeOffOf(TakeoffofP_Num3_V,
+   		    Holding,
+   		    Takeoffof),
+   	  holding(TakeoffofP_Num3_V,Holding),
+   	  Initiates).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',174).
+initiates(takeOffOf(TakeoffofP_Num3_V,
+		    Holding,
+		    Takeoffof),
+	  holding(TakeoffofP_Num3_V,Holding)).
+
+ /*  initiated(happens(takeOffOf(TakeoffofP_Num3_V,
+   			    Holding,
+   			    Takeoffof),
+   		  Time_From,
+   		  Time_Until),
+   	  holding(TakeoffofP_Num3_V,Holding),
+   	  []).
+ */
+
+
+% [agent,physobj1,physobj2,location,time]
+% Releases(TakeOffOf(agent,physobj1,physobj2),
+%          At(physobj1,location),
+%          time).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',178).
+
+ /*  axiom(releases(takeOffOf(Agent, Physobj1, Physobj2), at(Physobj1, Location), Time),
+       []).
+ */
+
+ /*  releases(takeOffOf(TakeoffofP_Num3_V,A,Takeoffof),
+   	 at(A,Tloc),
+   	 Releases).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',178).
+releases(takeOffOf(TakeoffofP_Num3_V,A,Takeoffof),
+	 loc_at(A,Tloc),
+	 Releases).
+
+
+% [agent,physobj1,physobj2,time]
+% Happens(TakeOffOf(agent,physobj1,physobj2),time) ->
+% HoldsAt(On(physobj1,physobj2),time) &
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',183).
+% {location}% 
+%  HoldsAt(At(agent,location),time) &
+%  HoldsAt(At(physobj1,location),time) &
+%  HoldsAt(At(physobj2,location),time).
+ %  clausify_pnf=exists([Location],  (happens(takeOffOf(Agent, Physobj1, Physobj2), Time)->holds_at(on(Physobj1, Physobj2), Time), holds_at(at(Agent, Location), Time), holds_at(at(Physobj1, Location), Time), holds_at(at(Physobj2, Location), Time))).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',185).
+
+ /*  not(happens(takeOffOf(Agent, Physobj1, Physobj2), Time)) :-
+       (   not(holds_at(on(Physobj1, Physobj2), Time))
+       ;   not(holds_at(at(Agent, Exists_Location), Time))
+       ;   not(holds_at(at(Physobj1, Exists_Location), Time))
+       ;   not(holds_at(at(Physobj2, Exists_Location), Time))
+       ),
+       some(Exists_Location,
+            '$kolem_Fn_111'(Agent, Physobj1, Physobj2, Time)).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',185).
+
+ /*  fix_axiom_head(Time) ->
+       [ not(happens(takeOffOf(Agent, Physobj1, Physobj2),
+                     Time)),
+          (->),
+         not(takeOffOf(Agent, Physobj1, Physobj2))
+       ].
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',185).
+
+ /*  axiom(not(takeOffOf(Agent, Physobj1, Physobj2)),
+       [  (not(on(Physobj1, Physobj2));not(at(Agent, Exists_Location));not(at(Physobj1, Exists_Location));not(at(Physobj2, Exists_Location))),
+         some(Exists_Location,
+              '$kolem_Fn_111'(Agent, Physobj1, Physobj2, Time))
+       ]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',185).
+
+ /*  (   (   not(on(A, On))
+       ;   not(at(Kolem_Fn_111P_Num4_V, Tloc))
+       ;   not(at(A, Tloc))
+       ;   not(at(On, Tloc))
+       ),
+       some(Tloc,
+            '$kolem_Fn_111'(Kolem_Fn_111P_Num4_V,
+                            A,
+                            On,
+                            Kolem_Fn_111))
+   ->  not(takeOffOf(Kolem_Fn_111P_Num4_V, A, On))
+   ).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',185).
+then(if(((not(on(A, On));not(loc_at(Kolem_Fn_111P_Num4_V, Tloc));not(loc_at(A, Tloc));not(loc_at(On, Tloc))), some(Tloc, '$kolem_Fn_111'(Kolem_Fn_111P_Num4_V, A, On, Kolem_Fn_111)))), not(takeOffOf(Kolem_Fn_111P_Num4_V, A, On))).
+
+ /*   reactive_rule([  (not(on(A, On));not(loc_at(Kolem_Fn_111P_Num4_V, Tloc));not(loc_at(A, Tloc));not(loc_at(On, Tloc))),
+                      some(Tloc,
+                           '$kolem_Fn_111'(Kolem_Fn_111P_Num4_V,
+                                           A,
+                                           On,
+                                           Kolem_Fn_111))
+                    ],
+                    [not(takeOffOf(Kolem_Fn_111P_Num4_V, A, On))]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',185).
+
+ /*  holds_at(on(Physobj1, Physobj2), Time) :-
+       happens(takeOffOf(Agent, Physobj1, Physobj2), Time),
+       some(Exists_Location,
+            '$kolem_Fn_111'(Agent, Physobj1, Physobj2, Time)).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',185).
+
+ /*  fix_axiom_head(Time) ->
+       [ holds_at(on(Physobj1, Physobj2), Time),
+          (->),
+         on(Physobj1, Physobj2)
+       ].
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',185).
+
+ /*  axiom(on(Physobj1, Physobj2),
+       [ takeOffOf(Agent, Physobj1, Physobj2),
+         some(Exists_Location,
+              '$kolem_Fn_111'(Agent, Physobj1, Physobj2, Time))
+       ]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',185).
+
+ /*  (   takeOffOf(TakeoffofP_Num3_V, A, Takeoffof),
+       some(_,
+            '$kolem_Fn_111'(TakeoffofP_Num3_V,
+                            A,
+                            Takeoffof,
+                            Kolem_Fn_11112))
+   ->  on(A, Takeoffof)
+   ).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',185).
+then(if((takeOffOf(TakeoffofP_Num3_V, A, Takeoffof), some(_, '$kolem_Fn_111'(TakeoffofP_Num3_V, A, Takeoffof, Kolem_Fn_11112)))), on(A, Takeoffof)).
+
+ /*  reactive_rule([ happens(takeOffOf(TakeoffofP_Num3_V,
+   				  A,
+   				  Takeoffof),
+   			Time_From,
+   			Time_Until),
+   		some(_,
+   		     '$kolem_Fn_111'(TakeoffofP_Num3_V,
+   				     A,
+   				     Takeoffof,
+   				     Kolem_Fn_11112))
+   	      ],
+   	      [holds(on(A,Takeoffof),Holds)]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',185).
+
+ /*  holds_at(at(Agent, Exists_Location), Time) :-
+       happens(takeOffOf(Agent, Physobj1, Physobj2), Time),
+       some(Exists_Location,
+            '$kolem_Fn_111'(Agent, Physobj1, Physobj2, Time)).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',185).
+
+ /*  fix_axiom_head(Time) ->
+       [ holds_at(at(Agent, Exists_Location), Time),
+          (->),
+         at(Agent, Exists_Location)
+       ].
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',185).
+
+ /*  axiom(at(Agent, Exists_Location),
+       [ takeOffOf(Agent, Physobj1, Physobj2),
+         some(Exists_Location,
+              '$kolem_Fn_111'(Agent, Physobj1, Physobj2, Time))
+       ]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',185).
+
+ /*  (   takeOffOf(TakeoffofP_Num3_V18, A, Takeoffof17),
+       some(Tloc16,
+            '$kolem_Fn_111'(TakeoffofP_Num3_V18,
+                            A,
+                            Takeoffof17,
+                            Kolem_Fn_11119))
+   ->  at(TakeoffofP_Num3_V18, Tloc16)
+   ).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',185).
+then(if((takeOffOf(TakeoffofP_Num3_V18, A, Takeoffof17), some(Tloc16, '$kolem_Fn_111'(TakeoffofP_Num3_V18, A, Takeoffof17, Kolem_Fn_11119)))), loc_at(TakeoffofP_Num3_V18, Tloc16)).
+
+ /*  reactive_rule([ happens(takeOffOf(TakeoffofP_Num3_V18,
+   				  A,
+   				  Takeoffof17),
+   			Time_From20,
+   			Time_Until21),
+   		some(Tloc16,
+   		     '$kolem_Fn_111'(TakeoffofP_Num3_V18,
+   				     A,
+   				     Takeoffof17,
+   				     Kolem_Fn_11119))
+   	      ],
+   	      [ holds(loc_at(TakeoffofP_Num3_V18,Tloc16),
+   		      Holds22)
+   	      ]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',185).
+
+ /*  holds_at(at(Physobj1, Exists_Location), Time) :-
+       happens(takeOffOf(Agent, Physobj1, Physobj2), Time),
+       some(Exists_Location,
+            '$kolem_Fn_111'(Agent, Physobj1, Physobj2, Time)).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',185).
+
+ /*  fix_axiom_head(Time) ->
+       [ holds_at(at(Physobj1, Exists_Location), Time),
+          (->),
+         at(Physobj1, Exists_Location)
+       ].
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',185).
+
+ /*  axiom(at(Physobj1, Exists_Location),
+       [ takeOffOf(Agent, Physobj1, Physobj2),
+         some(Exists_Location,
+              '$kolem_Fn_111'(Agent, Physobj1, Physobj2, Time))
+       ]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',185).
+
+ /*  (   takeOffOf(TakeoffofP_Num3_V25, A, Takeoffof24),
+       some(Tloc23,
+            '$kolem_Fn_111'(TakeoffofP_Num3_V25,
+                            A,
+                            Takeoffof24,
+                            Kolem_Fn_11126))
+   ->  at(A, Tloc23)
+   ).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',185).
+then(if((takeOffOf(TakeoffofP_Num3_V25, A, Takeoffof24), some(Tloc23, '$kolem_Fn_111'(TakeoffofP_Num3_V25, A, Takeoffof24, Kolem_Fn_11126)))), loc_at(A, Tloc23)).
+
+ /*  reactive_rule([ happens(takeOffOf(TakeoffofP_Num3_V25,
+   				  A,
+   				  Takeoffof24),
+   			Time_From27,
+   			Time_Until28),
+   		some(Tloc23,
+   		     '$kolem_Fn_111'(TakeoffofP_Num3_V25,
+   				     A,
+   				     Takeoffof24,
+   				     Kolem_Fn_11126))
+   	      ],
+   	      [holds(loc_at(A,Tloc23),Holds29)]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',185).
+
+ /*  holds_at(at(Physobj2, Exists_Location), Time) :-
+       happens(takeOffOf(Agent, Physobj1, Physobj2), Time),
+       some(Exists_Location,
+            '$kolem_Fn_111'(Agent, Physobj1, Physobj2, Time)).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',185).
+
+ /*  fix_axiom_head(Time) ->
+       [ holds_at(at(Physobj2, Exists_Location), Time),
+          (->),
+         at(Physobj2, Exists_Location)
+       ].
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',185).
+
+ /*  axiom(at(Physobj2, Exists_Location),
+       [ takeOffOf(Agent, Physobj1, Physobj2),
+         some(Exists_Location,
+              '$kolem_Fn_111'(Agent, Physobj1, Physobj2, Time))
+       ]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',185).
+
+ /*  (   takeOffOf(TakeoffofP_Num3_V32, A, Takeoffof31),
+       some(Tloc30,
+            '$kolem_Fn_111'(TakeoffofP_Num3_V32,
+                            A,
+                            Takeoffof31,
+                            Kolem_Fn_11133))
+   ->  at(Takeoffof31, Tloc30)
+   ).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',185).
+then(if((takeOffOf(TakeoffofP_Num3_V32, A, Takeoffof31), some(Tloc30, '$kolem_Fn_111'(TakeoffofP_Num3_V32, A, Takeoffof31, Kolem_Fn_11133)))), loc_at(Takeoffof31, Tloc30)).
+
+ /*  reactive_rule([ happens(takeOffOf(TakeoffofP_Num3_V32,
+   				  A,
+   				  Takeoffof31),
+   			Time_From34,
+   			Time_Until35),
+   		some(Tloc30,
+   		     '$kolem_Fn_111'(TakeoffofP_Num3_V32,
+   				     A,
+   				     Takeoffof31,
+   				     Kolem_Fn_11133))
+   	      ],
+   	      [ holds(loc_at(Takeoffof31,Tloc30),
+   		      Holds36)
+   	      ]).
+ */
+
+
+% [agent,physobj1,physobj2,location,time]
+% Releases(PlaceOn(agent,physobj1,physobj2),
+%          At(physobj1,location),
+%          time).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',191).
+
+ /*  axiom(releases(placeOn(Agent, Physobj1, Physobj2), at(Physobj1, Location), Time),
+       []).
+ */
+
+ /*  releases(placeOn(PlaceonP_Num3_V,A,Placeon),
+   	 at(A,Tloc),
+   	 Releases).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',191).
+releases(placeOn(PlaceonP_Num3_V,A,Placeon),
+	 loc_at(A,Tloc),
+	 Releases).
+
+
+% [physobj1,physobj2,location,time]
+% HoldsAt(On(physobj1,physobj2),time) &
+% HoldsAt(At(physobj2,location),time) ->
+% HoldsAt(At(physobj1,location),time).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',196).
+
+ /*  (   holds_at(on(Physobj1, Physobj2), Time),
+       holds_at(at(Physobj2, Location), Time)
+   ->  holds_at(at(Physobj1, Location), Time)
+   ).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',196).
+then(if((at(on(Physobj1, Physobj2), Time), at(loc_at(Physobj2, Location), Time))), at(loc_at(Physobj1, Location), Time)).
+
+ /*  reactive_rule([ holds(on(Physobj1,Physobj2),Time),
+   		holds(loc_at(Physobj2,Location),Time)
+   	      ],
+   	      [holds(loc_at(Physobj1,Location),Time)]).
+ */
+
+% fluent At(object,location)
+ %  fluent(at(object,location)).
+ %  fluent(at(object,location)).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',199).
+fluents([loc_at/2]).
+ %  mpred_prop(at(object,location),fluent).
+mpred_prop(loc_at(object,location),fluent).
+
+
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',202).
+% [object,time]
+% {location} % HoldsAt(At(object,location),time).
+
+ /*  clausify_pnf=exists([Location],
+          holds_at(at(Object,Location),Time)).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',202).
+
+ /*  holds_at(at(Object, Exists_Location), Time) :-
+       some(Exists_Location, '$kolem_Fn_112'(Object, Time)).
+ */
+
+ /*  fix_axiom_head(Time) ->
+       [ holds_at(at(Object, Exists_Location), Time),
+          (->),
+         at(Object, Exists_Location)
+       ].
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',202).
+
+ /*  axiom(at(Object, Exists_Location),
+       [some(Exists_Location, '$kolem_Fn_112'(Object, Time))]).
+ */
+
+ /*  some(Tloc, '$kolem_Fn_112'(A, Kolem_Fn_112)) ->
+       at(A, Tloc).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',202).
+then(if(some(Tloc,'$kolem_Fn_112'(A,Kolem_Fn_112))),
+     loc_at(A,Tloc)).
+
+ /*  reactive_rule([ some(Tloc,
+   		     '$kolem_Fn_112'(A,Kolem_Fn_112))
+   	      ],
+   	      [holds(loc_at(A,Tloc),Holds)]).
+ */
+
+
+% [object,location1,location2,time]
+% HoldsAt(At(object,location1),time) &
+% HoldsAt(At(object,location2),time) ->
+% location1=location2.
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',206).
+
+ /*  (   holds_at(at(Object, Location1), Time),
+       holds_at(at(Object, Location2), Time)
+   ->  equals(Location1, Location2)
+   ).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',206).
+then(if((at(loc_at(Object, Location1), Time), at(loc_at(Object, Location2), Time))), equals(Location1, Location2)).
+
+ /*  reactive_rule([ holds(loc_at(Object,Location1),Time),
+   		holds(loc_at(Object,Location2),Time)
+   	      ],
+   	      [equals(Location1,Location2)]).
+ */
+
+% function Side1(portal): location
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',209).
+
+ /*  axiom(function_arity(side1(portal), 1),
+       []).
+ */
+function_arity(side1(portal),1).
+ %  predicate(side1Pred(portal,location)).
+ %  predicate(side1Pred(portal,location)).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',209).
+predicates([side1Pred/2]).
+mpred_prop(side1Pred(portal,location),predicate).
+
+ /*  axiom(functional_predicate(side1, side1Pred),
+       []).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',209).
+functional_predicate(side1,side1Pred).
+resultIsa(side1,location).
+
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',211).
+% function Side2(portal): location
+
+ /*  axiom(function_arity(side2(portal), 1),
+       []).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',211).
+function_arity(side2(portal),1).
+ %  predicate(side2Pred(portal,location)).
+ %  predicate(side2Pred(portal,location)).
+predicates([side2Pred/2]).
+mpred_prop(side2Pred(portal,location),predicate).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',211).
+
+ /*  axiom(functional_predicate(side2, side2Pred),
+       []).
+ */
+functional_predicate(side2,side2Pred).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',211).
+resultIsa(side2,location).
+
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',213).
+% fluent NearPortal(object,portal)
+ %  fluent(nearPortal(object,portal)).
+ %  fluent(nearPortal(object,portal)).
+fluents([nearPortal/2]).
+mpred_prop(nearPortal(object,portal),fluent).
+
+% noninertial NearPortal
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',213).
+noninertial(nearPortal).
+
+
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',216).
+% [object,portal,time]
+% HoldsAt(NearPortal(object,portal),time) <->
+% {location}% 
+%  (Side1(portal)=location|
+%   Side2(portal)=location) &
+%  HoldsAt(At(object,location),time).
+ %  clausify_pnf=exists([Location], <->(holds_at(nearPortal(Object, Portal), Time),  ((equals(side1(Portal), Location);equals(side2(Portal), Location)), holds_at(at(Object, Location), Time)))).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',218).
+
+ /*  not(holds_at(nearPortal(Object, Portal), Time)) :-
+       (   not(equals(side1(Portal), Exists_Location)),
+           not(equals(side2(Portal), Exists_Location))
+       ;   not(holds_at(at(Object, Exists_Location), Time))
+       ),
+       some(Exists_Location,
+            '$kolem_Fn_113'(Object, Portal, Time)).
+ */
+ %  axiom(not(nearPortal(Object, Portal)), [(not(equals(side1(Portal), Exists_Location)), not(equals(side2(Portal), Exists_Location));not(at(Object, Exists_Location))), some(Exists_Location, '$kolem_Fn_113'(Object, Portal, Time))]).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',218).
+
+ /*  (   (   not(equals(side1(Side1), Tloc)),
+           not(equals(side2(Side1), Tloc))
+       ;   not(at(Kolem_Fn_113P_Num3_V, Tloc))
+       ),
+       some(Tloc,
+            '$kolem_Fn_113'(Kolem_Fn_113P_Num3_V,
+                            Side1,
+                            Kolem_Fn_113))
+   ->  not(nearPortal(Kolem_Fn_113P_Num3_V, Side1))
+   ).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',218).
+then(if(((not(equals(side1(Side1), Tloc)), not(equals(side2(Side1), Tloc));not(loc_at(Kolem_Fn_113P_Num3_V, Tloc))), some(Tloc, '$kolem_Fn_113'(Kolem_Fn_113P_Num3_V, Side1, Kolem_Fn_113)))), not(nearPortal(Kolem_Fn_113P_Num3_V, Side1))).
+ %  reactive_rule([(not(equals(side1(Side1), Tloc)), not(equals(side2(Side1), Tloc));not(loc_at(Kolem_Fn_113P_Num3_V, Tloc))), some(Tloc, '$kolem_Fn_113'(Kolem_Fn_113P_Num3_V, Side1, Kolem_Fn_113))], [holds(not(nearPortal(Kolem_Fn_113P_Num3_V, Side1)), Holds)]).
+
+ /*  holds_at(at(Object, Exists_Location), Time) :-
+       holds_at(nearPortal(Object, Portal), Time),
+       some(Exists_Location,
+            '$kolem_Fn_113'(Object, Portal, Time)).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',218).
+
+ /*  fix_axiom_head(Time) ->
+       [ holds_at(at(Object, Exists_Location), Time),
+          (->),
+         at(Object, Exists_Location)
+       ].
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',218).
+
+ /*  axiom(at(Object, Exists_Location),
+       [ nearPortal(Object, Portal),
+         some(Exists_Location,
+              '$kolem_Fn_113'(Object, Portal, Time))
+       ]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',218).
+
+ /*  (   nearPortal(Kolem_Fn_113P_Num3_V13, Nearportal),
+       some(Tloc10,
+            '$kolem_Fn_113'(Kolem_Fn_113P_Num3_V13,
+                            Nearportal,
+                            Kolem_Fn_11312))
+   ->  at(Kolem_Fn_113P_Num3_V13, Tloc10)
+   ).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',218).
+then(if((nearPortal(Kolem_Fn_113P_Num3_V13, Nearportal), some(Tloc10, '$kolem_Fn_113'(Kolem_Fn_113P_Num3_V13, Nearportal, Kolem_Fn_11312)))), loc_at(Kolem_Fn_113P_Num3_V13, Tloc10)).
+
+ /*  reactive_rule([ holds(nearPortal(Kolem_Fn_113P_Num3_V13,
+   				 Nearportal),
+   		      Holds14),
+   		some(Tloc10,
+   		     '$kolem_Fn_113'(Kolem_Fn_113P_Num3_V13,
+   				     Nearportal,
+   				     Kolem_Fn_11312))
+   	      ],
+   	      [ holds(loc_at(Kolem_Fn_113P_Num3_V13,Tloc10),
+   		      Holds15)
+   	      ]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',218).
+
+ /*  holds_at(nearPortal(Object, Portal), Time) :-
+       holds_at(at(Object, Exists_Location), Time),
+       (   equals(side1(Portal), Exists_Location)
+       ;   equals(side2(Portal), Exists_Location)
+       ),
+       some(Exists_Location,
+            '$kolem_Fn_113'(Object, Portal, Time)).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',218).
+
+ /*  fix_axiom_head(Time) ->
+       [ holds_at(nearPortal(Object, Portal), Time),
+          (->),
+         nearPortal(Object, Portal)
+       ].
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',218).
+
+ /*  axiom(nearPortal(Object, Portal),
+       [ at(Object, Exists_Location),
+          (equals(side1(Portal), Exists_Location);equals(side2(Portal), Exists_Location)),
+         some(Exists_Location,
+              '$kolem_Fn_113'(Object, Portal, Time))
+       ]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',218).
+
+ /*  (   at(Kolem_Fn_113P_Num3_V19, Tloc16),
+       (   equals(side1(Side117), Tloc16)
+       ;   equals(side2(Side117), Tloc16)
+       ),
+       some(Tloc16,
+            '$kolem_Fn_113'(Kolem_Fn_113P_Num3_V19,
+                            Side117,
+                            Kolem_Fn_11318))
+   ->  nearPortal(Kolem_Fn_113P_Num3_V19, Side117)
+   ).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',218).
+then(if((loc_at(Kolem_Fn_113P_Num3_V19, Tloc16), (equals(side1(Side117), Tloc16);equals(side2(Side117), Tloc16)), some(Tloc16, '$kolem_Fn_113'(Kolem_Fn_113P_Num3_V19, Side117, Kolem_Fn_11318)))), nearPortal(Kolem_Fn_113P_Num3_V19, Side117)).
+
+ /*   reactive_rule([ holds(loc_at(Kolem_Fn_113P_Num3_V19, Tloc16),
+                            Holds20),
+                       (equals(side1(Side117), Tloc16);equals(side2(Side117), Tloc16)),
+                      some(Tloc16,
+                           '$kolem_Fn_113'(Kolem_Fn_113P_Num3_V19,
+                                           Side117,
+                                           Kolem_Fn_11318))
+                    ],
+                    [ holds(nearPortal(Kolem_Fn_113P_Num3_V19,
+                                       Side117),
+                            Holds21)
+                    ]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',218).
+
+ /*  not(holds_at(at(Object, Exists_Location), Time)) :-
+       (   equals(side1(Portal), Exists_Location)
+       ;   equals(side2(Portal), Exists_Location)
+       ),
+       not(holds_at(nearPortal(Object, Portal), Time)),
+       some(Exists_Location,
+            '$kolem_Fn_113'(Object, Portal, Time)).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',218).
+
+ /*  axiom(not(at(Object, Exists_Location)),
+       [  (equals(side1(Portal), Exists_Location);equals(side2(Portal), Exists_Location)),
+         not(nearPortal(Object, Portal)),
+         some(Exists_Location,
+              '$kolem_Fn_113'(Object, Portal, Time))
+       ]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',218).
+
+ /*  (   (   equals(side1(Side123), Tloc22)
+       ;   equals(side2(Side123), Tloc22)
+       ),
+       not(nearPortal(Kolem_Fn_113P_Num3_V25, Side123)),
+       some(Tloc22,
+            '$kolem_Fn_113'(Kolem_Fn_113P_Num3_V25,
+                            Side123,
+                            Kolem_Fn_11324))
+   ->  not(at(Kolem_Fn_113P_Num3_V25, Tloc22))
+   ).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',218).
+then(if(((equals(side1(Side123), Tloc22);equals(side2(Side123), Tloc22)), not(nearPortal(Kolem_Fn_113P_Num3_V25, Side123)), some(Tloc22, '$kolem_Fn_113'(Kolem_Fn_113P_Num3_V25, Side123, Kolem_Fn_11324)))), not(loc_at(Kolem_Fn_113P_Num3_V25, Tloc22))).
+
+ /*   reactive_rule([  (equals(side1(Side123), Tloc22);equals(side2(Side123), Tloc22)),
+                      holds(not(nearPortal(Kolem_Fn_113P_Num3_V25,
+                                           Side123)),
+                            Holds26),
+                      some(Tloc22,
+                           '$kolem_Fn_113'(Kolem_Fn_113P_Num3_V25,
+                                           Side123,
+                                           Kolem_Fn_11324))
+                    ],
+                    [ holds(not(loc_at(Kolem_Fn_113P_Num3_V25, Tloc22)),
+                            Holds27)
+                    ]).
+ */
+
+% event WalkThroughDoor12(agent,door)
+ %  event(walkThroughDoor12(agent,door)).
+ %  event(walkThroughDoor12(agent,door)).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',222).
+actions([walkThroughDoor12/2]).
+mpred_prop(walkThroughDoor12(agent,door),event).
+
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',224).
+% event WalkThroughDoor21(agent,door)
+ %  event(walkThroughDoor21(agent,door)).
+ %  event(walkThroughDoor21(agent,door)).
+actions([walkThroughDoor21/2]).
+mpred_prop(walkThroughDoor21(agent,door),event).
+
+
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',226).
+% [agent,door,time]
+% Happens(WalkThroughDoor12(agent,door),time) ->
+% HoldsAt(Standing(agent),time) &
+% HoldsAt(At(agent,Side1(door)),time).
+
+ /*  (   happens(walkThroughDoor12(Agent, Door), Time)
+   ->  holds_at(standing(Agent), Time),
+       holds_at(at(Agent, side1(Door)), Time)
+   ).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',226).
+then(if(happens(walkThroughDoor12(Agent, Door), Time)),  (at(standing(Agent), Time), at(loc_at(Agent, side1(Door)), Time))).
+
+ /*  reactive_rule([ happens(walkThroughDoor12(Agent,Door),
+   			Time)
+   	      ],
+   	      [ holds(standing(Agent),Time),
+   		holds(loc_at(Agent,side1(Door)),Time)
+   	      ]).
+ */
+
+
+% [agent,door,time]
+% Happens(WalkThroughDoor21(agent,door),time) ->
+% HoldsAt(Standing(agent),time) &
+% HoldsAt(At(agent,Side2(door)),time).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',232).
+
+ /*  (   happens(walkThroughDoor21(Agent, Door), Time)
+   ->  holds_at(standing(Agent), Time),
+       holds_at(at(Agent, side2(Door)), Time)
+   ).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',232).
+then(if(happens(walkThroughDoor21(Agent, Door), Time)),  (at(standing(Agent), Time), at(loc_at(Agent, side2(Door)), Time))).
+
+ /*  reactive_rule([ happens(walkThroughDoor21(Agent,Door),
+   			Time)
+   	      ],
+   	      [ holds(standing(Agent),Time),
+   		holds(loc_at(Agent,side2(Door)),Time)
+   	      ]).
+ */
+
+
+% [agent,door,location,time]
+% Side2(door)=location ->
+% Initiates(WalkThroughDoor12(agent,door),At(agent,location),time).
+
+ /*  axiom(initiates(walkThroughDoor12(Agent, Door), at(Agent, Location), Time),
+       [equals(side2(Door), Location)]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',237).
+
+ /*  equals(side2(Side2), Tloc) ->
+       initiates(walkThroughDoor12(A, Side2),
+                 at(A, Tloc),
+                 Initiates).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',237).
+then(if(equals(side2(Side2),Tloc)),
+     initiates(walkThroughDoor12(A,Side2),
+	       at(loc_at(A,Tloc),Initiates),
+	       Initiates7)).
+
+ /*  reactive_rule([equals(side2(Side2),Tloc)],
+   	      [ initiates(walkThroughDoor12(A,Side2),
+   			  at(loc_at(A,Tloc),
+   			     Initiates),
+   			  Initiates7)
+   	      ]).
+ */
+
+
+% [agent,door,location,time]
+% Side1(door)=location ->
+% Initiates(WalkThroughDoor21(agent,door),At(agent,location),time).
+
+ /*  axiom(initiates(walkThroughDoor21(Agent, Door), at(Agent, Location), Time),
+       [equals(side1(Door), Location)]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',241).
+
+ /*  equals(side1(Side1), Tloc) ->
+       initiates(walkThroughDoor21(A, Side1),
+                 at(A, Tloc),
+                 Initiates).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',241).
+then(if(equals(side1(Side1),Tloc)),
+     initiates(walkThroughDoor21(A,Side1),
+	       at(loc_at(A,Tloc),Initiates),
+	       Initiates7)).
+
+ /*  reactive_rule([equals(side1(Side1),Tloc)],
+   	      [ initiates(walkThroughDoor21(A,Side1),
+   			  at(loc_at(A,Tloc),
+   			     Initiates),
+   			  Initiates7)
+   	      ]).
+ */
+
+
+% [agent,door,location,time]
+% Side1(door)=location ->
+% Terminates(WalkThroughDoor12(agent,door),At(agent,location),time).
+
+ /*  axiom(terminates(walkThroughDoor12(Agent, Door), at(Agent, Location), Time),
+       [equals(side1(Door), Location)]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',245).
+
+ /*  equals(side1(Side1), Tloc) ->
+       terminates(walkThroughDoor12(A, Side1),
+                  at(A, Tloc),
+                  Terminates).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',245).
+then(if(equals(side1(Side1),Tloc)),
+     terminates(walkThroughDoor12(A,Side1),
+		at(loc_at(A,Tloc),Terminates),
+		Terminates7)).
+
+ /*  reactive_rule([equals(side1(Side1),Tloc)],
+   	      [ terminates(walkThroughDoor12(A,Side1),
+   			   at(loc_at(A,Tloc),
+   			      Terminates),
+   			   Terminates7)
+   	      ]).
+ */
+
+
+% [agent,door,location,time]
+% Side2(door)=location ->
+% Terminates(WalkThroughDoor21(agent,door),At(agent,location),time).
+
+ /*  axiom(terminates(walkThroughDoor21(Agent, Door), at(Agent, Location), Time),
+       [equals(side2(Door), Location)]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',249).
+
+ /*  equals(side2(Side2), Tloc) ->
+       terminates(walkThroughDoor21(A, Side2),
+                  at(A, Tloc),
+                  Terminates).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',249).
+then(if(equals(side2(Side2),Tloc)),
+     terminates(walkThroughDoor21(A,Side2),
+		at(loc_at(A,Tloc),Terminates),
+		Terminates7)).
+
+ /*  reactive_rule([equals(side2(Side2),Tloc)],
+   	      [ terminates(walkThroughDoor21(A,Side2),
+   			   at(loc_at(A,Tloc),
+   			      Terminates),
+   			   Terminates7)
+   	      ]).
+ */
+
+% fluent Hungry(agent)
+ %  fluent(hungry(agent)).
+ %  fluent(hungry(agent)).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',251).
+fluents([hungry/1]).
+mpred_prop(hungry(agent),fluent).
+
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',254).
+% fluent Satiated(agent)
+ %  fluent(satiated(agent)).
+ %  fluent(satiated(agent)).
+fluents([satiated/1]).
+mpred_prop(satiated(agent),fluent).
+
+% noninertial Satiated
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',254).
+noninertial(satiated).
+
+
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',257).
+% [agent,time]
+ % HoldsAt(Hungry(agent),time) <-> !HoldsAt(Satiated(agent),time).
+
+ /*  holds_at(hungry(Agent), Time) <->
+       holds_at(neg(satiated(Agent)), Time).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',257).
+
+ /*  holds_at(hungry(Agent), Time) ->
+       holds_at(neg(satiated(Agent)), Time).
+ */
+then(if(at(hungry(Agent),Time)),
+     at(not(satiated(Agent)),Time)).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',257).
+
+ /*  reactive_rule([holds(hungry(Agent),Time)],
+   	      [holds(not(satiated(Agent)),Time)]).
+ */
+
+ /*  holds_at(neg(satiated(Agent)), Time) ->
+       holds_at(hungry(Agent), Time).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',257).
+then(if(at(not(satiated(Agent)),Time)),
+     at(hungry(Agent),Time)).
+
+ /*  reactive_rule([holds(not(satiated(Agent)),Time)],
+   	      [holds(hungry(Agent),Time)]).
+ */
+
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',259).
+% event Eat(agent,food)
+ %  event(eat(agent,food)).
+ %  event(eat(agent,food)).
+actions([eat/2]).
+mpred_prop(eat(agent,food),event).
+
+
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',261).
+% [agent,food,time]
+% Happens(Eat(agent,food),time) ->
+% {location}% 
+% HoldsAt(At(agent,location),time) &
+% HoldsAt(At(food,location),time).
+ %  clausify_pnf=exists([Location],  (happens(eat(Agent, Food), Time)->holds_at(at(Agent, Location), Time), holds_at(at(Food, Location), Time))).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',263).
+
+ /*  not(happens(eat(Agent, Food), Time)) :-
+       (   not(holds_at(at(Agent, Exists_Location), Time))
+       ;   not(holds_at(at(Food, Exists_Location), Time))
+       ),
+       some(Exists_Location,
+            '$kolem_Fn_114'(Agent, Food, Time)).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',263).
+
+ /*  fix_axiom_head(Time) ->
+       [ not(happens(eat(Agent, Food), Time)),
+          (->),
+         not(eat(Agent, Food))
+       ].
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',263).
+
+ /*  axiom(not(eat(Agent, Food)),
+       [  (not(at(Agent, Exists_Location));not(at(Food, Exists_Location))),
+         some(Exists_Location,
+              '$kolem_Fn_114'(Agent, Food, Time))
+       ]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',263).
+
+ /*  (   (   not(at(Kolem_Fn_114P_Num3_V, Tloc))
+       ;   not(at(Eat, Tloc))
+       ),
+       some(Tloc,
+            '$kolem_Fn_114'(Kolem_Fn_114P_Num3_V,
+                            Eat,
+                            Kolem_Fn_114))
+   ->  not(eat(Kolem_Fn_114P_Num3_V, Eat))
+   ).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',263).
+then(if(((not(loc_at(Kolem_Fn_114P_Num3_V, Tloc));not(loc_at(Eat, Tloc))), some(Tloc, '$kolem_Fn_114'(Kolem_Fn_114P_Num3_V, Eat, Kolem_Fn_114)))), not(eat(Kolem_Fn_114P_Num3_V, Eat))).
+
+ /*   reactive_rule([  (not(loc_at(Kolem_Fn_114P_Num3_V, Tloc));not(loc_at(Eat, Tloc))),
+                      some(Tloc,
+                           '$kolem_Fn_114'(Kolem_Fn_114P_Num3_V,
+                                           Eat,
+                                           Kolem_Fn_114))
+                    ],
+                    [not(eat(Kolem_Fn_114P_Num3_V, Eat))]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',263).
+
+ /*  holds_at(at(Agent, Exists_Location), Time) :-
+       happens(eat(Agent, Food), Time),
+       some(Exists_Location,
+            '$kolem_Fn_114'(Agent, Food, Time)).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',263).
+
+ /*  fix_axiom_head(Time) ->
+       [ holds_at(at(Agent, Exists_Location), Time),
+          (->),
+         at(Agent, Exists_Location)
+       ].
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',263).
+
+ /*  axiom(at(Agent, Exists_Location),
+       [ eat(Agent, Food),
+         some(Exists_Location,
+              '$kolem_Fn_114'(Agent, Food, Time))
+       ]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',263).
+
+ /*  (   eat(Kolem_Fn_114P_Num3_V12, Eat10),
+       some(Tloc9,
+            '$kolem_Fn_114'(Kolem_Fn_114P_Num3_V12,
+                            Eat10,
+                            Kolem_Fn_11411))
+   ->  at(Kolem_Fn_114P_Num3_V12, Tloc9)
+   ).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',263).
+then(if((eat(Kolem_Fn_114P_Num3_V12, Eat10), some(Tloc9, '$kolem_Fn_114'(Kolem_Fn_114P_Num3_V12, Eat10, Kolem_Fn_11411)))), loc_at(Kolem_Fn_114P_Num3_V12, Tloc9)).
+
+ /*  reactive_rule([ happens(eat(Kolem_Fn_114P_Num3_V12,Eat10),
+   			Time_From,
+   			Time_Until),
+   		some(Tloc9,
+   		     '$kolem_Fn_114'(Kolem_Fn_114P_Num3_V12,
+   				     Eat10,
+   				     Kolem_Fn_11411))
+   	      ],
+   	      [ holds(loc_at(Kolem_Fn_114P_Num3_V12,Tloc9),
+   		      Holds)
+   	      ]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',263).
+
+ /*  holds_at(at(Food, Exists_Location), Time) :-
+       happens(eat(Agent, Food), Time),
+       some(Exists_Location,
+            '$kolem_Fn_114'(Agent, Food, Time)).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',263).
+
+ /*  fix_axiom_head(Time) ->
+       [ holds_at(at(Food, Exists_Location), Time),
+          (->),
+         at(Food, Exists_Location)
+       ].
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',263).
+
+ /*  axiom(at(Food, Exists_Location),
+       [ eat(Agent, Food),
+         some(Exists_Location,
+              '$kolem_Fn_114'(Agent, Food, Time))
+       ]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',263).
+
+ /*  (   eat(Kolem_Fn_114P_Num3_V19, Eat17),
+       some(Tloc16,
+            '$kolem_Fn_114'(Kolem_Fn_114P_Num3_V19,
+                            Eat17,
+                            Kolem_Fn_11418))
+   ->  at(Eat17, Tloc16)
+   ).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',263).
+then(if((eat(Kolem_Fn_114P_Num3_V19, Eat17), some(Tloc16, '$kolem_Fn_114'(Kolem_Fn_114P_Num3_V19, Eat17, Kolem_Fn_11418)))), loc_at(Eat17, Tloc16)).
+
+ /*  reactive_rule([ happens(eat(Kolem_Fn_114P_Num3_V19,Eat17),
+   			Time_From20,
+   			Time_Until21),
+   		some(Tloc16,
+   		     '$kolem_Fn_114'(Kolem_Fn_114P_Num3_V19,
+   				     Eat17,
+   				     Kolem_Fn_11418))
+   	      ],
+   	      [holds(loc_at(Eat17,Tloc16),Holds22)]).
+ */
+
+
+% [agent,food,time]
+% Terminates(Eat(agent,food),Hungry(agent),time).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',268).
+
+ /*  axiom(terminates(eat(Agent, Food), hungry(Agent), Time),
+       []).
+ */
+
+ /*  terminates(eat(Hungry,Eat),
+   	   hungry(Hungry),
+   	   Terminates).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',268).
+terminates(eat(Hungry,Eat),hungry(Hungry)).
+
+ /*  terminated(happens(eat(Hungry,Eat),
+   		   Time_From,
+   		   Time_Until),
+   	   hungry(Hungry),
+   	   []).
+ */
+
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',270).
+% sort restaurant: script
+subsort(restaurant,script).
+
+% sort waiter: agent
+subsort(waiter,agent).
+
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',272).
+% sort cook: agent
+subsort(cook,agent).
+
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',274).
+% function BillOf(restaurant): bill
+
+ /*  axiom(function_arity(billOf(restaurant), 1),
+       []).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',274).
+function_arity(billOf(restaurant),1).
+ %  predicate(bill(restaurant,bill)).
+ %  predicate(bill(restaurant,bill)).
+predicates([bill/2]).
+mpred_prop(bill(restaurant,bill),predicate).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',274).
+
+ /*  axiom(functional_predicate(billOf, bill),
+       []).
+ */
+functional_predicate(billOf,bill).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',274).
+resultIsa(billOf,bill).
+
+% function CookOf(restaurant): cook
+
+ /*  axiom(function_arity(cookOf(restaurant), 1),
+       []).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',274).
+function_arity(cookOf(restaurant),1).
+ %  predicate(cook(restaurant,cook)).
+ %  predicate(cook(restaurant,cook)).
+predicates([cook/2]).
+mpred_prop(cook(restaurant,cook),predicate).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',274).
+
+ /*  axiom(functional_predicate(cookOf, cook),
+       []).
+ */
+functional_predicate(cookOf,cook).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',274).
+resultIsa(cookOf,cook).
+
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',276).
+% function TableOf(restaurant): table
+
+ /*  axiom(function_arity(tableOf(restaurant), 1),
+       []).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',276).
+function_arity(tableOf(restaurant),1).
+ %  predicate(table(restaurant,table)).
+ %  predicate(table(restaurant,table)).
+predicates([(table)/2]).
+mpred_prop(table(restaurant,table),predicate).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',276).
+
+ /*  axiom(functional_predicate(tableOf, table),
+       []).
+ */
+functional_predicate(tableOf,table).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',276).
+resultIsa(tableOf,table).
+
+% function WaiterOf(restaurant): waiter
+
+ /*  axiom(function_arity(waiterOf(restaurant), 1),
+       []).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',276).
+function_arity(waiterOf(restaurant),1).
+ %  predicate(waiter(restaurant,waiter)).
+ %  predicate(waiter(restaurant,waiter)).
+predicates([waiter/2]).
+mpred_prop(waiter(restaurant,waiter),predicate).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',276).
+
+ /*  axiom(functional_predicate(waiterOf, waiter),
+       []).
+ */
+functional_predicate(waiterOf,waiter).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',276).
+resultIsa(waiterOf,waiter).
+
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',278).
+% function KitchenDoorOf(restaurant): door
+
+ /*  axiom(function_arity(kitchenDoorOf(restaurant), 1),
+       []).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',278).
+function_arity(kitchenDoorOf(restaurant),1).
+ %  predicate(kitchenDoor(restaurant,door)).
+ %  predicate(kitchenDoor(restaurant,door)).
+predicates([kitchenDoor/2]).
+mpred_prop(kitchenDoor(restaurant,door),predicate).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',278).
+
+ /*  axiom(functional_predicate(kitchenDoorOf, kitchenDoor),
+       []).
+ */
+functional_predicate(kitchenDoorOf,kitchenDoor).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',278).
+resultIsa(kitchenDoorOf,door).
+
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',280).
+% fluent BeWaiter0(waiter)
+ %  fluent(beWaiter0(waiter)).
+ %  fluent(beWaiter0(waiter)).
+fluents([beWaiter0/1]).
+mpred_prop(beWaiter0(waiter),fluent).
+
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',282).
+% fluent BeWaiter1(waiter)
+ %  fluent(beWaiter1(waiter)).
+ %  fluent(beWaiter1(waiter)).
+fluents([beWaiter1/1]).
+mpred_prop(beWaiter1(waiter),fluent).
+
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',284).
+% fluent BeWaiter2(waiter)
+ %  fluent(beWaiter2(waiter)).
+ %  fluent(beWaiter2(waiter)).
+fluents([beWaiter2/1]).
+mpred_prop(beWaiter2(waiter),fluent).
+
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',286).
+% fluent BeWaiter3(waiter)
+ %  fluent(beWaiter3(waiter)).
+ %  fluent(beWaiter3(waiter)).
+fluents([beWaiter3/1]).
+mpred_prop(beWaiter3(waiter),fluent).
+
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',288).
+% fluent BeWaiter4(waiter)
+ %  fluent(beWaiter4(waiter)).
+ %  fluent(beWaiter4(waiter)).
+fluents([beWaiter4/1]).
+mpred_prop(beWaiter4(waiter),fluent).
+
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',290).
+% fluent BeWaiter5(waiter)
+ %  fluent(beWaiter5(waiter)).
+ %  fluent(beWaiter5(waiter)).
+fluents([beWaiter5/1]).
+mpred_prop(beWaiter5(waiter),fluent).
+
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',292).
+% fluent BeWaiter6(waiter)
+ %  fluent(beWaiter6(waiter)).
+ %  fluent(beWaiter6(waiter)).
+fluents([beWaiter6/1]).
+mpred_prop(beWaiter6(waiter),fluent).
+
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',294).
+% fluent BeWaiter7(waiter)
+ %  fluent(beWaiter7(waiter)).
+ %  fluent(beWaiter7(waiter)).
+fluents([beWaiter7/1]).
+mpred_prop(beWaiter7(waiter),fluent).
+
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',296).
+% fluent BeWaiter8(waiter)
+ %  fluent(beWaiter8(waiter)).
+ %  fluent(beWaiter8(waiter)).
+fluents([beWaiter8/1]).
+mpred_prop(beWaiter8(waiter),fluent).
+
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',298).
+% fluent BeWaiter9(waiter)
+ %  fluent(beWaiter9(waiter)).
+ %  fluent(beWaiter9(waiter)).
+fluents([beWaiter9/1]).
+mpred_prop(beWaiter9(waiter),fluent).
+
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',300).
+% xor BeWaiter0, BeWaiter1, BeWaiter2, BeWaiter3, BeWaiter4, BeWaiter5, BeWaiter6, BeWaiter7, BeWaiter8, BeWaiter9
+
+ /*  ==>xor[ beWaiter0,
+     beWaiter1,
+     beWaiter2,
+     beWaiter3,
+     beWaiter4,
+     beWaiter5,
+     beWaiter6,
+     beWaiter7,
+     beWaiter8,
+     beWaiter9
+   ].
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',300).
+==>xor[ beWaiter0,
+  beWaiter1,
+  beWaiter2,
+  beWaiter3,
+  beWaiter4,
+  beWaiter5,
+  beWaiter6,
+  beWaiter7,
+  beWaiter8,
+  beWaiter9
+].
+
+
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',302).
+% [waiter,agent,time]
+% HoldsAt(BeWaiter0(waiter),time) ->
+% Terminates(Greet(waiter,agent),
+%            BeWaiter0(waiter),
+%            time).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',302).
+
+ /*  axiom(terminates(greet(Waiter, Agent), beWaiter0(Waiter), Time),
+       [beWaiter0(Waiter)]).
+ */
+
+ /*  beWaiter0(Bewaiter0) ->
+       terminates(greet(Bewaiter0, Greet),
+                  beWaiter0(Bewaiter0),
+                  Terminates).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',302).
+then(if(beWaiter0(Bewaiter0)),
+     terminates(greet(Bewaiter0,Greet),
+		at(beWaiter0(Bewaiter0),Terminates),
+		Terminates6)).
+
+ /*  reactive_rule([beWaiter0(Bewaiter0)],
+   	      [ terminates(greet(Bewaiter0,Greet),
+   			   at(beWaiter0(Bewaiter0),
+   			      Terminates),
+   			   Terminates6)
+   	      ]).
+ */
+
+
+% [waiter,agent,time]
+% HoldsAt(BeWaiter0(waiter),time) ->
+% Initiates(Greet(waiter,agent),
+%           BeWaiter1(waiter),
+%           time).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',309).
+
+ /*  axiom(initiates(greet(Waiter, Agent), beWaiter1(Waiter), Time),
+       [beWaiter0(Waiter)]).
+ */
+
+ /*  beWaiter0(Bewaiter0) ->
+       initiates(greet(Bewaiter0, Greet),
+                 beWaiter1(Bewaiter0),
+                 Initiates).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',309).
+then(if(beWaiter0(Bewaiter0)),
+     initiates(greet(Bewaiter0,Greet),
+	       at(beWaiter1(Bewaiter0),Initiates),
+	       Initiates6)).
+
+ /*  reactive_rule([beWaiter0(Bewaiter0)],
+   	      [ initiates(greet(Bewaiter0,Greet),
+   			  at(beWaiter1(Bewaiter0),
+   			     Initiates),
+   			  Initiates6)
+   	      ]).
+ */
+
+
+% [waiter,agent,food,time]
+% HoldsAt(BeWaiter1(waiter),time) ->
+% Terminates(Order(agent,waiter,food),
+%            BeWaiter1(waiter),
+%            time).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',315).
+
+ /*  axiom(terminates(order(Agent, Waiter, Food), beWaiter1(Waiter), Time),
+       [beWaiter1(Waiter)]).
+ */
+
+ /*  beWaiter1(Bewaiter1) ->
+       terminates(order(OrderP_Num3_V, Bewaiter1, Order),
+                  beWaiter1(Bewaiter1),
+                  Terminates).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',315).
+then(if(beWaiter1(Bewaiter1)),
+     terminates(order(OrderP_Num3_V,Bewaiter1,Order),
+		at(beWaiter1(Bewaiter1),Terminates),
+		Terminates8)).
+
+ /*  reactive_rule([beWaiter1(Bewaiter1)],
+   	      [ terminates(order(OrderP_Num3_V,
+   				 Bewaiter1,
+   				 Order),
+   			   at(beWaiter1(Bewaiter1),
+   			      Terminates),
+   			   Terminates8)
+   	      ]).
+ */
+
+
+% [waiter,agent,food,time]
+% HoldsAt(BeWaiter1(waiter),time) ->
+% Initiates(Order(agent,waiter,food),
+%           BeWaiter2(waiter),
+%           time).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',321).
+
+ /*  axiom(initiates(order(Agent, Waiter, Food), beWaiter2(Waiter), Time),
+       [beWaiter1(Waiter)]).
+ */
+
+ /*  beWaiter1(Bewaiter1) ->
+       initiates(order(OrderP_Num3_V, Bewaiter1, Order),
+                 beWaiter2(Bewaiter1),
+                 Initiates).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',321).
+then(if(beWaiter1(Bewaiter1)),
+     initiates(order(OrderP_Num3_V,Bewaiter1,Order),
+	       at(beWaiter2(Bewaiter1),Initiates),
+	       Initiates8)).
+
+ /*  reactive_rule([beWaiter1(Bewaiter1)],
+   	      [ initiates(order(OrderP_Num3_V,
+   				Bewaiter1,
+   				Order),
+   			  at(beWaiter2(Bewaiter1),
+   			     Initiates),
+   			  Initiates8)
+   	      ]).
+ */
+
+
+% [restaurant,waiter,time]
+% WaiterOf(restaurant)=waiter &
+% HoldsAt(BeWaiter2(waiter),time) ->
+% Happens(WalkThroughDoor12(waiter,KitchenDoorOf(restaurant)),time).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',327).
+
+ /*  (   equals(waiterOf(Restaurant), Waiter),
+       holds_at(beWaiter2(Waiter), Time)
+   ->  happens(walkThroughDoor12(Waiter, kitchenDoorOf(Restaurant)),
+               Time)
+   ).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',327).
+then(if((equals(waiterOf(Restaurant), Waiter), at(beWaiter2(Waiter), Time))), happens(walkThroughDoor12(Waiter, kitchenDoorOf(Restaurant)), Time)).
+
+ /*  reactive_rule([ equals(waiterOf(Restaurant),Waiter),
+   		holds(beWaiter2(Waiter),Time)
+   	      ],
+   	      [ happens(walkThroughDoor12(Waiter,
+   					  kitchenDoorOf(Restaurant)),
+   			Time)
+   	      ]).
+ */
+
+
+% [restaurant,waiter,door,time]
+% HoldsAt(BeWaiter2(waiter),time) &
+% WaiterOf(restaurant)=waiter &
+% KitchenDoorOf(restaurant)=door ->
+% Terminates(WalkThroughDoor12(waiter,door),
+%            BeWaiter2(waiter),
+%            time).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',332).
+
+ /*  axiom(terminates(walkThroughDoor12(Waiter, Door), beWaiter2(Waiter), Time),
+       [ beWaiter2(Waiter),
+         equals(waiterOf(Restaurant), Waiter),
+         equals(kitchenDoorOf(Restaurant), Door)
+       ]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',332).
+
+ /*  (   beWaiter2(Bewaiter2),
+       equals(waiterOf(Waiterof), Bewaiter2),
+       equals(kitchenDoorOf(Waiterof), Equals)
+   ->  terminates(walkThroughDoor12(Bewaiter2, Equals),
+                  beWaiter2(Bewaiter2),
+                  Terminates)
+   ).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',332).
+then(if((beWaiter2(Bewaiter2), equals(waiterOf(Waiterof), Bewaiter2), equals(kitchenDoorOf(Waiterof), Equals))), terminates(walkThroughDoor12(Bewaiter2, Equals), at(beWaiter2(Bewaiter2), Terminates), Terminates8)).
+
+ /*  reactive_rule([ holds(beWaiter2(Bewaiter2),Holds),
+   		equals(waiterOf(Waiterof),Bewaiter2),
+   		equals(kitchenDoorOf(Waiterof),Equals)
+   	      ],
+   	      [ terminates(walkThroughDoor12(Bewaiter2,
+   					     Equals),
+   			   at(beWaiter2(Bewaiter2),
+   			      Terminates),
+   			   Terminates8)
+   	      ]).
+ */
+
+
+% [restaurant,waiter,door,time]
+% HoldsAt(BeWaiter2(waiter),time) &
+% WaiterOf(restaurant)=waiter &
+% KitchenDoorOf(restaurant)=door ->
+% Initiates(WalkThroughDoor12(waiter,door),
+%           BeWaiter3(waiter),
+%           time).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',340).
+
+ /*  axiom(initiates(walkThroughDoor12(Waiter, Door), beWaiter3(Waiter), Time),
+       [ beWaiter2(Waiter),
+         equals(waiterOf(Restaurant), Waiter),
+         equals(kitchenDoorOf(Restaurant), Door)
+       ]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',340).
+
+ /*  (   beWaiter2(Bewaiter2),
+       equals(waiterOf(Waiterof), Bewaiter2),
+       equals(kitchenDoorOf(Waiterof), Equals)
+   ->  initiates(walkThroughDoor12(Bewaiter2, Equals),
+                 beWaiter3(Bewaiter2),
+                 Initiates)
+   ).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',340).
+then(if((beWaiter2(Bewaiter2), equals(waiterOf(Waiterof), Bewaiter2), equals(kitchenDoorOf(Waiterof), Equals))), initiates(walkThroughDoor12(Bewaiter2, Equals), at(beWaiter3(Bewaiter2), Initiates), Initiates8)).
+
+ /*  reactive_rule([ holds(beWaiter2(Bewaiter2),Holds),
+   		equals(waiterOf(Waiterof),Bewaiter2),
+   		equals(kitchenDoorOf(Waiterof),Equals)
+   	      ],
+   	      [ initiates(walkThroughDoor12(Bewaiter2,
+   					    Equals),
+   			  at(beWaiter3(Bewaiter2),
+   			     Initiates),
+   			  Initiates8)
+   	      ]).
+ */
+
+
+% [restaurant,food,time]
+% HoldsAt(BeWaiter3(WaiterOf(restaurant)),time) &
+% ({agent} HoldsAt(KnowOrder(WaiterOf(restaurant),agent,food),time)) ->
+% Happens(Order(WaiterOf(restaurant),CookOf(restaurant),food),time).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',348).
+
+ /*  (   holds_at(beWaiter3(waiterOf(Restaurant)), Time),
+       exists([Agent],
+              holds_at(knowOrder(waiterOf(Restaurant),
+                                 Agent,
+                                 Food),
+                       Time))
+   ->  happens(order(waiterOf(Restaurant),
+                     cookOf(Restaurant),
+                     Food),
+               Time)
+   ).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',348).
+then(if((at(beWaiter3(waiterOf(Restaurant)), Time), exists([Agent], at(knowOrder(waiterOf(Restaurant), Agent, Food), Time)))), happens(order(waiterOf(Restaurant), cookOf(Restaurant), Food), Time)).
+
+ /*  reactive_rule([ holds(beWaiter3(waiterOf(Restaurant)),Time),
+   		exists([Agent],
+   		       at(knowOrder(waiterOf(Restaurant),
+   				    Agent,
+   				    Food),
+   			  Time))
+   	      ],
+   	      [ happens(order(waiterOf(Restaurant),
+   			      cookOf(Restaurant),
+   			      Food),
+   			Time)
+   	      ]).
+ */
+
+
+% [restaurant,waiter,cook,food,time]
+% WaiterOf(restaurant)=waiter &
+% CookOf(restaurant)=cook &
+% HoldsAt(BeWaiter3(waiter),time) ->
+% Terminates(Order(waiter,cook,food),
+%            BeWaiter3(waiter),
+%            time).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',353).
+
+ /*  axiom(terminates(order(Waiter, Cook, Food), beWaiter3(Waiter), Time),
+       [ equals(waiterOf(Restaurant), Waiter),
+         equals(cookOf(Restaurant), Cook),
+         beWaiter3(Waiter)
+       ]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',353).
+
+ /*  (   equals(waiterOf(Waiterof), Equals),
+       equals(cookOf(Waiterof), Equals7),
+       beWaiter3(Equals)
+   ->  terminates(order(Equals, Equals7, Order),
+                  beWaiter3(Equals),
+                  Terminates)
+   ).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',353).
+then(if((equals(waiterOf(Waiterof), Equals), equals(cookOf(Waiterof), Equals7), beWaiter3(Equals))), terminates(order(Equals, Equals7, Order), at(beWaiter3(Equals), Terminates), Terminates10)).
+
+ /*  reactive_rule([ equals(waiterOf(Waiterof),Equals),
+   		equals(cookOf(Waiterof),Equals7),
+   		holds(beWaiter3(Equals),Holds)
+   	      ],
+   	      [ terminates(order(Equals,
+   				 Equals7,
+   				 Order),
+   			   at(beWaiter3(Equals),Terminates),
+   			   Terminates10)
+   	      ]).
+ */
+
+
+% [restaurant,waiter,cook,food,time]
+% WaiterOf(restaurant)=waiter &
+% CookOf(restaurant)=cook &
+% HoldsAt(BeWaiter3(waiter),time) ->
+% Initiates(Order(waiter,cook,food),
+%           BeWaiter4(waiter),
+%           time).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',361).
+
+ /*  axiom(initiates(order(Waiter, Cook, Food), beWaiter4(Waiter), Time),
+       [ equals(waiterOf(Restaurant), Waiter),
+         equals(cookOf(Restaurant), Cook),
+         beWaiter3(Waiter)
+       ]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',361).
+
+ /*  (   equals(waiterOf(Waiterof), Equals),
+       equals(cookOf(Waiterof), Equals7),
+       beWaiter3(Equals)
+   ->  initiates(order(Equals, Equals7, Order),
+                 beWaiter4(Equals),
+                 Initiates)
+   ).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',361).
+then(if((equals(waiterOf(Waiterof), Equals), equals(cookOf(Waiterof), Equals7), beWaiter3(Equals))), initiates(order(Equals, Equals7, Order), at(beWaiter4(Equals), Initiates), Initiates10)).
+
+ /*  reactive_rule([ equals(waiterOf(Waiterof),Equals),
+   		equals(cookOf(Waiterof),Equals7),
+   		holds(beWaiter3(Equals),Holds)
+   	      ],
+   	      [ initiates(order(Equals,Equals7,Order),
+   			  at(beWaiter4(Equals),Initiates),
+   			  Initiates10)
+   	      ]).
+ */
+
+
+% [waiter,food,time]
+% HoldsAt(BeWaiter4(waiter),time) &
+% ({agent} HoldsAt(KnowOrder(waiter,agent,food),time)) &
+% HoldsAt(FoodPrepared(food),time) ->
+% Happens(PickUp(waiter,food),time).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',369).
+
+ /*  (   holds_at(beWaiter4(Waiter), Time),
+       exists([Agent],
+              holds_at(knowOrder(Waiter, Agent, Food), Time)),
+       holds_at(foodPrepared(Food), Time)
+   ->  happens(pickUp(Waiter, Food), Time)
+   ).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',369).
+then(if((at(beWaiter4(Waiter), Time), exists([Agent], at(knowOrder(Waiter, Agent, Food), Time)), at(foodPrepared(Food), Time))), happens(pickUp(Waiter, Food), Time)).
+
+ /*  reactive_rule([ holds(beWaiter4(Waiter),Time),
+   		exists([Agent],
+   		       at(knowOrder(Waiter,
+   				    Agent,
+   				    Food),
+   			  Time)),
+   		holds(foodPrepared(Food),Time)
+   	      ],
+   	      [happens(pickUp(Waiter,Food),Time)]).
+ */
+
+
+% [waiter,food,time]
+% HoldsAt(BeWaiter4(waiter),time) &
+% ({agent} HoldsAt(KnowOrder(waiter,agent,food),time)) ->
+% Terminates(PickUp(waiter,food),
+%            BeWaiter4(waiter),
+%            time).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',375).
+
+ /*  axiom(terminates(pickUp(Waiter, Food), beWaiter4(Waiter), Time),
+       [beWaiter4(Waiter), knowOrder(Waiter, Agent, Food)]).
+ */
+
+ /*  (   beWaiter4(Bewaiter4),
+       knowOrder(Bewaiter4, _, Knoworder)
+   ->  terminates(pickUp(Bewaiter4, Knoworder),
+                  beWaiter4(Bewaiter4),
+                  Terminates)
+   ).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',375).
+then(if((beWaiter4(Bewaiter4), knowOrder(Bewaiter4, _, Knoworder))), terminates(pickUp(Bewaiter4, Knoworder), at(beWaiter4(Bewaiter4), Terminates), Terminates7)).
+
+ /*  reactive_rule([ holds(beWaiter4(Bewaiter4),Holds),
+   		holds(knowOrder(Bewaiter4,
+   				_,
+   				Knoworder),
+   		      Holds)
+   	      ],
+   	      [ terminates(pickUp(Bewaiter4,Knoworder),
+   			   at(beWaiter4(Bewaiter4),
+   			      Terminates),
+   			   Terminates7)
+   	      ]).
+ */
+
+
+% [waiter,food,time]
+% HoldsAt(BeWaiter4(waiter),time) &
+% ({agent} HoldsAt(KnowOrder(waiter,agent,food),time)) ->
+% Initiates(PickUp(waiter,food),
+%           BeWaiter5(waiter),
+%           time).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',382).
+
+ /*  axiom(initiates(pickUp(Waiter, Food), beWaiter5(Waiter), Time),
+       [beWaiter4(Waiter), knowOrder(Waiter, Agent, Food)]).
+ */
+
+ /*  (   beWaiter4(Bewaiter4),
+       knowOrder(Bewaiter4, _, Knoworder)
+   ->  initiates(pickUp(Bewaiter4, Knoworder),
+                 beWaiter5(Bewaiter4),
+                 Initiates)
+   ).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',382).
+then(if((beWaiter4(Bewaiter4), knowOrder(Bewaiter4, _, Knoworder))), initiates(pickUp(Bewaiter4, Knoworder), at(beWaiter5(Bewaiter4), Initiates), Initiates7)).
+
+ /*  reactive_rule([ holds(beWaiter4(Bewaiter4),Holds),
+   		holds(knowOrder(Bewaiter4,
+   				_,
+   				Knoworder),
+   		      Holds)
+   	      ],
+   	      [ initiates(pickUp(Bewaiter4,Knoworder),
+   			  at(beWaiter5(Bewaiter4),
+   			     Initiates),
+   			  Initiates7)
+   	      ]).
+ */
+
+
+% [restaurant,waiter,time]
+% WaiterOf(restaurant)=waiter &
+% HoldsAt(BeWaiter5(waiter),time) ->
+% Happens(WalkThroughDoor21(waiter,KitchenDoorOf(restaurant)),time).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',389).
+
+ /*  (   equals(waiterOf(Restaurant), Waiter),
+       holds_at(beWaiter5(Waiter), Time)
+   ->  happens(walkThroughDoor21(Waiter, kitchenDoorOf(Restaurant)),
+               Time)
+   ).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',389).
+then(if((equals(waiterOf(Restaurant), Waiter), at(beWaiter5(Waiter), Time))), happens(walkThroughDoor21(Waiter, kitchenDoorOf(Restaurant)), Time)).
+
+ /*  reactive_rule([ equals(waiterOf(Restaurant),Waiter),
+   		holds(beWaiter5(Waiter),Time)
+   	      ],
+   	      [ happens(walkThroughDoor21(Waiter,
+   					  kitchenDoorOf(Restaurant)),
+   			Time)
+   	      ]).
+ */
+
+
+% [restaurant,waiter,door,time]
+% HoldsAt(BeWaiter5(waiter),time) &
+% WaiterOf(restaurant)=waiter &
+% KitchenDoorOf(restaurant)=door ->
+% Terminates(WalkThroughDoor21(waiter,door),
+%            BeWaiter5(waiter),
+%            time).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',394).
+
+ /*  axiom(terminates(walkThroughDoor21(Waiter, Door), beWaiter5(Waiter), Time),
+       [ beWaiter5(Waiter),
+         equals(waiterOf(Restaurant), Waiter),
+         equals(kitchenDoorOf(Restaurant), Door)
+       ]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',394).
+
+ /*  (   beWaiter5(Bewaiter5),
+       equals(waiterOf(Waiterof), Bewaiter5),
+       equals(kitchenDoorOf(Waiterof), Equals)
+   ->  terminates(walkThroughDoor21(Bewaiter5, Equals),
+                  beWaiter5(Bewaiter5),
+                  Terminates)
+   ).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',394).
+then(if((beWaiter5(Bewaiter5), equals(waiterOf(Waiterof), Bewaiter5), equals(kitchenDoorOf(Waiterof), Equals))), terminates(walkThroughDoor21(Bewaiter5, Equals), at(beWaiter5(Bewaiter5), Terminates), Terminates8)).
+
+ /*  reactive_rule([ holds(beWaiter5(Bewaiter5),Holds),
+   		equals(waiterOf(Waiterof),Bewaiter5),
+   		equals(kitchenDoorOf(Waiterof),Equals)
+   	      ],
+   	      [ terminates(walkThroughDoor21(Bewaiter5,
+   					     Equals),
+   			   at(beWaiter5(Bewaiter5),
+   			      Terminates),
+   			   Terminates8)
+   	      ]).
+ */
+
+
+% [restaurant,waiter,door,time]
+% HoldsAt(BeWaiter5(waiter),time) &
+% WaiterOf(restaurant)=waiter &
+% KitchenDoorOf(restaurant)=door ->
+% Initiates(WalkThroughDoor21(waiter,door),
+%           BeWaiter6(waiter),
+%           time).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',402).
+
+ /*  axiom(initiates(walkThroughDoor21(Waiter, Door), beWaiter6(Waiter), Time),
+       [ beWaiter5(Waiter),
+         equals(waiterOf(Restaurant), Waiter),
+         equals(kitchenDoorOf(Restaurant), Door)
+       ]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',402).
+
+ /*  (   beWaiter5(Bewaiter5),
+       equals(waiterOf(Waiterof), Bewaiter5),
+       equals(kitchenDoorOf(Waiterof), Equals)
+   ->  initiates(walkThroughDoor21(Bewaiter5, Equals),
+                 beWaiter6(Bewaiter5),
+                 Initiates)
+   ).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',402).
+then(if((beWaiter5(Bewaiter5), equals(waiterOf(Waiterof), Bewaiter5), equals(kitchenDoorOf(Waiterof), Equals))), initiates(walkThroughDoor21(Bewaiter5, Equals), at(beWaiter6(Bewaiter5), Initiates), Initiates8)).
+
+ /*  reactive_rule([ holds(beWaiter5(Bewaiter5),Holds),
+   		equals(waiterOf(Waiterof),Bewaiter5),
+   		equals(kitchenDoorOf(Waiterof),Equals)
+   	      ],
+   	      [ initiates(walkThroughDoor21(Bewaiter5,
+   					    Equals),
+   			  at(beWaiter6(Bewaiter5),
+   			     Initiates),
+   			  Initiates8)
+   	      ]).
+ */
+
+
+% [restaurant,waiter,table,food,time]
+% WaiterOf(restaurant)=waiter &
+% TableOf(restaurant)=table &
+% HoldsAt(BeWaiter6(waiter),time) &
+% HoldsAt(Holding(waiter,food),time) ->
+% Happens(PlaceOn(waiter,food,table),time).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',410).
+
+ /*  (   equals(waiterOf(Restaurant), Waiter),
+       equals(tableOf(Restaurant), Table),
+       holds_at(beWaiter6(Waiter), Time),
+       holds_at(holding(Waiter, Food), Time)
+   ->  happens(placeOn(Waiter, Food, Table), Time)
+   ).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',410).
+then(if((equals(waiterOf(Restaurant), Waiter), equals(tableOf(Restaurant), Table), at(beWaiter6(Waiter), Time), at(holding(Waiter, Food), Time))), happens(placeOn(Waiter, Food, Table), Time)).
+
+ /*  reactive_rule([ equals(waiterOf(Restaurant),Waiter),
+   		equals(tableOf(Restaurant),Table),
+   		holds(beWaiter6(Waiter),Time),
+   		holds(holding(Waiter,Food),Time)
+   	      ],
+   	      [ happens(placeOn(Waiter,Food,Table),
+   			Time)
+   	      ]).
+ */
+
+
+% [waiter,food,table,time]
+% HoldsAt(BeWaiter6(waiter),time) ->
+% Terminates(PlaceOn(waiter,food,table),
+%            BeWaiter6(waiter),
+%            time).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',417).
+
+ /*  axiom(terminates(placeOn(Waiter, Food, Table), beWaiter6(Waiter), Time),
+       [beWaiter6(Waiter)]).
+ */
+
+ /*  beWaiter6(Bewaiter6) ->
+       terminates(placeOn(Bewaiter6, _, Placeon),
+                  beWaiter6(Bewaiter6),
+                  Terminates).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',417).
+then(if(beWaiter6(Bewaiter6)),
+     terminates(placeOn(Bewaiter6,_,Placeon),
+		at(beWaiter6(Bewaiter6),Terminates),
+		Terminates7)).
+
+ /*  reactive_rule([holds(beWaiter6(Bewaiter6),Holds)],
+   	      [ terminates(placeOn(Bewaiter6,
+   				   _,
+   				   Placeon),
+   			   at(beWaiter6(Bewaiter6),
+   			      Terminates),
+   			   Terminates7)
+   	      ]).
+ */
+
+
+% [waiter,food,table,time]
+% HoldsAt(BeWaiter6(waiter),time) ->
+% Initiates(PlaceOn(waiter,food,table),
+%           BeWaiter7(waiter),
+%           time).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',423).
+
+ /*  axiom(initiates(placeOn(Waiter, Food, Table), beWaiter7(Waiter), Time),
+       [beWaiter6(Waiter)]).
+ */
+
+ /*  beWaiter6(Bewaiter6) ->
+       initiates(placeOn(Bewaiter6, _, Placeon),
+                 beWaiter7(Bewaiter6),
+                 Initiates).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',423).
+then(if(beWaiter6(Bewaiter6)),
+     initiates(placeOn(Bewaiter6,_,Placeon),
+	       at(beWaiter7(Bewaiter6),Initiates),
+	       Initiates7)).
+
+ /*  reactive_rule([holds(beWaiter6(Bewaiter6),Holds)],
+   	      [ initiates(placeOn(Bewaiter6,
+   				  _,
+   				  Placeon),
+   			  at(beWaiter7(Bewaiter6),
+   			     Initiates),
+   			  Initiates7)
+   	      ]).
+ */
+
+
+% [waiter,agent,bill,time]
+% HoldsAt(BeWaiter7(waiter),time) ->
+% Terminates(Request(agent,waiter,bill),
+%            BeWaiter7(waiter),
+%            time).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',429).
+
+ /*  axiom(terminates(request(Agent, Waiter, Bill), beWaiter7(Waiter), Time),
+       [beWaiter7(Waiter)]).
+ */
+
+ /*  beWaiter7(Bewaiter7) ->
+       terminates(request(RequestP_Num3_V, Bewaiter7, Request),
+                  beWaiter7(Bewaiter7),
+                  Terminates).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',429).
+then(if(beWaiter7(Bewaiter7)),
+     terminates(request(RequestP_Num3_V,
+			Bewaiter7,
+			Request),
+		at(beWaiter7(Bewaiter7),Terminates),
+		Terminates8)).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',429).
+
+ /*  reactive_rule([beWaiter7(Bewaiter7)],
+   	      [ terminates(request(RequestP_Num3_V,
+   				   Bewaiter7,
+   				   Request),
+   			   at(beWaiter7(Bewaiter7),
+   			      Terminates),
+   			   Terminates8)
+   	      ]).
+ */
+
+
+% [waiter,agent,bill,time]
+% HoldsAt(BeWaiter7(waiter),time) ->
+% Initiates(Request(agent,waiter,bill),
+%           BeWaiter8(waiter),
+%           time).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',435).
+
+ /*  axiom(initiates(request(Agent, Waiter, Bill), beWaiter8(Waiter), Time),
+       [beWaiter7(Waiter)]).
+ */
+
+ /*  beWaiter7(Bewaiter7) ->
+       initiates(request(RequestP_Num3_V, Bewaiter7, Request),
+                 beWaiter8(Bewaiter7),
+                 Initiates).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',435).
+then(if(beWaiter7(Bewaiter7)),
+     initiates(request(RequestP_Num3_V,
+		       Bewaiter7,
+		       Request),
+	       at(beWaiter8(Bewaiter7),Initiates),
+	       Initiates8)).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',435).
+
+ /*  reactive_rule([beWaiter7(Bewaiter7)],
+   	      [ initiates(request(RequestP_Num3_V,
+   				  Bewaiter7,
+   				  Request),
+   			  at(beWaiter8(Bewaiter7),
+   			     Initiates),
+   			  Initiates8)
+   	      ]).
+ */
+
+
+% [restaurant,waiter,bill,time]
+% WaiterOf(restaurant)=waiter &
+% BillOf(restaurant)=bill &
+% HoldsAt(BeWaiter8(waiter),time) ->
+% Happens(PickUp(waiter,bill),time).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',441).
+
+ /*  (   equals(waiterOf(Restaurant), Waiter),
+       equals(billOf(Restaurant), Bill),
+       holds_at(beWaiter8(Waiter), Time)
+   ->  happens(pickUp(Waiter, Bill), Time)
+   ).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',441).
+then(if((equals(waiterOf(Restaurant), Waiter), equals(billOf(Restaurant), Bill), at(beWaiter8(Waiter), Time))), happens(pickUp(Waiter, Bill), Time)).
+
+ /*  reactive_rule([ equals(waiterOf(Restaurant),Waiter),
+   		equals(billOf(Restaurant),Bill),
+   		holds(beWaiter8(Waiter),Time)
+   	      ],
+   	      [happens(pickUp(Waiter,Bill),Time)]).
+ */
+
+
+% [waiter,bill,time]
+% HoldsAt(BeWaiter8(waiter),time) ->
+% Terminates(PickUp(waiter,bill),
+%            BeWaiter8(waiter),
+%            time).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',447).
+
+ /*  axiom(terminates(pickUp(Waiter, Bill), beWaiter8(Waiter), Time),
+       [beWaiter8(Waiter)]).
+ */
+
+ /*  beWaiter8(Bewaiter8) ->
+       terminates(pickUp(Bewaiter8, Pickup),
+                  beWaiter8(Bewaiter8),
+                  Terminates).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',447).
+then(if(beWaiter8(Bewaiter8)),
+     terminates(pickUp(Bewaiter8,Pickup),
+		at(beWaiter8(Bewaiter8),Terminates),
+		Terminates6)).
+
+ /*  reactive_rule([holds(beWaiter8(Bewaiter8),Holds)],
+   	      [ terminates(pickUp(Bewaiter8,Pickup),
+   			   at(beWaiter8(Bewaiter8),
+   			      Terminates),
+   			   Terminates6)
+   	      ]).
+ */
+
+
+% [waiter,bill,time]
+% HoldsAt(BeWaiter8(waiter),time) ->
+% Initiates(PickUp(waiter,bill),
+%           BeWaiter9(waiter),
+%           time).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',453).
+
+ /*  axiom(initiates(pickUp(Waiter, Bill), beWaiter9(Waiter), Time),
+       [beWaiter8(Waiter)]).
+ */
+
+ /*  beWaiter8(Bewaiter8) ->
+       initiates(pickUp(Bewaiter8, Pickup),
+                 beWaiter9(Bewaiter8),
+                 Initiates).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',453).
+then(if(beWaiter8(Bewaiter8)),
+     initiates(pickUp(Bewaiter8,Pickup),
+	       at(beWaiter9(Bewaiter8),Initiates),
+	       Initiates6)).
+
+ /*  reactive_rule([holds(beWaiter8(Bewaiter8),Holds)],
+   	      [ initiates(pickUp(Bewaiter8,Pickup),
+   			  at(beWaiter9(Bewaiter8),
+   			     Initiates),
+   			  Initiates6)
+   	      ]).
+ */
+
+
+% [restaurant,waiter,bill,table,time]
+% WaiterOf(restaurant)=waiter &
+% BillOf(restaurant)=bill &
+% TableOf(restaurant)=table &
+% HoldsAt(BeWaiter9(waiter),time) ->
+% Happens(PlaceOn(waiter,bill,table),time).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',459).
+
+ /*  (   equals(waiterOf(Restaurant), Waiter),
+       equals(billOf(Restaurant), Bill),
+       equals(tableOf(Restaurant), Table),
+       holds_at(beWaiter9(Waiter), Time)
+   ->  happens(placeOn(Waiter, Bill, Table), Time)
+   ).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',459).
+then(if((equals(waiterOf(Restaurant), Waiter), equals(billOf(Restaurant), Bill), equals(tableOf(Restaurant), Table), at(beWaiter9(Waiter), Time))), happens(placeOn(Waiter, Bill, Table), Time)).
+
+ /*  reactive_rule([ equals(waiterOf(Restaurant),Waiter),
+   		equals(billOf(Restaurant),Bill),
+   		equals(tableOf(Restaurant),Table),
+   		holds(beWaiter9(Waiter),Time)
+   	      ],
+   	      [ happens(placeOn(Waiter,Bill,Table),
+   			Time)
+   	      ]).
+ */
+
+
+% [waiter,bill,table,time]
+% HoldsAt(BeWaiter9(waiter),time) ->
+% Terminates(PlaceOn(waiter,bill,table),
+%            BeWaiter9(waiter),
+%            time).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',466).
+
+ /*  axiom(terminates(placeOn(Waiter, Bill, Table), beWaiter9(Waiter), Time),
+       [beWaiter9(Waiter)]).
+ */
+
+ /*  beWaiter9(Bewaiter9) ->
+       terminates(placeOn(Bewaiter9, _, Placeon),
+                  beWaiter9(Bewaiter9),
+                  Terminates).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',466).
+then(if(beWaiter9(Bewaiter9)),
+     terminates(placeOn(Bewaiter9,_,Placeon),
+		at(beWaiter9(Bewaiter9),Terminates),
+		Terminates7)).
+
+ /*  reactive_rule([holds(beWaiter9(Bewaiter9),Holds)],
+   	      [ terminates(placeOn(Bewaiter9,
+   				   _,
+   				   Placeon),
+   			   at(beWaiter9(Bewaiter9),
+   			      Terminates),
+   			   Terminates7)
+   	      ]).
+ */
+
+
+% [waiter,bill,table,time]
+% HoldsAt(BeWaiter9(waiter),time) ->
+% Initiates(PlaceOn(waiter,bill,table),
+%           BeWaiter0(waiter),
+%           time).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',472).
+
+ /*  axiom(initiates(placeOn(Waiter, Bill, Table), beWaiter0(Waiter), Time),
+       [beWaiter9(Waiter)]).
+ */
+
+ /*  beWaiter9(Bewaiter9) ->
+       initiates(placeOn(Bewaiter9, _, Placeon),
+                 beWaiter0(Bewaiter9),
+                 Initiates).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',472).
+then(if(beWaiter9(Bewaiter9)),
+     initiates(placeOn(Bewaiter9,_,Placeon),
+	       at(beWaiter0(Bewaiter9),Initiates),
+	       Initiates7)).
+
+ /*  reactive_rule([holds(beWaiter9(Bewaiter9),Holds)],
+   	      [ initiates(placeOn(Bewaiter9,
+   				  _,
+   				  Placeon),
+   			  at(beWaiter0(Bewaiter9),
+   			     Initiates),
+   			  Initiates7)
+   	      ]).
+ */
+
+% fluent BeCook0(cook)
+ %  fluent(beCook0(cook)).
+ %  fluent(beCook0(cook)).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',476).
+fluents([beCook0/1]).
+mpred_prop(beCook0(cook),fluent).
+
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',479).
+% fluent BeCook1(cook)
+ %  fluent(beCook1(cook)).
+ %  fluent(beCook1(cook)).
+fluents([beCook1/1]).
+mpred_prop(beCook1(cook),fluent).
+
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',481).
+% xor BeCook0, BeCook1
+ %  ==>xor[beCook0,beCook1].
+==>xor[beCook0,beCook1].
+
+
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',483).
+% [cook,agent,food,time]
+% HoldsAt(BeCook0(cook),time) ->
+% Terminates(Order(agent,cook,food),
+%            BeCook0(cook),
+%            time).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',483).
+
+ /*  axiom(terminates(order(Agent, Cook, Food), beCook0(Cook), Time),
+       [beCook0(Cook)]).
+ */
+
+ /*  beCook0(Becook0) ->
+       terminates(order(OrderP_Num3_V, Becook0, Order),
+                  beCook0(Becook0),
+                  Terminates).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',483).
+then(if(beCook0(Becook0)),
+     terminates(order(OrderP_Num3_V,Becook0,Order),
+		at(beCook0(Becook0),Terminates),
+		Terminates8)).
+
+ /*  reactive_rule([beCook0(Becook0)],
+   	      [ terminates(order(OrderP_Num3_V,
+   				 Becook0,
+   				 Order),
+   			   at(beCook0(Becook0),Terminates),
+   			   Terminates8)
+   	      ]).
+ */
+
+
+% [cook,agent,food,time]
+% HoldsAt(BeCook0(cook),time) ->
+% Initiates(Order(agent,cook,food),
+%           BeCook1(cook),
+%           time).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',490).
+
+ /*  axiom(initiates(order(Agent, Cook, Food), beCook1(Cook), Time),
+       [beCook0(Cook)]).
+ */
+
+ /*  beCook0(Becook0) ->
+       initiates(order(OrderP_Num3_V, Becook0, Order),
+                 beCook1(Becook0),
+                 Initiates).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',490).
+then(if(beCook0(Becook0)),
+     initiates(order(OrderP_Num3_V,Becook0,Order),
+	       at(beCook1(Becook0),Initiates),
+	       Initiates8)).
+
+ /*  reactive_rule([beCook0(Becook0)],
+   	      [ initiates(order(OrderP_Num3_V,
+   				Becook0,
+   				Order),
+   			  at(beCook1(Becook0),Initiates),
+   			  Initiates8)
+   	      ]).
+ */
+
+% event FoodPrepare(agent,food)
+ %  event(foodPrepare(agent,food)).
+ %  event(foodPrepare(agent,food)).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',494).
+actions([foodPrepare/2]).
+mpred_prop(foodPrepare(agent,food),event).
+
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',497).
+% fluent FoodPrepared(food)
+ %  fluent(foodPrepared(food)).
+ %  fluent(foodPrepared(food)).
+fluents([foodPrepared/1]).
+mpred_prop(foodPrepared(food),fluent).
+
+
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',499).
+% [agent,food,time]
+% Initiates(FoodPrepare(agent,food),
+%           FoodPrepared(food),
+%           time).
+
+ /*  axiom(initiates(foodPrepare(Agent, Food), foodPrepared(Food), Time),
+       []).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',499).
+
+ /*  initiates(foodPrepare(_,Foodprepare),
+   	  foodPrepared(Foodprepare),
+   	  Initiates).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',499).
+initiates(foodPrepare(_,Foodprepare),
+	  foodPrepared(Foodprepare)).
+
+ /*  initiated(happens(foodPrepare(_,Foodprepare),
+   		  Time_From,
+   		  Time_Until),
+   	  foodPrepared(Foodprepare),
+   	  []).
+ */
+
+
+% [agent,food,time]
+% Happens(FoodPrepare(agent,food),time) ->
+% {location}% 
+% HoldsAt(At(agent,location),time) &
+% HoldsAt(At(food,location),time).
+ %  clausify_pnf=exists([Location],  (happens(foodPrepare(Agent, Food), Time)->holds_at(at(Agent, Location), Time), holds_at(at(Food, Location), Time))).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',505).
+
+ /*  not(happens(foodPrepare(Agent, Food), Time)) :-
+       (   not(holds_at(at(Agent, Exists_Location), Time))
+       ;   not(holds_at(at(Food, Exists_Location), Time))
+       ),
+       some(Exists_Location,
+            '$kolem_Fn_117'(Agent, Food, Time)).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',505).
+
+ /*  fix_axiom_head(Time) ->
+       [ not(happens(foodPrepare(Agent, Food), Time)),
+          (->),
+         not(foodPrepare(Agent, Food))
+       ].
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',505).
+
+ /*  axiom(not(foodPrepare(Agent, Food)),
+       [  (not(at(Agent, Exists_Location));not(at(Food, Exists_Location))),
+         some(Exists_Location,
+              '$kolem_Fn_117'(Agent, Food, Time))
+       ]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',505).
+
+ /*  (   (   not(at(Kolem_Fn_117P_Num3_V, Tloc))
+       ;   not(at(Foodprepare, Tloc))
+       ),
+       some(Tloc,
+            '$kolem_Fn_117'(Kolem_Fn_117P_Num3_V,
+                            Foodprepare,
+                            Kolem_Fn_117))
+   ->  not(foodPrepare(Kolem_Fn_117P_Num3_V, Foodprepare))
+   ).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',505).
+then(if(((not(loc_at(Kolem_Fn_117P_Num3_V, Tloc));not(loc_at(Foodprepare, Tloc))), some(Tloc, '$kolem_Fn_117'(Kolem_Fn_117P_Num3_V, Foodprepare, Kolem_Fn_117)))), not(foodPrepare(Kolem_Fn_117P_Num3_V, Foodprepare))).
+
+ /*   reactive_rule([  (not(loc_at(Kolem_Fn_117P_Num3_V, Tloc));not(loc_at(Foodprepare, Tloc))),
+                      some(Tloc,
+                           '$kolem_Fn_117'(Kolem_Fn_117P_Num3_V,
+                                           Foodprepare,
+                                           Kolem_Fn_117))
+                    ],
+                    [ not(foodPrepare(Kolem_Fn_117P_Num3_V,
+                                      Foodprepare))
+                    ]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',505).
+
+ /*  holds_at(at(Agent, Exists_Location), Time) :-
+       happens(foodPrepare(Agent, Food), Time),
+       some(Exists_Location,
+            '$kolem_Fn_117'(Agent, Food, Time)).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',505).
+
+ /*  fix_axiom_head(Time) ->
+       [ holds_at(at(Agent, Exists_Location), Time),
+          (->),
+         at(Agent, Exists_Location)
+       ].
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',505).
+
+ /*  axiom(at(Agent, Exists_Location),
+       [ foodPrepare(Agent, Food),
+         some(Exists_Location,
+              '$kolem_Fn_117'(Agent, Food, Time))
+       ]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',505).
+
+ /*  (   foodPrepare(Kolem_Fn_117P_Num3_V12, Foodprepare10),
+       some(Tloc9,
+            '$kolem_Fn_117'(Kolem_Fn_117P_Num3_V12,
+                            Foodprepare10,
+                            Kolem_Fn_11711))
+   ->  at(Kolem_Fn_117P_Num3_V12, Tloc9)
+   ).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',505).
+then(if((foodPrepare(Kolem_Fn_117P_Num3_V12, Foodprepare10), some(Tloc9, '$kolem_Fn_117'(Kolem_Fn_117P_Num3_V12, Foodprepare10, Kolem_Fn_11711)))), loc_at(Kolem_Fn_117P_Num3_V12, Tloc9)).
+
+ /*  reactive_rule([ happens(foodPrepare(Kolem_Fn_117P_Num3_V12,
+   				    Foodprepare10),
+   			Time_From,
+   			Time_Until),
+   		some(Tloc9,
+   		     '$kolem_Fn_117'(Kolem_Fn_117P_Num3_V12,
+   				     Foodprepare10,
+   				     Kolem_Fn_11711))
+   	      ],
+   	      [ holds(loc_at(Kolem_Fn_117P_Num3_V12,Tloc9),
+   		      Holds)
+   	      ]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',505).
+
+ /*  holds_at(at(Food, Exists_Location), Time) :-
+       happens(foodPrepare(Agent, Food), Time),
+       some(Exists_Location,
+            '$kolem_Fn_117'(Agent, Food, Time)).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',505).
+
+ /*  fix_axiom_head(Time) ->
+       [ holds_at(at(Food, Exists_Location), Time),
+          (->),
+         at(Food, Exists_Location)
+       ].
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',505).
+
+ /*  axiom(at(Food, Exists_Location),
+       [ foodPrepare(Agent, Food),
+         some(Exists_Location,
+              '$kolem_Fn_117'(Agent, Food, Time))
+       ]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',505).
+
+ /*  (   foodPrepare(Kolem_Fn_117P_Num3_V19, Foodprepare17),
+       some(Tloc16,
+            '$kolem_Fn_117'(Kolem_Fn_117P_Num3_V19,
+                            Foodprepare17,
+                            Kolem_Fn_11718))
+   ->  at(Foodprepare17, Tloc16)
+   ).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',505).
+then(if((foodPrepare(Kolem_Fn_117P_Num3_V19, Foodprepare17), some(Tloc16, '$kolem_Fn_117'(Kolem_Fn_117P_Num3_V19, Foodprepare17, Kolem_Fn_11718)))), loc_at(Foodprepare17, Tloc16)).
+
+ /*  reactive_rule([ happens(foodPrepare(Kolem_Fn_117P_Num3_V19,
+   				    Foodprepare17),
+   			Time_From20,
+   			Time_Until21),
+   		some(Tloc16,
+   		     '$kolem_Fn_117'(Kolem_Fn_117P_Num3_V19,
+   				     Foodprepare17,
+   				     Kolem_Fn_11718))
+   	      ],
+   	      [ holds(loc_at(Foodprepare17,Tloc16),
+   		      Holds22)
+   	      ]).
+ */
+
+
+% [cook,agent,food,time]
+% HoldsAt(BeCook1(cook),time) &
+% HoldsAt(KnowOrder(cook,agent,food),time) ->
+% Happens(FoodPrepare(cook,food),time).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',511).
+
+ /*  (   holds_at(beCook1(Cook), Time),
+       holds_at(knowOrder(Cook, Agent, Food), Time)
+   ->  happens(foodPrepare(Cook, Food), Time)
+   ).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',511).
+then(if((at(beCook1(Cook), Time), at(knowOrder(Cook, Agent, Food), Time))), happens(foodPrepare(Cook, Food), Time)).
+
+ /*  reactive_rule([ holds(beCook1(Cook),Time),
+   		holds(knowOrder(Cook,Agent,Food),
+   		      Time)
+   	      ],
+   	      [happens(foodPrepare(Cook,Food),Time)]).
+ */
+
+
+% [cook,food,time]
+% HoldsAt(BeCook1(cook),time) ->
+% Terminates(FoodPrepare(cook,food),
+%            BeCook1(cook),
+%            time).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',516).
+
+ /*  axiom(terminates(foodPrepare(Cook, Food), beCook1(Cook), Time),
+       [beCook1(Cook)]).
+ */
+
+ /*  beCook1(Becook1) ->
+       terminates(foodPrepare(Becook1, Foodprepare),
+                  beCook1(Becook1),
+                  Terminates).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',516).
+then(if(beCook1(Becook1)),
+     terminates(foodPrepare(Becook1,Foodprepare),
+		at(beCook1(Becook1),Terminates),
+		Terminates6)).
+
+ /*  reactive_rule([holds(beCook1(Becook1),Holds)],
+   	      [ terminates(foodPrepare(Becook1,Foodprepare),
+   			   at(beCook1(Becook1),Terminates),
+   			   Terminates6)
+   	      ]).
+ */
+
+
+% [cook,food,time]
+% HoldsAt(BeCook1(cook),time) ->
+% Initiates(FoodPrepare(cook,food),
+%           BeCook0(cook),
+%           time).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',522).
+
+ /*  axiom(initiates(foodPrepare(Cook, Food), beCook0(Cook), Time),
+       [beCook1(Cook)]).
+ */
+
+ /*  beCook1(Becook1) ->
+       initiates(foodPrepare(Becook1, Foodprepare),
+                 beCook0(Becook1),
+                 Initiates).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',522).
+then(if(beCook1(Becook1)),
+     initiates(foodPrepare(Becook1,Foodprepare),
+	       at(beCook0(Becook1),Initiates),
+	       Initiates6)).
+
+ /*  reactive_rule([holds(beCook1(Becook1),Holds)],
+   	      [ initiates(foodPrepare(Becook1,Foodprepare),
+   			  at(beCook0(Becook1),Initiates),
+   			  Initiates6)
+   	      ]).
+ */
+
+% event Pay(agent,agent)
+ %  event(pay(agent,agent)).
+ %  event(pay(agent,agent)).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',526).
+actions([pay/2]).
+mpred_prop(pay(agent,agent),event).
+
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',529).
+% event Tip(agent,agent)
+ %  event(tip(agent,agent)).
+ %  event(tip(agent,agent)).
+actions([tip/2]).
+mpred_prop(tip(agent,agent),event).
+
+
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',531).
+% [agent,physobj,time]
+% Happens(LieOn(agent,physobj),time) ->
+% {room}% 
+%  HoldsAt(At(agent,room),time) &
+%  HoldsAt(At(physobj,room),time).
+ %  clausify_pnf=exists([Room],  (happens(lieOn(Agent, Physobj), Time)->holds_at(at(Agent, Room), Time), holds_at(at(Physobj, Room), Time))).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',533).
+
+ /*  not(happens(lieOn(Agent, Physobj), Time)) :-
+       (   not(holds_at(at(Agent, Exists_Room), Time))
+       ;   not(holds_at(at(Physobj, Exists_Room), Time))
+       ),
+       some(Exists_Room,
+            '$kolem_Fn_118'(Agent, Physobj, Time)).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',533).
+
+ /*  fix_axiom_head(Time) ->
+       [ not(happens(lieOn(Agent, Physobj), Time)),
+          (->),
+         not(lieOn(Agent, Physobj))
+       ].
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',533).
+
+ /*  axiom(not(lieOn(Agent, Physobj)),
+       [  (not(at(Agent, Exists_Room));not(at(Physobj, Exists_Room))),
+         some(Exists_Room,
+              '$kolem_Fn_118'(Agent, Physobj, Time))
+       ]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',533).
+
+ /*  (   (   not(at(Kolem_Fn_118P_Num3_V, Tloc))
+       ;   not(at(Lieon, Tloc))
+       ),
+       some(Tloc,
+            '$kolem_Fn_118'(Kolem_Fn_118P_Num3_V,
+                            Lieon,
+                            Kolem_Fn_118))
+   ->  not(lieOn(Kolem_Fn_118P_Num3_V, Lieon))
+   ).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',533).
+then(if(((not(loc_at(Kolem_Fn_118P_Num3_V, Tloc));not(loc_at(Lieon, Tloc))), some(Tloc, '$kolem_Fn_118'(Kolem_Fn_118P_Num3_V, Lieon, Kolem_Fn_118)))), not(lieOn(Kolem_Fn_118P_Num3_V, Lieon))).
+
+ /*   reactive_rule([  (not(loc_at(Kolem_Fn_118P_Num3_V, Tloc));not(loc_at(Lieon, Tloc))),
+                      some(Tloc,
+                           '$kolem_Fn_118'(Kolem_Fn_118P_Num3_V,
+                                           Lieon,
+                                           Kolem_Fn_118))
+                    ],
+                    [not(lieOn(Kolem_Fn_118P_Num3_V, Lieon))]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',533).
+
+ /*  holds_at(at(Agent, Exists_Room), Time) :-
+       happens(lieOn(Agent, Physobj), Time),
+       some(Exists_Room,
+            '$kolem_Fn_118'(Agent, Physobj, Time)).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',533).
+
+ /*  fix_axiom_head(Time) ->
+       [ holds_at(at(Agent, Exists_Room), Time),
+          (->),
+         at(Agent, Exists_Room)
+       ].
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',533).
+
+ /*  axiom(at(Agent, Exists_Room),
+       [ lieOn(Agent, Physobj),
+         some(Exists_Room,
+              '$kolem_Fn_118'(Agent, Physobj, Time))
+       ]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',533).
+
+ /*  (   lieOn(Kolem_Fn_118P_Num3_V12, Lieon10),
+       some(Tloc9,
+            '$kolem_Fn_118'(Kolem_Fn_118P_Num3_V12,
+                            Lieon10,
+                            Kolem_Fn_11811))
+   ->  at(Kolem_Fn_118P_Num3_V12, Tloc9)
+   ).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',533).
+then(if((lieOn(Kolem_Fn_118P_Num3_V12, Lieon10), some(Tloc9, '$kolem_Fn_118'(Kolem_Fn_118P_Num3_V12, Lieon10, Kolem_Fn_11811)))), loc_at(Kolem_Fn_118P_Num3_V12, Tloc9)).
+
+ /*  reactive_rule([ happens(lieOn(Kolem_Fn_118P_Num3_V12,
+   			      Lieon10),
+   			Time_From,
+   			Time_Until),
+   		some(Tloc9,
+   		     '$kolem_Fn_118'(Kolem_Fn_118P_Num3_V12,
+   				     Lieon10,
+   				     Kolem_Fn_11811))
+   	      ],
+   	      [ holds(loc_at(Kolem_Fn_118P_Num3_V12,Tloc9),
+   		      Holds)
+   	      ]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',533).
+
+ /*  holds_at(at(Physobj, Exists_Room), Time) :-
+       happens(lieOn(Agent, Physobj), Time),
+       some(Exists_Room,
+            '$kolem_Fn_118'(Agent, Physobj, Time)).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',533).
+
+ /*  fix_axiom_head(Time) ->
+       [ holds_at(at(Physobj, Exists_Room), Time),
+          (->),
+         at(Physobj, Exists_Room)
+       ].
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',533).
+
+ /*  axiom(at(Physobj, Exists_Room),
+       [ lieOn(Agent, Physobj),
+         some(Exists_Room,
+              '$kolem_Fn_118'(Agent, Physobj, Time))
+       ]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',533).
+
+ /*  (   lieOn(Kolem_Fn_118P_Num3_V19, Lieon17),
+       some(Tloc16,
+            '$kolem_Fn_118'(Kolem_Fn_118P_Num3_V19,
+                            Lieon17,
+                            Kolem_Fn_11818))
+   ->  at(Lieon17, Tloc16)
+   ).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',533).
+then(if((lieOn(Kolem_Fn_118P_Num3_V19, Lieon17), some(Tloc16, '$kolem_Fn_118'(Kolem_Fn_118P_Num3_V19, Lieon17, Kolem_Fn_11818)))), loc_at(Lieon17, Tloc16)).
+
+ /*  reactive_rule([ happens(lieOn(Kolem_Fn_118P_Num3_V19,
+   			      Lieon17),
+   			Time_From20,
+   			Time_Until21),
+   		some(Tloc16,
+   		     '$kolem_Fn_118'(Kolem_Fn_118P_Num3_V19,
+   				     Lieon17,
+   				     Kolem_Fn_11818))
+   	      ],
+   	      [holds(loc_at(Lieon17,Tloc16),Holds22)]).
+ */
+
+
+% [agent,physobj,time]
+% Happens(SitOn(agent,physobj),time) ->
+% {room}% 
+%  HoldsAt(At(agent,room),time) &
+%  HoldsAt(At(physobj,room),time).
+ %  clausify_pnf=exists([Room],  (happens(sitOn(Agent, Physobj), Time)->holds_at(at(Agent, Room), Time), holds_at(at(Physobj, Room), Time))).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',538).
+
+ /*  not(happens(sitOn(Agent, Physobj), Time)) :-
+       (   not(holds_at(at(Agent, Exists_Room), Time))
+       ;   not(holds_at(at(Physobj, Exists_Room), Time))
+       ),
+       some(Exists_Room,
+            '$kolem_Fn_119'(Agent, Physobj, Time)).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',538).
+
+ /*  fix_axiom_head(Time) ->
+       [ not(happens(sitOn(Agent, Physobj), Time)),
+          (->),
+         not(sitOn(Agent, Physobj))
+       ].
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',538).
+
+ /*  axiom(not(sitOn(Agent, Physobj)),
+       [  (not(at(Agent, Exists_Room));not(at(Physobj, Exists_Room))),
+         some(Exists_Room,
+              '$kolem_Fn_119'(Agent, Physobj, Time))
+       ]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',538).
+
+ /*  (   (   not(at(Kolem_Fn_119P_Num3_V, Tloc))
+       ;   not(at(Siton, Tloc))
+       ),
+       some(Tloc,
+            '$kolem_Fn_119'(Kolem_Fn_119P_Num3_V,
+                            Siton,
+                            Kolem_Fn_119))
+   ->  not(sitOn(Kolem_Fn_119P_Num3_V, Siton))
+   ).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',538).
+then(if(((not(loc_at(Kolem_Fn_119P_Num3_V, Tloc));not(loc_at(Siton, Tloc))), some(Tloc, '$kolem_Fn_119'(Kolem_Fn_119P_Num3_V, Siton, Kolem_Fn_119)))), not(sitOn(Kolem_Fn_119P_Num3_V, Siton))).
+
+ /*   reactive_rule([  (not(loc_at(Kolem_Fn_119P_Num3_V, Tloc));not(loc_at(Siton, Tloc))),
+                      some(Tloc,
+                           '$kolem_Fn_119'(Kolem_Fn_119P_Num3_V,
+                                           Siton,
+                                           Kolem_Fn_119))
+                    ],
+                    [not(sitOn(Kolem_Fn_119P_Num3_V, Siton))]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',538).
+
+ /*  holds_at(at(Agent, Exists_Room), Time) :-
+       happens(sitOn(Agent, Physobj), Time),
+       some(Exists_Room,
+            '$kolem_Fn_119'(Agent, Physobj, Time)).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',538).
+
+ /*  fix_axiom_head(Time) ->
+       [ holds_at(at(Agent, Exists_Room), Time),
+          (->),
+         at(Agent, Exists_Room)
+       ].
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',538).
+
+ /*  axiom(at(Agent, Exists_Room),
+       [ sitOn(Agent, Physobj),
+         some(Exists_Room,
+              '$kolem_Fn_119'(Agent, Physobj, Time))
+       ]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',538).
+
+ /*  (   sitOn(Kolem_Fn_119P_Num3_V12, Siton10),
+       some(Tloc9,
+            '$kolem_Fn_119'(Kolem_Fn_119P_Num3_V12,
+                            Siton10,
+                            Kolem_Fn_11911))
+   ->  at(Kolem_Fn_119P_Num3_V12, Tloc9)
+   ).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',538).
+then(if((sitOn(Kolem_Fn_119P_Num3_V12, Siton10), some(Tloc9, '$kolem_Fn_119'(Kolem_Fn_119P_Num3_V12, Siton10, Kolem_Fn_11911)))), loc_at(Kolem_Fn_119P_Num3_V12, Tloc9)).
+
+ /*  reactive_rule([ happens(sitOn(Kolem_Fn_119P_Num3_V12,
+   			      Siton10),
+   			Time_From,
+   			Time_Until),
+   		some(Tloc9,
+   		     '$kolem_Fn_119'(Kolem_Fn_119P_Num3_V12,
+   				     Siton10,
+   				     Kolem_Fn_11911))
+   	      ],
+   	      [ holds(loc_at(Kolem_Fn_119P_Num3_V12,Tloc9),
+   		      Holds)
+   	      ]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',538).
+
+ /*  holds_at(at(Physobj, Exists_Room), Time) :-
+       happens(sitOn(Agent, Physobj), Time),
+       some(Exists_Room,
+            '$kolem_Fn_119'(Agent, Physobj, Time)).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',538).
+
+ /*  fix_axiom_head(Time) ->
+       [ holds_at(at(Physobj, Exists_Room), Time),
+          (->),
+         at(Physobj, Exists_Room)
+       ].
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',538).
+
+ /*  axiom(at(Physobj, Exists_Room),
+       [ sitOn(Agent, Physobj),
+         some(Exists_Room,
+              '$kolem_Fn_119'(Agent, Physobj, Time))
+       ]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',538).
+
+ /*  (   sitOn(Kolem_Fn_119P_Num3_V19, Siton17),
+       some(Tloc16,
+            '$kolem_Fn_119'(Kolem_Fn_119P_Num3_V19,
+                            Siton17,
+                            Kolem_Fn_11918))
+   ->  at(Siton17, Tloc16)
+   ).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',538).
+then(if((sitOn(Kolem_Fn_119P_Num3_V19, Siton17), some(Tloc16, '$kolem_Fn_119'(Kolem_Fn_119P_Num3_V19, Siton17, Kolem_Fn_11918)))), loc_at(Siton17, Tloc16)).
+
+ /*  reactive_rule([ happens(sitOn(Kolem_Fn_119P_Num3_V19,
+   			      Siton17),
+   			Time_From20,
+   			Time_Until21),
+   		some(Tloc16,
+   		     '$kolem_Fn_119'(Kolem_Fn_119P_Num3_V19,
+   				     Siton17,
+   				     Kolem_Fn_11918))
+   	      ],
+   	      [holds(loc_at(Siton17,Tloc16),Holds22)]).
+ */
+
+% event LieOn(agent,physobj)
+ %  event(lieOn(agent,physobj)).
+ %  event(lieOn(agent,physobj)).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',542).
+actions([lieOn/2]).
+mpred_prop(lieOn(agent,physobj),event).
+
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',545).
+% event SitOn(agent,physobj)
+ %  event(sitOn(agent,physobj)).
+ %  event(sitOn(agent,physobj)).
+actions([sitOn/2]).
+mpred_prop(sitOn(agent,physobj),event).
+
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',547).
+% event RiseFrom(agent,physobj)
+ %  event(riseFrom(agent,physobj)).
+ %  event(riseFrom(agent,physobj)).
+actions([riseFrom/2]).
+mpred_prop(riseFrom(agent,physobj),event).
+
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',549).
+% fluent LyingOn(agent,physobj)
+ %  fluent(lyingOn(agent,physobj)).
+ %  fluent(lyingOn(agent,physobj)).
+fluents([lyingOn/2]).
+mpred_prop(lyingOn(agent,physobj),fluent).
+
+% fluent SittingOn(agent,physobj)
+ %  fluent(sittingOn(agent,physobj)).
+ %  fluent(sittingOn(agent,physobj)).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',549).
+fluents([sittingOn/2]).
+mpred_prop(sittingOn(agent,physobj),fluent).
+
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',551).
+% fluent Standing(agent)
+ %  fluent(standing(agent)).
+ %  fluent(standing(agent)).
+fluents([standing/1]).
+mpred_prop(standing(agent),fluent).
+
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',553).
+% fluent Lying(agent)
+ %  fluent(lying(agent)).
+ %  fluent(lying(agent)).
+fluents([lying/1]).
+mpred_prop(lying(agent),fluent).
+
+% fluent Sitting(agent)
+ %  fluent(sitting(agent)).
+ %  fluent(sitting(agent)).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',553).
+fluents([sitting/1]).
+mpred_prop(sitting(agent),fluent).
+
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',555).
+% noninertial Lying
+noninertial(lying).
+
+% noninertial Sitting
+noninertial(sitting).
+
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',558).
+% xor Lying, Sitting, Standing
+ %  ==>xor[lying,sitting,standing].
+==>xor[lying,sitting,standing].
+
+
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',560).
+% [agent,physobj,time]
+% HoldsAt(LyingOn(agent,physobj),time) ->
+% HoldsAt(Lying(agent),time).
+
+ /*  holds_at(lyingOn(Agent, Physobj), Time) ->
+       holds_at(lying(Agent), Time).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',560).
+then(if(at(lyingOn(Agent,Physobj),Time)),
+     at(lying(Agent),Time)).
+
+ /*  reactive_rule([holds(lyingOn(Agent,Physobj),Time)],
+   	      [holds(lying(Agent),Time)]).
+ */
+
+
+% [agent,physobj,time]
+% HoldsAt(SittingOn(agent,physobj),time) ->
+% HoldsAt(Sitting(agent),time).
+
+ /*  holds_at(sittingOn(Agent, Physobj), Time) ->
+       holds_at(sitting(Agent), Time).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',565).
+then(if(at(sittingOn(Agent,Physobj),Time)),
+     at(sitting(Agent),Time)).
+
+ /*  reactive_rule([holds(sittingOn(Agent,Physobj),Time)],
+   	      [holds(sitting(Agent),Time)]).
+ */
+
+
+% [agent,physobj1,physobj2,time]
+% HoldsAt(LyingOn(agent,physobj1),time) &
+% HoldsAt(LyingOn(agent,physobj2),time) ->
+% physobj1=physobj2.
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',569).
+
+ /*  (   holds_at(lyingOn(Agent, Physobj1), Time),
+       holds_at(lyingOn(Agent, Physobj2), Time)
+   ->  equals(Physobj1, Physobj2)
+   ).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',569).
+then(if((at(lyingOn(Agent, Physobj1), Time), at(lyingOn(Agent, Physobj2), Time))), equals(Physobj1, Physobj2)).
+
+ /*  reactive_rule([ holds(lyingOn(Agent,Physobj1),Time),
+   		holds(lyingOn(Agent,Physobj2),Time)
+   	      ],
+   	      [equals(Physobj1,Physobj2)]).
+ */
+
+
+% [agent,physobj1,physobj2,time]
+% HoldsAt(SittingOn(agent,physobj1),time) &
+% HoldsAt(SittingOn(agent,physobj2),time) ->
+% physobj1=physobj2.
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',574).
+
+ /*  (   holds_at(sittingOn(Agent, Physobj1), Time),
+       holds_at(sittingOn(Agent, Physobj2), Time)
+   ->  equals(Physobj1, Physobj2)
+   ).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',574).
+then(if((at(sittingOn(Agent, Physobj1), Time), at(sittingOn(Agent, Physobj2), Time))), equals(Physobj1, Physobj2)).
+
+ /*  reactive_rule([ holds(sittingOn(Agent,Physobj1),Time),
+   		holds(sittingOn(Agent,Physobj2),Time)
+   	      ],
+   	      [equals(Physobj1,Physobj2)]).
+ */
+
+
+% [agent,physobj,time]
+% HoldsAt(Standing(agent),time) ->
+% Initiates(LieOn(agent,physobj),
+%           LyingOn(agent,physobj),
+%           time).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',579).
+
+ /*  axiom(initiates(lieOn(Agent, Physobj), lyingOn(Agent, Physobj), Time),
+       [standing(Agent)]).
+ */
+
+ /*  standing(Standing) ->
+       initiates(lieOn(Standing, Lieon),
+                 lyingOn(Standing, Lieon),
+                 Initiates).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',579).
+then(if(standing(Standing)),
+     initiates(lieOn(Standing,Lieon),
+	       at(lyingOn(Standing,Lieon),Initiates),
+	       Initiates6)).
+
+ /*  reactive_rule([holds(standing(Standing),Holds)],
+   	      [ initiates(lieOn(Standing,Lieon),
+   			  at(lyingOn(Standing,Lieon),
+   			     Initiates),
+   			  Initiates6)
+   	      ]).
+ */
+
+
+% [agent,physobj,time]
+% Terminates(LieOn(agent,physobj),
+%            Standing(agent),
+%            time).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',585).
+
+ /*  axiom(terminates(lieOn(Agent, Physobj), standing(Agent), Time),
+       []).
+ */
+
+ /*  terminates(lieOn(Standing,Lieon),
+   	   standing(Standing),
+   	   Terminates).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',585).
+terminates(lieOn(Standing,Lieon),standing(Standing)).
+
+ /*  terminated(happens(lieOn(Standing,Lieon),
+   		   Time_From,
+   		   Time_Until),
+   	   standing(Standing),
+   	   []).
+ */
+
+
+% [agent,physobj,time]
+% HoldsAt(Standing(agent),time) ->
+% Initiates(SitOn(agent,physobj),
+%           SittingOn(agent,physobj),
+%           time).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',590).
+
+ /*  axiom(initiates(sitOn(Agent, Physobj), sittingOn(Agent, Physobj), Time),
+       [standing(Agent)]).
+ */
+
+ /*  standing(Standing) ->
+       initiates(sitOn(Standing, Siton),
+                 sittingOn(Standing, Siton),
+                 Initiates).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',590).
+then(if(standing(Standing)),
+     initiates(sitOn(Standing,Siton),
+	       at(sittingOn(Standing,Siton),
+		  Initiates),
+	       Initiates6)).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',590).
+
+ /*  reactive_rule([holds(standing(Standing),Holds)],
+   	      [ initiates(sitOn(Standing,Siton),
+   			  at(sittingOn(Standing,Siton),
+   			     Initiates),
+   			  Initiates6)
+   	      ]).
+ */
+
+
+% [agent,physobj,time]
+% Terminates(SitOn(agent,physobj),
+%            Standing(agent),
+%            time).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',596).
+
+ /*  axiom(terminates(sitOn(Agent, Physobj), standing(Agent), Time),
+       []).
+ */
+
+ /*  terminates(sitOn(Standing,Siton),
+   	   standing(Standing),
+   	   Terminates).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',596).
+terminates(sitOn(Standing,Siton),standing(Standing)).
+
+ /*  terminated(happens(sitOn(Standing,Siton),
+   		   Time_From,
+   		   Time_Until),
+   	   standing(Standing),
+   	   []).
+ */
+
+
+% [agent,physobj,time]
+% (HoldsAt(SittingOn(agent,physobj),time) |
+%  HoldsAt(LyingOn(agent,physobj),time)) ->
+% Initiates(RiseFrom(agent,physobj),
+%           Standing(agent),
+%           time).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',601).
+
+ /*  axiom(initiates(riseFrom(Agent, Physobj), standing(Agent), Time),
+       [  (sittingOn(Agent, Physobj);lyingOn(Agent, Physobj))
+       ]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',601).
+
+ /*  sittingOn(Standing, Sittingon);lyingOn(Standing, Sittingon) ->
+       initiates(riseFrom(Standing, Sittingon),
+                 standing(Standing),
+                 Initiates).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',601).
+ then(if((sittingOn(Standing, Sittingon);lyingOn(Standing, Sittingon))),
+        initiates(riseFrom(Standing, Sittingon),
+                  at(standing(Standing), Initiates),
+                  Initiates6)).
+
+ /*   reactive_rule([  (sittingOn(Standing, Sittingon);lyingOn(Standing, Sittingon))
+                    ],
+                    [ initiates(riseFrom(Standing, Sittingon),
+                                at(standing(Standing), Initiates),
+                                Initiates6)
+                    ]).
+ */
+
+
+% [agent,physobj,time]
+% HoldsAt(LyingOn(agent,physobj),time) ->
+% Terminates(RiseFrom(agent,physobj),
+%            LyingOn(agent,physobj),
+%            time).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',608).
+
+ /*  axiom(terminates(riseFrom(Agent, Physobj), lyingOn(Agent, Physobj), Time),
+       [lyingOn(Agent, Physobj)]).
+ */
+
+ /*  lyingOn(A, Lyingon) ->
+       terminates(riseFrom(A, Lyingon),
+                  lyingOn(A, Lyingon),
+                  Terminates).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',608).
+then(if(lyingOn(A,Lyingon)),
+     terminates(riseFrom(A,Lyingon),
+		at(lyingOn(A,Lyingon),Terminates),
+		Terminates5)).
+
+ /*  reactive_rule([holds(lyingOn(A,Lyingon),Holds)],
+   	      [ terminates(riseFrom(A,Lyingon),
+   			   at(lyingOn(A,Lyingon),
+   			      Terminates),
+   			   Terminates5)
+   	      ]).
+ */
+
+
+% [agent,physobj,time]
+% HoldsAt(SittingOn(agent,physobj),time) ->
+% Terminates(RiseFrom(agent,physobj),
+%            SittingOn(agent,physobj),
+%            time).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',614).
+
+ /*  axiom(terminates(riseFrom(Agent, Physobj), sittingOn(Agent, Physobj), Time),
+       [sittingOn(Agent, Physobj)]).
+ */
+
+ /*  sittingOn(A, Sittingon) ->
+       terminates(riseFrom(A, Sittingon),
+                  sittingOn(A, Sittingon),
+                  Terminates).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',614).
+then(if(sittingOn(A,Sittingon)),
+     terminates(riseFrom(A,Sittingon),
+		at(sittingOn(A,Sittingon),Terminates),
+		Terminates5)).
+
+ /*  reactive_rule([holds(sittingOn(A,Sittingon),Holds)],
+   	      [ terminates(riseFrom(A,Sittingon),
+   			   at(sittingOn(A,Sittingon),
+   			      Terminates),
+   			   Terminates5)
+   	      ]).
+ */
+
+% event Greet(agent,agent)
+ %  event(greet(agent,agent)).
+ %  event(greet(agent,agent)).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',618).
+actions([greet/2]).
+mpred_prop(greet(agent,agent),event).
+
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',621).
+% event SayGoodbye(agent,agent)
+ %  event(sayGoodbye(agent,agent)).
+ %  event(sayGoodbye(agent,agent)).
+actions([sayGoodbye/2]).
+mpred_prop(sayGoodbye(agent,agent),event).
+
+
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',623).
+% [agent1,agent2,time]
+% Happens(Greet(agent1,agent2),time) ->
+% {location}% 
+% HoldsAt(At(agent1,location),time) &
+% HoldsAt(At(agent2,location),time).
+ %  clausify_pnf=exists([Location],  (happens(greet(Agent1, Agent2), Time)->holds_at(at(Agent1, Location), Time), holds_at(at(Agent2, Location), Time))).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',625).
+
+ /*  not(happens(greet(Agent1, Agent2), Time)) :-
+       (   not(holds_at(at(Agent1, Exists_Location), Time))
+       ;   not(holds_at(at(Agent2, Exists_Location), Time))
+       ),
+       some(Exists_Location,
+            '$kolem_Fn_120'(Agent1, Agent2, Time)).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',625).
+
+ /*  fix_axiom_head(Time) ->
+       [ not(happens(greet(Agent1, Agent2), Time)),
+          (->),
+         not(greet(Agent1, Agent2))
+       ].
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',625).
+
+ /*  axiom(not(greet(Agent1, Agent2)),
+       [  (not(at(Agent1, Exists_Location));not(at(Agent2, Exists_Location))),
+         some(Exists_Location,
+              '$kolem_Fn_120'(Agent1, Agent2, Time))
+       ]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',625).
+
+ /*  (   (   not(at(Kolem_Fn_120P_Num3_V, Tloc))
+       ;   not(at(Greet, Tloc))
+       ),
+       some(Tloc,
+            '$kolem_Fn_120'(Kolem_Fn_120P_Num3_V,
+                            Greet,
+                            Kolem_Fn_120))
+   ->  not(greet(Kolem_Fn_120P_Num3_V, Greet))
+   ).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',625).
+then(if(((not(loc_at(Kolem_Fn_120P_Num3_V, Tloc));not(loc_at(Greet, Tloc))), some(Tloc, '$kolem_Fn_120'(Kolem_Fn_120P_Num3_V, Greet, Kolem_Fn_120)))), not(greet(Kolem_Fn_120P_Num3_V, Greet))).
+
+ /*   reactive_rule([  (not(loc_at(Kolem_Fn_120P_Num3_V, Tloc));not(loc_at(Greet, Tloc))),
+                      some(Tloc,
+                           '$kolem_Fn_120'(Kolem_Fn_120P_Num3_V,
+                                           Greet,
+                                           Kolem_Fn_120))
+                    ],
+                    [not(greet(Kolem_Fn_120P_Num3_V, Greet))]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',625).
+
+ /*  holds_at(at(Agent1, Exists_Location), Time) :-
+       happens(greet(Agent1, Agent2), Time),
+       some(Exists_Location,
+            '$kolem_Fn_120'(Agent1, Agent2, Time)).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',625).
+
+ /*  fix_axiom_head(Time) ->
+       [ holds_at(at(Agent1, Exists_Location), Time),
+          (->),
+         at(Agent1, Exists_Location)
+       ].
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',625).
+
+ /*  axiom(at(Agent1, Exists_Location),
+       [ greet(Agent1, Agent2),
+         some(Exists_Location,
+              '$kolem_Fn_120'(Agent1, Agent2, Time))
+       ]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',625).
+
+ /*  (   greet(Kolem_Fn_120P_Num3_V12, Greet10),
+       some(Tloc9,
+            '$kolem_Fn_120'(Kolem_Fn_120P_Num3_V12,
+                            Greet10,
+                            Kolem_Fn_12011))
+   ->  at(Kolem_Fn_120P_Num3_V12, Tloc9)
+   ).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',625).
+then(if((greet(Kolem_Fn_120P_Num3_V12, Greet10), some(Tloc9, '$kolem_Fn_120'(Kolem_Fn_120P_Num3_V12, Greet10, Kolem_Fn_12011)))), loc_at(Kolem_Fn_120P_Num3_V12, Tloc9)).
+
+ /*  reactive_rule([ greet(Kolem_Fn_120P_Num3_V12,Greet10),
+   		some(Tloc9,
+   		     '$kolem_Fn_120'(Kolem_Fn_120P_Num3_V12,
+   				     Greet10,
+   				     Kolem_Fn_12011))
+   	      ],
+   	      [ holds(loc_at(Kolem_Fn_120P_Num3_V12,Tloc9),
+   		      Holds)
+   	      ]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',625).
+
+ /*  holds_at(at(Agent2, Exists_Location), Time) :-
+       happens(greet(Agent1, Agent2), Time),
+       some(Exists_Location,
+            '$kolem_Fn_120'(Agent1, Agent2, Time)).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',625).
+
+ /*  fix_axiom_head(Time) ->
+       [ holds_at(at(Agent2, Exists_Location), Time),
+          (->),
+         at(Agent2, Exists_Location)
+       ].
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',625).
+
+ /*  axiom(at(Agent2, Exists_Location),
+       [ greet(Agent1, Agent2),
+         some(Exists_Location,
+              '$kolem_Fn_120'(Agent1, Agent2, Time))
+       ]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',625).
+
+ /*  (   greet(Kolem_Fn_120P_Num3_V17, Greet15),
+       some(Tloc14,
+            '$kolem_Fn_120'(Kolem_Fn_120P_Num3_V17,
+                            Greet15,
+                            Kolem_Fn_12016))
+   ->  at(Greet15, Tloc14)
+   ).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',625).
+then(if((greet(Kolem_Fn_120P_Num3_V17, Greet15), some(Tloc14, '$kolem_Fn_120'(Kolem_Fn_120P_Num3_V17, Greet15, Kolem_Fn_12016)))), loc_at(Greet15, Tloc14)).
+
+ /*  reactive_rule([ greet(Kolem_Fn_120P_Num3_V17,Greet15),
+   		some(Tloc14,
+   		     '$kolem_Fn_120'(Kolem_Fn_120P_Num3_V17,
+   				     Greet15,
+   				     Kolem_Fn_12016))
+   	      ],
+   	      [holds(loc_at(Greet15,Tloc14),Holds18)]).
+ */
+
+
+% [agent1,agent2,time]
+% Happens(SayGoodbye(agent1,agent2),time) ->
+% {location}% 
+% HoldsAt(At(agent1,location),time) &
+% HoldsAt(At(agent2,location),time).
+ %  clausify_pnf=exists([Location],  (happens(sayGoodbye(Agent1, Agent2), Time)->holds_at(at(Agent1, Location), Time), holds_at(at(Agent2, Location), Time))).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',630).
+
+ /*  not(happens(sayGoodbye(Agent1, Agent2), Time)) :-
+       (   not(holds_at(at(Agent1, Exists_Location), Time))
+       ;   not(holds_at(at(Agent2, Exists_Location), Time))
+       ),
+       some(Exists_Location,
+            '$kolem_Fn_121'(Agent1, Agent2, Time)).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',630).
+
+ /*  fix_axiom_head(Time) ->
+       [ not(happens(sayGoodbye(Agent1, Agent2), Time)),
+          (->),
+         not(sayGoodbye(Agent1, Agent2))
+       ].
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',630).
+
+ /*  axiom(not(sayGoodbye(Agent1, Agent2)),
+       [  (not(at(Agent1, Exists_Location));not(at(Agent2, Exists_Location))),
+         some(Exists_Location,
+              '$kolem_Fn_121'(Agent1, Agent2, Time))
+       ]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',630).
+
+ /*  (   (   not(at(Kolem_Fn_121P_Num3_V, Tloc))
+       ;   not(at(Saygoodbye, Tloc))
+       ),
+       some(Tloc,
+            '$kolem_Fn_121'(Kolem_Fn_121P_Num3_V,
+                            Saygoodbye,
+                            Kolem_Fn_121))
+   ->  not(sayGoodbye(Kolem_Fn_121P_Num3_V, Saygoodbye))
+   ).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',630).
+then(if(((not(loc_at(Kolem_Fn_121P_Num3_V, Tloc));not(loc_at(Saygoodbye, Tloc))), some(Tloc, '$kolem_Fn_121'(Kolem_Fn_121P_Num3_V, Saygoodbye, Kolem_Fn_121)))), not(sayGoodbye(Kolem_Fn_121P_Num3_V, Saygoodbye))).
+
+ /*   reactive_rule([  (not(loc_at(Kolem_Fn_121P_Num3_V, Tloc));not(loc_at(Saygoodbye, Tloc))),
+                      some(Tloc,
+                           '$kolem_Fn_121'(Kolem_Fn_121P_Num3_V,
+                                           Saygoodbye,
+                                           Kolem_Fn_121))
+                    ],
+                    [ not(sayGoodbye(Kolem_Fn_121P_Num3_V, Saygoodbye))
+                    ]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',630).
+
+ /*  holds_at(at(Agent1, Exists_Location), Time) :-
+       happens(sayGoodbye(Agent1, Agent2), Time),
+       some(Exists_Location,
+            '$kolem_Fn_121'(Agent1, Agent2, Time)).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',630).
+
+ /*  fix_axiom_head(Time) ->
+       [ holds_at(at(Agent1, Exists_Location), Time),
+          (->),
+         at(Agent1, Exists_Location)
+       ].
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',630).
+
+ /*  axiom(at(Agent1, Exists_Location),
+       [ sayGoodbye(Agent1, Agent2),
+         some(Exists_Location,
+              '$kolem_Fn_121'(Agent1, Agent2, Time))
+       ]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',630).
+
+ /*  (   sayGoodbye(Kolem_Fn_121P_Num3_V12, Saygoodbye10),
+       some(Tloc9,
+            '$kolem_Fn_121'(Kolem_Fn_121P_Num3_V12,
+                            Saygoodbye10,
+                            Kolem_Fn_12111))
+   ->  at(Kolem_Fn_121P_Num3_V12, Tloc9)
+   ).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',630).
+then(if((sayGoodbye(Kolem_Fn_121P_Num3_V12, Saygoodbye10), some(Tloc9, '$kolem_Fn_121'(Kolem_Fn_121P_Num3_V12, Saygoodbye10, Kolem_Fn_12111)))), loc_at(Kolem_Fn_121P_Num3_V12, Tloc9)).
+
+ /*  reactive_rule([ sayGoodbye(Kolem_Fn_121P_Num3_V12,
+   			   Saygoodbye10),
+   		some(Tloc9,
+   		     '$kolem_Fn_121'(Kolem_Fn_121P_Num3_V12,
+   				     Saygoodbye10,
+   				     Kolem_Fn_12111))
+   	      ],
+   	      [ holds(loc_at(Kolem_Fn_121P_Num3_V12,Tloc9),
+   		      Holds)
+   	      ]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',630).
+
+ /*  holds_at(at(Agent2, Exists_Location), Time) :-
+       happens(sayGoodbye(Agent1, Agent2), Time),
+       some(Exists_Location,
+            '$kolem_Fn_121'(Agent1, Agent2, Time)).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',630).
+
+ /*  fix_axiom_head(Time) ->
+       [ holds_at(at(Agent2, Exists_Location), Time),
+          (->),
+         at(Agent2, Exists_Location)
+       ].
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',630).
+
+ /*  axiom(at(Agent2, Exists_Location),
+       [ sayGoodbye(Agent1, Agent2),
+         some(Exists_Location,
+              '$kolem_Fn_121'(Agent1, Agent2, Time))
+       ]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',630).
+
+ /*  (   sayGoodbye(Kolem_Fn_121P_Num3_V17, Saygoodbye15),
+       some(Tloc14,
+            '$kolem_Fn_121'(Kolem_Fn_121P_Num3_V17,
+                            Saygoodbye15,
+                            Kolem_Fn_12116))
+   ->  at(Saygoodbye15, Tloc14)
+   ).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',630).
+then(if((sayGoodbye(Kolem_Fn_121P_Num3_V17, Saygoodbye15), some(Tloc14, '$kolem_Fn_121'(Kolem_Fn_121P_Num3_V17, Saygoodbye15, Kolem_Fn_12116)))), loc_at(Saygoodbye15, Tloc14)).
+
+ /*  reactive_rule([ sayGoodbye(Kolem_Fn_121P_Num3_V17,
+   			   Saygoodbye15),
+   		some(Tloc14,
+   		     '$kolem_Fn_121'(Kolem_Fn_121P_Num3_V17,
+   				     Saygoodbye15,
+   				     Kolem_Fn_12116))
+   	      ],
+   	      [ holds(loc_at(Saygoodbye15,Tloc14),
+   		      Holds18)
+   	      ]).
+ */
+
+% event Order(agent,agent,physobj)
+ %  event(order(agent,agent,physobj)).
+ %  event(order(agent,agent,physobj)).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',634).
+actions([order/3]).
+mpred_prop(order(agent,agent,physobj),event).
+
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',637).
+% fluent KnowOrder(agent,agent,physobj)
+ %  fluent(knowOrder(agent,agent,physobj)).
+ %  fluent(knowOrder(agent,agent,physobj)).
+fluents([knowOrder/3]).
+mpred_prop(knowOrder(agent,agent,physobj),fluent).
+
+
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',639).
+% [agent1,agent2,physobj,time]
+% Initiates(Order(agent1,agent2,physobj),
+%           KnowOrder(agent2,agent1,physobj),
+%           time).
+
+ /*  axiom(initiates(order(Agent1, Agent2, Physobj), knowOrder(Agent2, Agent1, Physobj), Time),
+       []).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',639).
+
+ /*  initiates(order(OrderP_Num3_V,
+   		KnoworderP_Num3_V,
+   		Order),
+   	  knowOrder(KnoworderP_Num3_V,
+   		    OrderP_Num3_V,
+   		    Order),
+   	  Initiates).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',639).
+initiates(order(OrderP_Num3_V,
+		KnoworderP_Num3_V,
+		Order),
+	  knowOrder(KnoworderP_Num3_V,
+		    OrderP_Num3_V,
+		    Order)).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',639).
+
+ /*  initiated(happens(order(OrderP_Num3_V,
+   			KnoworderP_Num3_V,
+   			Order),
+   		  Time_From,
+   		  Time_Until),
+   	  knowOrder(KnoworderP_Num3_V,
+   		    OrderP_Num3_V,
+   		    Order),
+   	  []).
+ */
+
+
+% [agent1,agent2,physobj,time]
+% Happens(Order(agent1,agent2,physobj),time) ->
+% {location}% 
+% HoldsAt(At(agent1,location),time) &
+% HoldsAt(At(agent2,location),time).
+ %  clausify_pnf=exists([Location],  (happens(order(Agent1, Agent2, Physobj), Time)->holds_at(at(Agent1, Location), Time), holds_at(at(Agent2, Location), Time))).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',645).
+
+ /*  not(happens(order(Agent1, Agent2, Physobj), Time)) :-
+       (   not(holds_at(at(Agent1, Exists_Location), Time))
+       ;   not(holds_at(at(Agent2, Exists_Location), Time))
+       ),
+       some(Exists_Location,
+            '$kolem_Fn_122'(Agent1, Agent2, Physobj, Time)).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',645).
+
+ /*  fix_axiom_head(Time) ->
+       [ not(happens(order(Agent1, Agent2, Physobj), Time)),
+          (->),
+         not(order(Agent1, Agent2, Physobj))
+       ].
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',645).
+
+ /*  axiom(not(order(Agent1, Agent2, Physobj)),
+       [  (not(at(Agent1, Exists_Location));not(at(Agent2, Exists_Location))),
+         some(Exists_Location,
+              '$kolem_Fn_122'(Agent1, Agent2, Physobj, Time))
+       ]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',645).
+
+ /*  (   (   not(at(Kolem_Fn_122P_Num4_V, Tloc))
+       ;   not(at(A, Tloc))
+       ),
+       some(Tloc,
+            '$kolem_Fn_122'(Kolem_Fn_122P_Num4_V,
+                            A,
+                            Order,
+                            Kolem_Fn_122))
+   ->  not(order(Kolem_Fn_122P_Num4_V, A, Order))
+   ).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',645).
+then(if(((not(loc_at(Kolem_Fn_122P_Num4_V, Tloc));not(loc_at(A, Tloc))), some(Tloc, '$kolem_Fn_122'(Kolem_Fn_122P_Num4_V, A, Order, Kolem_Fn_122)))), not(order(Kolem_Fn_122P_Num4_V, A, Order))).
+
+ /*   reactive_rule([  (not(loc_at(Kolem_Fn_122P_Num4_V, Tloc));not(loc_at(A, Tloc))),
+                      some(Tloc,
+                           '$kolem_Fn_122'(Kolem_Fn_122P_Num4_V,
+                                           A,
+                                           Order,
+                                           Kolem_Fn_122))
+                    ],
+                    [not(order(Kolem_Fn_122P_Num4_V, A, Order))]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',645).
+
+ /*  holds_at(at(Agent1, Exists_Location), Time) :-
+       happens(order(Agent1, Agent2, Physobj), Time),
+       some(Exists_Location,
+            '$kolem_Fn_122'(Agent1, Agent2, Physobj, Time)).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',645).
+
+ /*  fix_axiom_head(Time) ->
+       [ holds_at(at(Agent1, Exists_Location), Time),
+          (->),
+         at(Agent1, Exists_Location)
+       ].
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',645).
+
+ /*  axiom(at(Agent1, Exists_Location),
+       [ order(Agent1, Agent2, Physobj),
+         some(Exists_Location,
+              '$kolem_Fn_122'(Agent1, Agent2, Physobj, Time))
+       ]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',645).
+
+ /*  (   order(OrderP_Num3_V, A, Order11),
+       some(Tloc10,
+            '$kolem_Fn_122'(OrderP_Num3_V,
+                            A,
+                            Order11,
+                            Kolem_Fn_12213))
+   ->  at(OrderP_Num3_V, Tloc10)
+   ).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',645).
+then(if((order(OrderP_Num3_V, A, Order11), some(Tloc10, '$kolem_Fn_122'(OrderP_Num3_V, A, Order11, Kolem_Fn_12213)))), loc_at(OrderP_Num3_V, Tloc10)).
+
+ /*  reactive_rule([ happens(order(OrderP_Num3_V,
+   			      A,
+   			      Order11),
+   			Time_From,
+   			Time_Until),
+   		some(Tloc10,
+   		     '$kolem_Fn_122'(OrderP_Num3_V,
+   				     A,
+   				     Order11,
+   				     Kolem_Fn_12213))
+   	      ],
+   	      [ holds(loc_at(OrderP_Num3_V,Tloc10),
+   		      Holds)
+   	      ]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',645).
+
+ /*  holds_at(at(Agent2, Exists_Location), Time) :-
+       happens(order(Agent1, Agent2, Physobj), Time),
+       some(Exists_Location,
+            '$kolem_Fn_122'(Agent1, Agent2, Physobj, Time)).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',645).
+
+ /*  fix_axiom_head(Time) ->
+       [ holds_at(at(Agent2, Exists_Location), Time),
+          (->),
+         at(Agent2, Exists_Location)
+       ].
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',645).
+
+ /*  axiom(at(Agent2, Exists_Location),
+       [ order(Agent1, Agent2, Physobj),
+         some(Exists_Location,
+              '$kolem_Fn_122'(Agent1, Agent2, Physobj, Time))
+       ]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',645).
+
+ /*  (   order(OrderP_Num3_V19, A, Order18),
+       some(Tloc17,
+            '$kolem_Fn_122'(OrderP_Num3_V19,
+                            A,
+                            Order18,
+                            Kolem_Fn_12220))
+   ->  at(A, Tloc17)
+   ).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',645).
+then(if((order(OrderP_Num3_V19, A, Order18), some(Tloc17, '$kolem_Fn_122'(OrderP_Num3_V19, A, Order18, Kolem_Fn_12220)))), loc_at(A, Tloc17)).
+
+ /*  reactive_rule([ happens(order(OrderP_Num3_V19,
+   			      A,
+   			      Order18),
+   			Time_From21,
+   			Time_Until22),
+   		some(Tloc17,
+   		     '$kolem_Fn_122'(OrderP_Num3_V19,
+   				     A,
+   				     Order18,
+   				     Kolem_Fn_12220))
+   	      ],
+   	      [holds(loc_at(A,Tloc17),Holds23)]).
+ */
+
+% event Request(agent,agent,physobj)
+ %  event(request(agent,agent,physobj)).
+ %  event(request(agent,agent,physobj)).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',649).
+actions([request/3]).
+mpred_prop(request(agent,agent,physobj),event).
+
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',652).
+% fluent KnowRequest(agent,agent,physobj)
+ %  fluent(knowRequest(agent,agent,physobj)).
+ %  fluent(knowRequest(agent,agent,physobj)).
+fluents([knowRequest/3]).
+mpred_prop(knowRequest(agent,agent,physobj),fluent).
+
+
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',654).
+% [agent1,agent2,physobj,time]
+% Initiates(Request(agent1,agent2,physobj),
+%           KnowRequest(agent2,agent1,physobj),
+%           time).
+
+ /*  axiom(initiates(request(Agent1, Agent2, Physobj), knowRequest(Agent2, Agent1, Physobj), Time),
+       []).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',654).
+
+ /*  initiates(request(RequestP_Num3_V,
+   		  KnowrequestP_Num3_V,
+   		  Request),
+   	  knowRequest(KnowrequestP_Num3_V,
+   		      RequestP_Num3_V,
+   		      Request),
+   	  Initiates).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',654).
+initiates(request(RequestP_Num3_V,
+		  KnowrequestP_Num3_V,
+		  Request),
+	  knowRequest(KnowrequestP_Num3_V,
+		      RequestP_Num3_V,
+		      Request)).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',654).
+
+ /*  initiated(happens(request(RequestP_Num3_V,
+   			  KnowrequestP_Num3_V,
+   			  Request),
+   		  Time_From,
+   		  Time_Until),
+   	  knowRequest(KnowrequestP_Num3_V,
+   		      RequestP_Num3_V,
+   		      Request),
+   	  []).
+ */
+
+
+% [agent1,agent2,physobj,time]
+% Happens(Request(agent1,agent2,physobj),time) ->
+% {location}% 
+% HoldsAt(At(agent1,location),time) &
+% HoldsAt(At(agent2,location),time).
+ %  clausify_pnf=exists([Location],  (happens(request(Agent1, Agent2, Physobj), Time)->holds_at(at(Agent1, Location), Time), holds_at(at(Agent2, Location), Time))).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',660).
+
+ /*  not(happens(request(Agent1, Agent2, Physobj), Time)) :-
+       (   not(holds_at(at(Agent1, Exists_Location), Time))
+       ;   not(holds_at(at(Agent2, Exists_Location), Time))
+       ),
+       some(Exists_Location,
+            '$kolem_Fn_123'(Agent1, Agent2, Physobj, Time)).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',660).
+
+ /*  fix_axiom_head(Time) ->
+       [ not(happens(request(Agent1, Agent2, Physobj), Time)),
+          (->),
+         not(request(Agent1, Agent2, Physobj))
+       ].
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',660).
+
+ /*  axiom(not(request(Agent1, Agent2, Physobj)),
+       [  (not(at(Agent1, Exists_Location));not(at(Agent2, Exists_Location))),
+         some(Exists_Location,
+              '$kolem_Fn_123'(Agent1, Agent2, Physobj, Time))
+       ]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',660).
+
+ /*  (   (   not(at(Kolem_Fn_123P_Num4_V, Tloc))
+       ;   not(at(A, Tloc))
+       ),
+       some(Tloc,
+            '$kolem_Fn_123'(Kolem_Fn_123P_Num4_V,
+                            A,
+                            Request,
+                            Kolem_Fn_123))
+   ->  not(request(Kolem_Fn_123P_Num4_V, A, Request))
+   ).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',660).
+then(if(((not(loc_at(Kolem_Fn_123P_Num4_V, Tloc));not(loc_at(A, Tloc))), some(Tloc, '$kolem_Fn_123'(Kolem_Fn_123P_Num4_V, A, Request, Kolem_Fn_123)))), not(request(Kolem_Fn_123P_Num4_V, A, Request))).
+
+ /*   reactive_rule([  (not(loc_at(Kolem_Fn_123P_Num4_V, Tloc));not(loc_at(A, Tloc))),
+                      some(Tloc,
+                           '$kolem_Fn_123'(Kolem_Fn_123P_Num4_V,
+                                           A,
+                                           Request,
+                                           Kolem_Fn_123))
+                    ],
+                    [ not(request(Kolem_Fn_123P_Num4_V,
+                                  A,
+                                  Request))
+                    ]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',660).
+
+ /*  holds_at(at(Agent1, Exists_Location), Time) :-
+       happens(request(Agent1, Agent2, Physobj), Time),
+       some(Exists_Location,
+            '$kolem_Fn_123'(Agent1, Agent2, Physobj, Time)).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',660).
+
+ /*  fix_axiom_head(Time) ->
+       [ holds_at(at(Agent1, Exists_Location), Time),
+          (->),
+         at(Agent1, Exists_Location)
+       ].
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',660).
+
+ /*  axiom(at(Agent1, Exists_Location),
+       [ request(Agent1, Agent2, Physobj),
+         some(Exists_Location,
+              '$kolem_Fn_123'(Agent1, Agent2, Physobj, Time))
+       ]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',660).
+
+ /*  (   request(RequestP_Num3_V, A, Request11),
+       some(Tloc10,
+            '$kolem_Fn_123'(RequestP_Num3_V,
+                            A,
+                            Request11,
+                            Kolem_Fn_12313))
+   ->  at(RequestP_Num3_V, Tloc10)
+   ).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',660).
+then(if((request(RequestP_Num3_V, A, Request11), some(Tloc10, '$kolem_Fn_123'(RequestP_Num3_V, A, Request11, Kolem_Fn_12313)))), loc_at(RequestP_Num3_V, Tloc10)).
+
+ /*  reactive_rule([ happens(request(RequestP_Num3_V,
+   				A,
+   				Request11),
+   			Time_From,
+   			Time_Until),
+   		some(Tloc10,
+   		     '$kolem_Fn_123'(RequestP_Num3_V,
+   				     A,
+   				     Request11,
+   				     Kolem_Fn_12313))
+   	      ],
+   	      [ holds(loc_at(RequestP_Num3_V,Tloc10),
+   		      Holds)
+   	      ]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',660).
+
+ /*  holds_at(at(Agent2, Exists_Location), Time) :-
+       happens(request(Agent1, Agent2, Physobj), Time),
+       some(Exists_Location,
+            '$kolem_Fn_123'(Agent1, Agent2, Physobj, Time)).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',660).
+
+ /*  fix_axiom_head(Time) ->
+       [ holds_at(at(Agent2, Exists_Location), Time),
+          (->),
+         at(Agent2, Exists_Location)
+       ].
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',660).
+
+ /*  axiom(at(Agent2, Exists_Location),
+       [ request(Agent1, Agent2, Physobj),
+         some(Exists_Location,
+              '$kolem_Fn_123'(Agent1, Agent2, Physobj, Time))
+       ]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',660).
+
+ /*  (   request(RequestP_Num3_V19, A, Request18),
+       some(Tloc17,
+            '$kolem_Fn_123'(RequestP_Num3_V19,
+                            A,
+                            Request18,
+                            Kolem_Fn_12320))
+   ->  at(A, Tloc17)
+   ).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',660).
+then(if((request(RequestP_Num3_V19, A, Request18), some(Tloc17, '$kolem_Fn_123'(RequestP_Num3_V19, A, Request18, Kolem_Fn_12320)))), loc_at(A, Tloc17)).
+
+ /*  reactive_rule([ happens(request(RequestP_Num3_V19,
+   				A,
+   				Request18),
+   			Time_From21,
+   			Time_Until22),
+   		some(Tloc17,
+   		     '$kolem_Fn_123'(RequestP_Num3_V19,
+   				     A,
+   				     Request18,
+   				     Kolem_Fn_12320))
+   	      ],
+   	      [holds(loc_at(A,Tloc17),Holds23)]).
+ */
+
+
+%; End of file.
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',664).
+% translate: ending  File: /pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e.lps 

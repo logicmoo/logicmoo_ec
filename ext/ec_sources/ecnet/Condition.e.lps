@@ -1,0 +1,409 @@
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Cognition.e',20).
+% translate: unskipped  File: /pack/logicmoo_ec/ext/ec_sources/ecnet/Condition.e.lps 
+:-include(library('ec_planner/ec_test_incl')).
+:-expects_dialect(lps).
+% translate: begining  File: /pack/logicmoo_ec/ext/ec_sources/ecnet/Condition.e.lps 
+% Wed, 07 Oct 2020 20:49:15 GMT File: <stream>(0x55afae155400)
+
+
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Cognition.e',20).
+%;
+%; Copyright (c) 2005 IBM Corporation and others.
+%; All rights reserved. This program and the accompanying materials
+%; are made available under the terms of the Common Public License v1.0
+%; which accompanies this distribution, and is available at
+%; http://www.eclipse.org/legal/cpl-v10.html
+%;
+%; Contributors:
+%; IBM - Initial implementation
+%;
+%; human health
+
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Condition.e',13).
+% fluent Alive(agent)
+ %  fluent(alive(agent)).
+ %  fluent(alive(agent)).
+fluents([alive/1]).
+mpred_prop(alive(agent),fluent).
+
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Condition.e',15).
+% fluent Dead(agent)
+ %  fluent(dead(agent)).
+ %  fluent(dead(agent)).
+fluents([dead/1]).
+mpred_prop(dead(agent),fluent).
+
+% noninertial Dead
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Condition.e',15).
+noninertial(dead).
+
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Condition.e',18).
+% fluent Injured(agent)
+ %  fluent(injured(agent)).
+ %  fluent(injured(agent)).
+fluents([injured/1]).
+mpred_prop(injured(agent),fluent).
+
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Condition.e',20).
+% event Kill(object,agent)
+ %  event(kill(object,agent)).
+ %  event(kill(object,agent)).
+events([kill/2]).
+mpred_prop(kill(object,agent),event).
+
+% event Injure(object,agent)
+ %  event(injure(object,agent)).
+ %  event(injure(object,agent)).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Condition.e',20).
+events([injure/2]).
+mpred_prop(injure(object,agent),event).
+
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Condition.e',22).
+% event HealInjured(agent)
+ %  event(healInjured(agent)).
+ %  event(healInjured(agent)).
+actions([healInjured/1]).
+mpred_prop(healInjured(agent),event).
+
+
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Condition.e',24).
+% [agent,time]
+ % HoldsAt(Alive(agent),time) <-> !HoldsAt(Dead(agent),time).
+
+ /*  holds_at(alive(Agent), Time) <->
+       holds_at(neg(dead(Agent)), Time).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Condition.e',24).
+
+ /*  holds_at(alive(Agent), Time) ->
+       holds_at(neg(dead(Agent)), Time).
+ */
+if alive(Agent)at Time then not dead(Agent)at Time.
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Condition.e',24).
+
+ /*  reactive_rule([holds(alive(Agent),Time)],
+   	      [holds(not(dead(Agent)),Time)]).
+ */
+
+ /*  holds_at(neg(dead(Agent)), Time) ->
+       holds_at(alive(Agent), Time).
+ */
+if not dead(Agent)at Time then alive(Agent)at Time.
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Condition.e',24).
+
+ /*  reactive_rule([holds(not(dead(Agent)),Time)],
+   	      [holds(alive(Agent),Time)]).
+ */
+
+
+% [agent,time]
+ % HoldsAt(Injured(agent),time) -> HoldsAt(Alive(agent),time).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Condition.e',24).
+
+ /*  holds_at(injured(Agent), Time) ->
+       holds_at(alive(Agent), Time).
+ */
+if injured(Agent)at Time then alive(Agent)at Time.
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Condition.e',24).
+
+ /*  reactive_rule([holds(injured(Agent),Time)],
+   	      [holds(alive(Agent),Time)]).
+ */
+
+
+% [object,agent,time]
+% Terminates(Kill(object,agent),Alive(agent),time).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Condition.e',28).
+
+ /*  axiom(terminates(kill(Object, Agent), alive(Agent), Time),
+       []).
+ */
+ %  terminates(kill(_,Kill),alive(Kill),Terminates).
+kill(_, Kill)terminates alive(Kill).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Condition.e',28).
+
+ /*  terminated(happens(kill(_,Kill),
+   		   Time_From,
+   		   Time_Until),
+   	   alive(Kill),
+   	   []).
+ */
+
+
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Condition.e',30).
+% [object,agent,time]
+% Initiates(Injure(object,agent),Injured(agent),time).
+
+ /*  axiom(initiates(injure(Object, Agent), injured(Agent), Time),
+       []).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Condition.e',30).
+
+ /*  initiates(injure(_,Injure),
+   	  injured(Injure),
+   	  Initiates).
+ */
+injure(_, Injure)initiates injured(Injure).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Condition.e',30).
+
+ /*  initiated(happens(injure(_,Injure),
+   		  Time_From,
+   		  Time_Until),
+   	  injured(Injure),
+   	  []).
+ */
+
+
+% [agent,time]
+% Terminates(HealInjured(agent),Injured(agent),time).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Condition.e',34).
+
+ /*  axiom(terminates(healInjured(Agent), injured(Agent), Time),
+       []).
+ */
+
+ /*  terminates(healInjured(Healinjured),
+   	   injured(Healinjured),
+   	   Terminates).
+ */
+healInjured(Healinjured)terminates injured(Healinjured).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Condition.e',34).
+
+ /*  terminated(happens(healInjured(Healinjured),
+   		   Time_From,
+   		   Time_Until),
+   	   injured(Healinjured),
+   	   []).
+ */
+
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Condition.e',36).
+% fluent Intact(physobj)
+ %  fluent(intact(physobj)).
+ %  fluent(intact(physobj)).
+fluents([intact/1]).
+mpred_prop(intact(physobj),fluent).
+
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Condition.e',38).
+% fluent Damaged(physobj)
+ %  fluent(damaged(physobj)).
+ %  fluent(damaged(physobj)).
+fluents([damaged/1]).
+mpred_prop(damaged(physobj),fluent).
+
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Condition.e',40).
+% fluent Destroyed(physobj)
+ %  fluent(destroyed(physobj)).
+ %  fluent(destroyed(physobj)).
+fluents([destroyed/1]).
+mpred_prop(destroyed(physobj),fluent).
+
+
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Condition.e',42).
+%; At any time, a physical object is either intact, damaged, or destroyed:
+
+% xor Intact, Damaged, Destroyed
+ %  ==>xor[intact,damaged,destroyed].
+==>xor[intact,damaged,destroyed].
+
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Condition.e',45).
+% event Damage(object,physobj)
+ %  event(damage(object,physobj)).
+ %  event(damage(object,physobj)).
+events([damage/2]).
+mpred_prop(damage(object,physobj),event).
+
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Condition.e',47).
+% event Destroy(object,physobj)
+ %  event(destroy(object,physobj)).
+ %  event(destroy(object,physobj)).
+events([destroy/2]).
+mpred_prop(destroy(object,physobj),event).
+
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Condition.e',49).
+% event Repair(object,physobj)
+ %  event(repair(object,physobj)).
+ %  event(repair(object,physobj)).
+events([repair/2]).
+mpred_prop(repair(object,physobj),event).
+
+
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Condition.e',51).
+% [object,physobj,time]
+% Happens(Damage(object,physobj),time) ->
+% HoldsAt(Intact(physobj),time).
+
+ /*  happens(damage(Object, Physobj), Time) ->
+       holds_at(intact(Physobj), Time).
+ */
+if happens(damage(Object, Physobj), Time)then intact(Physobj)at Time.
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Condition.e',51).
+
+ /*  reactive_rule([happens(damage(Object,Physobj),Time)],
+   	      [holds(intact(Physobj),Time)]).
+ */
+
+
+% [object,physobj,time]
+% Initiates(Damage(object,physobj),Damaged(physobj),time).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Condition.e',56).
+
+ /*  axiom(initiates(damage(Object, Physobj), damaged(Physobj), Time),
+       []).
+ */
+
+ /*  initiates(damage(_,Damage),
+   	  damaged(Damage),
+   	  Initiates).
+ */
+damage(_, Damage)initiates damaged(Damage).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Condition.e',56).
+
+ /*  initiated(happens(damage(_,Damage),
+   		  Time_From,
+   		  Time_Until),
+   	  damaged(Damage),
+   	  []).
+ */
+
+
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Condition.e',58).
+% [object,physobj,time]
+% Terminates(Damage(object,physobj),Intact(physobj),time).
+
+ /*  axiom(terminates(damage(Object, Physobj), intact(Physobj), Time),
+       []).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Condition.e',58).
+
+ /*  terminates(damage(_,Damage),
+   	   intact(Damage),
+   	   Terminates).
+ */
+damage(_, Damage)terminates intact(Damage).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Condition.e',58).
+
+ /*  terminated(happens(damage(_,Damage),
+   		   Time_From,
+   		   Time_Until),
+   	   intact(Damage),
+   	   []).
+ */
+
+
+% [object,physobj,time]
+% Happens(Destroy(object,physobj),time) ->
+% (HoldsAt(Intact(physobj),time)|
+%  HoldsAt(Damaged(physobj),time)).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Condition.e',62).
+
+ /*  happens(destroy(Object, Physobj), Time) ->
+       (   holds_at(intact(Physobj), Time)
+       ;   holds_at(damaged(Physobj), Time)
+       ).
+ */
+if happens(destroy(Object, Physobj), Time)then intact(Physobj)at Time;damaged(Physobj)at Time.
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Condition.e',62).
+
+ /*   reactive_rule([happens(destroy(Object, Physobj), Time)],
+                    [  (at(intact(Physobj), Time);at(damaged(Physobj), Time))
+                    ]).
+ */
+
+
+% [object,physobj,time]
+% Initiates(Destroy(object,physobj),Destroyed(physobj),time).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Condition.e',67).
+
+ /*  axiom(initiates(destroy(Object, Physobj), destroyed(Physobj), Time),
+       []).
+ */
+
+ /*  initiates(destroy(_,Destroy),
+   	  destroyed(Destroy),
+   	  Initiates).
+ */
+destroy(_, Destroy)initiates destroyed(Destroy).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Condition.e',67).
+
+ /*  initiated(happens(destroy(_,Destroy),
+   		  Time_From,
+   		  Time_Until),
+   	  destroyed(Destroy),
+   	  []).
+ */
+
+
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Condition.e',69).
+% [object,physobj,time]
+% Terminates(Destroy(object,physobj),Intact(physobj),time).
+
+ /*  axiom(terminates(destroy(Object, Physobj), intact(Physobj), Time),
+       []).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Condition.e',69).
+
+ /*  terminates(destroy(_,Destroy),
+   	   intact(Destroy),
+   	   Terminates).
+ */
+destroy(_, Destroy)terminates intact(Destroy).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Condition.e',69).
+
+ /*  terminated(happens(destroy(_,Destroy),
+   		   Time_From,
+   		   Time_Until),
+   	   intact(Destroy),
+   	   []).
+ */
+
+
+% [object,physobj,time]
+% Terminates(Destroy(object,physobj),Damaged(physobj),time).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Condition.e',73).
+
+ /*  axiom(terminates(destroy(Object, Physobj), damaged(Physobj), Time),
+       []).
+ */
+
+ /*  terminates(destroy(_,Destroy),
+   	   damaged(Destroy),
+   	   Terminates).
+ */
+destroy(_, Destroy)terminates damaged(Destroy).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Condition.e',73).
+
+ /*  terminated(happens(destroy(_,Destroy),
+   		   Time_From,
+   		   Time_Until),
+   	   damaged(Destroy),
+   	   []).
+ */
+
+
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Condition.e',75).
+% [object,physobj,time]
+% Initiates(Repair(object,physobj),Intact(physobj),time).
+
+ /*  axiom(initiates(repair(Object, Physobj), intact(Physobj), Time),
+       []).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Condition.e',75).
+
+ /*  initiates(repair(_,Repair),
+   	  intact(Repair),
+   	  Initiates).
+ */
+repair(_, Repair)initiates intact(Repair).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Condition.e',75).
+
+ /*  initiated(happens(repair(_,Repair),
+   		  Time_From,
+   		  Time_Until),
+   	  intact(Repair),
+   	  []).
+ */
+
+
+%; end of file.
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Condition.e',77).
+% translate: ending  File: /pack/logicmoo_ec/ext/ec_sources/ecnet/Condition.e.lps 

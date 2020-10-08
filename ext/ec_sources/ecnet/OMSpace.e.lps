@@ -1,0 +1,999 @@
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Money.e',12).
+% translate: unskipped  File: /pack/logicmoo_ec/ext/ec_sources/ecnet/OMSpace.e.lps 
+:-include(library('ec_planner/ec_test_incl')).
+:-expects_dialect(lps).
+% translate: begining  File: /pack/logicmoo_ec/ext/ec_sources/ecnet/OMSpace.e.lps 
+% Wed, 07 Oct 2020 09:36:08 GMT File: <stream>(0x5557c8f02a00)
+
+
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Money.e',12).
+%;
+%; Copyright (c) 2005 IBM Corporation and others.
+%; All rights reserved. This program and the accompanying materials
+%; are made available under the terms of the Common Public License v1.0
+%; which accompanies this distribution, and is available at
+%; http://www.eclipse.org/legal/cpl-v10.html
+%;
+%; Contributors:
+%; IBM - Initial implementation
+%;
+%; OMSpace: object-scale metric space
+%;
+%; The OMSpace representation deals with metric space at
+%; the scale of objects.
+%;
+%; @article{Morgenstern:2001,
+%;   author = "Morgenstern, Leora",
+%;   year = "2001",
+%;   title = "Mid-sized axiomatizations of commonsense problems: A case study in egg cracking",
+%;   journal = "Studia Logica",
+%;   volume = "67",
+%;   pages = "333--384",
+%; }
+%;
+%; @article{Shanahan:2003,
+%;   author = "Shanahan, Murray",
+%;   year = "2004",
+%;   title = "An attempt to formalise a non-trivial benchmark problem in common sense reasoning",
+%;   journal = "Artificial Intelligence",
+%;   volume = "153",
+%;   pages = "141--165",
+%; }
+%;
+
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OMSpace.e',35).
+% sort height: integer
+subsort(height,integer).
+
+% sort distance: integer
+subsort(distance,integer).
+%; Height
+%; The height of object is height.
+
+% fluent Height(object,height)
+ %  fluent(height(object,height)).
+ %  fluent(height(object,height)).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OMSpace.e',40).
+fluents([height/2]).
+mpred_prop(height(object,height),fluent).
+
+
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OMSpace.e',43).
+%; State constraint represent the fact that each
+%; object has a unique height:
+% [object,height1,height2,time]
+% HoldsAt(Height(object,height1),time) &
+% HoldsAt(Height(object,height2),time) ->
+% height1=height2.
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OMSpace.e',45).
+
+ /*  (   holds_at(height(Object, Height1), Time),
+       holds_at(height(Object, Height2), Time)
+   ->  equals(Height1, Height2)
+   ).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OMSpace.e',45).
+then(if((at(height(Object, Height1), Time), at(height(Object, Height2), Time))), equals(Height1, Height2)).
+
+ /*  reactive_rule([ holds(height(Object,Height1),Time),
+   		holds(height(Object,Height2),Time)
+   	      ],
+   	      [equals(Height1,Height2)]).
+ */
+
+
+% [object,time]
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OMSpace.e',51).
+% {height}% HoldsAt(Height(object,height),time).
+
+ /*  clausify_pnf=exists([Height],
+          holds_at(height(Object,Height),Time)).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OMSpace.e',51).
+
+ /*  holds_at(height(Object, Exists_Height), Time) :-
+       some(Exists_Height, '$kolem_Fn_74'(Object, Time)).
+ */
+
+ /*  fix_axiom_head(Time) ->
+       [ holds_at(height(Object, Exists_Height), Time),
+          (->),
+         height(Object, Exists_Height)
+       ].
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OMSpace.e',51).
+
+ /*  axiom(height(Object, Exists_Height),
+       [some(Exists_Height, '$kolem_Fn_74'(Object, Time))]).
+ */
+
+ /*  some(Height5, '$kolem_Fn_74'(A, Kolem_Fn_74)) ->
+       height(A, Height5).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OMSpace.e',51).
+then(if(some(Height5,'$kolem_Fn_74'(A,Kolem_Fn_74))),
+     height(A,Height5)).
+
+ /*  reactive_rule([ some(Height5,
+   		     '$kolem_Fn_74'(A,Kolem_Fn_74))
+   	      ],
+   	      [holds(height(A,Height5),Holds)]).
+ */
+
+
+%; falling
+%; physobj1 is falling from physobj2 to physobj3.
+
+% fluent FallingFromTo(physobj,physobj,physobj)
+ %  fluent(fallingFromTo(physobj,physobj,physobj)).
+ %  fluent(fallingFromTo(physobj,physobj,physobj)).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OMSpace.e',56).
+fluents([fallingFromTo/3]).
+mpred_prop(fallingFromTo(physobj,physobj,physobj),fluent).
+
+
+%; physobj1 starts falling from physobj2 to physobj3.
+
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OMSpace.e',59).
+% event StartFallingFromTo(physobj,physobj,physobj)
+ %  event(startFallingFromTo(physobj,physobj,physobj)).
+ %  event(startFallingFromTo(physobj,physobj,physobj)).
+events([startFallingFromTo/3]).
+mpred_prop(startFallingFromTo(physobj,physobj,physobj),event).
+
+
+%; physobj1 collides with physobj2.
+
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OMSpace.e',61).
+% event CollideWith(physobj,physobj)
+ %  event(collideWith(physobj,physobj)).
+ %  event(collideWith(physobj,physobj)).
+events([collideWith/2]).
+mpred_prop(collideWith(physobj,physobj),event).
+
+
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OMSpace.e',63).
+%; An effect axiom states that if a first physical object starts
+%; falling from a second physical object to a third physical
+%; object, the first physical object will be falling from the
+%; second physical object to the third physical object:
+% [physobj1,physobj2,physobj3,time]
+% Initiates(StartFallingFromTo(physobj1,physobj2,physobj3),
+%           FallingFromTo(physobj1,physobj2,physobj3),
+%           time).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OMSpace.e',67).
+
+ /*  axiom(initiates(startFallingFromTo(Physobj1, Physobj2, Physobj3), fallingFromTo(Physobj1, Physobj2, Physobj3), Time),
+       []).
+ */
+
+ /*  initiates(startFallingFromTo(StartfallingfromtoP_Num3_V,
+   			     A,
+   			     Startfallingfromto),
+   	  fallingFromTo(StartfallingfromtoP_Num3_V,
+   			A,
+   			Startfallingfromto),
+   	  Initiates).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OMSpace.e',67).
+initiates(startFallingFromTo(StartfallingfromtoP_Num3_V,
+			     A,
+			     Startfallingfromto),
+	  fallingFromTo(StartfallingfromtoP_Num3_V,
+			A,
+			Startfallingfromto)).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OMSpace.e',67).
+
+ /*  initiated(happens(startFallingFromTo(StartfallingfromtoP_Num3_V,
+   				     A,
+   				     Startfallingfromto),
+   		  Time_From,
+   		  Time_Until),
+   	  fallingFromTo(StartfallingfromtoP_Num3_V,
+   			A,
+   			Startfallingfromto),
+   	  []).
+ */
+
+
+%; A precondition axiom states that for
+%; a first physical object to start
+%; falling from a second physical object to a third physical
+%; object,
+%; the height of the first physical object and the
+%; second physical object must be the same.
+% [physobj1,physobj2,physobj3,height1,height2,time]
+% Happens(StartFallingFromTo(physobj1,physobj2,physobj3),time) &
+% HoldsAt(Height(physobj1,height1),time) &
+% HoldsAt(Height(physobj2,height2),time) ->
+% height1=height2.
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OMSpace.e',78).
+
+ /*  (   happens(startFallingFromTo(Physobj1, Physobj2, Physobj3),
+               Time),
+       holds_at(height(Physobj1, Height1), Time),
+       holds_at(height(Physobj2, Height2), Time)
+   ->  equals(Height1, Height2)
+   ).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OMSpace.e',78).
+then(if((happens(startFallingFromTo(Physobj1, Physobj2, Physobj3), Time), at(height(Physobj1, Height1), Time), at(height(Physobj2, Height2), Time))), equals(Height1, Height2)).
+
+ /*  reactive_rule([ happens(startFallingFromTo(Physobj1,
+   					   Physobj2,
+   					   Physobj3),
+   			Time),
+   		holds(height(Physobj1,Height1),Time),
+   		holds(height(Physobj2,Height2),Time)
+   	      ],
+   	      [equals(Height1,Height2)]).
+ */
+
+
+%; A state constraint says that a physical object
+%; cannot fall from itself, cannot fall to itself,
+%; and cannot fall from and to the same physical object:
+% [physobj1,physobj2,physobj3,time]
+% HoldsAt(FallingFromTo(physobj1,physobj2,physobj3),time) ->
+% physobj1!=physobj2 &
+% physobj1!=physobj3 &
+% physobj2!=physobj3.
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OMSpace.e',87).
+
+ /*  (   holds_at(fallingFromTo(Physobj1, Physobj2, Physobj3),
+                Time)
+   ->  diff(Physobj1, Physobj2),
+       diff(Physobj1, Physobj3),
+       diff(Physobj2, Physobj3)
+   ).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OMSpace.e',87).
+then(if(at(fallingFromTo(Physobj1, Physobj2, Physobj3), Time)),  (diff(Physobj1, Physobj2), diff(Physobj1, Physobj3), diff(Physobj2, Physobj3))).
+
+ /*  reactive_rule([ holds(fallingFromTo(Physobj1,
+   				    Physobj2,
+   				    Physobj3),
+   		      Time)
+   	      ],
+   	      [ diff(Physobj1,Physobj2),
+   		diff(Physobj1,Physobj3),
+   		diff(Physobj2,Physobj3)
+   	      ]).
+ */
+
+
+%; A state constraint says that the sky cannot fall:
+% [sky,physobj1,physobj2,time]
+% !HoldsAt(FallingFromTo(sky,physobj1,physobj2),time).
+
+ /*  fix_axiom_head(Time) ->
+       [ holds_at(neg(fallingFromTo(Sky, Physobj1, Physobj2)),
+                  Time),
+          (->),
+         not(fallingFromTo(Sky, Physobj1, Physobj2))
+       ].
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OMSpace.e',94).
+
+ /*  axiom(not(fallingFromTo(Sky, Physobj1, Physobj2)),
+       []).
+ */
+not(fallingFromTo(FallingfromtoP_Num3_V,
+		  _,
+		  Fallingfromto)).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OMSpace.e',94).
+
+ /*  l_int(holds(not(fallingFromTo(FallingfromtoP_Num3_V,
+   			      _,
+   			      Fallingfromto)),
+   	    Holds),
+         []).
+ */
+
+
+%; A releases axiom states that if
+%; if a first physical object starts
+%; falling from a second physical object to a third physical
+%; object, the height of the first physical object
+%; will be released from inertia:
+% [physobj1,physobj2,physobj3,height,time]
+% Releases(StartFallingFromTo(physobj1,physobj2,physobj3),
+%          Height(physobj1,height),
+%          time).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OMSpace.e',102).
+
+ /*  axiom(releases(startFallingFromTo(Physobj1, Physobj2, Physobj3), height(Physobj1, Height), Time),
+       []).
+ */
+releases(startFallingFromTo(StartfallingfromtoP_Num3_V,
+			    _,
+			    Startfallingfromto),
+	 height(StartfallingfromtoP_Num3_V,Height7),
+	 Releases).
+
+
+%; A trajectory axiom states that
+%; if a first physical object starts falling
+%; from a second physical object
+%; to a third physical object
+%; at a time and
+%; the first physical object has a height at the time,
+%; then the first physical object will have a height
+%; equal to the height minus an offset
+%; at a time equal to the time plus the offset:
+% [physobj1,physobj2,physobj3,height1,height2,offset,time]
+% HoldsAt(Height(physobj1,height1),time) &
+% height2=height1-offset ->
+% Trajectory(FallingFromTo(physobj1,physobj2,physobj3),time,
+%            Height(physobj1,height2),offset).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OMSpace.e',116).
+
+ /*  (   holds_at(height(Physobj1, Height1), Time),
+       equals(Height2, Height1-Offset)
+   ->  trajectory(fallingFromTo(Physobj1, Physobj2, Physobj3),
+                  Time,
+                  height(Physobj1, Height2),
+                  Offset)
+   ).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OMSpace.e',116).
+then(if((at(height(Physobj1, Height1), Time), equals(Height2, Height1-Offset))), trajectory(fallingFromTo(Physobj1, Physobj2, Physobj3), Time, height(Physobj1, Height2), Offset)).
+
+ /*  reactive_rule([ holds(height(Physobj1,Height1),Time),
+   		equals(Height2,Height1-Offset)
+   	      ],
+   	      [ trajectory(fallingFromTo(Physobj1,
+   					 Physobj2,
+   					 Physobj3),
+   			   Time,
+   			   height(Physobj1,Height2),
+   			   Offset)
+   	      ]).
+ */
+
+
+%; A trigger axiom states that
+%; if a first physical object is falling
+%; from a second physical object
+%; to a third physical object and
+%; the height of the first physical object
+%; is the same as the height of the third physical object,
+%; the first physical object collides with the
+%; third physical object:
+% [physobj1,physobj2,physobj3,height,time]
+% HoldsAt(FallingFromTo(physobj1,physobj2,physobj3),time) &
+% HoldsAt(Height(physobj1,height),time) &
+% HoldsAt(Height(physobj3,height),time) ->
+% Happens(CollideWith(physobj1,physobj3),time).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OMSpace.e',130).
+
+ /*  (   holds_at(fallingFromTo(Physobj1, Physobj2, Physobj3),
+                Time),
+       holds_at(height(Physobj1, Height), Time),
+       holds_at(height(Physobj3, Height), Time)
+   ->  happens(collideWith(Physobj1, Physobj3), Time)
+   ).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OMSpace.e',130).
+then(if((at(fallingFromTo(Physobj1, Physobj2, Physobj3), Time), at(height(Physobj1, Height), Time), at(height(Physobj3, Height), Time))), happens(collideWith(Physobj1, Physobj3), Time)).
+
+ /*  reactive_rule([ holds(fallingFromTo(Physobj1,
+   				    Physobj2,
+   				    Physobj3),
+   		      Time),
+   		holds(height(Physobj1,Height),Time),
+   		holds(height(Physobj3,Height),Time)
+   	      ],
+   	      [ happens(collideWith(Physobj1,Physobj3),
+   			Time)
+   	      ]).
+ */
+
+
+%; An effect axiom states that
+%; if a first physical object is falling
+%; from a second physical object
+%; to a third physical object and
+%; the first physical object collides with
+%; the third physical object,
+%; the first physical object will be on the third physical object:
+% [physobj1,physobj2,physobj3,time]
+% HoldsAt(FallingFromTo(physobj1,physobj2,physobj3),time) ->
+% Initiates(CollideWith(physobj1,physobj3),
+%           On(physobj1,physobj3),
+%           time).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OMSpace.e',143).
+
+ /*  axiom(initiates(collideWith(Physobj1, Physobj3), on(Physobj1, Physobj3), Time),
+       [fallingFromTo(Physobj1, Physobj2, Physobj3)]).
+ */
+
+ /*  fallingFromTo(FallingfromtoP_Num3_V, _, Fallingfromto) ->
+       initiates(collideWith(FallingfromtoP_Num3_V, Fallingfromto),
+                 on(FallingfromtoP_Num3_V, Fallingfromto),
+                 Initiates).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OMSpace.e',143).
+then(if(fallingFromTo(FallingfromtoP_Num3_V,
+		      _,
+		      Fallingfromto)),
+     initiates(collideWith(FallingfromtoP_Num3_V,
+			   Fallingfromto),
+	       at(on(FallingfromtoP_Num3_V,Fallingfromto),
+		  Initiates),
+	       Initiates7)).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OMSpace.e',143).
+
+ /*  reactive_rule([ holds(fallingFromTo(FallingfromtoP_Num3_V,
+   				    _,
+   				    Fallingfromto),
+   		      Holds)
+   	      ],
+   	      [ initiates(collideWith(FallingfromtoP_Num3_V,
+   				      Fallingfromto),
+   			  at(on(FallingfromtoP_Num3_V,
+   				Fallingfromto),
+   			     Initiates),
+   			  Initiates7)
+   	      ]).
+ */
+
+
+%; An effect axiom states that
+%; if a physical object collides with another
+%; physical object,
+%; the height of the first physical object will
+%; be the height of the second physical object:
+% [physobj1,physobj2,height,time]
+% HoldsAt(Height(physobj2,height),time) ->
+% Initiates(CollideWith(physobj1,physobj2),
+%           Height(physobj1,height),
+%           time).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OMSpace.e',154).
+
+ /*  axiom(initiates(collideWith(Physobj1, Physobj2), height(Physobj1, Height), Time),
+       [height(Physobj2, Height)]).
+ */
+
+ /*  height(Collidewith, Height4) ->
+       initiates(collideWith(A, Collidewith),
+                 height(A, Height4),
+                 Initiates).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OMSpace.e',154).
+then(if(height(Collidewith,Height4)),
+     initiates(collideWith(A,Collidewith),
+	       at(height(A,Height4),Initiates),
+	       Initiates7)).
+
+ /*  reactive_rule([ holds(height(Collidewith,Height4),
+   		      Holds)
+   	      ],
+   	      [ initiates(collideWith(A,Collidewith),
+   			  at(height(A,Height4),
+   			     Initiates),
+   			  Initiates7)
+   	      ]).
+ */
+
+
+%;[physobj1,physobj2,height1,height2,time]
+%;HoldsAt(Height(physobj2,height1),time) &
+%;height1 != height2 ->
+%;Terminates(CollideWith(physobj1,physobj2),
+%;           Height(physobj1,height2),
+%;           time).
+%; An effect axiom states that
+%; if a first physical object is falling
+%; from a second physical object
+%; to a third physical object and
+%; the first physical object collides with
+%; the third physical object,
+%; the first physical object will no longer be
+%; falling from the second physical object to the
+%; third physical object:
+% [physobj1,physobj2,physobj3,time]
+% HoldsAt(FallingFromTo(physobj1,physobj2,physobj3),time) ->
+% Terminates(CollideWith(physobj1,physobj3),
+%            FallingFromTo(physobj1,physobj2,physobj3),
+%            time).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OMSpace.e',176).
+
+ /*  axiom(terminates(collideWith(Physobj1, Physobj3), fallingFromTo(Physobj1, Physobj2, Physobj3), Time),
+       [fallingFromTo(Physobj1, Physobj2, Physobj3)]).
+ */
+
+ /*  fallingFromTo(FallingfromtoP_Num3_V, A, Fallingfromto) ->
+       terminates(collideWith(FallingfromtoP_Num3_V, Fallingfromto),
+                  fallingFromTo(FallingfromtoP_Num3_V,
+                                A,
+                                Fallingfromto),
+                  Terminates).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OMSpace.e',176).
+then(if(fallingFromTo(FallingfromtoP_Num3_V,
+		      A,
+		      Fallingfromto)),
+     terminates(collideWith(FallingfromtoP_Num3_V,
+			    Fallingfromto),
+		at(fallingFromTo(FallingfromtoP_Num3_V,
+				 A,
+				 Fallingfromto),
+		   Terminates),
+		Terminates7)).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OMSpace.e',176).
+
+ /*  reactive_rule([ holds(fallingFromTo(FallingfromtoP_Num3_V,
+   				    A,
+   				    Fallingfromto),
+   		      Holds)
+   	      ],
+   	      [ terminates(collideWith(FallingfromtoP_Num3_V,
+   				       Fallingfromto),
+   			   at(fallingFromTo(FallingfromtoP_Num3_V,
+   					    A,
+   					    Fallingfromto),
+   			      Terminates),
+   			   Terminates7)
+   	      ]).
+ */
+
+
+%; flying
+%; agent is flying from physobj1 to physobj2.
+
+% fluent FlyingFromTo(agent,physobj,physobj)
+ %  fluent(flyingFromTo(agent,physobj,physobj)).
+ %  fluent(flyingFromTo(agent,physobj,physobj)).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OMSpace.e',184).
+fluents([flyingFromTo/3]).
+mpred_prop(flyingFromTo(agent,physobj,physobj),fluent).
+
+
+%; agent starts flying from physobj1 to physobj2.
+
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OMSpace.e',187).
+% event StartFlyingFromTo(agent,physobj,physobj)
+ %  event(startFlyingFromTo(agent,physobj,physobj)).
+ %  event(startFlyingFromTo(agent,physobj,physobj)).
+actions([startFlyingFromTo/3]).
+mpred_prop(startFlyingFromTo(agent,physobj,physobj),event).
+
+
+%; agent reaches physobj.
+
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OMSpace.e',189).
+% event Reach(agent,physobj)
+ %  event(reach(agent,physobj)).
+ %  event(reach(agent,physobj)).
+actions([reach/2]).
+mpred_prop(reach(agent,physobj),event).
+
+
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OMSpace.e',191).
+%; An effect axiom states that if an agent starts
+%; flying from a physical object to another physical object,
+%; the agent will be flying from the first physical object
+%; to the second physical object:
+% [agent,physobj1,physobj2,time]
+% Initiates(StartFlyingFromTo(agent,physobj1,physobj2),
+%           FlyingFromTo(agent,physobj1,physobj2),
+%           time).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OMSpace.e',195).
+
+ /*  axiom(initiates(startFlyingFromTo(Agent, Physobj1, Physobj2), flyingFromTo(Agent, Physobj1, Physobj2), Time),
+       []).
+ */
+
+ /*  initiates(startFlyingFromTo(StartflyingfromtoP_Num3_V,
+   			    A,
+   			    Startflyingfromto),
+   	  flyingFromTo(StartflyingfromtoP_Num3_V,
+   		       A,
+   		       Startflyingfromto),
+   	  Initiates).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OMSpace.e',195).
+initiates(startFlyingFromTo(StartflyingfromtoP_Num3_V,
+			    A,
+			    Startflyingfromto),
+	  flyingFromTo(StartflyingfromtoP_Num3_V,
+		       A,
+		       Startflyingfromto)).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OMSpace.e',195).
+
+ /*  initiated(happens(startFlyingFromTo(StartflyingfromtoP_Num3_V,
+   				    A,
+   				    Startflyingfromto),
+   		  Time_From,
+   		  Time_Until),
+   	  flyingFromTo(StartflyingfromtoP_Num3_V,
+   		       A,
+   		       Startflyingfromto),
+   	  []).
+ */
+
+
+%; A precondition axiom states that for
+%; an agent to start flying from a physical object to
+%; another physical object,
+%; the height of the agent and
+%; the first physical object must be the same:
+% [agent,physobj1,physobj2,height1,height2,time]
+% Happens(StartFlyingFromTo(agent,physobj1,physobj2),time) &
+% HoldsAt(Height(agent,height1),time) &
+% HoldsAt(Height(physobj1,height2),time) ->
+% height1=height2.
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OMSpace.e',205).
+
+ /*  (   happens(startFlyingFromTo(Agent, Physobj1, Physobj2),
+               Time),
+       holds_at(height(Agent, Height1), Time),
+       holds_at(height(Physobj1, Height2), Time)
+   ->  equals(Height1, Height2)
+   ).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OMSpace.e',205).
+then(if((happens(startFlyingFromTo(Agent, Physobj1, Physobj2), Time), at(height(Agent, Height1), Time), at(height(Physobj1, Height2), Time))), equals(Height1, Height2)).
+
+ /*  reactive_rule([ happens(startFlyingFromTo(Agent,
+   					  Physobj1,
+   					  Physobj2),
+   			Time),
+   		holds(height(Agent,Height1),Time),
+   		holds(height(Physobj1,Height2),Time)
+   	      ],
+   	      [equals(Height1,Height2)]).
+ */
+
+
+%; A state constraint says that an agent
+%; cannot fly from and to the same physical object:
+% [agent,physobj1,physobj2,time]
+% HoldsAt(FlyingFromTo(agent,physobj1,physobj2),time) ->
+% physobj1!=physobj2.
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OMSpace.e',213).
+
+ /*  holds_at(flyingFromTo(Agent, Physobj1, Physobj2), Time) ->
+       diff(Physobj1, Physobj2).
+ */
+then(if(at(flyingFromTo(Agent,Physobj1,Physobj2),
+	   Time)),
+     diff(Physobj1,Physobj2)).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OMSpace.e',213).
+
+ /*  reactive_rule([ holds(flyingFromTo(Agent,
+   				   Physobj1,
+   				   Physobj2),
+   		      Time)
+   	      ],
+   	      [diff(Physobj1,Physobj2)]).
+ */
+
+
+%; A releases axiom states that if an agent
+%; starts flying from a physical object to another
+%; physical object, the height of the agent will
+%; be released from inertia:
+% [agent,physobj1,physobj2,height,time]
+% Releases(StartFlyingFromTo(agent,physobj1,physobj2),
+%          Height(agent,height),
+%          time).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OMSpace.e',221).
+
+ /*  axiom(releases(startFlyingFromTo(Agent, Physobj1, Physobj2), height(Agent, Height), Time),
+       []).
+ */
+releases(startFlyingFromTo(StartflyingfromtoP_Num3_V,
+			   _,
+			   Startflyingfromto),
+	 height(StartflyingfromtoP_Num3_V,Height7),
+	 Releases).
+
+
+%; A trajectory axiom states that
+%; if an agent starts flying from
+%; from a physical object
+%; to another physical object
+%; at a time and
+%; the agent has a height at the time,
+%; then the agent will have a height
+%; equal to the height plus an offset
+%; at a time equal to the time plus the offset:
+% [agent,physobj1,physobj2,height1,height2,offset,time]
+% HoldsAt(Height(agent,height1),time) &
+% height2=height1+offset ->
+% Trajectory(FlyingFromTo(agent,physobj1,physobj2),time,
+%            Height(agent,height2),offset).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OMSpace.e',235).
+
+ /*  (   holds_at(height(Agent, Height1), Time),
+       equals(Height2, Height1+Offset)
+   ->  trajectory(flyingFromTo(Agent, Physobj1, Physobj2),
+                  Time,
+                  height(Agent, Height2),
+                  Offset)
+   ).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OMSpace.e',235).
+then(if((at(height(Agent, Height1), Time), equals(Height2, Height1+Offset))), trajectory(flyingFromTo(Agent, Physobj1, Physobj2), Time, height(Agent, Height2), Offset)).
+
+ /*  reactive_rule([ holds(height(Agent,Height1),Time),
+   		equals(Height2,Height1+Offset)
+   	      ],
+   	      [ trajectory(flyingFromTo(Agent,
+   					Physobj1,
+   					Physobj2),
+   			   Time,
+   			   height(Agent,Height2),
+   			   Offset)
+   	      ]).
+ */
+
+
+%; A trigger axiom states that
+%; if an agent is flying
+%; from a physical object
+%; to another physical object and
+%; the height of the agent
+%; is the same as the height of the second physical object,
+%; the agent reaches the second physical object:
+% [agent,physobj1,physobj2,height,time]
+% HoldsAt(FlyingFromTo(agent,physobj1,physobj2),time) &
+% HoldsAt(Height(agent,height),time) &
+% HoldsAt(Height(physobj2,height),time) ->
+% Happens(Reach(agent,physobj2),time).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OMSpace.e',248).
+
+ /*  (   holds_at(flyingFromTo(Agent, Physobj1, Physobj2),
+                Time),
+       holds_at(height(Agent, Height), Time),
+       holds_at(height(Physobj2, Height), Time)
+   ->  happens(reach(Agent, Physobj2), Time)
+   ).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OMSpace.e',248).
+then(if((at(flyingFromTo(Agent, Physobj1, Physobj2), Time), at(height(Agent, Height), Time), at(height(Physobj2, Height), Time))), happens(reach(Agent, Physobj2), Time)).
+
+ /*  reactive_rule([ holds(flyingFromTo(Agent,
+   				   Physobj1,
+   				   Physobj2),
+   		      Time),
+   		holds(height(Agent,Height),Time),
+   		holds(height(Physobj2,Height),Time)
+   	      ],
+   	      [happens(reach(Agent,Physobj2),Time)]).
+ */
+
+
+%; An effect axiom states that
+%; if an agent reaches a physical object,
+%; the height of the agent will be the
+%; height of the physical object:
+% [agent,physobj,height,time]
+% HoldsAt(Height(physobj,height),time) ->
+% Initiates(Reach(agent,physobj),Height(agent,height),time).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OMSpace.e',258).
+
+ /*  axiom(initiates(reach(Agent, Physobj), height(Agent, Height), Time),
+       [height(Physobj, Height)]).
+ */
+
+ /*  height(Reach, Height4) ->
+       initiates(reach(A, Reach),
+                 height(A, Height4),
+                 Initiates).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OMSpace.e',258).
+then(if(height(Reach,Height4)),
+     initiates(reach(A,Reach),
+	       at(height(A,Height4),Initiates),
+	       Initiates7)).
+
+ /*  reactive_rule([holds(height(Reach,Height4),Holds)],
+   	      [ initiates(reach(A,Reach),
+   			  at(height(A,Height4),
+   			     Initiates),
+   			  Initiates7)
+   	      ]).
+ */
+
+
+%;[agent,physobj,height1,height2,time]
+%;HoldsAt(Height(physobj,height1),time) &
+%;height1!=height2 ->
+%;Terminates(Reach(agent,physobj),Height(agent,height2),time).
+%; An effect axiom states that
+%; if an agent is flying
+%; from a physical object
+%; to another physical object and
+%; the agent reaches the second physical object,
+%; the agent will no longer be
+%; flying from the first physical object
+%; to the second physical object:
+% [agent,physobj1,physobj2,time]
+% HoldsAt(FlyingFromTo(agent,physobj1,physobj2),time) ->
+% Terminates(Reach(agent,physobj2),
+%            FlyingFromTo(agent,physobj1,physobj2),
+%            time).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OMSpace.e',275).
+
+ /*  axiom(terminates(reach(Agent, Physobj2), flyingFromTo(Agent, Physobj1, Physobj2), Time),
+       [flyingFromTo(Agent, Physobj1, Physobj2)]).
+ */
+
+ /*  flyingFromTo(FlyingfromtoP_Num3_V, A, Flyingfromto) ->
+       terminates(reach(FlyingfromtoP_Num3_V, Flyingfromto),
+                  flyingFromTo(FlyingfromtoP_Num3_V,
+                               A,
+                               Flyingfromto),
+                  Terminates).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OMSpace.e',275).
+then(if(flyingFromTo(FlyingfromtoP_Num3_V,
+		     A,
+		     Flyingfromto)),
+     terminates(reach(FlyingfromtoP_Num3_V,Flyingfromto),
+		at(flyingFromTo(FlyingfromtoP_Num3_V,
+				A,
+				Flyingfromto),
+		   Terminates),
+		Terminates7)).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OMSpace.e',275).
+
+ /*  reactive_rule([ holds(flyingFromTo(FlyingfromtoP_Num3_V,
+   				   A,
+   				   Flyingfromto),
+   		      Holds)
+   	      ],
+   	      [ terminates(reach(FlyingfromtoP_Num3_V,
+   				 Flyingfromto),
+   			   at(flyingFromTo(FlyingfromtoP_Num3_V,
+   					   A,
+   					   Flyingfromto),
+   			      Terminates),
+   			   Terminates7)
+   	      ]).
+ */
+
+
+%; A releases axiom states that
+%; if an agent holds a physical object,
+%; the height of the physical object is released from inertia:
+% [agent,physobj,height,time]
+% Releases(Hold(agent,physobj),Height(physobj,height),time).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OMSpace.e',284).
+
+ /*  axiom(releases(hold(Agent, Physobj), height(Physobj, Height), Time),
+       []).
+ */
+releases(hold(_,Hold),
+	 height(Hold,Height5),
+	 Releases).
+
+
+%;[agent,physobj,height1,height2,time]
+%;(!{object} PartOf(physobj,object)) &
+%;HoldsAt(Height(physobj,height1),time) &
+%;height1 != height2 ->
+%;Terminates(LetGoOf(agent,physobj),Height(physobj,height2),time).
+% [agent,physobj,height,time]
+% (!{object} PartOf(physobj,object)) &
+% HoldsAt(Height(physobj,height),time) ->
+% Initiates(LetGoOf(agent,physobj),Height(physobj,height),time).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OMSpace.e',293).
+
+ /*  axiom(initiates(letGoOf(Agent, Physobj), height(Physobj, Height), Time),
+       [ not(partOf(Physobj, Object)),
+         height(Physobj, Height)
+       ]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OMSpace.e',293).
+
+ /*  (   not(partOf(Letgoof, Partof)),
+       height(Letgoof, Height6)
+   ->  initiates(letGoOf(_, Letgoof),
+                 height(Letgoof, Height6),
+                 Initiates)
+   ).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OMSpace.e',293).
+then(if((not(partOf(Letgoof, Partof)), height(Letgoof, Height6))), initiates(letGoOf(_, Letgoof), at(height(Letgoof, Height6), Initiates), Initiates9)).
+
+ /*  reactive_rule([ not(partOf(Letgoof,Partof)),
+   		holds(height(Letgoof,Height6),Holds)
+   	      ],
+   	      [ initiates(letGoOf(_,Letgoof),
+   			  at(height(Letgoof,Height6),
+   			     Initiates),
+   			  Initiates9)
+   	      ]).
+ */
+
+
+%; A state constraint says that
+%; if an agent is holding a physical object and
+%; the height of the agent is height,
+%; the height of the physical object is height:
+% [agent,physobj,height,time]
+% HoldsAt(Holding(agent,physobj),time) &
+% HoldsAt(Height(agent,height),time) ->
+% HoldsAt(Height(physobj,height),time).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OMSpace.e',302).
+
+ /*  (   holds_at(holding(Agent, Physobj), Time),
+       holds_at(height(Agent, Height), Time)
+   ->  holds_at(height(Physobj, Height), Time)
+   ).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OMSpace.e',302).
+then(if((at(holding(Agent, Physobj), Time), at(height(Agent, Height), Time))), at(height(Physobj, Height), Time)).
+
+ /*  reactive_rule([ holds(holding(Agent,Physobj),Time),
+   		holds(height(Agent,Height),Time)
+   	      ],
+   	      [holds(height(Physobj,Height),Time)]).
+ */
+
+
+%; A state constraint says that if a physical object
+%; is part of an object,
+%; the height of the physical object
+%; is the same as the height of the object:
+% [physobj,object,height,time]
+% PartOf(physobj,object) &
+% HoldsAt(Height(object,height),time) ->
+% HoldsAt(Height(physobj,height),time).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OMSpace.e',311).
+
+ /*  (   partOf(Physobj, Object),
+       holds_at(height(Object, Height), Time)
+   ->  holds_at(height(Physobj, Height), Time)
+   ).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OMSpace.e',311).
+then(if((partOf(Physobj, Object), at(height(Object, Height), Time))), at(height(Physobj, Height), Time)).
+
+ /*  reactive_rule([ partOf(Physobj,Object),
+   		holds(height(Object,Height),Time)
+   	      ],
+   	      [holds(height(Physobj,Height),Time)]).
+ */
+
+
+%;event Catch(agent,physobj)
+%;event HitFromTo(agent,physobj,object,object)
+%;fluent Distance(physobj,physobj,distance)
+%;fluent FlyingAcrossFromTo(physobj,object,object)
+%;[agent,physobj1,physobj2,physobj3,time]
+%;Initiates(HitFromTo(agent,physobj1,physobj2,physobj3),
+%;          FlyingAcrossFromTo(physobj1,physobj2,physobj3),
+%;          time).
+%;[agent,physobj1,physobj2,physobj3,distance,time]
+%;Releases(HitFromTo(agent,physobj1,physobj2,physobj3),
+%;         Distance(physobj1,physobj2,distance),
+%;         time).
+%;[agent,physobj1,physobj2,physobj3,distance,time]
+%;Releases(HitFromTo(agent,physobj1,physobj2,physobj3),
+%;         Distance(physobj1,physobj3,distance),
+%;         time).
+%;[physobj1,physobj2,physobj3,offset,time]
+%;Trajectory(FlyingAcrossFromTo(physobj1,physobj2,physobj3),time,
+%;           Distance(physobj1,physobj2,offset),offset).
+%;[physobj1,physobj2,physobj3,distance1,distance2,offset,time]
+%;HoldsAt(Distance(physobj2,physobj3,distance1),time) &
+%;distance2 = distance1 - time ->
+%;Trajectory(FlyingAcrossFromTo(physobj1,physobj2,physobj3),time,
+%;           Distance(physobj1,physobj3,distance2),offset).
+%;[agent,physobj1,physobj2,physobj3,time]
+%;HoldsAt(FlyingAcrossFromTo(physobj1,physobj2,physobj3),time) ->
+%;Initiates(Catch(agent,physobj1),
+%;          Holding(agent,physobj1),
+%;          time).
+%;[agent,physobj1,physobj2,physobj3,time]
+%;HoldsAt(FlyingAcrossFromTo(physobj1,physobj2,physobj3),time) ->
+%;Terminates(Catch(agent,physobj1),
+%;           FlyingAcrossFromTo(physobj1,physobj2,physobj3),
+%;           time).
+%; End of file.
+% translate: ending  File: /pack/logicmoo_ec/ext/ec_sources/ecnet/OMSpace.e.lps 

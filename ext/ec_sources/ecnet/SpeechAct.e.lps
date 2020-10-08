@@ -1,0 +1,1838 @@
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e',124).
+% translate: unskipped  File: /pack/logicmoo_ec/ext/ec_sources/ecnet/SpeechAct.e.lps 
+:-include(library('ec_planner/ec_test_incl')).
+:-expects_dialect(lps).
+% translate: begining  File: /pack/logicmoo_ec/ext/ec_sources/ecnet/SpeechAct.e.lps 
+% Wed, 07 Oct 2020 09:38:30 GMT File: <stream>(0x5557c8fe5f00)%;
+%; Copyright (c) 2005 IBM Corporation and others.
+%; All rights reserved. This program and the accompanying materials
+%; are made available under the terms of the Common Public License v1.0
+%; which accompanies this distribution, and is available at
+%; http://www.eclipse.org/legal/cpl-v10.html
+%;
+%; Contributors:
+%; IBM - Initial implementation
+%;
+%; The SpeechAct representation deals with a few speech acts
+%; \fullcite{Searle:1969}.
+%;
+%; @book{Searle:1969,
+%;   author = "John R. Searle",
+%;   year = "1969",
+%;   title = "Speech Acts: An Essay in the Philosophy of Language",
+%;   address = "Cambridge",
+%;   publisher = "Cambridge University Press",
+%; }
+%;
+%; We handle
+%; the illocutionary acts of
+%; inviting someone into one's house (a form of request) and
+%; greeting someone,
+%; and the expressive speech act of crying for joy.
+%;
+%; inviting in
+%; agent1 invites agent2 into room.
+
+% event InviteIn(agent,agent,room)
+ %  event(inviteIn(agent,agent,room)).
+ %  event(inviteIn(agent,agent,room)).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/SpeechAct.e',31).
+actions([inviteIn/3]).
+mpred_prop(inviteIn(agent,agent,room),event).
+
+
+%; agent1 is invited into room by agent2.
+
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/SpeechAct.e',34).
+% fluent InvitedIn(agent,room,agent)
+ %  fluent(invitedIn(agent,room,agent)).
+ %  fluent(invitedIn(agent,room,agent)).
+fluents([invitedIn/3]).
+mpred_prop(invitedIn(agent,room,agent),fluent).
+
+
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/SpeechAct.e',36).
+%; A precondition axiom states that for
+%; an agent to invite another agent into a room,
+%; the first agent must be in the room and
+%; there must be an outside area such that
+%; the second agent is at the outside area and
+%; the outside area is adjacent to the room:
+% [agent1,agent2,room,time]
+% Happens(InviteIn(agent1,agent2,room),time) ->
+% HoldsAt(At(agent1,room),time) &
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/SpeechAct.e',42).
+% {outside}% 
+% HoldsAt(At(agent2,outside),time) &
+% Adjacent(room,outside).
+ %  clausify_pnf=exists([Outside],  (happens(inviteIn(Agent1, Agent2, Room), Time)->holds_at(at(Agent1, Room), Time), holds_at(at(Agent2, Outside), Time), adjacent(Room, Outside))).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/SpeechAct.e',45).
+
+ /*  not(happens(inviteIn(Agent1, Agent2, Room), Time)) :-
+       (   not(holds_at(at(Agent1, Room), Time))
+       ;   not(holds_at(at(Agent2, Exists_Outside), Time))
+       ;   not(adjacent(Room, Exists_Outside))
+       ),
+       some(Exists_Outside,
+            '$kolem_Fn_204'(Agent1, Agent2, Room, Time)).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/SpeechAct.e',45).
+
+ /*  fix_axiom_head(Time) ->
+       [ not(happens(inviteIn(Agent1, Agent2, Room), Time)),
+          (->),
+         not(inviteIn(Agent1, Agent2, Room))
+       ].
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/SpeechAct.e',45).
+
+ /*  axiom(not(inviteIn(Agent1, Agent2, Room)),
+       [  (not(at(Agent1, Room));not(at(Agent2, Exists_Outside));not(adjacent(Room, Exists_Outside))),
+         some(Exists_Outside,
+              '$kolem_Fn_204'(Agent1, Agent2, Room, Time))
+       ]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/SpeechAct.e',45).
+
+ /*  (   (   not(at(Kolem_Fn_204P_Num4_V, Tloc))
+       ;   not(at(A, Tloc7))
+       ;   not(adjacent(Tloc, Tloc7))
+       ),
+       some(Tloc7,
+            '$kolem_Fn_204'(Kolem_Fn_204P_Num4_V,
+                            A,
+                            Tloc,
+                            Kolem_Fn_204))
+   ->  not(inviteIn(Kolem_Fn_204P_Num4_V, A, Tloc))
+   ).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/SpeechAct.e',45).
+then(if(((not(loc_at(Kolem_Fn_204P_Num4_V, Tloc));not(loc_at(A, Tloc7));not(adjacent(Tloc, Tloc7))), some(Tloc7, '$kolem_Fn_204'(Kolem_Fn_204P_Num4_V, A, Tloc, Kolem_Fn_204)))), not(inviteIn(Kolem_Fn_204P_Num4_V, A, Tloc))).
+
+ /*   reactive_rule([  (not(loc_at(Kolem_Fn_204P_Num4_V, Tloc));not(loc_at(A, Tloc7));not(adjacent(Tloc, Tloc7))),
+                      some(Tloc7,
+                           '$kolem_Fn_204'(Kolem_Fn_204P_Num4_V,
+                                           A,
+                                           Tloc,
+                                           Kolem_Fn_204))
+                    ],
+                    [ not(inviteIn(Kolem_Fn_204P_Num4_V, A, Tloc))
+                    ]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/SpeechAct.e',45).
+
+ /*  holds_at(at(Agent1, Room), Time) :-
+       happens(inviteIn(Agent1, Agent2, Room), Time),
+       some(Exists_Outside,
+            '$kolem_Fn_204'(Agent1, Agent2, Room, Time)).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/SpeechAct.e',45).
+
+ /*  fix_axiom_head(Time) ->
+       [ holds_at(at(Agent1, Room), Time),
+          (->),
+         at(Agent1, Room)
+       ].
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/SpeechAct.e',45).
+
+ /*  axiom(at(Agent1, Room),
+       [ inviteIn(Agent1, Agent2, Room),
+         some(Exists_Outside,
+              '$kolem_Fn_204'(Agent1, Agent2, Room, Time))
+       ]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/SpeechAct.e',45).
+
+ /*  (   inviteIn(InviteinP_Num3_V, A, Tloc10),
+       some(_,
+            '$kolem_Fn_204'(InviteinP_Num3_V,
+                            A,
+                            Tloc10,
+                            Kolem_Fn_20412))
+   ->  at(InviteinP_Num3_V, Tloc10)
+   ).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/SpeechAct.e',45).
+then(if((inviteIn(InviteinP_Num3_V, A, Tloc10), some(_, '$kolem_Fn_204'(InviteinP_Num3_V, A, Tloc10, Kolem_Fn_20412)))), loc_at(InviteinP_Num3_V, Tloc10)).
+
+ /*  reactive_rule([ happens(inviteIn(InviteinP_Num3_V,
+   				 A,
+   				 Tloc10),
+   			Time_From,
+   			Time_Until),
+   		some(_,
+   		     '$kolem_Fn_204'(InviteinP_Num3_V,
+   				     A,
+   				     Tloc10,
+   				     Kolem_Fn_20412))
+   	      ],
+   	      [ holds(loc_at(InviteinP_Num3_V,Tloc10),
+   		      Holds)
+   	      ]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/SpeechAct.e',45).
+
+ /*  holds_at(at(Agent2, Exists_Outside), Time) :-
+       happens(inviteIn(Agent1, Agent2, Room), Time),
+       some(Exists_Outside,
+            '$kolem_Fn_204'(Agent1, Agent2, Room, Time)).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/SpeechAct.e',45).
+
+ /*  fix_axiom_head(Time) ->
+       [ holds_at(at(Agent2, Exists_Outside), Time),
+          (->),
+         at(Agent2, Exists_Outside)
+       ].
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/SpeechAct.e',45).
+
+ /*  axiom(at(Agent2, Exists_Outside),
+       [ inviteIn(Agent1, Agent2, Room),
+         some(Exists_Outside,
+              '$kolem_Fn_204'(Agent1, Agent2, Room, Time))
+       ]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/SpeechAct.e',45).
+
+ /*  (   inviteIn(InviteinP_Num3_V18, A, Invitein),
+       some(Tloc16,
+            '$kolem_Fn_204'(InviteinP_Num3_V18,
+                            A,
+                            Invitein,
+                            Kolem_Fn_20419))
+   ->  at(A, Tloc16)
+   ).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/SpeechAct.e',45).
+then(if((inviteIn(InviteinP_Num3_V18, A, Invitein), some(Tloc16, '$kolem_Fn_204'(InviteinP_Num3_V18, A, Invitein, Kolem_Fn_20419)))), loc_at(A, Tloc16)).
+
+ /*  reactive_rule([ happens(inviteIn(InviteinP_Num3_V18,
+   				 A,
+   				 Invitein),
+   			Time_From20,
+   			Time_Until21),
+   		some(Tloc16,
+   		     '$kolem_Fn_204'(InviteinP_Num3_V18,
+   				     A,
+   				     Invitein,
+   				     Kolem_Fn_20419))
+   	      ],
+   	      [holds(loc_at(A,Tloc16),Holds22)]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/SpeechAct.e',45).
+
+ /*  adjacent(Room, Exists_Outside) :-
+       happens(inviteIn(Agent1, Agent2, Room), Time),
+       some(Exists_Outside,
+            '$kolem_Fn_204'(Agent1, Agent2, Room, Time)).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/SpeechAct.e',45).
+
+ /*  fix_axiom_head(Time) ->
+       [ happens(inviteIn(Agent1, Agent2, Room), Time),
+          (->),
+         inviteIn(Agent1, Agent2, Room)
+       ].
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/SpeechAct.e',45).
+
+ /*  axiom(adjacent(Room, Exists_Outside),
+       [ inviteIn(Agent1, Agent2, Room),
+         some(Exists_Outside,
+              '$kolem_Fn_204'(Agent1, Agent2, Room, Time))
+       ]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/SpeechAct.e',45).
+
+ /*  (   inviteIn(InviteinP_Num3_V24, A, Invitein23),
+       some(Adjacent,
+            '$kolem_Fn_204'(InviteinP_Num3_V24,
+                            A,
+                            Invitein23,
+                            Kolem_Fn_20425))
+   ->  adjacent(Invitein23, Adjacent)
+   ).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/SpeechAct.e',45).
+then(if((inviteIn(InviteinP_Num3_V24, A, Invitein23), some(Adjacent, '$kolem_Fn_204'(InviteinP_Num3_V24, A, Invitein23, Kolem_Fn_20425)))), adjacent(Invitein23, Adjacent)).
+
+ /*  reactive_rule([ happens(inviteIn(InviteinP_Num3_V24,
+   				 A,
+   				 Invitein23),
+   			Time_From27,
+   			Time_Until28),
+   		some(Adjacent,
+   		     '$kolem_Fn_204'(InviteinP_Num3_V24,
+   				     A,
+   				     Invitein23,
+   				     Kolem_Fn_20425))
+   	      ],
+   	      [adjacent(Invitein23,Adjacent)]).
+ */
+
+
+%; An effect axiom states that if
+%; an agent invites another agent into a room,
+%; the second agent will be invited into the room by the first agent:
+% [agent1,agent2,room,time]
+% Initiates(InviteIn(agent1,agent2,room),
+%           InvitedIn(agent2,room,agent1),
+%           time).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/SpeechAct.e',52).
+
+ /*  axiom(initiates(inviteIn(Agent1, Agent2, Room), invitedIn(Agent2, Room, Agent1), Time),
+       []).
+ */
+
+ /*  initiates(inviteIn(InviteinP_Num3_V,
+   		   InvitedinP_Num3_V,
+   		   Invitein),
+   	  invitedIn(InvitedinP_Num3_V,
+   		    Invitein,
+   		    InviteinP_Num3_V),
+   	  Initiates).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/SpeechAct.e',52).
+initiates(inviteIn(InviteinP_Num3_V,
+		   InvitedinP_Num3_V,
+		   Invitein),
+	  invitedIn(InvitedinP_Num3_V,
+		    Invitein,
+		    InviteinP_Num3_V)).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/SpeechAct.e',52).
+
+ /*  initiated(happens(inviteIn(InviteinP_Num3_V,
+   			   InvitedinP_Num3_V,
+   			   Invitein),
+   		  Time_From,
+   		  Time_Until),
+   	  invitedIn(InvitedinP_Num3_V,
+   		    Invitein,
+   		    InviteinP_Num3_V),
+   	  []).
+ */
+
+
+%; agent intends to walk into room.
+
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/SpeechAct.e',58).
+% event IntendToWalkIn(agent,room)
+ %  event(intendToWalkIn(agent,room)).
+ %  event(intendToWalkIn(agent,room)).
+actions([intendToWalkIn/2]).
+mpred_prop(intendToWalkIn(agent,room),event).
+
+
+%; agent has the intention to walk into room.
+
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/SpeechAct.e',60).
+% fluent IntentionToWalkIn(agent,room)
+ %  fluent(intentionToWalkIn(agent,room)).
+ %  fluent(intentionToWalkIn(agent,room)).
+fluents([intentionToWalkIn/2]).
+mpred_prop(intentionToWalkIn(agent,room),fluent).
+
+
+%; agent acts on the intention to walk into room.
+
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/SpeechAct.e',62).
+% fluent ActOnIntentionToWalkIn(agent,room)
+ %  fluent(actOnIntentionToWalkIn(agent,room)).
+ %  fluent(actOnIntentionToWalkIn(agent,room)).
+fluents([actOnIntentionToWalkIn/2]).
+mpred_prop(actOnIntentionToWalkIn(agent,room),fluent).
+
+% noninertial ActOnIntentionToWalkIn
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/SpeechAct.e',62).
+noninertial(actOnIntentionToWalkIn).
+%; A trigger axiom states that
+%; if an agent is invited into a room by another agent,
+%; the first agent likes the second agent, and
+%; the first agent does not already have the intention to
+%; walk into the room,
+%; the first agent intends to walk into the room:
+% [agent1,agent2,room,time]
+% HoldsAt(InvitedIn(agent1,room,agent2),time) &
+% HoldsAt(Like(agent1,agent2),time) &
+% !HoldsAt(IntentionToWalkIn(agent1,room),time) ->
+% Happens(IntendToWalkIn(agent1,room),time).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/SpeechAct.e',71).
+
+ /*  (   holds_at(invitedIn(Agent1, Room, Agent2), Time),
+       holds_at(like(Agent1, Agent2), Time),
+       holds_at(neg(intentionToWalkIn(Agent1, Room)), Time)
+   ->  happens(intendToWalkIn(Agent1, Room), Time)
+   ).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/SpeechAct.e',71).
+then(if((at(invitedIn(Agent1, Room, Agent2), Time), at(like(Agent1, Agent2), Time), at(not(intentionToWalkIn(Agent1, Room)), Time))), happens(intendToWalkIn(Agent1, Room), Time)).
+
+ /*  reactive_rule([ holds(invitedIn(Agent1,Room,Agent2),
+   		      Time),
+   		holds(like(Agent1,Agent2),Time),
+   		holds(not(intentionToWalkIn(Agent1,Room)),
+   		      Time)
+   	      ],
+   	      [ happens(intendToWalkIn(Agent1,Room),
+   			Time)
+   	      ]).
+ */
+
+
+%; An effect axiom states that
+%; if an agent intends to walk into a room,
+%; the agent will have the intention to walk into the room:
+% [agent,room,time]
+% Initiates(IntendToWalkIn(agent,room),
+%           IntentionToWalkIn(agent,room),
+%           time).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/SpeechAct.e',80).
+
+ /*  axiom(initiates(intendToWalkIn(Agent, Room), intentionToWalkIn(Agent, Room), Time),
+       []).
+ */
+
+ /*  initiates(intendToWalkIn(A,Intendtowalkin),
+   	  intentionToWalkIn(A,Intendtowalkin),
+   	  Initiates).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/SpeechAct.e',80).
+initiates(intendToWalkIn(A,Intendtowalkin),
+	  intentionToWalkIn(A,Intendtowalkin)).
+
+ /*  initiated(happens(intendToWalkIn(A,Intendtowalkin),
+   		  Time_From,
+   		  Time_Until),
+   	  intentionToWalkIn(A,Intendtowalkin),
+   	  []).
+ */
+
+
+%; Two trigger axioms state that
+%; if an agent has the intention to walk into a room,
+%; the agent acts on the intention to walk into the room,
+%; the agent is at a location,
+%; side one (two) of a door is the room,
+%; side two (one) of the door is the location,
+%; agent will walk through side two (one) of the door:
+% [agent,room,location,door,time]
+% HoldsAt(IntentionToWalkIn(agent,room),time) &
+% HoldsAt(ActOnIntentionToWalkIn(agent,room),time) &
+% HoldsAt(At(agent,location),time) &
+% Side1(door)=room &
+% Side2(door)=location ->
+% Happens(WalkThroughDoor21(agent,door),time).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/SpeechAct.e',92).
+
+ /*  (   holds_at(intentionToWalkIn(Agent, Room), Time),
+       holds_at(actOnIntentionToWalkIn(Agent, Room), Time),
+       holds_at(at(Agent, Location), Time),
+       equals(side1(Door), Room),
+       equals(side2(Door), Location)
+   ->  happens(walkThroughDoor21(Agent, Door), Time)
+   ).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/SpeechAct.e',92).
+then(if((at(intentionToWalkIn(Agent, Room), Time), at(actOnIntentionToWalkIn(Agent, Room), Time), at(loc_at(Agent, Location), Time), equals(side1(Door), Room), equals(side2(Door), Location))), happens(walkThroughDoor21(Agent, Door), Time)).
+
+ /*  reactive_rule([ holds(intentionToWalkIn(Agent,Room),
+   		      Time),
+   		holds(actOnIntentionToWalkIn(Agent,Room),
+   		      Time),
+   		holds(loc_at(Agent,Location),Time),
+   		equals(side1(Door),Room),
+   		equals(side2(Door),Location)
+   	      ],
+   	      [ happens(walkThroughDoor21(Agent,Door),
+   			Time)
+   	      ]).
+ */
+
+
+% [agent,room,location,door,time]
+% HoldsAt(IntentionToWalkIn(agent,room),time) &
+% HoldsAt(ActOnIntentionToWalkIn(agent,room),time) &
+% HoldsAt(At(agent,location),time) &
+% Side2(door)=room &
+% Side1(door)=location ->
+% Happens(WalkThroughDoor12(agent,door),time).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/SpeechAct.e',101).
+
+ /*  (   holds_at(intentionToWalkIn(Agent, Room), Time),
+       holds_at(actOnIntentionToWalkIn(Agent, Room), Time),
+       holds_at(at(Agent, Location), Time),
+       equals(side2(Door), Room),
+       equals(side1(Door), Location)
+   ->  happens(walkThroughDoor12(Agent, Door), Time)
+   ).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/SpeechAct.e',101).
+then(if((at(intentionToWalkIn(Agent, Room), Time), at(actOnIntentionToWalkIn(Agent, Room), Time), at(loc_at(Agent, Location), Time), equals(side2(Door), Room), equals(side1(Door), Location))), happens(walkThroughDoor12(Agent, Door), Time)).
+
+ /*  reactive_rule([ holds(intentionToWalkIn(Agent,Room),
+   		      Time),
+   		holds(actOnIntentionToWalkIn(Agent,Room),
+   		      Time),
+   		holds(loc_at(Agent,Location),Time),
+   		equals(side2(Door),Room),
+   		equals(side1(Door),Location)
+   	      ],
+   	      [ happens(walkThroughDoor12(Agent,Door),
+   			Time)
+   	      ]).
+ */
+
+
+%; Two effect axioms state that
+%; if side one (two) of a door is a room and
+%; an agent walks through side two (one) of the door,
+%; the agent will no longer have the intention to
+%; walk into the room:
+% [agent,room,door,time]
+% Side1(door)=room ->
+% Terminates(WalkThroughDoor21(agent,door),
+%            IntentionToWalkIn(agent,room),
+%            time).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/SpeechAct.e',113).
+
+ /*  axiom(terminates(walkThroughDoor21(Agent, Door), intentionToWalkIn(Agent, Room), Time),
+       [equals(side1(Door), Room)]).
+ */
+
+ /*  equals(side1(Side1), Equals) ->
+       terminates(walkThroughDoor21(A, Side1),
+                  intentionToWalkIn(A, Equals),
+                  Terminates).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/SpeechAct.e',113).
+then(if(equals(side1(Side1),Equals)),
+     terminates(walkThroughDoor21(A,Side1),
+		at(intentionToWalkIn(A,Equals),
+		   Terminates),
+		Terminates7)).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/SpeechAct.e',113).
+
+ /*  reactive_rule([equals(side1(Side1),Equals)],
+   	      [ terminates(walkThroughDoor21(A,Side1),
+   			   at(intentionToWalkIn(A,Equals),
+   			      Terminates),
+   			   Terminates7)
+   	      ]).
+ */
+
+
+% [agent,room,door,time]
+% Side2(door)=room ->
+% Terminates(WalkThroughDoor12(agent,door),
+%            IntentionToWalkIn(agent,room),
+%            time).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/SpeechAct.e',120).
+
+ /*  axiom(terminates(walkThroughDoor12(Agent, Door), intentionToWalkIn(Agent, Room), Time),
+       [equals(side2(Door), Room)]).
+ */
+
+ /*  equals(side2(Side2), Equals) ->
+       terminates(walkThroughDoor12(A, Side2),
+                  intentionToWalkIn(A, Equals),
+                  Terminates).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/SpeechAct.e',120).
+then(if(equals(side2(Side2),Equals)),
+     terminates(walkThroughDoor12(A,Side2),
+		at(intentionToWalkIn(A,Equals),
+		   Terminates),
+		Terminates7)).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/SpeechAct.e',120).
+
+ /*  reactive_rule([equals(side2(Side2),Equals)],
+   	      [ terminates(walkThroughDoor12(A,Side2),
+   			   at(intentionToWalkIn(A,Equals),
+   			      Terminates),
+   			   Terminates7)
+   	      ]).
+ */
+
+
+%; agent greets object.
+
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/SpeechAct.e',126).
+% event Greet(agent,object)
+ %  event(greet(agent,object)).
+ %  event(greet(agent,object)).
+actions([greet/2]).
+mpred_prop(greet(agent,object),event).
+
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/SpeechAct.e',128).
+% event SayPleasedToMeet(agent,agent)
+ %  event(sayPleasedToMeet(agent,agent)).
+ %  event(sayPleasedToMeet(agent,agent)).
+actions([sayPleasedToMeet/2]).
+mpred_prop(sayPleasedToMeet(agent,agent),event).
+
+
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/SpeechAct.e',130).
+%; agent says goodbye to object.
+
+% event SayGoodbye(agent,object)
+ %  event(sayGoodbye(agent,object)).
+ %  event(sayGoodbye(agent,object)).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/SpeechAct.e',130).
+actions([sayGoodbye/2]).
+mpred_prop(sayGoodbye(agent,object),event).
+
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/SpeechAct.e',133).
+% event TalkAbout(agent,content)
+ %  event(talkAbout(agent,content)).
+ %  event(talkAbout(agent,content)).
+actions([talkAbout/2]).
+mpred_prop(talkAbout(agent,content),event).
+
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/SpeechAct.e',135).
+% event Converse(agent,agent)
+ %  event(converse(agent,agent)).
+ %  event(converse(agent,agent)).
+actions([converse/2]).
+mpred_prop(converse(agent,agent),event).
+
+
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/SpeechAct.e',137).
+% [agent1,agent2,time]
+% Happens(Converse(agent1,agent2),time) ->
+% {location}% 
+% HoldsAt(At(agent1,location),time) &
+% HoldsAt(At(agent2,location),time).
+ %  clausify_pnf=exists([Location],  (happens(converse(Agent1, Agent2), Time)->holds_at(at(Agent1, Location), Time), holds_at(at(Agent2, Location), Time))).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/SpeechAct.e',139).
+
+ /*  not(happens(converse(Agent1, Agent2), Time)) :-
+       (   not(holds_at(at(Agent1, Exists_Location), Time))
+       ;   not(holds_at(at(Agent2, Exists_Location), Time))
+       ),
+       some(Exists_Location,
+            '$kolem_Fn_205'(Agent1, Agent2, Time)).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/SpeechAct.e',139).
+
+ /*  fix_axiom_head(Time) ->
+       [ not(happens(converse(Agent1, Agent2), Time)),
+          (->),
+         not(converse(Agent1, Agent2))
+       ].
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/SpeechAct.e',139).
+
+ /*  axiom(not(converse(Agent1, Agent2)),
+       [  (not(at(Agent1, Exists_Location));not(at(Agent2, Exists_Location))),
+         some(Exists_Location,
+              '$kolem_Fn_205'(Agent1, Agent2, Time))
+       ]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/SpeechAct.e',139).
+
+ /*  (   (   not(at(Kolem_Fn_205P_Num3_V, Tloc))
+       ;   not(at(Converse, Tloc))
+       ),
+       some(Tloc,
+            '$kolem_Fn_205'(Kolem_Fn_205P_Num3_V,
+                            Converse,
+                            Kolem_Fn_205))
+   ->  not(converse(Kolem_Fn_205P_Num3_V, Converse))
+   ).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/SpeechAct.e',139).
+then(if(((not(loc_at(Kolem_Fn_205P_Num3_V, Tloc));not(loc_at(Converse, Tloc))), some(Tloc, '$kolem_Fn_205'(Kolem_Fn_205P_Num3_V, Converse, Kolem_Fn_205)))), not(converse(Kolem_Fn_205P_Num3_V, Converse))).
+
+ /*   reactive_rule([  (not(loc_at(Kolem_Fn_205P_Num3_V, Tloc));not(loc_at(Converse, Tloc))),
+                      some(Tloc,
+                           '$kolem_Fn_205'(Kolem_Fn_205P_Num3_V,
+                                           Converse,
+                                           Kolem_Fn_205))
+                    ],
+                    [not(converse(Kolem_Fn_205P_Num3_V, Converse))]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/SpeechAct.e',139).
+
+ /*  holds_at(at(Agent1, Exists_Location), Time) :-
+       happens(converse(Agent1, Agent2), Time),
+       some(Exists_Location,
+            '$kolem_Fn_205'(Agent1, Agent2, Time)).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/SpeechAct.e',139).
+
+ /*  fix_axiom_head(Time) ->
+       [ holds_at(at(Agent1, Exists_Location), Time),
+          (->),
+         at(Agent1, Exists_Location)
+       ].
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/SpeechAct.e',139).
+
+ /*  axiom(at(Agent1, Exists_Location),
+       [ converse(Agent1, Agent2),
+         some(Exists_Location,
+              '$kolem_Fn_205'(Agent1, Agent2, Time))
+       ]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/SpeechAct.e',139).
+
+ /*  (   converse(Kolem_Fn_205P_Num3_V12, Converse10),
+       some(Tloc9,
+            '$kolem_Fn_205'(Kolem_Fn_205P_Num3_V12,
+                            Converse10,
+                            Kolem_Fn_20511))
+   ->  at(Kolem_Fn_205P_Num3_V12, Tloc9)
+   ).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/SpeechAct.e',139).
+then(if((converse(Kolem_Fn_205P_Num3_V12, Converse10), some(Tloc9, '$kolem_Fn_205'(Kolem_Fn_205P_Num3_V12, Converse10, Kolem_Fn_20511)))), loc_at(Kolem_Fn_205P_Num3_V12, Tloc9)).
+
+ /*  reactive_rule([ converse(Kolem_Fn_205P_Num3_V12,Converse10),
+   		some(Tloc9,
+   		     '$kolem_Fn_205'(Kolem_Fn_205P_Num3_V12,
+   				     Converse10,
+   				     Kolem_Fn_20511))
+   	      ],
+   	      [ holds(loc_at(Kolem_Fn_205P_Num3_V12,Tloc9),
+   		      Holds)
+   	      ]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/SpeechAct.e',139).
+
+ /*  holds_at(at(Agent2, Exists_Location), Time) :-
+       happens(converse(Agent1, Agent2), Time),
+       some(Exists_Location,
+            '$kolem_Fn_205'(Agent1, Agent2, Time)).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/SpeechAct.e',139).
+
+ /*  fix_axiom_head(Time) ->
+       [ holds_at(at(Agent2, Exists_Location), Time),
+          (->),
+         at(Agent2, Exists_Location)
+       ].
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/SpeechAct.e',139).
+
+ /*  axiom(at(Agent2, Exists_Location),
+       [ converse(Agent1, Agent2),
+         some(Exists_Location,
+              '$kolem_Fn_205'(Agent1, Agent2, Time))
+       ]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/SpeechAct.e',139).
+
+ /*  (   converse(Kolem_Fn_205P_Num3_V17, Converse15),
+       some(Tloc14,
+            '$kolem_Fn_205'(Kolem_Fn_205P_Num3_V17,
+                            Converse15,
+                            Kolem_Fn_20516))
+   ->  at(Converse15, Tloc14)
+   ).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/SpeechAct.e',139).
+then(if((converse(Kolem_Fn_205P_Num3_V17, Converse15), some(Tloc14, '$kolem_Fn_205'(Kolem_Fn_205P_Num3_V17, Converse15, Kolem_Fn_20516)))), loc_at(Converse15, Tloc14)).
+
+ /*  reactive_rule([ converse(Kolem_Fn_205P_Num3_V17,Converse15),
+   		some(Tloc14,
+   		     '$kolem_Fn_205'(Kolem_Fn_205P_Num3_V17,
+   				     Converse15,
+   				     Kolem_Fn_20516))
+   	      ],
+   	      [ holds(loc_at(Converse15,Tloc14),
+   		      Holds18)
+   	      ]).
+ */
+
+
+%; A precondition axiom states that for
+%; an agent to greet an object,
+%; there must be a location such that
+%; the agent is at the location and
+%; the object is at the location:
+% [agent,object,time]
+% Happens(Greet(agent,object),time) ->
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/SpeechAct.e',148).
+% {location}% 
+% HoldsAt(At(agent,location),time) &
+% HoldsAt(At(object,location),time).
+ %  clausify_pnf=exists([Location],  (happens(greet(Agent, Object), Time)->holds_at(at(Agent, Location), Time), holds_at(at(Object, Location), Time))).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/SpeechAct.e',150).
+
+ /*  not(happens(greet(Agent, Object), Time)) :-
+       (   not(holds_at(at(Agent, Exists_Location), Time))
+       ;   not(holds_at(at(Object, Exists_Location), Time))
+       ),
+       some(Exists_Location,
+            '$kolem_Fn_206'(Agent, Object, Time)).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/SpeechAct.e',150).
+
+ /*  fix_axiom_head(Time) ->
+       [ not(happens(greet(Agent, Object), Time)),
+          (->),
+         not(greet(Agent, Object))
+       ].
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/SpeechAct.e',150).
+
+ /*  axiom(not(greet(Agent, Object)),
+       [  (not(at(Agent, Exists_Location));not(at(Object, Exists_Location))),
+         some(Exists_Location,
+              '$kolem_Fn_206'(Agent, Object, Time))
+       ]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/SpeechAct.e',150).
+
+ /*  (   (   not(at(Kolem_Fn_206P_Num3_V, Tloc))
+       ;   not(at(Greet, Tloc))
+       ),
+       some(Tloc,
+            '$kolem_Fn_206'(Kolem_Fn_206P_Num3_V,
+                            Greet,
+                            Kolem_Fn_206))
+   ->  not(greet(Kolem_Fn_206P_Num3_V, Greet))
+   ).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/SpeechAct.e',150).
+then(if(((not(loc_at(Kolem_Fn_206P_Num3_V, Tloc));not(loc_at(Greet, Tloc))), some(Tloc, '$kolem_Fn_206'(Kolem_Fn_206P_Num3_V, Greet, Kolem_Fn_206)))), not(greet(Kolem_Fn_206P_Num3_V, Greet))).
+
+ /*   reactive_rule([  (not(loc_at(Kolem_Fn_206P_Num3_V, Tloc));not(loc_at(Greet, Tloc))),
+                      some(Tloc,
+                           '$kolem_Fn_206'(Kolem_Fn_206P_Num3_V,
+                                           Greet,
+                                           Kolem_Fn_206))
+                    ],
+                    [not(greet(Kolem_Fn_206P_Num3_V, Greet))]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/SpeechAct.e',150).
+
+ /*  holds_at(at(Agent, Exists_Location), Time) :-
+       happens(greet(Agent, Object), Time),
+       some(Exists_Location,
+            '$kolem_Fn_206'(Agent, Object, Time)).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/SpeechAct.e',150).
+
+ /*  fix_axiom_head(Time) ->
+       [ holds_at(at(Agent, Exists_Location), Time),
+          (->),
+         at(Agent, Exists_Location)
+       ].
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/SpeechAct.e',150).
+
+ /*  axiom(at(Agent, Exists_Location),
+       [ greet(Agent, Object),
+         some(Exists_Location,
+              '$kolem_Fn_206'(Agent, Object, Time))
+       ]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/SpeechAct.e',150).
+
+ /*  (   greet(Kolem_Fn_206P_Num3_V12, Greet10),
+       some(Tloc9,
+            '$kolem_Fn_206'(Kolem_Fn_206P_Num3_V12,
+                            Greet10,
+                            Kolem_Fn_20611))
+   ->  at(Kolem_Fn_206P_Num3_V12, Tloc9)
+   ).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/SpeechAct.e',150).
+then(if((greet(Kolem_Fn_206P_Num3_V12, Greet10), some(Tloc9, '$kolem_Fn_206'(Kolem_Fn_206P_Num3_V12, Greet10, Kolem_Fn_20611)))), loc_at(Kolem_Fn_206P_Num3_V12, Tloc9)).
+
+ /*  reactive_rule([ greet(Kolem_Fn_206P_Num3_V12,Greet10),
+   		some(Tloc9,
+   		     '$kolem_Fn_206'(Kolem_Fn_206P_Num3_V12,
+   				     Greet10,
+   				     Kolem_Fn_20611))
+   	      ],
+   	      [ holds(loc_at(Kolem_Fn_206P_Num3_V12,Tloc9),
+   		      Holds)
+   	      ]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/SpeechAct.e',150).
+
+ /*  holds_at(at(Object, Exists_Location), Time) :-
+       happens(greet(Agent, Object), Time),
+       some(Exists_Location,
+            '$kolem_Fn_206'(Agent, Object, Time)).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/SpeechAct.e',150).
+
+ /*  fix_axiom_head(Time) ->
+       [ holds_at(at(Object, Exists_Location), Time),
+          (->),
+         at(Object, Exists_Location)
+       ].
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/SpeechAct.e',150).
+
+ /*  axiom(at(Object, Exists_Location),
+       [ greet(Agent, Object),
+         some(Exists_Location,
+              '$kolem_Fn_206'(Agent, Object, Time))
+       ]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/SpeechAct.e',150).
+
+ /*  (   greet(Kolem_Fn_206P_Num3_V17, Greet15),
+       some(Tloc14,
+            '$kolem_Fn_206'(Kolem_Fn_206P_Num3_V17,
+                            Greet15,
+                            Kolem_Fn_20616))
+   ->  at(Greet15, Tloc14)
+   ).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/SpeechAct.e',150).
+then(if((greet(Kolem_Fn_206P_Num3_V17, Greet15), some(Tloc14, '$kolem_Fn_206'(Kolem_Fn_206P_Num3_V17, Greet15, Kolem_Fn_20616)))), loc_at(Greet15, Tloc14)).
+
+ /*  reactive_rule([ greet(Kolem_Fn_206P_Num3_V17,Greet15),
+   		some(Tloc14,
+   		     '$kolem_Fn_206'(Kolem_Fn_206P_Num3_V17,
+   				     Greet15,
+   				     Kolem_Fn_20616))
+   	      ],
+   	      [holds(loc_at(Greet15,Tloc14),Holds18)]).
+ */
+
+
+% [agent,object,time]
+% Happens(SayGoodbye(agent,object),time) ->
+% {location}% 
+% HoldsAt(At(agent,location),time) &
+% HoldsAt(At(object,location),time).
+ %  clausify_pnf=exists([Location],  (happens(sayGoodbye(Agent, Object), Time)->holds_at(at(Agent, Location), Time), holds_at(at(Object, Location), Time))).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/SpeechAct.e',155).
+
+ /*  not(happens(sayGoodbye(Agent, Object), Time)) :-
+       (   not(holds_at(at(Agent, Exists_Location), Time))
+       ;   not(holds_at(at(Object, Exists_Location), Time))
+       ),
+       some(Exists_Location,
+            '$kolem_Fn_207'(Agent, Object, Time)).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/SpeechAct.e',155).
+
+ /*  fix_axiom_head(Time) ->
+       [ not(happens(sayGoodbye(Agent, Object), Time)),
+          (->),
+         not(sayGoodbye(Agent, Object))
+       ].
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/SpeechAct.e',155).
+
+ /*  axiom(not(sayGoodbye(Agent, Object)),
+       [  (not(at(Agent, Exists_Location));not(at(Object, Exists_Location))),
+         some(Exists_Location,
+              '$kolem_Fn_207'(Agent, Object, Time))
+       ]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/SpeechAct.e',155).
+
+ /*  (   (   not(at(Kolem_Fn_207P_Num3_V, Tloc))
+       ;   not(at(Saygoodbye, Tloc))
+       ),
+       some(Tloc,
+            '$kolem_Fn_207'(Kolem_Fn_207P_Num3_V,
+                            Saygoodbye,
+                            Kolem_Fn_207))
+   ->  not(sayGoodbye(Kolem_Fn_207P_Num3_V, Saygoodbye))
+   ).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/SpeechAct.e',155).
+then(if(((not(loc_at(Kolem_Fn_207P_Num3_V, Tloc));not(loc_at(Saygoodbye, Tloc))), some(Tloc, '$kolem_Fn_207'(Kolem_Fn_207P_Num3_V, Saygoodbye, Kolem_Fn_207)))), not(sayGoodbye(Kolem_Fn_207P_Num3_V, Saygoodbye))).
+
+ /*   reactive_rule([  (not(loc_at(Kolem_Fn_207P_Num3_V, Tloc));not(loc_at(Saygoodbye, Tloc))),
+                      some(Tloc,
+                           '$kolem_Fn_207'(Kolem_Fn_207P_Num3_V,
+                                           Saygoodbye,
+                                           Kolem_Fn_207))
+                    ],
+                    [ not(sayGoodbye(Kolem_Fn_207P_Num3_V, Saygoodbye))
+                    ]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/SpeechAct.e',155).
+
+ /*  holds_at(at(Agent, Exists_Location), Time) :-
+       happens(sayGoodbye(Agent, Object), Time),
+       some(Exists_Location,
+            '$kolem_Fn_207'(Agent, Object, Time)).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/SpeechAct.e',155).
+
+ /*  fix_axiom_head(Time) ->
+       [ holds_at(at(Agent, Exists_Location), Time),
+          (->),
+         at(Agent, Exists_Location)
+       ].
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/SpeechAct.e',155).
+
+ /*  axiom(at(Agent, Exists_Location),
+       [ sayGoodbye(Agent, Object),
+         some(Exists_Location,
+              '$kolem_Fn_207'(Agent, Object, Time))
+       ]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/SpeechAct.e',155).
+
+ /*  (   sayGoodbye(Kolem_Fn_207P_Num3_V12, Saygoodbye10),
+       some(Tloc9,
+            '$kolem_Fn_207'(Kolem_Fn_207P_Num3_V12,
+                            Saygoodbye10,
+                            Kolem_Fn_20711))
+   ->  at(Kolem_Fn_207P_Num3_V12, Tloc9)
+   ).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/SpeechAct.e',155).
+then(if((sayGoodbye(Kolem_Fn_207P_Num3_V12, Saygoodbye10), some(Tloc9, '$kolem_Fn_207'(Kolem_Fn_207P_Num3_V12, Saygoodbye10, Kolem_Fn_20711)))), loc_at(Kolem_Fn_207P_Num3_V12, Tloc9)).
+
+ /*  reactive_rule([ sayGoodbye(Kolem_Fn_207P_Num3_V12,
+   			   Saygoodbye10),
+   		some(Tloc9,
+   		     '$kolem_Fn_207'(Kolem_Fn_207P_Num3_V12,
+   				     Saygoodbye10,
+   				     Kolem_Fn_20711))
+   	      ],
+   	      [ holds(loc_at(Kolem_Fn_207P_Num3_V12,Tloc9),
+   		      Holds)
+   	      ]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/SpeechAct.e',155).
+
+ /*  holds_at(at(Object, Exists_Location), Time) :-
+       happens(sayGoodbye(Agent, Object), Time),
+       some(Exists_Location,
+            '$kolem_Fn_207'(Agent, Object, Time)).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/SpeechAct.e',155).
+
+ /*  fix_axiom_head(Time) ->
+       [ holds_at(at(Object, Exists_Location), Time),
+          (->),
+         at(Object, Exists_Location)
+       ].
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/SpeechAct.e',155).
+
+ /*  axiom(at(Object, Exists_Location),
+       [ sayGoodbye(Agent, Object),
+         some(Exists_Location,
+              '$kolem_Fn_207'(Agent, Object, Time))
+       ]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/SpeechAct.e',155).
+
+ /*  (   sayGoodbye(Kolem_Fn_207P_Num3_V17, Saygoodbye15),
+       some(Tloc14,
+            '$kolem_Fn_207'(Kolem_Fn_207P_Num3_V17,
+                            Saygoodbye15,
+                            Kolem_Fn_20716))
+   ->  at(Saygoodbye15, Tloc14)
+   ).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/SpeechAct.e',155).
+then(if((sayGoodbye(Kolem_Fn_207P_Num3_V17, Saygoodbye15), some(Tloc14, '$kolem_Fn_207'(Kolem_Fn_207P_Num3_V17, Saygoodbye15, Kolem_Fn_20716)))), loc_at(Saygoodbye15, Tloc14)).
+
+ /*  reactive_rule([ sayGoodbye(Kolem_Fn_207P_Num3_V17,
+   			   Saygoodbye15),
+   		some(Tloc14,
+   		     '$kolem_Fn_207'(Kolem_Fn_207P_Num3_V17,
+   				     Saygoodbye15,
+   				     Kolem_Fn_20716))
+   	      ],
+   	      [ holds(loc_at(Saygoodbye15,Tloc14),
+   		      Holds18)
+   	      ]).
+ */
+
+
+%; speech: expression of emotions
+%; agent cries for joy.
+
+% event CryForJoy(agent)
+ %  event(cryForJoy(agent)).
+ %  event(cryForJoy(agent)).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/SpeechAct.e',162).
+actions([cryForJoy/1]).
+mpred_prop(cryForJoy(agent),event).
+
+
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/SpeechAct.e',165).
+%; A precondition axiom states that for
+%; an agent to cry for joy,
+%; the agent must be happy:
+% [agent,time]
+% Happens(CryForJoy(agent),time) ->
+% HoldsAt(Happy(agent),time).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/SpeechAct.e',168).
+
+ /*  happens(cryForJoy(Agent), Time) ->
+       holds_at(happy(Agent), Time).
+ */
+then(if(happens(cryForJoy(Agent),Time)),
+     at(happy(Agent),Time)).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/SpeechAct.e',168).
+
+ /*  reactive_rule([happens(cryForJoy(Agent),Time)],
+   	      [holds(happy(Agent),Time)]).
+ */
+
+% event Threaten(agent,agent,weapon)
+ %  event(threaten(agent,agent,weapon)).
+ %  event(threaten(agent,agent,weapon)).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/SpeechAct.e',171).
+actions([threaten/3]).
+mpred_prop(threaten(agent,agent,weapon),event).
+
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/SpeechAct.e',174).
+% event ReleaseFromThreat(agent,agent)
+ %  event(releaseFromThreat(agent,agent)).
+ %  event(releaseFromThreat(agent,agent)).
+actions([releaseFromThreat/2]).
+mpred_prop(releaseFromThreat(agent,agent),event).
+
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/SpeechAct.e',176).
+% fluent ThreatenedBy(agent,agent)
+ %  fluent(threatenedBy(agent,agent)).
+ %  fluent(threatenedBy(agent,agent)).
+fluents([threatenedBy/2]).
+mpred_prop(threatenedBy(agent,agent),fluent).
+
+
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/SpeechAct.e',178).
+% [agent1,agent2,weapon,time]
+% Happens(Threaten(agent1,agent2,weapon), time) ->
+% HoldsAt(Holding(agent1,weapon),time) &
+% {location}% 
+% HoldsAt(At(agent1,location),time) &
+% HoldsAt(At(agent2,location),time).
+ %  clausify_pnf=exists([Location],  (happens(threaten(Agent1, Agent2, Weapon), Time)->holds_at(holding(Agent1, Weapon), Time), holds_at(at(Agent1, Location), Time), holds_at(at(Agent2, Location), Time))).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/SpeechAct.e',181).
+
+ /*  not(happens(threaten(Agent1, Agent2, Weapon), Time)) :-
+       (   not(holds_at(holding(Agent1, Weapon), Time))
+       ;   not(holds_at(at(Agent1, Exists_Location), Time))
+       ;   not(holds_at(at(Agent2, Exists_Location), Time))
+       ),
+       some(Exists_Location,
+            '$kolem_Fn_208'(Agent1, Agent2, Weapon, Time)).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/SpeechAct.e',181).
+
+ /*  fix_axiom_head(Time) ->
+       [ not(happens(threaten(Agent1, Agent2, Weapon), Time)),
+          (->),
+         not(threaten(Agent1, Agent2, Weapon))
+       ].
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/SpeechAct.e',181).
+
+ /*  axiom(not(threaten(Agent1, Agent2, Weapon)),
+       [  (not(holding(Agent1, Weapon));not(at(Agent1, Exists_Location));not(at(Agent2, Exists_Location))),
+         some(Exists_Location,
+              '$kolem_Fn_208'(Agent1, Agent2, Weapon, Time))
+       ]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/SpeechAct.e',181).
+
+ /*  (   (   not(holding(Kolem_Fn_208P_Num4_V, Holding))
+       ;   not(at(Kolem_Fn_208P_Num4_V, Tloc))
+       ;   not(at(A, Tloc))
+       ),
+       some(Tloc,
+            '$kolem_Fn_208'(Kolem_Fn_208P_Num4_V,
+                            A,
+                            Holding,
+                            Kolem_Fn_208))
+   ->  not(threaten(Kolem_Fn_208P_Num4_V, A, Holding))
+   ).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/SpeechAct.e',181).
+then(if(((not(holding(Kolem_Fn_208P_Num4_V, Holding));not(loc_at(Kolem_Fn_208P_Num4_V, Tloc));not(loc_at(A, Tloc))), some(Tloc, '$kolem_Fn_208'(Kolem_Fn_208P_Num4_V, A, Holding, Kolem_Fn_208)))), not(threaten(Kolem_Fn_208P_Num4_V, A, Holding))).
+
+ /*   reactive_rule([  (not(holding(Kolem_Fn_208P_Num4_V, Holding));not(loc_at(Kolem_Fn_208P_Num4_V, Tloc));not(loc_at(A, Tloc))),
+                      some(Tloc,
+                           '$kolem_Fn_208'(Kolem_Fn_208P_Num4_V,
+                                           A,
+                                           Holding,
+                                           Kolem_Fn_208))
+                    ],
+                    [ not(threaten(Kolem_Fn_208P_Num4_V,
+                                   A,
+                                   Holding))
+                    ]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/SpeechAct.e',181).
+
+ /*  holds_at(holding(Agent1, Weapon), Time) :-
+       happens(threaten(Agent1, Agent2, Weapon), Time),
+       some(Exists_Location,
+            '$kolem_Fn_208'(Agent1, Agent2, Weapon, Time)).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/SpeechAct.e',181).
+
+ /*  fix_axiom_head(Time) ->
+       [ holds_at(holding(Agent1, Weapon), Time),
+          (->),
+         holding(Agent1, Weapon)
+       ].
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/SpeechAct.e',181).
+
+ /*  axiom(holding(Agent1, Weapon),
+       [ threaten(Agent1, Agent2, Weapon),
+         some(Exists_Location,
+              '$kolem_Fn_208'(Agent1, Agent2, Weapon, Time))
+       ]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/SpeechAct.e',181).
+
+ /*  (   threaten(ThreatenP_Num3_V, A, Threaten),
+       some(_,
+            '$kolem_Fn_208'(ThreatenP_Num3_V,
+                            A,
+                            Threaten,
+                            Kolem_Fn_20812))
+   ->  holding(ThreatenP_Num3_V, Threaten)
+   ).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/SpeechAct.e',181).
+then(if((threaten(ThreatenP_Num3_V, A, Threaten), some(_, '$kolem_Fn_208'(ThreatenP_Num3_V, A, Threaten, Kolem_Fn_20812)))), holding(ThreatenP_Num3_V, Threaten)).
+
+ /*  reactive_rule([ happens(threaten(ThreatenP_Num3_V,
+   				 A,
+   				 Threaten),
+   			Time_From,
+   			Time_Until),
+   		some(_,
+   		     '$kolem_Fn_208'(ThreatenP_Num3_V,
+   				     A,
+   				     Threaten,
+   				     Kolem_Fn_20812))
+   	      ],
+   	      [ holds(holding(ThreatenP_Num3_V,Threaten),
+   		      Holds)
+   	      ]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/SpeechAct.e',181).
+
+ /*  holds_at(at(Agent1, Exists_Location), Time) :-
+       happens(threaten(Agent1, Agent2, Weapon), Time),
+       some(Exists_Location,
+            '$kolem_Fn_208'(Agent1, Agent2, Weapon, Time)).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/SpeechAct.e',181).
+
+ /*  fix_axiom_head(Time) ->
+       [ holds_at(at(Agent1, Exists_Location), Time),
+          (->),
+         at(Agent1, Exists_Location)
+       ].
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/SpeechAct.e',181).
+
+ /*  axiom(at(Agent1, Exists_Location),
+       [ threaten(Agent1, Agent2, Weapon),
+         some(Exists_Location,
+              '$kolem_Fn_208'(Agent1, Agent2, Weapon, Time))
+       ]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/SpeechAct.e',181).
+
+ /*  (   threaten(ThreatenP_Num3_V18, A, Threaten17),
+       some(Tloc16,
+            '$kolem_Fn_208'(ThreatenP_Num3_V18,
+                            A,
+                            Threaten17,
+                            Kolem_Fn_20819))
+   ->  at(ThreatenP_Num3_V18, Tloc16)
+   ).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/SpeechAct.e',181).
+then(if((threaten(ThreatenP_Num3_V18, A, Threaten17), some(Tloc16, '$kolem_Fn_208'(ThreatenP_Num3_V18, A, Threaten17, Kolem_Fn_20819)))), loc_at(ThreatenP_Num3_V18, Tloc16)).
+
+ /*  reactive_rule([ happens(threaten(ThreatenP_Num3_V18,
+   				 A,
+   				 Threaten17),
+   			Time_From20,
+   			Time_Until21),
+   		some(Tloc16,
+   		     '$kolem_Fn_208'(ThreatenP_Num3_V18,
+   				     A,
+   				     Threaten17,
+   				     Kolem_Fn_20819))
+   	      ],
+   	      [ holds(loc_at(ThreatenP_Num3_V18,Tloc16),
+   		      Holds22)
+   	      ]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/SpeechAct.e',181).
+
+ /*  holds_at(at(Agent2, Exists_Location), Time) :-
+       happens(threaten(Agent1, Agent2, Weapon), Time),
+       some(Exists_Location,
+            '$kolem_Fn_208'(Agent1, Agent2, Weapon, Time)).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/SpeechAct.e',181).
+
+ /*  fix_axiom_head(Time) ->
+       [ holds_at(at(Agent2, Exists_Location), Time),
+          (->),
+         at(Agent2, Exists_Location)
+       ].
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/SpeechAct.e',181).
+
+ /*  axiom(at(Agent2, Exists_Location),
+       [ threaten(Agent1, Agent2, Weapon),
+         some(Exists_Location,
+              '$kolem_Fn_208'(Agent1, Agent2, Weapon, Time))
+       ]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/SpeechAct.e',181).
+
+ /*  (   threaten(ThreatenP_Num3_V25, A, Threaten24),
+       some(Tloc23,
+            '$kolem_Fn_208'(ThreatenP_Num3_V25,
+                            A,
+                            Threaten24,
+                            Kolem_Fn_20826))
+   ->  at(A, Tloc23)
+   ).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/SpeechAct.e',181).
+then(if((threaten(ThreatenP_Num3_V25, A, Threaten24), some(Tloc23, '$kolem_Fn_208'(ThreatenP_Num3_V25, A, Threaten24, Kolem_Fn_20826)))), loc_at(A, Tloc23)).
+
+ /*  reactive_rule([ happens(threaten(ThreatenP_Num3_V25,
+   				 A,
+   				 Threaten24),
+   			Time_From27,
+   			Time_Until28),
+   		some(Tloc23,
+   		     '$kolem_Fn_208'(ThreatenP_Num3_V25,
+   				     A,
+   				     Threaten24,
+   				     Kolem_Fn_20826))
+   	      ],
+   	      [holds(loc_at(A,Tloc23),Holds29)]).
+ */
+
+
+% [agent1,agent2,weapon,time]
+% Happens(Threaten(agent1,agent2,weapon), time) ->
+% Happens(BecomeAngryAt(agent2,agent1),time).
+
+ /*  happens(threaten(Agent1, Agent2, Weapon), Time) ->
+       happens(becomeAngryAt(Agent2, Agent1), Time).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/SpeechAct.e',186).
+then(if(happens(threaten(Agent1,Agent2,Weapon),
+		Time)),
+     happens(becomeAngryAt(Agent2,Agent1),Time)).
+
+ /*  reactive_rule([ happens(threaten(Agent1,
+   				 Agent2,
+   				 Weapon),
+   			Time)
+   	      ],
+   	      [ happens(becomeAngryAt(Agent2,Agent1),
+   			Time)
+   	      ]).
+ */
+
+
+% [agent1,agent2,weapon,time]
+% Initiates(Threaten(agent1,agent2,weapon),
+%           ThreatenedBy(agent2,agent1),
+%           time).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/SpeechAct.e',190).
+
+ /*  axiom(initiates(threaten(Agent1, Agent2, Weapon), threatenedBy(Agent2, Agent1), Time),
+       []).
+ */
+
+ /*  initiates(threaten(ThreatenP_Num3_V,A,Threaten),
+   	  threatenedBy(A,ThreatenP_Num3_V),
+   	  Initiates).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/SpeechAct.e',190).
+initiates(threaten(ThreatenP_Num3_V,A,Threaten),
+	  threatenedBy(A,ThreatenP_Num3_V)).
+
+ /*  initiated(happens(threaten(ThreatenP_Num3_V,
+   			   A,
+   			   Threaten),
+   		  Time_From,
+   		  Time_Until),
+   	  threatenedBy(A,ThreatenP_Num3_V),
+   	  []).
+ */
+
+
+% [agent1,agent2,time]
+% Terminates(ReleaseFromThreat(agent1,agent2),
+%            ThreatenedBy(agent2,agent1),
+%            time).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/SpeechAct.e',195).
+
+ /*  axiom(terminates(releaseFromThreat(Agent1, Agent2), threatenedBy(Agent2, Agent1), Time),
+       []).
+ */
+
+ /*  terminates(releaseFromThreat(Threatenedby,
+   			     Releasefromthreat),
+   	   threatenedBy(Releasefromthreat,Threatenedby),
+   	   Terminates).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/SpeechAct.e',195).
+terminates(releaseFromThreat(Threatenedby,
+			     Releasefromthreat),
+	   threatenedBy(Releasefromthreat,Threatenedby)).
+
+ /*  terminated(happens(releaseFromThreat(Threatenedby,
+   				     Releasefromthreat),
+   		   Time_From,
+   		   Time_Until),
+   	   threatenedBy(Releasefromthreat,Threatenedby),
+   	   []).
+ */
+
+% event Order(agent,agent,physobj)
+ %  event(order(agent,agent,physobj)).
+ %  event(order(agent,agent,physobj)).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/SpeechAct.e',198).
+actions([order/3]).
+mpred_prop(order(agent,agent,physobj),event).
+
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/SpeechAct.e',201).
+% fluent KnowOrder(agent,agent,physobj)
+ %  fluent(knowOrder(agent,agent,physobj)).
+ %  fluent(knowOrder(agent,agent,physobj)).
+fluents([knowOrder/3]).
+mpred_prop(knowOrder(agent,agent,physobj),fluent).
+
+
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/SpeechAct.e',203).
+% [agent1,agent2,physobj,time]
+% Initiates(Order(agent1,agent2,physobj),
+%           KnowOrder(agent2,agent1,physobj),
+%           time).
+
+ /*  axiom(initiates(order(Agent1, Agent2, Physobj), knowOrder(Agent2, Agent1, Physobj), Time),
+       []).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/SpeechAct.e',203).
+
+ /*  initiates(order(OrderP_Num3_V,
+   		KnoworderP_Num3_V,
+   		Order),
+   	  knowOrder(KnoworderP_Num3_V,
+   		    OrderP_Num3_V,
+   		    Order),
+   	  Initiates).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/SpeechAct.e',203).
+initiates(order(OrderP_Num3_V,
+		KnoworderP_Num3_V,
+		Order),
+	  knowOrder(KnoworderP_Num3_V,
+		    OrderP_Num3_V,
+		    Order)).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/SpeechAct.e',203).
+
+ /*  initiated(happens(order(OrderP_Num3_V,
+   			KnoworderP_Num3_V,
+   			Order),
+   		  Time_From,
+   		  Time_Until),
+   	  knowOrder(KnoworderP_Num3_V,
+   		    OrderP_Num3_V,
+   		    Order),
+   	  []).
+ */
+
+
+% [agent1,agent2,physobj,time]
+% Happens(Order(agent1,agent2,physobj),time) ->
+% {location}% 
+% HoldsAt(At(agent1,location),time) &
+% HoldsAt(At(agent2,location),time).
+ %  clausify_pnf=exists([Location],  (happens(order(Agent1, Agent2, Physobj), Time)->holds_at(at(Agent1, Location), Time), holds_at(at(Agent2, Location), Time))).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/SpeechAct.e',209).
+
+ /*  not(happens(order(Agent1, Agent2, Physobj), Time)) :-
+       (   not(holds_at(at(Agent1, Exists_Location), Time))
+       ;   not(holds_at(at(Agent2, Exists_Location), Time))
+       ),
+       some(Exists_Location,
+            '$kolem_Fn_209'(Agent1, Agent2, Physobj, Time)).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/SpeechAct.e',209).
+
+ /*  fix_axiom_head(Time) ->
+       [ not(happens(order(Agent1, Agent2, Physobj), Time)),
+          (->),
+         not(order(Agent1, Agent2, Physobj))
+       ].
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/SpeechAct.e',209).
+
+ /*  axiom(not(order(Agent1, Agent2, Physobj)),
+       [  (not(at(Agent1, Exists_Location));not(at(Agent2, Exists_Location))),
+         some(Exists_Location,
+              '$kolem_Fn_209'(Agent1, Agent2, Physobj, Time))
+       ]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/SpeechAct.e',209).
+
+ /*  (   (   not(at(Kolem_Fn_209P_Num4_V, Tloc))
+       ;   not(at(A, Tloc))
+       ),
+       some(Tloc,
+            '$kolem_Fn_209'(Kolem_Fn_209P_Num4_V,
+                            A,
+                            Order,
+                            Kolem_Fn_209))
+   ->  not(order(Kolem_Fn_209P_Num4_V, A, Order))
+   ).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/SpeechAct.e',209).
+then(if(((not(loc_at(Kolem_Fn_209P_Num4_V, Tloc));not(loc_at(A, Tloc))), some(Tloc, '$kolem_Fn_209'(Kolem_Fn_209P_Num4_V, A, Order, Kolem_Fn_209)))), not(order(Kolem_Fn_209P_Num4_V, A, Order))).
+
+ /*   reactive_rule([  (not(loc_at(Kolem_Fn_209P_Num4_V, Tloc));not(loc_at(A, Tloc))),
+                      some(Tloc,
+                           '$kolem_Fn_209'(Kolem_Fn_209P_Num4_V,
+                                           A,
+                                           Order,
+                                           Kolem_Fn_209))
+                    ],
+                    [not(order(Kolem_Fn_209P_Num4_V, A, Order))]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/SpeechAct.e',209).
+
+ /*  holds_at(at(Agent1, Exists_Location), Time) :-
+       happens(order(Agent1, Agent2, Physobj), Time),
+       some(Exists_Location,
+            '$kolem_Fn_209'(Agent1, Agent2, Physobj, Time)).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/SpeechAct.e',209).
+
+ /*  fix_axiom_head(Time) ->
+       [ holds_at(at(Agent1, Exists_Location), Time),
+          (->),
+         at(Agent1, Exists_Location)
+       ].
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/SpeechAct.e',209).
+
+ /*  axiom(at(Agent1, Exists_Location),
+       [ order(Agent1, Agent2, Physobj),
+         some(Exists_Location,
+              '$kolem_Fn_209'(Agent1, Agent2, Physobj, Time))
+       ]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/SpeechAct.e',209).
+
+ /*  (   order(OrderP_Num3_V, A, Order11),
+       some(Tloc10,
+            '$kolem_Fn_209'(OrderP_Num3_V,
+                            A,
+                            Order11,
+                            Kolem_Fn_20913))
+   ->  at(OrderP_Num3_V, Tloc10)
+   ).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/SpeechAct.e',209).
+then(if((order(OrderP_Num3_V, A, Order11), some(Tloc10, '$kolem_Fn_209'(OrderP_Num3_V, A, Order11, Kolem_Fn_20913)))), loc_at(OrderP_Num3_V, Tloc10)).
+
+ /*  reactive_rule([ happens(order(OrderP_Num3_V,
+   			      A,
+   			      Order11),
+   			Time_From,
+   			Time_Until),
+   		some(Tloc10,
+   		     '$kolem_Fn_209'(OrderP_Num3_V,
+   				     A,
+   				     Order11,
+   				     Kolem_Fn_20913))
+   	      ],
+   	      [ holds(loc_at(OrderP_Num3_V,Tloc10),
+   		      Holds)
+   	      ]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/SpeechAct.e',209).
+
+ /*  holds_at(at(Agent2, Exists_Location), Time) :-
+       happens(order(Agent1, Agent2, Physobj), Time),
+       some(Exists_Location,
+            '$kolem_Fn_209'(Agent1, Agent2, Physobj, Time)).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/SpeechAct.e',209).
+
+ /*  fix_axiom_head(Time) ->
+       [ holds_at(at(Agent2, Exists_Location), Time),
+          (->),
+         at(Agent2, Exists_Location)
+       ].
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/SpeechAct.e',209).
+
+ /*  axiom(at(Agent2, Exists_Location),
+       [ order(Agent1, Agent2, Physobj),
+         some(Exists_Location,
+              '$kolem_Fn_209'(Agent1, Agent2, Physobj, Time))
+       ]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/SpeechAct.e',209).
+
+ /*  (   order(OrderP_Num3_V19, A, Order18),
+       some(Tloc17,
+            '$kolem_Fn_209'(OrderP_Num3_V19,
+                            A,
+                            Order18,
+                            Kolem_Fn_20920))
+   ->  at(A, Tloc17)
+   ).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/SpeechAct.e',209).
+then(if((order(OrderP_Num3_V19, A, Order18), some(Tloc17, '$kolem_Fn_209'(OrderP_Num3_V19, A, Order18, Kolem_Fn_20920)))), loc_at(A, Tloc17)).
+
+ /*  reactive_rule([ happens(order(OrderP_Num3_V19,
+   			      A,
+   			      Order18),
+   			Time_From21,
+   			Time_Until22),
+   		some(Tloc17,
+   		     '$kolem_Fn_209'(OrderP_Num3_V19,
+   				     A,
+   				     Order18,
+   				     Kolem_Fn_20920))
+   	      ],
+   	      [holds(loc_at(A,Tloc17),Holds23)]).
+ */
+
+% event Request(agent,agent,physobj)
+ %  event(request(agent,agent,physobj)).
+ %  event(request(agent,agent,physobj)).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/SpeechAct.e',213).
+actions([request/3]).
+mpred_prop(request(agent,agent,physobj),event).
+
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/SpeechAct.e',216).
+% fluent KnowRequest(agent,agent,physobj)
+ %  fluent(knowRequest(agent,agent,physobj)).
+ %  fluent(knowRequest(agent,agent,physobj)).
+fluents([knowRequest/3]).
+mpred_prop(knowRequest(agent,agent,physobj),fluent).
+
+
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/SpeechAct.e',218).
+% [agent1,agent2,physobj,time]
+% Initiates(Request(agent1,agent2,physobj),
+%           KnowRequest(agent2,agent1,physobj),
+%           time).
+
+ /*  axiom(initiates(request(Agent1, Agent2, Physobj), knowRequest(Agent2, Agent1, Physobj), Time),
+       []).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/SpeechAct.e',218).
+
+ /*  initiates(request(RequestP_Num3_V,
+   		  KnowrequestP_Num3_V,
+   		  Request),
+   	  knowRequest(KnowrequestP_Num3_V,
+   		      RequestP_Num3_V,
+   		      Request),
+   	  Initiates).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/SpeechAct.e',218).
+initiates(request(RequestP_Num3_V,
+		  KnowrequestP_Num3_V,
+		  Request),
+	  knowRequest(KnowrequestP_Num3_V,
+		      RequestP_Num3_V,
+		      Request)).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/SpeechAct.e',218).
+
+ /*  initiated(happens(request(RequestP_Num3_V,
+   			  KnowrequestP_Num3_V,
+   			  Request),
+   		  Time_From,
+   		  Time_Until),
+   	  knowRequest(KnowrequestP_Num3_V,
+   		      RequestP_Num3_V,
+   		      Request),
+   	  []).
+ */
+
+
+% [agent1,agent2,physobj,time]
+% Happens(Request(agent1,agent2,physobj),time) ->
+% {location}% 
+% HoldsAt(At(agent1,location),time) &
+% HoldsAt(At(agent2,location),time).
+ %  clausify_pnf=exists([Location],  (happens(request(Agent1, Agent2, Physobj), Time)->holds_at(at(Agent1, Location), Time), holds_at(at(Agent2, Location), Time))).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/SpeechAct.e',224).
+
+ /*  not(happens(request(Agent1, Agent2, Physobj), Time)) :-
+       (   not(holds_at(at(Agent1, Exists_Location), Time))
+       ;   not(holds_at(at(Agent2, Exists_Location), Time))
+       ),
+       some(Exists_Location,
+            '$kolem_Fn_210'(Agent1, Agent2, Physobj, Time)).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/SpeechAct.e',224).
+
+ /*  fix_axiom_head(Time) ->
+       [ not(happens(request(Agent1, Agent2, Physobj), Time)),
+          (->),
+         not(request(Agent1, Agent2, Physobj))
+       ].
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/SpeechAct.e',224).
+
+ /*  axiom(not(request(Agent1, Agent2, Physobj)),
+       [  (not(at(Agent1, Exists_Location));not(at(Agent2, Exists_Location))),
+         some(Exists_Location,
+              '$kolem_Fn_210'(Agent1, Agent2, Physobj, Time))
+       ]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/SpeechAct.e',224).
+
+ /*  (   (   not(at(Kolem_Fn_210P_Num4_V, Tloc))
+       ;   not(at(A, Tloc))
+       ),
+       some(Tloc,
+            '$kolem_Fn_210'(Kolem_Fn_210P_Num4_V,
+                            A,
+                            Request,
+                            Kolem_Fn_210))
+   ->  not(request(Kolem_Fn_210P_Num4_V, A, Request))
+   ).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/SpeechAct.e',224).
+then(if(((not(loc_at(Kolem_Fn_210P_Num4_V, Tloc));not(loc_at(A, Tloc))), some(Tloc, '$kolem_Fn_210'(Kolem_Fn_210P_Num4_V, A, Request, Kolem_Fn_210)))), not(request(Kolem_Fn_210P_Num4_V, A, Request))).
+
+ /*   reactive_rule([  (not(loc_at(Kolem_Fn_210P_Num4_V, Tloc));not(loc_at(A, Tloc))),
+                      some(Tloc,
+                           '$kolem_Fn_210'(Kolem_Fn_210P_Num4_V,
+                                           A,
+                                           Request,
+                                           Kolem_Fn_210))
+                    ],
+                    [ not(request(Kolem_Fn_210P_Num4_V,
+                                  A,
+                                  Request))
+                    ]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/SpeechAct.e',224).
+
+ /*  holds_at(at(Agent1, Exists_Location), Time) :-
+       happens(request(Agent1, Agent2, Physobj), Time),
+       some(Exists_Location,
+            '$kolem_Fn_210'(Agent1, Agent2, Physobj, Time)).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/SpeechAct.e',224).
+
+ /*  fix_axiom_head(Time) ->
+       [ holds_at(at(Agent1, Exists_Location), Time),
+          (->),
+         at(Agent1, Exists_Location)
+       ].
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/SpeechAct.e',224).
+
+ /*  axiom(at(Agent1, Exists_Location),
+       [ request(Agent1, Agent2, Physobj),
+         some(Exists_Location,
+              '$kolem_Fn_210'(Agent1, Agent2, Physobj, Time))
+       ]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/SpeechAct.e',224).
+
+ /*  (   request(RequestP_Num3_V, A, Request11),
+       some(Tloc10,
+            '$kolem_Fn_210'(RequestP_Num3_V,
+                            A,
+                            Request11,
+                            Kolem_Fn_21013))
+   ->  at(RequestP_Num3_V, Tloc10)
+   ).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/SpeechAct.e',224).
+then(if((request(RequestP_Num3_V, A, Request11), some(Tloc10, '$kolem_Fn_210'(RequestP_Num3_V, A, Request11, Kolem_Fn_21013)))), loc_at(RequestP_Num3_V, Tloc10)).
+
+ /*  reactive_rule([ happens(request(RequestP_Num3_V,
+   				A,
+   				Request11),
+   			Time_From,
+   			Time_Until),
+   		some(Tloc10,
+   		     '$kolem_Fn_210'(RequestP_Num3_V,
+   				     A,
+   				     Request11,
+   				     Kolem_Fn_21013))
+   	      ],
+   	      [ holds(loc_at(RequestP_Num3_V,Tloc10),
+   		      Holds)
+   	      ]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/SpeechAct.e',224).
+
+ /*  holds_at(at(Agent2, Exists_Location), Time) :-
+       happens(request(Agent1, Agent2, Physobj), Time),
+       some(Exists_Location,
+            '$kolem_Fn_210'(Agent1, Agent2, Physobj, Time)).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/SpeechAct.e',224).
+
+ /*  fix_axiom_head(Time) ->
+       [ holds_at(at(Agent2, Exists_Location), Time),
+          (->),
+         at(Agent2, Exists_Location)
+       ].
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/SpeechAct.e',224).
+
+ /*  axiom(at(Agent2, Exists_Location),
+       [ request(Agent1, Agent2, Physobj),
+         some(Exists_Location,
+              '$kolem_Fn_210'(Agent1, Agent2, Physobj, Time))
+       ]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/SpeechAct.e',224).
+
+ /*  (   request(RequestP_Num3_V19, A, Request18),
+       some(Tloc17,
+            '$kolem_Fn_210'(RequestP_Num3_V19,
+                            A,
+                            Request18,
+                            Kolem_Fn_21020))
+   ->  at(A, Tloc17)
+   ).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/SpeechAct.e',224).
+then(if((request(RequestP_Num3_V19, A, Request18), some(Tloc17, '$kolem_Fn_210'(RequestP_Num3_V19, A, Request18, Kolem_Fn_21020)))), loc_at(A, Tloc17)).
+
+ /*  reactive_rule([ happens(request(RequestP_Num3_V19,
+   				A,
+   				Request18),
+   			Time_From21,
+   			Time_Until22),
+   		some(Tloc17,
+   		     '$kolem_Fn_210'(RequestP_Num3_V19,
+   				     A,
+   				     Request18,
+   				     Kolem_Fn_21020))
+   	      ],
+   	      [holds(loc_at(A,Tloc17),Holds23)]).
+ */
+
+
+%; End of file.
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/SpeechAct.e',228).
+% translate: ending  File: /pack/logicmoo_ec/ext/ec_sources/ecnet/SpeechAct.e.lps 

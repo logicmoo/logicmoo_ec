@@ -1,0 +1,531 @@
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/EatingInAHouse.e',183).
+% translate: unskipped  File: /pack/logicmoo_ec/ext/ec_sources/ecnet/Feeling.e.lps 
+:-include(library('ec_planner/ec_test_incl')).
+:-expects_dialect(lps).
+% translate: begining  File: /pack/logicmoo_ec/ext/ec_sources/ecnet/Feeling.e.lps 
+% Wed, 07 Oct 2020 20:49:55 GMT File: <stream>(0x55afad5c5000)%;
+%; Copyright (c) 2005 IBM Corporation and others.
+%; All rights reserved. This program and the accompanying materials
+%; are made available under the terms of the Common Public License v1.0
+%; which accompanies this distribution, and is available at
+%; http://www.eclipse.org/legal/cpl-v10.html
+%;
+%; Contributors:
+%; IBM - Initial implementation
+%;
+%; feeling = emotion, attitude, ...
+%;
+%; The Feeling representation includes simple positive, neutral, and
+%; negative emotions, and positive, neutral, and negative attitudes
+%; toward objects.
+%;
+%; emotions
+%; agent is happy.
+
+% fluent Happy(agent)
+ %  fluent(happy(agent)).
+ %  fluent(happy(agent)).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Feeling.e',20).
+fluents([happy/1]).
+mpred_prop(happy(agent),fluent).
+
+
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Feeling.e',23).
+%; agent is emotionally neutral or calm.
+
+% fluent Calm(agent)
+ %  fluent(calm(agent)).
+ %  fluent(calm(agent)).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Feeling.e',23).
+fluents([calm/1]).
+mpred_prop(calm(agent),fluent).
+
+
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Feeling.e',26).
+%; agent is unhappy.
+
+% fluent Unhappy(agent)
+ %  fluent(unhappy(agent)).
+ %  fluent(unhappy(agent)).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Feeling.e',26).
+fluents([unhappy/1]).
+mpred_prop(unhappy(agent),fluent).
+
+
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Feeling.e',29).
+%; At any moment, an agent is in one of three emotional states:
+
+% xor Happy, Calm, Unhappy
+ %  ==>xor[happy,calm,unhappy].
+==>xor[happy,calm,unhappy].
+%; agent becomes happy.
+
+% event BecomeHappy(agent)
+ %  event(becomeHappy(agent)).
+ %  event(becomeHappy(agent)).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Feeling.e',32).
+actions([becomeHappy/1]).
+mpred_prop(becomeHappy(agent),event).
+
+
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Feeling.e',35).
+%; agent becomes calm.
+
+% event BecomeCalm(agent)
+ %  event(becomeCalm(agent)).
+ %  event(becomeCalm(agent)).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Feeling.e',35).
+actions([becomeCalm/1]).
+mpred_prop(becomeCalm(agent),event).
+
+
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Feeling.e',38).
+%; agent becomes unhappy.
+
+% event BecomeUnhappy(agent)
+ %  event(becomeUnhappy(agent)).
+ %  event(becomeUnhappy(agent)).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Feeling.e',38).
+actions([becomeUnhappy/1]).
+mpred_prop(becomeUnhappy(agent),event).
+
+
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Feeling.e',41).
+%; A number of effect and precondition axioms deal with the transitions
+%; from one emotional state to another:
+% [agent,time]
+% Initiates(BecomeHappy(agent),Happy(agent),time).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Feeling.e',43).
+
+ /*  axiom(initiates(becomeHappy(Agent), happy(Agent), Time),
+       []).
+ */
+
+ /*  initiates(becomeHappy(Becomehappy),
+   	  happy(Becomehappy),
+   	  Initiates).
+ */
+becomeHappy(Becomehappy)initiates happy(Becomehappy).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Feeling.e',43).
+
+ /*  initiated(happens(becomeHappy(Becomehappy),
+   		  Time_From,
+   		  Time_Until),
+   	  happy(Becomehappy),
+   	  []).
+ */
+
+
+% [agent,time]
+% HoldsAt(Calm(agent),time) ->
+% Terminates(BecomeHappy(agent),Calm(agent),time).
+
+ /*  axiom(terminates(becomeHappy(Agent), calm(Agent), Time),
+       [calm(Agent)]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Feeling.e',47).
+
+ /*  calm(Calm) ->
+       terminates(becomeHappy(Calm), calm(Calm), Terminates).
+ */
+if calm(Calm)then terminates(becomeHappy(Calm), calm(Calm)at Terminates, _).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Feeling.e',47).
+
+ /*  reactive_rule([holds(calm(Calm),Holds)],
+   	      [ terminates(becomeHappy(Calm),
+   			   at(calm(Calm),Terminates),
+   			   Terminates5)
+   	      ]).
+ */
+
+
+% [agent,time]
+% HoldsAt(Unhappy(agent),time) ->
+% Terminates(BecomeHappy(agent),Unhappy(agent),time).
+
+ /*  axiom(terminates(becomeHappy(Agent), unhappy(Agent), Time),
+       [unhappy(Agent)]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Feeling.e',51).
+
+ /*  unhappy(Unhappy) ->
+       terminates(becomeHappy(Unhappy),
+                  unhappy(Unhappy),
+                  Terminates).
+ */
+if unhappy(Unhappy)then terminates(becomeHappy(Unhappy), unhappy(Unhappy)at Terminates, _).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Feeling.e',51).
+
+ /*  reactive_rule([holds(unhappy(Unhappy),Holds)],
+   	      [ terminates(becomeHappy(Unhappy),
+   			   at(unhappy(Unhappy),Terminates),
+   			   Terminates5)
+   	      ]).
+ */
+
+
+% [agent,time]
+% Happens(BecomeHappy(agent),time) ->
+% !HoldsAt(Happy(agent),time).
+
+ /*  happens(becomeHappy(Agent), Time) ->
+       holds_at(neg(happy(Agent)), Time).
+ */
+if happens(becomeHappy(Agent), Time)then not happy(Agent)at Time.
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Feeling.e',55).
+
+ /*  reactive_rule([happens(becomeHappy(Agent),Time)],
+   	      [holds(not(happy(Agent)),Time)]).
+ */
+
+
+% [agent,time]
+% Initiates(BecomeCalm(agent),Calm(agent),time).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Feeling.e',59).
+
+ /*  axiom(initiates(becomeCalm(Agent), calm(Agent), Time),
+       []).
+ */
+
+ /*  initiates(becomeCalm(Becomecalm),
+   	  calm(Becomecalm),
+   	  Initiates).
+ */
+becomeCalm(Becomecalm)initiates calm(Becomecalm).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Feeling.e',59).
+
+ /*  initiated(happens(becomeCalm(Becomecalm),
+   		  Time_From,
+   		  Time_Until),
+   	  calm(Becomecalm),
+   	  []).
+ */
+
+
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Feeling.e',61).
+% [agent,time]
+% HoldsAt(Happy(agent),time) ->
+% Terminates(BecomeCalm(agent),Happy(agent),time).
+
+ /*  axiom(terminates(becomeCalm(Agent), happy(Agent), Time),
+       [happy(Agent)]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Feeling.e',61).
+
+ /*  happy(Happy) ->
+       terminates(becomeCalm(Happy), happy(Happy), Terminates).
+ */
+if happy(Happy)then terminates(becomeCalm(Happy), happy(Happy)at Terminates, _).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Feeling.e',61).
+
+ /*  reactive_rule([holds(happy(Happy),Holds)],
+   	      [ terminates(becomeCalm(Happy),
+   			   at(happy(Happy),Terminates),
+   			   Terminates5)
+   	      ]).
+ */
+
+
+% [agent,time]
+% HoldsAt(Unhappy(agent),time) ->
+% Terminates(BecomeCalm(agent),Unhappy(agent),time).
+
+ /*  axiom(terminates(becomeCalm(Agent), unhappy(Agent), Time),
+       [unhappy(Agent)]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Feeling.e',66).
+
+ /*  unhappy(Unhappy) ->
+       terminates(becomeCalm(Unhappy),
+                  unhappy(Unhappy),
+                  Terminates).
+ */
+if unhappy(Unhappy)then terminates(becomeCalm(Unhappy), unhappy(Unhappy)at Terminates, _).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Feeling.e',66).
+
+ /*  reactive_rule([holds(unhappy(Unhappy),Holds)],
+   	      [ terminates(becomeCalm(Unhappy),
+   			   at(unhappy(Unhappy),Terminates),
+   			   Terminates5)
+   	      ]).
+ */
+
+
+% [agent,time]
+% Happens(BecomeCalm(agent),time) -> !HoldsAt(Calm(agent),time).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Feeling.e',70).
+
+ /*  happens(becomeCalm(Agent), Time) ->
+       holds_at(neg(calm(Agent)), Time).
+ */
+if happens(becomeCalm(Agent), Time)then not calm(Agent)at Time.
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Feeling.e',70).
+
+ /*  reactive_rule([happens(becomeCalm(Agent),Time)],
+   	      [holds(not(calm(Agent)),Time)]).
+ */
+
+
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Feeling.e',72).
+% [agent,time]
+% Initiates(BecomeUnhappy(agent),Unhappy(agent),time).
+
+ /*  axiom(initiates(becomeUnhappy(Agent), unhappy(Agent), Time),
+       []).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Feeling.e',72).
+
+ /*  initiates(becomeUnhappy(Becomeunhappy),
+   	  unhappy(Becomeunhappy),
+   	  Initiates).
+ */
+becomeUnhappy(Becomeunhappy)initiates unhappy(Becomeunhappy).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Feeling.e',72).
+
+ /*  initiated(happens(becomeUnhappy(Becomeunhappy),
+   		  Time_From,
+   		  Time_Until),
+   	  unhappy(Becomeunhappy),
+   	  []).
+ */
+
+
+% [agent,time]
+% HoldsAt(Happy(agent),time) ->
+% Terminates(BecomeUnhappy(agent),Happy(agent),time).
+
+ /*  axiom(terminates(becomeUnhappy(Agent), happy(Agent), Time),
+       [happy(Agent)]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Feeling.e',76).
+
+ /*  happy(Happy) ->
+       terminates(becomeUnhappy(Happy), happy(Happy), Terminates).
+ */
+if happy(Happy)then terminates(becomeUnhappy(Happy), happy(Happy)at Terminates, _).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Feeling.e',76).
+
+ /*  reactive_rule([holds(happy(Happy),Holds)],
+   	      [ terminates(becomeUnhappy(Happy),
+   			   at(happy(Happy),Terminates),
+   			   Terminates5)
+   	      ]).
+ */
+
+
+% [agent,time]
+% HoldsAt(Calm(agent),time) ->
+% Terminates(BecomeUnhappy(agent),Calm(agent),time).
+
+ /*  axiom(terminates(becomeUnhappy(Agent), calm(Agent), Time),
+       [calm(Agent)]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Feeling.e',80).
+
+ /*  calm(Calm) ->
+       terminates(becomeUnhappy(Calm), calm(Calm), Terminates).
+ */
+if calm(Calm)then terminates(becomeUnhappy(Calm), calm(Calm)at Terminates, _).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Feeling.e',80).
+
+ /*  reactive_rule([holds(calm(Calm),Holds)],
+   	      [ terminates(becomeUnhappy(Calm),
+   			   at(calm(Calm),Terminates),
+   			   Terminates5)
+   	      ]).
+ */
+
+
+% [agent,time]
+% Happens(BecomeUnhappy(agent),time) -> !HoldsAt(Unhappy(agent),time).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Feeling.e',84).
+
+ /*  happens(becomeUnhappy(Agent), Time) ->
+       holds_at(neg(unhappy(Agent)), Time).
+ */
+if happens(becomeUnhappy(Agent), Time)then not unhappy(Agent)at Time.
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Feeling.e',84).
+
+ /*  reactive_rule([happens(becomeUnhappy(Agent),Time)],
+   	      [holds(not(unhappy(Agent)),Time)]).
+ */
+
+
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Feeling.e',86).
+%; anger
+
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Feeling.e',88).
+% fluent AngryAt(agent,agent)
+ %  fluent(angryAt(agent,agent)).
+ %  fluent(angryAt(agent,agent)).
+fluents([angryAt/2]).
+mpred_prop(angryAt(agent,agent),fluent).
+
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Feeling.e',90).
+% event BecomeAngryAt(agent,agent)
+ %  event(becomeAngryAt(agent,agent)).
+ %  event(becomeAngryAt(agent,agent)).
+actions([becomeAngryAt/2]).
+mpred_prop(becomeAngryAt(agent,agent),event).
+
+
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Feeling.e',92).
+% [agent1,agent2,time]
+% Initiates(BecomeAngryAt(agent1,agent2),AngryAt(agent1,agent2),time).
+
+ /*  axiom(initiates(becomeAngryAt(Agent1, Agent2), angryAt(Agent1, Agent2), Time),
+       []).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Feeling.e',92).
+
+ /*  initiates(becomeAngryAt(A,Becomeangryat),
+   	  angryAt(A,Becomeangryat),
+   	  Initiates).
+ */
+becomeAngryAt(A, Becomeangryat)initiates angryAt(A, Becomeangryat).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Feeling.e',92).
+
+ /*  initiated(happens(becomeAngryAt(A,Becomeangryat),
+   		  Time_From,
+   		  Time_Until),
+   	  angryAt(A,Becomeangryat),
+   	  []).
+ */
+
+
+% [agent1,agent2,time]
+% Terminates(BecomeHappy(agent1),AngryAt(agent1,agent2),time).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Feeling.e',96).
+
+ /*  axiom(terminates(becomeHappy(Agent1), angryAt(Agent1, Agent2), Time),
+       []).
+ */
+
+ /*  terminates(becomeHappy(Becomehappy),
+   	   angryAt(Becomehappy,Angryat),
+   	   Terminates).
+ */
+becomeHappy(Becomehappy)terminates angryAt(Becomehappy, Angryat).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Feeling.e',96).
+
+ /*  terminated(happens(becomeHappy(Becomehappy),
+   		   Time_From,
+   		   Time_Until),
+   	   angryAt(Becomehappy,Angryat),
+   	   []).
+ */
+
+
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Feeling.e',98).
+% [agent1,agent2,time]
+% Happens(BecomeAngryAt(agent1,agent2),time) ->
+% Happens(BecomeUnhappy(agent1),time).
+
+ /*  happens(becomeAngryAt(Agent1, Agent2), Time) ->
+       happens(becomeUnhappy(Agent1), Time).
+ */
+if happens(becomeAngryAt(Agent1, Agent2), Time)then happens(becomeUnhappy(Agent1), Time).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Feeling.e',98).
+
+ /*  reactive_rule([ happens(becomeAngryAt(Agent1,Agent2),
+   			Time)
+   	      ],
+   	      [happens(becomeUnhappy(Agent1),Time)]).
+ */
+
+
+%; attitudes
+%; agent likes object.
+
+% fluent Like(agent,object)
+ %  fluent(like(agent,object)).
+ %  fluent(like(agent,object)).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Feeling.e',104).
+fluents([like/2]).
+mpred_prop(like(agent,object),fluent).
+
+
+%; agent loves object.
+
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Feeling.e',107).
+% fluent Love(agent,object)
+ %  fluent(love(agent,object)).
+ %  fluent(love(agent,object)).
+fluents([love/2]).
+mpred_prop(love(agent,object),fluent).
+
+
+%; agent dislikes object.
+
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Feeling.e',109).
+% fluent Dislike(agent,object)
+ %  fluent(dislike(agent,object)).
+ %  fluent(dislike(agent,object)).
+fluents([dislike/2]).
+mpred_prop(dislike(agent,object),fluent).
+
+
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Feeling.e',111).
+%; agent likes snow.
+
+% fluent LikeSnow(agent)
+ %  fluent(likeSnow(agent)).
+ %  fluent(likeSnow(agent)).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Feeling.e',111).
+fluents([likeSnow/1]).
+mpred_prop(likeSnow(agent),fluent).
+
+
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Feeling.e',114).
+%; A trigger axiom states that
+%; if an agent is awake, likes snow, and is in a room that
+%; looks out onto a location where it is snowing, that agent
+%; becomes happy:
+% [agent,room,outside,time]
+% !HoldsAt(Happy(agent),time) &
+% HoldsAt(Awake(agent),time) &
+% HoldsAt(LikeSnow(agent),time) &
+% HoldsAt(At(agent,room),time) &
+% LookOutOnto(room)=outside &
+% HoldsAt(Snowing(outside),time) ->
+% Happens(BecomeHappy(agent),time).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Feeling.e',118).
+
+ /*  (   holds_at(neg(happy(Agent)), Time),
+       holds_at(awake(Agent), Time),
+       holds_at(likeSnow(Agent), Time),
+       holds_at(at(Agent, Room), Time),
+       lookOutOntoPred(Room, Outside),
+       holds_at(snowing(Outside), Time)
+   ->  happens(becomeHappy(Agent), Time)
+   ).
+ */
+if not happy(Agent)at Time, awake(Agent)at Time, likeSnow(Agent)at Time, loc_at(Agent, Room)at Time, lookOutOntoPred(Room, Outside), snowing(Outside)at Time then happens(becomeHappy(Agent), Time).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Feeling.e',118).
+
+ /*  reactive_rule([ holds(not(happy(Agent)),Time),
+   		holds(awake(Agent),Time),
+   		holds(likeSnow(Agent),Time),
+   		holds(loc_at(Agent,Room),Time),
+   		lookOutOntoPred(Room,Outside),
+   		holds(snowing(Outside),Time)
+   	      ],
+   	      [happens(becomeHappy(Agent),Time)]).
+ */
+
+
+%; We introduced LikeSnow above since Like
+%; can only be used to represent that an agent likes a
+%; particular object, not snow in general.
+
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Feeling.e',131).
+% event Smile(agent)
+ %  event(smile(agent)).
+ %  event(smile(agent)).
+actions([smile/1]).
+mpred_prop(smile(agent),event).
+
+
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Feeling.e',133).
+%; End of file.
+% translate: ending  File: /pack/logicmoo_ec/ext/ec_sources/ecnet/Feeling.e.lps 

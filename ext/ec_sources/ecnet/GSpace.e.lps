@@ -1,0 +1,182 @@
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Fire.e',124).
+% translate: unskipped  File: /pack/logicmoo_ec/ext/ec_sources/ecnet/GSpace.e.lps 
+:-include(library('ec_planner/ec_test_incl')).
+:-expects_dialect(lps).
+% translate: begining  File: /pack/logicmoo_ec/ext/ec_sources/ecnet/GSpace.e.lps 
+% Wed, 07 Oct 2020 20:49:57 GMT File: <stream>(0x55afad5c4a00)%;
+%; Copyright (c) 2005 IBM Corporation and others.
+%; All rights reserved. This program and the accompanying materials
+%; are made available under the terms of the Common Public License v1.0
+%; which accompanies this distribution, and is available at
+%; http://www.eclipse.org/legal/cpl-v10.html
+%;
+%; Contributors:
+%; IBM - Initial implementation
+%;
+%; GSpace: grid space
+%;
+%; @book{Mueller:1998,
+%;   author = "Erik T. Mueller",
+%;   year = "1998",
+%;   title = "Natural Language Processing with \uppercase{T}hought\uppercase{T}reasure",
+%;   address = "New York",
+%;   publisher = "Signiform",
+%; }
+%;
+
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/GSpace.e',22).
+% sort coord: integer
+subsort(coord,integer).
+
+% sort grid
+sort(grid).
+%; object is at (coord1, coord2) in grid.
+
+% fluent GridAt(grid,object,coord,coord)
+ %  fluent(gridAt(grid,object,coord,coord)).
+ %  fluent(gridAt(grid,object,coord,coord)).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/GSpace.e',25).
+fluents([gridAt/4]).
+mpred_prop(gridAt(grid,object,coord,coord),fluent).
+
+
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/GSpace.e',28).
+%; agent walks from (coord1, coord2)
+%; to (coord3, coord4) in grid.
+
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/GSpace.e',30).
+% event GridWalk(grid,agent,coord,coord,coord,coord)
+ %  event(gridWalk(grid,agent,coord,coord,coord,coord)).
+ %  event(gridWalk(grid,agent,coord,coord,coord,coord)).
+events([gridWalk/6]).
+mpred_prop(gridWalk(grid,agent,coord,coord,coord,coord),event).
+
+
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/GSpace.e',32).
+%; A state constraint says that for a given grid an
+%; object is at one cell in that grid at a time:
+% [grid,object,coord1,coord2,coord3,coord4,time]
+% HoldsAt(GridAt(grid,object,coord1,coord2),time) &
+% HoldsAt(GridAt(grid,object,coord3,coord4),time) ->
+% coord1=coord3 & coord2=coord4.
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/GSpace.e',34).
+
+ /*  (   holds_at(gridAt(Grid, Object, Coord1, Coord2),
+                Time),
+       holds_at(gridAt(Grid, Object, Coord3, Coord4),
+                Time)
+   ->  equals(Coord1, Coord3),
+       equals(Coord2, Coord4)
+   ).
+ */
+if gridAt(Grid, Object, Coord1, Coord2)at Time, gridAt(Grid, Object, Coord3, Coord4)at Time then equals(Coord1, Coord3), equals(Coord2, Coord4).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/GSpace.e',34).
+
+ /*  reactive_rule([ holds(gridAt(Grid,
+   			     Object,
+   			     Coord1,
+   			     Coord2),
+   		      Time),
+   		holds(gridAt(Grid,
+   			     Object,
+   			     Coord3,
+   			     Coord4),
+   		      Time)
+   	      ],
+   	      [ equals(Coord1,Coord3),
+   		equals(Coord2,Coord4)
+   	      ]).
+ */
+
+
+%; An effect axiom states that
+%; if an agent walks from one cell in a grid to another cell,
+%; the agent will be at second cell:
+% [grid,agent,coord1,coord2,coord3,coord4,time]
+% Initiates(GridWalk(grid,agent,coord1,coord2,coord3,coord4),
+%           GridAt(grid,agent,coord3,coord4),
+%           time).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/GSpace.e',42).
+
+ /*  axiom(initiates(gridWalk(Grid, Agent, Coord1, Coord2, Coord3, Coord4), gridAt(Grid, Agent, Coord3, Coord4), Time),
+       []).
+ */
+
+ /*  initiates(gridWalk(GridwalkP_Num6_V,
+   		   A,
+   		   _,
+   		   _,
+   		   B,
+   		   Gridwalk),
+   	  gridAt(GridwalkP_Num6_V,A,B,Gridwalk),
+   	  Initiates).
+ */
+gridWalk(GridwalkP_Num6_V, A, _, _, B, Gridwalk)initiates gridAt(GridwalkP_Num6_V, A, B, Gridwalk).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/GSpace.e',42).
+
+ /*  initiated(happens(gridWalk(GridwalkP_Num6_V,
+   			   A,
+   			   _,
+   			   _,
+   			   B,
+   			   Gridwalk),
+   		  Time_From,
+   		  Time_Until),
+   	  gridAt(GridwalkP_Num6_V,A,B,Gridwalk),
+   	  []).
+ */
+
+
+%; An effect axiom states that
+%; if an agent walks from one cell in a grid to another cell,
+%; the agent will no longer be at the first cell:
+% [grid,agent,coord1,coord2,coord3,coord4,time]
+% Terminates(GridWalk(grid,agent,coord1,coord2,coord3,coord4),
+%            GridAt(grid,agent,coord1,coord2),
+%            time).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/GSpace.e',50).
+
+ /*  axiom(terminates(gridWalk(Grid, Agent, Coord1, Coord2, Coord3, Coord4), gridAt(Grid, Agent, Coord1, Coord2), Time),
+       []).
+ */
+
+ /*  terminates(gridWalk(GridwalkP_Num6_V,
+   		    A,
+   		    B,
+   		    Gridat,
+   		    _,
+   		    Gridwalk),
+   	   gridAt(GridwalkP_Num6_V,A,B,Gridat),
+   	   Terminates).
+ */
+gridWalk(GridwalkP_Num6_V, A, B, Gridat, _, Gridwalk)terminates gridAt(GridwalkP_Num6_V, A, B, Gridat).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/GSpace.e',50).
+
+ /*  terminated(happens(gridWalk(GridwalkP_Num6_V,
+   			    A,
+   			    B,
+   			    Gridat,
+   			    _,
+   			    Gridwalk),
+   		   Time_From,
+   		   Time_Until),
+   	   gridAt(GridwalkP_Num6_V,A,B,Gridat),
+   	   []).
+ */
+
+
+%; A precondition axiom states that for an agent to walk
+%; from one cell in a grid to another cell, the agent
+%; must be at the first cell, the second cell must not
+%; be occupied, and the first cell must be adjacent to
+%; the second cell:
+% [grid,agent,coord1,coord2,coord3,coord4,time]
+% Happens(GridWalk(grid,agent,coord1,coord2,coord3,coord4),time) ->
+% HoldsAt(GridAt(grid,agent,coord1,coord2),time) &
+% (!{object} HoldsAt(GridAt(grid,object,coord3,coord4),time)) &
+% (coord1=coord3 |
+%  coord1=coord3+1 |
+%  coord1=coord3-1) &
+% (coord2=coord4 |
+%  coord2=coord4+1 |
+%  coord2=coord4-1).

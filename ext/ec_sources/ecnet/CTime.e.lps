@@ -1,0 +1,183 @@
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Container.e',73).
+% translate: unskipped  File: /pack/logicmoo_ec/ext/ec_sources/ecnet/CTime.e.lps 
+:-include(library('ec_planner/ec_test_incl')).
+:-expects_dialect(lps).
+% translate: begining  File: /pack/logicmoo_ec/ext/ec_sources/ecnet/CTime.e.lps 
+% Wed, 07 Oct 2020 20:49:16 GMT File: <stream>(0x55afae0bb400)%;
+%; Copyright (c) 2005 IBM Corporation and others.
+%; All rights reserved. This program and the accompanying materials
+%; are made available under the terms of the Common Public License v1.0
+%; which accompanies this distribution, and is available at
+%; http://www.eclipse.org/legal/cpl-v10.html
+%;
+%; Contributors:
+%; IBM - Initial implementation
+%;
+%; clock time
+%; The CTime representation maps the time points of ECTime to clock time.
+%; part of the day
+%; time is in the daytime.
+
+% predicate Daytime(time)
+ %  predicate(daytime(time)).
+ %  predicate(daytime(time)).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/CTime.e',17).
+predicates([daytime/1]).
+mpred_prop(daytime(time),predicate).
+
+
+%; time is in the nighttime.
+
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/CTime.e',20).
+% predicate Nighttime(time)
+ %  predicate(nighttime(time)).
+ %  predicate(nighttime(time)).
+predicates([nighttime/1]).
+mpred_prop(nighttime(time),predicate).
+
+% xor Daytime, Nighttime
+ %  ==>xor[daytime,nighttime].
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/CTime.e',20).
+==>xor[daytime,nighttime].
+%; time is in the morning.
+
+% predicate Morning(time)
+ %  predicate(morning(time)).
+ %  predicate(morning(time)).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/CTime.e',23).
+predicates([morning/1]).
+mpred_prop(morning(time),predicate).
+
+
+%; time is in the afternoon.
+
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/CTime.e',26).
+% predicate Afternoon(time)
+ %  predicate(afternoon(time)).
+ %  predicate(afternoon(time)).
+predicates([afternoon/1]).
+mpred_prop(afternoon(time),predicate).
+
+
+%; time is in the evening.
+
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/CTime.e',28).
+% predicate Evening(time)
+ %  predicate(evening(time)).
+ %  predicate(evening(time)).
+predicates([evening/1]).
+mpred_prop(evening(time),predicate).
+
+
+%; time is in the night.
+
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/CTime.e',30).
+% predicate Night(time)
+ %  predicate(night(time)).
+ %  predicate(night(time)).
+predicates([night/1]).
+mpred_prop(night(time),predicate).
+
+
+%; time is in the late night.
+
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/CTime.e',32).
+% predicate LateNight(time)
+ %  predicate(lateNight(time)).
+ %  predicate(lateNight(time)).
+predicates([lateNight/1]).
+mpred_prop(lateNight(time),predicate).
+
+% xor Morning, Afternoon, Evening, Night, LateNight
+ %  ==>xor[morning,afternoon,evening,night,lateNight].
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/CTime.e',32).
+==>xor[morning,afternoon,evening,night,lateNight].
+
+
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/CTime.e',35).
+% [time]
+ % Daytime(time) <-> Morning(time)|Afternoon(time)|Evening(time).
+
+ /*  daytime(Time) <->
+       (   morning(Time)
+       ;   afternoon(Time)
+       ;   evening(Time)
+       ).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/CTime.e',35).
+
+ /*  daytime(Time) ->
+       (   morning(Time)
+       ;   afternoon(Time)
+       ;   evening(Time)
+       ).
+ */
+if daytime(Time)then morning(Time);afternoon(Time);evening(Time).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/CTime.e',35).
+
+ /*   reactive_rule([daytime(Time)],
+                    [  (morning(Time);afternoon(Time);evening(Time))
+                    ]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/CTime.e',35).
+
+ /*  morning(Time);afternoon(Time);evening(Time) ->
+       daytime(Time).
+ */
+if morning(Time);afternoon(Time);evening(Time)then daytime(Time).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/CTime.e',35).
+
+ /*   reactive_rule([  (morning(Time);afternoon(Time);evening(Time))
+                    ],
+                    [daytime(Time)]).
+ */
+
+
+% [time]
+ % Nighttime(time) <-> Night(time)|LateNight(time).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/CTime.e',35).
+
+ /*  nighttime(Time) <->
+       (   night(Time)
+       ;   lateNight(Time)
+       ).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/CTime.e',35).
+
+ /*  nighttime(Time) ->
+       (   night(Time)
+       ;   lateNight(Time)
+       ).
+ */
+if nighttime(Time)then night(Time);lateNight(Time).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/CTime.e',35).
+
+ /*   reactive_rule([nighttime(Time)],
+                    [(night(Time);lateNight(Time))]).
+ */
+
+ /*  night(Time);lateNight(Time) ->
+       nighttime(Time).
+ */
+if night(Time);lateNight(Time)then nighttime(Time).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/CTime.e',35).
+
+ /*   reactive_rule([(night(Time);lateNight(Time))],
+                    [nighttime(Time)]).
+ */
+
+
+%; dreams
+%; time is part of a dream sequence.
+
+% predicate DreamSequence(time)
+ %  predicate(dreamSequence(time)).
+ %  predicate(dreamSequence(time)).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/CTime.e',40).
+predicates([dreamSequence/1]).
+mpred_prop(dreamSequence(time),predicate).
+
+
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/CTime.e',43).
+%; End of file.
+% translate: ending  File: /pack/logicmoo_ec/ext/ec_sources/ecnet/CTime.e.lps 

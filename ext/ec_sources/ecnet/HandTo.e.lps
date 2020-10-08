@@ -1,0 +1,109 @@
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e',82).
+% translate: unskipped  File: /pack/logicmoo_ec/ext/ec_sources/ecnet/HandTo.e.lps 
+:-include(library('ec_planner/ec_test_incl')).
+:-expects_dialect(lps).
+% translate: begining  File: /pack/logicmoo_ec/ext/ec_sources/ecnet/HandTo.e.lps 
+% Wed, 07 Oct 2020 09:35:27 GMT File: <stream>(0x5557c8eca200)%;
+%; Copyright (c) 2005 IBM Corporation and others.
+%; All rights reserved. This program and the accompanying materials
+%; are made available under the terms of the Common Public License v1.0
+%; which accompanies this distribution, and is available at
+%; http://www.eclipse.org/legal/cpl-v10.html
+%;
+%; Contributors:
+%; IBM - Initial implementation
+%;
+
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/HandTo.e',12).
+% event HandTo(agent,agent,physobj)
+ %  event(handTo(agent,agent,physobj)).
+ %  event(handTo(agent,agent,physobj)).
+actions([handTo/3]).
+mpred_prop(handTo(agent,agent,physobj),event).
+
+
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/HandTo.e',14).
+% [agent1,agent2,physobj,time]
+% Initiates(HandTo(agent1,agent2,physobj),
+%           Holding(agent2,physobj),
+%           time).
+
+ /*  axiom(initiates(handTo(Agent1, Agent2, Physobj), holding(Agent2, Physobj), Time),
+       []).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/HandTo.e',14).
+
+ /*  initiates(handTo(HandtoP_Num3_V,A,Handto),
+   	  holding(A,Handto),
+   	  Initiates).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/HandTo.e',14).
+initiates(handTo(HandtoP_Num3_V,A,Handto),
+	  holding(A,Handto)).
+
+ /*  initiated(happens(handTo(HandtoP_Num3_V,A,Handto),
+   		  Time_From,
+   		  Time_Until),
+   	  holding(A,Handto),
+   	  []).
+ */
+
+
+% [agent1,agent2,physobj,time]
+% Terminates(HandTo(agent1,agent2,physobj),
+%            Holding(agent1,physobj),
+%            time).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/HandTo.e',20).
+
+ /*  axiom(terminates(handTo(Agent1, Agent2, Physobj), holding(Agent1, Physobj), Time),
+       []).
+ */
+
+ /*  terminates(handTo(HandtoP_Num3_V,_,Handto),
+   	   holding(HandtoP_Num3_V,Handto),
+   	   Terminates).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/HandTo.e',20).
+terminates(handTo(HandtoP_Num3_V,_,Handto),
+	   holding(HandtoP_Num3_V,Handto)).
+
+ /*  terminated(happens(handTo(HandtoP_Num3_V,_,Handto),
+   		   Time_From,
+   		   Time_Until),
+   	   holding(HandtoP_Num3_V,Handto),
+   	   []).
+ */
+
+
+% [agent1,agent2,physobj,time]
+% Happens(HandTo(agent1,agent2,physobj),time) ->
+% HoldsAt(Holding(agent1,physobj),time).
+
+ /*  happens(handTo(Agent1, Agent2, Physobj), Time) ->
+       holds_at(holding(Agent1, Physobj), Time).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/HandTo.e',25).
+then(if(happens(handTo(Agent1,Agent2,Physobj),
+		Time)),
+     at(holding(Agent1,Physobj),Time)).
+
+ /*  reactive_rule([ happens(handTo(Agent1,Agent2,Physobj),
+   			Time)
+   	      ],
+   	      [holds(holding(Agent1,Physobj),Time)]).
+ */
+
+% event ShakeHands(agent,agent)
+ %  event(shakeHands(agent,agent)).
+ %  event(shakeHands(agent,agent)).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/HandTo.e',27).
+actions([shakeHands/2]).
+mpred_prop(shakeHands(agent,agent),event).
+
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/HandTo.e',30).
+% event WriteOn(agent,paper,pen)
+ %  event(writeOn(agent,paper,pen)).
+ %  event(writeOn(agent,paper,pen)).
+actions([writeOn/3]).
+mpred_prop(writeOn(agent,paper,pen),event).
+% translate: ending  File: /pack/logicmoo_ec/ext/ec_sources/ecnet/HandTo.e.lps 

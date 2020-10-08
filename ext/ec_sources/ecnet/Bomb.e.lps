@@ -1,0 +1,589 @@
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e',157).
+% translate: unskipped  File: /pack/logicmoo_ec/ext/ec_sources/ecnet/Bomb.e.lps 
+:-include(library('ec_planner/ec_test_incl')).
+:-expects_dialect(lps).
+% translate: begining  File: /pack/logicmoo_ec/ext/ec_sources/ecnet/Bomb.e.lps 
+% Wed, 07 Oct 2020 20:49:12 GMT File: <stream>(0x55afad5c3700)%;
+%; Copyright (c) 2005 IBM Corporation and others.
+%; All rights reserved. This program and the accompanying materials
+%; are made available under the terms of the Common Public License v1.0
+%; which accompanies this distribution, and is available at
+%; http://www.eclipse.org/legal/cpl-v10.html
+%;
+%; Contributors:
+%; IBM - Initial implementation
+%;
+%; bomb
+%; agent is nondeterministically killed.
+
+% fluent KilledDeterminingFluent(agent)
+ %  fluent(killedDeterminingFluent(agent)).
+ %  fluent(killedDeterminingFluent(agent)).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Bomb.e',13).
+fluents([killedDeterminingFluent/1]).
+mpred_prop(killedDeterminingFluent(agent),fluent).
+
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Bomb.e',15).
+% noninertial KilledDeterminingFluent
+noninertial(killedDeterminingFluent).
+%; agent is nondeterministically injured.
+
+% fluent InjuredDeterminingFluent(agent)
+ %  fluent(injuredDeterminingFluent(agent)).
+ %  fluent(injuredDeterminingFluent(agent)).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Bomb.e',17).
+fluents([injuredDeterminingFluent/1]).
+mpred_prop(injuredDeterminingFluent(agent),fluent).
+
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Bomb.e',19).
+% noninertial InjuredDeterminingFluent
+noninertial(injuredDeterminingFluent).
+%; physobj is nondeterministically destroyed.
+
+% fluent DestroyedDeterminingFluent(physobj)
+ %  fluent(destroyedDeterminingFluent(physobj)).
+ %  fluent(destroyedDeterminingFluent(physobj)).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Bomb.e',21).
+fluents([destroyedDeterminingFluent/1]).
+mpred_prop(destroyedDeterminingFluent(physobj),fluent).
+
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Bomb.e',23).
+% noninertial DestroyedDeterminingFluent
+noninertial(destroyedDeterminingFluent).
+%; physobj is nondeterministically damaged.
+
+% fluent DamagedDeterminingFluent(physobj)
+ %  fluent(damagedDeterminingFluent(physobj)).
+ %  fluent(damagedDeterminingFluent(physobj)).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Bomb.e',25).
+fluents([damagedDeterminingFluent/1]).
+mpred_prop(damagedDeterminingFluent(physobj),fluent).
+
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Bomb.e',27).
+% noninertial DamagedDeterminingFluent
+noninertial(damagedDeterminingFluent).
+%; agent activates bomb.
+
+% event BombActivate(agent,bomb)
+ %  event(bombActivate(agent,bomb)).
+ %  event(bombActivate(agent,bomb)).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Bomb.e',29).
+actions([bombActivate/2]).
+mpred_prop(bombActivate(agent,bomb),event).
+
+
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Bomb.e',32).
+%; agent deactivates bomb.
+
+% event BombDeactivate(agent,bomb)
+ %  event(bombDeactivate(agent,bomb)).
+ %  event(bombDeactivate(agent,bomb)).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Bomb.e',32).
+actions([bombDeactivate/2]).
+mpred_prop(bombDeactivate(agent,bomb),event).
+
+
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Bomb.e',35).
+%; bomb explodes.
+
+% event BombExplode(bomb)
+ %  event(bombExplode(bomb)).
+ %  event(bombExplode(bomb)).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Bomb.e',35).
+events([bombExplode/1]).
+mpred_prop(bombExplode(bomb),event).
+
+
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Bomb.e',38).
+%; bomb is activated.
+
+% fluent BombActivated(bomb)
+ %  fluent(bombActivated(bomb)).
+ %  fluent(bombActivated(bomb)).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Bomb.e',38).
+fluents([bombActivated/1]).
+mpred_prop(bombActivated(bomb),fluent).
+
+
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Bomb.e',41).
+%; The timer value of bomb is offset.
+
+% fluent BombTimerValue(bomb,offset)
+ %  fluent(bombTimerValue(bomb,offset)).
+ %  fluent(bombTimerValue(bomb,offset)).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Bomb.e',41).
+fluents([bombTimerValue/2]).
+mpred_prop(bombTimerValue(bomb,offset),fluent).
+
+
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Bomb.e',44).
+%; The timer value of bomb is decremented.
+
+% event BombDecrementTimer(bomb)
+ %  event(bombDecrementTimer(bomb)).
+ %  event(bombDecrementTimer(bomb)).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Bomb.e',44).
+events([bombDecrementTimer/1]).
+mpred_prop(bombDecrementTimer(bomb),event).
+
+
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Bomb.e',47).
+%; The time delay of bomb is offset.
+
+% function BombTimeDelay(bomb): offset
+
+ /*  axiom(function_argtypes(Function_ArgtypesP_Num3_V, bombTimeDelay(bomb), offset),
+       []).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Bomb.e',47).
+function_argtypes(Function_ArgtypesP_Num3_V1,
+		  bombTimeDelay(bomb),
+		  offset).
+ %  predicate(bombTimeDelayPred(bomb,offset)).
+ %  predicate(bombTimeDelayPred(bomb,offset)).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Bomb.e',47).
+predicates([bombTimeDelayPred/2]).
+mpred_prop(bombTimeDelayPred(bomb,offset),predicate).
+
+ /*  axiom(functional_predicate(bombTimeDelay, bombTimeDelayPred),
+       []).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Bomb.e',47).
+functional_predicate(bombTimeDelay,bombTimeDelayPred).
+resultIsa(bombTimeDelay,offset).
+%; A state constraint says that a bomb has one timer
+%; value at a time:
+% [bomb,offset1,offset2,time]
+% HoldsAt(BombTimerValue(bomb,offset1),time) &
+% HoldsAt(BombTimerValue(bomb,offset2),time) ->
+% offset1=offset2.
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Bomb.e',52).
+
+ /*  (   holds_at(bombTimerValue(Bomb, Offset1), Time),
+       holds_at(bombTimerValue(Bomb, Offset2), Time)
+   ->  equals(Offset1, Offset2)
+   ).
+ */
+if bombTimerValue(Bomb, Offset1)at Time, bombTimerValue(Bomb, Offset2)at Time then equals(Offset1, Offset2).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Bomb.e',52).
+
+ /*  reactive_rule([ holds(bombTimerValue(Bomb,Offset1),
+   		      Time),
+   		holds(bombTimerValue(Bomb,Offset2),
+   		      Time)
+   	      ],
+   	      [equals(Offset1,Offset2)]).
+ */
+
+
+%; An effect axiom states that if a bomb is intact and
+%; an agent activates the bomb,
+%; the bomb will be activated:
+% [agent,bomb,time]
+% HoldsAt(Intact(bomb),time) ->
+% Initiates(BombActivate(agent,bomb),
+%           BombActivated(bomb),
+%           time).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Bomb.e',60).
+
+ /*  axiom(initiates(bombActivate(Agent, Bomb), bombActivated(Bomb), Time),
+       [intact(Bomb)]).
+ */
+
+ /*  intact(Intact) ->
+       initiates(bombActivate(_, Intact),
+                 bombActivated(Intact),
+                 Initiates).
+ */
+if intact(Intact)then initiates(bombActivate(_, Intact), bombActivated(Intact)at Initiates, _).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Bomb.e',60).
+
+ /*  reactive_rule([holds(intact(Intact),Holds)],
+   	      [ initiates(bombActivate(_,Intact),
+   			  at(bombActivated(Intact),
+   			     Initiates),
+   			  Initiates6)
+   	      ]).
+ */
+
+
+%; A precondition axiom states that
+%; for an agent to activate a bomb,
+%; the agent must be holding the bomb:
+% [agent,bomb,time]
+% Happens(BombActivate(agent,bomb),time) ->
+% HoldsAt(Holding(agent,bomb),time).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Bomb.e',69).
+
+ /*  happens(bombActivate(Agent, Bomb), Time) ->
+       holds_at(holding(Agent, Bomb), Time).
+ */
+if happens(bombActivate(Agent, Bomb), Time)then holding(Agent, Bomb)at Time.
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Bomb.e',69).
+
+ /*  reactive_rule([ happens(bombActivate(Agent,Bomb),
+   			Time)
+   	      ],
+   	      [holds(holding(Agent,Bomb),Time)]).
+ */
+
+
+%; An effect axiom states that if a bomb is intact and
+%; an agent deactivates the bomb,
+%; the bomb will no longer be activated:
+% [agent,bomb,time]
+% HoldsAt(Intact(bomb),time) ->
+% Terminates(BombDeactivate(agent,bomb),
+%            BombActivated(bomb),
+%            time).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Bomb.e',76).
+
+ /*  axiom(terminates(bombDeactivate(Agent, Bomb), bombActivated(Bomb), Time),
+       [intact(Bomb)]).
+ */
+
+ /*  intact(Intact) ->
+       terminates(bombDeactivate(_, Intact),
+                  bombActivated(Intact),
+                  Terminates).
+ */
+if intact(Intact)then terminates(bombDeactivate(_, Intact), bombActivated(Intact)at Terminates, _).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Bomb.e',76).
+
+ /*  reactive_rule([holds(intact(Intact),Holds)],
+   	      [ terminates(bombDeactivate(_,Intact),
+   			   at(bombActivated(Intact),
+   			      Terminates),
+   			   Terminates6)
+   	      ]).
+ */
+
+
+%; An axiom states that if a bomb explodes, the
+%; bomb destroys the bomb:
+% [bomb,time]
+% Happens(BombExplode(bomb),time) ->
+% Happens(Destroy(bomb,bomb),time).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Bomb.e',84).
+
+ /*  happens(bombExplode(Bomb), Time) ->
+       happens(destroy(Bomb, Bomb), Time).
+ */
+if happens(bombExplode(Bomb), Time)then happens(destroy(Bomb, Bomb), Time).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Bomb.e',84).
+
+ /*  reactive_rule([happens(bombExplode(Bomb),Time)],
+   	      [happens(destroy(Bomb,Bomb),Time)]).
+ */
+
+
+%; An effect axiom states that if a bomb explodes,
+%; the bomb is no longer activated:
+% [bomb,time]
+% Terminates(BombExplode(bomb),BombActivated(bomb),time).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Bomb.e',90).
+
+ /*  axiom(terminates(bombExplode(Bomb), bombActivated(Bomb), Time),
+       []).
+ */
+
+ /*  terminates(bombExplode(Bombexplode),
+   	   bombActivated(Bombexplode),
+   	   Terminates).
+ */
+bombExplode(Bombexplode)terminates bombActivated(Bombexplode).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Bomb.e',90).
+
+ /*  terminated(happens(bombExplode(Bombexplode),
+   		   Time_From,
+   		   Time_Until),
+   	   bombActivated(Bombexplode),
+   	   []).
+ */
+
+
+%; A trigger axiom states that
+%; if a bomb is activated,
+%; the timer value of the bomb is a timer value, and
+%; the timer value is greater than zero,
+%; the timer value of the bomb will be decremented:
+% [bomb,offset,time]
+% HoldsAt(BombActivated(bomb),time) &
+% HoldsAt(BombTimerValue(bomb,offset),time) &
+% (offset > 0) ->
+% Happens(BombDecrementTimer(bomb),time).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Bomb.e',98).
+
+ /*  (   holds_at(bombActivated(Bomb), Time),
+       holds_at(bombTimerValue(Bomb, Offset), Time),
+       Offset>0
+   ->  happens(bombDecrementTimer(Bomb), Time)
+   ).
+ */
+if bombActivated(Bomb)at Time, bombTimerValue(Bomb, Offset)at Time, Offset>0 then happens(bombDecrementTimer(Bomb), Time).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Bomb.e',98).
+
+ /*  reactive_rule([ holds(bombActivated(Bomb),Time),
+   		holds(bombTimerValue(Bomb,Offset),
+   		      Time),
+   		Offset>0
+   	      ],
+   	      [happens(bombDecrementTimer(Bomb),Time)]).
+ */
+
+
+%; An effect axiom states that
+%; if the timer value of the bomb is a timer value and
+%; the timer value of the bomb is decremented,
+%; the timer value of the bomb will be the timer value minus one:
+% [bomb,offset1,offset2,time]
+% HoldsAt(BombTimerValue(bomb,offset1),time) &
+% offset2 = offset1-1 ->
+% Initiates(BombDecrementTimer(bomb),
+%           BombTimerValue(bomb,offset2),
+%           time).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Bomb.e',108).
+
+ /*  axiom(initiates(bombDecrementTimer(Bomb), bombTimerValue(Bomb, Offset2), Time),
+       [ bombTimerValue(Bomb, Offset1),
+         '-Pred'(Offset1, 1, Offset2)
+       ]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Bomb.e',108).
+
+ /*  (   bombTimerValue(Bombdecrementtimer, Bombtimervalue),
+       '-Pred'(Bombtimervalue, 1, Pred)
+   ->  initiates(bombDecrementTimer(Bombdecrementtimer),
+                 bombTimerValue(Bombdecrementtimer, Pred),
+                 Initiates)
+   ).
+ */
+if bombTimerValue(Bombdecrementtimer, Bombtimervalue), '-Pred'(Bombtimervalue, 1, Pred)then initiates(bombDecrementTimer(Bombdecrementtimer), bombTimerValue(Bombdecrementtimer, Pred)at Initiates, _).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Bomb.e',108).
+
+ /*  reactive_rule([ holds(bombTimerValue(Bombdecrementtimer,
+   				     Bombtimervalue),
+   		      Holds),
+   		'-Pred'(Bombtimervalue,1,Pred)
+   	      ],
+   	      [ initiates(bombDecrementTimer(Bombdecrementtimer),
+   			  at(bombTimerValue(Bombdecrementtimer,
+   					    Pred),
+   			     Initiates),
+   			  Initiates9)
+   	      ]).
+ */
+
+
+%; An effect axiom states that
+%; if the timer value of the bomb is a timer value and
+%; the timer value of the bomb is decremented,
+%; the timer value of the bomb will no longer be the timer value:
+% [bomb,offset,time]
+% HoldsAt(BombTimerValue(bomb,offset),time) ->
+% Terminates(BombDecrementTimer(bomb),
+%            BombTimerValue(bomb,offset),
+%            time).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Bomb.e',119).
+
+ /*  axiom(terminates(bombDecrementTimer(Bomb), bombTimerValue(Bomb, Offset), Time),
+       [bombTimerValue(Bomb, Offset)]).
+ */
+
+ /*  bombTimerValue(Bombdecrementtimer, Bombtimervalue) ->
+       terminates(bombDecrementTimer(Bombdecrementtimer),
+                  bombTimerValue(Bombdecrementtimer, Bombtimervalue),
+                  Terminates).
+ */
+if bombTimerValue(Bombdecrementtimer, Bombtimervalue)then terminates(bombDecrementTimer(Bombdecrementtimer), bombTimerValue(Bombdecrementtimer, Bombtimervalue)at Terminates, _).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Bomb.e',119).
+
+ /*  reactive_rule([ holds(bombTimerValue(Bombdecrementtimer,
+   				     Bombtimervalue),
+   		      Holds)
+   	      ],
+   	      [ terminates(bombDecrementTimer(Bombdecrementtimer),
+   			   at(bombTimerValue(Bombdecrementtimer,
+   					     Bombtimervalue),
+   			      Terminates),
+   			   Terminates7)
+   	      ]).
+ */
+
+
+%; An effect axiom states that if a bomb explodes,
+%; the bomb will no longer be activated:
+% [bomb,time]
+% Terminates(BombExplode(bomb),BombActivated(bomb),time).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Bomb.e',127).
+
+ /*  axiom(terminates(bombExplode(Bomb), bombActivated(Bomb), Time),
+       []).
+ */
+
+ /*  terminates(bombExplode(Bombexplode),
+   	   bombActivated(Bombexplode),
+   	   Terminates).
+ */
+bombExplode(Bombexplode)terminates bombActivated(Bombexplode).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Bomb.e',127).
+
+ /*  terminated(happens(bombExplode(Bombexplode),
+   		   Time_From,
+   		   Time_Until),
+   	   bombActivated(Bombexplode),
+   	   []).
+ */
+
+
+%; A trigger axiom states that if the timer value
+%; of a bomb is zero, the bomb will explode:
+% [bomb,time]
+% HoldsAt(BombTimerValue(bomb,0),time) ->
+% Happens(BombExplode(bomb),time).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Bomb.e',132).
+
+ /*  holds_at(bombTimerValue(Bomb, 0), Time) ->
+       happens(bombExplode(Bomb), Time).
+ */
+if bombTimerValue(Bomb, 0)at Time then happens(bombExplode(Bomb), Time).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Bomb.e',132).
+
+ /*  reactive_rule([holds(bombTimerValue(Bomb,0),Time)],
+   	      [happens(bombExplode(Bomb),Time)]).
+ */
+
+
+%; An axiom states that if an agent is at a location,
+%; a bomb is at the location,
+%; the agent is nondeterministically injured, and
+%; the bomb explodes, then
+%; the bomb will injure the agent:
+% [agent,location,bomb,time]
+% HoldsAt(At(agent,location),time) &
+% HoldsAt(At(bomb,location),time) &
+% HoldsAt(InjuredDeterminingFluent(agent),time) &
+% Happens(BombExplode(bomb),time) ->
+% Happens(Injure(bomb,agent),time).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Bomb.e',141).
+
+ /*  (   holds_at(at(Agent, Location), Time),
+       holds_at(at(Bomb, Location), Time),
+       holds_at(injuredDeterminingFluent(Agent), Time),
+       happens(bombExplode(Bomb), Time)
+   ->  happens(injure(Bomb, Agent), Time)
+   ).
+ */
+if loc_at(Agent, Location)at Time, loc_at(Bomb, Location)at Time, injuredDeterminingFluent(Agent)at Time, happens(bombExplode(Bomb), Time)then happens(injure(Bomb, Agent), Time).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Bomb.e',141).
+
+ /*  reactive_rule([ holds(loc_at(Agent,Location),Time),
+   		holds(loc_at(Bomb,Location),Time),
+   		holds(injuredDeterminingFluent(Agent),Time),
+   		happens(bombExplode(Bomb),Time)
+   	      ],
+   	      [happens(injure(Bomb,Agent),Time)]).
+ */
+
+
+%; An axiom states that if an agent is at a location,
+%; a bomb is at the location,
+%; the agent is nondeterministically killed, and
+%; the bomb explodes, then
+%; the bomb will kill the agent:
+% [agent,location,bomb,time]
+% HoldsAt(At(agent,location),time) &
+% HoldsAt(At(bomb,location),time) &
+% HoldsAt(KilledDeterminingFluent(agent),time) &
+% Happens(BombExplode(bomb),time) ->
+% Happens(Kill(bomb,agent),time).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Bomb.e',153).
+
+ /*  (   holds_at(at(Agent, Location), Time),
+       holds_at(at(Bomb, Location), Time),
+       holds_at(killedDeterminingFluent(Agent), Time),
+       happens(bombExplode(Bomb), Time)
+   ->  happens(kill(Bomb, Agent), Time)
+   ).
+ */
+if loc_at(Agent, Location)at Time, loc_at(Bomb, Location)at Time, killedDeterminingFluent(Agent)at Time, happens(bombExplode(Bomb), Time)then happens(kill(Bomb, Agent), Time).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Bomb.e',153).
+
+ /*  reactive_rule([ holds(loc_at(Agent,Location),Time),
+   		holds(loc_at(Bomb,Location),Time),
+   		holds(killedDeterminingFluent(Agent),Time),
+   		happens(bombExplode(Bomb),Time)
+   	      ],
+   	      [happens(kill(Bomb,Agent),Time)]).
+ */
+
+
+%; An axiom states that if an physical object is at a location,
+%; a bomb is at the location,
+%; the physical object is nondeterministically damaged, and
+%; the bomb explodes, then
+%; the bomb will damage the physical object:
+% [physobj,location,bomb,time]
+% HoldsAt(At(physobj,location),time) &
+% HoldsAt(At(bomb,location),time) &
+% HoldsAt(DamagedDeterminingFluent(physobj),time) &
+% Happens(BombExplode(bomb),time) ->
+% Happens(Damage(bomb,physobj),time).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Bomb.e',165).
+
+ /*  (   holds_at(at(Physobj, Location), Time),
+       holds_at(at(Bomb, Location), Time),
+       holds_at(damagedDeterminingFluent(Physobj), Time),
+       happens(bombExplode(Bomb), Time)
+   ->  happens(damage(Bomb, Physobj), Time)
+   ).
+ */
+if loc_at(Physobj, Location)at Time, loc_at(Bomb, Location)at Time, damagedDeterminingFluent(Physobj)at Time, happens(bombExplode(Bomb), Time)then happens(damage(Bomb, Physobj), Time).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Bomb.e',165).
+
+ /*  reactive_rule([ holds(loc_at(Physobj,Location),Time),
+   		holds(loc_at(Bomb,Location),Time),
+   		holds(damagedDeterminingFluent(Physobj),
+   		      Time),
+   		happens(bombExplode(Bomb),Time)
+   	      ],
+   	      [happens(damage(Bomb,Physobj),Time)]).
+ */
+
+
+%; An axiom states that if an physical object is at a location,
+%; a bomb is at the location,
+%; the physical object is nondeterministically destroyed, and
+%; the bomb explodes, then
+%; the bomb will destroy the physical object:
+% [physobj,location,bomb,time]
+% HoldsAt(At(physobj,location),time) &
+% HoldsAt(At(bomb,location),time) &
+% HoldsAt(DestroyedDeterminingFluent(physobj),time) &
+% Happens(BombExplode(bomb),time) ->
+% Happens(Destroy(bomb,physobj),time).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Bomb.e',177).
+
+ /*  (   holds_at(at(Physobj, Location), Time),
+       holds_at(at(Bomb, Location), Time),
+       holds_at(destroyedDeterminingFluent(Physobj), Time),
+       happens(bombExplode(Bomb), Time)
+   ->  happens(destroy(Bomb, Physobj), Time)
+   ).
+ */
+if loc_at(Physobj, Location)at Time, loc_at(Bomb, Location)at Time, destroyedDeterminingFluent(Physobj)at Time, happens(bombExplode(Bomb), Time)then happens(destroy(Bomb, Physobj), Time).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Bomb.e',177).
+
+ /*  reactive_rule([ holds(loc_at(Physobj,Location),Time),
+   		holds(loc_at(Bomb,Location),Time),
+   		holds(destroyedDeterminingFluent(Physobj),
+   		      Time),
+   		happens(bombExplode(Bomb),Time)
+   	      ],
+   	      [happens(destroy(Bomb,Physobj),Time)]).
+ */
+
+
+%; End of file.
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Bomb.e',183).
+% translate: ending  File: /pack/logicmoo_ec/ext/ec_sources/ecnet/Bomb.e.lps 

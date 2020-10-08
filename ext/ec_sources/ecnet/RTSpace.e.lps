@@ -1,0 +1,1901 @@
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',329).
+% translate: unskipped  File: /pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e.lps 
+:-include(library('ec_planner/ec_test_incl')).
+:-expects_dialect(lps).
+% translate: begining  File: /pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e.lps 
+% Thu, 08 Oct 2020 00:18:45 GMT File: <stream>(0x5564d76a9900)%;
+%; Copyright (c) 2005 IBM Corporation and others.
+%; All rights reserved. This program and the accompanying materials
+%; are made available under the terms of the Common Public License v1.0
+%; which accompanies this distribution, and is available at
+%; http://www.eclipse.org/legal/cpl-v10.html
+%;
+%; Contributors:
+%; IBM - Initial implementation
+%;
+%; RTSpace: room-scale topological space
+%;
+%; We use topological and metric representations of space,
+%; at two levels of granularity---room-scale and object-scale.
+%; The RTSpace representation deals with topological space at
+%; the scale of rooms and outdoor locations.
+%; This representation of space consists of locations, which
+%; are connected by portals. There are two types of locations:
+%; rooms and outside areas (outsides).
+%;
+%; object is at location.
+
+% fluent At(object,location)
+ %  blue=fluent(at(object,location)).
+ %  fluent(at(object,location)).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',22).
+fluents([loc_at/2]).
+ %  mpred_prop(at(object,location),fluent).
+mpred_prop(loc_at(object,location),fluent).
+
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',24).
+% manualrelease At
+ %  pl=axiom(manualrelease(at),[]).
+manualrelease(at).
+
+
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',26).
+% [object1,location,time]
+% (% {object2} PartOf(object1,object2)) ->
+% ReleasedAt(At(object1,location),time).
+ %  clausify_pnf=exists([Object2],  (partOf(Object1, Object2)->releasedAt(at(Object1, Location), Time))).
+
+ /*  releasedAt(at(Object1, Location), Time) :-
+       partOf(Object1, Exists_Object2),
+       some(Exists_Object2,
+            '$kolem_Fn_22'(Object1, Location, Time)).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',26).
+
+ /*  pl=axiom(releasedAt(at(Object1,Location),Time),
+         [ partOf(Object1,Exists_Object2),
+   	some(Exists_Object2,
+   	     '$kolem_Fn_22'(Object1,Location,Time))
+         ]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',26).
+
+ /*  (   partOf(Object1, Exists_Object2),
+       some(Exists_Object2,
+            '$kolem_Fn_22'(Object1, Location, Time))
+   ->  releasedAt(at(Object1, Location), Time)
+   ).
+ */
+if partOf(Object1, Exists_Object2), some(Exists_Object2, '$kolem_Fn_22'(Object1, Location, Time))then releasedAt(loc_at(Object1, Location), Time).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',26).
+
+ /*  reactive_rule([ partOf(Object1,Exists_Object2),
+   		some(Exists_Object2,
+   		     '$kolem_Fn_22'(Object1,
+   				    Location,
+   				    Time))
+   	      ],
+   	      [ releasedAt(loc_at(Object1,Location),
+   			   Time)
+   	      ]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',26).
+
+ /*  not(partOf(Object1, Exists_Object2)) :-
+       not(releasedAt(at(Object1, Location), Time)),
+       some(Exists_Object2,
+            '$kolem_Fn_22'(Object1, Location, Time)).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',26).
+
+ /*  pl=axiom(not(partOf(Object1,Exists_Object2)),
+         [ not(releasedAt(at(Object1,Location),Time)),
+   	some(Exists_Object2,
+   	     '$kolem_Fn_22'(Object1,Location,Time))
+         ]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',26).
+
+ /*  (   not(releasedAt(at(Object1, Location), Time)),
+       some(Exists_Object2,
+            '$kolem_Fn_22'(Object1, Location, Time))
+   ->  not(partOf(Object1, Exists_Object2))
+   ).
+ */
+if not releasedAt(loc_at(Object1, Location), Time), some(Exists_Object2, '$kolem_Fn_22'(Object1, Location, Time))then not partOf(Object1, Exists_Object2).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',26).
+
+ /*  reactive_rule([ not(releasedAt(loc_at(Object1,Location),
+   			       Time)),
+   		some(Exists_Object2,
+   		     '$kolem_Fn_22'(Object1,
+   				    Location,
+   				    Time))
+   	      ],
+   	      [not(partOf(Object1,Exists_Object2))]).
+ */
+
+
+%; A state constraint says that an object
+%; is at one location at a time:
+% [object,location1,location2,time]
+% HoldsAt(At(object,location1),time) &
+% HoldsAt(At(object,location2),time) ->
+% location1=location2.
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',32).
+
+ /*  (   holds_at(at(Object, Location1), Time),
+       holds_at(at(Object, Location2), Time)
+   ->  equals(Location1, Location2)
+   ).
+ */
+if loc_at(Object, Location1)at Time, loc_at(Object, Location2)at Time then equals(Location1, Location2).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',32).
+
+ /*  reactive_rule([ holds(loc_at(Object,Location1),Time),
+   		holds(loc_at(Object,Location2),Time)
+   	      ],
+   	      [equals(Location1,Location2)]).
+ */
+
+
+%; connectivity
+%; Side one of portal is location.
+
+% function Side1(portal): location
+ %  blue=predicate(side1Pred(portal,location)).
+ %  predicate(side1Pred(portal,location)).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',39).
+predicates([side1Pred/2]).
+mpred_prop(side1Pred(portal,location),predicate).
+ %  pl=axiom(functional_predicate(side1,side1Pred),[]).
+functional_predicate(side1,side1Pred).
+ %  pl=axiom(function_argtypes(side1Pred,side1(portal),location),[]).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',39).
+function_argtypes(side1Pred,side1(portal),location).
+resultIsa(side1,location).
+%; Side two of portal is location.
+
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',42).
+% function Side2(portal): location
+ %  blue=predicate(side2Pred(portal,location)).
+ %  predicate(side2Pred(portal,location)).
+predicates([side2Pred/2]).
+mpred_prop(side2Pred(portal,location),predicate).
+ %  pl=axiom(functional_predicate(side2,side2Pred),[]).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',42).
+functional_predicate(side2,side2Pred).
+ %  pl=axiom(function_argtypes(side2Pred,side2(portal),location),[]).
+function_argtypes(side2Pred,side2(portal),location).
+resultIsa(side2,location).
+%; The building of room is building.
+
+% function BuildingOf(room): building
+ %  blue=predicate(building(room,building)).
+ %  predicate(building(room,building)).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',44).
+predicates([building/2]).
+mpred_prop(building(room,building),predicate).
+ %  pl=axiom(functional_predicate(buildingOf,building),[]).
+functional_predicate(buildingOf,building).
+ %  pl=axiom(function_argtypes(building,buildingOf(room),building),[]).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',44).
+function_argtypes(building,buildingOf(room),building).
+resultIsa(buildingOf,building).
+%; object is at a location that has portal.
+
+% fluent NearPortal(object,portal)
+ %  blue=fluent(nearPortal(object,portal)).
+ %  fluent(nearPortal(object,portal)).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',47).
+fluents([nearPortal/2]).
+mpred_prop(nearPortal(object,portal),fluent).
+
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',49).
+% noninertial NearPortal
+noninertial(nearPortal).
+%; A state constraint says that an object is near
+%; a portal if and only if there is a location such that
+%; the object is at the location and one of the sides
+%; of the portal is the location:
+% [object,portal,time]
+% HoldsAt(NearPortal(object,portal),time) <->
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',55).
+% {location}% 
+%  (Side1(portal)=location|
+%   Side2(portal)=location) &
+%  HoldsAt(At(object,location),time).
+ %  clausify_pnf=exists([Location], <->(holds_at(nearPortal(Object, Portal), Time),  ((side1Pred(Portal, Location);side2Pred(Portal, Location)), holds_at(at(Object, Location), Time)))).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',57).
+
+ /*  not(holds_at(nearPortal(Object, Portal), Time)) :-
+       (   not(side1Pred(Portal, Exists_Location)),
+           not(side2Pred(Portal, Exists_Location))
+       ;   not(holds_at(at(Object, Exists_Location), Time))
+       ),
+       some(Exists_Location,
+            '$kolem_Fn_23'(Object, Portal, Time)).
+ */
+ %  pl=axiom(not(nearPortal(Object, Portal)), [(not(side1Pred(Portal, Exists_Location)), not(side2Pred(Portal, Exists_Location));not(at(Object, Exists_Location))), some(Exists_Location, '$kolem_Fn_23'(Object, Portal, Time))]).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',57).
+
+ /*  (   (   not(side1Pred(Portal, Exists_Location)),
+           not(side2Pred(Portal, Exists_Location))
+       ;   not(at(Object, Exists_Location))
+       ),
+       some(Exists_Location,
+            '$kolem_Fn_23'(Object, Portal, Time))
+   ->  not(nearPortal(Object, Portal))
+   ).
+ */
+if (not side1Pred(Portal, Exists_Location), not side2Pred(Portal, Exists_Location);not loc_at(Object, Exists_Location)), some(Exists_Location, '$kolem_Fn_23'(Object, Portal, Time))then not nearPortal(Object, Portal).
+ %  reactive_rule([(not(side1Pred(Portal, Exists_Location)), not(side2Pred(Portal, Exists_Location));not(loc_at(Object, Exists_Location))), some(Exists_Location, '$kolem_Fn_23'(Object, Portal, Time))], [holds(not(nearPortal(Object, Portal)), Holds)]).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',57).
+
+ /*  side1Pred(Portal, Exists_Location) :-
+       not(side2Pred(Portal, Exists_Location)),
+       holds_at(nearPortal(Object, Portal), Time),
+       some(Exists_Location,
+            '$kolem_Fn_23'(Object, Portal, Time)).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',57).
+
+ /*  fix_axiom_head(Time) ->
+       [ holds_at(nearPortal(Object, Portal), Time),
+          (->),
+         nearPortal(Object, Portal)
+       ].
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',57).
+
+ /*  pl=axiom(side1Pred(Portal,Exists_Location),
+         [ not(side2Pred(Portal,Exists_Location)),
+   	nearPortal(Object,Portal),
+   	some(Exists_Location,
+   	     '$kolem_Fn_23'(Object,Portal,Time))
+         ]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',57).
+
+ /*  (   not(side2Pred(Portal, Exists_Location)),
+       nearPortal(Object, Portal),
+       some(Exists_Location,
+            '$kolem_Fn_23'(Object, Portal, Time))
+   ->  side1Pred(Portal, Exists_Location)
+   ).
+ */
+if not side2Pred(Portal, Exists_Location), nearPortal(Object, Portal), some(Exists_Location, '$kolem_Fn_23'(Object, Portal, Time))then side1Pred(Portal, Exists_Location).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',57).
+
+ /*  reactive_rule([ not(side2Pred(Portal,Exists_Location)),
+   		holds(nearPortal(Object,Portal),
+   		      Holds6),
+   		some(Exists_Location,
+   		     '$kolem_Fn_23'(Object,Portal,Time))
+   	      ],
+   	      [side1Pred(Portal,Exists_Location)]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',57).
+
+ /*  side2Pred(Portal, Exists_Location) :-
+       not(side1Pred(Portal, Exists_Location)),
+       holds_at(nearPortal(Object, Portal), Time),
+       some(Exists_Location,
+            '$kolem_Fn_23'(Object, Portal, Time)).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',57).
+
+ /*  fix_axiom_head(Time) ->
+       [ holds_at(nearPortal(Object, Portal), Time),
+          (->),
+         nearPortal(Object, Portal)
+       ].
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',57).
+
+ /*  pl=axiom(side2Pred(Portal,Exists_Location),
+         [ not(side1Pred(Portal,Exists_Location)),
+   	nearPortal(Object,Portal),
+   	some(Exists_Location,
+   	     '$kolem_Fn_23'(Object,Portal,Time))
+         ]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',57).
+
+ /*  (   not(side1Pred(Portal, Exists_Location)),
+       nearPortal(Object, Portal),
+       some(Exists_Location,
+            '$kolem_Fn_23'(Object, Portal, Time))
+   ->  side2Pred(Portal, Exists_Location)
+   ).
+ */
+if not side1Pred(Portal, Exists_Location), nearPortal(Object, Portal), some(Exists_Location, '$kolem_Fn_23'(Object, Portal, Time))then side2Pred(Portal, Exists_Location).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',57).
+
+ /*  reactive_rule([ not(side1Pred(Portal,Exists_Location)),
+   		holds(nearPortal(Object,Portal),
+   		      Holds7),
+   		some(Exists_Location,
+   		     '$kolem_Fn_23'(Object,Portal,Time))
+   	      ],
+   	      [side2Pred(Portal,Exists_Location)]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',57).
+
+ /*  holds_at(at(Object, Exists_Location), Time) :-
+       holds_at(nearPortal(Object, Portal), Time),
+       some(Exists_Location,
+            '$kolem_Fn_23'(Object, Portal, Time)).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',57).
+
+ /*  fix_axiom_head(Time) ->
+       [ holds_at(at(Object, Exists_Location), Time),
+          (->),
+         at(Object, Exists_Location)
+       ].
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',57).
+
+ /*  pl=axiom(at(Object,Exists_Location),
+         [ nearPortal(Object,Portal),
+   	some(Exists_Location,
+   	     '$kolem_Fn_23'(Object,Portal,Time))
+         ]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',57).
+
+ /*  (   nearPortal(Object, Portal),
+       some(Exists_Location,
+            '$kolem_Fn_23'(Object, Portal, Time))
+   ->  at(Object, Exists_Location)
+   ).
+ */
+if nearPortal(Object, Portal), some(Exists_Location, '$kolem_Fn_23'(Object, Portal, Time))then loc_at(Object, Exists_Location).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',57).
+
+ /*  reactive_rule([ holds(nearPortal(Object,Portal),
+   		      Holds8),
+   		some(Exists_Location,
+   		     '$kolem_Fn_23'(Object,Portal,Time))
+   	      ],
+   	      [ holds(loc_at(Object,Exists_Location),
+   		      Holds9)
+   	      ]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',57).
+
+ /*  holds_at(nearPortal(Object, Portal), Time) :-
+       holds_at(at(Object, Exists_Location), Time),
+       (   side1Pred(Portal, Exists_Location)
+       ;   side2Pred(Portal, Exists_Location)
+       ),
+       some(Exists_Location,
+            '$kolem_Fn_23'(Object, Portal, Time)).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',57).
+
+ /*  fix_axiom_head(Time) ->
+       [ holds_at(nearPortal(Object, Portal), Time),
+          (->),
+         nearPortal(Object, Portal)
+       ].
+ */
+ %   pl=axiom(nearPortal(Object, Portal), [at(Object, Exists_Location),  (side1Pred(Portal, Exists_Location);side2Pred(Portal, Exists_Location)), some(Exists_Location, '$kolem_Fn_23'(Object, Portal, Time))]).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',57).
+
+ /*  (   at(Object, Exists_Location),
+       (   side1Pred(Portal, Exists_Location)
+       ;   side2Pred(Portal, Exists_Location)
+       ),
+       some(Exists_Location,
+            '$kolem_Fn_23'(Object, Portal, Time))
+   ->  nearPortal(Object, Portal)
+   ).
+ */
+if loc_at(Object, Exists_Location), (side1Pred(Portal, Exists_Location);side2Pred(Portal, Exists_Location)), some(Exists_Location, '$kolem_Fn_23'(Object, Portal, Time))then nearPortal(Object, Portal).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',57).
+
+ /*   reactive_rule([ holds(loc_at(Object, Exists_Location),
+                            Holds10),
+                       (side1Pred(Portal, Exists_Location);side2Pred(Portal, Exists_Location)),
+                      some(Exists_Location,
+                           '$kolem_Fn_23'(Object, Portal, Time))
+                    ],
+                    [holds(nearPortal(Object, Portal), Holds11)]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',57).
+
+ /*  not(holds_at(at(Object, Exists_Location), Time)) :-
+       (   side1Pred(Portal, Exists_Location)
+       ;   side2Pred(Portal, Exists_Location)
+       ),
+       not(holds_at(nearPortal(Object, Portal), Time)),
+       some(Exists_Location,
+            '$kolem_Fn_23'(Object, Portal, Time)).
+ */
+ %   pl=axiom(not(at(Object, Exists_Location)), [(side1Pred(Portal, Exists_Location);side2Pred(Portal, Exists_Location)), not(nearPortal(Object, Portal)), some(Exists_Location, '$kolem_Fn_23'(Object, Portal, Time))]).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',57).
+
+ /*  (   (   side1Pred(Portal, Exists_Location)
+       ;   side2Pred(Portal, Exists_Location)
+       ),
+       not(nearPortal(Object, Portal)),
+       some(Exists_Location,
+            '$kolem_Fn_23'(Object, Portal, Time))
+   ->  not(at(Object, Exists_Location))
+   ).
+ */
+if (side1Pred(Portal, Exists_Location);side2Pred(Portal, Exists_Location)), not nearPortal(Object, Portal), some(Exists_Location, '$kolem_Fn_23'(Object, Portal, Time))then not loc_at(Object, Exists_Location).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',57).
+
+ /*   reactive_rule([  (side1Pred(Portal, Exists_Location);side2Pred(Portal, Exists_Location)),
+                      holds(not(nearPortal(Object, Portal)),
+                            Holds12),
+                      some(Exists_Location,
+                           '$kolem_Fn_23'(Object, Portal, Time))
+                    ],
+                    [ holds(not(loc_at(Object, Exists_Location)),
+                            Holds13)
+                    ]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',57).
+
+ /*  not(side1Pred(Portal, Exists_Location)) :-
+       holds_at(at(Object, Exists_Location), Time),
+       not(holds_at(nearPortal(Object, Portal), Time)),
+       some(Exists_Location,
+            '$kolem_Fn_23'(Object, Portal, Time)).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',57).
+
+ /*  fix_axiom_head(Time) ->
+       [ holds_at(at(Object, Exists_Location), Time),
+          (->),
+         at(Object, Exists_Location)
+       ].
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',57).
+
+ /*  pl=axiom(not(side1Pred(Portal,Exists_Location)),
+         [ at(Object,Exists_Location),
+   	not(nearPortal(Object,Portal)),
+   	some(Exists_Location,
+   	     '$kolem_Fn_23'(Object,Portal,Time))
+         ]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',57).
+
+ /*  (   at(Object, Exists_Location),
+       not(nearPortal(Object, Portal)),
+       some(Exists_Location,
+            '$kolem_Fn_23'(Object, Portal, Time))
+   ->  not(side1Pred(Portal, Exists_Location))
+   ).
+ */
+if loc_at(Object, Exists_Location), not nearPortal(Object, Portal), some(Exists_Location, '$kolem_Fn_23'(Object, Portal, Time))then not side1Pred(Portal, Exists_Location).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',57).
+
+ /*  reactive_rule([ holds(loc_at(Object,Exists_Location),
+   		      Holds14),
+   		holds(not(nearPortal(Object,Portal)),
+   		      Holds14),
+   		some(Exists_Location,
+   		     '$kolem_Fn_23'(Object,Portal,Time))
+   	      ],
+   	      [not(side1Pred(Portal,Exists_Location))]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',57).
+
+ /*  not(side2Pred(Portal, Exists_Location)) :-
+       holds_at(at(Object, Exists_Location), Time),
+       not(holds_at(nearPortal(Object, Portal), Time)),
+       some(Exists_Location,
+            '$kolem_Fn_23'(Object, Portal, Time)).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',57).
+
+ /*  fix_axiom_head(Time) ->
+       [ holds_at(at(Object, Exists_Location), Time),
+          (->),
+         at(Object, Exists_Location)
+       ].
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',57).
+
+ /*  pl=axiom(not(side2Pred(Portal,Exists_Location)),
+         [ at(Object,Exists_Location),
+   	not(nearPortal(Object,Portal)),
+   	some(Exists_Location,
+   	     '$kolem_Fn_23'(Object,Portal,Time))
+         ]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',57).
+
+ /*  (   at(Object, Exists_Location),
+       not(nearPortal(Object, Portal)),
+       some(Exists_Location,
+            '$kolem_Fn_23'(Object, Portal, Time))
+   ->  not(side2Pred(Portal, Exists_Location))
+   ).
+ */
+if loc_at(Object, Exists_Location), not nearPortal(Object, Portal), some(Exists_Location, '$kolem_Fn_23'(Object, Portal, Time))then not side2Pred(Portal, Exists_Location).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',57).
+
+ /*  reactive_rule([ holds(loc_at(Object,Exists_Location),
+   		      Holds15),
+   		holds(not(nearPortal(Object,Portal)),
+   		      Holds15),
+   		some(Exists_Location,
+   		     '$kolem_Fn_23'(Object,Portal,Time))
+   	      ],
+   	      [not(side2Pred(Portal,Exists_Location))]).
+ */
+
+
+%; locking and unlocking doors
+%; agent unlocks door.
+
+% event DoorUnlock(agent,door)
+ %  blue=event(doorUnlock(agent,door)).
+ %  event(doorUnlock(agent,door)).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',64).
+actions([doorUnlock/2]).
+mpred_prop(doorUnlock(agent,door),event).
+
+
+%; agent locks door.
+
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',67).
+% event DoorLock(agent,door)
+ %  blue=event(doorLock(agent,door)).
+ %  event(doorLock(agent,door)).
+actions([doorLock/2]).
+mpred_prop(doorLock(agent,door),event).
+
+
+%; door is unlocked.
+
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',69).
+% fluent DoorUnlocked(door)
+ %  blue=fluent(doorUnlocked(door)).
+ %  fluent(doorUnlocked(door)).
+fluents([doorUnlocked/1]).
+mpred_prop(doorUnlocked(door),fluent).
+
+
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',71).
+%; A precondition axiom states that
+%; for an agent to unlock a door,
+%; the agent must be awake,
+%; the door must not already be unlocked, and
+%; the agent must be near the door:
+% [agent,door,time]
+% Happens(DoorUnlock(agent,door),time) ->
+% HoldsAt(Awake(agent),time) &
+% !HoldsAt(DoorUnlocked(door),time) &
+% HoldsAt(NearPortal(agent,door),time).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',76).
+
+ /*  (   happens(doorUnlock(Agent, Door), Time)
+   ->  holds_at(awake(Agent), Time),
+       holds_at(neg(doorUnlocked(Door)), Time),
+       holds_at(nearPortal(Agent, Door), Time)
+   ).
+ */
+if happens(doorUnlock(Agent, Door), Time)then awake(Agent)at Time, not doorUnlocked(Door)at Time, nearPortal(Agent, Door)at Time.
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',76).
+
+ /*  reactive_rule([happens(doorUnlock(Agent,Door),Time)],
+   	      [ holds(awake(Agent),Time),
+   		holds(not(doorUnlocked(Door)),Time),
+   		holds(nearPortal(Agent,Door),Time)
+   	      ]).
+ */
+
+
+%; An effect axiom states that
+%; if an agent unlocks a door,
+%; the door will be unlocked:
+% [agent,door,time]
+% Initiates(DoorUnlock(agent,door),DoorUnlocked(door),time).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',85).
+
+ /*  pl=axiom(initiates(doorUnlock(Agent,Door),
+   		doorUnlocked(Door),
+   		Time),
+         []).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',85).
+
+ /*  initiates(doorUnlock(Agent,Door),
+   	  doorUnlocked(Door),
+   	  Time).
+ */
+doorUnlock(Agent, Door)initiates doorUnlocked(Door).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',85).
+
+ /*  initiated(happens(doorUnlock(Agent,Door),
+   		  Time_From,
+   		  Time_Until),
+   	  doorUnlocked(Door),
+   	  []).
+ */
+
+
+%; A precondition axiom states that
+%; for an agent to lock a door,
+%; the agent must be awake,
+%; the door must be unlocked, and
+%; the agent must be near the door:
+% [agent,door,time]
+% Happens(DoorLock(agent,door),time) ->
+% HoldsAt(Awake(agent),time) &
+% HoldsAt(DoorUnlocked(door),time) &
+% HoldsAt(NearPortal(agent,door),time).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',93).
+
+ /*  (   happens(doorLock(Agent, Door), Time)
+   ->  holds_at(awake(Agent), Time),
+       holds_at(doorUnlocked(Door), Time),
+       holds_at(nearPortal(Agent, Door), Time)
+   ).
+ */
+if happens(doorLock(Agent, Door), Time)then awake(Agent)at Time, doorUnlocked(Door)at Time, nearPortal(Agent, Door)at Time.
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',93).
+
+ /*  reactive_rule([happens(doorLock(Agent,Door),Time)],
+   	      [ holds(awake(Agent),Time),
+   		holds(doorUnlocked(Door),Time),
+   		holds(nearPortal(Agent,Door),Time)
+   	      ]).
+ */
+
+
+%; An effect axiom states that
+%; if an agent locks a door,
+%; the door will no longer be unlocked.
+% [agent,door,time]
+% Terminates(DoorLock(agent,door),DoorUnlocked(door),time).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',102).
+
+ /*  pl=axiom(terminates(doorLock(Agent,Door),
+   		 doorUnlocked(Door),
+   		 Time),
+         []).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',102).
+
+ /*  terminates(doorLock(Agent,Door),
+   	   doorUnlocked(Door),
+   	   Time).
+ */
+doorLock(Agent, Door)terminates doorUnlocked(Door).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',102).
+
+ /*  terminated(happens(doorLock(Agent,Door),
+   		   Time_From,
+   		   Time_Until),
+   	   doorUnlocked(Door),
+   	   []).
+ */
+
+
+%; A state constraint says that if a door is open,
+%; it is unlocked:
+% [door,time]
+% HoldsAt(DoorIsOpen(door),time) -> HoldsAt(DoorUnlocked(door),time).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',107).
+
+ /*  holds_at(doorIsOpen(Door), Time) ->
+       holds_at(doorUnlocked(Door), Time).
+ */
+if doorIsOpen(Door)at Time then doorUnlocked(Door)at Time.
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',107).
+
+ /*  reactive_rule([holds(doorIsOpen(Door),Time)],
+   	      [holds(doorUnlocked(Door),Time)]).
+ */
+
+
+%; opening and closing doors
+%; agent opens door.
+
+% event DoorOpen(agent,door)
+ %  blue=event(doorOpen(agent,door)).
+ %  event(doorOpen(agent,door)).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',112).
+actions([doorOpen/2]).
+mpred_prop(doorOpen(agent,door),event).
+
+
+%; agent closes door.
+
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',115).
+% event DoorClose(agent,door)
+ %  blue=event(doorClose(agent,door)).
+ %  event(doorClose(agent,door)).
+actions([doorClose/2]).
+mpred_prop(doorClose(agent,door),event).
+
+
+%; door is open.
+
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',117).
+% fluent DoorIsOpen(door)
+ %  blue=fluent(doorIsOpen(door)).
+ %  fluent(doorIsOpen(door)).
+fluents([doorIsOpen/1]).
+mpred_prop(doorIsOpen(door),fluent).
+
+
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',119).
+%; A precondition axiom states that
+%; for an agent to open a door,
+%; the agent must be awake,
+%; the door must not already be open,
+%; the door must be unlocked, and
+%; the agent must be near the door:
+% [agent,door,time]
+% Happens(DoorOpen(agent,door),time) ->
+% HoldsAt(Awake(agent),time) &
+% !HoldsAt(DoorIsOpen(door),time) &
+% HoldsAt(DoorUnlocked(door),time) &
+% HoldsAt(NearPortal(agent,door),time).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',125).
+
+ /*  (   happens(doorOpen(Agent, Door), Time)
+   ->  holds_at(awake(Agent), Time),
+       holds_at(neg(doorIsOpen(Door)), Time),
+       holds_at(doorUnlocked(Door), Time),
+       holds_at(nearPortal(Agent, Door), Time)
+   ).
+ */
+if happens(doorOpen(Agent, Door), Time)then awake(Agent)at Time, not doorIsOpen(Door)at Time, doorUnlocked(Door)at Time, nearPortal(Agent, Door)at Time.
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',125).
+
+ /*  reactive_rule([happens(doorOpen(Agent,Door),Time)],
+   	      [ holds(awake(Agent),Time),
+   		holds(not(doorIsOpen(Door)),Time),
+   		holds(doorUnlocked(Door),Time),
+   		holds(nearPortal(Agent,Door),Time)
+   	      ]).
+ */
+
+
+%; An effect axiom states that
+%; if an agent opens a door,
+%; the door will be open:
+% [agent,door,time]
+% Initiates(DoorOpen(agent,door),DoorIsOpen(door),time).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',135).
+
+ /*  pl=axiom(initiates(doorOpen(Agent,Door),
+   		doorIsOpen(Door),
+   		Time),
+         []).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',135).
+
+ /*  initiates(doorOpen(Agent,Door),
+   	  doorIsOpen(Door),
+   	  Time).
+ */
+doorOpen(Agent, Door)initiates doorIsOpen(Door).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',135).
+
+ /*  initiated(happens(doorOpen(Agent,Door),
+   		  Time_From,
+   		  Time_Until),
+   	  doorIsOpen(Door),
+   	  []).
+ */
+
+
+%; A precondition axiom states that
+%; for an agent to close a door,
+%; the agent must be awake,
+%; the door must be open,
+%; the door must be unlocked, and
+%; the agent must be near the door:
+% [agent,door,time]
+% Happens(DoorClose(agent,door),time) ->
+% HoldsAt(Awake(agent),time) &
+% HoldsAt(DoorIsOpen(door),time) &
+% HoldsAt(DoorUnlocked(door),time) &
+% HoldsAt(NearPortal(agent,door),time).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',144).
+
+ /*  (   happens(doorClose(Agent, Door), Time)
+   ->  holds_at(awake(Agent), Time),
+       holds_at(doorIsOpen(Door), Time),
+       holds_at(doorUnlocked(Door), Time),
+       holds_at(nearPortal(Agent, Door), Time)
+   ).
+ */
+if happens(doorClose(Agent, Door), Time)then awake(Agent)at Time, doorIsOpen(Door)at Time, doorUnlocked(Door)at Time, nearPortal(Agent, Door)at Time.
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',144).
+
+ /*  reactive_rule([happens(doorClose(Agent,Door),Time)],
+   	      [ holds(awake(Agent),Time),
+   		holds(doorIsOpen(Door),Time),
+   		holds(doorUnlocked(Door),Time),
+   		holds(nearPortal(Agent,Door),Time)
+   	      ]).
+ */
+
+
+%; An effect axiom states that
+%; if an agent closes a door,
+%; the door will no longer be open:
+% [agent,door,time]
+% Terminates(DoorClose(agent,door),DoorIsOpen(door),time).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',154).
+
+ /*  pl=axiom(terminates(doorClose(Agent,Door),
+   		 doorIsOpen(Door),
+   		 Time),
+         []).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',154).
+
+ /*  terminates(doorClose(Agent,Door),
+   	   doorIsOpen(Door),
+   	   Time).
+ */
+doorClose(Agent, Door)terminates doorIsOpen(Door).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',154).
+
+ /*  terminated(happens(doorClose(Agent,Door),
+   		   Time_From,
+   		   Time_Until),
+   	   doorIsOpen(Door),
+   	   []).
+ */
+
+
+%; passing through doors
+%; agent walks through side one of door.
+
+% event WalkThroughDoor12(agent,door)
+ %  blue=event(walkThroughDoor12(agent,door)).
+ %  event(walkThroughDoor12(agent,door)).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',159).
+actions([walkThroughDoor12/2]).
+mpred_prop(walkThroughDoor12(agent,door),event).
+
+
+%; agent walks through side two of door.
+
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',162).
+% event WalkThroughDoor21(agent,door)
+ %  blue=event(walkThroughDoor21(agent,door)).
+ %  event(walkThroughDoor21(agent,door)).
+actions([walkThroughDoor21/2]).
+mpred_prop(walkThroughDoor21(agent,door),event).
+
+
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',164).
+%; Precondition axioms state that
+%; for an agent to walk through a side of a door,
+%; the agent must be awake and standing,
+%; the door must be open, and
+%; the agent must be at the side of the door that
+%; the agent walks through:
+% [agent,door,time]
+% Happens(WalkThroughDoor12(agent,door),time) ->
+% HoldsAt(Awake(agent),time) &
+% HoldsAt(Standing(agent),time) &
+% HoldsAt(DoorIsOpen(door),time) &
+% HoldsAt(At(agent,Side1(door)),time).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',170).
+
+ /*  (   happens(walkThroughDoor12(Agent, Door), Time)
+   ->  holds_at(awake(Agent), Time),
+       holds_at(standing(Agent), Time),
+       holds_at(doorIsOpen(Door), Time),
+       holds_at(at(Agent, side1(Door)), Time)
+   ).
+ */
+if happens(walkThroughDoor12(Agent, Door), Time)then awake(Agent)at Time, standing(Agent)at Time, doorIsOpen(Door)at Time, loc_at(Agent, side1(Door))at Time.
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',170).
+
+ /*  reactive_rule([ happens(walkThroughDoor12(Agent,Door),
+   			Time)
+   	      ],
+   	      [ holds(awake(Agent),Time),
+   		holds(standing(Agent),Time),
+   		holds(doorIsOpen(Door),Time),
+   		holds(loc_at(Agent,side1(Door)),Time)
+   	      ]).
+ */
+
+
+% [agent,door,time]
+% Happens(WalkThroughDoor21(agent,door),time) ->
+% HoldsAt(Awake(agent),time) &
+% HoldsAt(Standing(agent),time) &
+% HoldsAt(DoorIsOpen(door),time) &
+% HoldsAt(At(agent,Side2(door)),time).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',178).
+
+ /*  (   happens(walkThroughDoor21(Agent, Door), Time)
+   ->  holds_at(awake(Agent), Time),
+       holds_at(standing(Agent), Time),
+       holds_at(doorIsOpen(Door), Time),
+       holds_at(at(Agent, side2(Door)), Time)
+   ).
+ */
+if happens(walkThroughDoor21(Agent, Door), Time)then awake(Agent)at Time, standing(Agent)at Time, doorIsOpen(Door)at Time, loc_at(Agent, side2(Door))at Time.
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',178).
+
+ /*  reactive_rule([ happens(walkThroughDoor21(Agent,Door),
+   			Time)
+   	      ],
+   	      [ holds(awake(Agent),Time),
+   		holds(standing(Agent),Time),
+   		holds(doorIsOpen(Door),Time),
+   		holds(loc_at(Agent,side2(Door)),Time)
+   	      ]).
+ */
+
+
+%; Effect axioms state that
+%; if an agent walks through one side of a door,
+%; the agent will be at the other side of the door:
+% [agent,door,location,time]
+% Side2(door)=location ->
+% Initiates(WalkThroughDoor12(agent,door),At(agent,location),time).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',187).
+
+ /*  pl=axiom(initiates(walkThroughDoor12(Agent,Door),
+   		at(Agent,Location),
+   		Time),
+         [side2Pred(Door,Location)]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',187).
+
+ /*  side2Pred(Door, Location) ->
+       initiates(walkThroughDoor12(Agent, Door),
+                 at(Agent, Location),
+                 Time).
+ */
+if side2Pred(Door, Location)then initiates(walkThroughDoor12(Agent, Door), loc_at(Agent, Location)at Time, _).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',187).
+
+ /*  reactive_rule([side2Pred(Door,Location)],
+   	      [ initiates(walkThroughDoor12(Agent,Door),
+   			  at(loc_at(Agent,Location),
+   			     Time),
+   			  Initiates)
+   	      ]).
+ */
+
+
+% [agent,door,location,time]
+% Side1(door)=location ->
+% Initiates(WalkThroughDoor21(agent,door),At(agent,location),time).
+
+ /*  pl=axiom(initiates(walkThroughDoor21(Agent,Door),
+   		at(Agent,Location),
+   		Time),
+         [side1Pred(Door,Location)]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',192).
+
+ /*  side1Pred(Door, Location) ->
+       initiates(walkThroughDoor21(Agent, Door),
+                 at(Agent, Location),
+                 Time).
+ */
+if side1Pred(Door, Location)then initiates(walkThroughDoor21(Agent, Door), loc_at(Agent, Location)at Time, _).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',192).
+
+ /*  reactive_rule([side1Pred(Door,Location)],
+   	      [ initiates(walkThroughDoor21(Agent,Door),
+   			  at(loc_at(Agent,Location),
+   			     Time),
+   			  Initiates)
+   	      ]).
+ */
+
+
+% [agent,door,location,time]
+% Side1(door)=location ->
+% Terminates(WalkThroughDoor12(agent,door),At(agent,location),time).
+
+ /*  pl=axiom(terminates(walkThroughDoor12(Agent,Door),
+   		 at(Agent,Location),
+   		 Time),
+         [side1Pred(Door,Location)]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',196).
+
+ /*  side1Pred(Door, Location) ->
+       terminates(walkThroughDoor12(Agent, Door),
+                  at(Agent, Location),
+                  Time).
+ */
+if side1Pred(Door, Location)then terminates(walkThroughDoor12(Agent, Door), loc_at(Agent, Location)at Time, _).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',196).
+
+ /*  reactive_rule([side1Pred(Door,Location)],
+   	      [ terminates(walkThroughDoor12(Agent,Door),
+   			   at(loc_at(Agent,Location),
+   			      Time),
+   			   Terminates)
+   	      ]).
+ */
+
+
+% [agent,door,location,time]
+% Side2(door)=location ->
+% Terminates(WalkThroughDoor21(agent,door),At(agent,location),time).
+
+ /*  pl=axiom(terminates(walkThroughDoor21(Agent,Door),
+   		 at(Agent,Location),
+   		 Time),
+         [side2Pred(Door,Location)]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',200).
+
+ /*  side2Pred(Door, Location) ->
+       terminates(walkThroughDoor21(Agent, Door),
+                  at(Agent, Location),
+                  Time).
+ */
+if side2Pred(Door, Location)then terminates(walkThroughDoor21(Agent, Door), loc_at(Agent, Location)at Time, _).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',200).
+
+ /*  reactive_rule([side2Pred(Door,Location)],
+   	      [ terminates(walkThroughDoor21(Agent,Door),
+   			   at(loc_at(Agent,Location),
+   			      Time),
+   			   Terminates)
+   	      ]).
+ */
+
+
+%; walking from one end of a street to another
+%; agent walks from the first end of street to the second end.
+
+% event WalkStreet12(agent,street)
+ %  blue=event(walkStreet12(agent,street)).
+ %  event(walkStreet12(agent,street)).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',205).
+actions([walkStreet12/2]).
+mpred_prop(walkStreet12(agent,street),event).
+
+
+%; agent walks from the second end of street to the first end.
+
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',208).
+% event WalkStreet21(agent,street)
+ %  blue=event(walkStreet21(agent,street)).
+ %  event(walkStreet21(agent,street)).
+actions([walkStreet21/2]).
+mpred_prop(walkStreet21(agent,street),event).
+
+
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',210).
+%; Precondition axioms state that
+%; for an agent to walk from one end of a street to another,
+%; the agent must be awake,
+%; the agent must be standing, and
+%; the agent must be at the first end of the street:
+% [agent,street,time]
+% Happens(WalkStreet12(agent,street),time) ->
+% HoldsAt(Awake(agent),time) &
+% HoldsAt(Standing(agent),time) &
+% HoldsAt(At(agent,Side1(street)),time).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',215).
+
+ /*  (   happens(walkStreet12(Agent, Street), Time)
+   ->  holds_at(awake(Agent), Time),
+       holds_at(standing(Agent), Time),
+       holds_at(at(Agent, side1(Street)), Time)
+   ).
+ */
+if happens(walkStreet12(Agent, Street), Time)then awake(Agent)at Time, standing(Agent)at Time, loc_at(Agent, side1(Street))at Time.
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',215).
+
+ /*  reactive_rule([ happens(walkStreet12(Agent,Street),
+   			Time)
+   	      ],
+   	      [ holds(awake(Agent),Time),
+   		holds(standing(Agent),Time),
+   		holds(loc_at(Agent,side1(Street)),
+   		      Time)
+   	      ]).
+ */
+
+
+% [agent,street,time]
+% Happens(WalkStreet21(agent,street),time) ->
+% HoldsAt(Awake(agent),time) &
+% HoldsAt(Standing(agent),time) &
+% HoldsAt(At(agent,Side2(street)),time).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',222).
+
+ /*  (   happens(walkStreet21(Agent, Street), Time)
+   ->  holds_at(awake(Agent), Time),
+       holds_at(standing(Agent), Time),
+       holds_at(at(Agent, side2(Street)), Time)
+   ).
+ */
+if happens(walkStreet21(Agent, Street), Time)then awake(Agent)at Time, standing(Agent)at Time, loc_at(Agent, side2(Street))at Time.
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',222).
+
+ /*  reactive_rule([ happens(walkStreet21(Agent,Street),
+   			Time)
+   	      ],
+   	      [ holds(awake(Agent),Time),
+   		holds(standing(Agent),Time),
+   		holds(loc_at(Agent,side2(Street)),
+   		      Time)
+   	      ]).
+ */
+
+
+%; Effect axioms state that
+%; if an agent walks from one end of a street to another,
+%; the agent will be at the other end of the street:
+% [agent,street,location,time]
+% Side2(street)=location ->
+% Initiates(WalkStreet12(agent,street),At(agent,location),time).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',230).
+
+ /*  pl=axiom(initiates(walkStreet12(Agent,Street),
+   		at(Agent,Location),
+   		Time),
+         [side2Pred(Street,Location)]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',230).
+
+ /*  side2Pred(Street, Location) ->
+       initiates(walkStreet12(Agent, Street),
+                 at(Agent, Location),
+                 Time).
+ */
+if side2Pred(Street, Location)then initiates(walkStreet12(Agent, Street), loc_at(Agent, Location)at Time, _).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',230).
+
+ /*  reactive_rule([side2Pred(Street,Location)],
+   	      [ initiates(walkStreet12(Agent,Street),
+   			  at(loc_at(Agent,Location),
+   			     Time),
+   			  Initiates)
+   	      ]).
+ */
+
+
+% [agent,street,location,time]
+% Side1(street)=location ->
+% Initiates(WalkStreet21(agent,street),At(agent,location),time).
+
+ /*  pl=axiom(initiates(walkStreet21(Agent,Street),
+   		at(Agent,Location),
+   		Time),
+         [side1Pred(Street,Location)]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',235).
+
+ /*  side1Pred(Street, Location) ->
+       initiates(walkStreet21(Agent, Street),
+                 at(Agent, Location),
+                 Time).
+ */
+if side1Pred(Street, Location)then initiates(walkStreet21(Agent, Street), loc_at(Agent, Location)at Time, _).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',235).
+
+ /*  reactive_rule([side1Pred(Street,Location)],
+   	      [ initiates(walkStreet21(Agent,Street),
+   			  at(loc_at(Agent,Location),
+   			     Time),
+   			  Initiates)
+   	      ]).
+ */
+
+
+% [agent,street,location,time]
+% Side1(street)=location ->
+% Terminates(WalkStreet12(agent,street),At(agent,location),time).
+
+ /*  pl=axiom(terminates(walkStreet12(Agent,Street),
+   		 at(Agent,Location),
+   		 Time),
+         [side1Pred(Street,Location)]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',239).
+
+ /*  side1Pred(Street, Location) ->
+       terminates(walkStreet12(Agent, Street),
+                  at(Agent, Location),
+                  Time).
+ */
+if side1Pred(Street, Location)then terminates(walkStreet12(Agent, Street), loc_at(Agent, Location)at Time, _).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',239).
+
+ /*  reactive_rule([side1Pred(Street,Location)],
+   	      [ terminates(walkStreet12(Agent,Street),
+   			   at(loc_at(Agent,Location),
+   			      Time),
+   			   Terminates)
+   	      ]).
+ */
+
+
+% [agent,street,location,time]
+% Side2(street)=location ->
+% Terminates(WalkStreet21(agent,street),At(agent,location),time).
+
+ /*  pl=axiom(terminates(walkStreet21(Agent,Street),
+   		 at(Agent,Location),
+   		 Time),
+         [side2Pred(Street,Location)]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',243).
+
+ /*  side2Pred(Street, Location) ->
+       terminates(walkStreet21(Agent, Street),
+                  at(Agent, Location),
+                  Time).
+ */
+if side2Pred(Street, Location)then terminates(walkStreet21(Agent, Street), loc_at(Agent, Location)at Time, _).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',243).
+
+ /*  reactive_rule([side2Pred(Street,Location)],
+   	      [ terminates(walkStreet21(Agent,Street),
+   			   at(loc_at(Agent,Location),
+   			      Time),
+   			   Terminates)
+   	      ]).
+ */
+
+
+%; floors
+%; The floor of room is integer.
+
+% function Floor(room): integer
+ %  blue=predicate(floorPred(room,integer)).
+ %  predicate(floorPred(room,integer)).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',248).
+predicates([floorPred/2]).
+mpred_prop(floorPred(room,integer),predicate).
+ %  pl=axiom(functional_predicate(floor,floorPred),[]).
+functional_predicate(floor,floorPred).
+ %  pl=axiom(function_argtypes(floorPred,floor(room),integer),[]).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',248).
+function_argtypes(floorPred,floor(room),integer).
+resultIsa(floor,integer).
+%; walking up and down staircases
+%; agent walks down staircase.
+
+% event WalkDownStaircase(agent,staircase)
+ %  blue=event(walkDownStaircase(agent,staircase)).
+ %  event(walkDownStaircase(agent,staircase)).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',253).
+actions([walkDownStaircase/2]).
+mpred_prop(walkDownStaircase(agent,staircase),event).
+
+
+%; agent walks up staircase.
+
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',256).
+% event WalkUpStaircase(agent,staircase)
+ %  blue=event(walkUpStaircase(agent,staircase)).
+ %  event(walkUpStaircase(agent,staircase)).
+actions([walkUpStaircase/2]).
+mpred_prop(walkUpStaircase(agent,staircase),event).
+
+
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',258).
+%; Precondition axioms state that
+%; for an agent to walk down (up) a staircase,
+%; the agent must be awake, standing, and
+%; at the top (bottom) of the staircase:
+% [agent,staircase,time]
+% Happens(WalkDownStaircase(agent,staircase),time) ->
+% HoldsAt(Awake(agent),time) &
+% HoldsAt(Standing(agent),time) &
+% HoldsAt(At(agent,Side2(staircase)),time).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',262).
+
+ /*  (   happens(walkDownStaircase(Agent, Staircase), Time)
+   ->  holds_at(awake(Agent), Time),
+       holds_at(standing(Agent), Time),
+       holds_at(at(Agent, side2(Staircase)), Time)
+   ).
+ */
+if happens(walkDownStaircase(Agent, Staircase), Time)then awake(Agent)at Time, standing(Agent)at Time, loc_at(Agent, side2(Staircase))at Time.
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',262).
+
+ /*  reactive_rule([ happens(walkDownStaircase(Agent,Staircase),
+   			Time)
+   	      ],
+   	      [ holds(awake(Agent),Time),
+   		holds(standing(Agent),Time),
+   		holds(loc_at(Agent,side2(Staircase)),
+   		      Time)
+   	      ]).
+ */
+
+
+% [agent,staircase,time]
+% Happens(WalkUpStaircase(agent,staircase),time) ->
+% HoldsAt(Awake(agent),time) &
+% HoldsAt(Standing(agent),time) &
+% HoldsAt(At(agent,Side1(staircase)),time).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',269).
+
+ /*  (   happens(walkUpStaircase(Agent, Staircase), Time)
+   ->  holds_at(awake(Agent), Time),
+       holds_at(standing(Agent), Time),
+       holds_at(at(Agent, side1(Staircase)), Time)
+   ).
+ */
+if happens(walkUpStaircase(Agent, Staircase), Time)then awake(Agent)at Time, standing(Agent)at Time, loc_at(Agent, side1(Staircase))at Time.
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',269).
+
+ /*  reactive_rule([ happens(walkUpStaircase(Agent,Staircase),
+   			Time)
+   	      ],
+   	      [ holds(awake(Agent),Time),
+   		holds(standing(Agent),Time),
+   		holds(loc_at(Agent,side1(Staircase)),
+   		      Time)
+   	      ]).
+ */
+
+
+%; Effect axioms state that
+%; if an agent walks down (up) a staircase,
+%; the agent will be at the bottom (top) of the staircase:
+% [agent,staircase,room,time]
+% Side1(staircase)=room ->
+% Initiates(WalkDownStaircase(agent,staircase),At(agent,room),time).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',277).
+
+ /*  pl=axiom(initiates(walkDownStaircase(Agent,Staircase),
+   		at(Agent,Room),
+   		Time),
+         [side1Pred(Staircase,Room)]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',277).
+
+ /*  side1Pred(Staircase, Room) ->
+       initiates(walkDownStaircase(Agent, Staircase),
+                 at(Agent, Room),
+                 Time).
+ */
+if side1Pred(Staircase, Room)then initiates(walkDownStaircase(Agent, Staircase), loc_at(Agent, Room)at Time, _).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',277).
+
+ /*  reactive_rule([side1Pred(Staircase,Room)],
+   	      [ initiates(walkDownStaircase(Agent,
+   					    Staircase),
+   			  at(loc_at(Agent,Room),Time),
+   			  Initiates)
+   	      ]).
+ */
+
+
+% [agent,staircase,room,time]
+% Side2(staircase)=room ->
+% Terminates(WalkDownStaircase(agent,staircase),At(agent,room),time).
+
+ /*  pl=axiom(terminates(walkDownStaircase(Agent,Staircase),
+   		 at(Agent,Room),
+   		 Time),
+         [side2Pred(Staircase,Room)]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',282).
+
+ /*  side2Pred(Staircase, Room) ->
+       terminates(walkDownStaircase(Agent, Staircase),
+                  at(Agent, Room),
+                  Time).
+ */
+if side2Pred(Staircase, Room)then terminates(walkDownStaircase(Agent, Staircase), loc_at(Agent, Room)at Time, _).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',282).
+
+ /*  reactive_rule([side2Pred(Staircase,Room)],
+   	      [ terminates(walkDownStaircase(Agent,
+   					     Staircase),
+   			   at(loc_at(Agent,Room),
+   			      Time),
+   			   Terminates)
+   	      ]).
+ */
+
+
+% [agent,staircase,room,time]
+% Side2(staircase)=room ->
+% Initiates(WalkUpStaircase(agent,staircase),At(agent,room),time).
+
+ /*  pl=axiom(initiates(walkUpStaircase(Agent,Staircase),
+   		at(Agent,Room),
+   		Time),
+         [side2Pred(Staircase,Room)]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',286).
+
+ /*  side2Pred(Staircase, Room) ->
+       initiates(walkUpStaircase(Agent, Staircase),
+                 at(Agent, Room),
+                 Time).
+ */
+if side2Pred(Staircase, Room)then initiates(walkUpStaircase(Agent, Staircase), loc_at(Agent, Room)at Time, _).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',286).
+
+ /*  reactive_rule([side2Pred(Staircase,Room)],
+   	      [ initiates(walkUpStaircase(Agent,Staircase),
+   			  at(loc_at(Agent,Room),Time),
+   			  Initiates)
+   	      ]).
+ */
+
+
+% [agent,staircase,room,time]
+% Side1(staircase)=room ->
+% Terminates(WalkUpStaircase(agent,staircase),At(agent,room),time).
+
+ /*  pl=axiom(terminates(walkUpStaircase(Agent,Staircase),
+   		 at(Agent,Room),
+   		 Time),
+         [side1Pred(Staircase,Room)]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',290).
+
+ /*  side1Pred(Staircase, Room) ->
+       terminates(walkUpStaircase(Agent, Staircase),
+                  at(Agent, Room),
+                  Time).
+ */
+if side1Pred(Staircase, Room)then terminates(walkUpStaircase(Agent, Staircase), loc_at(Agent, Room)at Time, _).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',290).
+
+ /*  reactive_rule([side1Pred(Staircase,Room)],
+   	      [ terminates(walkUpStaircase(Agent,Staircase),
+   			   at(loc_at(Agent,Room),
+   			      Time),
+   			   Terminates)
+   	      ]).
+ */
+
+
+%; A state constraint says that if an agent is outside,
+%; the agent is dressed.
+% [agent,outside,time]
+% HoldsAt(At(agent,outside),time) ->
+% HoldsAt(Dressed(agent),time).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',295).
+
+ /*  holds_at(at(Agent, Outside), Time) ->
+       holds_at(dressed(Agent), Time).
+ */
+if loc_at(Agent, Outside)at Time then dressed(Agent)at Time.
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',295).
+
+ /*  reactive_rule([holds(loc_at(Agent,Outside),Time)],
+   	      [holds(dressed(Agent),Time)]).
+ */
+
+
+%; room looks out onto outside.
+
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',300).
+% function LookOutOnto(room): outside
+ %  blue=predicate(lookOutOntoPred(room,outside)).
+ %  predicate(lookOutOntoPred(room,outside)).
+predicates([lookOutOntoPred/2]).
+mpred_prop(lookOutOntoPred(room,outside),predicate).
+ %  pl=axiom(functional_predicate(lookOutOnto,lookOutOntoPred),[]).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',300).
+functional_predicate(lookOutOnto,lookOutOntoPred).
+ %  pl=axiom(function_argtypes(lookOutOntoPred,lookOutOnto(room),outside),[]).
+function_argtypes(lookOutOntoPred,lookOutOnto(room),outside).
+resultIsa(lookOutOnto,outside).
+%; location1 is adjacent to location2.
+
+% predicate Adjacent(location,location)
+ %  blue=predicate(adjacent(location,location)).
+ %  predicate(adjacent(location,location)).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',302).
+predicates([adjacent/2]).
+mpred_prop(adjacent(location,location),predicate).
+
+
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',305).
+%; A state constraint says that
+%; two locations are adjacent if and only if
+%; they have a portal in common:
+% [location1,location2]
+ 
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',308).
+% Adjacent(location1,location2) <->
+% {portal}% 
+% (Side1(portal)=location1 &
+%  Side2(portal)=location2) |
+% (Side2(portal)=location1 &
+%  Side1(portal)=location2).
+ %  clausify_pnf=exists([Portal], <->(adjacent(Location1, Location2),  (side1Pred(Portal, Location1), side2Pred(Portal, Location2);side2Pred(Portal, Location1), side1Pred(Portal, Location2)))).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',308).
+
+ /*  adjacent(Location1, Location2) :-
+       (   side1Pred(Exists_Portal, Location1),
+           side2Pred(Exists_Portal, Location2)
+       ;   side2Pred(Exists_Portal, Location1),
+           side1Pred(Exists_Portal, Location2)
+       ),
+       some(Exists_Portal, '$kolem_Fn_24'(Location1, Location2)).
+ */
+ %  pl=axiom(adjacent(Location1, Location2), [(side1Pred(Exists_Portal, Location1), side2Pred(Exists_Portal, Location2);side2Pred(Exists_Portal, Location1), side1Pred(Exists_Portal, Location2)), some(Exists_Portal, '$kolem_Fn_24'(Location1, Location2))]).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',308).
+
+ /*  (   (   side1Pred(Exists_Portal, Location1),
+           side2Pred(Exists_Portal, Location2)
+       ;   side2Pred(Exists_Portal, Location1),
+           side1Pred(Exists_Portal, Location2)
+       ),
+       some(Exists_Portal, '$kolem_Fn_24'(Location1, Location2))
+   ->  adjacent(Location1, Location2)
+   ).
+ */
+if (side1Pred(Exists_Portal, Location1), side2Pred(Exists_Portal, Location2);side2Pred(Exists_Portal, Location1), side1Pred(Exists_Portal, Location2)), some(Exists_Portal, '$kolem_Fn_24'(Location1, Location2))then adjacent(Location1, Location2).
+ %  reactive_rule([(side1Pred(Exists_Portal, Location1), side2Pred(Exists_Portal, Location2);side2Pred(Exists_Portal, Location1), side1Pred(Exists_Portal, Location2)), some(Exists_Portal, '$kolem_Fn_24'(Location1, Location2))], [adjacent(Location1, Location2)]).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',308).
+
+ /*  not(side1Pred(Exists_Portal, Location1)) :-
+       side2Pred(Exists_Portal, Location2),
+       not(adjacent(Location1, Location2)),
+       some(Exists_Portal, '$kolem_Fn_24'(Location1, Location2)).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',308).
+
+ /*  pl=axiom(not(side1Pred(Exists_Portal,Location1)),
+         [ side2Pred(Exists_Portal,Location2),
+   	not(adjacent(Location1,Location2)),
+   	some(Exists_Portal,
+   	     '$kolem_Fn_24'(Location1,Location2))
+         ]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',308).
+
+ /*  (   side2Pred(Exists_Portal, Location2),
+       not(adjacent(Location1, Location2)),
+       some(Exists_Portal, '$kolem_Fn_24'(Location1, Location2))
+   ->  not(side1Pred(Exists_Portal, Location1))
+   ).
+ */
+if side2Pred(Exists_Portal, Location2), not adjacent(Location1, Location2), some(Exists_Portal, '$kolem_Fn_24'(Location1, Location2))then not side1Pred(Exists_Portal, Location1).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',308).
+
+ /*  reactive_rule([ side2Pred(Exists_Portal,Location2),
+   		not(adjacent(Location1,Location2)),
+   		some(Exists_Portal,
+   		     '$kolem_Fn_24'(Location1,Location2))
+   	      ],
+   	      [not(side1Pred(Exists_Portal,Location1))]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',308).
+
+ /*  not(side2Pred(Exists_Portal, Location2)) :-
+       side1Pred(Exists_Portal, Location1),
+       not(adjacent(Location1, Location2)),
+       some(Exists_Portal, '$kolem_Fn_24'(Location1, Location2)).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',308).
+
+ /*  pl=axiom(not(side2Pred(Exists_Portal,Location2)),
+         [ side1Pred(Exists_Portal,Location1),
+   	not(adjacent(Location1,Location2)),
+   	some(Exists_Portal,
+   	     '$kolem_Fn_24'(Location1,Location2))
+         ]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',308).
+
+ /*  (   side1Pred(Exists_Portal, Location1),
+       not(adjacent(Location1, Location2)),
+       some(Exists_Portal, '$kolem_Fn_24'(Location1, Location2))
+   ->  not(side2Pred(Exists_Portal, Location2))
+   ).
+ */
+if side1Pred(Exists_Portal, Location1), not adjacent(Location1, Location2), some(Exists_Portal, '$kolem_Fn_24'(Location1, Location2))then not side2Pred(Exists_Portal, Location2).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',308).
+
+ /*  reactive_rule([ side1Pred(Exists_Portal,Location1),
+   		not(adjacent(Location1,Location2)),
+   		some(Exists_Portal,
+   		     '$kolem_Fn_24'(Location1,Location2))
+   	      ],
+   	      [not(side2Pred(Exists_Portal,Location2))]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',308).
+
+ /*  not(side2Pred(Exists_Portal, Location1)) :-
+       side1Pred(Exists_Portal, Location2),
+       not(adjacent(Location1, Location2)),
+       some(Exists_Portal, '$kolem_Fn_24'(Location1, Location2)).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',308).
+
+ /*  pl=axiom(not(side2Pred(Exists_Portal,Location1)),
+         [ side1Pred(Exists_Portal,Location2),
+   	not(adjacent(Location1,Location2)),
+   	some(Exists_Portal,
+   	     '$kolem_Fn_24'(Location1,Location2))
+         ]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',308).
+
+ /*  (   side1Pred(Exists_Portal, Location2),
+       not(adjacent(Location1, Location2)),
+       some(Exists_Portal, '$kolem_Fn_24'(Location1, Location2))
+   ->  not(side2Pred(Exists_Portal, Location1))
+   ).
+ */
+if side1Pred(Exists_Portal, Location2), not adjacent(Location1, Location2), some(Exists_Portal, '$kolem_Fn_24'(Location1, Location2))then not side2Pred(Exists_Portal, Location1).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',308).
+
+ /*  reactive_rule([ side1Pred(Exists_Portal,Location2),
+   		not(adjacent(Location1,Location2)),
+   		some(Exists_Portal,
+   		     '$kolem_Fn_24'(Location1,Location2))
+   	      ],
+   	      [not(side2Pred(Exists_Portal,Location1))]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',308).
+
+ /*  not(side1Pred(Exists_Portal, Location2)) :-
+       side2Pred(Exists_Portal, Location1),
+       not(adjacent(Location1, Location2)),
+       some(Exists_Portal, '$kolem_Fn_24'(Location1, Location2)).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',308).
+
+ /*  pl=axiom(not(side1Pred(Exists_Portal,Location2)),
+         [ side2Pred(Exists_Portal,Location1),
+   	not(adjacent(Location1,Location2)),
+   	some(Exists_Portal,
+   	     '$kolem_Fn_24'(Location1,Location2))
+         ]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',308).
+
+ /*  (   side2Pred(Exists_Portal, Location1),
+       not(adjacent(Location1, Location2)),
+       some(Exists_Portal, '$kolem_Fn_24'(Location1, Location2))
+   ->  not(side1Pred(Exists_Portal, Location2))
+   ).
+ */
+if side2Pred(Exists_Portal, Location1), not adjacent(Location1, Location2), some(Exists_Portal, '$kolem_Fn_24'(Location1, Location2))then not side1Pred(Exists_Portal, Location2).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',308).
+
+ /*  reactive_rule([ side2Pred(Exists_Portal,Location1),
+   		not(adjacent(Location1,Location2)),
+   		some(Exists_Portal,
+   		     '$kolem_Fn_24'(Location1,Location2))
+   	      ],
+   	      [not(side1Pred(Exists_Portal,Location2))]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',308).
+
+ /*  not(adjacent(Location1, Location2)) :-
+       (   not(side1Pred(Exists_Portal, Location1))
+       ;   not(side2Pred(Exists_Portal, Location2))
+       ),
+       (   not(side2Pred(Exists_Portal, Location1))
+       ;   not(side1Pred(Exists_Portal, Location2))
+       ),
+       some(Exists_Portal, '$kolem_Fn_24'(Location1, Location2)).
+ */
+ %   pl=axiom(not(adjacent(Location1, Location2)), [(not(side1Pred(Exists_Portal, Location1));not(side2Pred(Exists_Portal, Location2))),  (not(side2Pred(Exists_Portal, Location1));not(side1Pred(Exists_Portal, Location2))), some(Exists_Portal, '$kolem_Fn_24'(Location1, Location2))]).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',308).
+
+ /*  (   (   not(side1Pred(Exists_Portal, Location1))
+       ;   not(side2Pred(Exists_Portal, Location2))
+       ),
+       (   not(side2Pred(Exists_Portal, Location1))
+       ;   not(side1Pred(Exists_Portal, Location2))
+       ),
+       some(Exists_Portal, '$kolem_Fn_24'(Location1, Location2))
+   ->  not(adjacent(Location1, Location2))
+   ).
+ */
+if (not side1Pred(Exists_Portal, Location1);not side2Pred(Exists_Portal, Location2)), (not side2Pred(Exists_Portal, Location1);not side1Pred(Exists_Portal, Location2)), some(Exists_Portal, '$kolem_Fn_24'(Location1, Location2))then not adjacent(Location1, Location2).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',308).
+
+ /*   reactive_rule([  (not(side1Pred(Exists_Portal, Location1));not(side2Pred(Exists_Portal, Location2))),
+                       (not(side2Pred(Exists_Portal, Location1));not(side1Pred(Exists_Portal, Location2))),
+                      some(Exists_Portal,
+                           '$kolem_Fn_24'(Location1, Location2))
+                    ],
+                    [not(adjacent(Location1, Location2))]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',308).
+
+ /*  side1Pred(Exists_Portal, Location1) :-
+       (   not(side2Pred(Exists_Portal, Location1))
+       ;   not(side1Pred(Exists_Portal, Location2))
+       ),
+       adjacent(Location1, Location2),
+       some(Exists_Portal, '$kolem_Fn_24'(Location1, Location2)).
+ */
+ %   pl=axiom(side1Pred(Exists_Portal, Location1), [(not(side2Pred(Exists_Portal, Location1));not(side1Pred(Exists_Portal, Location2))), adjacent(Location1, Location2), some(Exists_Portal, '$kolem_Fn_24'(Location1, Location2))]).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',308).
+
+ /*  (   (   not(side2Pred(Exists_Portal, Location1))
+       ;   not(side1Pred(Exists_Portal, Location2))
+       ),
+       adjacent(Location1, Location2),
+       some(Exists_Portal, '$kolem_Fn_24'(Location1, Location2))
+   ->  side1Pred(Exists_Portal, Location1)
+   ).
+ */
+if (not side2Pred(Exists_Portal, Location1);not side1Pred(Exists_Portal, Location2)), adjacent(Location1, Location2), some(Exists_Portal, '$kolem_Fn_24'(Location1, Location2))then side1Pred(Exists_Portal, Location1).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',308).
+
+ /*   reactive_rule([  (not(side2Pred(Exists_Portal, Location1));not(side1Pred(Exists_Portal, Location2))),
+                      adjacent(Location1, Location2),
+                      some(Exists_Portal,
+                           '$kolem_Fn_24'(Location1, Location2))
+                    ],
+                    [side1Pred(Exists_Portal, Location1)]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',308).
+
+ /*  side2Pred(Exists_Portal, Location2) :-
+       (   not(side2Pred(Exists_Portal, Location1))
+       ;   not(side1Pred(Exists_Portal, Location2))
+       ),
+       adjacent(Location1, Location2),
+       some(Exists_Portal, '$kolem_Fn_24'(Location1, Location2)).
+ */
+ %   pl=axiom(side2Pred(Exists_Portal, Location2), [(not(side2Pred(Exists_Portal, Location1));not(side1Pred(Exists_Portal, Location2))), adjacent(Location1, Location2), some(Exists_Portal, '$kolem_Fn_24'(Location1, Location2))]).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',308).
+
+ /*  (   (   not(side2Pred(Exists_Portal, Location1))
+       ;   not(side1Pred(Exists_Portal, Location2))
+       ),
+       adjacent(Location1, Location2),
+       some(Exists_Portal, '$kolem_Fn_24'(Location1, Location2))
+   ->  side2Pred(Exists_Portal, Location2)
+   ).
+ */
+if (not side2Pred(Exists_Portal, Location1);not side1Pred(Exists_Portal, Location2)), adjacent(Location1, Location2), some(Exists_Portal, '$kolem_Fn_24'(Location1, Location2))then side2Pred(Exists_Portal, Location2).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',308).
+
+ /*   reactive_rule([  (not(side2Pred(Exists_Portal, Location1));not(side1Pred(Exists_Portal, Location2))),
+                      adjacent(Location1, Location2),
+                      some(Exists_Portal,
+                           '$kolem_Fn_24'(Location1, Location2))
+                    ],
+                    [side2Pred(Exists_Portal, Location2)]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',308).
+
+ /*  side2Pred(Exists_Portal, Location1) :-
+       (   not(side1Pred(Exists_Portal, Location1))
+       ;   not(side2Pred(Exists_Portal, Location2))
+       ),
+       adjacent(Location1, Location2),
+       some(Exists_Portal, '$kolem_Fn_24'(Location1, Location2)).
+ */
+ %   pl=axiom(side2Pred(Exists_Portal, Location1), [(not(side1Pred(Exists_Portal, Location1));not(side2Pred(Exists_Portal, Location2))), adjacent(Location1, Location2), some(Exists_Portal, '$kolem_Fn_24'(Location1, Location2))]).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',308).
+
+ /*  (   (   not(side1Pred(Exists_Portal, Location1))
+       ;   not(side2Pred(Exists_Portal, Location2))
+       ),
+       adjacent(Location1, Location2),
+       some(Exists_Portal, '$kolem_Fn_24'(Location1, Location2))
+   ->  side2Pred(Exists_Portal, Location1)
+   ).
+ */
+if (not side1Pred(Exists_Portal, Location1);not side2Pred(Exists_Portal, Location2)), adjacent(Location1, Location2), some(Exists_Portal, '$kolem_Fn_24'(Location1, Location2))then side2Pred(Exists_Portal, Location1).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',308).
+
+ /*   reactive_rule([  (not(side1Pred(Exists_Portal, Location1));not(side2Pred(Exists_Portal, Location2))),
+                      adjacent(Location1, Location2),
+                      some(Exists_Portal,
+                           '$kolem_Fn_24'(Location1, Location2))
+                    ],
+                    [side2Pred(Exists_Portal, Location1)]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',308).
+
+ /*  side1Pred(Exists_Portal, Location2) :-
+       (   not(side1Pred(Exists_Portal, Location1))
+       ;   not(side2Pred(Exists_Portal, Location2))
+       ),
+       adjacent(Location1, Location2),
+       some(Exists_Portal, '$kolem_Fn_24'(Location1, Location2)).
+ */
+ %   pl=axiom(side1Pred(Exists_Portal, Location2), [(not(side1Pred(Exists_Portal, Location1));not(side2Pred(Exists_Portal, Location2))), adjacent(Location1, Location2), some(Exists_Portal, '$kolem_Fn_24'(Location1, Location2))]).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',308).
+
+ /*  (   (   not(side1Pred(Exists_Portal, Location1))
+       ;   not(side2Pred(Exists_Portal, Location2))
+       ),
+       adjacent(Location1, Location2),
+       some(Exists_Portal, '$kolem_Fn_24'(Location1, Location2))
+   ->  side1Pred(Exists_Portal, Location2)
+   ).
+ */
+if (not side1Pred(Exists_Portal, Location1);not side2Pred(Exists_Portal, Location2)), adjacent(Location1, Location2), some(Exists_Portal, '$kolem_Fn_24'(Location1, Location2))then side1Pred(Exists_Portal, Location2).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',308).
+
+ /*   reactive_rule([  (not(side1Pred(Exists_Portal, Location1));not(side2Pred(Exists_Portal, Location2))),
+                      adjacent(Location1, Location2),
+                      some(Exists_Portal,
+                           '$kolem_Fn_24'(Location1, Location2))
+                    ],
+                    [side1Pred(Exists_Portal, Location2)]).
+ */
+
+
+%; The ground of outside is ground.
+
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',316).
+% function GroundOf(outside): ground
+ %  blue=predicate(ground(outside,ground)).
+ %  predicate(ground(outside,ground)).
+predicates([ground/2]).
+mpred_prop(ground(outside,ground),predicate).
+ %  pl=axiom(functional_predicate(groundOf,ground),[]).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',316).
+functional_predicate(groundOf,ground).
+ %  pl=axiom(function_argtypes(ground,groundOf(outside),ground),[]).
+function_argtypes(ground,groundOf(outside),ground).
+resultIsa(groundOf,ground).
+%; The sky of outside is sky.
+
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',318).
+% function SkyOf(outside): sky
+ %  blue=predicate(sky(outside,sky)).
+ %  predicate(sky(outside,sky)).
+predicates([sky/2]).
+mpred_prop(sky(outside,sky),predicate).
+ %  pl=axiom(functional_predicate(skyOf,sky),[]).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',318).
+functional_predicate(skyOf,sky).
+ %  pl=axiom(function_argtypes(sky,skyOf(outside),sky),[]).
+function_argtypes(sky,skyOf(outside),sky).
+resultIsa(skyOf,sky).
+ %; State constraints fix the location of ground and sky:
+% [outside,ground,time]
+% GroundOf(outside) = ground ->
+% HoldsAt(At(ground,outside),time).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',322).
+
+ /*  ground(Outside, Ground) ->
+       holds_at(at(Ground, Outside), Time).
+ */
+if ground(Outside, Ground)then loc_at(Ground, Outside)at Time.
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',322).
+
+ /*  reactive_rule([ground(Outside,Ground)],
+   	      [holds(loc_at(Ground,Outside),Time)]).
+ */
+
+
+% [outside,sky,time]
+% SkyOf(outside) = sky ->
+% HoldsAt(At(sky,outside),time).
+
+ /*  sky(Outside, Sky) ->
+       holds_at(at(Sky, Outside), Time).
+ */
+if sky(Outside, Sky)then loc_at(Sky, Outside)at Time.
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',327).
+
+ /*  reactive_rule([sky(Outside,Sky)],
+   	      [holds(loc_at(Sky,Outside),Time)]).
+ */
+
+
+%; End of file.
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',329).
+% translate: ending  File: /pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e.lps 

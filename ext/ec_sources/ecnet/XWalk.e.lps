@@ -1,0 +1,1263 @@
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/WritingABook.e',97).
+% translate: unskipped  File: /pack/logicmoo_ec/ext/ec_sources/ecnet/XWalk.e.lps 
+:-include(library('ec_planner/ec_test_incl')).
+:-expects_dialect(lps).
+% translate: begining  File: /pack/logicmoo_ec/ext/ec_sources/ecnet/XWalk.e.lps 
+% Wed, 07 Oct 2020 09:39:48 GMT File: <stream>(0x5557c9068b00)%;
+%; Copyright (c) 2005 IBM Corporation and others.
+%; All rights reserved. This program and the accompanying materials
+%; are made available under the terms of the Common Public License v1.0
+%; which accompanies this distribution, and is available at
+%; http://www.eclipse.org/legal/cpl-v10.html
+%;
+%; Contributors:
+%; IBM - Initial implementation
+%;
+%; XWalk: WALK x-schema representation of walking
+%;
+%; @phdthesis{Narayanan:1997,
+%;   author = "Srinivas S. Narayanan",
+%;   year = "1997",
+%;   title = "Knowledge-based Action Representations for Metaphor and Aspect (\uppercase{KARMA})",
+%;   address = "Berkeley, CA",
+%;   school = "University of California, Berkeley",
+%; }
+%;
+
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/XWalk.e',22).
+% option trajectory on
+:- if(is_e_toplevel).
+:- set_ec_option(trajectory, on).
+:- endif.
+
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/XWalk.e',24).
+% sort xschema
+sort(xschema).
+%; parameters
+
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/XWalk.e',28).
+% predicate XWalkAgent(xschema,agent)
+ %  predicate(xWalkAgent(xschema,agent)).
+ %  predicate(xWalkAgent(xschema,agent)).
+predicates([xWalkAgent/2]).
+mpred_prop(xWalkAgent(xschema,agent),predicate).
+
+% function XWalkRate(xschema): offset ; step duration
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/XWalk.e',28).
+
+ /*  axiom(function_arity(xWalkRate(xschema), 1),
+       []).
+ */
+function_arity(xWalkRate(xschema),1).
+ %  predicate(xWalkRatePred(xschema,[offset,;,step,duration])).
+ %  predicate(xWalkRatePred(xschema,[offset,;,step,duration])).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/XWalk.e',28).
+predicates([xWalkRatePred/2]).
+mpred_prop(xWalkRatePred(xschema,[offset,;,step,duration]),predicate).
+
+ /*  axiom(functional_predicate(xWalkRate, xWalkRatePred),
+       []).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/XWalk.e',28).
+functional_predicate(xWalkRate,xWalkRatePred).
+resultIsa(xWalkRate,[offset,;,step,duration]).
+
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/XWalk.e',30).
+% function XWalkSize(xschema): offset ; step size
+
+ /*  axiom(function_arity(xWalkSize(xschema), 1),
+       []).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/XWalk.e',30).
+function_arity(xWalkSize(xschema),1).
+ %  predicate(xWalkSizePred(xschema,[offset,;,step,size])).
+ %  predicate(xWalkSizePred(xschema,[offset,;,step,size])).
+predicates([xWalkSizePred/2]).
+mpred_prop(xWalkSizePred(xschema,[offset,;,step,size]),predicate).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/XWalk.e',30).
+
+ /*  axiom(functional_predicate(xWalkSize, xWalkSizePred),
+       []).
+ */
+functional_predicate(xWalkSize,xWalkSizePred).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/XWalk.e',30).
+resultIsa(xWalkSize,[offset,;,step,size]).
+%; TTL input lines
+
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/XWalk.e',34).
+% fluent XWalkEnabled(xschema)
+ %  fluent(xWalkEnabled(xschema)).
+ %  fluent(xWalkEnabled(xschema)).
+fluents([xWalkEnabled/1]).
+mpred_prop(xWalkEnabled(xschema),fluent).
+
+% fluent XWalkGroundStable(xschema)
+ %  fluent(xWalkGroundStable(xschema)).
+ %  fluent(xWalkGroundStable(xschema)).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/XWalk.e',34).
+fluents([xWalkGroundStable/1]).
+mpred_prop(xWalkGroundStable(xschema),fluent).
+
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/XWalk.e',36).
+% fluent XWalkPosture(xschema)
+ %  fluent(xWalkPosture(xschema)).
+ %  fluent(xWalkPosture(xschema)).
+fluents([xWalkPosture/1]).
+mpred_prop(xWalkPosture(xschema),fluent).
+
+% fluent XWalkFootingOK(xschema)
+ %  fluent(xWalkFootingOK(xschema)).
+ %  fluent(xWalkFootingOK(xschema)).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/XWalk.e',36).
+fluents([xWalkFootingOK/1]).
+mpred_prop(xWalkFootingOK(xschema),fluent).
+
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/XWalk.e',38).
+% noninertial XWalkEnabled, XWalkGroundStable, XWalkPosture, XWalkFootingOK
+noninertial(xWalkEnabled).
+noninertial(xWalkGroundStable).
+noninertial(xWalkPosture).
+noninertial(xWalkFootingOK).
+%; fluents
+
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/XWalk.e',42).
+% fluent XWalkDistance(xschema,distance)
+ %  fluent(xWalkDistance(xschema,distance)).
+ %  fluent(xWalkDistance(xschema,distance)).
+fluents([xWalkDistance/2]).
+mpred_prop(xWalkDistance(xschema,distance),fluent).
+
+
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/XWalk.e',44).
+% [xschema,distance1,distance2,time]
+% HoldsAt(XWalkDistance(xschema,distance1),time) &
+% HoldsAt(XWalkDistance(xschema,distance2),time) ->
+% distance1=distance2.
+
+ /*  (   holds_at(xWalkDistance(Xschema, Distance1), Time),
+       holds_at(xWalkDistance(Xschema, Distance2), Time)
+   ->  equals(Distance1, Distance2)
+   ).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/XWalk.e',44).
+then(if((at(xWalkDistance(Xschema, Distance1), Time), at(xWalkDistance(Xschema, Distance2), Time))), equals(Distance1, Distance2)).
+
+ /*  reactive_rule([ holds(xWalkDistance(Xschema,Distance1),
+   		      Time),
+   		holds(xWalkDistance(Xschema,Distance2),
+   		      Time)
+   	      ],
+   	      [equals(Distance1,Distance2)]).
+ */
+
+
+%; logic gate behavior
+
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/XWalk.e',51).
+% fluent XWalkVision(xschema)
+ %  fluent(xWalkVision(xschema)).
+ %  fluent(xWalkVision(xschema)).
+fluents([xWalkVision/1]).
+mpred_prop(xWalkVision(xschema),fluent).
+
+% fluent XWalkVisionOK(xschema)
+ %  fluent(xWalkVisionOK(xschema)).
+ %  fluent(xWalkVisionOK(xschema)).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/XWalk.e',51).
+fluents([xWalkVisionOK/1]).
+mpred_prop(xWalkVisionOK(xschema),fluent).
+
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/XWalk.e',53).
+% fluent XWalkAtDestination(xschema)
+ %  fluent(xWalkAtDestination(xschema)).
+ %  fluent(xWalkAtDestination(xschema)).
+fluents([xWalkAtDestination/1]).
+mpred_prop(xWalkAtDestination(xschema),fluent).
+
+% fluent XWalkDone(xschema)
+ %  fluent(xWalkDone(xschema)).
+ %  fluent(xWalkDone(xschema)).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/XWalk.e',53).
+fluents([xWalkDone/1]).
+mpred_prop(xWalkDone(xschema),fluent).
+
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/XWalk.e',55).
+% noninertial XWalkVision, XWalkVisionOK, XWalkAtDestination, XWalkDone
+noninertial(xWalkVision).
+noninertial(xWalkVisionOK).
+noninertial(xWalkAtDestination).
+noninertial(xWalkDone).
+
+
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/XWalk.e',57).
+% [xschema,time]
+% HoldsAt(XWalkGroundStable(xschema),time) <->
+% HoldsAt(XWalkVision(xschema),time).
+
+ /*  holds_at(xWalkGroundStable(Xschema), Time) <->
+       holds_at(xWalkVision(Xschema), Time).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/XWalk.e',57).
+
+ /*  holds_at(xWalkGroundStable(Xschema), Time) ->
+       holds_at(xWalkVision(Xschema), Time).
+ */
+then(if(at(xWalkGroundStable(Xschema),Time)),
+     at(xWalkVision(Xschema),Time)).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/XWalk.e',57).
+
+ /*  reactive_rule([holds(xWalkGroundStable(Xschema),Time)],
+   	      [holds(xWalkVision(Xschema),Time)]).
+ */
+
+ /*  holds_at(xWalkVision(Xschema), Time) ->
+       holds_at(xWalkGroundStable(Xschema), Time).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/XWalk.e',57).
+then(if(at(xWalkVision(Xschema),Time)),
+     at(xWalkGroundStable(Xschema),Time)).
+
+ /*  reactive_rule([holds(xWalkVision(Xschema),Time)],
+   	      [holds(xWalkGroundStable(Xschema),Time)]).
+ */
+
+
+% [xschema,time]
+% HoldsAt(XWalkEnabled(xschema),time) &
+% HoldsAt(XWalkVision(xschema),time) &
+% HoldsAt(XWalkPosture(xschema),time) <->
+% HoldsAt(XWalkVisionOK(xschema),time).
+ %  <->((holds_at(xWalkEnabled(Xschema), Time), holds_at(xWalkVision(Xschema), Time), holds_at(xWalkPosture(Xschema), Time)), holds_at(xWalkVisionOK(Xschema), Time)).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/XWalk.e',62).
+
+ /*  (   holds_at(xWalkEnabled(Xschema), Time),
+       holds_at(xWalkVision(Xschema), Time),
+       holds_at(xWalkPosture(Xschema), Time)
+   ->  holds_at(xWalkVisionOK(Xschema), Time)
+   ).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/XWalk.e',62).
+then(if((at(xWalkEnabled(Xschema), Time), at(xWalkVision(Xschema), Time), at(xWalkPosture(Xschema), Time))), at(xWalkVisionOK(Xschema), Time)).
+
+ /*  reactive_rule([ holds(xWalkEnabled(Xschema),Time),
+   		holds(xWalkVision(Xschema),Time),
+   		holds(xWalkPosture(Xschema),Time)
+   	      ],
+   	      [holds(xWalkVisionOK(Xschema),Time)]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/XWalk.e',62).
+
+ /*  (   holds_at(xWalkVisionOK(Xschema), Time)
+   ->  holds_at(xWalkEnabled(Xschema), Time),
+       holds_at(xWalkVision(Xschema), Time),
+       holds_at(xWalkPosture(Xschema), Time)
+   ).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/XWalk.e',62).
+then(if(at(xWalkVisionOK(Xschema), Time)),  (at(xWalkEnabled(Xschema), Time), at(xWalkVision(Xschema), Time), at(xWalkPosture(Xschema), Time))).
+
+ /*  reactive_rule([holds(xWalkVisionOK(Xschema),Time)],
+   	      [ holds(xWalkEnabled(Xschema),Time),
+   		holds(xWalkVision(Xschema),Time),
+   		holds(xWalkPosture(Xschema),Time)
+   	      ]).
+ */
+
+
+% [xschema,time]
+% HoldsAt(XWalkDistance(xschema,0),time) <->
+% HoldsAt(XWalkAtDestination(xschema),time).
+
+ /*  holds_at(xWalkDistance(Xschema, 0), Time) <->
+       holds_at(xWalkAtDestination(Xschema), Time).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/XWalk.e',68).
+
+ /*  holds_at(xWalkDistance(Xschema, 0), Time) ->
+       holds_at(xWalkAtDestination(Xschema), Time).
+ */
+then(if(at(xWalkDistance(Xschema,0),Time)),
+     at(xWalkAtDestination(Xschema),Time)).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/XWalk.e',68).
+
+ /*  reactive_rule([holds(xWalkDistance(Xschema,0),Time)],
+   	      [holds(xWalkAtDestination(Xschema),Time)]).
+ */
+
+ /*  holds_at(xWalkAtDestination(Xschema), Time) ->
+       holds_at(xWalkDistance(Xschema, 0), Time).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/XWalk.e',68).
+then(if(at(xWalkAtDestination(Xschema),Time)),
+     at(xWalkDistance(Xschema,0),Time)).
+
+ /*  reactive_rule([holds(xWalkAtDestination(Xschema),Time)],
+   	      [holds(xWalkDistance(Xschema,0),Time)]).
+ */
+
+
+% [xschema,time]
+% HoldsAt(XWalkAtDestination(xschema),time) <->
+% HoldsAt(XWalkDone(xschema),time).
+
+ /*  holds_at(xWalkAtDestination(Xschema), Time) <->
+       holds_at(xWalkDone(Xschema), Time).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/XWalk.e',72).
+
+ /*  holds_at(xWalkAtDestination(Xschema), Time) ->
+       holds_at(xWalkDone(Xschema), Time).
+ */
+then(if(at(xWalkAtDestination(Xschema),Time)),
+     at(xWalkDone(Xschema),Time)).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/XWalk.e',72).
+
+ /*  reactive_rule([holds(xWalkAtDestination(Xschema),Time)],
+   	      [holds(xWalkDone(Xschema),Time)]).
+ */
+
+ /*  holds_at(xWalkDone(Xschema), Time) ->
+       holds_at(xWalkAtDestination(Xschema), Time).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/XWalk.e',72).
+then(if(at(xWalkDone(Xschema),Time)),
+     at(xWalkAtDestination(Xschema),Time)).
+
+ /*  reactive_rule([holds(xWalkDone(Xschema),Time)],
+   	      [holds(xWalkAtDestination(Xschema),Time)]).
+ */
+
+
+%; durative events
+%; distance is the goal
+
+% fluent XWalkStepping(xschema,distance) 
+ %  fluent(xWalkStepping(xschema,distance)).
+ %  fluent(xWalkStepping(xschema,distance)).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/XWalk.e',77).
+fluents([xWalkStepping/2]).
+mpred_prop(xWalkStepping(xschema,distance),fluent).
+
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/XWalk.e',79).
+% event XWalkSteppingOn(xschema)
+ %  event(xWalkSteppingOn(xschema)).
+ %  event(xWalkSteppingOn(xschema)).
+events([xWalkSteppingOn/1]).
+mpred_prop(xWalkSteppingOn(xschema),event).
+
+% event XWalkSteppingOff(xschema)
+ %  event(xWalkSteppingOff(xschema)).
+ %  event(xWalkSteppingOff(xschema)).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/XWalk.e',79).
+events([xWalkSteppingOff/1]).
+mpred_prop(xWalkSteppingOff(xschema),event).
+
+
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/XWalk.e',82).
+% [xschema,distance1,distance2,time]
+% HoldsAt(XWalkDistance(xschema,distance1),time) &
+% distance2 = distance1 - XWalkSize(xschema) ->
+% Initiates(XWalkSteppingOn(xschema),XWalkStepping(xschema,distance2),time).
+
+ /*  axiom(initiates(xWalkSteppingOn(Xschema), xWalkStepping(Xschema, Distance2), Time),
+       [ xWalkDistance(Xschema, Distance1),
+         equals(Distance2, Distance1-xWalkSize(Xschema))
+       ]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/XWalk.e',82).
+
+ /*  (   xWalkDistance(Xwalksize, Xwalkdistance),
+       equals(Xwalkstepping, Xwalkdistance-xWalkSize(Xwalksize))
+   ->  initiates(xWalkSteppingOn(Xwalksize),
+                 xWalkStepping(Xwalksize, Xwalkstepping),
+                 Initiates)
+   ).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/XWalk.e',82).
+then(if((xWalkDistance(Xwalksize, Xwalkdistance), equals(Xwalkstepping, Xwalkdistance-xWalkSize(Xwalksize)))), initiates(xWalkSteppingOn(Xwalksize), at(xWalkStepping(Xwalksize, Xwalkstepping), Initiates), Initiates8)).
+
+ /*  reactive_rule([ holds(xWalkDistance(Xwalksize,
+   				    Xwalkdistance),
+   		      Holds),
+   		equals(Xwalkstepping,
+   		       Xwalkdistance-xWalkSize(Xwalksize))
+   	      ],
+   	      [ initiates(xWalkSteppingOn(Xwalksize),
+   			  at(xWalkStepping(Xwalksize,
+   					   Xwalkstepping),
+   			     Initiates),
+   			  Initiates8)
+   	      ]).
+ */
+
+
+% [xschema,distance,time]
+% Terminates(XWalkSteppingOff(xschema),XWalkStepping(xschema,distance),time).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/XWalk.e',88).
+
+ /*  axiom(terminates(xWalkSteppingOff(Xschema), xWalkStepping(Xschema, Distance), Time),
+       []).
+ */
+
+ /*  terminates(xWalkSteppingOff(Xwalksteppingoff),
+   	   xWalkStepping(Xwalksteppingoff,Xwalkstepping),
+   	   Terminates).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/XWalk.e',88).
+terminates(xWalkSteppingOff(Xwalksteppingoff),
+	   xWalkStepping(Xwalksteppingoff,Xwalkstepping)).
+
+ /*  terminated(happens(xWalkSteppingOff(Xwalksteppingoff),
+   		   Time_From,
+   		   Time_Until),
+   	   xWalkStepping(Xwalksteppingoff,Xwalkstepping),
+   	   []).
+ */
+
+
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/XWalk.e',90).
+% [xschema,distance,time]
+% Releases(XWalkSteppingOn(xschema),XWalkDistance(xschema,distance),time).
+
+ /*  axiom(releases(xWalkSteppingOn(Xschema), xWalkDistance(Xschema, Distance), Time),
+       []).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/XWalk.e',90).
+releases(xWalkSteppingOn(Xwalksteppingon),
+	 xWalkDistance(Xwalksteppingon,Xwalkdistance),
+	 Releases).
+
+
+% [xschema,distance1,distance2,time]
+% HoldsAt(XWalkDistance(xschema,distance1),time) &
+% distance1 != distance2 ->
+% Terminates(XWalkSteppingOff(xschema),XWalkDistance(xschema,distance2),time).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/XWalk.e',94).
+
+ /*  axiom(terminates(xWalkSteppingOff(Xschema), xWalkDistance(Xschema, Distance2), Time),
+       [ xWalkDistance(Xschema, Distance1),
+         diff(Distance2, Distance1)
+       ]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/XWalk.e',94).
+
+ /*  (   xWalkDistance(Xwalksteppingoff, Xwalkdistance),
+       diff(Xwalkdistance6, Xwalkdistance)
+   ->  terminates(xWalkSteppingOff(Xwalksteppingoff),
+                  xWalkDistance(Xwalksteppingoff, Xwalkdistance6),
+                  Terminates)
+   ).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/XWalk.e',94).
+then(if((xWalkDistance(Xwalksteppingoff, Xwalkdistance), diff(Xwalkdistance6, Xwalkdistance))), terminates(xWalkSteppingOff(Xwalksteppingoff), at(xWalkDistance(Xwalksteppingoff, Xwalkdistance6), Terminates), Terminates8)).
+
+ /*  reactive_rule([ holds(xWalkDistance(Xwalksteppingoff,
+   				    Xwalkdistance),
+   		      Holds),
+   		diff(Xwalkdistance6,Xwalkdistance)
+   	      ],
+   	      [ terminates(xWalkSteppingOff(Xwalksteppingoff),
+   			   at(xWalkDistance(Xwalksteppingoff,
+   					    Xwalkdistance6),
+   			      Terminates),
+   			   Terminates8)
+   	      ]).
+ */
+
+
+% [xschema,distance,time]
+% HoldsAt(XWalkDistance(xschema,distance),time) ->
+% Initiates(XWalkSteppingOff(xschema),XWalkDistance(xschema,distance),time).
+
+ /*  axiom(initiates(xWalkSteppingOff(Xschema), xWalkDistance(Xschema, Distance), Time),
+       [xWalkDistance(Xschema, Distance)]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/XWalk.e',99).
+
+ /*  xWalkDistance(Xwalksteppingoff, Xwalkdistance) ->
+       initiates(xWalkSteppingOff(Xwalksteppingoff),
+                 xWalkDistance(Xwalksteppingoff, Xwalkdistance),
+                 Initiates).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/XWalk.e',99).
+then(if(xWalkDistance(Xwalksteppingoff,Xwalkdistance)),
+     initiates(xWalkSteppingOff(Xwalksteppingoff),
+	       at(xWalkDistance(Xwalksteppingoff,
+				Xwalkdistance),
+		  Initiates),
+	       Initiates6)).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/XWalk.e',99).
+
+ /*  reactive_rule([ holds(xWalkDistance(Xwalksteppingoff,
+   				    Xwalkdistance),
+   		      Holds)
+   	      ],
+   	      [ initiates(xWalkSteppingOff(Xwalksteppingoff),
+   			  at(xWalkDistance(Xwalksteppingoff,
+   					   Xwalkdistance),
+   			     Initiates),
+   			  Initiates6)
+   	      ]).
+ */
+
+
+% [xschema,distance01,distance02,distance03,offset,time]
+% HoldsAt(XWalkDistance(xschema,distance01),time) &
+% (distance03=(distance01-(offset*(XWalkSize(xschema)/XWalkRate(xschema))))) ->
+% Trajectory(XWalkStepping(xschema,distance02),
+%            time,
+%            XWalkDistance(xschema,distance03),
+%            offset).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/XWalk.e',103).
+
+ /*  (   holds_at(xWalkDistance(Xschema, Distance01), Time),
+       equals(Distance03,
+              Distance01-Offset*(xWalkSize(Xschema)/xWalkRate(Xschema)))
+   ->  trajectory(xWalkStepping(Xschema, Distance02),
+                  Time,
+                  xWalkDistance(Xschema, Distance03),
+                  Offset)
+   ).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/XWalk.e',103).
+then(if((at(xWalkDistance(Xschema, Distance01), Time), equals(Distance03, Distance01-Offset*(xWalkSize(Xschema)/xWalkRate(Xschema))))), trajectory(xWalkStepping(Xschema, Distance02), Time, xWalkDistance(Xschema, Distance03), Offset)).
+
+ /*  reactive_rule([ holds(xWalkDistance(Xschema,Distance01),
+   		      Time),
+   		equals(Distance03,
+   		       Distance01 - Offset*(xWalkSize(Xschema)/xWalkRate(Xschema)))
+   	      ],
+   	      [ trajectory(xWalkStepping(Xschema,
+   					 Distance02),
+   			   Time,
+   			   xWalkDistance(Xschema,
+   					 Distance03),
+   			   Offset)
+   	      ]).
+ */
+
+
+% [xschema,distance,time]
+% HoldsAt(XWalkStepping(xschema,distance),time) &
+% HoldsAt(XWalkDistance(xschema,distance),time) ->
+% Happens(XWalkSteppingOff(xschema),time).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/XWalk.e',111).
+
+ /*  (   holds_at(xWalkStepping(Xschema, Distance), Time),
+       holds_at(xWalkDistance(Xschema, Distance), Time)
+   ->  happens(xWalkSteppingOff(Xschema), Time)
+   ).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/XWalk.e',111).
+then(if((at(xWalkStepping(Xschema, Distance), Time), at(xWalkDistance(Xschema, Distance), Time))), happens(xWalkSteppingOff(Xschema), Time)).
+
+ /*  reactive_rule([ holds(xWalkStepping(Xschema,Distance),
+   		      Time),
+   		holds(xWalkDistance(Xschema,Distance),
+   		      Time)
+   	      ],
+   	      [happens(xWalkSteppingOff(Xschema),Time)]).
+ */
+
+
+%; punctual events
+
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/XWalk.e',117).
+% event XWalkTestFooting(xschema)
+ %  event(xWalkTestFooting(xschema)).
+ %  event(xWalkTestFooting(xschema)).
+events([xWalkTestFooting/1]).
+mpred_prop(xWalkTestFooting(xschema),event).
+
+% event XWalkMoveFoot(xschema)
+ %  event(xWalkMoveFoot(xschema)).
+ %  event(xWalkMoveFoot(xschema)).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/XWalk.e',117).
+events([xWalkMoveFoot/1]).
+mpred_prop(xWalkMoveFoot(xschema),event).
+
+
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/XWalk.e',120).
+% [xschema,time]
+% Happens(XWalkTestFooting(xschema),time) &
+% !HoldsAt(XWalkFootingOK(xschema),time) ->
+% Happens(XWalkMoveFoot(xschema),time+1).
+
+ /*  (   happens(xWalkTestFooting(Xschema), Time),
+       holds_at(neg(xWalkFootingOK(Xschema)), Time)
+   ->  happens(xWalkMoveFoot(Xschema), Time+1)
+   ).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/XWalk.e',120).
+then(if((happens(xWalkTestFooting(Xschema), Time), at(not(xWalkFootingOK(Xschema)), Time))), observe(at(xWalkMoveFoot(Xschema), Time+1))).
+
+ /*  reactive_rule([ happens(xWalkTestFooting(Xschema),Time),
+   		holds(not(xWalkFootingOK(Xschema)),Time)
+   	      ],
+   	      [observe(at(xWalkMoveFoot(Xschema),Time+1))]).
+ */
+
+
+% [xschema,time]
+% Happens(XWalkMoveFoot(xschema),time) ->
+% Happens(XWalkReadyOn(xschema),time+1).
+
+ /*  happens(xWalkMoveFoot(Xschema), Time) ->
+       happens(xWalkReadyOn(Xschema), Time+1).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/XWalk.e',126).
+then(if(happens(xWalkMoveFoot(Xschema),Time)),
+     observe(at(xWalkReadyOn(Xschema),Time+1))).
+
+ /*  reactive_rule([happens(xWalkMoveFoot(Xschema),Time)],
+   	      [observe(at(xWalkReadyOn(Xschema),Time+1))]).
+ */
+
+
+%; Petri net behavior
+
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/XWalk.e',131).
+% fluent XWalkReady(xschema)
+ %  fluent(xWalkReady(xschema)).
+ %  fluent(xWalkReady(xschema)).
+fluents([xWalkReady/1]).
+mpred_prop(xWalkReady(xschema),fluent).
+
+% event XWalkReadyOn(xschema)
+ %  event(xWalkReadyOn(xschema)).
+ %  event(xWalkReadyOn(xschema)).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/XWalk.e',131).
+events([xWalkReadyOn/1]).
+mpred_prop(xWalkReadyOn(xschema),event).
+
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/XWalk.e',133).
+% event XWalkReadyOff(xschema)
+ %  event(xWalkReadyOff(xschema)).
+ %  event(xWalkReadyOff(xschema)).
+events([xWalkReadyOff/1]).
+mpred_prop(xWalkReadyOff(xschema),event).
+
+
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/XWalk.e',135).
+% [xschema,time]
+% HoldsAt(XWalkEnabled(xschema),time) &
+% HoldsAt(XWalkVision(xschema),time) &
+% HoldsAt(XWalkPosture(xschema),time) &
+% !({distance} HoldsAt(XWalkStepping(xschema,distance),time)) & ; !!! pulse
+% !HoldsAt(XWalkReady(xschema),time) ->
+% Happens(XWalkReadyOn(xschema),time).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/XWalk.e',135).
+
+ /*  (   holds_at(xWalkEnabled(Xschema), Time),
+       holds_at(xWalkVision(Xschema), Time),
+       holds_at(xWalkPosture(Xschema), Time),
+       not(exists([Distance],
+                  holds_at(xWalkStepping(Xschema, Distance),
+                           Time))),
+       holds_at(neg(xWalkReady(Xschema)), Time)
+   ->  happens(xWalkReadyOn(Xschema), Time)
+   ).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/XWalk.e',135).
+then(if((at(xWalkEnabled(Xschema), Time), at(xWalkVision(Xschema), Time), at(xWalkPosture(Xschema), Time), not(at(xWalkStepping(Xschema, Distance), Time)), at(not(xWalkReady(Xschema)), Time))), happens(xWalkReadyOn(Xschema), Time)).
+
+ /*  reactive_rule([ holds(xWalkEnabled(Xschema),Time),
+   		holds(xWalkVision(Xschema),Time),
+   		holds(xWalkPosture(Xschema),Time),
+   		holds(not(xWalkStepping(Xschema,Distance)),
+   		      Time),
+   		holds(not(xWalkReady(Xschema)),Time)
+   	      ],
+   	      [happens(xWalkReadyOn(Xschema),Time)]).
+ */
+
+
+% [xschema,time]
+% Initiates(XWalkReadyOn(xschema),XWalkReady(xschema),time).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/XWalk.e',144).
+
+ /*  axiom(initiates(xWalkReadyOn(Xschema), xWalkReady(Xschema), Time),
+       []).
+ */
+
+ /*  initiates(xWalkReadyOn(Xwalkreadyon),
+   	  xWalkReady(Xwalkreadyon),
+   	  Initiates).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/XWalk.e',144).
+initiates(xWalkReadyOn(Xwalkreadyon),
+	  xWalkReady(Xwalkreadyon)).
+
+ /*  initiated(happens(xWalkReadyOn(Xwalkreadyon),
+   		  Time_From,
+   		  Time_Until),
+   	  xWalkReady(Xwalkreadyon),
+   	  []).
+ */
+
+
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/XWalk.e',146).
+% [xschema,time]
+% Terminates(XWalkReadyOff(xschema),XWalkReady(xschema),time).
+
+ /*  axiom(terminates(xWalkReadyOff(Xschema), xWalkReady(Xschema), Time),
+       []).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/XWalk.e',146).
+
+ /*  terminates(xWalkReadyOff(Xwalkreadyoff),
+   	   xWalkReady(Xwalkreadyoff),
+   	   Terminates).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/XWalk.e',146).
+terminates(xWalkReadyOff(Xwalkreadyoff),
+	   xWalkReady(Xwalkreadyoff)).
+
+ /*  terminated(happens(xWalkReadyOff(Xwalkreadyoff),
+   		   Time_From,
+   		   Time_Until),
+   	   xWalkReady(Xwalkreadyoff),
+   	   []).
+ */
+
+
+%; bypass_ok
+% [xschema,time]
+% !(% {distance} HoldsAt(XWalkStepping(xschema,distance),time)) &
+% HoldsAt(XWalkVisionOK(xschema),time) &
+% HoldsAt(XWalkReady(xschema),time) ->
+% Happens(XWalkSteppingOn(xschema),time) &
+% Happens(XWalkReadyOff(xschema),time).
+ %  clausify_pnf=exists([Distance],  (holds_at(neg(xWalkStepping(Xschema, Distance)), Time), holds_at(xWalkVisionOK(Xschema), Time), holds_at(xWalkReady(Xschema), Time)->happens(xWalkSteppingOn(Xschema), Time), happens(xWalkReadyOff(Xschema), Time))).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/XWalk.e',150).
+
+ /*  not(holds_at(neg(xWalkStepping(Xschema, Exists_Distance)), Time)) :-
+       holds_at(xWalkVisionOK(Xschema), Time),
+       holds_at(xWalkReady(Xschema), Time),
+       (   not(happens(xWalkSteppingOn(Xschema), Time))
+       ;   not(happens(xWalkReadyOff(Xschema), Time))
+       ),
+       some(Exists_Distance, '$kolem_Fn_271'(Xschema, Time)).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/XWalk.e',150).
+
+ /*  axiom(not(not(xWalkStepping(Xschema, Exists_Distance))),
+       [ xWalkVisionOK(Xschema),
+         xWalkReady(Xschema),
+          (not(xWalkSteppingOn(Xschema));not(xWalkReadyOff(Xschema))),
+         some(Exists_Distance, '$kolem_Fn_271'(Xschema, Time))
+       ]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/XWalk.e',150).
+
+ /*  (   xWalkVisionOK(Xwalkvisionok),
+       xWalkReady(Xwalkvisionok),
+       (   not(xWalkSteppingOn(Xwalkvisionok))
+       ;   not(xWalkReadyOff(Xwalkvisionok))
+       ),
+       some(Xwalkstepping,
+            '$kolem_Fn_271'(Xwalkvisionok, Kolem_Fn_271))
+   ->  not(not(xWalkStepping(Xwalkvisionok, Xwalkstepping)))
+   ).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/XWalk.e',150).
+then(if((xWalkVisionOK(Xwalkvisionok), xWalkReady(Xwalkvisionok), (not(xWalkSteppingOn(Xwalkvisionok));not(xWalkReadyOff(Xwalkvisionok))), some(Xwalkstepping, '$kolem_Fn_271'(Xwalkvisionok, Kolem_Fn_271)))), not(not(xWalkStepping(Xwalkvisionok, Xwalkstepping)))).
+
+ /*   reactive_rule([ holds(xWalkVisionOK(Xwalkvisionok), Holds),
+                      holds(xWalkReady(Xwalkvisionok), Holds),
+                       (not(xWalkSteppingOn(Xwalkvisionok));not(xWalkReadyOff(Xwalkvisionok))),
+                      some(Xwalkstepping,
+                           '$kolem_Fn_271'(Xwalkvisionok, Kolem_Fn_271))
+                    ],
+                    [ holds(not([ holds(not(xWalkStepping(Xwalkvisionok,
+                                                          Xwalkstepping)),
+                                        Holds8)
+                                ]),
+                            Holds8)
+                    ]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/XWalk.e',150).
+
+ /*  not(holds_at(xWalkVisionOK(Xschema), Time)) :-
+       holds_at(xWalkReady(Xschema), Time),
+       holds_at(neg(xWalkStepping(Xschema, Exists_Distance)),
+                Time),
+       (   not(happens(xWalkSteppingOn(Xschema), Time))
+       ;   not(happens(xWalkReadyOff(Xschema), Time))
+       ),
+       some(Exists_Distance, '$kolem_Fn_271'(Xschema, Time)).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/XWalk.e',150).
+
+ /*  axiom(not(xWalkVisionOK(Xschema)),
+       [ xWalkReady(Xschema),
+         not(xWalkStepping(Xschema, Exists_Distance)),
+          (not(xWalkSteppingOn(Xschema));not(xWalkReadyOff(Xschema))),
+         some(Exists_Distance, '$kolem_Fn_271'(Xschema, Time))
+       ]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/XWalk.e',150).
+
+ /*  (   xWalkReady(Xwalkready),
+       not(xWalkStepping(Xwalkready, Xwalkstepping10)),
+       (   not(xWalkSteppingOn(Xwalkready))
+       ;   not(xWalkReadyOff(Xwalkready))
+       ),
+       some(Xwalkstepping10,
+            '$kolem_Fn_271'(Xwalkready, Kolem_Fn_27111))
+   ->  not(xWalkVisionOK(Xwalkready))
+   ).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/XWalk.e',150).
+then(if((xWalkReady(Xwalkready), not(xWalkStepping(Xwalkready, Xwalkstepping10)), (not(xWalkSteppingOn(Xwalkready));not(xWalkReadyOff(Xwalkready))), some(Xwalkstepping10, '$kolem_Fn_271'(Xwalkready, Kolem_Fn_27111)))), not(xWalkVisionOK(Xwalkready))).
+
+ /*   reactive_rule([ holds(xWalkReady(Xwalkready), Holds12),
+                      holds(not(xWalkStepping(Xwalkready,
+                                              Xwalkstepping10)),
+                            Holds12),
+                       (not(xWalkSteppingOn(Xwalkready));not(xWalkReadyOff(Xwalkready))),
+                      some(Xwalkstepping10,
+                           '$kolem_Fn_271'(Xwalkready, Kolem_Fn_27111))
+                    ],
+                    [holds(not(xWalkVisionOK(Xwalkready)), Holds13)]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/XWalk.e',150).
+
+ /*  not(holds_at(xWalkReady(Xschema), Time)) :-
+       holds_at(xWalkVisionOK(Xschema), Time),
+       holds_at(neg(xWalkStepping(Xschema, Exists_Distance)),
+                Time),
+       (   not(happens(xWalkSteppingOn(Xschema), Time))
+       ;   not(happens(xWalkReadyOff(Xschema), Time))
+       ),
+       some(Exists_Distance, '$kolem_Fn_271'(Xschema, Time)).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/XWalk.e',150).
+
+ /*  axiom(not(xWalkReady(Xschema)),
+       [ xWalkVisionOK(Xschema),
+         not(xWalkStepping(Xschema, Exists_Distance)),
+          (not(xWalkSteppingOn(Xschema));not(xWalkReadyOff(Xschema))),
+         some(Exists_Distance, '$kolem_Fn_271'(Xschema, Time))
+       ]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/XWalk.e',150).
+
+ /*  (   xWalkVisionOK(Xwalkvisionok14),
+       not(xWalkStepping(Xwalkvisionok14, Xwalkstepping15)),
+       (   not(xWalkSteppingOn(Xwalkvisionok14))
+       ;   not(xWalkReadyOff(Xwalkvisionok14))
+       ),
+       some(Xwalkstepping15,
+            '$kolem_Fn_271'(Xwalkvisionok14, Kolem_Fn_27116))
+   ->  not(xWalkReady(Xwalkvisionok14))
+   ).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/XWalk.e',150).
+then(if((xWalkVisionOK(Xwalkvisionok14), not(xWalkStepping(Xwalkvisionok14, Xwalkstepping15)), (not(xWalkSteppingOn(Xwalkvisionok14));not(xWalkReadyOff(Xwalkvisionok14))), some(Xwalkstepping15, '$kolem_Fn_271'(Xwalkvisionok14, Kolem_Fn_27116)))), not(xWalkReady(Xwalkvisionok14))).
+
+ /*   reactive_rule([ holds(xWalkVisionOK(Xwalkvisionok14), Holds17),
+                      holds(not(xWalkStepping(Xwalkvisionok14,
+                                              Xwalkstepping15)),
+                            Holds17),
+                       (not(xWalkSteppingOn(Xwalkvisionok14));not(xWalkReadyOff(Xwalkvisionok14))),
+                      some(Xwalkstepping15,
+                           '$kolem_Fn_271'(Xwalkvisionok14,
+                                           Kolem_Fn_27116))
+                    ],
+                    [holds(not(xWalkReady(Xwalkvisionok14)), Holds18)]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/XWalk.e',150).
+
+ /*  happens(xWalkSteppingOn(Xschema), Time) :-
+       holds_at(neg(xWalkStepping(Xschema, Exists_Distance)),
+                Time),
+       holds_at(xWalkVisionOK(Xschema), Time),
+       holds_at(xWalkReady(Xschema), Time),
+       some(Exists_Distance, '$kolem_Fn_271'(Xschema, Time)).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/XWalk.e',150).
+
+ /*  fix_axiom_head(Time) ->
+       [ happens(xWalkSteppingOn(Xschema), Time),
+          (->),
+         xWalkSteppingOn(Xschema)
+       ].
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/XWalk.e',150).
+
+ /*  axiom(xWalkSteppingOn(Xschema),
+       [ not(xWalkStepping(Xschema, Exists_Distance)),
+         xWalkVisionOK(Xschema),
+         xWalkReady(Xschema),
+         some(Exists_Distance, '$kolem_Fn_271'(Xschema, Time))
+       ]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/XWalk.e',150).
+
+ /*  (   not(xWalkStepping(Xwalkvisionok20, Xwalkstepping19)),
+       xWalkVisionOK(Xwalkvisionok20),
+       xWalkReady(Xwalkvisionok20),
+       some(Xwalkstepping19,
+            '$kolem_Fn_271'(Xwalkvisionok20, Kolem_Fn_27121))
+   ->  xWalkSteppingOn(Xwalkvisionok20)
+   ).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/XWalk.e',150).
+then(if((not(xWalkStepping(Xwalkvisionok20, Xwalkstepping19)), xWalkVisionOK(Xwalkvisionok20), xWalkReady(Xwalkvisionok20), some(Xwalkstepping19, '$kolem_Fn_271'(Xwalkvisionok20, Kolem_Fn_27121)))), xWalkSteppingOn(Xwalkvisionok20)).
+
+ /*  reactive_rule([ holds(not(xWalkStepping(Xwalkvisionok20,
+   					Xwalkstepping19)),
+   		      Holds22),
+   		holds(xWalkVisionOK(Xwalkvisionok20),
+   		      Holds22),
+   		holds(xWalkReady(Xwalkvisionok20),Holds22),
+   		some(Xwalkstepping19,
+   		     '$kolem_Fn_271'(Xwalkvisionok20,
+   				     Kolem_Fn_27121))
+   	      ],
+   	      [xWalkSteppingOn(Xwalkvisionok20)]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/XWalk.e',150).
+
+ /*  happens(xWalkReadyOff(Xschema), Time) :-
+       holds_at(neg(xWalkStepping(Xschema, Exists_Distance)),
+                Time),
+       holds_at(xWalkVisionOK(Xschema), Time),
+       holds_at(xWalkReady(Xschema), Time),
+       some(Exists_Distance, '$kolem_Fn_271'(Xschema, Time)).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/XWalk.e',150).
+
+ /*  fix_axiom_head(Time) ->
+       [ happens(xWalkReadyOff(Xschema), Time),
+          (->),
+         xWalkReadyOff(Xschema)
+       ].
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/XWalk.e',150).
+
+ /*  axiom(xWalkReadyOff(Xschema),
+       [ not(xWalkStepping(Xschema, Exists_Distance)),
+         xWalkVisionOK(Xschema),
+         xWalkReady(Xschema),
+         some(Exists_Distance, '$kolem_Fn_271'(Xschema, Time))
+       ]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/XWalk.e',150).
+
+ /*  (   not(xWalkStepping(Xwalkvisionok24, Xwalkstepping23)),
+       xWalkVisionOK(Xwalkvisionok24),
+       xWalkReady(Xwalkvisionok24),
+       some(Xwalkstepping23,
+            '$kolem_Fn_271'(Xwalkvisionok24, Kolem_Fn_27125))
+   ->  xWalkReadyOff(Xwalkvisionok24)
+   ).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/XWalk.e',150).
+then(if((not(xWalkStepping(Xwalkvisionok24, Xwalkstepping23)), xWalkVisionOK(Xwalkvisionok24), xWalkReady(Xwalkvisionok24), some(Xwalkstepping23, '$kolem_Fn_271'(Xwalkvisionok24, Kolem_Fn_27125)))), xWalkReadyOff(Xwalkvisionok24)).
+
+ /*  reactive_rule([ holds(not(xWalkStepping(Xwalkvisionok24,
+   					Xwalkstepping23)),
+   		      Holds28),
+   		holds(xWalkVisionOK(Xwalkvisionok24),
+   		      Holds28),
+   		holds(xWalkReady(Xwalkvisionok24),Holds28),
+   		some(Xwalkstepping23,
+   		     '$kolem_Fn_271'(Xwalkvisionok24,
+   				     Kolem_Fn_27125))
+   	      ],
+   	      [ happens(xWalkReadyOff(Xwalkvisionok24),
+   			Time_From,
+   			Time_Until)
+   	      ]).
+ */
+
+
+%; !bypass_ok
+% [xschema,time]
+% !(% {distance} HoldsAt(XWalkStepping(xschema,distance),time)) &
+% !HoldsAt(XWalkVisionOK(xschema),time) &
+% HoldsAt(XWalkReady(xschema),time) ->
+% Happens(XWalkTestFooting(xschema),time) &
+% Happens(XWalkReadyOff(xschema),time).
+ %  clausify_pnf=exists([Distance],  (holds_at(neg(xWalkStepping(Xschema, Distance)), Time), holds_at(neg(xWalkVisionOK(Xschema)), Time), holds_at(xWalkReady(Xschema), Time)->happens(xWalkTestFooting(Xschema), Time), happens(xWalkReadyOff(Xschema), Time))).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/XWalk.e',158).
+
+ /*  not(holds_at(neg(xWalkStepping(Xschema, Exists_Distance)), Time)) :-
+       holds_at(neg(xWalkVisionOK(Xschema)), Time),
+       holds_at(xWalkReady(Xschema), Time),
+       (   not(happens(xWalkTestFooting(Xschema), Time))
+       ;   not(happens(xWalkReadyOff(Xschema), Time))
+       ),
+       some(Exists_Distance, '$kolem_Fn_272'(Xschema, Time)).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/XWalk.e',158).
+
+ /*  axiom(not(not(xWalkStepping(Xschema, Exists_Distance))),
+       [ not(xWalkVisionOK(Xschema)),
+         xWalkReady(Xschema),
+          (not(xWalkTestFooting(Xschema));not(xWalkReadyOff(Xschema))),
+         some(Exists_Distance, '$kolem_Fn_272'(Xschema, Time))
+       ]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/XWalk.e',158).
+
+ /*  (   not(xWalkVisionOK(Xwalkvisionok)),
+       xWalkReady(Xwalkvisionok),
+       (   not(xWalkTestFooting(Xwalkvisionok))
+       ;   not(xWalkReadyOff(Xwalkvisionok))
+       ),
+       some(Xwalkstepping,
+            '$kolem_Fn_272'(Xwalkvisionok, Kolem_Fn_272))
+   ->  not(not(xWalkStepping(Xwalkvisionok, Xwalkstepping)))
+   ).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/XWalk.e',158).
+then(if((not(xWalkVisionOK(Xwalkvisionok)), xWalkReady(Xwalkvisionok), (not(xWalkTestFooting(Xwalkvisionok));not(xWalkReadyOff(Xwalkvisionok))), some(Xwalkstepping, '$kolem_Fn_272'(Xwalkvisionok, Kolem_Fn_272)))), not(not(xWalkStepping(Xwalkvisionok, Xwalkstepping)))).
+
+ /*   reactive_rule([ holds(not(xWalkVisionOK(Xwalkvisionok)), Holds),
+                      holds(xWalkReady(Xwalkvisionok), Holds),
+                       (not(xWalkTestFooting(Xwalkvisionok));not(xWalkReadyOff(Xwalkvisionok))),
+                      some(Xwalkstepping,
+                           '$kolem_Fn_272'(Xwalkvisionok, Kolem_Fn_272))
+                    ],
+                    [ holds(not([ holds(not(xWalkStepping(Xwalkvisionok,
+                                                          Xwalkstepping)),
+                                        Holds8)
+                                ]),
+                            Holds8)
+                    ]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/XWalk.e',158).
+
+ /*  not(holds_at(neg(xWalkVisionOK(Xschema)), Time)) :-
+       holds_at(xWalkReady(Xschema), Time),
+       holds_at(neg(xWalkStepping(Xschema, Exists_Distance)),
+                Time),
+       (   not(happens(xWalkTestFooting(Xschema), Time))
+       ;   not(happens(xWalkReadyOff(Xschema), Time))
+       ),
+       some(Exists_Distance, '$kolem_Fn_272'(Xschema, Time)).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/XWalk.e',158).
+
+ /*  axiom(not(not(xWalkVisionOK(Xschema))),
+       [ xWalkReady(Xschema),
+         not(xWalkStepping(Xschema, Exists_Distance)),
+          (not(xWalkTestFooting(Xschema));not(xWalkReadyOff(Xschema))),
+         some(Exists_Distance, '$kolem_Fn_272'(Xschema, Time))
+       ]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/XWalk.e',158).
+
+ /*  (   xWalkReady(Xwalkready),
+       not(xWalkStepping(Xwalkready, Xwalkstepping10)),
+       (   not(xWalkTestFooting(Xwalkready))
+       ;   not(xWalkReadyOff(Xwalkready))
+       ),
+       some(Xwalkstepping10,
+            '$kolem_Fn_272'(Xwalkready, Kolem_Fn_27211))
+   ->  not(not(xWalkVisionOK(Xwalkready)))
+   ).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/XWalk.e',158).
+then(if((xWalkReady(Xwalkready), not(xWalkStepping(Xwalkready, Xwalkstepping10)), (not(xWalkTestFooting(Xwalkready));not(xWalkReadyOff(Xwalkready))), some(Xwalkstepping10, '$kolem_Fn_272'(Xwalkready, Kolem_Fn_27211)))), not(not(xWalkVisionOK(Xwalkready)))).
+
+ /*   reactive_rule([ holds(xWalkReady(Xwalkready), Holds12),
+                      holds(not(xWalkStepping(Xwalkready,
+                                              Xwalkstepping10)),
+                            Holds12),
+                       (not(xWalkTestFooting(Xwalkready));not(xWalkReadyOff(Xwalkready))),
+                      some(Xwalkstepping10,
+                           '$kolem_Fn_272'(Xwalkready, Kolem_Fn_27211))
+                    ],
+                    [ holds(not([ holds(not(xWalkVisionOK(Xwalkready)),
+                                        Holds13)
+                                ]),
+                            Holds13)
+                    ]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/XWalk.e',158).
+
+ /*  not(holds_at(xWalkReady(Xschema), Time)) :-
+       holds_at(neg(xWalkVisionOK(Xschema)), Time),
+       holds_at(neg(xWalkStepping(Xschema, Exists_Distance)),
+                Time),
+       (   not(happens(xWalkTestFooting(Xschema), Time))
+       ;   not(happens(xWalkReadyOff(Xschema), Time))
+       ),
+       some(Exists_Distance, '$kolem_Fn_272'(Xschema, Time)).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/XWalk.e',158).
+
+ /*  axiom(not(xWalkReady(Xschema)),
+       [ not(xWalkVisionOK(Xschema)),
+         not(xWalkStepping(Xschema, Exists_Distance)),
+          (not(xWalkTestFooting(Xschema));not(xWalkReadyOff(Xschema))),
+         some(Exists_Distance, '$kolem_Fn_272'(Xschema, Time))
+       ]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/XWalk.e',158).
+
+ /*  (   not(xWalkVisionOK(Xwalkvisionok14)),
+       not(xWalkStepping(Xwalkvisionok14, Xwalkstepping15)),
+       (   not(xWalkTestFooting(Xwalkvisionok14))
+       ;   not(xWalkReadyOff(Xwalkvisionok14))
+       ),
+       some(Xwalkstepping15,
+            '$kolem_Fn_272'(Xwalkvisionok14, Kolem_Fn_27216))
+   ->  not(xWalkReady(Xwalkvisionok14))
+   ).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/XWalk.e',158).
+then(if((not(xWalkVisionOK(Xwalkvisionok14)), not(xWalkStepping(Xwalkvisionok14, Xwalkstepping15)), (not(xWalkTestFooting(Xwalkvisionok14));not(xWalkReadyOff(Xwalkvisionok14))), some(Xwalkstepping15, '$kolem_Fn_272'(Xwalkvisionok14, Kolem_Fn_27216)))), not(xWalkReady(Xwalkvisionok14))).
+
+ /*   reactive_rule([ holds(not(xWalkVisionOK(Xwalkvisionok14)),
+                            Holds17),
+                      holds(not(xWalkStepping(Xwalkvisionok14,
+                                              Xwalkstepping15)),
+                            Holds17),
+                       (not(xWalkTestFooting(Xwalkvisionok14));not(xWalkReadyOff(Xwalkvisionok14))),
+                      some(Xwalkstepping15,
+                           '$kolem_Fn_272'(Xwalkvisionok14,
+                                           Kolem_Fn_27216))
+                    ],
+                    [holds(not(xWalkReady(Xwalkvisionok14)), Holds18)]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/XWalk.e',158).
+
+ /*  happens(xWalkTestFooting(Xschema), Time) :-
+       holds_at(neg(xWalkStepping(Xschema, Exists_Distance)),
+                Time),
+       holds_at(neg(xWalkVisionOK(Xschema)), Time),
+       holds_at(xWalkReady(Xschema), Time),
+       some(Exists_Distance, '$kolem_Fn_272'(Xschema, Time)).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/XWalk.e',158).
+
+ /*  fix_axiom_head(Time) ->
+       [ happens(xWalkTestFooting(Xschema), Time),
+          (->),
+         xWalkTestFooting(Xschema)
+       ].
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/XWalk.e',158).
+
+ /*  axiom(xWalkTestFooting(Xschema),
+       [ not(xWalkStepping(Xschema, Exists_Distance)),
+         not(xWalkVisionOK(Xschema)),
+         xWalkReady(Xschema),
+         some(Exists_Distance, '$kolem_Fn_272'(Xschema, Time))
+       ]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/XWalk.e',158).
+
+ /*  (   not(xWalkStepping(Xwalkvisionok20, Xwalkstepping19)),
+       not(xWalkVisionOK(Xwalkvisionok20)),
+       xWalkReady(Xwalkvisionok20),
+       some(Xwalkstepping19,
+            '$kolem_Fn_272'(Xwalkvisionok20, Kolem_Fn_27221))
+   ->  xWalkTestFooting(Xwalkvisionok20)
+   ).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/XWalk.e',158).
+then(if((not(xWalkStepping(Xwalkvisionok20, Xwalkstepping19)), not(xWalkVisionOK(Xwalkvisionok20)), xWalkReady(Xwalkvisionok20), some(Xwalkstepping19, '$kolem_Fn_272'(Xwalkvisionok20, Kolem_Fn_27221)))), xWalkTestFooting(Xwalkvisionok20)).
+
+ /*  reactive_rule([ holds(not(xWalkStepping(Xwalkvisionok20,
+   					Xwalkstepping19)),
+   		      Holds22),
+   		holds(not(xWalkVisionOK(Xwalkvisionok20)),
+   		      Holds22),
+   		holds(xWalkReady(Xwalkvisionok20),Holds22),
+   		some(Xwalkstepping19,
+   		     '$kolem_Fn_272'(Xwalkvisionok20,
+   				     Kolem_Fn_27221))
+   	      ],
+   	      [xWalkTestFooting(Xwalkvisionok20)]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/XWalk.e',158).
+
+ /*  happens(xWalkReadyOff(Xschema), Time) :-
+       holds_at(neg(xWalkStepping(Xschema, Exists_Distance)),
+                Time),
+       holds_at(neg(xWalkVisionOK(Xschema)), Time),
+       holds_at(xWalkReady(Xschema), Time),
+       some(Exists_Distance, '$kolem_Fn_272'(Xschema, Time)).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/XWalk.e',158).
+
+ /*  fix_axiom_head(Time) ->
+       [ happens(xWalkReadyOff(Xschema), Time),
+          (->),
+         xWalkReadyOff(Xschema)
+       ].
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/XWalk.e',158).
+
+ /*  axiom(xWalkReadyOff(Xschema),
+       [ not(xWalkStepping(Xschema, Exists_Distance)),
+         not(xWalkVisionOK(Xschema)),
+         xWalkReady(Xschema),
+         some(Exists_Distance, '$kolem_Fn_272'(Xschema, Time))
+       ]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/XWalk.e',158).
+
+ /*  (   not(xWalkStepping(Xwalkvisionok24, Xwalkstepping23)),
+       not(xWalkVisionOK(Xwalkvisionok24)),
+       xWalkReady(Xwalkvisionok24),
+       some(Xwalkstepping23,
+            '$kolem_Fn_272'(Xwalkvisionok24, Kolem_Fn_27225))
+   ->  xWalkReadyOff(Xwalkvisionok24)
+   ).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/XWalk.e',158).
+then(if((not(xWalkStepping(Xwalkvisionok24, Xwalkstepping23)), not(xWalkVisionOK(Xwalkvisionok24)), xWalkReady(Xwalkvisionok24), some(Xwalkstepping23, '$kolem_Fn_272'(Xwalkvisionok24, Kolem_Fn_27225)))), xWalkReadyOff(Xwalkvisionok24)).
+
+ /*  reactive_rule([ holds(not(xWalkStepping(Xwalkvisionok24,
+   					Xwalkstepping23)),
+   		      Holds28),
+   		holds(not(xWalkVisionOK(Xwalkvisionok24)),
+   		      Holds28),
+   		holds(xWalkReady(Xwalkvisionok24),Holds28),
+   		some(Xwalkstepping23,
+   		     '$kolem_Fn_272'(Xwalkvisionok24,
+   				     Kolem_Fn_27225))
+   	      ],
+   	      [ happens(xWalkReadyOff(Xwalkvisionok24),
+   			Time_From,
+   			Time_Until)
+   	      ]).
+ */
+
+
+% [xschema,distance,time]
+% HoldsAt(XWalkStepping(xschema,distance),time) &
+% HoldsAt(XWalkDistance(xschema,distance),time) &
+% (distance > 0) ->
+% Happens(XWalkReadyOn(xschema),time).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/XWalk.e',166).
+
+ /*  (   holds_at(xWalkStepping(Xschema, Distance), Time),
+       holds_at(xWalkDistance(Xschema, Distance), Time),
+       Distance>0
+   ->  happens(xWalkReadyOn(Xschema), Time)
+   ).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/XWalk.e',166).
+then(if((at(xWalkStepping(Xschema, Distance), Time), at(xWalkDistance(Xschema, Distance), Time), Distance>0)), happens(xWalkReadyOn(Xschema), Time)).
+
+ /*  reactive_rule([ holds(xWalkStepping(Xschema,Distance),
+   		      Time),
+   		holds(xWalkDistance(Xschema,Distance),
+   		      Time),
+   		Distance>0
+   	      ],
+   	      [happens(xWalkReadyOn(Xschema),Time)]).
+ */
+
+
+%; End of file.
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/XWalk.e',170).
+% translate: ending  File: /pack/logicmoo_ec/ext/ec_sources/ecnet/XWalk.e.lps 
