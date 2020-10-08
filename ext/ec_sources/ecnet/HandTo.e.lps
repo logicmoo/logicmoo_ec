@@ -3,7 +3,7 @@
 :-include(library('ec_planner/ec_test_incl')).
 :-expects_dialect(lps).
 % translate: begining  File: /pack/logicmoo_ec/ext/ec_sources/ecnet/HandTo.e.lps 
-% Wed, 07 Oct 2020 09:35:27 GMT File: <stream>(0x5557c8eca200)%;
+% Thu, 08 Oct 2020 19:06:09 GMT File: <stream>(0x5600a39aed00)%;
 %; Copyright (c) 2005 IBM Corporation and others.
 %; All rights reserved. This program and the accompanying materials
 %; are made available under the terms of the Common Public License v1.0
@@ -16,10 +16,13 @@
 
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/HandTo.e',12).
 % event HandTo(agent,agent,physobj)
- %  event(handTo(agent,agent,physobj)).
+ %  blue=event(handTo(agent,agent,physobj)).
  %  event(handTo(agent,agent,physobj)).
 actions([handTo/3]).
+ %  actions([handTo/3]).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/HandTo.e',12).
 mpred_prop(handTo(agent,agent,physobj),event).
+ %  mpred_prop(handTo(agent,agent,physobj),event).
 
 
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/HandTo.e',14).
@@ -28,23 +31,32 @@ mpred_prop(handTo(agent,agent,physobj),event).
 %           Holding(agent2,physobj),
 %           time).
 
- /*  axiom(initiates(handTo(Agent1, Agent2, Physobj), holding(Agent2, Physobj), Time),
-       []).
+ /*  pl=axiom(initiates(handTo(Agent1,Agent2,Physobj),
+   		holding(Agent2,Physobj),
+   		Time),
+         []).
  */
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/HandTo.e',14).
 
- /*  initiates(handTo(HandtoP_Num3_V,A,Handto),
-   	  holding(A,Handto),
-   	  Initiates).
+ /*  initiates(handTo(Agent1,Agent2,Physobj),
+   	  holding(Agent2,Physobj),
+   	  Time).
  */
+handTo(Agent1, Agent2, Physobj)initiates holding(Agent2, Physobj).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/HandTo.e',14).
-initiates(handTo(HandtoP_Num3_V,A,Handto),
-	  holding(A,Handto)).
 
- /*  initiated(happens(handTo(HandtoP_Num3_V,A,Handto),
+ /*  initiated(happens(handTo(Agent1,Agent2,Physobj),
    		  Time_From,
    		  Time_Until),
-   	  holding(A,Handto),
+   	  holding(Agent2,Physobj),
+   	  []).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/HandTo.e',14).
+
+ /*  initiated(happens(handTo(Agent1,Agent2,Physobj),
+   		  Time_From,
+   		  Time_Until),
+   	  holding(Agent2,Physobj),
    	  []).
  */
 
@@ -55,22 +67,32 @@ initiates(handTo(HandtoP_Num3_V,A,Handto),
 %            time).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/HandTo.e',20).
 
- /*  axiom(terminates(handTo(Agent1, Agent2, Physobj), holding(Agent1, Physobj), Time),
-       []).
- */
-
- /*  terminates(handTo(HandtoP_Num3_V,_,Handto),
-   	   holding(HandtoP_Num3_V,Handto),
-   	   Terminates).
+ /*  pl=axiom(terminates(handTo(Agent1,Agent2,Physobj),
+   		 holding(Agent1,Physobj),
+   		 Time),
+         []).
  */
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/HandTo.e',20).
-terminates(handTo(HandtoP_Num3_V,_,Handto),
-	   holding(HandtoP_Num3_V,Handto)).
 
- /*  terminated(happens(handTo(HandtoP_Num3_V,_,Handto),
+ /*  terminates(handTo(Agent1,Agent2,Physobj),
+   	   holding(Agent1,Physobj),
+   	   Time).
+ */
+handTo(Agent1, Agent2, Physobj)terminates holding(Agent1, Physobj).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/HandTo.e',20).
+
+ /*  terminated(happens(handTo(Agent1,Agent2,Physobj),
    		   Time_From,
    		   Time_Until),
-   	   holding(HandtoP_Num3_V,Handto),
+   	   holding(Agent1,Physobj),
+   	   []).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/HandTo.e',20).
+
+ /*  terminated(happens(handTo(Agent1,Agent2,Physobj),
+   		   Time_From,
+   		   Time_Until),
+   	   holding(Agent1,Physobj),
    	   []).
  */
 
@@ -78,32 +100,128 @@ terminates(handTo(HandtoP_Num3_V,_,Handto),
 % [agent1,agent2,physobj,time]
 % Happens(HandTo(agent1,agent2,physobj),time) ->
 % HoldsAt(Holding(agent1,physobj),time).
+ %  clausify_pnf=(happens(handTo(Agent1, Agent2, Physobj), Time)->holds_at(holding(Agent1, Physobj), Time)).
 
- /*  happens(handTo(Agent1, Agent2, Physobj), Time) ->
-       holds_at(holding(Agent1, Physobj), Time).
+ /*  holds_at(holding(Agent1, Physobj), Time) :-
+       happens(handTo(Agent1, Agent2, Physobj), Time).
  */
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/HandTo.e',25).
-then(if(happens(handTo(Agent1,Agent2,Physobj),
-		Time)),
-     at(holding(Agent1,Physobj),Time)).
 
- /*  reactive_rule([ happens(handTo(Agent1,Agent2,Physobj),
-   			Time)
+ /*  pl=axiom(requires(handTo(Agent1,Agent2,Physobj),
+   	       When_Time),
+         [metreqs(handTo(Agent1,Agent2,Physobj))]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/HandTo.e',25).
+
+ /*  metreqs(handTo(Agent1, Agent2, Physobj)) ->
+       requires(handTo(Agent1, Agent2, Physobj), When_Time).
+ */
+if metreqs(handTo(Agent1, Agent2, Physobj))then requires(handTo(Agent1, Agent2, Physobj), When_Time).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/HandTo.e',25).
+
+ /*  reactive_rule([ metreqs(handTo(Agent1,Agent2,Physobj))
    	      ],
-   	      [holds(holding(Agent1,Physobj),Time)]).
+   	      [ requires(handTo(Agent1,
+   				Agent2,
+   				Physobj),
+   			 When_Time)
+   	      ]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/HandTo.e',25).
+
+ /*  reactive_rule([ metreqs(handTo(Agent1,Agent2,Physobj))
+   	      ],
+   	      [ requires(handTo(Agent1,
+   				Agent2,
+   				Physobj),
+   			 When_Time)
+   	      ]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/HandTo.e',25).
+
+ /*  fix_axiom_head(When_Time) ->
+       [ holds_at(metreqs(handTo(Agent1, Agent2, Physobj)),
+                  When_Time),
+          (->),
+         metreqs(handTo(Agent1, Agent2, Physobj))
+       ].
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/HandTo.e',25).
+
+ /*  pl=axiom(metreqs(handTo(Agent1,Agent2,Physobj)),
+         [holding(Agent1,Physobj)]).
+ */
+
+ /*  holding(Agent1, Physobj) ->
+       metreqs(handTo(Agent1, Agent2, Physobj)).
+ */
+if holding(Agent1, Physobj)then metreqs(handTo(Agent1, Agent2, Physobj)).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/HandTo.e',25).
+
+ /*  reactive_rule([holds(holding(Agent1,Physobj),Holds)],
+   	      [ metreqs(handTo(Agent1,Agent2,Physobj))
+   	      ]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/HandTo.e',25).
+
+ /*  reactive_rule([holds(holding(Agent1,Physobj),Holds)],
+   	      [ metreqs(handTo(Agent1,Agent2,Physobj))
+   	      ]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/HandTo.e',25).
+
+ /*  not(happens(handTo(Agent1, Agent2, Physobj), When_Time)) :-
+       not(holds_at(holding(Agent1, Physobj), When_Time)).
+ */
+
+ /*  fix_axiom_head(When_Time) ->
+       [ not(happens(handTo(Agent1, Agent2, Physobj),
+                     When_Time)),
+          (->),
+         not(handTo(Agent1, Agent2, Physobj))
+       ].
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/HandTo.e',25).
+
+ /*  pl=axiom(not(handTo(Agent1,Agent2,Physobj)),
+         [not(holding(Agent1,Physobj))]).
+ */
+
+ /*  not(holding(Agent1, Physobj)) ->
+       not(handTo(Agent1, Agent2, Physobj)).
+ */
+if not holding(Agent1, Physobj)then not handTo(Agent1, Agent2, Physobj).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/HandTo.e',25).
+
+ /*  reactive_rule([ holds(not(holding(Agent1,Physobj)),
+   		      Holds6)
+   	      ],
+   	      [not(handTo(Agent1,Agent2,Physobj))]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/HandTo.e',25).
+
+ /*  reactive_rule([ holds(not(holding(Agent1,Physobj)),
+   		      Holds6)
+   	      ],
+   	      [not(handTo(Agent1,Agent2,Physobj))]).
  */
 
 % event ShakeHands(agent,agent)
- %  event(shakeHands(agent,agent)).
+ %  blue=event(shakeHands(agent,agent)).
  %  event(shakeHands(agent,agent)).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/HandTo.e',27).
 actions([shakeHands/2]).
+ %  actions([shakeHands/2]).
 mpred_prop(shakeHands(agent,agent),event).
+ %  mpred_prop(shakeHands(agent,agent),event).
 
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/HandTo.e',30).
 % event WriteOn(agent,paper,pen)
- %  event(writeOn(agent,paper,pen)).
+ %  blue=event(writeOn(agent,paper,pen)).
  %  event(writeOn(agent,paper,pen)).
 actions([writeOn/3]).
+ %  actions([writeOn/3]).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/HandTo.e',30).
 mpred_prop(writeOn(agent,paper,pen),event).
+ %  mpred_prop(writeOn(agent,paper,pen),event).
 % translate: ending  File: /pack/logicmoo_ec/ext/ec_sources/ecnet/HandTo.e.lps 

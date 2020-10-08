@@ -3,7 +3,7 @@
 :-include(library('ec_planner/ec_test_incl')).
 :-expects_dialect(lps).
 % translate: begining  File: /pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e.lps 
-% Wed, 07 Oct 2020 09:35:26 GMT File: <stream>(0x5557c8ecb500)%;
+% Thu, 08 Oct 2020 19:06:08 GMT File: <stream>(0x5600a3976800)%;
 %; Copyright (c) 2005 IBM Corporation and others.
 %; All rights reserved. This program and the accompanying materials
 %; are made available under the terms of the Common Public License v1.0
@@ -16,14 +16,17 @@
 
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e',12).
 % fluent Loaded(gun,bullet)
- %  fluent(loaded(gun,bullet)).
+ %  blue=fluent(loaded(gun,bullet)).
  %  fluent(loaded(gun,bullet)).
 fluents([loaded/2]).
+ %  fluents([loaded/2]).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e',12).
 mpred_prop(loaded(gun,bullet),fluent).
+ %  mpred_prop(loaded(gun,bullet),fluent).
 
 % noninertial Loaded
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e',12).
 noninertial(loaded).
+ %  noninertial(loaded).
 
 
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e',15).
@@ -34,64 +37,161 @@ noninertial(loaded).
  /*  holds_at(inside(Bullet, Gun), Time) <->
        holds_at(loaded(Gun, Bullet), Time).
  */
+ %  clausify_pnf=(holds_at(inside(Bullet, Gun), Time)->holds_at(loaded(Gun, Bullet), Time)).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e',15).
 
- /*  holds_at(inside(Bullet, Gun), Time) ->
-       holds_at(loaded(Gun, Bullet), Time).
- */
-then(if(at(inside(Bullet,Gun),Time)),
-     at(loaded(Gun,Bullet),Time)).
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e',15).
-
- /*  reactive_rule([holds(inside(Bullet,Gun),Time)],
-   	      [holds(loaded(Gun,Bullet),Time)]).
- */
-
- /*  holds_at(loaded(Gun, Bullet), Time) ->
+ /*  holds_at(loaded(Gun, Bullet), Time) :-
        holds_at(inside(Bullet, Gun), Time).
  */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e',15).
-then(if(at(loaded(Gun,Bullet),Time)),
-     at(inside(Bullet,Gun),Time)).
 
- /*  reactive_rule([holds(loaded(Gun,Bullet),Time)],
-   	      [holds(inside(Bullet,Gun),Time)]).
+ /*  fix_axiom_head(Time) ->
+       [ holds_at(loaded(Gun, Bullet), Time),
+          (->),
+         loaded(Gun, Bullet)
+       ].
+ */
+ %  pl=axiom(loaded(Gun,Bullet),[inside(Bullet,Gun)]).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e',15).
+
+ /*  inside(Bullet, Gun) ->
+       loaded(Gun, Bullet).
+ */
+if inside(Bullet, Gun)then loaded(Gun, Bullet).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e',15).
+
+ /*  reactive_rule([inside(Bullet,Gun)],
+   	      [loaded(Gun,Bullet)]).
+ */
+
+ /*  reactive_rule([inside(Bullet,Gun)],
+   	      [loaded(Gun,Bullet)]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e',15).
+
+ /*  not(holds_at(inside(Bullet, Gun), Time)) :-
+       not(holds_at(loaded(Gun, Bullet), Time)).
+ */
+
+ /*  pl=axiom(not(inside(Bullet,Gun)),
+         [not(loaded(Gun,Bullet))]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e',15).
+
+ /*  not(loaded(Gun, Bullet)) ->
+       not(inside(Bullet, Gun)).
+ */
+if not loaded(Gun, Bullet)then not inside(Bullet, Gun).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e',15).
+
+ /*  reactive_rule([not(loaded(Gun,Bullet))],
+   	      [not(inside(Bullet,Gun))]).
+ */
+
+ /*  reactive_rule([not(loaded(Gun,Bullet))],
+   	      [not(inside(Bullet,Gun))]).
+ */
+ %  clausify_pnf=(holds_at(loaded(Gun, Bullet), Time)->holds_at(inside(Bullet, Gun), Time)).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e',15).
+
+ /*  holds_at(inside(Bullet, Gun), Time) :-
+       holds_at(loaded(Gun, Bullet), Time).
+ */
+
+ /*  fix_axiom_head(Time) ->
+       [ holds_at(inside(Bullet, Gun), Time),
+          (->),
+         inside(Bullet, Gun)
+       ].
+ */
+ %  pl=axiom(inside(Bullet,Gun),[loaded(Gun,Bullet)]).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e',15).
+
+ /*  loaded(Gun, Bullet) ->
+       inside(Bullet, Gun).
+ */
+if loaded(Gun, Bullet)then inside(Bullet, Gun).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e',15).
+
+ /*  reactive_rule([loaded(Gun,Bullet)],
+   	      [inside(Bullet,Gun)]).
+ */
+
+ /*  reactive_rule([loaded(Gun,Bullet)],
+   	      [inside(Bullet,Gun)]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e',15).
+
+ /*  not(holds_at(loaded(Gun, Bullet), Time)) :-
+       not(holds_at(inside(Bullet, Gun), Time)).
+ */
+
+ /*  pl=axiom(not(loaded(Gun,Bullet)),
+         [not(inside(Bullet,Gun))]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e',15).
+
+ /*  not(inside(Bullet, Gun)) ->
+       not(loaded(Gun, Bullet)).
+ */
+if not inside(Bullet, Gun)then not loaded(Gun, Bullet).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e',15).
+
+ /*  reactive_rule([not(inside(Bullet,Gun))],
+   	      [not(loaded(Gun,Bullet))]).
+ */
+
+ /*  reactive_rule([not(inside(Bullet,Gun))],
+   	      [not(loaded(Gun,Bullet))]).
  */
 
 % event Shoot(agent,gun,object)
- %  event(shoot(agent,gun,object)).
+ %  blue=event(shoot(agent,gun,object)).
  %  event(shoot(agent,gun,object)).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e',18).
 actions([shoot/3]).
+ %  actions([shoot/3]).
 mpred_prop(shoot(agent,gun,object),event).
+ %  mpred_prop(shoot(agent,gun,object),event).
 
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e',21).
 % event ShootInjure(agent,gun,agent)
- %  event(shootInjure(agent,gun,agent)).
+ %  blue=event(shootInjure(agent,gun,agent)).
  %  event(shootInjure(agent,gun,agent)).
 actions([shootInjure/3]).
+ %  actions([shootInjure/3]).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e',21).
 mpred_prop(shootInjure(agent,gun,agent),event).
+ %  mpred_prop(shootInjure(agent,gun,agent),event).
 
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e',23).
 % event ShootKill(agent,gun,agent)
- %  event(shootKill(agent,gun,agent)).
+ %  blue=event(shootKill(agent,gun,agent)).
  %  event(shootKill(agent,gun,agent)).
 actions([shootKill/3]).
+ %  actions([shootKill/3]).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e',23).
 mpred_prop(shootKill(agent,gun,agent),event).
+ %  mpred_prop(shootKill(agent,gun,agent),event).
 
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e',25).
 % event ShootDamage(agent,gun,physobj)
- %  event(shootDamage(agent,gun,physobj)).
+ %  blue=event(shootDamage(agent,gun,physobj)).
  %  event(shootDamage(agent,gun,physobj)).
 actions([shootDamage/3]).
+ %  actions([shootDamage/3]).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e',25).
 mpred_prop(shootDamage(agent,gun,physobj),event).
+ %  mpred_prop(shootDamage(agent,gun,physobj),event).
 
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e',27).
 % event ShootDestroy(agent,gun,physobj)
- %  event(shootDestroy(agent,gun,physobj)).
+ %  blue=event(shootDestroy(agent,gun,physobj)).
  %  event(shootDestroy(agent,gun,physobj)).
 actions([shootDestroy/3]).
+ %  actions([shootDestroy/3]).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e',27).
 mpred_prop(shootDestroy(agent,gun,physobj),event).
+ %  mpred_prop(shootDestroy(agent,gun,physobj),event).
 
 
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e',29).
@@ -102,28 +202,35 @@ mpred_prop(shootDestroy(agent,gun,physobj),event).
 %            time).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e',29).
 
- /*  axiom(terminates(shoot(Agent, Gun, Object), inside(Bullet, Gun), Time),
-       [inside(Bullet, Gun)]).
- */
-
- /*  inside(A, Inside) ->
-       terminates(shoot(ShootP_Num3_V, Inside, Shoot),
-                  inside(A, Inside),
-                  Terminates).
+ /*  pl=axiom(terminates(shoot(Agent,Gun,Object),
+   		 inside(Bullet,Gun),
+   		 Time),
+         [inside(Bullet,Gun)]).
  */
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e',29).
-then(if(inside(A,Inside)),
-     terminates(shoot(ShootP_Num3_V,Inside,Shoot),
-		at(inside(A,Inside),Terminates),
-		Terminates9)).
 
- /*  reactive_rule([holds(inside(A,Inside),Holds)],
-   	      [ terminates(shoot(ShootP_Num3_V,
-   				 Inside,
-   				 Shoot),
-   			   at(inside(A,Inside),
-   			      Terminates),
-   			   Terminates9)
+ /*  inside(Bullet, Gun) ->
+       terminates(shoot(Agent, Gun, Object),
+                  inside(Bullet, Gun),
+                  Time).
+ */
+if inside(Bullet, Gun)then terminates(shoot(Agent, Gun, Object), inside(Bullet, Gun)at Time, _).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e',29).
+
+ /*  reactive_rule([inside(Bullet,Gun)],
+   	      [ terminates(shoot(Agent,Gun,Object),
+   			   at(inside(Bullet,Gun),
+   			      Time),
+   			   Terminates)
+   	      ]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e',29).
+
+ /*  reactive_rule([inside(Bullet,Gun)],
+   	      [ terminates(shoot(Agent,Gun,Object),
+   			   at(inside(Bullet,Gun),
+   			      Time),
+   			   Terminates)
    	      ]).
  */
 
@@ -135,35 +242,47 @@ then(if(inside(A,Inside)),
 % Terminates(Shoot(agent,gun,object),At(bullet,location2),time).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e',36).
 
- /*  axiom(terminates(shoot(Agent, Gun, Object), at(Bullet, Location2), Time),
-       [ inside(Bullet, Gun),
-         at(Gun, Location1),
-         diff(Location2, Location1)
-       ]).
+ /*  pl=axiom(terminates(shoot(Agent,Gun,Object),
+   		 at(Bullet,Location2),
+   		 Time),
+         [ inside(Bullet,Gun),
+   	at(Gun,Location1),
+   	diff(Location2,Location1)
+         ]).
  */
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e',36).
 
- /*  (   inside(A, Inside),
-       at(Inside, Tloc),
-       diff(Tloc8, Tloc)
-   ->  terminates(shoot(ShootP_Num3_V, Inside, Shoot),
-                  at(A, Tloc8),
-                  Terminates)
+ /*  (   inside(Bullet, Gun),
+       at(Gun, Location1),
+       diff(Location2, Location1)
+   ->  terminates(shoot(Agent, Gun, Object),
+                  at(Bullet, Location2),
+                  Time)
    ).
  */
+if inside(Bullet, Gun), loc_at(Gun, Location1), diff(Location2, Location1)then terminates(shoot(Agent, Gun, Object), loc_at(Bullet, Location2)at Time, _).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e',36).
-then(if((inside(A, Inside), loc_at(Inside, Tloc), diff(Tloc8, Tloc))), terminates(shoot(ShootP_Num3_V, Inside, Shoot), at(loc_at(A, Tloc8), Terminates), Terminates13)).
 
- /*  reactive_rule([ holds(inside(A,Inside),Holds),
-   		holds(loc_at(Inside,Tloc),Holds),
-   		diff(Tloc8,Tloc)
+ /*  reactive_rule([ inside(Bullet,Gun),
+   		loc_at(Gun,Location1),
+   		diff(Location2,Location1)
    	      ],
-   	      [ terminates(shoot(ShootP_Num3_V,
-   				 Inside,
-   				 Shoot),
-   			   at(loc_at(A,Tloc8),
-   			      Terminates),
-   			   Terminates13)
+   	      [ terminates(shoot(Agent,Gun,Object),
+   			   at(loc_at(Bullet,Location2),
+   			      Time),
+   			   Terminates)
+   	      ]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e',36).
+
+ /*  reactive_rule([ inside(Bullet,Gun),
+   		loc_at(Gun,Location1),
+   		diff(Location2,Location1)
+   	      ],
+   	      [ terminates(shoot(Agent,Gun,Object),
+   			   at(loc_at(Bullet,Location2),
+   			      Time),
+   			   Terminates)
    	      ]).
  */
 
@@ -174,29 +293,41 @@ then(if((inside(A, Inside), loc_at(Inside, Tloc), diff(Tloc8, Tloc))), terminate
 % Initiates(Shoot(agent,gun,object),At(bullet,location),time).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e',42).
 
- /*  axiom(initiates(shoot(Agent, Gun, Object), at(Bullet, Location), Time),
-       [at(Object, Location), inside(Bullet, Gun)]).
- */
-
- /*  (   at(Shoot, Tloc),
-       inside(A, Inside)
-   ->  initiates(shoot(ShootP_Num3_V, Inside, Shoot),
-                 at(A, Tloc),
-                 Initiates)
-   ).
+ /*  pl=axiom(initiates(shoot(Agent,Gun,Object),
+   		at(Bullet,Location),
+   		Time),
+         [at(Object,Location),inside(Bullet,Gun)]).
  */
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e',42).
-then(if((loc_at(Shoot, Tloc), inside(A, Inside))), initiates(shoot(ShootP_Num3_V, Inside, Shoot), at(loc_at(A, Tloc), Initiates), Initiates11)).
 
- /*  reactive_rule([ holds(loc_at(Shoot,Tloc),Holds),
-   		holds(inside(A,Inside),Holds)
+ /*  (   at(Object, Location),
+       inside(Bullet, Gun)
+   ->  initiates(shoot(Agent, Gun, Object),
+                 at(Bullet, Location),
+                 Time)
+   ).
+ */
+if loc_at(Object, Location), inside(Bullet, Gun)then initiates(shoot(Agent, Gun, Object), loc_at(Bullet, Location)at Time, _).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e',42).
+
+ /*  reactive_rule([ loc_at(Object,Location),
+   		inside(Bullet,Gun)
    	      ],
-   	      [ initiates(shoot(ShootP_Num3_V,
-   				Inside,
-   				Shoot),
-   			  at(loc_at(A,Tloc),
-   			     Initiates),
-   			  Initiates11)
+   	      [ initiates(shoot(Agent,Gun,Object),
+   			  at(loc_at(Bullet,Location),
+   			     Time),
+   			  Initiates)
+   	      ]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e',42).
+
+ /*  reactive_rule([ loc_at(Object,Location),
+   		inside(Bullet,Gun)
+   	      ],
+   	      [ initiates(shoot(Agent,Gun,Object),
+   			  at(loc_at(Bullet,Location),
+   			     Time),
+   			  Initiates)
    	      ]).
  */
 
@@ -207,40 +338,410 @@ then(if((loc_at(Shoot, Tloc), inside(A, Inside))), initiates(shoot(ShootP_Num3_V
 % ({bullet} HoldsAt(Loaded(gun,bullet),time)) &
 % ({location} HoldsAt(At(agent,location),time) &
 %             HoldsAt(At(object,location),time)).
+ %  clausify_pnf=(happens(shoot(Agent, Gun, Object), Time)->holds_at(holding(Agent, Gun), Time), exists([Bullet], holds_at(loaded(Gun, Bullet), Time)), exists([Location],  (holds_at(at(Agent, Location), Time), holds_at(at(Object, Location), Time)))).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e',47).
 
- /*  (   happens(shoot(Agent, Gun, Object), Time)
-   ->  holds_at(holding(Agent, Gun), Time),
-       exists([Bullet], holds_at(loaded(Gun, Bullet), Time)),
-       exists([Location],
-               (holds_at(at(Agent, Location), Time), holds_at(at(Object, Location), Time)))
-   ).
+ /*  not(happens(shoot(Agent, Gun, Object), Time)) :-
+       (   not(holds_at(holding(Agent, Gun), Time))
+       ;   not(holds_at(loaded(Gun, Bullet), Time))
+       ;   not(holds_at(at(Agent, Location), Time))
+       ;   not(holds_at(at(Object, Location), Time))
+       ).
  */
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e',47).
-then(if(happens(shoot(Agent, Gun, Object), Time)),  (at(holding(Agent, Gun), Time), exists([Bullet], at(loaded(Gun, Bullet), Time)), exists([Location],  (at(loc_at(Agent, Location), Time), at(loc_at(Object, Location), Time))))).
- %  reactive_rule([happens(shoot(Agent, Gun, Object), Time)], [holds(holding(Agent, Gun), Time), exists([Bullet], at(loaded(Gun, Bullet), Time)), exists([Location],  (at(loc_at(Agent, Location), Time), at(loc_at(Object, Location), Time)))]).
+
+ /*  fix_axiom_head(Time) ->
+       [ not(happens(shoot(Agent, Gun, Object), Time)),
+          (->),
+         not(shoot(Agent, Gun, Object))
+       ].
+ */
+ %   pl=axiom(not(shoot(Agent, Gun, Object)), [(not(holding(Agent, Gun));not(loaded(Gun, Bullet));not(at(Agent, Location));not(at(Object, Location)))]).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e',47).
+
+ /*  not(holding(Agent, Gun));not(loaded(Gun, Bullet));not(at(Agent, Location));not(at(Object, Location)) ->
+       not(shoot(Agent, Gun, Object)).
+ */
+if not holding(Agent, Gun);not loaded(Gun, Bullet);not loc_at(Agent, Location);not loc_at(Object, Location)then not shoot(Agent, Gun, Object).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e',47).
+
+ /*   reactive_rule([  (not(holding(Agent, Gun));not(loaded(Gun, Bullet));not(loc_at(Agent, Location));not(loc_at(Object, Location)))
+                    ],
+                    [not(shoot(Agent, Gun, Object))]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e',47).
+
+ /*   reactive_rule([  (not(holding(Agent, Gun));not(loaded(Gun, Bullet));not(loc_at(Agent, Location));not(loc_at(Object, Location)))
+                    ],
+                    [not(shoot(Agent, Gun, Object))]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e',47).
+
+ /*  holds_at(holding(Agent, Gun), Time) :-
+       happens(shoot(Agent, Gun, Object), Time).
+ */
+
+ /*  pl=axiom(requires(shoot(Agent,Gun,Object),
+   	       When_Time),
+         [metreqs(shoot(Agent,Gun,Object))]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e',47).
+
+ /*  metreqs(shoot(Agent, Gun, Object)) ->
+       requires(shoot(Agent, Gun, Object), When_Time).
+ */
+if metreqs(shoot(Agent, Gun, Object))then requires(shoot(Agent, Gun, Object), When_Time).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e',47).
+
+ /*  reactive_rule([metreqs(shoot(Agent,Gun,Object))],
+   	      [ requires(shoot(Agent,Gun,Object),
+   			 When_Time)
+   	      ]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e',47).
+
+ /*  reactive_rule([metreqs(shoot(Agent,Gun,Object))],
+   	      [ requires(shoot(Agent,Gun,Object),
+   			 When_Time)
+   	      ]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e',47).
+
+ /*  fix_axiom_head(When_Time) ->
+       [ holds_at(metreqs(shoot(Agent, Gun, Object)),
+                  When_Time),
+          (->),
+         metreqs(shoot(Agent, Gun, Object))
+       ].
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e',47).
+
+ /*  pl=axiom(metreqs(shoot(Agent,Gun,Object)),
+         [holding(Agent,Gun)]).
+ */
+
+ /*  holding(Agent, Gun) ->
+       metreqs(shoot(Agent, Gun, Object)).
+ */
+if holding(Agent, Gun)then metreqs(shoot(Agent, Gun, Object)).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e',47).
+
+ /*  reactive_rule([holds(holding(Agent,Gun),Holds)],
+   	      [metreqs(shoot(Agent,Gun,Object))]).
+ */
+
+ /*  reactive_rule([holds(holding(Agent,Gun),Holds)],
+   	      [metreqs(shoot(Agent,Gun,Object))]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e',47).
+
+ /*  holds_at(loaded(Gun, Bullet), When_Time) :-
+       happens(shoot(Agent, Gun, Object), When_Time).
+ */
+
+ /*  pl=axiom(requires(shoot(Agent,Gun,Object),
+   	       When_Time),
+         [metreqs(shoot(Agent,Gun,Object))]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e',47).
+
+ /*  metreqs(shoot(Agent, Gun, Object)) ->
+       requires(shoot(Agent, Gun, Object), When_Time).
+ */
+if metreqs(shoot(Agent, Gun, Object))then requires(shoot(Agent, Gun, Object), When_Time).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e',47).
+
+ /*  reactive_rule([metreqs(shoot(Agent,Gun,Object))],
+   	      [ requires(shoot(Agent,Gun,Object),
+   			 When_Time)
+   	      ]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e',47).
+
+ /*  reactive_rule([metreqs(shoot(Agent,Gun,Object))],
+   	      [ requires(shoot(Agent,Gun,Object),
+   			 When_Time)
+   	      ]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e',47).
+
+ /*  fix_axiom_head(When_Time) ->
+       [ holds_at(metreqs(shoot(Agent, Gun, Object)),
+                  When_Time),
+          (->),
+         metreqs(shoot(Agent, Gun, Object))
+       ].
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e',47).
+
+ /*  pl=axiom(metreqs(shoot(Agent,Gun,Object)),
+         [loaded(Gun,Bullet)]).
+ */
+
+ /*  loaded(Gun, Bullet) ->
+       metreqs(shoot(Agent, Gun, Object)).
+ */
+if loaded(Gun, Bullet)then metreqs(shoot(Agent, Gun, Object)).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e',47).
+
+ /*  reactive_rule([loaded(Gun,Bullet)],
+   	      [metreqs(shoot(Agent,Gun,Object))]).
+ */
+
+ /*  reactive_rule([loaded(Gun,Bullet)],
+   	      [metreqs(shoot(Agent,Gun,Object))]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e',47).
+
+ /*  holds_at(at(Agent, Location), When_Time) :-
+       happens(shoot(Agent, Gun, Object), When_Time).
+ */
+
+ /*  pl=axiom(requires(shoot(Agent,Gun,Object),
+   	       When_Time),
+         [metreqs(shoot(Agent,Gun,Object))]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e',47).
+
+ /*  metreqs(shoot(Agent, Gun, Object)) ->
+       requires(shoot(Agent, Gun, Object), When_Time).
+ */
+if metreqs(shoot(Agent, Gun, Object))then requires(shoot(Agent, Gun, Object), When_Time).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e',47).
+
+ /*  reactive_rule([metreqs(shoot(Agent,Gun,Object))],
+   	      [ requires(shoot(Agent,Gun,Object),
+   			 When_Time)
+   	      ]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e',47).
+
+ /*  reactive_rule([metreqs(shoot(Agent,Gun,Object))],
+   	      [ requires(shoot(Agent,Gun,Object),
+   			 When_Time)
+   	      ]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e',47).
+
+ /*  fix_axiom_head(When_Time) ->
+       [ holds_at(metreqs(shoot(Agent, Gun, Object)),
+                  When_Time),
+          (->),
+         metreqs(shoot(Agent, Gun, Object))
+       ].
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e',47).
+
+ /*  pl=axiom(metreqs(shoot(Agent,Gun,Object)),
+         [at(Agent,Location)]).
+ */
+
+ /*  at(Agent, Location) ->
+       metreqs(shoot(Agent, Gun, Object)).
+ */
+if loc_at(Agent, Location)then metreqs(shoot(Agent, Gun, Object)).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e',47).
+
+ /*  reactive_rule([loc_at(Agent,Location)],
+   	      [metreqs(shoot(Agent,Gun,Object))]).
+ */
+
+ /*  reactive_rule([loc_at(Agent,Location)],
+   	      [metreqs(shoot(Agent,Gun,Object))]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e',47).
+
+ /*  holds_at(at(Object, Location), When_Time) :-
+       happens(shoot(Agent, Gun, Object), When_Time).
+ */
+
+ /*  pl=axiom(requires(shoot(Agent,Gun,Object),
+   	       When_Time),
+         [metreqs(shoot(Agent,Gun,Object))]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e',47).
+
+ /*  metreqs(shoot(Agent, Gun, Object)) ->
+       requires(shoot(Agent, Gun, Object), When_Time).
+ */
+if metreqs(shoot(Agent, Gun, Object))then requires(shoot(Agent, Gun, Object), When_Time).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e',47).
+
+ /*  reactive_rule([metreqs(shoot(Agent,Gun,Object))],
+   	      [ requires(shoot(Agent,Gun,Object),
+   			 When_Time)
+   	      ]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e',47).
+
+ /*  reactive_rule([metreqs(shoot(Agent,Gun,Object))],
+   	      [ requires(shoot(Agent,Gun,Object),
+   			 When_Time)
+   	      ]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e',47).
+
+ /*  fix_axiom_head(When_Time) ->
+       [ holds_at(metreqs(shoot(Agent, Gun, Object)),
+                  When_Time),
+          (->),
+         metreqs(shoot(Agent, Gun, Object))
+       ].
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e',47).
+
+ /*  pl=axiom(metreqs(shoot(Agent,Gun,Object)),
+         [at(Object,Location)]).
+ */
+
+ /*  at(Object, Location) ->
+       metreqs(shoot(Agent, Gun, Object)).
+ */
+if loc_at(Object, Location)then metreqs(shoot(Agent, Gun, Object)).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e',47).
+
+ /*  reactive_rule([loc_at(Object,Location)],
+   	      [metreqs(shoot(Agent,Gun,Object))]).
+ */
+
+ /*  reactive_rule([loc_at(Object,Location)],
+   	      [metreqs(shoot(Agent,Gun,Object))]).
+ */
 
 
 % [agent1,gun,agent2,time]
 % Happens(Shoot(agent1,gun,agent2),time) ->
 % Happens(ShootInjure(agent1,gun,agent2),time) |
 % Happens(ShootKill(agent1,gun,agent2),time).
+ %  clausify_pnf=(happens(shoot(Agent1, Gun, Agent2), Time)->happens(shootInjure(Agent1, Gun, Agent2), Time);happens(shootKill(Agent1, Gun, Agent2), Time)).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e',54).
 
- /*  happens(shoot(Agent1, Gun, Agent2), Time) ->
-       (   happens(shootInjure(Agent1, Gun, Agent2), Time)
-       ;   happens(shootKill(Agent1, Gun, Agent2), Time)
-       ).
+ /*  happens(shootInjure(Agent1, Gun, Agent2), Time) :-
+       not(happens(shootKill(Agent1, Gun, Agent2), Time)),
+       happens(shoot(Agent1, Gun, Agent2), Time).
  */
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e',54).
- then(if(happens(shoot(Agent1, Gun, Agent2), Time)),
-         (happens(shootInjure(Agent1, Gun, Agent2), Time);happens(shootKill(Agent1, Gun, Agent2), Time))).
 
- /*   reactive_rule([ happens(shoot(Agent1, Gun, Agent2),
-                              Time)
-                    ],
-                    [  (happens(shootInjure(Agent1, Gun, Agent2), Time);happens(shootKill(Agent1, Gun, Agent2), Time))
-                    ]).
+ /*  fix_axiom_head(Time) ->
+       [ happens(shootInjure(Agent1, Gun, Agent2), Time),
+          (->),
+         shootInjure(Agent1, Gun, Agent2)
+       ].
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e',54).
+
+ /*  pl=axiom(shootInjure(Agent1,Gun,Agent2),
+         [ not(shootKill(Agent1,Gun,Agent2)),
+   	shoot(Agent1,Gun,Agent2)
+         ]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e',54).
+
+ /*  (   not(shootKill(Agent1, Gun, Agent2)),
+       shoot(Agent1, Gun, Agent2)
+   ->  shootInjure(Agent1, Gun, Agent2)
+   ).
+ */
+if not shootKill(Agent1, Gun, Agent2), shoot(Agent1, Gun, Agent2)then shootInjure(Agent1, Gun, Agent2).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e',54).
+
+ /*  reactive_rule([ not(shootKill(Agent1,Gun,Agent2)),
+   		shoot(Agent1,Gun,Agent2)
+   	      ],
+   	      [shootInjure(Agent1,Gun,Agent2)]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e',54).
+
+ /*  reactive_rule([ not(shootKill(Agent1,Gun,Agent2)),
+   		shoot(Agent1,Gun,Agent2)
+   	      ],
+   	      [shootInjure(Agent1,Gun,Agent2)]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e',54).
+
+ /*  happens(shootKill(Agent1, Gun, Agent2), Time) :-
+       not(happens(shootInjure(Agent1, Gun, Agent2), Time)),
+       happens(shoot(Agent1, Gun, Agent2), Time).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e',54).
+
+ /*  fix_axiom_head(Time) ->
+       [ happens(shootKill(Agent1, Gun, Agent2), Time),
+          (->),
+         shootKill(Agent1, Gun, Agent2)
+       ].
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e',54).
+
+ /*  pl=axiom(shootKill(Agent1,Gun,Agent2),
+         [ not(shootInjure(Agent1,Gun,Agent2)),
+   	shoot(Agent1,Gun,Agent2)
+         ]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e',54).
+
+ /*  (   not(shootInjure(Agent1, Gun, Agent2)),
+       shoot(Agent1, Gun, Agent2)
+   ->  shootKill(Agent1, Gun, Agent2)
+   ).
+ */
+if not shootInjure(Agent1, Gun, Agent2), shoot(Agent1, Gun, Agent2)then shootKill(Agent1, Gun, Agent2).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e',54).
+
+ /*  reactive_rule([ not(shootInjure(Agent1,Gun,Agent2)),
+   		shoot(Agent1,Gun,Agent2)
+   	      ],
+   	      [shootKill(Agent1,Gun,Agent2)]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e',54).
+
+ /*  reactive_rule([ not(shootInjure(Agent1,Gun,Agent2)),
+   		shoot(Agent1,Gun,Agent2)
+   	      ],
+   	      [shootKill(Agent1,Gun,Agent2)]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e',54).
+
+ /*  not(happens(shoot(Agent1, Gun, Agent2), Time)) :-
+       not(happens(shootInjure(Agent1, Gun, Agent2), Time)),
+       not(happens(shootKill(Agent1, Gun, Agent2), Time)).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e',54).
+
+ /*  fix_axiom_head(Time) ->
+       [ not(happens(shoot(Agent1, Gun, Agent2), Time)),
+          (->),
+         not(shoot(Agent1, Gun, Agent2))
+       ].
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e',54).
+
+ /*  pl=axiom(not(shoot(Agent1,Gun,Agent2)),
+         [ not(shootInjure(Agent1,Gun,Agent2)),
+   	not(shootKill(Agent1,Gun,Agent2))
+         ]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e',54).
+
+ /*  (   not(shootInjure(Agent1, Gun, Agent2)),
+       not(shootKill(Agent1, Gun, Agent2))
+   ->  not(shoot(Agent1, Gun, Agent2))
+   ).
+ */
+if not shootInjure(Agent1, Gun, Agent2), not shootKill(Agent1, Gun, Agent2)then not shoot(Agent1, Gun, Agent2).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e',54).
+
+ /*  reactive_rule([ not(shootInjure(Agent1,Gun,Agent2)),
+   		not(shootKill(Agent1,Gun,Agent2))
+   	      ],
+   	      [not(shoot(Agent1,Gun,Agent2))]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e',54).
+
+ /*  reactive_rule([ not(shootInjure(Agent1,Gun,Agent2)),
+   		not(shootKill(Agent1,Gun,Agent2))
+   	      ],
+   	      [not(shoot(Agent1,Gun,Agent2))]).
  */
 
 
@@ -248,21 +749,127 @@ then(if(happens(shoot(Agent, Gun, Object), Time)),  (at(holding(Agent, Gun), Tim
 % HoldsAt(Inside(bullet,gun),time) &
 % Happens(ShootKill(agent1,gun,agent2),time) ->
 % Happens(Kill(bullet,agent2),time).
+ %  clausify_pnf=(holds_at(inside(Bullet, Gun), Time), happens(shootKill(Agent1, Gun, Agent2), Time)->happens(kill(Bullet, Agent2), Time)).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e',59).
 
- /*  (   holds_at(inside(Bullet, Gun), Time),
-       happens(shootKill(Agent1, Gun, Agent2), Time)
-   ->  happens(kill(Bullet, Agent2), Time)
-   ).
+ /*  happens(kill(Bullet, Agent2), Time) :-
+       holds_at(inside(Bullet, Gun), Time),
+       happens(shootKill(Agent1, Gun, Agent2), Time).
  */
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e',59).
-then(if((at(inside(Bullet, Gun), Time), happens(shootKill(Agent1, Gun, Agent2), Time))), happens(kill(Bullet, Agent2), Time)).
 
- /*  reactive_rule([ holds(inside(Bullet,Gun),Time),
-   		happens(shootKill(Agent1,Gun,Agent2),
-   			Time)
+ /*  fix_axiom_head(Time) ->
+       [ happens(kill(Bullet, Agent2), Time),
+          (->),
+         call(kill(Bullet, Agent2))
+       ].
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e',59).
+
+ /*  pl=axiom(call(kill(Bullet,Agent2)),
+         [ inside(Bullet,Gun),
+   	shootKill(Agent1,Gun,Agent2)
+         ]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e',59).
+
+ /*  (   inside(Bullet, Gun),
+       shootKill(Agent1, Gun, Agent2)
+   ->  call(kill(Bullet, Agent2))
+   ).
+ */
+if inside(Bullet, Gun), shootKill(Agent1, Gun, Agent2)then call(kill(Bullet, Agent2)).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e',59).
+
+ /*  reactive_rule([ inside(Bullet,Gun),
+   		shootKill(Agent1,Gun,Agent2)
    	      ],
-   	      [happens(kill(Bullet,Agent2),Time)]).
+   	      [call(kill(Bullet,Agent2))]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e',59).
+
+ /*  reactive_rule([ inside(Bullet,Gun),
+   		shootKill(Agent1,Gun,Agent2)
+   	      ],
+   	      [call(kill(Bullet,Agent2))]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e',59).
+
+ /*  not(holds_at(inside(Bullet, Gun), Time)) :-
+       happens(shootKill(Agent1, Gun, Agent2), Time),
+       not(happens(kill(Bullet, Agent2), Time)).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e',59).
+
+ /*  pl=axiom(not(inside(Bullet,Gun)),
+         [ shootKill(Agent1,Gun,Agent2),
+   	not(call(kill(Bullet,Agent2)))
+         ]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e',59).
+
+ /*  (   shootKill(Agent1, Gun, Agent2),
+       not(call(kill(Bullet, Agent2)))
+   ->  not(inside(Bullet, Gun))
+   ).
+ */
+if shootKill(Agent1, Gun, Agent2), not call(kill(Bullet, Agent2))then not inside(Bullet, Gun).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e',59).
+
+ /*  reactive_rule([ shootKill(Agent1,Gun,Agent2),
+   		not(call(kill(Bullet,Agent2)))
+   	      ],
+   	      [not(inside(Bullet,Gun))]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e',59).
+
+ /*  reactive_rule([ shootKill(Agent1,Gun,Agent2),
+   		not(call(kill(Bullet,Agent2)))
+   	      ],
+   	      [not(inside(Bullet,Gun))]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e',59).
+
+ /*  not(happens(shootKill(Agent1, Gun, Agent2), Time)) :-
+       holds_at(inside(Bullet, Gun), Time),
+       not(happens(kill(Bullet, Agent2), Time)).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e',59).
+
+ /*  fix_axiom_head(Time) ->
+       [ not(happens(shootKill(Agent1, Gun, Agent2), Time)),
+          (->),
+         not(shootKill(Agent1, Gun, Agent2))
+       ].
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e',59).
+
+ /*  pl=axiom(not(shootKill(Agent1,Gun,Agent2)),
+         [ inside(Bullet,Gun),
+   	not(call(kill(Bullet,Agent2)))
+         ]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e',59).
+
+ /*  (   inside(Bullet, Gun),
+       not(call(kill(Bullet, Agent2)))
+   ->  not(shootKill(Agent1, Gun, Agent2))
+   ).
+ */
+if inside(Bullet, Gun), not call(kill(Bullet, Agent2))then not shootKill(Agent1, Gun, Agent2).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e',59).
+
+ /*  reactive_rule([ inside(Bullet,Gun),
+   		not(call(kill(Bullet,Agent2)))
+   	      ],
+   	      [not(shootKill(Agent1,Gun,Agent2))]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e',59).
+
+ /*  reactive_rule([ inside(Bullet,Gun),
+   		not(call(kill(Bullet,Agent2)))
+   	      ],
+   	      [not(shootKill(Agent1,Gun,Agent2))]).
  */
 
 
@@ -270,23 +877,133 @@ then(if((at(inside(Bullet, Gun), Time), happens(shootKill(Agent1, Gun, Agent2), 
 % HoldsAt(Inside(bullet,gun),time) &
 % Happens(ShootInjure(agent1,gun,agent2),time) ->
 % Happens(Injure(bullet,agent2),time).
+ %  clausify_pnf=(holds_at(inside(Bullet, Gun), Time), happens(shootInjure(Agent1, Gun, Agent2), Time)->happens(injure(Bullet, Agent2), Time)).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e',64).
 
- /*  (   holds_at(inside(Bullet, Gun), Time),
-       happens(shootInjure(Agent1, Gun, Agent2), Time)
-   ->  happens(injure(Bullet, Agent2), Time)
-   ).
+ /*  happens(injure(Bullet, Agent2), Time) :-
+       holds_at(inside(Bullet, Gun), Time),
+       happens(shootInjure(Agent1, Gun, Agent2), Time).
  */
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e',64).
-then(if((at(inside(Bullet, Gun), Time), happens(shootInjure(Agent1, Gun, Agent2), Time))), happens(injure(Bullet, Agent2), Time)).
 
- /*  reactive_rule([ holds(inside(Bullet,Gun),Time),
-   		happens(shootInjure(Agent1,
-   				    Gun,
-   				    Agent2),
-   			Time)
+ /*  fix_axiom_head(Time) ->
+       [ happens(injure(Bullet, Agent2), Time),
+          (->),
+         injure(Bullet, Agent2)
+       ].
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e',64).
+
+ /*  pl=axiom(injure(Bullet,Agent2),
+         [ inside(Bullet,Gun),
+   	shootInjure(Agent1,Gun,Agent2)
+         ]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e',64).
+
+ /*  (   inside(Bullet, Gun),
+       shootInjure(Agent1, Gun, Agent2)
+   ->  injure(Bullet, Agent2)
+   ).
+ */
+if inside(Bullet, Gun), shootInjure(Agent1, Gun, Agent2)then injure(Bullet, Agent2).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e',64).
+
+ /*  reactive_rule([ inside(Bullet,Gun),
+   		shootInjure(Agent1,Gun,Agent2)
    	      ],
-   	      [happens(injure(Bullet,Agent2),Time)]).
+   	      [ happens(injure(Bullet,Agent2),
+   			Time_From,
+   			Time_Until)
+   	      ]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e',64).
+
+ /*  reactive_rule([ inside(Bullet,Gun),
+   		shootInjure(Agent1,Gun,Agent2)
+   	      ],
+   	      [ happens(injure(Bullet,Agent2),
+   			Time_From,
+   			Time_Until)
+   	      ]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e',64).
+
+ /*  not(holds_at(inside(Bullet, Gun), Time)) :-
+       happens(shootInjure(Agent1, Gun, Agent2), Time),
+       not(happens(injure(Bullet, Agent2), Time)).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e',64).
+
+ /*  pl=axiom(not(inside(Bullet,Gun)),
+         [ shootInjure(Agent1,Gun,Agent2),
+   	not(injure(Bullet,Agent2))
+         ]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e',64).
+
+ /*  (   shootInjure(Agent1, Gun, Agent2),
+       not(injure(Bullet, Agent2))
+   ->  not(inside(Bullet, Gun))
+   ).
+ */
+if shootInjure(Agent1, Gun, Agent2), not injure(Bullet, Agent2)then not inside(Bullet, Gun).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e',64).
+
+ /*  reactive_rule([ shootInjure(Agent1,Gun,Agent2),
+   		not(injure(Bullet,Agent2))
+   	      ],
+   	      [not(inside(Bullet,Gun))]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e',64).
+
+ /*  reactive_rule([ shootInjure(Agent1,Gun,Agent2),
+   		not(injure(Bullet,Agent2))
+   	      ],
+   	      [not(inside(Bullet,Gun))]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e',64).
+
+ /*  not(happens(shootInjure(Agent1, Gun, Agent2), Time)) :-
+       holds_at(inside(Bullet, Gun), Time),
+       not(happens(injure(Bullet, Agent2), Time)).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e',64).
+
+ /*  fix_axiom_head(Time) ->
+       [ not(happens(shootInjure(Agent1, Gun, Agent2), Time)),
+          (->),
+         not(shootInjure(Agent1, Gun, Agent2))
+       ].
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e',64).
+
+ /*  pl=axiom(not(shootInjure(Agent1,Gun,Agent2)),
+         [ inside(Bullet,Gun),
+   	not(injure(Bullet,Agent2))
+         ]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e',64).
+
+ /*  (   inside(Bullet, Gun),
+       not(injure(Bullet, Agent2))
+   ->  not(shootInjure(Agent1, Gun, Agent2))
+   ).
+ */
+if inside(Bullet, Gun), not injure(Bullet, Agent2)then not shootInjure(Agent1, Gun, Agent2).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e',64).
+
+ /*  reactive_rule([ inside(Bullet,Gun),
+   		not(injure(Bullet,Agent2))
+   	      ],
+   	      [not(shootInjure(Agent1,Gun,Agent2))]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e',64).
+
+ /*  reactive_rule([ inside(Bullet,Gun),
+   		not(injure(Bullet,Agent2))
+   	      ],
+   	      [not(shootInjure(Agent1,Gun,Agent2))]).
  */
 
 
@@ -294,22 +1011,135 @@ then(if((at(inside(Bullet, Gun), Time), happens(shootInjure(Agent1, Gun, Agent2)
 % Happens(Shoot(agent,gun,physobj),time) ->
 % Happens(ShootDamage(agent,gun,physobj),time) |
 % Happens(ShootDestroy(agent,gun,physobj),time).
+ %  clausify_pnf=(happens(shoot(Agent, Gun, Physobj), Time)->happens(shootDamage(Agent, Gun, Physobj), Time);happens(shootDestroy(Agent, Gun, Physobj), Time)).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e',69).
 
- /*  happens(shoot(Agent, Gun, Physobj), Time) ->
-       (   happens(shootDamage(Agent, Gun, Physobj), Time)
-       ;   happens(shootDestroy(Agent, Gun, Physobj), Time)
-       ).
+ /*  happens(shootDamage(Agent, Gun, Physobj), Time) :-
+       not(happens(shootDestroy(Agent, Gun, Physobj), Time)),
+       happens(shoot(Agent, Gun, Physobj), Time).
  */
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e',69).
- then(if(happens(shoot(Agent, Gun, Physobj), Time)),
-         (happens(shootDamage(Agent, Gun, Physobj), Time);happens(shootDestroy(Agent, Gun, Physobj), Time))).
 
- /*   reactive_rule([ happens(shoot(Agent, Gun, Physobj),
-                              Time)
-                    ],
-                    [  (happens(shootDamage(Agent, Gun, Physobj), Time);happens(shootDestroy(Agent, Gun, Physobj), Time))
-                    ]).
+ /*  fix_axiom_head(Time) ->
+       [ happens(shootDamage(Agent, Gun, Physobj), Time),
+          (->),
+         shootDamage(Agent, Gun, Physobj)
+       ].
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e',69).
+
+ /*  pl=axiom(shootDamage(Agent,Gun,Physobj),
+         [ not(shootDestroy(Agent,Gun,Physobj)),
+   	shoot(Agent,Gun,Physobj)
+         ]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e',69).
+
+ /*  (   not(shootDestroy(Agent, Gun, Physobj)),
+       shoot(Agent, Gun, Physobj)
+   ->  shootDamage(Agent, Gun, Physobj)
+   ).
+ */
+if not shootDestroy(Agent, Gun, Physobj), shoot(Agent, Gun, Physobj)then shootDamage(Agent, Gun, Physobj).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e',69).
+
+ /*  reactive_rule([ not(shootDestroy(Agent,Gun,Physobj)),
+   		shoot(Agent,Gun,Physobj)
+   	      ],
+   	      [shootDamage(Agent,Gun,Physobj)]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e',69).
+
+ /*  reactive_rule([ not(shootDestroy(Agent,Gun,Physobj)),
+   		shoot(Agent,Gun,Physobj)
+   	      ],
+   	      [shootDamage(Agent,Gun,Physobj)]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e',69).
+
+ /*  happens(shootDestroy(Agent, Gun, Physobj), Time) :-
+       not(happens(shootDamage(Agent, Gun, Physobj), Time)),
+       happens(shoot(Agent, Gun, Physobj), Time).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e',69).
+
+ /*  fix_axiom_head(Time) ->
+       [ happens(shootDestroy(Agent, Gun, Physobj), Time),
+          (->),
+         shootDestroy(Agent, Gun, Physobj)
+       ].
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e',69).
+
+ /*  pl=axiom(shootDestroy(Agent,Gun,Physobj),
+         [ not(shootDamage(Agent,Gun,Physobj)),
+   	shoot(Agent,Gun,Physobj)
+         ]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e',69).
+
+ /*  (   not(shootDamage(Agent, Gun, Physobj)),
+       shoot(Agent, Gun, Physobj)
+   ->  shootDestroy(Agent, Gun, Physobj)
+   ).
+ */
+if not shootDamage(Agent, Gun, Physobj), shoot(Agent, Gun, Physobj)then shootDestroy(Agent, Gun, Physobj).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e',69).
+
+ /*  reactive_rule([ not(shootDamage(Agent,Gun,Physobj)),
+   		shoot(Agent,Gun,Physobj)
+   	      ],
+   	      [shootDestroy(Agent,Gun,Physobj)]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e',69).
+
+ /*  reactive_rule([ not(shootDamage(Agent,Gun,Physobj)),
+   		shoot(Agent,Gun,Physobj)
+   	      ],
+   	      [shootDestroy(Agent,Gun,Physobj)]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e',69).
+
+ /*  not(happens(shoot(Agent, Gun, Physobj), Time)) :-
+       not(happens(shootDamage(Agent, Gun, Physobj), Time)),
+       not(happens(shootDestroy(Agent, Gun, Physobj), Time)).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e',69).
+
+ /*  fix_axiom_head(Time) ->
+       [ not(happens(shoot(Agent, Gun, Physobj), Time)),
+          (->),
+         not(shoot(Agent, Gun, Physobj))
+       ].
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e',69).
+
+ /*  pl=axiom(not(shoot(Agent,Gun,Physobj)),
+         [ not(shootDamage(Agent,Gun,Physobj)),
+   	not(shootDestroy(Agent,Gun,Physobj))
+         ]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e',69).
+
+ /*  (   not(shootDamage(Agent, Gun, Physobj)),
+       not(shootDestroy(Agent, Gun, Physobj))
+   ->  not(shoot(Agent, Gun, Physobj))
+   ).
+ */
+if not shootDamage(Agent, Gun, Physobj), not shootDestroy(Agent, Gun, Physobj)then not shoot(Agent, Gun, Physobj).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e',69).
+
+ /*  reactive_rule([ not(shootDamage(Agent,Gun,Physobj)),
+   		not(shootDestroy(Agent,Gun,Physobj))
+   	      ],
+   	      [not(shoot(Agent,Gun,Physobj))]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e',69).
+
+ /*  reactive_rule([ not(shootDamage(Agent,Gun,Physobj)),
+   		not(shootDestroy(Agent,Gun,Physobj))
+   	      ],
+   	      [not(shoot(Agent,Gun,Physobj))]).
  */
 
 
@@ -317,23 +1147,133 @@ then(if((at(inside(Bullet, Gun), Time), happens(shootInjure(Agent1, Gun, Agent2)
 % HoldsAt(Inside(bullet,gun),time) &
 % Happens(ShootDamage(agent,gun,physobj),time) ->
 % Happens(Damage(bullet,physobj),time).
+ %  clausify_pnf=(holds_at(inside(Bullet, Gun), Time), happens(shootDamage(Agent, Gun, Physobj), Time)->happens(damage(Bullet, Physobj), Time)).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e',74).
 
- /*  (   holds_at(inside(Bullet, Gun), Time),
-       happens(shootDamage(Agent, Gun, Physobj), Time)
-   ->  happens(damage(Bullet, Physobj), Time)
-   ).
+ /*  happens(damage(Bullet, Physobj), Time) :-
+       holds_at(inside(Bullet, Gun), Time),
+       happens(shootDamage(Agent, Gun, Physobj), Time).
  */
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e',74).
-then(if((at(inside(Bullet, Gun), Time), happens(shootDamage(Agent, Gun, Physobj), Time))), happens(damage(Bullet, Physobj), Time)).
 
- /*  reactive_rule([ holds(inside(Bullet,Gun),Time),
-   		happens(shootDamage(Agent,
-   				    Gun,
-   				    Physobj),
-   			Time)
+ /*  fix_axiom_head(Time) ->
+       [ happens(damage(Bullet, Physobj), Time),
+          (->),
+         damage(Bullet, Physobj)
+       ].
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e',74).
+
+ /*  pl=axiom(damage(Bullet,Physobj),
+         [ inside(Bullet,Gun),
+   	shootDamage(Agent,Gun,Physobj)
+         ]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e',74).
+
+ /*  (   inside(Bullet, Gun),
+       shootDamage(Agent, Gun, Physobj)
+   ->  damage(Bullet, Physobj)
+   ).
+ */
+if inside(Bullet, Gun), shootDamage(Agent, Gun, Physobj)then damage(Bullet, Physobj).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e',74).
+
+ /*  reactive_rule([ inside(Bullet,Gun),
+   		shootDamage(Agent,Gun,Physobj)
    	      ],
-   	      [happens(damage(Bullet,Physobj),Time)]).
+   	      [ happens(damage(Bullet,Physobj),
+   			Time_From,
+   			Time_Until)
+   	      ]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e',74).
+
+ /*  reactive_rule([ inside(Bullet,Gun),
+   		shootDamage(Agent,Gun,Physobj)
+   	      ],
+   	      [ happens(damage(Bullet,Physobj),
+   			Time_From,
+   			Time_Until)
+   	      ]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e',74).
+
+ /*  not(holds_at(inside(Bullet, Gun), Time)) :-
+       happens(shootDamage(Agent, Gun, Physobj), Time),
+       not(happens(damage(Bullet, Physobj), Time)).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e',74).
+
+ /*  pl=axiom(not(inside(Bullet,Gun)),
+         [ shootDamage(Agent,Gun,Physobj),
+   	not(damage(Bullet,Physobj))
+         ]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e',74).
+
+ /*  (   shootDamage(Agent, Gun, Physobj),
+       not(damage(Bullet, Physobj))
+   ->  not(inside(Bullet, Gun))
+   ).
+ */
+if shootDamage(Agent, Gun, Physobj), not damage(Bullet, Physobj)then not inside(Bullet, Gun).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e',74).
+
+ /*  reactive_rule([ shootDamage(Agent,Gun,Physobj),
+   		not(damage(Bullet,Physobj))
+   	      ],
+   	      [not(inside(Bullet,Gun))]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e',74).
+
+ /*  reactive_rule([ shootDamage(Agent,Gun,Physobj),
+   		not(damage(Bullet,Physobj))
+   	      ],
+   	      [not(inside(Bullet,Gun))]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e',74).
+
+ /*  not(happens(shootDamage(Agent, Gun, Physobj), Time)) :-
+       holds_at(inside(Bullet, Gun), Time),
+       not(happens(damage(Bullet, Physobj), Time)).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e',74).
+
+ /*  fix_axiom_head(Time) ->
+       [ not(happens(shootDamage(Agent, Gun, Physobj), Time)),
+          (->),
+         not(shootDamage(Agent, Gun, Physobj))
+       ].
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e',74).
+
+ /*  pl=axiom(not(shootDamage(Agent,Gun,Physobj)),
+         [ inside(Bullet,Gun),
+   	not(damage(Bullet,Physobj))
+         ]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e',74).
+
+ /*  (   inside(Bullet, Gun),
+       not(damage(Bullet, Physobj))
+   ->  not(shootDamage(Agent, Gun, Physobj))
+   ).
+ */
+if inside(Bullet, Gun), not damage(Bullet, Physobj)then not shootDamage(Agent, Gun, Physobj).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e',74).
+
+ /*  reactive_rule([ inside(Bullet,Gun),
+   		not(damage(Bullet,Physobj))
+   	      ],
+   	      [not(shootDamage(Agent,Gun,Physobj))]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e',74).
+
+ /*  reactive_rule([ inside(Bullet,Gun),
+   		not(damage(Bullet,Physobj))
+   	      ],
+   	      [not(shootDamage(Agent,Gun,Physobj))]).
  */
 
 
@@ -341,23 +1281,134 @@ then(if((at(inside(Bullet, Gun), Time), happens(shootDamage(Agent, Gun, Physobj)
 % HoldsAt(Inside(bullet,gun),time) &
 % Happens(ShootDestroy(agent,gun,physobj),time) ->
 % Happens(Destroy(bullet,physobj),time).
+ %  clausify_pnf=(holds_at(inside(Bullet, Gun), Time), happens(shootDestroy(Agent, Gun, Physobj), Time)->happens(destroy(Bullet, Physobj), Time)).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e',79).
 
- /*  (   holds_at(inside(Bullet, Gun), Time),
-       happens(shootDestroy(Agent, Gun, Physobj), Time)
-   ->  happens(destroy(Bullet, Physobj), Time)
-   ).
+ /*  happens(destroy(Bullet, Physobj), Time) :-
+       holds_at(inside(Bullet, Gun), Time),
+       happens(shootDestroy(Agent, Gun, Physobj), Time).
  */
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e',79).
-then(if((at(inside(Bullet, Gun), Time), happens(shootDestroy(Agent, Gun, Physobj), Time))), happens(destroy(Bullet, Physobj), Time)).
 
- /*  reactive_rule([ holds(inside(Bullet,Gun),Time),
-   		happens(shootDestroy(Agent,
-   				     Gun,
-   				     Physobj),
-   			Time)
+ /*  fix_axiom_head(Time) ->
+       [ happens(destroy(Bullet, Physobj), Time),
+          (->),
+         destroy(Bullet, Physobj)
+       ].
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e',79).
+
+ /*  pl=axiom(destroy(Bullet,Physobj),
+         [ inside(Bullet,Gun),
+   	shootDestroy(Agent,Gun,Physobj)
+         ]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e',79).
+
+ /*  (   inside(Bullet, Gun),
+       shootDestroy(Agent, Gun, Physobj)
+   ->  destroy(Bullet, Physobj)
+   ).
+ */
+if inside(Bullet, Gun), shootDestroy(Agent, Gun, Physobj)then destroy(Bullet, Physobj).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e',79).
+
+ /*  reactive_rule([ inside(Bullet,Gun),
+   		shootDestroy(Agent,Gun,Physobj)
    	      ],
-   	      [happens(destroy(Bullet,Physobj),Time)]).
+   	      [ happens(destroy(Bullet,Physobj),
+   			Time_From,
+   			Time_Until)
+   	      ]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e',79).
+
+ /*  reactive_rule([ inside(Bullet,Gun),
+   		shootDestroy(Agent,Gun,Physobj)
+   	      ],
+   	      [ happens(destroy(Bullet,Physobj),
+   			Time_From,
+   			Time_Until)
+   	      ]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e',79).
+
+ /*  not(holds_at(inside(Bullet, Gun), Time)) :-
+       happens(shootDestroy(Agent, Gun, Physobj), Time),
+       not(happens(destroy(Bullet, Physobj), Time)).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e',79).
+
+ /*  pl=axiom(not(inside(Bullet,Gun)),
+         [ shootDestroy(Agent,Gun,Physobj),
+   	not(destroy(Bullet,Physobj))
+         ]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e',79).
+
+ /*  (   shootDestroy(Agent, Gun, Physobj),
+       not(destroy(Bullet, Physobj))
+   ->  not(inside(Bullet, Gun))
+   ).
+ */
+if shootDestroy(Agent, Gun, Physobj), not destroy(Bullet, Physobj)then not inside(Bullet, Gun).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e',79).
+
+ /*  reactive_rule([ shootDestroy(Agent,Gun,Physobj),
+   		not(destroy(Bullet,Physobj))
+   	      ],
+   	      [not(inside(Bullet,Gun))]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e',79).
+
+ /*  reactive_rule([ shootDestroy(Agent,Gun,Physobj),
+   		not(destroy(Bullet,Physobj))
+   	      ],
+   	      [not(inside(Bullet,Gun))]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e',79).
+
+ /*  not(happens(shootDestroy(Agent, Gun, Physobj), Time)) :-
+       holds_at(inside(Bullet, Gun), Time),
+       not(happens(destroy(Bullet, Physobj), Time)).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e',79).
+
+ /*  fix_axiom_head(Time) ->
+       [ not(happens(shootDestroy(Agent, Gun, Physobj),
+                     Time)),
+          (->),
+         not(shootDestroy(Agent, Gun, Physobj))
+       ].
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e',79).
+
+ /*  pl=axiom(not(shootDestroy(Agent,Gun,Physobj)),
+         [ inside(Bullet,Gun),
+   	not(destroy(Bullet,Physobj))
+         ]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e',79).
+
+ /*  (   inside(Bullet, Gun),
+       not(destroy(Bullet, Physobj))
+   ->  not(shootDestroy(Agent, Gun, Physobj))
+   ).
+ */
+if inside(Bullet, Gun), not destroy(Bullet, Physobj)then not shootDestroy(Agent, Gun, Physobj).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e',79).
+
+ /*  reactive_rule([ inside(Bullet,Gun),
+   		not(destroy(Bullet,Physobj))
+   	      ],
+   	      [not(shootDestroy(Agent,Gun,Physobj))]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e',79).
+
+ /*  reactive_rule([ inside(Bullet,Gun),
+   		not(destroy(Bullet,Physobj))
+   	      ],
+   	      [not(shootDestroy(Agent,Gun,Physobj))]).
  */
 
 

@@ -1,8 +1,9 @@
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',664).
 % translate: unskipped  File: /pack/logicmoo_ec/ext/ec_sources/ecnet/Restaurant.e.lps 
 :-include(library('ec_planner/ec_test_incl')).
 :-expects_dialect(lps).
 % translate: begining  File: /pack/logicmoo_ec/ext/ec_sources/ecnet/Restaurant.e.lps 
-% Wed, 07 Oct 2020 11:03:04 GMT File: <stream>(0x55afadaa9c00)%;
+% Thu, 08 Oct 2020 19:06:37 GMT File: <stream>(0x5600a3a6f900)%;
 %; Copyright (c) 2005 IBM Corporation and others.
 %; All rights reserved. This program and the accompanying materials
 %; are made available under the terms of the Common Public License v1.0
@@ -13,241 +14,282 @@
 %; IBM - Initial implementation
 %;
 
-% sort restaurant: script
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Restaurant.e',11).
+% sort restaurant: script
 subsort(restaurant,script).
+ %  subsort(restaurant,script).
 
 % sort waiter: agent
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Restaurant.e',11).
 subsort(waiter,agent).
+ %  subsort(waiter,agent).
 
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Restaurant.e',13).
 % sort cook: agent
 subsort(cook,agent).
+ %  subsort(cook,agent).
 
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Restaurant.e',15).
 % function BillOf(restaurant): bill
-
- /*  axiom(function_argtypes(Function_ArgtypesP_Num3_V, billOf(restaurant), bill),
-       []).
- */
+ %  blue=function(billOf(restaurant)).
+ %  function(billOf(restaurant)).
+functions([billOf/1]).
+ %  functions([billOf/1]).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Restaurant.e',15).
-function_argtypes(Function_ArgtypesP_Num3_V1,
-		  billOf(restaurant),
-		  bill).
+mpred_prop(billOf(restaurant),function).
+ %  mpred_prop(billOf(restaurant),function).
+ %  blue=predicate(bill(restaurant,bill)).
  %  predicate(bill(restaurant,bill)).
- %  predicate(bill(restaurant,bill)).
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Restaurant.e',15).
 predicates([bill/2]).
-mpred_prop(bill(restaurant,bill),predicate).
-
- /*  axiom(functional_predicate(billOf, bill),
-       []).
- */
+ %  predicates([bill/2]).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Restaurant.e',15).
+mpred_prop(bill(restaurant,bill),predicate).
+ %  mpred_prop(bill(restaurant,bill),predicate).
+ %  pl=axiom(functional_predicate(billOf,bill),[]).
 functional_predicate(billOf,bill).
+ %  functional_predicate(billOf,bill).
+ %  pl=axiom(function_argtypes(bill,billOf(restaurant),bill),[]).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Restaurant.e',15).
+function_argtypes(bill,billOf(restaurant),bill).
+ %  function_argtypes(bill,billOf(restaurant),bill).
 resultIsa(billOf,bill).
+ %  resultIsa(billOf,bill).
 
 % function CookOf(restaurant): cook
-
- /*  axiom(function_argtypes(Function_ArgtypesP_Num3_V, cookOf(restaurant), cook),
-       []).
- */
+ %  blue=function(cookOf(restaurant)).
+ %  function(cookOf(restaurant)).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Restaurant.e',15).
-function_argtypes(Function_ArgtypesP_Num3_V1,
-		  cookOf(restaurant),
-		  cook).
- %  predicate(cook(restaurant,cook)).
+functions([cookOf/1]).
+ %  functions([cookOf/1]).
+mpred_prop(cookOf(restaurant),function).
+ %  mpred_prop(cookOf(restaurant),function).
+ %  blue=predicate(cook(restaurant,cook)).
  %  predicate(cook(restaurant,cook)).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Restaurant.e',15).
 predicates([cook/2]).
+ %  predicates([cook/2]).
 mpred_prop(cook(restaurant,cook),predicate).
-
- /*  axiom(functional_predicate(cookOf, cook),
-       []).
- */
+ %  mpred_prop(cook(restaurant,cook),predicate).
+ %  pl=axiom(functional_predicate(cookOf,cook),[]).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Restaurant.e',15).
 functional_predicate(cookOf,cook).
+ %  functional_predicate(cookOf,cook).
+ %  pl=axiom(function_argtypes(cook,cookOf(restaurant),cook),[]).
+function_argtypes(cook,cookOf(restaurant),cook).
+ %  function_argtypes(cook,cookOf(restaurant),cook).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Restaurant.e',15).
 resultIsa(cookOf,cook).
+ %  resultIsa(cookOf,cook).
 
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Restaurant.e',17).
 % function TableOf(restaurant): table
-
- /*  axiom(function_argtypes(Function_ArgtypesP_Num3_V, tableOf(restaurant), table),
-       []).
- */
+ %  blue=function(tableOf(restaurant)).
+ %  function(tableOf(restaurant)).
+functions([tableOf/1]).
+ %  functions([tableOf/1]).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Restaurant.e',17).
-function_argtypes(Function_ArgtypesP_Num3_V1,
-		  tableOf(restaurant),
-		  table).
+mpred_prop(tableOf(restaurant),function).
+ %  mpred_prop(tableOf(restaurant),function).
+ %  blue=predicate(table(restaurant,table)).
  %  predicate(table(restaurant,table)).
- %  predicate(table(restaurant,table)).
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Restaurant.e',17).
 predicates([(table)/2]).
-mpred_prop(table(restaurant,table),predicate).
-
- /*  axiom(functional_predicate(tableOf, table),
-       []).
- */
+ %  predicates([(table)/2]).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Restaurant.e',17).
+mpred_prop(table(restaurant,table),predicate).
+ %  mpred_prop(table(restaurant,table),predicate).
+ %  pl=axiom(functional_predicate(tableOf,table),[]).
 functional_predicate(tableOf,table).
+ %  functional_predicate(tableOf,table).
+ %  pl=axiom(function_argtypes(table,tableOf(restaurant),table),[]).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Restaurant.e',17).
+function_argtypes(table,tableOf(restaurant),table).
+ %  function_argtypes(table,tableOf(restaurant),table).
 resultIsa(tableOf,table).
+ %  resultIsa(tableOf,table).
 
 % function WaiterOf(restaurant): waiter
-
- /*  axiom(function_argtypes(Function_ArgtypesP_Num3_V, waiterOf(restaurant), waiter),
-       []).
- */
+ %  blue=function(waiterOf(restaurant)).
+ %  function(waiterOf(restaurant)).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Restaurant.e',17).
-function_argtypes(Function_ArgtypesP_Num3_V1,
-		  waiterOf(restaurant),
-		  waiter).
- %  predicate(waiter(restaurant,waiter)).
+functions([waiterOf/1]).
+ %  functions([waiterOf/1]).
+mpred_prop(waiterOf(restaurant),function).
+ %  mpred_prop(waiterOf(restaurant),function).
+ %  blue=predicate(waiter(restaurant,waiter)).
  %  predicate(waiter(restaurant,waiter)).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Restaurant.e',17).
 predicates([waiter/2]).
+ %  predicates([waiter/2]).
 mpred_prop(waiter(restaurant,waiter),predicate).
-
- /*  axiom(functional_predicate(waiterOf, waiter),
-       []).
- */
+ %  mpred_prop(waiter(restaurant,waiter),predicate).
+ %  pl=axiom(functional_predicate(waiterOf,waiter),[]).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Restaurant.e',17).
 functional_predicate(waiterOf,waiter).
+ %  functional_predicate(waiterOf,waiter).
+ %  pl=axiom(function_argtypes(waiter,waiterOf(restaurant),waiter),[]).
+function_argtypes(waiter,waiterOf(restaurant),waiter).
+ %  function_argtypes(waiter,waiterOf(restaurant),waiter).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Restaurant.e',17).
 resultIsa(waiterOf,waiter).
+ %  resultIsa(waiterOf,waiter).
 
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Restaurant.e',19).
 % function KitchenDoorOf(restaurant): door
-
- /*  axiom(function_argtypes(Function_ArgtypesP_Num3_V, kitchenDoorOf(restaurant), door),
-       []).
- */
+ %  blue=function(kitchenDoorOf(restaurant)).
+ %  function(kitchenDoorOf(restaurant)).
+functions([kitchenDoorOf/1]).
+ %  functions([kitchenDoorOf/1]).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Restaurant.e',19).
-function_argtypes(Function_ArgtypesP_Num3_V1,
-		  kitchenDoorOf(restaurant),
-		  door).
+mpred_prop(kitchenDoorOf(restaurant),function).
+ %  mpred_prop(kitchenDoorOf(restaurant),function).
+ %  blue=predicate(kitchenDoor(restaurant,door)).
  %  predicate(kitchenDoor(restaurant,door)).
- %  predicate(kitchenDoor(restaurant,door)).
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Restaurant.e',19).
 predicates([kitchenDoor/2]).
-mpred_prop(kitchenDoor(restaurant,door),predicate).
-
- /*  axiom(functional_predicate(kitchenDoorOf, kitchenDoor),
-       []).
- */
+ %  predicates([kitchenDoor/2]).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Restaurant.e',19).
+mpred_prop(kitchenDoor(restaurant,door),predicate).
+ %  mpred_prop(kitchenDoor(restaurant,door),predicate).
+ %  pl=axiom(functional_predicate(kitchenDoorOf,kitchenDoor),[]).
 functional_predicate(kitchenDoorOf,kitchenDoor).
+ %  functional_predicate(kitchenDoorOf,kitchenDoor).
+ %  pl=axiom(function_argtypes(kitchenDoor,kitchenDoorOf(restaurant),door),[]).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Restaurant.e',19).
+function_argtypes(kitchenDoor,kitchenDoorOf(restaurant),door).
+ %  function_argtypes(kitchenDoor,kitchenDoorOf(restaurant),door).
 resultIsa(kitchenDoorOf,door).
+ %  resultIsa(kitchenDoorOf,door).
 %; awaiting customer/waiter has set down bill on customer's table
 
 % fluent BeWaiter0(waiter)
- %  fluent(beWaiter0(waiter)).
+ %  blue=fluent(beWaiter0(waiter)).
  %  fluent(beWaiter0(waiter)).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Restaurant.e',21).
 fluents([beWaiter0/1]).
+ %  fluents([beWaiter0/1]).
 mpred_prop(beWaiter0(waiter),fluent).
+ %  mpred_prop(beWaiter0(waiter),fluent).
 
 
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Restaurant.e',24).
 %; awaiting customer order
 
 % fluent BeWaiter1(waiter)
- %  fluent(beWaiter1(waiter)).
+ %  blue=fluent(beWaiter1(waiter)).
  %  fluent(beWaiter1(waiter)).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Restaurant.e',24).
 fluents([beWaiter1/1]).
+ %  fluents([beWaiter1/1]).
 mpred_prop(beWaiter1(waiter),fluent).
+ %  mpred_prop(beWaiter1(waiter),fluent).
 
 
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Restaurant.e',27).
 %; has customer order
 
 % fluent BeWaiter2(waiter)
- %  fluent(beWaiter2(waiter)).
+ %  blue=fluent(beWaiter2(waiter)).
  %  fluent(beWaiter2(waiter)).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Restaurant.e',27).
 fluents([beWaiter2/1]).
+ %  fluents([beWaiter2/1]).
 mpred_prop(beWaiter2(waiter),fluent).
+ %  mpred_prop(beWaiter2(waiter),fluent).
 
 
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Restaurant.e',30).
 %; in kitchen
 
 % fluent BeWaiter3(waiter)
- %  fluent(beWaiter3(waiter)).
+ %  blue=fluent(beWaiter3(waiter)).
  %  fluent(beWaiter3(waiter)).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Restaurant.e',30).
 fluents([beWaiter3/1]).
+ %  fluents([beWaiter3/1]).
 mpred_prop(beWaiter3(waiter),fluent).
+ %  mpred_prop(beWaiter3(waiter),fluent).
 
 
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Restaurant.e',33).
 %; awaiting preparation of order
 
 % fluent BeWaiter4(waiter)
- %  fluent(beWaiter4(waiter)).
+ %  blue=fluent(beWaiter4(waiter)).
  %  fluent(beWaiter4(waiter)).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Restaurant.e',33).
 fluents([beWaiter4/1]).
+ %  fluents([beWaiter4/1]).
 mpred_prop(beWaiter4(waiter),fluent).
+ %  mpred_prop(beWaiter4(waiter),fluent).
 
 
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Restaurant.e',36).
 %; has order
 
 % fluent BeWaiter5(waiter)
- %  fluent(beWaiter5(waiter)).
+ %  blue=fluent(beWaiter5(waiter)).
  %  fluent(beWaiter5(waiter)).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Restaurant.e',36).
 fluents([beWaiter5/1]).
+ %  fluents([beWaiter5/1]).
 mpred_prop(beWaiter5(waiter),fluent).
+ %  mpred_prop(beWaiter5(waiter),fluent).
 
 
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Restaurant.e',39).
 %; back in dining room
 
 % fluent BeWaiter6(waiter)
- %  fluent(beWaiter6(waiter)).
+ %  blue=fluent(beWaiter6(waiter)).
  %  fluent(beWaiter6(waiter)).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Restaurant.e',39).
 fluents([beWaiter6/1]).
+ %  fluents([beWaiter6/1]).
 mpred_prop(beWaiter6(waiter),fluent).
+ %  mpred_prop(beWaiter6(waiter),fluent).
 
 
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Restaurant.e',42).
 %; order delivered to customer (can ask if all is OK)
 
 % fluent BeWaiter7(waiter)
- %  fluent(beWaiter7(waiter)).
+ %  blue=fluent(beWaiter7(waiter)).
  %  fluent(beWaiter7(waiter)).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Restaurant.e',42).
 fluents([beWaiter7/1]).
+ %  fluents([beWaiter7/1]).
 mpred_prop(beWaiter7(waiter),fluent).
+ %  mpred_prop(beWaiter7(waiter),fluent).
 
 
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Restaurant.e',45).
 %; customer has requested bill
 
 % fluent BeWaiter8(waiter)
- %  fluent(beWaiter8(waiter)).
+ %  blue=fluent(beWaiter8(waiter)).
  %  fluent(beWaiter8(waiter)).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Restaurant.e',45).
 fluents([beWaiter8/1]).
+ %  fluents([beWaiter8/1]).
 mpred_prop(beWaiter8(waiter),fluent).
+ %  mpred_prop(beWaiter8(waiter),fluent).
 
 
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Restaurant.e',48).
 %; waiter is holding bill
 
 % fluent BeWaiter9(waiter)
- %  fluent(beWaiter9(waiter)).
+ %  blue=fluent(beWaiter9(waiter)).
  %  fluent(beWaiter9(waiter)).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Restaurant.e',48).
 fluents([beWaiter9/1]).
+ %  fluents([beWaiter9/1]).
 mpred_prop(beWaiter9(waiter),fluent).
+ %  mpred_prop(beWaiter9(waiter),fluent).
 
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Restaurant.e',51).
 % xor BeWaiter0, BeWaiter1, BeWaiter2, BeWaiter3, BeWaiter4, BeWaiter5, BeWaiter6, BeWaiter7, BeWaiter8, BeWaiter9
 
- /*  ==>xor[ beWaiter0,
+ /*  red = ==>xor[ beWaiter0,
      beWaiter1,
      beWaiter2,
      beWaiter3,
@@ -271,6 +313,20 @@ mpred_prop(beWaiter9(waiter),fluent).
   beWaiter8,
   beWaiter9
 ].
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Restaurant.e',51).
+
+ /*  ==>xor[ beWaiter0,
+     beWaiter1,
+     beWaiter2,
+     beWaiter3,
+     beWaiter4,
+     beWaiter5,
+     beWaiter6,
+     beWaiter7,
+     beWaiter8,
+     beWaiter9
+   ].
+ */
 
 
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Restaurant.e',53).
@@ -281,23 +337,33 @@ mpred_prop(beWaiter9(waiter),fluent).
 %            time).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Restaurant.e',53).
 
- /*  axiom(terminates(greet(Waiter, Agent), beWaiter0(Waiter), Time),
-       [beWaiter0(Waiter)]).
+ /*  pl=axiom(terminates(greet(Waiter,Agent),
+   		 beWaiter0(Waiter),
+   		 Time),
+         [beWaiter0(Waiter)]).
  */
-
- /*  beWaiter0(Bewaiter0) ->
-       terminates(greet(Bewaiter0, Greet),
-                  beWaiter0(Bewaiter0),
-                  Terminates).
- */
-if beWaiter0(Bewaiter0)then terminates(greet(Bewaiter0, Greet), beWaiter0(Bewaiter0)at Terminates, _).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Restaurant.e',53).
 
- /*  reactive_rule([beWaiter0(Bewaiter0)],
-   	      [ terminates(greet(Bewaiter0,Greet),
-   			   at(beWaiter0(Bewaiter0),
-   			      Terminates),
-   			   Terminates6)
+ /*  beWaiter0(Waiter) ->
+       terminates(greet(Waiter, Agent),
+                  beWaiter0(Waiter),
+                  Time).
+ */
+if beWaiter0(Waiter)then terminates(greet(Waiter, Agent), beWaiter0(Waiter)at Time, _).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Restaurant.e',53).
+
+ /*  reactive_rule([beWaiter0(Waiter)],
+   	      [ terminates(greet(Waiter,Agent),
+   			   at(beWaiter0(Waiter),Time),
+   			   Terminates)
+   	      ]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Restaurant.e',53).
+
+ /*  reactive_rule([beWaiter0(Waiter)],
+   	      [ terminates(greet(Waiter,Agent),
+   			   at(beWaiter0(Waiter),Time),
+   			   Terminates)
    	      ]).
  */
 
@@ -309,23 +375,33 @@ if beWaiter0(Bewaiter0)then terminates(greet(Bewaiter0, Greet), beWaiter0(Bewait
 %           time).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Restaurant.e',60).
 
- /*  axiom(initiates(greet(Waiter, Agent), beWaiter1(Waiter), Time),
-       [beWaiter0(Waiter)]).
+ /*  pl=axiom(initiates(greet(Waiter,Agent),
+   		beWaiter1(Waiter),
+   		Time),
+         [beWaiter0(Waiter)]).
  */
-
- /*  beWaiter0(Bewaiter0) ->
-       initiates(greet(Bewaiter0, Greet),
-                 beWaiter1(Bewaiter0),
-                 Initiates).
- */
-if beWaiter0(Bewaiter0)then initiates(greet(Bewaiter0, Greet), beWaiter1(Bewaiter0)at Initiates, _).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Restaurant.e',60).
 
- /*  reactive_rule([beWaiter0(Bewaiter0)],
-   	      [ initiates(greet(Bewaiter0,Greet),
-   			  at(beWaiter1(Bewaiter0),
-   			     Initiates),
-   			  Initiates6)
+ /*  beWaiter0(Waiter) ->
+       initiates(greet(Waiter, Agent),
+                 beWaiter1(Waiter),
+                 Time).
+ */
+if beWaiter0(Waiter)then initiates(greet(Waiter, Agent), beWaiter1(Waiter)at Time, _).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Restaurant.e',60).
+
+ /*  reactive_rule([beWaiter0(Waiter)],
+   	      [ initiates(greet(Waiter,Agent),
+   			  at(beWaiter1(Waiter),Time),
+   			  Initiates)
+   	      ]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Restaurant.e',60).
+
+ /*  reactive_rule([beWaiter0(Waiter)],
+   	      [ initiates(greet(Waiter,Agent),
+   			  at(beWaiter1(Waiter),Time),
+   			  Initiates)
    	      ]).
  */
 
@@ -337,25 +413,33 @@ if beWaiter0(Bewaiter0)then initiates(greet(Bewaiter0, Greet), beWaiter1(Bewaite
 %            time).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Restaurant.e',66).
 
- /*  axiom(terminates(order(Agent, Waiter, Food), beWaiter1(Waiter), Time),
-       [beWaiter1(Waiter)]).
+ /*  pl=axiom(terminates(order(Agent,Waiter,Food),
+   		 beWaiter1(Waiter),
+   		 Time),
+         [beWaiter1(Waiter)]).
  */
-
- /*  beWaiter1(Bewaiter1) ->
-       terminates(order(OrderP_Num3_V, Bewaiter1, Order),
-                  beWaiter1(Bewaiter1),
-                  Terminates).
- */
-if beWaiter1(Bewaiter1)then terminates(order(OrderP_Num3_V, Bewaiter1, Order), beWaiter1(Bewaiter1)at Terminates, _).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Restaurant.e',66).
 
- /*  reactive_rule([beWaiter1(Bewaiter1)],
-   	      [ terminates(order(OrderP_Num3_V,
-   				 Bewaiter1,
-   				 Order),
-   			   at(beWaiter1(Bewaiter1),
-   			      Terminates),
-   			   Terminates8)
+ /*  beWaiter1(Waiter) ->
+       terminates(order(Agent, Waiter, Food),
+                  beWaiter1(Waiter),
+                  Time).
+ */
+if beWaiter1(Waiter)then terminates(order(Agent, Waiter, Food), beWaiter1(Waiter)at Time, _).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Restaurant.e',66).
+
+ /*  reactive_rule([beWaiter1(Waiter)],
+   	      [ terminates(order(Agent,Waiter,Food),
+   			   at(beWaiter1(Waiter),Time),
+   			   Terminates)
+   	      ]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Restaurant.e',66).
+
+ /*  reactive_rule([beWaiter1(Waiter)],
+   	      [ terminates(order(Agent,Waiter,Food),
+   			   at(beWaiter1(Waiter),Time),
+   			   Terminates)
    	      ]).
  */
 
@@ -367,25 +451,33 @@ if beWaiter1(Bewaiter1)then terminates(order(OrderP_Num3_V, Bewaiter1, Order), b
 %           time).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Restaurant.e',72).
 
- /*  axiom(initiates(order(Agent, Waiter, Food), beWaiter2(Waiter), Time),
-       [beWaiter1(Waiter)]).
+ /*  pl=axiom(initiates(order(Agent,Waiter,Food),
+   		beWaiter2(Waiter),
+   		Time),
+         [beWaiter1(Waiter)]).
  */
-
- /*  beWaiter1(Bewaiter1) ->
-       initiates(order(OrderP_Num3_V, Bewaiter1, Order),
-                 beWaiter2(Bewaiter1),
-                 Initiates).
- */
-if beWaiter1(Bewaiter1)then initiates(order(OrderP_Num3_V, Bewaiter1, Order), beWaiter2(Bewaiter1)at Initiates, _).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Restaurant.e',72).
 
- /*  reactive_rule([beWaiter1(Bewaiter1)],
-   	      [ initiates(order(OrderP_Num3_V,
-   				Bewaiter1,
-   				Order),
-   			  at(beWaiter2(Bewaiter1),
-   			     Initiates),
-   			  Initiates8)
+ /*  beWaiter1(Waiter) ->
+       initiates(order(Agent, Waiter, Food),
+                 beWaiter2(Waiter),
+                 Time).
+ */
+if beWaiter1(Waiter)then initiates(order(Agent, Waiter, Food), beWaiter2(Waiter)at Time, _).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Restaurant.e',72).
+
+ /*  reactive_rule([beWaiter1(Waiter)],
+   	      [ initiates(order(Agent,Waiter,Food),
+   			  at(beWaiter2(Waiter),Time),
+   			  Initiates)
+   	      ]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Restaurant.e',72).
+
+ /*  reactive_rule([beWaiter1(Waiter)],
+   	      [ initiates(order(Agent,Waiter,Food),
+   			  at(beWaiter2(Waiter),Time),
+   			  Initiates)
    	      ]).
  */
 
@@ -394,24 +486,145 @@ if beWaiter1(Bewaiter1)then initiates(order(OrderP_Num3_V, Bewaiter1, Order), be
 % WaiterOf(restaurant)=waiter &
 % HoldsAt(BeWaiter2(waiter),time) ->
 % Happens(WalkThroughDoor12(waiter,KitchenDoorOf(restaurant)),time).
+ %  clausify_pnf=(waiter(Restaurant, Waiter), holds_at(beWaiter2(Waiter), Time)->happens(walkThroughDoor12(Waiter, kitchenDoorOf(Restaurant)), Time)).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Restaurant.e',78).
 
+ /*  happens(walkThroughDoor12(Waiter, kitchenDoorOf(Restaurant)), Time) :-
+       waiter(Restaurant, Waiter),
+       holds_at(beWaiter2(Waiter), Time).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Restaurant.e',78).
+
+ /*  fix_axiom_head(Time) ->
+       [ happens(walkThroughDoor12(Waiter, kitchenDoorOf(Restaurant)),
+                 Time),
+          (->),
+         walkThroughDoor12(Waiter, kitchenDoorOf(Restaurant))
+       ].
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Restaurant.e',78).
+
+ /*  pl=axiom(walkThroughDoor12(Waiter,kitchenDoorOf(Restaurant)),
+         [waiter(Restaurant,Waiter),beWaiter2(Waiter)]).
+ */
+
  /*  (   waiter(Restaurant, Waiter),
-       holds_at(beWaiter2(Waiter), Time)
-   ->  happens(walkThroughDoor12(Waiter, kitchenDoorOf(Restaurant)),
-               Time)
+       beWaiter2(Waiter)
+   ->  walkThroughDoor12(Waiter, kitchenDoorOf(Restaurant))
    ).
  */
-if waiter(Restaurant, Waiter), beWaiter2(Waiter)at Time then happens(walkThroughDoor12(Waiter, kitchenDoorOf(Restaurant)), Time).
+if waiter(Restaurant, Waiter), beWaiter2(Waiter)then walkThroughDoor12(Waiter, kitchenDoorOf(Restaurant)).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Restaurant.e',78).
 
  /*  reactive_rule([ waiter(Restaurant,Waiter),
-   		holds(beWaiter2(Waiter),Time)
+   		beWaiter2(Waiter)
    	      ],
-   	      [ happens(walkThroughDoor12(Waiter,
-   					  kitchenDoorOf(Restaurant)),
-   			Time)
+   	      [ walkThroughDoor12(Waiter,
+   				  kitchenDoorOf(Restaurant))
    	      ]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Restaurant.e',78).
+
+ /*  reactive_rule([ waiter(Restaurant,Waiter),
+   		beWaiter2(Waiter)
+   	      ],
+   	      [ walkThroughDoor12(Waiter,
+   				  kitchenDoorOf(Restaurant))
+   	      ]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Restaurant.e',78).
+
+ /*  not(waiter(Restaurant, Waiter)) :-
+       holds_at(beWaiter2(Waiter), Time),
+       not(happens(walkThroughDoor12(Waiter,
+                                     kitchenDoorOf(Restaurant)),
+                   Time)).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Restaurant.e',78).
+
+ /*  fix_axiom_head(Time) ->
+       [holds_at(beWaiter2(Waiter), Time), ->, beWaiter2(Waiter)].
+ */
+
+ /*  fix_axiom_head(Time) ->
+       [ not(happens(walkThroughDoor12(Waiter,
+                                       kitchenDoorOf(Restaurant)),
+                     Time)),
+          (->),
+         not(walkThroughDoor12(Waiter, kitchenDoorOf(Restaurant)))
+       ].
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Restaurant.e',78).
+
+ /*  pl=axiom(not(waiter(Restaurant,Waiter)),
+         [ beWaiter2(Waiter),
+   	not(walkThroughDoor12(Waiter,
+   			      kitchenDoorOf(Restaurant)))
+         ]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Restaurant.e',78).
+
+ /*  (   beWaiter2(Waiter),
+       not(walkThroughDoor12(Waiter, kitchenDoorOf(Restaurant)))
+   ->  not(waiter(Restaurant, Waiter))
+   ).
+ */
+if beWaiter2(Waiter), not walkThroughDoor12(Waiter, kitchenDoorOf(Restaurant))then not waiter(Restaurant, Waiter).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Restaurant.e',78).
+
+ /*  reactive_rule([ beWaiter2(Waiter),
+   		not(walkThroughDoor12(Waiter,
+   				      kitchenDoorOf(Restaurant)))
+   	      ],
+   	      [not(waiter(Restaurant,Waiter))]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Restaurant.e',78).
+
+ /*  reactive_rule([ beWaiter2(Waiter),
+   		not(walkThroughDoor12(Waiter,
+   				      kitchenDoorOf(Restaurant)))
+   	      ],
+   	      [not(waiter(Restaurant,Waiter))]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Restaurant.e',78).
+
+ /*  not(holds_at(beWaiter2(Waiter), Time)) :-
+       waiter(Restaurant, Waiter),
+       not(happens(walkThroughDoor12(Waiter,
+                                     kitchenDoorOf(Restaurant)),
+                   Time)).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Restaurant.e',78).
+
+ /*  pl=axiom(not(beWaiter2(Waiter)),
+         [ waiter(Restaurant,Waiter),
+   	not(walkThroughDoor12(Waiter,
+   			      kitchenDoorOf(Restaurant)))
+         ]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Restaurant.e',78).
+
+ /*  (   waiter(Restaurant, Waiter),
+       not(walkThroughDoor12(Waiter, kitchenDoorOf(Restaurant)))
+   ->  not(beWaiter2(Waiter))
+   ).
+ */
+if waiter(Restaurant, Waiter), not walkThroughDoor12(Waiter, kitchenDoorOf(Restaurant))then not beWaiter2(Waiter).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Restaurant.e',78).
+
+ /*  reactive_rule([ waiter(Restaurant,Waiter),
+   		not(walkThroughDoor12(Waiter,
+   				      kitchenDoorOf(Restaurant)))
+   	      ],
+   	      [not(beWaiter2(Waiter))]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Restaurant.e',78).
+
+ /*  reactive_rule([ waiter(Restaurant,Waiter),
+   		not(walkThroughDoor12(Waiter,
+   				      kitchenDoorOf(Restaurant)))
+   	      ],
+   	      [not(beWaiter2(Waiter))]).
  */
 
 
@@ -424,34 +637,45 @@ if waiter(Restaurant, Waiter), beWaiter2(Waiter)at Time then happens(walkThrough
 %            time).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Restaurant.e',83).
 
- /*  axiom(terminates(walkThroughDoor12(Waiter, Door), beWaiter2(Waiter), Time),
-       [ beWaiter2(Waiter),
-         waiter(Restaurant, Waiter),
-         kitchenDoor(Restaurant, Door)
-       ]).
+ /*  pl=axiom(terminates(walkThroughDoor12(Waiter,Door),
+   		 beWaiter2(Waiter),
+   		 Time),
+         [ beWaiter2(Waiter),
+   	waiter(Restaurant,Waiter),
+   	kitchenDoor(Restaurant,Door)
+         ]).
  */
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Restaurant.e',83).
 
- /*  (   beWaiter2(Bewaiter2),
-       waiter(A, Bewaiter2),
-       kitchenDoor(A, Kitchendoor)
-   ->  terminates(walkThroughDoor12(Bewaiter2, Kitchendoor),
-                  beWaiter2(Bewaiter2),
-                  Terminates)
+ /*  (   beWaiter2(Waiter),
+       waiter(Restaurant, Waiter),
+       kitchenDoor(Restaurant, Door)
+   ->  terminates(walkThroughDoor12(Waiter, Door),
+                  beWaiter2(Waiter),
+                  Time)
    ).
  */
-if beWaiter2(Bewaiter2), waiter(A, Bewaiter2), kitchenDoor(A, Kitchendoor)then terminates(walkThroughDoor12(Bewaiter2, Kitchendoor), beWaiter2(Bewaiter2)at Terminates, _).
+if beWaiter2(Waiter), waiter(Restaurant, Waiter), kitchenDoor(Restaurant, Door)then terminates(walkThroughDoor12(Waiter, Door), beWaiter2(Waiter)at Time, _).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Restaurant.e',83).
 
- /*  reactive_rule([ holds(beWaiter2(Bewaiter2),Holds),
-   		waiter(A,Bewaiter2),
-   		kitchenDoor(A,Kitchendoor)
+ /*  reactive_rule([ beWaiter2(Waiter),
+   		waiter(Restaurant,Waiter),
+   		kitchenDoor(Restaurant,Door)
    	      ],
-   	      [ terminates(walkThroughDoor12(Bewaiter2,
-   					     Kitchendoor),
-   			   at(beWaiter2(Bewaiter2),
-   			      Terminates),
-   			   Terminates8)
+   	      [ terminates(walkThroughDoor12(Waiter,Door),
+   			   at(beWaiter2(Waiter),Time),
+   			   Terminates)
+   	      ]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Restaurant.e',83).
+
+ /*  reactive_rule([ beWaiter2(Waiter),
+   		waiter(Restaurant,Waiter),
+   		kitchenDoor(Restaurant,Door)
+   	      ],
+   	      [ terminates(walkThroughDoor12(Waiter,Door),
+   			   at(beWaiter2(Waiter),Time),
+   			   Terminates)
    	      ]).
  */
 
@@ -465,34 +689,45 @@ if beWaiter2(Bewaiter2), waiter(A, Bewaiter2), kitchenDoor(A, Kitchendoor)then t
 %           time).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Restaurant.e',91).
 
- /*  axiom(initiates(walkThroughDoor12(Waiter, Door), beWaiter3(Waiter), Time),
-       [ beWaiter2(Waiter),
-         waiter(Restaurant, Waiter),
-         kitchenDoor(Restaurant, Door)
-       ]).
+ /*  pl=axiom(initiates(walkThroughDoor12(Waiter,Door),
+   		beWaiter3(Waiter),
+   		Time),
+         [ beWaiter2(Waiter),
+   	waiter(Restaurant,Waiter),
+   	kitchenDoor(Restaurant,Door)
+         ]).
  */
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Restaurant.e',91).
 
- /*  (   beWaiter2(Bewaiter2),
-       waiter(A, Bewaiter2),
-       kitchenDoor(A, Kitchendoor)
-   ->  initiates(walkThroughDoor12(Bewaiter2, Kitchendoor),
-                 beWaiter3(Bewaiter2),
-                 Initiates)
+ /*  (   beWaiter2(Waiter),
+       waiter(Restaurant, Waiter),
+       kitchenDoor(Restaurant, Door)
+   ->  initiates(walkThroughDoor12(Waiter, Door),
+                 beWaiter3(Waiter),
+                 Time)
    ).
  */
-if beWaiter2(Bewaiter2), waiter(A, Bewaiter2), kitchenDoor(A, Kitchendoor)then initiates(walkThroughDoor12(Bewaiter2, Kitchendoor), beWaiter3(Bewaiter2)at Initiates, _).
+if beWaiter2(Waiter), waiter(Restaurant, Waiter), kitchenDoor(Restaurant, Door)then initiates(walkThroughDoor12(Waiter, Door), beWaiter3(Waiter)at Time, _).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Restaurant.e',91).
 
- /*  reactive_rule([ holds(beWaiter2(Bewaiter2),Holds),
-   		waiter(A,Bewaiter2),
-   		kitchenDoor(A,Kitchendoor)
+ /*  reactive_rule([ beWaiter2(Waiter),
+   		waiter(Restaurant,Waiter),
+   		kitchenDoor(Restaurant,Door)
    	      ],
-   	      [ initiates(walkThroughDoor12(Bewaiter2,
-   					    Kitchendoor),
-   			  at(beWaiter3(Bewaiter2),
-   			     Initiates),
-   			  Initiates8)
+   	      [ initiates(walkThroughDoor12(Waiter,Door),
+   			  at(beWaiter3(Waiter),Time),
+   			  Initiates)
+   	      ]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Restaurant.e',91).
+
+ /*  reactive_rule([ beWaiter2(Waiter),
+   		waiter(Restaurant,Waiter),
+   		kitchenDoor(Restaurant,Door)
+   	      ],
+   	      [ initiates(walkThroughDoor12(Waiter,Door),
+   			  at(beWaiter3(Waiter),Time),
+   			  Initiates)
    	      ]).
  */
 
@@ -501,34 +736,173 @@ if beWaiter2(Bewaiter2), waiter(A, Bewaiter2), kitchenDoor(A, Kitchendoor)then i
 % HoldsAt(BeWaiter3(WaiterOf(restaurant)),time) &
 % ({agent} HoldsAt(KnowOrder(WaiterOf(restaurant),agent,food),time)) ->
 % Happens(Order(WaiterOf(restaurant),CookOf(restaurant),food),time).
+ %  clausify_pnf=(holds_at(beWaiter3(waiterOf(Restaurant)), Time), exists([Agent], holds_at(knowOrder(waiterOf(Restaurant), Agent, Food), Time))->happens(order(waiterOf(Restaurant), cookOf(Restaurant), Food), Time)).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Restaurant.e',99).
 
- /*  (   holds_at(beWaiter3(waiterOf(Restaurant)), Time),
-       exists([Agent],
-              holds_at(knowOrder(waiterOf(Restaurant),
-                                 Agent,
-                                 Food),
-                       Time))
-   ->  happens(order(waiterOf(Restaurant),
-                     cookOf(Restaurant),
-                     Food),
-               Time)
+ /*  happens(order(waiterOf(Restaurant), cookOf(Restaurant), Food), Time) :-
+       holds_at(beWaiter3(waiterOf(Restaurant)), Time),
+       holds_at(knowOrder(waiterOf(Restaurant), Agent, Food),
+                Time).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Restaurant.e',99).
+
+ /*  fix_axiom_head(Time) ->
+       [ happens(order(waiterOf(Restaurant),
+                       cookOf(Restaurant),
+                       Food),
+                 Time),
+          (->),
+         order(waiterOf(Restaurant), cookOf(Restaurant), Food)
+       ].
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Restaurant.e',99).
+
+ /*  pl=axiom(order(waiterOf(Restaurant),
+   	    cookOf(Restaurant),
+   	    Food),
+         [ beWaiter3(waiterOf(Restaurant)),
+   	knowOrder(waiterOf(Restaurant),Agent,Food)
+         ]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Restaurant.e',99).
+
+ /*  (   beWaiter3(waiterOf(Restaurant)),
+       knowOrder(waiterOf(Restaurant), Agent, Food)
+   ->  order(waiterOf(Restaurant), cookOf(Restaurant), Food)
    ).
  */
-if beWaiter3(waiterOf(Restaurant))at Time, exists([Agent], knowOrder(waiterOf(Restaurant), Agent, Food)at Time)then happens(order(waiterOf(Restaurant), cookOf(Restaurant), Food), Time).
+if beWaiter3(waiterOf(Restaurant)), knowOrder(waiterOf(Restaurant), Agent, Food)then order(waiterOf(Restaurant), cookOf(Restaurant), Food).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Restaurant.e',99).
 
- /*  reactive_rule([ holds(beWaiter3(waiterOf(Restaurant)),Time),
-   		exists([Agent],
-   		       at(knowOrder(waiterOf(Restaurant),
-   				    Agent,
-   				    Food),
-   			  Time))
+ /*  reactive_rule([ beWaiter3(waiterOf(Restaurant)),
+   		holds(knowOrder(waiterOf(Restaurant),
+   				Agent,
+   				Food),
+   		      Holds)
    	      ],
    	      [ happens(order(waiterOf(Restaurant),
    			      cookOf(Restaurant),
    			      Food),
-   			Time)
+   			Time_From,
+   			Time_Until)
+   	      ]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Restaurant.e',99).
+
+ /*  reactive_rule([ beWaiter3(waiterOf(Restaurant)),
+   		holds(knowOrder(waiterOf(Restaurant),
+   				Agent,
+   				Food),
+   		      Holds)
+   	      ],
+   	      [ happens(order(waiterOf(Restaurant),
+   			      cookOf(Restaurant),
+   			      Food),
+   			Time_From,
+   			Time_Until)
+   	      ]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Restaurant.e',99).
+
+ /*  not(holds_at(beWaiter3(waiterOf(Restaurant)), Time)) :-
+       holds_at(knowOrder(waiterOf(Restaurant), Agent, Food),
+                Time),
+       not(happens(order(waiterOf(Restaurant),
+                         cookOf(Restaurant),
+                         Food),
+                   Time)).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Restaurant.e',99).
+
+ /*  pl=axiom(not(beWaiter3(waiterOf(Restaurant))),
+         [ knowOrder(waiterOf(Restaurant),Agent,Food),
+   	not(order(waiterOf(Restaurant),
+   		  cookOf(Restaurant),
+   		  Food))
+         ]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Restaurant.e',99).
+
+ /*  (   knowOrder(waiterOf(Restaurant), Agent, Food),
+       not(order(waiterOf(Restaurant), cookOf(Restaurant), Food))
+   ->  not(beWaiter3(waiterOf(Restaurant)))
+   ).
+ */
+if knowOrder(waiterOf(Restaurant), Agent, Food), not order(waiterOf(Restaurant), cookOf(Restaurant), Food)then not beWaiter3(waiterOf(Restaurant)).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Restaurant.e',99).
+
+ /*  reactive_rule([ holds(knowOrder(waiterOf(Restaurant),
+   				Agent,
+   				Food),
+   		      Holds7),
+   		not(order(waiterOf(Restaurant),
+   			  cookOf(Restaurant),
+   			  Food))
+   	      ],
+   	      [not(beWaiter3(waiterOf(Restaurant)))]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Restaurant.e',99).
+
+ /*  reactive_rule([ holds(knowOrder(waiterOf(Restaurant),
+   				Agent,
+   				Food),
+   		      Holds7),
+   		not(order(waiterOf(Restaurant),
+   			  cookOf(Restaurant),
+   			  Food))
+   	      ],
+   	      [not(beWaiter3(waiterOf(Restaurant)))]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Restaurant.e',99).
+
+ /*  not(holds_at(knowOrder(waiterOf(Restaurant), Agent, Food), Time)) :-
+       holds_at(beWaiter3(waiterOf(Restaurant)), Time),
+       not(happens(order(waiterOf(Restaurant),
+                         cookOf(Restaurant),
+                         Food),
+                   Time)).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Restaurant.e',99).
+
+ /*  pl=axiom(not(knowOrder(waiterOf(Restaurant),Agent,Food)),
+         [ beWaiter3(waiterOf(Restaurant)),
+   	not(order(waiterOf(Restaurant),
+   		  cookOf(Restaurant),
+   		  Food))
+         ]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Restaurant.e',99).
+
+ /*  (   beWaiter3(waiterOf(Restaurant)),
+       not(order(waiterOf(Restaurant), cookOf(Restaurant), Food))
+   ->  not(knowOrder(waiterOf(Restaurant), Agent, Food))
+   ).
+ */
+if beWaiter3(waiterOf(Restaurant)), not order(waiterOf(Restaurant), cookOf(Restaurant), Food)then not knowOrder(waiterOf(Restaurant), Agent, Food).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Restaurant.e',99).
+
+ /*  reactive_rule([ beWaiter3(waiterOf(Restaurant)),
+   		not(order(waiterOf(Restaurant),
+   			  cookOf(Restaurant),
+   			  Food))
+   	      ],
+   	      [ holds(not(knowOrder(waiterOf(Restaurant),
+   				    Agent,
+   				    Food)),
+   		      Holds8)
+   	      ]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Restaurant.e',99).
+
+ /*  reactive_rule([ beWaiter3(waiterOf(Restaurant)),
+   		not(order(waiterOf(Restaurant),
+   			  cookOf(Restaurant),
+   			  Food))
+   	      ],
+   	      [ holds(not(knowOrder(waiterOf(Restaurant),
+   				    Agent,
+   				    Food)),
+   		      Holds8)
    	      ]).
  */
 
@@ -542,33 +916,45 @@ if beWaiter3(waiterOf(Restaurant))at Time, exists([Agent], knowOrder(waiterOf(Re
 %            time).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Restaurant.e',104).
 
- /*  axiom(terminates(order(Waiter, Cook, Food), beWaiter3(Waiter), Time),
-       [ waiter(Restaurant, Waiter),
-         cook(Restaurant, Cook),
-         beWaiter3(Waiter)
-       ]).
+ /*  pl=axiom(terminates(order(Waiter,Cook,Food),
+   		 beWaiter3(Waiter),
+   		 Time),
+         [ waiter(Restaurant,Waiter),
+   	cook(Restaurant,Cook),
+   	beWaiter3(Waiter)
+         ]).
  */
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Restaurant.e',104).
 
- /*  (   waiter(A, Waiter5),
-       cook(A, Cook6),
-       beWaiter3(Waiter5)
-   ->  terminates(order(Waiter5, Cook6, Order),
-                  beWaiter3(Waiter5),
-                  Terminates)
+ /*  (   waiter(Restaurant, Waiter),
+       cook(Restaurant, Cook),
+       beWaiter3(Waiter)
+   ->  terminates(order(Waiter, Cook, Food),
+                  beWaiter3(Waiter),
+                  Time)
    ).
  */
-if waiter(A, Waiter5), cook(A, Cook6), beWaiter3(Waiter5)then terminates(order(Waiter5, Cook6, Order), beWaiter3(Waiter5)at Terminates, _).
+if waiter(Restaurant, Waiter), cook(Restaurant, Cook), beWaiter3(Waiter)then terminates(order(Waiter, Cook, Food), beWaiter3(Waiter)at Time, _).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Restaurant.e',104).
 
- /*  reactive_rule([ waiter(A,Waiter5),
-   		cook(A,Cook6),
-   		holds(beWaiter3(Waiter5),Holds)
+ /*  reactive_rule([ waiter(Restaurant,Waiter),
+   		cook(Restaurant,Cook),
+   		beWaiter3(Waiter)
    	      ],
-   	      [ terminates(order(Waiter5,Cook6,Order),
-   			   at(beWaiter3(Waiter5),
-   			      Terminates),
-   			   Terminates10)
+   	      [ terminates(order(Waiter,Cook,Food),
+   			   at(beWaiter3(Waiter),Time),
+   			   Terminates)
+   	      ]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Restaurant.e',104).
+
+ /*  reactive_rule([ waiter(Restaurant,Waiter),
+   		cook(Restaurant,Cook),
+   		beWaiter3(Waiter)
+   	      ],
+   	      [ terminates(order(Waiter,Cook,Food),
+   			   at(beWaiter3(Waiter),Time),
+   			   Terminates)
    	      ]).
  */
 
@@ -582,32 +968,45 @@ if waiter(A, Waiter5), cook(A, Cook6), beWaiter3(Waiter5)then terminates(order(W
 %           time).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Restaurant.e',112).
 
- /*  axiom(initiates(order(Waiter, Cook, Food), beWaiter4(Waiter), Time),
-       [ waiter(Restaurant, Waiter),
-         cook(Restaurant, Cook),
-         beWaiter3(Waiter)
-       ]).
+ /*  pl=axiom(initiates(order(Waiter,Cook,Food),
+   		beWaiter4(Waiter),
+   		Time),
+         [ waiter(Restaurant,Waiter),
+   	cook(Restaurant,Cook),
+   	beWaiter3(Waiter)
+         ]).
  */
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Restaurant.e',112).
 
- /*  (   waiter(A, Waiter5),
-       cook(A, Cook6),
-       beWaiter3(Waiter5)
-   ->  initiates(order(Waiter5, Cook6, Order),
-                 beWaiter4(Waiter5),
-                 Initiates)
+ /*  (   waiter(Restaurant, Waiter),
+       cook(Restaurant, Cook),
+       beWaiter3(Waiter)
+   ->  initiates(order(Waiter, Cook, Food),
+                 beWaiter4(Waiter),
+                 Time)
    ).
  */
-if waiter(A, Waiter5), cook(A, Cook6), beWaiter3(Waiter5)then initiates(order(Waiter5, Cook6, Order), beWaiter4(Waiter5)at Initiates, _).
+if waiter(Restaurant, Waiter), cook(Restaurant, Cook), beWaiter3(Waiter)then initiates(order(Waiter, Cook, Food), beWaiter4(Waiter)at Time, _).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Restaurant.e',112).
 
- /*  reactive_rule([ waiter(A,Waiter5),
-   		cook(A,Cook6),
-   		holds(beWaiter3(Waiter5),Holds)
+ /*  reactive_rule([ waiter(Restaurant,Waiter),
+   		cook(Restaurant,Cook),
+   		beWaiter3(Waiter)
    	      ],
-   	      [ initiates(order(Waiter5,Cook6,Order),
-   			  at(beWaiter4(Waiter5),Initiates),
-   			  Initiates10)
+   	      [ initiates(order(Waiter,Cook,Food),
+   			  at(beWaiter4(Waiter),Time),
+   			  Initiates)
+   	      ]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Restaurant.e',112).
+
+ /*  reactive_rule([ waiter(Restaurant,Waiter),
+   		cook(Restaurant,Cook),
+   		beWaiter3(Waiter)
+   	      ],
+   	      [ initiates(order(Waiter,Cook,Food),
+   			  at(beWaiter4(Waiter),Time),
+   			  Initiates)
    	      ]).
  */
 
@@ -617,27 +1016,194 @@ if waiter(A, Waiter5), cook(A, Cook6), beWaiter3(Waiter5)then initiates(order(Wa
 % ({agent} HoldsAt(KnowOrder(waiter,agent,food),time)) &
 % HoldsAt(FoodPrepared(food),time) ->
 % Happens(PickUp(waiter,food),time).
+ %  clausify_pnf=(holds_at(beWaiter4(Waiter), Time), exists([Agent], holds_at(knowOrder(Waiter, Agent, Food), Time)), holds_at(foodPrepared(Food), Time)->happens(pickUp(Waiter, Food), Time)).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Restaurant.e',120).
 
- /*  (   holds_at(beWaiter4(Waiter), Time),
-       exists([Agent],
-              holds_at(knowOrder(Waiter, Agent, Food), Time)),
-       holds_at(foodPrepared(Food), Time)
-   ->  happens(pickUp(Waiter, Food), Time)
+ /*  happens(pickUp(Waiter, Food), Time) :-
+       holds_at(beWaiter4(Waiter), Time),
+       holds_at(knowOrder(Waiter, Agent, Food), Time),
+       holds_at(foodPrepared(Food), Time).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Restaurant.e',120).
+
+ /*  fix_axiom_head(Time) ->
+       [ happens(pickUp(Waiter, Food), Time),
+          (->),
+         pickUp(Waiter, Food)
+       ].
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Restaurant.e',120).
+
+ /*  pl=axiom(pickUp(Waiter,Food),
+         [ beWaiter4(Waiter),
+   	knowOrder(Waiter,Agent,Food),
+   	foodPrepared(Food)
+         ]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Restaurant.e',120).
+
+ /*  (   beWaiter4(Waiter),
+       knowOrder(Waiter, Agent, Food),
+       foodPrepared(Food)
+   ->  pickUp(Waiter, Food)
    ).
  */
-if beWaiter4(Waiter)at Time, exists([Agent], knowOrder(Waiter, Agent, Food)at Time), foodPrepared(Food)at Time then happens(pickUp(Waiter, Food), Time).
+if beWaiter4(Waiter), knowOrder(Waiter, Agent, Food), foodPrepared(Food)then pickUp(Waiter, Food).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Restaurant.e',120).
 
- /*  reactive_rule([ holds(beWaiter4(Waiter),Time),
-   		exists([Agent],
-   		       at(knowOrder(Waiter,
-   				    Agent,
-   				    Food),
-   			  Time)),
-   		holds(foodPrepared(Food),Time)
+ /*  reactive_rule([ beWaiter4(Waiter),
+   		holds(knowOrder(Waiter,Agent,Food),
+   		      Holds),
+   		holds(foodPrepared(Food),Holds)
    	      ],
-   	      [happens(pickUp(Waiter,Food),Time)]).
+   	      [ happens(pickUp(Waiter,Food),
+   			Time_From,
+   			Time_Until)
+   	      ]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Restaurant.e',120).
+
+ /*  reactive_rule([ beWaiter4(Waiter),
+   		holds(knowOrder(Waiter,Agent,Food),
+   		      Holds),
+   		holds(foodPrepared(Food),Holds)
+   	      ],
+   	      [ happens(pickUp(Waiter,Food),
+   			Time_From,
+   			Time_Until)
+   	      ]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Restaurant.e',120).
+
+ /*  not(holds_at(beWaiter4(Waiter), Time)) :-
+       holds_at(knowOrder(Waiter, Agent, Food), Time),
+       holds_at(foodPrepared(Food), Time),
+       not(happens(pickUp(Waiter, Food), Time)).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Restaurant.e',120).
+
+ /*  pl=axiom(not(beWaiter4(Waiter)),
+         [ knowOrder(Waiter,Agent,Food),
+   	foodPrepared(Food),
+   	not(pickUp(Waiter,Food))
+         ]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Restaurant.e',120).
+
+ /*  (   knowOrder(Waiter, Agent, Food),
+       foodPrepared(Food),
+       not(pickUp(Waiter, Food))
+   ->  not(beWaiter4(Waiter))
+   ).
+ */
+if knowOrder(Waiter, Agent, Food), foodPrepared(Food), not pickUp(Waiter, Food)then not beWaiter4(Waiter).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Restaurant.e',120).
+
+ /*  reactive_rule([ holds(knowOrder(Waiter,Agent,Food),
+   		      Holds7),
+   		holds(foodPrepared(Food),Holds7),
+   		not(pickUp(Waiter,Food))
+   	      ],
+   	      [not(beWaiter4(Waiter))]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Restaurant.e',120).
+
+ /*  reactive_rule([ holds(knowOrder(Waiter,Agent,Food),
+   		      Holds7),
+   		holds(foodPrepared(Food),Holds7),
+   		not(pickUp(Waiter,Food))
+   	      ],
+   	      [not(beWaiter4(Waiter))]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Restaurant.e',120).
+
+ /*  not(holds_at(knowOrder(Waiter, Agent, Food), Time)) :-
+       holds_at(foodPrepared(Food), Time),
+       holds_at(beWaiter4(Waiter), Time),
+       not(happens(pickUp(Waiter, Food), Time)).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Restaurant.e',120).
+
+ /*  pl=axiom(not(knowOrder(Waiter,Agent,Food)),
+         [ foodPrepared(Food),
+   	beWaiter4(Waiter),
+   	not(pickUp(Waiter,Food))
+         ]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Restaurant.e',120).
+
+ /*  (   foodPrepared(Food),
+       beWaiter4(Waiter),
+       not(pickUp(Waiter, Food))
+   ->  not(knowOrder(Waiter, Agent, Food))
+   ).
+ */
+if foodPrepared(Food), beWaiter4(Waiter), not pickUp(Waiter, Food)then not knowOrder(Waiter, Agent, Food).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Restaurant.e',120).
+
+ /*  reactive_rule([ holds(foodPrepared(Food),Holds8),
+   		beWaiter4(Waiter),
+   		not(pickUp(Waiter,Food))
+   	      ],
+   	      [ holds(not(knowOrder(Waiter,
+   				    Agent,
+   				    Food)),
+   		      Holds9)
+   	      ]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Restaurant.e',120).
+
+ /*  reactive_rule([ holds(foodPrepared(Food),Holds8),
+   		beWaiter4(Waiter),
+   		not(pickUp(Waiter,Food))
+   	      ],
+   	      [ holds(not(knowOrder(Waiter,
+   				    Agent,
+   				    Food)),
+   		      Holds9)
+   	      ]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Restaurant.e',120).
+
+ /*  not(holds_at(foodPrepared(Food), Time)) :-
+       holds_at(knowOrder(Waiter, Agent, Food), Time),
+       holds_at(beWaiter4(Waiter), Time),
+       not(happens(pickUp(Waiter, Food), Time)).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Restaurant.e',120).
+
+ /*  pl=axiom(not(foodPrepared(Food)),
+         [ knowOrder(Waiter,Agent,Food),
+   	beWaiter4(Waiter),
+   	not(pickUp(Waiter,Food))
+         ]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Restaurant.e',120).
+
+ /*  (   knowOrder(Waiter, Agent, Food),
+       beWaiter4(Waiter),
+       not(pickUp(Waiter, Food))
+   ->  not(foodPrepared(Food))
+   ).
+ */
+if knowOrder(Waiter, Agent, Food), beWaiter4(Waiter), not pickUp(Waiter, Food)then not foodPrepared(Food).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Restaurant.e',120).
+
+ /*  reactive_rule([ holds(knowOrder(Waiter,Agent,Food),
+   		      Holds10),
+   		beWaiter4(Waiter),
+   		not(pickUp(Waiter,Food))
+   	      ],
+   	      [holds(not(foodPrepared(Food)),Holds11)]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Restaurant.e',120).
+
+ /*  reactive_rule([ holds(knowOrder(Waiter,Agent,Food),
+   		      Holds10),
+   		beWaiter4(Waiter),
+   		not(pickUp(Waiter,Food))
+   	      ],
+   	      [holds(not(foodPrepared(Food)),Holds11)]).
  */
 
 
@@ -649,27 +1215,43 @@ if beWaiter4(Waiter)at Time, exists([Agent], knowOrder(Waiter, Agent, Food)at Ti
 %            time).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Restaurant.e',126).
 
- /*  axiom(terminates(pickUp(Waiter, Food), beWaiter4(Waiter), Time),
-       [beWaiter4(Waiter), knowOrder(Waiter, Agent, Food)]).
+ /*  pl=axiom(terminates(pickUp(Waiter,Food),
+   		 beWaiter4(Waiter),
+   		 Time),
+         [ beWaiter4(Waiter),
+   	knowOrder(Waiter,Agent,Food)
+         ]).
  */
-
- /*  (   beWaiter4(Bewaiter4),
-       knowOrder(Bewaiter4, _, Knoworder)
-   ->  terminates(pickUp(Bewaiter4, Knoworder),
-                  beWaiter4(Bewaiter4),
-                  Terminates)
-   ).
- */
-if beWaiter4(Bewaiter4), knowOrder(Bewaiter4, _, Knoworder)then terminates(pickUp(Bewaiter4, Knoworder), beWaiter4(Bewaiter4)at Terminates, _).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Restaurant.e',126).
 
- /*  reactive_rule([ holds(beWaiter4(Bewaiter4),Holds),
-   		knowOrder(Bewaiter4,_,Knoworder)
+ /*  (   beWaiter4(Waiter),
+       knowOrder(Waiter, Agent, Food)
+   ->  terminates(pickUp(Waiter, Food),
+                  beWaiter4(Waiter),
+                  Time)
+   ).
+ */
+if beWaiter4(Waiter), knowOrder(Waiter, Agent, Food)then terminates(pickUp(Waiter, Food), beWaiter4(Waiter)at Time, _).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Restaurant.e',126).
+
+ /*  reactive_rule([ beWaiter4(Waiter),
+   		holds(knowOrder(Waiter,Agent,Food),
+   		      Holds)
    	      ],
-   	      [ terminates(pickUp(Bewaiter4,Knoworder),
-   			   at(beWaiter4(Bewaiter4),
-   			      Terminates),
-   			   Terminates8)
+   	      [ terminates(pickUp(Waiter,Food),
+   			   at(beWaiter4(Waiter),Time),
+   			   Terminates)
+   	      ]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Restaurant.e',126).
+
+ /*  reactive_rule([ beWaiter4(Waiter),
+   		holds(knowOrder(Waiter,Agent,Food),
+   		      Holds)
+   	      ],
+   	      [ terminates(pickUp(Waiter,Food),
+   			   at(beWaiter4(Waiter),Time),
+   			   Terminates)
    	      ]).
  */
 
@@ -682,27 +1264,43 @@ if beWaiter4(Bewaiter4), knowOrder(Bewaiter4, _, Knoworder)then terminates(pickU
 %           time).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Restaurant.e',133).
 
- /*  axiom(initiates(pickUp(Waiter, Food), beWaiter5(Waiter), Time),
-       [beWaiter4(Waiter), knowOrder(Waiter, Agent, Food)]).
+ /*  pl=axiom(initiates(pickUp(Waiter,Food),
+   		beWaiter5(Waiter),
+   		Time),
+         [ beWaiter4(Waiter),
+   	knowOrder(Waiter,Agent,Food)
+         ]).
  */
-
- /*  (   beWaiter4(Bewaiter4),
-       knowOrder(Bewaiter4, _, Knoworder)
-   ->  initiates(pickUp(Bewaiter4, Knoworder),
-                 beWaiter5(Bewaiter4),
-                 Initiates)
-   ).
- */
-if beWaiter4(Bewaiter4), knowOrder(Bewaiter4, _, Knoworder)then initiates(pickUp(Bewaiter4, Knoworder), beWaiter5(Bewaiter4)at Initiates, _).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Restaurant.e',133).
 
- /*  reactive_rule([ holds(beWaiter4(Bewaiter4),Holds),
-   		knowOrder(Bewaiter4,_,Knoworder)
+ /*  (   beWaiter4(Waiter),
+       knowOrder(Waiter, Agent, Food)
+   ->  initiates(pickUp(Waiter, Food),
+                 beWaiter5(Waiter),
+                 Time)
+   ).
+ */
+if beWaiter4(Waiter), knowOrder(Waiter, Agent, Food)then initiates(pickUp(Waiter, Food), beWaiter5(Waiter)at Time, _).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Restaurant.e',133).
+
+ /*  reactive_rule([ beWaiter4(Waiter),
+   		holds(knowOrder(Waiter,Agent,Food),
+   		      Holds)
    	      ],
-   	      [ initiates(pickUp(Bewaiter4,Knoworder),
-   			  at(beWaiter5(Bewaiter4),
-   			     Initiates),
-   			  Initiates8)
+   	      [ initiates(pickUp(Waiter,Food),
+   			  at(beWaiter5(Waiter),Time),
+   			  Initiates)
+   	      ]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Restaurant.e',133).
+
+ /*  reactive_rule([ beWaiter4(Waiter),
+   		holds(knowOrder(Waiter,Agent,Food),
+   		      Holds)
+   	      ],
+   	      [ initiates(pickUp(Waiter,Food),
+   			  at(beWaiter5(Waiter),Time),
+   			  Initiates)
    	      ]).
  */
 
@@ -711,24 +1309,145 @@ if beWaiter4(Bewaiter4), knowOrder(Bewaiter4, _, Knoworder)then initiates(pickUp
 % WaiterOf(restaurant)=waiter &
 % HoldsAt(BeWaiter5(waiter),time) ->
 % Happens(WalkThroughDoor21(waiter,KitchenDoorOf(restaurant)),time).
+ %  clausify_pnf=(waiter(Restaurant, Waiter), holds_at(beWaiter5(Waiter), Time)->happens(walkThroughDoor21(Waiter, kitchenDoorOf(Restaurant)), Time)).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Restaurant.e',140).
 
+ /*  happens(walkThroughDoor21(Waiter, kitchenDoorOf(Restaurant)), Time) :-
+       waiter(Restaurant, Waiter),
+       holds_at(beWaiter5(Waiter), Time).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Restaurant.e',140).
+
+ /*  fix_axiom_head(Time) ->
+       [ happens(walkThroughDoor21(Waiter, kitchenDoorOf(Restaurant)),
+                 Time),
+          (->),
+         walkThroughDoor21(Waiter, kitchenDoorOf(Restaurant))
+       ].
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Restaurant.e',140).
+
+ /*  pl=axiom(walkThroughDoor21(Waiter,kitchenDoorOf(Restaurant)),
+         [waiter(Restaurant,Waiter),beWaiter5(Waiter)]).
+ */
+
  /*  (   waiter(Restaurant, Waiter),
-       holds_at(beWaiter5(Waiter), Time)
-   ->  happens(walkThroughDoor21(Waiter, kitchenDoorOf(Restaurant)),
-               Time)
+       beWaiter5(Waiter)
+   ->  walkThroughDoor21(Waiter, kitchenDoorOf(Restaurant))
    ).
  */
-if waiter(Restaurant, Waiter), beWaiter5(Waiter)at Time then happens(walkThroughDoor21(Waiter, kitchenDoorOf(Restaurant)), Time).
+if waiter(Restaurant, Waiter), beWaiter5(Waiter)then walkThroughDoor21(Waiter, kitchenDoorOf(Restaurant)).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Restaurant.e',140).
 
  /*  reactive_rule([ waiter(Restaurant,Waiter),
-   		holds(beWaiter5(Waiter),Time)
+   		beWaiter5(Waiter)
    	      ],
-   	      [ happens(walkThroughDoor21(Waiter,
-   					  kitchenDoorOf(Restaurant)),
-   			Time)
+   	      [ walkThroughDoor21(Waiter,
+   				  kitchenDoorOf(Restaurant))
    	      ]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Restaurant.e',140).
+
+ /*  reactive_rule([ waiter(Restaurant,Waiter),
+   		beWaiter5(Waiter)
+   	      ],
+   	      [ walkThroughDoor21(Waiter,
+   				  kitchenDoorOf(Restaurant))
+   	      ]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Restaurant.e',140).
+
+ /*  not(waiter(Restaurant, Waiter)) :-
+       holds_at(beWaiter5(Waiter), Time),
+       not(happens(walkThroughDoor21(Waiter,
+                                     kitchenDoorOf(Restaurant)),
+                   Time)).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Restaurant.e',140).
+
+ /*  fix_axiom_head(Time) ->
+       [holds_at(beWaiter5(Waiter), Time), ->, beWaiter5(Waiter)].
+ */
+
+ /*  fix_axiom_head(Time) ->
+       [ not(happens(walkThroughDoor21(Waiter,
+                                       kitchenDoorOf(Restaurant)),
+                     Time)),
+          (->),
+         not(walkThroughDoor21(Waiter, kitchenDoorOf(Restaurant)))
+       ].
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Restaurant.e',140).
+
+ /*  pl=axiom(not(waiter(Restaurant,Waiter)),
+         [ beWaiter5(Waiter),
+   	not(walkThroughDoor21(Waiter,
+   			      kitchenDoorOf(Restaurant)))
+         ]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Restaurant.e',140).
+
+ /*  (   beWaiter5(Waiter),
+       not(walkThroughDoor21(Waiter, kitchenDoorOf(Restaurant)))
+   ->  not(waiter(Restaurant, Waiter))
+   ).
+ */
+if beWaiter5(Waiter), not walkThroughDoor21(Waiter, kitchenDoorOf(Restaurant))then not waiter(Restaurant, Waiter).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Restaurant.e',140).
+
+ /*  reactive_rule([ beWaiter5(Waiter),
+   		not(walkThroughDoor21(Waiter,
+   				      kitchenDoorOf(Restaurant)))
+   	      ],
+   	      [not(waiter(Restaurant,Waiter))]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Restaurant.e',140).
+
+ /*  reactive_rule([ beWaiter5(Waiter),
+   		not(walkThroughDoor21(Waiter,
+   				      kitchenDoorOf(Restaurant)))
+   	      ],
+   	      [not(waiter(Restaurant,Waiter))]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Restaurant.e',140).
+
+ /*  not(holds_at(beWaiter5(Waiter), Time)) :-
+       waiter(Restaurant, Waiter),
+       not(happens(walkThroughDoor21(Waiter,
+                                     kitchenDoorOf(Restaurant)),
+                   Time)).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Restaurant.e',140).
+
+ /*  pl=axiom(not(beWaiter5(Waiter)),
+         [ waiter(Restaurant,Waiter),
+   	not(walkThroughDoor21(Waiter,
+   			      kitchenDoorOf(Restaurant)))
+         ]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Restaurant.e',140).
+
+ /*  (   waiter(Restaurant, Waiter),
+       not(walkThroughDoor21(Waiter, kitchenDoorOf(Restaurant)))
+   ->  not(beWaiter5(Waiter))
+   ).
+ */
+if waiter(Restaurant, Waiter), not walkThroughDoor21(Waiter, kitchenDoorOf(Restaurant))then not beWaiter5(Waiter).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Restaurant.e',140).
+
+ /*  reactive_rule([ waiter(Restaurant,Waiter),
+   		not(walkThroughDoor21(Waiter,
+   				      kitchenDoorOf(Restaurant)))
+   	      ],
+   	      [not(beWaiter5(Waiter))]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Restaurant.e',140).
+
+ /*  reactive_rule([ waiter(Restaurant,Waiter),
+   		not(walkThroughDoor21(Waiter,
+   				      kitchenDoorOf(Restaurant)))
+   	      ],
+   	      [not(beWaiter5(Waiter))]).
  */
 
 
@@ -741,34 +1460,45 @@ if waiter(Restaurant, Waiter), beWaiter5(Waiter)at Time then happens(walkThrough
 %            time).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Restaurant.e',145).
 
- /*  axiom(terminates(walkThroughDoor21(Waiter, Door), beWaiter5(Waiter), Time),
-       [ beWaiter5(Waiter),
-         waiter(Restaurant, Waiter),
-         kitchenDoor(Restaurant, Door)
-       ]).
+ /*  pl=axiom(terminates(walkThroughDoor21(Waiter,Door),
+   		 beWaiter5(Waiter),
+   		 Time),
+         [ beWaiter5(Waiter),
+   	waiter(Restaurant,Waiter),
+   	kitchenDoor(Restaurant,Door)
+         ]).
  */
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Restaurant.e',145).
 
- /*  (   beWaiter5(Bewaiter5),
-       waiter(A, Bewaiter5),
-       kitchenDoor(A, Kitchendoor)
-   ->  terminates(walkThroughDoor21(Bewaiter5, Kitchendoor),
-                  beWaiter5(Bewaiter5),
-                  Terminates)
+ /*  (   beWaiter5(Waiter),
+       waiter(Restaurant, Waiter),
+       kitchenDoor(Restaurant, Door)
+   ->  terminates(walkThroughDoor21(Waiter, Door),
+                  beWaiter5(Waiter),
+                  Time)
    ).
  */
-if beWaiter5(Bewaiter5), waiter(A, Bewaiter5), kitchenDoor(A, Kitchendoor)then terminates(walkThroughDoor21(Bewaiter5, Kitchendoor), beWaiter5(Bewaiter5)at Terminates, _).
+if beWaiter5(Waiter), waiter(Restaurant, Waiter), kitchenDoor(Restaurant, Door)then terminates(walkThroughDoor21(Waiter, Door), beWaiter5(Waiter)at Time, _).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Restaurant.e',145).
 
- /*  reactive_rule([ holds(beWaiter5(Bewaiter5),Holds),
-   		waiter(A,Bewaiter5),
-   		kitchenDoor(A,Kitchendoor)
+ /*  reactive_rule([ beWaiter5(Waiter),
+   		waiter(Restaurant,Waiter),
+   		kitchenDoor(Restaurant,Door)
    	      ],
-   	      [ terminates(walkThroughDoor21(Bewaiter5,
-   					     Kitchendoor),
-   			   at(beWaiter5(Bewaiter5),
-   			      Terminates),
-   			   Terminates8)
+   	      [ terminates(walkThroughDoor21(Waiter,Door),
+   			   at(beWaiter5(Waiter),Time),
+   			   Terminates)
+   	      ]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Restaurant.e',145).
+
+ /*  reactive_rule([ beWaiter5(Waiter),
+   		waiter(Restaurant,Waiter),
+   		kitchenDoor(Restaurant,Door)
+   	      ],
+   	      [ terminates(walkThroughDoor21(Waiter,Door),
+   			   at(beWaiter5(Waiter),Time),
+   			   Terminates)
    	      ]).
  */
 
@@ -782,34 +1512,45 @@ if beWaiter5(Bewaiter5), waiter(A, Bewaiter5), kitchenDoor(A, Kitchendoor)then t
 %           time).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Restaurant.e',153).
 
- /*  axiom(initiates(walkThroughDoor21(Waiter, Door), beWaiter6(Waiter), Time),
-       [ beWaiter5(Waiter),
-         waiter(Restaurant, Waiter),
-         kitchenDoor(Restaurant, Door)
-       ]).
+ /*  pl=axiom(initiates(walkThroughDoor21(Waiter,Door),
+   		beWaiter6(Waiter),
+   		Time),
+         [ beWaiter5(Waiter),
+   	waiter(Restaurant,Waiter),
+   	kitchenDoor(Restaurant,Door)
+         ]).
  */
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Restaurant.e',153).
 
- /*  (   beWaiter5(Bewaiter5),
-       waiter(A, Bewaiter5),
-       kitchenDoor(A, Kitchendoor)
-   ->  initiates(walkThroughDoor21(Bewaiter5, Kitchendoor),
-                 beWaiter6(Bewaiter5),
-                 Initiates)
+ /*  (   beWaiter5(Waiter),
+       waiter(Restaurant, Waiter),
+       kitchenDoor(Restaurant, Door)
+   ->  initiates(walkThroughDoor21(Waiter, Door),
+                 beWaiter6(Waiter),
+                 Time)
    ).
  */
-if beWaiter5(Bewaiter5), waiter(A, Bewaiter5), kitchenDoor(A, Kitchendoor)then initiates(walkThroughDoor21(Bewaiter5, Kitchendoor), beWaiter6(Bewaiter5)at Initiates, _).
+if beWaiter5(Waiter), waiter(Restaurant, Waiter), kitchenDoor(Restaurant, Door)then initiates(walkThroughDoor21(Waiter, Door), beWaiter6(Waiter)at Time, _).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Restaurant.e',153).
 
- /*  reactive_rule([ holds(beWaiter5(Bewaiter5),Holds),
-   		waiter(A,Bewaiter5),
-   		kitchenDoor(A,Kitchendoor)
+ /*  reactive_rule([ beWaiter5(Waiter),
+   		waiter(Restaurant,Waiter),
+   		kitchenDoor(Restaurant,Door)
    	      ],
-   	      [ initiates(walkThroughDoor21(Bewaiter5,
-   					    Kitchendoor),
-   			  at(beWaiter6(Bewaiter5),
-   			     Initiates),
-   			  Initiates8)
+   	      [ initiates(walkThroughDoor21(Waiter,Door),
+   			  at(beWaiter6(Waiter),Time),
+   			  Initiates)
+   	      ]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Restaurant.e',153).
+
+ /*  reactive_rule([ beWaiter5(Waiter),
+   		waiter(Restaurant,Waiter),
+   		kitchenDoor(Restaurant,Door)
+   	      ],
+   	      [ initiates(walkThroughDoor21(Waiter,Door),
+   			  at(beWaiter6(Waiter),Time),
+   			  Initiates)
    	      ]).
  */
 
@@ -820,26 +1561,296 @@ if beWaiter5(Bewaiter5), waiter(A, Bewaiter5), kitchenDoor(A, Kitchendoor)then i
 % HoldsAt(BeWaiter6(waiter),time) &
 % HoldsAt(Holding(waiter,food),time) ->
 % Happens(PlaceOn(waiter,food,table),time).
+ %  clausify_pnf=(waiter(Restaurant, Waiter), table(Restaurant, Table), holds_at(beWaiter6(Waiter), Time), holds_at(holding(Waiter, Food), Time)->happens(placeOn(Waiter, Food, Table), Time)).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Restaurant.e',161).
+
+ /*  happens(placeOn(Waiter, Food, Table), Time) :-
+       waiter(Restaurant, Waiter),
+       ( table(Restaurant, Table)
+       ),
+       holds_at(beWaiter6(Waiter), Time),
+       holds_at(holding(Waiter, Food), Time).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Restaurant.e',161).
+
+ /*  fix_axiom_head(Time) ->
+       [ happens(placeOn(Waiter, Food, Table), Time),
+          (->),
+         placeOn(Waiter, Food, Table)
+       ].
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Restaurant.e',161).
+
+ /*  pl=axiom(placeOn(Waiter,Food,Table),
+         [ waiter(Restaurant,Waiter),
+   	table(Restaurant,Table),
+   	beWaiter6(Waiter),
+   	holding(Waiter,Food)
+         ]).
+ */
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Restaurant.e',161).
 
  /*  (   waiter(Restaurant, Waiter),
        ( table(Restaurant, Table)
        ),
-       holds_at(beWaiter6(Waiter), Time),
-       holds_at(holding(Waiter, Food), Time)
-   ->  happens(placeOn(Waiter, Food, Table), Time)
+       beWaiter6(Waiter),
+       holding(Waiter, Food)
+   ->  placeOn(Waiter, Food, Table)
    ).
  */
-if waiter(Restaurant, Waiter), table(Restaurant, Table), beWaiter6(Waiter)at Time, holding(Waiter, Food)at Time then happens(placeOn(Waiter, Food, Table), Time).
+if waiter(Restaurant, Waiter), table(Restaurant, Table), beWaiter6(Waiter), holding(Waiter, Food)then placeOn(Waiter, Food, Table).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Restaurant.e',161).
 
  /*  reactive_rule([ waiter(Restaurant,Waiter),
    		table(Restaurant,Table),
-   		holds(beWaiter6(Waiter),Time),
-   		holds(holding(Waiter,Food),Time)
+   		beWaiter6(Waiter),
+   		holds(holding(Waiter,Food),Holds)
    	      ],
    	      [ happens(placeOn(Waiter,Food,Table),
-   			Time)
+   			Time_From,
+   			Time_Until)
+   	      ]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Restaurant.e',161).
+
+ /*  reactive_rule([ waiter(Restaurant,Waiter),
+   		table(Restaurant,Table),
+   		beWaiter6(Waiter),
+   		holds(holding(Waiter,Food),Holds)
+   	      ],
+   	      [ happens(placeOn(Waiter,Food,Table),
+   			Time_From,
+   			Time_Until)
+   	      ]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Restaurant.e',161).
+
+ /*  not(waiter(Restaurant, Waiter)) :-
+       ( table(Restaurant, Table)
+       ),
+       holds_at(beWaiter6(Waiter), Time),
+       holds_at(holding(Waiter, Food), Time),
+       not(happens(placeOn(Waiter, Food, Table), Time)).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Restaurant.e',161).
+
+ /*  fix_axiom_head(Time) ->
+       [holds_at(beWaiter6(Waiter), Time), ->, beWaiter6(Waiter)].
+ */
+
+ /*  fix_axiom_head(Time) ->
+       [ holds_at(holding(Waiter, Food), Time),
+          (->),
+         holding(Waiter, Food)
+       ].
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Restaurant.e',161).
+
+ /*  fix_axiom_head(Time) ->
+       [ not(happens(placeOn(Waiter, Food, Table), Time)),
+          (->),
+         not(placeOn(Waiter, Food, Table))
+       ].
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Restaurant.e',161).
+
+ /*  pl=axiom(not(waiter(Restaurant,Waiter)),
+         [ table(Restaurant,Table),
+   	beWaiter6(Waiter),
+   	holding(Waiter,Food),
+   	not(placeOn(Waiter,Food,Table))
+         ]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Restaurant.e',161).
+
+ /*  (   ( table(Restaurant, Table)
+       ),
+       beWaiter6(Waiter),
+       holding(Waiter, Food),
+       not(placeOn(Waiter, Food, Table))
+   ->  not(waiter(Restaurant, Waiter))
+   ).
+ */
+if table(Restaurant, Table), beWaiter6(Waiter), holding(Waiter, Food), not placeOn(Waiter, Food, Table)then not waiter(Restaurant, Waiter).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Restaurant.e',161).
+
+ /*  reactive_rule([ table(Restaurant,Table),
+   		beWaiter6(Waiter),
+   		holds(holding(Waiter,Food),Holds8),
+   		not(placeOn(Waiter,Food,Table))
+   	      ],
+   	      [not(waiter(Restaurant,Waiter))]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Restaurant.e',161).
+
+ /*  reactive_rule([ table(Restaurant,Table),
+   		beWaiter6(Waiter),
+   		holds(holding(Waiter,Food),Holds8),
+   		not(placeOn(Waiter,Food,Table))
+   	      ],
+   	      [not(waiter(Restaurant,Waiter))]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Restaurant.e',161).
+
+ /*  not(table(Restaurant, Table)) :-
+       holds_at(beWaiter6(Waiter), Time),
+       holds_at(holding(Waiter, Food), Time),
+       waiter(Restaurant, Waiter),
+       not(happens(placeOn(Waiter, Food, Table), Time)).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Restaurant.e',161).
+
+ /*  fix_axiom_head(Time) ->
+       [holds_at(beWaiter6(Waiter), Time), ->, beWaiter6(Waiter)].
+ */
+
+ /*  fix_axiom_head(Time) ->
+       [ holds_at(holding(Waiter, Food), Time),
+          (->),
+         holding(Waiter, Food)
+       ].
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Restaurant.e',161).
+
+ /*  fix_axiom_head(Time) ->
+       [ not(happens(placeOn(Waiter, Food, Table), Time)),
+          (->),
+         not(placeOn(Waiter, Food, Table))
+       ].
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Restaurant.e',161).
+
+ /*  pl=axiom(not(table(Restaurant,Table)),
+         [ beWaiter6(Waiter),
+   	holding(Waiter,Food),
+   	waiter(Restaurant,Waiter),
+   	not(placeOn(Waiter,Food,Table))
+         ]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Restaurant.e',161).
+
+ /*  (   beWaiter6(Waiter),
+       holding(Waiter, Food),
+       waiter(Restaurant, Waiter),
+       not(placeOn(Waiter, Food, Table))
+   ->  not(table(Restaurant, Table))
+   ).
+ */
+if beWaiter6(Waiter), holding(Waiter, Food), waiter(Restaurant, Waiter), not placeOn(Waiter, Food, Table)then not table(Restaurant, Table).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Restaurant.e',161).
+
+ /*  reactive_rule([ beWaiter6(Waiter),
+   		holds(holding(Waiter,Food),Holds9),
+   		waiter(Restaurant,Waiter),
+   		not(placeOn(Waiter,Food,Table))
+   	      ],
+   	      [not(table(Restaurant,Table))]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Restaurant.e',161).
+
+ /*  reactive_rule([ beWaiter6(Waiter),
+   		holds(holding(Waiter,Food),Holds9),
+   		waiter(Restaurant,Waiter),
+   		not(placeOn(Waiter,Food,Table))
+   	      ],
+   	      [not(table(Restaurant,Table))]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Restaurant.e',161).
+
+ /*  not(holds_at(beWaiter6(Waiter), Time)) :-
+       holds_at(holding(Waiter, Food), Time),
+       ( table(Restaurant, Table)
+       ),
+       waiter(Restaurant, Waiter),
+       not(happens(placeOn(Waiter, Food, Table), Time)).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Restaurant.e',161).
+
+ /*  pl=axiom(not(beWaiter6(Waiter)),
+         [ holding(Waiter,Food),
+   	table(Restaurant,Table),
+   	waiter(Restaurant,Waiter),
+   	not(placeOn(Waiter,Food,Table))
+         ]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Restaurant.e',161).
+
+ /*  (   holding(Waiter, Food),
+       ( table(Restaurant, Table)
+       ),
+       waiter(Restaurant, Waiter),
+       not(placeOn(Waiter, Food, Table))
+   ->  not(beWaiter6(Waiter))
+   ).
+ */
+if holding(Waiter, Food), table(Restaurant, Table), waiter(Restaurant, Waiter), not placeOn(Waiter, Food, Table)then not beWaiter6(Waiter).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Restaurant.e',161).
+
+ /*  reactive_rule([ holds(holding(Waiter,Food),Holds10),
+   		table(Restaurant,Table),
+   		waiter(Restaurant,Waiter),
+   		not(placeOn(Waiter,Food,Table))
+   	      ],
+   	      [not(beWaiter6(Waiter))]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Restaurant.e',161).
+
+ /*  reactive_rule([ holds(holding(Waiter,Food),Holds10),
+   		table(Restaurant,Table),
+   		waiter(Restaurant,Waiter),
+   		not(placeOn(Waiter,Food,Table))
+   	      ],
+   	      [not(beWaiter6(Waiter))]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Restaurant.e',161).
+
+ /*  not(holds_at(holding(Waiter, Food), Time)) :-
+       holds_at(beWaiter6(Waiter), Time),
+       ( table(Restaurant, Table)
+       ),
+       waiter(Restaurant, Waiter),
+       not(happens(placeOn(Waiter, Food, Table), Time)).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Restaurant.e',161).
+
+ /*  pl=axiom(not(holding(Waiter,Food)),
+         [ beWaiter6(Waiter),
+   	table(Restaurant,Table),
+   	waiter(Restaurant,Waiter),
+   	not(placeOn(Waiter,Food,Table))
+         ]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Restaurant.e',161).
+
+ /*  (   beWaiter6(Waiter),
+       ( table(Restaurant, Table)
+       ),
+       waiter(Restaurant, Waiter),
+       not(placeOn(Waiter, Food, Table))
+   ->  not(holding(Waiter, Food))
+   ).
+ */
+if beWaiter6(Waiter), table(Restaurant, Table), waiter(Restaurant, Waiter), not placeOn(Waiter, Food, Table)then not holding(Waiter, Food).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Restaurant.e',161).
+
+ /*  reactive_rule([ beWaiter6(Waiter),
+   		table(Restaurant,Table),
+   		waiter(Restaurant,Waiter),
+   		not(placeOn(Waiter,Food,Table))
+   	      ],
+   	      [ holds(not(holding(Waiter,Food)),
+   		      Holds11)
+   	      ]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Restaurant.e',161).
+
+ /*  reactive_rule([ beWaiter6(Waiter),
+   		table(Restaurant,Table),
+   		waiter(Restaurant,Waiter),
+   		not(placeOn(Waiter,Food,Table))
+   	      ],
+   	      [ holds(not(holding(Waiter,Food)),
+   		      Holds11)
    	      ]).
  */
 
@@ -851,25 +1862,33 @@ if waiter(Restaurant, Waiter), table(Restaurant, Table), beWaiter6(Waiter)at Tim
 %            time).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Restaurant.e',168).
 
- /*  axiom(terminates(placeOn(Waiter, Food, Table), beWaiter6(Waiter), Time),
-       [beWaiter6(Waiter)]).
+ /*  pl=axiom(terminates(placeOn(Waiter,Food,Table),
+   		 beWaiter6(Waiter),
+   		 Time),
+         [beWaiter6(Waiter)]).
  */
-
- /*  beWaiter6(Bewaiter6) ->
-       terminates(placeOn(Bewaiter6, _, Placeon),
-                  beWaiter6(Bewaiter6),
-                  Terminates).
- */
-if beWaiter6(Bewaiter6)then terminates(placeOn(Bewaiter6, _, Placeon), beWaiter6(Bewaiter6)at Terminates, _).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Restaurant.e',168).
 
- /*  reactive_rule([holds(beWaiter6(Bewaiter6),Holds)],
-   	      [ terminates(placeOn(Bewaiter6,
-   				   _,
-   				   Placeon),
-   			   at(beWaiter6(Bewaiter6),
-   			      Terminates),
-   			   Terminates8)
+ /*  beWaiter6(Waiter) ->
+       terminates(placeOn(Waiter, Food, Table),
+                  beWaiter6(Waiter),
+                  Time).
+ */
+if beWaiter6(Waiter)then terminates(placeOn(Waiter, Food, Table), beWaiter6(Waiter)at Time, _).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Restaurant.e',168).
+
+ /*  reactive_rule([beWaiter6(Waiter)],
+   	      [ terminates(placeOn(Waiter,Food,Table),
+   			   at(beWaiter6(Waiter),Time),
+   			   Terminates)
+   	      ]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Restaurant.e',168).
+
+ /*  reactive_rule([beWaiter6(Waiter)],
+   	      [ terminates(placeOn(Waiter,Food,Table),
+   			   at(beWaiter6(Waiter),Time),
+   			   Terminates)
    	      ]).
  */
 
@@ -881,25 +1900,33 @@ if beWaiter6(Bewaiter6)then terminates(placeOn(Bewaiter6, _, Placeon), beWaiter6
 %           time).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Restaurant.e',174).
 
- /*  axiom(initiates(placeOn(Waiter, Food, Table), beWaiter7(Waiter), Time),
-       [beWaiter6(Waiter)]).
+ /*  pl=axiom(initiates(placeOn(Waiter,Food,Table),
+   		beWaiter7(Waiter),
+   		Time),
+         [beWaiter6(Waiter)]).
  */
-
- /*  beWaiter6(Bewaiter6) ->
-       initiates(placeOn(Bewaiter6, _, Placeon),
-                 beWaiter7(Bewaiter6),
-                 Initiates).
- */
-if beWaiter6(Bewaiter6)then initiates(placeOn(Bewaiter6, _, Placeon), beWaiter7(Bewaiter6)at Initiates, _).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Restaurant.e',174).
 
- /*  reactive_rule([holds(beWaiter6(Bewaiter6),Holds)],
-   	      [ initiates(placeOn(Bewaiter6,
-   				  _,
-   				  Placeon),
-   			  at(beWaiter7(Bewaiter6),
-   			     Initiates),
-   			  Initiates8)
+ /*  beWaiter6(Waiter) ->
+       initiates(placeOn(Waiter, Food, Table),
+                 beWaiter7(Waiter),
+                 Time).
+ */
+if beWaiter6(Waiter)then initiates(placeOn(Waiter, Food, Table), beWaiter7(Waiter)at Time, _).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Restaurant.e',174).
+
+ /*  reactive_rule([beWaiter6(Waiter)],
+   	      [ initiates(placeOn(Waiter,Food,Table),
+   			  at(beWaiter7(Waiter),Time),
+   			  Initiates)
+   	      ]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Restaurant.e',174).
+
+ /*  reactive_rule([beWaiter6(Waiter)],
+   	      [ initiates(placeOn(Waiter,Food,Table),
+   			  at(beWaiter7(Waiter),Time),
+   			  Initiates)
    	      ]).
  */
 
@@ -911,25 +1938,33 @@ if beWaiter6(Bewaiter6)then initiates(placeOn(Bewaiter6, _, Placeon), beWaiter7(
 %            time).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Restaurant.e',180).
 
- /*  axiom(terminates(request(Agent, Waiter, Bill), beWaiter7(Waiter), Time),
-       [beWaiter7(Waiter)]).
+ /*  pl=axiom(terminates(request(Agent,Waiter,Bill),
+   		 beWaiter7(Waiter),
+   		 Time),
+         [beWaiter7(Waiter)]).
  */
-
- /*  beWaiter7(Bewaiter7) ->
-       terminates(request(RequestP_Num3_V, Bewaiter7, Request),
-                  beWaiter7(Bewaiter7),
-                  Terminates).
- */
-if beWaiter7(Bewaiter7)then terminates(request(RequestP_Num3_V, Bewaiter7, Request), beWaiter7(Bewaiter7)at Terminates, _).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Restaurant.e',180).
 
- /*  reactive_rule([beWaiter7(Bewaiter7)],
-   	      [ terminates(request(RequestP_Num3_V,
-   				   Bewaiter7,
-   				   Request),
-   			   at(beWaiter7(Bewaiter7),
-   			      Terminates),
-   			   Terminates8)
+ /*  beWaiter7(Waiter) ->
+       terminates(request(Agent, Waiter, Bill),
+                  beWaiter7(Waiter),
+                  Time).
+ */
+if beWaiter7(Waiter)then terminates(request(Agent, Waiter, Bill), beWaiter7(Waiter)at Time, _).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Restaurant.e',180).
+
+ /*  reactive_rule([beWaiter7(Waiter)],
+   	      [ terminates(request(Agent,Waiter,Bill),
+   			   at(beWaiter7(Waiter),Time),
+   			   Terminates)
+   	      ]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Restaurant.e',180).
+
+ /*  reactive_rule([beWaiter7(Waiter)],
+   	      [ terminates(request(Agent,Waiter,Bill),
+   			   at(beWaiter7(Waiter),Time),
+   			   Terminates)
    	      ]).
  */
 
@@ -941,25 +1976,33 @@ if beWaiter7(Bewaiter7)then terminates(request(RequestP_Num3_V, Bewaiter7, Reque
 %           time).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Restaurant.e',186).
 
- /*  axiom(initiates(request(Agent, Waiter, Bill), beWaiter8(Waiter), Time),
-       [beWaiter7(Waiter)]).
+ /*  pl=axiom(initiates(request(Agent,Waiter,Bill),
+   		beWaiter8(Waiter),
+   		Time),
+         [beWaiter7(Waiter)]).
  */
-
- /*  beWaiter7(Bewaiter7) ->
-       initiates(request(RequestP_Num3_V, Bewaiter7, Request),
-                 beWaiter8(Bewaiter7),
-                 Initiates).
- */
-if beWaiter7(Bewaiter7)then initiates(request(RequestP_Num3_V, Bewaiter7, Request), beWaiter8(Bewaiter7)at Initiates, _).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Restaurant.e',186).
 
- /*  reactive_rule([beWaiter7(Bewaiter7)],
-   	      [ initiates(request(RequestP_Num3_V,
-   				  Bewaiter7,
-   				  Request),
-   			  at(beWaiter8(Bewaiter7),
-   			     Initiates),
-   			  Initiates8)
+ /*  beWaiter7(Waiter) ->
+       initiates(request(Agent, Waiter, Bill),
+                 beWaiter8(Waiter),
+                 Time).
+ */
+if beWaiter7(Waiter)then initiates(request(Agent, Waiter, Bill), beWaiter8(Waiter)at Time, _).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Restaurant.e',186).
+
+ /*  reactive_rule([beWaiter7(Waiter)],
+   	      [ initiates(request(Agent,Waiter,Bill),
+   			  at(beWaiter8(Waiter),Time),
+   			  Initiates)
+   	      ]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Restaurant.e',186).
+
+ /*  reactive_rule([beWaiter7(Waiter)],
+   	      [ initiates(request(Agent,Waiter,Bill),
+   			  at(beWaiter8(Waiter),Time),
+   			  Initiates)
    	      ]).
  */
 
@@ -969,22 +2012,204 @@ if beWaiter7(Bewaiter7)then initiates(request(RequestP_Num3_V, Bewaiter7, Reques
 % BillOf(restaurant)=bill &
 % HoldsAt(BeWaiter8(waiter),time) ->
 % Happens(PickUp(waiter,bill),time).
+ %  clausify_pnf=(waiter(Restaurant, Waiter), bill(Restaurant, Bill), holds_at(beWaiter8(Waiter), Time)->happens(pickUp(Waiter, Bill), Time)).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Restaurant.e',192).
+
+ /*  happens(pickUp(Waiter, Bill), Time) :-
+       waiter(Restaurant, Waiter),
+       bill(Restaurant, Bill),
+       holds_at(beWaiter8(Waiter), Time).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Restaurant.e',192).
+
+ /*  fix_axiom_head(Time) ->
+       [ happens(pickUp(Waiter, Bill), Time),
+          (->),
+         pickUp(Waiter, Bill)
+       ].
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Restaurant.e',192).
+
+ /*  pl=axiom(pickUp(Waiter,Bill),
+         [ waiter(Restaurant,Waiter),
+   	bill(Restaurant,Bill),
+   	beWaiter8(Waiter)
+         ]).
+ */
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Restaurant.e',192).
 
  /*  (   waiter(Restaurant, Waiter),
        bill(Restaurant, Bill),
-       holds_at(beWaiter8(Waiter), Time)
-   ->  happens(pickUp(Waiter, Bill), Time)
+       beWaiter8(Waiter)
+   ->  pickUp(Waiter, Bill)
    ).
  */
-if waiter(Restaurant, Waiter), bill(Restaurant, Bill), beWaiter8(Waiter)at Time then happens(pickUp(Waiter, Bill), Time).
+if waiter(Restaurant, Waiter), bill(Restaurant, Bill), beWaiter8(Waiter)then pickUp(Waiter, Bill).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Restaurant.e',192).
 
  /*  reactive_rule([ waiter(Restaurant,Waiter),
    		bill(Restaurant,Bill),
-   		holds(beWaiter8(Waiter),Time)
+   		beWaiter8(Waiter)
    	      ],
-   	      [happens(pickUp(Waiter,Bill),Time)]).
+   	      [ happens(pickUp(Waiter,Bill),
+   			Time_From,
+   			Time_Until)
+   	      ]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Restaurant.e',192).
+
+ /*  reactive_rule([ waiter(Restaurant,Waiter),
+   		bill(Restaurant,Bill),
+   		beWaiter8(Waiter)
+   	      ],
+   	      [ happens(pickUp(Waiter,Bill),
+   			Time_From,
+   			Time_Until)
+   	      ]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Restaurant.e',192).
+
+ /*  not(waiter(Restaurant, Waiter)) :-
+       bill(Restaurant, Bill),
+       holds_at(beWaiter8(Waiter), Time),
+       not(happens(pickUp(Waiter, Bill), Time)).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Restaurant.e',192).
+
+ /*  fix_axiom_head(Time) ->
+       [holds_at(beWaiter8(Waiter), Time), ->, beWaiter8(Waiter)].
+ */
+
+ /*  fix_axiom_head(Time) ->
+       [ not(happens(pickUp(Waiter, Bill), Time)),
+          (->),
+         not(pickUp(Waiter, Bill))
+       ].
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Restaurant.e',192).
+
+ /*  pl=axiom(not(waiter(Restaurant,Waiter)),
+         [ bill(Restaurant,Bill),
+   	beWaiter8(Waiter),
+   	not(pickUp(Waiter,Bill))
+         ]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Restaurant.e',192).
+
+ /*  (   bill(Restaurant, Bill),
+       beWaiter8(Waiter),
+       not(pickUp(Waiter, Bill))
+   ->  not(waiter(Restaurant, Waiter))
+   ).
+ */
+if bill(Restaurant, Bill), beWaiter8(Waiter), not pickUp(Waiter, Bill)then not waiter(Restaurant, Waiter).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Restaurant.e',192).
+
+ /*  reactive_rule([ bill(Restaurant,Bill),
+   		beWaiter8(Waiter),
+   		not(pickUp(Waiter,Bill))
+   	      ],
+   	      [not(waiter(Restaurant,Waiter))]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Restaurant.e',192).
+
+ /*  reactive_rule([ bill(Restaurant,Bill),
+   		beWaiter8(Waiter),
+   		not(pickUp(Waiter,Bill))
+   	      ],
+   	      [not(waiter(Restaurant,Waiter))]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Restaurant.e',192).
+
+ /*  not(bill(Restaurant, Bill)) :-
+       holds_at(beWaiter8(Waiter), Time),
+       waiter(Restaurant, Waiter),
+       not(happens(pickUp(Waiter, Bill), Time)).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Restaurant.e',192).
+
+ /*  fix_axiom_head(Time) ->
+       [holds_at(beWaiter8(Waiter), Time), ->, beWaiter8(Waiter)].
+ */
+
+ /*  fix_axiom_head(Time) ->
+       [ not(happens(pickUp(Waiter, Bill), Time)),
+          (->),
+         not(pickUp(Waiter, Bill))
+       ].
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Restaurant.e',192).
+
+ /*  pl=axiom(not(bill(Restaurant,Bill)),
+         [ beWaiter8(Waiter),
+   	waiter(Restaurant,Waiter),
+   	not(pickUp(Waiter,Bill))
+         ]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Restaurant.e',192).
+
+ /*  (   beWaiter8(Waiter),
+       waiter(Restaurant, Waiter),
+       not(pickUp(Waiter, Bill))
+   ->  not(bill(Restaurant, Bill))
+   ).
+ */
+if beWaiter8(Waiter), waiter(Restaurant, Waiter), not pickUp(Waiter, Bill)then not bill(Restaurant, Bill).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Restaurant.e',192).
+
+ /*  reactive_rule([ beWaiter8(Waiter),
+   		waiter(Restaurant,Waiter),
+   		not(pickUp(Waiter,Bill))
+   	      ],
+   	      [not(bill(Restaurant,Bill))]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Restaurant.e',192).
+
+ /*  reactive_rule([ beWaiter8(Waiter),
+   		waiter(Restaurant,Waiter),
+   		not(pickUp(Waiter,Bill))
+   	      ],
+   	      [not(bill(Restaurant,Bill))]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Restaurant.e',192).
+
+ /*  not(holds_at(beWaiter8(Waiter), Time)) :-
+       bill(Restaurant, Bill),
+       waiter(Restaurant, Waiter),
+       not(happens(pickUp(Waiter, Bill), Time)).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Restaurant.e',192).
+
+ /*  pl=axiom(not(beWaiter8(Waiter)),
+         [ bill(Restaurant,Bill),
+   	waiter(Restaurant,Waiter),
+   	not(pickUp(Waiter,Bill))
+         ]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Restaurant.e',192).
+
+ /*  (   bill(Restaurant, Bill),
+       waiter(Restaurant, Waiter),
+       not(pickUp(Waiter, Bill))
+   ->  not(beWaiter8(Waiter))
+   ).
+ */
+if bill(Restaurant, Bill), waiter(Restaurant, Waiter), not pickUp(Waiter, Bill)then not beWaiter8(Waiter).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Restaurant.e',192).
+
+ /*  reactive_rule([ bill(Restaurant,Bill),
+   		waiter(Restaurant,Waiter),
+   		not(pickUp(Waiter,Bill))
+   	      ],
+   	      [not(beWaiter8(Waiter))]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Restaurant.e',192).
+
+ /*  reactive_rule([ bill(Restaurant,Bill),
+   		waiter(Restaurant,Waiter),
+   		not(pickUp(Waiter,Bill))
+   	      ],
+   	      [not(beWaiter8(Waiter))]).
  */
 
 
@@ -995,23 +2220,33 @@ if waiter(Restaurant, Waiter), bill(Restaurant, Bill), beWaiter8(Waiter)at Time 
 %            time).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Restaurant.e',198).
 
- /*  axiom(terminates(pickUp(Waiter, Bill), beWaiter8(Waiter), Time),
-       [beWaiter8(Waiter)]).
+ /*  pl=axiom(terminates(pickUp(Waiter,Bill),
+   		 beWaiter8(Waiter),
+   		 Time),
+         [beWaiter8(Waiter)]).
  */
-
- /*  beWaiter8(Bewaiter8) ->
-       terminates(pickUp(Bewaiter8, Pickup),
-                  beWaiter8(Bewaiter8),
-                  Terminates).
- */
-if beWaiter8(Bewaiter8)then terminates(pickUp(Bewaiter8, Pickup), beWaiter8(Bewaiter8)at Terminates, _).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Restaurant.e',198).
 
- /*  reactive_rule([holds(beWaiter8(Bewaiter8),Holds)],
-   	      [ terminates(pickUp(Bewaiter8,Pickup),
-   			   at(beWaiter8(Bewaiter8),
-   			      Terminates),
-   			   Terminates7)
+ /*  beWaiter8(Waiter) ->
+       terminates(pickUp(Waiter, Bill),
+                  beWaiter8(Waiter),
+                  Time).
+ */
+if beWaiter8(Waiter)then terminates(pickUp(Waiter, Bill), beWaiter8(Waiter)at Time, _).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Restaurant.e',198).
+
+ /*  reactive_rule([beWaiter8(Waiter)],
+   	      [ terminates(pickUp(Waiter,Bill),
+   			   at(beWaiter8(Waiter),Time),
+   			   Terminates)
+   	      ]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Restaurant.e',198).
+
+ /*  reactive_rule([beWaiter8(Waiter)],
+   	      [ terminates(pickUp(Waiter,Bill),
+   			   at(beWaiter8(Waiter),Time),
+   			   Terminates)
    	      ]).
  */
 
@@ -1023,23 +2258,33 @@ if beWaiter8(Bewaiter8)then terminates(pickUp(Bewaiter8, Pickup), beWaiter8(Bewa
 %           time).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Restaurant.e',204).
 
- /*  axiom(initiates(pickUp(Waiter, Bill), beWaiter9(Waiter), Time),
-       [beWaiter8(Waiter)]).
+ /*  pl=axiom(initiates(pickUp(Waiter,Bill),
+   		beWaiter9(Waiter),
+   		Time),
+         [beWaiter8(Waiter)]).
  */
-
- /*  beWaiter8(Bewaiter8) ->
-       initiates(pickUp(Bewaiter8, Pickup),
-                 beWaiter9(Bewaiter8),
-                 Initiates).
- */
-if beWaiter8(Bewaiter8)then initiates(pickUp(Bewaiter8, Pickup), beWaiter9(Bewaiter8)at Initiates, _).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Restaurant.e',204).
 
- /*  reactive_rule([holds(beWaiter8(Bewaiter8),Holds)],
-   	      [ initiates(pickUp(Bewaiter8,Pickup),
-   			  at(beWaiter9(Bewaiter8),
-   			     Initiates),
-   			  Initiates7)
+ /*  beWaiter8(Waiter) ->
+       initiates(pickUp(Waiter, Bill),
+                 beWaiter9(Waiter),
+                 Time).
+ */
+if beWaiter8(Waiter)then initiates(pickUp(Waiter, Bill), beWaiter9(Waiter)at Time, _).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Restaurant.e',204).
+
+ /*  reactive_rule([beWaiter8(Waiter)],
+   	      [ initiates(pickUp(Waiter,Bill),
+   			  at(beWaiter9(Waiter),Time),
+   			  Initiates)
+   	      ]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Restaurant.e',204).
+
+ /*  reactive_rule([beWaiter8(Waiter)],
+   	      [ initiates(pickUp(Waiter,Bill),
+   			  at(beWaiter9(Waiter),Time),
+   			  Initiates)
    	      ]).
  */
 
@@ -1050,27 +2295,289 @@ if beWaiter8(Bewaiter8)then initiates(pickUp(Bewaiter8, Pickup), beWaiter9(Bewai
 % TableOf(restaurant)=table &
 % HoldsAt(BeWaiter9(waiter),time) ->
 % Happens(PlaceOn(waiter,bill,table),time).
+ %  clausify_pnf=(waiter(Restaurant, Waiter), bill(Restaurant, Bill), table(Restaurant, Table), holds_at(beWaiter9(Waiter), Time)->happens(placeOn(Waiter, Bill, Table), Time)).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Restaurant.e',210).
+
+ /*  happens(placeOn(Waiter, Bill, Table), Time) :-
+       waiter(Restaurant, Waiter),
+       bill(Restaurant, Bill),
+       ( table(Restaurant, Table)
+       ),
+       holds_at(beWaiter9(Waiter), Time).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Restaurant.e',210).
+
+ /*  fix_axiom_head(Time) ->
+       [ happens(placeOn(Waiter, Bill, Table), Time),
+          (->),
+         placeOn(Waiter, Bill, Table)
+       ].
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Restaurant.e',210).
+
+ /*  pl=axiom(placeOn(Waiter,Bill,Table),
+         [ waiter(Restaurant,Waiter),
+   	bill(Restaurant,Bill),
+   	table(Restaurant,Table),
+   	beWaiter9(Waiter)
+         ]).
+ */
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Restaurant.e',210).
 
  /*  (   waiter(Restaurant, Waiter),
        bill(Restaurant, Bill),
        ( table(Restaurant, Table)
        ),
-       holds_at(beWaiter9(Waiter), Time)
-   ->  happens(placeOn(Waiter, Bill, Table), Time)
+       beWaiter9(Waiter)
+   ->  placeOn(Waiter, Bill, Table)
    ).
  */
-if waiter(Restaurant, Waiter), bill(Restaurant, Bill), table(Restaurant, Table), beWaiter9(Waiter)at Time then happens(placeOn(Waiter, Bill, Table), Time).
+if waiter(Restaurant, Waiter), bill(Restaurant, Bill), table(Restaurant, Table), beWaiter9(Waiter)then placeOn(Waiter, Bill, Table).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Restaurant.e',210).
 
  /*  reactive_rule([ waiter(Restaurant,Waiter),
    		bill(Restaurant,Bill),
    		table(Restaurant,Table),
-   		holds(beWaiter9(Waiter),Time)
+   		beWaiter9(Waiter)
    	      ],
    	      [ happens(placeOn(Waiter,Bill,Table),
-   			Time)
+   			Time_From,
+   			Time_Until)
    	      ]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Restaurant.e',210).
+
+ /*  reactive_rule([ waiter(Restaurant,Waiter),
+   		bill(Restaurant,Bill),
+   		table(Restaurant,Table),
+   		beWaiter9(Waiter)
+   	      ],
+   	      [ happens(placeOn(Waiter,Bill,Table),
+   			Time_From,
+   			Time_Until)
+   	      ]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Restaurant.e',210).
+
+ /*  not(waiter(Restaurant, Waiter)) :-
+       bill(Restaurant, Bill),
+       ( table(Restaurant, Table)
+       ),
+       holds_at(beWaiter9(Waiter), Time),
+       not(happens(placeOn(Waiter, Bill, Table), Time)).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Restaurant.e',210).
+
+ /*  fix_axiom_head(Time) ->
+       [holds_at(beWaiter9(Waiter), Time), ->, beWaiter9(Waiter)].
+ */
+
+ /*  fix_axiom_head(Time) ->
+       [ not(happens(placeOn(Waiter, Bill, Table), Time)),
+          (->),
+         not(placeOn(Waiter, Bill, Table))
+       ].
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Restaurant.e',210).
+
+ /*  pl=axiom(not(waiter(Restaurant,Waiter)),
+         [ bill(Restaurant,Bill),
+   	table(Restaurant,Table),
+   	beWaiter9(Waiter),
+   	not(placeOn(Waiter,Bill,Table))
+         ]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Restaurant.e',210).
+
+ /*  (   bill(Restaurant, Bill),
+       ( table(Restaurant, Table)
+       ),
+       beWaiter9(Waiter),
+       not(placeOn(Waiter, Bill, Table))
+   ->  not(waiter(Restaurant, Waiter))
+   ).
+ */
+if bill(Restaurant, Bill), table(Restaurant, Table), beWaiter9(Waiter), not placeOn(Waiter, Bill, Table)then not waiter(Restaurant, Waiter).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Restaurant.e',210).
+
+ /*  reactive_rule([ bill(Restaurant,Bill),
+   		table(Restaurant,Table),
+   		beWaiter9(Waiter),
+   		not(placeOn(Waiter,Bill,Table))
+   	      ],
+   	      [not(waiter(Restaurant,Waiter))]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Restaurant.e',210).
+
+ /*  reactive_rule([ bill(Restaurant,Bill),
+   		table(Restaurant,Table),
+   		beWaiter9(Waiter),
+   		not(placeOn(Waiter,Bill,Table))
+   	      ],
+   	      [not(waiter(Restaurant,Waiter))]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Restaurant.e',210).
+
+ /*  not(bill(Restaurant, Bill)) :-
+       ( table(Restaurant, Table)
+       ),
+       holds_at(beWaiter9(Waiter), Time),
+       waiter(Restaurant, Waiter),
+       not(happens(placeOn(Waiter, Bill, Table), Time)).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Restaurant.e',210).
+
+ /*  fix_axiom_head(Time) ->
+       [holds_at(beWaiter9(Waiter), Time), ->, beWaiter9(Waiter)].
+ */
+
+ /*  fix_axiom_head(Time) ->
+       [ not(happens(placeOn(Waiter, Bill, Table), Time)),
+          (->),
+         not(placeOn(Waiter, Bill, Table))
+       ].
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Restaurant.e',210).
+
+ /*  pl=axiom(not(bill(Restaurant,Bill)),
+         [ table(Restaurant,Table),
+   	beWaiter9(Waiter),
+   	waiter(Restaurant,Waiter),
+   	not(placeOn(Waiter,Bill,Table))
+         ]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Restaurant.e',210).
+
+ /*  (   ( table(Restaurant, Table)
+       ),
+       beWaiter9(Waiter),
+       waiter(Restaurant, Waiter),
+       not(placeOn(Waiter, Bill, Table))
+   ->  not(bill(Restaurant, Bill))
+   ).
+ */
+if table(Restaurant, Table), beWaiter9(Waiter), waiter(Restaurant, Waiter), not placeOn(Waiter, Bill, Table)then not bill(Restaurant, Bill).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Restaurant.e',210).
+
+ /*  reactive_rule([ table(Restaurant,Table),
+   		beWaiter9(Waiter),
+   		waiter(Restaurant,Waiter),
+   		not(placeOn(Waiter,Bill,Table))
+   	      ],
+   	      [not(bill(Restaurant,Bill))]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Restaurant.e',210).
+
+ /*  reactive_rule([ table(Restaurant,Table),
+   		beWaiter9(Waiter),
+   		waiter(Restaurant,Waiter),
+   		not(placeOn(Waiter,Bill,Table))
+   	      ],
+   	      [not(bill(Restaurant,Bill))]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Restaurant.e',210).
+
+ /*  not(table(Restaurant, Table)) :-
+       holds_at(beWaiter9(Waiter), Time),
+       bill(Restaurant, Bill),
+       waiter(Restaurant, Waiter),
+       not(happens(placeOn(Waiter, Bill, Table), Time)).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Restaurant.e',210).
+
+ /*  fix_axiom_head(Time) ->
+       [holds_at(beWaiter9(Waiter), Time), ->, beWaiter9(Waiter)].
+ */
+
+ /*  fix_axiom_head(Time) ->
+       [ not(happens(placeOn(Waiter, Bill, Table), Time)),
+          (->),
+         not(placeOn(Waiter, Bill, Table))
+       ].
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Restaurant.e',210).
+
+ /*  pl=axiom(not(table(Restaurant,Table)),
+         [ beWaiter9(Waiter),
+   	bill(Restaurant,Bill),
+   	waiter(Restaurant,Waiter),
+   	not(placeOn(Waiter,Bill,Table))
+         ]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Restaurant.e',210).
+
+ /*  (   beWaiter9(Waiter),
+       bill(Restaurant, Bill),
+       waiter(Restaurant, Waiter),
+       not(placeOn(Waiter, Bill, Table))
+   ->  not(table(Restaurant, Table))
+   ).
+ */
+if beWaiter9(Waiter), bill(Restaurant, Bill), waiter(Restaurant, Waiter), not placeOn(Waiter, Bill, Table)then not table(Restaurant, Table).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Restaurant.e',210).
+
+ /*  reactive_rule([ beWaiter9(Waiter),
+   		bill(Restaurant,Bill),
+   		waiter(Restaurant,Waiter),
+   		not(placeOn(Waiter,Bill,Table))
+   	      ],
+   	      [not(table(Restaurant,Table))]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Restaurant.e',210).
+
+ /*  reactive_rule([ beWaiter9(Waiter),
+   		bill(Restaurant,Bill),
+   		waiter(Restaurant,Waiter),
+   		not(placeOn(Waiter,Bill,Table))
+   	      ],
+   	      [not(table(Restaurant,Table))]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Restaurant.e',210).
+
+ /*  not(holds_at(beWaiter9(Waiter), Time)) :-
+       ( table(Restaurant, Table)
+       ),
+       bill(Restaurant, Bill),
+       waiter(Restaurant, Waiter),
+       not(happens(placeOn(Waiter, Bill, Table), Time)).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Restaurant.e',210).
+
+ /*  pl=axiom(not(beWaiter9(Waiter)),
+         [ table(Restaurant,Table),
+   	bill(Restaurant,Bill),
+   	waiter(Restaurant,Waiter),
+   	not(placeOn(Waiter,Bill,Table))
+         ]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Restaurant.e',210).
+
+ /*  (   ( table(Restaurant, Table)
+       ),
+       bill(Restaurant, Bill),
+       waiter(Restaurant, Waiter),
+       not(placeOn(Waiter, Bill, Table))
+   ->  not(beWaiter9(Waiter))
+   ).
+ */
+if table(Restaurant, Table), bill(Restaurant, Bill), waiter(Restaurant, Waiter), not placeOn(Waiter, Bill, Table)then not beWaiter9(Waiter).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Restaurant.e',210).
+
+ /*  reactive_rule([ table(Restaurant,Table),
+   		bill(Restaurant,Bill),
+   		waiter(Restaurant,Waiter),
+   		not(placeOn(Waiter,Bill,Table))
+   	      ],
+   	      [not(beWaiter9(Waiter))]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Restaurant.e',210).
+
+ /*  reactive_rule([ table(Restaurant,Table),
+   		bill(Restaurant,Bill),
+   		waiter(Restaurant,Waiter),
+   		not(placeOn(Waiter,Bill,Table))
+   	      ],
+   	      [not(beWaiter9(Waiter))]).
  */
 
 
@@ -1081,25 +2588,33 @@ if waiter(Restaurant, Waiter), bill(Restaurant, Bill), table(Restaurant, Table),
 %            time).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Restaurant.e',217).
 
- /*  axiom(terminates(placeOn(Waiter, Bill, Table), beWaiter9(Waiter), Time),
-       [beWaiter9(Waiter)]).
+ /*  pl=axiom(terminates(placeOn(Waiter,Bill,Table),
+   		 beWaiter9(Waiter),
+   		 Time),
+         [beWaiter9(Waiter)]).
  */
-
- /*  beWaiter9(Bewaiter9) ->
-       terminates(placeOn(Bewaiter9, _, Placeon),
-                  beWaiter9(Bewaiter9),
-                  Terminates).
- */
-if beWaiter9(Bewaiter9)then terminates(placeOn(Bewaiter9, _, Placeon), beWaiter9(Bewaiter9)at Terminates, _).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Restaurant.e',217).
 
- /*  reactive_rule([holds(beWaiter9(Bewaiter9),Holds)],
-   	      [ terminates(placeOn(Bewaiter9,
-   				   _,
-   				   Placeon),
-   			   at(beWaiter9(Bewaiter9),
-   			      Terminates),
-   			   Terminates8)
+ /*  beWaiter9(Waiter) ->
+       terminates(placeOn(Waiter, Bill, Table),
+                  beWaiter9(Waiter),
+                  Time).
+ */
+if beWaiter9(Waiter)then terminates(placeOn(Waiter, Bill, Table), beWaiter9(Waiter)at Time, _).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Restaurant.e',217).
+
+ /*  reactive_rule([beWaiter9(Waiter)],
+   	      [ terminates(placeOn(Waiter,Bill,Table),
+   			   at(beWaiter9(Waiter),Time),
+   			   Terminates)
+   	      ]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Restaurant.e',217).
+
+ /*  reactive_rule([beWaiter9(Waiter)],
+   	      [ terminates(placeOn(Waiter,Bill,Table),
+   			   at(beWaiter9(Waiter),Time),
+   			   Terminates)
    	      ]).
  */
 
@@ -1111,25 +2626,33 @@ if beWaiter9(Bewaiter9)then terminates(placeOn(Bewaiter9, _, Placeon), beWaiter9
 %           time).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Restaurant.e',223).
 
- /*  axiom(initiates(placeOn(Waiter, Bill, Table), beWaiter0(Waiter), Time),
-       [beWaiter9(Waiter)]).
+ /*  pl=axiom(initiates(placeOn(Waiter,Bill,Table),
+   		beWaiter0(Waiter),
+   		Time),
+         [beWaiter9(Waiter)]).
  */
-
- /*  beWaiter9(Bewaiter9) ->
-       initiates(placeOn(Bewaiter9, _, Placeon),
-                 beWaiter0(Bewaiter9),
-                 Initiates).
- */
-if beWaiter9(Bewaiter9)then initiates(placeOn(Bewaiter9, _, Placeon), beWaiter0(Bewaiter9)at Initiates, _).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Restaurant.e',223).
 
- /*  reactive_rule([holds(beWaiter9(Bewaiter9),Holds)],
-   	      [ initiates(placeOn(Bewaiter9,
-   				  _,
-   				  Placeon),
-   			  at(beWaiter0(Bewaiter9),
-   			     Initiates),
-   			  Initiates8)
+ /*  beWaiter9(Waiter) ->
+       initiates(placeOn(Waiter, Bill, Table),
+                 beWaiter0(Waiter),
+                 Time).
+ */
+if beWaiter9(Waiter)then initiates(placeOn(Waiter, Bill, Table), beWaiter0(Waiter)at Time, _).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Restaurant.e',223).
+
+ /*  reactive_rule([beWaiter9(Waiter)],
+   	      [ initiates(placeOn(Waiter,Bill,Table),
+   			  at(beWaiter0(Waiter),Time),
+   			  Initiates)
+   	      ]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Restaurant.e',223).
+
+ /*  reactive_rule([beWaiter9(Waiter)],
+   	      [ initiates(placeOn(Waiter,Bill,Table),
+   			  at(beWaiter0(Waiter),Time),
+   			  Initiates)
    	      ]).
  */
 
@@ -1138,26 +2661,32 @@ if beWaiter9(Bewaiter9)then initiates(placeOn(Bewaiter9, _, Placeon), beWaiter0(
 
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Restaurant.e',229).
 % fluent BeCook0(cook)
- %  fluent(beCook0(cook)).
+ %  blue=fluent(beCook0(cook)).
  %  fluent(beCook0(cook)).
 fluents([beCook0/1]).
+ %  fluents([beCook0/1]).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Restaurant.e',229).
 mpred_prop(beCook0(cook),fluent).
+ %  mpred_prop(beCook0(cook),fluent).
 
 
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Restaurant.e',231).
 %; waiter order received
 
 % fluent BeCook1(cook)
- %  fluent(beCook1(cook)).
+ %  blue=fluent(beCook1(cook)).
  %  fluent(beCook1(cook)).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Restaurant.e',231).
 fluents([beCook1/1]).
+ %  fluents([beCook1/1]).
 mpred_prop(beCook1(cook),fluent).
+ %  mpred_prop(beCook1(cook),fluent).
 
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Restaurant.e',234).
 % xor BeCook0, BeCook1
- %  ==>xor[beCook0,beCook1].
+ %  red = ==>xor[beCook0,beCook1].
 ==>xor[beCook0,beCook1].
+ %  ==>xor[beCook0,beCook1].
 
 
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Restaurant.e',236).
@@ -1168,24 +2697,33 @@ mpred_prop(beCook1(cook),fluent).
 %            time).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Restaurant.e',236).
 
- /*  axiom(terminates(order(Agent, Cook, Food), beCook0(Cook), Time),
-       [beCook0(Cook)]).
+ /*  pl=axiom(terminates(order(Agent,Cook,Food),
+   		 beCook0(Cook),
+   		 Time),
+         [beCook0(Cook)]).
  */
-
- /*  beCook0(Becook0) ->
-       terminates(order(OrderP_Num3_V, Becook0, Order),
-                  beCook0(Becook0),
-                  Terminates).
- */
-if beCook0(Becook0)then terminates(order(OrderP_Num3_V, Becook0, Order), beCook0(Becook0)at Terminates, _).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Restaurant.e',236).
 
- /*  reactive_rule([beCook0(Becook0)],
-   	      [ terminates(order(OrderP_Num3_V,
-   				 Becook0,
-   				 Order),
-   			   at(beCook0(Becook0),Terminates),
-   			   Terminates8)
+ /*  beCook0(Cook) ->
+       terminates(order(Agent, Cook, Food),
+                  beCook0(Cook),
+                  Time).
+ */
+if beCook0(Cook)then terminates(order(Agent, Cook, Food), beCook0(Cook)at Time, _).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Restaurant.e',236).
+
+ /*  reactive_rule([beCook0(Cook)],
+   	      [ terminates(order(Agent,Cook,Food),
+   			   at(beCook0(Cook),Time),
+   			   Terminates)
+   	      ]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Restaurant.e',236).
+
+ /*  reactive_rule([beCook0(Cook)],
+   	      [ terminates(order(Agent,Cook,Food),
+   			   at(beCook0(Cook),Time),
+   			   Terminates)
    	      ]).
  */
 
@@ -1197,40 +2735,54 @@ if beCook0(Becook0)then terminates(order(OrderP_Num3_V, Becook0, Order), beCook0
 %           time).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Restaurant.e',243).
 
- /*  axiom(initiates(order(Agent, Cook, Food), beCook1(Cook), Time),
-       [beCook0(Cook)]).
+ /*  pl=axiom(initiates(order(Agent,Cook,Food),
+   		beCook1(Cook),
+   		Time),
+         [beCook0(Cook)]).
  */
-
- /*  beCook0(Becook0) ->
-       initiates(order(OrderP_Num3_V, Becook0, Order),
-                 beCook1(Becook0),
-                 Initiates).
- */
-if beCook0(Becook0)then initiates(order(OrderP_Num3_V, Becook0, Order), beCook1(Becook0)at Initiates, _).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Restaurant.e',243).
 
- /*  reactive_rule([beCook0(Becook0)],
-   	      [ initiates(order(OrderP_Num3_V,
-   				Becook0,
-   				Order),
-   			  at(beCook1(Becook0),Initiates),
-   			  Initiates8)
+ /*  beCook0(Cook) ->
+       initiates(order(Agent, Cook, Food),
+                 beCook1(Cook),
+                 Time).
+ */
+if beCook0(Cook)then initiates(order(Agent, Cook, Food), beCook1(Cook)at Time, _).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Restaurant.e',243).
+
+ /*  reactive_rule([beCook0(Cook)],
+   	      [ initiates(order(Agent,Cook,Food),
+   			  at(beCook1(Cook),Time),
+   			  Initiates)
+   	      ]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Restaurant.e',243).
+
+ /*  reactive_rule([beCook0(Cook)],
+   	      [ initiates(order(Agent,Cook,Food),
+   			  at(beCook1(Cook),Time),
+   			  Initiates)
    	      ]).
  */
 
 % event FoodPrepare(agent,food)
- %  event(foodPrepare(agent,food)).
+ %  blue=event(foodPrepare(agent,food)).
  %  event(foodPrepare(agent,food)).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Restaurant.e',247).
 actions([foodPrepare/2]).
+ %  actions([foodPrepare/2]).
 mpred_prop(foodPrepare(agent,food),event).
+ %  mpred_prop(foodPrepare(agent,food),event).
 
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Restaurant.e',250).
 % fluent FoodPrepared(food)
- %  fluent(foodPrepared(food)).
+ %  blue=fluent(foodPrepared(food)).
  %  fluent(foodPrepared(food)).
 fluents([foodPrepared/1]).
+ %  fluents([foodPrepared/1]).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Restaurant.e',250).
 mpred_prop(foodPrepared(food),fluent).
+ %  mpred_prop(foodPrepared(food),fluent).
 
 
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Restaurant.e',252).
@@ -1239,22 +2791,32 @@ mpred_prop(foodPrepared(food),fluent).
 %           FoodPrepared(food),
 %           time).
 
- /*  axiom(initiates(foodPrepare(Agent, Food), foodPrepared(Food), Time),
-       []).
+ /*  pl=axiom(initiates(foodPrepare(Agent,Food),
+   		foodPrepared(Food),
+   		Time),
+         []).
  */
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Restaurant.e',252).
 
- /*  initiates(foodPrepare(_,Foodprepare),
-   	  foodPrepared(Foodprepare),
-   	  Initiates).
+ /*  initiates(foodPrepare(Agent,Food),
+   	  foodPrepared(Food),
+   	  Time).
  */
-foodPrepare(_, Foodprepare)initiates foodPrepared(Foodprepare).
+foodPrepare(Agent, Food)initiates foodPrepared(Food).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Restaurant.e',252).
 
- /*  initiated(happens(foodPrepare(_,Foodprepare),
+ /*  initiated(happens(foodPrepare(Agent,Food),
    		  Time_From,
    		  Time_Until),
-   	  foodPrepared(Foodprepare),
+   	  foodPrepared(Food),
+   	  []).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Restaurant.e',252).
+
+ /*  initiated(happens(foodPrepare(Agent,Food),
+   		  Time_From,
+   		  Time_Until),
+   	  foodPrepared(Food),
    	  []).
  */
 
@@ -1271,7 +2833,8 @@ foodPrepare(_, Foodprepare)initiates foodPrepared(Foodprepare).
        (   not(holds_at(at(Agent, Exists_Location), Time))
        ;   not(holds_at(at(Food, Exists_Location), Time))
        ),
-       some(Exists_Location, '$kolem_Fn_3'(Agent, Food, Time)).
+       some(Exists_Location,
+            '$kolem_Fn_58'(Agent, Food, Time)).
  */
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Restaurant.e',258).
 
@@ -1281,43 +2844,40 @@ foodPrepare(_, Foodprepare)initiates foodPrepared(Foodprepare).
          not(foodPrepare(Agent, Food))
        ].
  */
+ %   pl=axiom(not(foodPrepare(Agent, Food)), [(not(at(Agent, Exists_Location));not(at(Food, Exists_Location))), some(Exists_Location, '$kolem_Fn_58'(Agent, Food, Time))]).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Restaurant.e',258).
 
- /*  axiom(not(foodPrepare(Agent, Food)),
-       [  (not(at(Agent, Exists_Location));not(at(Food, Exists_Location))),
-         some(Exists_Location,
-              '$kolem_Fn_3'(Agent, Food, Time))
-       ]).
- */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Restaurant.e',258).
-
- /*  (   (   not(at(Kolem_Fn_3P_Num3_V, Tloc))
-       ;   not(at(Foodprepare, Tloc))
+ /*  (   (   not(at(Agent, Exists_Location))
+       ;   not(at(Food, Exists_Location))
        ),
-       some(Tloc,
-            '$kolem_Fn_3'(Kolem_Fn_3P_Num3_V,
-                          Foodprepare,
-                          Kolem_Fn_3))
-   ->  not(foodPrepare(Kolem_Fn_3P_Num3_V, Foodprepare))
+       some(Exists_Location,
+            '$kolem_Fn_58'(Agent, Food, Time))
+   ->  not(foodPrepare(Agent, Food))
    ).
  */
-if (not loc_at(Kolem_Fn_3P_Num3_V, Tloc);not loc_at(Foodprepare, Tloc)), some(Tloc, '$kolem_Fn_3'(Kolem_Fn_3P_Num3_V, Foodprepare, Kolem_Fn_3))then not foodPrepare(Kolem_Fn_3P_Num3_V, Foodprepare).
+if (not loc_at(Agent, Exists_Location);not loc_at(Food, Exists_Location)), some(Exists_Location, '$kolem_Fn_58'(Agent, Food, Time))then not foodPrepare(Agent, Food).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Restaurant.e',258).
 
- /*   reactive_rule([  (not(loc_at(Kolem_Fn_3P_Num3_V, Tloc));not(loc_at(Foodprepare, Tloc))),
-                      some(Tloc,
-                           '$kolem_Fn_3'(Kolem_Fn_3P_Num3_V,
-                                         Foodprepare,
-                                         Kolem_Fn_3))
+ /*   reactive_rule([  (not(loc_at(Agent, Exists_Location));not(loc_at(Food, Exists_Location))),
+                      some(Exists_Location,
+                           '$kolem_Fn_58'(Agent, Food, Time))
                     ],
-                    [ not(foodPrepare(Kolem_Fn_3P_Num3_V, Foodprepare))
-                    ]).
+                    [not(foodPrepare(Agent, Food))]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Restaurant.e',258).
+
+ /*   reactive_rule([  (not(loc_at(Agent, Exists_Location));not(loc_at(Food, Exists_Location))),
+                      some(Exists_Location,
+                           '$kolem_Fn_58'(Agent, Food, Time))
+                    ],
+                    [not(foodPrepare(Agent, Food))]).
  */
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Restaurant.e',258).
 
  /*  holds_at(at(Agent, Exists_Location), Time) :-
        happens(foodPrepare(Agent, Food), Time),
-       some(Exists_Location, '$kolem_Fn_3'(Agent, Food, Time)).
+       some(Exists_Location,
+            '$kolem_Fn_58'(Agent, Food, Time)).
  */
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Restaurant.e',258).
 
@@ -1329,41 +2889,47 @@ if (not loc_at(Kolem_Fn_3P_Num3_V, Tloc);not loc_at(Foodprepare, Tloc)), some(Tl
  */
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Restaurant.e',258).
 
- /*  axiom(at(Agent, Exists_Location),
-       [ foodPrepare(Agent, Food),
-         some(Exists_Location,
-              '$kolem_Fn_3'(Agent, Food, Time))
-       ]).
+ /*  pl=axiom(at(Agent,Exists_Location),
+         [ foodPrepare(Agent,Food),
+   	some(Exists_Location,
+   	     '$kolem_Fn_58'(Agent,Food,Time))
+         ]).
  */
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Restaurant.e',258).
 
- /*  (   foodPrepare(Kolem_Fn_3P_Num3_V12, Foodprepare10),
-       some(Tloc9,
-            '$kolem_Fn_3'(Kolem_Fn_3P_Num3_V12,
-                          Foodprepare10,
-                          Kolem_Fn_311))
-   ->  at(Kolem_Fn_3P_Num3_V12, Tloc9)
+ /*  (   foodPrepare(Agent, Food),
+       some(Exists_Location,
+            '$kolem_Fn_58'(Agent, Food, Time))
+   ->  at(Agent, Exists_Location)
    ).
  */
-if foodPrepare(Kolem_Fn_3P_Num3_V12, Foodprepare10), some(Tloc9, '$kolem_Fn_3'(Kolem_Fn_3P_Num3_V12, Foodprepare10, Kolem_Fn_311))then loc_at(Kolem_Fn_3P_Num3_V12, Tloc9).
+if foodPrepare(Agent, Food), some(Exists_Location, '$kolem_Fn_58'(Agent, Food, Time))then loc_at(Agent, Exists_Location).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Restaurant.e',258).
 
- /*  reactive_rule([ happens(foodPrepare(Kolem_Fn_3P_Num3_V12,
-   				    Foodprepare10),
+ /*  reactive_rule([ happens(foodPrepare(Agent,Food),
    			Time_From,
    			Time_Until),
-   		some(Tloc9,
-   		     '$kolem_Fn_3'(Kolem_Fn_3P_Num3_V12,
-   				   Foodprepare10,
-   				   Kolem_Fn_311))
+   		some(Exists_Location,
+   		     '$kolem_Fn_58'(Agent,Food,Time))
    	      ],
-   	      [loc_at(Kolem_Fn_3P_Num3_V12,Tloc9)]).
+   	      [loc_at(Agent,Exists_Location)]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Restaurant.e',258).
+
+ /*  reactive_rule([ happens(foodPrepare(Agent,Food),
+   			Time_From,
+   			Time_Until),
+   		some(Exists_Location,
+   		     '$kolem_Fn_58'(Agent,Food,Time))
+   	      ],
+   	      [loc_at(Agent,Exists_Location)]).
  */
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Restaurant.e',258).
 
  /*  holds_at(at(Food, Exists_Location), Time) :-
        happens(foodPrepare(Agent, Food), Time),
-       some(Exists_Location, '$kolem_Fn_3'(Agent, Food, Time)).
+       some(Exists_Location,
+            '$kolem_Fn_58'(Agent, Food, Time)).
  */
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Restaurant.e',258).
 
@@ -1375,35 +2941,40 @@ if foodPrepare(Kolem_Fn_3P_Num3_V12, Foodprepare10), some(Tloc9, '$kolem_Fn_3'(K
  */
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Restaurant.e',258).
 
- /*  axiom(at(Food, Exists_Location),
-       [ foodPrepare(Agent, Food),
-         some(Exists_Location,
-              '$kolem_Fn_3'(Agent, Food, Time))
-       ]).
+ /*  pl=axiom(at(Food,Exists_Location),
+         [ foodPrepare(Agent,Food),
+   	some(Exists_Location,
+   	     '$kolem_Fn_58'(Agent,Food,Time))
+         ]).
  */
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Restaurant.e',258).
 
- /*  (   foodPrepare(Kolem_Fn_3P_Num3_V18, Foodprepare16),
-       some(Tloc15,
-            '$kolem_Fn_3'(Kolem_Fn_3P_Num3_V18,
-                          Foodprepare16,
-                          Kolem_Fn_317))
-   ->  at(Foodprepare16, Tloc15)
+ /*  (   foodPrepare(Agent, Food),
+       some(Exists_Location,
+            '$kolem_Fn_58'(Agent, Food, Time))
+   ->  at(Food, Exists_Location)
    ).
  */
-if foodPrepare(Kolem_Fn_3P_Num3_V18, Foodprepare16), some(Tloc15, '$kolem_Fn_3'(Kolem_Fn_3P_Num3_V18, Foodprepare16, Kolem_Fn_317))then loc_at(Foodprepare16, Tloc15).
+if foodPrepare(Agent, Food), some(Exists_Location, '$kolem_Fn_58'(Agent, Food, Time))then loc_at(Food, Exists_Location).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Restaurant.e',258).
 
- /*  reactive_rule([ happens(foodPrepare(Kolem_Fn_3P_Num3_V18,
-   				    Foodprepare16),
-   			Time_From19,
-   			Time_Until20),
-   		some(Tloc15,
-   		     '$kolem_Fn_3'(Kolem_Fn_3P_Num3_V18,
-   				   Foodprepare16,
-   				   Kolem_Fn_317))
+ /*  reactive_rule([ happens(foodPrepare(Agent,Food),
+   			Time_From7,
+   			Time_Until8),
+   		some(Exists_Location,
+   		     '$kolem_Fn_58'(Agent,Food,Time))
    	      ],
-   	      [loc_at(Foodprepare16,Tloc15)]).
+   	      [loc_at(Food,Exists_Location)]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Restaurant.e',258).
+
+ /*  reactive_rule([ happens(foodPrepare(Agent,Food),
+   			Time_From7,
+   			Time_Until8),
+   		some(Exists_Location,
+   		     '$kolem_Fn_58'(Agent,Food,Time))
+   	      ],
+   	      [loc_at(Food,Exists_Location)]).
  */
 
 
@@ -1411,21 +2982,130 @@ if foodPrepare(Kolem_Fn_3P_Num3_V18, Foodprepare16), some(Tloc15, '$kolem_Fn_3'(
 % HoldsAt(BeCook1(cook),time) &
 % HoldsAt(KnowOrder(cook,agent,food),time) ->
 % Happens(FoodPrepare(cook,food),time).
+ %  clausify_pnf=(holds_at(beCook1(Cook), Time), holds_at(knowOrder(Cook, Agent, Food), Time)->happens(foodPrepare(Cook, Food), Time)).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Restaurant.e',264).
 
- /*  (   holds_at(beCook1(Cook), Time),
-       holds_at(knowOrder(Cook, Agent, Food), Time)
-   ->  happens(foodPrepare(Cook, Food), Time)
+ /*  happens(foodPrepare(Cook, Food), Time) :-
+       holds_at(beCook1(Cook), Time),
+       holds_at(knowOrder(Cook, Agent, Food), Time).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Restaurant.e',264).
+
+ /*  fix_axiom_head(Time) ->
+       [ happens(foodPrepare(Cook, Food), Time),
+          (->),
+         foodPrepare(Cook, Food)
+       ].
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Restaurant.e',264).
+
+ /*  pl=axiom(foodPrepare(Cook,Food),
+         [ beCook1(Cook),
+   	knowOrder(Cook,Agent,Food)
+         ]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Restaurant.e',264).
+
+ /*  (   beCook1(Cook),
+       knowOrder(Cook, Agent, Food)
+   ->  foodPrepare(Cook, Food)
    ).
  */
-if beCook1(Cook)at Time, knowOrder(Cook, Agent, Food)at Time then happens(foodPrepare(Cook, Food), Time).
+if beCook1(Cook), knowOrder(Cook, Agent, Food)then foodPrepare(Cook, Food).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Restaurant.e',264).
 
- /*  reactive_rule([ holds(beCook1(Cook),Time),
+ /*  reactive_rule([ beCook1(Cook),
    		holds(knowOrder(Cook,Agent,Food),
-   		      Time)
+   		      Holds)
    	      ],
-   	      [happens(foodPrepare(Cook,Food),Time)]).
+   	      [ happens(foodPrepare(Cook,Food),
+   			Time_From,
+   			Time_Until)
+   	      ]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Restaurant.e',264).
+
+ /*  reactive_rule([ beCook1(Cook),
+   		holds(knowOrder(Cook,Agent,Food),
+   		      Holds)
+   	      ],
+   	      [ happens(foodPrepare(Cook,Food),
+   			Time_From,
+   			Time_Until)
+   	      ]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Restaurant.e',264).
+
+ /*  not(holds_at(beCook1(Cook), Time)) :-
+       holds_at(knowOrder(Cook, Agent, Food), Time),
+       not(happens(foodPrepare(Cook, Food), Time)).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Restaurant.e',264).
+
+ /*  pl=axiom(not(beCook1(Cook)),
+         [ knowOrder(Cook,Agent,Food),
+   	not(foodPrepare(Cook,Food))
+         ]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Restaurant.e',264).
+
+ /*  (   knowOrder(Cook, Agent, Food),
+       not(foodPrepare(Cook, Food))
+   ->  not(beCook1(Cook))
+   ).
+ */
+if knowOrder(Cook, Agent, Food), not foodPrepare(Cook, Food)then not beCook1(Cook).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Restaurant.e',264).
+
+ /*  reactive_rule([ holds(knowOrder(Cook,Agent,Food),
+   		      Holds7),
+   		not(foodPrepare(Cook,Food))
+   	      ],
+   	      [not(beCook1(Cook))]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Restaurant.e',264).
+
+ /*  reactive_rule([ holds(knowOrder(Cook,Agent,Food),
+   		      Holds7),
+   		not(foodPrepare(Cook,Food))
+   	      ],
+   	      [not(beCook1(Cook))]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Restaurant.e',264).
+
+ /*  not(holds_at(knowOrder(Cook, Agent, Food), Time)) :-
+       holds_at(beCook1(Cook), Time),
+       not(happens(foodPrepare(Cook, Food), Time)).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Restaurant.e',264).
+
+ /*  pl=axiom(not(knowOrder(Cook,Agent,Food)),
+         [beCook1(Cook),not(foodPrepare(Cook,Food))]).
+ */
+
+ /*  (   beCook1(Cook),
+       not(foodPrepare(Cook, Food))
+   ->  not(knowOrder(Cook, Agent, Food))
+   ).
+ */
+if beCook1(Cook), not foodPrepare(Cook, Food)then not knowOrder(Cook, Agent, Food).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Restaurant.e',264).
+
+ /*  reactive_rule([ beCook1(Cook),
+   		not(foodPrepare(Cook,Food))
+   	      ],
+   	      [ holds(not(knowOrder(Cook,Agent,Food)),
+   		      Holds8)
+   	      ]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Restaurant.e',264).
+
+ /*  reactive_rule([ beCook1(Cook),
+   		not(foodPrepare(Cook,Food))
+   	      ],
+   	      [ holds(not(knowOrder(Cook,Agent,Food)),
+   		      Holds8)
+   	      ]).
  */
 
 
@@ -1436,22 +3116,33 @@ if beCook1(Cook)at Time, knowOrder(Cook, Agent, Food)at Time then happens(foodPr
 %            time).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Restaurant.e',269).
 
- /*  axiom(terminates(foodPrepare(Cook, Food), beCook1(Cook), Time),
-       [beCook1(Cook)]).
+ /*  pl=axiom(terminates(foodPrepare(Cook,Food),
+   		 beCook1(Cook),
+   		 Time),
+         [beCook1(Cook)]).
  */
-
- /*  beCook1(Becook1) ->
-       terminates(foodPrepare(Becook1, Foodprepare),
-                  beCook1(Becook1),
-                  Terminates).
- */
-if beCook1(Becook1)then terminates(foodPrepare(Becook1, Foodprepare), beCook1(Becook1)at Terminates, _).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Restaurant.e',269).
 
- /*  reactive_rule([holds(beCook1(Becook1),Holds)],
-   	      [ terminates(foodPrepare(Becook1,Foodprepare),
-   			   at(beCook1(Becook1),Terminates),
-   			   Terminates7)
+ /*  beCook1(Cook) ->
+       terminates(foodPrepare(Cook, Food),
+                  beCook1(Cook),
+                  Time).
+ */
+if beCook1(Cook)then terminates(foodPrepare(Cook, Food), beCook1(Cook)at Time, _).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Restaurant.e',269).
+
+ /*  reactive_rule([beCook1(Cook)],
+   	      [ terminates(foodPrepare(Cook,Food),
+   			   at(beCook1(Cook),Time),
+   			   Terminates)
+   	      ]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Restaurant.e',269).
+
+ /*  reactive_rule([beCook1(Cook)],
+   	      [ terminates(foodPrepare(Cook,Food),
+   			   at(beCook1(Cook),Time),
+   			   Terminates)
    	      ]).
  */
 
@@ -1463,22 +3154,33 @@ if beCook1(Becook1)then terminates(foodPrepare(Becook1, Foodprepare), beCook1(Be
 %           time).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Restaurant.e',275).
 
- /*  axiom(initiates(foodPrepare(Cook, Food), beCook0(Cook), Time),
-       [beCook1(Cook)]).
+ /*  pl=axiom(initiates(foodPrepare(Cook,Food),
+   		beCook0(Cook),
+   		Time),
+         [beCook1(Cook)]).
  */
-
- /*  beCook1(Becook1) ->
-       initiates(foodPrepare(Becook1, Foodprepare),
-                 beCook0(Becook1),
-                 Initiates).
- */
-if beCook1(Becook1)then initiates(foodPrepare(Becook1, Foodprepare), beCook0(Becook1)at Initiates, _).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Restaurant.e',275).
 
- /*  reactive_rule([holds(beCook1(Becook1),Holds)],
-   	      [ initiates(foodPrepare(Becook1,Foodprepare),
-   			  at(beCook0(Becook1),Initiates),
-   			  Initiates7)
+ /*  beCook1(Cook) ->
+       initiates(foodPrepare(Cook, Food),
+                 beCook0(Cook),
+                 Time).
+ */
+if beCook1(Cook)then initiates(foodPrepare(Cook, Food), beCook0(Cook)at Time, _).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Restaurant.e',275).
+
+ /*  reactive_rule([beCook1(Cook)],
+   	      [ initiates(foodPrepare(Cook,Food),
+   			  at(beCook0(Cook),Time),
+   			  Initiates)
+   	      ]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Restaurant.e',275).
+
+ /*  reactive_rule([beCook1(Cook)],
+   	      [ initiates(foodPrepare(Cook,Food),
+   			  at(beCook0(Cook),Time),
+   			  Initiates)
    	      ]).
  */
 

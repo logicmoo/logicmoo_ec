@@ -3,7 +3,7 @@
 :-include(library('ec_planner/ec_test_incl')).
 :-expects_dialect(lps).
 % translate: begining  File: /pack/logicmoo_ec/ext/ec_sources/ecnet/Vision.e.lps 
-% Wed, 07 Oct 2020 09:39:34 GMT File: <stream>(0x5557c9047600)%;
+% Thu, 08 Oct 2020 19:07:18 GMT File: <stream>(0x5600a3b2a800)%;
 %; Copyright (c) 2005 IBM Corporation and others.
 %; All rights reserved. This program and the accompanying materials
 %; are made available under the terms of the Common Public License v1.0
@@ -19,22 +19,26 @@
 %; agent looks at object.
 
 % event LookAt(agent,object)
- %  event(lookAt(agent,object)).
+ %  blue=event(lookAt(agent,object)).
  %  event(lookAt(agent,object)).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vision.e',15).
 actions([lookAt/2]).
+ %  actions([lookAt/2]).
 mpred_prop(lookAt(agent,object),event).
+ %  mpred_prop(lookAt(agent,object),event).
 
 
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vision.e',18).
 %; agent sees object.
 
 % fluent See(agent,object)
- %  fluent(see(agent,object)).
+ %  blue=fluent(see(agent,object)).
  %  fluent(see(agent,object)).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vision.e',18).
 fluents([see/2]).
+ %  fluents([see/2]).
 mpred_prop(see(agent,object),fluent).
+ %  mpred_prop(see(agent,object),fluent).
 
 
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vision.e',21).
@@ -46,21 +50,32 @@ mpred_prop(see(agent,object),fluent).
 %           time).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vision.e',23).
 
- /*  axiom(initiates(lookAt(Agent, Object), see(Agent, Object), Time),
-       []).
- */
-
- /*  initiates(lookAt(A,Lookat),
-   	  see(A,Lookat),
-   	  Initiates).
+ /*  pl=axiom(initiates(lookAt(Agent,Object),
+   		see(Agent,Object),
+   		Time),
+         []).
  */
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vision.e',23).
-initiates(lookAt(A,Lookat),see(A,Lookat)).
 
- /*  initiated(happens(lookAt(A,Lookat),
+ /*  initiates(lookAt(Agent,Object),
+   	  see(Agent,Object),
+   	  Time).
+ */
+lookAt(Agent, Object)initiates see(Agent, Object).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vision.e',23).
+
+ /*  initiated(happens(lookAt(Agent,Object),
    		  Time_From,
    		  Time_Until),
-   	  see(A,Lookat),
+   	  see(Agent,Object),
+   	  []).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vision.e',23).
+
+ /*  initiated(happens(lookAt(Agent,Object),
+   		  Time_From,
+   		  Time_Until),
+   	  see(Agent,Object),
    	  []).
  */
 
@@ -93,25 +108,35 @@ initiates(lookAt(A,Lookat),see(A,Lookat)).
 %            time).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vision.e',50).
 
- /*  axiom(terminates(lookAt(Agent, Object1), see(Agent, Object2), Time),
-       [diff(Object1, Object2)]).
- */
-
- /*  diff(Lookat, Diff) ->
-       terminates(lookAt(A, Lookat),
-                  see(A, Diff),
-                  Terminates).
+ /*  pl=axiom(terminates(lookAt(Agent,Object1),
+   		 see(Agent,Object2),
+   		 Time),
+         [diff(Object1,Object2)]).
  */
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vision.e',50).
-then(if(diff(Lookat,Diff)),
-     terminates(lookAt(A,Lookat),
-		at(see(A,Diff),Terminates),
-		Terminates7)).
 
- /*  reactive_rule([diff(Lookat,Diff)],
-   	      [ terminates(lookAt(A,Lookat),
-   			   at(see(A,Diff),Terminates),
-   			   Terminates7)
+ /*  diff(Object1, Object2) ->
+       terminates(lookAt(Agent, Object1),
+                  see(Agent, Object2),
+                  Time).
+ */
+if diff(Object1, Object2)then terminates(lookAt(Agent, Object1), see(Agent, Object2)at Time, _).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vision.e',50).
+
+ /*  reactive_rule([diff(Object1,Object2)],
+   	      [ terminates(lookAt(Agent,Object1),
+   			   at(see(Agent,Object2),
+   			      Time),
+   			   Terminates)
+   	      ]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vision.e',50).
+
+ /*  reactive_rule([diff(Object1,Object2)],
+   	      [ terminates(lookAt(Agent,Object1),
+   			   at(see(Agent,Object2),
+   			      Time),
+   			   Terminates)
    	      ]).
  */
 
@@ -125,22 +150,32 @@ then(if(diff(Lookat,Diff)),
 %            time).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vision.e',59).
 
- /*  axiom(terminates(walkThroughDoor12(Agent, Door), see(Agent, Object), Time),
-       []).
- */
-
- /*  terminates(walkThroughDoor12(A,Walkthroughdoor12),
-   	   see(A,See),
-   	   Terminates).
+ /*  pl=axiom(terminates(walkThroughDoor12(Agent,Door),
+   		 see(Agent,Object),
+   		 Time),
+         []).
  */
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vision.e',59).
-terminates(walkThroughDoor12(A,Walkthroughdoor12),
-	   see(A,See)).
 
- /*  terminated(happens(walkThroughDoor12(A,Walkthroughdoor12),
+ /*  terminates(walkThroughDoor12(Agent,Door),
+   	   see(Agent,Object),
+   	   Time).
+ */
+walkThroughDoor12(Agent, Door)terminates see(Agent, Object).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vision.e',59).
+
+ /*  terminated(happens(walkThroughDoor12(Agent,Door),
    		   Time_From,
    		   Time_Until),
-   	   see(A,See),
+   	   see(Agent,Object),
+   	   []).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vision.e',59).
+
+ /*  terminated(happens(walkThroughDoor12(Agent,Door),
+   		   Time_From,
+   		   Time_Until),
+   	   see(Agent,Object),
    	   []).
  */
 
@@ -151,23 +186,32 @@ terminates(walkThroughDoor12(A,Walkthroughdoor12),
 %            See(agent,object),
 %            time).
 
- /*  axiom(terminates(walkThroughDoor21(Agent, Door), see(Agent, Object), Time),
-       []).
+ /*  pl=axiom(terminates(walkThroughDoor21(Agent,Door),
+   		 see(Agent,Object),
+   		 Time),
+         []).
  */
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vision.e',63).
 
- /*  terminates(walkThroughDoor21(A,Walkthroughdoor21),
-   	   see(A,See),
-   	   Terminates).
+ /*  terminates(walkThroughDoor21(Agent,Door),
+   	   see(Agent,Object),
+   	   Time).
  */
+walkThroughDoor21(Agent, Door)terminates see(Agent, Object).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vision.e',63).
-terminates(walkThroughDoor21(A,Walkthroughdoor21),
-	   see(A,See)).
 
- /*  terminated(happens(walkThroughDoor21(A,Walkthroughdoor21),
+ /*  terminated(happens(walkThroughDoor21(Agent,Door),
    		   Time_From,
    		   Time_Until),
-   	   see(A,See),
+   	   see(Agent,Object),
+   	   []).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vision.e',63).
+
+ /*  terminated(happens(walkThroughDoor21(Agent,Door),
+   		   Time_From,
+   		   Time_Until),
+   	   see(Agent,Object),
    	   []).
  */
 
@@ -178,23 +222,32 @@ terminates(walkThroughDoor21(A,Walkthroughdoor21),
 %            See(agent,object),
 %            time).
 
- /*  axiom(terminates(walkUpStaircase(Agent, Door), see(Agent, Object), Time),
-       []).
+ /*  pl=axiom(terminates(walkUpStaircase(Agent,Door),
+   		 see(Agent,Object),
+   		 Time),
+         []).
  */
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vision.e',67).
 
- /*  terminates(walkUpStaircase(A,Walkupstaircase),
-   	   see(A,See),
-   	   Terminates).
+ /*  terminates(walkUpStaircase(Agent,Door),
+   	   see(Agent,Object),
+   	   Time).
  */
+walkUpStaircase(Agent, Door)terminates see(Agent, Object).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vision.e',67).
-terminates(walkUpStaircase(A,Walkupstaircase),
-	   see(A,See)).
 
- /*  terminated(happens(walkUpStaircase(A,Walkupstaircase),
+ /*  terminated(happens(walkUpStaircase(Agent,Door),
    		   Time_From,
    		   Time_Until),
-   	   see(A,See),
+   	   see(Agent,Object),
+   	   []).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vision.e',67).
+
+ /*  terminated(happens(walkUpStaircase(Agent,Door),
+   		   Time_From,
+   		   Time_Until),
+   	   see(Agent,Object),
    	   []).
  */
 
@@ -205,23 +258,32 @@ terminates(walkUpStaircase(A,Walkupstaircase),
 %            See(agent,object),
 %            time).
 
- /*  axiom(terminates(walkDownStaircase(Agent, Door), see(Agent, Object), Time),
-       []).
+ /*  pl=axiom(terminates(walkDownStaircase(Agent,Door),
+   		 see(Agent,Object),
+   		 Time),
+         []).
  */
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vision.e',71).
 
- /*  terminates(walkDownStaircase(A,Walkdownstaircase),
-   	   see(A,See),
-   	   Terminates).
+ /*  terminates(walkDownStaircase(Agent,Door),
+   	   see(Agent,Object),
+   	   Time).
  */
+walkDownStaircase(Agent, Door)terminates see(Agent, Object).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vision.e',71).
-terminates(walkDownStaircase(A,Walkdownstaircase),
-	   see(A,See)).
 
- /*  terminated(happens(walkDownStaircase(A,Walkdownstaircase),
+ /*  terminated(happens(walkDownStaircase(Agent,Door),
    		   Time_From,
    		   Time_Until),
-   	   see(A,See),
+   	   see(Agent,Object),
+   	   []).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vision.e',71).
+
+ /*  terminated(happens(walkDownStaircase(Agent,Door),
+   		   Time_From,
+   		   Time_Until),
+   	   see(Agent,Object),
    	   []).
  */
 

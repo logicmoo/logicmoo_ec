@@ -3,7 +3,7 @@
 :-include(library('ec_planner/ec_test_incl')).
 :-expects_dialect(lps).
 % translate: begining  File: /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e.lps 
-% Wed, 07 Oct 2020 09:39:30 GMT File: <stream>(0x5557c9047c00)%;
+% Thu, 08 Oct 2020 19:07:14 GMT File: <stream>(0x5600a3b2af00)%;
 %; Copyright (c) 2005 IBM Corporation and others.
 %; All rights reserved. This program and the accompanying materials
 %; are made available under the terms of the Common Public License v1.0
@@ -19,79 +19,237 @@
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',14).
 % sort vehicle: physobj
 subsort(vehicle,physobj).
+ %  subsort(vehicle,physobj).
 
 % sort vehiclein: vehicle
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',14).
 subsort(vehiclein,vehicle).
+ %  subsort(vehiclein,vehicle).
 
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',16).
 % sort vehicleon: vehicle
 subsort(vehicleon,vehicle).
+ %  subsort(vehicleon,vehicle).
 
 % sort train: vehicleon
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',16).
 subsort(train,vehicleon).
+ %  subsort(train,vehicleon).
 
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',18).
 % sort carriage: vehiclein
 subsort(carriage,vehiclein).
+ %  subsort(carriage,vehiclein).
 
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',20).
 % sort vehicledoor
 sort(vehicledoor).
+ %  sort(vehicledoor).
 %; RideTrack
 
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',24).
 % event RideTrack12(train,track)
- %  event(rideTrack12(train,track)).
+ %  blue=event(rideTrack12(train,track)).
  %  event(rideTrack12(train,track)).
 events([rideTrack12/2]).
+ %  events([rideTrack12/2]).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',24).
 mpred_prop(rideTrack12(train,track),event).
+ %  mpred_prop(rideTrack12(train,track),event).
 
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',26).
 % event RideTrack21(train,track)
- %  event(rideTrack21(train,track)).
+ %  blue=event(rideTrack21(train,track)).
  %  event(rideTrack21(train,track)).
 events([rideTrack21/2]).
+ %  events([rideTrack21/2]).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',26).
 mpred_prop(rideTrack21(train,track),event).
+ %  mpred_prop(rideTrack21(train,track),event).
 
 
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',28).
 % [train,track,time]
 % Happens(RideTrack12(train,track),time) ->
 % HoldsAt(At(train,Side1(track)),time).
+ %  clausify_pnf=(happens(rideTrack12(Train, Track), Time)->holds_at(at(Train, side1(Track)), Time)).
 
- /*  happens(rideTrack12(Train, Track), Time) ->
-       holds_at(at(Train, side1(Track)), Time).
+ /*  holds_at(at(Train, side1(Track)), Time) :-
+       happens(rideTrack12(Train, Track), Time).
  */
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',28).
-then(if(happens(rideTrack12(Train,Track),Time)),
-     at(loc_at(Train,side1(Track)),Time)).
 
- /*  reactive_rule([ happens(rideTrack12(Train,Track),
-   			Time)
-   	      ],
-   	      [ holds(loc_at(Train,side1(Track)),
-   		      Time)
+ /*  pl=axiom(requires(rideTrack12(Train,Track),When_Time),
+         [metreqs(rideTrack12(Train,Track))]).
+ */
+
+ /*  metreqs(rideTrack12(Train, Track)) ->
+       requires(rideTrack12(Train, Track), When_Time).
+ */
+if metreqs(rideTrack12(Train, Track))then requires(rideTrack12(Train, Track), When_Time).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',28).
+
+ /*  reactive_rule([metreqs(rideTrack12(Train,Track))],
+   	      [ requires(rideTrack12(Train,Track),
+   			 When_Time)
    	      ]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',28).
+
+ /*  reactive_rule([metreqs(rideTrack12(Train,Track))],
+   	      [ requires(rideTrack12(Train,Track),
+   			 When_Time)
+   	      ]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',28).
+
+ /*  fix_axiom_head(When_Time) ->
+       [ holds_at(metreqs(rideTrack12(Train, Track)), When_Time),
+          (->),
+         metreqs(rideTrack12(Train, Track))
+       ].
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',28).
+
+ /*  pl=axiom(metreqs(rideTrack12(Train,Track)),
+         [at(Train,side1(Track))]).
+ */
+
+ /*  at(Train, side1(Track)) ->
+       metreqs(rideTrack12(Train, Track)).
+ */
+if loc_at(Train, side1(Track))then metreqs(rideTrack12(Train, Track)).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',28).
+
+ /*  reactive_rule([loc_at(Train,side1(Track))],
+   	      [metreqs(rideTrack12(Train,Track))]).
+ */
+
+ /*  reactive_rule([loc_at(Train,side1(Track))],
+   	      [metreqs(rideTrack12(Train,Track))]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',28).
+
+ /*  not(happens(rideTrack12(Train, Track), When_Time)) :-
+       not(holds_at(at(Train, side1(Track)), When_Time)).
+ */
+
+ /*  fix_axiom_head(When_Time) ->
+       [ not(happens(rideTrack12(Train, Track), When_Time)),
+          (->),
+         not(rideTrack12(Train, Track))
+       ].
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',28).
+
+ /*  pl=axiom(not(rideTrack12(Train,Track)),
+         [not(at(Train,side1(Track)))]).
+ */
+
+ /*  not(at(Train, side1(Track))) ->
+       not(rideTrack12(Train, Track)).
+ */
+if not loc_at(Train, side1(Track))then not rideTrack12(Train, Track).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',28).
+
+ /*  reactive_rule([not(loc_at(Train,side1(Track)))],
+   	      [not(rideTrack12(Train,Track))]).
+ */
+
+ /*  reactive_rule([not(loc_at(Train,side1(Track)))],
+   	      [not(rideTrack12(Train,Track))]).
  */
 
 
 % [train,track,time]
 % Happens(RideTrack21(train,track),time) ->
 % HoldsAt(At(train,Side2(track)),time).
+ %  clausify_pnf=(happens(rideTrack21(Train, Track), Time)->holds_at(at(Train, side2(Track)), Time)).
 
- /*  happens(rideTrack21(Train, Track), Time) ->
-       holds_at(at(Train, side2(Track)), Time).
+ /*  holds_at(at(Train, side2(Track)), Time) :-
+       happens(rideTrack21(Train, Track), Time).
  */
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',33).
-then(if(happens(rideTrack21(Train,Track),Time)),
-     at(loc_at(Train,side2(Track)),Time)).
 
- /*  reactive_rule([ happens(rideTrack21(Train,Track),
-   			Time)
-   	      ],
-   	      [ holds(loc_at(Train,side2(Track)),
-   		      Time)
+ /*  pl=axiom(requires(rideTrack21(Train,Track),When_Time),
+         [metreqs(rideTrack21(Train,Track))]).
+ */
+
+ /*  metreqs(rideTrack21(Train, Track)) ->
+       requires(rideTrack21(Train, Track), When_Time).
+ */
+if metreqs(rideTrack21(Train, Track))then requires(rideTrack21(Train, Track), When_Time).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',33).
+
+ /*  reactive_rule([metreqs(rideTrack21(Train,Track))],
+   	      [ requires(rideTrack21(Train,Track),
+   			 When_Time)
    	      ]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',33).
+
+ /*  reactive_rule([metreqs(rideTrack21(Train,Track))],
+   	      [ requires(rideTrack21(Train,Track),
+   			 When_Time)
+   	      ]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',33).
+
+ /*  fix_axiom_head(When_Time) ->
+       [ holds_at(metreqs(rideTrack21(Train, Track)), When_Time),
+          (->),
+         metreqs(rideTrack21(Train, Track))
+       ].
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',33).
+
+ /*  pl=axiom(metreqs(rideTrack21(Train,Track)),
+         [at(Train,side2(Track))]).
+ */
+
+ /*  at(Train, side2(Track)) ->
+       metreqs(rideTrack21(Train, Track)).
+ */
+if loc_at(Train, side2(Track))then metreqs(rideTrack21(Train, Track)).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',33).
+
+ /*  reactive_rule([loc_at(Train,side2(Track))],
+   	      [metreqs(rideTrack21(Train,Track))]).
+ */
+
+ /*  reactive_rule([loc_at(Train,side2(Track))],
+   	      [metreqs(rideTrack21(Train,Track))]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',33).
+
+ /*  not(happens(rideTrack21(Train, Track), When_Time)) :-
+       not(holds_at(at(Train, side2(Track)), When_Time)).
+ */
+
+ /*  fix_axiom_head(When_Time) ->
+       [ not(happens(rideTrack21(Train, Track), When_Time)),
+          (->),
+         not(rideTrack21(Train, Track))
+       ].
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',33).
+
+ /*  pl=axiom(not(rideTrack21(Train,Track)),
+         [not(at(Train,side2(Track)))]).
+ */
+
+ /*  not(at(Train, side2(Track))) ->
+       not(rideTrack21(Train, Track)).
+ */
+if not loc_at(Train, side2(Track))then not rideTrack21(Train, Track).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',33).
+
+ /*  reactive_rule([not(loc_at(Train,side2(Track)))],
+   	      [not(rideTrack21(Train,Track))]).
+ */
+
+ /*  reactive_rule([not(loc_at(Train,side2(Track)))],
+   	      [not(rideTrack21(Train,Track))]).
  */
 
 
@@ -99,27 +257,35 @@ then(if(happens(rideTrack21(Train,Track),Time)),
 % Side2(track)=location ->
 % Initiates(RideTrack12(train,track),At(train,location),time).
 
- /*  axiom(initiates(rideTrack12(Train, Track), at(Train, Location), Time),
-       [equals(side2(Track), Location)]).
+ /*  pl=axiom(initiates(rideTrack12(Train,Track),
+   		at(Train,Location),
+   		Time),
+         [side2Pred(Track,Location)]).
  */
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',37).
 
- /*  equals(side2(Side2), Tloc) ->
-       initiates(rideTrack12(A, Side2),
-                 at(A, Tloc),
-                 Initiates).
+ /*  side2Pred(Track, Location) ->
+       initiates(rideTrack12(Train, Track),
+                 at(Train, Location),
+                 Time).
+ */
+if side2Pred(Track, Location)then initiates(rideTrack12(Train, Track), loc_at(Train, Location)at Time, _).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',37).
+
+ /*  reactive_rule([side2Pred(Track,Location)],
+   	      [ initiates(rideTrack12(Train,Track),
+   			  at(loc_at(Train,Location),
+   			     Time),
+   			  Initiates)
+   	      ]).
  */
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',37).
-then(if(equals(side2(Side2),Tloc)),
-     initiates(rideTrack12(A,Side2),
-	       at(loc_at(A,Tloc),Initiates),
-	       Initiates7)).
 
- /*  reactive_rule([equals(side2(Side2),Tloc)],
-   	      [ initiates(rideTrack12(A,Side2),
-   			  at(loc_at(A,Tloc),
-   			     Initiates),
-   			  Initiates7)
+ /*  reactive_rule([side2Pred(Track,Location)],
+   	      [ initiates(rideTrack12(Train,Track),
+   			  at(loc_at(Train,Location),
+   			     Time),
+   			  Initiates)
    	      ]).
  */
 
@@ -128,27 +294,35 @@ then(if(equals(side2(Side2),Tloc)),
 % Side1(track)=location ->
 % Initiates(RideTrack21(train,track),At(train,location),time).
 
- /*  axiom(initiates(rideTrack21(Train, Track), at(Train, Location), Time),
-       [equals(side1(Track), Location)]).
+ /*  pl=axiom(initiates(rideTrack21(Train,Track),
+   		at(Train,Location),
+   		Time),
+         [side1Pred(Track,Location)]).
  */
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',41).
 
- /*  equals(side1(Side1), Tloc) ->
-       initiates(rideTrack21(A, Side1),
-                 at(A, Tloc),
-                 Initiates).
+ /*  side1Pred(Track, Location) ->
+       initiates(rideTrack21(Train, Track),
+                 at(Train, Location),
+                 Time).
+ */
+if side1Pred(Track, Location)then initiates(rideTrack21(Train, Track), loc_at(Train, Location)at Time, _).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',41).
+
+ /*  reactive_rule([side1Pred(Track,Location)],
+   	      [ initiates(rideTrack21(Train,Track),
+   			  at(loc_at(Train,Location),
+   			     Time),
+   			  Initiates)
+   	      ]).
  */
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',41).
-then(if(equals(side1(Side1),Tloc)),
-     initiates(rideTrack21(A,Side1),
-	       at(loc_at(A,Tloc),Initiates),
-	       Initiates7)).
 
- /*  reactive_rule([equals(side1(Side1),Tloc)],
-   	      [ initiates(rideTrack21(A,Side1),
-   			  at(loc_at(A,Tloc),
-   			     Initiates),
-   			  Initiates7)
+ /*  reactive_rule([side1Pred(Track,Location)],
+   	      [ initiates(rideTrack21(Train,Track),
+   			  at(loc_at(Train,Location),
+   			     Time),
+   			  Initiates)
    	      ]).
  */
 
@@ -157,27 +331,35 @@ then(if(equals(side1(Side1),Tloc)),
 % Side1(track)=location ->
 % Terminates(RideTrack12(train,track),At(train,location),time).
 
- /*  axiom(terminates(rideTrack12(Train, Track), at(Train, Location), Time),
-       [equals(side1(Track), Location)]).
+ /*  pl=axiom(terminates(rideTrack12(Train,Track),
+   		 at(Train,Location),
+   		 Time),
+         [side1Pred(Track,Location)]).
  */
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',45).
 
- /*  equals(side1(Side1), Tloc) ->
-       terminates(rideTrack12(A, Side1),
-                  at(A, Tloc),
-                  Terminates).
+ /*  side1Pred(Track, Location) ->
+       terminates(rideTrack12(Train, Track),
+                  at(Train, Location),
+                  Time).
+ */
+if side1Pred(Track, Location)then terminates(rideTrack12(Train, Track), loc_at(Train, Location)at Time, _).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',45).
+
+ /*  reactive_rule([side1Pred(Track,Location)],
+   	      [ terminates(rideTrack12(Train,Track),
+   			   at(loc_at(Train,Location),
+   			      Time),
+   			   Terminates)
+   	      ]).
  */
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',45).
-then(if(equals(side1(Side1),Tloc)),
-     terminates(rideTrack12(A,Side1),
-		at(loc_at(A,Tloc),Terminates),
-		Terminates7)).
 
- /*  reactive_rule([equals(side1(Side1),Tloc)],
-   	      [ terminates(rideTrack12(A,Side1),
-   			   at(loc_at(A,Tloc),
-   			      Terminates),
-   			   Terminates7)
+ /*  reactive_rule([side1Pred(Track,Location)],
+   	      [ terminates(rideTrack12(Train,Track),
+   			   at(loc_at(Train,Location),
+   			      Time),
+   			   Terminates)
    	      ]).
  */
 
@@ -186,27 +368,35 @@ then(if(equals(side1(Side1),Tloc)),
 % Side2(track)=location ->
 % Terminates(RideTrack21(train,track),At(train,location),time).
 
- /*  axiom(terminates(rideTrack21(Train, Track), at(Train, Location), Time),
-       [equals(side2(Track), Location)]).
+ /*  pl=axiom(terminates(rideTrack21(Train,Track),
+   		 at(Train,Location),
+   		 Time),
+         [side2Pred(Track,Location)]).
  */
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',49).
 
- /*  equals(side2(Side2), Tloc) ->
-       terminates(rideTrack21(A, Side2),
-                  at(A, Tloc),
-                  Terminates).
+ /*  side2Pred(Track, Location) ->
+       terminates(rideTrack21(Train, Track),
+                  at(Train, Location),
+                  Time).
+ */
+if side2Pred(Track, Location)then terminates(rideTrack21(Train, Track), loc_at(Train, Location)at Time, _).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',49).
+
+ /*  reactive_rule([side2Pred(Track,Location)],
+   	      [ terminates(rideTrack21(Train,Track),
+   			   at(loc_at(Train,Location),
+   			      Time),
+   			   Terminates)
+   	      ]).
  */
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',49).
-then(if(equals(side2(Side2),Tloc)),
-     terminates(rideTrack21(A,Side2),
-		at(loc_at(A,Tloc),Terminates),
-		Terminates7)).
 
- /*  reactive_rule([equals(side2(Side2),Tloc)],
-   	      [ terminates(rideTrack21(A,Side2),
-   			   at(loc_at(A,Tloc),
-   			      Terminates),
-   			   Terminates7)
+ /*  reactive_rule([side2Pred(Track,Location)],
+   	      [ terminates(rideTrack21(Train,Track),
+   			   at(loc_at(Train,Location),
+   			      Time),
+   			   Terminates)
    	      ]).
  */
 
@@ -215,57 +405,213 @@ then(if(equals(side2(Side2),Tloc)),
 
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',54).
 % event DriveStreet12(vehicle,street)
- %  event(driveStreet12(vehicle,street)).
+ %  blue=event(driveStreet12(vehicle,street)).
  %  event(driveStreet12(vehicle,street)).
 events([driveStreet12/2]).
+ %  events([driveStreet12/2]).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',54).
 mpred_prop(driveStreet12(vehicle,street),event).
+ %  mpred_prop(driveStreet12(vehicle,street),event).
 
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',56).
 % event DriveStreet21(vehicle,street)
- %  event(driveStreet21(vehicle,street)).
+ %  blue=event(driveStreet21(vehicle,street)).
  %  event(driveStreet21(vehicle,street)).
 events([driveStreet21/2]).
+ %  events([driveStreet21/2]).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',56).
 mpred_prop(driveStreet21(vehicle,street),event).
+ %  mpred_prop(driveStreet21(vehicle,street),event).
 
 
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',58).
 % [vehicle,street,time]
 % Happens(DriveStreet12(vehicle,street),time) ->
 % HoldsAt(At(vehicle,Side1(street)),time).
+ %  clausify_pnf=(happens(driveStreet12(Vehicle, Street), Time)->holds_at(at(Vehicle, side1(Street)), Time)).
 
- /*  happens(driveStreet12(Vehicle, Street), Time) ->
-       holds_at(at(Vehicle, side1(Street)), Time).
+ /*  holds_at(at(Vehicle, side1(Street)), Time) :-
+       happens(driveStreet12(Vehicle, Street), Time).
  */
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',58).
-then(if(happens(driveStreet12(Vehicle,Street),Time)),
-     at(loc_at(Vehicle,side1(Street)),Time)).
 
- /*  reactive_rule([ happens(driveStreet12(Vehicle,Street),
-   			Time)
-   	      ],
-   	      [ holds(loc_at(Vehicle,side1(Street)),
-   		      Time)
+ /*  pl=axiom(requires(driveStreet12(Vehicle,Street),
+   	       When_Time),
+         [metreqs(driveStreet12(Vehicle,Street))]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',58).
+
+ /*  metreqs(driveStreet12(Vehicle, Street)) ->
+       requires(driveStreet12(Vehicle, Street), When_Time).
+ */
+if metreqs(driveStreet12(Vehicle, Street))then requires(driveStreet12(Vehicle, Street), When_Time).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',58).
+
+ /*  reactive_rule([metreqs(driveStreet12(Vehicle,Street))],
+   	      [ requires(driveStreet12(Vehicle,Street),
+   			 When_Time)
    	      ]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',58).
+
+ /*  reactive_rule([metreqs(driveStreet12(Vehicle,Street))],
+   	      [ requires(driveStreet12(Vehicle,Street),
+   			 When_Time)
+   	      ]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',58).
+
+ /*  fix_axiom_head(When_Time) ->
+       [ holds_at(metreqs(driveStreet12(Vehicle, Street)),
+                  When_Time),
+          (->),
+         metreqs(driveStreet12(Vehicle, Street))
+       ].
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',58).
+
+ /*  pl=axiom(metreqs(driveStreet12(Vehicle,Street)),
+         [at(Vehicle,side1(Street))]).
+ */
+
+ /*  at(Vehicle, side1(Street)) ->
+       metreqs(driveStreet12(Vehicle, Street)).
+ */
+if loc_at(Vehicle, side1(Street))then metreqs(driveStreet12(Vehicle, Street)).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',58).
+
+ /*  reactive_rule([loc_at(Vehicle,side1(Street))],
+   	      [metreqs(driveStreet12(Vehicle,Street))]).
+ */
+
+ /*  reactive_rule([loc_at(Vehicle,side1(Street))],
+   	      [metreqs(driveStreet12(Vehicle,Street))]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',58).
+
+ /*  not(happens(driveStreet12(Vehicle, Street), When_Time)) :-
+       not(holds_at(at(Vehicle, side1(Street)), When_Time)).
+ */
+
+ /*  fix_axiom_head(When_Time) ->
+       [ not(happens(driveStreet12(Vehicle, Street), When_Time)),
+          (->),
+         not(driveStreet12(Vehicle, Street))
+       ].
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',58).
+
+ /*  pl=axiom(not(driveStreet12(Vehicle,Street)),
+         [not(at(Vehicle,side1(Street)))]).
+ */
+
+ /*  not(at(Vehicle, side1(Street))) ->
+       not(driveStreet12(Vehicle, Street)).
+ */
+if not loc_at(Vehicle, side1(Street))then not driveStreet12(Vehicle, Street).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',58).
+
+ /*  reactive_rule([not(loc_at(Vehicle,side1(Street)))],
+   	      [not(driveStreet12(Vehicle,Street))]).
+ */
+
+ /*  reactive_rule([not(loc_at(Vehicle,side1(Street)))],
+   	      [not(driveStreet12(Vehicle,Street))]).
  */
 
 
 % [vehicle,street,time]
 % Happens(DriveStreet21(vehicle,street),time) ->
 % HoldsAt(At(vehicle,Side2(street)),time).
+ %  clausify_pnf=(happens(driveStreet21(Vehicle, Street), Time)->holds_at(at(Vehicle, side2(Street)), Time)).
 
- /*  happens(driveStreet21(Vehicle, Street), Time) ->
-       holds_at(at(Vehicle, side2(Street)), Time).
+ /*  holds_at(at(Vehicle, side2(Street)), Time) :-
+       happens(driveStreet21(Vehicle, Street), Time).
  */
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',63).
-then(if(happens(driveStreet21(Vehicle,Street),Time)),
-     at(loc_at(Vehicle,side2(Street)),Time)).
 
- /*  reactive_rule([ happens(driveStreet21(Vehicle,Street),
-   			Time)
-   	      ],
-   	      [ holds(loc_at(Vehicle,side2(Street)),
-   		      Time)
+ /*  pl=axiom(requires(driveStreet21(Vehicle,Street),
+   	       When_Time),
+         [metreqs(driveStreet21(Vehicle,Street))]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',63).
+
+ /*  metreqs(driveStreet21(Vehicle, Street)) ->
+       requires(driveStreet21(Vehicle, Street), When_Time).
+ */
+if metreqs(driveStreet21(Vehicle, Street))then requires(driveStreet21(Vehicle, Street), When_Time).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',63).
+
+ /*  reactive_rule([metreqs(driveStreet21(Vehicle,Street))],
+   	      [ requires(driveStreet21(Vehicle,Street),
+   			 When_Time)
    	      ]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',63).
+
+ /*  reactive_rule([metreqs(driveStreet21(Vehicle,Street))],
+   	      [ requires(driveStreet21(Vehicle,Street),
+   			 When_Time)
+   	      ]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',63).
+
+ /*  fix_axiom_head(When_Time) ->
+       [ holds_at(metreqs(driveStreet21(Vehicle, Street)),
+                  When_Time),
+          (->),
+         metreqs(driveStreet21(Vehicle, Street))
+       ].
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',63).
+
+ /*  pl=axiom(metreqs(driveStreet21(Vehicle,Street)),
+         [at(Vehicle,side2(Street))]).
+ */
+
+ /*  at(Vehicle, side2(Street)) ->
+       metreqs(driveStreet21(Vehicle, Street)).
+ */
+if loc_at(Vehicle, side2(Street))then metreqs(driveStreet21(Vehicle, Street)).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',63).
+
+ /*  reactive_rule([loc_at(Vehicle,side2(Street))],
+   	      [metreqs(driveStreet21(Vehicle,Street))]).
+ */
+
+ /*  reactive_rule([loc_at(Vehicle,side2(Street))],
+   	      [metreqs(driveStreet21(Vehicle,Street))]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',63).
+
+ /*  not(happens(driveStreet21(Vehicle, Street), When_Time)) :-
+       not(holds_at(at(Vehicle, side2(Street)), When_Time)).
+ */
+
+ /*  fix_axiom_head(When_Time) ->
+       [ not(happens(driveStreet21(Vehicle, Street), When_Time)),
+          (->),
+         not(driveStreet21(Vehicle, Street))
+       ].
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',63).
+
+ /*  pl=axiom(not(driveStreet21(Vehicle,Street)),
+         [not(at(Vehicle,side2(Street)))]).
+ */
+
+ /*  not(at(Vehicle, side2(Street))) ->
+       not(driveStreet21(Vehicle, Street)).
+ */
+if not loc_at(Vehicle, side2(Street))then not driveStreet21(Vehicle, Street).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',63).
+
+ /*  reactive_rule([not(loc_at(Vehicle,side2(Street)))],
+   	      [not(driveStreet21(Vehicle,Street))]).
+ */
+
+ /*  reactive_rule([not(loc_at(Vehicle,side2(Street)))],
+   	      [not(driveStreet21(Vehicle,Street))]).
  */
 
 
@@ -273,27 +619,35 @@ then(if(happens(driveStreet21(Vehicle,Street),Time)),
 % Side2(street)=location ->
 % Initiates(DriveStreet12(vehicle,street),At(vehicle,location),time).
 
- /*  axiom(initiates(driveStreet12(Vehicle, Street), at(Vehicle, Location), Time),
-       [equals(side2(Street), Location)]).
+ /*  pl=axiom(initiates(driveStreet12(Vehicle,Street),
+   		at(Vehicle,Location),
+   		Time),
+         [side2Pred(Street,Location)]).
  */
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',67).
 
- /*  equals(side2(Side2), Tloc) ->
-       initiates(driveStreet12(A, Side2),
-                 at(A, Tloc),
-                 Initiates).
+ /*  side2Pred(Street, Location) ->
+       initiates(driveStreet12(Vehicle, Street),
+                 at(Vehicle, Location),
+                 Time).
+ */
+if side2Pred(Street, Location)then initiates(driveStreet12(Vehicle, Street), loc_at(Vehicle, Location)at Time, _).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',67).
+
+ /*  reactive_rule([side2Pred(Street,Location)],
+   	      [ initiates(driveStreet12(Vehicle,Street),
+   			  at(loc_at(Vehicle,Location),
+   			     Time),
+   			  Initiates)
+   	      ]).
  */
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',67).
-then(if(equals(side2(Side2),Tloc)),
-     initiates(driveStreet12(A,Side2),
-	       at(loc_at(A,Tloc),Initiates),
-	       Initiates7)).
 
- /*  reactive_rule([equals(side2(Side2),Tloc)],
-   	      [ initiates(driveStreet12(A,Side2),
-   			  at(loc_at(A,Tloc),
-   			     Initiates),
-   			  Initiates7)
+ /*  reactive_rule([side2Pred(Street,Location)],
+   	      [ initiates(driveStreet12(Vehicle,Street),
+   			  at(loc_at(Vehicle,Location),
+   			     Time),
+   			  Initiates)
    	      ]).
  */
 
@@ -302,27 +656,35 @@ then(if(equals(side2(Side2),Tloc)),
 % Side1(street)=location ->
 % Initiates(DriveStreet21(vehicle,street),At(vehicle,location),time).
 
- /*  axiom(initiates(driveStreet21(Vehicle, Street), at(Vehicle, Location), Time),
-       [equals(side1(Street), Location)]).
+ /*  pl=axiom(initiates(driveStreet21(Vehicle,Street),
+   		at(Vehicle,Location),
+   		Time),
+         [side1Pred(Street,Location)]).
  */
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',71).
 
- /*  equals(side1(Side1), Tloc) ->
-       initiates(driveStreet21(A, Side1),
-                 at(A, Tloc),
-                 Initiates).
+ /*  side1Pred(Street, Location) ->
+       initiates(driveStreet21(Vehicle, Street),
+                 at(Vehicle, Location),
+                 Time).
+ */
+if side1Pred(Street, Location)then initiates(driveStreet21(Vehicle, Street), loc_at(Vehicle, Location)at Time, _).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',71).
+
+ /*  reactive_rule([side1Pred(Street,Location)],
+   	      [ initiates(driveStreet21(Vehicle,Street),
+   			  at(loc_at(Vehicle,Location),
+   			     Time),
+   			  Initiates)
+   	      ]).
  */
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',71).
-then(if(equals(side1(Side1),Tloc)),
-     initiates(driveStreet21(A,Side1),
-	       at(loc_at(A,Tloc),Initiates),
-	       Initiates7)).
 
- /*  reactive_rule([equals(side1(Side1),Tloc)],
-   	      [ initiates(driveStreet21(A,Side1),
-   			  at(loc_at(A,Tloc),
-   			     Initiates),
-   			  Initiates7)
+ /*  reactive_rule([side1Pred(Street,Location)],
+   	      [ initiates(driveStreet21(Vehicle,Street),
+   			  at(loc_at(Vehicle,Location),
+   			     Time),
+   			  Initiates)
    	      ]).
  */
 
@@ -331,27 +693,35 @@ then(if(equals(side1(Side1),Tloc)),
 % Side1(street)=location ->
 % Terminates(DriveStreet12(vehicle,street),At(vehicle,location),time).
 
- /*  axiom(terminates(driveStreet12(Vehicle, Street), at(Vehicle, Location), Time),
-       [equals(side1(Street), Location)]).
+ /*  pl=axiom(terminates(driveStreet12(Vehicle,Street),
+   		 at(Vehicle,Location),
+   		 Time),
+         [side1Pred(Street,Location)]).
  */
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',75).
 
- /*  equals(side1(Side1), Tloc) ->
-       terminates(driveStreet12(A, Side1),
-                  at(A, Tloc),
-                  Terminates).
+ /*  side1Pred(Street, Location) ->
+       terminates(driveStreet12(Vehicle, Street),
+                  at(Vehicle, Location),
+                  Time).
+ */
+if side1Pred(Street, Location)then terminates(driveStreet12(Vehicle, Street), loc_at(Vehicle, Location)at Time, _).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',75).
+
+ /*  reactive_rule([side1Pred(Street,Location)],
+   	      [ terminates(driveStreet12(Vehicle,Street),
+   			   at(loc_at(Vehicle,Location),
+   			      Time),
+   			   Terminates)
+   	      ]).
  */
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',75).
-then(if(equals(side1(Side1),Tloc)),
-     terminates(driveStreet12(A,Side1),
-		at(loc_at(A,Tloc),Terminates),
-		Terminates7)).
 
- /*  reactive_rule([equals(side1(Side1),Tloc)],
-   	      [ terminates(driveStreet12(A,Side1),
-   			   at(loc_at(A,Tloc),
-   			      Terminates),
-   			   Terminates7)
+ /*  reactive_rule([side1Pred(Street,Location)],
+   	      [ terminates(driveStreet12(Vehicle,Street),
+   			   at(loc_at(Vehicle,Location),
+   			      Time),
+   			   Terminates)
    	      ]).
  */
 
@@ -360,27 +730,35 @@ then(if(equals(side1(Side1),Tloc)),
 % Side2(street)=location ->
 % Terminates(DriveStreet21(vehicle,street),At(vehicle,location),time).
 
- /*  axiom(terminates(driveStreet21(Vehicle, Street), at(Vehicle, Location), Time),
-       [equals(side2(Street), Location)]).
+ /*  pl=axiom(terminates(driveStreet21(Vehicle,Street),
+   		 at(Vehicle,Location),
+   		 Time),
+         [side2Pred(Street,Location)]).
  */
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',79).
 
- /*  equals(side2(Side2), Tloc) ->
-       terminates(driveStreet21(A, Side2),
-                  at(A, Tloc),
-                  Terminates).
+ /*  side2Pred(Street, Location) ->
+       terminates(driveStreet21(Vehicle, Street),
+                  at(Vehicle, Location),
+                  Time).
+ */
+if side2Pred(Street, Location)then terminates(driveStreet21(Vehicle, Street), loc_at(Vehicle, Location)at Time, _).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',79).
+
+ /*  reactive_rule([side2Pred(Street,Location)],
+   	      [ terminates(driveStreet21(Vehicle,Street),
+   			   at(loc_at(Vehicle,Location),
+   			      Time),
+   			   Terminates)
+   	      ]).
  */
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',79).
-then(if(equals(side2(Side2),Tloc)),
-     terminates(driveStreet21(A,Side2),
-		at(loc_at(A,Tloc),Terminates),
-		Terminates7)).
 
- /*  reactive_rule([equals(side2(Side2),Tloc)],
-   	      [ terminates(driveStreet21(A,Side2),
-   			   at(loc_at(A,Tloc),
-   			      Terminates),
-   			   Terminates7)
+ /*  reactive_rule([side2Pred(Street,Location)],
+   	      [ terminates(driveStreet21(Vehicle,Street),
+   			   at(loc_at(Vehicle,Location),
+   			      Time),
+   			   Terminates)
    	      ]).
  */
 
@@ -389,17 +767,23 @@ then(if(equals(side2(Side2),Tloc)),
 
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',84).
 % event PointToward(agent,horse,street)
- %  event(pointToward(agent,horse,street)).
+ %  blue=event(pointToward(agent,horse,street)).
  %  event(pointToward(agent,horse,street)).
 actions([pointToward/3]).
+ %  actions([pointToward/3]).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',84).
 mpred_prop(pointToward(agent,horse,street),event).
+ %  mpred_prop(pointToward(agent,horse,street),event).
 
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',86).
 % fluent PointedToward(horse,street)
- %  fluent(pointedToward(horse,street)).
+ %  blue=fluent(pointedToward(horse,street)).
  %  fluent(pointedToward(horse,street)).
 fluents([pointedToward/2]).
+ %  fluents([pointedToward/2]).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',86).
 mpred_prop(pointedToward(horse,street),fluent).
+ %  mpred_prop(pointedToward(horse,street),fluent).
 
 
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',88).
@@ -407,21 +791,76 @@ mpred_prop(pointedToward(horse,street),fluent).
 % HoldsAt(PointedToward(horse,street1),time) &
 % HoldsAt(PointedToward(horse,street2),time) ->
 % street1=street2.
+ %  clausify_pnf=(holds_at(pointedToward(Horse, Street1), Time), holds_at(pointedToward(Horse, Street2), Time)->equals(Street1, Street2)).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',88).
 
- /*  (   holds_at(pointedToward(Horse, Street1), Time),
-       holds_at(pointedToward(Horse, Street2), Time)
-   ->  equals(Street1, Street2)
-   ).
+ /*  not(holds_at(pointedToward(Horse, Street1), Time)) :-
+       holds_at(pointedToward(Horse, Street2), Time),
+       not(equals(Street1, Street2)).
  */
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',88).
-then(if((at(pointedToward(Horse, Street1), Time), at(pointedToward(Horse, Street2), Time))), equals(Street1, Street2)).
 
- /*  reactive_rule([ holds(pointedToward(Horse,Street1),
-   		      Time),
-   		holds(pointedToward(Horse,Street2),
-   		      Time)
+ /*  pl=axiom(not(pointedToward(Horse,Street1)),
+         [ pointedToward(Horse,Street2),
+   	not(equals(Street1,Street2))
+         ]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',88).
+
+ /*  (   pointedToward(Horse, Street2),
+       not(equals(Street1, Street2))
+   ->  not(pointedToward(Horse, Street1))
+   ).
+ */
+if pointedToward(Horse, Street2), not equals(Street1, Street2)then not pointedToward(Horse, Street1).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',88).
+
+ /*  reactive_rule([ pointedToward(Horse,Street2),
+   		not(equals(Street1,Street2))
    	      ],
-   	      [equals(Street1,Street2)]).
+   	      [not(pointedToward(Horse,Street1))]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',88).
+
+ /*  reactive_rule([ pointedToward(Horse,Street2),
+   		not(equals(Street1,Street2))
+   	      ],
+   	      [not(pointedToward(Horse,Street1))]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',88).
+
+ /*  not(holds_at(pointedToward(Horse, Street2), Time)) :-
+       holds_at(pointedToward(Horse, Street1), Time),
+       not(equals(Street1, Street2)).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',88).
+
+ /*  pl=axiom(not(pointedToward(Horse,Street2)),
+         [ pointedToward(Horse,Street1),
+   	not(equals(Street2,Street1))
+         ]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',88).
+
+ /*  (   pointedToward(Horse, Street1),
+       not(equals(Street2, Street1))
+   ->  not(pointedToward(Horse, Street2))
+   ).
+ */
+if pointedToward(Horse, Street1), not equals(Street2, Street1)then not pointedToward(Horse, Street2).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',88).
+
+ /*  reactive_rule([ pointedToward(Horse,Street1),
+   		not(equals(Street2,Street1))
+   	      ],
+   	      [not(pointedToward(Horse,Street2))]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',88).
+
+ /*  reactive_rule([ pointedToward(Horse,Street1),
+   		not(equals(Street2,Street1))
+   	      ],
+   	      [not(pointedToward(Horse,Street2))]).
  */
 
 
@@ -431,28 +870,32 @@ then(if((at(pointedToward(Horse, Street1), Time), at(pointedToward(Horse, Street
 %           time).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',94).
 
- /*  axiom(initiates(pointToward(Agent, Horse, Street), pointedToward(Horse, Street), Time),
-       []).
- */
-
- /*  initiates(pointToward(PointtowardP_Num3_V,
-   		      A,
-   		      Pointtoward),
-   	  pointedToward(A,Pointtoward),
-   	  Initiates).
+ /*  pl=axiom(initiates(pointToward(Agent,Horse,Street),
+   		pointedToward(Horse,Street),
+   		Time),
+         []).
  */
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',94).
-initiates(pointToward(PointtowardP_Num3_V,
-		      A,
-		      Pointtoward),
-	  pointedToward(A,Pointtoward)).
 
- /*  initiated(happens(pointToward(PointtowardP_Num3_V,
-   			      A,
-   			      Pointtoward),
+ /*  initiates(pointToward(Agent,Horse,Street),
+   	  pointedToward(Horse,Street),
+   	  Time).
+ */
+pointToward(Agent, Horse, Street)initiates pointedToward(Horse, Street).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',94).
+
+ /*  initiated(happens(pointToward(Agent,Horse,Street),
    		  Time_From,
    		  Time_Until),
-   	  pointedToward(A,Pointtoward),
+   	  pointedToward(Horse,Street),
+   	  []).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',94).
+
+ /*  initiated(happens(pointToward(Agent,Horse,Street),
+   		  Time_From,
+   		  Time_Until),
+   	  pointedToward(Horse,Street),
    	  []).
  */
 
@@ -464,37 +907,43 @@ initiates(pointToward(PointtowardP_Num3_V,
 %            time).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',99).
 
- /*  axiom(terminates(pointToward(Agent, Horse, Street2), pointedToward(Horse, Street1), Time),
-       [pointedToward(Horse, Street1)]).
- */
-
- /*  pointedToward(A, Pointedtoward) ->
-       terminates(pointToward(PointtowardP_Num3_V,
-                              A,
-                              Pointtoward),
-                  pointedToward(A, Pointedtoward),
-                  Terminates).
+ /*  pl=axiom(terminates(pointToward(Agent,Horse,Street2),
+   		 pointedToward(Horse,Street1),
+   		 Time),
+         [pointedToward(Horse,Street1)]).
  */
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',99).
-then(if(pointedToward(A,Pointedtoward)),
-     terminates(pointToward(PointtowardP_Num3_V,
-			    A,
-			    Pointtoward),
-		at(pointedToward(A,Pointedtoward),
-		   Terminates),
-		Terminates9)).
+
+ /*  pointedToward(Horse, Street1) ->
+       terminates(pointToward(Agent, Horse, Street2),
+                  pointedToward(Horse, Street1),
+                  Time).
+ */
+if pointedToward(Horse, Street1)then terminates(pointToward(Agent, Horse, Street2), pointedToward(Horse, Street1)at Time, _).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',99).
 
- /*  reactive_rule([ holds(pointedToward(A,Pointedtoward),
+ /*  reactive_rule([ holds(pointedToward(Horse,Street1),
    		      Holds)
    	      ],
-   	      [ terminates(pointToward(PointtowardP_Num3_V,
-   				       A,
-   				       Pointtoward),
-   			   at(pointedToward(A,
-   					    Pointedtoward),
-   			      Terminates),
-   			   Terminates9)
+   	      [ terminates(pointToward(Agent,
+   				       Horse,
+   				       Street2),
+   			   at(pointedToward(Horse,Street1),
+   			      Time),
+   			   Terminates)
+   	      ]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',99).
+
+ /*  reactive_rule([ holds(pointedToward(Horse,Street1),
+   		      Holds)
+   	      ],
+   	      [ terminates(pointToward(Agent,
+   				       Horse,
+   				       Street2),
+   			   at(pointedToward(Horse,Street1),
+   			      Time),
+   			   Terminates)
    	      ]).
  */
 
@@ -505,28 +954,32 @@ then(if(pointedToward(A,Pointedtoward)),
 %            time).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',105).
 
- /*  axiom(terminates(pullStreet12(Horse, Vehicle, Street), pointedToward(Horse, Street), Time),
-       []).
- */
-
- /*  terminates(pullStreet12(Pullstreet12P_Num3_V,
-   			_,
-   			Pullstreet12),
-   	   pointedToward(Pullstreet12P_Num3_V,Pullstreet12),
-   	   Terminates).
+ /*  pl=axiom(terminates(pullStreet12(Horse,Vehicle,Street),
+   		 pointedToward(Horse,Street),
+   		 Time),
+         []).
  */
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',105).
-terminates(pullStreet12(Pullstreet12P_Num3_V,
-			_,
-			Pullstreet12),
-	   pointedToward(Pullstreet12P_Num3_V,Pullstreet12)).
 
- /*  terminated(happens(pullStreet12(Pullstreet12P_Num3_V,
-   				_,
-   				Pullstreet12),
+ /*  terminates(pullStreet12(Horse,Vehicle,Street),
+   	   pointedToward(Horse,Street),
+   	   Time).
+ */
+pullStreet12(Horse, Vehicle, Street)terminates pointedToward(Horse, Street).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',105).
+
+ /*  terminated(happens(pullStreet12(Horse,Vehicle,Street),
    		   Time_From,
    		   Time_Until),
-   	   pointedToward(Pullstreet12P_Num3_V,Pullstreet12),
+   	   pointedToward(Horse,Street),
+   	   []).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',105).
+
+ /*  terminated(happens(pullStreet12(Horse,Vehicle,Street),
+   		   Time_From,
+   		   Time_Until),
+   	   pointedToward(Horse,Street),
    	   []).
  */
 
@@ -537,28 +990,32 @@ terminates(pullStreet12(Pullstreet12P_Num3_V,
 %            time).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',110).
 
- /*  axiom(terminates(pullStreet21(Horse, Vehicle, Street), pointedToward(Horse, Street), Time),
-       []).
- */
-
- /*  terminates(pullStreet21(Pullstreet21P_Num3_V,
-   			_,
-   			Pullstreet21),
-   	   pointedToward(Pullstreet21P_Num3_V,Pullstreet21),
-   	   Terminates).
+ /*  pl=axiom(terminates(pullStreet21(Horse,Vehicle,Street),
+   		 pointedToward(Horse,Street),
+   		 Time),
+         []).
  */
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',110).
-terminates(pullStreet21(Pullstreet21P_Num3_V,
-			_,
-			Pullstreet21),
-	   pointedToward(Pullstreet21P_Num3_V,Pullstreet21)).
 
- /*  terminated(happens(pullStreet21(Pullstreet21P_Num3_V,
-   				_,
-   				Pullstreet21),
+ /*  terminates(pullStreet21(Horse,Vehicle,Street),
+   	   pointedToward(Horse,Street),
+   	   Time).
+ */
+pullStreet21(Horse, Vehicle, Street)terminates pointedToward(Horse, Street).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',110).
+
+ /*  terminated(happens(pullStreet21(Horse,Vehicle,Street),
    		   Time_From,
    		   Time_Until),
-   	   pointedToward(Pullstreet21P_Num3_V,Pullstreet21),
+   	   pointedToward(Horse,Street),
+   	   []).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',110).
+
+ /*  terminated(happens(pullStreet21(Horse,Vehicle,Street),
+   		   Time_From,
+   		   Time_Until),
+   	   pointedToward(Horse,Street),
    	   []).
  */
 
@@ -566,33 +1023,91 @@ terminates(pullStreet21(Pullstreet21P_Num3_V,
 % [horse,street,time]
 % HoldsAt(PointedToward(horse,street),time) ->
 % HoldsAt(NearPortal(horse,street),time).
+ %  clausify_pnf=(holds_at(pointedToward(Horse, Street), Time)->holds_at(nearPortal(Horse, Street), Time)).
 
- /*  holds_at(pointedToward(Horse, Street), Time) ->
-       holds_at(nearPortal(Horse, Street), Time).
+ /*  holds_at(nearPortal(Horse, Street), Time) :-
+       holds_at(pointedToward(Horse, Street), Time).
  */
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',115).
-then(if(at(pointedToward(Horse,Street),Time)),
-     at(nearPortal(Horse,Street),Time)).
+
+ /*  fix_axiom_head(Time) ->
+       [ holds_at(nearPortal(Horse, Street), Time),
+          (->),
+         nearPortal(Horse, Street)
+       ].
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',115).
+
+ /*  pl=axiom(nearPortal(Horse,Street),
+         [pointedToward(Horse,Street)]).
+ */
+
+ /*  pointedToward(Horse, Street) ->
+       nearPortal(Horse, Street).
+ */
+if pointedToward(Horse, Street)then nearPortal(Horse, Street).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',115).
 
  /*  reactive_rule([ holds(pointedToward(Horse,Street),
-   		      Time)
+   		      Holds)
    	      ],
-   	      [holds(nearPortal(Horse,Street),Time)]).
+   	      [nearPortal(Horse,Street)]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',115).
+
+ /*  reactive_rule([ holds(pointedToward(Horse,Street),
+   		      Holds)
+   	      ],
+   	      [nearPortal(Horse,Street)]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',115).
+
+ /*  not(holds_at(pointedToward(Horse, Street), Time)) :-
+       not(holds_at(nearPortal(Horse, Street), Time)).
+ */
+
+ /*  pl=axiom(not(pointedToward(Horse,Street)),
+         [not(nearPortal(Horse,Street))]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',115).
+
+ /*  not(nearPortal(Horse, Street)) ->
+       not(pointedToward(Horse, Street)).
+ */
+if not nearPortal(Horse, Street)then not pointedToward(Horse, Street).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',115).
+
+ /*  reactive_rule([not(nearPortal(Horse,Street))],
+   	      [ holds(not(pointedToward(Horse,Street)),
+   		      Holds4)
+   	      ]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',115).
+
+ /*  reactive_rule([not(nearPortal(Horse,Street))],
+   	      [ holds(not(pointedToward(Horse,Street)),
+   		      Holds4)
+   	      ]).
  */
 
 % event Lash(agent,horse)
- %  event(lash(agent,horse)).
+ %  blue=event(lash(agent,horse)).
  %  event(lash(agent,horse)).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',117).
 actions([lash/2]).
+ %  actions([lash/2]).
 mpred_prop(lash(agent,horse),event).
+ %  mpred_prop(lash(agent,horse),event).
 
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',120).
 % fluent HitchedTo(horse,vehicle)
- %  fluent(hitchedTo(horse,vehicle)).
+ %  blue=fluent(hitchedTo(horse,vehicle)).
  %  fluent(hitchedTo(horse,vehicle)).
 fluents([hitchedTo/2]).
+ %  fluents([hitchedTo/2]).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',120).
 mpred_prop(hitchedTo(horse,vehicle),fluent).
+ %  mpred_prop(hitchedTo(horse,vehicle),fluent).
 
 
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',122).
@@ -600,19 +1115,119 @@ mpred_prop(hitchedTo(horse,vehicle),fluent).
 % HoldsAt(HitchedTo(horse,vehicle),time) &
 % HoldsAt(At(vehicle,location),time) ->
 % HoldsAt(At(horse,location),time).
+ %  clausify_pnf=(holds_at(hitchedTo(Horse, Vehicle), Time), holds_at(at(Vehicle, Location), Time)->holds_at(at(Horse, Location), Time)).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',122).
 
- /*  (   holds_at(hitchedTo(Horse, Vehicle), Time),
-       holds_at(at(Vehicle, Location), Time)
-   ->  holds_at(at(Horse, Location), Time)
-   ).
+ /*  holds_at(at(Horse, Location), Time) :-
+       holds_at(hitchedTo(Horse, Vehicle), Time),
+       holds_at(at(Vehicle, Location), Time).
  */
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',122).
-then(if((at(hitchedTo(Horse, Vehicle), Time), at(loc_at(Vehicle, Location), Time))), at(loc_at(Horse, Location), Time)).
 
- /*  reactive_rule([ holds(hitchedTo(Horse,Vehicle),Time),
-   		holds(loc_at(Vehicle,Location),Time)
+ /*  fix_axiom_head(Time) ->
+       [ holds_at(at(Horse, Location), Time),
+          (->),
+         at(Horse, Location)
+       ].
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',122).
+
+ /*  pl=axiom(at(Horse,Location),
+         [ hitchedTo(Horse,Vehicle),
+   	at(Vehicle,Location)
+         ]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',122).
+
+ /*  (   hitchedTo(Horse, Vehicle),
+       at(Vehicle, Location)
+   ->  at(Horse, Location)
+   ).
+ */
+if hitchedTo(Horse, Vehicle), loc_at(Vehicle, Location)then loc_at(Horse, Location).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',122).
+
+ /*  reactive_rule([ hitchedTo(Horse,Vehicle),
+   		loc_at(Vehicle,Location)
    	      ],
-   	      [holds(loc_at(Horse,Location),Time)]).
+   	      [loc_at(Horse,Location)]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',122).
+
+ /*  reactive_rule([ hitchedTo(Horse,Vehicle),
+   		loc_at(Vehicle,Location)
+   	      ],
+   	      [loc_at(Horse,Location)]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',122).
+
+ /*  not(holds_at(hitchedTo(Horse, Vehicle), Time)) :-
+       holds_at(at(Vehicle, Location), Time),
+       not(holds_at(at(Horse, Location), Time)).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',122).
+
+ /*  pl=axiom(not(hitchedTo(Horse,Vehicle)),
+         [ at(Vehicle,Location),
+   	not(at(Horse,Location))
+         ]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',122).
+
+ /*  (   at(Vehicle, Location),
+       not(at(Horse, Location))
+   ->  not(hitchedTo(Horse, Vehicle))
+   ).
+ */
+if loc_at(Vehicle, Location), not loc_at(Horse, Location)then not hitchedTo(Horse, Vehicle).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',122).
+
+ /*  reactive_rule([ loc_at(Vehicle,Location),
+   		not(loc_at(Horse,Location))
+   	      ],
+   	      [not(hitchedTo(Horse,Vehicle))]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',122).
+
+ /*  reactive_rule([ loc_at(Vehicle,Location),
+   		not(loc_at(Horse,Location))
+   	      ],
+   	      [not(hitchedTo(Horse,Vehicle))]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',122).
+
+ /*  not(holds_at(at(Vehicle, Location), Time)) :-
+       holds_at(hitchedTo(Horse, Vehicle), Time),
+       not(holds_at(at(Horse, Location), Time)).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',122).
+
+ /*  pl=axiom(not(at(Vehicle,Location)),
+         [ hitchedTo(Horse,Vehicle),
+   	not(at(Horse,Location))
+         ]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',122).
+
+ /*  (   hitchedTo(Horse, Vehicle),
+       not(at(Horse, Location))
+   ->  not(at(Vehicle, Location))
+   ).
+ */
+if hitchedTo(Horse, Vehicle), not loc_at(Horse, Location)then not loc_at(Vehicle, Location).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',122).
+
+ /*  reactive_rule([ hitchedTo(Horse,Vehicle),
+   		not(loc_at(Horse,Location))
+   	      ],
+   	      [not(loc_at(Vehicle,Location))]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',122).
+
+ /*  reactive_rule([ hitchedTo(Horse,Vehicle),
+   		not(loc_at(Horse,Location))
+   	      ],
+   	      [not(loc_at(Vehicle,Location))]).
  */
 
 
@@ -622,30 +1237,289 @@ then(if((at(hitchedTo(Horse, Vehicle), Time), at(loc_at(Vehicle, Location), Time
 % HoldsAt(HitchedTo(horse,vehicle),time) &
 % HoldsAt(At(horse,Side1(street)),time) ->
 % Happens(PullStreet12(horse,vehicle,street),time).
+ %  clausify_pnf=(happens(lash(Agent, Horse), Time), holds_at(pointedToward(Horse, Street), Time), holds_at(hitchedTo(Horse, Vehicle), Time), holds_at(at(Horse, side1(Street)), Time)->happens(pullStreet12(Horse, Vehicle, Street), Time)).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',128).
 
- /*  (   happens(lash(Agent, Horse), Time),
+ /*  happens(pullStreet12(Horse, Vehicle, Street), Time) :-
+       happens(lash(Agent, Horse), Time),
        holds_at(pointedToward(Horse, Street), Time),
        holds_at(hitchedTo(Horse, Vehicle), Time),
-       holds_at(at(Horse, side1(Street)), Time)
-   ->  happens(pullStreet12(Horse, Vehicle, Street), Time)
-   ).
+       holds_at(at(Horse, side1(Street)), Time).
  */
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',128).
-then(if((happens(lash(Agent, Horse), Time), at(pointedToward(Horse, Street), Time), at(hitchedTo(Horse, Vehicle), Time), at(loc_at(Horse, side1(Street)), Time))), happens(pullStreet12(Horse, Vehicle, Street), Time)).
 
- /*  reactive_rule([ happens(lash(Agent,Horse),Time),
+ /*  fix_axiom_head(Time) ->
+       [ happens(pullStreet12(Horse, Vehicle, Street), Time),
+          (->),
+         pullStreet12(Horse, Vehicle, Street)
+       ].
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',128).
+
+ /*  pl=axiom(pullStreet12(Horse,Vehicle,Street),
+         [ lash(Agent,Horse),
+   	pointedToward(Horse,Street),
+   	hitchedTo(Horse,Vehicle),
+   	at(Horse,side1(Street))
+         ]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',128).
+
+ /*  (   lash(Agent, Horse),
+       pointedToward(Horse, Street),
+       hitchedTo(Horse, Vehicle),
+       at(Horse, side1(Street))
+   ->  pullStreet12(Horse, Vehicle, Street)
+   ).
+ */
+if lash(Agent, Horse), pointedToward(Horse, Street), hitchedTo(Horse, Vehicle), loc_at(Horse, side1(Street))then pullStreet12(Horse, Vehicle, Street).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',128).
+
+ /*  reactive_rule([ lash(Agent,Horse),
    		holds(pointedToward(Horse,Street),
-   		      Time),
-   		holds(hitchedTo(Horse,Vehicle),Time),
-   		holds(loc_at(Horse,side1(Street)),
-   		      Time)
+   		      Holds),
+   		hitchedTo(Horse,Vehicle),
+   		loc_at(Horse,side1(Street))
    	      ],
    	      [ happens(pullStreet12(Horse,
    				     Vehicle,
    				     Street),
-   			Time)
+   			Time_From,
+   			Time_Until)
    	      ]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',128).
+
+ /*  reactive_rule([ lash(Agent,Horse),
+   		holds(pointedToward(Horse,Street),
+   		      Holds),
+   		hitchedTo(Horse,Vehicle),
+   		loc_at(Horse,side1(Street))
+   	      ],
+   	      [ happens(pullStreet12(Horse,
+   				     Vehicle,
+   				     Street),
+   			Time_From,
+   			Time_Until)
+   	      ]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',128).
+
+ /*  not(happens(lash(Agent, Horse), Time)) :-
+       holds_at(pointedToward(Horse, Street), Time),
+       holds_at(hitchedTo(Horse, Vehicle), Time),
+       holds_at(at(Horse, side1(Street)), Time),
+       not(happens(pullStreet12(Horse, Vehicle, Street),
+                   Time)).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',128).
+
+ /*  fix_axiom_head(Time) ->
+       [ not(happens(lash(Agent, Horse), Time)),
+          (->),
+         not(lash(Agent, Horse))
+       ].
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',128).
+
+ /*  pl=axiom(not(lash(Agent,Horse)),
+         [ pointedToward(Horse,Street),
+   	hitchedTo(Horse,Vehicle),
+   	at(Horse,side1(Street)),
+   	not(pullStreet12(Horse,Vehicle,Street))
+         ]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',128).
+
+ /*  (   pointedToward(Horse, Street),
+       hitchedTo(Horse, Vehicle),
+       at(Horse, side1(Street)),
+       not(pullStreet12(Horse, Vehicle, Street))
+   ->  not(lash(Agent, Horse))
+   ).
+ */
+if pointedToward(Horse, Street), hitchedTo(Horse, Vehicle), loc_at(Horse, side1(Street)), not pullStreet12(Horse, Vehicle, Street)then not lash(Agent, Horse).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',128).
+
+ /*  reactive_rule([ holds(pointedToward(Horse,Street),
+   		      Holds8),
+   		hitchedTo(Horse,Vehicle),
+   		loc_at(Horse,side1(Street)),
+   		not(pullStreet12(Horse,
+   				 Vehicle,
+   				 Street))
+   	      ],
+   	      [not(lash(Agent,Horse))]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',128).
+
+ /*  reactive_rule([ holds(pointedToward(Horse,Street),
+   		      Holds8),
+   		hitchedTo(Horse,Vehicle),
+   		loc_at(Horse,side1(Street)),
+   		not(pullStreet12(Horse,
+   				 Vehicle,
+   				 Street))
+   	      ],
+   	      [not(lash(Agent,Horse))]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',128).
+
+ /*  not(holds_at(pointedToward(Horse, Street), Time)) :-
+       holds_at(hitchedTo(Horse, Vehicle), Time),
+       holds_at(at(Horse, side1(Street)), Time),
+       happens(lash(Agent, Horse), Time),
+       not(happens(pullStreet12(Horse, Vehicle, Street),
+                   Time)).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',128).
+
+ /*  pl=axiom(not(pointedToward(Horse,Street)),
+         [ hitchedTo(Horse,Vehicle),
+   	at(Horse,side1(Street)),
+   	lash(Agent,Horse),
+   	not(pullStreet12(Horse,Vehicle,Street))
+         ]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',128).
+
+ /*  (   hitchedTo(Horse, Vehicle),
+       at(Horse, side1(Street)),
+       lash(Agent, Horse),
+       not(pullStreet12(Horse, Vehicle, Street))
+   ->  not(pointedToward(Horse, Street))
+   ).
+ */
+if hitchedTo(Horse, Vehicle), loc_at(Horse, side1(Street)), lash(Agent, Horse), not pullStreet12(Horse, Vehicle, Street)then not pointedToward(Horse, Street).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',128).
+
+ /*  reactive_rule([ hitchedTo(Horse,Vehicle),
+   		loc_at(Horse,side1(Street)),
+   		lash(Agent,Horse),
+   		not(pullStreet12(Horse,
+   				 Vehicle,
+   				 Street))
+   	      ],
+   	      [ holds(not(pointedToward(Horse,Street)),
+   		      Holds9)
+   	      ]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',128).
+
+ /*  reactive_rule([ hitchedTo(Horse,Vehicle),
+   		loc_at(Horse,side1(Street)),
+   		lash(Agent,Horse),
+   		not(pullStreet12(Horse,
+   				 Vehicle,
+   				 Street))
+   	      ],
+   	      [ holds(not(pointedToward(Horse,Street)),
+   		      Holds9)
+   	      ]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',128).
+
+ /*  not(holds_at(hitchedTo(Horse, Vehicle), Time)) :-
+       holds_at(at(Horse, side1(Street)), Time),
+       holds_at(pointedToward(Horse, Street), Time),
+       happens(lash(Agent, Horse), Time),
+       not(happens(pullStreet12(Horse, Vehicle, Street),
+                   Time)).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',128).
+
+ /*  pl=axiom(not(hitchedTo(Horse,Vehicle)),
+         [ at(Horse,side1(Street)),
+   	pointedToward(Horse,Street),
+   	lash(Agent,Horse),
+   	not(pullStreet12(Horse,Vehicle,Street))
+         ]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',128).
+
+ /*  (   at(Horse, side1(Street)),
+       pointedToward(Horse, Street),
+       lash(Agent, Horse),
+       not(pullStreet12(Horse, Vehicle, Street))
+   ->  not(hitchedTo(Horse, Vehicle))
+   ).
+ */
+if loc_at(Horse, side1(Street)), pointedToward(Horse, Street), lash(Agent, Horse), not pullStreet12(Horse, Vehicle, Street)then not hitchedTo(Horse, Vehicle).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',128).
+
+ /*  reactive_rule([ loc_at(Horse,side1(Street)),
+   		holds(pointedToward(Horse,Street),
+   		      Holds10),
+   		lash(Agent,Horse),
+   		not(pullStreet12(Horse,
+   				 Vehicle,
+   				 Street))
+   	      ],
+   	      [not(hitchedTo(Horse,Vehicle))]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',128).
+
+ /*  reactive_rule([ loc_at(Horse,side1(Street)),
+   		holds(pointedToward(Horse,Street),
+   		      Holds10),
+   		lash(Agent,Horse),
+   		not(pullStreet12(Horse,
+   				 Vehicle,
+   				 Street))
+   	      ],
+   	      [not(hitchedTo(Horse,Vehicle))]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',128).
+
+ /*  not(holds_at(at(Horse, side1(Street)), Time)) :-
+       holds_at(hitchedTo(Horse, Vehicle), Time),
+       holds_at(pointedToward(Horse, Street), Time),
+       happens(lash(Agent, Horse), Time),
+       not(happens(pullStreet12(Horse, Vehicle, Street),
+                   Time)).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',128).
+
+ /*  pl=axiom(not(at(Horse,side1(Street))),
+         [ hitchedTo(Horse,Vehicle),
+   	pointedToward(Horse,Street),
+   	lash(Agent,Horse),
+   	not(pullStreet12(Horse,Vehicle,Street))
+         ]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',128).
+
+ /*  (   hitchedTo(Horse, Vehicle),
+       pointedToward(Horse, Street),
+       lash(Agent, Horse),
+       not(pullStreet12(Horse, Vehicle, Street))
+   ->  not(at(Horse, side1(Street)))
+   ).
+ */
+if hitchedTo(Horse, Vehicle), pointedToward(Horse, Street), lash(Agent, Horse), not pullStreet12(Horse, Vehicle, Street)then not loc_at(Horse, side1(Street)).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',128).
+
+ /*  reactive_rule([ hitchedTo(Horse,Vehicle),
+   		holds(pointedToward(Horse,Street),
+   		      Holds11),
+   		lash(Agent,Horse),
+   		not(pullStreet12(Horse,
+   				 Vehicle,
+   				 Street))
+   	      ],
+   	      [not(loc_at(Horse,side1(Street)))]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',128).
+
+ /*  reactive_rule([ hitchedTo(Horse,Vehicle),
+   		holds(pointedToward(Horse,Street),
+   		      Holds11),
+   		lash(Agent,Horse),
+   		not(pullStreet12(Horse,
+   				 Vehicle,
+   				 Street))
+   	      ],
+   	      [not(loc_at(Horse,side1(Street)))]).
  */
 
 
@@ -655,67 +1529,395 @@ then(if((happens(lash(Agent, Horse), Time), at(pointedToward(Horse, Street), Tim
 % HoldsAt(HitchedTo(horse,vehicle),time) &
 % HoldsAt(At(horse,Side2(street)),time) ->
 % Happens(PullStreet21(horse,vehicle,street),time).
+ %  clausify_pnf=(happens(lash(Agent, Horse), Time), holds_at(pointedToward(Horse, Street), Time), holds_at(hitchedTo(Horse, Vehicle), Time), holds_at(at(Horse, side2(Street)), Time)->happens(pullStreet21(Horse, Vehicle, Street), Time)).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',135).
 
- /*  (   happens(lash(Agent, Horse), Time),
+ /*  happens(pullStreet21(Horse, Vehicle, Street), Time) :-
+       happens(lash(Agent, Horse), Time),
        holds_at(pointedToward(Horse, Street), Time),
        holds_at(hitchedTo(Horse, Vehicle), Time),
-       holds_at(at(Horse, side2(Street)), Time)
-   ->  happens(pullStreet21(Horse, Vehicle, Street), Time)
-   ).
+       holds_at(at(Horse, side2(Street)), Time).
  */
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',135).
-then(if((happens(lash(Agent, Horse), Time), at(pointedToward(Horse, Street), Time), at(hitchedTo(Horse, Vehicle), Time), at(loc_at(Horse, side2(Street)), Time))), happens(pullStreet21(Horse, Vehicle, Street), Time)).
 
- /*  reactive_rule([ happens(lash(Agent,Horse),Time),
+ /*  fix_axiom_head(Time) ->
+       [ happens(pullStreet21(Horse, Vehicle, Street), Time),
+          (->),
+         pullStreet21(Horse, Vehicle, Street)
+       ].
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',135).
+
+ /*  pl=axiom(pullStreet21(Horse,Vehicle,Street),
+         [ lash(Agent,Horse),
+   	pointedToward(Horse,Street),
+   	hitchedTo(Horse,Vehicle),
+   	at(Horse,side2(Street))
+         ]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',135).
+
+ /*  (   lash(Agent, Horse),
+       pointedToward(Horse, Street),
+       hitchedTo(Horse, Vehicle),
+       at(Horse, side2(Street))
+   ->  pullStreet21(Horse, Vehicle, Street)
+   ).
+ */
+if lash(Agent, Horse), pointedToward(Horse, Street), hitchedTo(Horse, Vehicle), loc_at(Horse, side2(Street))then pullStreet21(Horse, Vehicle, Street).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',135).
+
+ /*  reactive_rule([ lash(Agent,Horse),
    		holds(pointedToward(Horse,Street),
-   		      Time),
-   		holds(hitchedTo(Horse,Vehicle),Time),
-   		holds(loc_at(Horse,side2(Street)),
-   		      Time)
+   		      Holds),
+   		hitchedTo(Horse,Vehicle),
+   		loc_at(Horse,side2(Street))
    	      ],
    	      [ happens(pullStreet21(Horse,
    				     Vehicle,
    				     Street),
-   			Time)
+   			Time_From,
+   			Time_Until)
    	      ]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',135).
+
+ /*  reactive_rule([ lash(Agent,Horse),
+   		holds(pointedToward(Horse,Street),
+   		      Holds),
+   		hitchedTo(Horse,Vehicle),
+   		loc_at(Horse,side2(Street))
+   	      ],
+   	      [ happens(pullStreet21(Horse,
+   				     Vehicle,
+   				     Street),
+   			Time_From,
+   			Time_Until)
+   	      ]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',135).
+
+ /*  not(happens(lash(Agent, Horse), Time)) :-
+       holds_at(pointedToward(Horse, Street), Time),
+       holds_at(hitchedTo(Horse, Vehicle), Time),
+       holds_at(at(Horse, side2(Street)), Time),
+       not(happens(pullStreet21(Horse, Vehicle, Street),
+                   Time)).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',135).
+
+ /*  fix_axiom_head(Time) ->
+       [ not(happens(lash(Agent, Horse), Time)),
+          (->),
+         not(lash(Agent, Horse))
+       ].
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',135).
+
+ /*  pl=axiom(not(lash(Agent,Horse)),
+         [ pointedToward(Horse,Street),
+   	hitchedTo(Horse,Vehicle),
+   	at(Horse,side2(Street)),
+   	not(pullStreet21(Horse,Vehicle,Street))
+         ]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',135).
+
+ /*  (   pointedToward(Horse, Street),
+       hitchedTo(Horse, Vehicle),
+       at(Horse, side2(Street)),
+       not(pullStreet21(Horse, Vehicle, Street))
+   ->  not(lash(Agent, Horse))
+   ).
+ */
+if pointedToward(Horse, Street), hitchedTo(Horse, Vehicle), loc_at(Horse, side2(Street)), not pullStreet21(Horse, Vehicle, Street)then not lash(Agent, Horse).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',135).
+
+ /*  reactive_rule([ holds(pointedToward(Horse,Street),
+   		      Holds8),
+   		hitchedTo(Horse,Vehicle),
+   		loc_at(Horse,side2(Street)),
+   		not(pullStreet21(Horse,
+   				 Vehicle,
+   				 Street))
+   	      ],
+   	      [not(lash(Agent,Horse))]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',135).
+
+ /*  reactive_rule([ holds(pointedToward(Horse,Street),
+   		      Holds8),
+   		hitchedTo(Horse,Vehicle),
+   		loc_at(Horse,side2(Street)),
+   		not(pullStreet21(Horse,
+   				 Vehicle,
+   				 Street))
+   	      ],
+   	      [not(lash(Agent,Horse))]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',135).
+
+ /*  not(holds_at(pointedToward(Horse, Street), Time)) :-
+       holds_at(hitchedTo(Horse, Vehicle), Time),
+       holds_at(at(Horse, side2(Street)), Time),
+       happens(lash(Agent, Horse), Time),
+       not(happens(pullStreet21(Horse, Vehicle, Street),
+                   Time)).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',135).
+
+ /*  pl=axiom(not(pointedToward(Horse,Street)),
+         [ hitchedTo(Horse,Vehicle),
+   	at(Horse,side2(Street)),
+   	lash(Agent,Horse),
+   	not(pullStreet21(Horse,Vehicle,Street))
+         ]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',135).
+
+ /*  (   hitchedTo(Horse, Vehicle),
+       at(Horse, side2(Street)),
+       lash(Agent, Horse),
+       not(pullStreet21(Horse, Vehicle, Street))
+   ->  not(pointedToward(Horse, Street))
+   ).
+ */
+if hitchedTo(Horse, Vehicle), loc_at(Horse, side2(Street)), lash(Agent, Horse), not pullStreet21(Horse, Vehicle, Street)then not pointedToward(Horse, Street).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',135).
+
+ /*  reactive_rule([ hitchedTo(Horse,Vehicle),
+   		loc_at(Horse,side2(Street)),
+   		lash(Agent,Horse),
+   		not(pullStreet21(Horse,
+   				 Vehicle,
+   				 Street))
+   	      ],
+   	      [ holds(not(pointedToward(Horse,Street)),
+   		      Holds9)
+   	      ]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',135).
+
+ /*  reactive_rule([ hitchedTo(Horse,Vehicle),
+   		loc_at(Horse,side2(Street)),
+   		lash(Agent,Horse),
+   		not(pullStreet21(Horse,
+   				 Vehicle,
+   				 Street))
+   	      ],
+   	      [ holds(not(pointedToward(Horse,Street)),
+   		      Holds9)
+   	      ]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',135).
+
+ /*  not(holds_at(hitchedTo(Horse, Vehicle), Time)) :-
+       holds_at(at(Horse, side2(Street)), Time),
+       holds_at(pointedToward(Horse, Street), Time),
+       happens(lash(Agent, Horse), Time),
+       not(happens(pullStreet21(Horse, Vehicle, Street),
+                   Time)).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',135).
+
+ /*  pl=axiom(not(hitchedTo(Horse,Vehicle)),
+         [ at(Horse,side2(Street)),
+   	pointedToward(Horse,Street),
+   	lash(Agent,Horse),
+   	not(pullStreet21(Horse,Vehicle,Street))
+         ]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',135).
+
+ /*  (   at(Horse, side2(Street)),
+       pointedToward(Horse, Street),
+       lash(Agent, Horse),
+       not(pullStreet21(Horse, Vehicle, Street))
+   ->  not(hitchedTo(Horse, Vehicle))
+   ).
+ */
+if loc_at(Horse, side2(Street)), pointedToward(Horse, Street), lash(Agent, Horse), not pullStreet21(Horse, Vehicle, Street)then not hitchedTo(Horse, Vehicle).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',135).
+
+ /*  reactive_rule([ loc_at(Horse,side2(Street)),
+   		holds(pointedToward(Horse,Street),
+   		      Holds10),
+   		lash(Agent,Horse),
+   		not(pullStreet21(Horse,
+   				 Vehicle,
+   				 Street))
+   	      ],
+   	      [not(hitchedTo(Horse,Vehicle))]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',135).
+
+ /*  reactive_rule([ loc_at(Horse,side2(Street)),
+   		holds(pointedToward(Horse,Street),
+   		      Holds10),
+   		lash(Agent,Horse),
+   		not(pullStreet21(Horse,
+   				 Vehicle,
+   				 Street))
+   	      ],
+   	      [not(hitchedTo(Horse,Vehicle))]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',135).
+
+ /*  not(holds_at(at(Horse, side2(Street)), Time)) :-
+       holds_at(hitchedTo(Horse, Vehicle), Time),
+       holds_at(pointedToward(Horse, Street), Time),
+       happens(lash(Agent, Horse), Time),
+       not(happens(pullStreet21(Horse, Vehicle, Street),
+                   Time)).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',135).
+
+ /*  pl=axiom(not(at(Horse,side2(Street))),
+         [ hitchedTo(Horse,Vehicle),
+   	pointedToward(Horse,Street),
+   	lash(Agent,Horse),
+   	not(pullStreet21(Horse,Vehicle,Street))
+         ]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',135).
+
+ /*  (   hitchedTo(Horse, Vehicle),
+       pointedToward(Horse, Street),
+       lash(Agent, Horse),
+       not(pullStreet21(Horse, Vehicle, Street))
+   ->  not(at(Horse, side2(Street)))
+   ).
+ */
+if hitchedTo(Horse, Vehicle), pointedToward(Horse, Street), lash(Agent, Horse), not pullStreet21(Horse, Vehicle, Street)then not loc_at(Horse, side2(Street)).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',135).
+
+ /*  reactive_rule([ hitchedTo(Horse,Vehicle),
+   		holds(pointedToward(Horse,Street),
+   		      Holds11),
+   		lash(Agent,Horse),
+   		not(pullStreet21(Horse,
+   				 Vehicle,
+   				 Street))
+   	      ],
+   	      [not(loc_at(Horse,side2(Street)))]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',135).
+
+ /*  reactive_rule([ hitchedTo(Horse,Vehicle),
+   		holds(pointedToward(Horse,Street),
+   		      Holds11),
+   		lash(Agent,Horse),
+   		not(pullStreet21(Horse,
+   				 Vehicle,
+   				 Street))
+   	      ],
+   	      [not(loc_at(Horse,side2(Street)))]).
  */
 
 % event PullStreet12(horse,vehicle,street)
- %  event(pullStreet12(horse,vehicle,street)).
+ %  blue=event(pullStreet12(horse,vehicle,street)).
  %  event(pullStreet12(horse,vehicle,street)).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',140).
 events([pullStreet12/3]).
+ %  events([pullStreet12/3]).
 mpred_prop(pullStreet12(horse,vehicle,street),event).
+ %  mpred_prop(pullStreet12(horse,vehicle,street),event).
 
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',143).
 % event PullStreet21(horse,vehicle,street)
- %  event(pullStreet21(horse,vehicle,street)).
+ %  blue=event(pullStreet21(horse,vehicle,street)).
  %  event(pullStreet21(horse,vehicle,street)).
 events([pullStreet21/3]).
+ %  events([pullStreet21/3]).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',143).
 mpred_prop(pullStreet21(horse,vehicle,street),event).
+ %  mpred_prop(pullStreet21(horse,vehicle,street),event).
 
 
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',145).
 % [horse,vehicle,street,time]
 % Happens(PullStreet12(horse,vehicle,street),time) ->
 % Happens(DriveStreet12(vehicle,street),time).
+ %  clausify_pnf=(happens(pullStreet12(Horse, Vehicle, Street), Time)->happens(driveStreet12(Vehicle, Street), Time)).
 
- /*  happens(pullStreet12(Horse, Vehicle, Street), Time) ->
-       happens(driveStreet12(Vehicle, Street), Time).
+ /*  happens(driveStreet12(Vehicle, Street), Time) :-
+       happens(pullStreet12(Horse, Vehicle, Street), Time).
  */
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',145).
-then(if(happens(pullStreet12(Horse,Vehicle,Street),
-		Time)),
-     happens(driveStreet12(Vehicle,Street),Time)).
+
+ /*  fix_axiom_head(Time) ->
+       [ happens(driveStreet12(Vehicle, Street), Time),
+          (->),
+         driveStreet12(Vehicle, Street)
+       ].
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',145).
+
+ /*  pl=axiom(driveStreet12(Vehicle,Street),
+         [pullStreet12(Horse,Vehicle,Street)]).
+ */
+
+ /*  pullStreet12(Horse, Vehicle, Street) ->
+       driveStreet12(Vehicle, Street).
+ */
+if pullStreet12(Horse, Vehicle, Street)then driveStreet12(Vehicle, Street).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',145).
 
  /*  reactive_rule([ happens(pullStreet12(Horse,
    				     Vehicle,
    				     Street),
-   			Time)
+   			Time_From,
+   			Time_Until)
    	      ],
-   	      [ happens(driveStreet12(Vehicle,Street),
-   			Time)
+   	      [driveStreet12(Vehicle,Street)]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',145).
+
+ /*  reactive_rule([ happens(pullStreet12(Horse,
+   				     Vehicle,
+   				     Street),
+   			Time_From,
+   			Time_Until)
+   	      ],
+   	      [driveStreet12(Vehicle,Street)]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',145).
+
+ /*  not(happens(pullStreet12(Horse, Vehicle, Street), Time)) :-
+       not(happens(driveStreet12(Vehicle, Street), Time)).
+ */
+
+ /*  fix_axiom_head(Time) ->
+       [ not(happens(pullStreet12(Horse, Vehicle, Street),
+                     Time)),
+          (->),
+         not(pullStreet12(Horse, Vehicle, Street))
+       ].
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',145).
+
+ /*  pl=axiom(not(pullStreet12(Horse,Vehicle,Street)),
+         [not(driveStreet12(Vehicle,Street))]).
+ */
+
+ /*  not(driveStreet12(Vehicle, Street)) ->
+       not(pullStreet12(Horse, Vehicle, Street)).
+ */
+if not driveStreet12(Vehicle, Street)then not pullStreet12(Horse, Vehicle, Street).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',145).
+
+ /*  reactive_rule([not(driveStreet12(Vehicle,Street))],
+   	      [ not(pullStreet12(Horse,
+   				 Vehicle,
+   				 Street))
+   	      ]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',145).
+
+ /*  reactive_rule([not(driveStreet12(Vehicle,Street))],
+   	      [ not(pullStreet12(Horse,
+   				 Vehicle,
+   				 Street))
    	      ]).
  */
 
@@ -723,22 +1925,86 @@ then(if(happens(pullStreet12(Horse,Vehicle,Street),
 % [horse,vehicle,street,time]
 % Happens(PullStreet21(horse,vehicle,street),time) ->
 % Happens(DriveStreet21(vehicle,street),time).
+ %  clausify_pnf=(happens(pullStreet21(Horse, Vehicle, Street), Time)->happens(driveStreet21(Vehicle, Street), Time)).
 
- /*  happens(pullStreet21(Horse, Vehicle, Street), Time) ->
-       happens(driveStreet21(Vehicle, Street), Time).
+ /*  happens(driveStreet21(Vehicle, Street), Time) :-
+       happens(pullStreet21(Horse, Vehicle, Street), Time).
  */
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',150).
-then(if(happens(pullStreet21(Horse,Vehicle,Street),
-		Time)),
-     happens(driveStreet21(Vehicle,Street),Time)).
+
+ /*  fix_axiom_head(Time) ->
+       [ happens(driveStreet21(Vehicle, Street), Time),
+          (->),
+         driveStreet21(Vehicle, Street)
+       ].
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',150).
+
+ /*  pl=axiom(driveStreet21(Vehicle,Street),
+         [pullStreet21(Horse,Vehicle,Street)]).
+ */
+
+ /*  pullStreet21(Horse, Vehicle, Street) ->
+       driveStreet21(Vehicle, Street).
+ */
+if pullStreet21(Horse, Vehicle, Street)then driveStreet21(Vehicle, Street).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',150).
 
  /*  reactive_rule([ happens(pullStreet21(Horse,
    				     Vehicle,
    				     Street),
-   			Time)
+   			Time_From,
+   			Time_Until)
    	      ],
-   	      [ happens(driveStreet21(Vehicle,Street),
-   			Time)
+   	      [driveStreet21(Vehicle,Street)]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',150).
+
+ /*  reactive_rule([ happens(pullStreet21(Horse,
+   				     Vehicle,
+   				     Street),
+   			Time_From,
+   			Time_Until)
+   	      ],
+   	      [driveStreet21(Vehicle,Street)]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',150).
+
+ /*  not(happens(pullStreet21(Horse, Vehicle, Street), Time)) :-
+       not(happens(driveStreet21(Vehicle, Street), Time)).
+ */
+
+ /*  fix_axiom_head(Time) ->
+       [ not(happens(pullStreet21(Horse, Vehicle, Street),
+                     Time)),
+          (->),
+         not(pullStreet21(Horse, Vehicle, Street))
+       ].
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',150).
+
+ /*  pl=axiom(not(pullStreet21(Horse,Vehicle,Street)),
+         [not(driveStreet21(Vehicle,Street))]).
+ */
+
+ /*  not(driveStreet21(Vehicle, Street)) ->
+       not(pullStreet21(Horse, Vehicle, Street)).
+ */
+if not driveStreet21(Vehicle, Street)then not pullStreet21(Horse, Vehicle, Street).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',150).
+
+ /*  reactive_rule([not(driveStreet21(Vehicle,Street))],
+   	      [ not(pullStreet21(Horse,
+   				 Vehicle,
+   				 Street))
+   	      ]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',150).
+
+ /*  reactive_rule([not(driveStreet21(Vehicle,Street))],
+   	      [ not(pullStreet21(Horse,
+   				 Vehicle,
+   				 Street))
    	      ]).
  */
 
@@ -746,22 +2012,120 @@ then(if(happens(pullStreet21(Horse,Vehicle,Street),
 % [horse,vehicle,street,time]
 % Happens(PullStreet12(horse,vehicle,street),time) ->
 % HoldsAt(At(horse,Side1(street)),time).
+ %  clausify_pnf=(happens(pullStreet12(Horse, Vehicle, Street), Time)->holds_at(at(Horse, side1(Street)), Time)).
 
- /*  happens(pullStreet12(Horse, Vehicle, Street), Time) ->
-       holds_at(at(Horse, side1(Street)), Time).
+ /*  holds_at(at(Horse, side1(Street)), Time) :-
+       happens(pullStreet12(Horse, Vehicle, Street), Time).
  */
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',154).
-then(if(happens(pullStreet12(Horse,Vehicle,Street),
-		Time)),
-     at(loc_at(Horse,side1(Street)),Time)).
 
- /*  reactive_rule([ happens(pullStreet12(Horse,
+ /*  pl=axiom(requires(pullStreet12(Horse,Vehicle,Street),
+   	       When_Time),
+         [metreqs(pullStreet12(Horse,Vehicle,Street))]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',154).
+
+ /*  metreqs(pullStreet12(Horse, Vehicle, Street)) ->
+       requires(pullStreet12(Horse, Vehicle, Street),
+                When_Time).
+ */
+if metreqs(pullStreet12(Horse, Vehicle, Street))then requires(pullStreet12(Horse, Vehicle, Street), When_Time).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',154).
+
+ /*  reactive_rule([ metreqs(pullStreet12(Horse,
    				     Vehicle,
-   				     Street),
-   			Time)
+   				     Street))
    	      ],
-   	      [ holds(loc_at(Horse,side1(Street)),
-   		      Time)
+   	      [ requires(pullStreet12(Horse,
+   				      Vehicle,
+   				      Street),
+   			 When_Time)
+   	      ]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',154).
+
+ /*  reactive_rule([ metreqs(pullStreet12(Horse,
+   				     Vehicle,
+   				     Street))
+   	      ],
+   	      [ requires(pullStreet12(Horse,
+   				      Vehicle,
+   				      Street),
+   			 When_Time)
+   	      ]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',154).
+
+ /*  fix_axiom_head(When_Time) ->
+       [ holds_at(metreqs(pullStreet12(Horse, Vehicle, Street)),
+                  When_Time),
+          (->),
+         metreqs(pullStreet12(Horse, Vehicle, Street))
+       ].
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',154).
+
+ /*  pl=axiom(metreqs(pullStreet12(Horse,Vehicle,Street)),
+         [at(Horse,side1(Street))]).
+ */
+
+ /*  at(Horse, side1(Street)) ->
+       metreqs(pullStreet12(Horse, Vehicle, Street)).
+ */
+if loc_at(Horse, side1(Street))then metreqs(pullStreet12(Horse, Vehicle, Street)).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',154).
+
+ /*  reactive_rule([loc_at(Horse,side1(Street))],
+   	      [ metreqs(pullStreet12(Horse,
+   				     Vehicle,
+   				     Street))
+   	      ]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',154).
+
+ /*  reactive_rule([loc_at(Horse,side1(Street))],
+   	      [ metreqs(pullStreet12(Horse,
+   				     Vehicle,
+   				     Street))
+   	      ]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',154).
+
+ /*  not(happens(pullStreet12(Horse, Vehicle, Street), When_Time)) :-
+       not(holds_at(at(Horse, side1(Street)), When_Time)).
+ */
+
+ /*  fix_axiom_head(When_Time) ->
+       [ not(happens(pullStreet12(Horse, Vehicle, Street),
+                     When_Time)),
+          (->),
+         not(pullStreet12(Horse, Vehicle, Street))
+       ].
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',154).
+
+ /*  pl=axiom(not(pullStreet12(Horse,Vehicle,Street)),
+         [not(at(Horse,side1(Street)))]).
+ */
+
+ /*  not(at(Horse, side1(Street))) ->
+       not(pullStreet12(Horse, Vehicle, Street)).
+ */
+if not loc_at(Horse, side1(Street))then not pullStreet12(Horse, Vehicle, Street).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',154).
+
+ /*  reactive_rule([not(loc_at(Horse,side1(Street)))],
+   	      [ not(pullStreet12(Horse,
+   				 Vehicle,
+   				 Street))
+   	      ]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',154).
+
+ /*  reactive_rule([not(loc_at(Horse,side1(Street)))],
+   	      [ not(pullStreet12(Horse,
+   				 Vehicle,
+   				 Street))
    	      ]).
  */
 
@@ -769,22 +2133,120 @@ then(if(happens(pullStreet12(Horse,Vehicle,Street),
 % [horse,vehicle,street,time]
 % Happens(PullStreet21(horse,vehicle,street),time) ->
 % HoldsAt(At(horse,Side2(street)),time).
+ %  clausify_pnf=(happens(pullStreet21(Horse, Vehicle, Street), Time)->holds_at(at(Horse, side2(Street)), Time)).
 
- /*  happens(pullStreet21(Horse, Vehicle, Street), Time) ->
-       holds_at(at(Horse, side2(Street)), Time).
+ /*  holds_at(at(Horse, side2(Street)), Time) :-
+       happens(pullStreet21(Horse, Vehicle, Street), Time).
  */
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',158).
-then(if(happens(pullStreet21(Horse,Vehicle,Street),
-		Time)),
-     at(loc_at(Horse,side2(Street)),Time)).
 
- /*  reactive_rule([ happens(pullStreet21(Horse,
+ /*  pl=axiom(requires(pullStreet21(Horse,Vehicle,Street),
+   	       When_Time),
+         [metreqs(pullStreet21(Horse,Vehicle,Street))]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',158).
+
+ /*  metreqs(pullStreet21(Horse, Vehicle, Street)) ->
+       requires(pullStreet21(Horse, Vehicle, Street),
+                When_Time).
+ */
+if metreqs(pullStreet21(Horse, Vehicle, Street))then requires(pullStreet21(Horse, Vehicle, Street), When_Time).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',158).
+
+ /*  reactive_rule([ metreqs(pullStreet21(Horse,
    				     Vehicle,
-   				     Street),
-   			Time)
+   				     Street))
    	      ],
-   	      [ holds(loc_at(Horse,side2(Street)),
-   		      Time)
+   	      [ requires(pullStreet21(Horse,
+   				      Vehicle,
+   				      Street),
+   			 When_Time)
+   	      ]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',158).
+
+ /*  reactive_rule([ metreqs(pullStreet21(Horse,
+   				     Vehicle,
+   				     Street))
+   	      ],
+   	      [ requires(pullStreet21(Horse,
+   				      Vehicle,
+   				      Street),
+   			 When_Time)
+   	      ]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',158).
+
+ /*  fix_axiom_head(When_Time) ->
+       [ holds_at(metreqs(pullStreet21(Horse, Vehicle, Street)),
+                  When_Time),
+          (->),
+         metreqs(pullStreet21(Horse, Vehicle, Street))
+       ].
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',158).
+
+ /*  pl=axiom(metreqs(pullStreet21(Horse,Vehicle,Street)),
+         [at(Horse,side2(Street))]).
+ */
+
+ /*  at(Horse, side2(Street)) ->
+       metreqs(pullStreet21(Horse, Vehicle, Street)).
+ */
+if loc_at(Horse, side2(Street))then metreqs(pullStreet21(Horse, Vehicle, Street)).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',158).
+
+ /*  reactive_rule([loc_at(Horse,side2(Street))],
+   	      [ metreqs(pullStreet21(Horse,
+   				     Vehicle,
+   				     Street))
+   	      ]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',158).
+
+ /*  reactive_rule([loc_at(Horse,side2(Street))],
+   	      [ metreqs(pullStreet21(Horse,
+   				     Vehicle,
+   				     Street))
+   	      ]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',158).
+
+ /*  not(happens(pullStreet21(Horse, Vehicle, Street), When_Time)) :-
+       not(holds_at(at(Horse, side2(Street)), When_Time)).
+ */
+
+ /*  fix_axiom_head(When_Time) ->
+       [ not(happens(pullStreet21(Horse, Vehicle, Street),
+                     When_Time)),
+          (->),
+         not(pullStreet21(Horse, Vehicle, Street))
+       ].
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',158).
+
+ /*  pl=axiom(not(pullStreet21(Horse,Vehicle,Street)),
+         [not(at(Horse,side2(Street)))]).
+ */
+
+ /*  not(at(Horse, side2(Street))) ->
+       not(pullStreet21(Horse, Vehicle, Street)).
+ */
+if not loc_at(Horse, side2(Street))then not pullStreet21(Horse, Vehicle, Street).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',158).
+
+ /*  reactive_rule([not(loc_at(Horse,side2(Street)))],
+   	      [ not(pullStreet21(Horse,
+   				 Vehicle,
+   				 Street))
+   	      ]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',158).
+
+ /*  reactive_rule([not(loc_at(Horse,side2(Street)))],
+   	      [ not(pullStreet21(Horse,
+   				 Vehicle,
+   				 Street))
    	      ]).
  */
 
@@ -793,34 +2255,39 @@ then(if(happens(pullStreet21(Horse,Vehicle,Street),
 % Side2(street)=location ->
 % Initiates(PullStreet12(horse,vehicle,street),At(horse,location),time).
 
- /*  axiom(initiates(pullStreet12(Horse, Vehicle, Street), at(Horse, Location), Time),
-       [equals(side2(Street), Location)]).
+ /*  pl=axiom(initiates(pullStreet12(Horse,Vehicle,Street),
+   		at(Horse,Location),
+   		Time),
+         [side2Pred(Street,Location)]).
  */
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',162).
 
- /*  equals(side2(Side2), Tloc) ->
-       initiates(pullStreet12(Pullstreet12P_Num3_V, _, Side2),
-                 at(Pullstreet12P_Num3_V, Tloc),
-                 Initiates).
+ /*  side2Pred(Street, Location) ->
+       initiates(pullStreet12(Horse, Vehicle, Street),
+                 at(Horse, Location),
+                 Time).
  */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',162).
-then(if(equals(side2(Side2),Tloc)),
-     initiates(pullStreet12(Pullstreet12P_Num3_V,
-			    _,
-			    Side2),
-	       at(loc_at(Pullstreet12P_Num3_V,Tloc),
-		  Initiates),
-	       Initiates9)).
+if side2Pred(Street, Location)then initiates(pullStreet12(Horse, Vehicle, Street), loc_at(Horse, Location)at Time, _).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',162).
 
- /*  reactive_rule([equals(side2(Side2),Tloc)],
-   	      [ initiates(pullStreet12(Pullstreet12P_Num3_V,
-   				       _,
-   				       Side2),
-   			  at(loc_at(Pullstreet12P_Num3_V,
-   				    Tloc),
-   			     Initiates),
-   			  Initiates9)
+ /*  reactive_rule([side2Pred(Street,Location)],
+   	      [ initiates(pullStreet12(Horse,
+   				       Vehicle,
+   				       Street),
+   			  at(loc_at(Horse,Location),
+   			     Time),
+   			  Initiates)
+   	      ]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',162).
+
+ /*  reactive_rule([side2Pred(Street,Location)],
+   	      [ initiates(pullStreet12(Horse,
+   				       Vehicle,
+   				       Street),
+   			  at(loc_at(Horse,Location),
+   			     Time),
+   			  Initiates)
    	      ]).
  */
 
@@ -829,34 +2296,39 @@ then(if(equals(side2(Side2),Tloc)),
 % Side1(street)=location ->
 % Initiates(PullStreet21(horse,vehicle,street),At(horse,location),time).
 
- /*  axiom(initiates(pullStreet21(Horse, Vehicle, Street), at(Horse, Location), Time),
-       [equals(side1(Street), Location)]).
+ /*  pl=axiom(initiates(pullStreet21(Horse,Vehicle,Street),
+   		at(Horse,Location),
+   		Time),
+         [side1Pred(Street,Location)]).
  */
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',166).
 
- /*  equals(side1(Side1), Tloc) ->
-       initiates(pullStreet21(Pullstreet21P_Num3_V, _, Side1),
-                 at(Pullstreet21P_Num3_V, Tloc),
-                 Initiates).
+ /*  side1Pred(Street, Location) ->
+       initiates(pullStreet21(Horse, Vehicle, Street),
+                 at(Horse, Location),
+                 Time).
  */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',166).
-then(if(equals(side1(Side1),Tloc)),
-     initiates(pullStreet21(Pullstreet21P_Num3_V,
-			    _,
-			    Side1),
-	       at(loc_at(Pullstreet21P_Num3_V,Tloc),
-		  Initiates),
-	       Initiates9)).
+if side1Pred(Street, Location)then initiates(pullStreet21(Horse, Vehicle, Street), loc_at(Horse, Location)at Time, _).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',166).
 
- /*  reactive_rule([equals(side1(Side1),Tloc)],
-   	      [ initiates(pullStreet21(Pullstreet21P_Num3_V,
-   				       _,
-   				       Side1),
-   			  at(loc_at(Pullstreet21P_Num3_V,
-   				    Tloc),
-   			     Initiates),
-   			  Initiates9)
+ /*  reactive_rule([side1Pred(Street,Location)],
+   	      [ initiates(pullStreet21(Horse,
+   				       Vehicle,
+   				       Street),
+   			  at(loc_at(Horse,Location),
+   			     Time),
+   			  Initiates)
+   	      ]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',166).
+
+ /*  reactive_rule([side1Pred(Street,Location)],
+   	      [ initiates(pullStreet21(Horse,
+   				       Vehicle,
+   				       Street),
+   			  at(loc_at(Horse,Location),
+   			     Time),
+   			  Initiates)
    	      ]).
  */
 
@@ -865,34 +2337,39 @@ then(if(equals(side1(Side1),Tloc)),
 % Side1(street)=location ->
 % Terminates(PullStreet12(horse,vehicle,street),At(horse,location),time).
 
- /*  axiom(terminates(pullStreet12(Horse, Vehicle, Street), at(Horse, Location), Time),
-       [equals(side1(Street), Location)]).
+ /*  pl=axiom(terminates(pullStreet12(Horse,Vehicle,Street),
+   		 at(Horse,Location),
+   		 Time),
+         [side1Pred(Street,Location)]).
  */
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',170).
 
- /*  equals(side1(Side1), Tloc) ->
-       terminates(pullStreet12(Pullstreet12P_Num3_V, _, Side1),
-                  at(Pullstreet12P_Num3_V, Tloc),
-                  Terminates).
+ /*  side1Pred(Street, Location) ->
+       terminates(pullStreet12(Horse, Vehicle, Street),
+                  at(Horse, Location),
+                  Time).
  */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',170).
-then(if(equals(side1(Side1),Tloc)),
-     terminates(pullStreet12(Pullstreet12P_Num3_V,
-			     _,
-			     Side1),
-		at(loc_at(Pullstreet12P_Num3_V,Tloc),
-		   Terminates),
-		Terminates9)).
+if side1Pred(Street, Location)then terminates(pullStreet12(Horse, Vehicle, Street), loc_at(Horse, Location)at Time, _).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',170).
 
- /*  reactive_rule([equals(side1(Side1),Tloc)],
-   	      [ terminates(pullStreet12(Pullstreet12P_Num3_V,
-   					_,
-   					Side1),
-   			   at(loc_at(Pullstreet12P_Num3_V,
-   				     Tloc),
-   			      Terminates),
-   			   Terminates9)
+ /*  reactive_rule([side1Pred(Street,Location)],
+   	      [ terminates(pullStreet12(Horse,
+   					Vehicle,
+   					Street),
+   			   at(loc_at(Horse,Location),
+   			      Time),
+   			   Terminates)
+   	      ]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',170).
+
+ /*  reactive_rule([side1Pred(Street,Location)],
+   	      [ terminates(pullStreet12(Horse,
+   					Vehicle,
+   					Street),
+   			   at(loc_at(Horse,Location),
+   			      Time),
+   			   Terminates)
    	      ]).
  */
 
@@ -901,34 +2378,39 @@ then(if(equals(side1(Side1),Tloc)),
 % Side2(street)=location ->
 % Terminates(PullStreet21(horse,vehicle,street),At(horse,location),time).
 
- /*  axiom(terminates(pullStreet21(Horse, Vehicle, Street), at(Horse, Location), Time),
-       [equals(side2(Street), Location)]).
+ /*  pl=axiom(terminates(pullStreet21(Horse,Vehicle,Street),
+   		 at(Horse,Location),
+   		 Time),
+         [side2Pred(Street,Location)]).
  */
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',174).
 
- /*  equals(side2(Side2), Tloc) ->
-       terminates(pullStreet21(Pullstreet21P_Num3_V, _, Side2),
-                  at(Pullstreet21P_Num3_V, Tloc),
-                  Terminates).
+ /*  side2Pred(Street, Location) ->
+       terminates(pullStreet21(Horse, Vehicle, Street),
+                  at(Horse, Location),
+                  Time).
  */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',174).
-then(if(equals(side2(Side2),Tloc)),
-     terminates(pullStreet21(Pullstreet21P_Num3_V,
-			     _,
-			     Side2),
-		at(loc_at(Pullstreet21P_Num3_V,Tloc),
-		   Terminates),
-		Terminates9)).
+if side2Pred(Street, Location)then terminates(pullStreet21(Horse, Vehicle, Street), loc_at(Horse, Location)at Time, _).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',174).
 
- /*  reactive_rule([equals(side2(Side2),Tloc)],
-   	      [ terminates(pullStreet21(Pullstreet21P_Num3_V,
-   					_,
-   					Side2),
-   			   at(loc_at(Pullstreet21P_Num3_V,
-   				     Tloc),
-   			      Terminates),
-   			   Terminates9)
+ /*  reactive_rule([side2Pred(Street,Location)],
+   	      [ terminates(pullStreet21(Horse,
+   					Vehicle,
+   					Street),
+   			   at(loc_at(Horse,Location),
+   			      Time),
+   			   Terminates)
+   	      ]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',174).
+
+ /*  reactive_rule([side2Pred(Street,Location)],
+   	      [ terminates(pullStreet21(Horse,
+   					Vehicle,
+   					Street),
+   			   at(loc_at(Horse,Location),
+   			      Time),
+   			   Terminates)
    	      ]).
  */
 
@@ -937,62 +2419,123 @@ then(if(equals(side2(Side2),Tloc)),
 
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',179).
 % fluent OnVehicle(object,vehicleon)
- %  fluent(onVehicle(object,vehicleon)).
+ %  blue=fluent(onVehicle(object,vehicleon)).
  %  fluent(onVehicle(object,vehicleon)).
 fluents([onVehicle/2]).
+ %  fluents([onVehicle/2]).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',179).
 mpred_prop(onVehicle(object,vehicleon),fluent).
+ %  mpred_prop(onVehicle(object,vehicleon),fluent).
 
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',181).
 % event GetOnVehicle(agent,vehicleon)
- %  event(getOnVehicle(agent,vehicleon)).
+ %  blue=event(getOnVehicle(agent,vehicleon)).
  %  event(getOnVehicle(agent,vehicleon)).
 actions([getOnVehicle/2]).
+ %  actions([getOnVehicle/2]).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',181).
 mpred_prop(getOnVehicle(agent,vehicleon),event).
+ %  mpred_prop(getOnVehicle(agent,vehicleon),event).
 
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',183).
 % event GetOffVehicle(agent,vehicleon)
- %  event(getOffVehicle(agent,vehicleon)).
+ %  blue=event(getOffVehicle(agent,vehicleon)).
  %  event(getOffVehicle(agent,vehicleon)).
 actions([getOffVehicle/2]).
+ %  actions([getOffVehicle/2]).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',183).
 mpred_prop(getOffVehicle(agent,vehicleon),event).
+ %  mpred_prop(getOffVehicle(agent,vehicleon),event).
 
 
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',185).
 % [vehicleon1,vehicleon2,time]
 % HoldsAt(OnVehicle(vehicleon1,vehicleon2),time) ->
 % vehicleon1!=vehicleon2.
+ %  clausify_pnf=(holds_at(onVehicle(Vehicleon1, Vehicleon2), Time)->diff(Vehicleon1, Vehicleon2)).
 
- /*  holds_at(onVehicle(Vehicleon1, Vehicleon2), Time) ->
-       diff(Vehicleon1, Vehicleon2).
+ /*  not(holds_at(onVehicle(Vehicleon1, Vehicleon2), Time)) :-
+       not(diff(Vehicleon1, Vehicleon2)).
  */
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',185).
-then(if(at(onVehicle(Vehicleon1,Vehicleon2),Time)),
-     diff(Vehicleon1,Vehicleon2)).
 
- /*  reactive_rule([ holds(onVehicle(Vehicleon1,Vehicleon2),
-   		      Time)
-   	      ],
-   	      [diff(Vehicleon1,Vehicleon2)]).
+ /*  pl=axiom(not(onVehicle(Vehicleon1,Vehicleon2)),
+         [equals(Vehicleon1,Vehicleon2)]).
+ */
+
+ /*  equals(Vehicleon1, Vehicleon2) ->
+       not(onVehicle(Vehicleon1, Vehicleon2)).
+ */
+if equals(Vehicleon1, Vehicleon2)then not onVehicle(Vehicleon1, Vehicleon2).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',185).
+
+ /*  reactive_rule([equals(Vehicleon1,Vehicleon2)],
+   	      [not(onVehicle(Vehicleon1,Vehicleon2))]).
+ */
+
+ /*  reactive_rule([equals(Vehicleon1,Vehicleon2)],
+   	      [not(onVehicle(Vehicleon1,Vehicleon2))]).
  */
 
 
 % [vehicleon1,vehicleon2,time]
 % HoldsAt(OnVehicle(vehicleon1,vehicleon2),time) ->
 % !HoldsAt(OnVehicle(vehicleon2,vehicleon1),time).
+ %  clausify_pnf=(holds_at(onVehicle(Vehicleon1, Vehicleon2), Time)->holds_at(neg(onVehicle(Vehicleon2, Vehicleon1)), Time)).
 
- /*  holds_at(onVehicle(Vehicleon1, Vehicleon2), Time) ->
-       holds_at(neg(onVehicle(Vehicleon2, Vehicleon1)), Time).
+ /*  holds_at(neg(onVehicle(Vehicleon2, Vehicleon1)), Time) :-
+       holds_at(onVehicle(Vehicleon1, Vehicleon2), Time).
  */
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',190).
-then(if(at(onVehicle(Vehicleon1,Vehicleon2),Time)),
-     at(not(onVehicle(Vehicleon2,Vehicleon1)),Time)).
 
- /*  reactive_rule([ holds(onVehicle(Vehicleon1,Vehicleon2),
-   		      Time)
-   	      ],
-   	      [ holds(not(onVehicle(Vehicleon2,Vehicleon1)),
-   		      Time)
-   	      ]).
+ /*  fix_axiom_head(Time) ->
+       [ holds_at(neg(onVehicle(Vehicleon2, Vehicleon1)), Time),
+          (->),
+         not(onVehicle(Vehicleon2, Vehicleon1))
+       ].
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',190).
+
+ /*  pl=axiom(not(onVehicle(Vehicleon2,Vehicleon1)),
+         [onVehicle(Vehicleon1,Vehicleon2)]).
+ */
+
+ /*  onVehicle(Vehicleon1, Vehicleon2) ->
+       not(onVehicle(Vehicleon2, Vehicleon1)).
+ */
+if onVehicle(Vehicleon1, Vehicleon2)then not onVehicle(Vehicleon2, Vehicleon1).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',190).
+
+ /*  reactive_rule([onVehicle(Vehicleon1,Vehicleon2)],
+   	      [not(onVehicle(Vehicleon2,Vehicleon1))]).
+ */
+
+ /*  reactive_rule([onVehicle(Vehicleon1,Vehicleon2)],
+   	      [not(onVehicle(Vehicleon2,Vehicleon1))]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',190).
+
+ /*  not(holds_at(onVehicle(Vehicleon1, Vehicleon2), Time)) :-
+       not(holds_at(neg(onVehicle(Vehicleon2, Vehicleon1)), Time)).
+ */
+
+ /*  pl=axiom(not(onVehicle(Vehicleon1,Vehicleon2)),
+         [not(not(onVehicle(Vehicleon2,Vehicleon1)))]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',190).
+
+ /*  not(not(onVehicle(Vehicleon2, Vehicleon1))) ->
+       not(onVehicle(Vehicleon1, Vehicleon2)).
+ */
+if not not onVehicle(Vehicleon2, Vehicleon1)then not onVehicle(Vehicleon1, Vehicleon2).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',190).
+
+ /*  reactive_rule([not(not(onVehicle(Vehicleon2,Vehicleon1)))],
+   	      [not(onVehicle(Vehicleon1,Vehicleon2))]).
+ */
+
+ /*  reactive_rule([not(not(onVehicle(Vehicleon2,Vehicleon1)))],
+   	      [not(onVehicle(Vehicleon1,Vehicleon2))]).
  */
 
 
@@ -1000,22 +2543,32 @@ then(if(at(onVehicle(Vehicleon1,Vehicleon2),Time)),
 % Initiates(GetOnVehicle(agent,vehicleon),OnVehicle(agent,vehicleon),time).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',194).
 
- /*  axiom(initiates(getOnVehicle(Agent, Vehicleon), onVehicle(Agent, Vehicleon), Time),
-       []).
- */
-
- /*  initiates(getOnVehicle(A,Getonvehicle),
-   	  onVehicle(A,Getonvehicle),
-   	  Initiates).
+ /*  pl=axiom(initiates(getOnVehicle(Agent,Vehicleon),
+   		onVehicle(Agent,Vehicleon),
+   		Time),
+         []).
  */
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',194).
-initiates(getOnVehicle(A,Getonvehicle),
-	  onVehicle(A,Getonvehicle)).
 
- /*  initiated(happens(getOnVehicle(A,Getonvehicle),
+ /*  initiates(getOnVehicle(Agent,Vehicleon),
+   	  onVehicle(Agent,Vehicleon),
+   	  Time).
+ */
+getOnVehicle(Agent, Vehicleon)initiates onVehicle(Agent, Vehicleon).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',194).
+
+ /*  initiated(happens(getOnVehicle(Agent,Vehicleon),
    		  Time_From,
    		  Time_Until),
-   	  onVehicle(A,Getonvehicle),
+   	  onVehicle(Agent,Vehicleon),
+   	  []).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',194).
+
+ /*  initiated(happens(getOnVehicle(Agent,Vehicleon),
+   		  Time_From,
+   		  Time_Until),
+   	  onVehicle(Agent,Vehicleon),
    	  []).
  */
 
@@ -1034,7 +2587,7 @@ initiates(getOnVehicle(A,Getonvehicle),
        ;   not(holds_at(at(Vehicleon, Exists_Location), Time))
        ),
        some(Exists_Location,
-            '$kolem_Fn_257'(Agent, Vehicleon, Time)).
+            '$kolem_Fn_71'(Agent, Vehicleon, Time)).
  */
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',198).
 
@@ -1044,45 +2597,40 @@ initiates(getOnVehicle(A,Getonvehicle),
          not(getOnVehicle(Agent, Vehicleon))
        ].
  */
+ %   pl=axiom(not(getOnVehicle(Agent, Vehicleon)), [(not(at(Agent, Exists_Location));not(at(Vehicleon, Exists_Location))), some(Exists_Location, '$kolem_Fn_71'(Agent, Vehicleon, Time))]).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',198).
 
- /*  axiom(not(getOnVehicle(Agent, Vehicleon)),
-       [  (not(at(Agent, Exists_Location));not(at(Vehicleon, Exists_Location))),
-         some(Exists_Location,
-              '$kolem_Fn_257'(Agent, Vehicleon, Time))
-       ]).
- */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',198).
-
- /*  (   (   not(at(Kolem_Fn_257P_Num3_V, Tloc))
-       ;   not(at(Getonvehicle, Tloc))
+ /*  (   (   not(at(Agent, Exists_Location))
+       ;   not(at(Vehicleon, Exists_Location))
        ),
-       some(Tloc,
-            '$kolem_Fn_257'(Kolem_Fn_257P_Num3_V,
-                            Getonvehicle,
-                            Kolem_Fn_257))
-   ->  not(getOnVehicle(Kolem_Fn_257P_Num3_V, Getonvehicle))
+       some(Exists_Location,
+            '$kolem_Fn_71'(Agent, Vehicleon, Time))
+   ->  not(getOnVehicle(Agent, Vehicleon))
    ).
  */
+if (not loc_at(Agent, Exists_Location);not loc_at(Vehicleon, Exists_Location)), some(Exists_Location, '$kolem_Fn_71'(Agent, Vehicleon, Time))then not getOnVehicle(Agent, Vehicleon).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',198).
-then(if(((not(loc_at(Kolem_Fn_257P_Num3_V, Tloc));not(loc_at(Getonvehicle, Tloc))), some(Tloc, '$kolem_Fn_257'(Kolem_Fn_257P_Num3_V, Getonvehicle, Kolem_Fn_257)))), not(getOnVehicle(Kolem_Fn_257P_Num3_V, Getonvehicle))).
 
- /*   reactive_rule([  (not(loc_at(Kolem_Fn_257P_Num3_V, Tloc));not(loc_at(Getonvehicle, Tloc))),
-                      some(Tloc,
-                           '$kolem_Fn_257'(Kolem_Fn_257P_Num3_V,
-                                           Getonvehicle,
-                                           Kolem_Fn_257))
+ /*   reactive_rule([  (not(loc_at(Agent, Exists_Location));not(loc_at(Vehicleon, Exists_Location))),
+                      some(Exists_Location,
+                           '$kolem_Fn_71'(Agent, Vehicleon, Time))
                     ],
-                    [ not(getOnVehicle(Kolem_Fn_257P_Num3_V,
-                                       Getonvehicle))
-                    ]).
+                    [not(getOnVehicle(Agent, Vehicleon))]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',198).
+
+ /*   reactive_rule([  (not(loc_at(Agent, Exists_Location));not(loc_at(Vehicleon, Exists_Location))),
+                      some(Exists_Location,
+                           '$kolem_Fn_71'(Agent, Vehicleon, Time))
+                    ],
+                    [not(getOnVehicle(Agent, Vehicleon))]).
  */
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',198).
 
  /*  holds_at(at(Agent, Exists_Location), Time) :-
        happens(getOnVehicle(Agent, Vehicleon), Time),
        some(Exists_Location,
-            '$kolem_Fn_257'(Agent, Vehicleon, Time)).
+            '$kolem_Fn_71'(Agent, Vehicleon, Time)).
  */
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',198).
 
@@ -1094,44 +2642,51 @@ then(if(((not(loc_at(Kolem_Fn_257P_Num3_V, Tloc));not(loc_at(Getonvehicle, Tloc)
  */
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',198).
 
- /*  axiom(at(Agent, Exists_Location),
-       [ getOnVehicle(Agent, Vehicleon),
-         some(Exists_Location,
-              '$kolem_Fn_257'(Agent, Vehicleon, Time))
-       ]).
+ /*  pl=axiom(at(Agent,Exists_Location),
+         [ getOnVehicle(Agent,Vehicleon),
+   	some(Exists_Location,
+   	     '$kolem_Fn_71'(Agent,Vehicleon,Time))
+         ]).
  */
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',198).
 
- /*  (   getOnVehicle(Kolem_Fn_257P_Num3_V12, Getonvehicle10),
-       some(Tloc9,
-            '$kolem_Fn_257'(Kolem_Fn_257P_Num3_V12,
-                            Getonvehicle10,
-                            Kolem_Fn_25711))
-   ->  at(Kolem_Fn_257P_Num3_V12, Tloc9)
+ /*  (   getOnVehicle(Agent, Vehicleon),
+       some(Exists_Location,
+            '$kolem_Fn_71'(Agent, Vehicleon, Time))
+   ->  at(Agent, Exists_Location)
    ).
  */
+if getOnVehicle(Agent, Vehicleon), some(Exists_Location, '$kolem_Fn_71'(Agent, Vehicleon, Time))then loc_at(Agent, Exists_Location).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',198).
-then(if((getOnVehicle(Kolem_Fn_257P_Num3_V12, Getonvehicle10), some(Tloc9, '$kolem_Fn_257'(Kolem_Fn_257P_Num3_V12, Getonvehicle10, Kolem_Fn_25711)))), loc_at(Kolem_Fn_257P_Num3_V12, Tloc9)).
 
- /*  reactive_rule([ happens(getOnVehicle(Kolem_Fn_257P_Num3_V12,
-   				     Getonvehicle10),
+ /*  reactive_rule([ happens(getOnVehicle(Agent,Vehicleon),
    			Time_From,
    			Time_Until),
-   		some(Tloc9,
-   		     '$kolem_Fn_257'(Kolem_Fn_257P_Num3_V12,
-   				     Getonvehicle10,
-   				     Kolem_Fn_25711))
+   		some(Exists_Location,
+   		     '$kolem_Fn_71'(Agent,
+   				    Vehicleon,
+   				    Time))
    	      ],
-   	      [ holds(loc_at(Kolem_Fn_257P_Num3_V12,Tloc9),
-   		      Holds)
-   	      ]).
+   	      [loc_at(Agent,Exists_Location)]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',198).
+
+ /*  reactive_rule([ happens(getOnVehicle(Agent,Vehicleon),
+   			Time_From,
+   			Time_Until),
+   		some(Exists_Location,
+   		     '$kolem_Fn_71'(Agent,
+   				    Vehicleon,
+   				    Time))
+   	      ],
+   	      [loc_at(Agent,Exists_Location)]).
  */
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',198).
 
  /*  holds_at(at(Vehicleon, Exists_Location), Time) :-
        happens(getOnVehicle(Agent, Vehicleon), Time),
        some(Exists_Location,
-            '$kolem_Fn_257'(Agent, Vehicleon, Time)).
+            '$kolem_Fn_71'(Agent, Vehicleon, Time)).
  */
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',198).
 
@@ -1143,37 +2698,44 @@ then(if((getOnVehicle(Kolem_Fn_257P_Num3_V12, Getonvehicle10), some(Tloc9, '$kol
  */
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',198).
 
- /*  axiom(at(Vehicleon, Exists_Location),
-       [ getOnVehicle(Agent, Vehicleon),
-         some(Exists_Location,
-              '$kolem_Fn_257'(Agent, Vehicleon, Time))
-       ]).
+ /*  pl=axiom(at(Vehicleon,Exists_Location),
+         [ getOnVehicle(Agent,Vehicleon),
+   	some(Exists_Location,
+   	     '$kolem_Fn_71'(Agent,Vehicleon,Time))
+         ]).
  */
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',198).
 
- /*  (   getOnVehicle(Kolem_Fn_257P_Num3_V19, Getonvehicle17),
-       some(Tloc16,
-            '$kolem_Fn_257'(Kolem_Fn_257P_Num3_V19,
-                            Getonvehicle17,
-                            Kolem_Fn_25718))
-   ->  at(Getonvehicle17, Tloc16)
+ /*  (   getOnVehicle(Agent, Vehicleon),
+       some(Exists_Location,
+            '$kolem_Fn_71'(Agent, Vehicleon, Time))
+   ->  at(Vehicleon, Exists_Location)
    ).
  */
+if getOnVehicle(Agent, Vehicleon), some(Exists_Location, '$kolem_Fn_71'(Agent, Vehicleon, Time))then loc_at(Vehicleon, Exists_Location).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',198).
-then(if((getOnVehicle(Kolem_Fn_257P_Num3_V19, Getonvehicle17), some(Tloc16, '$kolem_Fn_257'(Kolem_Fn_257P_Num3_V19, Getonvehicle17, Kolem_Fn_25718)))), loc_at(Getonvehicle17, Tloc16)).
 
- /*  reactive_rule([ happens(getOnVehicle(Kolem_Fn_257P_Num3_V19,
-   				     Getonvehicle17),
-   			Time_From20,
-   			Time_Until21),
-   		some(Tloc16,
-   		     '$kolem_Fn_257'(Kolem_Fn_257P_Num3_V19,
-   				     Getonvehicle17,
-   				     Kolem_Fn_25718))
+ /*  reactive_rule([ happens(getOnVehicle(Agent,Vehicleon),
+   			Time_From7,
+   			Time_Until8),
+   		some(Exists_Location,
+   		     '$kolem_Fn_71'(Agent,
+   				    Vehicleon,
+   				    Time))
    	      ],
-   	      [ holds(loc_at(Getonvehicle17,Tloc16),
-   		      Holds22)
-   	      ]).
+   	      [loc_at(Vehicleon,Exists_Location)]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',198).
+
+ /*  reactive_rule([ happens(getOnVehicle(Agent,Vehicleon),
+   			Time_From7,
+   			Time_Until8),
+   		some(Exists_Location,
+   		     '$kolem_Fn_71'(Agent,
+   				    Vehicleon,
+   				    Time))
+   	      ],
+   	      [loc_at(Vehicleon,Exists_Location)]).
  */
 
 
@@ -1181,22 +2743,32 @@ then(if((getOnVehicle(Kolem_Fn_257P_Num3_V19, Getonvehicle17), some(Tloc16, '$ko
 % Terminates(GetOffVehicle(agent,vehicleon),OnVehicle(agent,vehicleon),time).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',203).
 
- /*  axiom(terminates(getOffVehicle(Agent, Vehicleon), onVehicle(Agent, Vehicleon), Time),
-       []).
- */
-
- /*  terminates(getOffVehicle(A,Getoffvehicle),
-   	   onVehicle(A,Getoffvehicle),
-   	   Terminates).
+ /*  pl=axiom(terminates(getOffVehicle(Agent,Vehicleon),
+   		 onVehicle(Agent,Vehicleon),
+   		 Time),
+         []).
  */
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',203).
-terminates(getOffVehicle(A,Getoffvehicle),
-	   onVehicle(A,Getoffvehicle)).
 
- /*  terminated(happens(getOffVehicle(A,Getoffvehicle),
+ /*  terminates(getOffVehicle(Agent,Vehicleon),
+   	   onVehicle(Agent,Vehicleon),
+   	   Time).
+ */
+getOffVehicle(Agent, Vehicleon)terminates onVehicle(Agent, Vehicleon).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',203).
+
+ /*  terminated(happens(getOffVehicle(Agent,Vehicleon),
    		   Time_From,
    		   Time_Until),
-   	   onVehicle(A,Getoffvehicle),
+   	   onVehicle(Agent,Vehicleon),
+   	   []).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',203).
+
+ /*  terminated(happens(getOffVehicle(Agent,Vehicleon),
+   		   Time_From,
+   		   Time_Until),
+   	   onVehicle(Agent,Vehicleon),
    	   []).
  */
 
@@ -1205,20 +2777,105 @@ terminates(getOffVehicle(A,Getoffvehicle),
 % [agent,vehicleon,time]
 % Happens(GetOffVehicle(agent,vehicleon),time) ->
 % HoldsAt(OnVehicle(agent,vehicleon),time).
+ %  clausify_pnf=(happens(getOffVehicle(Agent, Vehicleon), Time)->holds_at(onVehicle(Agent, Vehicleon), Time)).
 
- /*  happens(getOffVehicle(Agent, Vehicleon), Time) ->
-       holds_at(onVehicle(Agent, Vehicleon), Time).
+ /*  holds_at(onVehicle(Agent, Vehicleon), Time) :-
+       happens(getOffVehicle(Agent, Vehicleon), Time).
  */
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',205).
-then(if(happens(getOffVehicle(Agent,Vehicleon),Time)),
-     at(onVehicle(Agent,Vehicleon),Time)).
 
- /*  reactive_rule([ happens(getOffVehicle(Agent,Vehicleon),
-   			Time)
-   	      ],
-   	      [ holds(onVehicle(Agent,Vehicleon),
-   		      Time)
+ /*  pl=axiom(requires(getOffVehicle(Agent,Vehicleon),
+   	       When_Time),
+         [metreqs(getOffVehicle(Agent,Vehicleon))]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',205).
+
+ /*  metreqs(getOffVehicle(Agent, Vehicleon)) ->
+       requires(getOffVehicle(Agent, Vehicleon), When_Time).
+ */
+if metreqs(getOffVehicle(Agent, Vehicleon))then requires(getOffVehicle(Agent, Vehicleon), When_Time).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',205).
+
+ /*  reactive_rule([metreqs(getOffVehicle(Agent,Vehicleon))],
+   	      [ requires(getOffVehicle(Agent,Vehicleon),
+   			 When_Time)
    	      ]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',205).
+
+ /*  reactive_rule([metreqs(getOffVehicle(Agent,Vehicleon))],
+   	      [ requires(getOffVehicle(Agent,Vehicleon),
+   			 When_Time)
+   	      ]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',205).
+
+ /*  fix_axiom_head(When_Time) ->
+       [ holds_at(metreqs(getOffVehicle(Agent, Vehicleon)),
+                  When_Time),
+          (->),
+         metreqs(getOffVehicle(Agent, Vehicleon))
+       ].
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',205).
+
+ /*  pl=axiom(metreqs(getOffVehicle(Agent,Vehicleon)),
+         [onVehicle(Agent,Vehicleon)]).
+ */
+
+ /*  onVehicle(Agent, Vehicleon) ->
+       metreqs(getOffVehicle(Agent, Vehicleon)).
+ */
+if onVehicle(Agent, Vehicleon)then metreqs(getOffVehicle(Agent, Vehicleon)).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',205).
+
+ /*  reactive_rule([ holds(onVehicle(Agent,Vehicleon),
+   		      Holds)
+   	      ],
+   	      [metreqs(getOffVehicle(Agent,Vehicleon))]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',205).
+
+ /*  reactive_rule([ holds(onVehicle(Agent,Vehicleon),
+   		      Holds)
+   	      ],
+   	      [metreqs(getOffVehicle(Agent,Vehicleon))]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',205).
+
+ /*  not(happens(getOffVehicle(Agent, Vehicleon), When_Time)) :-
+       not(holds_at(onVehicle(Agent, Vehicleon), When_Time)).
+ */
+
+ /*  fix_axiom_head(When_Time) ->
+       [ not(happens(getOffVehicle(Agent, Vehicleon), When_Time)),
+          (->),
+         not(getOffVehicle(Agent, Vehicleon))
+       ].
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',205).
+
+ /*  pl=axiom(not(getOffVehicle(Agent,Vehicleon)),
+         [not(onVehicle(Agent,Vehicleon))]).
+ */
+
+ /*  not(onVehicle(Agent, Vehicleon)) ->
+       not(getOffVehicle(Agent, Vehicleon)).
+ */
+if not onVehicle(Agent, Vehicleon)then not getOffVehicle(Agent, Vehicleon).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',205).
+
+ /*  reactive_rule([ holds(not(onVehicle(Agent,Vehicleon)),
+   		      Holds5)
+   	      ],
+   	      [not(getOffVehicle(Agent,Vehicleon))]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',205).
+
+ /*  reactive_rule([ holds(not(onVehicle(Agent,Vehicleon)),
+   		      Holds5)
+   	      ],
+   	      [not(getOffVehicle(Agent,Vehicleon))]).
  */
 
 
@@ -1228,18 +2885,26 @@ then(if(happens(getOffVehicle(Agent,Vehicleon),Time)),
 %          time).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',210).
 
- /*  axiom(releases(getOnVehicle(Agent, Vehicleon), at(Agent, Location), Time),
-       []).
- */
-
- /*  releases(getOnVehicle(A,Getonvehicle),
-   	 at(A,Tloc),
-   	 Releases).
+ /*  pl=axiom(releases(getOnVehicle(Agent,Vehicleon),
+   	       at(Agent,Location),
+   	       Time),
+         []).
  */
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',210).
-releases(getOnVehicle(A,Getonvehicle),
-	 loc_at(A,Tloc),
-	 Releases).
+
+ /*  releases(getOnVehicle(Agent,Vehicleon),
+   	 at(Agent,Location),
+   	 Time).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',210).
+releases(getOnVehicle(Agent,Vehicleon),
+	 loc_at(Agent,Location),
+	 Time).
+
+ /*  releases(getOnVehicle(Agent,Vehicleon),
+   	 loc_at(Agent,Location),
+   	 Time).
+ */
 
 
 %;[agent,vehicleon,location1,location2,time]
@@ -1255,28 +2920,35 @@ releases(getOnVehicle(A,Getonvehicle),
 %           time).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',221).
 
- /*  axiom(initiates(getOffVehicle(Agent, Vehicleon), at(Agent, Location), Time),
-       [at(Vehicleon, Location)]).
- */
-
- /*  at(Getoffvehicle, Tloc) ->
-       initiates(getOffVehicle(A, Getoffvehicle),
-                 at(A, Tloc),
-                 Initiates).
+ /*  pl=axiom(initiates(getOffVehicle(Agent,Vehicleon),
+   		at(Agent,Location),
+   		Time),
+         [at(Vehicleon,Location)]).
  */
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',221).
-then(if(loc_at(Getoffvehicle,Tloc)),
-     initiates(getOffVehicle(A,Getoffvehicle),
-	       at(loc_at(A,Tloc),Initiates),
-	       Initiates7)).
 
- /*  reactive_rule([ holds(loc_at(Getoffvehicle,Tloc),
-   		      Holds)
-   	      ],
-   	      [ initiates(getOffVehicle(A,Getoffvehicle),
-   			  at(loc_at(A,Tloc),
-   			     Initiates),
-   			  Initiates7)
+ /*  at(Vehicleon, Location) ->
+       initiates(getOffVehicle(Agent, Vehicleon),
+                 at(Agent, Location),
+                 Time).
+ */
+if loc_at(Vehicleon, Location)then initiates(getOffVehicle(Agent, Vehicleon), loc_at(Agent, Location)at Time, _).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',221).
+
+ /*  reactive_rule([loc_at(Vehicleon,Location)],
+   	      [ initiates(getOffVehicle(Agent,Vehicleon),
+   			  at(loc_at(Agent,Location),
+   			     Time),
+   			  Initiates)
+   	      ]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',221).
+
+ /*  reactive_rule([loc_at(Vehicleon,Location)],
+   	      [ initiates(getOffVehicle(Agent,Vehicleon),
+   			  at(loc_at(Agent,Location),
+   			     Time),
+   			  Initiates)
    	      ]).
  */
 
@@ -1285,22 +2957,127 @@ then(if(loc_at(Getoffvehicle,Tloc)),
 % HoldsAt(OnVehicle(object,vehicleon),time) &
 % HoldsAt(At(vehicleon,location),time) ->
 % HoldsAt(At(object,location),time).
+ %  clausify_pnf=(holds_at(onVehicle(Object, Vehicleon), Time), holds_at(at(Vehicleon, Location), Time)->holds_at(at(Object, Location), Time)).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',228).
 
- /*  (   holds_at(onVehicle(Object, Vehicleon), Time),
-       holds_at(at(Vehicleon, Location), Time)
-   ->  holds_at(at(Object, Location), Time)
-   ).
+ /*  holds_at(at(Object, Location), Time) :-
+       holds_at(onVehicle(Object, Vehicleon), Time),
+       holds_at(at(Vehicleon, Location), Time).
  */
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',228).
-then(if((at(onVehicle(Object, Vehicleon), Time), at(loc_at(Vehicleon, Location), Time))), at(loc_at(Object, Location), Time)).
+
+ /*  fix_axiom_head(Time) ->
+       [ holds_at(at(Object, Location), Time),
+          (->),
+         at(Object, Location)
+       ].
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',228).
+
+ /*  pl=axiom(at(Object,Location),
+         [ onVehicle(Object,Vehicleon),
+   	at(Vehicleon,Location)
+         ]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',228).
+
+ /*  (   onVehicle(Object, Vehicleon),
+       at(Vehicleon, Location)
+   ->  at(Object, Location)
+   ).
+ */
+if onVehicle(Object, Vehicleon), loc_at(Vehicleon, Location)then loc_at(Object, Location).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',228).
 
  /*  reactive_rule([ holds(onVehicle(Object,Vehicleon),
-   		      Time),
-   		holds(loc_at(Vehicleon,Location),
-   		      Time)
+   		      Holds),
+   		loc_at(Vehicleon,Location)
    	      ],
-   	      [holds(loc_at(Object,Location),Time)]).
+   	      [loc_at(Object,Location)]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',228).
+
+ /*  reactive_rule([ holds(onVehicle(Object,Vehicleon),
+   		      Holds),
+   		loc_at(Vehicleon,Location)
+   	      ],
+   	      [loc_at(Object,Location)]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',228).
+
+ /*  not(holds_at(onVehicle(Object, Vehicleon), Time)) :-
+       holds_at(at(Vehicleon, Location), Time),
+       not(holds_at(at(Object, Location), Time)).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',228).
+
+ /*  pl=axiom(not(onVehicle(Object,Vehicleon)),
+         [ at(Vehicleon,Location),
+   	not(at(Object,Location))
+         ]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',228).
+
+ /*  (   at(Vehicleon, Location),
+       not(at(Object, Location))
+   ->  not(onVehicle(Object, Vehicleon))
+   ).
+ */
+if loc_at(Vehicleon, Location), not loc_at(Object, Location)then not onVehicle(Object, Vehicleon).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',228).
+
+ /*  reactive_rule([ loc_at(Vehicleon,Location),
+   		not(loc_at(Object,Location))
+   	      ],
+   	      [ holds(not(onVehicle(Object,Vehicleon)),
+   		      Holds5)
+   	      ]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',228).
+
+ /*  reactive_rule([ loc_at(Vehicleon,Location),
+   		not(loc_at(Object,Location))
+   	      ],
+   	      [ holds(not(onVehicle(Object,Vehicleon)),
+   		      Holds5)
+   	      ]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',228).
+
+ /*  not(holds_at(at(Vehicleon, Location), Time)) :-
+       holds_at(onVehicle(Object, Vehicleon), Time),
+       not(holds_at(at(Object, Location), Time)).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',228).
+
+ /*  pl=axiom(not(at(Vehicleon,Location)),
+         [ onVehicle(Object,Vehicleon),
+   	not(at(Object,Location))
+         ]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',228).
+
+ /*  (   onVehicle(Object, Vehicleon),
+       not(at(Object, Location))
+   ->  not(at(Vehicleon, Location))
+   ).
+ */
+if onVehicle(Object, Vehicleon), not loc_at(Object, Location)then not loc_at(Vehicleon, Location).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',228).
+
+ /*  reactive_rule([ holds(onVehicle(Object,Vehicleon),
+   		      Holds6),
+   		not(loc_at(Object,Location))
+   	      ],
+   	      [not(loc_at(Vehicleon,Location))]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',228).
+
+ /*  reactive_rule([ holds(onVehicle(Object,Vehicleon),
+   		      Holds6),
+   		not(loc_at(Object,Location))
+   	      ],
+   	      [not(loc_at(Vehicleon,Location))]).
  */
 
 
@@ -1308,62 +3085,123 @@ then(if((at(onVehicle(Object, Vehicleon), Time), at(loc_at(Vehicleon, Location),
 
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',234).
 % fluent InVehicle(object,vehiclein)
- %  fluent(inVehicle(object,vehiclein)).
+ %  blue=fluent(inVehicle(object,vehiclein)).
  %  fluent(inVehicle(object,vehiclein)).
 fluents([inVehicle/2]).
+ %  fluents([inVehicle/2]).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',234).
 mpred_prop(inVehicle(object,vehiclein),fluent).
+ %  mpred_prop(inVehicle(object,vehiclein),fluent).
 
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',236).
 % event GetInVehicle(agent,vehiclein)
- %  event(getInVehicle(agent,vehiclein)).
+ %  blue=event(getInVehicle(agent,vehiclein)).
  %  event(getInVehicle(agent,vehiclein)).
 actions([getInVehicle/2]).
+ %  actions([getInVehicle/2]).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',236).
 mpred_prop(getInVehicle(agent,vehiclein),event).
+ %  mpred_prop(getInVehicle(agent,vehiclein),event).
 
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',238).
 % event GetOutOfVehicle(agent,vehiclein)
- %  event(getOutOfVehicle(agent,vehiclein)).
+ %  blue=event(getOutOfVehicle(agent,vehiclein)).
  %  event(getOutOfVehicle(agent,vehiclein)).
 actions([getOutOfVehicle/2]).
+ %  actions([getOutOfVehicle/2]).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',238).
 mpred_prop(getOutOfVehicle(agent,vehiclein),event).
+ %  mpred_prop(getOutOfVehicle(agent,vehiclein),event).
 
 
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',240).
 % [vehiclein1,vehiclein2,time]
 % HoldsAt(InVehicle(vehiclein1,vehiclein2),time) ->
 % vehiclein1!=vehiclein2.
+ %  clausify_pnf=(holds_at(inVehicle(Vehiclein1, Vehiclein2), Time)->diff(Vehiclein1, Vehiclein2)).
 
- /*  holds_at(inVehicle(Vehiclein1, Vehiclein2), Time) ->
-       diff(Vehiclein1, Vehiclein2).
+ /*  not(holds_at(inVehicle(Vehiclein1, Vehiclein2), Time)) :-
+       not(diff(Vehiclein1, Vehiclein2)).
  */
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',240).
-then(if(at(inVehicle(Vehiclein1,Vehiclein2),Time)),
-     diff(Vehiclein1,Vehiclein2)).
 
- /*  reactive_rule([ holds(inVehicle(Vehiclein1,Vehiclein2),
-   		      Time)
-   	      ],
-   	      [diff(Vehiclein1,Vehiclein2)]).
+ /*  pl=axiom(not(inVehicle(Vehiclein1,Vehiclein2)),
+         [equals(Vehiclein1,Vehiclein2)]).
+ */
+
+ /*  equals(Vehiclein1, Vehiclein2) ->
+       not(inVehicle(Vehiclein1, Vehiclein2)).
+ */
+if equals(Vehiclein1, Vehiclein2)then not inVehicle(Vehiclein1, Vehiclein2).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',240).
+
+ /*  reactive_rule([equals(Vehiclein1,Vehiclein2)],
+   	      [not(inVehicle(Vehiclein1,Vehiclein2))]).
+ */
+
+ /*  reactive_rule([equals(Vehiclein1,Vehiclein2)],
+   	      [not(inVehicle(Vehiclein1,Vehiclein2))]).
  */
 
 
 % [vehiclein1,vehiclein2,time]
 % HoldsAt(InVehicle(vehiclein1,vehiclein2),time) ->
 % !HoldsAt(InVehicle(vehiclein2,vehiclein1),time).
+ %  clausify_pnf=(holds_at(inVehicle(Vehiclein1, Vehiclein2), Time)->holds_at(neg(inVehicle(Vehiclein2, Vehiclein1)), Time)).
 
- /*  holds_at(inVehicle(Vehiclein1, Vehiclein2), Time) ->
-       holds_at(neg(inVehicle(Vehiclein2, Vehiclein1)), Time).
+ /*  holds_at(neg(inVehicle(Vehiclein2, Vehiclein1)), Time) :-
+       holds_at(inVehicle(Vehiclein1, Vehiclein2), Time).
  */
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',245).
-then(if(at(inVehicle(Vehiclein1,Vehiclein2),Time)),
-     at(not(inVehicle(Vehiclein2,Vehiclein1)),Time)).
 
- /*  reactive_rule([ holds(inVehicle(Vehiclein1,Vehiclein2),
-   		      Time)
-   	      ],
-   	      [ holds(not(inVehicle(Vehiclein2,Vehiclein1)),
-   		      Time)
-   	      ]).
+ /*  fix_axiom_head(Time) ->
+       [ holds_at(neg(inVehicle(Vehiclein2, Vehiclein1)), Time),
+          (->),
+         not(inVehicle(Vehiclein2, Vehiclein1))
+       ].
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',245).
+
+ /*  pl=axiom(not(inVehicle(Vehiclein2,Vehiclein1)),
+         [inVehicle(Vehiclein1,Vehiclein2)]).
+ */
+
+ /*  inVehicle(Vehiclein1, Vehiclein2) ->
+       not(inVehicle(Vehiclein2, Vehiclein1)).
+ */
+if inVehicle(Vehiclein1, Vehiclein2)then not inVehicle(Vehiclein2, Vehiclein1).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',245).
+
+ /*  reactive_rule([inVehicle(Vehiclein1,Vehiclein2)],
+   	      [not(inVehicle(Vehiclein2,Vehiclein1))]).
+ */
+
+ /*  reactive_rule([inVehicle(Vehiclein1,Vehiclein2)],
+   	      [not(inVehicle(Vehiclein2,Vehiclein1))]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',245).
+
+ /*  not(holds_at(inVehicle(Vehiclein1, Vehiclein2), Time)) :-
+       not(holds_at(neg(inVehicle(Vehiclein2, Vehiclein1)), Time)).
+ */
+
+ /*  pl=axiom(not(inVehicle(Vehiclein1,Vehiclein2)),
+         [not(not(inVehicle(Vehiclein2,Vehiclein1)))]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',245).
+
+ /*  not(not(inVehicle(Vehiclein2, Vehiclein1))) ->
+       not(inVehicle(Vehiclein1, Vehiclein2)).
+ */
+if not not inVehicle(Vehiclein2, Vehiclein1)then not inVehicle(Vehiclein1, Vehiclein2).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',245).
+
+ /*  reactive_rule([not(not(inVehicle(Vehiclein2,Vehiclein1)))],
+   	      [not(inVehicle(Vehiclein1,Vehiclein2))]).
+ */
+
+ /*  reactive_rule([not(not(inVehicle(Vehiclein2,Vehiclein1)))],
+   	      [not(inVehicle(Vehiclein1,Vehiclein2))]).
  */
 
 
@@ -1371,22 +3209,32 @@ then(if(at(inVehicle(Vehiclein1,Vehiclein2),Time)),
 % Initiates(GetInVehicle(agent,vehiclein),InVehicle(agent,vehiclein),time).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',249).
 
- /*  axiom(initiates(getInVehicle(Agent, Vehiclein), inVehicle(Agent, Vehiclein), Time),
-       []).
- */
-
- /*  initiates(getInVehicle(A,Getinvehicle),
-   	  inVehicle(A,Getinvehicle),
-   	  Initiates).
+ /*  pl=axiom(initiates(getInVehicle(Agent,Vehiclein),
+   		inVehicle(Agent,Vehiclein),
+   		Time),
+         []).
  */
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',249).
-initiates(getInVehicle(A,Getinvehicle),
-	  inVehicle(A,Getinvehicle)).
 
- /*  initiated(happens(getInVehicle(A,Getinvehicle),
+ /*  initiates(getInVehicle(Agent,Vehiclein),
+   	  inVehicle(Agent,Vehiclein),
+   	  Time).
+ */
+getInVehicle(Agent, Vehiclein)initiates inVehicle(Agent, Vehiclein).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',249).
+
+ /*  initiated(happens(getInVehicle(Agent,Vehiclein),
    		  Time_From,
    		  Time_Until),
-   	  inVehicle(A,Getinvehicle),
+   	  inVehicle(Agent,Vehiclein),
+   	  []).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',249).
+
+ /*  initiated(happens(getInVehicle(Agent,Vehiclein),
+   		  Time_From,
+   		  Time_Until),
+   	  inVehicle(Agent,Vehiclein),
    	  []).
  */
 
@@ -1405,7 +3253,7 @@ initiates(getInVehicle(A,Getinvehicle),
        ;   not(holds_at(at(Vehiclein, Exists_Location), Time))
        ),
        some(Exists_Location,
-            '$kolem_Fn_258'(Agent, Vehiclein, Time)).
+            '$kolem_Fn_72'(Agent, Vehiclein, Time)).
  */
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',253).
 
@@ -1415,45 +3263,40 @@ initiates(getInVehicle(A,Getinvehicle),
          not(getInVehicle(Agent, Vehiclein))
        ].
  */
+ %   pl=axiom(not(getInVehicle(Agent, Vehiclein)), [(not(at(Agent, Exists_Location));not(at(Vehiclein, Exists_Location))), some(Exists_Location, '$kolem_Fn_72'(Agent, Vehiclein, Time))]).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',253).
 
- /*  axiom(not(getInVehicle(Agent, Vehiclein)),
-       [  (not(at(Agent, Exists_Location));not(at(Vehiclein, Exists_Location))),
-         some(Exists_Location,
-              '$kolem_Fn_258'(Agent, Vehiclein, Time))
-       ]).
- */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',253).
-
- /*  (   (   not(at(Kolem_Fn_258P_Num3_V, Tloc))
-       ;   not(at(Getinvehicle, Tloc))
+ /*  (   (   not(at(Agent, Exists_Location))
+       ;   not(at(Vehiclein, Exists_Location))
        ),
-       some(Tloc,
-            '$kolem_Fn_258'(Kolem_Fn_258P_Num3_V,
-                            Getinvehicle,
-                            Kolem_Fn_258))
-   ->  not(getInVehicle(Kolem_Fn_258P_Num3_V, Getinvehicle))
+       some(Exists_Location,
+            '$kolem_Fn_72'(Agent, Vehiclein, Time))
+   ->  not(getInVehicle(Agent, Vehiclein))
    ).
  */
+if (not loc_at(Agent, Exists_Location);not loc_at(Vehiclein, Exists_Location)), some(Exists_Location, '$kolem_Fn_72'(Agent, Vehiclein, Time))then not getInVehicle(Agent, Vehiclein).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',253).
-then(if(((not(loc_at(Kolem_Fn_258P_Num3_V, Tloc));not(loc_at(Getinvehicle, Tloc))), some(Tloc, '$kolem_Fn_258'(Kolem_Fn_258P_Num3_V, Getinvehicle, Kolem_Fn_258)))), not(getInVehicle(Kolem_Fn_258P_Num3_V, Getinvehicle))).
 
- /*   reactive_rule([  (not(loc_at(Kolem_Fn_258P_Num3_V, Tloc));not(loc_at(Getinvehicle, Tloc))),
-                      some(Tloc,
-                           '$kolem_Fn_258'(Kolem_Fn_258P_Num3_V,
-                                           Getinvehicle,
-                                           Kolem_Fn_258))
+ /*   reactive_rule([  (not(loc_at(Agent, Exists_Location));not(loc_at(Vehiclein, Exists_Location))),
+                      some(Exists_Location,
+                           '$kolem_Fn_72'(Agent, Vehiclein, Time))
                     ],
-                    [ not(getInVehicle(Kolem_Fn_258P_Num3_V,
-                                       Getinvehicle))
-                    ]).
+                    [not(getInVehicle(Agent, Vehiclein))]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',253).
+
+ /*   reactive_rule([  (not(loc_at(Agent, Exists_Location));not(loc_at(Vehiclein, Exists_Location))),
+                      some(Exists_Location,
+                           '$kolem_Fn_72'(Agent, Vehiclein, Time))
+                    ],
+                    [not(getInVehicle(Agent, Vehiclein))]).
  */
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',253).
 
  /*  holds_at(at(Agent, Exists_Location), Time) :-
        happens(getInVehicle(Agent, Vehiclein), Time),
        some(Exists_Location,
-            '$kolem_Fn_258'(Agent, Vehiclein, Time)).
+            '$kolem_Fn_72'(Agent, Vehiclein, Time)).
  */
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',253).
 
@@ -1465,44 +3308,51 @@ then(if(((not(loc_at(Kolem_Fn_258P_Num3_V, Tloc));not(loc_at(Getinvehicle, Tloc)
  */
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',253).
 
- /*  axiom(at(Agent, Exists_Location),
-       [ getInVehicle(Agent, Vehiclein),
-         some(Exists_Location,
-              '$kolem_Fn_258'(Agent, Vehiclein, Time))
-       ]).
+ /*  pl=axiom(at(Agent,Exists_Location),
+         [ getInVehicle(Agent,Vehiclein),
+   	some(Exists_Location,
+   	     '$kolem_Fn_72'(Agent,Vehiclein,Time))
+         ]).
  */
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',253).
 
- /*  (   getInVehicle(Kolem_Fn_258P_Num3_V12, Getinvehicle10),
-       some(Tloc9,
-            '$kolem_Fn_258'(Kolem_Fn_258P_Num3_V12,
-                            Getinvehicle10,
-                            Kolem_Fn_25811))
-   ->  at(Kolem_Fn_258P_Num3_V12, Tloc9)
+ /*  (   getInVehicle(Agent, Vehiclein),
+       some(Exists_Location,
+            '$kolem_Fn_72'(Agent, Vehiclein, Time))
+   ->  at(Agent, Exists_Location)
    ).
  */
+if getInVehicle(Agent, Vehiclein), some(Exists_Location, '$kolem_Fn_72'(Agent, Vehiclein, Time))then loc_at(Agent, Exists_Location).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',253).
-then(if((getInVehicle(Kolem_Fn_258P_Num3_V12, Getinvehicle10), some(Tloc9, '$kolem_Fn_258'(Kolem_Fn_258P_Num3_V12, Getinvehicle10, Kolem_Fn_25811)))), loc_at(Kolem_Fn_258P_Num3_V12, Tloc9)).
 
- /*  reactive_rule([ happens(getInVehicle(Kolem_Fn_258P_Num3_V12,
-   				     Getinvehicle10),
+ /*  reactive_rule([ happens(getInVehicle(Agent,Vehiclein),
    			Time_From,
    			Time_Until),
-   		some(Tloc9,
-   		     '$kolem_Fn_258'(Kolem_Fn_258P_Num3_V12,
-   				     Getinvehicle10,
-   				     Kolem_Fn_25811))
+   		some(Exists_Location,
+   		     '$kolem_Fn_72'(Agent,
+   				    Vehiclein,
+   				    Time))
    	      ],
-   	      [ holds(loc_at(Kolem_Fn_258P_Num3_V12,Tloc9),
-   		      Holds)
-   	      ]).
+   	      [loc_at(Agent,Exists_Location)]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',253).
+
+ /*  reactive_rule([ happens(getInVehicle(Agent,Vehiclein),
+   			Time_From,
+   			Time_Until),
+   		some(Exists_Location,
+   		     '$kolem_Fn_72'(Agent,
+   				    Vehiclein,
+   				    Time))
+   	      ],
+   	      [loc_at(Agent,Exists_Location)]).
  */
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',253).
 
  /*  holds_at(at(Vehiclein, Exists_Location), Time) :-
        happens(getInVehicle(Agent, Vehiclein), Time),
        some(Exists_Location,
-            '$kolem_Fn_258'(Agent, Vehiclein, Time)).
+            '$kolem_Fn_72'(Agent, Vehiclein, Time)).
  */
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',253).
 
@@ -1514,37 +3364,44 @@ then(if((getInVehicle(Kolem_Fn_258P_Num3_V12, Getinvehicle10), some(Tloc9, '$kol
  */
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',253).
 
- /*  axiom(at(Vehiclein, Exists_Location),
-       [ getInVehicle(Agent, Vehiclein),
-         some(Exists_Location,
-              '$kolem_Fn_258'(Agent, Vehiclein, Time))
-       ]).
+ /*  pl=axiom(at(Vehiclein,Exists_Location),
+         [ getInVehicle(Agent,Vehiclein),
+   	some(Exists_Location,
+   	     '$kolem_Fn_72'(Agent,Vehiclein,Time))
+         ]).
  */
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',253).
 
- /*  (   getInVehicle(Kolem_Fn_258P_Num3_V19, Getinvehicle17),
-       some(Tloc16,
-            '$kolem_Fn_258'(Kolem_Fn_258P_Num3_V19,
-                            Getinvehicle17,
-                            Kolem_Fn_25818))
-   ->  at(Getinvehicle17, Tloc16)
+ /*  (   getInVehicle(Agent, Vehiclein),
+       some(Exists_Location,
+            '$kolem_Fn_72'(Agent, Vehiclein, Time))
+   ->  at(Vehiclein, Exists_Location)
    ).
  */
+if getInVehicle(Agent, Vehiclein), some(Exists_Location, '$kolem_Fn_72'(Agent, Vehiclein, Time))then loc_at(Vehiclein, Exists_Location).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',253).
-then(if((getInVehicle(Kolem_Fn_258P_Num3_V19, Getinvehicle17), some(Tloc16, '$kolem_Fn_258'(Kolem_Fn_258P_Num3_V19, Getinvehicle17, Kolem_Fn_25818)))), loc_at(Getinvehicle17, Tloc16)).
 
- /*  reactive_rule([ happens(getInVehicle(Kolem_Fn_258P_Num3_V19,
-   				     Getinvehicle17),
-   			Time_From20,
-   			Time_Until21),
-   		some(Tloc16,
-   		     '$kolem_Fn_258'(Kolem_Fn_258P_Num3_V19,
-   				     Getinvehicle17,
-   				     Kolem_Fn_25818))
+ /*  reactive_rule([ happens(getInVehicle(Agent,Vehiclein),
+   			Time_From7,
+   			Time_Until8),
+   		some(Exists_Location,
+   		     '$kolem_Fn_72'(Agent,
+   				    Vehiclein,
+   				    Time))
    	      ],
-   	      [ holds(loc_at(Getinvehicle17,Tloc16),
-   		      Holds22)
-   	      ]).
+   	      [loc_at(Vehiclein,Exists_Location)]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',253).
+
+ /*  reactive_rule([ happens(getInVehicle(Agent,Vehiclein),
+   			Time_From7,
+   			Time_Until8),
+   		some(Exists_Location,
+   		     '$kolem_Fn_72'(Agent,
+   				    Vehiclein,
+   				    Time))
+   	      ],
+   	      [loc_at(Vehiclein,Exists_Location)]).
  */
 
 
@@ -1552,22 +3409,32 @@ then(if((getInVehicle(Kolem_Fn_258P_Num3_V19, Getinvehicle17), some(Tloc16, '$ko
 % Terminates(GetOutOfVehicle(agent,vehiclein),InVehicle(agent,vehiclein),time).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',258).
 
- /*  axiom(terminates(getOutOfVehicle(Agent, Vehiclein), inVehicle(Agent, Vehiclein), Time),
-       []).
- */
-
- /*  terminates(getOutOfVehicle(A,Getoutofvehicle),
-   	   inVehicle(A,Getoutofvehicle),
-   	   Terminates).
+ /*  pl=axiom(terminates(getOutOfVehicle(Agent,Vehiclein),
+   		 inVehicle(Agent,Vehiclein),
+   		 Time),
+         []).
  */
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',258).
-terminates(getOutOfVehicle(A,Getoutofvehicle),
-	   inVehicle(A,Getoutofvehicle)).
 
- /*  terminated(happens(getOutOfVehicle(A,Getoutofvehicle),
+ /*  terminates(getOutOfVehicle(Agent,Vehiclein),
+   	   inVehicle(Agent,Vehiclein),
+   	   Time).
+ */
+getOutOfVehicle(Agent, Vehiclein)terminates inVehicle(Agent, Vehiclein).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',258).
+
+ /*  terminated(happens(getOutOfVehicle(Agent,Vehiclein),
    		   Time_From,
    		   Time_Until),
-   	   inVehicle(A,Getoutofvehicle),
+   	   inVehicle(Agent,Vehiclein),
+   	   []).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',258).
+
+ /*  terminated(happens(getOutOfVehicle(Agent,Vehiclein),
+   		   Time_From,
+   		   Time_Until),
+   	   inVehicle(Agent,Vehiclein),
    	   []).
  */
 
@@ -1576,21 +3443,106 @@ terminates(getOutOfVehicle(A,Getoutofvehicle),
 % [agent,vehiclein,time]
 % Happens(GetOutOfVehicle(agent,vehiclein),time) ->
 % HoldsAt(InVehicle(agent,vehiclein),time).
+ %  clausify_pnf=(happens(getOutOfVehicle(Agent, Vehiclein), Time)->holds_at(inVehicle(Agent, Vehiclein), Time)).
 
- /*  happens(getOutOfVehicle(Agent, Vehiclein), Time) ->
-       holds_at(inVehicle(Agent, Vehiclein), Time).
+ /*  holds_at(inVehicle(Agent, Vehiclein), Time) :-
+       happens(getOutOfVehicle(Agent, Vehiclein), Time).
  */
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',260).
-then(if(happens(getOutOfVehicle(Agent,Vehiclein),
-		Time)),
-     at(inVehicle(Agent,Vehiclein),Time)).
 
- /*  reactive_rule([ happens(getOutOfVehicle(Agent,Vehiclein),
-   			Time)
-   	      ],
-   	      [ holds(inVehicle(Agent,Vehiclein),
-   		      Time)
+ /*  pl=axiom(requires(getOutOfVehicle(Agent,Vehiclein),
+   	       When_Time),
+         [metreqs(getOutOfVehicle(Agent,Vehiclein))]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',260).
+
+ /*  metreqs(getOutOfVehicle(Agent, Vehiclein)) ->
+       requires(getOutOfVehicle(Agent, Vehiclein), When_Time).
+ */
+if metreqs(getOutOfVehicle(Agent, Vehiclein))then requires(getOutOfVehicle(Agent, Vehiclein), When_Time).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',260).
+
+ /*  reactive_rule([metreqs(getOutOfVehicle(Agent,Vehiclein))],
+   	      [ requires(getOutOfVehicle(Agent,Vehiclein),
+   			 When_Time)
    	      ]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',260).
+
+ /*  reactive_rule([metreqs(getOutOfVehicle(Agent,Vehiclein))],
+   	      [ requires(getOutOfVehicle(Agent,Vehiclein),
+   			 When_Time)
+   	      ]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',260).
+
+ /*  fix_axiom_head(When_Time) ->
+       [ holds_at(metreqs(getOutOfVehicle(Agent, Vehiclein)),
+                  When_Time),
+          (->),
+         metreqs(getOutOfVehicle(Agent, Vehiclein))
+       ].
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',260).
+
+ /*  pl=axiom(metreqs(getOutOfVehicle(Agent,Vehiclein)),
+         [inVehicle(Agent,Vehiclein)]).
+ */
+
+ /*  inVehicle(Agent, Vehiclein) ->
+       metreqs(getOutOfVehicle(Agent, Vehiclein)).
+ */
+if inVehicle(Agent, Vehiclein)then metreqs(getOutOfVehicle(Agent, Vehiclein)).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',260).
+
+ /*  reactive_rule([ holds(inVehicle(Agent,Vehiclein),
+   		      Holds)
+   	      ],
+   	      [metreqs(getOutOfVehicle(Agent,Vehiclein))]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',260).
+
+ /*  reactive_rule([ holds(inVehicle(Agent,Vehiclein),
+   		      Holds)
+   	      ],
+   	      [metreqs(getOutOfVehicle(Agent,Vehiclein))]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',260).
+
+ /*  not(happens(getOutOfVehicle(Agent, Vehiclein), When_Time)) :-
+       not(holds_at(inVehicle(Agent, Vehiclein), When_Time)).
+ */
+
+ /*  fix_axiom_head(When_Time) ->
+       [ not(happens(getOutOfVehicle(Agent, Vehiclein),
+                     When_Time)),
+          (->),
+         not(getOutOfVehicle(Agent, Vehiclein))
+       ].
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',260).
+
+ /*  pl=axiom(not(getOutOfVehicle(Agent,Vehiclein)),
+         [not(inVehicle(Agent,Vehiclein))]).
+ */
+
+ /*  not(inVehicle(Agent, Vehiclein)) ->
+       not(getOutOfVehicle(Agent, Vehiclein)).
+ */
+if not inVehicle(Agent, Vehiclein)then not getOutOfVehicle(Agent, Vehiclein).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',260).
+
+ /*  reactive_rule([ holds(not(inVehicle(Agent,Vehiclein)),
+   		      Holds5)
+   	      ],
+   	      [not(getOutOfVehicle(Agent,Vehiclein))]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',260).
+
+ /*  reactive_rule([ holds(not(inVehicle(Agent,Vehiclein)),
+   		      Holds5)
+   	      ],
+   	      [not(getOutOfVehicle(Agent,Vehiclein))]).
  */
 
 
@@ -1600,18 +3552,26 @@ then(if(happens(getOutOfVehicle(Agent,Vehiclein),
 %          time).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',265).
 
- /*  axiom(releases(getInVehicle(Agent, Vehiclein), at(Agent, Location), Time),
-       []).
- */
-
- /*  releases(getInVehicle(A,Getinvehicle),
-   	 at(A,Tloc),
-   	 Releases).
+ /*  pl=axiom(releases(getInVehicle(Agent,Vehiclein),
+   	       at(Agent,Location),
+   	       Time),
+         []).
  */
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',265).
-releases(getInVehicle(A,Getinvehicle),
-	 loc_at(A,Tloc),
-	 Releases).
+
+ /*  releases(getInVehicle(Agent,Vehiclein),
+   	 at(Agent,Location),
+   	 Time).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',265).
+releases(getInVehicle(Agent,Vehiclein),
+	 loc_at(Agent,Location),
+	 Time).
+
+ /*  releases(getInVehicle(Agent,Vehiclein),
+   	 loc_at(Agent,Location),
+   	 Time).
+ */
 
 
 %;[agent,vehiclein,location1,location2,time]
@@ -1627,29 +3587,35 @@ releases(getInVehicle(A,Getinvehicle),
 %           time).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',276).
 
- /*  axiom(initiates(getOutOfVehicle(Agent, Vehiclein), at(Agent, Location), Time),
-       [at(Vehiclein, Location)]).
- */
-
- /*  at(Getoutofvehicle, Tloc) ->
-       initiates(getOutOfVehicle(A, Getoutofvehicle),
-                 at(A, Tloc),
-                 Initiates).
+ /*  pl=axiom(initiates(getOutOfVehicle(Agent,Vehiclein),
+   		at(Agent,Location),
+   		Time),
+         [at(Vehiclein,Location)]).
  */
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',276).
-then(if(loc_at(Getoutofvehicle,Tloc)),
-     initiates(getOutOfVehicle(A,Getoutofvehicle),
-	       at(loc_at(A,Tloc),Initiates),
-	       Initiates7)).
 
- /*  reactive_rule([ holds(loc_at(Getoutofvehicle,Tloc),
-   		      Holds)
-   	      ],
-   	      [ initiates(getOutOfVehicle(A,
-   					  Getoutofvehicle),
-   			  at(loc_at(A,Tloc),
-   			     Initiates),
-   			  Initiates7)
+ /*  at(Vehiclein, Location) ->
+       initiates(getOutOfVehicle(Agent, Vehiclein),
+                 at(Agent, Location),
+                 Time).
+ */
+if loc_at(Vehiclein, Location)then initiates(getOutOfVehicle(Agent, Vehiclein), loc_at(Agent, Location)at Time, _).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',276).
+
+ /*  reactive_rule([loc_at(Vehiclein,Location)],
+   	      [ initiates(getOutOfVehicle(Agent,Vehiclein),
+   			  at(loc_at(Agent,Location),
+   			     Time),
+   			  Initiates)
+   	      ]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',276).
+
+ /*  reactive_rule([loc_at(Vehiclein,Location)],
+   	      [ initiates(getOutOfVehicle(Agent,Vehiclein),
+   			  at(loc_at(Agent,Location),
+   			     Time),
+   			  Initiates)
    	      ]).
  */
 
@@ -1658,22 +3624,127 @@ then(if(loc_at(Getoutofvehicle,Tloc)),
 % HoldsAt(InVehicle(object,vehiclein),time) &
 % HoldsAt(At(vehiclein,location),time) ->
 % HoldsAt(At(object,location),time).
+ %  clausify_pnf=(holds_at(inVehicle(Object, Vehiclein), Time), holds_at(at(Vehiclein, Location), Time)->holds_at(at(Object, Location), Time)).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',283).
 
- /*  (   holds_at(inVehicle(Object, Vehiclein), Time),
-       holds_at(at(Vehiclein, Location), Time)
-   ->  holds_at(at(Object, Location), Time)
-   ).
+ /*  holds_at(at(Object, Location), Time) :-
+       holds_at(inVehicle(Object, Vehiclein), Time),
+       holds_at(at(Vehiclein, Location), Time).
  */
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',283).
-then(if((at(inVehicle(Object, Vehiclein), Time), at(loc_at(Vehiclein, Location), Time))), at(loc_at(Object, Location), Time)).
+
+ /*  fix_axiom_head(Time) ->
+       [ holds_at(at(Object, Location), Time),
+          (->),
+         at(Object, Location)
+       ].
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',283).
+
+ /*  pl=axiom(at(Object,Location),
+         [ inVehicle(Object,Vehiclein),
+   	at(Vehiclein,Location)
+         ]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',283).
+
+ /*  (   inVehicle(Object, Vehiclein),
+       at(Vehiclein, Location)
+   ->  at(Object, Location)
+   ).
+ */
+if inVehicle(Object, Vehiclein), loc_at(Vehiclein, Location)then loc_at(Object, Location).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',283).
 
  /*  reactive_rule([ holds(inVehicle(Object,Vehiclein),
-   		      Time),
-   		holds(loc_at(Vehiclein,Location),
-   		      Time)
+   		      Holds),
+   		loc_at(Vehiclein,Location)
    	      ],
-   	      [holds(loc_at(Object,Location),Time)]).
+   	      [loc_at(Object,Location)]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',283).
+
+ /*  reactive_rule([ holds(inVehicle(Object,Vehiclein),
+   		      Holds),
+   		loc_at(Vehiclein,Location)
+   	      ],
+   	      [loc_at(Object,Location)]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',283).
+
+ /*  not(holds_at(inVehicle(Object, Vehiclein), Time)) :-
+       holds_at(at(Vehiclein, Location), Time),
+       not(holds_at(at(Object, Location), Time)).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',283).
+
+ /*  pl=axiom(not(inVehicle(Object,Vehiclein)),
+         [ at(Vehiclein,Location),
+   	not(at(Object,Location))
+         ]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',283).
+
+ /*  (   at(Vehiclein, Location),
+       not(at(Object, Location))
+   ->  not(inVehicle(Object, Vehiclein))
+   ).
+ */
+if loc_at(Vehiclein, Location), not loc_at(Object, Location)then not inVehicle(Object, Vehiclein).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',283).
+
+ /*  reactive_rule([ loc_at(Vehiclein,Location),
+   		not(loc_at(Object,Location))
+   	      ],
+   	      [ holds(not(inVehicle(Object,Vehiclein)),
+   		      Holds5)
+   	      ]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',283).
+
+ /*  reactive_rule([ loc_at(Vehiclein,Location),
+   		not(loc_at(Object,Location))
+   	      ],
+   	      [ holds(not(inVehicle(Object,Vehiclein)),
+   		      Holds5)
+   	      ]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',283).
+
+ /*  not(holds_at(at(Vehiclein, Location), Time)) :-
+       holds_at(inVehicle(Object, Vehiclein), Time),
+       not(holds_at(at(Object, Location), Time)).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',283).
+
+ /*  pl=axiom(not(at(Vehiclein,Location)),
+         [ inVehicle(Object,Vehiclein),
+   	not(at(Object,Location))
+         ]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',283).
+
+ /*  (   inVehicle(Object, Vehiclein),
+       not(at(Object, Location))
+   ->  not(at(Vehiclein, Location))
+   ).
+ */
+if inVehicle(Object, Vehiclein), not loc_at(Object, Location)then not loc_at(Vehiclein, Location).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',283).
+
+ /*  reactive_rule([ holds(inVehicle(Object,Vehiclein),
+   		      Holds6),
+   		not(loc_at(Object,Location))
+   	      ],
+   	      [not(loc_at(Vehiclein,Location))]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',283).
+
+ /*  reactive_rule([ holds(inVehicle(Object,Vehiclein),
+   		      Holds6),
+   		not(loc_at(Object,Location))
+   	      ],
+   	      [not(loc_at(Vehiclein,Location))]).
  */
 
 
@@ -1682,24 +3753,33 @@ then(if((at(inVehicle(Object, Vehiclein), Time), at(loc_at(Vehiclein, Location),
 
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',290).
 % event VehicleDoorOpen(agent,vehicledoor)
- %  event(vehicleDoorOpen(agent,vehicledoor)).
+ %  blue=event(vehicleDoorOpen(agent,vehicledoor)).
  %  event(vehicleDoorOpen(agent,vehicledoor)).
 actions([vehicleDoorOpen/2]).
+ %  actions([vehicleDoorOpen/2]).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',290).
 mpred_prop(vehicleDoorOpen(agent,vehicledoor),event).
+ %  mpred_prop(vehicleDoorOpen(agent,vehicledoor),event).
 
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',292).
 % event VehicleDoorClose(agent,vehicledoor)
- %  event(vehicleDoorClose(agent,vehicledoor)).
+ %  blue=event(vehicleDoorClose(agent,vehicledoor)).
  %  event(vehicleDoorClose(agent,vehicledoor)).
 actions([vehicleDoorClose/2]).
+ %  actions([vehicleDoorClose/2]).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',292).
 mpred_prop(vehicleDoorClose(agent,vehicledoor),event).
+ %  mpred_prop(vehicleDoorClose(agent,vehicledoor),event).
 
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',294).
 % fluent VehicleDoorIsOpen(vehicledoor)
- %  fluent(vehicleDoorIsOpen(vehicledoor)).
+ %  blue=fluent(vehicleDoorIsOpen(vehicledoor)).
  %  fluent(vehicleDoorIsOpen(vehicledoor)).
 fluents([vehicleDoorIsOpen/1]).
+ %  fluents([vehicleDoorIsOpen/1]).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',294).
 mpred_prop(vehicleDoorIsOpen(vehicledoor),fluent).
+ %  mpred_prop(vehicleDoorIsOpen(vehicledoor),fluent).
 
 
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',296).
@@ -1707,22 +3787,156 @@ mpred_prop(vehicleDoorIsOpen(vehicledoor),fluent).
 % Happens(VehicleDoorOpen(agent,vehicledoor),time) ->
 % HoldsAt(Awake(agent),time) &
 % !HoldsAt(VehicleDoorIsOpen(vehicledoor),time).
+ %  clausify_pnf=(happens(vehicleDoorOpen(Agent, Vehicledoor), Time)->holds_at(awake(Agent), Time), holds_at(neg(vehicleDoorIsOpen(Vehicledoor)), Time)).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',296).
 
- /*  (   happens(vehicleDoorOpen(Agent, Vehicledoor), Time)
-   ->  holds_at(awake(Agent), Time),
-       holds_at(neg(vehicleDoorIsOpen(Vehicledoor)), Time)
-   ).
+ /*  not(happens(vehicleDoorOpen(Agent, Vehicledoor), Time)) :-
+       (   not(holds_at(awake(Agent), Time))
+       ;   not(holds_at(neg(vehicleDoorIsOpen(Vehicledoor)), Time))
+       ).
  */
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',296).
-then(if(happens(vehicleDoorOpen(Agent, Vehicledoor), Time)),  (at(awake(Agent), Time), at(not(vehicleDoorIsOpen(Vehicledoor)), Time))).
 
- /*  reactive_rule([ happens(vehicleDoorOpen(Agent,Vehicledoor),
-   			Time)
-   	      ],
-   	      [ holds(awake(Agent),Time),
-   		holds(not(vehicleDoorIsOpen(Vehicledoor)),
-   		      Time)
+ /*  fix_axiom_head(Time) ->
+       [ not(happens(vehicleDoorOpen(Agent, Vehicledoor), Time)),
+          (->),
+         not(vehicleDoorOpen(Agent, Vehicledoor))
+       ].
+ */
+ %   pl=axiom(not(vehicleDoorOpen(Agent, Vehicledoor)), [(not(awake(Agent));not(not(vehicleDoorIsOpen(Vehicledoor))))]).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',296).
+
+ /*  not(awake(Agent));not(not(vehicleDoorIsOpen(Vehicledoor))) ->
+       not(vehicleDoorOpen(Agent, Vehicledoor)).
+ */
+if not awake(Agent);not not vehicleDoorIsOpen(Vehicledoor)then not vehicleDoorOpen(Agent, Vehicledoor).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',296).
+
+ /*   reactive_rule([  (not(awake(Agent));not(not(vehicleDoorIsOpen(Vehicledoor))))
+                    ],
+                    [not(vehicleDoorOpen(Agent, Vehicledoor))]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',296).
+
+ /*   reactive_rule([  (not(awake(Agent));not(not(vehicleDoorIsOpen(Vehicledoor))))
+                    ],
+                    [not(vehicleDoorOpen(Agent, Vehicledoor))]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',296).
+
+ /*  holds_at(awake(Agent), Time) :-
+       happens(vehicleDoorOpen(Agent, Vehicledoor), Time).
+ */
+
+ /*  pl=axiom(requires(vehicleDoorOpen(Agent,Vehicledoor),
+   	       When_Time),
+         [metreqs(vehicleDoorOpen(Agent,Vehicledoor))]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',296).
+
+ /*  metreqs(vehicleDoorOpen(Agent, Vehicledoor)) ->
+       requires(vehicleDoorOpen(Agent, Vehicledoor), When_Time).
+ */
+if metreqs(vehicleDoorOpen(Agent, Vehicledoor))then requires(vehicleDoorOpen(Agent, Vehicledoor), When_Time).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',296).
+
+ /*  reactive_rule([metreqs(vehicleDoorOpen(Agent,Vehicledoor))],
+   	      [ requires(vehicleDoorOpen(Agent,Vehicledoor),
+   			 When_Time)
    	      ]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',296).
+
+ /*  reactive_rule([metreqs(vehicleDoorOpen(Agent,Vehicledoor))],
+   	      [ requires(vehicleDoorOpen(Agent,Vehicledoor),
+   			 When_Time)
+   	      ]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',296).
+
+ /*  fix_axiom_head(When_Time) ->
+       [ holds_at(metreqs(vehicleDoorOpen(Agent, Vehicledoor)),
+                  When_Time),
+          (->),
+         metreqs(vehicleDoorOpen(Agent, Vehicledoor))
+       ].
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',296).
+
+ /*  pl=axiom(metreqs(vehicleDoorOpen(Agent,Vehicledoor)),
+         [awake(Agent)]).
+ */
+
+ /*  awake(Agent) ->
+       metreqs(vehicleDoorOpen(Agent, Vehicledoor)).
+ */
+if awake(Agent)then metreqs(vehicleDoorOpen(Agent, Vehicledoor)).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',296).
+
+ /*  reactive_rule([awake(Agent)],
+   	      [metreqs(vehicleDoorOpen(Agent,Vehicledoor))]).
+ */
+
+ /*  reactive_rule([awake(Agent)],
+   	      [metreqs(vehicleDoorOpen(Agent,Vehicledoor))]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',296).
+
+ /*  holds_at(neg(vehicleDoorIsOpen(Vehicledoor)), When_Time) :-
+       happens(vehicleDoorOpen(Agent, Vehicledoor), When_Time).
+ */
+
+ /*  pl=axiom(requires(vehicleDoorOpen(Agent,Vehicledoor),
+   	       When_Time),
+         [metreqs(vehicleDoorOpen(Agent,Vehicledoor))]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',296).
+
+ /*  metreqs(vehicleDoorOpen(Agent, Vehicledoor)) ->
+       requires(vehicleDoorOpen(Agent, Vehicledoor), When_Time).
+ */
+if metreqs(vehicleDoorOpen(Agent, Vehicledoor))then requires(vehicleDoorOpen(Agent, Vehicledoor), When_Time).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',296).
+
+ /*  reactive_rule([metreqs(vehicleDoorOpen(Agent,Vehicledoor))],
+   	      [ requires(vehicleDoorOpen(Agent,Vehicledoor),
+   			 When_Time)
+   	      ]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',296).
+
+ /*  reactive_rule([metreqs(vehicleDoorOpen(Agent,Vehicledoor))],
+   	      [ requires(vehicleDoorOpen(Agent,Vehicledoor),
+   			 When_Time)
+   	      ]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',296).
+
+ /*  fix_axiom_head(When_Time) ->
+       [ holds_at(metreqs(vehicleDoorOpen(Agent, Vehicledoor)),
+                  When_Time),
+          (->),
+         metreqs(vehicleDoorOpen(Agent, Vehicledoor))
+       ].
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',296).
+
+ /*  pl=axiom(metreqs(vehicleDoorOpen(Agent,Vehicledoor)),
+         [not(vehicleDoorIsOpen(Vehicledoor))]).
+ */
+
+ /*  not(vehicleDoorIsOpen(Vehicledoor)) ->
+       metreqs(vehicleDoorOpen(Agent, Vehicledoor)).
+ */
+if not vehicleDoorIsOpen(Vehicledoor)then metreqs(vehicleDoorOpen(Agent, Vehicledoor)).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',296).
+
+ /*  reactive_rule([not(vehicleDoorIsOpen(Vehicledoor))],
+   	      [metreqs(vehicleDoorOpen(Agent,Vehicledoor))]).
+ */
+
+ /*  reactive_rule([not(vehicleDoorIsOpen(Vehicledoor))],
+   	      [metreqs(vehicleDoorOpen(Agent,Vehicledoor))]).
  */
 
 
@@ -1732,22 +3946,32 @@ then(if(happens(vehicleDoorOpen(Agent, Vehicledoor), Time)),  (at(awake(Agent), 
 %           time).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',302).
 
- /*  axiom(initiates(vehicleDoorOpen(Agent, Vehicledoor), vehicleDoorIsOpen(Vehicledoor), Time),
-       []).
- */
-
- /*  initiates(vehicleDoorOpen(_,Vehicledooropen),
-   	  vehicleDoorIsOpen(Vehicledooropen),
-   	  Initiates).
+ /*  pl=axiom(initiates(vehicleDoorOpen(Agent,Vehicledoor),
+   		vehicleDoorIsOpen(Vehicledoor),
+   		Time),
+         []).
  */
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',302).
-initiates(vehicleDoorOpen(_,Vehicledooropen),
-	  vehicleDoorIsOpen(Vehicledooropen)).
 
- /*  initiated(happens(vehicleDoorOpen(_,Vehicledooropen),
+ /*  initiates(vehicleDoorOpen(Agent,Vehicledoor),
+   	  vehicleDoorIsOpen(Vehicledoor),
+   	  Time).
+ */
+vehicleDoorOpen(Agent, Vehicledoor)initiates vehicleDoorIsOpen(Vehicledoor).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',302).
+
+ /*  initiated(happens(vehicleDoorOpen(Agent,Vehicledoor),
    		  Time_From,
    		  Time_Until),
-   	  vehicleDoorIsOpen(Vehicledooropen),
+   	  vehicleDoorIsOpen(Vehicledoor),
+   	  []).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',302).
+
+ /*  initiated(happens(vehicleDoorOpen(Agent,Vehicledoor),
+   		  Time_From,
+   		  Time_Until),
+   	  vehicleDoorIsOpen(Vehicledoor),
    	  []).
  */
 
@@ -1756,21 +3980,169 @@ initiates(vehicleDoorOpen(_,Vehicledooropen),
 % Happens(VehicleDoorClose(agent,vehicledoor),time) ->
 % HoldsAt(Awake(agent),time) &
 % HoldsAt(VehicleDoorIsOpen(vehicledoor),time).
+ %  clausify_pnf=(happens(vehicleDoorClose(Agent, Vehicledoor), Time)->holds_at(awake(Agent), Time), holds_at(vehicleDoorIsOpen(Vehicledoor), Time)).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',307).
 
- /*  (   happens(vehicleDoorClose(Agent, Vehicledoor), Time)
-   ->  holds_at(awake(Agent), Time),
-       holds_at(vehicleDoorIsOpen(Vehicledoor), Time)
-   ).
+ /*  not(happens(vehicleDoorClose(Agent, Vehicledoor), Time)) :-
+       (   not(holds_at(awake(Agent), Time))
+       ;   not(holds_at(vehicleDoorIsOpen(Vehicledoor), Time))
+       ).
  */
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',307).
-then(if(happens(vehicleDoorClose(Agent, Vehicledoor), Time)),  (at(awake(Agent), Time), at(vehicleDoorIsOpen(Vehicledoor), Time))).
 
- /*  reactive_rule([ happens(vehicleDoorClose(Agent,Vehicledoor),
-   			Time)
+ /*  fix_axiom_head(Time) ->
+       [ not(happens(vehicleDoorClose(Agent, Vehicledoor), Time)),
+          (->),
+         not(vehicleDoorClose(Agent, Vehicledoor))
+       ].
+ */
+ %   pl=axiom(not(vehicleDoorClose(Agent, Vehicledoor)), [(not(awake(Agent));not(vehicleDoorIsOpen(Vehicledoor)))]).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',307).
+
+ /*  not(awake(Agent));not(vehicleDoorIsOpen(Vehicledoor)) ->
+       not(vehicleDoorClose(Agent, Vehicledoor)).
+ */
+if not awake(Agent);not vehicleDoorIsOpen(Vehicledoor)then not vehicleDoorClose(Agent, Vehicledoor).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',307).
+
+ /*   reactive_rule([  (not(awake(Agent));not(vehicleDoorIsOpen(Vehicledoor)))
+                    ],
+                    [not(vehicleDoorClose(Agent, Vehicledoor))]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',307).
+
+ /*   reactive_rule([  (not(awake(Agent));not(vehicleDoorIsOpen(Vehicledoor)))
+                    ],
+                    [not(vehicleDoorClose(Agent, Vehicledoor))]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',307).
+
+ /*  holds_at(awake(Agent), Time) :-
+       happens(vehicleDoorClose(Agent, Vehicledoor), Time).
+ */
+
+ /*  pl=axiom(requires(vehicleDoorClose(Agent,Vehicledoor),
+   	       When_Time),
+         [metreqs(vehicleDoorClose(Agent,Vehicledoor))]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',307).
+
+ /*  metreqs(vehicleDoorClose(Agent, Vehicledoor)) ->
+       requires(vehicleDoorClose(Agent, Vehicledoor), When_Time).
+ */
+if metreqs(vehicleDoorClose(Agent, Vehicledoor))then requires(vehicleDoorClose(Agent, Vehicledoor), When_Time).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',307).
+
+ /*  reactive_rule([ metreqs(vehicleDoorClose(Agent,Vehicledoor))
    	      ],
-   	      [ holds(awake(Agent),Time),
-   		holds(vehicleDoorIsOpen(Vehicledoor),Time)
+   	      [ requires(vehicleDoorClose(Agent,
+   					  Vehicledoor),
+   			 When_Time)
+   	      ]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',307).
+
+ /*  reactive_rule([ metreqs(vehicleDoorClose(Agent,Vehicledoor))
+   	      ],
+   	      [ requires(vehicleDoorClose(Agent,
+   					  Vehicledoor),
+   			 When_Time)
+   	      ]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',307).
+
+ /*  fix_axiom_head(When_Time) ->
+       [ holds_at(metreqs(vehicleDoorClose(Agent, Vehicledoor)),
+                  When_Time),
+          (->),
+         metreqs(vehicleDoorClose(Agent, Vehicledoor))
+       ].
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',307).
+
+ /*  pl=axiom(metreqs(vehicleDoorClose(Agent,Vehicledoor)),
+         [awake(Agent)]).
+ */
+
+ /*  awake(Agent) ->
+       metreqs(vehicleDoorClose(Agent, Vehicledoor)).
+ */
+if awake(Agent)then metreqs(vehicleDoorClose(Agent, Vehicledoor)).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',307).
+
+ /*  reactive_rule([awake(Agent)],
+   	      [ metreqs(vehicleDoorClose(Agent,Vehicledoor))
+   	      ]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',307).
+
+ /*  reactive_rule([awake(Agent)],
+   	      [ metreqs(vehicleDoorClose(Agent,Vehicledoor))
+   	      ]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',307).
+
+ /*  holds_at(vehicleDoorIsOpen(Vehicledoor), When_Time) :-
+       happens(vehicleDoorClose(Agent, Vehicledoor), When_Time).
+ */
+
+ /*  pl=axiom(requires(vehicleDoorClose(Agent,Vehicledoor),
+   	       When_Time),
+         [metreqs(vehicleDoorClose(Agent,Vehicledoor))]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',307).
+
+ /*  metreqs(vehicleDoorClose(Agent, Vehicledoor)) ->
+       requires(vehicleDoorClose(Agent, Vehicledoor), When_Time).
+ */
+if metreqs(vehicleDoorClose(Agent, Vehicledoor))then requires(vehicleDoorClose(Agent, Vehicledoor), When_Time).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',307).
+
+ /*  reactive_rule([ metreqs(vehicleDoorClose(Agent,Vehicledoor))
+   	      ],
+   	      [ requires(vehicleDoorClose(Agent,
+   					  Vehicledoor),
+   			 When_Time)
+   	      ]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',307).
+
+ /*  reactive_rule([ metreqs(vehicleDoorClose(Agent,Vehicledoor))
+   	      ],
+   	      [ requires(vehicleDoorClose(Agent,
+   					  Vehicledoor),
+   			 When_Time)
+   	      ]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',307).
+
+ /*  fix_axiom_head(When_Time) ->
+       [ holds_at(metreqs(vehicleDoorClose(Agent, Vehicledoor)),
+                  When_Time),
+          (->),
+         metreqs(vehicleDoorClose(Agent, Vehicledoor))
+       ].
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',307).
+
+ /*  pl=axiom(metreqs(vehicleDoorClose(Agent,Vehicledoor)),
+         [vehicleDoorIsOpen(Vehicledoor)]).
+ */
+
+ /*  vehicleDoorIsOpen(Vehicledoor) ->
+       metreqs(vehicleDoorClose(Agent, Vehicledoor)).
+ */
+if vehicleDoorIsOpen(Vehicledoor)then metreqs(vehicleDoorClose(Agent, Vehicledoor)).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',307).
+
+ /*  reactive_rule([holds(vehicleDoorIsOpen(Vehicledoor),Holds)],
+   	      [ metreqs(vehicleDoorClose(Agent,Vehicledoor))
+   	      ]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',307).
+
+ /*  reactive_rule([holds(vehicleDoorIsOpen(Vehicledoor),Holds)],
+   	      [ metreqs(vehicleDoorClose(Agent,Vehicledoor))
    	      ]).
  */
 
@@ -1781,22 +4153,32 @@ then(if(happens(vehicleDoorClose(Agent, Vehicledoor), Time)),  (at(awake(Agent),
 %            time).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',312).
 
- /*  axiom(terminates(vehicleDoorClose(Agent, Vehicledoor), vehicleDoorIsOpen(Vehicledoor), Time),
-       []).
- */
-
- /*  terminates(vehicleDoorClose(_,Vehicledoorclose),
-   	   vehicleDoorIsOpen(Vehicledoorclose),
-   	   Terminates).
+ /*  pl=axiom(terminates(vehicleDoorClose(Agent,Vehicledoor),
+   		 vehicleDoorIsOpen(Vehicledoor),
+   		 Time),
+         []).
  */
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',312).
-terminates(vehicleDoorClose(_,Vehicledoorclose),
-	   vehicleDoorIsOpen(Vehicledoorclose)).
 
- /*  terminated(happens(vehicleDoorClose(_,Vehicledoorclose),
+ /*  terminates(vehicleDoorClose(Agent,Vehicledoor),
+   	   vehicleDoorIsOpen(Vehicledoor),
+   	   Time).
+ */
+vehicleDoorClose(Agent, Vehicledoor)terminates vehicleDoorIsOpen(Vehicledoor).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',312).
+
+ /*  terminated(happens(vehicleDoorClose(Agent,Vehicledoor),
    		   Time_From,
    		   Time_Until),
-   	   vehicleDoorIsOpen(Vehicledoorclose),
+   	   vehicleDoorIsOpen(Vehicledoor),
+   	   []).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',312).
+
+ /*  terminated(happens(vehicleDoorClose(Agent,Vehicledoor),
+   		   Time_From,
+   		   Time_Until),
+   	   vehicleDoorIsOpen(Vehicledoor),
    	   []).
  */
 
@@ -1806,32 +4188,42 @@ terminates(vehicleDoorClose(_,Vehicledoorclose),
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',318).
 % sort ticketagent: agent
 subsort(ticketagent,agent).
+ %  subsort(ticketagent,agent).
 
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',320).
 % fluent BeTicketAgent0(ticketagent)
- %  fluent(beTicketAgent0(ticketagent)).
+ %  blue=fluent(beTicketAgent0(ticketagent)).
  %  fluent(beTicketAgent0(ticketagent)).
 fluents([beTicketAgent0/1]).
+ %  fluents([beTicketAgent0/1]).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',320).
 mpred_prop(beTicketAgent0(ticketagent),fluent).
+ %  mpred_prop(beTicketAgent0(ticketagent),fluent).
 
 % fluent BeTicketAgent1(ticketagent)
- %  fluent(beTicketAgent1(ticketagent)).
+ %  blue=fluent(beTicketAgent1(ticketagent)).
  %  fluent(beTicketAgent1(ticketagent)).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',320).
 fluents([beTicketAgent1/1]).
+ %  fluents([beTicketAgent1/1]).
 mpred_prop(beTicketAgent1(ticketagent),fluent).
+ %  mpred_prop(beTicketAgent1(ticketagent),fluent).
 
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',322).
 % fluent BeTicketAgent2(ticketagent)
- %  fluent(beTicketAgent2(ticketagent)).
+ %  blue=fluent(beTicketAgent2(ticketagent)).
  %  fluent(beTicketAgent2(ticketagent)).
 fluents([beTicketAgent2/1]).
+ %  fluents([beTicketAgent2/1]).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',322).
 mpred_prop(beTicketAgent2(ticketagent),fluent).
+ %  mpred_prop(beTicketAgent2(ticketagent),fluent).
 
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',324).
 % xor BeTicketAgent0, BeTicketAgent1, BeTicketAgent2
- %  ==>xor[beTicketAgent0,beTicketAgent1,beTicketAgent2].
+ %  red = ==>xor[beTicketAgent0,beTicketAgent1,beTicketAgent2].
 ==>xor[beTicketAgent0,beTicketAgent1,beTicketAgent2].
+ %  ==>xor[beTicketAgent0,beTicketAgent1,beTicketAgent2].
 
 
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',326).
@@ -1842,34 +4234,39 @@ mpred_prop(beTicketAgent2(ticketagent),fluent).
 %            time).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',326).
 
- /*  axiom(terminates(request(Agent, Ticketagent, Ticket), beTicketAgent0(Ticketagent), Time),
-       [beTicketAgent0(Ticketagent)]).
- */
-
- /*  beTicketAgent0(Beticketagent0) ->
-       terminates(request(RequestP_Num3_V,
-                          Beticketagent0,
-                          Request),
-                  beTicketAgent0(Beticketagent0),
-                  Terminates).
+ /*  pl=axiom(terminates(request(Agent,Ticketagent,Ticket),
+   		 beTicketAgent0(Ticketagent),
+   		 Time),
+         [beTicketAgent0(Ticketagent)]).
  */
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',326).
-then(if(beTicketAgent0(Beticketagent0)),
-     terminates(request(RequestP_Num3_V,
-			Beticketagent0,
-			Request),
-		at(beTicketAgent0(Beticketagent0),
-		   Terminates),
-		Terminates8)).
+
+ /*  beTicketAgent0(Ticketagent) ->
+       terminates(request(Agent, Ticketagent, Ticket),
+                  beTicketAgent0(Ticketagent),
+                  Time).
+ */
+if beTicketAgent0(Ticketagent)then terminates(request(Agent, Ticketagent, Ticket), beTicketAgent0(Ticketagent)at Time, _).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',326).
 
- /*  reactive_rule([beTicketAgent0(Beticketagent0)],
-   	      [ terminates(request(RequestP_Num3_V,
-   				   Beticketagent0,
-   				   Request),
-   			   at(beTicketAgent0(Beticketagent0),
-   			      Terminates),
-   			   Terminates8)
+ /*  reactive_rule([beTicketAgent0(Ticketagent)],
+   	      [ terminates(request(Agent,
+   				   Ticketagent,
+   				   Ticket),
+   			   at(beTicketAgent0(Ticketagent),
+   			      Time),
+   			   Terminates)
+   	      ]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',326).
+
+ /*  reactive_rule([beTicketAgent0(Ticketagent)],
+   	      [ terminates(request(Agent,
+   				   Ticketagent,
+   				   Ticket),
+   			   at(beTicketAgent0(Ticketagent),
+   			      Time),
+   			   Terminates)
    	      ]).
  */
 
@@ -1881,33 +4278,39 @@ then(if(beTicketAgent0(Beticketagent0)),
 %           time).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',333).
 
- /*  axiom(initiates(request(Agent, Ticketagent, Ticket), beTicketAgent1(Ticketagent), Time),
-       [beTicketAgent0(Ticketagent)]).
- */
-
- /*  beTicketAgent0(Beticketagent0) ->
-       initiates(request(RequestP_Num3_V,
-                         Beticketagent0,
-                         Request),
-                 beTicketAgent1(Beticketagent0),
-                 Initiates).
+ /*  pl=axiom(initiates(request(Agent,Ticketagent,Ticket),
+   		beTicketAgent1(Ticketagent),
+   		Time),
+         [beTicketAgent0(Ticketagent)]).
  */
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',333).
-then(if(beTicketAgent0(Beticketagent0)),
-     initiates(request(RequestP_Num3_V,
-		       Beticketagent0,
-		       Request),
-	       at(beTicketAgent1(Beticketagent0),Initiates),
-	       Initiates8)).
+
+ /*  beTicketAgent0(Ticketagent) ->
+       initiates(request(Agent, Ticketagent, Ticket),
+                 beTicketAgent1(Ticketagent),
+                 Time).
+ */
+if beTicketAgent0(Ticketagent)then initiates(request(Agent, Ticketagent, Ticket), beTicketAgent1(Ticketagent)at Time, _).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',333).
 
- /*  reactive_rule([beTicketAgent0(Beticketagent0)],
-   	      [ initiates(request(RequestP_Num3_V,
-   				  Beticketagent0,
-   				  Request),
-   			  at(beTicketAgent1(Beticketagent0),
-   			     Initiates),
-   			  Initiates8)
+ /*  reactive_rule([beTicketAgent0(Ticketagent)],
+   	      [ initiates(request(Agent,
+   				  Ticketagent,
+   				  Ticket),
+   			  at(beTicketAgent1(Ticketagent),
+   			     Time),
+   			  Initiates)
+   	      ]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',333).
+
+ /*  reactive_rule([beTicketAgent0(Ticketagent)],
+   	      [ initiates(request(Agent,
+   				  Ticketagent,
+   				  Ticket),
+   			  at(beTicketAgent1(Ticketagent),
+   			     Time),
+   			  Initiates)
    	      ]).
  */
 
@@ -1916,25 +4319,146 @@ then(if(beTicketAgent0(Beticketagent0)),
 % HoldsAt(BeTicketAgent1(ticketagent),time) &
 % HoldsAt(KnowRequest(ticketagent,agent,ticket),time) ->
 % Happens(PickUp(ticketagent,ticket),time).
+ %  clausify_pnf=(holds_at(beTicketAgent1(Ticketagent), Time), holds_at(knowRequest(Ticketagent, Agent, Ticket), Time)->happens(pickUp(Ticketagent, Ticket), Time)).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',339).
 
- /*  (   holds_at(beTicketAgent1(Ticketagent), Time),
+ /*  happens(pickUp(Ticketagent, Ticket), Time) :-
+       holds_at(beTicketAgent1(Ticketagent), Time),
        holds_at(knowRequest(Ticketagent, Agent, Ticket),
-                Time)
-   ->  happens(pickUp(Ticketagent, Ticket), Time)
-   ).
+                Time).
  */
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',339).
-then(if((at(beTicketAgent1(Ticketagent), Time), at(knowRequest(Ticketagent, Agent, Ticket), Time))), happens(pickUp(Ticketagent, Ticket), Time)).
 
- /*  reactive_rule([ holds(beTicketAgent1(Ticketagent),Time),
+ /*  fix_axiom_head(Time) ->
+       [ happens(pickUp(Ticketagent, Ticket), Time),
+          (->),
+         pickUp(Ticketagent, Ticket)
+       ].
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',339).
+
+ /*  pl=axiom(pickUp(Ticketagent,Ticket),
+         [ beTicketAgent1(Ticketagent),
+   	knowRequest(Ticketagent,Agent,Ticket)
+         ]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',339).
+
+ /*  (   beTicketAgent1(Ticketagent),
+       knowRequest(Ticketagent, Agent, Ticket)
+   ->  pickUp(Ticketagent, Ticket)
+   ).
+ */
+if beTicketAgent1(Ticketagent), knowRequest(Ticketagent, Agent, Ticket)then pickUp(Ticketagent, Ticket).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',339).
+
+ /*  reactive_rule([ beTicketAgent1(Ticketagent),
    		holds(knowRequest(Ticketagent,
    				  Agent,
    				  Ticket),
-   		      Time)
+   		      Holds)
    	      ],
    	      [ happens(pickUp(Ticketagent,Ticket),
-   			Time)
+   			Time_From,
+   			Time_Until)
+   	      ]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',339).
+
+ /*  reactive_rule([ beTicketAgent1(Ticketagent),
+   		holds(knowRequest(Ticketagent,
+   				  Agent,
+   				  Ticket),
+   		      Holds)
+   	      ],
+   	      [ happens(pickUp(Ticketagent,Ticket),
+   			Time_From,
+   			Time_Until)
+   	      ]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',339).
+
+ /*  not(holds_at(beTicketAgent1(Ticketagent), Time)) :-
+       holds_at(knowRequest(Ticketagent, Agent, Ticket),
+                Time),
+       not(happens(pickUp(Ticketagent, Ticket), Time)).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',339).
+
+ /*  pl=axiom(not(beTicketAgent1(Ticketagent)),
+         [ knowRequest(Ticketagent,Agent,Ticket),
+   	not(pickUp(Ticketagent,Ticket))
+         ]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',339).
+
+ /*  (   knowRequest(Ticketagent, Agent, Ticket),
+       not(pickUp(Ticketagent, Ticket))
+   ->  not(beTicketAgent1(Ticketagent))
+   ).
+ */
+if knowRequest(Ticketagent, Agent, Ticket), not pickUp(Ticketagent, Ticket)then not beTicketAgent1(Ticketagent).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',339).
+
+ /*  reactive_rule([ holds(knowRequest(Ticketagent,
+   				  Agent,
+   				  Ticket),
+   		      Holds7),
+   		not(pickUp(Ticketagent,Ticket))
+   	      ],
+   	      [not(beTicketAgent1(Ticketagent))]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',339).
+
+ /*  reactive_rule([ holds(knowRequest(Ticketagent,
+   				  Agent,
+   				  Ticket),
+   		      Holds7),
+   		not(pickUp(Ticketagent,Ticket))
+   	      ],
+   	      [not(beTicketAgent1(Ticketagent))]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',339).
+
+ /*  not(holds_at(knowRequest(Ticketagent, Agent, Ticket), Time)) :-
+       holds_at(beTicketAgent1(Ticketagent), Time),
+       not(happens(pickUp(Ticketagent, Ticket), Time)).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',339).
+
+ /*  pl=axiom(not(knowRequest(Ticketagent,Agent,Ticket)),
+         [ beTicketAgent1(Ticketagent),
+   	not(pickUp(Ticketagent,Ticket))
+         ]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',339).
+
+ /*  (   beTicketAgent1(Ticketagent),
+       not(pickUp(Ticketagent, Ticket))
+   ->  not(knowRequest(Ticketagent, Agent, Ticket))
+   ).
+ */
+if beTicketAgent1(Ticketagent), not pickUp(Ticketagent, Ticket)then not knowRequest(Ticketagent, Agent, Ticket).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',339).
+
+ /*  reactive_rule([ beTicketAgent1(Ticketagent),
+   		not(pickUp(Ticketagent,Ticket))
+   	      ],
+   	      [ holds(not(knowRequest(Ticketagent,
+   				      Agent,
+   				      Ticket)),
+   		      Holds8)
+   	      ]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',339).
+
+ /*  reactive_rule([ beTicketAgent1(Ticketagent),
+   		not(pickUp(Ticketagent,Ticket))
+   	      ],
+   	      [ holds(not(knowRequest(Ticketagent,
+   				      Agent,
+   				      Ticket)),
+   		      Holds8)
    	      ]).
  */
 
@@ -1946,28 +4470,35 @@ then(if((at(beTicketAgent1(Ticketagent), Time), at(knowRequest(Ticketagent, Agen
 %            time).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',344).
 
- /*  axiom(terminates(pickUp(Ticketagent, Ticket), beTicketAgent1(Ticketagent), Time),
-       [beTicketAgent1(Ticketagent)]).
- */
-
- /*  beTicketAgent1(Beticketagent1) ->
-       terminates(pickUp(Beticketagent1, Pickup),
-                  beTicketAgent1(Beticketagent1),
-                  Terminates).
+ /*  pl=axiom(terminates(pickUp(Ticketagent,Ticket),
+   		 beTicketAgent1(Ticketagent),
+   		 Time),
+         [beTicketAgent1(Ticketagent)]).
  */
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',344).
-then(if(beTicketAgent1(Beticketagent1)),
-     terminates(pickUp(Beticketagent1,Pickup),
-		at(beTicketAgent1(Beticketagent1),
-		   Terminates),
-		Terminates6)).
+
+ /*  beTicketAgent1(Ticketagent) ->
+       terminates(pickUp(Ticketagent, Ticket),
+                  beTicketAgent1(Ticketagent),
+                  Time).
+ */
+if beTicketAgent1(Ticketagent)then terminates(pickUp(Ticketagent, Ticket), beTicketAgent1(Ticketagent)at Time, _).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',344).
 
- /*  reactive_rule([holds(beTicketAgent1(Beticketagent1),Holds)],
-   	      [ terminates(pickUp(Beticketagent1,Pickup),
-   			   at(beTicketAgent1(Beticketagent1),
-   			      Terminates),
-   			   Terminates6)
+ /*  reactive_rule([beTicketAgent1(Ticketagent)],
+   	      [ terminates(pickUp(Ticketagent,Ticket),
+   			   at(beTicketAgent1(Ticketagent),
+   			      Time),
+   			   Terminates)
+   	      ]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',344).
+
+ /*  reactive_rule([beTicketAgent1(Ticketagent)],
+   	      [ terminates(pickUp(Ticketagent,Ticket),
+   			   at(beTicketAgent1(Ticketagent),
+   			      Time),
+   			   Terminates)
    	      ]).
  */
 
@@ -1979,26 +4510,35 @@ then(if(beTicketAgent1(Beticketagent1)),
 %           time).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',350).
 
- /*  axiom(initiates(pickUp(Ticketagent, Ticket), beTicketAgent2(Ticketagent), Time),
-       [beTicketAgent1(Ticketagent)]).
- */
-
- /*  beTicketAgent1(Beticketagent1) ->
-       initiates(pickUp(Beticketagent1, Pickup),
-                 beTicketAgent2(Beticketagent1),
-                 Initiates).
+ /*  pl=axiom(initiates(pickUp(Ticketagent,Ticket),
+   		beTicketAgent2(Ticketagent),
+   		Time),
+         [beTicketAgent1(Ticketagent)]).
  */
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',350).
-then(if(beTicketAgent1(Beticketagent1)),
-     initiates(pickUp(Beticketagent1,Pickup),
-	       at(beTicketAgent2(Beticketagent1),Initiates),
-	       Initiates6)).
 
- /*  reactive_rule([holds(beTicketAgent1(Beticketagent1),Holds)],
-   	      [ initiates(pickUp(Beticketagent1,Pickup),
-   			  at(beTicketAgent2(Beticketagent1),
-   			     Initiates),
-   			  Initiates6)
+ /*  beTicketAgent1(Ticketagent) ->
+       initiates(pickUp(Ticketagent, Ticket),
+                 beTicketAgent2(Ticketagent),
+                 Time).
+ */
+if beTicketAgent1(Ticketagent)then initiates(pickUp(Ticketagent, Ticket), beTicketAgent2(Ticketagent)at Time, _).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',350).
+
+ /*  reactive_rule([beTicketAgent1(Ticketagent)],
+   	      [ initiates(pickUp(Ticketagent,Ticket),
+   			  at(beTicketAgent2(Ticketagent),
+   			     Time),
+   			  Initiates)
+   	      ]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',350).
+
+ /*  reactive_rule([beTicketAgent1(Ticketagent)],
+   	      [ initiates(pickUp(Ticketagent,Ticket),
+   			  at(beTicketAgent2(Ticketagent),
+   			     Time),
+   			  Initiates)
    	      ]).
  */
 
@@ -2007,27 +4547,150 @@ then(if(beTicketAgent1(Beticketagent1)),
 % HoldsAt(BeTicketAgent2(ticketagent),time) &
 % HoldsAt(KnowRequest(ticketagent,agent,ticket),time) ->
 % Happens(HandTo(ticketagent,agent,ticket),time).
+ %  clausify_pnf=(holds_at(beTicketAgent2(Ticketagent), Time), holds_at(knowRequest(Ticketagent, Agent, Ticket), Time)->happens(handTo(Ticketagent, Agent, Ticket), Time)).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',356).
 
- /*  (   holds_at(beTicketAgent2(Ticketagent), Time),
+ /*  happens(handTo(Ticketagent, Agent, Ticket), Time) :-
+       holds_at(beTicketAgent2(Ticketagent), Time),
        holds_at(knowRequest(Ticketagent, Agent, Ticket),
-                Time)
-   ->  happens(handTo(Ticketagent, Agent, Ticket), Time)
-   ).
+                Time).
  */
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',356).
-then(if((at(beTicketAgent2(Ticketagent), Time), at(knowRequest(Ticketagent, Agent, Ticket), Time))), happens(handTo(Ticketagent, Agent, Ticket), Time)).
 
- /*  reactive_rule([ holds(beTicketAgent2(Ticketagent),Time),
+ /*  fix_axiom_head(Time) ->
+       [ happens(handTo(Ticketagent, Agent, Ticket), Time),
+          (->),
+         handTo(Ticketagent, Agent, Ticket)
+       ].
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',356).
+
+ /*  pl=axiom(handTo(Ticketagent,Agent,Ticket),
+         [ beTicketAgent2(Ticketagent),
+   	knowRequest(Ticketagent,Agent,Ticket)
+         ]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',356).
+
+ /*  (   beTicketAgent2(Ticketagent),
+       knowRequest(Ticketagent, Agent, Ticket)
+   ->  handTo(Ticketagent, Agent, Ticket)
+   ).
+ */
+if beTicketAgent2(Ticketagent), knowRequest(Ticketagent, Agent, Ticket)then handTo(Ticketagent, Agent, Ticket).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',356).
+
+ /*  reactive_rule([ beTicketAgent2(Ticketagent),
    		holds(knowRequest(Ticketagent,
    				  Agent,
    				  Ticket),
-   		      Time)
+   		      Holds)
    	      ],
    	      [ happens(handTo(Ticketagent,
    			       Agent,
    			       Ticket),
-   			Time)
+   			Time_From,
+   			Time_Until)
+   	      ]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',356).
+
+ /*  reactive_rule([ beTicketAgent2(Ticketagent),
+   		holds(knowRequest(Ticketagent,
+   				  Agent,
+   				  Ticket),
+   		      Holds)
+   	      ],
+   	      [ happens(handTo(Ticketagent,
+   			       Agent,
+   			       Ticket),
+   			Time_From,
+   			Time_Until)
+   	      ]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',356).
+
+ /*  not(holds_at(beTicketAgent2(Ticketagent), Time)) :-
+       holds_at(knowRequest(Ticketagent, Agent, Ticket),
+                Time),
+       not(happens(handTo(Ticketagent, Agent, Ticket), Time)).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',356).
+
+ /*  pl=axiom(not(beTicketAgent2(Ticketagent)),
+         [ knowRequest(Ticketagent,Agent,Ticket),
+   	not(handTo(Ticketagent,Agent,Ticket))
+         ]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',356).
+
+ /*  (   knowRequest(Ticketagent, Agent, Ticket),
+       not(handTo(Ticketagent, Agent, Ticket))
+   ->  not(beTicketAgent2(Ticketagent))
+   ).
+ */
+if knowRequest(Ticketagent, Agent, Ticket), not handTo(Ticketagent, Agent, Ticket)then not beTicketAgent2(Ticketagent).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',356).
+
+ /*  reactive_rule([ holds(knowRequest(Ticketagent,
+   				  Agent,
+   				  Ticket),
+   		      Holds7),
+   		not(handTo(Ticketagent,Agent,Ticket))
+   	      ],
+   	      [not(beTicketAgent2(Ticketagent))]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',356).
+
+ /*  reactive_rule([ holds(knowRequest(Ticketagent,
+   				  Agent,
+   				  Ticket),
+   		      Holds7),
+   		not(handTo(Ticketagent,Agent,Ticket))
+   	      ],
+   	      [not(beTicketAgent2(Ticketagent))]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',356).
+
+ /*  not(holds_at(knowRequest(Ticketagent, Agent, Ticket), Time)) :-
+       holds_at(beTicketAgent2(Ticketagent), Time),
+       not(happens(handTo(Ticketagent, Agent, Ticket), Time)).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',356).
+
+ /*  pl=axiom(not(knowRequest(Ticketagent,Agent,Ticket)),
+         [ beTicketAgent2(Ticketagent),
+   	not(handTo(Ticketagent,Agent,Ticket))
+         ]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',356).
+
+ /*  (   beTicketAgent2(Ticketagent),
+       not(handTo(Ticketagent, Agent, Ticket))
+   ->  not(knowRequest(Ticketagent, Agent, Ticket))
+   ).
+ */
+if beTicketAgent2(Ticketagent), not handTo(Ticketagent, Agent, Ticket)then not knowRequest(Ticketagent, Agent, Ticket).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',356).
+
+ /*  reactive_rule([ beTicketAgent2(Ticketagent),
+   		not(handTo(Ticketagent,Agent,Ticket))
+   	      ],
+   	      [ holds(not(knowRequest(Ticketagent,
+   				      Agent,
+   				      Ticket)),
+   		      Holds8)
+   	      ]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',356).
+
+ /*  reactive_rule([ beTicketAgent2(Ticketagent),
+   		not(handTo(Ticketagent,Agent,Ticket))
+   	      ],
+   	      [ holds(not(knowRequest(Ticketagent,
+   				      Agent,
+   				      Ticket)),
+   		      Holds8)
    	      ]).
  */
 
@@ -2039,30 +4702,39 @@ then(if((at(beTicketAgent2(Ticketagent), Time), at(knowRequest(Ticketagent, Agen
 %            time).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',361).
 
- /*  axiom(terminates(handTo(Ticketagent, Agent, Ticket), beTicketAgent2(Ticketagent), Time),
-       [beTicketAgent2(Ticketagent)]).
- */
-
- /*  beTicketAgent2(Beticketagent2) ->
-       terminates(handTo(Beticketagent2, _, Handto),
-                  beTicketAgent2(Beticketagent2),
-                  Terminates).
+ /*  pl=axiom(terminates(handTo(Ticketagent,Agent,Ticket),
+   		 beTicketAgent2(Ticketagent),
+   		 Time),
+         [beTicketAgent2(Ticketagent)]).
  */
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',361).
-then(if(beTicketAgent2(Beticketagent2)),
-     terminates(handTo(Beticketagent2,_,Handto),
-		at(beTicketAgent2(Beticketagent2),
-		   Terminates),
-		Terminates7)).
+
+ /*  beTicketAgent2(Ticketagent) ->
+       terminates(handTo(Ticketagent, Agent, Ticket),
+                  beTicketAgent2(Ticketagent),
+                  Time).
+ */
+if beTicketAgent2(Ticketagent)then terminates(handTo(Ticketagent, Agent, Ticket), beTicketAgent2(Ticketagent)at Time, _).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',361).
 
- /*  reactive_rule([holds(beTicketAgent2(Beticketagent2),Holds)],
-   	      [ terminates(handTo(Beticketagent2,
-   				  _,
-   				  Handto),
-   			   at(beTicketAgent2(Beticketagent2),
-   			      Terminates),
-   			   Terminates7)
+ /*  reactive_rule([beTicketAgent2(Ticketagent)],
+   	      [ terminates(handTo(Ticketagent,
+   				  Agent,
+   				  Ticket),
+   			   at(beTicketAgent2(Ticketagent),
+   			      Time),
+   			   Terminates)
+   	      ]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',361).
+
+ /*  reactive_rule([beTicketAgent2(Ticketagent)],
+   	      [ terminates(handTo(Ticketagent,
+   				  Agent,
+   				  Ticket),
+   			   at(beTicketAgent2(Ticketagent),
+   			      Time),
+   			   Terminates)
    	      ]).
  */
 
@@ -2074,28 +4746,39 @@ then(if(beTicketAgent2(Beticketagent2)),
 %           time).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',367).
 
- /*  axiom(initiates(handTo(Ticketagent, Agent, Ticket), beTicketAgent0(Ticketagent), Time),
-       [beTicketAgent2(Ticketagent)]).
- */
-
- /*  beTicketAgent2(Beticketagent2) ->
-       initiates(handTo(Beticketagent2, _, Handto),
-                 beTicketAgent0(Beticketagent2),
-                 Initiates).
+ /*  pl=axiom(initiates(handTo(Ticketagent,Agent,Ticket),
+   		beTicketAgent0(Ticketagent),
+   		Time),
+         [beTicketAgent2(Ticketagent)]).
  */
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',367).
-then(if(beTicketAgent2(Beticketagent2)),
-     initiates(handTo(Beticketagent2,_,Handto),
-	       at(beTicketAgent0(Beticketagent2),Initiates),
-	       Initiates7)).
 
- /*  reactive_rule([holds(beTicketAgent2(Beticketagent2),Holds)],
-   	      [ initiates(handTo(Beticketagent2,
-   				 _,
-   				 Handto),
-   			  at(beTicketAgent0(Beticketagent2),
-   			     Initiates),
-   			  Initiates7)
+ /*  beTicketAgent2(Ticketagent) ->
+       initiates(handTo(Ticketagent, Agent, Ticket),
+                 beTicketAgent0(Ticketagent),
+                 Time).
+ */
+if beTicketAgent2(Ticketagent)then initiates(handTo(Ticketagent, Agent, Ticket), beTicketAgent0(Ticketagent)at Time, _).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',367).
+
+ /*  reactive_rule([beTicketAgent2(Ticketagent)],
+   	      [ initiates(handTo(Ticketagent,
+   				 Agent,
+   				 Ticket),
+   			  at(beTicketAgent0(Ticketagent),
+   			     Time),
+   			  Initiates)
+   	      ]).
+ */
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',367).
+
+ /*  reactive_rule([beTicketAgent2(Ticketagent)],
+   	      [ initiates(handTo(Ticketagent,
+   				 Agent,
+   				 Ticket),
+   			  at(beTicketAgent0(Ticketagent),
+   			     Time),
+   			  Initiates)
    	      ]).
  */
 

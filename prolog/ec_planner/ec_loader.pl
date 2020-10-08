@@ -1,8 +1,23 @@
 % =========================================
 % Goal/Plan translating
 % =========================================
-:- module(ec_loader,[load_e/1, needs_proccess/3,process_ec/2,fix_time_args/3,fix_goal/3, brk_on_bind/1,assert_axiom_2/2, is_e_toplevel/0]).
+:- module(ec_loader,[load_e/1, fix_time_args/3,fix_goal/3, brk_on_bind/1,assert_axiom_2/2, is_e_toplevel/0,
+  needs_proccess/3,process_ec/2]).
 
+only_dec_pl(Goal):- into_dec_pl->call(Goal);true.
+only_lps(Goal):- into_lps->call(Goal);true.
+:- dynamic(translating_inline/0).
+:- dynamic(translating_files/0).
+:- thread_local(t_l:is_ec_cvt/1).
+into_lps :- t_l:is_ec_cvt(lps).
+into_dec_pl :- \+ t_l:is_ec_cvt(lps).
+no_canon :- true. 
+
+assert_to_lps(Stuff):- ignore(ec_lps_convert:assert_lps(Stuff)).
+
+
+pprint_ecp_pl(Type,Form):- \+ into_lps, !, pprint_ecp(Type,Form),!.
+pprint_ecp_pl(Type,Form):- pprint_ecp_cmt(Type,Form),!.
 
 :- use_module(library(logicmoo_common)).
 
@@ -25,6 +40,7 @@ is_e_toplevel :- prolog_load_context(source,File),prolog_load_context(file,File)
 :- baseKB:export(baseKB:spft/4).
 :- system:import(baseKB:spft/4).
 
+:- module_transparent(export_transparent/1).
 export_transparent(P):-
   export(P),
   module_transparent(P).
@@ -35,62 +51,114 @@ export_transparent(P):-
 :- export_transparent(e_reader_teste/0).
 e_reader_teste:- with_e_sample_tests(load_e),e_reader_teste2.
 
-e_reader_teste2:- 
-     convert_to_axiom(fff,
-  ((holds_at(beWaiter3(waiterOf(Restaurant)), Time),
-    exists([Agent], holds_at(knowOrder(waiterOf(Restaurant), Agent, Food), Time))) ->
-       ( happens(order(waiterOf(Restaurant),
-                      cookOf(Restaurant),
-                      Food),
-                Time))),O),
-     assert_ready(e,O).
-
 :- export_transparent(e_reader_testec/0).
 e_reader_testec:- with_e_sample_tests(cvt_e_pl).
 
+:- export_transparent(e_reader_testec_lps/0).
+e_reader_testec_lps:- with_e_sample_tests(translate_e_to_pfc).
+
 :- export_transparent(load_e/1).
-load_e(F):- load_e(F, always),!.
+% load_e(F):- load_e_from_translation(F).
+load_e(F):- into_dec_pl, !, load_e_cond(F, always),!.
+load_e(F):- load_e_into_memory(F).
 
-
+load_e_from_translation(F):- 
+  translate_e_to_pfc(F),
+  calc_pel_filename(F,_,PL),
+  consult(PL),!.
 
 foundations_file('foundations/EC.e').
 foundations_file('foundations/Root.e').
-:- export_transparent(cond_load_e/2).
+:- export_transparent(load_e_cond/2).
 
-load_e(S0,How):-
+load_e_cond(F,Cond):- into_dec_pl, cond_load_e(Cond,F).
+load_e_cond(S0,How):-
  must((
   ((resolve_local_files(S0,SS), 
   SS\==[])
-   -> must_maplist(cond_load_e(How), SS)
+   -> must_maplist(load_e_cond(How), SS)
    ; pprint_ecp_cmt(red, load(How,S0))))),!.
+
+current_loading_proc(Proc1):- nb_current('$loading_proc',Proc1),!.
+current_loading_proc(Proc1):- into_dec_pl, Proc1 = assert_ele_cond_load_e,!.
+current_loading_proc(Proc1):- Proc1 = assert_ele, !.
+
+:- export_transparent(cond_load_e/2).
+
 
 cond_load_e(Cond,EndsWith):- is_list(EndsWith),!,must_maplist(cond_load_e(Cond),EndsWith).
 cond_load_e(changed,F):- etmp:ec_option(load(F), loaded),!.
 cond_load_e(changed,EndsWith):- atom(EndsWith),foundations_file(Already),atom_concat(_,Already,EndsWith),!.
 cond_load_e(Cond,F):- etmp:ec_option(load(F), loading), Cond\==recursed, !.
+cond_load_e(Cond,F):- needs_resolve_local_files(F, L), !, must_maplist(cond_load_e(Cond), L).  
 cond_load_e(_,F):- is_filename(F), \+ atom_concat(_,'.e',F), !.
 cond_load_e(Cond,F):- needs_resolve_local_files(F, L), !, must_maplist(cond_load_e(Cond), L).  
 %cond_load_e(include,_):- nb_current('$load_cond', cvt_e_pl),!. 
+%cond_load_e(include,_):- nb_current('$load_cond', translate_e_to_filetype( PlExt)),!. 
 cond_load_e(Cond,F):- Req = [pl],
    \+ nb_current('$output_lang',Req), !,
    locally(b_setval('$output_lang',Req), cond_load_e(Cond,F)).
+cond_load_e(Cond, S0):- resolve_local_files(S0,SS), SS==[], !, pprint_ecp_cmt(red, load(Cond,S0)),!.
 cond_load_e(Cond,F):-
    pprint_ecp_cmt(green, loading(Cond, F)),
    current_prolog_flag(occurs_check,Was),
    (nb_current('$load_cond', OldCond);OldCond=[]),
    setup_call_cleanup(
-
+     % Setup
      (set_ec_option(load(F), loading),
       set_ec_option(load_cond, Cond),
       set_prolog_flag(occurs_check,error),
       nb_setval('$load_cond', Cond)),
-
-      e_to_pl(assert_ele_cond_load_e, current_output, F),
-
+     % Call
+     (current_loading_proc(Proc1),with_e_file(Proc1, current_output, F)),
+     % Cleanup
      (set_ec_option(load(F), unknown),
       set_prolog_flag(occurs_check,Was),
       nb_setval('$load_cond', OldCond))),
    set_ec_option(load(F), loaded).
+
+
+load_e_into_memory(F):- 
+  with_e_file(assert_ele,current_output,F).
+
+
+:- export_transparent(translate_e_to_pfc/1).
+translate_e_to_pfc(F):- translate_e_to_filetype(pfc,F),!.
+
+:- export_transparent(translate_e_to_filetype/2).
+translate_e_to_filetype(FileType,F):- needs_resolve_local_files(F, L), !, must_maplist(translate_e_to_filetype(FileType), L),!. 
+translate_e_to_filetype(FileType,F):- calc_filename_ext(FileType,F,E,PL), translate_e_to_filetype( FileType,E,PL),!.
+
+filetype_to_dialect(pl,pfc).
+filetype_to_dialect(pfc,pfc).
+filetype_to_dialect(pel,ecalc).
+filetype_to_dialect(lps,lps).
+filetype_to_dialect(FileType,Dialect):- fail, FileType = Dialect,!.
+
+:- thread_local(t_l:is_ec_cvt/1).
+
+:- export_transparent(translate_e_to_filetype/3).
+translate_e_to_filetype( FileType,F,OutputName):- absolute_file_name(F,FA),F\==FA,!,translate_e_to_filetype(FileType,FA,OutputName).
+translate_e_to_filetype(_FileType,_,OutputName):- fail, \+ should_update(OutputName),!. 
+translate_e_to_filetype(MFileType,F,OutputName):-  
+ strip_module(MFileType,Mod,FileType),
+ setup_call_cleanup(flag('$ec_translate_depth', Was, Was),
+   ((ignore((Was==0 -> retractall(etmp:ec_option(load(_), _)))),
+   locally(t_l:is_ec_cvt(FileType),
+     with_e_file(Mod:assert_ele, OutputName, F)))),
+   flag('$ec_translate_depth', _, Was)).
+
+calc_filename_ext(pel,F,FE,PL):- calc_pel_filename(F,FE,PL),!.
+calc_filename_ext(Ext,F,FE,PL):- atom_concat(Was,Ext,F),PL=F,!,calc_filename_ext(Ext,Was,FE,_).
+calc_filename_ext(Ext,F,FE,PL):- atom_concat(Was,'e',F),FE=F,!,calc_filename_ext(Ext,Was,_,PL).
+calc_filename_ext(Ext,F,FE,OutputName):- FE=F, calc_where_to(outdir('.', Ext), F, OutputName).
+                        
+calc_pel_filename(F,FE,F):- atom_concat(Was,'.pel',F),!,atom_concat(Was,'.e',FE).
+calc_pel_filename(F,FE,F):- atom_concat(Was,'.e.pl',F),!,atom_concat(Was,'.e',FE).
+calc_pel_filename(F,FE,F):- atom_concat(Was,'.pl',F),!,atom_concat(Was,'.e',FE).
+calc_pel_filename(F,F,PL):- atom_concat(Was,'.e',F), atom_concat(Was,'.pel',PL),exists_file(PL).
+calc_pel_filename(F,F,PL):- atom_concat(Was,'.e',F), atom_concat(Was,'.e.pl',PL),exists_file(PL).
+calc_pel_filename(F,F,PL):- atom_concat(Was,'.e',F), atom_concat(Was,'.pl',PL),exists_file(PL).
 
 :- export_transparent(load_e_pl/1).
 load_e_pl(F):- needs_resolve_local_files(F, L), !, must_maplist(load_e_pl, L),!. 
@@ -202,15 +270,16 @@ functor_is(F,P):- compound(P), compound_name_arity(P,F,_).
 
 :- export_transparent(set_mpred_props/2).
 set_mpred_props(MF,E):- strip_module(MF,M,P),MF==P,!,must(set_mpred_props(M:P,E)).
-set_mpred_props(M:F/A,E):- !, (var(A)-> true ; ain(mpred_prop(M,F,A,E))).
+set_mpred_props(M:F/A,E):- !, (is_ftVar(A)-> true ; ain(mpred_prop(M,F,A,E))).
 set_mpred_props(M:P,E):- \+ compound(P),!,set_mpred_props(M:P/_,E).
 set_mpred_props(M:P,E):- compound_name_arity(P,F,A),set_mpred_props(M:F/A,E),
    add_mat(P),!.
 
 add_mat(P):- compound_name_arity(P,_,0),!.
 add_mat(P):-
-   assert_ready(red, ('==>'(meta_argtypes(P)))),
+   only_dec_pl(assert_ready(red, ('==>'(meta_argtypes(P))))),
    ain(meta_argtypes(P)).
+
 
 
 
@@ -269,12 +338,17 @@ fix_numbered_argtypes(Time, NthArg, FType, [H|T], [HH|TT]):- !,
   fix_numbered_argtypes(Time, NthArgPlus1, FType, T, TT).
 fix_numbered_argtypes(_Time, _NthArg, _FType, [], []).
 
+:- export_transparent(fix_axiom_head/3).
 
 fix_axiom_head(_, X, Y):-  (\+ callable(X);\+ compound(X)), !, X=Y.
 fix_axiom_head(T, [G1|G2], [GG1|GG2]):- !, fix_axiom_head(T, G1, GG1),fix_axiom_head(T, G2, GG2). 
 fix_axiom_head(T, (G1,G2), (GG1,GG2)):- !, fix_axiom_head(T, G1, GG1),fix_axiom_head(T, G2, GG2). 
 fix_axiom_head(T, (G1;G2), (GG1;GG2)):- !, fix_axiom_head(T, G1, GG1),fix_axiom_head(T, G2, GG2). 
 fix_axiom_head(T, (G1:-B), (GG1:-B)):- !, fix_axiom_head(T, G1, GG1),!.
+
+
+fix_axiom_head(T, exists(X,G), (ex(X),GG)):- no_canon, !, fix_axiom_head(T, G, GG).
+
 fix_axiom_head(T, exists(X,G), exists(X,GG)):-!, fix_axiom_head(T, G, GG).
 
 fix_axiom_head(T, neg(II),O):- compound(II), II= neg(I), !, fix_axiom_head(T, I,O),!.
@@ -286,18 +360,38 @@ fix_axiom_head(T, (G1G2), (GG1GG2)):- compound_name_arguments(G1G2,F,[G1,G2]),
    member(F,['->','<-','<->',';',',']), !,
    fix_axiom_head(T, G1, GG1),fix_axiom_head(T, G2, GG2),
    compound_name_arguments(GG1GG2,F,[GG1,GG2]).
-fix_axiom_head(_, G, G):- safe_functor(G,F,A), already_good(F,A),!.
 
-fix_axiom_head(T, G, holds_at(G,T)):- functor_skel(G,P), syntx_term_check(fluent(P)),!.
-fix_axiom_head(T, G, happens(G,T)):- functor_skel(G,P), \+ syntx_term_check(predicate(P)), (syntx_term_check(event(P);executable(P))),!.
+% EC to LPS
+fix_axiom_head(T, holds_at(G,T1), G):- into_lps, same_times(T1,T), functor_skel(G,P), syntx_term_check(fluent(P)),!.
+fix_axiom_head(T, holds_at(Event,T1), G):- into_lps, nonvar(Event), same_times(T1,T), !, fix_axiom_head(T1, Event, G).
+fix_axiom_head(T, happens(Event,T1), G):- into_lps, nonvar(Event), same_times(T1,T), !, fix_axiom_head(T1, Event, G).
+fix_axiom_head(_, G, G):- into_lps, functor_skel(G,P), syntx_term_check(fluent(P)),!.
+fix_axiom_head(_, G, G):- into_lps, functor_skel(G,P), syntx_term_check(predicate(P)),!.
+
+% EC to DEC_PL
+fix_axiom_head(_, G, G):- into_dec_pl, safe_functor(G,F,A), already_good(F,A),!.
+fix_axiom_head(T, G, holds_at(G,T)):- into_dec_pl, functor_skel(G,P), syntx_term_check(fluent(P)),!.
+fix_axiom_head(T, G, happens(G,T)):- into_dec_pl,  functor_skel(G,P), \+ syntx_term_check(predicate(P)), (syntx_term_check(event(P);executable(P))),!.
+fix_axiom_head(T, G, holds_at(G,T)):- into_dec_pl, functor_skel(G,P), syntx_term_check(fluent(P)),!.
+
 fix_axiom_head(_, G, G):- G\=not(_), functor_skel(G,P), syntx_term_check(predicate(P)),!.
+
 fix_axiom_head(T, P, PP):-  
    P =..[F|Args],functor(P,F,A), arg_info(AxH,F,Arity),
    functor(Arity,_,N),  correct_ax_args(T,F,A,Args,AxH,Arity,N,PP),!. 
 fix_axiom_head(T, P, Out):- predicate_property(P,foreign),!,if_debugging(ec,((call(dumpST), wdmsg(fix_axiom_head(T, call(P))),break))),!,Out=call(P).
-fix_axiom_head(T, G, GG):- if_debugging(ec, ((call(dumpST), wdmsg(fix_axiom_head(T, G)), break))), GG = holds_at(G, T).
 
-:- export_transparent(fix_axiom_head/3).
+fix_axiom_head(T, G, GG):- into_dec_pl, !, if_debugging(ec, ((call(dumpST), wdmsg(fix_axiom_head(T, G)), break))), GG = holds_at(G, T).
+
+% LPS Only
+fix_axiom_head(_, P, P):-  functor(P,F,_),fixed_already(F),!.
+fix_axiom_head(_, P, P):-  functor(P,F,_),atom_concat(F0,'s',F),fixed_already(F0),!.
+
+fix_axiom_head(T, G, GG):- if_debugging(ec, ((call(dumpST), wdmsg(fix_axiom_head(T, G)), break))),  \+ into_lps,
+  GG = holds_at_oops(G, T).
+fix_axiom_head(_T,G,G):-!.
+
+same_times(T1,T):- T1==T,!.
 
 %maybe_show_diff(T0, F, O):- copy_term_nat(T0+F+O,T+HT+HTTermO),
 maybe_show_diff(T, HT, HTTermO):-
@@ -324,23 +418,24 @@ show_fix_axiom_head(T, HT, HTTermO):- trace, rtrace(fix_axiom_head(T, HT, HTTerm
 call_ready_body(Type,Body):- 
    setup_call_cleanup(
     pprint_ecp(Type,':-'(if(is_e_toplevel))),
+    ((notrace((echo_format('~N'))),
+    pprint_ecp(Type,':-'(Body)),
+    notrace((echo_format('~N'))),
     ignore(must((Body,!))),
+    notrace((echo_format('~N'))))),
     pprint_ecp(Type,':-'(endif))).
 
 assert_ready(P):- assert_ready(pl,P).
 
 assert_ready(Type,(:-Body)):- 
-   notrace((echo_format('~N'))),
-   pprint_ecp(Type,':-'(Body)),
-   notrace((echo_format('~N'))),
    call_ready_body(Type,Body),!.
 
 assert_ready(Type,'==>'(next_axiom_uses(Value))):- 
-     pprint_ecp(Type,'next_axiom_uses'(Value)),
+     pprint_ecp_pl(Type,'next_axiom_uses'(Value)),
      assert(ec_tmp:do_next_axiom_uses(Value)),!.
 
 assert_ready(Type,'==>'(Value)):- 
-   pprint_ecp(Type,'==>'(Value)),
+  only_dec_pl( pprint_ecp_pl(Type,'==>'(Value))),
    mpred_fwc('==>'(Value)),
    Value = ValueO, % fix_assert(_Time,Value,ValueO),
    into_current_domain_db(ValueO),!.
@@ -359,7 +454,7 @@ assert_ready(Type,Value):-
   assert_ready_now(Type,Value).
 
 assert_ready_now(Type,Value):- 
-   pprint_ecp(Type,Value),
+   pprint_ecp_pl(Type,Type=Value),
    notrace((echo_format('~N'))),
    mpred_fwc(Value),
    fix_assert(_Time,Value,ValueO),
@@ -367,17 +462,18 @@ assert_ready_now(Type,Value):-
 
 into_current_domain_db('==>'(Value)):-!,into_current_domain_db((Value)).
 into_current_domain_db(ec_current_domain_db(Value)):- !, into_current_domain_db((Value)).
-into_current_domain_db(ec_current_domain_db(Value,T)):- var(T),!,into_current_domain_db(Value).
+into_current_domain_db(ec_current_domain_db(Value,T)):- is_ftVar(T),!,into_current_domain_db(Value).
 into_current_domain_db(ec_current_domain_db(Value,T)):- !, assertz_if_new_domain_db(Value,T).
-into_current_domain_db(Value):- copy_term_nat(Value,ValueO), assertz_if_new_domain_db(ValueO,_).
+into_current_domain_db(Value):- get_varname_list(Vs),=(Value-Vs,ValueO-VsO),
+locally(b_setval('$variables',VsO),assertz_if_new_domain_db(ValueO,_)).
+
 
 assertz_if_new_domain_db((H:-B),T):- !, assertz_if_new_msg((user:ec_current_domain_db(H,T):-B)).
-
 assertz_if_new_domain_db(ValueO,_):- ValueO =@= axiom(holds_at(neg(raining), _), []),!,barf.
 assertz_if_new_domain_db(ValueO,T):- assertz_if_new_msg(user:ec_current_domain_db(ValueO,T)).
 
-assertz_if_new_msg(Stuff):- clause_asserted(Stuff),wdmsg(already(Stuff)).
-assertz_if_new_msg(Stuff):- assertz_if_new(Stuff).
+assertz_if_new_msg(Stuff):- clause_asserted(Stuff),wdmsg(already(Stuff)), !, only_lps(assert_to_lps(Stuff)),!.
+assertz_if_new_msg(Stuff):- assertz_if_new(Stuff), only_lps(assert_to_lps(Stuff)),!.
 
 some_renames(O,O):- \+ compound(O),!.
 some_renames(HB,O):- sub_term(Sub,HB),compound(Sub),Sub=before(X,Y),!,
@@ -415,9 +511,9 @@ assert_ele(translate(Event, Outfile)):- !, mention_s_l, echo_format('% translate
 assert_ele(:- S0):- !, assert_ready( (:-(S0))).
 
 assert_ele(axiom(H,B)):- !, assert_axiom(H,B).
-assert_ele(include(S0)):- !, assert_ready( :-(load_e(S0,include))).
-assert_ele(load(S0)):- !, assert_ready( :-(load_e(S0,changed))).
-assert_ele(load(Cond, S0)):- !, assert_ready( :-(load_e(S0,Cond))).
+assert_ele(include(S0)):- !, assert_ready( :-(load_e_cond(S0,include))).
+assert_ele(load(S0)):- !, assert_ready( :-(load_e_cond(S0,changed))).
+assert_ele(load(Cond, S0)):- !, assert_ready( :-(load_e_cond(S0,Cond))).
 assert_ele(ec_current_domain_db(P)):- !, assert_ready( ec_current_domain_db(P)).
 
 
@@ -440,13 +536,13 @@ assert_ele(HB):- HB=..[function, RelSpec, RetType],
    get_functor(RelSpec,F),
    get_functor(PredSpec,P),
    assert_ele(functional_predicate(F,P)),
-   
+   assert_ele(function_argtypes(P,RelSpec,RetType)),
    assert_ele('==>'(resultIsa(F, RetType))))).
 
 assert_ele(HB):- HB=..[RelType,RelSpec],arg_info(domain,RelType,arginfo), !, 
   functor_skel(RelSpec,P),!, 
   RelTypeOpen=..[RelType,P],
-  nop(assert_ready(blue, RelTypeOpen)),
+  only_dec_pl(assert_ready(blue, RelTypeOpen)),
   assert_ready(blue, HB),
   assert_ready(red, ('==>'(mpred_prop(RelSpec, RelType)))),
   must(set_mpred_props(RelSpec,RelType)).
@@ -463,7 +559,7 @@ assert_ele(Cvt1):-  (cvt0(_T, Cvt1,Cvt2) -> Cvt1\=@=Cvt2), !, assert_ele(Cvt2).
   %locally(b_setval('$output_lang',[ec]), assert_ele(P)).
 assert_ele('<->'(H,B)):- 
   pprint_ecp_cmt(green, '<->'(H,B)), !,
-  atoms_of(H,HH), atoms_of(B,BB), pprint_ecp_cmt(yellow, '<->'(HH,BB)), !,
+  only_dec_pl((atoms_of(H,HH), atoms_of(B,BB),pprint_ecp_cmt(yellow, '<->'(HH,BB)))), !,
   assert_ele('->'(H,B)),
   assert_ele('->'(B,H)).
 
@@ -531,7 +627,7 @@ assert_ele(axiom(H)):- !, assert_ele(axiom(H,[])).
 
 % assert_ele(SS):- fix_time_args(T, SS),
 assert_ele(SS):- echo_format('~N'), 
-  dmsg(warn(assert_ele(SS))),
+  % dmsg(warn(assert_ele(SS))),
   assert_axiom(SS,[]),!.
   %assert_ready(red, SS).
 
@@ -691,12 +787,15 @@ assert_ele_clauses(_X,_L,(H:-B)):- !,
 assert_ele_clauses(_X,_L,H):-  
   assert_axiom(H , []). 
 
+%assert_m_axiom(Ax):- (e_to_ec(Ax,X)->Ax\==X),!,assert_m_axiom(Ax).
 assert_m_axiom(Ax):- 
   retract(ec_tmp:do_next_axiom_uses(Value)),!,
   assert_m_axiom(axiom_uses(Value)->Ax).
-assert_m_axiom(Ax):- 
-  e_to_ec(Ax,X),
-  pprint_ecp_cmt(green, X),
+%assert_m_axiom(A->B):- into_lps, !, assert_lps(A->B),!. 
+%assert_m_axiom('<->'(A,B)):- into_lps, !, assert_m_axiom(A->B), assert_m_axiom(B->A). 
+%assert_m_axiom('<-'(A,B)):- into_lps, !, assert_m_axiom(A->B). 
+assert_m_axiom(X):-
+  pprint_ecp_cmt(green, clausify_pnf=X),
   with_output_to(string(_), clausify_pnf(X,Conds)), 
   conjuncts_to_list(Conds,CondsL),
   assert_ele_clauses(X,CondsL,CondsL).
@@ -748,7 +847,7 @@ assert_axiom(AxHead, Some):- is_list(Some), select(E,Some,Rest), compound(E), E 
 
 assert_axiom(AxHead, B):-
   semi_legit_time(AxHead,TimeBase),
-  (var(TimeBase) -> TimeBase = T ; T = _),
+  (is_ftVar(TimeBase) -> must(TimeBase = T) ; T = _),
   fix_goal(T,B,Bs), B\=@=Bs, !, 
   assert_axiom(AxHead, Bs).
 
@@ -759,17 +858,21 @@ assert_axiom(AxHead, B):-
   assert_effect(Effect,Event,Fluent, T, B), !.
 
 assert_axiom(H,B) :- 
-  ignore((semi_legit_time(H+B,TimeBase),var(TimeBase));semi_legit_time(H+B,TimeBase)),
-  (var(TimeBase) -> TimeBase = Time ; Time = _ ),
+  ignore((semi_legit_time(H+B,TimeBase),is_ftVar(TimeBase));semi_legit_time(H+B,TimeBase)),
+  (is_ftVar(TimeBase) -> must(TimeBase = Time) ; Time = _ ),
 
   must_maplist(show_fix_axiom_head(Time),[H|B],[HH|BB]),
 
   correct_axiom_time_args_other(Time,HH,BB,HHH,BBB),
+  only_dec_pl(report_time_values(Time,HH,BB,HHH,BBB)),
+  must(assert_axiom_2(HHH,BBB)),!.
+
+
+report_time_values(Time,HH,BB,HHH,BBB):-
   get_time_values(axiom(HH,BB),TimeVs1),
   get_time_values(axiom(HHH,BBB),TimeVs2),
   %ignore(TimeVs2=TimeVs1),
-  pprint_ecp_cmt(green,BBB->ta(Time,tvs1=TimeVs1,tvs2=TimeVs2,HHH)),
-  must(assert_axiom_2(HHH,BBB)),!.
+  pprint_ecp_cmt(green,BBB->ta(Time,tvs1=TimeVs1,tvs2=TimeVs2,HHH)),!.
 
 hide_compound(ignore(_)).
 msub_term(X, X).
@@ -892,14 +995,42 @@ ect:- call(call,ect1).
 
 :- export_transparent(ect1/0).
 ect1:- 
-   cls, make,  Out = cvt_e_pl,
+   cls, update_changed_files,  Out = translate_e_to_pfc,
    call(Out, ['../*/*/*/*.e','../*/*/*.e','../*/*.e']),
    list_undefined,
    list_void_declarations,  
   !.
 
+:- export_transparent(ect2/0).
 ect2:- 
-   cls, make,  Out = cvt_e_pl,
+   cls, update_changed_files,  Out = translate_e_to_pfc,
+   call(Out, 'examples/FrankEtAl2003/Story1.e'),
+   % call(Out, 'ectest/ec_reader_test_ecnet.e'),
+   call(Out, 'ecnet/GSpace.e'),
+   call(Out, 'ecnet/Diving.e'),
+   call(Out, 'ecnet/RTSpace.e'),
+   call(Out, 'ecnet/SpeechAct.e'),
+   call(Out, 'ecnet/Kidnapping.e'),
+   call(Out,'examples/Mueller2006/Exercises/MixingPaints.e'),
+   call(Out,'examples/Mueller2006/Chapter11/HungryCat.e'),
+   call(Out, 'examples/AkmanEtAl2004/ZooWorld.e'),   
+   % call(Out,'examples/Mueller2006/Chapter11/*.e'),
+
+   list_undefined,
+   list_void_declarations,  
+  !.
+
+:- export_transparent(ect1_cvt_e_pl/0).
+ect1_cvt_e_pl:- 
+   cls, update_changed_files,  Out = cvt_e_pl,
+   call(Out, ['../*/*/*/*.e','../*/*/*.e','../*/*.e']),
+   list_undefined,
+   list_void_declarations,  
+  !.
+
+:- export_transparent(ect2_cvt_e_pl/0).
+ect2_cvt_e_pl:- 
+   cls, update_changed_files,  Out = cvt_e_pl,
    call(Out, 'examples/FrankEtAl2003/Story1.e'),
    % call(Out, 'ectest/ec_reader_test_ecnet.e'),
    call(Out, 'ecnet/GSpace.e'),
@@ -933,11 +1064,12 @@ fix_goal(_, Nil,[]):- Nil==[],!.
 fix_goal(T,[G|Gs],GGs):- !, fix_goal(T,G,G0),fix_goal(T,Gs,Gs0),append(G0,Gs0,GGs),!.
 fix_goal(T,(G,Gs),GGs):- !, fix_goal(T,G,G0),fix_goal(T,Gs,Gs0),append(G0,Gs0,GGs),!.
 fix_goal(T,{Gs},{GGs}):- !, fix_goal(T,Gs,GGs).
+fix_goal(T, G, GGs):- into_lps, (fix_axiom_head(T,G,GG)-> G\==GG), !, fix_goal(T, GG, GGs).
 fix_goal(T, G, GGs):- fix_axiom_head(T,G,GG),!, listify(GG,GGs).
 fix_goal(T, G, [Gs| TExtra]):- fix_goal_add_on_arg( T, G, Gs, TExtra),!.
 fix_goal(T, G, GGs):- to_axiom_head(T,G,GG),!, listify(GG,GGs).
-fix_goal(_, holds_at(G, T3), [holds_at(G, T3)]):-!.
-fix_goal(T, G, [holds_at(G, T)]).
+fix_goal(_, holds_at(G, T3), [holds_at(G, T3)]):- into_dec_pl,!.
+fix_goal(T, G, [holds_at(G, T)]):- into_dec_pl,!.
 
 
 ec_to_ax(_, X,Y):-  (\+ callable(X) ; \+ compound(X)), !, X=Y.
@@ -968,9 +1100,12 @@ as_equals(X,Y,equals(X,Y)).
 
 
 syntx_term_check(G):- var(G),!,fail.
+syntx_term_check(G):- is_ftVar(G),!,fail.
 syntx_term_check((G1;G2)):- !, syntx_term_check(G1); syntx_term_check(G2).
-syntx_term_check(G):- clause(G,_).
+syntx_term_check(G):- predicate_property(G,clause_count(_)), clause(G,_).
 syntx_term_check(G):- clause(ec_current_domain_db(G, _),_).
+syntx_term_check(G):- into_lps, G=..[F,A], ec_lps_convert:argtype_pred(F,FS),GS=..[FS,[A]],syntx_term_check(GS).
+
 
 functor_skel(G,P):- compound(G), compound_name_arity(G,F,A), compound_name_arity(P,F,A),!.
 functor_skel(G,P):- atom(G),P=G.
@@ -978,7 +1113,7 @@ functor_skel(G,P):- atom(G),P=G.
 between_r(H,L,N):- nonvar(N),!,between(L,H,N).
 between_r(H,L,N):- Hm1 is H - L, !, between(L,H,NN), N is NN + Hm1.
 
-can_be_time_arg(Var):- var(Var),!.
+can_be_time_arg(Var):- is_ftVar(Var),!.
 can_be_time_arg(_+_):-!.
 can_be_time_arg(_-_):-!.
 can_be_time_arg(A):- atom(A).
@@ -1064,10 +1199,10 @@ visit_time_f_args(Stem,In,F, N, [HT|L], [HTO|LL], Out):- N2 is N+1,
    visit_time_f_args(Stem,MID,F, N2, L, LL,Out).
 
 
-correct_time_arg(_Stem,In, TN, TN, In):- var(TN), !.
+correct_time_arg(_Stem,In, TN, TN, In):- is_ftVar(TN), !.
 correct_time_arg(_Stem,In, TN, TN, In):- TN==start, !.
 correct_time_arg(_Stem,In, TN, TN, In):- atom(TN), !.
-correct_time_arg(_Stem,In, AM1,T, In):- compound(AM1),(AM1 = (AfterT- N)),compound(AfterT),after(T)=AfterT, N==1, var(T), !.
+correct_time_arg(_Stem,In, AM1,T, In):- compound(AM1),(AM1 = (AfterT- N)),compound(AfterT),after(T)=AfterT, N==1, is_ftVar(T), !.
 correct_time_arg(Stem, In, TN, TpN, Out):- number(TN), !, correct_time_arg(Stem,In, Stem+TN, TpN, Out).
 correct_time_arg(_Stem,In, v, _, In):- !.
 correct_time_arg(_Stem,In, TN, TpN, In):- lookup_time_val(TN,TpN,In),!.
@@ -1093,8 +1228,8 @@ t_plus_or_minus_1(In, T-N, TN, In):- N==1, memberchk(b(TN,T),In),!.
 t_plus_or_minus_1(In, T+N, TN, In):- N==1, memberchk(b(T,TN),In),!.
 t_plus_or_minus_1(In, T-N, TN, [b(TN,T),ignore(T-N==TN)|In]):- N==1,!.
 t_plus_or_minus_1(In, T+N, TN, [b(T,TN),ignore(T+N==TN)|In]):- N==1,!.
-t_plus_or_minus_1(In, T+N, TN, [b(T,TN),toffset(T,N,TN),ignore(T+N==TN)|In]):- var(N),!.
-t_plus_or_minus_1(In, T-N, TN, [b(TN,T),toffset(TN,N,T),ignore(T-N==TN)|In]):- var(N),!.
+t_plus_or_minus_1(In, T+N, TN, [b(T,TN),toffset(T,N,TN),ignore(T+N==TN)|In]):- is_ftVar(N),!.
+t_plus_or_minus_1(In, T-N, TN, [b(TN,T),toffset(TN,N,T),ignore(T-N==TN)|In]):- is_ftVar(N),!.
 t_plus_or_minus_1(In, T+N, TN, [b(T,TN),toffset(T,N,TN),ignore(T+N==TN)|In]):- number(N),!,debug_var([T,N],TN).
 t_plus_or_minus_1(In, T-N, TN, [b(TN,T),toffset(TN,N,T),ignore(T-N==TN)|In]):- number(N),!,debug_var([T,minus,N],TN).
 %t_plus_or_minus_1(In, T-N, TN, [b(TN,T),ignore(T-N==TN)|In]):- N==1, must((next_t(TN,T))),!.
@@ -1104,12 +1239,12 @@ t_plus_or_minus_1(In, T+N, TN, [b(T,TN),ignore(T+N==TN)|In]):- ((ground(T+N), at
 t_plus_or_minus_1(In, T-N, TN, [b(TN,T),ignore(T-N==TN)|In]):- gensym(t_less,TN).
 t_plus_or_minus_1(In, T+N, TN, [b(T,TN),ignore(T+N==TN)|In]):- gensym(t_more,TN).
 /*
-next_t(T,Var):- var(T),var(Var),!.
+next_t(T,Var):- is_ftVar(T),is_ftVar(Var),!.
 next_t(start,t).
-next_t(T,Var):- var(T),!,Var=after(T).
+next_t(T,Var):- is_ftVar(T),!,Var=after(T).
 next_t(t,now).
 next_t(now,aft).
-next_t(aft,Aft_1):- var(Aft_1),!,gensym(aft_,Aft_1).
+next_t(aft,Aft_1):- is_ftVar(Aft_1),!,gensym(aft_,Aft_1).
 next_t(aft,completeFn(_)).
 */
 
@@ -1118,16 +1253,10 @@ fix_time_args1(T,G,Gs):-
 
 
 
-already_good(happens, 2).
-already_good(happens, 3).
+already_good(comparison, 3).
 already_good(some, 2).
 already_good(some, 1).
-already_good(ignore, 1).
 already_good(call, 1).
-already_good(holds_at, 2).
-already_good(holds_at, 3).
-already_good(b, 2).
-already_good(toffset, 3).
 already_good(requires, 2).
 already_good(equals, 2).
 already_good(axiom_uses, 2).
@@ -1135,13 +1264,21 @@ already_good(is, 2).
 already_good(diff, 2).
 already_good(dif, 2).
 already_good(allDifferent, 1).
-already_good(F, 1):- arg_info(domain,F,arginfo).
-already_good(F, N):- arg_info(axiom_head,F,Args),compound(Args),functor(Args,v,N).
-already_good(F, 1):- fixed_already(F).
-already_good(comparison, 3).
 already_good(terms_or_rels,3).
-already_good(F,A):- functor(P,F,A),syntx_term_check(abducible(PP)),compound(PP),PP=P.
-already_good(F,A):- functor(P,F,A),syntx_term_check(predicate(PP)),compound(PP),PP=P.
+already_good(ignore, 1).
+already_good(F,A):- into_dec_pl, already_good_dec_pl(F,A).
+
+already_good_dec_pl(happens, 2).
+already_good_dec_pl(happens, 3).
+already_good_dec_pl(holds_at, 2).
+already_good_dec_pl(holds_at, 3).
+already_good_dec_pl(b, 2).
+already_good_dec_pl(toffset, 3).
+already_good_dec_pl(F, 1):- arg_info(domain,F,arginfo).
+already_good_dec_pl(F, N):- arg_info(axiom_head,F,Args),compound(Args),functor(Args,v,N).
+already_good_dec_pl(F, 1):- fixed_already(F).
+already_good_dec_pl(F,A):- functor(P,F,A),syntx_term_check(abducible(PP)),compound(PP),PP=P.
+already_good_dec_pl(F,A):- functor(P,F,A),syntx_term_check(predicate(PP)),compound(PP),PP=P.
 
 
 
@@ -1172,7 +1309,7 @@ brk_on:attr_unify_hook(Var,Vars):- brk_on_unify_hook(Var,Vars).
 brk_on:attribute_goals(Var,[brk_on(Vars,Var)|L],L):- get_attr(Var,brk_on,Vars).
 
 brk_on_unify_hook(Var,Vars):- 
- (var(Var), \+ ( member(E,Vars), E==Var)) -> true ;
+ (is_ftVar(Var), \+ ( member(E,Vars), E==Var)) -> true ;
     if_debugging(ec,((dumpST,wdmsg(brk_on(Var)),break))).
 
 brk_on_bind(HB):- term_variables(HB,Vars),must_maplist(brk_on(Vars),Vars).
@@ -1193,24 +1330,22 @@ needs_process_axiom_fa('->',2).
 needs_process_axiom_fa(F,A):- arg_info(_,F,Args), (Args==arginfo-> true; functor(Args,_,A)).
 
 
-:- module_transparent(needs_proccess/3).
+:- export_transparent(needs_proccess/3).
 needs_proccess(_File, PA,_):- \+ compound(PA),!,fail.
 needs_proccess( File, M:H, How):- !, M\==system, nonvar(H),!,needs_proccess(File, H,How).
 needs_proccess(_File, PA, process_ec):- needs_process_axiom(PA),!.
 needs_proccess( File, (axiom(_,_) :- _),process_ec):- \+ skipped_ec_file(File), !.
 needs_proccess( File, (H :- _),How):- \+ skipped_ec_file(File), !, nonvar(H),!,needs_proccess(File, H,How).
 
+:- export_transparent(process_ec/1).
 
-:- module_transparent(process_ec/1).
-
-:- export(process_ec/1).
 process_ec( HB ):- notrace(must(get_linfo(T))), process_ec( T, HB ).
 %:- export_transparent(process_ec/2).
 %process_ec( _, HB , T):- !,process_ec( T, HB ).
 
-:- module_transparent(process_ec/2).
 
-:- export(process_ec/2).
+:- export_transparent(process_ec/2).
+
 process_ec( _, HB ):- brk_on_bind(HB), assert_ele(HB),!.
 process_ec( lsvm(L,S,Vs,M), HB ):- fail,  
   must(convert_to_axiom(lsvm(L,S,Vs,M),HB,NEWHB)),
@@ -1218,8 +1353,7 @@ process_ec( lsvm(L,S,Vs,M), HB ):- fail,
 
 merge_into_body(X,_Y,Z):- Z = X.
 
-:- module_transparent(do_process_ec/3).
-:- export(do_process_ec/3).
+:- export_transparent(do_process_ec/3).
 do_process_ec(_Why, M, NonCallable) :- break, assertion((current_module(M),callable(NonCallable))), fail.
 do_process_ec(Why, M, NEWHB):- is_list(NEWHB), !, must_maplist(do_process_ec(Why, M), NEWHB).
 do_process_ec(_Why, M, (:- GOAL)):- !, must(M:GOAL).
@@ -1228,7 +1362,18 @@ do_process_ec(_Why, M, (?- GOAL)):- !, (M:forall(GOAL, true)).
 %do_process_ec(Why, M, NEWHB):- wdmsg(do_process_ec(Why, M, NEWHB)),fail.
 do_process_ec(Why, M, NEWHB):- M:call(Why, NEWHB).
 
+e_reader_teste2:- 
+     convert_to_axiom(fff,
+  ((holds_at(beWaiter3(waiterOf(Restaurant)), Time),
+    exists([Agent], holds_at(knowOrder(waiterOf(Restaurant), Agent, Food), Time))) ->
+       ( happens(order(waiterOf(Restaurant),
+                      cookOf(Restaurant),
+                      Food),
+                Time))),O),
+     assert_ready(e,O).
+
 :- export_transparent(convert_to_axiom/3).
+convert_to_axiom(T,A,A):- into_lps, throw(convert_to_axiom(T,A,A)),!.
 convert_to_axiom(T, M:H, [M:HH]):- !, convert_to_axiom(T, H, HH).
 convert_to_axiom(T, (H:-B),[(HH:- B)]):- !, convert_to_axiom(T, H,HH).
 convert_to_axiom(_, abducible(H), abducible(H)):- !.
@@ -1344,15 +1489,13 @@ correct_ax_args(_T,F,2,[P,R],domain,arginfo,0,PP):- append_term(P,R,AB),PP =.. [
 %failed_must(correct_ax_args(_T,initiates,2,[go(_1694),at(_1694)],axiom_head,3,v(event,fluent,time),_1684))
 
 
-skipped_ec_file(File):- var(File),fail.
+skipped_ec_file(File):- is_ftVar(File),fail.
 
-
-:- export(hook_ec_axioms/2).
-:- module_transparent(hook_ec_axioms/2).
+:- export_transparent(hook_ec_axioms/2).
 
 :- (prolog:(import(hook_ec_axioms/2))).
 
-hook_ec_axioms(What, File):- var(File), !, current_input(Input), hook_ec_axioms(What, Input).
+hook_ec_axioms(What, File):- is_ftVar(File), !, current_input(Input), hook_ec_axioms(What, Input).
 hook_ec_axioms(What, file(_File,AbsFile)):- !, hook_ec_axioms(What, file(AbsFile)).
 hook_ec_axioms(What, file(AbsFile)):- !, hook_ec_axioms(What, AbsFile).
 hook_ec_axioms(What, File):- fail, 
@@ -1406,10 +1549,10 @@ prolog:message(welcome) -->  {hook_ec_axioms(welcome, welcome),fail}.
 
 :- multifile(user:term_expansion/4).
 :- dynamic(user:term_expansion/4).
-:- module_transparent(user:term_expansion/4).
+:- export_transparent(user:term_expansion/4).
 :- user:import(ec_loader:needs_proccess/3).
 :- user:import(ec_loader:process_ec/2).
-user:term_expansion(In,P,Out,PO):- 
+user:term_expansion(In,P,Out,PO):-  fail,  \+ into_lps,
   (\+ current_prolog_flag(ec_loader,false)),
   source_location(File,_), 
   notrace((nonvar(P),compound(In), In\=(:- _), 

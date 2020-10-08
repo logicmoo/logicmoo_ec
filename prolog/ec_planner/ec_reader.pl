@@ -23,7 +23,9 @@
     
 
 */
-:- module(ec_reader,[convert_e/1, set_ec_option/2, verbatum_functor/1, builtin_pred/1, with_e_file/3, s_l/2,
+:- module(ec_reader,[convert_e/1, set_ec_option/2, verbatum_functor/1, builtin_pred/1, s_l/2,
+   with_e_file/3, 
+   convert_e/2,
    echo_format/1, 
    e_reader_test/0,
    e_reader_test/1,
@@ -148,29 +150,53 @@ with_e_sample_tests(Out) :-
 raise_translation_event(Proc1,What,OutputName):- call(Proc1,translate(What,OutputName)).
 
 
-dedupe_files(SL0,SL):- maplist(relative_file_name,SL0,SL1), list_to_set(SL1,SL2),maplist(absolute_file_name,SL2,SL),!.
-  relative_file_name(A,S):-  prolog_canonical_source(A,L), file_name_on_path(L,S), atom(S), \+ name(S,[]), exists_file(S),!.
+dedupe_files(SL0,SL):- maplist(relative_file_name,SL0,SL1), list_to_set(SL1,SL2),maplist(absolute_file_name_or_dir,SL2,SLO),!,
+  list_to_set(SLO,SL),!.
+
+  relative_file_name(A,S):-  prolog_canonical_source(A,L), file_name_on_path(L,S), atom(S), \+ name(S,[]), (exists_file(S);exists_directory(S)),!.
   relative_file_name(A,A).          
 
 exists_all_filenames(S0, SL, Options):- 
   findall(N, (relative_from(D), 
-     absolute_file_name(S0, N, 
-        [relative_to(D), file_type(txt), file_errors(fail), access(read), solutions(all)|Options])), SL0),
+     absolute_file_name_or_dir(S0, N, 
+        [relative_to(D), file_errors(fail), access(read), solutions(all)|Options])), SL0),
   dedupe_files(SL0,SL),!.
 
+
+absolute_file_name_or_dir(S0,N):-absolute_file_name_or_dir(S0,N,[file_errors(fail), access(read), solutions(all)]).
+absolute_file_name_or_dir(S0,N,Options):- 
+  absolute_file_name(S0,N,Options)*-> true
+  ;(\+ member(file_ext(_),Options),
+    \+ member(file_type(_),Options),!,
+      (absolute_file_name(S0,N,[file_type(directory)|Options]) *-> true
+     ; absolute_file_name(S0,N,[file_type(txt)|Options]))).
+
+absolute_file_name_or_dir(S0,N,Options):- absolute_file_name(S0,N,Options).
+
 :- export(resolve_local_files/2).
-resolve_local_files(S0,SL):- is_list(S0), !, maplist(resolve_local_files,S0,SS), append(SS,SL).
+resolve_local_files(S0,SL):- is_list(S0), !, maplist(resolve_local_files,S0,SS), append(SS,SF),dedupe_files(SF,SL).
 resolve_local_files(S0,SL):- atom(S0), exists_file(S0), !, SL = [S0].
-resolve_local_files(S0,SL):- atom(S0), expand_file_name(S0,SL), SL = [E|_], exists_file(E), !.
-resolve_local_files(S0,SL):- exists_all_filenames(S0,SL, [expand(false)]), SL \= [].
-resolve_local_files(S0,SL):- exists_all_filenames(S0,SL, [expand(true)]), SL \= [].
-resolve_local_files(S0,SS):- atom(S0), file_base_name(S0,S1), S0\==S1, resolve_local_files(S1,SS).
+resolve_local_files(S0,SS):- atom(S0),atom_concat(AA,'M.e',S0),atom_concat(AA,'.e',SL),resolve_local_files(SL,SS),!.
+resolve_local_files(S0,SS):- atom(S0),atom_concat('answers/Mueller2004c/',AA,S0),atom_concat("ecnet/",AA,SL),resolve_local_files(SL,SS),!.
+%resolve_local_files(S0,SS):- atom(S0),atom_concat("answers/",AA,S0),atom_concat("examples/",AA,SL),resolve_local_files(SL,SS),!.
+resolve_local_files(S0,SS):- findall(S1,resolve_local_files_1(S0,S1),SL),flatten(SL,SF),dedupe_files(SF,SS),SS\==[], !.
+% expand_file_search_path
+%resolve_local_files(S0,SS):- atom(S0), findall(S1,resolve_local_files_1(ec(S0),S1),SL),flatten(SL,SF),dedupe_files(SF,SS),!.
+   
+resolve_local_files_1(S0,SL):- atom(S0), expand_file_name(S0,SL), SL = [E|_], exists_file(E), !.
+resolve_local_files_1(S0,SL):- exists_all_filenames(S0,SL, [expand(false)]), SL \= [].
+resolve_local_files_1(S0,SL):- exists_all_filenames(S0,SL, [expand(true)]), SL \= [].
+resolve_local_files_1(S0,SL):- expand_file_search_path(S0,S1),S0\==S1,resolve_local_files(S1,SL).
+resolve_local_files_1(S0,SS):- atom(S0), file_base_name(S0,S1), S0\==S1, resolve_local_files(S1,SS).
+%resolve_local_files_1(S0,SL):- atom(S0), resolve_local_files(ec(S0),SL).
 
 relative_from(F):- nb_current('$ec_input_file', F).
 relative_from(D):- working_directory(D,D).
 relative_from(F):- stream_property(_,file_name(F)).
-relative_from(D):- expand_file_search_path(library(ec_planner),D),exists_directory(D).
+relative_from(D):- expand_file_search_path(library('ec_planner'),D),exists_directory(D).
+relative_from(D):- expand_file_search_path(library('ec_planner/../../ext/ec_sources'),D),exists_directory(D).
 
+user:file_search_path(ec,D):- findall(D,relative_from(D),L),dedupe_files(L,S),member(D,S).
 /*
 resolve_file(S0,SS):- atom(S0), exists_file(S0), !, SS=S0. 
 resolve_file(S0,SS):- absolute_file_name(S0, SS, [expand(true), file_errors(fail), access(read)]), !.
@@ -208,8 +234,9 @@ include_e(F):- with_e_file(do_convert_e, current_output, F).
 convert_e(F):- convert_e(outdir('.', ep), F).
 :- export(convert_e/2).
 convert_e(Out, F):- with_e_file(do_convert_e, Out, F).
-:- export(convert_e/2).
+:- export(convert_e/3).
 convert_e(Proc1, Out, F):- with_e_file(Proc1, Out, F).
+
 
 
 :- export(is_filename/1).
@@ -221,7 +248,6 @@ is_filename(F):- atom(F), \+ is_stream(F),
 with_e_file(Proc1, OutputName, Ins):- wdmsg(with_e_file(Proc1, OutputName, Ins)),fail.
 
 with_e_file(Proc1, Out, F):- compound(Out), Out=outdir(Dir), !, with_e_file(Proc1, outdir(Dir, ep), F).
-with_e_file(Proc1, Out, F):- nonvar(F), \+ is_stream(F), \+ is_filename(F), needs_resolve_local_files(F, L), !, maplist(with_e_file(Proc1, Out), L).  
 
 % wildcard input file  "./foo*.e"
 with_e_file(Proc1, Out, F):- atom(F), \+ is_stream(F), \+ is_filename(F), 
@@ -232,6 +258,9 @@ with_e_file(Proc1, Out, F):-  \+ is_stream(F), \+ is_filename(F),
    findall(N, absolute_file_name(F, N, [file_type(txt), file_errors(fail), expand(false), solutions(all)]), L), 
    L\=[F], !, maplist(with_e_file(Proc1, Out), L).
 
+
+with_e_file(Proc1, Out, F):- nonvar(F), needs_resolve_local_files(F, L), !, maplist(with_e_file(Proc1, Out), L).  
+
 % Out is a misdirected stream
 with_e_file(Proc1, Outs, Ins):- 
    atomic(Outs), is_stream(Outs),
@@ -240,22 +269,16 @@ with_e_file(Proc1, Outs, Ins):-
    with_output_to(Outs, 
     with_e_file(Proc1,current_output, Ins)),!.
 
-% Out is like a wildcard stream (but we have a real filename)
-with_e_file(Proc1, outdir(Dir, Ext), F):- is_filename(F), !, 
-   calc_where_to(outdir(Dir, Ext), F, OutputName),
-   with_e_file(Proc1, OutputName, F).
-
-% Out is like a wildcard stream (calc a real filename)
-with_e_file(Proc1, outdir(Dir, Ext), Ins):- must(is_stream(Ins)), !, 
-   must(stream_property(Ins, file(InputName))),
-   calc_where_to(outdir(Dir, Ext), InputName, OutputName),
-   with_e_file(Proc1, OutputName, Ins).
-
 % Out is a filename not neding update
 with_e_file(Proc1, OutputName, _Ins):- is_filename(OutputName), 
    \+ should_update(OutputName),
    raise_translation_event(Proc1,skipped,OutputName),
    raise_translation_event(Proc1,ready,OutputName), !.
+   
+% Out is like a wildcard stream (but we have a real filename)
+with_e_file(Proc1, outdir(Dir, Ext), F):- is_filename(F), !, 
+   calc_where_to(outdir(Dir, Ext), F, OutputName),
+   with_e_file(Proc1, OutputName, F).
 
 with_e_file(Proc1, Out, F):- is_filename(F), !, 
   absolute_file_name(F,AF),
@@ -264,9 +287,57 @@ with_e_file(Proc1, Out, F):- is_filename(F), !,
         open(F, read, Ins),    
          with_e_file(Proc1, Out, Ins),
         close(Ins))),!.
+        
+% Out is like a wildcard stream (calc a real filename)
+with_e_file(Proc1, outdir(Dir, Ext), Ins):- must(is_stream(Ins)), !, 
+   must(stream_property(Ins, file(InputName))),
+   calc_where_to(outdir(Dir, Ext), InputName, OutputName),
+   with_e_file(Proc1, OutputName, Ins).
+
+
 
 % Out is a filename not currently loadable 
-with_e_file(Proc1, OutputName, Ins):-  \+ is_stream(OutputName),  !,
+with_e_file(MProc1, OutputName, Ins):- \+ is_stream(OutputName), 
+  assertion(is_stream(Ins)), assertion(stream_property(Ins, input)),
+  with_e_file_write1(MProc1, OutputName, Ins).
+
+% with_e_file(MProc1, OutputName, Ins):- with_e_file_write2(MProc1, OutputName, Ins).
+
+with_e_file(Proc1, Out, Ins):- 
+      assertion(current_output(Out)),       
+      e_io(Proc1, Ins).
+
+:- nb_setval(ec_input_file,[]).
+
+
+with_e_file_write1(MProc1, OutputName, Ins):-  \+ is_stream(OutputName), 
+  assertion(is_stream(Ins)), assertion(stream_property(Ins, input)),
+  must(should_update(OutputName)),
+ strip_module(MProc1,Mod,Proc1),
+ t_l:is_ec_cvt(FileType),!,
+ flag('$ec_translate_depth', Was, Was),
+ %ignore((Was==0 -> retractall(etmp:ec_option(load(_), _)))),
+ retractall(etmp:ec_option(load(_), _)),
+ setup_call_cleanup(flag('$ec_translate_depth', Was, Was+1),
+   setup_call_cleanup(open(OutputName, write, Outs),
+    setup_call_cleanup(b_setval('$ec_output_stream',Outs),
+      locally(b_setval('$ec_input_stream',Ins),
+        with_output_to(Outs,trans_e(FileType,Mod,Proc1,OutputName,Outs,Ins))),
+      b_setval('$ec_output_stream',[])),
+    close(Outs)),flag('$ec_translate_depth', _, Was)).
+
+trans_e(FileType,Mod,Proc1,OutputName,Outs,Ins):- 
+   assertion(is_outputing_to_file),
+   raise_translation_event(Proc1,unskipped,OutputName),
+   format(Outs,'~N~q.~n',[( :- include(library('ec_planner/ec_test_incl')))]),
+   ignore((filetype_to_dialect(FileType,Dialect)->
+     format(Outs,'~N~q.~n',[ :- expects_dialect(Dialect)]))),
+   raise_translation_event(Proc1,begining,OutputName),
+   get_date_atom(DateAtom),format(Outs,'% ~w File: ~w',[DateAtom,Ins]),     
+   locally(t_l:is_ec_cvt(FileType), with_output_to(Outs,with_e_file(Mod:Proc1,Outs,Ins))),
+   raise_translation_event(Proc1,ending,OutputName),!.
+
+with_e_file_write2(Proc1, OutputName, Ins):-  \+ is_stream(OutputName),  !,
    assertion(is_stream(Ins)), assertion(stream_property(Ins, input)),
    must(should_update(OutputName)),
    raise_translation_event(Proc1,unskipped,OutputName),
@@ -281,11 +352,6 @@ with_e_file(Proc1, OutputName, Ins):-  \+ is_stream(OutputName),  !,
      (nb_setval('$ec_output_stream',[]),close(Outs))),
    raise_translation_event(Proc1,ready,OutputName).
 
-with_e_file(Proc1, Out, Ins):- 
-      assertion(current_output(Out)),       
-      e_io(Proc1, Ins).
-
-:- nb_setval(ec_input_file,[]).
         
 %e_io(Proc1, Ins):- dmsg(e_io(Proc1, Ins)), fail.
 e_io(Proc1, Ins):-  
