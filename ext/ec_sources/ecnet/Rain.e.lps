@@ -3,7 +3,7 @@
 :-include(library('ec_planner/ec_test_incl')).
 :-expects_dialect(lps).
 % translate: begining  File: /pack/logicmoo_ec/ext/ec_sources/ecnet/Rain.e.lps 
-% Thu, 08 Oct 2020 19:06:25 GMT File: <stream>(0x5600a39e0e00)%;
+% Thu, 08 Oct 2020 21:36:37 GMT File: <stream>(0x55894c2e0700)%;
 %; Copyright (c) 2005 IBM Corporation and others.
 %; All rights reserved. This program and the accompanying materials
 %; are made available under the terms of the Common Public License v1.0
@@ -18,69 +18,75 @@
 %; It starts raining at location outside.
 
 % event StartRaining(outside)
- %  blue=event(startRaining(outside)).
- %  event(startRaining(outside)).
+% event(
+%    startRaining(outside)).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Rain.e',14).
 events([startRaining/1]).
- %  events([startRaining/1]).
+% mpred_prop(
+%    startRaining(outside), 
+%    event).
 mpred_prop(startRaining(outside),event).
- %  mpred_prop(startRaining(outside),event).
 
 
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Rain.e',17).
 %; It stops raining at location outside.
 
 % event StopRaining(outside)
- %  blue=event(stopRaining(outside)).
- %  event(stopRaining(outside)).
+% event(
+%    stopRaining(outside)).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Rain.e',17).
 events([stopRaining/1]).
- %  events([stopRaining/1]).
+% mpred_prop(
+%    stopRaining(outside), 
+%    event).
 mpred_prop(stopRaining(outside),event).
- %  mpred_prop(stopRaining(outside),event).
 
 
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Rain.e',20).
 %; It is raining at location outside.
 
 % fluent Raining(outside)
- %  blue=fluent(raining(outside)).
- %  fluent(raining(outside)).
+% fluent(
+%    raining(outside)).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Rain.e',20).
 fluents([raining/1]).
- %  fluents([raining/1]).
+% mpred_prop(
+%    raining(outside), 
+%    fluent).
 mpred_prop(raining(outside),fluent).
- %  mpred_prop(raining(outside),fluent).
 
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Rain.e',23).
 % event GetWet(object)
- %  blue=event(getWet(object)).
- %  event(getWet(object)).
+% event(
+%    getWet(object)).
 events([getWet/1]).
- %  events([getWet/1]).
+% mpred_prop(
+%    getWet(object), 
+%    event).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Rain.e',23).
 mpred_prop(getWet(object),event).
- %  mpred_prop(getWet(object),event).
 
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Rain.e',25).
 % event Dry(object)
- %  blue=event(dry(object)).
- %  event(dry(object)).
+% event(
+%    dry(object)).
 events([dry/1]).
- %  events([dry/1]).
+% mpred_prop(
+%    dry(object), 
+%    event).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Rain.e',25).
 mpred_prop(dry(object),event).
- %  mpred_prop(dry(object),event).
 
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Rain.e',27).
 % fluent Wet(object)
- %  blue=fluent(wet(object)).
- %  fluent(wet(object)).
+% fluent(
+%    wet(object)).
 fluents([wet/1]).
- %  fluents([wet/1]).
+% mpred_prop(
+%    wet(object), 
+%    fluent).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Rain.e',27).
 mpred_prop(wet(object),fluent).
- %  mpred_prop(wet(object),fluent).
 
 
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Rain.e',29).
@@ -90,258 +96,134 @@ mpred_prop(wet(object),fluent).
 % !HoldsAt(Wet(agent),time) &
 % (!{umbrella} HoldsAt(Holding(agent,umbrella),time)) ->
 % Happens(GetWet(agent),time).
- %  clausify_pnf=(holds_at(at(Agent, Outside), Time), holds_at(raining(Outside), Time), holds_at(neg(wet(Agent)), Time), not(exists([Umbrella], holds_at(holding(Agent, Umbrella), Time)))->happens(getWet(Agent), Time)).
+% '->'(
+%    ','(
+%       at(Agent,Outside), 
+%       ','(
+%          raining(Outside), 
+%          ','(
+%             not(
+%                wet(Agent)), 
+%             not(
+%                holding(Agent,Umbrella))))), 
+%    getWet(Agent)).
+getWet(Agent)if loc_at(Agent, Outside), raining(Outside), not wet(Agent), not holding(Agent, Umbrella).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Rain.e',29).
 
- /*  happens(getWet(Agent), Time) :-
-       holds_at(at(Agent, Outside), Time),
-       holds_at(raining(Outside), Time),
-       holds_at(neg(wet(Agent)), Time),
-       not(holds_at(holding(Agent, Umbrella), Time)).
+ /*  l_events(happens(getWet(Agent),Time_From,Time_From),
+   	 [ loc_at(Agent,Outside),
+   	   raining(Outside),
+   	   holds(not(wet(Agent)),Time_From),
+   	   holds(not(holding(Agent,Umbrella)),
+   		 Time_From)
+   	 ]).
  */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Rain.e',29).
-
- /*  fix_axiom_head(Time) ->
-       [happens(getWet(Agent), Time), ->, getWet(Agent)].
- */
-
- /*  pl=axiom(getWet(Agent),
-         [ at(Agent,Outside),
-   	raining(Outside),
-   	not(wet(Agent)),
-   	not(holding(Agent,Umbrella))
-         ]).
- */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Rain.e',29).
-
- /*  (   at(Agent, Outside),
-       raining(Outside),
-       not(wet(Agent)),
-       not(holding(Agent, Umbrella))
-   ->  getWet(Agent)
-   ).
- */
-if loc_at(Agent, Outside), raining(Outside), not wet(Agent), not holding(Agent, Umbrella)then getWet(Agent).
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Rain.e',29).
-
- /*  reactive_rule([ loc_at(Agent,Outside),
-   		raining(Outside),
-   		not(wet(Agent)),
-   		holds(not(holding(Agent,Umbrella)),
-   		      Holds)
-   	      ],
-   	      [getWet(Agent)]).
- */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Rain.e',29).
-
- /*  reactive_rule([ loc_at(Agent,Outside),
-   		raining(Outside),
-   		not(wet(Agent)),
-   		holds(not(holding(Agent,Umbrella)),
-   		      Holds)
-   	      ],
-   	      [getWet(Agent)]).
- */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Rain.e',29).
-
- /*  not(holds_at(at(Agent, Outside), Time)) :-
-       holds_at(raining(Outside), Time),
-       holds_at(neg(wet(Agent)), Time),
-       not(holds_at(holding(Agent, Umbrella), Time)),
-       not(happens(getWet(Agent), Time)).
- */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Rain.e',29).
-
- /*  pl=axiom(not(at(Agent,Outside)),
-         [ raining(Outside),
-   	not(wet(Agent)),
-   	not(holding(Agent,Umbrella)),
-   	not(getWet(Agent))
-         ]).
- */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Rain.e',29).
-
- /*  (   raining(Outside),
-       not(wet(Agent)),
-       not(holding(Agent, Umbrella)),
-       not(getWet(Agent))
-   ->  not(at(Agent, Outside))
-   ).
- */
+ %  "% =================================".
+% '->'(
+%    ','(
+%       raining(Outside), 
+%       ','(
+%          not(
+%             wet(Agent)), 
+%          ','(
+%             not(
+%                holding(Agent,Umbrella)), 
+%             not(
+%                getWet(Agent))))), 
+%    not(
+%       at(Agent,Outside))).
 if raining(Outside), not wet(Agent), not holding(Agent, Umbrella), not getWet(Agent)then not loc_at(Agent, Outside).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Rain.e',29).
 
  /*  reactive_rule([ raining(Outside),
-   		not(wet(Agent)),
+   		holds(not(wet(Agent)),Time_At),
    		holds(not(holding(Agent,Umbrella)),
-   		      Holds5),
+   		      Time_At),
    		not(getWet(Agent))
    	      ],
    	      [not(loc_at(Agent,Outside))]).
  */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Rain.e',29).
-
- /*  reactive_rule([ raining(Outside),
-   		not(wet(Agent)),
-   		holds(not(holding(Agent,Umbrella)),
-   		      Holds5),
-   		not(getWet(Agent))
-   	      ],
-   	      [not(loc_at(Agent,Outside))]).
- */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Rain.e',29).
-
- /*  not(holds_at(raining(Outside), Time)) :-
-       holds_at(neg(wet(Agent)), Time),
-       not(holds_at(holding(Agent, Umbrella), Time)),
-       holds_at(at(Agent, Outside), Time),
-       not(happens(getWet(Agent), Time)).
- */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Rain.e',29).
-
- /*  pl=axiom(not(raining(Outside)),
-         [ not(wet(Agent)),
-   	not(holding(Agent,Umbrella)),
-   	at(Agent,Outside),
-   	not(getWet(Agent))
-         ]).
- */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Rain.e',29).
-
- /*  (   not(wet(Agent)),
-       not(holding(Agent, Umbrella)),
-       at(Agent, Outside),
-       not(getWet(Agent))
-   ->  not(raining(Outside))
-   ).
- */
+ %  "% =================================".
+% '->'(
+%    ','(
+%       not(
+%          wet(Agent)), 
+%       ','(
+%          not(
+%             holding(Agent,Umbrella)), 
+%          ','(
+%             at(Agent,Outside), 
+%             not(
+%                getWet(Agent))))), 
+%    not(
+%       raining(Outside))).
 if not wet(Agent), not holding(Agent, Umbrella), loc_at(Agent, Outside), not getWet(Agent)then not raining(Outside).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Rain.e',29).
 
- /*  reactive_rule([ not(wet(Agent)),
+ /*  reactive_rule([ holds(not(wet(Agent)),Time_At6),
    		holds(not(holding(Agent,Umbrella)),
-   		      Holds6),
+   		      Time_At6),
    		loc_at(Agent,Outside),
    		not(getWet(Agent))
    	      ],
    	      [not(raining(Outside))]).
  */
+ %  "% =================================".
+% '->'(
+%    ','(
+%       not(
+%          holding(Agent,Umbrella)), 
+%       ','(
+%          raining(Outside), 
+%          ','(
+%             at(Agent,Outside), 
+%             not(
+%                getWet(Agent))))), 
+%    not(
+%       not(
+%          wet(Agent)))).
+not not wet(Agent)if not holding(Agent, Umbrella), raining(Outside), loc_at(Agent, Outside), not getWet(Agent).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Rain.e',29).
 
- /*  reactive_rule([ not(wet(Agent)),
-   		holds(not(holding(Agent,Umbrella)),
-   		      Holds6),
-   		loc_at(Agent,Outside),
-   		not(getWet(Agent))
-   	      ],
-   	      [not(raining(Outside))]).
- */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Rain.e',29).
-
- /*  not(holds_at(neg(wet(Agent)), Time)) :-
-       not(holds_at(holding(Agent, Umbrella), Time)),
-       holds_at(raining(Outside), Time),
-       holds_at(at(Agent, Outside), Time),
-       not(happens(getWet(Agent), Time)).
- */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Rain.e',29).
-
- /*  pl=axiom(not(not(wet(Agent))),
-         [ not(holding(Agent,Umbrella)),
+ /*  l_int(holds(not([holds(not(wet(Agent)),Time_At7)]),
+   	    Time_At7),
+         [ holds(not(holding(Agent,Umbrella)),Time_At7),
    	raining(Outside),
-   	at(Agent,Outside),
+   	loc_at(Agent,Outside),
    	not(getWet(Agent))
          ]).
  */
+ %  "% =================================".
+% '->'(
+%    ','(
+%       not(
+%          wet(Agent)), 
+%       ','(
+%          raining(Outside), 
+%          ','(
+%             at(Agent,Outside), 
+%             not(
+%                getWet(Agent))))), 
+%    holding(Agent,Umbrella)).
+holding(Agent, Umbrella)if not wet(Agent), raining(Outside), loc_at(Agent, Outside), not getWet(Agent).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Rain.e',29).
 
- /*  (   not(holding(Agent, Umbrella)),
-       raining(Outside),
-       at(Agent, Outside),
-       not(getWet(Agent))
-   ->  not(not(wet(Agent)))
-   ).
- */
-if not holding(Agent, Umbrella), raining(Outside), loc_at(Agent, Outside), not getWet(Agent)then not not wet(Agent).
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Rain.e',29).
-
- /*  reactive_rule([ holds(not(holding(Agent,Umbrella)),
-   		      Holds7),
-   		raining(Outside),
-   		loc_at(Agent,Outside),
-   		not(getWet(Agent))
-   	      ],
-   	      [not(not(wet(Agent)))]).
- */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Rain.e',29).
-
- /*  reactive_rule([ holds(not(holding(Agent,Umbrella)),
-   		      Holds7),
-   		raining(Outside),
-   		loc_at(Agent,Outside),
-   		not(getWet(Agent))
-   	      ],
-   	      [not(not(wet(Agent)))]).
- */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Rain.e',29).
-
- /*  holds_at(holding(Agent, Umbrella), Time) :-
-       holds_at(neg(wet(Agent)), Time),
-       holds_at(raining(Outside), Time),
-       holds_at(at(Agent, Outside), Time),
-       not(happens(getWet(Agent), Time)).
- */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Rain.e',29).
-
- /*  fix_axiom_head(Time) ->
-       [ holds_at(holding(Agent, Umbrella), Time),
-          (->),
-         holding(Agent, Umbrella)
-       ].
- */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Rain.e',29).
-
- /*  pl=axiom(holding(Agent,Umbrella),
-         [ not(wet(Agent)),
+ /*  l_int(holds(holding(Agent,Umbrella),Time_At8),
+         [ holds(not(wet(Agent)),Time_At8),
    	raining(Outside),
-   	at(Agent,Outside),
+   	loc_at(Agent,Outside),
    	not(getWet(Agent))
          ]).
  */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Rain.e',29).
-
- /*  (   not(wet(Agent)),
-       raining(Outside),
-       at(Agent, Outside),
-       not(getWet(Agent))
-   ->  holding(Agent, Umbrella)
-   ).
- */
-if not wet(Agent), raining(Outside), loc_at(Agent, Outside), not getWet(Agent)then holding(Agent, Umbrella).
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Rain.e',29).
-
- /*  reactive_rule([ not(wet(Agent)),
-   		raining(Outside),
-   		loc_at(Agent,Outside),
-   		not(getWet(Agent))
-   	      ],
-   	      [holds(holding(Agent,Umbrella),Holds8)]).
- */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Rain.e',29).
-
- /*  reactive_rule([ not(wet(Agent)),
-   		raining(Outside),
-   		loc_at(Agent,Outside),
-   		not(getWet(Agent))
-   	      ],
-   	      [holds(holding(Agent,Umbrella),Holds8)]).
- */
+ %  "% =================================".
 
 
 % [object,time]
 % Initiates(GetWet(object),Wet(object),time).
- %  pl=axiom(initiates(getWet(Object),wet(Object),Time),[]).
- %  initiates(getWet(Object),wet(Object),Time).
+% initiates(
+%    getWet(Object), 
+%    wet(Object), 
+%    Time).
 getWet(Object)initiates wet(Object).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Rain.e',37).
 
@@ -351,21 +233,16 @@ getWet(Object)initiates wet(Object).
    	  wet(Object),
    	  []).
  */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Rain.e',37).
-
- /*  initiated(happens(getWet(Object),
-   		  Time_From,
-   		  Time_Until),
-   	  wet(Object),
-   	  []).
- */
+ %  "% =================================".
 
 
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Rain.e',39).
 % [object,time]
 % Terminates(Dry(object),Wet(object),time).
- %  pl=axiom(terminates(dry(Object),wet(Object),Time),[]).
- %  terminates(dry(Object),wet(Object),Time).
+% terminates(
+%    dry(Object), 
+%    wet(Object), 
+%    Time).
 dry(Object)terminates wet(Object).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Rain.e',39).
 
@@ -373,12 +250,7 @@ dry(Object)terminates wet(Object).
    	   wet(Object),
    	   []).
  */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Rain.e',39).
-
- /*  terminated(happens(dry(Object),Time_From,Time_Until),
-   	   wet(Object),
-   	   []).
- */
+ %  "% =================================".
 
 
 %; End of file.

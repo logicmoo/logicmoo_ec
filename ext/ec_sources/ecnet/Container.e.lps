@@ -3,7 +3,7 @@
 :-include(library('ec_planner/ec_test_incl')).
 :-expects_dialect(lps).
 % translate: begining  File: /pack/logicmoo_ec/ext/ec_sources/ecnet/Container.e.lps 
-% Thu, 08 Oct 2020 19:05:46 GMT File: <stream>(0x5600a387d800)%;
+% Thu, 08 Oct 2020 21:35:58 GMT File: <stream>(0x55894c216100)%;
 %; Copyright (c) 2005 IBM Corporation and others.
 %; All rights reserved. This program and the accompanying materials
 %; are made available under the terms of the Common Public License v1.0
@@ -21,33 +21,20 @@
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Container.e',17).
 % Happens(TakeOutOf(agent,container1,container2),time) ->
 % HoldsAt(ContainerIsOpen(container2),time).
- %  clausify_pnf=(happens(takeOutOf(Agent, Container1, Container2), Time)->holds_at(containerIsOpen(Container2), Time)).
-
- /*  holds_at(containerIsOpen(Container2), Time) :-
-       happens(takeOutOf(Agent, Container1, Container2),
-               Time).
- */
+% '->'(
+%    metreqs(
+%       takeOutOf(Agent,Container1,Container2)), 
+%    requires(
+%       takeOutOf(Agent,Container1,Container2), 
+%       When_Time)).
+if takeOutOf(Agent, Container1, Container2)then requires(takeOutOf(Agent, Container1, Container2), When_Time).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Container.e',17).
 
- /*  pl=axiom(requires(takeOutOf(Agent,Container1,Container2),
-   	       When_Time),
-         [ metreqs(takeOutOf(Agent,
-   			  Container1,
-   			  Container2))
-         ]).
- */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Container.e',17).
-
- /*  metreqs(takeOutOf(Agent, Container1, Container2)) ->
-       requires(takeOutOf(Agent, Container1, Container2),
-                When_Time).
- */
-if metreqs(takeOutOf(Agent, Container1, Container2))then requires(takeOutOf(Agent, Container1, Container2), When_Time).
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Container.e',17).
-
- /*  reactive_rule([ metreqs(takeOutOf(Agent,
+ /*  reactive_rule([ happens(takeOutOf(Agent,
    				  Container1,
-   				  Container2))
+   				  Container2),
+   			Time_From,
+   			Time_Until)
    	      ],
    	      [ requires(takeOutOf(Agent,
    				   Container1,
@@ -55,126 +42,57 @@ if metreqs(takeOutOf(Agent, Container1, Container2))then requires(takeOutOf(Agen
    			 When_Time)
    	      ]).
  */
+ %  "% =================================".
+% '->'(
+%    containerIsOpen(Container2), 
+%    metreqs(
+%       takeOutOf(Agent,Container1,Container2))).
+takeOutOf(Agent, Container1, Container2)if containerIsOpen(Container2).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Container.e',17).
 
- /*  reactive_rule([ metreqs(takeOutOf(Agent,
-   				  Container1,
-   				  Container2))
-   	      ],
-   	      [ requires(takeOutOf(Agent,
-   				   Container1,
-   				   Container2),
-   			 When_Time)
-   	      ]).
+ /*  l_events(happens(takeOutOf(Agent,
+   			   Container1,
+   			   Container2),
+   		 Time_From7,
+   		 Time_From7),
+   	 [holds(containerIsOpen(Container2),Time_From7)]).
  */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Container.e',17).
-
- /*  fix_axiom_head(When_Time) ->
-       [ holds_at(metreqs(takeOutOf(Agent,
-                                    Container1,
-                                    Container2)),
-                  When_Time),
-          (->),
-         metreqs(takeOutOf(Agent, Container1, Container2))
-       ].
- */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Container.e',17).
-
- /*  pl=axiom(metreqs(takeOutOf(Agent,Container1,Container2)),
-         [containerIsOpen(Container2)]).
- */
-
- /*  containerIsOpen(Container2) ->
-       metreqs(takeOutOf(Agent, Container1, Container2)).
- */
-if containerIsOpen(Container2)then metreqs(takeOutOf(Agent, Container1, Container2)).
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Container.e',17).
-
- /*  reactive_rule([containerIsOpen(Container2)],
-   	      [ metreqs(takeOutOf(Agent,
-   				  Container1,
-   				  Container2))
-   	      ]).
- */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Container.e',17).
-
- /*  reactive_rule([containerIsOpen(Container2)],
-   	      [ metreqs(takeOutOf(Agent,
-   				  Container1,
-   				  Container2))
-   	      ]).
- */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Container.e',17).
-
- /*  not(happens(takeOutOf(Agent, Container1, Container2), When_Time)) :-
-       not(holds_at(containerIsOpen(Container2), When_Time)).
- */
-
- /*  fix_axiom_head(When_Time) ->
-       [ not(happens(takeOutOf(Agent, Container1, Container2),
-                     When_Time)),
-          (->),
-         not(takeOutOf(Agent, Container1, Container2))
-       ].
- */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Container.e',17).
-
- /*  pl=axiom(not(takeOutOf(Agent,Container1,Container2)),
-         [not(containerIsOpen(Container2))]).
- */
-
- /*  not(containerIsOpen(Container2)) ->
-       not(takeOutOf(Agent, Container1, Container2)).
- */
+ %  "% =================================".
+% '->'(
+%    not(
+%       containerIsOpen(Container2)), 
+%    not(
+%       takeOutOf(Agent,Container1,Container2))).
 if not containerIsOpen(Container2)then not takeOutOf(Agent, Container1, Container2).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Container.e',17).
 
- /*  reactive_rule([not(containerIsOpen(Container2))],
+ /*  reactive_rule([ holds(not(containerIsOpen(Container2)),
+   		      Time_At)
+   	      ],
    	      [ not(takeOutOf(Agent,
    			      Container1,
    			      Container2))
    	      ]).
  */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Container.e',17).
-
- /*  reactive_rule([not(containerIsOpen(Container2))],
-   	      [ not(takeOutOf(Agent,
-   			      Container1,
-   			      Container2))
-   	      ]).
- */
+ %  "% =================================".
 
 
 % [agent,container1,container2,time]
 % Happens(PutInside(agent,container1,container2),time) ->
 % HoldsAt(ContainerIsOpen(container2),time).
- %  clausify_pnf=(happens(putInside(Agent, Container1, Container2), Time)->holds_at(containerIsOpen(Container2), Time)).
+% '->'(
+%    metreqs(
+%       putInside(Agent,Container1,Container2)), 
+%    requires(
+%       putInside(Agent,Container1,Container2), 
+%       When_Time)).
+if putInside(Agent, Container1, Container2)then requires(putInside(Agent, Container1, Container2), When_Time).
 
- /*  holds_at(containerIsOpen(Container2), Time) :-
-       happens(putInside(Agent, Container1, Container2),
-               Time).
- */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Container.e',21).
-
- /*  pl=axiom(requires(putInside(Agent,Container1,Container2),
-   	       When_Time),
-         [ metreqs(putInside(Agent,
-   			  Container1,
-   			  Container2))
-         ]).
- */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Container.e',21).
-
- /*  metreqs(putInside(Agent, Container1, Container2)) ->
-       requires(putInside(Agent, Container1, Container2),
-                When_Time).
- */
-if metreqs(putInside(Agent, Container1, Container2))then requires(putInside(Agent, Container1, Container2), When_Time).
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Container.e',21).
-
- /*  reactive_rule([ metreqs(putInside(Agent,
+ /*  reactive_rule([ happens(putInside(Agent,
    				  Container1,
-   				  Container2))
+   				  Container2),
+   			Time_From,
+   			Time_Until)
    	      ],
    	      [ requires(putInside(Agent,
    				   Container1,
@@ -182,147 +100,96 @@ if metreqs(putInside(Agent, Container1, Container2))then requires(putInside(Agen
    			 When_Time)
    	      ]).
  */
+ %  "% =================================".
+% '->'(
+%    containerIsOpen(Container2), 
+%    metreqs(
+%       putInside(Agent,Container1,Container2))).
+putInside(Agent, Container1, Container2)if containerIsOpen(Container2).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Container.e',21).
 
- /*  reactive_rule([ metreqs(putInside(Agent,
-   				  Container1,
-   				  Container2))
-   	      ],
-   	      [ requires(putInside(Agent,
-   				   Container1,
-   				   Container2),
-   			 When_Time)
-   	      ]).
+ /*  l_events(happens(putInside(Agent,
+   			   Container1,
+   			   Container2),
+   		 Time_From7,
+   		 Time_From7),
+   	 [holds(containerIsOpen(Container2),Time_From7)]).
  */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Container.e',21).
-
- /*  fix_axiom_head(When_Time) ->
-       [ holds_at(metreqs(putInside(Agent,
-                                    Container1,
-                                    Container2)),
-                  When_Time),
-          (->),
-         metreqs(putInside(Agent, Container1, Container2))
-       ].
- */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Container.e',21).
-
- /*  pl=axiom(metreqs(putInside(Agent,Container1,Container2)),
-         [containerIsOpen(Container2)]).
- */
-
- /*  containerIsOpen(Container2) ->
-       metreqs(putInside(Agent, Container1, Container2)).
- */
-if containerIsOpen(Container2)then metreqs(putInside(Agent, Container1, Container2)).
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Container.e',21).
-
- /*  reactive_rule([containerIsOpen(Container2)],
-   	      [ metreqs(putInside(Agent,
-   				  Container1,
-   				  Container2))
-   	      ]).
- */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Container.e',21).
-
- /*  reactive_rule([containerIsOpen(Container2)],
-   	      [ metreqs(putInside(Agent,
-   				  Container1,
-   				  Container2))
-   	      ]).
- */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Container.e',21).
-
- /*  not(happens(putInside(Agent, Container1, Container2), When_Time)) :-
-       not(holds_at(containerIsOpen(Container2), When_Time)).
- */
-
- /*  fix_axiom_head(When_Time) ->
-       [ not(happens(putInside(Agent, Container1, Container2),
-                     When_Time)),
-          (->),
-         not(putInside(Agent, Container1, Container2))
-       ].
- */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Container.e',21).
-
- /*  pl=axiom(not(putInside(Agent,Container1,Container2)),
-         [not(containerIsOpen(Container2))]).
- */
-
- /*  not(containerIsOpen(Container2)) ->
-       not(putInside(Agent, Container1, Container2)).
- */
+ %  "% =================================".
+% '->'(
+%    not(
+%       containerIsOpen(Container2)), 
+%    not(
+%       putInside(Agent,Container1,Container2))).
 if not containerIsOpen(Container2)then not putInside(Agent, Container1, Container2).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Container.e',21).
 
- /*  reactive_rule([not(containerIsOpen(Container2))],
+ /*  reactive_rule([ holds(not(containerIsOpen(Container2)),
+   		      Time_At)
+   	      ],
    	      [ not(putInside(Agent,
    			      Container1,
    			      Container2))
    	      ]).
  */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Container.e',21).
-
- /*  reactive_rule([not(containerIsOpen(Container2))],
-   	      [ not(putInside(Agent,
-   			      Container1,
-   			      Container2))
-   	      ]).
- */
+ %  "% =================================".
 
 
 %; agent opens container.
 
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Container.e',25).
 % event ContainerOpen(agent,container)
- %  blue=event(containerOpen(agent,container)).
- %  event(containerOpen(agent,container)).
+% event(
+%    containerOpen(agent,container)).
 actions([containerOpen/2]).
- %  actions([containerOpen/2]).
+% mpred_prop(
+%    containerOpen(agent,container), 
+%    event).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Container.e',25).
 mpred_prop(containerOpen(agent,container),event).
- %  mpred_prop(containerOpen(agent,container),event).
 
 
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Container.e',27).
 %; agent closes container.
 
 % event ContainerClose(agent,container)
- %  blue=event(containerClose(agent,container)).
- %  event(containerClose(agent,container)).
+% event(
+%    containerClose(agent,container)).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Container.e',27).
 actions([containerClose/2]).
- %  actions([containerClose/2]).
+% mpred_prop(
+%    containerClose(agent,container), 
+%    event).
 mpred_prop(containerClose(agent,container),event).
- %  mpred_prop(containerClose(agent,container),event).
 
 
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Container.e',30).
 %; container is open.
 
 % fluent ContainerIsOpen(container)
- %  blue=fluent(containerIsOpen(container)).
- %  fluent(containerIsOpen(container)).
+% fluent(
+%    containerIsOpen(container)).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Container.e',30).
 fluents([containerIsOpen/1]).
- %  fluents([containerIsOpen/1]).
+% mpred_prop(
+%    containerIsOpen(container), 
+%    fluent).
 mpred_prop(containerIsOpen(container),fluent).
- %  mpred_prop(containerIsOpen(container),fluent).
 
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Container.e',33).
 % fluent ContainerClosed(container)
- %  blue=fluent(containerClosed(container)).
- %  fluent(containerClosed(container)).
+% fluent(
+%    containerClosed(container)).
 fluents([containerClosed/1]).
- %  fluents([containerClosed/1]).
+% mpred_prop(
+%    containerClosed(container), 
+%    fluent).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Container.e',33).
 mpred_prop(containerClosed(container),fluent).
- %  mpred_prop(containerClosed(container),fluent).
 
 % noninertial ContainerClosed
+% noninertial(containerClosed).
 noninertial(containerClosed).
- %  noninertial(containerClosed).
 
 
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Container.e',36).
@@ -333,118 +200,63 @@ noninertial(containerClosed).
  /*  holds_at(containerClosed(Container), Time) <->
        holds_at(neg(containerIsOpen(Container)), Time).
  */
- %  clausify_pnf=(holds_at(containerClosed(Container), Time)->holds_at(neg(containerIsOpen(Container)), Time)).
+% '->'(
+%    containerClosed(Container), 
+%    not(
+%       containerIsOpen(Container))).
+not containerIsOpen(Container)if containerClosed(Container).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Container.e',36).
 
- /*  holds_at(neg(containerIsOpen(Container)), Time) :-
-       holds_at(containerClosed(Container), Time).
- */
-
- /*  fix_axiom_head(Time) ->
-       [ holds_at(neg(containerIsOpen(Container)), Time),
-          (->),
-         not(containerIsOpen(Container))
-       ].
- */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Container.e',36).
-
- /*  pl=axiom(not(containerIsOpen(Container)),
+ /*  l_int(holds(not(containerIsOpen(Container)),Time_At),
          [containerClosed(Container)]).
  */
-
- /*  containerClosed(Container) ->
-       not(containerIsOpen(Container)).
- */
-if containerClosed(Container)then not containerIsOpen(Container).
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Container.e',36).
-
- /*  reactive_rule([containerClosed(Container)],
-   	      [not(containerIsOpen(Container))]).
- */
-
- /*  reactive_rule([containerClosed(Container)],
-   	      [not(containerIsOpen(Container))]).
- */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Container.e',36).
-
- /*  not(holds_at(containerClosed(Container), Time)) :-
-       not(holds_at(neg(containerIsOpen(Container)), Time)).
- */
-
- /*  pl=axiom(not(containerClosed(Container)),
-         [not(not(containerIsOpen(Container)))]).
- */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Container.e',36).
-
- /*  not(not(containerIsOpen(Container))) ->
-       not(containerClosed(Container)).
- */
+ %  "% =================================".
+% '->'(
+%    not(
+%       not(
+%          containerIsOpen(Container))), 
+%    not(
+%       containerClosed(Container))).
 if not not containerIsOpen(Container)then not containerClosed(Container).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Container.e',36).
 
- /*  reactive_rule([not(not(containerIsOpen(Container)))],
+ /*  reactive_rule([ holds(not([ holds(not(containerIsOpen(Container)),
+   				  Time_At3)
+   			  ]),
+   		      Time_At3)
+   	      ],
    	      [not(containerClosed(Container))]).
  */
-
- /*  reactive_rule([not(not(containerIsOpen(Container)))],
-   	      [not(containerClosed(Container))]).
- */
- %  clausify_pnf=(holds_at(neg(containerIsOpen(Container)), Time)->holds_at(containerClosed(Container), Time)).
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Container.e',36).
-
- /*  holds_at(containerClosed(Container), Time) :-
-       holds_at(neg(containerIsOpen(Container)), Time).
- */
-
- /*  fix_axiom_head(Time) ->
-       [ holds_at(containerClosed(Container), Time),
-          (->),
-         containerClosed(Container)
-       ].
- */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Container.e',36).
-
- /*  pl=axiom(containerClosed(Container),
-         [not(containerIsOpen(Container))]).
- */
-
- /*  not(containerIsOpen(Container)) ->
-       containerClosed(Container).
- */
+ %  "% =================================".
+% '->'(
+%    not(
+%       containerIsOpen(Container)), 
+%    containerClosed(Container)).
 if not containerIsOpen(Container)then containerClosed(Container).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Container.e',36).
 
- /*  reactive_rule([not(containerIsOpen(Container))],
+ /*  reactive_rule([ holds(not(containerIsOpen(Container)),
+   		      Time_At4)
+   	      ],
    	      [containerClosed(Container)]).
  */
-
- /*  reactive_rule([not(containerIsOpen(Container))],
-   	      [containerClosed(Container)]).
- */
+ %  "% =================================".
+% '->'(
+%    not(
+%       containerClosed(Container)), 
+%    not(
+%       not(
+%          containerIsOpen(Container)))).
+not not containerIsOpen(Container)if not containerClosed(Container).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Container.e',36).
 
- /*  not(holds_at(neg(containerIsOpen(Container)), Time)) :-
-       not(holds_at(containerClosed(Container), Time)).
- */
-
- /*  pl=axiom(not(not(containerIsOpen(Container))),
+ /*  l_int(holds(not([ holds(not(containerIsOpen(Container)),
+   			Time_At5)
+   		]),
+   	    Time_At5),
          [not(containerClosed(Container))]).
  */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Container.e',36).
-
- /*  not(containerClosed(Container)) ->
-       not(not(containerIsOpen(Container))).
- */
-if not containerClosed(Container)then not not containerIsOpen(Container).
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Container.e',36).
-
- /*  reactive_rule([not(containerClosed(Container))],
-   	      [not(not(containerIsOpen(Container)))]).
- */
-
- /*  reactive_rule([not(containerClosed(Container))],
-   	      [not(not(containerIsOpen(Container)))]).
- */
+ %  "% =================================".
 
 
 %; A precondition axiom states that
@@ -457,29 +269,18 @@ if not containerClosed(Container)then not not containerIsOpen(Container).
 % HoldsAt(Awake(agent),time) &
 % !HoldsAt(ContainerIsOpen(container),time) &
 % HoldsAt(Holding(agent,container),time).
- %  clausify_pnf=(happens(containerOpen(Agent, Container), Time)->holds_at(awake(Agent), Time), holds_at(neg(containerIsOpen(Container)), Time), holds_at(holding(Agent, Container), Time)).
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Container.e',45).
-
- /*  not(happens(containerOpen(Agent, Container), Time)) :-
-       (   not(holds_at(awake(Agent), Time))
-       ;   not(holds_at(neg(containerIsOpen(Container)), Time))
-       ;   not(holds_at(holding(Agent, Container), Time))
-       ).
- */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Container.e',45).
-
- /*  fix_axiom_head(Time) ->
-       [ not(happens(containerOpen(Agent, Container), Time)),
-          (->),
-         not(containerOpen(Agent, Container))
-       ].
- */
- %   pl=axiom(not(containerOpen(Agent, Container)), [(not(awake(Agent));not(not(containerIsOpen(Container)));not(holding(Agent, Container)))]).
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Container.e',45).
-
- /*  not(awake(Agent));not(not(containerIsOpen(Container)));not(holding(Agent, Container)) ->
-       not(containerOpen(Agent, Container)).
- */
+% '->'(
+%    ';'(
+%       not(
+%          awake(Agent)), 
+%       ';'(
+%          not(
+%             not(
+%                containerIsOpen(Container))), 
+%          not(
+%             holding(Agent,Container)))), 
+%    not(
+%       containerOpen(Agent,Container))).
 if not awake(Agent);not not containerIsOpen(Container);not holding(Agent, Container)then not containerOpen(Agent, Container).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Container.e',45).
 
@@ -487,186 +288,105 @@ if not awake(Agent);not not containerIsOpen(Container);not holding(Agent, Contai
                     ],
                     [not(containerOpen(Agent, Container))]).
  */
+ %  "% =================================".
+% '->'(
+%    metreqs(
+%       containerOpen(Agent,Container)), 
+%    requires(
+%       containerOpen(Agent,Container), 
+%       When_Time)).
+if containerOpen(Agent, Container)then requires(containerOpen(Agent, Container), When_Time).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Container.e',45).
 
- /*   reactive_rule([  (not(awake(Agent));not(not(containerIsOpen(Container)));not(holding(Agent, Container)))
-                    ],
-                    [not(containerOpen(Agent, Container))]).
- */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Container.e',45).
-
- /*  holds_at(awake(Agent), Time) :-
-       happens(containerOpen(Agent, Container), Time).
- */
-
- /*  pl=axiom(requires(containerOpen(Agent,Container),
-   	       When_Time),
-         [metreqs(containerOpen(Agent,Container))]).
- */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Container.e',45).
-
- /*  metreqs(containerOpen(Agent, Container)) ->
-       requires(containerOpen(Agent, Container), When_Time).
- */
-if metreqs(containerOpen(Agent, Container))then requires(containerOpen(Agent, Container), When_Time).
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Container.e',45).
-
- /*  reactive_rule([metreqs(containerOpen(Agent,Container))],
+ /*  reactive_rule([ happens(containerOpen(Agent,Container),
+   			Time_From,
+   			Time_Until)
+   	      ],
    	      [ requires(containerOpen(Agent,Container),
    			 When_Time)
    	      ]).
  */
+ %  "% =================================".
+% '->'(
+%    awake(Agent), 
+%    metreqs(
+%       containerOpen(Agent,Container))).
+containerOpen(Agent, Container)if awake(Agent).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Container.e',45).
 
- /*  reactive_rule([metreqs(containerOpen(Agent,Container))],
+ /*  l_events(happens(containerOpen(Agent,Container),
+   		 Time_From6,
+   		 Time_From6),
+   	 [awake(Agent)]).
+ */
+ %  "% =================================".
+% '->'(
+%    metreqs(
+%       containerOpen(Agent,Container)), 
+%    requires(
+%       containerOpen(Agent,Container), 
+%       When_Time)).
+if containerOpen(Agent, Container)then requires(containerOpen(Agent, Container), When_Time).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Container.e',45).
+
+ /*  reactive_rule([ happens(containerOpen(Agent,Container),
+   			Time_From7,
+   			Time_Until8)
+   	      ],
    	      [ requires(containerOpen(Agent,Container),
    			 When_Time)
    	      ]).
  */
+ %  "% =================================".
+% '->'(
+%    not(
+%       containerIsOpen(Container)), 
+%    metreqs(
+%       containerOpen(Agent,Container))).
+containerOpen(Agent, Container)if not containerIsOpen(Container).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Container.e',45).
 
- /*  fix_axiom_head(When_Time) ->
-       [ holds_at(metreqs(containerOpen(Agent, Container)),
-                  When_Time),
-          (->),
-         metreqs(containerOpen(Agent, Container))
-       ].
+ /*  l_events(happens(containerOpen(Agent,Container),
+   		 Time_From9,
+   		 Time_From9),
+   	 [ holds(not(containerIsOpen(Container)),
+   		 Time_From9)
+   	 ]).
  */
+ %  "% =================================".
+% '->'(
+%    metreqs(
+%       containerOpen(Agent,Container)), 
+%    requires(
+%       containerOpen(Agent,Container), 
+%       When_Time)).
+if containerOpen(Agent, Container)then requires(containerOpen(Agent, Container), When_Time).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Container.e',45).
 
- /*  pl=axiom(metreqs(containerOpen(Agent,Container)),
-         [awake(Agent)]).
- */
-
- /*  awake(Agent) ->
-       metreqs(containerOpen(Agent, Container)).
- */
-if awake(Agent)then metreqs(containerOpen(Agent, Container)).
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Container.e',45).
-
- /*  reactive_rule([awake(Agent)],
-   	      [metreqs(containerOpen(Agent,Container))]).
- */
-
- /*  reactive_rule([awake(Agent)],
-   	      [metreqs(containerOpen(Agent,Container))]).
- */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Container.e',45).
-
- /*  holds_at(neg(containerIsOpen(Container)), When_Time) :-
-       happens(containerOpen(Agent, Container), When_Time).
- */
-
- /*  pl=axiom(requires(containerOpen(Agent,Container),
-   	       When_Time),
-         [metreqs(containerOpen(Agent,Container))]).
- */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Container.e',45).
-
- /*  metreqs(containerOpen(Agent, Container)) ->
-       requires(containerOpen(Agent, Container), When_Time).
- */
-if metreqs(containerOpen(Agent, Container))then requires(containerOpen(Agent, Container), When_Time).
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Container.e',45).
-
- /*  reactive_rule([metreqs(containerOpen(Agent,Container))],
+ /*  reactive_rule([ happens(containerOpen(Agent,Container),
+   			Time_From10,
+   			Time_Until11)
+   	      ],
    	      [ requires(containerOpen(Agent,Container),
    			 When_Time)
    	      ]).
  */
+ %  "% =================================".
+% '->'(
+%    holding(Agent,Container), 
+%    metreqs(
+%       containerOpen(Agent,Container))).
+containerOpen(Agent, Container)if holding(Agent, Container).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Container.e',45).
 
- /*  reactive_rule([metreqs(containerOpen(Agent,Container))],
-   	      [ requires(containerOpen(Agent,Container),
-   			 When_Time)
-   	      ]).
+ /*  l_events(happens(containerOpen(Agent,Container),
+   		 Time_From12,
+   		 Time_From12),
+   	 [ holds(holding(Agent,Container),
+   		 Time_From12)
+   	 ]).
  */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Container.e',45).
-
- /*  fix_axiom_head(When_Time) ->
-       [ holds_at(metreqs(containerOpen(Agent, Container)),
-                  When_Time),
-          (->),
-         metreqs(containerOpen(Agent, Container))
-       ].
- */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Container.e',45).
-
- /*  pl=axiom(metreqs(containerOpen(Agent,Container)),
-         [not(containerIsOpen(Container))]).
- */
-
- /*  not(containerIsOpen(Container)) ->
-       metreqs(containerOpen(Agent, Container)).
- */
-if not containerIsOpen(Container)then metreqs(containerOpen(Agent, Container)).
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Container.e',45).
-
- /*  reactive_rule([not(containerIsOpen(Container))],
-   	      [metreqs(containerOpen(Agent,Container))]).
- */
-
- /*  reactive_rule([not(containerIsOpen(Container))],
-   	      [metreqs(containerOpen(Agent,Container))]).
- */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Container.e',45).
-
- /*  holds_at(holding(Agent, Container), When_Time) :-
-       happens(containerOpen(Agent, Container), When_Time).
- */
-
- /*  pl=axiom(requires(containerOpen(Agent,Container),
-   	       When_Time),
-         [metreqs(containerOpen(Agent,Container))]).
- */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Container.e',45).
-
- /*  metreqs(containerOpen(Agent, Container)) ->
-       requires(containerOpen(Agent, Container), When_Time).
- */
-if metreqs(containerOpen(Agent, Container))then requires(containerOpen(Agent, Container), When_Time).
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Container.e',45).
-
- /*  reactive_rule([metreqs(containerOpen(Agent,Container))],
-   	      [ requires(containerOpen(Agent,Container),
-   			 When_Time)
-   	      ]).
- */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Container.e',45).
-
- /*  reactive_rule([metreqs(containerOpen(Agent,Container))],
-   	      [ requires(containerOpen(Agent,Container),
-   			 When_Time)
-   	      ]).
- */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Container.e',45).
-
- /*  fix_axiom_head(When_Time) ->
-       [ holds_at(metreqs(containerOpen(Agent, Container)),
-                  When_Time),
-          (->),
-         metreqs(containerOpen(Agent, Container))
-       ].
- */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Container.e',45).
-
- /*  pl=axiom(metreqs(containerOpen(Agent,Container)),
-         [holding(Agent,Container)]).
- */
-
- /*  holding(Agent, Container) ->
-       metreqs(containerOpen(Agent, Container)).
- */
-if holding(Agent, Container)then metreqs(containerOpen(Agent, Container)).
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Container.e',45).
-
- /*  reactive_rule([holding(Agent,Container)],
-   	      [metreqs(containerOpen(Agent,Container))]).
- */
-
- /*  reactive_rule([holding(Agent,Container)],
-   	      [metreqs(containerOpen(Agent,Container))]).
- */
+ %  "% =================================".
 
 
 %; An effect axiom states that
@@ -674,19 +394,10 @@ if holding(Agent, Container)then metreqs(containerOpen(Agent, Container)).
 %; the container will be open:
 % [agent,container,time]
 % Initiates(ContainerOpen(agent,container),ContainerIsOpen(container),time).
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Container.e',54).
-
- /*  pl=axiom(initiates(containerOpen(Agent,Container),
-   		containerIsOpen(Container),
-   		Time),
-         []).
- */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Container.e',54).
-
- /*  initiates(containerOpen(Agent,Container),
-   	  containerIsOpen(Container),
-   	  Time).
- */
+% initiates(
+%    containerOpen(Agent,Container), 
+%    containerIsOpen(Container), 
+%    Time).
 containerOpen(Agent, Container)initiates containerIsOpen(Container).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Container.e',54).
 
@@ -696,14 +407,7 @@ containerOpen(Agent, Container)initiates containerIsOpen(Container).
    	  containerIsOpen(Container),
    	  []).
  */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Container.e',54).
-
- /*  initiated(happens(containerOpen(Agent,Container),
-   		  Time_From,
-   		  Time_Until),
-   	  containerIsOpen(Container),
-   	  []).
- */
+ %  "% =================================".
 
 
 %; A precondition axiom states that
@@ -716,29 +420,17 @@ containerOpen(Agent, Container)initiates containerIsOpen(Container).
 % HoldsAt(Awake(agent),time) &
 % HoldsAt(ContainerIsOpen(container),time) &
 % HoldsAt(Holding(agent,container),time).
- %  clausify_pnf=(happens(containerClose(Agent, Container), Time)->holds_at(awake(Agent), Time), holds_at(containerIsOpen(Container), Time), holds_at(holding(Agent, Container), Time)).
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Container.e',62).
-
- /*  not(happens(containerClose(Agent, Container), Time)) :-
-       (   not(holds_at(awake(Agent), Time))
-       ;   not(holds_at(containerIsOpen(Container), Time))
-       ;   not(holds_at(holding(Agent, Container), Time))
-       ).
- */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Container.e',62).
-
- /*  fix_axiom_head(Time) ->
-       [ not(happens(containerClose(Agent, Container), Time)),
-          (->),
-         not(containerClose(Agent, Container))
-       ].
- */
- %   pl=axiom(not(containerClose(Agent, Container)), [(not(awake(Agent));not(containerIsOpen(Container));not(holding(Agent, Container)))]).
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Container.e',62).
-
- /*  not(awake(Agent));not(containerIsOpen(Container));not(holding(Agent, Container)) ->
-       not(containerClose(Agent, Container)).
- */
+% '->'(
+%    ';'(
+%       not(
+%          awake(Agent)), 
+%       ';'(
+%          not(
+%             containerIsOpen(Container)), 
+%          not(
+%             holding(Agent,Container)))), 
+%    not(
+%       containerClose(Agent,Container))).
 if not awake(Agent);not containerIsOpen(Container);not holding(Agent, Container)then not containerClose(Agent, Container).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Container.e',62).
 
@@ -746,186 +438,102 @@ if not awake(Agent);not containerIsOpen(Container);not holding(Agent, Container)
                     ],
                     [not(containerClose(Agent, Container))]).
  */
+ %  "% =================================".
+% '->'(
+%    metreqs(
+%       containerClose(Agent,Container)), 
+%    requires(
+%       containerClose(Agent,Container), 
+%       When_Time)).
+if containerClose(Agent, Container)then requires(containerClose(Agent, Container), When_Time).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Container.e',62).
 
- /*   reactive_rule([  (not(awake(Agent));not(containerIsOpen(Container));not(holding(Agent, Container)))
-                    ],
-                    [not(containerClose(Agent, Container))]).
- */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Container.e',62).
-
- /*  holds_at(awake(Agent), Time) :-
-       happens(containerClose(Agent, Container), Time).
- */
-
- /*  pl=axiom(requires(containerClose(Agent,Container),
-   	       When_Time),
-         [metreqs(containerClose(Agent,Container))]).
- */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Container.e',62).
-
- /*  metreqs(containerClose(Agent, Container)) ->
-       requires(containerClose(Agent, Container), When_Time).
- */
-if metreqs(containerClose(Agent, Container))then requires(containerClose(Agent, Container), When_Time).
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Container.e',62).
-
- /*  reactive_rule([metreqs(containerClose(Agent,Container))],
+ /*  reactive_rule([ happens(containerClose(Agent,Container),
+   			Time_From,
+   			Time_Until)
+   	      ],
    	      [ requires(containerClose(Agent,Container),
    			 When_Time)
    	      ]).
  */
+ %  "% =================================".
+% '->'(
+%    awake(Agent), 
+%    metreqs(
+%       containerClose(Agent,Container))).
+containerClose(Agent, Container)if awake(Agent).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Container.e',62).
 
- /*  reactive_rule([metreqs(containerClose(Agent,Container))],
+ /*  l_events(happens(containerClose(Agent,Container),
+   		 Time_From6,
+   		 Time_From6),
+   	 [awake(Agent)]).
+ */
+ %  "% =================================".
+% '->'(
+%    metreqs(
+%       containerClose(Agent,Container)), 
+%    requires(
+%       containerClose(Agent,Container), 
+%       When_Time)).
+if containerClose(Agent, Container)then requires(containerClose(Agent, Container), When_Time).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Container.e',62).
+
+ /*  reactive_rule([ happens(containerClose(Agent,Container),
+   			Time_From7,
+   			Time_Until8)
+   	      ],
    	      [ requires(containerClose(Agent,Container),
    			 When_Time)
    	      ]).
  */
+ %  "% =================================".
+% '->'(
+%    containerIsOpen(Container), 
+%    metreqs(
+%       containerClose(Agent,Container))).
+containerClose(Agent, Container)if containerIsOpen(Container).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Container.e',62).
 
- /*  fix_axiom_head(When_Time) ->
-       [ holds_at(metreqs(containerClose(Agent, Container)),
-                  When_Time),
-          (->),
-         metreqs(containerClose(Agent, Container))
-       ].
+ /*  l_events(happens(containerClose(Agent,Container),
+   		 Time_From9,
+   		 Time_From9),
+   	 [holds(containerIsOpen(Container),Time_From9)]).
  */
+ %  "% =================================".
+% '->'(
+%    metreqs(
+%       containerClose(Agent,Container)), 
+%    requires(
+%       containerClose(Agent,Container), 
+%       When_Time)).
+if containerClose(Agent, Container)then requires(containerClose(Agent, Container), When_Time).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Container.e',62).
 
- /*  pl=axiom(metreqs(containerClose(Agent,Container)),
-         [awake(Agent)]).
- */
-
- /*  awake(Agent) ->
-       metreqs(containerClose(Agent, Container)).
- */
-if awake(Agent)then metreqs(containerClose(Agent, Container)).
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Container.e',62).
-
- /*  reactive_rule([awake(Agent)],
-   	      [metreqs(containerClose(Agent,Container))]).
- */
-
- /*  reactive_rule([awake(Agent)],
-   	      [metreqs(containerClose(Agent,Container))]).
- */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Container.e',62).
-
- /*  holds_at(containerIsOpen(Container), When_Time) :-
-       happens(containerClose(Agent, Container), When_Time).
- */
-
- /*  pl=axiom(requires(containerClose(Agent,Container),
-   	       When_Time),
-         [metreqs(containerClose(Agent,Container))]).
- */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Container.e',62).
-
- /*  metreqs(containerClose(Agent, Container)) ->
-       requires(containerClose(Agent, Container), When_Time).
- */
-if metreqs(containerClose(Agent, Container))then requires(containerClose(Agent, Container), When_Time).
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Container.e',62).
-
- /*  reactive_rule([metreqs(containerClose(Agent,Container))],
+ /*  reactive_rule([ happens(containerClose(Agent,Container),
+   			Time_From10,
+   			Time_Until11)
+   	      ],
    	      [ requires(containerClose(Agent,Container),
    			 When_Time)
    	      ]).
  */
+ %  "% =================================".
+% '->'(
+%    holding(Agent,Container), 
+%    metreqs(
+%       containerClose(Agent,Container))).
+containerClose(Agent, Container)if holding(Agent, Container).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Container.e',62).
 
- /*  reactive_rule([metreqs(containerClose(Agent,Container))],
-   	      [ requires(containerClose(Agent,Container),
-   			 When_Time)
-   	      ]).
+ /*  l_events(happens(containerClose(Agent,Container),
+   		 Time_From12,
+   		 Time_From12),
+   	 [ holds(holding(Agent,Container),
+   		 Time_From12)
+   	 ]).
  */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Container.e',62).
-
- /*  fix_axiom_head(When_Time) ->
-       [ holds_at(metreqs(containerClose(Agent, Container)),
-                  When_Time),
-          (->),
-         metreqs(containerClose(Agent, Container))
-       ].
- */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Container.e',62).
-
- /*  pl=axiom(metreqs(containerClose(Agent,Container)),
-         [containerIsOpen(Container)]).
- */
-
- /*  containerIsOpen(Container) ->
-       metreqs(containerClose(Agent, Container)).
- */
-if containerIsOpen(Container)then metreqs(containerClose(Agent, Container)).
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Container.e',62).
-
- /*  reactive_rule([holds(containerIsOpen(Container),Holds)],
-   	      [metreqs(containerClose(Agent,Container))]).
- */
-
- /*  reactive_rule([holds(containerIsOpen(Container),Holds)],
-   	      [metreqs(containerClose(Agent,Container))]).
- */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Container.e',62).
-
- /*  holds_at(holding(Agent, Container), When_Time) :-
-       happens(containerClose(Agent, Container), When_Time).
- */
-
- /*  pl=axiom(requires(containerClose(Agent,Container),
-   	       When_Time),
-         [metreqs(containerClose(Agent,Container))]).
- */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Container.e',62).
-
- /*  metreqs(containerClose(Agent, Container)) ->
-       requires(containerClose(Agent, Container), When_Time).
- */
-if metreqs(containerClose(Agent, Container))then requires(containerClose(Agent, Container), When_Time).
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Container.e',62).
-
- /*  reactive_rule([metreqs(containerClose(Agent,Container))],
-   	      [ requires(containerClose(Agent,Container),
-   			 When_Time)
-   	      ]).
- */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Container.e',62).
-
- /*  reactive_rule([metreqs(containerClose(Agent,Container))],
-   	      [ requires(containerClose(Agent,Container),
-   			 When_Time)
-   	      ]).
- */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Container.e',62).
-
- /*  fix_axiom_head(When_Time) ->
-       [ holds_at(metreqs(containerClose(Agent, Container)),
-                  When_Time),
-          (->),
-         metreqs(containerClose(Agent, Container))
-       ].
- */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Container.e',62).
-
- /*  pl=axiom(metreqs(containerClose(Agent,Container)),
-         [holding(Agent,Container)]).
- */
-
- /*  holding(Agent, Container) ->
-       metreqs(containerClose(Agent, Container)).
- */
-if holding(Agent, Container)then metreqs(containerClose(Agent, Container)).
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Container.e',62).
-
- /*  reactive_rule([holding(Agent,Container)],
-   	      [metreqs(containerClose(Agent,Container))]).
- */
-
- /*  reactive_rule([holding(Agent,Container)],
-   	      [metreqs(containerClose(Agent,Container))]).
- */
+ %  "% =================================".
 
 
 %; An effect axiom states that
@@ -933,19 +541,10 @@ if holding(Agent, Container)then metreqs(containerClose(Agent, Container)).
 %; the container will no longer be open:
 % [agent,container,time]
 % Terminates(ContainerClose(agent,container),ContainerIsOpen(container),time).
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Container.e',71).
-
- /*  pl=axiom(terminates(containerClose(Agent,Container),
-   		 containerIsOpen(Container),
-   		 Time),
-         []).
- */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Container.e',71).
-
- /*  terminates(containerClose(Agent,Container),
-   	   containerIsOpen(Container),
-   	   Time).
- */
+% terminates(
+%    containerClose(Agent,Container), 
+%    containerIsOpen(Container), 
+%    Time).
 containerClose(Agent, Container)terminates containerIsOpen(Container).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Container.e',71).
 
@@ -955,14 +554,7 @@ containerClose(Agent, Container)terminates containerIsOpen(Container).
    	   containerIsOpen(Container),
    	   []).
  */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Container.e',71).
-
- /*  terminated(happens(containerClose(Agent,Container),
-   		   Time_From,
-   		   Time_Until),
-   	   containerIsOpen(Container),
-   	   []).
- */
+ %  "% =================================".
 
 
 %; End of file.

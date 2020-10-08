@@ -3,7 +3,7 @@
 :-include(library('ec_planner/ec_test_incl')).
 :-expects_dialect(lps).
 % translate: begining  File: /pack/logicmoo_ec/ext/ec_sources/ecnet/Rest.e.lps 
-% Thu, 08 Oct 2020 19:06:41 GMT File: <stream>(0x5600a3a71900)%;
+% Thu, 08 Oct 2020 21:36:53 GMT File: <stream>(0x55894c178300)%;
 %; Copyright (c) 2005 IBM Corporation and others.
 %; All rights reserved. This program and the accompanying materials
 %; are made available under the terms of the Common Public License v1.0
@@ -63,635 +63,599 @@
 
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Rest.e',27).
 % door MainEntrance1
- %  t(door,mainEntrance1).
+% t(door,mainEntrance1).
 door(mainEntrance1).
- %  door(mainEntrance1).
 %; room-scale topological space
 
 % outside Street1
- %  t(outside,street1).
+% t(outside,street1).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Rest.e',29).
 outside(street1).
- %  outside(street1).
 
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Rest.e',31).
 % room DiningRoom1
- %  t(room,diningRoom1).
+% t(room,diningRoom1).
 room(diningRoom1).
- %  room(diningRoom1).
 
 % door KitchenDoor1
- %  t(door,kitchenDoor1).
+% t(door,kitchenDoor1).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Rest.e',31).
 door(kitchenDoor1).
- %  door(kitchenDoor1).
 
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Rest.e',33).
 % room Kitchen1
- %  t(room,kitchen1).
+% t(room,kitchen1).
 room(kitchen1).
- %  room(kitchen1).
 
 
 % Side1(MainEntrance1)=Street1.
- %  pl=axiom(side1Pred(mainEntrance1,street1),[]).
+% side1Pred(mainEntrance1,street1).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Rest.e',33).
 side1Pred(mainEntrance1,street1).
- %  side1Pred(mainEntrance1,street1).
 
 
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Rest.e',35).
 % Side2(MainEntrance1)=DiningRoom1.
- %  pl=axiom(side2Pred(mainEntrance1,diningRoom1),[]).
+% side2Pred(mainEntrance1,diningRoom1).
 side2Pred(mainEntrance1,diningRoom1).
- %  side2Pred(mainEntrance1,diningRoom1).
 
 
 % Side1(KitchenDoor1)=DiningRoom1.
- %  pl=axiom(side1Pred(kitchenDoor1,diningRoom1),[]).
+% side1Pred(kitchenDoor1,diningRoom1).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Rest.e',35).
 side1Pred(kitchenDoor1,diningRoom1).
- %  side1Pred(kitchenDoor1,diningRoom1).
 
 
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Rest.e',37).
 % Side2(KitchenDoor1)=Kitchen1.
- %  pl=axiom(side2Pred(kitchenDoor1,kitchen1),[]).
+% side2Pred(kitchenDoor1,kitchen1).
 side2Pred(kitchenDoor1,kitchen1).
- %  side2Pred(kitchenDoor1,kitchen1).
 
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Rest.e',39).
 % agent Customer1
- %  t(agent,customer1).
+% t(agent,customer1).
 agent(customer1).
- %  agent(customer1).
 
 % menu Menu1
- %  t(menu,menu1).
+% t(menu,menu1).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Rest.e',39).
 menu(menu1).
- %  menu(menu1).
 
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Rest.e',41).
 % chair Chair1
- %  t(chair,chair1).
+% t(chair,chair1).
 chair(chair1).
- %  chair(chair1).
 
 % food Food1
- %  t(food,food1).
+% t(food,food1).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Rest.e',41).
 food(food1).
- %  food(food1).
 
 
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Rest.e',43).
 % HoldsAt(At(Customer1,Street1),0).
- %  pl=axiom(initially(at(customer1,street1)),[]).
- %  initially(at(customer1,street1)).
+% initially(
+%    at(customer1,street1)).
 initially loc_at(customer1, street1).
  %  initial_state([loc_at(customer1,street1)]).
- %  initial_state([loc_at(customer1,street1)]).
+ %  "% =================================".
 
 
 % HoldsAt(Hungry(Customer1),0).
- %  pl=axiom(initially(hungry(customer1)),[]).
+% initially(
+%    hungry(customer1)).
 initially hungry(customer1).
  %  initial_state([hungry(customer1)]).
- %  initial_state([hungry(customer1)]).
+ %  "% =================================".
 
 
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Rest.e',45).
 % HoldsAt(At(Chair1,DiningRoom1),0).
- %  pl=axiom(initially(at(chair1,diningRoom1)),[]).
- %  initially(at(chair1,diningRoom1)).
+% initially(
+%    at(chair1,diningRoom1)).
 initially loc_at(chair1, diningRoom1).
  %  initial_state([loc_at(chair1,diningRoom1)]).
- %  initial_state([loc_at(chair1,diningRoom1)]).
+ %  "% =================================".
 
 
 % HoldsAt(At(Menu1,DiningRoom1),0).
- %  pl=axiom(initially(at(menu1,diningRoom1)),[]).
- %  initially(at(menu1,diningRoom1)).
+% initially(
+%    at(menu1,diningRoom1)).
 initially loc_at(menu1, diningRoom1).
  %  initial_state([loc_at(menu1,diningRoom1)]).
- %  initial_state([loc_at(menu1,diningRoom1)]).
+ %  "% =================================".
 
 
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Rest.e',47).
 % HoldsAt(On(Menu1,Table1),0).
- %  pl=axiom(initially(on(menu1,table1)),[]).
+% initially(
+%    on(menu1,table1)).
 initially on(menu1, table1).
  %  initial_state([on(menu1,table1)]).
- %  initial_state([on(menu1,table1)]).
+ %  "% =================================".
 
 
 % HoldsAt(At(Food1,Kitchen1),0).
- %  pl=axiom(initially(at(food1,kitchen1)),[]).
- %  initially(at(food1,kitchen1)).
+% initially(
+%    at(food1,kitchen1)).
 initially loc_at(food1, kitchen1).
  %  initial_state([loc_at(food1,kitchen1)]).
- %  initial_state([loc_at(food1,kitchen1)]).
+ %  "% =================================".
 
 % waiter Waiter1
- %  t(waiter,waiter1).
+% t(waiter,waiter1).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Rest.e',49).
 waiter(waiter1).
- %  waiter(waiter1).
 
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Rest.e',51).
 % cook Cook1
- %  t(cook,cook1).
+% t(cook,cook1).
 cook(cook1).
- %  cook(cook1).
 %; props
 
 % table Table1
- %  t(table,table1).
+% t(table,table1).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Rest.e',53).
 table table1.
- %  table table1.
 
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Rest.e',55).
 % bill Bill1
- %  t(bill,bill1).
+% t(bill,bill1).
 bill(bill1).
- %  bill(bill1).
 %; restaurant
 
 % restaurant Restaurant1
- %  t(restaurant,restaurant1).
+% t(restaurant,restaurant1).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Rest.e',57).
 restaurant(restaurant1).
- %  restaurant(restaurant1).
 
 
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Rest.e',59).
 % CookOf(Restaurant1)=Cook1.
- %  pl=axiom(cook(restaurant1,cook1),[]).
+% cook(restaurant1,cook1).
 cook(restaurant1,cook1).
- %  cook(restaurant1,cook1).
 
 
 % TableOf(Restaurant1)=Table1.
- %  pl=axiom(table(restaurant1,table1),[]).
+% table(restaurant1,table1).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Rest.e',59).
 table(restaurant1,table1).
- %  table(restaurant1,table1).
 
 
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Rest.e',61).
 % WaiterOf(Restaurant1)=Waiter1.
- %  pl=axiom(waiter(restaurant1,waiter1),[]).
+% waiter(restaurant1,waiter1).
 waiter(restaurant1,waiter1).
- %  waiter(restaurant1,waiter1).
 
 
 % KitchenDoorOf(Restaurant1)=KitchenDoor1.
- %  pl=axiom(kitchenDoor(restaurant1,kitchenDoor1),[]).
+% kitchenDoor(restaurant1,kitchenDoor1).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Rest.e',61).
 kitchenDoor(restaurant1,kitchenDoor1).
- %  kitchenDoor(restaurant1,kitchenDoor1).
 
 
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Rest.e',63).
 % BillOf(Restaurant1)=Bill1.
- %  pl=axiom(bill(restaurant1,bill1),[]).
+% bill(restaurant1,bill1).
 bill(restaurant1,bill1).
- %  bill(restaurant1,bill1).
 
 
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Rest.e',65).
 %; prune
 
 % sort ona, onb
+% sort(ona).
 sort(ona).
- %  sort(ona).
+% sort(onb).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Rest.e',65).
 sort(onb).
- %  sort(onb).
 
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Rest.e',67).
 % fluent! On(ona,onb)
- %  blue=fluent(on(ona,onb)).
- %  fluent(on(ona,onb)).
+% fluent(
+%    on(ona,onb)).
 fluents([on/2]).
- %  fluents([on/2]).
+% mpred_prop(
+%    on(ona,onb), 
+%    fluent).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Rest.e',67).
 mpred_prop(on(ona,onb),fluent).
- %  mpred_prop(on(ona,onb),fluent).
 
 % event! PlaceOn(agent,ona,onb)
- %  blue=event(placeOn(agent,ona,onb)).
- %  event(placeOn(agent,ona,onb)).
+% event(
+%    placeOn(agent,ona,onb)).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Rest.e',67).
 actions([placeOn/3]).
- %  actions([placeOn/3]).
+% mpred_prop(
+%    placeOn(agent,ona,onb), 
+%    event).
 mpred_prop(placeOn(agent,ona,onb),event).
- %  mpred_prop(placeOn(agent,ona,onb),event).
 
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Rest.e',69).
 % event! TakeOffOf(agent,ona,onb)
- %  blue=event(takeOffOf(agent,ona,onb)).
- %  event(takeOffOf(agent,ona,onb)).
+% event(
+%    takeOffOf(agent,ona,onb)).
 actions([takeOffOf/3]).
- %  actions([takeOffOf/3]).
+% mpred_prop(
+%    takeOffOf(agent,ona,onb), 
+%    event).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Rest.e',69).
 mpred_prop(takeOffOf(agent,ona,onb),event).
- %  mpred_prop(takeOffOf(agent,ona,onb),event).
 
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Rest.e',71).
 % sort ordera, orderb, orderc
+% sort(ordera).
 sort(ordera).
- %  sort(ordera).
+% sort(orderb).
 sort(orderb).
- %  sort(orderb).
+% sort(orderc).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Rest.e',71).
 sort(orderc).
- %  sort(orderc).
 
 % event! Order(ordera,orderb,orderc)
- %  blue=event(order(ordera,orderb,orderc)).
- %  event(order(ordera,orderb,orderc)).
+% event(
+%    order(ordera,orderb,orderc)).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Rest.e',71).
 events([order/3]).
- %  events([order/3]).
+% mpred_prop(
+%    order(ordera,orderb,orderc), 
+%    event).
 mpred_prop(order(ordera,orderb,orderc),event).
- %  mpred_prop(order(ordera,orderb,orderc),event).
 
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Rest.e',73).
 % fluent! KnowOrder(orderb,ordera,orderc)
- %  blue=fluent(knowOrder(orderb,ordera,orderc)).
- %  fluent(knowOrder(orderb,ordera,orderc)).
+% fluent(
+%    knowOrder(orderb,ordera,orderc)).
 fluents([knowOrder/3]).
- %  fluents([knowOrder/3]).
+% mpred_prop(
+%    knowOrder(orderb,ordera,orderc), 
+%    fluent).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Rest.e',73).
 mpred_prop(knowOrder(orderb,ordera,orderc),fluent).
- %  mpred_prop(knowOrder(orderb,ordera,orderc),fluent).
 
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Rest.e',75).
 % sort requesta, requestb, requestc
+% sort(requesta).
 sort(requesta).
- %  sort(requesta).
+% sort(requestb).
 sort(requestb).
- %  sort(requestb).
+% sort(requestc).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Rest.e',75).
 sort(requestc).
- %  sort(requestc).
 
 % event! Request(requesta,requestb,requestc)
- %  blue=event(request(requesta,requestb,requestc)).
- %  event(request(requesta,requestb,requestc)).
+% event(
+%    request(requesta,requestb,requestc)).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Rest.e',75).
 events([request/3]).
- %  events([request/3]).
+% mpred_prop(
+%    request(requesta,requestb,requestc), 
+%    event).
 mpred_prop(request(requesta,requestb,requestc),event).
- %  mpred_prop(request(requesta,requestb,requestc),event).
 
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Rest.e',77).
 % fluent! KnowRequest(requestb,requesta,requestc)
- %  blue=fluent(knowRequest(requestb,requesta,requestc)).
- %  fluent(knowRequest(requestb,requesta,requestc)).
+% fluent(
+%    knowRequest(requestb,requesta,requestc)).
 fluents([knowRequest/3]).
- %  fluents([knowRequest/3]).
+% mpred_prop(
+%    knowRequest(requestb,requesta,requestc), 
+%    fluent).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Rest.e',77).
 mpred_prop(knowRequest(requestb,requesta,requestc),fluent).
- %  mpred_prop(knowRequest(requestb,requesta,requestc),fluent).
 
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Rest.e',79).
 % sort holda, holdb, holdc
+% sort(holda).
 sort(holda).
- %  sort(holda).
+% sort(holdb).
 sort(holdb).
- %  sort(holdb).
+% sort(holdc).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Rest.e',79).
 sort(holdc).
- %  sort(holdc).
 
 % event! TakeOffOf(holda,holdb,holdc)
- %  blue=event(takeOffOf(holda,holdb,holdc)).
- %  event(takeOffOf(holda,holdb,holdc)).
+% event(
+%    takeOffOf(holda,holdb,holdc)).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Rest.e',79).
 events([takeOffOf/3]).
- %  events([takeOffOf/3]).
+% mpred_prop(
+%    takeOffOf(holda,holdb,holdc), 
+%    event).
 mpred_prop(takeOffOf(holda,holdb,holdc),event).
- %  mpred_prop(takeOffOf(holda,holdb,holdc),event).
 
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Rest.e',81).
 % event! PickUp(holda,holdb)
- %  blue=event(pickUp(holda,holdb)).
- %  event(pickUp(holda,holdb)).
+% event(
+%    pickUp(holda,holdb)).
 events([pickUp/2]).
- %  events([pickUp/2]).
+% mpred_prop(
+%    pickUp(holda,holdb), 
+%    event).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Rest.e',81).
 mpred_prop(pickUp(holda,holdb),event).
- %  mpred_prop(pickUp(holda,holdb),event).
 
 % event! LetGoOf(holda,holdb)
- %  blue=event(letGoOf(holda,holdb)).
- %  event(letGoOf(holda,holdb)).
+% event(
+%    letGoOf(holda,holdb)).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Rest.e',81).
 events([letGoOf/2]).
- %  events([letGoOf/2]).
+% mpred_prop(
+%    letGoOf(holda,holdb), 
+%    event).
 mpred_prop(letGoOf(holda,holdb),event).
- %  mpred_prop(letGoOf(holda,holdb),event).
 
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Rest.e',83).
 % event! Hold(holda,holdb)
- %  blue=event(hold(holda,holdb)).
- %  event(hold(holda,holdb)).
+% event(
+%    hold(holda,holdb)).
 events([hold/2]).
- %  events([hold/2]).
+% mpred_prop(
+%    hold(holda,holdb), 
+%    event).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Rest.e',83).
 mpred_prop(hold(holda,holdb),event).
- %  mpred_prop(hold(holda,holdb),event).
 
 % fluent! Holding(holda,holdb)
- %  blue=fluent(holding(holda,holdb)).
- %  fluent(holding(holda,holdb)).
+% fluent(
+%    holding(holda,holdb)).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Rest.e',83).
 fluents([holding/2]).
- %  fluents([holding/2]).
+% mpred_prop(
+%    holding(holda,holdb), 
+%    fluent).
 mpred_prop(holding(holda,holdb),fluent).
- %  mpred_prop(holding(holda,holdb),fluent).
 
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Rest.e',86).
 % sort sita, sitb
+% sort(sita).
 sort(sita).
- %  sort(sita).
+% sort(sitb).
 sort(sitb).
- %  sort(sitb).
 
 % event! LieOn(sita,sitb)
- %  blue=event(lieOn(sita,sitb)).
- %  event(lieOn(sita,sitb)).
+% event(
+%    lieOn(sita,sitb)).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Rest.e',86).
 events([lieOn/2]).
- %  events([lieOn/2]).
+% mpred_prop(
+%    lieOn(sita,sitb), 
+%    event).
 mpred_prop(lieOn(sita,sitb),event).
- %  mpred_prop(lieOn(sita,sitb),event).
 
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Rest.e',88).
 % event! SitOn(sita,sitb)
- %  blue=event(sitOn(sita,sitb)).
- %  event(sitOn(sita,sitb)).
+% event(
+%    sitOn(sita,sitb)).
 events([sitOn/2]).
- %  events([sitOn/2]).
+% mpred_prop(
+%    sitOn(sita,sitb), 
+%    event).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Rest.e',88).
 mpred_prop(sitOn(sita,sitb),event).
- %  mpred_prop(sitOn(sita,sitb),event).
 
 % event! RiseFrom(sita,sitb)
- %  blue=event(riseFrom(sita,sitb)).
- %  event(riseFrom(sita,sitb)).
+% event(
+%    riseFrom(sita,sitb)).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Rest.e',88).
 events([riseFrom/2]).
- %  events([riseFrom/2]).
+% mpred_prop(
+%    riseFrom(sita,sitb), 
+%    event).
 mpred_prop(riseFrom(sita,sitb),event).
- %  mpred_prop(riseFrom(sita,sitb),event).
 
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Rest.e',90).
 % fluent! LyingOn(sita,sitb)
- %  blue=fluent(lyingOn(sita,sitb)).
- %  fluent(lyingOn(sita,sitb)).
+% fluent(
+%    lyingOn(sita,sitb)).
 fluents([lyingOn/2]).
- %  fluents([lyingOn/2]).
+% mpred_prop(
+%    lyingOn(sita,sitb), 
+%    fluent).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Rest.e',90).
 mpred_prop(lyingOn(sita,sitb),fluent).
- %  mpred_prop(lyingOn(sita,sitb),fluent).
 
 % fluent! SittingOn(sita,sitb)
- %  blue=fluent(sittingOn(sita,sitb)).
- %  fluent(sittingOn(sita,sitb)).
+% fluent(
+%    sittingOn(sita,sitb)).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Rest.e',90).
 fluents([sittingOn/2]).
- %  fluents([sittingOn/2]).
+% mpred_prop(
+%    sittingOn(sita,sitb), 
+%    fluent).
 mpred_prop(sittingOn(sita,sitb),fluent).
- %  mpred_prop(sittingOn(sita,sitb),fluent).
 
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Rest.e',93).
 % sort greeta, greetb
+% sort(greeta).
 sort(greeta).
- %  sort(greeta).
+% sort(greetb).
 sort(greetb).
- %  sort(greetb).
 
 % event! Greet(greeta,greetb)
- %  blue=event(greet(greeta,greetb)).
- %  event(greet(greeta,greetb)).
+% event(
+%    greet(greeta,greetb)).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Rest.e',93).
 events([greet/2]).
- %  events([greet/2]).
+% mpred_prop(
+%    greet(greeta,greetb), 
+%    event).
 mpred_prop(greet(greeta,greetb),event).
- %  mpred_prop(greet(greeta,greetb),event).
 
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Rest.e',96).
 % ona! Menu1, Food1, Bill1
- %  t(ona,menu1).
+% t(ona,menu1).
 ona(menu1).
- %  ona(menu1).
- %  t(ona,food1).
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Rest.e',96).
+% t(ona,food1).
 ona(food1).
- %  ona(food1).
- %  t(ona,bill1).
+% t(ona,bill1).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Rest.e',96).
 ona(bill1).
- %  ona(bill1).
 
 % onb! Table1
- %  t(onb,table1).
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Rest.e',96).
+% t(onb,table1).
 onb(table1).
- %  onb(table1).
 
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Rest.e',98).
 % ordera! Customer1, Waiter1
- %  t(ordera,customer1).
+% t(ordera,customer1).
 ordera(customer1).
- %  ordera(customer1).
- %  t(ordera,waiter1).
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Rest.e',98).
+% t(ordera,waiter1).
 ordera(waiter1).
- %  ordera(waiter1).
 
 % orderb! Waiter1, Cook1
- %  t(orderb,waiter1).
+% t(orderb,waiter1).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Rest.e',98).
 orderb(waiter1).
- %  orderb(waiter1).
- %  t(orderb,cook1).
+% t(orderb,cook1).
 orderb(cook1).
- %  orderb(cook1).
 
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Rest.e',100).
 % orderc! Food1
- %  t(orderc,food1).
+% t(orderc,food1).
 orderc(food1).
- %  orderc(food1).
 
 % requesta! Customer1
- %  t(requesta,customer1).
+% t(requesta,customer1).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Rest.e',100).
 requesta(customer1).
- %  requesta(customer1).
 
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Rest.e',102).
 % requestb! Waiter1
- %  t(requestb,waiter1).
+% t(requestb,waiter1).
 requestb(waiter1).
- %  requestb(waiter1).
 
 % requestc! Bill1
- %  t(requestc,bill1).
+% t(requestc,bill1).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Rest.e',102).
 requestc(bill1).
- %  requestc(bill1).
 
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Rest.e',104).
 % holda! Customer1, Waiter1
- %  t(holda,customer1).
+% t(holda,customer1).
 holda(customer1).
- %  holda(customer1).
- %  t(holda,waiter1).
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Rest.e',104).
+% t(holda,waiter1).
 holda(waiter1).
- %  holda(waiter1).
 
 % holdb! Menu1, Food1, Bill1
- %  t(holdb,menu1).
+% t(holdb,menu1).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Rest.e',104).
 holdb(menu1).
- %  holdb(menu1).
- %  t(holdb,food1).
+% t(holdb,food1).
 holdb(food1).
- %  holdb(food1).
- %  t(holdb,bill1).
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Rest.e',104).
+% t(holdb,bill1).
 holdb(bill1).
- %  holdb(bill1).
 
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Rest.e',106).
 % holdc! Table1
- %  t(holdc,table1).
+% t(holdc,table1).
 holdc(table1).
- %  holdc(table1).
 
 % sita! Customer1
- %  t(sita,customer1).
+% t(sita,customer1).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Rest.e',106).
 sita(customer1).
- %  sita(customer1).
 
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Rest.e',108).
 % sitb! Chair1
- %  t(sitb,chair1).
+% t(sitb,chair1).
 sitb(chair1).
- %  sitb(chair1).
 
 % greeta! Customer1, Waiter1
- %  t(greeta,customer1).
+% t(greeta,customer1).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Rest.e',108).
 greeta(customer1).
- %  greeta(customer1).
- %  t(greeta,waiter1).
+% t(greeta,waiter1).
 greeta(waiter1).
- %  greeta(waiter1).
 
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Rest.e',110).
 % greetb! Customer1, Waiter1
- %  t(greetb,customer1).
+% t(greetb,customer1).
 greetb(customer1).
- %  greetb(customer1).
- %  t(greetb,waiter1).
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Rest.e',110).
+% t(greetb,waiter1).
 greetb(waiter1).
- %  greetb(waiter1).
 %; initial situation
 
 
 % HoldsAt(At(Waiter1,DiningRoom1),0).
- %  pl=axiom(initially(at(waiter1,diningRoom1)),[]).
- %  initially(at(waiter1,diningRoom1)).
+% initially(
+%    at(waiter1,diningRoom1)).
 initially loc_at(waiter1, diningRoom1).
  %  initial_state([loc_at(waiter1,diningRoom1)]).
- %  initial_state([loc_at(waiter1,diningRoom1)]).
+ %  "% =================================".
 
 
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Rest.e',114).
 % HoldsAt(At(Cook1,Kitchen1),0).
- %  pl=axiom(initially(at(cook1,kitchen1)),[]).
- %  initially(at(cook1,kitchen1)).
+% initially(
+%    at(cook1,kitchen1)).
 initially loc_at(cook1, kitchen1).
  %  initial_state([loc_at(cook1,kitchen1)]).
- %  initial_state([loc_at(cook1,kitchen1)]).
+ %  "% =================================".
 
 
 % HoldsAt(At(Table1,DiningRoom1),0).
- %  pl=axiom(initially(at(table1,diningRoom1)),[]).
- %  initially(at(table1,diningRoom1)).
+% initially(
+%    at(table1,diningRoom1)).
 initially loc_at(table1, diningRoom1).
  %  initial_state([loc_at(table1,diningRoom1)]).
- %  initial_state([loc_at(table1,diningRoom1)]).
+ %  "% =================================".
 
 
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Rest.e',116).
 % !HoldsAt(On(Bill1,Table1),0).
- %  pl=axiom(initially(neg(on(bill1,table1))),[]).
- %  initially(neg(on(bill1,table1))).
+% initially(
+%    neg(
+%       on(bill1,table1))).
 initially not on(bill1, table1).
  %  initial_state([not(on(bill1,table1))]).
- %  initial_state([not(on(bill1,table1))]).
+ %  "% =================================".
 
 
 % HoldsAt(At(Bill1,DiningRoom1),0).
- %  pl=axiom(initially(at(bill1,diningRoom1)),[]).
- %  initially(at(bill1,diningRoom1)).
+% initially(
+%    at(bill1,diningRoom1)).
 initially loc_at(bill1, diningRoom1).
  %  initial_state([loc_at(bill1,diningRoom1)]).
- %  initial_state([loc_at(bill1,diningRoom1)]).
+ %  "% =================================".
 
 
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Rest.e',118).
 % [agent]
  % HoldsAt(Standing(agent),0).
- %  pl=axiom(initially(standing(Agent)),[]).
+% initially(
+%    standing(Agent)).
 initially standing(Agent).
  %  initial_state([standing(Agent)]).
- %  initial_state([standing(Agent)]).
+ %  "% =================================".
 
 
 % [agent,object]
  % !HoldsAt(Holding(agent,object),0).
- %  pl=axiom(initially(neg(holding(Agent,Object))),[]).
- %  initially(neg(holding(Agent,Object))).
+% initially(
+%    neg(
+%       holding(Agent,Object))).
 initially not holding(Agent, Object).
  %  initial_state([not(holding(Agent,Object))]).
- %  initial_state([not(holding(Agent,Object))]).
+ %  "% =================================".
 
 
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Rest.e',120).
 % [agent1,agent2,physobj]
  % !HoldsAt(KnowOrder(agent1,agent2,physobj),0).
-
- /*  pl=axiom(initially(neg(knowOrder(Agent1,Agent2,Physobj))),
-         []).
- */
- %  initially(neg(knowOrder(Agent1,Agent2,Physobj))).
+% initially(
+%    neg(
+%       knowOrder(Agent1,Agent2,Physobj))).
 initially not knowOrder(Agent1, Agent2, Physobj).
  %  initial_state([not(knowOrder(Agent1,Agent2,Physobj))]).
- %  initial_state([not(knowOrder(Agent1,Agent2,Physobj))]).
+ %  "% =================================".
 
 
 % [agent1,agent2,physobj]
  % !HoldsAt(KnowRequest(agent1,agent2,physobj),0).
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Rest.e',120).
-
- /*  pl=axiom(initially(neg(knowRequest(Agent1,
-   				Agent2,
-   				Physobj))),
-         []).
- */
- %  initially(neg(knowRequest(Agent1,Agent2,Physobj))).
+% initially(
+%    neg(
+%       knowRequest(Agent1,Agent2,Physobj))).
 initially not knowRequest(Agent1, Agent2, Physobj).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Rest.e',120).
 
@@ -700,454 +664,195 @@ initially not knowRequest(Agent1, Agent2, Physobj).
    				Physobj))
    	      ]).
  */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Rest.e',120).
-
- /*  initial_state([ not(knowRequest(Agent1,
-   				Agent2,
-   				Physobj))
-   	      ]).
- */
+ %  "% =================================".
 
 
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Rest.e',122).
 % HoldsAt(BeWaiter0(Waiter1),0).
- %  pl=axiom(initially(beWaiter0(waiter1)),[]).
+% initially(
+%    beWaiter0(waiter1)).
 initially beWaiter0(waiter1).
  %  initial_state([beWaiter0(waiter1)]).
- %  initial_state([beWaiter0(waiter1)]).
+ %  "% =================================".
 
 
 % HoldsAt(BeCook0(Cook1),0).
- %  pl=axiom(initially(beCook0(cook1)),[]).
+% initially(
+%    beCook0(cook1)).
 initially beCook0(cook1).
  %  initial_state([beCook0(cook1)]).
- %  initial_state([beCook0(cook1)]).
+ %  "% =================================".
 
 
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Rest.e',124).
 % [food]
  % !HoldsAt(FoodPrepared(food),0).
- %  pl=axiom(initially(neg(foodPrepared(Food))),[]).
- %  initially(neg(foodPrepared(Food))).
+% initially(
+%    neg(
+%       foodPrepared(Food))).
 initially not foodPrepared(Food).
  %  initial_state([not(foodPrepared(Food))]).
- %  initial_state([not(foodPrepared(Food))]).
+ %  "% =================================".
 
 
 % !HoldsAt(Hungry(Cook1),0).
- %  pl=axiom(initially(neg(hungry(cook1))),[]).
- %  initially(neg(hungry(cook1))).
+% initially(
+%    neg(
+%       hungry(cook1))).
 initially not hungry(cook1).
  %  initial_state([not(hungry(cook1))]).
- %  initial_state([not(hungry(cook1))]).
+ %  "% =================================".
 
 
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Rest.e',126).
 % !HoldsAt(Hungry(Waiter1),0).
- %  pl=axiom(initially(neg(hungry(waiter1))),[]).
- %  initially(neg(hungry(waiter1))).
+% initially(
+%    neg(
+%       hungry(waiter1))).
 initially not hungry(waiter1).
  %  initial_state([not(hungry(waiter1))]).
- %  initial_state([not(hungry(waiter1))]).
+ %  "% =================================".
 
 
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Rest.e',128).
 % Happens(WalkThroughDoor12(Customer1,MainEntrance1),0).
- %  pl=axiom(happens(walkThroughDoor12(customer1,mainEntrance1),start),[]).
- %  happens(walkThroughDoor12(customer1,mainEntrance1),start).
+% happens(
+%    walkThroughDoor12(customer1,mainEntrance1), 
+%    start).
 observe(at(walkThroughDoor12(customer1,mainEntrance1),start)).
- %  observe(at(walkThroughDoor12(customer1,mainEntrance1),start)).
 
 
 % Happens(Greet(Waiter1,Customer1),1).
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Rest.e',128).
-
- /*  pl=axiom(happens(greet(waiter1,customer1),When),
-         [b(start,When)]).
- */
-
- /*  b(start, When) ->
-       happens(greet(waiter1, customer1), When).
- */
-if b(start, When)then happens(greet(waiter1, customer1), When).
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Rest.e',128).
-
- /*  reactive_rule([b(start,When)],
-   	      [happens(greet(waiter1,customer1),When)]).
- */
-
- /*  reactive_rule([b(start,When)],
-   	      [happens(greet(waiter1,customer1),When)]).
- */
+% happens(
+%    greet(waiter1,customer1), 
+%    start+1).
+observe greet(waiter1, customer1)at start+1.
+ %  observe([greet(waiter1,customer1)],start+1).
+ %  "% =================================".
 
 
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Rest.e',130).
 % Happens(SitOn(Customer1,Chair1),2).
-
- /*  pl=axiom(happens(sitOn(customer1,chair1),Start_Num2),
-         [b(start,Start_Num2),toffset(start,2,Start_Num2)]).
- */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Rest.e',130).
-
- /*  (   b(start, Start_Num2),
-       toffset(start, 2, Start_Num2)
-   ->  happens(sitOn(customer1, chair1), Start_Num2)
-   ).
- */
-if b(start, Start_Num2), toffset(start, 2, Start_Num2)then happens(sitOn(customer1, chair1), Start_Num2).
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Rest.e',130).
-
- /*  reactive_rule([ b(start,Start_Num2),
-   		toffset(start,2,Start_Num2)
-   	      ],
-   	      [happens(sitOn(customer1,chair1),Start_Num2)]).
- */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Rest.e',130).
-
- /*  reactive_rule([ b(start,Start_Num2),
-   		toffset(start,2,Start_Num2)
-   	      ],
-   	      [happens(sitOn(customer1,chair1),Start_Num2)]).
- */
+% happens(
+%    sitOn(customer1,chair1), 
+%    start+2).
+observe sitOn(customer1, chair1)at start+2.
+ %  observe([sitOn(customer1,chair1)],start+2).
+ %  "% =================================".
 
 
 % Happens(TakeOffOf(Customer1,Menu1,Table1),3).
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Rest.e',130).
-
- /*  pl=axiom(happens(takeOffOf(customer1,menu1,table1),Start_Num3),
-         [b(start,Start_Num3),toffset(start,3,Start_Num3)]).
- */
-
- /*  (   b(start, Start_Num3),
-       toffset(start, 3, Start_Num3)
-   ->  happens(takeOffOf(customer1, menu1, table1), Start_Num3)
-   ).
- */
-if b(start, Start_Num3), toffset(start, 3, Start_Num3)then happens(takeOffOf(customer1, menu1, table1), Start_Num3).
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Rest.e',130).
-
- /*  reactive_rule([ b(start,Start_Num3),
-   		toffset(start,3,Start_Num3)
-   	      ],
-   	      [ happens(takeOffOf(customer1,menu1,table1),
-   			Start_Num3)
-   	      ]).
- */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Rest.e',130).
-
- /*  reactive_rule([ b(start,Start_Num3),
-   		toffset(start,3,Start_Num3)
-   	      ],
-   	      [ happens(takeOffOf(customer1,menu1,table1),
-   			Start_Num3)
-   	      ]).
- */
+% happens(
+%    takeOffOf(customer1,menu1,table1), 
+%    start+3).
+observe takeOffOf(customer1, menu1, table1)at start+3.
+ %  observe([takeOffOf(customer1,menu1,table1)],start+3).
+ %  "% =================================".
 
 
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Rest.e',132).
 % Happens(Order(Customer1,Waiter1,Food1),4).
-
- /*  pl=axiom(happens(order(customer1,waiter1,food1),Start_Num4),
-         [b(start,Start_Num4),toffset(start,4,Start_Num4)]).
- */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Rest.e',132).
-
- /*  (   b(start, Start_Num4),
-       toffset(start, 4, Start_Num4)
-   ->  happens(order(customer1, waiter1, food1), Start_Num4)
-   ).
- */
-if b(start, Start_Num4), toffset(start, 4, Start_Num4)then happens(order(customer1, waiter1, food1), Start_Num4).
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Rest.e',132).
-
- /*  reactive_rule([ b(start,Start_Num4),
-   		toffset(start,4,Start_Num4)
-   	      ],
-   	      [ happens(order(customer1,waiter1,food1),
-   			Start_Num4)
-   	      ]).
- */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Rest.e',132).
-
- /*  reactive_rule([ b(start,Start_Num4),
-   		toffset(start,4,Start_Num4)
-   	      ],
-   	      [ happens(order(customer1,waiter1,food1),
-   			Start_Num4)
-   	      ]).
- */
+% happens(
+%    order(customer1,waiter1,food1), 
+%    start+4).
+observe order(customer1, waiter1, food1)at start+4.
+ %  observe([order(customer1,waiter1,food1)],start+4).
+ %  "% =================================".
 
 
 % Happens(PlaceOn(Customer1,Menu1,Table1),5).
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Rest.e',132).
-
- /*  pl=axiom(happens(placeOn(customer1,menu1,table1),Start_Num5),
-         [b(start,Start_Num5),toffset(start,5,Start_Num5)]).
- */
-
- /*  (   b(start, Start_Num5),
-       toffset(start, 5, Start_Num5)
-   ->  happens(placeOn(customer1, menu1, table1), Start_Num5)
-   ).
- */
-if b(start, Start_Num5), toffset(start, 5, Start_Num5)then happens(placeOn(customer1, menu1, table1), Start_Num5).
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Rest.e',132).
-
- /*  reactive_rule([ b(start,Start_Num5),
-   		toffset(start,5,Start_Num5)
-   	      ],
-   	      [ happens(placeOn(customer1,menu1,table1),
-   			Start_Num5)
-   	      ]).
- */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Rest.e',132).
-
- /*  reactive_rule([ b(start,Start_Num5),
-   		toffset(start,5,Start_Num5)
-   	      ],
-   	      [ happens(placeOn(customer1,menu1,table1),
-   			Start_Num5)
-   	      ]).
- */
+% happens(
+%    placeOn(customer1,menu1,table1), 
+%    start+5).
+observe placeOn(customer1, menu1, table1)at start+5.
+ %  observe([placeOn(customer1,menu1,table1)],start+5).
+ %  "% =================================".
 
 
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Rest.e',134).
 % Happens(Eat(Customer1,Food1),11).
-
- /*  pl=axiom(happens(eat(customer1,food1),Start_Num11),
-         [b(start,Start_Num11),toffset(start,11,Start_Num11)]).
- */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Rest.e',134).
-
- /*  (   b(start, Start_Num11),
-       toffset(start, 11, Start_Num11)
-   ->  happens(eat(customer1, food1), Start_Num11)
-   ).
- */
-if b(start, Start_Num11), toffset(start, 11, Start_Num11)then happens(eat(customer1, food1), Start_Num11).
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Rest.e',134).
-
- /*  reactive_rule([ b(start,Start_Num11),
-   		toffset(start,11,Start_Num11)
-   	      ],
-   	      [happens(eat(customer1,food1),Start_Num11)]).
- */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Rest.e',134).
-
- /*  reactive_rule([ b(start,Start_Num11),
-   		toffset(start,11,Start_Num11)
-   	      ],
-   	      [happens(eat(customer1,food1),Start_Num11)]).
- */
+% happens(
+%    eat(customer1,food1), 
+%    start+11).
+observe eat(customer1, food1)at start+11.
+ %  observe([eat(customer1,food1)],start+11).
+ %  "% =================================".
 
 
 % Happens(Request(Customer1,Waiter1,Bill1),12).
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Rest.e',134).
-
- /*  pl=axiom(happens(request(customer1,waiter1,bill1),Start_Num12),
-         [b(start,Start_Num12),toffset(start,12,Start_Num12)]).
- */
-
- /*  (   b(start, Start_Num12),
-       toffset(start, 12, Start_Num12)
-   ->  happens(request(customer1, waiter1, bill1), Start_Num12)
-   ).
- */
-if b(start, Start_Num12), toffset(start, 12, Start_Num12)then happens(request(customer1, waiter1, bill1), Start_Num12).
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Rest.e',134).
-
- /*  reactive_rule([ b(start,Start_Num12),
-   		toffset(start,12,Start_Num12)
-   	      ],
-   	      [ happens(request(customer1,waiter1,bill1),
-   			Start_Num12)
-   	      ]).
- */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Rest.e',134).
-
- /*  reactive_rule([ b(start,Start_Num12),
-   		toffset(start,12,Start_Num12)
-   	      ],
-   	      [ happens(request(customer1,waiter1,bill1),
-   			Start_Num12)
-   	      ]).
- */
+% happens(
+%    request(customer1,waiter1,bill1), 
+%    start+12).
+observe request(customer1, waiter1, bill1)at start+12.
+ %  observe([request(customer1,waiter1,bill1)],start+12).
+ %  "% =================================".
 
 
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Rest.e',136).
 % Happens(Pay(Customer1,Waiter1),15).
-
- /*  pl=axiom(happens(pay(customer1,waiter1),Start_Num15),
-         [b(start,Start_Num15),toffset(start,15,Start_Num15)]).
- */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Rest.e',136).
-
- /*  (   b(start, Start_Num15),
-       toffset(start, 15, Start_Num15)
-   ->  happens(pay(customer1, waiter1), Start_Num15)
-   ).
- */
-if b(start, Start_Num15), toffset(start, 15, Start_Num15)then happens(pay(customer1, waiter1), Start_Num15).
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Rest.e',136).
-
- /*  reactive_rule([ b(start,Start_Num15),
-   		toffset(start,15,Start_Num15)
-   	      ],
-   	      [happens(pay(customer1,waiter1),Start_Num15)]).
- */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Rest.e',136).
-
- /*  reactive_rule([ b(start,Start_Num15),
-   		toffset(start,15,Start_Num15)
-   	      ],
-   	      [happens(pay(customer1,waiter1),Start_Num15)]).
- */
+% happens(
+%    pay(customer1,waiter1), 
+%    start+15).
+observe pay(customer1, waiter1)at start+15.
+ %  observe([pay(customer1,waiter1)],start+15).
+ %  "% =================================".
 
 
 % Happens(Tip(Customer1,Waiter1),15).
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Rest.e',136).
-
- /*  pl=axiom(happens(tip(customer1,waiter1),Start_Num15),
-         [b(start,Start_Num15),toffset(start,15,Start_Num15)]).
- */
-
- /*  (   b(start, Start_Num15),
-       toffset(start, 15, Start_Num15)
-   ->  happens(tip(customer1, waiter1), Start_Num15)
-   ).
- */
-if b(start, Start_Num15), toffset(start, 15, Start_Num15)then happens(tip(customer1, waiter1), Start_Num15).
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Rest.e',136).
-
- /*  reactive_rule([ b(start,Start_Num15),
-   		toffset(start,15,Start_Num15)
-   	      ],
-   	      [happens(tip(customer1,waiter1),Start_Num15)]).
- */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Rest.e',136).
-
- /*  reactive_rule([ b(start,Start_Num15),
-   		toffset(start,15,Start_Num15)
-   	      ],
-   	      [happens(tip(customer1,waiter1),Start_Num15)]).
- */
+% happens(
+%    tip(customer1,waiter1), 
+%    start+15).
+observe tip(customer1, waiter1)at start+15.
+ %  observe([tip(customer1,waiter1)],start+15).
+ %  "% =================================".
 
 
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Rest.e',138).
 % Happens(RiseFrom(Customer1,Chair1),16).
-
- /*  pl=axiom(happens(riseFrom(customer1,chair1),Start_Num16),
-         [b(start,Start_Num16),toffset(start,16,Start_Num16)]).
- */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Rest.e',138).
-
- /*  (   b(start, Start_Num16),
-       toffset(start, 16, Start_Num16)
-   ->  happens(riseFrom(customer1, chair1), Start_Num16)
-   ).
- */
-if b(start, Start_Num16), toffset(start, 16, Start_Num16)then happens(riseFrom(customer1, chair1), Start_Num16).
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Rest.e',138).
-
- /*  reactive_rule([ b(start,Start_Num16),
-   		toffset(start,16,Start_Num16)
-   	      ],
-   	      [happens(riseFrom(customer1,chair1),Start_Num16)]).
- */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Rest.e',138).
-
- /*  reactive_rule([ b(start,Start_Num16),
-   		toffset(start,16,Start_Num16)
-   	      ],
-   	      [happens(riseFrom(customer1,chair1),Start_Num16)]).
- */
+% happens(
+%    riseFrom(customer1,chair1), 
+%    start+16).
+observe riseFrom(customer1, chair1)at start+16.
+ %  observe([riseFrom(customer1,chair1)],start+16).
+ %  "% =================================".
 
 
 % Happens(SayGoodbye(Customer1,Waiter1),17).
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Rest.e',138).
-
- /*  pl=axiom(happens(sayGoodbye(customer1,waiter1),Start_Num17),
-         [b(start,Start_Num17),toffset(start,17,Start_Num17)]).
- */
-
- /*  (   b(start, Start_Num17),
-       toffset(start, 17, Start_Num17)
-   ->  happens(sayGoodbye(customer1, waiter1), Start_Num17)
-   ).
- */
-if b(start, Start_Num17), toffset(start, 17, Start_Num17)then happens(sayGoodbye(customer1, waiter1), Start_Num17).
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Rest.e',138).
-
- /*  reactive_rule([ b(start,Start_Num17),
-   		toffset(start,17,Start_Num17)
-   	      ],
-   	      [ happens(sayGoodbye(customer1,waiter1),
-   			Start_Num17)
-   	      ]).
- */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Rest.e',138).
-
- /*  reactive_rule([ b(start,Start_Num17),
-   		toffset(start,17,Start_Num17)
-   	      ],
-   	      [ happens(sayGoodbye(customer1,waiter1),
-   			Start_Num17)
-   	      ]).
- */
+% happens(
+%    sayGoodbye(customer1,waiter1), 
+%    start+17).
+observe sayGoodbye(customer1, waiter1)at start+17.
+ %  observe([sayGoodbye(customer1,waiter1)],start+17).
+ %  "% =================================".
 
 
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Rest.e',140).
 % Happens(WalkThroughDoor21(Customer1,MainEntrance1),18).
-
- /*  pl=axiom(happens(walkThroughDoor21(customer1,mainEntrance1),
-   	      Start_Num18),
-         [b(start,Start_Num18),toffset(start,18,Start_Num18)]).
- */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Rest.e',140).
-
- /*  (   b(start, Start_Num18),
-       toffset(start, 18, Start_Num18)
-   ->  happens(walkThroughDoor21(customer1, mainEntrance1), Start_Num18)
-   ).
- */
-if b(start, Start_Num18), toffset(start, 18, Start_Num18)then happens(walkThroughDoor21(customer1, mainEntrance1), Start_Num18).
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Rest.e',140).
-
- /*  reactive_rule([ b(start,Start_Num18),
-   		toffset(start,18,Start_Num18)
-   	      ],
-   	      [ happens(walkThroughDoor21(customer1,mainEntrance1),
-   			Start_Num18)
-   	      ]).
- */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Rest.e',140).
-
- /*  reactive_rule([ b(start,Start_Num18),
-   		toffset(start,18,Start_Num18)
-   	      ],
-   	      [ happens(walkThroughDoor21(customer1,mainEntrance1),
-   			Start_Num18)
-   	      ]).
- */
+% happens(
+%    walkThroughDoor21(customer1,mainEntrance1), 
+%    start+18).
+observe walkThroughDoor21(customer1, mainEntrance1)at start+18.
+ %  observe([walkThroughDoor21(customer1,mainEntrance1)],start+18).
+ %  "% =================================".
 
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Rest.e',142).
 % range time 0 19
+% range(time,0,19).
 range(time,0,19).
- %  range(time,0,19).
 
 % range offset 0 0
+% range(offset,0,0).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Rest.e',142).
 range(offset,0,0).
- %  range(offset,0,0).
 
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Rest.e',144).
 % range diameter 0 0
+% range(diameter,0,0).
 range(diameter,0,0).
- %  range(diameter,0,0).
 
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Rest.e',146).
 % completion Happens
+% completion(happens).
 completion(happens).
- %  completion(happens).
 %; End of file.
 % translate: ending  File: /pack/logicmoo_ec/ext/ec_sources/ecnet/Rest.e.lps 

@@ -3,7 +3,7 @@
 :-include(library('ec_planner/ec_test_incl')).
 :-expects_dialect(lps).
 % translate: begining  File: /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoke.e.lps 
-% Thu, 08 Oct 2020 19:07:00 GMT File: <stream>(0x5600a3ae1800)%;
+% Thu, 08 Oct 2020 21:37:15 GMT File: <stream>(0x55894c1db000)%;
 %; Copyright (c) 2005 IBM Corporation and others.
 %; All rights reserved. This program and the accompanying materials
 %; are made available under the terms of the Common Public License v1.0
@@ -18,27 +18,29 @@
 
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Smoke.e',14).
 % fluent CraveNicotine(agent)
- %  blue=fluent(craveNicotine(agent)).
- %  fluent(craveNicotine(agent)).
+% fluent(
+%    craveNicotine(agent)).
 fluents([craveNicotine/1]).
- %  fluents([craveNicotine/1]).
+% mpred_prop(
+%    craveNicotine(agent), 
+%    fluent).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Smoke.e',14).
 mpred_prop(craveNicotine(agent),fluent).
- %  mpred_prop(craveNicotine(agent),fluent).
 
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Smoke.e',16).
 % fluent NicotineCravingSatisfied(agent)
- %  blue=fluent(nicotineCravingSatisfied(agent)).
- %  fluent(nicotineCravingSatisfied(agent)).
+% fluent(
+%    nicotineCravingSatisfied(agent)).
 fluents([nicotineCravingSatisfied/1]).
- %  fluents([nicotineCravingSatisfied/1]).
+% mpred_prop(
+%    nicotineCravingSatisfied(agent), 
+%    fluent).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Smoke.e',16).
 mpred_prop(nicotineCravingSatisfied(agent),fluent).
- %  mpred_prop(nicotineCravingSatisfied(agent),fluent).
 
 % noninertial NicotineCravingSatisfied
+% noninertial(nicotineCravingSatisfied).
 noninertial(nicotineCravingSatisfied).
- %  noninertial(nicotineCravingSatisfied).
 
 
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Smoke.e',19).
@@ -49,242 +51,123 @@ noninertial(nicotineCravingSatisfied).
  /*  holds_at(craveNicotine(Agent), Time) <->
        holds_at(neg(nicotineCravingSatisfied(Agent)), Time).
  */
- %  clausify_pnf=(holds_at(craveNicotine(Agent), Time)->holds_at(neg(nicotineCravingSatisfied(Agent)), Time)).
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Smoke.e',19).
-
- /*  holds_at(neg(nicotineCravingSatisfied(Agent)), Time) :-
-       holds_at(craveNicotine(Agent), Time).
- */
-
- /*  fix_axiom_head(Time) ->
-       [ holds_at(neg(nicotineCravingSatisfied(Agent)), Time),
-          (->),
-         not(nicotineCravingSatisfied(Agent))
-       ].
- */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Smoke.e',19).
-
- /*  pl=axiom(not(nicotineCravingSatisfied(Agent)),
-         [craveNicotine(Agent)]).
- */
-
- /*  craveNicotine(Agent) ->
-       not(nicotineCravingSatisfied(Agent)).
- */
+% '->'(
+%    craveNicotine(Agent), 
+%    not(
+%       nicotineCravingSatisfied(Agent))).
 if craveNicotine(Agent)then not nicotineCravingSatisfied(Agent).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Smoke.e',19).
 
- /*  reactive_rule([craveNicotine(Agent)],
+ /*  reactive_rule([holds(craveNicotine(Agent),Time_At)],
    	      [not(nicotineCravingSatisfied(Agent))]).
  */
-
- /*  reactive_rule([craveNicotine(Agent)],
-   	      [not(nicotineCravingSatisfied(Agent))]).
- */
+ %  "% =================================".
+% '->'(
+%    not(
+%       not(
+%          nicotineCravingSatisfied(Agent))), 
+%    not(
+%       craveNicotine(Agent))).
+not craveNicotine(Agent)if not not nicotineCravingSatisfied(Agent).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Smoke.e',19).
 
- /*  not(holds_at(craveNicotine(Agent), Time)) :-
-       not(holds_at(neg(nicotineCravingSatisfied(Agent)), Time)).
- */
-
- /*  pl=axiom(not(craveNicotine(Agent)),
+ /*  l_int(holds(not(craveNicotine(Agent)),Time_At3),
          [not(not(nicotineCravingSatisfied(Agent)))]).
  */
+ %  "% =================================".
+% '->'(
+%    not(
+%       nicotineCravingSatisfied(Agent)), 
+%    craveNicotine(Agent)).
+craveNicotine(Agent)if not nicotineCravingSatisfied(Agent).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Smoke.e',19).
 
- /*  not(not(nicotineCravingSatisfied(Agent))) ->
-       not(craveNicotine(Agent)).
- */
-if not not nicotineCravingSatisfied(Agent)then not craveNicotine(Agent).
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Smoke.e',19).
-
- /*  reactive_rule([not(not(nicotineCravingSatisfied(Agent)))],
-   	      [not(craveNicotine(Agent))]).
- */
-
- /*  reactive_rule([not(not(nicotineCravingSatisfied(Agent)))],
-   	      [not(craveNicotine(Agent))]).
- */
- %  clausify_pnf=(holds_at(neg(nicotineCravingSatisfied(Agent)), Time)->holds_at(craveNicotine(Agent), Time)).
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Smoke.e',19).
-
- /*  holds_at(craveNicotine(Agent), Time) :-
-       holds_at(neg(nicotineCravingSatisfied(Agent)), Time).
- */
-
- /*  fix_axiom_head(Time) ->
-       [ holds_at(craveNicotine(Agent), Time),
-          (->),
-         craveNicotine(Agent)
-       ].
- */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Smoke.e',19).
-
- /*  pl=axiom(craveNicotine(Agent),
+ /*  l_int(holds(craveNicotine(Agent),Time_At4),
          [not(nicotineCravingSatisfied(Agent))]).
  */
-
- /*  not(nicotineCravingSatisfied(Agent)) ->
-       craveNicotine(Agent).
- */
-if not nicotineCravingSatisfied(Agent)then craveNicotine(Agent).
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Smoke.e',19).
-
- /*  reactive_rule([not(nicotineCravingSatisfied(Agent))],
-   	      [craveNicotine(Agent)]).
- */
-
- /*  reactive_rule([not(nicotineCravingSatisfied(Agent))],
-   	      [craveNicotine(Agent)]).
- */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Smoke.e',19).
-
- /*  not(holds_at(neg(nicotineCravingSatisfied(Agent)), Time)) :-
-       not(holds_at(craveNicotine(Agent), Time)).
- */
-
- /*  pl=axiom(not(not(nicotineCravingSatisfied(Agent))),
-         [not(craveNicotine(Agent))]).
- */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Smoke.e',19).
-
- /*  not(craveNicotine(Agent)) ->
-       not(not(nicotineCravingSatisfied(Agent))).
- */
+ %  "% =================================".
+% '->'(
+%    not(
+%       craveNicotine(Agent)), 
+%    not(
+%       not(
+%          nicotineCravingSatisfied(Agent)))).
 if not craveNicotine(Agent)then not not nicotineCravingSatisfied(Agent).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Smoke.e',19).
 
- /*  reactive_rule([not(craveNicotine(Agent))],
+ /*  reactive_rule([holds(not(craveNicotine(Agent)),Time_At5)],
    	      [not(not(nicotineCravingSatisfied(Agent)))]).
  */
-
- /*  reactive_rule([not(craveNicotine(Agent))],
-   	      [not(not(nicotineCravingSatisfied(Agent)))]).
- */
+ %  "% =================================".
 
 % event Smoke(agent,cigarette)
- %  blue=event(smoke(agent,cigarette)).
- %  event(smoke(agent,cigarette)).
+% event(
+%    smoke(agent,cigarette)).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Smoke.e',22).
 actions([smoke/2]).
- %  actions([smoke/2]).
+% mpred_prop(
+%    smoke(agent,cigarette), 
+%    event).
 mpred_prop(smoke(agent,cigarette),event).
- %  mpred_prop(smoke(agent,cigarette),event).
 
 
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Smoke.e',25).
 % [agent,cigarette,time]
 % Happens(Smoke(agent,cigarette),time) ->
 % HoldsAt(Holding(agent,cigarette),time).
- %  clausify_pnf=(happens(smoke(Agent, Cigarette), Time)->holds_at(holding(Agent, Cigarette), Time)).
-
- /*  holds_at(holding(Agent, Cigarette), Time) :-
-       happens(smoke(Agent, Cigarette), Time).
- */
+% '->'(
+%    metreqs(
+%       smoke(Agent,Cigarette)), 
+%    requires(
+%       smoke(Agent,Cigarette), 
+%       When_Time)).
+if smoke(Agent, Cigarette)then requires(smoke(Agent, Cigarette), When_Time).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Smoke.e',25).
 
- /*  pl=axiom(requires(smoke(Agent,Cigarette),When_Time),
-         [metreqs(smoke(Agent,Cigarette))]).
- */
-
- /*  metreqs(smoke(Agent, Cigarette)) ->
-       requires(smoke(Agent, Cigarette), When_Time).
- */
-if metreqs(smoke(Agent, Cigarette))then requires(smoke(Agent, Cigarette), When_Time).
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Smoke.e',25).
-
- /*  reactive_rule([metreqs(smoke(Agent,Cigarette))],
+ /*  reactive_rule([ happens(smoke(Agent,Cigarette),
+   			Time_From,
+   			Time_Until)
+   	      ],
    	      [ requires(smoke(Agent,Cigarette),
    			 When_Time)
    	      ]).
  */
+ %  "% =================================".
+% '->'(
+%    holding(Agent,Cigarette), 
+%    metreqs(
+%       smoke(Agent,Cigarette))).
+smoke(Agent, Cigarette)if holding(Agent, Cigarette).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Smoke.e',25).
 
- /*  reactive_rule([metreqs(smoke(Agent,Cigarette))],
-   	      [ requires(smoke(Agent,Cigarette),
-   			 When_Time)
-   	      ]).
+ /*  l_events(happens(smoke(Agent,Cigarette),
+   		 Time_From6,
+   		 Time_From6),
+   	 [holds(holding(Agent,Cigarette),Time_From6)]).
  */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Smoke.e',25).
-
- /*  fix_axiom_head(When_Time) ->
-       [ holds_at(metreqs(smoke(Agent, Cigarette)), When_Time),
-          (->),
-         metreqs(smoke(Agent, Cigarette))
-       ].
- */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Smoke.e',25).
-
- /*  pl=axiom(metreqs(smoke(Agent,Cigarette)),
-         [holding(Agent,Cigarette)]).
- */
-
- /*  holding(Agent, Cigarette) ->
-       metreqs(smoke(Agent, Cigarette)).
- */
-if holding(Agent, Cigarette)then metreqs(smoke(Agent, Cigarette)).
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Smoke.e',25).
-
- /*  reactive_rule([holds(holding(Agent,Cigarette),Holds)],
-   	      [metreqs(smoke(Agent,Cigarette))]).
- */
-
- /*  reactive_rule([holds(holding(Agent,Cigarette),Holds)],
-   	      [metreqs(smoke(Agent,Cigarette))]).
- */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Smoke.e',25).
-
- /*  not(happens(smoke(Agent, Cigarette), When_Time)) :-
-       not(holds_at(holding(Agent, Cigarette), When_Time)).
- */
-
- /*  fix_axiom_head(When_Time) ->
-       [ not(happens(smoke(Agent, Cigarette), When_Time)),
-          (->),
-         not(smoke(Agent, Cigarette))
-       ].
- */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Smoke.e',25).
-
- /*  pl=axiom(not(smoke(Agent,Cigarette)),
-         [not(holding(Agent,Cigarette))]).
- */
-
- /*  not(holding(Agent, Cigarette)) ->
-       not(smoke(Agent, Cigarette)).
- */
+ %  "% =================================".
+% '->'(
+%    not(
+%       holding(Agent,Cigarette)), 
+%    not(
+%       smoke(Agent,Cigarette))).
 if not holding(Agent, Cigarette)then not smoke(Agent, Cigarette).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Smoke.e',25).
 
  /*  reactive_rule([ holds(not(holding(Agent,Cigarette)),
-   		      Holds5)
+   		      Time_At)
    	      ],
    	      [not(smoke(Agent,Cigarette))]).
  */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Smoke.e',25).
-
- /*  reactive_rule([ holds(not(holding(Agent,Cigarette)),
-   		      Holds5)
-   	      ],
-   	      [not(smoke(Agent,Cigarette))]).
- */
+ %  "% =================================".
 
 
 % [agent,cigarette,time]
 % Terminates(Smoke(agent,cigarette),CraveNicotine(agent),time).
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Smoke.e',30).
-
- /*  pl=axiom(terminates(smoke(Agent,Cigarette),
-   		 craveNicotine(Agent),
-   		 Time),
-         []).
- */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Smoke.e',30).
-
- /*  terminates(smoke(Agent,Cigarette),
-   	   craveNicotine(Agent),
-   	   Time).
- */
+% terminates(
+%    smoke(Agent,Cigarette), 
+%    craveNicotine(Agent), 
+%    Time).
 smoke(Agent, Cigarette)terminates craveNicotine(Agent).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Smoke.e',30).
 
@@ -294,109 +177,61 @@ smoke(Agent, Cigarette)terminates craveNicotine(Agent).
    	   craveNicotine(Agent),
    	   []).
  */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Smoke.e',30).
-
- /*  terminated(happens(smoke(Agent,Cigarette),
-   		   Time_From,
-   		   Time_Until),
-   	   craveNicotine(Agent),
-   	   []).
- */
+ %  "% =================================".
 
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Smoke.e',32).
 % event Puff(agent,cigarette)
- %  blue=event(puff(agent,cigarette)).
- %  event(puff(agent,cigarette)).
+% event(
+%    puff(agent,cigarette)).
 actions([puff/2]).
- %  actions([puff/2]).
+% mpred_prop(
+%    puff(agent,cigarette), 
+%    event).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Smoke.e',32).
 mpred_prop(puff(agent,cigarette),event).
- %  mpred_prop(puff(agent,cigarette),event).
 
 
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Smoke.e',34).
 % [agent,cigarette,time]
 % Happens(Puff(agent,cigarette),time) ->
 % Happens(Smoke(agent,cigarette),time).
- %  clausify_pnf=(happens(puff(Agent, Cigarette), Time)->happens(smoke(Agent, Cigarette), Time)).
-
- /*  happens(smoke(Agent, Cigarette), Time) :-
-       happens(puff(Agent, Cigarette), Time).
- */
+% '->'(
+%    puff(Agent,Cigarette), 
+%    smoke(Agent,Cigarette)).
+smoke(Agent, Cigarette)if puff(Agent, Cigarette).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Smoke.e',34).
 
- /*  fix_axiom_head(Time) ->
-       [ happens(smoke(Agent, Cigarette), Time),
-          (->),
-         smoke(Agent, Cigarette)
-       ].
+ /*  l_events(happens(smoke(Agent,Cigarette),
+   		 Time_From,
+   		 Time_Until),
+   	 [ happens(puff(Agent,Cigarette),
+   		   Time_From,
+   		   Time_Until)
+   	 ]).
  */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Smoke.e',34).
-
- /*  pl=axiom(smoke(Agent,Cigarette),
-         [puff(Agent,Cigarette)]).
- */
-
- /*  puff(Agent, Cigarette) ->
-       smoke(Agent, Cigarette).
- */
-if puff(Agent, Cigarette)then smoke(Agent, Cigarette).
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Smoke.e',34).
-
- /*  reactive_rule([puff(Agent,Cigarette)],
-   	      [ happens(smoke(Agent,Cigarette),
-   			Time_From,
-   			Time_Until)
-   	      ]).
- */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Smoke.e',34).
-
- /*  reactive_rule([puff(Agent,Cigarette)],
-   	      [ happens(smoke(Agent,Cigarette),
-   			Time_From,
-   			Time_Until)
-   	      ]).
- */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Smoke.e',34).
-
- /*  not(happens(puff(Agent, Cigarette), Time)) :-
-       not(happens(smoke(Agent, Cigarette), Time)).
- */
-
- /*  fix_axiom_head(Time) ->
-       [ not(happens(puff(Agent, Cigarette), Time)),
-          (->),
-         not(puff(Agent, Cigarette))
-       ].
- */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Smoke.e',34).
-
- /*  pl=axiom(not(puff(Agent,Cigarette)),
-         [not(smoke(Agent,Cigarette))]).
- */
-
- /*  not(smoke(Agent, Cigarette)) ->
-       not(puff(Agent, Cigarette)).
- */
+ %  "% =================================".
+% '->'(
+%    not(
+%       smoke(Agent,Cigarette)), 
+%    not(
+%       puff(Agent,Cigarette))).
 if not smoke(Agent, Cigarette)then not puff(Agent, Cigarette).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Smoke.e',34).
 
  /*  reactive_rule([not(smoke(Agent,Cigarette))],
    	      [not(puff(Agent,Cigarette))]).
  */
-
- /*  reactive_rule([not(smoke(Agent,Cigarette))],
-   	      [not(puff(Agent,Cigarette))]).
- */
+ %  "% =================================".
 
 % event BlowOutSmoke(agent,smoke)
- %  blue=event(blowOutSmoke(agent,smoke)).
- %  event(blowOutSmoke(agent,smoke)).
+% event(
+%    blowOutSmoke(agent,smoke)).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Smoke.e',37).
 actions([blowOutSmoke/2]).
- %  actions([blowOutSmoke/2]).
+% mpred_prop(
+%    blowOutSmoke(agent,smoke), 
+%    event).
 mpred_prop(blowOutSmoke(agent,smoke),event).
- %  mpred_prop(blowOutSmoke(agent,smoke),event).
 
 
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Smoke.e',40).

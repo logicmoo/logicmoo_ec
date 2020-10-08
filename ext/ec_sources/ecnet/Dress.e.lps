@@ -3,7 +3,7 @@
 :-include(library('ec_planner/ec_test_incl')).
 :-expects_dialect(lps).
 % translate: begining  File: /pack/logicmoo_ec/ext/ec_sources/ecnet/Dress.e.lps 
-% Thu, 08 Oct 2020 19:06:00 GMT File: <stream>(0x5600a3943400)%;
+% Thu, 08 Oct 2020 21:36:10 GMT File: <stream>(0x55894c1db500)%;
 %; Copyright (c) 2005 IBM Corporation and others.
 %; All rights reserved. This program and the accompanying materials
 %; are made available under the terms of the Common Public License v1.0
@@ -19,33 +19,36 @@
 
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Dress.e',15).
 % event PutOn(agent,clothing)
- %  blue=event(putOn(agent,clothing)).
- %  event(putOn(agent,clothing)).
+% event(
+%    putOn(agent,clothing)).
 actions([putOn/2]).
- %  actions([putOn/2]).
+% mpred_prop(
+%    putOn(agent,clothing), 
+%    event).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Dress.e',15).
 mpred_prop(putOn(agent,clothing),event).
- %  mpred_prop(putOn(agent,clothing),event).
 
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Dress.e',17).
 % event TakeOff(agent,clothing)
- %  blue=event(takeOff(agent,clothing)).
- %  event(takeOff(agent,clothing)).
+% event(
+%    takeOff(agent,clothing)).
 actions([takeOff/2]).
- %  actions([takeOff/2]).
+% mpred_prop(
+%    takeOff(agent,clothing), 
+%    event).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Dress.e',17).
 mpred_prop(takeOff(agent,clothing),event).
- %  mpred_prop(takeOff(agent,clothing),event).
 
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Dress.e',19).
 % fluent Wearing(agent,clothing)
- %  blue=fluent(wearing(agent,clothing)).
- %  fluent(wearing(agent,clothing)).
+% fluent(
+%    wearing(agent,clothing)).
 fluents([wearing/2]).
- %  fluents([wearing/2]).
+% mpred_prop(
+%    wearing(agent,clothing), 
+%    fluent).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Dress.e',19).
 mpred_prop(wearing(agent,clothing),fluent).
- %  mpred_prop(wearing(agent,clothing),fluent).
 
 
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Dress.e',21).
@@ -53,18 +56,10 @@ mpred_prop(wearing(agent,clothing),fluent).
 % Initiates(PutOn(agent,clothing),
 %           Wearing(agent,clothing),
 %           time).
-
- /*  pl=axiom(initiates(putOn(Agent,Clothing),
-   		wearing(Agent,Clothing),
-   		Time),
-         []).
- */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Dress.e',21).
-
- /*  initiates(putOn(Agent,Clothing),
-   	  wearing(Agent,Clothing),
-   	  Time).
- */
+% initiates(
+%    putOn(Agent,Clothing), 
+%    wearing(Agent,Clothing), 
+%    Time).
 putOn(Agent, Clothing)initiates wearing(Agent, Clothing).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Dress.e',21).
 
@@ -74,14 +69,7 @@ putOn(Agent, Clothing)initiates wearing(Agent, Clothing).
    	  wearing(Agent,Clothing),
    	  []).
  */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Dress.e',21).
-
- /*  initiated(happens(putOn(Agent,Clothing),
-   		  Time_From,
-   		  Time_Until),
-   	  wearing(Agent,Clothing),
-   	  []).
- */
+ %  "% =================================".
 
 
 % [agent,clothing,time]
@@ -90,245 +78,104 @@ putOn(Agent, Clothing)initiates wearing(Agent, Clothing).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Dress.e',27).
 % {location}%  HoldsAt(At(agent,location),time) &
 %            HoldsAt(At(clothing,location),time).
- %  clausify_pnf=exists([Location],  (happens(putOn(Agent, Clothing), Time)->holds_at(neg(wearing(Agent, Clothing)), Time), holds_at(at(Agent, Location), Time), holds_at(at(Clothing, Location), Time))).
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Dress.e',29).
-
- /*  not(happens(putOn(Agent, Clothing), Time)) :-
-       (   not(holds_at(neg(wearing(Agent, Clothing)), Time))
-       ;   not(holds_at(at(Agent, Exists_Location), Time))
-       ;   not(holds_at(at(Clothing, Exists_Location), Time))
-       ),
-       some(Exists_Location,
-            '$kolem_Fn_16'(Agent, Clothing, Time)).
- */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Dress.e',29).
-
- /*  fix_axiom_head(Time) ->
-       [ not(happens(putOn(Agent, Clothing), Time)),
-          (->),
-         not(putOn(Agent, Clothing))
-       ].
- */
- %   pl=axiom(not(putOn(Agent, Clothing)), [(not(not(wearing(Agent, Clothing)));not(at(Agent, Exists_Location));not(at(Clothing, Exists_Location))), some(Exists_Location, '$kolem_Fn_16'(Agent, Clothing, Time))]).
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Dress.e',29).
-
- /*  (   (   not(not(wearing(Agent, Clothing)))
-       ;   not(at(Agent, Exists_Location))
-       ;   not(at(Clothing, Exists_Location))
-       ),
-       some(Exists_Location,
-            '$kolem_Fn_16'(Agent, Clothing, Time))
-   ->  not(putOn(Agent, Clothing))
-   ).
- */
-if (not not wearing(Agent, Clothing);not loc_at(Agent, Exists_Location);not loc_at(Clothing, Exists_Location)), some(Exists_Location, '$kolem_Fn_16'(Agent, Clothing, Time))then not putOn(Agent, Clothing).
+% '->'(
+%    ','(
+%       ';'(
+%          not(
+%             not(
+%                wearing(Agent,Clothing))), 
+%          ';'(
+%             not(
+%                at(Agent,Exists_Location)), 
+%             not(
+%                at(Clothing,Exists_Location)))), 
+%       some(
+%          Exists_Location, 
+%          '$kolem_Fn_686'(Agent,Clothing,Time))), 
+%    not(
+%       putOn(Agent,Clothing))).
+if (not not wearing(Agent, Clothing);not loc_at(Agent, Exists_Location);not loc_at(Clothing, Exists_Location)), some(Exists_Location, '$kolem_Fn_686'(Agent, Clothing, Time))then not putOn(Agent, Clothing).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Dress.e',29).
 
  /*   reactive_rule([  (not(not(wearing(Agent, Clothing)));not(loc_at(Agent, Exists_Location));not(loc_at(Clothing, Exists_Location))),
                       some(Exists_Location,
-                           '$kolem_Fn_16'(Agent, Clothing, Time))
+                           '$kolem_Fn_686'(Agent, Clothing, Time))
                     ],
                     [not(putOn(Agent, Clothing))]).
  */
+ %  "% =================================".
+% '->'(
+%    ','(
+%       putOn(Agent,Clothing), 
+%       some(
+%          Exists_Location, 
+%          '$kolem_Fn_686'(Agent,Clothing,Time))), 
+%    not(
+%       wearing(Agent,Clothing))).
+not wearing(Agent, Clothing)if putOn(Agent, Clothing), some(Exists_Location, '$kolem_Fn_686'(Agent, Clothing, Time)).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Dress.e',29).
 
- /*   reactive_rule([  (not(not(wearing(Agent, Clothing)));not(loc_at(Agent, Exists_Location));not(loc_at(Clothing, Exists_Location))),
-                      some(Exists_Location,
-                           '$kolem_Fn_16'(Agent, Clothing, Time))
-                    ],
-                    [not(putOn(Agent, Clothing))]).
- */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Dress.e',29).
-
- /*  holds_at(neg(wearing(Agent, Clothing)), Time) :-
-       happens(putOn(Agent, Clothing), Time),
-       some(Exists_Location,
-            '$kolem_Fn_16'(Agent, Clothing, Time)).
- */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Dress.e',29).
-
- /*  fix_axiom_head(Time) ->
-       [ holds_at(neg(wearing(Agent, Clothing)), Time),
-          (->),
-         not(wearing(Agent, Clothing))
-       ].
- */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Dress.e',29).
-
- /*  pl=axiom(not(wearing(Agent,Clothing)),
-         [ putOn(Agent,Clothing),
+ /*  l_int(holds(not(wearing(Agent,Clothing)),Time_At),
+         [ happens(putOn(Agent,Clothing),
+   		Time_At,
+   		Time_At),
    	some(Exists_Location,
-   	     '$kolem_Fn_16'(Agent,Clothing,Time))
+   	     '$kolem_Fn_686'(Agent,Clothing,Time))
          ]).
  */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Dress.e',29).
-
- /*  (   putOn(Agent, Clothing),
-       some(Exists_Location,
-            '$kolem_Fn_16'(Agent, Clothing, Time))
-   ->  not(wearing(Agent, Clothing))
-   ).
- */
-if putOn(Agent, Clothing), some(Exists_Location, '$kolem_Fn_16'(Agent, Clothing, Time))then not wearing(Agent, Clothing).
+ %  "% =================================".
+% '->'(
+%    ','(
+%       putOn(Agent,Clothing), 
+%       some(
+%          Exists_Location, 
+%          '$kolem_Fn_686'(Agent,Clothing,Time))), 
+%    at(Agent,Exists_Location)).
+if putOn(Agent, Clothing), some(Exists_Location, '$kolem_Fn_686'(Agent, Clothing, Time))then loc_at(Agent, Exists_Location).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Dress.e',29).
 
  /*  reactive_rule([ happens(putOn(Agent,Clothing),
    			Time_From,
    			Time_Until),
    		some(Exists_Location,
-   		     '$kolem_Fn_16'(Agent,
-   				    Clothing,
-   				    Time))
+   		     '$kolem_Fn_686'(Agent,
+   				     Clothing,
+   				     Time))
    	      ],
-   	      [ holds(not(wearing(Agent,Clothing)),
-   		      Holds)
-   	      ]).
+   	      [loc_at(Agent,Exists_Location)]).
  */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Dress.e',29).
-
- /*  reactive_rule([ happens(putOn(Agent,Clothing),
-   			Time_From,
-   			Time_Until),
-   		some(Exists_Location,
-   		     '$kolem_Fn_16'(Agent,
-   				    Clothing,
-   				    Time))
-   	      ],
-   	      [ holds(not(wearing(Agent,Clothing)),
-   		      Holds)
-   	      ]).
- */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Dress.e',29).
-
- /*  holds_at(at(Agent, Exists_Location), Time) :-
-       happens(putOn(Agent, Clothing), Time),
-       some(Exists_Location,
-            '$kolem_Fn_16'(Agent, Clothing, Time)).
- */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Dress.e',29).
-
- /*  fix_axiom_head(Time) ->
-       [ holds_at(at(Agent, Exists_Location), Time),
-          (->),
-         at(Agent, Exists_Location)
-       ].
- */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Dress.e',29).
-
- /*  pl=axiom(at(Agent,Exists_Location),
-         [ putOn(Agent,Clothing),
-   	some(Exists_Location,
-   	     '$kolem_Fn_16'(Agent,Clothing,Time))
-         ]).
- */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Dress.e',29).
-
- /*  (   putOn(Agent, Clothing),
-       some(Exists_Location,
-            '$kolem_Fn_16'(Agent, Clothing, Time))
-   ->  at(Agent, Exists_Location)
-   ).
- */
-if putOn(Agent, Clothing), some(Exists_Location, '$kolem_Fn_16'(Agent, Clothing, Time))then loc_at(Agent, Exists_Location).
+ %  "% =================================".
+% '->'(
+%    ','(
+%       putOn(Agent,Clothing), 
+%       some(
+%          Exists_Location, 
+%          '$kolem_Fn_686'(Agent,Clothing,Time))), 
+%    at(Clothing,Exists_Location)).
+if putOn(Agent, Clothing), some(Exists_Location, '$kolem_Fn_686'(Agent, Clothing, Time))then loc_at(Clothing, Exists_Location).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Dress.e',29).
 
  /*  reactive_rule([ happens(putOn(Agent,Clothing),
    			Time_From8,
    			Time_Until9),
    		some(Exists_Location,
-   		     '$kolem_Fn_16'(Agent,
-   				    Clothing,
-   				    Time))
-   	      ],
-   	      [loc_at(Agent,Exists_Location)]).
- */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Dress.e',29).
-
- /*  reactive_rule([ happens(putOn(Agent,Clothing),
-   			Time_From8,
-   			Time_Until9),
-   		some(Exists_Location,
-   		     '$kolem_Fn_16'(Agent,
-   				    Clothing,
-   				    Time))
-   	      ],
-   	      [loc_at(Agent,Exists_Location)]).
- */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Dress.e',29).
-
- /*  holds_at(at(Clothing, Exists_Location), Time) :-
-       happens(putOn(Agent, Clothing), Time),
-       some(Exists_Location,
-            '$kolem_Fn_16'(Agent, Clothing, Time)).
- */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Dress.e',29).
-
- /*  fix_axiom_head(Time) ->
-       [ holds_at(at(Clothing, Exists_Location), Time),
-          (->),
-         at(Clothing, Exists_Location)
-       ].
- */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Dress.e',29).
-
- /*  pl=axiom(at(Clothing,Exists_Location),
-         [ putOn(Agent,Clothing),
-   	some(Exists_Location,
-   	     '$kolem_Fn_16'(Agent,Clothing,Time))
-         ]).
- */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Dress.e',29).
-
- /*  (   putOn(Agent, Clothing),
-       some(Exists_Location,
-            '$kolem_Fn_16'(Agent, Clothing, Time))
-   ->  at(Clothing, Exists_Location)
-   ).
- */
-if putOn(Agent, Clothing), some(Exists_Location, '$kolem_Fn_16'(Agent, Clothing, Time))then loc_at(Clothing, Exists_Location).
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Dress.e',29).
-
- /*  reactive_rule([ happens(putOn(Agent,Clothing),
-   			Time_From10,
-   			Time_Until11),
-   		some(Exists_Location,
-   		     '$kolem_Fn_16'(Agent,
-   				    Clothing,
-   				    Time))
+   		     '$kolem_Fn_686'(Agent,
+   				     Clothing,
+   				     Time))
    	      ],
    	      [loc_at(Clothing,Exists_Location)]).
  */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Dress.e',29).
-
- /*  reactive_rule([ happens(putOn(Agent,Clothing),
-   			Time_From10,
-   			Time_Until11),
-   		some(Exists_Location,
-   		     '$kolem_Fn_16'(Agent,
-   				    Clothing,
-   				    Time))
-   	      ],
-   	      [loc_at(Clothing,Exists_Location)]).
- */
+ %  "% =================================".
 
 
 % [agent,clothing,time]
 % Terminates(TakeOff(agent,clothing),
 %            Wearing(agent,clothing),
 %            time).
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Dress.e',33).
-
- /*  pl=axiom(terminates(takeOff(Agent,Clothing),
-   		 wearing(Agent,Clothing),
-   		 Time),
-         []).
- */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Dress.e',33).
-
- /*  terminates(takeOff(Agent,Clothing),
-   	   wearing(Agent,Clothing),
-   	   Time).
- */
+% terminates(
+%    takeOff(Agent,Clothing), 
+%    wearing(Agent,Clothing), 
+%    Time).
 takeOff(Agent, Clothing)terminates wearing(Agent, Clothing).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Dress.e',33).
 
@@ -338,137 +185,68 @@ takeOff(Agent, Clothing)terminates wearing(Agent, Clothing).
    	   wearing(Agent,Clothing),
    	   []).
  */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Dress.e',33).
-
- /*  terminated(happens(takeOff(Agent,Clothing),
-   		   Time_From,
-   		   Time_Until),
-   	   wearing(Agent,Clothing),
-   	   []).
- */
+ %  "% =================================".
 
 
 % [agent,clothing,time]
 % Happens(TakeOff(agent,clothing),time) ->
 % HoldsAt(Wearing(agent,clothing),time).
- %  clausify_pnf=(happens(takeOff(Agent, Clothing), Time)->holds_at(wearing(Agent, Clothing), Time)).
+% '->'(
+%    metreqs(
+%       takeOff(Agent,Clothing)), 
+%    requires(
+%       takeOff(Agent,Clothing), 
+%       When_Time)).
+if takeOff(Agent, Clothing)then requires(takeOff(Agent, Clothing), When_Time).
 
- /*  holds_at(wearing(Agent, Clothing), Time) :-
-       happens(takeOff(Agent, Clothing), Time).
- */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Dress.e',38).
-
- /*  pl=axiom(requires(takeOff(Agent,Clothing),When_Time),
-         [metreqs(takeOff(Agent,Clothing))]).
- */
-
- /*  metreqs(takeOff(Agent, Clothing)) ->
-       requires(takeOff(Agent, Clothing), When_Time).
- */
-if metreqs(takeOff(Agent, Clothing))then requires(takeOff(Agent, Clothing), When_Time).
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Dress.e',38).
-
- /*  reactive_rule([metreqs(takeOff(Agent,Clothing))],
+ /*  reactive_rule([ happens(takeOff(Agent,Clothing),
+   			Time_From,
+   			Time_Until)
+   	      ],
    	      [ requires(takeOff(Agent,Clothing),
    			 When_Time)
    	      ]).
  */
+ %  "% =================================".
+% '->'(
+%    wearing(Agent,Clothing), 
+%    metreqs(
+%       takeOff(Agent,Clothing))).
+takeOff(Agent, Clothing)if wearing(Agent, Clothing).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Dress.e',38).
 
- /*  reactive_rule([metreqs(takeOff(Agent,Clothing))],
-   	      [ requires(takeOff(Agent,Clothing),
-   			 When_Time)
-   	      ]).
+ /*  l_events(happens(takeOff(Agent,Clothing),
+   		 Time_From6,
+   		 Time_From6),
+   	 [holds(wearing(Agent,Clothing),Time_From6)]).
  */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Dress.e',38).
-
- /*  fix_axiom_head(When_Time) ->
-       [ holds_at(metreqs(takeOff(Agent, Clothing)), When_Time),
-          (->),
-         metreqs(takeOff(Agent, Clothing))
-       ].
- */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Dress.e',38).
-
- /*  pl=axiom(metreqs(takeOff(Agent,Clothing)),
-         [wearing(Agent,Clothing)]).
- */
-
- /*  wearing(Agent, Clothing) ->
-       metreqs(takeOff(Agent, Clothing)).
- */
-if wearing(Agent, Clothing)then metreqs(takeOff(Agent, Clothing)).
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Dress.e',38).
-
- /*  reactive_rule([holds(wearing(Agent,Clothing),Holds)],
-   	      [metreqs(takeOff(Agent,Clothing))]).
- */
-
- /*  reactive_rule([holds(wearing(Agent,Clothing),Holds)],
-   	      [metreqs(takeOff(Agent,Clothing))]).
- */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Dress.e',38).
-
- /*  not(happens(takeOff(Agent, Clothing), When_Time)) :-
-       not(holds_at(wearing(Agent, Clothing), When_Time)).
- */
-
- /*  fix_axiom_head(When_Time) ->
-       [ not(happens(takeOff(Agent, Clothing), When_Time)),
-          (->),
-         not(takeOff(Agent, Clothing))
-       ].
- */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Dress.e',38).
-
- /*  pl=axiom(not(takeOff(Agent,Clothing)),
-         [not(wearing(Agent,Clothing))]).
- */
-
- /*  not(wearing(Agent, Clothing)) ->
-       not(takeOff(Agent, Clothing)).
- */
+ %  "% =================================".
+% '->'(
+%    not(
+%       wearing(Agent,Clothing)), 
+%    not(
+%       takeOff(Agent,Clothing))).
 if not wearing(Agent, Clothing)then not takeOff(Agent, Clothing).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Dress.e',38).
 
  /*  reactive_rule([ holds(not(wearing(Agent,Clothing)),
-   		      Holds5)
+   		      Time_At)
    	      ],
    	      [not(takeOff(Agent,Clothing))]).
  */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Dress.e',38).
-
- /*  reactive_rule([ holds(not(wearing(Agent,Clothing)),
-   		      Holds5)
-   	      ],
-   	      [not(takeOff(Agent,Clothing))]).
- */
+ %  "% =================================".
 
 
 % [agent,clothing,location,time]
 % Releases(PutOn(agent,clothing),At(clothing,location),time).
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Dress.e',42).
-
- /*  pl=axiom(releases(putOn(Agent,Clothing),
-   	       at(Clothing,Location),
-   	       Time),
-         []).
- */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Dress.e',42).
-
- /*  releases(putOn(Agent,Clothing),
-   	 at(Clothing,Location),
-   	 Time).
- */
+% releases(
+%    putOn(Agent,Clothing), 
+%    at(Clothing,Location), 
+%    Time).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Dress.e',42).
 releases(putOn(Agent,Clothing),
 	 loc_at(Clothing,Location),
 	 Time).
-
- /*  releases(putOn(Agent,Clothing),
-   	 loc_at(Clothing,Location),
-   	 Time).
- */
 
 
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Dress.e',44).
@@ -476,124 +254,54 @@ releases(putOn(Agent,Clothing),
 % HoldsAt(Wearing(agent,clothing),time) &
 % HoldsAt(At(agent,location),time) ->
 % HoldsAt(At(clothing,location),time).
- %  clausify_pnf=(holds_at(wearing(Agent, Clothing), Time), holds_at(at(Agent, Location), Time)->holds_at(at(Clothing, Location), Time)).
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Dress.e',44).
-
- /*  holds_at(at(Clothing, Location), Time) :-
-       holds_at(wearing(Agent, Clothing), Time),
-       holds_at(at(Agent, Location), Time).
- */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Dress.e',44).
-
- /*  fix_axiom_head(Time) ->
-       [ holds_at(at(Clothing, Location), Time),
-          (->),
-         at(Clothing, Location)
-       ].
- */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Dress.e',44).
-
- /*  pl=axiom(at(Clothing,Location),
-         [ wearing(Agent,Clothing),
-   	at(Agent,Location)
-         ]).
- */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Dress.e',44).
-
- /*  (   wearing(Agent, Clothing),
-       at(Agent, Location)
-   ->  at(Clothing, Location)
-   ).
- */
+% '->'(
+%    ','(
+%       wearing(Agent,Clothing), 
+%       at(Agent,Location)), 
+%    at(Clothing,Location)).
 if wearing(Agent, Clothing), loc_at(Agent, Location)then loc_at(Clothing, Location).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Dress.e',44).
 
- /*  reactive_rule([ holds(wearing(Agent,Clothing),Holds),
+ /*  reactive_rule([ holds(wearing(Agent,Clothing),
+   		      Time_At),
    		loc_at(Agent,Location)
    	      ],
    	      [loc_at(Clothing,Location)]).
  */
+ %  "% =================================".
+% '->'(
+%    ','(
+%       at(Agent,Location), 
+%       not(
+%          at(Clothing,Location))), 
+%    not(
+%       wearing(Agent,Clothing))).
+not wearing(Agent, Clothing)if loc_at(Agent, Location), not loc_at(Clothing, Location).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Dress.e',44).
 
- /*  reactive_rule([ holds(wearing(Agent,Clothing),Holds),
-   		loc_at(Agent,Location)
-   	      ],
-   	      [loc_at(Clothing,Location)]).
- */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Dress.e',44).
-
- /*  not(holds_at(wearing(Agent, Clothing), Time)) :-
-       holds_at(at(Agent, Location), Time),
-       not(holds_at(at(Clothing, Location), Time)).
- */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Dress.e',44).
-
- /*  pl=axiom(not(wearing(Agent,Clothing)),
-         [ at(Agent,Location),
-   	not(at(Clothing,Location))
+ /*  l_int(holds(not(wearing(Agent,Clothing)),Time_At5),
+         [ loc_at(Agent,Location),
+   	not(loc_at(Clothing,Location))
          ]).
  */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Dress.e',44).
-
- /*  (   at(Agent, Location),
-       not(at(Clothing, Location))
-   ->  not(wearing(Agent, Clothing))
-   ).
- */
-if loc_at(Agent, Location), not loc_at(Clothing, Location)then not wearing(Agent, Clothing).
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Dress.e',44).
-
- /*  reactive_rule([ loc_at(Agent,Location),
-   		not(loc_at(Clothing,Location))
-   	      ],
-   	      [ holds(not(wearing(Agent,Clothing)),
-   		      Holds5)
-   	      ]).
- */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Dress.e',44).
-
- /*  reactive_rule([ loc_at(Agent,Location),
-   		not(loc_at(Clothing,Location))
-   	      ],
-   	      [ holds(not(wearing(Agent,Clothing)),
-   		      Holds5)
-   	      ]).
- */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Dress.e',44).
-
- /*  not(holds_at(at(Agent, Location), Time)) :-
-       holds_at(wearing(Agent, Clothing), Time),
-       not(holds_at(at(Clothing, Location), Time)).
- */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Dress.e',44).
-
- /*  pl=axiom(not(at(Agent,Location)),
-         [ wearing(Agent,Clothing),
-   	not(at(Clothing,Location))
-         ]).
- */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Dress.e',44).
-
- /*  (   wearing(Agent, Clothing),
-       not(at(Clothing, Location))
-   ->  not(at(Agent, Location))
-   ).
- */
+ %  "% =================================".
+% '->'(
+%    ','(
+%       wearing(Agent,Clothing), 
+%       not(
+%          at(Clothing,Location))), 
+%    not(
+%       at(Agent,Location))).
 if wearing(Agent, Clothing), not loc_at(Clothing, Location)then not loc_at(Agent, Location).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Dress.e',44).
 
- /*  reactive_rule([ holds(wearing(Agent,Clothing),Holds6),
+ /*  reactive_rule([ holds(wearing(Agent,Clothing),
+   		      Time_At6),
    		not(loc_at(Clothing,Location))
    	      ],
    	      [not(loc_at(Agent,Location))]).
  */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Dress.e',44).
-
- /*  reactive_rule([ holds(wearing(Agent,Clothing),Holds6),
-   		not(loc_at(Clothing,Location))
-   	      ],
-   	      [not(loc_at(Agent,Location))]).
- */
+ %  "% =================================".
 
 
 %;[agent,clothing,location1,location2,time]
@@ -603,20 +311,12 @@ if wearing(Agent, Clothing), not loc_at(Clothing, Location)then not loc_at(Agent
 % [agent,clothing,location,time]
 % HoldsAt(At(agent,location),time) ->
 % Initiates(TakeOff(agent,clothing),At(clothing,location),time).
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Dress.e',54).
-
- /*  pl=axiom(initiates(takeOff(Agent,Clothing),
-   		at(Clothing,Location),
-   		Time),
-         [at(Agent,Location)]).
- */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Dress.e',54).
-
- /*  at(Agent, Location) ->
-       initiates(takeOff(Agent, Clothing),
-                 at(Clothing, Location),
-                 Time).
- */
+% '->'(
+%    at(Agent,Location), 
+%    initiates(
+%       takeOff(Agent,Clothing), 
+%       at(Clothing,Location), 
+%       Time)).
 if loc_at(Agent, Location)then initiates(takeOff(Agent, Clothing), loc_at(Clothing, Location)at Time, _).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Dress.e',54).
 
@@ -627,15 +327,7 @@ if loc_at(Agent, Location)then initiates(takeOff(Agent, Clothing), loc_at(Clothi
    			  Initiates)
    	      ]).
  */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Dress.e',54).
-
- /*  reactive_rule([loc_at(Agent,Location)],
-   	      [ initiates(takeOff(Agent,Clothing),
-   			  at(loc_at(Clothing,Location),
-   			     Time),
-   			  Initiates)
-   	      ]).
- */
+ %  "% =================================".
 
 
 %; End of file.

@@ -3,7 +3,7 @@
 :-include(library('ec_planner/ec_test_incl')).
 :-expects_dialect(lps).
 % translate: begining  File: /pack/logicmoo_ec/ext/ec_sources/ecnet/OMSpace.e.lps 
-% Thu, 08 Oct 2020 19:06:16 GMT File: <stream>(0x5600a39e3000)
+% Thu, 08 Oct 2020 21:36:27 GMT File: <stream>(0x55894c2e3d00)
 
 
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Money.e',12).
@@ -43,24 +43,25 @@
 
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OMSpace.e',35).
 % sort height: integer
+% subsort(height,integer).
 subsort(height,integer).
- %  subsort(height,integer).
 
 % sort distance: integer
+% subsort(distance,integer).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OMSpace.e',35).
 subsort(distance,integer).
- %  subsort(distance,integer).
 %; Height
 %; The height of object is height.
 
 % fluent Height(object,height)
- %  blue=fluent(height(object,height)).
- %  fluent(height(object,height)).
+% fluent(
+%    height(object,height)).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OMSpace.e',40).
 fluents([height/2]).
- %  fluents([height/2]).
+% mpred_prop(
+%    height(object,height), 
+%    fluent).
 mpred_prop(height(object,height),fluent).
- %  mpred_prop(height(object,height),fluent).
 
 
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OMSpace.e',43).
@@ -70,27 +71,13 @@ mpred_prop(height(object,height),fluent).
 % HoldsAt(Height(object,height1),time) &
 % HoldsAt(Height(object,height2),time) ->
 % height1=height2.
- %  clausify_pnf=(holds_at(height(Object, Height1), Time), holds_at(height(Object, Height2), Time)->equals(Height1, Height2)).
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OMSpace.e',45).
-
- /*  not(holds_at(height(Object, Height1), Time)) :-
-       holds_at(height(Object, Height2), Time),
-       not(equals(Height1, Height2)).
- */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OMSpace.e',45).
-
- /*  pl=axiom(not(height(Object,Height1)),
-         [ height(Object,Height2),
-   	not(equals(Height1,Height2))
-         ]).
- */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OMSpace.e',45).
-
- /*  (   height(Object, Height2),
-       not(equals(Height1, Height2))
-   ->  not(height(Object, Height1))
-   ).
- */
+% '->'(
+%    ','(
+%       height(Object,Height2), 
+%       not(
+%          equals(Height1,Height2))), 
+%    not(
+%       height(Object,Height1))).
 if height(Object, Height2), not equals(Height1, Height2)then not height(Object, Height1).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OMSpace.e',45).
 
@@ -99,33 +86,14 @@ if height(Object, Height2), not equals(Height1, Height2)then not height(Object, 
    	      ],
    	      [not(height(Object,Height1))]).
  */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OMSpace.e',45).
-
- /*  reactive_rule([ height(Object,Height2),
-   		not(equals(Height1,Height2))
-   	      ],
-   	      [not(height(Object,Height1))]).
- */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OMSpace.e',45).
-
- /*  not(holds_at(height(Object, Height2), Time)) :-
-       holds_at(height(Object, Height1), Time),
-       not(equals(Height1, Height2)).
- */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OMSpace.e',45).
-
- /*  pl=axiom(not(height(Object,Height2)),
-         [ height(Object,Height1),
-   	not(equals(Height2,Height1))
-         ]).
- */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OMSpace.e',45).
-
- /*  (   height(Object, Height1),
-       not(equals(Height2, Height1))
-   ->  not(height(Object, Height2))
-   ).
- */
+ %  "% =================================".
+% '->'(
+%    ','(
+%       height(Object,Height1), 
+%       not(
+%          equals(Height2,Height1))), 
+%    not(
+%       height(Object,Height2))).
 if height(Object, Height1), not equals(Height2, Height1)then not height(Object, Height2).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OMSpace.e',45).
 
@@ -134,71 +102,40 @@ if height(Object, Height1), not equals(Height2, Height1)then not height(Object, 
    	      ],
    	      [not(height(Object,Height2))]).
  */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OMSpace.e',45).
-
- /*  reactive_rule([ height(Object,Height1),
-   		not(equals(Height2,Height1))
-   	      ],
-   	      [not(height(Object,Height2))]).
- */
+ %  "% =================================".
 
 
 % [object,time]
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OMSpace.e',51).
 % {height}% HoldsAt(Height(object,height),time).
-
- /*  clausify_pnf=exists([Height],
-          holds_at(height(Object,Height),Time)).
- */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OMSpace.e',51).
-
- /*  holds_at(height(Object, Exists_Height), Time) :-
-       some(Exists_Height, '$kolem_Fn_23'(Object, Time)).
- */
-
- /*  fix_axiom_head(Time) ->
-       [ holds_at(height(Object, Exists_Height), Time),
-          (->),
-         height(Object, Exists_Height)
-       ].
- */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OMSpace.e',51).
-
- /*  pl=axiom(height(Object,Exists_Height),
-         [some(Exists_Height,'$kolem_Fn_23'(Object,Time))]).
- */
-
- /*  some(Exists_Height, '$kolem_Fn_23'(Object, Time)) ->
-       height(Object, Exists_Height).
- */
-if some(Exists_Height, '$kolem_Fn_23'(Object, Time))then height(Object, Exists_Height).
+% '->'(
+%    some(
+%       Exists_Height, 
+%       '$kolem_Fn_693'(Object,Time)), 
+%    height(Object,Exists_Height)).
+if some(Exists_Height, '$kolem_Fn_693'(Object, Time))then height(Object, Exists_Height).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OMSpace.e',51).
 
  /*  reactive_rule([ some(Exists_Height,
-   		     '$kolem_Fn_23'(Object,Time))
+   		     '$kolem_Fn_693'(Object,Time))
    	      ],
    	      [height(Object,Exists_Height)]).
  */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OMSpace.e',51).
-
- /*  reactive_rule([ some(Exists_Height,
-   		     '$kolem_Fn_23'(Object,Time))
-   	      ],
-   	      [height(Object,Exists_Height)]).
- */
+ %  "% =================================".
 
 
 %; falling
 %; physobj1 is falling from physobj2 to physobj3.
 
 % fluent FallingFromTo(physobj,physobj,physobj)
- %  blue=fluent(fallingFromTo(physobj,physobj,physobj)).
- %  fluent(fallingFromTo(physobj,physobj,physobj)).
+% fluent(
+%    fallingFromTo(physobj,physobj,physobj)).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OMSpace.e',56).
 fluents([fallingFromTo/3]).
- %  fluents([fallingFromTo/3]).
+% mpred_prop(
+%    fallingFromTo(physobj,physobj,physobj), 
+%    fluent).
 mpred_prop(fallingFromTo(physobj,physobj,physobj),fluent).
- %  mpred_prop(fallingFromTo(physobj,physobj,physobj),fluent).
 
 
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OMSpace.e',56).
@@ -206,26 +143,28 @@ mpred_prop(fallingFromTo(physobj,physobj,physobj),fluent).
 
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OMSpace.e',59).
 % event StartFallingFromTo(physobj,physobj,physobj)
- %  blue=event(startFallingFromTo(physobj,physobj,physobj)).
- %  event(startFallingFromTo(physobj,physobj,physobj)).
+% event(
+%    startFallingFromTo(physobj,physobj,physobj)).
 events([startFallingFromTo/3]).
- %  events([startFallingFromTo/3]).
+% mpred_prop(
+%    startFallingFromTo(physobj,physobj,physobj), 
+%    event).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OMSpace.e',59).
 mpred_prop(startFallingFromTo(physobj,physobj,physobj),event).
- %  mpred_prop(startFallingFromTo(physobj,physobj,physobj),event).
 
 
 %; physobj1 collides with physobj2.
 
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OMSpace.e',61).
 % event CollideWith(physobj,physobj)
- %  blue=event(collideWith(physobj,physobj)).
- %  event(collideWith(physobj,physobj)).
+% event(
+%    collideWith(physobj,physobj)).
 events([collideWith/2]).
- %  events([collideWith/2]).
+% mpred_prop(
+%    collideWith(physobj,physobj), 
+%    event).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OMSpace.e',61).
 mpred_prop(collideWith(physobj,physobj),event).
- %  mpred_prop(collideWith(physobj,physobj),event).
 
 
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OMSpace.e',63).
@@ -237,25 +176,10 @@ mpred_prop(collideWith(physobj,physobj),event).
 % Initiates(StartFallingFromTo(physobj1,physobj2,physobj3),
 %           FallingFromTo(physobj1,physobj2,physobj3),
 %           time).
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OMSpace.e',67).
-
- /*  pl=axiom(initiates(startFallingFromTo(Physobj1,
-   				   Physobj2,
-   				   Physobj3),
-   		fallingFromTo(Physobj1,
-   			      Physobj2,
-   			      Physobj3),
-   		Time),
-         []).
- */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OMSpace.e',67).
-
- /*  initiates(startFallingFromTo(Physobj1,
-   			     Physobj2,
-   			     Physobj3),
-   	  fallingFromTo(Physobj1,Physobj2,Physobj3),
-   	  Time).
- */
+% initiates(
+%    startFallingFromTo(Physobj1,Physobj2,Physobj3), 
+%    fallingFromTo(Physobj1,Physobj2,Physobj3), 
+%    Time).
 startFallingFromTo(Physobj1, Physobj2, Physobj3)initiates fallingFromTo(Physobj1, Physobj2, Physobj3).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OMSpace.e',67).
 
@@ -267,16 +191,7 @@ startFallingFromTo(Physobj1, Physobj2, Physobj3)initiates fallingFromTo(Physobj1
    	  fallingFromTo(Physobj1,Physobj2,Physobj3),
    	  []).
  */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OMSpace.e',67).
-
- /*  initiated(happens(startFallingFromTo(Physobj1,
-   				     Physobj2,
-   				     Physobj3),
-   		  Time_From,
-   		  Time_Until),
-   	  fallingFromTo(Physobj1,Physobj2,Physobj3),
-   	  []).
- */
+ %  "% =================================".
 
 
 %; A precondition axiom states that for
@@ -290,43 +205,15 @@ startFallingFromTo(Physobj1, Physobj2, Physobj3)initiates fallingFromTo(Physobj1
 % HoldsAt(Height(physobj1,height1),time) &
 % HoldsAt(Height(physobj2,height2),time) ->
 % height1=height2.
- %  clausify_pnf=(happens(startFallingFromTo(Physobj1, Physobj2, Physobj3), Time), holds_at(height(Physobj1, Height1), Time), holds_at(height(Physobj2, Height2), Time)->equals(Height1, Height2)).
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OMSpace.e',78).
-
- /*  not(happens(startFallingFromTo(Physobj1, Physobj2, Physobj3), Time)) :-
-       holds_at(height(Physobj1, Height1), Time),
-       holds_at(height(Physobj2, Height2), Time),
-       not(equals(Height1, Height2)).
- */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OMSpace.e',78).
-
- /*  fix_axiom_head(Time) ->
-       [ not(happens(startFallingFromTo(Physobj1,
-                                        Physobj2,
-                                        Physobj3),
-                     Time)),
-          (->),
-         not(startFallingFromTo(Physobj1, Physobj2, Physobj3))
-       ].
- */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OMSpace.e',78).
-
- /*  pl=axiom(not(startFallingFromTo(Physobj1,
-   			     Physobj2,
-   			     Physobj3)),
-         [ height(Physobj1,Height1),
-   	height(Physobj2,Height2),
-   	not(equals(Height1,Height2))
-         ]).
- */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OMSpace.e',78).
-
- /*  (   height(Physobj1, Height1),
-       height(Physobj2, Height2),
-       not(equals(Height1, Height2))
-   ->  not(startFallingFromTo(Physobj1, Physobj2, Physobj3))
-   ).
- */
+% '->'(
+%    ','(
+%       height(Physobj1,Height1), 
+%       ','(
+%          height(Physobj2,Height2), 
+%          not(
+%             equals(Height1,Height2)))), 
+%    not(
+%       startFallingFromTo(Physobj1,Physobj2,Physobj3))).
 if height(Physobj1, Height1), height(Physobj2, Height2), not equals(Height1, Height2)then not startFallingFromTo(Physobj1, Physobj2, Physobj3).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OMSpace.e',78).
 
@@ -339,43 +226,16 @@ if height(Physobj1, Height1), height(Physobj2, Height2), not equals(Height1, Hei
    				       Physobj3))
    	      ]).
  */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OMSpace.e',78).
-
- /*  reactive_rule([ height(Physobj1,Height1),
-   		height(Physobj2,Height2),
-   		not(equals(Height1,Height2))
-   	      ],
-   	      [ not(startFallingFromTo(Physobj1,
-   				       Physobj2,
-   				       Physobj3))
-   	      ]).
- */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OMSpace.e',78).
-
- /*  not(holds_at(height(Physobj1, Height1), Time)) :-
-       holds_at(height(Physobj2, Height2), Time),
-       happens(startFallingFromTo(Physobj1, Physobj2, Physobj3),
-               Time),
-       not(equals(Height1, Height2)).
- */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OMSpace.e',78).
-
- /*  pl=axiom(not(height(Physobj1,Height1)),
-         [ height(Physobj2,Height2),
-   	startFallingFromTo(Physobj1,
-   			   Physobj2,
-   			   Physobj3),
-   	not(equals(Height1,Height2))
-         ]).
- */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OMSpace.e',78).
-
- /*  (   height(Physobj2, Height2),
-       startFallingFromTo(Physobj1, Physobj2, Physobj3),
-       not(equals(Height1, Height2))
-   ->  not(height(Physobj1, Height1))
-   ).
- */
+ %  "% =================================".
+% '->'(
+%    ','(
+%       height(Physobj2,Height2), 
+%       ','(
+%          startFallingFromTo(Physobj1,Physobj2,Physobj3), 
+%          not(
+%             equals(Height1,Height2)))), 
+%    not(
+%       height(Physobj1,Height1))).
 if height(Physobj2, Height2), startFallingFromTo(Physobj1, Physobj2, Physobj3), not equals(Height1, Height2)then not height(Physobj1, Height1).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OMSpace.e',78).
 
@@ -389,44 +249,16 @@ if height(Physobj2, Height2), startFallingFromTo(Physobj1, Physobj2, Physobj3), 
    	      ],
    	      [not(height(Physobj1,Height1))]).
  */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OMSpace.e',78).
-
- /*  reactive_rule([ height(Physobj2,Height2),
-   		happens(startFallingFromTo(Physobj1,
-   					   Physobj2,
-   					   Physobj3),
-   			Time_From,
-   			Time_Until),
-   		not(equals(Height1,Height2))
-   	      ],
-   	      [not(height(Physobj1,Height1))]).
- */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OMSpace.e',78).
-
- /*  not(holds_at(height(Physobj2, Height2), Time)) :-
-       holds_at(height(Physobj1, Height1), Time),
-       happens(startFallingFromTo(Physobj1, Physobj2, Physobj3),
-               Time),
-       not(equals(Height1, Height2)).
- */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OMSpace.e',78).
-
- /*  pl=axiom(not(height(Physobj2,Height2)),
-         [ height(Physobj1,Height1),
-   	startFallingFromTo(Physobj1,
-   			   Physobj2,
-   			   Physobj3),
-   	not(equals(Height2,Height1))
-         ]).
- */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OMSpace.e',78).
-
- /*  (   height(Physobj1, Height1),
-       startFallingFromTo(Physobj1, Physobj2, Physobj3),
-       not(equals(Height2, Height1))
-   ->  not(height(Physobj2, Height2))
-   ).
- */
+ %  "% =================================".
+% '->'(
+%    ','(
+%       height(Physobj1,Height1), 
+%       ','(
+%          startFallingFromTo(Physobj1,Physobj2,Physobj3), 
+%          not(
+%             equals(Height2,Height1)))), 
+%    not(
+%       height(Physobj2,Height2))).
 if height(Physobj1, Height1), startFallingFromTo(Physobj1, Physobj2, Physobj3), not equals(Height2, Height1)then not height(Physobj2, Height2).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OMSpace.e',78).
 
@@ -440,18 +272,7 @@ if height(Physobj1, Height1), startFallingFromTo(Physobj1, Physobj2, Physobj3), 
    	      ],
    	      [not(height(Physobj2,Height2))]).
  */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OMSpace.e',78).
-
- /*  reactive_rule([ height(Physobj1,Height1),
-   		happens(startFallingFromTo(Physobj1,
-   					   Physobj2,
-   					   Physobj3),
-   			Time_From8,
-   			Time_Until9),
-   		not(equals(Height2,Height1))
-   	      ],
-   	      [not(height(Physobj2,Height2))]).
- */
+ %  "% =================================".
 
 
 %; A state constraint says that a physical object
@@ -462,69 +283,37 @@ if height(Physobj1, Height1), startFallingFromTo(Physobj1, Physobj2, Physobj3), 
 % physobj1!=physobj2 &
 % physobj1!=physobj3 &
 % physobj2!=physobj3.
- %  clausify_pnf=(holds_at(fallingFromTo(Physobj1, Physobj2, Physobj3), Time)->diff(Physobj1, Physobj2), diff(Physobj1, Physobj3), diff(Physobj2, Physobj3)).
+% '->'(
+%    ';'(
+%       equals(Physobj1,Physobj2), 
+%       ';'(
+%          equals(Physobj1,Physobj3), 
+%          equals(Physobj2,Physobj3))), 
+%    not(
+%       fallingFromTo(Physobj1,Physobj2,Physobj3))).
+not fallingFromTo(Physobj1, Physobj2, Physobj3)if equals(Physobj1, Physobj2);equals(Physobj1, Physobj3);equals(Physobj2, Physobj3).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OMSpace.e',87).
 
- /*  not(holds_at(fallingFromTo(Physobj1, Physobj2, Physobj3), Time)) :-
-       (   not(diff(Physobj1, Physobj2))
-       ;   not(diff(Physobj1, Physobj3))
-       ;   not(diff(Physobj2, Physobj3))
-       ).
+ /*   l_int(holds(not(fallingFromTo(Physobj1, Physobj2, Physobj3)),
+                  Time_At),
+            [  (equals(Physobj1, Physobj2);equals(Physobj1, Physobj3);equals(Physobj2, Physobj3))
+            ]).
  */
- %   pl=axiom(not(fallingFromTo(Physobj1, Physobj2, Physobj3)), [(equals(Physobj1, Physobj2);equals(Physobj1, Physobj3);equals(Physobj2, Physobj3))]).
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OMSpace.e',87).
-
- /*  equals(Physobj1, Physobj2);equals(Physobj1, Physobj3);equals(Physobj2, Physobj3) ->
-       not(fallingFromTo(Physobj1, Physobj2, Physobj3)).
- */
-if equals(Physobj1, Physobj2);equals(Physobj1, Physobj3);equals(Physobj2, Physobj3)then not fallingFromTo(Physobj1, Physobj2, Physobj3).
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OMSpace.e',87).
-
- /*   reactive_rule([  (equals(Physobj1, Physobj2);equals(Physobj1, Physobj3);equals(Physobj2, Physobj3))
-                    ],
-                    [ holds(not(fallingFromTo(Physobj1,
-                                              Physobj2,
-                                              Physobj3)),
-                            Holds)
-                    ]).
- */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OMSpace.e',87).
-
- /*   reactive_rule([  (equals(Physobj1, Physobj2);equals(Physobj1, Physobj3);equals(Physobj2, Physobj3))
-                    ],
-                    [ holds(not(fallingFromTo(Physobj1,
-                                              Physobj2,
-                                              Physobj3)),
-                            Holds)
-                    ]).
- */
+ %  "% =================================".
 
 
 %; A state constraint says that the sky cannot fall:
 % [sky,physobj1,physobj2,time]
 % !HoldsAt(FallingFromTo(sky,physobj1,physobj2),time).
-
- /*  fix_axiom_head(Time) ->
-       [ holds_at(neg(fallingFromTo(Sky, Physobj1, Physobj2)),
-                  Time),
-          (->),
-         not(fallingFromTo(Sky, Physobj1, Physobj2))
-       ].
- */
- %  pl=axiom(not(fallingFromTo(Sky,Physobj1,Physobj2)),[]).
+% not(
+%    fallingFromTo(Sky,Physobj1,Physobj2)).
 not fallingFromTo(Sky, Physobj1, Physobj2).
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OMSpace.e',94).
 
  /*  l_int(holds(not(fallingFromTo(Sky,Physobj1,Physobj2)),
-   	    Holds),
+   	    Time_At),
          []).
  */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OMSpace.e',94).
-
- /*  l_int(holds(not(fallingFromTo(Sky,Physobj1,Physobj2)),
-   	    Holds),
-         []).
- */
+ %  "% =================================".
 
 
 %; A releases axiom states that if
@@ -536,29 +325,16 @@ not fallingFromTo(Sky, Physobj1, Physobj2).
 % Releases(StartFallingFromTo(physobj1,physobj2,physobj3),
 %          Height(physobj1,height),
 %          time).
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OMSpace.e',102).
-
- /*  pl=axiom(releases(startFallingFromTo(Physobj1,
-   				  Physobj2,
-   				  Physobj3),
-   	       height(Physobj1,Height),
-   	       Time),
-         []).
- */
+% releases(
+%    startFallingFromTo(Physobj1,Physobj2,Physobj3), 
+%    height(Physobj1,Height), 
+%    Time).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OMSpace.e',102).
 releases(startFallingFromTo(Physobj1,
 			    Physobj2,
 			    Physobj3),
 	 height(Physobj1,Height),
 	 Time).
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OMSpace.e',102).
-
- /*  releases(startFallingFromTo(Physobj1,
-   			    Physobj2,
-   			    Physobj3),
-   	 height(Physobj1,Height),
-   	 Time).
- */
 
 
 %; A trajectory axiom states that
@@ -575,35 +351,15 @@ releases(startFallingFromTo(Physobj1,
 % height2=height1-offset ->
 % Trajectory(FallingFromTo(physobj1,physobj2,physobj3),time,
 %            Height(physobj1,height2),offset).
- %  clausify_pnf=(holds_at(height(Physobj1, Height1), Time), '-Pred'(Height1, Offset, Height2)->trajectory(fallingFromTo(Physobj1, Physobj2, Physobj3), Time, height(Physobj1, Height2), Offset)).
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OMSpace.e',116).
-
- /*  trajectory(fallingFromTo(Physobj1, Physobj2, Physobj3), Time, height(Physobj1, Height2), Offset) :-
-       holds_at(height(Physobj1, Height1), Time),
-       '-Pred'(Height1, Offset, Height2).
- */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OMSpace.e',116).
-
- /*  pl=axiom(trajectory(fallingFromTo(Physobj1,
-   			       Physobj2,
-   			       Physobj3),
-   		 Time,
-   		 height(Physobj1,Height2),
-   		 Offset),
-         [ height(Physobj1,Height1),
-   	'-Pred'(Height1,Offset,Height2)
-         ]).
- */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OMSpace.e',116).
-
- /*  (   height(Physobj1, Height1),
-       '-Pred'(Height1, Offset, Height2)
-   ->  trajectory(fallingFromTo(Physobj1, Physobj2, Physobj3),
-                  Time,
-                  height(Physobj1, Height2),
-                  Offset)
-   ).
- */
+% '->'(
+%    ','(
+%       height(Physobj1,Height1), 
+%       '-Pred'(Height1,Offset,Height2)), 
+%    trajectory(
+%       fallingFromTo(Physobj1,Physobj2,Physobj3), 
+%       Time, Time, 
+%                height(Physobj1,Height2), 
+%                Offset)).
 if height(Physobj1, Height1), '-Pred'(Height1, Offset, Height2)then trajectory(fallingFromTo(Physobj1, Physobj2, Physobj3), Time, height(Physobj1, Height2), Offset).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OMSpace.e',116).
 
@@ -618,50 +374,18 @@ if height(Physobj1, Height1), '-Pred'(Height1, Offset, Height2)then trajectory(f
    			   Offset)
    	      ]).
  */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OMSpace.e',116).
-
- /*  reactive_rule([ height(Physobj1,Height1),
-   		'-Pred'(Height1,Offset,Height2)
-   	      ],
-   	      [ trajectory(fallingFromTo(Physobj1,
-   					 Physobj2,
-   					 Physobj3),
-   			   Time,
-   			   height(Physobj1,Height2),
-   			   Offset)
-   	      ]).
- */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OMSpace.e',116).
-
- /*  not(holds_at(height(Physobj1, Height1), Time)) :-
-       '-Pred'(Height1, Offset, Height2),
-       not(trajectory(fallingFromTo(Physobj1, Physobj2, Physobj3),
-                      Time,
-                      height(Physobj1, Height2),
-                      Offset)).
- */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OMSpace.e',116).
-
- /*  pl=axiom(not(height(Physobj1,Height1)),
-         [ '-Pred'(Height1,Offset,Height2),
-   	not(trajectory(fallingFromTo(Physobj1,
-   				     Physobj2,
-   				     Physobj3),
-   		       Time,
-   		       height(Physobj1,Height2),
-   		       Offset))
-         ]).
- */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OMSpace.e',116).
-
- /*  (   '-Pred'(Height1, Offset, Height2),
-       not(trajectory(fallingFromTo(Physobj1, Physobj2, Physobj3),
-                      Time,
-                      height(Physobj1, Height2),
-                      Offset))
-   ->  not(height(Physobj1, Height1))
-   ).
- */
+ %  "% =================================".
+% '->'(
+%    ','(
+%       '-Pred'(Height1,Offset,Height2), 
+%       not(
+%          trajectory(
+%             fallingFromTo(Physobj1,Physobj2,Physobj3), 
+%             Time, Time, 
+%                      height(Physobj1,Height2), 
+%                      Offset))), 
+%    not(
+%       height(Physobj1,Height1))).
 if'-Pred'(Height1, Offset, Height2), not trajectory(fallingFromTo(Physobj1, Physobj2, Physobj3), Time, height(Physobj1, Height2), Offset)then not height(Physobj1, Height1).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OMSpace.e',116).
 
@@ -675,57 +399,18 @@ if'-Pred'(Height1, Offset, Height2), not trajectory(fallingFromTo(Physobj1, Phys
    	      ],
    	      [not(height(Physobj1,Height1))]).
  */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OMSpace.e',116).
-
- /*  reactive_rule([ '-Pred'(Height1,Offset,Height2),
-   		not(trajectory(fallingFromTo(Physobj1,
-   					     Physobj2,
-   					     Physobj3),
-   			       Time,
-   			       height(Physobj1,Height2),
-   			       Offset))
-   	      ],
-   	      [not(height(Physobj1,Height1))]).
- */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OMSpace.e',116).
-
- /*  not('-Pred'(Height1, Offset, Height2)) :-
-       holds_at(height(Physobj1, Height1), Time),
-       not(trajectory(fallingFromTo(Physobj1, Physobj2, Physobj3),
-                      Time,
-                      height(Physobj1, Height2),
-                      Offset)).
- */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OMSpace.e',116).
-
- /*  fix_axiom_head(Time) ->
-       [ holds_at(height(Physobj1, Height1), Time),
-          (->),
-         height(Physobj1, Height1)
-       ].
- */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OMSpace.e',116).
-
- /*  pl=axiom(not('-Pred'(Height1,Offset,Height2)),
-         [ height(Physobj1,Height1),
-   	not(trajectory(fallingFromTo(Physobj1,
-   				     Physobj2,
-   				     Physobj3),
-   		       Time,
-   		       height(Physobj1,Height2),
-   		       Offset))
-         ]).
- */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OMSpace.e',116).
-
- /*  (   height(Physobj1, Height1),
-       not(trajectory(fallingFromTo(Physobj1, Physobj2, Physobj3),
-                      Time,
-                      height(Physobj1, Height2),
-                      Offset))
-   ->  not('-Pred'(Height1, Offset, Height2))
-   ).
- */
+ %  "% =================================".
+% '->'(
+%    ','(
+%       height(Physobj1,Height1), 
+%       not(
+%          trajectory(
+%             fallingFromTo(Physobj1,Physobj2,Physobj3), 
+%             Time, Time, 
+%                      height(Physobj1,Height2), 
+%                      Offset))), 
+%    not(
+%       '-Pred'(Height1,Offset,Height2))).
 if height(Physobj1, Height1), not trajectory(fallingFromTo(Physobj1, Physobj2, Physobj3), Time, height(Physobj1, Height2), Offset)then not'-Pred'(Height1, Offset, Height2).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OMSpace.e',116).
 
@@ -739,18 +424,7 @@ if height(Physobj1, Height1), not trajectory(fallingFromTo(Physobj1, Physobj2, P
    	      ],
    	      [not('-Pred'(Height1,Offset,Height2))]).
  */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OMSpace.e',116).
-
- /*  reactive_rule([ height(Physobj1,Height1),
-   		not(trajectory(fallingFromTo(Physobj1,
-   					     Physobj2,
-   					     Physobj3),
-   			       Time,
-   			       height(Physobj1,Height2),
-   			       Offset))
-   	      ],
-   	      [not('-Pred'(Height1,Offset,Height2))]).
- */
+ %  "% =================================".
 
 
 %; A trigger axiom states that
@@ -766,134 +440,57 @@ if height(Physobj1, Height1), not trajectory(fallingFromTo(Physobj1, Physobj2, P
 % HoldsAt(Height(physobj1,height),time) &
 % HoldsAt(Height(physobj3,height),time) ->
 % Happens(CollideWith(physobj1,physobj3),time).
- %  clausify_pnf=(holds_at(fallingFromTo(Physobj1, Physobj2, Physobj3), Time), holds_at(height(Physobj1, Height), Time), holds_at(height(Physobj3, Height), Time)->happens(collideWith(Physobj1, Physobj3), Time)).
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OMSpace.e',130).
-
- /*  happens(collideWith(Physobj1, Physobj3), Time) :-
-       holds_at(fallingFromTo(Physobj1, Physobj2, Physobj3),
-                Time),
-       holds_at(height(Physobj1, Height), Time),
-       holds_at(height(Physobj3, Height), Time).
- */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OMSpace.e',130).
-
- /*  fix_axiom_head(Time) ->
-       [ happens(collideWith(Physobj1, Physobj3), Time),
-          (->),
-         collideWith(Physobj1, Physobj3)
-       ].
- */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OMSpace.e',130).
-
- /*  pl=axiom(collideWith(Physobj1,Physobj3),
-         [ fallingFromTo(Physobj1,Physobj2,Physobj3),
-   	height(Physobj1,Height),
-   	height(Physobj3,Height)
-         ]).
- */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OMSpace.e',130).
-
- /*  (   fallingFromTo(Physobj1, Physobj2, Physobj3),
-       height(Physobj1, Height),
-       height(Physobj3, Height)
-   ->  collideWith(Physobj1, Physobj3)
-   ).
- */
+% '->'(
+%    ','(
+%       fallingFromTo(Physobj1,Physobj2,Physobj3), 
+%       ','(
+%          height(Physobj1,Height), 
+%          height(Physobj3,Height))), 
+%    collideWith(Physobj1,Physobj3)).
 if fallingFromTo(Physobj1, Physobj2, Physobj3), height(Physobj1, Height), height(Physobj3, Height)then collideWith(Physobj1, Physobj3).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OMSpace.e',130).
 
  /*  reactive_rule([ holds(fallingFromTo(Physobj1,
    				    Physobj2,
    				    Physobj3),
-   		      Holds),
+   		      Time_At),
    		height(Physobj1,Height),
    		height(Physobj3,Height)
    	      ],
    	      [collideWith(Physobj1,Physobj3)]).
  */
+ %  "% =================================".
+% '->'(
+%    ','(
+%       height(Physobj1,Height), 
+%       ','(
+%          height(Physobj3,Height), 
+%          not(
+%             collideWith(Physobj1,Physobj3)))), 
+%    not(
+%       fallingFromTo(Physobj1,Physobj2,Physobj3))).
+not fallingFromTo(Physobj1, Physobj2, Physobj3)if height(Physobj1, Height), height(Physobj3, Height), not collideWith(Physobj1, Physobj3).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OMSpace.e',130).
 
- /*  reactive_rule([ holds(fallingFromTo(Physobj1,
-   				    Physobj2,
-   				    Physobj3),
-   		      Holds),
-   		height(Physobj1,Height),
-   		height(Physobj3,Height)
-   	      ],
-   	      [collideWith(Physobj1,Physobj3)]).
- */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OMSpace.e',130).
-
- /*  not(holds_at(fallingFromTo(Physobj1, Physobj2, Physobj3), Time)) :-
-       holds_at(height(Physobj1, Height), Time),
-       holds_at(height(Physobj3, Height), Time),
-       not(happens(collideWith(Physobj1, Physobj3), Time)).
- */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OMSpace.e',130).
-
- /*  pl=axiom(not(fallingFromTo(Physobj1,Physobj2,Physobj3)),
+ /*  l_int(holds(not(fallingFromTo(Physobj1,
+   			      Physobj2,
+   			      Physobj3)),
+   	    Time_At6),
          [ height(Physobj1,Height),
    	height(Physobj3,Height),
    	not(collideWith(Physobj1,Physobj3))
          ]).
  */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OMSpace.e',130).
-
- /*  (   height(Physobj1, Height),
-       height(Physobj3, Height),
-       not(collideWith(Physobj1, Physobj3))
-   ->  not(fallingFromTo(Physobj1, Physobj2, Physobj3))
-   ).
- */
-if height(Physobj1, Height), height(Physobj3, Height), not collideWith(Physobj1, Physobj3)then not fallingFromTo(Physobj1, Physobj2, Physobj3).
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OMSpace.e',130).
-
- /*  reactive_rule([ height(Physobj1,Height),
-   		height(Physobj3,Height),
-   		not(collideWith(Physobj1,Physobj3))
-   	      ],
-   	      [ holds(not(fallingFromTo(Physobj1,
-   					Physobj2,
-   					Physobj3)),
-   		      Holds6)
-   	      ]).
- */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OMSpace.e',130).
-
- /*  reactive_rule([ height(Physobj1,Height),
-   		height(Physobj3,Height),
-   		not(collideWith(Physobj1,Physobj3))
-   	      ],
-   	      [ holds(not(fallingFromTo(Physobj1,
-   					Physobj2,
-   					Physobj3)),
-   		      Holds6)
-   	      ]).
- */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OMSpace.e',130).
-
- /*  not(holds_at(height(Physobj1, Height), Time)) :-
-       holds_at(height(Physobj3, Height), Time),
-       holds_at(fallingFromTo(Physobj1, Physobj2, Physobj3),
-                Time),
-       not(happens(collideWith(Physobj1, Physobj3), Time)).
- */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OMSpace.e',130).
-
- /*  pl=axiom(not(height(Physobj1,Height)),
-         [ height(Physobj3,Height),
-   	fallingFromTo(Physobj1,Physobj2,Physobj3),
-   	not(collideWith(Physobj1,Physobj3))
-         ]).
- */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OMSpace.e',130).
-
- /*  (   height(Physobj3, Height),
-       fallingFromTo(Physobj1, Physobj2, Physobj3),
-       not(collideWith(Physobj1, Physobj3))
-   ->  not(height(Physobj1, Height))
-   ).
- */
+ %  "% =================================".
+% '->'(
+%    ','(
+%       height(Physobj3,Height), 
+%       ','(
+%          fallingFromTo(Physobj1,Physobj2,Physobj3), 
+%          not(
+%             collideWith(Physobj1,Physobj3)))), 
+%    not(
+%       height(Physobj1,Height))).
 if height(Physobj3, Height), fallingFromTo(Physobj1, Physobj2, Physobj3), not collideWith(Physobj1, Physobj3)then not height(Physobj1, Height).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OMSpace.e',130).
 
@@ -901,46 +498,21 @@ if height(Physobj3, Height), fallingFromTo(Physobj1, Physobj2, Physobj3), not co
    		holds(fallingFromTo(Physobj1,
    				    Physobj2,
    				    Physobj3),
-   		      Holds7),
+   		      Time_At7),
    		not(collideWith(Physobj1,Physobj3))
    	      ],
    	      [not(height(Physobj1,Height))]).
  */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OMSpace.e',130).
-
- /*  reactive_rule([ height(Physobj3,Height),
-   		holds(fallingFromTo(Physobj1,
-   				    Physobj2,
-   				    Physobj3),
-   		      Holds7),
-   		not(collideWith(Physobj1,Physobj3))
-   	      ],
-   	      [not(height(Physobj1,Height))]).
- */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OMSpace.e',130).
-
- /*  not(holds_at(height(Physobj3, Height), Time)) :-
-       holds_at(height(Physobj1, Height), Time),
-       holds_at(fallingFromTo(Physobj1, Physobj2, Physobj3),
-                Time),
-       not(happens(collideWith(Physobj1, Physobj3), Time)).
- */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OMSpace.e',130).
-
- /*  pl=axiom(not(height(Physobj3,Height)),
-         [ height(Physobj1,Height),
-   	fallingFromTo(Physobj1,Physobj2,Physobj3),
-   	not(collideWith(Physobj1,Physobj3))
-         ]).
- */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OMSpace.e',130).
-
- /*  (   height(Physobj1, Height),
-       fallingFromTo(Physobj1, Physobj2, Physobj3),
-       not(collideWith(Physobj1, Physobj3))
-   ->  not(height(Physobj3, Height))
-   ).
- */
+ %  "% =================================".
+% '->'(
+%    ','(
+%       height(Physobj1,Height), 
+%       ','(
+%          fallingFromTo(Physobj1,Physobj2,Physobj3), 
+%          not(
+%             collideWith(Physobj1,Physobj3)))), 
+%    not(
+%       height(Physobj3,Height))).
 if height(Physobj1, Height), fallingFromTo(Physobj1, Physobj2, Physobj3), not collideWith(Physobj1, Physobj3)then not height(Physobj3, Height).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OMSpace.e',130).
 
@@ -948,22 +520,12 @@ if height(Physobj1, Height), fallingFromTo(Physobj1, Physobj2, Physobj3), not co
    		holds(fallingFromTo(Physobj1,
    				    Physobj2,
    				    Physobj3),
-   		      Holds8),
+   		      Time_At8),
    		not(collideWith(Physobj1,Physobj3))
    	      ],
    	      [not(height(Physobj3,Height))]).
  */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OMSpace.e',130).
-
- /*  reactive_rule([ height(Physobj1,Height),
-   		holds(fallingFromTo(Physobj1,
-   				    Physobj2,
-   				    Physobj3),
-   		      Holds8),
-   		not(collideWith(Physobj1,Physobj3))
-   	      ],
-   	      [not(height(Physobj3,Height))]).
- */
+ %  "% =================================".
 
 
 %; An effect axiom states that
@@ -978,27 +540,19 @@ if height(Physobj1, Height), fallingFromTo(Physobj1, Physobj2, Physobj3), not co
 % Initiates(CollideWith(physobj1,physobj3),
 %           On(physobj1,physobj3),
 %           time).
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OMSpace.e',143).
-
- /*  pl=axiom(initiates(collideWith(Physobj1,Physobj3),
-   		on(Physobj1,Physobj3),
-   		Time),
-         [fallingFromTo(Physobj1,Physobj2,Physobj3)]).
- */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OMSpace.e',143).
-
- /*  fallingFromTo(Physobj1, Physobj2, Physobj3) ->
-       initiates(collideWith(Physobj1, Physobj3),
-                 on(Physobj1, Physobj3),
-                 Time).
- */
+% '->'(
+%    fallingFromTo(Physobj1,Physobj2,Physobj3), 
+%    initiates(
+%       collideWith(Physobj1,Physobj3), 
+%       on(Physobj1,Physobj3), 
+%       Time)).
 if fallingFromTo(Physobj1, Physobj2, Physobj3)then initiates(collideWith(Physobj1, Physobj3), on(Physobj1, Physobj3)at Time, _).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OMSpace.e',143).
 
  /*  reactive_rule([ holds(fallingFromTo(Physobj1,
    				    Physobj2,
    				    Physobj3),
-   		      Holds)
+   		      Time_At)
    	      ],
    	      [ initiates(collideWith(Physobj1,Physobj3),
    			  at(on(Physobj1,Physobj3),
@@ -1006,19 +560,7 @@ if fallingFromTo(Physobj1, Physobj2, Physobj3)then initiates(collideWith(Physobj
    			  Initiates)
    	      ]).
  */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OMSpace.e',143).
-
- /*  reactive_rule([ holds(fallingFromTo(Physobj1,
-   				    Physobj2,
-   				    Physobj3),
-   		      Holds)
-   	      ],
-   	      [ initiates(collideWith(Physobj1,Physobj3),
-   			  at(on(Physobj1,Physobj3),
-   			     Time),
-   			  Initiates)
-   	      ]).
- */
+ %  "% =================================".
 
 
 %; An effect axiom states that
@@ -1031,20 +573,12 @@ if fallingFromTo(Physobj1, Physobj2, Physobj3)then initiates(collideWith(Physobj
 % Initiates(CollideWith(physobj1,physobj2),
 %           Height(physobj1,height),
 %           time).
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OMSpace.e',154).
-
- /*  pl=axiom(initiates(collideWith(Physobj1,Physobj2),
-   		height(Physobj1,Height),
-   		Time),
-         [height(Physobj2,Height)]).
- */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OMSpace.e',154).
-
- /*  height(Physobj2, Height) ->
-       initiates(collideWith(Physobj1, Physobj2),
-                 height(Physobj1, Height),
-                 Time).
- */
+% '->'(
+%    height(Physobj2,Height), 
+%    initiates(
+%       collideWith(Physobj1,Physobj2), 
+%       height(Physobj1,Height), 
+%       Time)).
 if height(Physobj2, Height)then initiates(collideWith(Physobj1, Physobj2), height(Physobj1, Height)at Time, _).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OMSpace.e',154).
 
@@ -1055,15 +589,7 @@ if height(Physobj2, Height)then initiates(collideWith(Physobj1, Physobj2), heigh
    			  Initiates)
    	      ]).
  */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OMSpace.e',154).
-
- /*  reactive_rule([height(Physobj2,Height)],
-   	      [ initiates(collideWith(Physobj1,Physobj2),
-   			  at(height(Physobj1,Height),
-   			     Time),
-   			  Initiates)
-   	      ]).
- */
+ %  "% =================================".
 
 
 %;[physobj1,physobj2,height1,height2,time]
@@ -1086,29 +612,19 @@ if height(Physobj2, Height)then initiates(collideWith(Physobj1, Physobj2), heigh
 % Terminates(CollideWith(physobj1,physobj3),
 %            FallingFromTo(physobj1,physobj2,physobj3),
 %            time).
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OMSpace.e',176).
-
- /*  pl=axiom(terminates(collideWith(Physobj1,Physobj3),
-   		 fallingFromTo(Physobj1,
-   			       Physobj2,
-   			       Physobj3),
-   		 Time),
-         [fallingFromTo(Physobj1,Physobj2,Physobj3)]).
- */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OMSpace.e',176).
-
- /*  fallingFromTo(Physobj1, Physobj2, Physobj3) ->
-       terminates(collideWith(Physobj1, Physobj3),
-                  fallingFromTo(Physobj1, Physobj2, Physobj3),
-                  Time).
- */
+% '->'(
+%    fallingFromTo(Physobj1,Physobj2,Physobj3), 
+%    terminates(
+%       collideWith(Physobj1,Physobj3), 
+%       fallingFromTo(Physobj1,Physobj2,Physobj3), 
+%       Time)).
 if fallingFromTo(Physobj1, Physobj2, Physobj3)then terminates(collideWith(Physobj1, Physobj3), fallingFromTo(Physobj1, Physobj2, Physobj3)at Time, _).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OMSpace.e',176).
 
  /*  reactive_rule([ holds(fallingFromTo(Physobj1,
    				    Physobj2,
    				    Physobj3),
-   		      Holds)
+   		      Time_At)
    	      ],
    	      [ terminates(collideWith(Physobj1,Physobj3),
    			   at(fallingFromTo(Physobj1,
@@ -1118,34 +634,21 @@ if fallingFromTo(Physobj1, Physobj2, Physobj3)then terminates(collideWith(Physob
    			   Terminates)
    	      ]).
  */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OMSpace.e',176).
-
- /*  reactive_rule([ holds(fallingFromTo(Physobj1,
-   				    Physobj2,
-   				    Physobj3),
-   		      Holds)
-   	      ],
-   	      [ terminates(collideWith(Physobj1,Physobj3),
-   			   at(fallingFromTo(Physobj1,
-   					    Physobj2,
-   					    Physobj3),
-   			      Time),
-   			   Terminates)
-   	      ]).
- */
+ %  "% =================================".
 
 
 %; flying
 %; agent is flying from physobj1 to physobj2.
 
 % fluent FlyingFromTo(agent,physobj,physobj)
- %  blue=fluent(flyingFromTo(agent,physobj,physobj)).
- %  fluent(flyingFromTo(agent,physobj,physobj)).
+% fluent(
+%    flyingFromTo(agent,physobj,physobj)).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OMSpace.e',184).
 fluents([flyingFromTo/3]).
- %  fluents([flyingFromTo/3]).
+% mpred_prop(
+%    flyingFromTo(agent,physobj,physobj), 
+%    fluent).
 mpred_prop(flyingFromTo(agent,physobj,physobj),fluent).
- %  mpred_prop(flyingFromTo(agent,physobj,physobj),fluent).
 
 
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OMSpace.e',184).
@@ -1153,26 +656,28 @@ mpred_prop(flyingFromTo(agent,physobj,physobj),fluent).
 
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OMSpace.e',187).
 % event StartFlyingFromTo(agent,physobj,physobj)
- %  blue=event(startFlyingFromTo(agent,physobj,physobj)).
- %  event(startFlyingFromTo(agent,physobj,physobj)).
+% event(
+%    startFlyingFromTo(agent,physobj,physobj)).
 actions([startFlyingFromTo/3]).
- %  actions([startFlyingFromTo/3]).
+% mpred_prop(
+%    startFlyingFromTo(agent,physobj,physobj), 
+%    event).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OMSpace.e',187).
 mpred_prop(startFlyingFromTo(agent,physobj,physobj),event).
- %  mpred_prop(startFlyingFromTo(agent,physobj,physobj),event).
 
 
 %; agent reaches physobj.
 
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OMSpace.e',189).
 % event Reach(agent,physobj)
- %  blue=event(reach(agent,physobj)).
- %  event(reach(agent,physobj)).
+% event(
+%    reach(agent,physobj)).
 actions([reach/2]).
- %  actions([reach/2]).
+% mpred_prop(
+%    reach(agent,physobj), 
+%    event).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OMSpace.e',189).
 mpred_prop(reach(agent,physobj),event).
- %  mpred_prop(reach(agent,physobj),event).
 
 
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OMSpace.e',191).
@@ -1184,21 +689,10 @@ mpred_prop(reach(agent,physobj),event).
 % Initiates(StartFlyingFromTo(agent,physobj1,physobj2),
 %           FlyingFromTo(agent,physobj1,physobj2),
 %           time).
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OMSpace.e',195).
-
- /*  pl=axiom(initiates(startFlyingFromTo(Agent,
-   				  Physobj1,
-   				  Physobj2),
-   		flyingFromTo(Agent,Physobj1,Physobj2),
-   		Time),
-         []).
- */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OMSpace.e',195).
-
- /*  initiates(startFlyingFromTo(Agent,Physobj1,Physobj2),
-   	  flyingFromTo(Agent,Physobj1,Physobj2),
-   	  Time).
- */
+% initiates(
+%    startFlyingFromTo(Agent,Physobj1,Physobj2), 
+%    flyingFromTo(Agent,Physobj1,Physobj2), 
+%    Time).
 startFlyingFromTo(Agent, Physobj1, Physobj2)initiates flyingFromTo(Agent, Physobj1, Physobj2).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OMSpace.e',195).
 
@@ -1210,16 +704,7 @@ startFlyingFromTo(Agent, Physobj1, Physobj2)initiates flyingFromTo(Agent, Physob
    	  flyingFromTo(Agent,Physobj1,Physobj2),
    	  []).
  */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OMSpace.e',195).
-
- /*  initiated(happens(startFlyingFromTo(Agent,
-   				    Physobj1,
-   				    Physobj2),
-   		  Time_From,
-   		  Time_Until),
-   	  flyingFromTo(Agent,Physobj1,Physobj2),
-   	  []).
- */
+ %  "% =================================".
 
 
 %; A precondition axiom states that for
@@ -1232,39 +717,15 @@ startFlyingFromTo(Agent, Physobj1, Physobj2)initiates flyingFromTo(Agent, Physob
 % HoldsAt(Height(agent,height1),time) &
 % HoldsAt(Height(physobj1,height2),time) ->
 % height1=height2.
- %  clausify_pnf=(happens(startFlyingFromTo(Agent, Physobj1, Physobj2), Time), holds_at(height(Agent, Height1), Time), holds_at(height(Physobj1, Height2), Time)->equals(Height1, Height2)).
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OMSpace.e',205).
-
- /*  not(happens(startFlyingFromTo(Agent, Physobj1, Physobj2), Time)) :-
-       holds_at(height(Agent, Height1), Time),
-       holds_at(height(Physobj1, Height2), Time),
-       not(equals(Height1, Height2)).
- */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OMSpace.e',205).
-
- /*  fix_axiom_head(Time) ->
-       [ not(happens(startFlyingFromTo(Agent, Physobj1, Physobj2),
-                     Time)),
-          (->),
-         not(startFlyingFromTo(Agent, Physobj1, Physobj2))
-       ].
- */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OMSpace.e',205).
-
- /*  pl=axiom(not(startFlyingFromTo(Agent,Physobj1,Physobj2)),
-         [ height(Agent,Height1),
-   	height(Physobj1,Height2),
-   	not(equals(Height1,Height2))
-         ]).
- */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OMSpace.e',205).
-
- /*  (   height(Agent, Height1),
-       height(Physobj1, Height2),
-       not(equals(Height1, Height2))
-   ->  not(startFlyingFromTo(Agent, Physobj1, Physobj2))
-   ).
- */
+% '->'(
+%    ','(
+%       height(Agent,Height1), 
+%       ','(
+%          height(Physobj1,Height2), 
+%          not(
+%             equals(Height1,Height2)))), 
+%    not(
+%       startFlyingFromTo(Agent,Physobj1,Physobj2))).
 if height(Agent, Height1), height(Physobj1, Height2), not equals(Height1, Height2)then not startFlyingFromTo(Agent, Physobj1, Physobj2).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OMSpace.e',205).
 
@@ -1277,41 +738,16 @@ if height(Agent, Height1), height(Physobj1, Height2), not equals(Height1, Height
    				      Physobj2))
    	      ]).
  */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OMSpace.e',205).
-
- /*  reactive_rule([ height(Agent,Height1),
-   		height(Physobj1,Height2),
-   		not(equals(Height1,Height2))
-   	      ],
-   	      [ not(startFlyingFromTo(Agent,
-   				      Physobj1,
-   				      Physobj2))
-   	      ]).
- */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OMSpace.e',205).
-
- /*  not(holds_at(height(Agent, Height1), Time)) :-
-       holds_at(height(Physobj1, Height2), Time),
-       happens(startFlyingFromTo(Agent, Physobj1, Physobj2),
-               Time),
-       not(equals(Height1, Height2)).
- */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OMSpace.e',205).
-
- /*  pl=axiom(not(height(Agent,Height1)),
-         [ height(Physobj1,Height2),
-   	startFlyingFromTo(Agent,Physobj1,Physobj2),
-   	not(equals(Height1,Height2))
-         ]).
- */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OMSpace.e',205).
-
- /*  (   height(Physobj1, Height2),
-       startFlyingFromTo(Agent, Physobj1, Physobj2),
-       not(equals(Height1, Height2))
-   ->  not(height(Agent, Height1))
-   ).
- */
+ %  "% =================================".
+% '->'(
+%    ','(
+%       height(Physobj1,Height2), 
+%       ','(
+%          startFlyingFromTo(Agent,Physobj1,Physobj2), 
+%          not(
+%             equals(Height1,Height2)))), 
+%    not(
+%       height(Agent,Height1))).
 if height(Physobj1, Height2), startFlyingFromTo(Agent, Physobj1, Physobj2), not equals(Height1, Height2)then not height(Agent, Height1).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OMSpace.e',205).
 
@@ -1325,42 +761,16 @@ if height(Physobj1, Height2), startFlyingFromTo(Agent, Physobj1, Physobj2), not 
    	      ],
    	      [not(height(Agent,Height1))]).
  */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OMSpace.e',205).
-
- /*  reactive_rule([ height(Physobj1,Height2),
-   		happens(startFlyingFromTo(Agent,
-   					  Physobj1,
-   					  Physobj2),
-   			Time_From,
-   			Time_Until),
-   		not(equals(Height1,Height2))
-   	      ],
-   	      [not(height(Agent,Height1))]).
- */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OMSpace.e',205).
-
- /*  not(holds_at(height(Physobj1, Height2), Time)) :-
-       holds_at(height(Agent, Height1), Time),
-       happens(startFlyingFromTo(Agent, Physobj1, Physobj2),
-               Time),
-       not(equals(Height1, Height2)).
- */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OMSpace.e',205).
-
- /*  pl=axiom(not(height(Physobj1,Height2)),
-         [ height(Agent,Height1),
-   	startFlyingFromTo(Agent,Physobj1,Physobj2),
-   	not(equals(Height2,Height1))
-         ]).
- */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OMSpace.e',205).
-
- /*  (   height(Agent, Height1),
-       startFlyingFromTo(Agent, Physobj1, Physobj2),
-       not(equals(Height2, Height1))
-   ->  not(height(Physobj1, Height2))
-   ).
- */
+ %  "% =================================".
+% '->'(
+%    ','(
+%       height(Agent,Height1), 
+%       ','(
+%          startFlyingFromTo(Agent,Physobj1,Physobj2), 
+%          not(
+%             equals(Height2,Height1)))), 
+%    not(
+%       height(Physobj1,Height2))).
 if height(Agent, Height1), startFlyingFromTo(Agent, Physobj1, Physobj2), not equals(Height2, Height1)then not height(Physobj1, Height2).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OMSpace.e',205).
 
@@ -1374,18 +784,7 @@ if height(Agent, Height1), startFlyingFromTo(Agent, Physobj1, Physobj2), not equ
    	      ],
    	      [not(height(Physobj1,Height2))]).
  */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OMSpace.e',205).
-
- /*  reactive_rule([ height(Agent,Height1),
-   		happens(startFlyingFromTo(Agent,
-   					  Physobj1,
-   					  Physobj2),
-   			Time_From8,
-   			Time_Until9),
-   		not(equals(Height2,Height1))
-   	      ],
-   	      [not(height(Physobj1,Height2))]).
- */
+ %  "% =================================".
 
 
 %; A state constraint says that an agent
@@ -1393,40 +792,18 @@ if height(Agent, Height1), startFlyingFromTo(Agent, Physobj1, Physobj2), not equ
 % [agent,physobj1,physobj2,time]
 % HoldsAt(FlyingFromTo(agent,physobj1,physobj2),time) ->
 % physobj1!=physobj2.
- %  clausify_pnf=(holds_at(flyingFromTo(Agent, Physobj1, Physobj2), Time)->diff(Physobj1, Physobj2)).
+% '->'(
+%    equals(Physobj1,Physobj2), 
+%    not(
+%       flyingFromTo(Agent,Physobj1,Physobj2))).
+not flyingFromTo(Agent, Physobj1, Physobj2)if equals(Physobj1, Physobj2).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OMSpace.e',213).
 
- /*  not(holds_at(flyingFromTo(Agent, Physobj1, Physobj2), Time)) :-
-       not(diff(Physobj1, Physobj2)).
- */
-
- /*  pl=axiom(not(flyingFromTo(Agent,Physobj1,Physobj2)),
+ /*  l_int(holds(not(flyingFromTo(Agent,Physobj1,Physobj2)),
+   	    Time_At),
          [equals(Physobj1,Physobj2)]).
  */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OMSpace.e',213).
-
- /*  equals(Physobj1, Physobj2) ->
-       not(flyingFromTo(Agent, Physobj1, Physobj2)).
- */
-if equals(Physobj1, Physobj2)then not flyingFromTo(Agent, Physobj1, Physobj2).
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OMSpace.e',213).
-
- /*  reactive_rule([equals(Physobj1,Physobj2)],
-   	      [ holds(not(flyingFromTo(Agent,
-   				       Physobj1,
-   				       Physobj2)),
-   		      Holds)
-   	      ]).
- */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OMSpace.e',213).
-
- /*  reactive_rule([equals(Physobj1,Physobj2)],
-   	      [ holds(not(flyingFromTo(Agent,
-   				       Physobj1,
-   				       Physobj2)),
-   		      Holds)
-   	      ]).
- */
+ %  "% =================================".
 
 
 %; A releases axiom states that if an agent
@@ -1437,24 +814,14 @@ if equals(Physobj1, Physobj2)then not flyingFromTo(Agent, Physobj1, Physobj2).
 % Releases(StartFlyingFromTo(agent,physobj1,physobj2),
 %          Height(agent,height),
 %          time).
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OMSpace.e',221).
-
- /*  pl=axiom(releases(startFlyingFromTo(Agent,
-   				 Physobj1,
-   				 Physobj2),
-   	       height(Agent,Height),
-   	       Time),
-         []).
- */
+% releases(
+%    startFlyingFromTo(Agent,Physobj1,Physobj2), 
+%    height(Agent,Height), 
+%    Time).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OMSpace.e',221).
 releases(startFlyingFromTo(Agent,Physobj1,Physobj2),
 	 height(Agent,Height),
 	 Time).
-
- /*  releases(startFlyingFromTo(Agent,Physobj1,Physobj2),
-   	 height(Agent,Height),
-   	 Time).
- */
 
 
 %; A trajectory axiom states that
@@ -1471,35 +838,15 @@ releases(startFlyingFromTo(Agent,Physobj1,Physobj2),
 % height2=height1+offset ->
 % Trajectory(FlyingFromTo(agent,physobj1,physobj2),time,
 %            Height(agent,height2),offset).
- %  clausify_pnf=(holds_at(height(Agent, Height1), Time), '+Pred'(Height1, Offset, Height2)->trajectory(flyingFromTo(Agent, Physobj1, Physobj2), Time, height(Agent, Height2), Offset)).
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OMSpace.e',235).
-
- /*  trajectory(flyingFromTo(Agent, Physobj1, Physobj2), Time, height(Agent, Height2), Offset) :-
-       holds_at(height(Agent, Height1), Time),
-       '+Pred'(Height1, Offset, Height2).
- */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OMSpace.e',235).
-
- /*  pl=axiom(trajectory(flyingFromTo(Agent,
-   			      Physobj1,
-   			      Physobj2),
-   		 Time,
-   		 height(Agent,Height2),
-   		 Offset),
-         [ height(Agent,Height1),
-   	'+Pred'(Height1,Offset,Height2)
-         ]).
- */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OMSpace.e',235).
-
- /*  (   height(Agent, Height1),
-       '+Pred'(Height1, Offset, Height2)
-   ->  trajectory(flyingFromTo(Agent, Physobj1, Physobj2),
-                  Time,
-                  height(Agent, Height2),
-                  Offset)
-   ).
- */
+% '->'(
+%    ','(
+%       height(Agent,Height1), 
+%       '+Pred'(Height1,Offset,Height2)), 
+%    trajectory(
+%       flyingFromTo(Agent,Physobj1,Physobj2), 
+%       Time, Time, 
+%                height(Agent,Height2), 
+%                Offset)).
 if height(Agent, Height1), '+Pred'(Height1, Offset, Height2)then trajectory(flyingFromTo(Agent, Physobj1, Physobj2), Time, height(Agent, Height2), Offset).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OMSpace.e',235).
 
@@ -1514,50 +861,18 @@ if height(Agent, Height1), '+Pred'(Height1, Offset, Height2)then trajectory(flyi
    			   Offset)
    	      ]).
  */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OMSpace.e',235).
-
- /*  reactive_rule([ height(Agent,Height1),
-   		'+Pred'(Height1,Offset,Height2)
-   	      ],
-   	      [ trajectory(flyingFromTo(Agent,
-   					Physobj1,
-   					Physobj2),
-   			   Time,
-   			   height(Agent,Height2),
-   			   Offset)
-   	      ]).
- */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OMSpace.e',235).
-
- /*  not(holds_at(height(Agent, Height1), Time)) :-
-       '+Pred'(Height1, Offset, Height2),
-       not(trajectory(flyingFromTo(Agent, Physobj1, Physobj2),
-                      Time,
-                      height(Agent, Height2),
-                      Offset)).
- */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OMSpace.e',235).
-
- /*  pl=axiom(not(height(Agent,Height1)),
-         [ '+Pred'(Height1,Offset,Height2),
-   	not(trajectory(flyingFromTo(Agent,
-   				    Physobj1,
-   				    Physobj2),
-   		       Time,
-   		       height(Agent,Height2),
-   		       Offset))
-         ]).
- */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OMSpace.e',235).
-
- /*  (   '+Pred'(Height1, Offset, Height2),
-       not(trajectory(flyingFromTo(Agent, Physobj1, Physobj2),
-                      Time,
-                      height(Agent, Height2),
-                      Offset))
-   ->  not(height(Agent, Height1))
-   ).
- */
+ %  "% =================================".
+% '->'(
+%    ','(
+%       '+Pred'(Height1,Offset,Height2), 
+%       not(
+%          trajectory(
+%             flyingFromTo(Agent,Physobj1,Physobj2), 
+%             Time, Time, 
+%                      height(Agent,Height2), 
+%                      Offset))), 
+%    not(
+%       height(Agent,Height1))).
 if'+Pred'(Height1, Offset, Height2), not trajectory(flyingFromTo(Agent, Physobj1, Physobj2), Time, height(Agent, Height2), Offset)then not height(Agent, Height1).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OMSpace.e',235).
 
@@ -1571,57 +886,18 @@ if'+Pred'(Height1, Offset, Height2), not trajectory(flyingFromTo(Agent, Physobj1
    	      ],
    	      [not(height(Agent,Height1))]).
  */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OMSpace.e',235).
-
- /*  reactive_rule([ '+Pred'(Height1,Offset,Height2),
-   		not(trajectory(flyingFromTo(Agent,
-   					    Physobj1,
-   					    Physobj2),
-   			       Time,
-   			       height(Agent,Height2),
-   			       Offset))
-   	      ],
-   	      [not(height(Agent,Height1))]).
- */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OMSpace.e',235).
-
- /*  not('+Pred'(Height1, Offset, Height2)) :-
-       holds_at(height(Agent, Height1), Time),
-       not(trajectory(flyingFromTo(Agent, Physobj1, Physobj2),
-                      Time,
-                      height(Agent, Height2),
-                      Offset)).
- */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OMSpace.e',235).
-
- /*  fix_axiom_head(Time) ->
-       [ holds_at(height(Agent, Height1), Time),
-          (->),
-         height(Agent, Height1)
-       ].
- */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OMSpace.e',235).
-
- /*  pl=axiom(not('+Pred'(Height1,Offset,Height2)),
-         [ height(Agent,Height1),
-   	not(trajectory(flyingFromTo(Agent,
-   				    Physobj1,
-   				    Physobj2),
-   		       Time,
-   		       height(Agent,Height2),
-   		       Offset))
-         ]).
- */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OMSpace.e',235).
-
- /*  (   height(Agent, Height1),
-       not(trajectory(flyingFromTo(Agent, Physobj1, Physobj2),
-                      Time,
-                      height(Agent, Height2),
-                      Offset))
-   ->  not('+Pred'(Height1, Offset, Height2))
-   ).
- */
+ %  "% =================================".
+% '->'(
+%    ','(
+%       height(Agent,Height1), 
+%       not(
+%          trajectory(
+%             flyingFromTo(Agent,Physobj1,Physobj2), 
+%             Time, Time, 
+%                      height(Agent,Height2), 
+%                      Offset))), 
+%    not(
+%       '+Pred'(Height1,Offset,Height2))).
 if height(Agent, Height1), not trajectory(flyingFromTo(Agent, Physobj1, Physobj2), Time, height(Agent, Height2), Offset)then not'+Pred'(Height1, Offset, Height2).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OMSpace.e',235).
 
@@ -1635,18 +911,7 @@ if height(Agent, Height1), not trajectory(flyingFromTo(Agent, Physobj1, Physobj2
    	      ],
    	      [not('+Pred'(Height1,Offset,Height2))]).
  */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OMSpace.e',235).
-
- /*  reactive_rule([ height(Agent,Height1),
-   		not(trajectory(flyingFromTo(Agent,
-   					    Physobj1,
-   					    Physobj2),
-   			       Time,
-   			       height(Agent,Height2),
-   			       Offset))
-   	      ],
-   	      [not('+Pred'(Height1,Offset,Height2))]).
- */
+ %  "% =================================".
 
 
 %; A trigger axiom states that
@@ -1661,134 +926,55 @@ if height(Agent, Height1), not trajectory(flyingFromTo(Agent, Physobj1, Physobj2
 % HoldsAt(Height(agent,height),time) &
 % HoldsAt(Height(physobj2,height),time) ->
 % Happens(Reach(agent,physobj2),time).
- %  clausify_pnf=(holds_at(flyingFromTo(Agent, Physobj1, Physobj2), Time), holds_at(height(Agent, Height), Time), holds_at(height(Physobj2, Height), Time)->happens(reach(Agent, Physobj2), Time)).
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OMSpace.e',248).
-
- /*  happens(reach(Agent, Physobj2), Time) :-
-       holds_at(flyingFromTo(Agent, Physobj1, Physobj2),
-                Time),
-       holds_at(height(Agent, Height), Time),
-       holds_at(height(Physobj2, Height), Time).
- */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OMSpace.e',248).
-
- /*  fix_axiom_head(Time) ->
-       [ happens(reach(Agent, Physobj2), Time),
-          (->),
-         reach(Agent, Physobj2)
-       ].
- */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OMSpace.e',248).
-
- /*  pl=axiom(reach(Agent,Physobj2),
-         [ flyingFromTo(Agent,Physobj1,Physobj2),
-   	height(Agent,Height),
-   	height(Physobj2,Height)
-         ]).
- */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OMSpace.e',248).
-
- /*  (   flyingFromTo(Agent, Physobj1, Physobj2),
-       height(Agent, Height),
-       height(Physobj2, Height)
-   ->  reach(Agent, Physobj2)
-   ).
- */
+% '->'(
+%    ','(
+%       flyingFromTo(Agent,Physobj1,Physobj2), 
+%       ','(
+%          height(Agent,Height), 
+%          height(Physobj2,Height))), 
+%    reach(Agent,Physobj2)).
 if flyingFromTo(Agent, Physobj1, Physobj2), height(Agent, Height), height(Physobj2, Height)then reach(Agent, Physobj2).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OMSpace.e',248).
 
  /*  reactive_rule([ holds(flyingFromTo(Agent,
    				   Physobj1,
    				   Physobj2),
-   		      Holds),
+   		      Time_At),
    		height(Agent,Height),
    		height(Physobj2,Height)
    	      ],
    	      [reach(Agent,Physobj2)]).
  */
+ %  "% =================================".
+% '->'(
+%    ','(
+%       height(Agent,Height), 
+%       ','(
+%          height(Physobj2,Height), 
+%          not(
+%             reach(Agent,Physobj2)))), 
+%    not(
+%       flyingFromTo(Agent,Physobj1,Physobj2))).
+not flyingFromTo(Agent, Physobj1, Physobj2)if height(Agent, Height), height(Physobj2, Height), not reach(Agent, Physobj2).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OMSpace.e',248).
 
- /*  reactive_rule([ holds(flyingFromTo(Agent,
-   				   Physobj1,
-   				   Physobj2),
-   		      Holds),
-   		height(Agent,Height),
-   		height(Physobj2,Height)
-   	      ],
-   	      [reach(Agent,Physobj2)]).
- */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OMSpace.e',248).
-
- /*  not(holds_at(flyingFromTo(Agent, Physobj1, Physobj2), Time)) :-
-       holds_at(height(Agent, Height), Time),
-       holds_at(height(Physobj2, Height), Time),
-       not(happens(reach(Agent, Physobj2), Time)).
- */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OMSpace.e',248).
-
- /*  pl=axiom(not(flyingFromTo(Agent,Physobj1,Physobj2)),
+ /*  l_int(holds(not(flyingFromTo(Agent,Physobj1,Physobj2)),
+   	    Time_At6),
          [ height(Agent,Height),
    	height(Physobj2,Height),
    	not(reach(Agent,Physobj2))
          ]).
  */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OMSpace.e',248).
-
- /*  (   height(Agent, Height),
-       height(Physobj2, Height),
-       not(reach(Agent, Physobj2))
-   ->  not(flyingFromTo(Agent, Physobj1, Physobj2))
-   ).
- */
-if height(Agent, Height), height(Physobj2, Height), not reach(Agent, Physobj2)then not flyingFromTo(Agent, Physobj1, Physobj2).
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OMSpace.e',248).
-
- /*  reactive_rule([ height(Agent,Height),
-   		height(Physobj2,Height),
-   		not(reach(Agent,Physobj2))
-   	      ],
-   	      [ holds(not(flyingFromTo(Agent,
-   				       Physobj1,
-   				       Physobj2)),
-   		      Holds6)
-   	      ]).
- */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OMSpace.e',248).
-
- /*  reactive_rule([ height(Agent,Height),
-   		height(Physobj2,Height),
-   		not(reach(Agent,Physobj2))
-   	      ],
-   	      [ holds(not(flyingFromTo(Agent,
-   				       Physobj1,
-   				       Physobj2)),
-   		      Holds6)
-   	      ]).
- */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OMSpace.e',248).
-
- /*  not(holds_at(height(Agent, Height), Time)) :-
-       holds_at(height(Physobj2, Height), Time),
-       holds_at(flyingFromTo(Agent, Physobj1, Physobj2),
-                Time),
-       not(happens(reach(Agent, Physobj2), Time)).
- */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OMSpace.e',248).
-
- /*  pl=axiom(not(height(Agent,Height)),
-         [ height(Physobj2,Height),
-   	flyingFromTo(Agent,Physobj1,Physobj2),
-   	not(reach(Agent,Physobj2))
-         ]).
- */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OMSpace.e',248).
-
- /*  (   height(Physobj2, Height),
-       flyingFromTo(Agent, Physobj1, Physobj2),
-       not(reach(Agent, Physobj2))
-   ->  not(height(Agent, Height))
-   ).
- */
+ %  "% =================================".
+% '->'(
+%    ','(
+%       height(Physobj2,Height), 
+%       ','(
+%          flyingFromTo(Agent,Physobj1,Physobj2), 
+%          not(
+%             reach(Agent,Physobj2)))), 
+%    not(
+%       height(Agent,Height))).
 if height(Physobj2, Height), flyingFromTo(Agent, Physobj1, Physobj2), not reach(Agent, Physobj2)then not height(Agent, Height).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OMSpace.e',248).
 
@@ -1796,46 +982,21 @@ if height(Physobj2, Height), flyingFromTo(Agent, Physobj1, Physobj2), not reach(
    		holds(flyingFromTo(Agent,
    				   Physobj1,
    				   Physobj2),
-   		      Holds7),
+   		      Time_At7),
    		not(reach(Agent,Physobj2))
    	      ],
    	      [not(height(Agent,Height))]).
  */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OMSpace.e',248).
-
- /*  reactive_rule([ height(Physobj2,Height),
-   		holds(flyingFromTo(Agent,
-   				   Physobj1,
-   				   Physobj2),
-   		      Holds7),
-   		not(reach(Agent,Physobj2))
-   	      ],
-   	      [not(height(Agent,Height))]).
- */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OMSpace.e',248).
-
- /*  not(holds_at(height(Physobj2, Height), Time)) :-
-       holds_at(height(Agent, Height), Time),
-       holds_at(flyingFromTo(Agent, Physobj1, Physobj2),
-                Time),
-       not(happens(reach(Agent, Physobj2), Time)).
- */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OMSpace.e',248).
-
- /*  pl=axiom(not(height(Physobj2,Height)),
-         [ height(Agent,Height),
-   	flyingFromTo(Agent,Physobj1,Physobj2),
-   	not(reach(Agent,Physobj2))
-         ]).
- */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OMSpace.e',248).
-
- /*  (   height(Agent, Height),
-       flyingFromTo(Agent, Physobj1, Physobj2),
-       not(reach(Agent, Physobj2))
-   ->  not(height(Physobj2, Height))
-   ).
- */
+ %  "% =================================".
+% '->'(
+%    ','(
+%       height(Agent,Height), 
+%       ','(
+%          flyingFromTo(Agent,Physobj1,Physobj2), 
+%          not(
+%             reach(Agent,Physobj2)))), 
+%    not(
+%       height(Physobj2,Height))).
 if height(Agent, Height), flyingFromTo(Agent, Physobj1, Physobj2), not reach(Agent, Physobj2)then not height(Physobj2, Height).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OMSpace.e',248).
 
@@ -1843,22 +1004,12 @@ if height(Agent, Height), flyingFromTo(Agent, Physobj1, Physobj2), not reach(Age
    		holds(flyingFromTo(Agent,
    				   Physobj1,
    				   Physobj2),
-   		      Holds8),
+   		      Time_At8),
    		not(reach(Agent,Physobj2))
    	      ],
    	      [not(height(Physobj2,Height))]).
  */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OMSpace.e',248).
-
- /*  reactive_rule([ height(Agent,Height),
-   		holds(flyingFromTo(Agent,
-   				   Physobj1,
-   				   Physobj2),
-   		      Holds8),
-   		not(reach(Agent,Physobj2))
-   	      ],
-   	      [not(height(Physobj2,Height))]).
- */
+ %  "% =================================".
 
 
 %; An effect axiom states that
@@ -1868,20 +1019,12 @@ if height(Agent, Height), flyingFromTo(Agent, Physobj1, Physobj2), not reach(Age
 % [agent,physobj,height,time]
 % HoldsAt(Height(physobj,height),time) ->
 % Initiates(Reach(agent,physobj),Height(agent,height),time).
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OMSpace.e',258).
-
- /*  pl=axiom(initiates(reach(Agent,Physobj),
-   		height(Agent,Height),
-   		Time),
-         [height(Physobj,Height)]).
- */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OMSpace.e',258).
-
- /*  height(Physobj, Height) ->
-       initiates(reach(Agent, Physobj),
-                 height(Agent, Height),
-                 Time).
- */
+% '->'(
+%    height(Physobj,Height), 
+%    initiates(
+%       reach(Agent,Physobj), 
+%       height(Agent,Height), 
+%       Time)).
 if height(Physobj, Height)then initiates(reach(Agent, Physobj), height(Agent, Height)at Time, _).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OMSpace.e',258).
 
@@ -1892,15 +1035,7 @@ if height(Physobj, Height)then initiates(reach(Agent, Physobj), height(Agent, He
    			  Initiates)
    	      ]).
  */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OMSpace.e',258).
-
- /*  reactive_rule([height(Physobj,Height)],
-   	      [ initiates(reach(Agent,Physobj),
-   			  at(height(Agent,Height),
-   			     Time),
-   			  Initiates)
-   	      ]).
- */
+ %  "% =================================".
 
 
 %;[agent,physobj,height1,height2,time]
@@ -1920,29 +1055,19 @@ if height(Physobj, Height)then initiates(reach(Agent, Physobj), height(Agent, He
 % Terminates(Reach(agent,physobj2),
 %            FlyingFromTo(agent,physobj1,physobj2),
 %            time).
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OMSpace.e',275).
-
- /*  pl=axiom(terminates(reach(Agent,Physobj2),
-   		 flyingFromTo(Agent,
-   			      Physobj1,
-   			      Physobj2),
-   		 Time),
-         [flyingFromTo(Agent,Physobj1,Physobj2)]).
- */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OMSpace.e',275).
-
- /*  flyingFromTo(Agent, Physobj1, Physobj2) ->
-       terminates(reach(Agent, Physobj2),
-                  flyingFromTo(Agent, Physobj1, Physobj2),
-                  Time).
- */
+% '->'(
+%    flyingFromTo(Agent,Physobj1,Physobj2), 
+%    terminates(
+%       reach(Agent,Physobj2), 
+%       flyingFromTo(Agent,Physobj1,Physobj2), 
+%       Time)).
 if flyingFromTo(Agent, Physobj1, Physobj2)then terminates(reach(Agent, Physobj2), flyingFromTo(Agent, Physobj1, Physobj2)at Time, _).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OMSpace.e',275).
 
  /*  reactive_rule([ holds(flyingFromTo(Agent,
    				   Physobj1,
    				   Physobj2),
-   		      Holds)
+   		      Time_At)
    	      ],
    	      [ terminates(reach(Agent,Physobj2),
    			   at(flyingFromTo(Agent,
@@ -1952,21 +1077,7 @@ if flyingFromTo(Agent, Physobj1, Physobj2)then terminates(reach(Agent, Physobj2)
    			   Terminates)
    	      ]).
  */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OMSpace.e',275).
-
- /*  reactive_rule([ holds(flyingFromTo(Agent,
-   				   Physobj1,
-   				   Physobj2),
-   		      Holds)
-   	      ],
-   	      [ terminates(reach(Agent,Physobj2),
-   			   at(flyingFromTo(Agent,
-   					   Physobj1,
-   					   Physobj2),
-   			      Time),
-   			   Terminates)
-   	      ]).
- */
+ %  "% =================================".
 
 
 %; A releases axiom states that
@@ -1974,22 +1085,14 @@ if flyingFromTo(Agent, Physobj1, Physobj2)then terminates(reach(Agent, Physobj2)
 %; the height of the physical object is released from inertia:
 % [agent,physobj,height,time]
 % Releases(Hold(agent,physobj),Height(physobj,height),time).
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OMSpace.e',284).
-
- /*  pl=axiom(releases(hold(Agent,Physobj),
-   	       height(Physobj,Height),
-   	       Time),
-         []).
- */
+% releases(
+%    hold(Agent,Physobj), 
+%    height(Physobj,Height), 
+%    Time).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OMSpace.e',284).
 releases(hold(Agent,Physobj),
 	 height(Physobj,Height),
 	 Time).
-
- /*  releases(hold(Agent,Physobj),
-   	 height(Physobj,Height),
-   	 Time).
- */
 
 
 %;[agent,physobj,height1,height2,time]
@@ -2001,24 +1104,15 @@ releases(hold(Agent,Physobj),
 % (!{object} PartOf(physobj,object)) &
 % HoldsAt(Height(physobj,height),time) ->
 % Initiates(LetGoOf(agent,physobj),Height(physobj,height),time).
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OMSpace.e',293).
-
- /*  pl=axiom(initiates(letGoOf(Agent,Physobj),
-   		height(Physobj,Height),
-   		Time),
-         [ not(partOf(Physobj,Object)),
-   	height(Physobj,Height)
-         ]).
- */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OMSpace.e',293).
-
- /*  (   not(partOf(Physobj, Object)),
-       height(Physobj, Height)
-   ->  initiates(letGoOf(Agent, Physobj),
-                 height(Physobj, Height),
-                 Time)
-   ).
- */
+% '->'(
+%    ','(
+%       not(
+%          partOf(Physobj,Object)), 
+%       height(Physobj,Height)), 
+%    initiates(
+%       letGoOf(Agent,Physobj), 
+%       height(Physobj,Height), 
+%       Time)).
 if not partOf(Physobj, Object), height(Physobj, Height)then initiates(letGoOf(Agent, Physobj), height(Physobj, Height)at Time, _).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OMSpace.e',293).
 
@@ -2031,17 +1125,7 @@ if not partOf(Physobj, Object), height(Physobj, Height)then initiates(letGoOf(Ag
    			  Initiates)
    	      ]).
  */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OMSpace.e',293).
-
- /*  reactive_rule([ not(partOf(Physobj,Object)),
-   		height(Physobj,Height)
-   	      ],
-   	      [ initiates(letGoOf(Agent,Physobj),
-   			  at(height(Physobj,Height),
-   			     Time),
-   			  Initiates)
-   	      ]).
- */
+ %  "% =================================".
 
 
 %; A state constraint says that
@@ -2052,124 +1136,53 @@ if not partOf(Physobj, Object), height(Physobj, Height)then initiates(letGoOf(Ag
 % HoldsAt(Holding(agent,physobj),time) &
 % HoldsAt(Height(agent,height),time) ->
 % HoldsAt(Height(physobj,height),time).
- %  clausify_pnf=(holds_at(holding(Agent, Physobj), Time), holds_at(height(Agent, Height), Time)->holds_at(height(Physobj, Height), Time)).
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OMSpace.e',302).
-
- /*  holds_at(height(Physobj, Height), Time) :-
-       holds_at(holding(Agent, Physobj), Time),
-       holds_at(height(Agent, Height), Time).
- */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OMSpace.e',302).
-
- /*  fix_axiom_head(Time) ->
-       [ holds_at(height(Physobj, Height), Time),
-          (->),
-         height(Physobj, Height)
-       ].
- */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OMSpace.e',302).
-
- /*  pl=axiom(height(Physobj,Height),
-         [ holding(Agent,Physobj),
-   	height(Agent,Height)
-         ]).
- */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OMSpace.e',302).
-
- /*  (   holding(Agent, Physobj),
-       height(Agent, Height)
-   ->  height(Physobj, Height)
-   ).
- */
+% '->'(
+%    ','(
+%       holding(Agent,Physobj), 
+%       height(Agent,Height)), 
+%    height(Physobj,Height)).
 if holding(Agent, Physobj), height(Agent, Height)then height(Physobj, Height).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OMSpace.e',302).
 
- /*  reactive_rule([ holds(holding(Agent,Physobj),Holds),
+ /*  reactive_rule([ holds(holding(Agent,Physobj),Time_At),
    		height(Agent,Height)
    	      ],
    	      [height(Physobj,Height)]).
  */
+ %  "% =================================".
+% '->'(
+%    ','(
+%       height(Agent,Height), 
+%       not(
+%          height(Physobj,Height))), 
+%    not(
+%       holding(Agent,Physobj))).
+not holding(Agent, Physobj)if height(Agent, Height), not height(Physobj, Height).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OMSpace.e',302).
 
- /*  reactive_rule([ holds(holding(Agent,Physobj),Holds),
-   		height(Agent,Height)
-   	      ],
-   	      [height(Physobj,Height)]).
- */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OMSpace.e',302).
-
- /*  not(holds_at(holding(Agent, Physobj), Time)) :-
-       holds_at(height(Agent, Height), Time),
-       not(holds_at(height(Physobj, Height), Time)).
- */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OMSpace.e',302).
-
- /*  pl=axiom(not(holding(Agent,Physobj)),
+ /*  l_int(holds(not(holding(Agent,Physobj)),Time_At5),
          [ height(Agent,Height),
    	not(height(Physobj,Height))
          ]).
  */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OMSpace.e',302).
-
- /*  (   height(Agent, Height),
-       not(height(Physobj, Height))
-   ->  not(holding(Agent, Physobj))
-   ).
- */
-if height(Agent, Height), not height(Physobj, Height)then not holding(Agent, Physobj).
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OMSpace.e',302).
-
- /*  reactive_rule([ height(Agent,Height),
-   		not(height(Physobj,Height))
-   	      ],
-   	      [ holds(not(holding(Agent,Physobj)),
-   		      Holds5)
-   	      ]).
- */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OMSpace.e',302).
-
- /*  reactive_rule([ height(Agent,Height),
-   		not(height(Physobj,Height))
-   	      ],
-   	      [ holds(not(holding(Agent,Physobj)),
-   		      Holds5)
-   	      ]).
- */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OMSpace.e',302).
-
- /*  not(holds_at(height(Agent, Height), Time)) :-
-       holds_at(holding(Agent, Physobj), Time),
-       not(holds_at(height(Physobj, Height), Time)).
- */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OMSpace.e',302).
-
- /*  pl=axiom(not(height(Agent,Height)),
-         [ holding(Agent,Physobj),
-   	not(height(Physobj,Height))
-         ]).
- */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OMSpace.e',302).
-
- /*  (   holding(Agent, Physobj),
-       not(height(Physobj, Height))
-   ->  not(height(Agent, Height))
-   ).
- */
+ %  "% =================================".
+% '->'(
+%    ','(
+%       holding(Agent,Physobj), 
+%       not(
+%          height(Physobj,Height))), 
+%    not(
+%       height(Agent,Height))).
 if holding(Agent, Physobj), not height(Physobj, Height)then not height(Agent, Height).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OMSpace.e',302).
 
- /*  reactive_rule([ holds(holding(Agent,Physobj),Holds6),
+ /*  reactive_rule([ holds(holding(Agent,Physobj),
+   		      Time_At6),
    		not(height(Physobj,Height))
    	      ],
    	      [not(height(Agent,Height))]).
  */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OMSpace.e',302).
-
- /*  reactive_rule([ holds(holding(Agent,Physobj),Holds6),
-   		not(height(Physobj,Height))
-   	      ],
-   	      [not(height(Agent,Height))]).
- */
+ %  "% =================================".
 
 
 %; A state constraint says that if a physical object
@@ -2180,35 +1193,11 @@ if holding(Agent, Physobj), not height(Physobj, Height)then not height(Agent, He
 % PartOf(physobj,object) &
 % HoldsAt(Height(object,height),time) ->
 % HoldsAt(Height(physobj,height),time).
- %  clausify_pnf=(partOf(Physobj, Object), holds_at(height(Object, Height), Time)->holds_at(height(Physobj, Height), Time)).
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OMSpace.e',311).
-
- /*  holds_at(height(Physobj, Height), Time) :-
-       partOf(Physobj, Object),
-       holds_at(height(Object, Height), Time).
- */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OMSpace.e',311).
-
- /*  fix_axiom_head(Time) ->
-       [ holds_at(height(Physobj, Height), Time),
-          (->),
-         height(Physobj, Height)
-       ].
- */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OMSpace.e',311).
-
- /*  pl=axiom(height(Physobj,Height),
-         [ partOf(Physobj,Object),
-   	height(Object,Height)
-         ]).
- */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OMSpace.e',311).
-
- /*  (   partOf(Physobj, Object),
-       height(Object, Height)
-   ->  height(Physobj, Height)
-   ).
- */
+% '->'(
+%    ','(
+%       partOf(Physobj,Object), 
+%       height(Object,Height)), 
+%    height(Physobj,Height)).
 if partOf(Physobj, Object), height(Object, Height)then height(Physobj, Height).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OMSpace.e',311).
 
@@ -2217,41 +1206,14 @@ if partOf(Physobj, Object), height(Object, Height)then height(Physobj, Height).
    	      ],
    	      [height(Physobj,Height)]).
  */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OMSpace.e',311).
-
- /*  reactive_rule([ partOf(Physobj,Object),
-   		height(Object,Height)
-   	      ],
-   	      [height(Physobj,Height)]).
- */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OMSpace.e',311).
-
- /*  not(partOf(Physobj, Object)) :-
-       holds_at(height(Object, Height), Time),
-       not(holds_at(height(Physobj, Height), Time)).
- */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OMSpace.e',311).
-
- /*  fix_axiom_head(Time) ->
-       [ holds_at(height(Object, Height), Time),
-          (->),
-         height(Object, Height)
-       ].
- */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OMSpace.e',311).
-
- /*  pl=axiom(not(partOf(Physobj,Object)),
-         [ height(Object,Height),
-   	not(height(Physobj,Height))
-         ]).
- */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OMSpace.e',311).
-
- /*  (   height(Object, Height),
-       not(height(Physobj, Height))
-   ->  not(partOf(Physobj, Object))
-   ).
- */
+ %  "% =================================".
+% '->'(
+%    ','(
+%       height(Object,Height), 
+%       not(
+%          height(Physobj,Height))), 
+%    not(
+%       partOf(Physobj,Object))).
 if height(Object, Height), not height(Physobj, Height)then not partOf(Physobj, Object).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OMSpace.e',311).
 
@@ -2260,33 +1222,14 @@ if height(Object, Height), not height(Physobj, Height)then not partOf(Physobj, O
    	      ],
    	      [not(partOf(Physobj,Object))]).
  */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OMSpace.e',311).
-
- /*  reactive_rule([ height(Object,Height),
-   		not(height(Physobj,Height))
-   	      ],
-   	      [not(partOf(Physobj,Object))]).
- */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OMSpace.e',311).
-
- /*  not(holds_at(height(Object, Height), Time)) :-
-       partOf(Physobj, Object),
-       not(holds_at(height(Physobj, Height), Time)).
- */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OMSpace.e',311).
-
- /*  pl=axiom(not(height(Object,Height)),
-         [ partOf(Physobj,Object),
-   	not(height(Physobj,Height))
-         ]).
- */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OMSpace.e',311).
-
- /*  (   partOf(Physobj, Object),
-       not(height(Physobj, Height))
-   ->  not(height(Object, Height))
-   ).
- */
+ %  "% =================================".
+% '->'(
+%    ','(
+%       partOf(Physobj,Object), 
+%       not(
+%          height(Physobj,Height))), 
+%    not(
+%       height(Object,Height))).
 if partOf(Physobj, Object), not height(Physobj, Height)then not height(Object, Height).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OMSpace.e',311).
 
@@ -2295,13 +1238,7 @@ if partOf(Physobj, Object), not height(Physobj, Height)then not height(Object, H
    	      ],
    	      [not(height(Object,Height))]).
  */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OMSpace.e',311).
-
- /*  reactive_rule([ partOf(Physobj,Object),
-   		not(height(Physobj,Height))
-   	      ],
-   	      [not(height(Object,Height))]).
- */
+ %  "% =================================".
 
 
 %;event Catch(agent,physobj)

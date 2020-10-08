@@ -3,7 +3,7 @@
 :-include(library('ec_planner/ec_test_incl')).
 :-expects_dialect(lps).
 % translate: begining  File: /pack/logicmoo_ec/ext/ec_sources/ecnet/CTime.e.lps 
-% Thu, 08 Oct 2020 19:05:48 GMT File: <stream>(0x5600a3808c00)%;
+% Thu, 08 Oct 2020 21:35:59 GMT File: <stream>(0x55894c218800)%;
 %; Copyright (c) 2005 IBM Corporation and others.
 %; All rights reserved. This program and the accompanying materials
 %; are made available under the terms of the Common Public License v1.0
@@ -19,13 +19,14 @@
 %; time is in the daytime.
 
 % predicate Daytime(time)
- %  blue=predicate(daytime(time)).
- %  predicate(daytime(time)).
+% predicate(
+%    daytime(time)).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/CTime.e',17).
 predicates([daytime/1]).
- %  predicates([daytime/1]).
+% mpred_prop(
+%    daytime(time), 
+%    predicate).
 mpred_prop(daytime(time),predicate).
- %  mpred_prop(daytime(time),predicate).
 
 
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/CTime.e',17).
@@ -33,29 +34,33 @@ mpred_prop(daytime(time),predicate).
 
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/CTime.e',20).
 % predicate Nighttime(time)
- %  blue=predicate(nighttime(time)).
- %  predicate(nighttime(time)).
+% predicate(
+%    nighttime(time)).
 predicates([nighttime/1]).
- %  predicates([nighttime/1]).
+% mpred_prop(
+%    nighttime(time), 
+%    predicate).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/CTime.e',20).
 mpred_prop(nighttime(time),predicate).
- %  mpred_prop(nighttime(time),predicate).
 
 % xor Daytime, Nighttime
- %  red = ==>xor[daytime,nighttime].
+% xor(
+%    ==>, 
+%    [ daytime, 
+%      nighttime ]).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/CTime.e',20).
 ==>xor[daytime,nighttime].
- %  ==>xor[daytime,nighttime].
 %; time is in the morning.
 
 % predicate Morning(time)
- %  blue=predicate(morning(time)).
- %  predicate(morning(time)).
+% predicate(
+%    morning(time)).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/CTime.e',23).
 predicates([morning/1]).
- %  predicates([morning/1]).
+% mpred_prop(
+%    morning(time), 
+%    predicate).
 mpred_prop(morning(time),predicate).
- %  mpred_prop(morning(time),predicate).
 
 
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/CTime.e',23).
@@ -63,58 +68,67 @@ mpred_prop(morning(time),predicate).
 
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/CTime.e',26).
 % predicate Afternoon(time)
- %  blue=predicate(afternoon(time)).
- %  predicate(afternoon(time)).
+% predicate(
+%    afternoon(time)).
 predicates([afternoon/1]).
- %  predicates([afternoon/1]).
+% mpred_prop(
+%    afternoon(time), 
+%    predicate).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/CTime.e',26).
 mpred_prop(afternoon(time),predicate).
- %  mpred_prop(afternoon(time),predicate).
 
 
 %; time is in the evening.
 
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/CTime.e',28).
 % predicate Evening(time)
- %  blue=predicate(evening(time)).
- %  predicate(evening(time)).
+% predicate(
+%    evening(time)).
 predicates([evening/1]).
- %  predicates([evening/1]).
+% mpred_prop(
+%    evening(time), 
+%    predicate).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/CTime.e',28).
 mpred_prop(evening(time),predicate).
- %  mpred_prop(evening(time),predicate).
 
 
 %; time is in the night.
 
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/CTime.e',30).
 % predicate Night(time)
- %  blue=predicate(night(time)).
- %  predicate(night(time)).
+% predicate(
+%    night(time)).
 predicates([night/1]).
- %  predicates([night/1]).
+% mpred_prop(
+%    night(time), 
+%    predicate).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/CTime.e',30).
 mpred_prop(night(time),predicate).
- %  mpred_prop(night(time),predicate).
 
 
 %; time is in the late night.
 
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/CTime.e',32).
 % predicate LateNight(time)
- %  blue=predicate(lateNight(time)).
- %  predicate(lateNight(time)).
+% predicate(
+%    lateNight(time)).
 predicates([lateNight/1]).
- %  predicates([lateNight/1]).
+% mpred_prop(
+%    lateNight(time), 
+%    predicate).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/CTime.e',32).
 mpred_prop(lateNight(time),predicate).
- %  mpred_prop(lateNight(time),predicate).
 
 % xor Morning, Afternoon, Evening, Night, LateNight
- %  red = ==>xor[morning,afternoon,evening,night,lateNight].
+% xor(
+%    ==>, 
+%    [ morning, 
+%      afternoon, 
+%      evening, 
+%      night, 
+%      lateNight ]).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/CTime.e',32).
 ==>xor[morning,afternoon,evening,night,lateNight].
- %  ==>xor[morning,afternoon,evening,night,lateNight].
 
 
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/CTime.e',35).
@@ -127,30 +141,15 @@ mpred_prop(lateNight(time),predicate).
        ;   evening(Time)
        ).
  */
- %  clausify_pnf=(daytime(Time)->morning(Time);afternoon(Time);evening(Time)).
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/CTime.e',35).
-
- /*  morning(Time) :-
-       not(afternoon(Time)),
-       not(evening(Time)),
-       daytime(Time).
- */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/CTime.e',35).
-
- /*  pl=axiom(morning(Time),
-         [ not(afternoon(Time)),
-   	not(evening(Time)),
-   	daytime(Time)
-         ]).
- */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/CTime.e',35).
-
- /*  (   not(afternoon(Time)),
-       not(evening(Time)),
-       daytime(Time)
-   ->  morning(Time)
-   ).
- */
+% '->'(
+%    ','(
+%       not(
+%          afternoon(Time)), 
+%       ','(
+%          not(
+%             evening(Time)), 
+%          daytime(Time))), 
+%    morning(Time)).
 if not afternoon(Time), not evening(Time), daytime(Time)then morning(Time).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/CTime.e',35).
 
@@ -160,37 +159,16 @@ if not afternoon(Time), not evening(Time), daytime(Time)then morning(Time).
    	      ],
    	      [morning(Time)]).
  */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/CTime.e',35).
-
- /*  reactive_rule([ not(afternoon(Time)),
-   		not(evening(Time)),
-   		daytime(Time)
-   	      ],
-   	      [morning(Time)]).
- */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/CTime.e',35).
-
- /*  afternoon(Time) :-
-       not(evening(Time)),
-       not(morning(Time)),
-       daytime(Time).
- */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/CTime.e',35).
-
- /*  pl=axiom(afternoon(Time),
-         [ not(evening(Time)),
-   	not(morning(Time)),
-   	daytime(Time)
-         ]).
- */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/CTime.e',35).
-
- /*  (   not(evening(Time)),
-       not(morning(Time)),
-       daytime(Time)
-   ->  afternoon(Time)
-   ).
- */
+ %  "% =================================".
+% '->'(
+%    ','(
+%       not(
+%          evening(Time)), 
+%       ','(
+%          not(
+%             morning(Time)), 
+%          daytime(Time))), 
+%    afternoon(Time)).
 if not evening(Time), not morning(Time), daytime(Time)then afternoon(Time).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/CTime.e',35).
 
@@ -200,37 +178,16 @@ if not evening(Time), not morning(Time), daytime(Time)then afternoon(Time).
    	      ],
    	      [afternoon(Time)]).
  */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/CTime.e',35).
-
- /*  reactive_rule([ not(evening(Time)),
-   		not(morning(Time)),
-   		daytime(Time)
-   	      ],
-   	      [afternoon(Time)]).
- */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/CTime.e',35).
-
- /*  evening(Time) :-
-       not(afternoon(Time)),
-       not(morning(Time)),
-       daytime(Time).
- */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/CTime.e',35).
-
- /*  pl=axiom(evening(Time),
-         [ not(afternoon(Time)),
-   	not(morning(Time)),
-   	daytime(Time)
-         ]).
- */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/CTime.e',35).
-
- /*  (   not(afternoon(Time)),
-       not(morning(Time)),
-       daytime(Time)
-   ->  evening(Time)
-   ).
- */
+ %  "% =================================".
+% '->'(
+%    ','(
+%       not(
+%          afternoon(Time)), 
+%       ','(
+%          not(
+%             morning(Time)), 
+%          daytime(Time))), 
+%    evening(Time)).
 if not afternoon(Time), not morning(Time), daytime(Time)then evening(Time).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/CTime.e',35).
 
@@ -240,37 +197,18 @@ if not afternoon(Time), not morning(Time), daytime(Time)then evening(Time).
    	      ],
    	      [evening(Time)]).
  */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/CTime.e',35).
-
- /*  reactive_rule([ not(afternoon(Time)),
-   		not(morning(Time)),
-   		daytime(Time)
-   	      ],
-   	      [evening(Time)]).
- */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/CTime.e',35).
-
- /*  not(daytime(Time)) :-
-       not(morning(Time)),
-       not(afternoon(Time)),
-       not(evening(Time)).
- */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/CTime.e',35).
-
- /*  pl=axiom(not(daytime(Time)),
-         [ not(morning(Time)),
-   	not(afternoon(Time)),
-   	not(evening(Time))
-         ]).
- */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/CTime.e',35).
-
- /*  (   not(morning(Time)),
-       not(afternoon(Time)),
-       not(evening(Time))
-   ->  not(daytime(Time))
-   ).
- */
+ %  "% =================================".
+% '->'(
+%    ','(
+%       not(
+%          morning(Time)), 
+%       ','(
+%          not(
+%             afternoon(Time)), 
+%          not(
+%             evening(Time)))), 
+%    not(
+%       daytime(Time))).
 if not morning(Time), not afternoon(Time), not evening(Time)then not daytime(Time).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/CTime.e',35).
 
@@ -280,29 +218,14 @@ if not morning(Time), not afternoon(Time), not evening(Time)then not daytime(Tim
    	      ],
    	      [not(daytime(Time))]).
  */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/CTime.e',35).
-
- /*  reactive_rule([ not(morning(Time)),
-   		not(afternoon(Time)),
-   		not(evening(Time))
-   	      ],
-   	      [not(daytime(Time))]).
- */
- %  clausify_pnf=(morning(Time);afternoon(Time);evening(Time)->daytime(Time)).
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/CTime.e',35).
-
- /*  daytime(Time) :-
-       (   morning(Time)
-       ;   afternoon(Time)
-       ;   evening(Time)
-       ).
- */
- %   pl=axiom(daytime(Time), [(morning(Time);afternoon(Time);evening(Time))]).
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/CTime.e',35).
-
- /*  morning(Time);afternoon(Time);evening(Time) ->
-       daytime(Time).
- */
+ %  "% =================================".
+% '->'(
+%    ';'(
+%       morning(Time), 
+%       ';'(
+%          afternoon(Time), 
+%          evening(Time))), 
+%    daytime(Time)).
 if morning(Time);afternoon(Time);evening(Time)then daytime(Time).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/CTime.e',35).
 
@@ -310,54 +233,31 @@ if morning(Time);afternoon(Time);evening(Time)then daytime(Time).
                     ],
                     [daytime(Time)]).
  */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/CTime.e',35).
-
- /*   reactive_rule([  (morning(Time);afternoon(Time);evening(Time))
-                    ],
-                    [daytime(Time)]).
- */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/CTime.e',35).
-
- /*  not(morning(Time)) :-
-       not(daytime(Time)).
- */
- %  pl=axiom(not(morning(Time)),[not(daytime(Time))]).
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/CTime.e',35).
-
- /*  not(daytime(Time)) ->
-       not(morning(Time)).
- */
+ %  "% =================================".
+% '->'(
+%    not(
+%       daytime(Time)), 
+%    not(
+%       morning(Time))).
 if not daytime(Time)then not morning(Time).
  %  reactive_rule([not(daytime(Time))],[not(morning(Time))]).
- %  reactive_rule([not(daytime(Time))],[not(morning(Time))]).
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/CTime.e',35).
-
- /*  not(afternoon(Time)) :-
-       not(daytime(Time)).
- */
- %  pl=axiom(not(afternoon(Time)),[not(daytime(Time))]).
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/CTime.e',35).
-
- /*  not(daytime(Time)) ->
-       not(afternoon(Time)).
- */
+ %  "% =================================".
+% '->'(
+%    not(
+%       daytime(Time)), 
+%    not(
+%       afternoon(Time))).
 if not daytime(Time)then not afternoon(Time).
  %  reactive_rule([not(daytime(Time))],[not(afternoon(Time))]).
- %  reactive_rule([not(daytime(Time))],[not(afternoon(Time))]).
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/CTime.e',35).
-
- /*  not(evening(Time)) :-
-       not(daytime(Time)).
- */
- %  pl=axiom(not(evening(Time)),[not(daytime(Time))]).
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/CTime.e',35).
-
- /*  not(daytime(Time)) ->
-       not(evening(Time)).
- */
+ %  "% =================================".
+% '->'(
+%    not(
+%       daytime(Time)), 
+%    not(
+%       evening(Time))).
 if not daytime(Time)then not evening(Time).
  %  reactive_rule([not(daytime(Time))],[not(evening(Time))]).
- %  reactive_rule([not(daytime(Time))],[not(evening(Time))]).
+ %  "% =================================".
 
 
 % [time]
@@ -369,160 +269,93 @@ if not daytime(Time)then not evening(Time).
        ;   lateNight(Time)
        ).
  */
- %  clausify_pnf=(nighttime(Time)->night(Time);lateNight(Time)).
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/CTime.e',35).
-
- /*  night(Time) :-
-       not(lateNight(Time)),
-       nighttime(Time).
- */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/CTime.e',35).
-
- /*  pl=axiom(night(Time),
-         [not(lateNight(Time)),nighttime(Time)]).
- */
-
- /*  (   not(lateNight(Time)),
-       nighttime(Time)
-   ->  night(Time)
-   ).
- */
+% '->'(
+%    ','(
+%       not(
+%          lateNight(Time)), 
+%       nighttime(Time)), 
+%    night(Time)).
 if not lateNight(Time), nighttime(Time)then night(Time).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/CTime.e',35).
 
  /*  reactive_rule([not(lateNight(Time)),nighttime(Time)],
    	      [night(Time)]).
  */
-
- /*  reactive_rule([not(lateNight(Time)),nighttime(Time)],
-   	      [night(Time)]).
- */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/CTime.e',35).
-
- /*  lateNight(Time) :-
-       not(night(Time)),
-       nighttime(Time).
- */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/CTime.e',35).
-
- /*  pl=axiom(lateNight(Time),
-         [not(night(Time)),nighttime(Time)]).
- */
-
- /*  (   not(night(Time)),
-       nighttime(Time)
-   ->  lateNight(Time)
-   ).
- */
+ %  "% =================================".
+% '->'(
+%    ','(
+%       not(
+%          night(Time)), 
+%       nighttime(Time)), 
+%    lateNight(Time)).
 if not night(Time), nighttime(Time)then lateNight(Time).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/CTime.e',35).
 
  /*  reactive_rule([not(night(Time)),nighttime(Time)],
    	      [lateNight(Time)]).
  */
-
- /*  reactive_rule([not(night(Time)),nighttime(Time)],
-   	      [lateNight(Time)]).
- */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/CTime.e',35).
-
- /*  not(nighttime(Time)) :-
-       not(night(Time)),
-       not(lateNight(Time)).
- */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/CTime.e',35).
-
- /*  pl=axiom(not(nighttime(Time)),
-         [not(night(Time)),not(lateNight(Time))]).
- */
-
- /*  (   not(night(Time)),
-       not(lateNight(Time))
-   ->  not(nighttime(Time))
-   ).
- */
+ %  "% =================================".
+% '->'(
+%    ','(
+%       not(
+%          night(Time)), 
+%       not(
+%          lateNight(Time))), 
+%    not(
+%       nighttime(Time))).
 if not night(Time), not lateNight(Time)then not nighttime(Time).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/CTime.e',35).
 
  /*  reactive_rule([not(night(Time)),not(lateNight(Time))],
    	      [not(nighttime(Time))]).
  */
-
- /*  reactive_rule([not(night(Time)),not(lateNight(Time))],
-   	      [not(nighttime(Time))]).
- */
- %  clausify_pnf=(night(Time);lateNight(Time)->nighttime(Time)).
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/CTime.e',35).
-
- /*  nighttime(Time) :-
-       (   night(Time)
-       ;   lateNight(Time)
-       ).
- */
- %   pl=axiom(nighttime(Time), [(night(Time);lateNight(Time))]).
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/CTime.e',35).
-
- /*  night(Time);lateNight(Time) ->
-       nighttime(Time).
- */
+ %  "% =================================".
+% '->'(
+%    ';'(
+%       night(Time), 
+%       lateNight(Time)), 
+%    nighttime(Time)).
 if night(Time);lateNight(Time)then nighttime(Time).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/CTime.e',35).
 
  /*   reactive_rule([(night(Time);lateNight(Time))],
                     [nighttime(Time)]).
  */
-
- /*   reactive_rule([(night(Time);lateNight(Time))],
-                    [nighttime(Time)]).
- */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/CTime.e',35).
-
- /*  not(night(Time)) :-
-       not(nighttime(Time)).
- */
- %  pl=axiom(not(night(Time)),[not(nighttime(Time))]).
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/CTime.e',35).
-
- /*  not(nighttime(Time)) ->
-       not(night(Time)).
- */
+ %  "% =================================".
+% '->'(
+%    not(
+%       nighttime(Time)), 
+%    not(
+%       night(Time))).
 if not nighttime(Time)then not night(Time).
  %  reactive_rule([not(nighttime(Time))],[not(night(Time))]).
- %  reactive_rule([not(nighttime(Time))],[not(night(Time))]).
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/CTime.e',35).
-
- /*  not(lateNight(Time)) :-
-       not(nighttime(Time)).
- */
- %  pl=axiom(not(lateNight(Time)),[not(nighttime(Time))]).
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/CTime.e',35).
-
- /*  not(nighttime(Time)) ->
-       not(lateNight(Time)).
- */
+ %  "% =================================".
+% '->'(
+%    not(
+%       nighttime(Time)), 
+%    not(
+%       lateNight(Time))).
 if not nighttime(Time)then not lateNight(Time).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/CTime.e',35).
 
  /*  reactive_rule([not(nighttime(Time))],
    	      [not(lateNight(Time))]).
  */
-
- /*  reactive_rule([not(nighttime(Time))],
-   	      [not(lateNight(Time))]).
- */
+ %  "% =================================".
 
 
 %; dreams
 %; time is part of a dream sequence.
 
 % predicate DreamSequence(time)
- %  blue=predicate(dreamSequence(time)).
- %  predicate(dreamSequence(time)).
+% predicate(
+%    dreamSequence(time)).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/CTime.e',40).
 predicates([dreamSequence/1]).
- %  predicates([dreamSequence/1]).
+% mpred_prop(
+%    dreamSequence(time), 
+%    predicate).
 mpred_prop(dreamSequence(time),predicate).
- %  mpred_prop(dreamSequence(time),predicate).
 
 
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/CTime.e',43).

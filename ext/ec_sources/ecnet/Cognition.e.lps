@@ -3,7 +3,7 @@
 :-include(library('ec_planner/ec_test_incl')).
 :-expects_dialect(lps).
 % translate: begining  File: /pack/logicmoo_ec/ext/ec_sources/ecnet/Cognition.e.lps 
-% Thu, 08 Oct 2020 19:05:44 GMT File: <stream>(0x5600a3808c00)%;
+% Thu, 08 Oct 2020 21:35:56 GMT File: <stream>(0x55894c1dd100)%;
 %; Copyright (c) 2005 IBM Corporation and others.
 %; All rights reserved. This program and the accompanying materials
 %; are made available under the terms of the Common Public License v1.0
@@ -16,146 +16,104 @@
 
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Cognition.e',11).
 % event Read(agent,text,content)
- %  blue=event(read(agent,text,content)).
- %  event(read(agent,text,content)).
+% event(
+%    read(agent,text,content)).
 actions([read/3]).
- %  actions([read/3]).
+% mpred_prop(
+%    read(agent,text,content), 
+%    event).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Cognition.e',11).
 mpred_prop(read(agent,text,content),event).
- %  mpred_prop(read(agent,text,content),event).
 
 % event ThinkAbout(agent,content)
- %  blue=event(thinkAbout(agent,content)).
- %  event(thinkAbout(agent,content)).
+% event(
+%    thinkAbout(agent,content)).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Cognition.e',11).
 actions([thinkAbout/2]).
- %  actions([thinkAbout/2]).
+% mpred_prop(
+%    thinkAbout(agent,content), 
+%    event).
 mpred_prop(thinkAbout(agent,content),event).
- %  mpred_prop(thinkAbout(agent,content),event).
 
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Cognition.e',13).
 % event Think(agent)
- %  blue=event(think(agent)).
- %  event(think(agent)).
+% event(
+%    think(agent)).
 actions([think/1]).
- %  actions([think/1]).
+% mpred_prop(
+%    think(agent), 
+%    event).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Cognition.e',13).
 mpred_prop(think(agent),event).
- %  mpred_prop(think(agent),event).
 
 % event Understand(agent,content)
- %  blue=event(understand(agent,content)).
- %  event(understand(agent,content)).
+% event(
+%    understand(agent,content)).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Cognition.e',13).
 actions([understand/2]).
- %  actions([understand/2]).
+% mpred_prop(
+%    understand(agent,content), 
+%    event).
 mpred_prop(understand(agent,content),event).
- %  mpred_prop(understand(agent,content),event).
 
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Cognition.e',15).
 % event Dream(agent)
- %  blue=event(dream(agent)).
- %  event(dream(agent)).
+% event(
+%    dream(agent)).
 actions([dream/1]).
- %  actions([dream/1]).
+% mpred_prop(
+%    dream(agent), 
+%    event).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Cognition.e',15).
 mpred_prop(dream(agent),event).
- %  mpred_prop(dream(agent),event).
 
 
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Cognition.e',17).
 % [agent,text,content,time]
 % Happens(Read(agent,text,content),time) ->
 % HoldsAt(See(agent,text),time).
- %  clausify_pnf=(happens(read(Agent, Text, Content), Time)->holds_at(see(Agent, Text), Time)).
-
- /*  holds_at(see(Agent, Text), Time) :-
-       happens(read(Agent, Text, Content), Time).
- */
+% '->'(
+%    metreqs(
+%       read(Agent,Text,Content)), 
+%    requires(
+%       read(Agent,Text,Content), 
+%       When_Time)).
+if read(Agent, Text, Content)then requires(read(Agent, Text, Content), When_Time).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Cognition.e',17).
 
- /*  pl=axiom(requires(read(Agent,Text,Content),
-   	       When_Time),
-         [metreqs(read(Agent,Text,Content))]).
- */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Cognition.e',17).
-
- /*  metreqs(read(Agent, Text, Content)) ->
-       requires(read(Agent, Text, Content), When_Time).
- */
-if metreqs(read(Agent, Text, Content))then requires(read(Agent, Text, Content), When_Time).
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Cognition.e',17).
-
- /*  reactive_rule([metreqs(read(Agent,Text,Content))],
+ /*  reactive_rule([ happens(read(Agent,Text,Content),
+   			Time_From,
+   			Time_Until)
+   	      ],
    	      [ requires(read(Agent,Text,Content),
    			 When_Time)
    	      ]).
  */
+ %  "% =================================".
+% '->'(
+%    see(Agent,Text), 
+%    metreqs(
+%       read(Agent,Text,Content))).
+read(Agent, Text, Content)if see(Agent, Text).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Cognition.e',17).
 
- /*  reactive_rule([metreqs(read(Agent,Text,Content))],
-   	      [ requires(read(Agent,Text,Content),
-   			 When_Time)
-   	      ]).
+ /*  l_events(happens(read(Agent,Text,Content),
+   		 Time_From7,
+   		 Time_From7),
+   	 [holds(see(Agent,Text),Time_From7)]).
  */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Cognition.e',17).
-
- /*  fix_axiom_head(When_Time) ->
-       [ holds_at(metreqs(read(Agent, Text, Content)),
-                  When_Time),
-          (->),
-         metreqs(read(Agent, Text, Content))
-       ].
- */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Cognition.e',17).
-
- /*  pl=axiom(metreqs(read(Agent,Text,Content)),
-         [see(Agent,Text)]).
- */
-
- /*  see(Agent, Text) ->
-       metreqs(read(Agent, Text, Content)).
- */
-if see(Agent, Text)then metreqs(read(Agent, Text, Content)).
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Cognition.e',17).
-
- /*  reactive_rule([see(Agent,Text)],
-   	      [metreqs(read(Agent,Text,Content))]).
- */
-
- /*  reactive_rule([see(Agent,Text)],
-   	      [metreqs(read(Agent,Text,Content))]).
- */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Cognition.e',17).
-
- /*  not(happens(read(Agent, Text, Content), When_Time)) :-
-       not(holds_at(see(Agent, Text), When_Time)).
- */
-
- /*  fix_axiom_head(When_Time) ->
-       [ not(happens(read(Agent, Text, Content), When_Time)),
-          (->),
-         not(read(Agent, Text, Content))
-       ].
- */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Cognition.e',17).
-
- /*  pl=axiom(not(read(Agent,Text,Content)),
-         [not(see(Agent,Text))]).
- */
-
- /*  not(see(Agent, Text)) ->
-       not(read(Agent, Text, Content)).
- */
+ %  "% =================================".
+% '->'(
+%    not(
+%       see(Agent,Text)), 
+%    not(
+%       read(Agent,Text,Content))).
 if not see(Agent, Text)then not read(Agent, Text, Content).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Cognition.e',17).
 
- /*  reactive_rule([not(see(Agent,Text))],
+ /*  reactive_rule([holds(not(see(Agent,Text)),Time_At)],
    	      [not(read(Agent,Text,Content))]).
  */
-
- /*  reactive_rule([not(see(Agent,Text))],
-   	      [not(read(Agent,Text,Content))]).
- */
+ %  "% =================================".
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Cognition.e',20).
 % translate: ending  File: /pack/logicmoo_ec/ext/ec_sources/ecnet/Cognition.e.lps 

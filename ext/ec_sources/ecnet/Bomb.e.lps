@@ -3,7 +3,7 @@
 :-include(library('ec_planner/ec_test_incl')).
 :-expects_dialect(lps).
 % translate: begining  File: /pack/logicmoo_ec/ext/ec_sources/ecnet/Bomb.e.lps 
-% Thu, 08 Oct 2020 19:05:40 GMT File: <stream>(0x5600a3709b00)%;
+% Thu, 08 Oct 2020 21:35:53 GMT File: <stream>(0x55894c2e2700)%;
 %; Copyright (c) 2005 IBM Corporation and others.
 %; All rights reserved. This program and the accompanying materials
 %; are made available under the terms of the Common Public License v1.0
@@ -17,198 +17,194 @@
 %; agent is nondeterministically killed.
 
 % fluent KilledDeterminingFluent(agent)
- %  blue=fluent(killedDeterminingFluent(agent)).
- %  fluent(killedDeterminingFluent(agent)).
+% fluent(
+%    killedDeterminingFluent(agent)).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Bomb.e',13).
 fluents([killedDeterminingFluent/1]).
- %  fluents([killedDeterminingFluent/1]).
+% mpred_prop(
+%    killedDeterminingFluent(agent), 
+%    fluent).
 mpred_prop(killedDeterminingFluent(agent),fluent).
- %  mpred_prop(killedDeterminingFluent(agent),fluent).
 
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Bomb.e',15).
 % noninertial KilledDeterminingFluent
+% noninertial(killedDeterminingFluent).
 noninertial(killedDeterminingFluent).
- %  noninertial(killedDeterminingFluent).
 %; agent is nondeterministically injured.
 
 % fluent InjuredDeterminingFluent(agent)
- %  blue=fluent(injuredDeterminingFluent(agent)).
- %  fluent(injuredDeterminingFluent(agent)).
+% fluent(
+%    injuredDeterminingFluent(agent)).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Bomb.e',17).
 fluents([injuredDeterminingFluent/1]).
- %  fluents([injuredDeterminingFluent/1]).
+% mpred_prop(
+%    injuredDeterminingFluent(agent), 
+%    fluent).
 mpred_prop(injuredDeterminingFluent(agent),fluent).
- %  mpred_prop(injuredDeterminingFluent(agent),fluent).
 
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Bomb.e',19).
 % noninertial InjuredDeterminingFluent
+% noninertial(injuredDeterminingFluent).
 noninertial(injuredDeterminingFluent).
- %  noninertial(injuredDeterminingFluent).
 %; physobj is nondeterministically destroyed.
 
 % fluent DestroyedDeterminingFluent(physobj)
- %  blue=fluent(destroyedDeterminingFluent(physobj)).
- %  fluent(destroyedDeterminingFluent(physobj)).
+% fluent(
+%    destroyedDeterminingFluent(physobj)).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Bomb.e',21).
 fluents([destroyedDeterminingFluent/1]).
- %  fluents([destroyedDeterminingFluent/1]).
+% mpred_prop(
+%    destroyedDeterminingFluent(physobj), 
+%    fluent).
 mpred_prop(destroyedDeterminingFluent(physobj),fluent).
- %  mpred_prop(destroyedDeterminingFluent(physobj),fluent).
 
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Bomb.e',23).
 % noninertial DestroyedDeterminingFluent
+% noninertial(destroyedDeterminingFluent).
 noninertial(destroyedDeterminingFluent).
- %  noninertial(destroyedDeterminingFluent).
 %; physobj is nondeterministically damaged.
 
 % fluent DamagedDeterminingFluent(physobj)
- %  blue=fluent(damagedDeterminingFluent(physobj)).
- %  fluent(damagedDeterminingFluent(physobj)).
+% fluent(
+%    damagedDeterminingFluent(physobj)).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Bomb.e',25).
 fluents([damagedDeterminingFluent/1]).
- %  fluents([damagedDeterminingFluent/1]).
+% mpred_prop(
+%    damagedDeterminingFluent(physobj), 
+%    fluent).
 mpred_prop(damagedDeterminingFluent(physobj),fluent).
- %  mpred_prop(damagedDeterminingFluent(physobj),fluent).
 
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Bomb.e',27).
 % noninertial DamagedDeterminingFluent
+% noninertial(damagedDeterminingFluent).
 noninertial(damagedDeterminingFluent).
- %  noninertial(damagedDeterminingFluent).
 %; agent activates bomb.
 
 % event BombActivate(agent,bomb)
- %  blue=event(bombActivate(agent,bomb)).
- %  event(bombActivate(agent,bomb)).
+% event(
+%    bombActivate(agent,bomb)).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Bomb.e',29).
 actions([bombActivate/2]).
- %  actions([bombActivate/2]).
+% mpred_prop(
+%    bombActivate(agent,bomb), 
+%    event).
 mpred_prop(bombActivate(agent,bomb),event).
- %  mpred_prop(bombActivate(agent,bomb),event).
 
 
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Bomb.e',32).
 %; agent deactivates bomb.
 
 % event BombDeactivate(agent,bomb)
- %  blue=event(bombDeactivate(agent,bomb)).
- %  event(bombDeactivate(agent,bomb)).
+% event(
+%    bombDeactivate(agent,bomb)).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Bomb.e',32).
 actions([bombDeactivate/2]).
- %  actions([bombDeactivate/2]).
+% mpred_prop(
+%    bombDeactivate(agent,bomb), 
+%    event).
 mpred_prop(bombDeactivate(agent,bomb),event).
- %  mpred_prop(bombDeactivate(agent,bomb),event).
 
 
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Bomb.e',35).
 %; bomb explodes.
 
 % event BombExplode(bomb)
- %  blue=event(bombExplode(bomb)).
- %  event(bombExplode(bomb)).
+% event(
+%    bombExplode(bomb)).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Bomb.e',35).
 events([bombExplode/1]).
- %  events([bombExplode/1]).
+% mpred_prop(
+%    bombExplode(bomb), 
+%    event).
 mpred_prop(bombExplode(bomb),event).
- %  mpred_prop(bombExplode(bomb),event).
 
 
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Bomb.e',38).
 %; bomb is activated.
 
 % fluent BombActivated(bomb)
- %  blue=fluent(bombActivated(bomb)).
- %  fluent(bombActivated(bomb)).
+% fluent(
+%    bombActivated(bomb)).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Bomb.e',38).
 fluents([bombActivated/1]).
- %  fluents([bombActivated/1]).
+% mpred_prop(
+%    bombActivated(bomb), 
+%    fluent).
 mpred_prop(bombActivated(bomb),fluent).
- %  mpred_prop(bombActivated(bomb),fluent).
 
 
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Bomb.e',41).
 %; The timer value of bomb is offset.
 
 % fluent BombTimerValue(bomb,offset)
- %  blue=fluent(bombTimerValue(bomb,offset)).
- %  fluent(bombTimerValue(bomb,offset)).
+% fluent(
+%    bombTimerValue(bomb,offset)).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Bomb.e',41).
 fluents([bombTimerValue/2]).
- %  fluents([bombTimerValue/2]).
+% mpred_prop(
+%    bombTimerValue(bomb,offset), 
+%    fluent).
 mpred_prop(bombTimerValue(bomb,offset),fluent).
- %  mpred_prop(bombTimerValue(bomb,offset),fluent).
 
 
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Bomb.e',44).
 %; The timer value of bomb is decremented.
 
 % event BombDecrementTimer(bomb)
- %  blue=event(bombDecrementTimer(bomb)).
- %  event(bombDecrementTimer(bomb)).
+% event(
+%    bombDecrementTimer(bomb)).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Bomb.e',44).
 events([bombDecrementTimer/1]).
- %  events([bombDecrementTimer/1]).
+% mpred_prop(
+%    bombDecrementTimer(bomb), 
+%    event).
 mpred_prop(bombDecrementTimer(bomb),event).
- %  mpred_prop(bombDecrementTimer(bomb),event).
 
 
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Bomb.e',47).
 %; The time delay of bomb is offset.
 
 % function BombTimeDelay(bomb): offset
- %  blue=function(bombTimeDelay(bomb)).
- %  function(bombTimeDelay(bomb)).
+% function(
+%    bombTimeDelay(bomb)).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Bomb.e',47).
 functions([bombTimeDelay/1]).
- %  functions([bombTimeDelay/1]).
+% mpred_prop(
+%    bombTimeDelay(bomb), 
+%    function).
 mpred_prop(bombTimeDelay(bomb),function).
- %  mpred_prop(bombTimeDelay(bomb),function).
- %  blue=predicate(bombTimeDelayPred(bomb,offset)).
- %  predicate(bombTimeDelayPred(bomb,offset)).
+% predicate(
+%    bombTimeDelayPred(bomb,offset)).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Bomb.e',47).
 predicates([bombTimeDelayPred/2]).
- %  predicates([bombTimeDelayPred/2]).
+% mpred_prop(
+%    bombTimeDelayPred(bomb,offset), 
+%    predicate).
 mpred_prop(bombTimeDelayPred(bomb,offset),predicate).
- %  mpred_prop(bombTimeDelayPred(bomb,offset),predicate).
- %  pl=axiom(functional_predicate(bombTimeDelay,bombTimeDelayPred),[]).
+% functional_predicate(bombTimeDelay,bombTimeDelayPred).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Bomb.e',47).
 functional_predicate(bombTimeDelay,bombTimeDelayPred).
- %  functional_predicate(bombTimeDelay,bombTimeDelayPred).
-
- /*  pl=axiom(function_argtypes(bombTimeDelayPred,bombTimeDelay(bomb),offset),
-         []).
- */
+% function_argtypes(
+%    bombTimeDelayPred, 
+%    bombTimeDelay(bomb), 
+%    offset).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Bomb.e',47).
 function_argtypes(bombTimeDelayPred,bombTimeDelay(bomb),offset).
- %  function_argtypes(bombTimeDelayPred,bombTimeDelay(bomb),offset).
+% resultIsa(bombTimeDelay,offset).
 resultIsa(bombTimeDelay,offset).
- %  resultIsa(bombTimeDelay,offset).
 %; A state constraint says that a bomb has one timer
 %; value at a time:
 % [bomb,offset1,offset2,time]
 % HoldsAt(BombTimerValue(bomb,offset1),time) &
 % HoldsAt(BombTimerValue(bomb,offset2),time) ->
 % offset1=offset2.
- %  clausify_pnf=(holds_at(bombTimerValue(Bomb, Offset1), Time), holds_at(bombTimerValue(Bomb, Offset2), Time)->equals(Offset1, Offset2)).
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Bomb.e',52).
-
- /*  not(holds_at(bombTimerValue(Bomb, Offset1), Time)) :-
-       holds_at(bombTimerValue(Bomb, Offset2), Time),
-       not(equals(Offset1, Offset2)).
- */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Bomb.e',52).
-
- /*  pl=axiom(not(bombTimerValue(Bomb,Offset1)),
-         [ bombTimerValue(Bomb,Offset2),
-   	not(equals(Offset1,Offset2))
-         ]).
- */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Bomb.e',52).
-
- /*  (   bombTimerValue(Bomb, Offset2),
-       not(equals(Offset1, Offset2))
-   ->  not(bombTimerValue(Bomb, Offset1))
-   ).
- */
+% '->'(
+%    ','(
+%       bombTimerValue(Bomb,Offset2), 
+%       not(
+%          equals(Offset1,Offset2))), 
+%    not(
+%       bombTimerValue(Bomb,Offset1))).
 if bombTimerValue(Bomb, Offset2), not equals(Offset1, Offset2)then not bombTimerValue(Bomb, Offset1).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Bomb.e',52).
 
@@ -217,33 +213,14 @@ if bombTimerValue(Bomb, Offset2), not equals(Offset1, Offset2)then not bombTimer
    	      ],
    	      [not(bombTimerValue(Bomb,Offset1))]).
  */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Bomb.e',52).
-
- /*  reactive_rule([ bombTimerValue(Bomb,Offset2),
-   		not(equals(Offset1,Offset2))
-   	      ],
-   	      [not(bombTimerValue(Bomb,Offset1))]).
- */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Bomb.e',52).
-
- /*  not(holds_at(bombTimerValue(Bomb, Offset2), Time)) :-
-       holds_at(bombTimerValue(Bomb, Offset1), Time),
-       not(equals(Offset1, Offset2)).
- */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Bomb.e',52).
-
- /*  pl=axiom(not(bombTimerValue(Bomb,Offset2)),
-         [ bombTimerValue(Bomb,Offset1),
-   	not(equals(Offset2,Offset1))
-         ]).
- */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Bomb.e',52).
-
- /*  (   bombTimerValue(Bomb, Offset1),
-       not(equals(Offset2, Offset1))
-   ->  not(bombTimerValue(Bomb, Offset2))
-   ).
- */
+ %  "% =================================".
+% '->'(
+%    ','(
+%       bombTimerValue(Bomb,Offset1), 
+%       not(
+%          equals(Offset2,Offset1))), 
+%    not(
+%       bombTimerValue(Bomb,Offset2))).
 if bombTimerValue(Bomb, Offset1), not equals(Offset2, Offset1)then not bombTimerValue(Bomb, Offset2).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Bomb.e',52).
 
@@ -252,13 +229,7 @@ if bombTimerValue(Bomb, Offset1), not equals(Offset2, Offset1)then not bombTimer
    	      ],
    	      [not(bombTimerValue(Bomb,Offset2))]).
  */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Bomb.e',52).
-
- /*  reactive_rule([ bombTimerValue(Bomb,Offset1),
-   		not(equals(Offset2,Offset1))
-   	      ],
-   	      [not(bombTimerValue(Bomb,Offset2))]).
- */
+ %  "% =================================".
 
 
 %; An effect axiom states that if a bomb is intact and
@@ -269,37 +240,22 @@ if bombTimerValue(Bomb, Offset1), not equals(Offset2, Offset1)then not bombTimer
 % Initiates(BombActivate(agent,bomb),
 %           BombActivated(bomb),
 %           time).
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Bomb.e',60).
-
- /*  pl=axiom(initiates(bombActivate(Agent,Bomb),
-   		bombActivated(Bomb),
-   		Time),
-         [intact(Bomb)]).
- */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Bomb.e',60).
-
- /*  intact(Bomb) ->
-       initiates(bombActivate(Agent, Bomb),
-                 bombActivated(Bomb),
-                 Time).
- */
+% '->'(
+%    intact(Bomb), 
+%    initiates(
+%       bombActivate(Agent,Bomb), 
+%       bombActivated(Bomb), 
+%       Time)).
 if intact(Bomb)then initiates(bombActivate(Agent, Bomb), bombActivated(Bomb)at Time, _).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Bomb.e',60).
 
- /*  reactive_rule([intact(Bomb)],
+ /*  reactive_rule([holds(intact(Bomb),Time_At)],
    	      [ initiates(bombActivate(Agent,Bomb),
    			  at(bombActivated(Bomb),Time),
    			  Initiates)
    	      ]).
  */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Bomb.e',60).
-
- /*  reactive_rule([intact(Bomb)],
-   	      [ initiates(bombActivate(Agent,Bomb),
-   			  at(bombActivated(Bomb),Time),
-   			  Initiates)
-   	      ]).
- */
+ %  "% =================================".
 
 
 %; A precondition axiom states that
@@ -308,94 +264,51 @@ if intact(Bomb)then initiates(bombActivate(Agent, Bomb), bombActivated(Bomb)at T
 % [agent,bomb,time]
 % Happens(BombActivate(agent,bomb),time) ->
 % HoldsAt(Holding(agent,bomb),time).
- %  clausify_pnf=(happens(bombActivate(Agent, Bomb), Time)->holds_at(holding(Agent, Bomb), Time)).
+% '->'(
+%    metreqs(
+%       bombActivate(Agent,Bomb)), 
+%    requires(
+%       bombActivate(Agent,Bomb), 
+%       When_Time)).
+if bombActivate(Agent, Bomb)then requires(bombActivate(Agent, Bomb), When_Time).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Bomb.e',69).
 
- /*  holds_at(holding(Agent, Bomb), Time) :-
-       happens(bombActivate(Agent, Bomb), Time).
- */
-
- /*  pl=axiom(requires(bombActivate(Agent,Bomb),When_Time),
-         [metreqs(bombActivate(Agent,Bomb))]).
- */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Bomb.e',69).
-
- /*  metreqs(bombActivate(Agent, Bomb)) ->
-       requires(bombActivate(Agent, Bomb), When_Time).
- */
-if metreqs(bombActivate(Agent, Bomb))then requires(bombActivate(Agent, Bomb), When_Time).
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Bomb.e',69).
-
- /*  reactive_rule([metreqs(bombActivate(Agent,Bomb))],
+ /*  reactive_rule([ happens(bombActivate(Agent,Bomb),
+   			Time_From,
+   			Time_Until)
+   	      ],
    	      [ requires(bombActivate(Agent,Bomb),
    			 When_Time)
    	      ]).
  */
+ %  "% =================================".
+% '->'(
+%    holding(Agent,Bomb), 
+%    metreqs(
+%       bombActivate(Agent,Bomb))).
+bombActivate(Agent, Bomb)if holding(Agent, Bomb).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Bomb.e',69).
 
- /*  reactive_rule([metreqs(bombActivate(Agent,Bomb))],
-   	      [ requires(bombActivate(Agent,Bomb),
-   			 When_Time)
-   	      ]).
+ /*  l_events(happens(bombActivate(Agent,Bomb),
+   		 Time_From6,
+   		 Time_From6),
+   	 [holds(holding(Agent,Bomb),Time_From6)]).
  */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Bomb.e',69).
-
- /*  fix_axiom_head(When_Time) ->
-       [ holds_at(metreqs(bombActivate(Agent, Bomb)), When_Time),
-          (->),
-         metreqs(bombActivate(Agent, Bomb))
-       ].
- */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Bomb.e',69).
-
- /*  pl=axiom(metreqs(bombActivate(Agent,Bomb)),
-         [holding(Agent,Bomb)]).
- */
-
- /*  holding(Agent, Bomb) ->
-       metreqs(bombActivate(Agent, Bomb)).
- */
-if holding(Agent, Bomb)then metreqs(bombActivate(Agent, Bomb)).
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Bomb.e',69).
-
- /*  reactive_rule([holding(Agent,Bomb)],
-   	      [metreqs(bombActivate(Agent,Bomb))]).
- */
-
- /*  reactive_rule([holding(Agent,Bomb)],
-   	      [metreqs(bombActivate(Agent,Bomb))]).
- */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Bomb.e',69).
-
- /*  not(happens(bombActivate(Agent, Bomb), When_Time)) :-
-       not(holds_at(holding(Agent, Bomb), When_Time)).
- */
-
- /*  fix_axiom_head(When_Time) ->
-       [ not(happens(bombActivate(Agent, Bomb), When_Time)),
-          (->),
-         not(bombActivate(Agent, Bomb))
-       ].
- */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Bomb.e',69).
-
- /*  pl=axiom(not(bombActivate(Agent,Bomb)),
-         [not(holding(Agent,Bomb))]).
- */
-
- /*  not(holding(Agent, Bomb)) ->
-       not(bombActivate(Agent, Bomb)).
- */
+ %  "% =================================".
+% '->'(
+%    not(
+%       holding(Agent,Bomb)), 
+%    not(
+%       bombActivate(Agent,Bomb))).
 if not holding(Agent, Bomb)then not bombActivate(Agent, Bomb).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Bomb.e',69).
 
- /*  reactive_rule([not(holding(Agent,Bomb))],
+ /*  reactive_rule([ holds(not(holding(Agent,Bomb)),
+   		      Time_At)
+   	      ],
    	      [not(bombActivate(Agent,Bomb))]).
  */
-
- /*  reactive_rule([not(holding(Agent,Bomb))],
-   	      [not(bombActivate(Agent,Bomb))]).
- */
+ %  "% =================================".
 
 
 %; An effect axiom states that if a bomb is intact and
@@ -406,37 +319,22 @@ if not holding(Agent, Bomb)then not bombActivate(Agent, Bomb).
 % Terminates(BombDeactivate(agent,bomb),
 %            BombActivated(bomb),
 %            time).
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Bomb.e',76).
-
- /*  pl=axiom(terminates(bombDeactivate(Agent,Bomb),
-   		 bombActivated(Bomb),
-   		 Time),
-         [intact(Bomb)]).
- */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Bomb.e',76).
-
- /*  intact(Bomb) ->
-       terminates(bombDeactivate(Agent, Bomb),
-                  bombActivated(Bomb),
-                  Time).
- */
+% '->'(
+%    intact(Bomb), 
+%    terminates(
+%       bombDeactivate(Agent,Bomb), 
+%       bombActivated(Bomb), 
+%       Time)).
 if intact(Bomb)then terminates(bombDeactivate(Agent, Bomb), bombActivated(Bomb)at Time, _).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Bomb.e',76).
 
- /*  reactive_rule([intact(Bomb)],
+ /*  reactive_rule([holds(intact(Bomb),Time_At)],
    	      [ terminates(bombDeactivate(Agent,Bomb),
    			   at(bombActivated(Bomb),Time),
    			   Terminates)
    	      ]).
  */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Bomb.e',76).
-
- /*  reactive_rule([intact(Bomb)],
-   	      [ terminates(bombDeactivate(Agent,Bomb),
-   			   at(bombActivated(Bomb),Time),
-   			   Terminates)
-   	      ]).
- */
+ %  "% =================================".
 
 
 %; An axiom states that if a bomb explodes, the
@@ -444,85 +342,43 @@ if intact(Bomb)then terminates(bombDeactivate(Agent, Bomb), bombActivated(Bomb)a
 % [bomb,time]
 % Happens(BombExplode(bomb),time) ->
 % Happens(Destroy(bomb,bomb),time).
- %  clausify_pnf=(happens(bombExplode(Bomb), Time)->happens(destroy(Bomb, Bomb), Time)).
+% '->'(
+%    bombExplode(Bomb), 
+%    destroy(Bomb,Bomb)).
+destroy(Bomb, Bomb)if bombExplode(Bomb).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Bomb.e',84).
 
- /*  happens(destroy(Bomb, Bomb), Time) :-
-       happens(bombExplode(Bomb), Time).
+ /*  l_events(happens(destroy(Bomb,Bomb),
+   		 Time_From,
+   		 Time_Until),
+   	 [ happens(bombExplode(Bomb),
+   		   Time_From,
+   		   Time_Until)
+   	 ]).
  */
-
- /*  fix_axiom_head(Time) ->
-       [ happens(destroy(Bomb, Bomb), Time),
-          (->),
-         destroy(Bomb, Bomb)
-       ].
- */
- %  pl=axiom(destroy(Bomb,Bomb),[bombExplode(Bomb)]).
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Bomb.e',84).
-
- /*  bombExplode(Bomb) ->
-       destroy(Bomb, Bomb).
- */
-if bombExplode(Bomb)then destroy(Bomb, Bomb).
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Bomb.e',84).
-
- /*  reactive_rule([bombExplode(Bomb)],
-   	      [destroy(Bomb,Bomb)]).
- */
-
- /*  reactive_rule([bombExplode(Bomb)],
-   	      [destroy(Bomb,Bomb)]).
- */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Bomb.e',84).
-
- /*  not(happens(bombExplode(Bomb), Time)) :-
-       not(happens(destroy(Bomb, Bomb), Time)).
- */
-
- /*  fix_axiom_head(Time) ->
-       [ not(happens(bombExplode(Bomb), Time)),
-          (->),
-         not(bombExplode(Bomb))
-       ].
- */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Bomb.e',84).
-
- /*  pl=axiom(not(bombExplode(Bomb)),
-         [not(destroy(Bomb,Bomb))]).
- */
-
- /*  not(destroy(Bomb, Bomb)) ->
-       not(bombExplode(Bomb)).
- */
+ %  "% =================================".
+% '->'(
+%    not(
+%       destroy(Bomb,Bomb)), 
+%    not(
+%       bombExplode(Bomb))).
 if not destroy(Bomb, Bomb)then not bombExplode(Bomb).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Bomb.e',84).
 
  /*  reactive_rule([not(destroy(Bomb,Bomb))],
    	      [not(bombExplode(Bomb))]).
  */
-
- /*  reactive_rule([not(destroy(Bomb,Bomb))],
-   	      [not(bombExplode(Bomb))]).
- */
+ %  "% =================================".
 
 
 %; An effect axiom states that if a bomb explodes,
 %; the bomb is no longer activated:
 % [bomb,time]
 % Terminates(BombExplode(bomb),BombActivated(bomb),time).
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Bomb.e',90).
-
- /*  pl=axiom(terminates(bombExplode(Bomb),
-   		 bombActivated(Bomb),
-   		 Time),
-         []).
- */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Bomb.e',90).
-
- /*  terminates(bombExplode(Bomb),
-   	   bombActivated(Bomb),
-   	   Time).
- */
+% terminates(
+%    bombExplode(Bomb), 
+%    bombActivated(Bomb), 
+%    Time).
 bombExplode(Bomb)terminates bombActivated(Bomb).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Bomb.e',90).
 
@@ -532,14 +388,7 @@ bombExplode(Bomb)terminates bombActivated(Bomb).
    	   bombActivated(Bomb),
    	   []).
  */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Bomb.e',90).
-
- /*  terminated(happens(bombExplode(Bomb),
-   		   Time_From,
-   		   Time_Until),
-   	   bombActivated(Bomb),
-   	   []).
- */
+ %  "% =================================".
 
 
 %; A trigger axiom states that
@@ -552,135 +401,61 @@ bombExplode(Bomb)terminates bombActivated(Bomb).
 % HoldsAt(BombTimerValue(bomb,offset),time) &
 % (offset > 0) ->
 % Happens(BombDecrementTimer(bomb),time).
- %  clausify_pnf=(holds_at(bombActivated(Bomb), Time), holds_at(bombTimerValue(Bomb, Offset), Time), Offset>0->happens(bombDecrementTimer(Bomb), Time)).
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Bomb.e',98).
-
- /*  happens(bombDecrementTimer(Bomb), Time) :-
-       holds_at(bombActivated(Bomb), Time),
-       holds_at(bombTimerValue(Bomb, Offset), Time),
-       comparison(Offset, 0, >).
- */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Bomb.e',98).
-
- /*  fix_axiom_head(Time) ->
-       [ happens(bombDecrementTimer(Bomb), Time),
-          (->),
-         bombDecrementTimer(Bomb)
-       ].
- */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Bomb.e',98).
-
- /*  pl=axiom(bombDecrementTimer(Bomb),
-         [ bombActivated(Bomb),
-   	bombTimerValue(Bomb,Offset),
-   	comparison(Offset,0,>)
-         ]).
- */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Bomb.e',98).
-
- /*  (   bombActivated(Bomb),
-       bombTimerValue(Bomb, Offset),
-       comparison(Offset, 0, >)
-   ->  bombDecrementTimer(Bomb)
-   ).
- */
+% '->'(
+%    ','(
+%       bombActivated(Bomb), 
+%       ','(
+%          bombTimerValue(Bomb,Offset), 
+%          comparison(Offset,0,>))), 
+%    bombDecrementTimer(Bomb)).
 if bombActivated(Bomb), bombTimerValue(Bomb, Offset), comparison(Offset, 0, >)then bombDecrementTimer(Bomb).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Bomb.e',98).
 
- /*  reactive_rule([ holds(bombActivated(Bomb),Holds),
+ /*  reactive_rule([ holds(bombActivated(Bomb),Time_At),
    		bombTimerValue(Bomb,Offset),
    		comparison(Offset,0,>)
    	      ],
    	      [bombDecrementTimer(Bomb)]).
  */
+ %  "% =================================".
+% '->'(
+%    ','(
+%       bombTimerValue(Bomb,Offset), 
+%       ','(
+%          comparison(Offset,0,>), 
+%          not(
+%             bombDecrementTimer(Bomb)))), 
+%    not(
+%       bombActivated(Bomb))).
+not bombActivated(Bomb)if bombTimerValue(Bomb, Offset), comparison(Offset, 0, >), not bombDecrementTimer(Bomb).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Bomb.e',98).
 
- /*  reactive_rule([ holds(bombActivated(Bomb),Holds),
-   		bombTimerValue(Bomb,Offset),
-   		comparison(Offset,0,>)
-   	      ],
-   	      [bombDecrementTimer(Bomb)]).
- */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Bomb.e',98).
-
- /*  not(holds_at(bombActivated(Bomb), Time)) :-
-       holds_at(bombTimerValue(Bomb, Offset), Time),
-       comparison(Offset, 0, >),
-       not(happens(bombDecrementTimer(Bomb), Time)).
- */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Bomb.e',98).
-
- /*  pl=axiom(not(bombActivated(Bomb)),
+ /*  l_int(holds(not(bombActivated(Bomb)),Time_At4),
          [ bombTimerValue(Bomb,Offset),
    	comparison(Offset,0,>),
    	not(bombDecrementTimer(Bomb))
          ]).
  */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Bomb.e',98).
-
- /*  (   bombTimerValue(Bomb, Offset),
-       comparison(Offset, 0, >),
-       not(bombDecrementTimer(Bomb))
-   ->  not(bombActivated(Bomb))
-   ).
- */
-if bombTimerValue(Bomb, Offset), comparison(Offset, 0, >), not bombDecrementTimer(Bomb)then not bombActivated(Bomb).
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Bomb.e',98).
-
- /*  reactive_rule([ bombTimerValue(Bomb,Offset),
-   		comparison(Offset,0,>),
-   		not(bombDecrementTimer(Bomb))
-   	      ],
-   	      [holds(not(bombActivated(Bomb)),Holds4)]).
- */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Bomb.e',98).
-
- /*  reactive_rule([ bombTimerValue(Bomb,Offset),
-   		comparison(Offset,0,>),
-   		not(bombDecrementTimer(Bomb))
-   	      ],
-   	      [holds(not(bombActivated(Bomb)),Holds4)]).
- */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Bomb.e',98).
-
- /*  not(holds_at(bombTimerValue(Bomb, Offset), Time)) :-
-       comparison(Offset, 0, >),
-       holds_at(bombActivated(Bomb), Time),
-       not(happens(bombDecrementTimer(Bomb), Time)).
- */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Bomb.e',98).
-
- /*  pl=axiom(not(bombTimerValue(Bomb,Offset)),
-         [ comparison(Offset,0,>),
-   	bombActivated(Bomb),
-   	not(bombDecrementTimer(Bomb))
-         ]).
- */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Bomb.e',98).
-
- /*  (   comparison(Offset, 0, >),
-       bombActivated(Bomb),
-       not(bombDecrementTimer(Bomb))
-   ->  not(bombTimerValue(Bomb, Offset))
-   ).
- */
+ %  "% =================================".
+% '->'(
+%    ','(
+%       comparison(Offset,0,>), 
+%       ','(
+%          bombActivated(Bomb), 
+%          not(
+%             bombDecrementTimer(Bomb)))), 
+%    not(
+%       bombTimerValue(Bomb,Offset))).
 if comparison(Offset, 0, >), bombActivated(Bomb), not bombDecrementTimer(Bomb)then not bombTimerValue(Bomb, Offset).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Bomb.e',98).
 
  /*  reactive_rule([ comparison(Offset,0,>),
-   		holds(bombActivated(Bomb),Holds5),
+   		holds(bombActivated(Bomb),Time_At5),
    		not(bombDecrementTimer(Bomb))
    	      ],
    	      [not(bombTimerValue(Bomb,Offset))]).
  */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Bomb.e',98).
-
- /*  reactive_rule([ comparison(Offset,0,>),
-   		holds(bombActivated(Bomb),Holds5),
-   		not(bombDecrementTimer(Bomb))
-   	      ],
-   	      [not(bombTimerValue(Bomb,Offset))]).
- */
+ %  "% =================================".
 
 
 %; An effect axiom states that
@@ -693,24 +468,14 @@ if comparison(Offset, 0, >), bombActivated(Bomb), not bombDecrementTimer(Bomb)th
 % Initiates(BombDecrementTimer(bomb),
 %           BombTimerValue(bomb,offset2),
 %           time).
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Bomb.e',108).
-
- /*  pl=axiom(initiates(bombDecrementTimer(Bomb),
-   		bombTimerValue(Bomb,Offset2),
-   		Time),
-         [ bombTimerValue(Bomb,Offset1),
-   	'-Pred'(Offset1,1,Offset2)
-         ]).
- */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Bomb.e',108).
-
- /*  (   bombTimerValue(Bomb, Offset1),
-       '-Pred'(Offset1, 1, Offset2)
-   ->  initiates(bombDecrementTimer(Bomb),
-                 bombTimerValue(Bomb, Offset2),
-                 Time)
-   ).
- */
+% '->'(
+%    ','(
+%       bombTimerValue(Bomb,Offset1), 
+%       '-Pred'(Offset1,1,Offset2)), 
+%    initiates(
+%       bombDecrementTimer(Bomb), 
+%       bombTimerValue(Bomb,Offset2), 
+%       Time)).
 if bombTimerValue(Bomb, Offset1), '-Pred'(Offset1, 1, Offset2)then initiates(bombDecrementTimer(Bomb), bombTimerValue(Bomb, Offset2)at Time, _).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Bomb.e',108).
 
@@ -723,17 +488,7 @@ if bombTimerValue(Bomb, Offset1), '-Pred'(Offset1, 1, Offset2)then initiates(bom
    			  Initiates)
    	      ]).
  */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Bomb.e',108).
-
- /*  reactive_rule([ bombTimerValue(Bomb,Offset1),
-   		'-Pred'(Offset1,1,Offset2)
-   	      ],
-   	      [ initiates(bombDecrementTimer(Bomb),
-   			  at(bombTimerValue(Bomb,Offset2),
-   			     Time),
-   			  Initiates)
-   	      ]).
- */
+ %  "% =================================".
 
 
 %; An effect axiom states that
@@ -745,20 +500,12 @@ if bombTimerValue(Bomb, Offset1), '-Pred'(Offset1, 1, Offset2)then initiates(bom
 % Terminates(BombDecrementTimer(bomb),
 %            BombTimerValue(bomb,offset),
 %            time).
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Bomb.e',119).
-
- /*  pl=axiom(terminates(bombDecrementTimer(Bomb),
-   		 bombTimerValue(Bomb,Offset),
-   		 Time),
-         [bombTimerValue(Bomb,Offset)]).
- */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Bomb.e',119).
-
- /*  bombTimerValue(Bomb, Offset) ->
-       terminates(bombDecrementTimer(Bomb),
-                  bombTimerValue(Bomb, Offset),
-                  Time).
- */
+% '->'(
+%    bombTimerValue(Bomb,Offset), 
+%    terminates(
+%       bombDecrementTimer(Bomb), 
+%       bombTimerValue(Bomb,Offset), 
+%       Time)).
 if bombTimerValue(Bomb, Offset)then terminates(bombDecrementTimer(Bomb), bombTimerValue(Bomb, Offset)at Time, _).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Bomb.e',119).
 
@@ -769,34 +516,17 @@ if bombTimerValue(Bomb, Offset)then terminates(bombDecrementTimer(Bomb), bombTim
    			   Terminates)
    	      ]).
  */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Bomb.e',119).
-
- /*  reactive_rule([bombTimerValue(Bomb,Offset)],
-   	      [ terminates(bombDecrementTimer(Bomb),
-   			   at(bombTimerValue(Bomb,Offset),
-   			      Time),
-   			   Terminates)
-   	      ]).
- */
+ %  "% =================================".
 
 
 %; An effect axiom states that if a bomb explodes,
 %; the bomb will no longer be activated:
 % [bomb,time]
 % Terminates(BombExplode(bomb),BombActivated(bomb),time).
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Bomb.e',127).
-
- /*  pl=axiom(terminates(bombExplode(Bomb),
-   		 bombActivated(Bomb),
-   		 Time),
-         []).
- */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Bomb.e',127).
-
- /*  terminates(bombExplode(Bomb),
-   	   bombActivated(Bomb),
-   	   Time).
- */
+% terminates(
+%    bombExplode(Bomb), 
+%    bombActivated(Bomb), 
+%    Time).
 bombExplode(Bomb)terminates bombActivated(Bomb).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Bomb.e',127).
 
@@ -806,14 +536,7 @@ bombExplode(Bomb)terminates bombActivated(Bomb).
    	   bombActivated(Bomb),
    	   []).
  */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Bomb.e',127).
-
- /*  terminated(happens(bombExplode(Bomb),
-   		   Time_From,
-   		   Time_Until),
-   	   bombActivated(Bomb),
-   	   []).
- */
+ %  "% =================================".
 
 
 %; A trigger axiom states that if the timer value
@@ -821,60 +544,30 @@ bombExplode(Bomb)terminates bombActivated(Bomb).
 % [bomb,time]
 % HoldsAt(BombTimerValue(bomb,0),time) ->
 % Happens(BombExplode(bomb),time).
- %  clausify_pnf=(holds_at(bombTimerValue(Bomb, 0), Time)->happens(bombExplode(Bomb), Time)).
+% '->'(
+%    bombTimerValue(Bomb,0), 
+%    bombExplode(Bomb)).
+bombExplode(Bomb)if bombTimerValue(Bomb, 0).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Bomb.e',132).
 
- /*  happens(bombExplode(Bomb), Time) :-
-       holds_at(bombTimerValue(Bomb, 0), Time).
+ /*  l_events(happens(bombExplode(Bomb),
+   		 Time_From,
+   		 Time_From),
+   	 [bombTimerValue(Bomb,0)]).
  */
-
- /*  fix_axiom_head(Time) ->
-       [happens(bombExplode(Bomb), Time), ->, bombExplode(Bomb)].
- */
- %  pl=axiom(bombExplode(Bomb),[bombTimerValue(Bomb,0)]).
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Bomb.e',132).
-
- /*  bombTimerValue(Bomb, 0) ->
-       bombExplode(Bomb).
- */
-if bombTimerValue(Bomb, 0)then bombExplode(Bomb).
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Bomb.e',132).
-
- /*  reactive_rule([bombTimerValue(Bomb,0)],
-   	      [ happens(bombExplode(Bomb),
-   			Time_From,
-   			Time_Until)
-   	      ]).
- */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Bomb.e',132).
-
- /*  reactive_rule([bombTimerValue(Bomb,0)],
-   	      [ happens(bombExplode(Bomb),
-   			Time_From,
-   			Time_Until)
-   	      ]).
- */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Bomb.e',132).
-
- /*  not(holds_at(bombTimerValue(Bomb, 0), Time)) :-
-       not(happens(bombExplode(Bomb), Time)).
- */
- %  pl=axiom(not(bombTimerValue(Bomb,0)),[not(bombExplode(Bomb))]).
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Bomb.e',132).
-
- /*  not(bombExplode(Bomb)) ->
-       not(bombTimerValue(Bomb, 0)).
- */
+ %  "% =================================".
+% '->'(
+%    not(
+%       bombExplode(Bomb)), 
+%    not(
+%       bombTimerValue(Bomb,0))).
 if not bombExplode(Bomb)then not bombTimerValue(Bomb, 0).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Bomb.e',132).
 
  /*  reactive_rule([not(bombExplode(Bomb))],
    	      [not(bombTimerValue(Bomb,0))]).
  */
-
- /*  reactive_rule([not(bombExplode(Bomb))],
-   	      [not(bombTimerValue(Bomb,0))]).
- */
+ %  "% =================================".
 
 
 %; An axiom states that if an agent is at a location,
@@ -888,90 +581,41 @@ if not bombExplode(Bomb)then not bombTimerValue(Bomb, 0).
 % HoldsAt(InjuredDeterminingFluent(agent),time) &
 % Happens(BombExplode(bomb),time) ->
 % Happens(Injure(bomb,agent),time).
- %  clausify_pnf=(holds_at(at(Agent, Location), Time), holds_at(at(Bomb, Location), Time), holds_at(injuredDeterminingFluent(Agent), Time), happens(bombExplode(Bomb), Time)->happens(injure(Bomb, Agent), Time)).
+% '->'(
+%    ','(
+%       at(Agent,Location), 
+%       ','(
+%          at(Bomb,Location), 
+%          ','(
+%             injuredDeterminingFluent(Agent), 
+%             bombExplode(Bomb)))), 
+%    injure(Bomb,Agent)).
+injure(Bomb, Agent)if loc_at(Agent, Location), loc_at(Bomb, Location), injuredDeterminingFluent(Agent), bombExplode(Bomb).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Bomb.e',141).
 
- /*  happens(injure(Bomb, Agent), Time) :-
-       holds_at(at(Agent, Location), Time),
-       holds_at(at(Bomb, Location), Time),
-       holds_at(injuredDeterminingFluent(Agent), Time),
-       happens(bombExplode(Bomb), Time).
+ /*  l_events(happens(injure(Bomb,Agent),
+   		 Time_From,
+   		 Time_Until),
+   	 [ loc_at(Agent,Location),
+   	   loc_at(Bomb,Location),
+   	   injuredDeterminingFluent(Agent),
+   	   happens(bombExplode(Bomb),
+   		   Time_From,
+   		   Time_Until)
+   	 ]).
  */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Bomb.e',141).
-
- /*  fix_axiom_head(Time) ->
-       [ happens(injure(Bomb, Agent), Time),
-          (->),
-         injure(Bomb, Agent)
-       ].
- */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Bomb.e',141).
-
- /*  pl=axiom(injure(Bomb,Agent),
-         [ at(Agent,Location),
-   	at(Bomb,Location),
-   	injuredDeterminingFluent(Agent),
-   	bombExplode(Bomb)
-         ]).
- */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Bomb.e',141).
-
- /*  (   at(Agent, Location),
-       at(Bomb, Location),
-       injuredDeterminingFluent(Agent),
-       bombExplode(Bomb)
-   ->  injure(Bomb, Agent)
-   ).
- */
-if loc_at(Agent, Location), loc_at(Bomb, Location), injuredDeterminingFluent(Agent), bombExplode(Bomb)then injure(Bomb, Agent).
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Bomb.e',141).
-
- /*  reactive_rule([ loc_at(Agent,Location),
-   		loc_at(Bomb,Location),
-   		injuredDeterminingFluent(Agent),
-   		happens(bombExplode(Bomb),
-   			Time_From,
-   			Time_Until)
-   	      ],
-   	      [injure(Bomb,Agent)]).
- */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Bomb.e',141).
-
- /*  reactive_rule([ loc_at(Agent,Location),
-   		loc_at(Bomb,Location),
-   		injuredDeterminingFluent(Agent),
-   		happens(bombExplode(Bomb),
-   			Time_From,
-   			Time_Until)
-   	      ],
-   	      [injure(Bomb,Agent)]).
- */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Bomb.e',141).
-
- /*  not(holds_at(at(Agent, Location), Time)) :-
-       holds_at(at(Bomb, Location), Time),
-       holds_at(injuredDeterminingFluent(Agent), Time),
-       happens(bombExplode(Bomb), Time),
-       not(happens(injure(Bomb, Agent), Time)).
- */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Bomb.e',141).
-
- /*  pl=axiom(not(at(Agent,Location)),
-         [ at(Bomb,Location),
-   	injuredDeterminingFluent(Agent),
-   	bombExplode(Bomb),
-   	not(injure(Bomb,Agent))
-         ]).
- */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Bomb.e',141).
-
- /*  (   at(Bomb, Location),
-       injuredDeterminingFluent(Agent),
-       bombExplode(Bomb),
-       not(injure(Bomb, Agent))
-   ->  not(at(Agent, Location))
-   ).
- */
+ %  "% =================================".
+% '->'(
+%    ','(
+%       at(Bomb,Location), 
+%       ','(
+%          injuredDeterminingFluent(Agent), 
+%          ','(
+%             bombExplode(Bomb), 
+%             not(
+%                injure(Bomb,Agent))))), 
+%    not(
+%       at(Agent,Location))).
 if loc_at(Bomb, Location), injuredDeterminingFluent(Agent), bombExplode(Bomb), not injure(Bomb, Agent)then not loc_at(Agent, Location).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Bomb.e',141).
 
@@ -984,43 +628,18 @@ if loc_at(Bomb, Location), injuredDeterminingFluent(Agent), bombExplode(Bomb), n
    	      ],
    	      [not(loc_at(Agent,Location))]).
  */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Bomb.e',141).
-
- /*  reactive_rule([ loc_at(Bomb,Location),
-   		injuredDeterminingFluent(Agent),
-   		happens(bombExplode(Bomb),
-   			Time_From6,
-   			Time_Until7),
-   		not(injure(Bomb,Agent))
-   	      ],
-   	      [not(loc_at(Agent,Location))]).
- */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Bomb.e',141).
-
- /*  not(holds_at(at(Bomb, Location), Time)) :-
-       holds_at(injuredDeterminingFluent(Agent), Time),
-       happens(bombExplode(Bomb), Time),
-       holds_at(at(Agent, Location), Time),
-       not(happens(injure(Bomb, Agent), Time)).
- */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Bomb.e',141).
-
- /*  pl=axiom(not(at(Bomb,Location)),
-         [ injuredDeterminingFluent(Agent),
-   	bombExplode(Bomb),
-   	at(Agent,Location),
-   	not(injure(Bomb,Agent))
-         ]).
- */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Bomb.e',141).
-
- /*  (   injuredDeterminingFluent(Agent),
-       bombExplode(Bomb),
-       at(Agent, Location),
-       not(injure(Bomb, Agent))
-   ->  not(at(Bomb, Location))
-   ).
- */
+ %  "% =================================".
+% '->'(
+%    ','(
+%       injuredDeterminingFluent(Agent), 
+%       ','(
+%          bombExplode(Bomb), 
+%          ','(
+%             at(Agent,Location), 
+%             not(
+%                injure(Bomb,Agent))))), 
+%    not(
+%       at(Bomb,Location))).
 if injuredDeterminingFluent(Agent), bombExplode(Bomb), loc_at(Agent, Location), not injure(Bomb, Agent)then not loc_at(Bomb, Location).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Bomb.e',141).
 
@@ -1033,43 +652,18 @@ if injuredDeterminingFluent(Agent), bombExplode(Bomb), loc_at(Agent, Location), 
    	      ],
    	      [not(loc_at(Bomb,Location))]).
  */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Bomb.e',141).
-
- /*  reactive_rule([ injuredDeterminingFluent(Agent),
-   		happens(bombExplode(Bomb),
-   			Time_From8,
-   			Time_Until9),
-   		loc_at(Agent,Location),
-   		not(injure(Bomb,Agent))
-   	      ],
-   	      [not(loc_at(Bomb,Location))]).
- */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Bomb.e',141).
-
- /*  not(holds_at(injuredDeterminingFluent(Agent), Time)) :-
-       happens(bombExplode(Bomb), Time),
-       holds_at(at(Bomb, Location), Time),
-       holds_at(at(Agent, Location), Time),
-       not(happens(injure(Bomb, Agent), Time)).
- */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Bomb.e',141).
-
- /*  pl=axiom(not(injuredDeterminingFluent(Agent)),
-         [ bombExplode(Bomb),
-   	at(Bomb,Location),
-   	at(Agent,Location),
-   	not(injure(Bomb,Agent))
-         ]).
- */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Bomb.e',141).
-
- /*  (   bombExplode(Bomb),
-       at(Bomb, Location),
-       at(Agent, Location),
-       not(injure(Bomb, Agent))
-   ->  not(injuredDeterminingFluent(Agent))
-   ).
- */
+ %  "% =================================".
+% '->'(
+%    ','(
+%       bombExplode(Bomb), 
+%       ','(
+%          at(Bomb,Location), 
+%          ','(
+%             at(Agent,Location), 
+%             not(
+%                injure(Bomb,Agent))))), 
+%    not(
+%       injuredDeterminingFluent(Agent))).
 if bombExplode(Bomb), loc_at(Bomb, Location), loc_at(Agent, Location), not injure(Bomb, Agent)then not injuredDeterminingFluent(Agent).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Bomb.e',141).
 
@@ -1082,51 +676,18 @@ if bombExplode(Bomb), loc_at(Bomb, Location), loc_at(Agent, Location), not injur
    	      ],
    	      [not(injuredDeterminingFluent(Agent))]).
  */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Bomb.e',141).
-
- /*  reactive_rule([ happens(bombExplode(Bomb),
-   			Time_From10,
-   			Time_Until11),
-   		loc_at(Bomb,Location),
-   		loc_at(Agent,Location),
-   		not(injure(Bomb,Agent))
-   	      ],
-   	      [not(injuredDeterminingFluent(Agent))]).
- */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Bomb.e',141).
-
- /*  not(happens(bombExplode(Bomb), Time)) :-
-       holds_at(injuredDeterminingFluent(Agent), Time),
-       holds_at(at(Bomb, Location), Time),
-       holds_at(at(Agent, Location), Time),
-       not(happens(injure(Bomb, Agent), Time)).
- */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Bomb.e',141).
-
- /*  fix_axiom_head(Time) ->
-       [ not(happens(bombExplode(Bomb), Time)),
-          (->),
-         not(bombExplode(Bomb))
-       ].
- */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Bomb.e',141).
-
- /*  pl=axiom(not(bombExplode(Bomb)),
-         [ injuredDeterminingFluent(Agent),
-   	at(Bomb,Location),
-   	at(Agent,Location),
-   	not(injure(Bomb,Agent))
-         ]).
- */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Bomb.e',141).
-
- /*  (   injuredDeterminingFluent(Agent),
-       at(Bomb, Location),
-       at(Agent, Location),
-       not(injure(Bomb, Agent))
-   ->  not(bombExplode(Bomb))
-   ).
- */
+ %  "% =================================".
+% '->'(
+%    ','(
+%       injuredDeterminingFluent(Agent), 
+%       ','(
+%          at(Bomb,Location), 
+%          ','(
+%             at(Agent,Location), 
+%             not(
+%                injure(Bomb,Agent))))), 
+%    not(
+%       bombExplode(Bomb))).
 if injuredDeterminingFluent(Agent), loc_at(Bomb, Location), loc_at(Agent, Location), not injure(Bomb, Agent)then not bombExplode(Bomb).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Bomb.e',141).
 
@@ -1137,15 +698,7 @@ if injuredDeterminingFluent(Agent), loc_at(Bomb, Location), loc_at(Agent, Locati
    	      ],
    	      [not(bombExplode(Bomb))]).
  */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Bomb.e',141).
-
- /*  reactive_rule([ injuredDeterminingFluent(Agent),
-   		loc_at(Bomb,Location),
-   		loc_at(Agent,Location),
-   		not(injure(Bomb,Agent))
-   	      ],
-   	      [not(bombExplode(Bomb))]).
- */
+ %  "% =================================".
 
 
 %; An axiom states that if an agent is at a location,
@@ -1159,41 +712,16 @@ if injuredDeterminingFluent(Agent), loc_at(Bomb, Location), loc_at(Agent, Locati
 % HoldsAt(KilledDeterminingFluent(agent),time) &
 % Happens(BombExplode(bomb),time) ->
 % Happens(Kill(bomb,agent),time).
- %  clausify_pnf=(holds_at(at(Agent, Location), Time), holds_at(at(Bomb, Location), Time), holds_at(killedDeterminingFluent(Agent), Time), happens(bombExplode(Bomb), Time)->happens(kill(Bomb, Agent), Time)).
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Bomb.e',153).
-
- /*  happens(kill(Bomb, Agent), Time) :-
-       holds_at(at(Agent, Location), Time),
-       holds_at(at(Bomb, Location), Time),
-       holds_at(killedDeterminingFluent(Agent), Time),
-       happens(bombExplode(Bomb), Time).
- */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Bomb.e',153).
-
- /*  fix_axiom_head(Time) ->
-       [ happens(kill(Bomb, Agent), Time),
-          (->),
-         call(kill(Bomb, Agent))
-       ].
- */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Bomb.e',153).
-
- /*  pl=axiom(call(kill(Bomb,Agent)),
-         [ at(Agent,Location),
-   	at(Bomb,Location),
-   	killedDeterminingFluent(Agent),
-   	bombExplode(Bomb)
-         ]).
- */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Bomb.e',153).
-
- /*  (   at(Agent, Location),
-       at(Bomb, Location),
-       killedDeterminingFluent(Agent),
-       bombExplode(Bomb)
-   ->  call(kill(Bomb, Agent))
-   ).
- */
+% '->'(
+%    ','(
+%       at(Agent,Location), 
+%       ','(
+%          at(Bomb,Location), 
+%          ','(
+%             killedDeterminingFluent(Agent), 
+%             bombExplode(Bomb)))), 
+%    call(
+%       kill(Bomb,Agent))).
 if loc_at(Agent, Location), loc_at(Bomb, Location), killedDeterminingFluent(Agent), bombExplode(Bomb)then call(kill(Bomb, Agent)).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Bomb.e',153).
 
@@ -1206,43 +734,19 @@ if loc_at(Agent, Location), loc_at(Bomb, Location), killedDeterminingFluent(Agen
    	      ],
    	      [call(kill(Bomb,Agent))]).
  */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Bomb.e',153).
-
- /*  reactive_rule([ loc_at(Agent,Location),
-   		loc_at(Bomb,Location),
-   		killedDeterminingFluent(Agent),
-   		happens(bombExplode(Bomb),
-   			Time_From,
-   			Time_Until)
-   	      ],
-   	      [call(kill(Bomb,Agent))]).
- */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Bomb.e',153).
-
- /*  not(holds_at(at(Agent, Location), Time)) :-
-       holds_at(at(Bomb, Location), Time),
-       holds_at(killedDeterminingFluent(Agent), Time),
-       happens(bombExplode(Bomb), Time),
-       not(happens(kill(Bomb, Agent), Time)).
- */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Bomb.e',153).
-
- /*  pl=axiom(not(at(Agent,Location)),
-         [ at(Bomb,Location),
-   	killedDeterminingFluent(Agent),
-   	bombExplode(Bomb),
-   	not(call(kill(Bomb,Agent)))
-         ]).
- */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Bomb.e',153).
-
- /*  (   at(Bomb, Location),
-       killedDeterminingFluent(Agent),
-       bombExplode(Bomb),
-       not(call(kill(Bomb, Agent)))
-   ->  not(at(Agent, Location))
-   ).
- */
+ %  "% =================================".
+% '->'(
+%    ','(
+%       at(Bomb,Location), 
+%       ','(
+%          killedDeterminingFluent(Agent), 
+%          ','(
+%             bombExplode(Bomb), 
+%             not(
+%                call(
+%                   kill(Bomb,Agent)))))), 
+%    not(
+%       at(Agent,Location))).
 if loc_at(Bomb, Location), killedDeterminingFluent(Agent), bombExplode(Bomb), not call(kill(Bomb, Agent))then not loc_at(Agent, Location).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Bomb.e',153).
 
@@ -1255,43 +759,19 @@ if loc_at(Bomb, Location), killedDeterminingFluent(Agent), bombExplode(Bomb), no
    	      ],
    	      [not(loc_at(Agent,Location))]).
  */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Bomb.e',153).
-
- /*  reactive_rule([ loc_at(Bomb,Location),
-   		killedDeterminingFluent(Agent),
-   		happens(bombExplode(Bomb),
-   			Time_From6,
-   			Time_Until7),
-   		not(call(kill(Bomb,Agent)))
-   	      ],
-   	      [not(loc_at(Agent,Location))]).
- */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Bomb.e',153).
-
- /*  not(holds_at(at(Bomb, Location), Time)) :-
-       holds_at(killedDeterminingFluent(Agent), Time),
-       happens(bombExplode(Bomb), Time),
-       holds_at(at(Agent, Location), Time),
-       not(happens(kill(Bomb, Agent), Time)).
- */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Bomb.e',153).
-
- /*  pl=axiom(not(at(Bomb,Location)),
-         [ killedDeterminingFluent(Agent),
-   	bombExplode(Bomb),
-   	at(Agent,Location),
-   	not(call(kill(Bomb,Agent)))
-         ]).
- */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Bomb.e',153).
-
- /*  (   killedDeterminingFluent(Agent),
-       bombExplode(Bomb),
-       at(Agent, Location),
-       not(call(kill(Bomb, Agent)))
-   ->  not(at(Bomb, Location))
-   ).
- */
+ %  "% =================================".
+% '->'(
+%    ','(
+%       killedDeterminingFluent(Agent), 
+%       ','(
+%          bombExplode(Bomb), 
+%          ','(
+%             at(Agent,Location), 
+%             not(
+%                call(
+%                   kill(Bomb,Agent)))))), 
+%    not(
+%       at(Bomb,Location))).
 if killedDeterminingFluent(Agent), bombExplode(Bomb), loc_at(Agent, Location), not call(kill(Bomb, Agent))then not loc_at(Bomb, Location).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Bomb.e',153).
 
@@ -1304,43 +784,19 @@ if killedDeterminingFluent(Agent), bombExplode(Bomb), loc_at(Agent, Location), n
    	      ],
    	      [not(loc_at(Bomb,Location))]).
  */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Bomb.e',153).
-
- /*  reactive_rule([ killedDeterminingFluent(Agent),
-   		happens(bombExplode(Bomb),
-   			Time_From8,
-   			Time_Until9),
-   		loc_at(Agent,Location),
-   		not(call(kill(Bomb,Agent)))
-   	      ],
-   	      [not(loc_at(Bomb,Location))]).
- */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Bomb.e',153).
-
- /*  not(holds_at(killedDeterminingFluent(Agent), Time)) :-
-       happens(bombExplode(Bomb), Time),
-       holds_at(at(Bomb, Location), Time),
-       holds_at(at(Agent, Location), Time),
-       not(happens(kill(Bomb, Agent), Time)).
- */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Bomb.e',153).
-
- /*  pl=axiom(not(killedDeterminingFluent(Agent)),
-         [ bombExplode(Bomb),
-   	at(Bomb,Location),
-   	at(Agent,Location),
-   	not(call(kill(Bomb,Agent)))
-         ]).
- */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Bomb.e',153).
-
- /*  (   bombExplode(Bomb),
-       at(Bomb, Location),
-       at(Agent, Location),
-       not(call(kill(Bomb, Agent)))
-   ->  not(killedDeterminingFluent(Agent))
-   ).
- */
+ %  "% =================================".
+% '->'(
+%    ','(
+%       bombExplode(Bomb), 
+%       ','(
+%          at(Bomb,Location), 
+%          ','(
+%             at(Agent,Location), 
+%             not(
+%                call(
+%                   kill(Bomb,Agent)))))), 
+%    not(
+%       killedDeterminingFluent(Agent))).
 if bombExplode(Bomb), loc_at(Bomb, Location), loc_at(Agent, Location), not call(kill(Bomb, Agent))then not killedDeterminingFluent(Agent).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Bomb.e',153).
 
@@ -1353,51 +809,19 @@ if bombExplode(Bomb), loc_at(Bomb, Location), loc_at(Agent, Location), not call(
    	      ],
    	      [not(killedDeterminingFluent(Agent))]).
  */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Bomb.e',153).
-
- /*  reactive_rule([ happens(bombExplode(Bomb),
-   			Time_From10,
-   			Time_Until11),
-   		loc_at(Bomb,Location),
-   		loc_at(Agent,Location),
-   		not(call(kill(Bomb,Agent)))
-   	      ],
-   	      [not(killedDeterminingFluent(Agent))]).
- */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Bomb.e',153).
-
- /*  not(happens(bombExplode(Bomb), Time)) :-
-       holds_at(killedDeterminingFluent(Agent), Time),
-       holds_at(at(Bomb, Location), Time),
-       holds_at(at(Agent, Location), Time),
-       not(happens(kill(Bomb, Agent), Time)).
- */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Bomb.e',153).
-
- /*  fix_axiom_head(Time) ->
-       [ not(happens(bombExplode(Bomb), Time)),
-          (->),
-         not(bombExplode(Bomb))
-       ].
- */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Bomb.e',153).
-
- /*  pl=axiom(not(bombExplode(Bomb)),
-         [ killedDeterminingFluent(Agent),
-   	at(Bomb,Location),
-   	at(Agent,Location),
-   	not(call(kill(Bomb,Agent)))
-         ]).
- */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Bomb.e',153).
-
- /*  (   killedDeterminingFluent(Agent),
-       at(Bomb, Location),
-       at(Agent, Location),
-       not(call(kill(Bomb, Agent)))
-   ->  not(bombExplode(Bomb))
-   ).
- */
+ %  "% =================================".
+% '->'(
+%    ','(
+%       killedDeterminingFluent(Agent), 
+%       ','(
+%          at(Bomb,Location), 
+%          ','(
+%             at(Agent,Location), 
+%             not(
+%                call(
+%                   kill(Bomb,Agent)))))), 
+%    not(
+%       bombExplode(Bomb))).
 if killedDeterminingFluent(Agent), loc_at(Bomb, Location), loc_at(Agent, Location), not call(kill(Bomb, Agent))then not bombExplode(Bomb).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Bomb.e',153).
 
@@ -1408,15 +832,7 @@ if killedDeterminingFluent(Agent), loc_at(Bomb, Location), loc_at(Agent, Locatio
    	      ],
    	      [not(bombExplode(Bomb))]).
  */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Bomb.e',153).
-
- /*  reactive_rule([ killedDeterminingFluent(Agent),
-   		loc_at(Bomb,Location),
-   		loc_at(Agent,Location),
-   		not(call(kill(Bomb,Agent)))
-   	      ],
-   	      [not(bombExplode(Bomb))]).
- */
+ %  "% =================================".
 
 
 %; An axiom states that if an physical object is at a location,
@@ -1430,90 +846,41 @@ if killedDeterminingFluent(Agent), loc_at(Bomb, Location), loc_at(Agent, Locatio
 % HoldsAt(DamagedDeterminingFluent(physobj),time) &
 % Happens(BombExplode(bomb),time) ->
 % Happens(Damage(bomb,physobj),time).
- %  clausify_pnf=(holds_at(at(Physobj, Location), Time), holds_at(at(Bomb, Location), Time), holds_at(damagedDeterminingFluent(Physobj), Time), happens(bombExplode(Bomb), Time)->happens(damage(Bomb, Physobj), Time)).
+% '->'(
+%    ','(
+%       at(Physobj,Location), 
+%       ','(
+%          at(Bomb,Location), 
+%          ','(
+%             damagedDeterminingFluent(Physobj), 
+%             bombExplode(Bomb)))), 
+%    damage(Bomb,Physobj)).
+damage(Bomb, Physobj)if loc_at(Physobj, Location), loc_at(Bomb, Location), damagedDeterminingFluent(Physobj), bombExplode(Bomb).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Bomb.e',165).
 
- /*  happens(damage(Bomb, Physobj), Time) :-
-       holds_at(at(Physobj, Location), Time),
-       holds_at(at(Bomb, Location), Time),
-       holds_at(damagedDeterminingFluent(Physobj), Time),
-       happens(bombExplode(Bomb), Time).
+ /*  l_events(happens(damage(Bomb,Physobj),
+   		 Time_From,
+   		 Time_Until),
+   	 [ loc_at(Physobj,Location),
+   	   loc_at(Bomb,Location),
+   	   damagedDeterminingFluent(Physobj),
+   	   happens(bombExplode(Bomb),
+   		   Time_From,
+   		   Time_Until)
+   	 ]).
  */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Bomb.e',165).
-
- /*  fix_axiom_head(Time) ->
-       [ happens(damage(Bomb, Physobj), Time),
-          (->),
-         damage(Bomb, Physobj)
-       ].
- */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Bomb.e',165).
-
- /*  pl=axiom(damage(Bomb,Physobj),
-         [ at(Physobj,Location),
-   	at(Bomb,Location),
-   	damagedDeterminingFluent(Physobj),
-   	bombExplode(Bomb)
-         ]).
- */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Bomb.e',165).
-
- /*  (   at(Physobj, Location),
-       at(Bomb, Location),
-       damagedDeterminingFluent(Physobj),
-       bombExplode(Bomb)
-   ->  damage(Bomb, Physobj)
-   ).
- */
-if loc_at(Physobj, Location), loc_at(Bomb, Location), damagedDeterminingFluent(Physobj), bombExplode(Bomb)then damage(Bomb, Physobj).
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Bomb.e',165).
-
- /*  reactive_rule([ loc_at(Physobj,Location),
-   		loc_at(Bomb,Location),
-   		damagedDeterminingFluent(Physobj),
-   		happens(bombExplode(Bomb),
-   			Time_From,
-   			Time_Until)
-   	      ],
-   	      [damage(Bomb,Physobj)]).
- */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Bomb.e',165).
-
- /*  reactive_rule([ loc_at(Physobj,Location),
-   		loc_at(Bomb,Location),
-   		damagedDeterminingFluent(Physobj),
-   		happens(bombExplode(Bomb),
-   			Time_From,
-   			Time_Until)
-   	      ],
-   	      [damage(Bomb,Physobj)]).
- */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Bomb.e',165).
-
- /*  not(holds_at(at(Physobj, Location), Time)) :-
-       holds_at(at(Bomb, Location), Time),
-       holds_at(damagedDeterminingFluent(Physobj), Time),
-       happens(bombExplode(Bomb), Time),
-       not(happens(damage(Bomb, Physobj), Time)).
- */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Bomb.e',165).
-
- /*  pl=axiom(not(at(Physobj,Location)),
-         [ at(Bomb,Location),
-   	damagedDeterminingFluent(Physobj),
-   	bombExplode(Bomb),
-   	not(damage(Bomb,Physobj))
-         ]).
- */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Bomb.e',165).
-
- /*  (   at(Bomb, Location),
-       damagedDeterminingFluent(Physobj),
-       bombExplode(Bomb),
-       not(damage(Bomb, Physobj))
-   ->  not(at(Physobj, Location))
-   ).
- */
+ %  "% =================================".
+% '->'(
+%    ','(
+%       at(Bomb,Location), 
+%       ','(
+%          damagedDeterminingFluent(Physobj), 
+%          ','(
+%             bombExplode(Bomb), 
+%             not(
+%                damage(Bomb,Physobj))))), 
+%    not(
+%       at(Physobj,Location))).
 if loc_at(Bomb, Location), damagedDeterminingFluent(Physobj), bombExplode(Bomb), not damage(Bomb, Physobj)then not loc_at(Physobj, Location).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Bomb.e',165).
 
@@ -1526,43 +893,18 @@ if loc_at(Bomb, Location), damagedDeterminingFluent(Physobj), bombExplode(Bomb),
    	      ],
    	      [not(loc_at(Physobj,Location))]).
  */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Bomb.e',165).
-
- /*  reactive_rule([ loc_at(Bomb,Location),
-   		damagedDeterminingFluent(Physobj),
-   		happens(bombExplode(Bomb),
-   			Time_From6,
-   			Time_Until7),
-   		not(damage(Bomb,Physobj))
-   	      ],
-   	      [not(loc_at(Physobj,Location))]).
- */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Bomb.e',165).
-
- /*  not(holds_at(at(Bomb, Location), Time)) :-
-       holds_at(damagedDeterminingFluent(Physobj), Time),
-       happens(bombExplode(Bomb), Time),
-       holds_at(at(Physobj, Location), Time),
-       not(happens(damage(Bomb, Physobj), Time)).
- */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Bomb.e',165).
-
- /*  pl=axiom(not(at(Bomb,Location)),
-         [ damagedDeterminingFluent(Physobj),
-   	bombExplode(Bomb),
-   	at(Physobj,Location),
-   	not(damage(Bomb,Physobj))
-         ]).
- */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Bomb.e',165).
-
- /*  (   damagedDeterminingFluent(Physobj),
-       bombExplode(Bomb),
-       at(Physobj, Location),
-       not(damage(Bomb, Physobj))
-   ->  not(at(Bomb, Location))
-   ).
- */
+ %  "% =================================".
+% '->'(
+%    ','(
+%       damagedDeterminingFluent(Physobj), 
+%       ','(
+%          bombExplode(Bomb), 
+%          ','(
+%             at(Physobj,Location), 
+%             not(
+%                damage(Bomb,Physobj))))), 
+%    not(
+%       at(Bomb,Location))).
 if damagedDeterminingFluent(Physobj), bombExplode(Bomb), loc_at(Physobj, Location), not damage(Bomb, Physobj)then not loc_at(Bomb, Location).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Bomb.e',165).
 
@@ -1575,43 +917,18 @@ if damagedDeterminingFluent(Physobj), bombExplode(Bomb), loc_at(Physobj, Locatio
    	      ],
    	      [not(loc_at(Bomb,Location))]).
  */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Bomb.e',165).
-
- /*  reactive_rule([ damagedDeterminingFluent(Physobj),
-   		happens(bombExplode(Bomb),
-   			Time_From8,
-   			Time_Until9),
-   		loc_at(Physobj,Location),
-   		not(damage(Bomb,Physobj))
-   	      ],
-   	      [not(loc_at(Bomb,Location))]).
- */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Bomb.e',165).
-
- /*  not(holds_at(damagedDeterminingFluent(Physobj), Time)) :-
-       happens(bombExplode(Bomb), Time),
-       holds_at(at(Bomb, Location), Time),
-       holds_at(at(Physobj, Location), Time),
-       not(happens(damage(Bomb, Physobj), Time)).
- */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Bomb.e',165).
-
- /*  pl=axiom(not(damagedDeterminingFluent(Physobj)),
-         [ bombExplode(Bomb),
-   	at(Bomb,Location),
-   	at(Physobj,Location),
-   	not(damage(Bomb,Physobj))
-         ]).
- */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Bomb.e',165).
-
- /*  (   bombExplode(Bomb),
-       at(Bomb, Location),
-       at(Physobj, Location),
-       not(damage(Bomb, Physobj))
-   ->  not(damagedDeterminingFluent(Physobj))
-   ).
- */
+ %  "% =================================".
+% '->'(
+%    ','(
+%       bombExplode(Bomb), 
+%       ','(
+%          at(Bomb,Location), 
+%          ','(
+%             at(Physobj,Location), 
+%             not(
+%                damage(Bomb,Physobj))))), 
+%    not(
+%       damagedDeterminingFluent(Physobj))).
 if bombExplode(Bomb), loc_at(Bomb, Location), loc_at(Physobj, Location), not damage(Bomb, Physobj)then not damagedDeterminingFluent(Physobj).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Bomb.e',165).
 
@@ -1624,51 +941,18 @@ if bombExplode(Bomb), loc_at(Bomb, Location), loc_at(Physobj, Location), not dam
    	      ],
    	      [not(damagedDeterminingFluent(Physobj))]).
  */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Bomb.e',165).
-
- /*  reactive_rule([ happens(bombExplode(Bomb),
-   			Time_From10,
-   			Time_Until11),
-   		loc_at(Bomb,Location),
-   		loc_at(Physobj,Location),
-   		not(damage(Bomb,Physobj))
-   	      ],
-   	      [not(damagedDeterminingFluent(Physobj))]).
- */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Bomb.e',165).
-
- /*  not(happens(bombExplode(Bomb), Time)) :-
-       holds_at(damagedDeterminingFluent(Physobj), Time),
-       holds_at(at(Bomb, Location), Time),
-       holds_at(at(Physobj, Location), Time),
-       not(happens(damage(Bomb, Physobj), Time)).
- */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Bomb.e',165).
-
- /*  fix_axiom_head(Time) ->
-       [ not(happens(bombExplode(Bomb), Time)),
-          (->),
-         not(bombExplode(Bomb))
-       ].
- */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Bomb.e',165).
-
- /*  pl=axiom(not(bombExplode(Bomb)),
-         [ damagedDeterminingFluent(Physobj),
-   	at(Bomb,Location),
-   	at(Physobj,Location),
-   	not(damage(Bomb,Physobj))
-         ]).
- */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Bomb.e',165).
-
- /*  (   damagedDeterminingFluent(Physobj),
-       at(Bomb, Location),
-       at(Physobj, Location),
-       not(damage(Bomb, Physobj))
-   ->  not(bombExplode(Bomb))
-   ).
- */
+ %  "% =================================".
+% '->'(
+%    ','(
+%       damagedDeterminingFluent(Physobj), 
+%       ','(
+%          at(Bomb,Location), 
+%          ','(
+%             at(Physobj,Location), 
+%             not(
+%                damage(Bomb,Physobj))))), 
+%    not(
+%       bombExplode(Bomb))).
 if damagedDeterminingFluent(Physobj), loc_at(Bomb, Location), loc_at(Physobj, Location), not damage(Bomb, Physobj)then not bombExplode(Bomb).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Bomb.e',165).
 
@@ -1679,15 +963,7 @@ if damagedDeterminingFluent(Physobj), loc_at(Bomb, Location), loc_at(Physobj, Lo
    	      ],
    	      [not(bombExplode(Bomb))]).
  */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Bomb.e',165).
-
- /*  reactive_rule([ damagedDeterminingFluent(Physobj),
-   		loc_at(Bomb,Location),
-   		loc_at(Physobj,Location),
-   		not(damage(Bomb,Physobj))
-   	      ],
-   	      [not(bombExplode(Bomb))]).
- */
+ %  "% =================================".
 
 
 %; An axiom states that if an physical object is at a location,
@@ -1701,90 +977,41 @@ if damagedDeterminingFluent(Physobj), loc_at(Bomb, Location), loc_at(Physobj, Lo
 % HoldsAt(DestroyedDeterminingFluent(physobj),time) &
 % Happens(BombExplode(bomb),time) ->
 % Happens(Destroy(bomb,physobj),time).
- %  clausify_pnf=(holds_at(at(Physobj, Location), Time), holds_at(at(Bomb, Location), Time), holds_at(destroyedDeterminingFluent(Physobj), Time), happens(bombExplode(Bomb), Time)->happens(destroy(Bomb, Physobj), Time)).
+% '->'(
+%    ','(
+%       at(Physobj,Location), 
+%       ','(
+%          at(Bomb,Location), 
+%          ','(
+%             destroyedDeterminingFluent(Physobj), 
+%             bombExplode(Bomb)))), 
+%    destroy(Bomb,Physobj)).
+destroy(Bomb, Physobj)if loc_at(Physobj, Location), loc_at(Bomb, Location), destroyedDeterminingFluent(Physobj), bombExplode(Bomb).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Bomb.e',177).
 
- /*  happens(destroy(Bomb, Physobj), Time) :-
-       holds_at(at(Physobj, Location), Time),
-       holds_at(at(Bomb, Location), Time),
-       holds_at(destroyedDeterminingFluent(Physobj), Time),
-       happens(bombExplode(Bomb), Time).
+ /*  l_events(happens(destroy(Bomb,Physobj),
+   		 Time_From,
+   		 Time_Until),
+   	 [ loc_at(Physobj,Location),
+   	   loc_at(Bomb,Location),
+   	   destroyedDeterminingFluent(Physobj),
+   	   happens(bombExplode(Bomb),
+   		   Time_From,
+   		   Time_Until)
+   	 ]).
  */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Bomb.e',177).
-
- /*  fix_axiom_head(Time) ->
-       [ happens(destroy(Bomb, Physobj), Time),
-          (->),
-         destroy(Bomb, Physobj)
-       ].
- */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Bomb.e',177).
-
- /*  pl=axiom(destroy(Bomb,Physobj),
-         [ at(Physobj,Location),
-   	at(Bomb,Location),
-   	destroyedDeterminingFluent(Physobj),
-   	bombExplode(Bomb)
-         ]).
- */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Bomb.e',177).
-
- /*  (   at(Physobj, Location),
-       at(Bomb, Location),
-       destroyedDeterminingFluent(Physobj),
-       bombExplode(Bomb)
-   ->  destroy(Bomb, Physobj)
-   ).
- */
-if loc_at(Physobj, Location), loc_at(Bomb, Location), destroyedDeterminingFluent(Physobj), bombExplode(Bomb)then destroy(Bomb, Physobj).
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Bomb.e',177).
-
- /*  reactive_rule([ loc_at(Physobj,Location),
-   		loc_at(Bomb,Location),
-   		destroyedDeterminingFluent(Physobj),
-   		happens(bombExplode(Bomb),
-   			Time_From,
-   			Time_Until)
-   	      ],
-   	      [destroy(Bomb,Physobj)]).
- */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Bomb.e',177).
-
- /*  reactive_rule([ loc_at(Physobj,Location),
-   		loc_at(Bomb,Location),
-   		destroyedDeterminingFluent(Physobj),
-   		happens(bombExplode(Bomb),
-   			Time_From,
-   			Time_Until)
-   	      ],
-   	      [destroy(Bomb,Physobj)]).
- */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Bomb.e',177).
-
- /*  not(holds_at(at(Physobj, Location), Time)) :-
-       holds_at(at(Bomb, Location), Time),
-       holds_at(destroyedDeterminingFluent(Physobj), Time),
-       happens(bombExplode(Bomb), Time),
-       not(happens(destroy(Bomb, Physobj), Time)).
- */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Bomb.e',177).
-
- /*  pl=axiom(not(at(Physobj,Location)),
-         [ at(Bomb,Location),
-   	destroyedDeterminingFluent(Physobj),
-   	bombExplode(Bomb),
-   	not(destroy(Bomb,Physobj))
-         ]).
- */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Bomb.e',177).
-
- /*  (   at(Bomb, Location),
-       destroyedDeterminingFluent(Physobj),
-       bombExplode(Bomb),
-       not(destroy(Bomb, Physobj))
-   ->  not(at(Physobj, Location))
-   ).
- */
+ %  "% =================================".
+% '->'(
+%    ','(
+%       at(Bomb,Location), 
+%       ','(
+%          destroyedDeterminingFluent(Physobj), 
+%          ','(
+%             bombExplode(Bomb), 
+%             not(
+%                destroy(Bomb,Physobj))))), 
+%    not(
+%       at(Physobj,Location))).
 if loc_at(Bomb, Location), destroyedDeterminingFluent(Physobj), bombExplode(Bomb), not destroy(Bomb, Physobj)then not loc_at(Physobj, Location).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Bomb.e',177).
 
@@ -1797,43 +1024,18 @@ if loc_at(Bomb, Location), destroyedDeterminingFluent(Physobj), bombExplode(Bomb
    	      ],
    	      [not(loc_at(Physobj,Location))]).
  */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Bomb.e',177).
-
- /*  reactive_rule([ loc_at(Bomb,Location),
-   		destroyedDeterminingFluent(Physobj),
-   		happens(bombExplode(Bomb),
-   			Time_From6,
-   			Time_Until7),
-   		not(destroy(Bomb,Physobj))
-   	      ],
-   	      [not(loc_at(Physobj,Location))]).
- */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Bomb.e',177).
-
- /*  not(holds_at(at(Bomb, Location), Time)) :-
-       holds_at(destroyedDeterminingFluent(Physobj), Time),
-       happens(bombExplode(Bomb), Time),
-       holds_at(at(Physobj, Location), Time),
-       not(happens(destroy(Bomb, Physobj), Time)).
- */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Bomb.e',177).
-
- /*  pl=axiom(not(at(Bomb,Location)),
-         [ destroyedDeterminingFluent(Physobj),
-   	bombExplode(Bomb),
-   	at(Physobj,Location),
-   	not(destroy(Bomb,Physobj))
-         ]).
- */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Bomb.e',177).
-
- /*  (   destroyedDeterminingFluent(Physobj),
-       bombExplode(Bomb),
-       at(Physobj, Location),
-       not(destroy(Bomb, Physobj))
-   ->  not(at(Bomb, Location))
-   ).
- */
+ %  "% =================================".
+% '->'(
+%    ','(
+%       destroyedDeterminingFluent(Physobj), 
+%       ','(
+%          bombExplode(Bomb), 
+%          ','(
+%             at(Physobj,Location), 
+%             not(
+%                destroy(Bomb,Physobj))))), 
+%    not(
+%       at(Bomb,Location))).
 if destroyedDeterminingFluent(Physobj), bombExplode(Bomb), loc_at(Physobj, Location), not destroy(Bomb, Physobj)then not loc_at(Bomb, Location).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Bomb.e',177).
 
@@ -1846,43 +1048,18 @@ if destroyedDeterminingFluent(Physobj), bombExplode(Bomb), loc_at(Physobj, Locat
    	      ],
    	      [not(loc_at(Bomb,Location))]).
  */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Bomb.e',177).
-
- /*  reactive_rule([ destroyedDeterminingFluent(Physobj),
-   		happens(bombExplode(Bomb),
-   			Time_From8,
-   			Time_Until9),
-   		loc_at(Physobj,Location),
-   		not(destroy(Bomb,Physobj))
-   	      ],
-   	      [not(loc_at(Bomb,Location))]).
- */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Bomb.e',177).
-
- /*  not(holds_at(destroyedDeterminingFluent(Physobj), Time)) :-
-       happens(bombExplode(Bomb), Time),
-       holds_at(at(Bomb, Location), Time),
-       holds_at(at(Physobj, Location), Time),
-       not(happens(destroy(Bomb, Physobj), Time)).
- */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Bomb.e',177).
-
- /*  pl=axiom(not(destroyedDeterminingFluent(Physobj)),
-         [ bombExplode(Bomb),
-   	at(Bomb,Location),
-   	at(Physobj,Location),
-   	not(destroy(Bomb,Physobj))
-         ]).
- */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Bomb.e',177).
-
- /*  (   bombExplode(Bomb),
-       at(Bomb, Location),
-       at(Physobj, Location),
-       not(destroy(Bomb, Physobj))
-   ->  not(destroyedDeterminingFluent(Physobj))
-   ).
- */
+ %  "% =================================".
+% '->'(
+%    ','(
+%       bombExplode(Bomb), 
+%       ','(
+%          at(Bomb,Location), 
+%          ','(
+%             at(Physobj,Location), 
+%             not(
+%                destroy(Bomb,Physobj))))), 
+%    not(
+%       destroyedDeterminingFluent(Physobj))).
 if bombExplode(Bomb), loc_at(Bomb, Location), loc_at(Physobj, Location), not destroy(Bomb, Physobj)then not destroyedDeterminingFluent(Physobj).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Bomb.e',177).
 
@@ -1895,51 +1072,18 @@ if bombExplode(Bomb), loc_at(Bomb, Location), loc_at(Physobj, Location), not des
    	      ],
    	      [not(destroyedDeterminingFluent(Physobj))]).
  */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Bomb.e',177).
-
- /*  reactive_rule([ happens(bombExplode(Bomb),
-   			Time_From10,
-   			Time_Until11),
-   		loc_at(Bomb,Location),
-   		loc_at(Physobj,Location),
-   		not(destroy(Bomb,Physobj))
-   	      ],
-   	      [not(destroyedDeterminingFluent(Physobj))]).
- */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Bomb.e',177).
-
- /*  not(happens(bombExplode(Bomb), Time)) :-
-       holds_at(destroyedDeterminingFluent(Physobj), Time),
-       holds_at(at(Bomb, Location), Time),
-       holds_at(at(Physobj, Location), Time),
-       not(happens(destroy(Bomb, Physobj), Time)).
- */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Bomb.e',177).
-
- /*  fix_axiom_head(Time) ->
-       [ not(happens(bombExplode(Bomb), Time)),
-          (->),
-         not(bombExplode(Bomb))
-       ].
- */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Bomb.e',177).
-
- /*  pl=axiom(not(bombExplode(Bomb)),
-         [ destroyedDeterminingFluent(Physobj),
-   	at(Bomb,Location),
-   	at(Physobj,Location),
-   	not(destroy(Bomb,Physobj))
-         ]).
- */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Bomb.e',177).
-
- /*  (   destroyedDeterminingFluent(Physobj),
-       at(Bomb, Location),
-       at(Physobj, Location),
-       not(destroy(Bomb, Physobj))
-   ->  not(bombExplode(Bomb))
-   ).
- */
+ %  "% =================================".
+% '->'(
+%    ','(
+%       destroyedDeterminingFluent(Physobj), 
+%       ','(
+%          at(Bomb,Location), 
+%          ','(
+%             at(Physobj,Location), 
+%             not(
+%                destroy(Bomb,Physobj))))), 
+%    not(
+%       bombExplode(Bomb))).
 if destroyedDeterminingFluent(Physobj), loc_at(Bomb, Location), loc_at(Physobj, Location), not destroy(Bomb, Physobj)then not bombExplode(Bomb).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Bomb.e',177).
 
@@ -1950,15 +1094,7 @@ if destroyedDeterminingFluent(Physobj), loc_at(Bomb, Location), loc_at(Physobj, 
    	      ],
    	      [not(bombExplode(Bomb))]).
  */
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Bomb.e',177).
-
- /*  reactive_rule([ destroyedDeterminingFluent(Physobj),
-   		loc_at(Bomb,Location),
-   		loc_at(Physobj,Location),
-   		not(destroy(Bomb,Physobj))
-   	      ],
-   	      [not(bombExplode(Bomb))]).
- */
+ %  "% =================================".
 
 
 %; End of file.

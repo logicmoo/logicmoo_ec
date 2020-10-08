@@ -13,11 +13,13 @@ into_lps :- t_l:is_ec_cvt(lps).
 into_dec_pl :- \+ t_l:is_ec_cvt(lps).
 no_canon :- true. 
 
+major_debug(Goal):- nop(Goal).
+
 assert_to_lps(Stuff):- ignore(ec_lps_convert:assert_lps(Stuff)).
 
 
 pprint_ecp_pl(Type,Form):- \+ into_lps, !, pprint_ecp(Type,Form),!.
-pprint_ecp_pl(Type,Form):- pprint_ecp_cmt(Type,Form),!.
+pprint_ecp_pl(Type,Form):- major_debug(pprint_ecp_cmt(Type,Form)),!.
 
 :- use_module(library(logicmoo_common)).
 
@@ -44,7 +46,7 @@ is_e_toplevel :- prolog_load_context(source,File),prolog_load_context(file,File)
 export_transparent(P):-
   export(P),
   module_transparent(P).
-:- reexport(library('ec_planner/ec_planner_dmiles')).
+%:- reexport(library('ec_planner/ec_planner_dmiles')).
 :- reexport(library('ec_planner/ec_reader')).
 
 
@@ -163,19 +165,14 @@ calc_pel_filename(F,F,PL):- atom_concat(Was,'.e',F), atom_concat(Was,'.pl',PL),e
 :- export_transparent(load_e_pl/1).
 load_e_pl(F):- needs_resolve_local_files(F, L), !, must_maplist(load_e_pl, L),!. 
 load_e_pl(F):- to_e_pl(F,E,PL),load_e_pl(E,PL),!.
+
 :- export_transparent(cvt_e_pl/1).
 cvt_e_pl(F):- needs_resolve_local_files(F, L), !, must_maplist(cvt_e_pl, L),!. 
 cvt_e_pl(F):- to_e_pl(F,E,PL), cvt_e_pl(E,PL),!.
                         
-to_e_pl(F,FE,F):- atom_concat(Was,'.pel',F),!,atom_concat(Was,'.e',FE).
-to_e_pl(F,FE,F):- atom_concat(Was,'.e.pl',F),!,atom_concat(Was,'.e',FE).
-to_e_pl(F,FE,F):- atom_concat(Was,'.pl',F),!,atom_concat(Was,'.e',FE).
-to_e_pl(F,F,PL):- atom_concat(Was,'.e',F), atom_concat(Was,'.pel',PL),exists_file(PL).
-to_e_pl(F,F,PL):- atom_concat(Was,'.e',F), atom_concat(Was,'.e.pl',PL),exists_file(PL).
-to_e_pl(F,F,PL):- atom_concat(Was,'.e',F), atom_concat(Was,'.pl',PL),exists_file(PL).
-to_e_pl(F,F,OutputName):- calc_where_to(outdir('.', 'pel'), F, OutputName).
+to_e_pl(F,FE,PL):- calc_filename_ext(pel,F,FE,PL),!.
 
-:- module_transparent(load_e_pl/2).
+:- export_transparent(load_e_pl/2).
 load_e_pl(ME,PL):- strip_module(ME,M,E),cvt_e_pl(E,PL),M:user:consult(PL),!.
 
 get_date_atom(Atom):- 
@@ -397,7 +394,7 @@ same_times(T1,T):- T1==T,!.
 maybe_show_diff(T, HT, HTTermO):-
   ignore((HT\==HTTermO, HT \= not(holds_at(_,_)), 
     % pprint_ecp_cmt(blue,(axiom_head(T) -> HT)),
-    pprint_ecp_cmt(blue,(fix_axiom_head(T) -> [HT ,(->), HTTermO])))),!.
+    major_debug(pprint_ecp_cmt(blue,(fix_axiom_head(T) -> [HT ,(->), HTTermO]))))),!.
 
 :- export(show_fix_axiom_head/3).
 show_fix_axiom_head(T, HT, HTTermO):- 
@@ -454,7 +451,7 @@ assert_ready(Type,Value):-
   assert_ready_now(Type,Value).
 
 assert_ready_now(Type,Value):- 
-   pprint_ecp_pl(Type,Type=Value),
+   only_dec_pl(pprint_ecp_pl(Type,Type=Value)),
    notrace((echo_format('~N'))),
    mpred_fwc(Value),
    fix_assert(_Time,Value,ValueO),
@@ -472,7 +469,7 @@ assertz_if_new_domain_db((H:-B),T):- !, assertz_if_new_msg((user:ec_current_doma
 assertz_if_new_domain_db(ValueO,_):- ValueO =@= axiom(holds_at(neg(raining), _), []),!,barf.
 assertz_if_new_domain_db(ValueO,T):- assertz_if_new_msg(user:ec_current_domain_db(ValueO,T)).
 
-assertz_if_new_msg(Stuff):- clause_asserted(Stuff),wdmsg(already(Stuff)), !, only_lps(assert_to_lps(Stuff)),!.
+assertz_if_new_msg(Stuff):- clause_asserted(Stuff),major_debug(wdmsg(already(Stuff))), !, only_lps(assert_to_lps(Stuff)),!.
 assertz_if_new_msg(Stuff):- assertz_if_new(Stuff), only_lps(assert_to_lps(Stuff)),!.
 
 some_renames(O,O):- \+ compound(O),!.
@@ -631,7 +628,8 @@ assert_ele(SS):- echo_format('~N'),
   assert_axiom(SS,[]),!.
   %assert_ready(red, SS).
 
-correct_axiom_time_args(Stem,H,B,HH,BB):- 
+correct_axiom_time_args(_Stem,H,B,HH,BB):- into_lps,!, H=HH,B=BB,!.
+correct_axiom_time_args( Stem,H,B,HH,BB):- 
   visit_time_args(Stem,[],H,HH,Mid),
   visit_time_args(Stem,Mid,B,BBs,Out),
   append(BBs,Out,BB),!.
@@ -781,7 +779,7 @@ assert_ele_clauses(_X,_L,(H:-B)):- skipped_head(H), !,
    nop((pprint_ecp_cmt(yellow,skipped_head(H):-B))),!.
 
 assert_ele_clauses(_X,_L,(H:-B)):- !,
-  pprint_ecp_cmt(red,(H:-B)),
+  only_dec_pl(pprint_ecp_cmt(red,(H:-B))),
   conjuncts_to_list_body(B, BL),
   assert_axiom(H , BL).
 assert_ele_clauses(_X,_L,H):-  
@@ -795,7 +793,7 @@ assert_m_axiom(Ax):-
 %assert_m_axiom('<->'(A,B)):- into_lps, !, assert_m_axiom(A->B), assert_m_axiom(B->A). 
 %assert_m_axiom('<-'(A,B)):- into_lps, !, assert_m_axiom(A->B). 
 assert_m_axiom(X):-
-  pprint_ecp_cmt(green, clausify_pnf=X),
+  major_debug(pprint_ecp_cmt(green, clausify_pnf=X)),
   with_output_to(string(_), clausify_pnf(X,Conds)), 
   conjuncts_to_list(Conds,CondsL),
   assert_ele_clauses(X,CondsL,CondsL).

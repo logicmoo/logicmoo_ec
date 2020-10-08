@@ -13,7 +13,7 @@
 
 :- use_module(library(ec_planner/ec_loader)).
 
-ec_current_domain(X):- wdmsg(ec_current_domain(X)),fail.
+system:ec_current_domain(X):- wdmsg(ec_current_domain(X)),fail.
 /*export_transparent(P):-
   export(P),
   module_transparent(P).
@@ -33,11 +33,18 @@ assert_lps(axiom(Stuff,Nil)):- Nil==[],!,assert_lps(Stuff).
 assert_lps(axiom(Stuff,List)):- !,must_or_rtrace(list_to_conjuncts(List,Body)),!,assert_lps(->(Body,Stuff)).
 assert_lps(Stuff):- assert_ep(lps_test_mod,Stuff).
 
+print_tree_cmt(C,P):- 
+ notrace((echo_format('~N'),  
+  with_output_to(string(S), in_cmt( print_tree(P))),
+  to_ansi(C, C0),
+  real_ansi_format(C0, '~s', [S]))).
+
+assert_ep( _M,Form):- print_tree_cmt(white,Form),fail.
 assert_ep(Mod,option(N,V)):- assert_lps(Mod,option(N,V),option(N,V)).
 assert_ep(Mod,Form):- 
   format('~N',[]),
   must_or_rtrace(ep_to_lps(Form,Lps)),
-  ignore((Form\==Lps->pprint_ecp_cmt(hfg(green),Form))),
+  major_debug(ignore((Form\==Lps->pprint_ecp_cmt(hfg(green),Form)))),
   must_or_rtrace(assert_lps(Mod,Form,Lps)),!.
 
 assert_lps(Mod,_,include(F)):- include_e_lps_file_now(Mod:F). % with_e_file(assert_ep(Mod),current_output, [F]). 
@@ -47,17 +54,23 @@ assert_lps(Mod,_,load(F)):- include_e_lps_file_now(Mod:F). % with_e_file(assert_
 assert_lps(Mod,Form,Lps):- nortrace, is_list(Lps),!, maplist(assert_lps(Mod,Form),Lps).
 assert_lps(Mod,t(Type,Inst),_):- atom(Type), M=..[Type,Inst],!,assert_lps(Mod,M,M),!.
 assert_lps(Mod,_Form,Lps):- 
- locally(current_prolog_flag(lps_translation_only_HIDE,true),
-   locally(t_l:lps_program_module(Mod),
-    must_or_rtrace(lps_f_term_expansion_now(Mod,Lps,Prolog)))),!,
+  lps_xform(Mod,Lps,Prolog),!,
   must_or_rtrace((Lps\==Prolog->(ignore(( /*(Form\==Prolog,Lps==Prolog)-> */
-    with_lps_operators2(user,ec_lps_convert:with_lps_operators2(pretty_clauses,pretty_clauses:clause_to_string(Lps,S))),
-    real_ansi_format(hfg(yellow), '~N~s.~N', [S]),
+    print_lps_syntax(yellow,Lps),
      nop(pprint_ecp(yellow,Lps)))),
-    pprint_ecp_cmt(cyan,Prolog))
-   ;pprint_ecp(red,Prolog))),
+    pprint_ecp_cmt(cyan,Prolog),pprint_ecp_cmt(white,"% ================================="))
+   ;assert_lps_try_harder(Prolog))),
   must_or_rtrace(assert_prolog(Mod,Prolog)),!.
 
+print_lps_syntax(Color,Lps):- 
+ with_lps_operators2(user,
+  ec_lps_convert:with_lps_operators2(pretty_clauses,pretty_clauses:clause_to_string(Lps,S))),
+    real_ansi_format(hfg(Color), '~N~s.~N', [S]),!.
+
+lps_xform(Mod,Lps,Prolog):- 
+ locally(current_prolog_flag(lps_translation_only_HIDE,true),
+   locally(t_l:lps_program_module(Mod),
+    must_or_rtrace(lps_f_term_expansion_now(Mod,Lps,Prolog)))),!.
 
 :- export_transparent(with_lps_operators2/2).
 with_lps_operators2(M,Goal):- 
@@ -72,7 +85,7 @@ with_lps_operators(MGoal):-
 
 assert_prolog(Mod,Prolog):- is_list(Prolog),!, maplist(assert_prolog(Mod),Prolog).
 assert_prolog(_Mod,Prolog):- % get_source_location(File,Line),
-   pprint_ecp_pl(yellow,Prolog).
+   major_debug(pprint_ecp_pl(yellow,Prolog)).
 
 include_e_lps_file_now(MFile):- strip_module(MFile,M,File), include_e_lps_file_now(M,File).
 include_e_lps_file_now(M,File):- absolute_file_name(File,AbsFile),File\==AbsFile,!,include_e_lps_file_now(M,AbsFile).
@@ -130,6 +143,8 @@ compound_name_arguments_maybe_zero(LpsM,F,ArgsO):- compound_name_arguments(LpsM,
 over_pass(_Top, X, X):- \+ compound(X),!.
 over_pass(_Top, X, X):- functor(X,_,1), arg(1,X,Var), is_ftVar(Var),!.
 over_pass(_Top,at(X,Y),loc_at(X,Y)).
+over_pass(_Top,metreqs(X),X).
+
 over_pass(Top,neg(X),Rest):- ep_to_lps_arg(Top,not(X),Rest).
 over_pass(_Top,holds_at(Fluent, Time),initially(Fluent)):- Time==start, !.
 over_pass(_Top,holds_at(Fluent, Time),initially(Fluent)):- Time==0, !.
@@ -152,8 +167,18 @@ over_pass(_Top,terminates(Event,Fluent,Time),(Event terminates Fluent at Time)):
 over_pass(_Top,Form,LpsO):- Form=..[EFP,X], argtype_pred(EFP,_), protify(EFP,X,Lps),!,flatten([Lps],LpsO).
 over_pass(_Top,X=Y,Lps):- callable(X),append_term(X,Y,Lps).
 over_pass(Top,'<->'(X1,X2),[Lps1,Lps2]):- over_pass(Top,'->'(X1,X2),Lps1),over_pass(Top,'->'(X2,X1),Lps2).
-over_pass(_Top,'->'(X1,X2),(if X1 then X2)):-!.
+over_pass(_Top,'->'(X1,X2),(X2 if X1)):-!.
+
 over_pass(_Top,X,X).  
+
+assert_lps_try_harder_now((X2 if X1),(if X1 then X2)).
+assert_lps_try_harder(Prolog):- assert_lps_try_harder_now(Prolog,Again),
+  lps_xform(lps_test_mod,Again,PrologAgain),Again\==PrologAgain,!, 
+   print_lps_syntax(yellow,Again),
+   pprint_ecp_cmt(cyan,PrologAgain),
+   pprint_ecp_cmt(white,"% ================================="),
+   !.
+assert_lps_try_harder(Prolog):- pprint_ecp(red,Prolog).
 
 argtype_pred(event,events).
 argtype_pred(fluent,fluents).
