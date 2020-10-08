@@ -275,12 +275,19 @@ fix_axiom_head(T, [G1|G2], [GG1|GG2]):- !, fix_axiom_head(T, G1, GG1),fix_axiom_
 fix_axiom_head(T, (G1,G2), (GG1,GG2)):- !, fix_axiom_head(T, G1, GG1),fix_axiom_head(T, G2, GG2). 
 fix_axiom_head(T, (G1;G2), (GG1;GG2)):- !, fix_axiom_head(T, G1, GG1),fix_axiom_head(T, G2, GG2). 
 fix_axiom_head(T, (G1:-B), (GG1:-B)):- !, fix_axiom_head(T, G1, GG1),!.
+fix_axiom_head(T, exists(X,G), exists(X,GG)):-!, fix_axiom_head(T, G, GG).
+
 fix_axiom_head(T, neg(II),O):- compound(II), II= neg(I), !, fix_axiom_head(T, I,O),!.
 fix_axiom_head(T, neg(I),O):- !, fix_axiom_head(T, I,M), correct_holds(neg, not(M), O). 
 fix_axiom_head(T, not(I),O):- !, fix_axiom_head(T, I,M), correct_holds(neg, not(M), O).
 fix_axiom_head(T, G, GG):- must_or_dumpst(cvt0_full(T,G,Y)), (G==Y -> fail; fix_axiom_head(T,Y,GG)),!.
+
+fix_axiom_head(T, (G1G2), (GG1GG2)):- compound_name_arguments(G1G2,F,[G1,G2]),
+   member(F,['->','<-','<->',';',',']), !,
+   fix_axiom_head(T, G1, GG1),fix_axiom_head(T, G2, GG2),
+   compound_name_arguments(GG1GG2,F,[GG1,GG2]).
 fix_axiom_head(_, G, G):- safe_functor(G,F,A), already_good(F,A),!.
-fix_axiom_head(T, exists(X,G), exists(X,GG)):-!, fix_axiom_head(T, G, GG).
+
 fix_axiom_head(T, G, holds_at(G,T)):- functor_skel(G,P), syntx_term_check(fluent(P)),!.
 fix_axiom_head(T, G, happens(G,T)):- functor_skel(G,P), \+ syntx_term_check(predicate(P)), (syntx_term_check(event(P);executable(P))),!.
 fix_axiom_head(_, G, G):- G\=not(_), functor_skel(G,P), syntx_term_check(predicate(P)),!.
@@ -558,6 +565,9 @@ start_plus(Zero,start+Zero):- number(Zero),!.
 
 cvt0(_, X, Y):-  (\+ callable(X);\+ compound(X)), !, X=Y.
 cvt0(_, X\=Y, diff(X,Y)) :- !.
+cvt0(T, equals(X,Y), O):- is_ftVar(X), \+ is_ftVar(Y),!,cvt0(T, equals(Y,X), O),!.
+cvt0(T, equals(X,Y), O):- \+compound(X), compound(Y),!,cvt0(T, equals(Y,X), O),!.
+cvt0(_, equals(X,Y), O):-compound(X), functionform_to_predform(equals(X,Y),O),!.
 cvt0(_, X=Y, Equals):- !,as_equals(X,Y,Equals).
 cvt0(T0, holds_at(NotH,T),O):- compound(NotH),not(H)= NotH, !, cvt0(T0, holds_at(neg(H),T), O).
 %cvt0(T, P, call(P)):- predicate_property(P,foreign),!.
@@ -1155,12 +1165,6 @@ get_linfo(lsvm(L,F,Vs,M)):-
   nb_current('$variable_names',Vs))).
 
 
-:- module_transparent(process_ec/1).
-
-:- export(process_ec/1).
-process_ec( HB ):- notrace(must(get_linfo(T))), process_ec( T, HB ).
-%:- export_transparent(process_ec/2).
-%process_ec( _, HB , T):- !,process_ec( T, HB ).
 
                     
 
@@ -1174,6 +1178,35 @@ brk_on_unify_hook(Var,Vars):-
 brk_on_bind(HB):- term_variables(HB,Vars),must_maplist(brk_on(Vars),Vars).
 brk_on(Vars,X):- ord_del_element(Vars,X,Rest),put_attr(X,brk_on,Rest).
 
+
+
+needs_process_axiom(C):- \+ compound(C), !, fail.
+needs_process_axiom(axiom(_,_)).
+needs_process_axiom(axiom(_)).
+needs_process_axiom(abducible(_)).
+needs_process_axiom(executable(_)).
+needs_process_axiom(P):- compound_name_arity(P,F,A),needs_process_axiom_fa(F,A).
+
+needs_process_axiom_fa(iff,2).
+%needs_process_axiom_fa('<-',2).
+needs_process_axiom_fa('->',2).
+needs_process_axiom_fa(F,A):- arg_info(_,F,Args), (Args==arginfo-> true; functor(Args,_,A)).
+
+
+:- module_transparent(needs_proccess/3).
+needs_proccess(_File, PA,_):- \+ compound(PA),!,fail.
+needs_proccess( File, M:H, How):- !, M\==system, nonvar(H),!,needs_proccess(File, H,How).
+needs_proccess(_File, PA, process_ec):- needs_process_axiom(PA),!.
+needs_proccess( File, (axiom(_,_) :- _),process_ec):- \+ skipped_ec_file(File), !.
+needs_proccess( File, (H :- _),How):- \+ skipped_ec_file(File), !, nonvar(H),!,needs_proccess(File, H,How).
+
+
+:- module_transparent(process_ec/1).
+
+:- export(process_ec/1).
+process_ec( HB ):- notrace(must(get_linfo(T))), process_ec( T, HB ).
+%:- export_transparent(process_ec/2).
+%process_ec( _, HB , T):- !,process_ec( T, HB ).
 
 :- module_transparent(process_ec/2).
 
@@ -1311,33 +1344,8 @@ correct_ax_args(_T,F,2,[P,R],domain,arginfo,0,PP):- append_term(P,R,AB),PP =.. [
 %failed_must(correct_ax_args(_T,initiates,2,[go(_1694),at(_1694)],axiom_head,3,v(event,fluent,time),_1684))
 
 
-
-
-
-
-
-
-needs_process_axiom(C):- \+ compound(C), !, fail.
-needs_process_axiom(axiom(_,_)).
-needs_process_axiom(axiom(_)).
-needs_process_axiom(abducible(_)).
-needs_process_axiom(executable(_)).
-needs_process_axiom(P):- compound_name_arity(P,F,A),needs_process_axiom_fa(F,A).
-
-needs_process_axiom_fa(iff,2).
-%needs_process_axiom_fa('<-',2).
-needs_process_axiom_fa('->',2).
-needs_process_axiom_fa(F,A):- arg_info(_,F,Args), (Args==arginfo-> true; functor(Args,_,A)).
-
-
-:- module_transparent(needs_proccess/3).
-needs_proccess(_File, PA,_):- \+ compound(PA),!,fail.
-needs_proccess( File, M:H, How):- !, M\==system, nonvar(H),!,needs_proccess(File, H,How).
-needs_proccess(_File, PA, process_ec):- needs_process_axiom(PA),!.
-needs_proccess( File, (axiom(_,_) :- _),process_ec):- \+ skipped_ec_file(File), !.
-needs_proccess( File, (H :- _),How):- \+ skipped_ec_file(File), !, nonvar(H),!,needs_proccess(File, H,How).
-
 skipped_ec_file(File):- var(File),fail.
+
 
 :- export(hook_ec_axioms/2).
 :- module_transparent(hook_ec_axioms/2).

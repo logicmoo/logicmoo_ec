@@ -11,22 +11,6 @@
 
 is_e_toplevel :- prolog_load_context(source,File),prolog_load_context(file,File).
 
-/*
-:- if(\+ current_prolog_flag(lm_no_autoload,_)).
-:- set_prolog_flag(lm_no_autoload,false).
-:- wdmsg("WARNING: PFC_AUTOLOAD").
-:- endif.
-
-:- if(\+ current_prolog_flag(lm_pfc_lean,_)).
-:- set_prolog_flag(lm_pfc_lean,false).
-:- wdmsg("WARNING: PFC_NOT_LEAN").
-:- endif.
-
-%:- use_module(library(pfc_lib)).
-%:- include(library(pfc)).
-:- baseKB:export(baseKB:spft/4).
-:- system:import(baseKB:spft/4).
-*/
 ec_current_domain(X):- wdmsg(ec_current_domain(X)),fail.
 export_transparent(P):-
   export(P),

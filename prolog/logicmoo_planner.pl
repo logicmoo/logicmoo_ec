@@ -11,14 +11,15 @@
 :- initialization(attach_packs).
 :- endif.
 
-:-  add_absolute_search_folder(ext,('../ext/')).
-% :-  add_absolute_search_folder(ext,library('../ext')).
+%:-  add_absolute_search_folder(ext,('../ext/')).
+:-  add_absolute_search_folder(ext,library('../ext/')).
+%:-  add_absolute_search_folder(pack,library('../prolog/../..')).
 
 :- if( \+  user:file_search_path(pddl,_) ).
 
-:-  add_absolute_search_folder(pddl,'../test/pddl_tests/'),
-    add_absolute_search_folder(pddl,'../test/uw-yale-pddl/strict-domains/'),
-    add_absolute_search_folder(pddl,'../test/uw-yale-pddl/domains/'),
+:-  add_absolute_search_folder(pddl,library('../test/pddl_tests/')),
+    add_absolute_search_folder(pddl,library('../test/uw-yale-pddl/strict-domains/')),
+    add_absolute_search_folder(pddl,library('../test/uw-yale-pddl/domains/')),
     !.
          
 :- endif.

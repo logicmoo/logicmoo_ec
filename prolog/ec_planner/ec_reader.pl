@@ -23,7 +23,7 @@
     
 
 */
-:- module(ec_reader,[convert_e/1, set_ec_option/2, verbatum_functor/1, builtin_pred/1, e_to_ecalc/3, s_l/2,
+:- module(ec_reader,[convert_e/1, set_ec_option/2, verbatum_functor/1, builtin_pred/1, with_e_file/3, s_l/2,
    echo_format/1, 
    e_reader_test/0,
    e_reader_test/1,
@@ -85,7 +85,7 @@ is_quantifier_type(X,Y):- atom(X), is_quantifier_type(_,X),Y=X.
 
 % used by ec_loader
 
-:- meta_predicate e_to_ecalc(1,+,+), e_to_ecalc(1,+,+).
+:- meta_predicate with_e_file(1,+,+), with_e_file(1,+,+).
 :- meta_predicate map_callables(2,*,*).
 :- meta_predicate process_e_stream(1,*).
 :- meta_predicate ec_on_read(1,*).
@@ -135,7 +135,7 @@ with_e_sample_tests(Out) :-
   %call(Out, 'ecnet/SpeechAct.e'),
   % call(Out, 'ecnet/Diving.e'),
    %call(Out, 'examples/Mueller2006/Exercises/MixingPaints.e'),
-   call(Out, ['*/*/*/*.e','*/*/*.e','*/*.e']),
+   call(Out, [ec('*/*/*/*.e'),ec('*/*/*.e'),ec('*/*.e')]),
   
 %  call(Out, 'examples/Mueller2006/Chapter11/HungryCat.e'),
   !.
@@ -145,7 +145,7 @@ with_e_sample_tests(Out) :-
 % 
 % :- meta_predicate ec_reader:must(0).
 
-raise_translation_event(Why,What,OutputName):- call(Why,translate(What,OutputName)).
+raise_translation_event(Proc1,What,OutputName):- call(Proc1,translate(What,OutputName)).
 
 
 dedupe_files(SL0,SL):- maplist(relative_file_name,SL0,SL1), list_to_set(SL1,SL2),maplist(absolute_file_name,SL2,SL),!.
@@ -196,99 +196,101 @@ calc_where_to(outdir(Dir, Ext), InputNameE, OutputFile):-
 
 :- export(should_update/1).
 should_update(OutputName):- is_filename(OutputName), \+ exists_file(OutputName), !.
+should_update(_):- etmp:ec_option(overwrite_translated_files,never),!,fail.
 should_update(_):- etmp:ec_option(overwrite_translated_files,always),!.
+should_update(_):- !.
 
 :- export(include_e/1).
-include_e(F):- e_to_ecalc(do_convert_e, current_output, F).
+include_e(F):- with_e_file(do_convert_e, current_output, F).
 
 
 :- export(convert_e/1).
 convert_e(F):- convert_e(outdir('.', ep), F).
 :- export(convert_e/2).
-convert_e(Out, F):- e_to_ecalc(do_convert_e, Out, F).
+convert_e(Out, F):- with_e_file(do_convert_e, Out, F).
 :- export(convert_e/2).
-convert_e(Pred, Out, F):- e_to_ecalc(Pred, Out, F).
+convert_e(Proc1, Out, F):- with_e_file(Proc1, Out, F).
 
 
 :- export(is_filename/1).
 is_filename(F):- atom(F), \+ is_stream(F),
   (exists_file(F);is_absolute_file_name(F)).
 
-%e_to_ecalc(Why, Out, F):- dmsg(e_to_ecalc(Why, Out, F)), fail.
+%with_e_file(Proc1, Out, F):- dmsg(with_e_file(Proc1, Out, F)), fail.
 
-e_to_ecalc(Why, OutputName, Ins):- wdmsg(e_to_ecalc(Why, OutputName, Ins)),fail.
+with_e_file(Proc1, OutputName, Ins):- wdmsg(with_e_file(Proc1, OutputName, Ins)),fail.
 
-e_to_ecalc(Why, Out, F):- compound(Out), Out=outdir(Dir), !, e_to_ecalc(Why, outdir(Dir, ep), F).
-e_to_ecalc(Why, Out, F):- nonvar(F), \+ is_stream(F), \+ is_filename(F), needs_resolve_local_files(F, L), !, maplist(e_to_ecalc(Why, Out), L).  
+with_e_file(Proc1, Out, F):- compound(Out), Out=outdir(Dir), !, with_e_file(Proc1, outdir(Dir, ep), F).
+with_e_file(Proc1, Out, F):- nonvar(F), \+ is_stream(F), \+ is_filename(F), needs_resolve_local_files(F, L), !, maplist(with_e_file(Proc1, Out), L).  
 
 % wildcard input file  "./foo*.e"
-e_to_ecalc(Why, Out, F):- atom(F), \+ is_stream(F), \+ is_filename(F), 
-   expand_file_name(F, L), L\==[], [F]\==L, !, maplist(e_to_ecalc(Why, Out), L).
+with_e_file(Proc1, Out, F):- atom(F), \+ is_stream(F), \+ is_filename(F), 
+   expand_file_name(F, L), L\==[], [F]\==L, !, maplist(with_e_file(Proc1, Out), L).
 
 % wildcard input file  logical(./foo*.e).
-e_to_ecalc(Why, Out, F):-  \+ is_stream(F), \+ is_filename(F),
+with_e_file(Proc1, Out, F):-  \+ is_stream(F), \+ is_filename(F),
    findall(N, absolute_file_name(F, N, [file_type(txt), file_errors(fail), expand(false), solutions(all)]), L), 
-   L\=[F], !, maplist(e_to_ecalc(Why, Out), L).
+   L\=[F], !, maplist(with_e_file(Proc1, Out), L).
 
 % Out is a misdirected stream
-e_to_ecalc(Why, Outs, Ins):- 
+with_e_file(Proc1, Outs, Ins):- 
    atomic(Outs), is_stream(Outs),
    assertion(stream_property(Outs, output)), 
    \+ current_output(Outs), !,
    with_output_to(Outs, 
-    e_to_ecalc(Why,current_output, Ins)),!.
+    with_e_file(Proc1,current_output, Ins)),!.
 
 % Out is like a wildcard stream (but we have a real filename)
-e_to_ecalc(Why, outdir(Dir, Ext), F):- is_filename(F), !, 
+with_e_file(Proc1, outdir(Dir, Ext), F):- is_filename(F), !, 
    calc_where_to(outdir(Dir, Ext), F, OutputName),
-   e_to_ecalc(Why, OutputName, F).
+   with_e_file(Proc1, OutputName, F).
 
 % Out is like a wildcard stream (calc a real filename)
-e_to_ecalc(Why, outdir(Dir, Ext), Ins):- must(is_stream(Ins)), !, 
+with_e_file(Proc1, outdir(Dir, Ext), Ins):- must(is_stream(Ins)), !, 
    must(stream_property(Ins, file(InputName))),
    calc_where_to(outdir(Dir, Ext), InputName, OutputName),
-   e_to_ecalc(Why, OutputName, Ins).
+   with_e_file(Proc1, OutputName, Ins).
 
 % Out is a filename not neding update
-e_to_ecalc(Why, OutputName, _Ins):- is_filename(OutputName), 
+with_e_file(Proc1, OutputName, _Ins):- is_filename(OutputName), 
    \+ should_update(OutputName),
-   raise_translation_event(Why,skipped,OutputName),
-   raise_translation_event(Why,ready,OutputName), !.
+   raise_translation_event(Proc1,skipped,OutputName),
+   raise_translation_event(Proc1,ready,OutputName), !.
 
-e_to_ecalc(Why, Out, F):- is_filename(F), !, 
+with_e_file(Proc1, Out, F):- is_filename(F), !, 
   absolute_file_name(F,AF),
     locally(b_setval('$ec_input_file',AF),
       setup_call_cleanup(
         open(F, read, Ins),    
-         e_to_ecalc(Why, Out, Ins),
+         with_e_file(Proc1, Out, Ins),
         close(Ins))),!.
 
 % Out is a filename not currently loadable 
-e_to_ecalc(Why, OutputName, Ins):-  \+ is_stream(OutputName),  !,
+with_e_file(Proc1, OutputName, Ins):-  \+ is_stream(OutputName),  !,
    assertion(is_stream(Ins)), assertion(stream_property(Ins, input)),
    must(should_update(OutputName)),
-   raise_translation_event(Why,unskipped,OutputName),
+   raise_translation_event(Proc1,unskipped,OutputName),
    setup_call_cleanup(
      open(OutputName, write, Outs),
      with_output_to(Outs, 
-       (raise_translation_event(Why,begining,OutputName),
+       (raise_translation_event(Proc1,begining,OutputName),
          nb_setval('$ec_output_stream',Outs),
          format(Outs,'~N~q.~n',[:- expects_dialect(ecalc)]),
-         e_to_ecalc(Why, current_output, Ins),
-          raise_translation_event(Why,ending,OutputName))),
+         with_e_file(Proc1, current_output, Ins),
+          raise_translation_event(Proc1,ending,OutputName))),
      (nb_setval('$ec_output_stream',[]),close(Outs))),
-   raise_translation_event(Why,ready,OutputName).
+   raise_translation_event(Proc1,ready,OutputName).
 
-e_to_ecalc(Why, Out, Ins):- 
+with_e_file(Proc1, Out, Ins):- 
       assertion(current_output(Out)),       
-      e_io(Why, Ins).
+      e_io(Proc1, Ins).
 
 :- nb_setval(ec_input_file,[]).
         
-%e_io(Why, Ins):- dmsg(e_io(Why, Ins)), fail.
-e_io(Why, Ins):-  
+%e_io(Proc1, Ins):- dmsg(e_io(Proc1, Ins)), fail.
+e_io(Proc1, Ins):-  
   repeat, 
-  locally(b_setval('$ec_input_stream',Ins),once(process_e_stream(Why, Ins))), 
+  locally(b_setval('$ec_input_stream',Ins),once(process_e_stream(Proc1, Ins))), 
   notrace(at_end_of_stream(Ins)), !.
   
 
@@ -323,7 +325,7 @@ upcased_functors(G):-
       notrace(set_prolog_flag(N, Was))).
 
 
-%% process_e_stream(Why, ?S) is det.
+%% process_e_stream(Proc1, ?S) is det.
 %
 % Process file stream input
 %
@@ -348,46 +350,46 @@ process_stream_peeked213(S, "["):- !,
 process_stream_peeked213(S, "{"):- mention_s_l, echo_format('% '), !, read_stream_until(S, [], `}`, Codes), read_n_save_vars(existential, Codes).
 
 
-%process_e_stream(Why, S):- assertion(stream_property(S, input)).
-process_e_stream(Why, S):- notrace(at_end_of_stream(S)), !, mention_s_l, call(Why, end_of_file).
+%process_e_stream(Proc1, S):- assertion(stream_property(S, input)).
+process_e_stream(Proc1, S):- notrace(at_end_of_stream(S)), !, mention_s_l, call(Proc1, end_of_file).
 process_e_stream(_, S) :- removed_one_ws(S), !.
 process_e_stream(_, S):- process_stream_comment(S), !.
 
-process_e_stream(Why, S):-   
+process_e_stream(Proc1, S):-   
    OR = [to_lower('.'), to_lower('('), end_of_line, to_lower('='),to_lower('>'), space, to_lower(':')], 
    locally(b_setval(e_echo, nil),
          read_stream_until_true(S, [], char_type_inverse(Was, or(OR)), Text)), 
    unpad_codes(Text, Codes), 
    maybe_o_s_l,
    ttyflush, 
-   must(continue_process_e_stream(Why, S, Codes, Was)), !.
-process_e_stream(Why, S):- read_line_to_string(S, Comment), echo_format('~N%RROOR: ~w: ~s~n', [Why, Comment]), break.
+   must(continue_process_e_stream(Proc1, S, Codes, Was)), !.
+process_e_stream(Proc1, S):- read_line_to_string(S, Comment), echo_format('~N%RROOR: ~w: ~s~n', [Proc1, Comment]), break.
 
 
-% continue_process_e_stream(Why, _S, [], space):- !.
-continue_process_e_stream(_Why, _S, [], _):- !.
-continue_process_e_stream(_Why, _S, [], end_of_line):- !.
-continue_process_e_stream(Why, S, NextCodes, CanBe ):- ttyflush,
-  continue_process_e_stream_too(Why, S, NextCodes, CanBe ),!.
+% continue_process_e_stream(Proc1, _S, [], space):- !.
+continue_process_e_stream(_Proc1, _S, [], _):- !.
+continue_process_e_stream(_Proc1, _S, [], end_of_line):- !.
+continue_process_e_stream(Proc1, S, NextCodes, CanBe ):- ttyflush,
+  continue_process_e_stream_too(Proc1, S, NextCodes, CanBe ),!.
 
-continue_process_e_stream_too(Why, _S, Codes, to_lower(':')):- 
+continue_process_e_stream_too(Proc1, _S, Codes, to_lower(':')):- 
   append(Delta, [_], Codes), 
   text_to_string(Delta,DeltaS),
   normalize_space(atom(Term),DeltaS),
   nb_setval(last_e_string, delta),
   echo_format('~N~n'),maybe_mention_s_l(0), echo_format('% ~s ', [Codes]),
-  ec_on_read(Why, directive(Term)),!.
-continue_process_e_stream_too(Why, S, Codes, space):- last(Codes, Last), 
+  ec_on_read(Proc1, directive(Term)),!.
+continue_process_e_stream_too(Proc1, S, Codes, space):- last(Codes, Last), 
    once([Last]=`!`;char_type(Last, alpha)), !, 
    trim_off_whitepace(S), !, 
    atom_codes(Token, Codes),  
    nb_setval(last_e_string, kw),
    echo_format('~N~n'),maybe_mention_s_l(0), echo_format('% ~s ', [Codes]),
-   process_e_stream_token(Why, Token, S), ttyflush, !.
-continue_process_e_stream_too(Why, S, NextCodes, _CanBe ):-  !, 
+   process_e_stream_token(Proc1, Token, S), ttyflush, !.
+continue_process_e_stream_too(Proc1, S, NextCodes, _CanBe ):-  !, 
   ( \+ nb_current(last_e_string, vars) -> (echo_format('~N~n~n',[]), mention_s_l) ; true),
    maybe_mention_s_l(2), echo_format('% ~s', [NextCodes]),
-   last(NextCodes, Last), cont_one_e_compound(S, NextCodes, Last, Term), ec_on_read(Why, Term).
+   last(NextCodes, Last), cont_one_e_compound(S, NextCodes, Last, Term), ec_on_read(Proc1, Term).
 
 unpad_codes(Text, Codes):- text_to_string(Text, String), 
    normalize_space(codes(Codes0), String),
@@ -635,17 +637,17 @@ cont_one_e_compound(S, InCodes, WasLast, Term):-
 
 :- meta_predicate ec_on_each_read(1,*,*).
 
-ec_on_read(Why, EOF):- EOF == end_of_file, !,  must(call(Why, EOF)).
-ec_on_read(Why, SL):- e_to_ec(SL, SO) -> SL\=@=SO, !, ec_on_read(Why, SO).
-ec_on_read(Why, Cmp):- compound_gt(Cmp, 0), 
+ec_on_read(Proc1, EOF):- EOF == end_of_file, !,  must(call(Proc1, EOF)).
+ec_on_read(Proc1, SL):- e_to_ec(SL, SO) -> SL\=@=SO, !, ec_on_read(Proc1, SO).
+ec_on_read(Proc1, Cmp):- compound_gt(Cmp, 0), 
   Cmp =.. [NonlistF, List], is_list(List), non_list_functor(NonlistF),!, 
-  maplist(ec_on_each_read(Why,NonlistF), List).
-ec_on_read(Why, S):- must(glean_data(Why, S)), must(call(Why, S)).
+  maplist(ec_on_each_read(Proc1,NonlistF), List).
+ec_on_read(Proc1, S):- must(glean_data(Proc1, S)), must(call(Proc1, S)).
 
 
 :- use_module(library(logicmoo/misc_terms)).
 
-ec_on_each_read(Why, NonlistF, E):- univ_safe(Cmp , [NonlistF, E]), ec_on_read(Why, Cmp).
+ec_on_each_read(Proc1, NonlistF, E):- univ_safe(Cmp , [NonlistF, E]), ec_on_read(Proc1, Cmp).
 
 %must(G):- tracing, !, notrace(G).
 %must(G):- call(G)->true;(trace,ignore(rtrace(G)),break).
@@ -661,47 +663,47 @@ on_convert_ele(SS):- must(echo_format('~N')), must(pprint_ecp(e,SS)).
 do_convert_e(SS):- on_convert_ele(SS).
 
 
-glean_data(Why, SL):- \+ compound(SL), !, dmsg(warn(glean_data(Why, SL))).
-glean_data(Why, subsort(S1, S2)):- !, glean_data(Why, sort(S1)), glean_data(Why, sort(S2)), assert_gleaned(Why, subsort(S1, S2)).
-glean_data(Why, sort(S)):- !, assert_gleaned(Why, sort(S)).
-glean_data(Why, isa(E, S)):- !, assert_gleaned(Why, isa(E, S)).
-glean_data(Why, SL):- SL=..[S, L], 
+glean_data(Pred1, SL):- \+ compound(SL), !, dmsg(warn(glean_data(Pred1, SL))).
+glean_data(Pred1, subsort(S1, S2)):- !, glean_data(Pred1, sort(S1)), glean_data(Pred1, sort(S2)), assert_gleaned(Pred1, subsort(S1, S2)).
+glean_data(Pred1, sort(S)):- !, assert_gleaned(Pred1, sort(S)).
+glean_data(Pred1, isa(E, S)):- !, assert_gleaned(Pred1, isa(E, S)).
+glean_data(Pred1, SL):- SL=..[S, L], 
   \+ is_non_sort(S), is_list(L), !, 
-  glean_data(Why, sort(S)), 
-  maplist(glean_data(Why, hasInstance(S)), L).
+  glean_data(Pred1, sort(S)), 
+  maplist(glean_data(Pred1, hasInstance(S)), L).
 glean_data(_, _).
 
-%assert_gleaned(Why, sort(S)):-  !, call(Why, gleaned(sort(S))).
-assert_gleaned(_Why, SS):-  asserta_if_new(gleaned(SS)).
-%assert_gleaned(Why, SS):-  call(Why, gleaned(SS)).
+%assert_gleaned(Pred1, sort(S)):-  !, call(Pred1, gleaned(sort(S))).
+assert_gleaned(_Pred1, SS):-  asserta_if_new(gleaned(SS)).
+%assert_gleaned(Pred1, SS):-  call(Pred1, gleaned(SS)).
 
-glean_data(Why, hasInstance(S), E):- !, glean_data(Why, isa(E, S)).
+glean_data(Pred1, hasInstance(S), E):- !, glean_data(Pred1, isa(E, S)).
 
 
 
-process_e_stream_token(Why, Atom, S):- atom_concat(New, '!', Atom), !, process_e_stream_token(Why, New, S).
-process_e_stream_token(Why, Type, S):- normalize_space(atom(A), Type), A\==Type, !, process_e_stream_token(Why, A, S).
-process_e_stream_token(Why, Text, S):- \+ atom(Text), !, text_to_string(Text, String), atom_string(Atom,String), process_e_stream_token(Why, Atom, S).
-process_e_stream_token(Why, function, S):- !, read_stream_until(S, [], `:`, Text), read_line_to_string_echo(S, String), 
+process_e_stream_token(Proc1, Atom, S):- atom_concat(New, '!', Atom), !, process_e_stream_token(Proc1, New, S).
+process_e_stream_token(Proc1, Type, S):- normalize_space(atom(A), Type), A\==Type, !, process_e_stream_token(Proc1, A, S).
+process_e_stream_token(Proc1, Text, S):- \+ atom(Text), !, text_to_string(Text, String), atom_string(Atom,String), process_e_stream_token(Proc1, Atom, S).
+process_e_stream_token(Proc1, function, S):- !, read_stream_until(S, [], `:`, Text), read_line_to_string_echo(S, String), 
   append(TextL, [_], Text), 
   e_read1(TextL, Value, _), 
   token_stringsss(String, Type), 
-   ec_on_read(Why, (function(Value, Type))).
+   ec_on_read(Proc1, (function(Value, Type))).
 
-process_e_stream_token(Why, Type, S):- downcase_atom(Type, Event), (memberchk(Event, [fluent, predicate, event]);is_reified_sort(Event)), !, 
-   read_one_e_compound(S, Value), ec_on_read(Why, t(Event, Value)).
+process_e_stream_token(Proc1, Type, S):- downcase_atom(Type, Event), (memberchk(Event, [fluent, predicate, event]);is_reified_sort(Event)), !, 
+   read_one_e_compound(S, Value), ec_on_read(Proc1, t(Event, Value)).
 
-process_e_stream_token(Why, reified, S):- !, read_stream_until(S, [], ` `, Text), 
-   text_to_string(Text, St), atom_concat('reified_', St, Type), !, process_e_stream_token(Why, Type, S).
+process_e_stream_token(Proc1, reified, S):- !, read_stream_until(S, [], ` `, Text), 
+   text_to_string(Text, St), atom_concat('reified_', St, Type), !, process_e_stream_token(Proc1, Type, S).
 
-process_e_stream_token(Why, Type, S):- read_line_to_string_echo(S, String), process_e_token_with_string(Why, Type, String).
+process_e_stream_token(Proc1, Type, S):- read_line_to_string_echo(S, String), process_e_token_with_string(Proc1, Type, String).
 
-process_e_token_with_string(Why, Type, String):- \+ is_non_sort(Type), 
+process_e_token_with_string(Proc1, Type, String):- \+ is_non_sort(Type), 
  % \+ atom_contains(String,"("),
   atomics_to_string(VList, ',', String), VList \= [_], !, 
-  maplist(process_e_token_with_string(Why, Type), VList).
+  maplist(process_e_token_with_string(Proc1, Type), VList).
 process_e_token_with_string(_, _, ""):-!.
-process_e_token_with_string(Why, Type, String):- token_stringsss(String, Out), ec_on_read(Why, t(Type, Out)).
+process_e_token_with_string(Proc1, Type, String):- token_stringsss(String, Out), ec_on_read(Proc1, t(Type, Out)).
 
 token_stringsss("", []):-!.
 token_stringsss(T, Out) :- if_string_replace(T, '  ', ' ', NewT), !, token_stringsss(NewT, Out).
@@ -744,15 +746,15 @@ char_type_inverse(Type, [Spec], Code):- !, char_type_inverse(Type, Spec, Code).
 char_type_inverse(Type, [Spec|List], Code):- !, char_type_inverse(_, Spec, Code), char_type_inverse(Type, List, Code).
 char_type_inverse(Type, Spec, Code):- char_type(Code, Spec), Type=Spec.
 
-read_stream_until_true(S, Buffer, Pred, Buffer):- at_end_of_stream(S), !, ignore(call(Pred, 10)).
-read_stream_until_true(S, Buffer, Pred, Codes):- get_code(S, Char), 
+read_stream_until_true(S, Buffer, Proc1, Buffer):- at_end_of_stream(S), !, ignore(call(Proc1, 10)).
+read_stream_until_true(S, Buffer, Proc1, Codes):- get_code(S, Char), 
   (nb_current(e_echo,nil) -> true; put_out(Char)),
-  (call(Pred, Char) -> notrace(append(Buffer, [Char], Codes)) ; 
-  (notrace(append(Buffer, [Char], NextBuffer)), read_stream_until_true(S, NextBuffer, Pred, Codes))).
+  (call(Proc1, Char) -> notrace(append(Buffer, [Char], Codes)) ; 
+  (notrace(append(Buffer, [Char], NextBuffer)), read_stream_until_true(S, NextBuffer, Proc1, Codes))).
 
 
 /*
-process_e_stream(Why, S):- must((read_term(S, T, [variable_names(Vs)]), put_variable_names( Vs))), 
+process_e_stream(Proc1, S):- must((read_term(S, T, [variable_names(Vs)]), put_variable_names( Vs))), 
   call(b_setval, '$variable_names', Vs), b_setval('$term', T), 
   (t_l:echo_mode(skip(items)) -> true ; write_stream_item(user_error, T)), !, 
   ttyflush(user_error), 

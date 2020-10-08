@@ -1,4 +1,4 @@
-:- module(logicmoo_ec,[]).
+:- module(logicmoo_ec,[test_logicmoo_ec/0]).
 
 % [Required] Load the Logicmoo Library Utils
 :- ensure_loaded(library(logicmoo_utils)).
@@ -23,7 +23,9 @@
 :- initialization(attach_packs,now).
 */
 
-e_lps_reader_test(Files):- with_abs_paths(convert_e(user_output),Files).
+test_logicmoo_ec:- 
+   test_logicmoo_ec_sanity,
+   test_logicmoo_ec_lps_reader.
 
 
 %:- use_module(library(lps_corner)).
