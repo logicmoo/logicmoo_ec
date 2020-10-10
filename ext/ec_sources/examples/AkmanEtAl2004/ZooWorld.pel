@@ -25,152 +25,152 @@
 %; }
 %;
 
-% sort position: integer
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/examples/AkmanEtAl2004/ZooWorld.e',21).
+% sort position: integer
 subsort(position,integer).
 
 % sort location
 sort(location).
 
-% sort cage: location
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/examples/AkmanEtAl2004/ZooWorld.e',23).
+% sort cage: location
 subsort(cage,location).
 
 % sort gate
 sort(gate).
 
-% sort animal
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/examples/AkmanEtAl2004/ZooWorld.e',25).
+% sort animal
 sort(animal).
 
 % sort elephant: animal
 subsort(elephant,animal).
 
-% sort horse: animal
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/examples/AkmanEtAl2004/ZooWorld.e',27).
+% sort horse: animal
 subsort(horse,animal).
 
 % sort dog: animal
 subsort(dog,animal).
 
-% sort human: animal
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/examples/AkmanEtAl2004/ZooWorld.e',29).
+% sort human: animal
 subsort(human,animal).
 
 % sort species
 sort(species).
 
-% function Loc(position): location
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/examples/AkmanEtAl2004/ZooWorld.e',32).
+% function Loc(position): location
 function(loc(position),location).
 
 % function Side1(gate): position
 function(side1(gate),position).
 
-% function Side2(gate): position
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/examples/AkmanEtAl2004/ZooWorld.e',34).
+% function Side2(gate): position
 function(side2(gate),position).
 
 % function Species(animal): species
 function(species(animal),species).
 
-% predicate Accessible(position,position,time)
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/examples/AkmanEtAl2004/ZooWorld.e',37).
+% predicate Accessible(position,position,time)
 predicate(accessible(position,position,time)).
 
 % predicate Adult(animal)
 predicate(adult(animal)).
 
-% predicate Large(animal)
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/examples/AkmanEtAl2004/ZooWorld.e',39).
+% predicate Large(animal)
 predicate(large(animal)).
 
 % predicate LargeSpecies(species)
 predicate(largeSpecies(species)).
 
-% predicate Neighbor(position,position)
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/examples/AkmanEtAl2004/ZooWorld.e',41).
+% predicate Neighbor(position,position)
 predicate(neighbor(position,position)).
 
 % predicate Sides(position,position,gate)
 predicate(sides(position,position,gate)).
 
-% event Close(human,gate)
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/examples/AkmanEtAl2004/ZooWorld.e',44).
+% event Close(human,gate)
 event(close(human,gate)).
 
 % event GetOff(human,animal)
 event(getOff(human,animal)).
 
-% event Mount(human,animal)
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/examples/AkmanEtAl2004/ZooWorld.e',46).
+% event Mount(human,animal)
 event(mount(human,animal)).
 
 % event Move(animal,position)
 event(move(animal,position)).
 
-% event Open(human,gate)
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/examples/AkmanEtAl2004/ZooWorld.e',48).
+% event Open(human,gate)
 event(open(human,gate)).
 
 % event ThrowOff(animal,human)
 event(throwOff(animal,human)).
 
-% fluent AbnormalEncroachment(human)
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/examples/AkmanEtAl2004/ZooWorld.e',51).
+% fluent AbnormalEncroachment(human)
 fluent(abnormalEncroachment(human)).
 
 % noninertial AbnormalEncroachment
 :- call_pel_directive(noninertial(abnormalEncroachment)).
 
-% fluent DoneBy(event,animal)
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/examples/AkmanEtAl2004/ZooWorld.e',53).
+% fluent DoneBy(event,animal)
 fluent(doneBy(event,animal)).
 
 % noninertial DoneBy
 :- call_pel_directive(noninertial(doneBy)).
 
-% fluent Mounted(human,animal)
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/examples/AkmanEtAl2004/ZooWorld.e',55).
+% fluent Mounted(human,animal)
 fluent(mounted(human,animal)).
 
 % fluent MountFails(human)
 fluent(mountFails(human)).
 
-% noninertial MountFails
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/examples/AkmanEtAl2004/ZooWorld.e',57).
+% noninertial MountFails
 :- call_pel_directive(noninertial(mountFails)).
 
 % fluent Moves(animal)
 fluent(moves(animal)).
 
-% noninertial Moves
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/examples/AkmanEtAl2004/ZooWorld.e',59).
+% noninertial Moves
 :- call_pel_directive(noninertial(moves)).
 
 % fluent Opened(gate)
 fluent(opened(gate)).
 
-% fluent Pos(animal,position)
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/examples/AkmanEtAl2004/ZooWorld.e',61).
+% fluent Pos(animal,position)
 fluent(pos(animal,position)).
 
 % fluent PosDeterminingFluent(human,position)
 fluent(posDeterminingFluent(human,position)).
 
-% noninertial PosDeterminingFluent
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/examples/AkmanEtAl2004/ZooWorld.e',63).
+% noninertial PosDeterminingFluent
 :- call_pel_directive(noninertial(posDeterminingFluent)).
 
 % fluent ThrowOffFails(animal,human)
 fluent(throwOffFails(animal,human)).
 
-% noninertial ThrowOffFails
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/examples/AkmanEtAl2004/ZooWorld.e',65).
+% noninertial ThrowOffFails
 :- call_pel_directive(noninertial(throwOffFails)).
 
-% species HumanSpecies, ElephantSpecies, HorseSpecies, DogSpecies
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/examples/AkmanEtAl2004/ZooWorld.e',67).
+% species HumanSpecies, ElephantSpecies, HorseSpecies, DogSpecies
 t(species,humanSpecies).
 t(species,elephantSpecies).
 t(species,horseSpecies).
