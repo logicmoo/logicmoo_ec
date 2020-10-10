@@ -1,11 +1,10 @@
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/examples/Mueller2004b/PickUp.e',110).
+:- call_pel_directive(translate(unskipped,
+                                '/pack/logicmoo_ec/ext/ec_sources/examples/Mueller2004b/RouletteWheel.pel')).
 :-include(library('ec_planner/ec_test_incl')).
-:-expects_dialect(pfc).
-% Tue, 06 Oct 2020 05:00:13 GMT
-% From /pack/logicmoo_ec/ext/ec_sources/examples/Mueller2004b/RouletteWheel.pel:4
-
- /*  loading(load_e_pl,
-   	'/pack/logicmoo_ec/ext/ec_sources/examples/Mueller2004b/RouletteWheel.e').
- */
+:-expects_dialect(ecalc).
+:- call_pel_directive(translate(begining,
+                                '/pack/logicmoo_ec/ext/ec_sources/examples/Mueller2004b/RouletteWheel.pel')).
 %;
 %; Copyright (c) 2005 IBM Corporation and others.
 %; All rights reserved. This program and the accompanying materials
@@ -28,360 +27,113 @@
 %; }
 %;
 
-% From /pack/logicmoo_ec/ext/ec_sources/examples/Mueller2004b/RouletteWheel.e:22
 % load foundations/Root.e
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/examples/Mueller2004b/RouletteWheel.e',23).
+:- call_pel_directive(load('foundations/Root.e')).
 
-% From /pack/logicmoo_ec/ext/ec_sources/examples/Mueller2004b/RouletteWheel.e:23
 % load foundations/EC.e
+:- call_pel_directive(load('foundations/EC.e')).
 
-% From /pack/logicmoo_ec/ext/ec_sources/examples/Mueller2004b/RouletteWheel.e:25
 % sort wheel
-% From /pack/logicmoo_ec/ext/ec_sources/examples/Mueller2004b/RouletteWheel.e:26
-% From /pack/logicmoo_ec/ext/ec_sources/examples/Mueller2004b/RouletteWheel.e:26
-sort(wheel).
-% From /pack/logicmoo_ec/ext/ec_sources/examples/Mueller2004b/RouletteWheel.e:26
-% From /pack/logicmoo_ec/ext/ec_sources/examples/Mueller2004b/RouletteWheel.e:26
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/examples/Mueller2004b/RouletteWheel.e',26).
 sort(wheel).
 
-% From /pack/logicmoo_ec/ext/ec_sources/examples/Mueller2004b/RouletteWheel.e:26
 % sort value: integer
-% From /pack/logicmoo_ec/ext/ec_sources/examples/Mueller2004b/RouletteWheel.e:27
-% From /pack/logicmoo_ec/ext/ec_sources/examples/Mueller2004b/RouletteWheel.e:27
-subsort(value,integer).
-% From /pack/logicmoo_ec/ext/ec_sources/examples/Mueller2004b/RouletteWheel.e:27
-% From /pack/logicmoo_ec/ext/ec_sources/examples/Mueller2004b/RouletteWheel.e:27
 subsort(value,integer).
 
-% From /pack/logicmoo_ec/ext/ec_sources/examples/Mueller2004b/RouletteWheel.e:28
 % fluent WheelValueDeterminingFluent(wheel,value)
-% From /pack/logicmoo_ec/ext/ec_sources/examples/Mueller2004b/RouletteWheel.e:29
-% From /pack/logicmoo_ec/ext/ec_sources/examples/Mueller2004b/RouletteWheel.e:29
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/examples/Mueller2004b/RouletteWheel.e',29).
 fluent(wheelValueDeterminingFluent(wheel,value)).
-% From /pack/logicmoo_ec/ext/ec_sources/examples/Mueller2004b/RouletteWheel.e:29
-% From /pack/logicmoo_ec/ext/ec_sources/examples/Mueller2004b/RouletteWheel.e:29
-fluents([wheelValueDeterminingFluent/2]).
-% From /pack/logicmoo_ec/ext/ec_sources/examples/Mueller2004b/RouletteWheel.e:29
-% From /pack/logicmoo_ec/ext/ec_sources/examples/Mueller2004b/RouletteWheel.e:29
-fluents([wheelValueDeterminingFluent/2]).
-% From /pack/logicmoo_ec/ext/ec_sources/examples/Mueller2004b/RouletteWheel.e:29
-% From /pack/logicmoo_ec/ext/ec_sources/examples/Mueller2004b/RouletteWheel.e:29
-meta_argtypes(wheelValueDeterminingFluent(wheel,value)).
-% From /pack/logicmoo_ec/ext/ec_sources/examples/Mueller2004b/RouletteWheel.e:29
-% From /pack/logicmoo_ec/ext/ec_sources/examples/Mueller2004b/RouletteWheel.e:29
-meta_argtypes(wheelValueDeterminingFluent(wheel,value)).
-% From /pack/logicmoo_ec/ext/ec_sources/examples/Mueller2004b/RouletteWheel.e:29
-% From /pack/logicmoo_ec/ext/ec_sources/examples/Mueller2004b/RouletteWheel.e:29
-mpred_prop(wheelValueDeterminingFluent(wheel,value),fluent).
-% From /pack/logicmoo_ec/ext/ec_sources/examples/Mueller2004b/RouletteWheel.e:29
-% From /pack/logicmoo_ec/ext/ec_sources/examples/Mueller2004b/RouletteWheel.e:29
-mpred_prop(wheelValueDeterminingFluent(wheel,value),fluent).
-% From /pack/logicmoo_ec/ext/ec_sources/examples/Mueller2004b/RouletteWheel.e:29
-% From /pack/logicmoo_ec/ext/ec_sources/examples/Mueller2004b/RouletteWheel.e:29
-meta_argtypes(wheelValueDeterminingFluent(wheel,value)).
-% From /pack/logicmoo_ec/ext/ec_sources/examples/Mueller2004b/RouletteWheel.e:29
-% From /pack/logicmoo_ec/ext/ec_sources/examples/Mueller2004b/RouletteWheel.e:29
-meta_argtypes(wheelValueDeterminingFluent(wheel,value)).
 
-% From /pack/logicmoo_ec/ext/ec_sources/examples/Mueller2004b/RouletteWheel.e:29
 % fluent WheelValue(wheel,value)
-% From /pack/logicmoo_ec/ext/ec_sources/examples/Mueller2004b/RouletteWheel.e:30
-% From /pack/logicmoo_ec/ext/ec_sources/examples/Mueller2004b/RouletteWheel.e:30
 fluent(wheelValue(wheel,value)).
-% From /pack/logicmoo_ec/ext/ec_sources/examples/Mueller2004b/RouletteWheel.e:30
-% From /pack/logicmoo_ec/ext/ec_sources/examples/Mueller2004b/RouletteWheel.e:30
-fluents([wheelValue/2]).
-% From /pack/logicmoo_ec/ext/ec_sources/examples/Mueller2004b/RouletteWheel.e:30
-% From /pack/logicmoo_ec/ext/ec_sources/examples/Mueller2004b/RouletteWheel.e:30
-fluents([wheelValue/2]).
-% From /pack/logicmoo_ec/ext/ec_sources/examples/Mueller2004b/RouletteWheel.e:30
-% From /pack/logicmoo_ec/ext/ec_sources/examples/Mueller2004b/RouletteWheel.e:30
-meta_argtypes(wheelValue(wheel,value)).
-% From /pack/logicmoo_ec/ext/ec_sources/examples/Mueller2004b/RouletteWheel.e:30
-% From /pack/logicmoo_ec/ext/ec_sources/examples/Mueller2004b/RouletteWheel.e:30
-meta_argtypes(wheelValue(wheel,value)).
-% From /pack/logicmoo_ec/ext/ec_sources/examples/Mueller2004b/RouletteWheel.e:30
-% From /pack/logicmoo_ec/ext/ec_sources/examples/Mueller2004b/RouletteWheel.e:30
-mpred_prop(wheelValue(wheel,value),fluent).
-% From /pack/logicmoo_ec/ext/ec_sources/examples/Mueller2004b/RouletteWheel.e:30
-% From /pack/logicmoo_ec/ext/ec_sources/examples/Mueller2004b/RouletteWheel.e:30
-mpred_prop(wheelValue(wheel,value),fluent).
-% From /pack/logicmoo_ec/ext/ec_sources/examples/Mueller2004b/RouletteWheel.e:30
-% From /pack/logicmoo_ec/ext/ec_sources/examples/Mueller2004b/RouletteWheel.e:30
-meta_argtypes(wheelValue(wheel,value)).
-% From /pack/logicmoo_ec/ext/ec_sources/examples/Mueller2004b/RouletteWheel.e:30
-% From /pack/logicmoo_ec/ext/ec_sources/examples/Mueller2004b/RouletteWheel.e:30
-meta_argtypes(wheelValue(wheel,value)).
 
-% From /pack/logicmoo_ec/ext/ec_sources/examples/Mueller2004b/RouletteWheel.e:30
 % noninertial WheelValueDeterminingFluent
-% From /pack/logicmoo_ec/ext/ec_sources/examples/Mueller2004b/RouletteWheel.e:31
-% From /pack/logicmoo_ec/ext/ec_sources/examples/Mueller2004b/RouletteWheel.e:31
-noninertial(wheelValueDeterminingFluent).
-% From /pack/logicmoo_ec/ext/ec_sources/examples/Mueller2004b/RouletteWheel.e:31
-% From /pack/logicmoo_ec/ext/ec_sources/examples/Mueller2004b/RouletteWheel.e:31
-noninertial(wheelValueDeterminingFluent).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/examples/Mueller2004b/RouletteWheel.e',31).
+:- call_pel_directive(noninertial(wheelValueDeterminingFluent)).
 
-% From /pack/logicmoo_ec/ext/ec_sources/examples/Mueller2004b/RouletteWheel.e:31
 % event Spin(wheel)
-% From /pack/logicmoo_ec/ext/ec_sources/examples/Mueller2004b/RouletteWheel.e:32
-% From /pack/logicmoo_ec/ext/ec_sources/examples/Mueller2004b/RouletteWheel.e:32
 event(spin(wheel)).
-% From /pack/logicmoo_ec/ext/ec_sources/examples/Mueller2004b/RouletteWheel.e:32
-% From /pack/logicmoo_ec/ext/ec_sources/examples/Mueller2004b/RouletteWheel.e:32
-events([spin/1]).
-% From /pack/logicmoo_ec/ext/ec_sources/examples/Mueller2004b/RouletteWheel.e:32
-% From /pack/logicmoo_ec/ext/ec_sources/examples/Mueller2004b/RouletteWheel.e:32
-events([spin/1]).
-% From /pack/logicmoo_ec/ext/ec_sources/examples/Mueller2004b/RouletteWheel.e:32
-% From /pack/logicmoo_ec/ext/ec_sources/examples/Mueller2004b/RouletteWheel.e:32
-meta_argtypes(spin(wheel)).
-% From /pack/logicmoo_ec/ext/ec_sources/examples/Mueller2004b/RouletteWheel.e:32
-% From /pack/logicmoo_ec/ext/ec_sources/examples/Mueller2004b/RouletteWheel.e:32
-meta_argtypes(spin(wheel)).
-% From /pack/logicmoo_ec/ext/ec_sources/examples/Mueller2004b/RouletteWheel.e:32
-% From /pack/logicmoo_ec/ext/ec_sources/examples/Mueller2004b/RouletteWheel.e:32
-mpred_prop(spin(wheel),event).
-% From /pack/logicmoo_ec/ext/ec_sources/examples/Mueller2004b/RouletteWheel.e:32
-% From /pack/logicmoo_ec/ext/ec_sources/examples/Mueller2004b/RouletteWheel.e:32
-mpred_prop(spin(wheel),event).
-% From /pack/logicmoo_ec/ext/ec_sources/examples/Mueller2004b/RouletteWheel.e:32
-% From /pack/logicmoo_ec/ext/ec_sources/examples/Mueller2004b/RouletteWheel.e:32
-meta_argtypes(spin(wheel)).
-% From /pack/logicmoo_ec/ext/ec_sources/examples/Mueller2004b/RouletteWheel.e:32
-% From /pack/logicmoo_ec/ext/ec_sources/examples/Mueller2004b/RouletteWheel.e:32
-meta_argtypes(spin(wheel)).
 
 
-% From /pack/logicmoo_ec/ext/ec_sources/examples/Mueller2004b/RouletteWheel.e:33
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/examples/Mueller2004b/RouletteWheel.e',34).
 % [wheel,value1,value2,time]
-% From /pack/logicmoo_ec/ext/ec_sources/examples/Mueller2004b/RouletteWheel.e:34
 % HoldsAt(WheelValue(wheel,value1),time) &
 % HoldsAt(WheelValue(wheel,value2),time) ->
 % value1=value2.
-% From /pack/logicmoo_ec/ext/ec_sources/examples/Mueller2004b/RouletteWheel.e:36
-% From /pack/logicmoo_ec/ext/ec_sources/examples/Mueller2004b/RouletteWheel.e:36
 holds_at(wheelValue(Wheel, Value1), Time), holds_at(wheelValue(Wheel, Value2), Time) ->
-    equals(Value1, Value2).
-% From /pack/logicmoo_ec/ext/ec_sources/examples/Mueller2004b/RouletteWheel.e:36
-% From /pack/logicmoo_ec/ext/ec_sources/examples/Mueller2004b/RouletteWheel.e:36
-reactive_rule([ holds(wheelValue(Wheel,Value1),Time),
-		holds(wheelValue(Wheel,Value2),Time)
-	      ],
-	      [equals(Value1,Value2)]).
+    Value1=Value2.
 
 
-% From /pack/logicmoo_ec/ext/ec_sources/examples/Mueller2004b/RouletteWheel.e:38
 % [wheel,value1,value2,time]
-% From /pack/logicmoo_ec/ext/ec_sources/examples/Mueller2004b/RouletteWheel.e:39
 % HoldsAt(WheelValueDeterminingFluent(wheel,value1),time) &
 % HoldsAt(WheelValueDeterminingFluent(wheel,value2),time) ->
 % value1=value2.
-% From /pack/logicmoo_ec/ext/ec_sources/examples/Mueller2004b/RouletteWheel.e:41
-% From /pack/logicmoo_ec/ext/ec_sources/examples/Mueller2004b/RouletteWheel.e:41
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/examples/Mueller2004b/RouletteWheel.e',40).
 holds_at(wheelValueDeterminingFluent(Wheel, Value1), Time), holds_at(wheelValueDeterminingFluent(Wheel, Value2), Time) ->
-    equals(Value1, Value2).
-% From /pack/logicmoo_ec/ext/ec_sources/examples/Mueller2004b/RouletteWheel.e:41
-% From /pack/logicmoo_ec/ext/ec_sources/examples/Mueller2004b/RouletteWheel.e:41
-reactive_rule([ holds(wheelValueDeterminingFluent(Wheel,
-						  Value1),
-		      Time),
-		holds(wheelValueDeterminingFluent(Wheel,
-						  Value2),
-		      Time)
-	      ],
-	      [equals(Value1,Value2)]).
+    Value1=Value2.
 
 
-% From /pack/logicmoo_ec/ext/ec_sources/examples/Mueller2004b/RouletteWheel.e:43
 % [wheel,value,time]
-% From /pack/logicmoo_ec/ext/ec_sources/examples/Mueller2004b/RouletteWheel.e:44
 % HoldsAt(WheelValueDeterminingFluent(wheel,value),time) ->
 % Initiates(Spin(wheel),WheelValue(wheel,value),time).
-% From /pack/logicmoo_ec/ext/ec_sources/examples/Mueller2004b/RouletteWheel.e:45
-% From /pack/logicmoo_ec/ext/ec_sources/examples/Mueller2004b/RouletteWheel.e:45
 holds_at(wheelValueDeterminingFluent(Wheel, Value), Time) ->
-    initiates(spin(Wheel),
-              wheelValue(Wheel, Value),
-              Time).
-% From /pack/logicmoo_ec/ext/ec_sources/examples/Mueller2004b/RouletteWheel.e:45
-% From /pack/logicmoo_ec/ext/ec_sources/examples/Mueller2004b/RouletteWheel.e:45
-reactive_rule([ holds(wheelValueDeterminingFluent(Wheel,
-						  Value),
-		      Time)
-	      ],
-	      [ initiates(spin(Wheel),
-			  at(wheelValue(Wheel,Value),
-			     Time))
-	      ]).
+    initiates_at(spin(Wheel),
+                 wheelValue(Wheel, Value),
+                 Time).
 
 
-% From /pack/logicmoo_ec/ext/ec_sources/examples/Mueller2004b/RouletteWheel.e:47
 % [wheel,value1,value2,time]
-% From /pack/logicmoo_ec/ext/ec_sources/examples/Mueller2004b/RouletteWheel.e:48
 % HoldsAt(WheelValue(wheel,value1),time) &
 % HoldsAt(WheelValueDeterminingFluent(wheel,value2),time) &
 % value1!=value2 ->
 % Terminates(Spin(wheel),WheelValue(wheel,value1),time).
-% From /pack/logicmoo_ec/ext/ec_sources/examples/Mueller2004b/RouletteWheel.e:51
-% From /pack/logicmoo_ec/ext/ec_sources/examples/Mueller2004b/RouletteWheel.e:51
-holds_at(wheelValue(Wheel, Value1), Time), holds_at(wheelValueDeterminingFluent(Wheel, Value2), Time), diff(Value1, Value2) ->
-    terminates(spin(Wheel),
-               wheelValue(Wheel, Value1),
-               Time).
-% From /pack/logicmoo_ec/ext/ec_sources/examples/Mueller2004b/RouletteWheel.e:51
-% From /pack/logicmoo_ec/ext/ec_sources/examples/Mueller2004b/RouletteWheel.e:51
-reactive_rule([ holds(wheelValue(Wheel,Value1),Time),
-		holds(wheelValueDeterminingFluent(Wheel,
-						  Value2),
-		      Time),
-		diff(Value1,Value2)
-	      ],
-	      [ terminates(spin(Wheel),
-			   at(wheelValue(Wheel,Value1),
-			      Time))
-	      ]).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/examples/Mueller2004b/RouletteWheel.e',49).
+holds_at(wheelValue(Wheel, Value1), Time), holds_at(wheelValueDeterminingFluent(Wheel, Value2), Time), Value1\=Value2 ->
+    terminates_at(spin(Wheel),
+                  wheelValue(Wheel, Value1),
+                  Time).
 
 
-% From /pack/logicmoo_ec/ext/ec_sources/examples/Mueller2004b/RouletteWheel.e:53
 % [wheel,time]
-% From /pack/logicmoo_ec/ext/ec_sources/examples/Mueller2004b/RouletteWheel.e:54
-% {value} 
-% From /pack/logicmoo_ec/ext/ec_sources/examples/Mueller2004b/RouletteWheel.e:54
-% HoldsAt(WheelValueDeterminingFluent(wheel,value),time).
-% From /pack/logicmoo_ec/ext/ec_sources/examples/Mueller2004b/RouletteWheel.e:54
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/examples/Mueller2004b/RouletteWheel.e',55).
+% {value} % HoldsAt(WheelValueDeterminingFluent(wheel,value),time).
+exists([Value],
+ holds_at(wheelValueDeterminingFluent(Wheel,Value),
+	 Time)).
 
- /*  exists([Value],
-    holds_at(wheelValueDeterminingFluent(Wheel,Value),
-   	 Time)).
- */
-% From /pack/logicmoo_ec/ext/ec_sources/examples/Mueller2004b/RouletteWheel.e:54
-
- /*  holds_at(wheelValueDeterminingFluent(Wheel, Exists_Value), Time) :-
-       some(Exists_Value, '$kolem_Fn_58'(Wheel, Time)).
- */
-% From /pack/logicmoo_ec/ext/ec_sources/examples/Mueller2004b/RouletteWheel.e:54
-
- /*  [some(Exists_Value, '$kolem_Fn_58'(Wheel, Time))] ->
-       ta(Time,
-          tvs1=[Time],
-          tvs2=[Time],
-          holds_at(wheelValueDeterminingFluent(Wheel, Exists_Value),
-                   Time)).
- */
-% From /pack/logicmoo_ec/ext/ec_sources/examples/Mueller2004b/RouletteWheel.e:54
-% From /pack/logicmoo_ec/ext/ec_sources/examples/Mueller2004b/RouletteWheel.e:54
-some(Wheelvaluedeterminingfluent, '$kolem_Fn_58'(A, Time4)) ->
-    holds_at(wheelValueDeterminingFluent(A,
-                                         Wheelvaluedeterminingfluent),
-             Time4).
-% From /pack/logicmoo_ec/ext/ec_sources/examples/Mueller2004b/RouletteWheel.e:54
-% From /pack/logicmoo_ec/ext/ec_sources/examples/Mueller2004b/RouletteWheel.e:54
-reactive_rule([ some(Wheelvaluedeterminingfluent,
-		     '$kolem_Fn_58'(A,Time4))
-	      ],
-	      [ holds(wheelValueDeterminingFluent(A,
-						  Wheelvaluedeterminingfluent),
-		      Time4)
-	      ]).
-
-% From /pack/logicmoo_ec/ext/ec_sources/examples/Mueller2004b/RouletteWheel.e:56
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/examples/Mueller2004b/RouletteWheel.e',57).
 % wheel Wheel
-% From /pack/logicmoo_ec/ext/ec_sources/examples/Mueller2004b/RouletteWheel.e:57
-% From /pack/logicmoo_ec/ext/ec_sources/examples/Mueller2004b/RouletteWheel.e:57
 t(wheel,wheel).
-% From /pack/logicmoo_ec/ext/ec_sources/examples/Mueller2004b/RouletteWheel.e:57
-% From /pack/logicmoo_ec/ext/ec_sources/examples/Mueller2004b/RouletteWheel.e:57
-wheel(wheel).
 
 
-% From /pack/logicmoo_ec/ext/ec_sources/examples/Mueller2004b/RouletteWheel.e:58
-% From /pack/logicmoo_ec/ext/ec_sources/examples/Mueller2004b/RouletteWheel.e:58
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/examples/Mueller2004b/RouletteWheel.e',59).
 % HoldsAt(WheelValue(Wheel,7),0).
-% From /pack/logicmoo_ec/ext/ec_sources/examples/Mueller2004b/RouletteWheel.e:58
-
- /*  [] ->
-       ta(TaP_Num4_V, tvs1=[], tvs2=[], initially(wheelValue(wheel, 7))).
- */
-% From /pack/logicmoo_ec/ext/ec_sources/examples/Mueller2004b/RouletteWheel.e:58
-% From /pack/logicmoo_ec/ext/ec_sources/examples/Mueller2004b/RouletteWheel.e:58
-initially(wheelValue(wheel,7)).
-% From /pack/logicmoo_ec/ext/ec_sources/examples/Mueller2004b/RouletteWheel.e:58
-% From /pack/logicmoo_ec/ext/ec_sources/examples/Mueller2004b/RouletteWheel.e:58
-initial_state([wheelValue(wheel,7)]).
+holds_at(wheelValue(wheel,7),0).
 
 
-% From /pack/logicmoo_ec/ext/ec_sources/examples/Mueller2004b/RouletteWheel.e:59
-% From /pack/logicmoo_ec/ext/ec_sources/examples/Mueller2004b/RouletteWheel.e:59
 % Happens(Spin(Wheel),0).
-% From /pack/logicmoo_ec/ext/ec_sources/examples/Mueller2004b/RouletteWheel.e:59
-
- /*  [] ->
-       ta(TaP_Num4_V, tvs1=[start], tvs2=[start], happens(spin(wheel), start)).
- */
-% From /pack/logicmoo_ec/ext/ec_sources/examples/Mueller2004b/RouletteWheel.e:59
-% From /pack/logicmoo_ec/ext/ec_sources/examples/Mueller2004b/RouletteWheel.e:59
-happens(spin(wheel),start).
-% From /pack/logicmoo_ec/ext/ec_sources/examples/Mueller2004b/RouletteWheel.e:59
-% From /pack/logicmoo_ec/ext/ec_sources/examples/Mueller2004b/RouletteWheel.e:59
-observe(at(spin(wheel),start)).
-% From /pack/logicmoo_ec/ext/ec_sources/examples/Mueller2004b/RouletteWheel.e:59
-% From /pack/logicmoo_ec/ext/ec_sources/examples/Mueller2004b/RouletteWheel.e:59
-observe(at(spin(wheel),start)).
+happens_at(spin(wheel),0).
 
 
-% From /pack/logicmoo_ec/ext/ec_sources/examples/Mueller2004b/RouletteWheel.e:60
-% From /pack/logicmoo_ec/ext/ec_sources/examples/Mueller2004b/RouletteWheel.e:60
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/examples/Mueller2004b/RouletteWheel.e',61).
 % HoldsAt(WheelValueDeterminingFluent(Wheel,7),1).
-% From /pack/logicmoo_ec/ext/ec_sources/examples/Mueller2004b/RouletteWheel.e:60
+holds_at(wheelValueDeterminingFluent(wheel,7),1).
 
- /*  [b(start, Time), ignore(start+1==Time)] ->
-       ta(TaP_Num4_V,
-          tvs1=[start+1],
-          tvs2=[Time, start],
-          holds_at(wheelValueDeterminingFluent(wheel, 7), Time)).
- */
-% From /pack/logicmoo_ec/ext/ec_sources/examples/Mueller2004b/RouletteWheel.e:60
-% From /pack/logicmoo_ec/ext/ec_sources/examples/Mueller2004b/RouletteWheel.e:60
-b(start, Time2) ->
-    holds_at(wheelValueDeterminingFluent(wheel, 7), Time2).
-% From /pack/logicmoo_ec/ext/ec_sources/examples/Mueller2004b/RouletteWheel.e:60
-% From /pack/logicmoo_ec/ext/ec_sources/examples/Mueller2004b/RouletteWheel.e:60
-reactive_rule([b(start,Time2)],
-	      [holds(wheelValueDeterminingFluent(wheel,7),Time2)]).
-
-% From /pack/logicmoo_ec/ext/ec_sources/examples/Mueller2004b/RouletteWheel.e:62
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/examples/Mueller2004b/RouletteWheel.e',63).
 % completion Happens
-% From /pack/logicmoo_ec/ext/ec_sources/examples/Mueller2004b/RouletteWheel.e:63
-% From /pack/logicmoo_ec/ext/ec_sources/examples/Mueller2004b/RouletteWheel.e:63
-completion(happens).
-% From /pack/logicmoo_ec/ext/ec_sources/examples/Mueller2004b/RouletteWheel.e:63
-% From /pack/logicmoo_ec/ext/ec_sources/examples/Mueller2004b/RouletteWheel.e:63
-completion(happens).
+:- call_pel_directive(completion(happens_at)).
 
-% From /pack/logicmoo_ec/ext/ec_sources/examples/Mueller2004b/RouletteWheel.e:64
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/examples/Mueller2004b/RouletteWheel.e',65).
 % range value 7 10
-% From /pack/logicmoo_ec/ext/ec_sources/examples/Mueller2004b/RouletteWheel.e:65
-% From /pack/logicmoo_ec/ext/ec_sources/examples/Mueller2004b/RouletteWheel.e:65
-range(value,7,10).
-% From /pack/logicmoo_ec/ext/ec_sources/examples/Mueller2004b/RouletteWheel.e:65
-% From /pack/logicmoo_ec/ext/ec_sources/examples/Mueller2004b/RouletteWheel.e:65
-range(value,7,10).
+:- call_pel_directive(range(value, 7, 10)).
 
-% From /pack/logicmoo_ec/ext/ec_sources/examples/Mueller2004b/RouletteWheel.e:65
 % range time 0 1
-% From /pack/logicmoo_ec/ext/ec_sources/examples/Mueller2004b/RouletteWheel.e:66
-% From /pack/logicmoo_ec/ext/ec_sources/examples/Mueller2004b/RouletteWheel.e:66
-range(time,0,1).
-% From /pack/logicmoo_ec/ext/ec_sources/examples/Mueller2004b/RouletteWheel.e:66
-% From /pack/logicmoo_ec/ext/ec_sources/examples/Mueller2004b/RouletteWheel.e:66
-range(time,0,1).
+:- call_pel_directive(range(time, 0, 1)).
 
-% From /pack/logicmoo_ec/ext/ec_sources/examples/Mueller2004b/RouletteWheel.e:66
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/examples/Mueller2004b/RouletteWheel.e',67).
 % range offset 1 1
-% From /pack/logicmoo_ec/ext/ec_sources/examples/Mueller2004b/RouletteWheel.e:67
-% From /pack/logicmoo_ec/ext/ec_sources/examples/Mueller2004b/RouletteWheel.e:67
-range(offset,1,1).
-% From /pack/logicmoo_ec/ext/ec_sources/examples/Mueller2004b/RouletteWheel.e:67
-% From /pack/logicmoo_ec/ext/ec_sources/examples/Mueller2004b/RouletteWheel.e:67
-range(offset,1,1).
+:- call_pel_directive(range(offset, 1, 1)).
 %; End of file.
+:- call_pel_directive(translate(ending,
+                                '/pack/logicmoo_ec/ext/ec_sources/examples/Mueller2004b/RouletteWheel.pel')).

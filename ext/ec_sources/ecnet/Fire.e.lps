@@ -1,9 +1,18 @@
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Feeling.e',133).
-% translate: unskipped  File: /pack/logicmoo_ec/ext/ec_sources/ecnet/Fire.e.lps 
+% From E: 
+% 
+% :-call_pel_directive(translate(unskipped,'/pack/logicmoo_ec/ext/ec_sources/ecnet/Fire.e.lps')).
+:- call_pel_directive(translate(unskipped,
+                                '/pack/logicmoo_ec/ext/ec_sources/ecnet/Fire.e.lps')).
 :-include(library('ec_planner/ec_test_incl')).
 :-expects_dialect(lps).
-% translate: begining  File: /pack/logicmoo_ec/ext/ec_sources/ecnet/Fire.e.lps 
-% Thu, 08 Oct 2020 21:36:17 GMT File: <stream>(0x55894c2e2200)%;
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Feeling.e',133).
+% From E: 
+% 
+% :-call_pel_directive(translate(begining,'/pack/logicmoo_ec/ext/ec_sources/ecnet/Fire.e.lps')).
+:- call_pel_directive(translate(begining,
+                                '/pack/logicmoo_ec/ext/ec_sources/ecnet/Fire.e.lps')).
+% Sat, 10 Oct 2020 14:56:04 GMT File: <stream>(0x5597f2c02800)%;
 %; Copyright (c) 2005 IBM Corporation and others.
 %; All rights reserved. This program and the accompanying materials
 %; are made available under the terms of the Common Public License v1.0
@@ -18,14 +27,14 @@
 %; agent sets fire to physobj with burn time offset.
 
 % event SetFireTo(agent,physobj,fire,offset)
-% event(
-%    setFireTo(agent,physobj,fire,offset)).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Fire.e',14).
+% From E: 
+% 
+% event(setFireTo(agent,physobj,fire,offset)).
+events([setFireTo/4]).
+mpred_prop(setFireTo(agent,physobj,fire,offset),action).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Fire.e',14).
 actions([setFireTo/4]).
-% mpred_prop(
-%    setFireTo(agent,physobj,fire,offset), 
-%    event).
-mpred_prop(setFireTo(agent,physobj,fire,offset),event).
 
 
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Fire.e',17).
@@ -36,10 +45,14 @@ mpred_prop(setFireTo(agent,physobj,fire,offset),event).
 % Initiates(SetFireTo(agent,physobj,fire,offset),
 %           Burning(physobj,fire,offset),
 %           time).
-% initiates(
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Fire.e',20).
+% From E: 
+% 
+% initiates_at(
 %    setFireTo(Agent,Physobj,Fire,Offset), 
 %    burning(Physobj,Fire,Offset), 
 %    Time).
+ %   [Time].
 setFireTo(Agent, Physobj, Fire, Offset)initiates burning(Physobj, Fire, Offset).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Fire.e',20).
 
@@ -59,14 +72,13 @@ setFireTo(Agent, Physobj, Fire, Offset)initiates burning(Physobj, Fire, Offset).
 
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Fire.e',26).
 % event PutOutFire(agent,physobj,fire)
-% event(
-%    putOutFire(agent,physobj,fire)).
-actions([putOutFire/3]).
-% mpred_prop(
-%    putOutFire(agent,physobj,fire), 
-%    event).
+% From E: 
+% 
+% event(putOutFire(agent,physobj,fire)).
+events([putOutFire/3]).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Fire.e',26).
-mpred_prop(putOutFire(agent,physobj,fire),event).
+mpred_prop(putOutFire(agent,physobj,fire),action).
+actions([putOutFire/3]).
 
 
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Fire.e',28).
@@ -77,10 +89,14 @@ mpred_prop(putOutFire(agent,physobj,fire),event).
 % Terminates(PutOutFire(agent,physobj,fire),
 %            Burning(physobj,fire,offset),
 %            time).
-% terminates(
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Fire.e',31).
+% From E: 
+% 
+% terminates_at(
 %    putOutFire(Agent,Physobj,Fire), 
 %    burning(Physobj,Fire,Offset), 
 %    Time).
+ %   [Time].
 putOutFire(Agent, Physobj, Fire)terminates burning(Physobj, Fire, Offset).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Fire.e',31).
 
@@ -103,88 +119,18 @@ putOutFire(Agent, Physobj, Fire)terminates burning(Physobj, Fire, Offset).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Fire.e',41).
 % {location}%  HoldsAt(At(agent,location),time) &
 %            HoldsAt(At(physobj,location),time).
-% '->'(
-%    ','(
-%       ';'(
-%          not(
-%             at(Agent,Exists_Location)), 
-%          not(
-%             at(Physobj,Exists_Location))), 
-%       some(
-%          Exists_Location, 
-%          '$kolem_Fn_687'(Agent,Physobj,Fire,Offset,Time))), 
-%    not(
-%       setFireTo(Agent,Physobj,Fire,Offset))).
-if (not loc_at(Agent, Exists_Location);not loc_at(Physobj, Exists_Location)), some(Exists_Location, '$kolem_Fn_687'(Agent, Physobj, Fire, Offset, Time))then not setFireTo(Agent, Physobj, Fire, Offset).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Fire.e',43).
-
- /*   reactive_rule([  (not(loc_at(Agent, Exists_Location));not(loc_at(Physobj, Exists_Location))),
-                      some(Exists_Location,
-                           '$kolem_Fn_687'(Agent,
-                                           Physobj,
-                                           Fire,
-                                           Offset,
-                                           Time))
-                    ],
-                    [ not(setFireTo(Agent,
-                                    Physobj,
-                                    Fire,
-                                    Offset))
-                    ]).
- */
- %  "% =================================".
-% '->'(
-%    ','(
-%       setFireTo(Agent,Physobj,Fire,Offset), 
-%       some(
-%          Exists_Location, 
-%          '$kolem_Fn_687'(Agent,Physobj,Fire,Offset,Time))), 
-%    at(Agent,Exists_Location)).
-if setFireTo(Agent, Physobj, Fire, Offset), some(Exists_Location, '$kolem_Fn_687'(Agent, Physobj, Fire, Offset, Time))then loc_at(Agent, Exists_Location).
+% From E: 
+% 
+% exists(
+%    [Location], 
+%    '->'(
+%       happens_at(setFireTo(Agent,Physobj,Fire,Offset),Time), 
+%       (holds_at(at_loc(Agent,Location),Time) , 
+%        holds_at(at_loc(Physobj,Location),Time)))).
+ %   [Time].
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Fire.e',43).
-
- /*  reactive_rule([ happens(setFireTo(Agent,
-   				  Physobj,
-   				  Fire,
-   				  Offset),
-   			Time_From,
-   			Time_Until),
-   		some(Exists_Location,
-   		     '$kolem_Fn_687'(Agent,
-   				     Physobj,
-   				     Fire,
-   				     Offset,
-   				     Time))
-   	      ],
-   	      [loc_at(Agent,Exists_Location)]).
- */
- %  "% =================================".
-% '->'(
-%    ','(
-%       setFireTo(Agent,Physobj,Fire,Offset), 
-%       some(
-%          Exists_Location, 
-%          '$kolem_Fn_687'(Agent,Physobj,Fire,Offset,Time))), 
-%    at(Physobj,Exists_Location)).
-if setFireTo(Agent, Physobj, Fire, Offset), some(Exists_Location, '$kolem_Fn_687'(Agent, Physobj, Fire, Offset, Time))then loc_at(Physobj, Exists_Location).
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Fire.e',43).
-
- /*  reactive_rule([ happens(setFireTo(Agent,
-   				  Physobj,
-   				  Fire,
-   				  Offset),
-   			Time_From9,
-   			Time_Until10),
-   		some(Exists_Location,
-   		     '$kolem_Fn_687'(Agent,
-   				     Physobj,
-   				     Fire,
-   				     Offset,
-   				     Time))
-   	      ],
-   	      [loc_at(Physobj,Exists_Location)]).
- */
- %  "% =================================".
+exists([Location], if((at_loc(Agent, Location), at_loc(Physobj, Location)), setFireTo(Agent, Physobj, Fire, Offset))).
 
 
 %; A precondition axiom states that
@@ -197,93 +143,30 @@ if setFireTo(Agent, Physobj, Fire, Offset), some(Exists_Location, '$kolem_Fn_687
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Fire.e',51).
 % {location}%  HoldsAt(At(agent,location),time) &
 %            HoldsAt(At(physobj,location),time).
-% '->'(
-%    ','(
-%       ';'(
-%          not(
-%             at(Agent,Exists_Location)), 
-%          not(
-%             at(Physobj,Exists_Location))), 
-%       some(
-%          Exists_Location, 
-%          '$kolem_Fn_688'(Agent,Physobj,Fire,Time))), 
-%    not(
-%       putOutFire(Agent,Physobj,Fire))).
-if (not loc_at(Agent, Exists_Location);not loc_at(Physobj, Exists_Location)), some(Exists_Location, '$kolem_Fn_688'(Agent, Physobj, Fire, Time))then not putOutFire(Agent, Physobj, Fire).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Fire.e',53).
-
- /*   reactive_rule([  (not(loc_at(Agent, Exists_Location));not(loc_at(Physobj, Exists_Location))),
-                      some(Exists_Location,
-                           '$kolem_Fn_688'(Agent,
-                                           Physobj,
-                                           Fire,
-                                           Time))
-                    ],
-                    [not(putOutFire(Agent, Physobj, Fire))]).
- */
- %  "% =================================".
-% '->'(
-%    ','(
-%       putOutFire(Agent,Physobj,Fire), 
-%       some(
-%          Exists_Location, 
-%          '$kolem_Fn_688'(Agent,Physobj,Fire,Time))), 
-%    at(Agent,Exists_Location)).
-if putOutFire(Agent, Physobj, Fire), some(Exists_Location, '$kolem_Fn_688'(Agent, Physobj, Fire, Time))then loc_at(Agent, Exists_Location).
+% From E: 
+% 
+% exists(
+%    [Location], 
+%    '->'(
+%       happens_at(putOutFire(Agent,Physobj,Fire),Time), 
+%       (holds_at(at_loc(Agent,Location),Time) , 
+%        holds_at(at_loc(Physobj,Location),Time)))).
+ %   [Time].
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Fire.e',53).
-
- /*  reactive_rule([ happens(putOutFire(Agent,
-   				   Physobj,
-   				   Fire),
-   			Time_From,
-   			Time_Until),
-   		some(Exists_Location,
-   		     '$kolem_Fn_688'(Agent,
-   				     Physobj,
-   				     Fire,
-   				     Time))
-   	      ],
-   	      [loc_at(Agent,Exists_Location)]).
- */
- %  "% =================================".
-% '->'(
-%    ','(
-%       putOutFire(Agent,Physobj,Fire), 
-%       some(
-%          Exists_Location, 
-%          '$kolem_Fn_688'(Agent,Physobj,Fire,Time))), 
-%    at(Physobj,Exists_Location)).
-if putOutFire(Agent, Physobj, Fire), some(Exists_Location, '$kolem_Fn_688'(Agent, Physobj, Fire, Time))then loc_at(Physobj, Exists_Location).
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Fire.e',53).
-
- /*  reactive_rule([ happens(putOutFire(Agent,
-   				   Physobj,
-   				   Fire),
-   			Time_From8,
-   			Time_Until9),
-   		some(Exists_Location,
-   		     '$kolem_Fn_688'(Agent,
-   				     Physobj,
-   				     Fire,
-   				     Time))
-   	      ],
-   	      [loc_at(Physobj,Exists_Location)]).
- */
- %  "% =================================".
+exists([Location], if((at_loc(Agent, Location), at_loc(Physobj, Location)), putOutFire(Agent, Physobj, Fire))).
 
 
 %; physobj is burning with fire and burn time offset.
 
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Fire.e',57).
 % fluent Burning(physobj,fire,offset)
-% fluent(
-%    burning(physobj,fire,offset)).
-fluents([burning/3]).
-% mpred_prop(
-%    burning(physobj,fire,offset), 
-%    fluent).
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Fire.e',57).
+% From E: 
+% 
+% fluent(burning(physobj,fire,offset)).
 mpred_prop(burning(physobj,fire,offset),fluent).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Fire.e',57).
+fluents([burning/3]).
 
 
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Fire.e',59).
@@ -293,39 +176,22 @@ mpred_prop(burning(physobj,fire,offset),fluent).
 % HoldsAt(Burning(physobj,fire,offset1),time) &
 % HoldsAt(Burning(physobj,fire,offset2),time) ->
 % offset1=offset2.
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Fire.e',61).
+% From E: 
+% 
 % '->'(
-%    ','(
-%       burning(Physobj,Fire,Offset2), 
-%       not(
-%          equals(Offset1,Offset2))), 
-%    not(
-%       burning(Physobj,Fire,Offset1))).
-not burning(Physobj, Fire, Offset1)if burning(Physobj, Fire, Offset2), not equals(Offset1, Offset2).
+%    (holds_at(burning(Physobj,Fire,Offset1),Time) , 
+%     holds_at(burning(Physobj,Fire,Offset2),Time)), 
+%    Offset1=Offset2).
+ %   [Time].
+false not equals(Offset1, Offset2), burning(Physobj, Fire, Offset1), burning(Physobj, Fire, Offset2).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Fire.e',61).
 
- /*  l_int(holds(not(burning(Physobj,Fire,Offset1)),
-   	    Time_At),
-         [ holds(burning(Physobj,Fire,Offset2),
+ /*  d_pre([ not(equals(Offset1,Offset2)),
+   	holds(burning(Physobj,Fire,Offset1),
    	      Time_At),
-   	not(equals(Offset1,Offset2))
-         ]).
- */
- %  "% =================================".
-% '->'(
-%    ','(
-%       burning(Physobj,Fire,Offset1), 
-%       not(
-%          equals(Offset2,Offset1))), 
-%    not(
-%       burning(Physobj,Fire,Offset2))).
-not burning(Physobj, Fire, Offset2)if burning(Physobj, Fire, Offset1), not equals(Offset2, Offset1).
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Fire.e',61).
-
- /*  l_int(holds(not(burning(Physobj,Fire,Offset2)),
-   	    Time_At6),
-         [ holds(burning(Physobj,Fire,Offset1),
-   	      Time_At6),
-   	not(equals(Offset2,Offset1))
+   	holds(burning(Physobj,Fire,Offset2),
+   	      Time_At)
          ]).
  */
  %  "% =================================".
@@ -335,14 +201,12 @@ not burning(Physobj, Fire, Offset2)if burning(Physobj, Fire, Offset1), not equal
 
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Fire.e',67).
 % event DecrementBurning(physobj)
-% event(
-%    decrementBurning(physobj)).
-events([decrementBurning/1]).
-% mpred_prop(
-%    decrementBurning(physobj), 
-%    event).
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Fire.e',67).
+% From E: 
+% 
+% event(decrementBurning(physobj)).
 mpred_prop(decrementBurning(physobj),event).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Fire.e',67).
+events([decrementBurning/1]).
 
 
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Fire.e',69).
@@ -354,35 +218,21 @@ mpred_prop(decrementBurning(physobj),event).
 % HoldsAt(Burning(physobj,fire,offset),time) &
 % (offset > 0) ->
 % Happens(DecrementBurning(physobj),time).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Fire.e',73).
+% From E: 
+% 
 % '->'(
-%    ','(
-%       burning(Physobj,Fire,Offset), 
-%       comparison(Offset,0,>)), 
-%    decrementBurning(Physobj)).
-if burning(Physobj, Fire, Offset), comparison(Offset, 0, >)then decrementBurning(Physobj).
+%    (holds_at(burning(Physobj,Fire,Offset),Time) , 
+%     Offset>0), 
+%    happens_at(decrementBurning(Physobj),Time)).
+ %   [Time].
+false not decrementBurning(Physobj), burning(Physobj, Fire, Offset), comparison(Offset, 0, >).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Fire.e',73).
 
- /*  reactive_rule([ holds(burning(Physobj,Fire,Offset),
-   		      Time_At),
-   		comparison(Offset,0,>)
-   	      ],
-   	      [decrementBurning(Physobj)]).
- */
- %  "% =================================".
-% '->'(
-%    ','(
-%       comparison(Offset,0,>), 
-%       not(
-%          decrementBurning(Physobj))), 
-%    not(
-%       burning(Physobj,Fire,Offset))).
-not burning(Physobj, Fire, Offset)if comparison(Offset, 0, >), not decrementBurning(Physobj).
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Fire.e',73).
-
- /*  l_int(holds(not(burning(Physobj,Fire,Offset)),
-   	    Time_At5),
-         [ comparison(Offset,0,>),
-   	not(decrementBurning(Physobj))
+ /*  d_pre([ not(decrementBurning(Physobj)),
+   	holds(burning(Physobj,Fire,Offset),
+   	      Time_At),
+   	comparison(Offset,0,>)
          ]).
  */
  %  "% =================================".
@@ -398,30 +248,21 @@ not burning(Physobj, Fire, Offset)if comparison(Offset, 0, >), not decrementBurn
 % Initiates(DecrementBurning(physobj),
 %           Burning(physobj,fire,offset2),
 %           time).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Fire.e',82).
+% From E: 
+% 
 % '->'(
-%    ','(
-%       burning(Physobj,Fire,Offset1), 
-%       '-Pred'(Offset1,1,Offset2)), 
-%    initiates(
+%    (holds_at(burning(Physobj,Fire,Offset1),Time) , 
+%     Offset2=Offset1-1), 
+%    initiates_at(
 %       decrementBurning(Physobj), 
 %       burning(Physobj,Fire,Offset2), 
 %       Time)).
-if burning(Physobj, Fire, Offset1), '-Pred'(Offset1, 1, Offset2)then initiates(decrementBurning(Physobj), burning(Physobj, Fire, Offset2)at Time, _).
+ %   [Time].
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Fire.e',82).
-
- /*  reactive_rule([ holds(burning(Physobj,Fire,Offset1),
-   		      Time_At),
-   		'-Pred'(Offset1,1,Offset2)
-   	      ],
-   	      [ initiates(decrementBurning(Physobj),
-   			  at(burning(Physobj,
-   				     Fire,
-   				     Offset2),
-   			     Time),
-   			  Initiates)
-   	      ]).
- */
- %  "% =================================".
+burning(Physobj, Fire, Offset1), Offset2=Offset1-1 ->
+    initiates(decrementBurning(Physobj),
+              burning(Physobj, Fire, Offset2)).
 
 
 %; An effect axiom states that if a physical object is
@@ -433,25 +274,26 @@ if burning(Physobj, Fire, Offset1), '-Pred'(Offset1, 1, Offset2)then initiates(d
 % Terminates(DecrementBurning(physobj),
 %            Burning(physobj,fire,offset),
 %            time).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Fire.e',93).
+% From E: 
+% 
 % '->'(
-%    burning(Physobj,Fire,Offset), 
-%    terminates(
+%    holds_at(burning(Physobj,Fire,Offset),Time), 
+%    terminates_at(
 %       decrementBurning(Physobj), 
 %       burning(Physobj,Fire,Offset), 
 %       Time)).
-if burning(Physobj, Fire, Offset)then terminates(decrementBurning(Physobj), burning(Physobj, Fire, Offset)at Time, _).
+ %   [Time].
+decrementBurning(Physobj)terminates burning(Physobj, Fire, Offset)if burning(Physobj, Fire, Offset).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Fire.e',93).
 
- /*  reactive_rule([ holds(burning(Physobj,Fire,Offset),
-   		      Time_At)
-   	      ],
-   	      [ terminates(decrementBurning(Physobj),
-   			   at(burning(Physobj,
-   				      Fire,
-   				      Offset),
-   			      Time),
-   			   Terminates)
-   	      ]).
+ /*  terminated(happens(decrementBurning(Physobj),
+   		   Time_From,
+   		   Time_Until),
+   	   burning(Physobj,Fire,Offset),
+   	   [ holds(burning(Physobj,Fire,Offset),
+   		   Time_From)
+   	   ]).
  */
  %  "% =================================".
 
@@ -465,66 +307,18 @@ if burning(Physobj, Fire, Offset)then terminates(decrementBurning(Physobj), burn
 % HoldsAt(Burning(physobj,fire,offset),time) &
 % HoldsAt(Intact(physobj),time) ->
 % Happens(Damage(fire,physobj),time).
-% '->'(
-%    ','(
-%       diff(Offset,0), 
-%       ','(
-%          burning(Physobj,Fire,Offset), 
-%          intact(Physobj))), 
-%    damage(Fire,Physobj)).
-damage(Fire, Physobj)if diff(Offset, 0), burning(Physobj, Fire, Offset), intact(Physobj).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Fire.e',103).
-
- /*  l_events(happens(damage(Fire,Physobj),
-   		 Time_From,
-   		 Time_From),
-   	 [ diff(Offset,0),
-   	   holds(burning(Physobj,Fire,Offset),
-   		 Time_From),
-   	   holds(intact(Physobj),Time_From)
-   	 ]).
- */
- %  "% =================================".
+% From E: 
+% 
 % '->'(
-%    ','(
-%       intact(Physobj), 
-%       ','(
-%          diff(Offset,0), 
-%          not(
-%             damage(Fire,Physobj)))), 
-%    not(
-%       burning(Physobj,Fire,Offset))).
-not burning(Physobj, Fire, Offset)if intact(Physobj), diff(Offset, 0), not damage(Fire, Physobj).
+%    (Offset\=0 , 
+%      holds_at(burning(Physobj,Fire,Offset),Time) , 
+%     holds_at(intact(Physobj),Time)), 
+%    happens_at(damage(Fire,Physobj),Time)).
+ %   [Time].
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Fire.e',103).
-
- /*  l_int(holds(not(burning(Physobj,Fire,Offset)),
-   	    Time_At),
-         [ holds(intact(Physobj),Time_At),
-   	diff(Offset,0),
-   	not(damage(Fire,Physobj))
-         ]).
- */
- %  "% =================================".
-% '->'(
-%    ','(
-%       burning(Physobj,Fire,Offset), 
-%       ','(
-%          diff(Offset,0), 
-%          not(
-%             damage(Fire,Physobj)))), 
-%    not(
-%       intact(Physobj))).
-not intact(Physobj)if burning(Physobj, Fire, Offset), diff(Offset, 0), not damage(Fire, Physobj).
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Fire.e',103).
-
- /*  l_int(holds(not(intact(Physobj)),Time_At6),
-         [ holds(burning(Physobj,Fire,Offset),
-   	      Time_At6),
-   	diff(Offset,0),
-   	not(damage(Fire,Physobj))
-         ]).
- */
- %  "% =================================".
+Offset\=0, burning(Physobj, Fire, Offset), intact(Physobj) ->
+    damage(Fire, Physobj).
 
 
 %; A trigger axiom states that
@@ -535,12 +329,14 @@ not intact(Physobj)if burning(Physobj, Fire, Offset), diff(Offset, 0), not damag
 % HoldsAt(Burning(physobj,fire,0),time) &
 % !HoldsAt(Destroyed(physobj),time) ->
 % Happens(Destroy(fire,physobj),time).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Fire.e',113).
+% From E: 
+% 
 % '->'(
-%    ','(
-%       burning(Physobj,Fire,0), 
-%       not(
-%          destroyed(Physobj))), 
-%    destroy(Fire,Physobj)).
+%    (holds_at(burning(Physobj,Fire,0),Time) , 
+%     holds_at(not(destroyed(Physobj)),Time)), 
+%    happens_at(destroy(Fire,Physobj),Time)).
+ %   [Time].
 destroy(Fire, Physobj)if burning(Physobj, Fire, 0), not destroyed(Physobj).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Fire.e',113).
 
@@ -552,41 +348,6 @@ destroy(Fire, Physobj)if burning(Physobj, Fire, 0), not destroyed(Physobj).
    	 ]).
  */
  %  "% =================================".
-% '->'(
-%    ','(
-%       not(
-%          destroyed(Physobj)), 
-%       not(
-%          destroy(Fire,Physobj))), 
-%    not(
-%       burning(Physobj,Fire,0))).
-not burning(Physobj, Fire, 0)if not destroyed(Physobj), not destroy(Fire, Physobj).
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Fire.e',113).
-
- /*  l_int(holds(not(burning(Physobj,Fire,0)),Time_At),
-         [ holds(not(destroyed(Physobj)),Time_At),
-   	not(destroy(Fire,Physobj))
-         ]).
- */
- %  "% =================================".
-% '->'(
-%    ','(
-%       burning(Physobj,Fire,0), 
-%       not(
-%          destroy(Fire,Physobj))), 
-%    not(
-%       not(
-%          destroyed(Physobj)))).
-not not destroyed(Physobj)if burning(Physobj, Fire, 0), not destroy(Fire, Physobj).
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Fire.e',113).
-
- /*  l_int(holds(not([holds(not(destroyed(Physobj)),Time_At5)]),
-   	    Time_At5),
-         [ holds(burning(Physobj,Fire,0),Time_At5),
-   	not(destroy(Fire,Physobj))
-         ]).
- */
- %  "% =================================".
 
 
 %; An effect axiom states that if a fire destroys a physical
@@ -595,10 +356,14 @@ not not destroyed(Physobj)if burning(Physobj, Fire, 0), not destroy(Fire, Physob
 % Terminates(Destroy(fire,physobj),
 %            Burning(physobj,fire,offset),
 %            time).
-% terminates(
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Fire.e',120).
+% From E: 
+% 
+% terminates_at(
 %    destroy(Fire,Physobj), 
 %    burning(Physobj,Fire,Offset), 
 %    Time).
+ %   [Time].
 destroy(Fire, Physobj)terminates burning(Physobj, Fire, Offset).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Fire.e',120).
 
@@ -613,4 +378,8 @@ destroy(Fire, Physobj)terminates burning(Physobj, Fire, Offset).
 
 %; End of file.
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Fire.e',124).
-% translate: ending  File: /pack/logicmoo_ec/ext/ec_sources/ecnet/Fire.e.lps 
+% From E: 
+% 
+% :-call_pel_directive(translate(ending,'/pack/logicmoo_ec/ext/ec_sources/ecnet/Fire.e.lps')).
+:- call_pel_directive(translate(ending,
+                                '/pack/logicmoo_ec/ext/ec_sources/ecnet/Fire.e.lps')).

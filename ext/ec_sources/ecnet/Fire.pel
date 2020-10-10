@@ -1,7 +1,10 @@
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Feeling.e',133).
+:- call_pel_directive(translate(unskipped,
+                                '/pack/logicmoo_ec/ext/ec_sources/ecnet/Fire.pel')).
 :-include(library('ec_planner/ec_test_incl')).
-:-expects_dialect(pfc).
-% Tue, 06 Oct 2020 05:01:09 GMT
- %  loading(load_e_pl,'/pack/logicmoo_ec/ext/ec_sources/ecnet/Fire.e').
+:-expects_dialect(ecalc).
+:- call_pel_directive(translate(begining,
+                                '/pack/logicmoo_ec/ext/ec_sources/ecnet/Fire.pel')).
 %;
 %; Copyright (c) 2005 IBM Corporation and others.
 %; All rights reserved. This program and the accompanying materials
@@ -16,678 +19,190 @@
 %;
 %; agent sets fire to physobj with burn time offset.
 
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Fire.e:14
 % event SetFireTo(agent,physobj,fire,offset)
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Fire.e:15
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Fire.e:15
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Fire.e',14).
 event(setFireTo(agent,physobj,fire,offset)).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Fire.e:15
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Fire.e:15
-actions([setFireTo/4]).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Fire.e:15
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Fire.e:15
-actions([setFireTo/4]).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Fire.e:15
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Fire.e:15
-meta_argtypes(setFireTo(agent,physobj,fire,offset)).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Fire.e:15
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Fire.e:15
-meta_argtypes(setFireTo(agent,physobj,fire,offset)).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Fire.e:15
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Fire.e:15
-mpred_prop(setFireTo(agent,physobj,fire,offset),event).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Fire.e:15
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Fire.e:15
-mpred_prop(setFireTo(agent,physobj,fire,offset),event).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Fire.e:15
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Fire.e:15
-meta_argtypes(setFireTo(agent,physobj,fire,offset)).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Fire.e:15
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Fire.e:15
-meta_argtypes(setFireTo(agent,physobj,fire,offset)).
 
 
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Fire.e:16
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Fire.e',17).
 %; An effect axioms states that
 %; if an agent sets a fire to a physical object with a burn time,
 %; the physical object will be burning with the fire and burn time:
 % [agent,physobj,fire,offset,time]
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Fire.e:20
 % Initiates(SetFireTo(agent,physobj,fire,offset),
 %           Burning(physobj,fire,offset),
 %           time).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Fire.e:22
-
- /*  [] ->
-       ta(Time,
-          tvs1=[Time],
-          tvs2=[Time],
-          initiates(setFireTo(Agent, Physobj, Fire, Offset),
-                    burning(Physobj, Fire, Offset),
-                    Time)).
- */
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Fire.e:22
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Fire.e:22
-initiates(setFireTo(SetfiretoP_Num4_V,
-		    BurningP_Num3_V,
-		    A,
-		    Setfireto),
-	  burning(BurningP_Num3_V,A,Setfireto),
-	  Initiates).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Fire.e:22
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Fire.e:22
-initiated(happens(setFireTo(SetfiretoP_Num4_V,
-			    BurningP_Num3_V,
-			    A,
-			    Setfireto),
-		  Maptime,
-		  Happens),
-	  burning(BurningP_Num3_V,A,Setfireto),
-	  []).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Fire.e',20).
+initiates_at(setFireTo(Agent,
+		       Physobj,
+		       Fire,
+		       Offset),
+	     burning(Physobj,Fire,Offset),
+	     Time).
 
 
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Fire.e:24
 %; agent puts out fire on physobj.
 
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Fire.e:25
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Fire.e',26).
 % event PutOutFire(agent,physobj,fire)
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Fire.e:26
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Fire.e:26
 event(putOutFire(agent,physobj,fire)).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Fire.e:26
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Fire.e:26
-actions([putOutFire/3]).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Fire.e:26
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Fire.e:26
-actions([putOutFire/3]).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Fire.e:26
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Fire.e:26
-meta_argtypes(putOutFire(agent,physobj,fire)).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Fire.e:26
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Fire.e:26
-meta_argtypes(putOutFire(agent,physobj,fire)).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Fire.e:26
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Fire.e:26
-mpred_prop(putOutFire(agent,physobj,fire),event).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Fire.e:26
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Fire.e:26
-mpred_prop(putOutFire(agent,physobj,fire),event).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Fire.e:26
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Fire.e:26
-meta_argtypes(putOutFire(agent,physobj,fire)).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Fire.e:26
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Fire.e:26
-meta_argtypes(putOutFire(agent,physobj,fire)).
 
 
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Fire.e:27
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Fire.e',28).
 %; An effect axiom states that
 %; if an agent puts out a fire on a physical object,
 %; the physical object will no longer be burning:
 % [agent,physobj,fire,offset,time]
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Fire.e:31
 % Terminates(PutOutFire(agent,physobj,fire),
 %            Burning(physobj,fire,offset),
 %            time).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Fire.e:33
-
- /*  [] ->
-       ta(Time,
-          tvs1=[Time],
-          tvs2=[Time],
-          terminates(putOutFire(Agent, Physobj, Fire),
-                     burning(Physobj, Fire, Offset),
-                     Time)).
- */
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Fire.e:33
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Fire.e:33
-terminates(putOutFire(PutoutfireP_Num3_V,
-		      BurningP_Num3_V,
-		      Putoutfire),
-	   burning(BurningP_Num3_V,
-		   Putoutfire,
-		   Burning),
-	   Terminates).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Fire.e:33
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Fire.e:33
-terminated(happens(putOutFire(PutoutfireP_Num3_V,
-			      BurningP_Num3_V,
-			      Putoutfire),
-		   Maptime,
-		   Happens),
-	   burning(BurningP_Num3_V,
-		   Putoutfire,
-		   Burning),
-	   []).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Fire.e',31).
+terminates_at(putOutFire(Agent,Physobj,Fire),
+	      burning(Physobj,Fire,Offset),
+	      Time).
 
 
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Fire.e:35
 %; A precondition axiom states that
 %; for an agent to set fire to a physical object,
 %; there must be a location such that
 %; the agent is at the location and
 %; the physical object is at the location:
 % [agent,fire,physobj,offset,time]
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Fire.e:41
 % Happens(SetFireTo(agent,physobj,fire,offset),time) ->
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Fire.e:42
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Fire.e',41).
 % {location}%  HoldsAt(At(agent,location),time) &
 %            HoldsAt(At(physobj,location),time).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Fire.e:43
-
- /*  exists([Location],
-    happens(setFireTo(Agent, Physobj, Fire, Offset), Time) ->
-       holds_at(at(Agent, Location), Time),
-       holds_at(at(Physobj, Location), Time)).
- */
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Fire.e:43
-
- /*  not(happens(setFireTo(Agent, Physobj, Fire, Offset), Time)) :-
-       (   not(holds_at(at(Agent, Exists_Location), Time))
-       ;   not(holds_at(at(Physobj, Exists_Location), Time))
-       ),
-       some(Exists_Location,
-            '$kolem_Fn_73'(Agent,
-                           Physobj,
-                           Fire,
-                           Offset,
-                           Time)).
- */
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Fire.e:43
-
- /*  [(holds_at(neg(at(Agent, Exists_Location)), Time);holds_at(neg(at(Physobj, Exists_Location)), Time)), some(Exists_Location, '$kolem_Fn_73'(Agent, Physobj, Fire, Offset, Time))] ->
-       ta(Time,
-          tvs1=[Time],
-          tvs2=[Time],
-          not(happens(setFireTo(Agent,
-                                Physobj,
-                                Fire,
-                                Offset),
-                      Time))).
- */
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Fire.e:43
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Fire.e:43
-(holds_at(neg(at(Kolem_Fn_73P_Num5_V, Location7)), Time8);holds_at(neg(at(A, Location7)), Time8)), some(Location7, '$kolem_Fn_73'(Kolem_Fn_73P_Num5_V, A, B, Setfireto, Time8)) ->
-    not(happens(setFireTo(Kolem_Fn_73P_Num5_V,
-                          A,
-                          B,
-                          Setfireto),
-                Time8)).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Fire.e:43
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Fire.e:43
- reactive_rule([  (at(not(loc_at(Kolem_Fn_73P_Num5_V, Location7)), Time8);at(not(loc_at(A, Location7)), Time8)),
-                   some(Location7,
-                        '$kolem_Fn_73'(Kolem_Fn_73P_Num5_V,
-                                       A,
-                                       B,
-                                       Setfireto,
-                                       Time8))
-                 ],
-                 [ not(happens(setFireTo(Kolem_Fn_73P_Num5_V,
-                                         A,
-                                         B,
-                                         Setfireto),
-                               Time8))
-                 ]).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Fire.e:43
-
- /*  holds_at(at(Agent, Exists_Location), Time) :-
-       happens(setFireTo(Agent, Physobj, Fire, Offset),
-               Time),
-       some(Exists_Location,
-            '$kolem_Fn_73'(Agent,
-                           Physobj,
-                           Fire,
-                           Offset,
-                           Time)).
- */
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Fire.e:43
-
- /*  [happens(setFireTo(Agent, Physobj, Fire, Offset), Time), some(Exists_Location, '$kolem_Fn_73'(Agent, Physobj, Fire, Offset, Time))] ->
-       ta(Time,
-          tvs1=[Time],
-          tvs2=[Time],
-          holds_at(at(Agent, Exists_Location), Time)).
- */
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Fire.e:43
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Fire.e:43
-happens(setFireTo(SetfiretoP_Num4_V, A, B, Setfireto13), Maptime), some(Location12, '$kolem_Fn_73'(SetfiretoP_Num4_V, A, B, Setfireto13, Maptime)) ->
-    holds_at(at(SetfiretoP_Num4_V, Location12), Maptime).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Fire.e:43
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Fire.e:43
-reactive_rule([ happens(setFireTo(SetfiretoP_Num4_V,
-				  A,
-				  B,
-				  Setfireto13),
-			Maptime),
-		some(Location12,
-		     '$kolem_Fn_73'(SetfiretoP_Num4_V,
-				    A,
-				    B,
-				    Setfireto13,
-				    Maptime))
-	      ],
-	      [ holds(loc_at(SetfiretoP_Num4_V,Location12),
-		      Maptime)
-	      ]).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Fire.e:43
-
- /*  holds_at(at(Physobj, Exists_Location), Time) :-
-       happens(setFireTo(Agent, Physobj, Fire, Offset),
-               Time),
-       some(Exists_Location,
-            '$kolem_Fn_73'(Agent,
-                           Physobj,
-                           Fire,
-                           Offset,
-                           Time)).
- */
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Fire.e:43
-
- /*  [happens(setFireTo(Agent, Physobj, Fire, Offset), Time), some(Exists_Location, '$kolem_Fn_73'(Agent, Physobj, Fire, Offset, Time))] ->
-       ta(Time,
-          tvs1=[Time],
-          tvs2=[Time],
-          holds_at(at(Physobj, Exists_Location), Time)).
- */
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Fire.e:43
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Fire.e:43
-happens(setFireTo(SetfiretoP_Num4_V18, A, B, Setfireto17), Maptime15), some(Location16, '$kolem_Fn_73'(SetfiretoP_Num4_V18, A, B, Setfireto17, Maptime15)) ->
-    holds_at(at(A, Location16), Maptime15).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Fire.e:43
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Fire.e:43
-reactive_rule([ happens(setFireTo(SetfiretoP_Num4_V18,
-				  A,
-				  B,
-				  Setfireto17),
-			Maptime15),
-		some(Location16,
-		     '$kolem_Fn_73'(SetfiretoP_Num4_V18,
-				    A,
-				    B,
-				    Setfireto17,
-				    Maptime15))
-	      ],
-	      [holds(loc_at(A,Location16),Maptime15)]).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Fire.e',43).
+exists([Location],  (happens_at(setFireTo(Agent, Physobj, Fire, Offset), Time)->holds_at(at_loc(Agent, Location), Time), holds_at(at_loc(Physobj, Location), Time))).
 
 
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Fire.e:45
 %; A precondition axiom states that
 %; for an agent to put out a fire on a physical object,
 %; there must be a location such that
 %; the agent is at the location and
 %; the physical object is at the location:
 % [agent,fire,physobj,time]
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Fire.e:51
 % Happens(PutOutFire(agent,physobj,fire),time) ->
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Fire.e:52
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Fire.e',51).
 % {location}%  HoldsAt(At(agent,location),time) &
 %            HoldsAt(At(physobj,location),time).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Fire.e:53
-
- /*  exists([Location],
-    happens(putOutFire(Agent, Physobj, Fire), Time) ->
-       holds_at(at(Agent, Location), Time),
-       holds_at(at(Physobj, Location), Time)).
- */
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Fire.e:53
-
- /*  not(happens(putOutFire(Agent, Physobj, Fire), Time)) :-
-       (   not(holds_at(at(Agent, Exists_Location), Time))
-       ;   not(holds_at(at(Physobj, Exists_Location), Time))
-       ),
-       some(Exists_Location,
-            '$kolem_Fn_74'(Agent, Physobj, Fire, Time)).
- */
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Fire.e:53
-
- /*  [(holds_at(neg(at(Agent, Exists_Location)), Time);holds_at(neg(at(Physobj, Exists_Location)), Time)), some(Exists_Location, '$kolem_Fn_74'(Agent, Physobj, Fire, Time))] ->
-       ta(Time,
-          tvs1=[Time],
-          tvs2=[Time],
-          not(happens(putOutFire(Agent, Physobj, Fire),
-                      Time))).
- */
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Fire.e:53
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Fire.e:53
-(holds_at(neg(at(Kolem_Fn_74P_Num4_V, Location6)), Time7);holds_at(neg(at(A, Location6)), Time7)), some(Location6, '$kolem_Fn_74'(Kolem_Fn_74P_Num4_V, A, Putoutfire, Time7)) ->
-    not(happens(putOutFire(Kolem_Fn_74P_Num4_V, A, Putoutfire),
-                Time7)).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Fire.e:53
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Fire.e:53
- reactive_rule([  (at(not(loc_at(Kolem_Fn_74P_Num4_V, Location6)), Time7);at(not(loc_at(A, Location6)), Time7)),
-                   some(Location6,
-                        '$kolem_Fn_74'(Kolem_Fn_74P_Num4_V,
-                                       A,
-                                       Putoutfire,
-                                       Time7))
-                 ],
-                 [ not(happens(putOutFire(Kolem_Fn_74P_Num4_V,
-                                          A,
-                                          Putoutfire),
-                               Time7))
-                 ]).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Fire.e:53
-
- /*  holds_at(at(Agent, Exists_Location), Time) :-
-       happens(putOutFire(Agent, Physobj, Fire), Time),
-       some(Exists_Location,
-            '$kolem_Fn_74'(Agent, Physobj, Fire, Time)).
- */
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Fire.e:53
-
- /*  [happens(putOutFire(Agent, Physobj, Fire), Time), some(Exists_Location, '$kolem_Fn_74'(Agent, Physobj, Fire, Time))] ->
-       ta(Time,
-          tvs1=[Time],
-          tvs2=[Time],
-          holds_at(at(Agent, Exists_Location), Time)).
- */
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Fire.e:53
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Fire.e:53
-happens(putOutFire(PutoutfireP_Num3_V, A, Putoutfire12), Maptime), some(Location11, '$kolem_Fn_74'(PutoutfireP_Num3_V, A, Putoutfire12, Maptime)) ->
-    holds_at(at(PutoutfireP_Num3_V, Location11), Maptime).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Fire.e:53
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Fire.e:53
-reactive_rule([ happens(putOutFire(PutoutfireP_Num3_V,
-				   A,
-				   Putoutfire12),
-			Maptime),
-		some(Location11,
-		     '$kolem_Fn_74'(PutoutfireP_Num3_V,
-				    A,
-				    Putoutfire12,
-				    Maptime))
-	      ],
-	      [ holds(loc_at(PutoutfireP_Num3_V,Location11),
-		      Maptime)
-	      ]).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Fire.e:53
-
- /*  holds_at(at(Physobj, Exists_Location), Time) :-
-       happens(putOutFire(Agent, Physobj, Fire), Time),
-       some(Exists_Location,
-            '$kolem_Fn_74'(Agent, Physobj, Fire, Time)).
- */
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Fire.e:53
-
- /*  [happens(putOutFire(Agent, Physobj, Fire), Time), some(Exists_Location, '$kolem_Fn_74'(Agent, Physobj, Fire, Time))] ->
-       ta(Time,
-          tvs1=[Time],
-          tvs2=[Time],
-          holds_at(at(Physobj, Exists_Location), Time)).
- */
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Fire.e:53
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Fire.e:53
-happens(putOutFire(PutoutfireP_Num3_V17, A, Putoutfire16), Maptime14), some(Location15, '$kolem_Fn_74'(PutoutfireP_Num3_V17, A, Putoutfire16, Maptime14)) ->
-    holds_at(at(A, Location15), Maptime14).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Fire.e:53
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Fire.e:53
-reactive_rule([ happens(putOutFire(PutoutfireP_Num3_V17,
-				   A,
-				   Putoutfire16),
-			Maptime14),
-		some(Location15,
-		     '$kolem_Fn_74'(PutoutfireP_Num3_V17,
-				    A,
-				    Putoutfire16,
-				    Maptime14))
-	      ],
-	      [holds(loc_at(A,Location15),Maptime14)]).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Fire.e',53).
+exists([Location],  (happens_at(putOutFire(Agent, Physobj, Fire), Time)->holds_at(at_loc(Agent, Location), Time), holds_at(at_loc(Physobj, Location), Time))).
 
 
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Fire.e:55
 %; physobj is burning with fire and burn time offset.
 
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Fire.e:56
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Fire.e',57).
 % fluent Burning(physobj,fire,offset)
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Fire.e:57
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Fire.e:57
 fluent(burning(physobj,fire,offset)).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Fire.e:57
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Fire.e:57
-fluents([burning/3]).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Fire.e:57
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Fire.e:57
-fluents([burning/3]).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Fire.e:57
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Fire.e:57
-meta_argtypes(burning(physobj,fire,offset)).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Fire.e:57
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Fire.e:57
-meta_argtypes(burning(physobj,fire,offset)).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Fire.e:57
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Fire.e:57
-mpred_prop(burning(physobj,fire,offset),fluent).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Fire.e:57
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Fire.e:57
-mpred_prop(burning(physobj,fire,offset),fluent).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Fire.e:57
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Fire.e:57
-meta_argtypes(burning(physobj,fire,offset)).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Fire.e:57
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Fire.e:57
-meta_argtypes(burning(physobj,fire,offset)).
 
 
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Fire.e:58
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Fire.e',59).
 %; A state constraint says that a physical object burning with
 %; a fire has at most one burn time at a time:
 % [physobj,fire,offset1,offset2,time]
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Fire.e:61
 % HoldsAt(Burning(physobj,fire,offset1),time) &
 % HoldsAt(Burning(physobj,fire,offset2),time) ->
 % offset1=offset2.
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Fire.e:63
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Fire.e:63
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Fire.e',61).
 holds_at(burning(Physobj, Fire, Offset1), Time), holds_at(burning(Physobj, Fire, Offset2), Time) ->
-    equals(Offset1, Offset2).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Fire.e:63
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Fire.e:63
-reactive_rule([ holds(burning(Physobj,Fire,Offset1),
-		      Time),
-		holds(burning(Physobj,Fire,Offset2),
-		      Time)
-	      ],
-	      [equals(Offset1,Offset2)]).
+    Offset1=Offset2.
 
 
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Fire.e:65
 %; The burn time of physobj is decremented.
 
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Fire.e:66
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Fire.e',67).
 % event DecrementBurning(physobj)
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Fire.e:67
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Fire.e:67
 event(decrementBurning(physobj)).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Fire.e:67
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Fire.e:67
-events([decrementBurning/1]).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Fire.e:67
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Fire.e:67
-events([decrementBurning/1]).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Fire.e:67
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Fire.e:67
-meta_argtypes(decrementBurning(physobj)).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Fire.e:67
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Fire.e:67
-meta_argtypes(decrementBurning(physobj)).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Fire.e:67
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Fire.e:67
-mpred_prop(decrementBurning(physobj),event).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Fire.e:67
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Fire.e:67
-mpred_prop(decrementBurning(physobj),event).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Fire.e:67
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Fire.e:67
-meta_argtypes(decrementBurning(physobj)).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Fire.e:67
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Fire.e:67
-meta_argtypes(decrementBurning(physobj)).
 
 
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Fire.e:68
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Fire.e',69).
 %; A trigger axiom states that
 %; if a physical object is burning with a fire and a burn time and
 %; the burn time is greater than zero,
 %; the burn time of the physical object is decremented:
 % [physobj,fire,offset,time]
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Fire.e:73
 % HoldsAt(Burning(physobj,fire,offset),time) &
 % (offset > 0) ->
 % Happens(DecrementBurning(physobj),time).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Fire.e:75
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Fire.e:75
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Fire.e',73).
 holds_at(burning(Physobj, Fire, Offset), Time), Offset>0 ->
-    happens(decrementBurning(Physobj), Time).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Fire.e:75
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Fire.e:75
-reactive_rule([ holds(burning(Physobj,Fire,Offset),
-		      Time),
-		Offset>0
-	      ],
-	      [happens(decrementBurning(Physobj),Time)]).
+    happens_at(decrementBurning(Physobj), Time).
 
 
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Fire.e:77
 %; An effect axiom states that if a physical object is
 %; burning with a fire and a burn time, and the burn time of a physical
 %; object is decremented, the burn time of the physical
 %; object will be the burn time minus one:
 % [physobj,fire,offset1,offset2,time]
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Fire.e:82
 % HoldsAt(Burning(physobj,fire,offset1),time) &
 % offset2 = offset1-1 ->
 % Initiates(DecrementBurning(physobj),
 %           Burning(physobj,fire,offset2),
 %           time).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Fire.e:86
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Fire.e:86
-holds_at(burning(Physobj, Fire, Offset1), Time), equals(Offset2, Offset1-1) ->
-    initiates(decrementBurning(Physobj),
-              burning(Physobj, Fire, Offset2),
-              Time).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Fire.e:86
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Fire.e:86
-reactive_rule([ holds(burning(Physobj,Fire,Offset1),
-		      Time),
-		equals(Offset2,Offset1-1)
-	      ],
-	      [ initiates(decrementBurning(Physobj),
-			  at(burning(Physobj,
-				     Fire,
-				     Offset2),
-			     Time))
-	      ]).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Fire.e',82).
+holds_at(burning(Physobj, Fire, Offset1), Time), Offset2=Offset1-1 ->
+    initiates_at(decrementBurning(Physobj),
+                 burning(Physobj, Fire, Offset2),
+                 Time).
 
 
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Fire.e:88
 %; An effect axiom states that if a physical object is
 %; burning with a fire and a burn time, and the burn time of a physical
 %; object is decremented, the burn time of the physical
 %; object will no longer be the burn time:
 % [physobj,fire,offset,time]
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Fire.e:93
 % HoldsAt(Burning(physobj,fire,offset),time) ->
 % Terminates(DecrementBurning(physobj),
 %            Burning(physobj,fire,offset),
 %            time).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Fire.e:96
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Fire.e:96
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Fire.e',93).
 holds_at(burning(Physobj, Fire, Offset), Time) ->
-    terminates(decrementBurning(Physobj),
-               burning(Physobj, Fire, Offset),
-               Time).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Fire.e:96
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Fire.e:96
-reactive_rule([ holds(burning(Physobj,Fire,Offset),
-		      Time)
-	      ],
-	      [ terminates(decrementBurning(Physobj),
-			   at(burning(Physobj,
-				      Fire,
-				      Offset),
-			      Time))
-	      ]).
+    terminates_at(decrementBurning(Physobj),
+                  burning(Physobj, Fire, Offset),
+                  Time).
 
 
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Fire.e:98
 %; A trigger axiom states that
 %; if a physical object is burning with a fire and a burn time
 %; that is not equal to zero, the fire will damage the
 %; physical object:
 % [physobj,fire,offset,time]
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Fire.e:103
 % offset!=% 0 &
 % HoldsAt(Burning(physobj,fire,offset),time) &
 % HoldsAt(Intact(physobj),time) ->
 % Happens(Damage(fire,physobj),time).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Fire.e:106
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Fire.e:106
-diff(Offset, 0), holds_at(burning(Physobj, Fire, Offset), Time), holds_at(intact(Physobj), Time) ->
-    happens(damage(Fire, Physobj), Time).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Fire.e:106
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Fire.e:106
-reactive_rule([ diff(Offset,0),
-		holds(burning(Physobj,Fire,Offset),
-		      Time),
-		holds(intact(Physobj),Time)
-	      ],
-	      [happens(damage(Fire,Physobj),Time)]).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Fire.e',103).
+Offset\=0, holds_at(burning(Physobj, Fire, Offset), Time), holds_at(intact(Physobj), Time) ->
+    happens_at(damage(Fire, Physobj), Time).
 
 
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Fire.e:108
 %; A trigger axiom states that
 %; if a physical object is burning with a fire and a burn time
 %; that is equal to zero, the fire will destroy the
 %; physical object:
 % [physobj,fire,time]
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Fire.e:113
 % HoldsAt(Burning(physobj,fire,0),time) &
 % !HoldsAt(Destroyed(physobj),time) ->
 % Happens(Destroy(fire,physobj),time).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Fire.e:115
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Fire.e:115
-holds_at(burning(Physobj, Fire, 0), Time), holds_at(neg(destroyed(Physobj)), Time) ->
-    happens(destroy(Fire, Physobj), Time).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Fire.e:115
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Fire.e:115
-reactive_rule([ holds(burning(Physobj,Fire,0),Time),
-		holds(not(destroyed(Physobj)),Time)
-	      ],
-	      [happens(destroy(Fire,Physobj),Time)]).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Fire.e',113).
+holds_at(burning(Physobj, Fire, 0), Time), holds_at(not(destroyed(Physobj)), Time) ->
+    happens_at(destroy(Fire, Physobj), Time).
 
 
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Fire.e:117
 %; An effect axiom states that if a fire destroys a physical
 %; object, the physical object will no longer be burning:
 % [physobj,fire,offset,time]
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Fire.e:120
 % Terminates(Destroy(fire,physobj),
 %            Burning(physobj,fire,offset),
 %            time).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Fire.e:122
-
- /*  [] ->
-       ta(Time,
-          tvs1=[Time],
-          tvs2=[Time],
-          terminates(destroy(Fire, Physobj),
-                     burning(Physobj, Fire, Offset),
-                     Time)).
- */
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Fire.e:122
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Fire.e:122
-terminates(destroy(A,Destroy),
-	   burning(Destroy,A,Burning),
-	   Terminates).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Fire.e:122
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Fire.e:122
-terminated(happens(destroy(A,Destroy),
-		   Maptime,
-		   Happens),
-	   burning(Destroy,A,Burning),
-	   []).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Fire.e',120).
+terminates_at(destroy(Fire,Physobj),
+	      burning(Physobj,Fire,Offset),
+	      Time).
 
 
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Fire.e:124
 %; End of file.
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Fire.e',124).
+:- call_pel_directive(translate(ending,
+                                '/pack/logicmoo_ec/ext/ec_sources/ecnet/Fire.pel')).

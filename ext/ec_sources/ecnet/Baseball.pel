@@ -1,7 +1,10 @@
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Arson.e',87).
+:- call_pel_directive(translate(unskipped,
+                                '/pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.pel')).
 :-include(library('ec_planner/ec_test_incl')).
-:-expects_dialect(pfc).
-% Tue, 06 Oct 2020 05:00:37 GMT
- %  loading(load_e_pl,'/pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e').
+:-expects_dialect(ecalc).
+:- call_pel_directive(translate(begining,
+                                '/pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.pel')).
 %;
 %; Copyright (c) 2005 IBM Corporation and others.
 %; All rights reserved. This program and the accompanying materials
@@ -32,1447 +35,302 @@
 %; }
 %;
 
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:30
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e',31).
 % sort ballgame
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:31
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:31
-sort(ballgame).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:31
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:31
 sort(ballgame).
 
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:32
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e',33).
 % sort hardball: ball
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:33
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:33
-subsort(hardball,ball).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:33
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:33
 subsort(hardball,ball).
 
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:34
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e',35).
 % sort base: physobj
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:35
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:35
-subsort(base,physobj).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:35
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:35
 subsort(base,physobj).
 
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:35
 % sort firstbase: base
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:36
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:36
-subsort(firstbase,base).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:36
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:36
 subsort(firstbase,base).
 %;sort secondbase: base
 %;sort thirdbase: base
 
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:38
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e',39).
 % sort homeplate: base
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:39
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:39
-subsort(homeplate,base).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:39
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:39
 subsort(homeplate,base).
 
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:40
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e',41).
 % sort mound: physobj
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:41
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:41
-subsort(mound,physobj).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:41
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:41
 subsort(mound,physobj).
 
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:41
 % sort pitchermound: mound
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:42
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:42
-subsort(pitchermound,mound).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:42
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:42
 subsort(pitchermound,mound).
 %;sort furniture: physobj
 %;sort bench: furniture
 %;sort playerbench: bench
 
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:47
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e',48).
 % sort field: physobj
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:48
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:48
-subsort(field,physobj).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:48
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:48
 subsort(field,physobj).
 %;sort shortstoparea: field
 %;sort catcherarea: field
 
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:52
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e',53).
 % sort outfield: field
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:53
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:53
-subsort(outfield,field).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:53
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:53
 subsort(outfield,field).
 %;sort leftfield: outfield
 %;sort centerfield: outfield
 %;sort rightfield: outfield
 
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:57
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e',58).
 % function BallOf(ballgame): hardball
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:58
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:58
-function(ballOf(ballgame)).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:58
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:58
-functions([ballOf/1]).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:58
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:58
-functions([ballOf/1]).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:58
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:58
-meta_argtypes(ballOf(ballgame)).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:58
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:58
-meta_argtypes(ballOf(ballgame)).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:58
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:58
-mpred_prop(ballOf(ballgame),function).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:58
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:58
-mpred_prop(ballOf(ballgame),function).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:58
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:58
-meta_argtypes(ballOf(ballgame)).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:58
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:58
-meta_argtypes(ballOf(ballgame)).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:58
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:58
-predicate(ball(ballgame,hardball)).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:58
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:58
-actions([ball/2]).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:58
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:58
-actions([ball/2]).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:58
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:58
-meta_argtypes(ball(ballgame,hardball)).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:58
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:58
-meta_argtypes(ball(ballgame,hardball)).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:58
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:58
-mpred_prop(ball(ballgame,hardball),predicate).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:58
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:58
-mpred_prop(ball(ballgame,hardball),predicate).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:58
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:58
-meta_argtypes(ball(ballgame,hardball)).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:58
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:58
-meta_argtypes(ball(ballgame,hardball)).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:58
+function(ballOf(ballgame),hardball).
 
- /*  fix_axiom_head(Time) ->
-       [ functional_predicate(ballOf, ball),
-          (->),
-         holds_at(functional_predicate(ballOf, ball), Time)
-       ].
- */
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:58
-
- /*  [] ->
-       ta(Time,
-          tvs1=[Time],
-          tvs2=[Time],
-          holds_at(functional_predicate(ballOf, ball), Time)).
- */
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:58
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:58
-holds_at(functional_predicate(ballOf,ball),Time1).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:58
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:58
-l_int(holds(functional_predicate(ballOf,ball),Time1),[]).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:58
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:58
-resultIsa(ballOf,hardball).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:58
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:58
-resultIsa(ballOf,hardball).
-
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:58
 % function FirstBaseOf(ballgame): firstbase
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:59
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:59
-function(firstBaseOf(ballgame)).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:59
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:59
-functions([firstBaseOf/1]).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:59
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:59
-functions([firstBaseOf/1]).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:59
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:59
-meta_argtypes(firstBaseOf(ballgame)).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:59
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:59
-meta_argtypes(firstBaseOf(ballgame)).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:59
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:59
-mpred_prop(firstBaseOf(ballgame),function).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:59
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:59
-mpred_prop(firstBaseOf(ballgame),function).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:59
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:59
-meta_argtypes(firstBaseOf(ballgame)).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:59
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:59
-meta_argtypes(firstBaseOf(ballgame)).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:59
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:59
-predicate(firstBase(ballgame,firstbase)).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:59
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:59
-actions([firstBase/2]).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:59
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:59
-actions([firstBase/2]).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:59
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:59
-meta_argtypes(firstBase(ballgame,firstbase)).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:59
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:59
-meta_argtypes(firstBase(ballgame,firstbase)).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:59
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:59
-mpred_prop(firstBase(ballgame,firstbase),predicate).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:59
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:59
-mpred_prop(firstBase(ballgame,firstbase),predicate).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:59
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:59
-meta_argtypes(firstBase(ballgame,firstbase)).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:59
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:59
-meta_argtypes(firstBase(ballgame,firstbase)).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:59
-
- /*  fix_axiom_head(Time) ->
-       [ functional_predicate(firstBaseOf, firstBase),
-          (->),
-         holds_at(functional_predicate(firstBaseOf, firstBase), Time)
-       ].
- */
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:59
-
- /*  [] ->
-       ta(Time,
-          tvs1=[Time],
-          tvs2=[Time],
-          holds_at(functional_predicate(firstBaseOf, firstBase), Time)).
- */
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:59
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:59
-holds_at(functional_predicate(firstBaseOf,firstBase),Time1).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:59
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:59
-l_int(holds(functional_predicate(firstBaseOf,firstBase),Time1),
-      []).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:59
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:59
-resultIsa(firstBaseOf,firstbase).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:59
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:59
-resultIsa(firstBaseOf,firstbase).
+function(firstBaseOf(ballgame),firstbase).
 %;function SecondBaseOf(ballgame): secondbase
 %;function ThirdBaseOf(ballgame): thirdbase
 
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:61
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e',62).
 % function HomeplateOf(ballgame): homeplate
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:62
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:62
-function(homeplateOf(ballgame)).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:62
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:62
-functions([homeplateOf/1]).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:62
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:62
-functions([homeplateOf/1]).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:62
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:62
-meta_argtypes(homeplateOf(ballgame)).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:62
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:62
-meta_argtypes(homeplateOf(ballgame)).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:62
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:62
-mpred_prop(homeplateOf(ballgame),function).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:62
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:62
-mpred_prop(homeplateOf(ballgame),function).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:62
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:62
-meta_argtypes(homeplateOf(ballgame)).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:62
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:62
-meta_argtypes(homeplateOf(ballgame)).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:62
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:62
-predicate(homeplate(ballgame,homeplate)).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:62
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:62
-actions([homeplate/2]).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:62
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:62
-actions([homeplate/2]).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:62
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:62
-meta_argtypes(homeplate(ballgame,homeplate)).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:62
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:62
-meta_argtypes(homeplate(ballgame,homeplate)).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:62
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:62
-mpred_prop(homeplate(ballgame,homeplate),predicate).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:62
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:62
-mpred_prop(homeplate(ballgame,homeplate),predicate).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:62
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:62
-meta_argtypes(homeplate(ballgame,homeplate)).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:62
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:62
-meta_argtypes(homeplate(ballgame,homeplate)).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:62
+function(homeplateOf(ballgame),homeplate).
 
- /*  fix_axiom_head(Time) ->
-       [ functional_predicate(homeplateOf, homeplate),
-          (->),
-         holds_at(functional_predicate(homeplateOf, homeplate), Time)
-       ].
- */
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:62
-
- /*  [] ->
-       ta(Time,
-          tvs1=[Time],
-          tvs2=[Time],
-          holds_at(functional_predicate(homeplateOf, homeplate), Time)).
- */
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:62
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:62
-holds_at(functional_predicate(homeplateOf,homeplate),Time1).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:62
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:62
-l_int(holds(functional_predicate(homeplateOf,homeplate),Time1),
-      []).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:62
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:62
-resultIsa(homeplateOf,homeplate).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:62
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:62
-resultIsa(homeplateOf,homeplate).
-
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:62
 % function OutfieldOf(ballgame): outfield
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:63
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:63
-function(outfieldOf(ballgame)).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:63
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:63
-functions([outfieldOf/1]).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:63
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:63
-functions([outfieldOf/1]).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:63
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:63
-meta_argtypes(outfieldOf(ballgame)).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:63
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:63
-meta_argtypes(outfieldOf(ballgame)).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:63
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:63
-mpred_prop(outfieldOf(ballgame),function).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:63
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:63
-mpred_prop(outfieldOf(ballgame),function).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:63
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:63
-meta_argtypes(outfieldOf(ballgame)).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:63
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:63
-meta_argtypes(outfieldOf(ballgame)).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:63
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:63
-predicate(outfield(ballgame,outfield)).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:63
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:63
-actions([outfield/2]).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:63
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:63
-actions([outfield/2]).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:63
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:63
-meta_argtypes(outfield(ballgame,outfield)).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:63
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:63
-meta_argtypes(outfield(ballgame,outfield)).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:63
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:63
-mpred_prop(outfield(ballgame,outfield),predicate).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:63
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:63
-mpred_prop(outfield(ballgame,outfield),predicate).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:63
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:63
-meta_argtypes(outfield(ballgame,outfield)).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:63
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:63
-meta_argtypes(outfield(ballgame,outfield)).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:63
+function(outfieldOf(ballgame),outfield).
 
- /*  fix_axiom_head(Time) ->
-       [ functional_predicate(outfieldOf, outfield),
-          (->),
-         holds_at(functional_predicate(outfieldOf, outfield), Time)
-       ].
- */
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:63
-
- /*  [] ->
-       ta(Time,
-          tvs1=[Time],
-          tvs2=[Time],
-          holds_at(functional_predicate(outfieldOf, outfield), Time)).
- */
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:63
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:63
-holds_at(functional_predicate(outfieldOf,outfield),Time1).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:63
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:63
-l_int(holds(functional_predicate(outfieldOf,outfield),Time1),[]).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:63
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:63
-resultIsa(outfieldOf,outfield).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:63
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:63
-resultIsa(outfieldOf,outfield).
-
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:63
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e',64).
 % function PitchermoundOf(ballgame): pitchermound
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:64
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:64
-function(pitchermoundOf(ballgame)).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:64
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:64
-functions([pitchermoundOf/1]).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:64
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:64
-functions([pitchermoundOf/1]).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:64
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:64
-meta_argtypes(pitchermoundOf(ballgame)).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:64
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:64
-meta_argtypes(pitchermoundOf(ballgame)).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:64
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:64
-mpred_prop(pitchermoundOf(ballgame),function).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:64
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:64
-mpred_prop(pitchermoundOf(ballgame),function).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:64
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:64
-meta_argtypes(pitchermoundOf(ballgame)).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:64
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:64
-meta_argtypes(pitchermoundOf(ballgame)).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:64
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:64
-predicate(pitchermound(ballgame,pitchermound)).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:64
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:64
-actions([pitchermound/2]).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:64
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:64
-actions([pitchermound/2]).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:64
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:64
-meta_argtypes(pitchermound(ballgame,pitchermound)).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:64
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:64
-meta_argtypes(pitchermound(ballgame,pitchermound)).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:64
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:64
-mpred_prop(pitchermound(ballgame,pitchermound),predicate).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:64
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:64
-mpred_prop(pitchermound(ballgame,pitchermound),predicate).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:64
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:64
-meta_argtypes(pitchermound(ballgame,pitchermound)).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:64
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:64
-meta_argtypes(pitchermound(ballgame,pitchermound)).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:64
+function(pitchermoundOf(ballgame),pitchermound).
 
- /*  fix_axiom_head(Time) ->
-       [ functional_predicate(pitchermoundOf, pitchermound),
-          (->),
-         holds_at(functional_predicate(pitchermoundOf, pitchermound), Time)
-       ].
- */
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:64
-
- /*  [] ->
-       ta(Time,
-          tvs1=[Time],
-          tvs2=[Time],
-          holds_at(functional_predicate(pitchermoundOf, pitchermound), Time)).
- */
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:64
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:64
-holds_at(functional_predicate(pitchermoundOf,pitchermound),Time1).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:64
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:64
-l_int(holds(functional_predicate(pitchermoundOf,pitchermound),
-	    Time1),
-      []).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:64
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:64
-resultIsa(pitchermoundOf,pitchermound).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:64
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:64
-resultIsa(pitchermoundOf,pitchermound).
-
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:64
 % function PlayerbenchOf(ballgame): playerbench
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:65
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:65
-function(playerbenchOf(ballgame)).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:65
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:65
-functions([playerbenchOf/1]).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:65
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:65
-functions([playerbenchOf/1]).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:65
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:65
-meta_argtypes(playerbenchOf(ballgame)).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:65
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:65
-meta_argtypes(playerbenchOf(ballgame)).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:65
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:65
-mpred_prop(playerbenchOf(ballgame),function).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:65
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:65
-mpred_prop(playerbenchOf(ballgame),function).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:65
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:65
-meta_argtypes(playerbenchOf(ballgame)).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:65
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:65
-meta_argtypes(playerbenchOf(ballgame)).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:65
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:65
-predicate(playerbench(ballgame,playerbench)).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:65
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:65
-actions([playerbench/2]).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:65
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:65
-actions([playerbench/2]).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:65
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:65
-meta_argtypes(playerbench(ballgame,playerbench)).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:65
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:65
-meta_argtypes(playerbench(ballgame,playerbench)).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:65
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:65
-mpred_prop(playerbench(ballgame,playerbench),predicate).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:65
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:65
-mpred_prop(playerbench(ballgame,playerbench),predicate).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:65
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:65
-meta_argtypes(playerbench(ballgame,playerbench)).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:65
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:65
-meta_argtypes(playerbench(ballgame,playerbench)).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:65
+function(playerbenchOf(ballgame),playerbench).
 
- /*  fix_axiom_head(Time) ->
-       [ functional_predicate(playerbenchOf, playerbench),
-          (->),
-         holds_at(functional_predicate(playerbenchOf, playerbench), Time)
-       ].
- */
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:65
-
- /*  [] ->
-       ta(Time,
-          tvs1=[Time],
-          tvs2=[Time],
-          holds_at(functional_predicate(playerbenchOf, playerbench), Time)).
- */
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:65
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:65
-holds_at(functional_predicate(playerbenchOf,playerbench),Time1).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:65
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:65
-l_int(holds(functional_predicate(playerbenchOf,playerbench),
-	    Time1),
-      []).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:65
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:65
-resultIsa(playerbenchOf,playerbench).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:65
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:65
-resultIsa(playerbenchOf,playerbench).
-
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:66
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e',67).
 % predicate HomeTeamPlayer(ballgame,agent)
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:67
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:67
 predicate(homeTeamPlayer(ballgame,agent)).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:67
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:67
-actions([homeTeamPlayer/2]).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:67
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:67
-actions([homeTeamPlayer/2]).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:67
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:67
-meta_argtypes(homeTeamPlayer(ballgame,agent)).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:67
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:67
-meta_argtypes(homeTeamPlayer(ballgame,agent)).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:67
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:67
-mpred_prop(homeTeamPlayer(ballgame,agent),predicate).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:67
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:67
-mpred_prop(homeTeamPlayer(ballgame,agent),predicate).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:67
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:67
-meta_argtypes(homeTeamPlayer(ballgame,agent)).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:67
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:67
-meta_argtypes(homeTeamPlayer(ballgame,agent)).
 
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:67
 % predicate VisitingTeamPlayer(ballgame,agent)
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:68
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:68
 predicate(visitingTeamPlayer(ballgame,agent)).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:68
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:68
-actions([visitingTeamPlayer/2]).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:68
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:68
-actions([visitingTeamPlayer/2]).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:68
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:68
-meta_argtypes(visitingTeamPlayer(ballgame,agent)).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:68
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:68
-meta_argtypes(visitingTeamPlayer(ballgame,agent)).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:68
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:68
-mpred_prop(visitingTeamPlayer(ballgame,agent),predicate).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:68
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:68
-mpred_prop(visitingTeamPlayer(ballgame,agent),predicate).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:68
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:68
-meta_argtypes(visitingTeamPlayer(ballgame,agent)).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:68
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:68
-meta_argtypes(visitingTeamPlayer(ballgame,agent)).
 
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:68
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e',69).
 % predicate Player(ballgame,agent)
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:69
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:69
 predicate(player(ballgame,agent)).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:69
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:69
-actions([player/2]).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:69
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:69
-actions([player/2]).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:69
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:69
-meta_argtypes(player(ballgame,agent)).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:69
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:69
-meta_argtypes(player(ballgame,agent)).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:69
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:69
-mpred_prop(player(ballgame,agent),predicate).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:69
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:69
-mpred_prop(player(ballgame,agent),predicate).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:69
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:69
-meta_argtypes(player(ballgame,agent)).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:69
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:69
-meta_argtypes(player(ballgame,agent)).
 
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:69
 % predicate OnOppositeTeams(ballgame,agent,agent)
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:70
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:70
 predicate(onOppositeTeams(ballgame,agent,agent)).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:70
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:70
-actions([onOppositeTeams/3]).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:70
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:70
-actions([onOppositeTeams/3]).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:70
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:70
-meta_argtypes(onOppositeTeams(ballgame,agent,agent)).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:70
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:70
-meta_argtypes(onOppositeTeams(ballgame,agent,agent)).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:70
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:70
-mpred_prop(onOppositeTeams(ballgame,agent,agent),predicate).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:70
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:70
-mpred_prop(onOppositeTeams(ballgame,agent,agent),predicate).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:70
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:70
-meta_argtypes(onOppositeTeams(ballgame,agent,agent)).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:70
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:70
-meta_argtypes(onOppositeTeams(ballgame,agent,agent)).
 
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:71
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e',72).
 % event Pitch(ballgame,agent,hardball,agent)
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:72
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:72
 event(pitch(ballgame,agent,hardball,agent)).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:72
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:72
-events([pitch/4]).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:72
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:72
-events([pitch/4]).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:72
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:72
-meta_argtypes(pitch(ballgame,agent,hardball,agent)).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:72
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:72
-meta_argtypes(pitch(ballgame,agent,hardball,agent)).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:72
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:72
-mpred_prop(pitch(ballgame,agent,hardball,agent),event).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:72
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:72
-mpred_prop(pitch(ballgame,agent,hardball,agent),event).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:72
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:72
-meta_argtypes(pitch(ballgame,agent,hardball,agent)).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:72
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:72
-meta_argtypes(pitch(ballgame,agent,hardball,agent)).
 
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:72
 % event PitchInStrikeZone(ballgame,agent,hardball,agent)
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:73
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:73
 event(pitchInStrikeZone(ballgame,agent,hardball,agent)).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:73
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:73
-events([pitchInStrikeZone/4]).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:73
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:73
-events([pitchInStrikeZone/4]).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:73
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:73
-meta_argtypes(pitchInStrikeZone(ballgame,agent,hardball,agent)).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:73
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:73
-meta_argtypes(pitchInStrikeZone(ballgame,agent,hardball,agent)).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:73
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:73
-mpred_prop(pitchInStrikeZone(ballgame,agent,hardball,agent),event).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:73
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:73
-mpred_prop(pitchInStrikeZone(ballgame,agent,hardball,agent),event).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:73
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:73
-meta_argtypes(pitchInStrikeZone(ballgame,agent,hardball,agent)).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:73
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:73
-meta_argtypes(pitchInStrikeZone(ballgame,agent,hardball,agent)).
 
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:73
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e',74).
 % event PitchOutOfStrikeZone(ballgame,agent,hardball,agent)
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:74
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:74
 event(pitchOutOfStrikeZone(ballgame,agent,hardball,agent)).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:74
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:74
-events([pitchOutOfStrikeZone/4]).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:74
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:74
-events([pitchOutOfStrikeZone/4]).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:74
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:74
-meta_argtypes(pitchOutOfStrikeZone(ballgame,agent,hardball,agent)).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:74
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:74
-meta_argtypes(pitchOutOfStrikeZone(ballgame,agent,hardball,agent)).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:74
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:74
-mpred_prop(pitchOutOfStrikeZone(ballgame,agent,hardball,agent),event).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:74
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:74
-mpred_prop(pitchOutOfStrikeZone(ballgame,agent,hardball,agent),event).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:74
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:74
-meta_argtypes(pitchOutOfStrikeZone(ballgame,agent,hardball,agent)).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:74
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:74
-meta_argtypes(pitchOutOfStrikeZone(ballgame,agent,hardball,agent)).
 
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:74
 % event Swing(ballgame,agent,hardball)
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:75
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:75
 event(swing(ballgame,agent,hardball)).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:75
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:75
-events([swing/3]).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:75
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:75
-events([swing/3]).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:75
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:75
-meta_argtypes(swing(ballgame,agent,hardball)).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:75
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:75
-meta_argtypes(swing(ballgame,agent,hardball)).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:75
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:75
-mpred_prop(swing(ballgame,agent,hardball),event).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:75
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:75
-mpred_prop(swing(ballgame,agent,hardball),event).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:75
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:75
-meta_argtypes(swing(ballgame,agent,hardball)).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:75
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:75
-meta_argtypes(swing(ballgame,agent,hardball)).
 
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:75
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e',76).
 % event SwingMiss(ballgame,agent,hardball)
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:76
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:76
 event(swingMiss(ballgame,agent,hardball)).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:76
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:76
-events([swingMiss/3]).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:76
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:76
-events([swingMiss/3]).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:76
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:76
-meta_argtypes(swingMiss(ballgame,agent,hardball)).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:76
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:76
-meta_argtypes(swingMiss(ballgame,agent,hardball)).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:76
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:76
-mpred_prop(swingMiss(ballgame,agent,hardball),event).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:76
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:76
-mpred_prop(swingMiss(ballgame,agent,hardball),event).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:76
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:76
-meta_argtypes(swingMiss(ballgame,agent,hardball)).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:76
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:76
-meta_argtypes(swingMiss(ballgame,agent,hardball)).
 
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:76
 % event SwingHit(ballgame,agent,hardball)
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:77
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:77
 event(swingHit(ballgame,agent,hardball)).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:77
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:77
-events([swingHit/3]).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:77
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:77
-events([swingHit/3]).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:77
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:77
-meta_argtypes(swingHit(ballgame,agent,hardball)).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:77
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:77
-meta_argtypes(swingHit(ballgame,agent,hardball)).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:77
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:77
-mpred_prop(swingHit(ballgame,agent,hardball),event).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:77
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:77
-mpred_prop(swingHit(ballgame,agent,hardball),event).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:77
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:77
-meta_argtypes(swingHit(ballgame,agent,hardball)).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:77
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:77
-meta_argtypes(swingHit(ballgame,agent,hardball)).
 
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:77
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e',78).
 % event SwingHitFair(ballgame,agent,hardball)
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:78
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:78
 event(swingHitFair(ballgame,agent,hardball)).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:78
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:78
-events([swingHitFair/3]).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:78
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:78
-events([swingHitFair/3]).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:78
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:78
-meta_argtypes(swingHitFair(ballgame,agent,hardball)).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:78
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:78
-meta_argtypes(swingHitFair(ballgame,agent,hardball)).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:78
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:78
-mpred_prop(swingHitFair(ballgame,agent,hardball),event).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:78
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:78
-mpred_prop(swingHitFair(ballgame,agent,hardball),event).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:78
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:78
-meta_argtypes(swingHitFair(ballgame,agent,hardball)).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:78
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:78
-meta_argtypes(swingHitFair(ballgame,agent,hardball)).
 
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:78
 % event SwingHitFoul(ballgame,agent,hardball)
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:79
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:79
 event(swingHitFoul(ballgame,agent,hardball)).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:79
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:79
-events([swingHitFoul/3]).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:79
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:79
-events([swingHitFoul/3]).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:79
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:79
-meta_argtypes(swingHitFoul(ballgame,agent,hardball)).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:79
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:79
-meta_argtypes(swingHitFoul(ballgame,agent,hardball)).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:79
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:79
-mpred_prop(swingHitFoul(ballgame,agent,hardball),event).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:79
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:79
-mpred_prop(swingHitFoul(ballgame,agent,hardball),event).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:79
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:79
-meta_argtypes(swingHitFoul(ballgame,agent,hardball)).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:79
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:79
-meta_argtypes(swingHitFoul(ballgame,agent,hardball)).
 
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:79
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e',80).
 % event SwingHitFairFly(ballgame,agent,hardball)
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:80
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:80
 event(swingHitFairFly(ballgame,agent,hardball)).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:80
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:80
-events([swingHitFairFly/3]).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:80
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:80
-events([swingHitFairFly/3]).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:80
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:80
-meta_argtypes(swingHitFairFly(ballgame,agent,hardball)).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:80
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:80
-meta_argtypes(swingHitFairFly(ballgame,agent,hardball)).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:80
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:80
-mpred_prop(swingHitFairFly(ballgame,agent,hardball),event).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:80
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:80
-mpred_prop(swingHitFairFly(ballgame,agent,hardball),event).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:80
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:80
-meta_argtypes(swingHitFairFly(ballgame,agent,hardball)).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:80
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:80
-meta_argtypes(swingHitFairFly(ballgame,agent,hardball)).
 
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:80
 % event SwingHitFairGround(ballgame,agent,hardball)
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:81
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:81
 event(swingHitFairGround(ballgame,agent,hardball)).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:81
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:81
-events([swingHitFairGround/3]).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:81
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:81
-events([swingHitFairGround/3]).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:81
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:81
-meta_argtypes(swingHitFairGround(ballgame,agent,hardball)).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:81
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:81
-meta_argtypes(swingHitFairGround(ballgame,agent,hardball)).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:81
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:81
-mpred_prop(swingHitFairGround(ballgame,agent,hardball),event).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:81
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:81
-mpred_prop(swingHitFairGround(ballgame,agent,hardball),event).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:81
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:81
-meta_argtypes(swingHitFairGround(ballgame,agent,hardball)).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:81
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:81
-meta_argtypes(swingHitFairGround(ballgame,agent,hardball)).
 
 
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:82
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e',83).
 % [ballgame,agent]
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:83
 % HomeTeamPlayer(ballgame,agent) ->
 % !VisitingTeamPlayer(ballgame,agent).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:84
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:84
 homeTeamPlayer(Ballgame, Agent) ->
     not(visitingTeamPlayer(Ballgame, Agent)).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:84
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:84
-reactive_rule([homeTeamPlayer(Ballgame,Agent)],
-	      [not(visitingTeamPlayer(Ballgame,Agent))]).
 
 
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:86
 % [ballgame,agent]
- 
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:86
-% HomeTeamPlayer(ballgame,agent) -> Player(ballgame,agent).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:86
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:86
+ % HomeTeamPlayer(ballgame,agent) -> Player(ballgame,agent).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e',86).
 homeTeamPlayer(Ballgame, Agent) ->
     player(Ballgame, Agent).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:86
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:86
-reactive_rule([homeTeamPlayer(Ballgame,Agent)],
-	      [player(Ballgame,Agent)]).
 
 
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:88
 % [ballgame,agent]
- 
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:88
-% VisitingTeamPlayer(ballgame,agent) -> Player(ballgame,agent).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:88
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:88
+ % VisitingTeamPlayer(ballgame,agent) -> Player(ballgame,agent).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e',88).
 visitingTeamPlayer(Ballgame, Agent) ->
     player(Ballgame, Agent).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:88
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:88
-reactive_rule([visitingTeamPlayer(Ballgame,Agent)],
-	      [player(Ballgame,Agent)]).
 
 
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:90
 % [ballgame,agent1,agent2]
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:91
 % OnOppositeTeams(ballgame,agent1,agent2) <->
 % (HomeTeamPlayer(ballgame,agent1) &
 %  VisitingTeamPlayer(ballgame,agent2)) |
 % (HomeTeamPlayer(ballgame,agent2) &
 %  VisitingTeamPlayer(ballgame,agent1)).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:95
-
- /*  onOppositeTeams(Ballgame, Agent1, Agent2) <->
-       (   homeTeamPlayer(Ballgame, Agent1),
-           visitingTeamPlayer(Ballgame, Agent2)
-       ;   homeTeamPlayer(Ballgame, Agent2),
-           visitingTeamPlayer(Ballgame, Agent1)
-       ).
- */
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:95
-
- /*  [onOppositeTeams] <->
-       [;, homeTeamPlayer, visitingTeamPlayer, homeTeamPlayer, visitingTeamPlayer].
- */
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:95
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:95
-onOppositeTeams(Ballgame, Agent1, Agent2) ->
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e',92).
+onOppositeTeams(Ballgame, Agent1, Agent2) <->
     (   homeTeamPlayer(Ballgame, Agent1),
         visitingTeamPlayer(Ballgame, Agent2)
     ;   homeTeamPlayer(Ballgame, Agent2),
         visitingTeamPlayer(Ballgame, Agent1)
     ).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:95
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:95
- reactive_rule([onOppositeTeams(Ballgame, Agent1, Agent2)],
-                 [  (homeTeamPlayer(Ballgame, Agent1), visitingTeamPlayer(Ballgame, Agent2);homeTeamPlayer(Ballgame, Agent2), visitingTeamPlayer(Ballgame, Agent1))
-                 ]).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:95
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:95
-homeTeamPlayer(Ballgame, Agent1), visitingTeamPlayer(Ballgame, Agent2);homeTeamPlayer(Ballgame, Agent2), visitingTeamPlayer(Ballgame, Agent1) ->
-    onOppositeTeams(Ballgame, Agent1, Agent2).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:95
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:95
- reactive_rule([  (homeTeamPlayer(Ballgame, Agent1), visitingTeamPlayer(Ballgame, Agent2);homeTeamPlayer(Ballgame, Agent2), visitingTeamPlayer(Ballgame, Agent1))
-                 ],
-                 [onOppositeTeams(Ballgame, Agent1, Agent2)]).
 
 
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:97
 % [ballgame,agent1,hardball,agent2,pitchermound,homeplate,time]
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:98
 % Happens(Pitch(ballgame,agent1,hardball,agent2),time) &
 % PitchermoundOf(ballgame) = pitchermound &
 % HomeplateOf(ballgame) = homeplate ->
 % HoldsAt(Near(agent1,pitchermound),time) &
 % HoldsAt(Near(agent2,homeplate),time) &
 % OnOppositeTeams(ballgame,agent1,agent2).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:103
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:103
-happens(pitch(Ballgame, Agent1, Hardball, Agent2), Time), equals(pitchermoundOf(Ballgame), Pitchermound), equals(homeplateOf(Ballgame), Homeplate) ->
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e',99).
+happens_at(pitch(Ballgame, Agent1, Hardball, Agent2), Time), pitchermoundOf(Ballgame)=Pitchermound, homeplateOf(Ballgame)=Homeplate ->
     holds_at(near(Agent1, Pitchermound), Time),
     holds_at(near(Agent2, Homeplate), Time),
     onOppositeTeams(Ballgame, Agent1, Agent2).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:103
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:103
-reactive_rule([ happens(pitch(Ballgame,
-			      Agent1,
-			      Hardball,
-			      Agent2),
-			Time),
-		equals(pitchermoundOf(Ballgame),
-		       Pitchermound),
-		equals(homeplateOf(Ballgame),Homeplate)
-	      ],
-	      [ holds(near(Agent1,Pitchermound),Time),
-		holds(near(Agent2,Homeplate),Time),
-		onOppositeTeams(Ballgame,
-				Agent1,
-				Agent2)
-	      ]).
 
 
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:105
 % [ballgame,agent1,agent2,hardball,time]
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:106
 % Happens(Pitch(ballgame,agent1,hardball,agent2),time) ->
 % Happens(PitchInStrikeZone(ballgame,agent1,hardball,agent2),time) |
 % Happens(PitchOutOfStrikeZone(ballgame,agent1,hardball,agent2),time).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:108
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:108
-happens(pitch(Ballgame, Agent1, Hardball, Agent2), Time) ->
-    (   happens(pitchInStrikeZone(Ballgame,
-                                  Agent1,
-                                  Hardball,
-                                  Agent2),
-                Time)
-    ;   happens(pitchOutOfStrikeZone(Ballgame,
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e',107).
+happens_at(pitch(Ballgame, Agent1, Hardball, Agent2), Time) ->
+    (   happens_at(pitchInStrikeZone(Ballgame,
                                      Agent1,
                                      Hardball,
                                      Agent2),
-                Time)
+                   Time)
+    ;   happens_at(pitchOutOfStrikeZone(Ballgame,
+                                        Agent1,
+                                        Hardball,
+                                        Agent2),
+                   Time)
     ).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:108
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:108
- reactive_rule([ happens(pitch(Ballgame,
-                                 Agent1,
-                                 Hardball,
-                                 Agent2),
-                           Time)
-                 ],
-                 [  (happens(pitchInStrikeZone(Ballgame, Agent1, Hardball, Agent2), Time);happens(pitchOutOfStrikeZone(Ballgame, Agent1, Hardball, Agent2), Time))
-                 ]).
 
 
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:110
 % [ballgame,agent1,agent2,hardball,time]
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:111
 % Happens(PitchInStrikeZone(ballgame,agent1,hardball,agent2),time) ->
 % !Happens(PitchOutOfStrikeZone(ballgame,agent1,hardball,agent2),time).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:112
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:112
-happens(pitchInStrikeZone(Ballgame, Agent1, Hardball, Agent2), Time) ->
-    not(happens(pitchOutOfStrikeZone(Ballgame,
-                                     Agent1,
-                                     Hardball,
-                                     Agent2),
-                Time)).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:112
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:112
-reactive_rule([ happens(pitchInStrikeZone(Ballgame,
-					  Agent1,
-					  Hardball,
-					  Agent2),
-			Time)
-	      ],
-	      [ not(happens(pitchOutOfStrikeZone(Ballgame,
-						 Agent1,
-						 Hardball,
-						 Agent2),
-			    Time))
-	      ]).
+happens_at(pitchInStrikeZone(Ballgame, Agent1, Hardball, Agent2), Time) ->
+    not(happens_at(pitchOutOfStrikeZone(Ballgame,
+                                        Agent1,
+                                        Hardball,
+                                        Agent2),
+                   Time)).
 
 
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:114
 % [ballgame,agent1,agent2,hardball,time]
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:115
 % Happens(PitchInStrikeZone(ballgame,agent1,hardball,agent2),time) ->
 % Happens(Swing(ballgame,agent2,hardball),time+1).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:116
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:116
-happens(pitchInStrikeZone(Ballgame, Agent1, Hardball, Agent2), Time) ->
-    happens(swing(Ballgame, Agent2, Hardball), Time+1).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:116
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:116
-reactive_rule([ happens(pitchInStrikeZone(Ballgame,
-					  Agent1,
-					  Hardball,
-					  Agent2),
-			Time)
-	      ],
-	      [ observe(at(swing(Ballgame,
-				 Agent2,
-				 Hardball),
-			   Time+1))
-	      ]).
+happens_at(pitchInStrikeZone(Ballgame, Agent1, Hardball, Agent2), Time) ->
+    happens_at(swing(Ballgame, Agent2, Hardball), Time+1).
 
 
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:118
 % [ballgame,agent,hardball,time]
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:119
 % Happens(Swing(ballgame,agent,hardball),time) ->
 % Happens(SwingHit(ballgame,agent,hardball),time) |
 % Happens(SwingMiss(ballgame,agent,hardball),time).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:121
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:121
-happens(swing(Ballgame, Agent, Hardball), Time) ->
-    (   happens(swingHit(Ballgame, Agent, Hardball),
-                Time)
-    ;   happens(swingMiss(Ballgame, Agent, Hardball),
-                Time)
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e',120).
+happens_at(swing(Ballgame, Agent, Hardball), Time) ->
+    (   happens_at(swingHit(Ballgame, Agent, Hardball),
+                   Time)
+    ;   happens_at(swingMiss(Ballgame, Agent, Hardball),
+                   Time)
     ).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:121
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:121
- reactive_rule([ happens(swing(Ballgame, Agent, Hardball),
-                           Time)
-                 ],
-                 [  (happens(swingHit(Ballgame, Agent, Hardball), Time);happens(swingMiss(Ballgame, Agent, Hardball), Time))
-                 ]).
 
 
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:123
 % [ballgame,agent,hardball,time]
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:124
 % Happens(SwingHit(ballgame,agent,hardball),time) ->
 % !Happens(SwingMiss(ballgame,agent,hardball),time).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:125
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:125
-happens(swingHit(Ballgame, Agent, Hardball), Time) ->
-    not(happens(swingMiss(Ballgame, Agent, Hardball),
-                Time)).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:125
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:125
-reactive_rule([ happens(swingHit(Ballgame,
-				 Agent,
-				 Hardball),
-			Time)
-	      ],
-	      [ not(happens(swingMiss(Ballgame,
-				      Agent,
-				      Hardball),
-			    Time))
-	      ]).
+happens_at(swingHit(Ballgame, Agent, Hardball), Time) ->
+    not(happens_at(swingMiss(Ballgame, Agent, Hardball),
+                   Time)).
 
 
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:127
 % [ballgame,agent,hardball,time]
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:128
 % Happens(SwingHit(ballgame,agent,hardball),time) ->
 % Happens(SwingHitFair(ballgame,agent,hardball),time) |
 % Happens(SwingHitFoul(ballgame,agent,hardball),time).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:130
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:130
-happens(swingHit(Ballgame, Agent, Hardball), Time) ->
-    (   happens(swingHitFair(Ballgame, Agent, Hardball),
-                Time)
-    ;   happens(swingHitFoul(Ballgame, Agent, Hardball),
-                Time)
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e',129).
+happens_at(swingHit(Ballgame, Agent, Hardball), Time) ->
+    (   happens_at(swingHitFair(Ballgame, Agent, Hardball),
+                   Time)
+    ;   happens_at(swingHitFoul(Ballgame, Agent, Hardball),
+                   Time)
     ).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:130
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:130
- reactive_rule([ happens(swingHit(Ballgame, Agent, Hardball),
-                           Time)
-                 ],
-                 [  (happens(swingHitFair(Ballgame, Agent, Hardball), Time);happens(swingHitFoul(Ballgame, Agent, Hardball), Time))
-                 ]).
 
 
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:132
 % [ballgame,agent,hardball,time]
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:133
 % Happens(SwingHitFair(ballgame,agent,hardball),time) ->
 % !Happens(SwingHitFoul(ballgame,agent,hardball),time).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:134
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:134
-happens(swingHitFair(Ballgame, Agent, Hardball), Time) ->
-    not(happens(swingHitFoul(Ballgame, Agent, Hardball),
-                Time)).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:134
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:134
-reactive_rule([ happens(swingHitFair(Ballgame,
-				     Agent,
-				     Hardball),
-			Time)
-	      ],
-	      [ not(happens(swingHitFoul(Ballgame,
-					 Agent,
-					 Hardball),
-			    Time))
-	      ]).
+happens_at(swingHitFair(Ballgame, Agent, Hardball), Time) ->
+    not(happens_at(swingHitFoul(Ballgame, Agent, Hardball),
+                   Time)).
 
 
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:136
 % [ballgame,agent,hardball,time]
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:137
 % Happens(SwingHitFair(ballgame,agent,hardball),time) ->
 % Happens(SwingHitFairFly(ballgame,agent,hardball),time) |
 % Happens(SwingHitFairGround(ballgame,agent,hardball),time).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:139
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:139
-happens(swingHitFair(Ballgame, Agent, Hardball), Time) ->
-    (   happens(swingHitFairFly(Ballgame, Agent, Hardball),
-                Time)
-    ;   happens(swingHitFairGround(Ballgame, Agent, Hardball),
-                Time)
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e',138).
+happens_at(swingHitFair(Ballgame, Agent, Hardball), Time) ->
+    (   happens_at(swingHitFairFly(Ballgame, Agent, Hardball),
+                   Time)
+    ;   happens_at(swingHitFairGround(Ballgame,
+                                      Agent,
+                                      Hardball),
+                   Time)
     ).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:139
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:139
- reactive_rule([ happens(swingHitFair(Ballgame,
-                                        Agent,
-                                        Hardball),
-                           Time)
-                 ],
-                 [  (happens(swingHitFairFly(Ballgame, Agent, Hardball), Time);happens(swingHitFairGround(Ballgame, Agent, Hardball), Time))
-                 ]).
 
 
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:141
 % [ballgame,agent,hardball,time]
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:142
 % Happens(SwingHitFairFly(ballgame,agent,hardball),time) ->
 % Happens(SwingHitFairGround(ballgame,agent,hardball),time).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:143
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:143
-happens(swingHitFairFly(Ballgame, Agent, Hardball), Time) ->
-    happens(swingHitFairGround(Ballgame, Agent, Hardball),
-            Time).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:143
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:143
-reactive_rule([ happens(swingHitFairFly(Ballgame,
-					Agent,
-					Hardball),
-			Time)
-	      ],
-	      [ happens(swingHitFairGround(Ballgame,
-					   Agent,
-					   Hardball),
-			Time)
-	      ]).
+happens_at(swingHitFairFly(Ballgame, Agent, Hardball), Time) ->
+    happens_at(swingHitFairGround(Ballgame, Agent, Hardball),
+               Time).
 
 
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:145
 % [ballgame,agent,hardball,homeplate,firstbase,time]
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:146
 % Happens(SwingHit(ballgame,agent,hardball),time) &
 % HomeplateOf(ballgame) = homeplate &
 % FirstBaseOf(ballgame) = firstbase ->
 % Happens(RunFromTo(agent,homeplate,firstbase),time).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:149
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:149
-happens(swingHit(Ballgame, Agent, Hardball), Time), equals(homeplateOf(Ballgame), Homeplate), equals(firstBaseOf(Ballgame), Firstbase) ->
-    happens(runFromTo(Agent, Homeplate, Firstbase), Time).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:149
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:149
-reactive_rule([ happens(swingHit(Ballgame,
-				 Agent,
-				 Hardball),
-			Time),
-		equals(homeplateOf(Ballgame),Homeplate),
-		equals(firstBaseOf(Ballgame),Firstbase)
-	      ],
-	      [ happens(runFromTo(Agent,
-				  Homeplate,
-				  Firstbase),
-			Time)
-	      ]).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e',147).
+happens_at(swingHit(Ballgame, Agent, Hardball), Time), homeplateOf(Ballgame)=Homeplate, firstBaseOf(Ballgame)=Firstbase ->
+    happens_at(runFromTo(Agent, Homeplate, Firstbase),
+               Time).
 
 
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:151
 % [ballgame,agent,hardball,homeplate,outfield,time]
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:152
 % HomeplateOf(ballgame) = homeplate &
 % OutfieldOf(ballgame) = outfield &
 % Happens(SwingHitFairFly(ballgame,agent,hardball),time) ->
 % Happens(HitFromTo(agent,hardball,homeplate,outfield),time).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:155
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:155
-equals(homeplateOf(Ballgame), Homeplate), equals(outfieldOf(Ballgame), Outfield), happens(swingHitFairFly(Ballgame, Agent, Hardball), Time) ->
-    happens(hitFromTo(Agent,
-                      Hardball,
-                      Homeplate,
-                      Outfield),
-            Time).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:155
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:155
-reactive_rule([ equals(homeplateOf(Ballgame),Homeplate),
-		equals(outfieldOf(Ballgame),Outfield),
-		happens(swingHitFairFly(Ballgame,
-					Agent,
-					Hardball),
-			Time)
-	      ],
-	      [ happens(hitFromTo(Agent,
-				  Hardball,
-				  Homeplate,
-				  Outfield),
-			Time)
-	      ]).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e',153).
+homeplateOf(Ballgame)=Homeplate, outfieldOf(Ballgame)=Outfield, happens_at(swingHitFairFly(Ballgame, Agent, Hardball), Time) ->
+    happens_at(hitFromTo(Agent,
+                         Hardball,
+                         Homeplate,
+                         Outfield),
+               Time).
 
 
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e:157
 %; End of file.
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.e',157).
+:- call_pel_directive(translate(ending,
+                                '/pack/logicmoo_ec/ext/ec_sources/ecnet/Baseball.pel')).

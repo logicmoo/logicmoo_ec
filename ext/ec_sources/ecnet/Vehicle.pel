@@ -1,7 +1,10 @@
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/TimeDelayBombing.e',147).
+:- call_pel_directive(translate(unskipped,
+                                '/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.pel')).
 :-include(library('ec_planner/ec_test_incl')).
-:-expects_dialect(pfc).
-% Tue, 06 Oct 2020 05:02:32 GMT
- %  loading(load_e_pl,'/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e').
+:-expects_dialect(ecalc).
+:- call_pel_directive(translate(begining,
+                                '/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.pel')).
 %;
 %; Copyright (c) 2005 IBM Corporation and others.
 %; All rights reserved. This program and the accompanying materials
@@ -15,1372 +18,408 @@
 %; Vehicle: transportation vehicles
 %;
 
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:13
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',14).
 % sort vehicle: physobj
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:14
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:14
-subsort(vehicle,physobj).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:14
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:14
 subsort(vehicle,physobj).
 
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:14
 % sort vehiclein: vehicle
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:15
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:15
-subsort(vehiclein,vehicle).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:15
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:15
 subsort(vehiclein,vehicle).
 
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:15
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',16).
 % sort vehicleon: vehicle
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:16
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:16
-subsort(vehicleon,vehicle).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:16
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:16
 subsort(vehicleon,vehicle).
 
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:16
 % sort train: vehicleon
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:17
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:17
-subsort(train,vehicleon).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:17
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:17
 subsort(train,vehicleon).
 
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:17
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',18).
 % sort carriage: vehiclein
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:18
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:18
-subsort(carriage,vehiclein).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:18
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:18
 subsort(carriage,vehiclein).
 
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:19
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',20).
 % sort vehicledoor
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:20
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:20
-sort(vehicledoor).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:20
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:20
 sort(vehicledoor).
 %; RideTrack
 
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:23
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',24).
 % event RideTrack12(train,track)
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:24
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:24
 event(rideTrack12(train,track)).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:24
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:24
-events([rideTrack12/2]).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:24
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:24
-events([rideTrack12/2]).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:24
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:24
-meta_argtypes(rideTrack12(train,track)).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:24
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:24
-meta_argtypes(rideTrack12(train,track)).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:24
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:24
-mpred_prop(rideTrack12(train,track),event).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:24
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:24
-mpred_prop(rideTrack12(train,track),event).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:24
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:24
-meta_argtypes(rideTrack12(train,track)).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:24
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:24
-meta_argtypes(rideTrack12(train,track)).
 
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:25
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',26).
 % event RideTrack21(train,track)
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:26
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:26
 event(rideTrack21(train,track)).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:26
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:26
-events([rideTrack21/2]).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:26
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:26
-events([rideTrack21/2]).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:26
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:26
-meta_argtypes(rideTrack21(train,track)).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:26
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:26
-meta_argtypes(rideTrack21(train,track)).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:26
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:26
-mpred_prop(rideTrack21(train,track),event).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:26
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:26
-mpred_prop(rideTrack21(train,track),event).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:26
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:26
-meta_argtypes(rideTrack21(train,track)).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:26
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:26
-meta_argtypes(rideTrack21(train,track)).
 
 
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:27
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',28).
 % [train,track,time]
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:28
 % Happens(RideTrack12(train,track),time) ->
 % HoldsAt(At(train,Side1(track)),time).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:29
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:29
-happens(rideTrack12(Train, Track), Time) ->
-    holds_at(at(Train, side1(Track)), Time).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:29
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:29
-reactive_rule([ happens(rideTrack12(Train,Track),
-			Time)
-	      ],
-	      [ holds(loc_at(Train,side1(Track)),
-		      Time)
-	      ]).
+happens_at(rideTrack12(Train, Track), Time) ->
+    holds_at(at_loc(Train, side1(Track)), Time).
 
 
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:31
 % [train,track,time]
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:32
 % Happens(RideTrack21(train,track),time) ->
 % HoldsAt(At(train,Side2(track)),time).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:33
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:33
-happens(rideTrack21(Train, Track), Time) ->
-    holds_at(at(Train, side2(Track)), Time).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:33
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:33
-reactive_rule([ happens(rideTrack21(Train,Track),
-			Time)
-	      ],
-	      [ holds(loc_at(Train,side2(Track)),
-		      Time)
-	      ]).
+happens_at(rideTrack21(Train, Track), Time) ->
+    holds_at(at_loc(Train, side2(Track)), Time).
 
 
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:35
 % [train,track,location,time]
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:36
 % Side2(track)=location ->
 % Initiates(RideTrack12(train,track),At(train,location),time).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:37
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:37
-equals(side2(Track), Location) ->
-    initiates(rideTrack12(Train, Track),
-              at(Train, Location),
-              Time).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:37
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:37
-reactive_rule([equals(side2(Track),Location)],
-	      [ initiates(rideTrack12(Train,Track),
-			  at(loc_at(Train,Location),
-			     Time))
-	      ]).
+side2(Track)=Location ->
+    initiates_at(rideTrack12(Train, Track),
+                 at_loc(Train, Location),
+                 Time).
 
 
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:39
 % [train,track,location,time]
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:40
 % Side1(track)=location ->
 % Initiates(RideTrack21(train,track),At(train,location),time).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:41
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:41
-equals(side1(Track), Location) ->
-    initiates(rideTrack21(Train, Track),
-              at(Train, Location),
-              Time).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:41
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:41
-reactive_rule([equals(side1(Track),Location)],
-	      [ initiates(rideTrack21(Train,Track),
-			  at(loc_at(Train,Location),
-			     Time))
-	      ]).
+side1(Track)=Location ->
+    initiates_at(rideTrack21(Train, Track),
+                 at_loc(Train, Location),
+                 Time).
 
 
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:43
 % [train,track,location,time]
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:44
 % Side1(track)=location ->
 % Terminates(RideTrack12(train,track),At(train,location),time).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:45
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:45
-equals(side1(Track), Location) ->
-    terminates(rideTrack12(Train, Track),
-               at(Train, Location),
-               Time).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:45
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:45
-reactive_rule([equals(side1(Track),Location)],
-	      [ terminates(rideTrack12(Train,Track),
-			   at(loc_at(Train,Location),
-			      Time))
-	      ]).
+side1(Track)=Location ->
+    terminates_at(rideTrack12(Train, Track),
+                  at_loc(Train, Location),
+                  Time).
 
 
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:47
 % [train,track,location,time]
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:48
 % Side2(track)=location ->
 % Terminates(RideTrack21(train,track),At(train,location),time).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:49
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:49
-equals(side2(Track), Location) ->
-    terminates(rideTrack21(Train, Track),
-               at(Train, Location),
-               Time).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:49
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:49
-reactive_rule([equals(side2(Track),Location)],
-	      [ terminates(rideTrack21(Train,Track),
-			   at(loc_at(Train,Location),
-			      Time))
-	      ]).
+side2(Track)=Location ->
+    terminates_at(rideTrack21(Train, Track),
+                  at_loc(Train, Location),
+                  Time).
 
 
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:51
 %; DriveStreet
 
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:53
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',54).
 % event DriveStreet12(vehicle,street)
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:54
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:54
 event(driveStreet12(vehicle,street)).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:54
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:54
-events([driveStreet12/2]).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:54
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:54
-events([driveStreet12/2]).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:54
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:54
-meta_argtypes(driveStreet12(vehicle,street)).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:54
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:54
-meta_argtypes(driveStreet12(vehicle,street)).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:54
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:54
-mpred_prop(driveStreet12(vehicle,street),event).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:54
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:54
-mpred_prop(driveStreet12(vehicle,street),event).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:54
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:54
-meta_argtypes(driveStreet12(vehicle,street)).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:54
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:54
-meta_argtypes(driveStreet12(vehicle,street)).
 
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:55
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',56).
 % event DriveStreet21(vehicle,street)
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:56
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:56
 event(driveStreet21(vehicle,street)).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:56
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:56
-events([driveStreet21/2]).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:56
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:56
-events([driveStreet21/2]).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:56
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:56
-meta_argtypes(driveStreet21(vehicle,street)).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:56
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:56
-meta_argtypes(driveStreet21(vehicle,street)).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:56
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:56
-mpred_prop(driveStreet21(vehicle,street),event).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:56
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:56
-mpred_prop(driveStreet21(vehicle,street),event).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:56
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:56
-meta_argtypes(driveStreet21(vehicle,street)).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:56
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:56
-meta_argtypes(driveStreet21(vehicle,street)).
 
 
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:57
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',58).
 % [vehicle,street,time]
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:58
 % Happens(DriveStreet12(vehicle,street),time) ->
 % HoldsAt(At(vehicle,Side1(street)),time).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:59
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:59
-happens(driveStreet12(Vehicle, Street), Time) ->
-    holds_at(at(Vehicle, side1(Street)), Time).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:59
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:59
-reactive_rule([ happens(driveStreet12(Vehicle,Street),
-			Time)
-	      ],
-	      [ holds(loc_at(Vehicle,side1(Street)),
-		      Time)
-	      ]).
+happens_at(driveStreet12(Vehicle, Street), Time) ->
+    holds_at(at_loc(Vehicle, side1(Street)), Time).
 
 
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:61
 % [vehicle,street,time]
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:62
 % Happens(DriveStreet21(vehicle,street),time) ->
 % HoldsAt(At(vehicle,Side2(street)),time).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:63
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:63
-happens(driveStreet21(Vehicle, Street), Time) ->
-    holds_at(at(Vehicle, side2(Street)), Time).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:63
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:63
-reactive_rule([ happens(driveStreet21(Vehicle,Street),
-			Time)
-	      ],
-	      [ holds(loc_at(Vehicle,side2(Street)),
-		      Time)
-	      ]).
+happens_at(driveStreet21(Vehicle, Street), Time) ->
+    holds_at(at_loc(Vehicle, side2(Street)), Time).
 
 
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:65
 % [vehicle,street,location,time]
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:66
 % Side2(street)=location ->
 % Initiates(DriveStreet12(vehicle,street),At(vehicle,location),time).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:67
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:67
-equals(side2(Street), Location) ->
-    initiates(driveStreet12(Vehicle, Street),
-              at(Vehicle, Location),
-              Time).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:67
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:67
-reactive_rule([equals(side2(Street),Location)],
-	      [ initiates(driveStreet12(Vehicle,Street),
-			  at(loc_at(Vehicle,Location),
-			     Time))
-	      ]).
+side2(Street)=Location ->
+    initiates_at(driveStreet12(Vehicle, Street),
+                 at_loc(Vehicle, Location),
+                 Time).
 
 
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:69
 % [vehicle,street,location,time]
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:70
 % Side1(street)=location ->
 % Initiates(DriveStreet21(vehicle,street),At(vehicle,location),time).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:71
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:71
-equals(side1(Street), Location) ->
-    initiates(driveStreet21(Vehicle, Street),
-              at(Vehicle, Location),
-              Time).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:71
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:71
-reactive_rule([equals(side1(Street),Location)],
-	      [ initiates(driveStreet21(Vehicle,Street),
-			  at(loc_at(Vehicle,Location),
-			     Time))
-	      ]).
+side1(Street)=Location ->
+    initiates_at(driveStreet21(Vehicle, Street),
+                 at_loc(Vehicle, Location),
+                 Time).
 
 
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:73
 % [vehicle,street,location,time]
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:74
 % Side1(street)=location ->
 % Terminates(DriveStreet12(vehicle,street),At(vehicle,location),time).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:75
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:75
-equals(side1(Street), Location) ->
-    terminates(driveStreet12(Vehicle, Street),
-               at(Vehicle, Location),
-               Time).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:75
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:75
-reactive_rule([equals(side1(Street),Location)],
-	      [ terminates(driveStreet12(Vehicle,Street),
-			   at(loc_at(Vehicle,Location),
-			      Time))
-	      ]).
+side1(Street)=Location ->
+    terminates_at(driveStreet12(Vehicle, Street),
+                  at_loc(Vehicle, Location),
+                  Time).
 
 
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:77
 % [vehicle,street,location,time]
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:78
 % Side2(street)=location ->
 % Terminates(DriveStreet21(vehicle,street),At(vehicle,location),time).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:79
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:79
-equals(side2(Street), Location) ->
-    terminates(driveStreet21(Vehicle, Street),
-               at(Vehicle, Location),
-               Time).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:79
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:79
-reactive_rule([equals(side2(Street),Location)],
-	      [ terminates(driveStreet21(Vehicle,Street),
-			   at(loc_at(Vehicle,Location),
-			      Time))
-	      ]).
+side2(Street)=Location ->
+    terminates_at(driveStreet21(Vehicle, Street),
+                  at_loc(Vehicle, Location),
+                  Time).
 
 
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:81
 %; Pulling
 
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:83
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',84).
 % event PointToward(agent,horse,street)
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:84
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:84
 event(pointToward(agent,horse,street)).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:84
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:84
-actions([pointToward/3]).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:84
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:84
-actions([pointToward/3]).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:84
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:84
-meta_argtypes(pointToward(agent,horse,street)).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:84
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:84
-meta_argtypes(pointToward(agent,horse,street)).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:84
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:84
-mpred_prop(pointToward(agent,horse,street),event).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:84
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:84
-mpred_prop(pointToward(agent,horse,street),event).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:84
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:84
-meta_argtypes(pointToward(agent,horse,street)).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:84
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:84
-meta_argtypes(pointToward(agent,horse,street)).
 
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:85
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',86).
 % fluent PointedToward(horse,street)
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:86
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:86
 fluent(pointedToward(horse,street)).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:86
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:86
-fluents([pointedToward/2]).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:86
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:86
-fluents([pointedToward/2]).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:86
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:86
-meta_argtypes(pointedToward(horse,street)).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:86
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:86
-meta_argtypes(pointedToward(horse,street)).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:86
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:86
-mpred_prop(pointedToward(horse,street),fluent).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:86
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:86
-mpred_prop(pointedToward(horse,street),fluent).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:86
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:86
-meta_argtypes(pointedToward(horse,street)).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:86
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:86
-meta_argtypes(pointedToward(horse,street)).
 
 
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:87
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',88).
 % [horse,street1,street2,time]
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:88
 % HoldsAt(PointedToward(horse,street1),time) &
 % HoldsAt(PointedToward(horse,street2),time) ->
 % street1=street2.
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:90
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:90
 holds_at(pointedToward(Horse, Street1), Time), holds_at(pointedToward(Horse, Street2), Time) ->
-    equals(Street1, Street2).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:90
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:90
-reactive_rule([ holds(pointedToward(Horse,Street1),
-		      Time),
-		holds(pointedToward(Horse,Street2),
-		      Time)
-	      ],
-	      [equals(Street1,Street2)]).
+    Street1=Street2.
 
 
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:92
 % [agent,horse,street,time]
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:93
 % Initiates(PointToward(agent,horse,street),
 %           PointedToward(horse,street),
 %           time).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:95
-
- /*  [] ->
-       ta(Time,
-          tvs1=[Time],
-          tvs2=[Time],
-          initiates(pointToward(Agent, Horse, Street),
-                    pointedToward(Horse, Street),
-                    Time)).
- */
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:95
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:95
-initiates(pointToward(PointtowardP_Num3_V,
-		      A,
-		      Pointtoward),
-	  pointedToward(A,Pointtoward),
-	  Initiates).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:95
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:95
-initiated(happens(pointToward(PointtowardP_Num3_V,
-			      A,
-			      Pointtoward),
-		  Maptime,
-		  Happens),
-	  pointedToward(A,Pointtoward),
-	  []).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',94).
+initiates_at(pointToward(Agent,Horse,Street),
+	     pointedToward(Horse,Street),
+	     Time).
 
 
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:97
 % [agent,horse,street1,street2,time]
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:98
 % HoldsAt(PointedToward(horse,street1),time) ->
 % Terminates(PointToward(agent,horse,street2),
 %            PointedToward(horse,street1),
 %            time).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:101
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:101
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',99).
 holds_at(pointedToward(Horse, Street1), Time) ->
-    terminates(pointToward(Agent, Horse, Street2),
-               pointedToward(Horse, Street1),
-               Time).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:101
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:101
-reactive_rule([ holds(pointedToward(Horse,Street1),
-		      Time)
-	      ],
-	      [ terminates(pointToward(Agent,
-				       Horse,
-				       Street2),
-			   at(pointedToward(Horse,Street1),
-			      Time))
-	      ]).
+    terminates_at(pointToward(Agent, Horse, Street2),
+                  pointedToward(Horse, Street1),
+                  Time).
 
 
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:103
 % [horse,vehicle,street,time]
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:104
 % Terminates(PullStreet12(horse,vehicle,street),
 %            PointedToward(horse,street),
 %            time).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:106
-
- /*  [] ->
-       ta(Time,
-          tvs1=[Time],
-          tvs2=[Time],
-          terminates(pullStreet12(Horse, Vehicle, Street),
-                     pointedToward(Horse, Street),
-                     Time)).
- */
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:106
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:106
-terminates(pullStreet12(Pullstreet12P_Num3_V,
-			_,
-			Pullstreet12),
-	   pointedToward(Pullstreet12P_Num3_V,Pullstreet12),
-	   Terminates).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:106
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:106
-terminated(happens(pullStreet12(Pullstreet12P_Num3_V,
-				_,
-				Pullstreet12),
-		   Maptime,
-		   Happens),
-	   pointedToward(Pullstreet12P_Num3_V,Pullstreet12),
-	   []).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',105).
+terminates_at(pullStreet12(Horse,Vehicle,Street),
+	      pointedToward(Horse,Street),
+	      Time).
 
 
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:108
 % [horse,vehicle,street,time]
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:109
 % Terminates(PullStreet21(horse,vehicle,street),
 %            PointedToward(horse,street),
 %            time).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:111
-
- /*  [] ->
-       ta(Time,
-          tvs1=[Time],
-          tvs2=[Time],
-          terminates(pullStreet21(Horse, Vehicle, Street),
-                     pointedToward(Horse, Street),
-                     Time)).
- */
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:111
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:111
-terminates(pullStreet21(Pullstreet21P_Num3_V,
-			_,
-			Pullstreet21),
-	   pointedToward(Pullstreet21P_Num3_V,Pullstreet21),
-	   Terminates).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:111
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:111
-terminated(happens(pullStreet21(Pullstreet21P_Num3_V,
-				_,
-				Pullstreet21),
-		   Maptime,
-		   Happens),
-	   pointedToward(Pullstreet21P_Num3_V,Pullstreet21),
-	   []).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',110).
+terminates_at(pullStreet21(Horse,Vehicle,Street),
+	      pointedToward(Horse,Street),
+	      Time).
 
 
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:113
 % [horse,street,time]
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:114
 % HoldsAt(PointedToward(horse,street),time) ->
 % HoldsAt(NearPortal(horse,street),time).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:115
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:115
 holds_at(pointedToward(Horse, Street), Time) ->
     holds_at(nearPortal(Horse, Street), Time).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:115
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:115
-reactive_rule([ holds(pointedToward(Horse,Street),
-		      Time)
-	      ],
-	      [holds(nearPortal(Horse,Street),Time)]).
 
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:117
 % event Lash(agent,horse)
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:118
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:118
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',117).
 event(lash(agent,horse)).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:118
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:118
-actions([lash/2]).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:118
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:118
-actions([lash/2]).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:118
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:118
-meta_argtypes(lash(agent,horse)).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:118
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:118
-meta_argtypes(lash(agent,horse)).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:118
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:118
-mpred_prop(lash(agent,horse),event).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:118
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:118
-mpred_prop(lash(agent,horse),event).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:118
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:118
-meta_argtypes(lash(agent,horse)).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:118
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:118
-meta_argtypes(lash(agent,horse)).
 
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:119
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',120).
 % fluent HitchedTo(horse,vehicle)
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:120
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:120
 fluent(hitchedTo(horse,vehicle)).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:120
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:120
-fluents([hitchedTo/2]).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:120
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:120
-fluents([hitchedTo/2]).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:120
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:120
-meta_argtypes(hitchedTo(horse,vehicle)).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:120
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:120
-meta_argtypes(hitchedTo(horse,vehicle)).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:120
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:120
-mpred_prop(hitchedTo(horse,vehicle),fluent).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:120
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:120
-mpred_prop(hitchedTo(horse,vehicle),fluent).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:120
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:120
-meta_argtypes(hitchedTo(horse,vehicle)).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:120
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:120
-meta_argtypes(hitchedTo(horse,vehicle)).
 
 
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:121
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',122).
 % [horse,vehicle,location,time]
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:122
 % HoldsAt(HitchedTo(horse,vehicle),time) &
 % HoldsAt(At(vehicle,location),time) ->
 % HoldsAt(At(horse,location),time).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:124
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:124
-holds_at(hitchedTo(Horse, Vehicle), Time), holds_at(at(Vehicle, Location), Time) ->
-    holds_at(at(Horse, Location), Time).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:124
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:124
-reactive_rule([ holds(hitchedTo(Horse,Vehicle),Time),
-		holds(loc_at(Vehicle,Location),Time)
-	      ],
-	      [holds(loc_at(Horse,Location),Time)]).
+holds_at(hitchedTo(Horse, Vehicle), Time), holds_at(at_loc(Vehicle, Location), Time) ->
+    holds_at(at_loc(Horse, Location), Time).
 
 
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:126
 % [agent,horse,vehicle,street,time]
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:127
 % Happens(Lash(agent,horse),time) &
 % HoldsAt(PointedToward(horse,street),time) &
 % HoldsAt(HitchedTo(horse,vehicle),time) &
 % HoldsAt(At(horse,Side1(street)),time) ->
 % Happens(PullStreet12(horse,vehicle,street),time).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:131
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:131
-happens(lash(Agent, Horse), Time), holds_at(pointedToward(Horse, Street), Time), holds_at(hitchedTo(Horse, Vehicle), Time), holds_at(at(Horse, side1(Street)), Time) ->
-    happens(pullStreet12(Horse, Vehicle, Street), Time).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:131
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:131
-reactive_rule([ happens(lash(Agent,Horse),Time),
-		holds(pointedToward(Horse,Street),
-		      Time),
-		holds(hitchedTo(Horse,Vehicle),Time),
-		holds(loc_at(Horse,side1(Street)),
-		      Time)
-	      ],
-	      [ happens(pullStreet12(Horse,
-				     Vehicle,
-				     Street),
-			Time)
-	      ]).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',128).
+happens_at(lash(Agent, Horse), Time), holds_at(pointedToward(Horse, Street), Time), holds_at(hitchedTo(Horse, Vehicle), Time), holds_at(at_loc(Horse, side1(Street)), Time) ->
+    happens_at(pullStreet12(Horse, Vehicle, Street),
+               Time).
 
 
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:133
 % [agent,horse,vehicle,street,time]
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:134
 % Happens(Lash(agent,horse),time) &
 % HoldsAt(PointedToward(horse,street),time) &
 % HoldsAt(HitchedTo(horse,vehicle),time) &
 % HoldsAt(At(horse,Side2(street)),time) ->
 % Happens(PullStreet21(horse,vehicle,street),time).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:138
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:138
-happens(lash(Agent, Horse), Time), holds_at(pointedToward(Horse, Street), Time), holds_at(hitchedTo(Horse, Vehicle), Time), holds_at(at(Horse, side2(Street)), Time) ->
-    happens(pullStreet21(Horse, Vehicle, Street), Time).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:138
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:138
-reactive_rule([ happens(lash(Agent,Horse),Time),
-		holds(pointedToward(Horse,Street),
-		      Time),
-		holds(hitchedTo(Horse,Vehicle),Time),
-		holds(loc_at(Horse,side2(Street)),
-		      Time)
-	      ],
-	      [ happens(pullStreet21(Horse,
-				     Vehicle,
-				     Street),
-			Time)
-	      ]).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',135).
+happens_at(lash(Agent, Horse), Time), holds_at(pointedToward(Horse, Street), Time), holds_at(hitchedTo(Horse, Vehicle), Time), holds_at(at_loc(Horse, side2(Street)), Time) ->
+    happens_at(pullStreet21(Horse, Vehicle, Street),
+               Time).
 
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:140
 % event PullStreet12(horse,vehicle,street)
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:141
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:141
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',140).
 event(pullStreet12(horse,vehicle,street)).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:141
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:141
-events([pullStreet12/3]).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:141
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:141
-events([pullStreet12/3]).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:141
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:141
-meta_argtypes(pullStreet12(horse,vehicle,street)).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:141
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:141
-meta_argtypes(pullStreet12(horse,vehicle,street)).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:141
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:141
-mpred_prop(pullStreet12(horse,vehicle,street),event).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:141
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:141
-mpred_prop(pullStreet12(horse,vehicle,street),event).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:141
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:141
-meta_argtypes(pullStreet12(horse,vehicle,street)).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:141
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:141
-meta_argtypes(pullStreet12(horse,vehicle,street)).
 
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:142
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',143).
 % event PullStreet21(horse,vehicle,street)
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:143
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:143
 event(pullStreet21(horse,vehicle,street)).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:143
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:143
-events([pullStreet21/3]).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:143
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:143
-events([pullStreet21/3]).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:143
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:143
-meta_argtypes(pullStreet21(horse,vehicle,street)).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:143
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:143
-meta_argtypes(pullStreet21(horse,vehicle,street)).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:143
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:143
-mpred_prop(pullStreet21(horse,vehicle,street),event).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:143
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:143
-mpred_prop(pullStreet21(horse,vehicle,street),event).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:143
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:143
-meta_argtypes(pullStreet21(horse,vehicle,street)).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:143
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:143
-meta_argtypes(pullStreet21(horse,vehicle,street)).
 
 
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:144
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',145).
 % [horse,vehicle,street,time]
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:145
 % Happens(PullStreet12(horse,vehicle,street),time) ->
 % Happens(DriveStreet12(vehicle,street),time).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:146
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:146
-happens(pullStreet12(Horse, Vehicle, Street), Time) ->
-    happens(driveStreet12(Vehicle, Street), Time).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:146
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:146
-reactive_rule([ happens(pullStreet12(Horse,
-				     Vehicle,
-				     Street),
-			Time)
-	      ],
-	      [ happens(driveStreet12(Vehicle,Street),
-			Time)
-	      ]).
+happens_at(pullStreet12(Horse, Vehicle, Street), Time) ->
+    happens_at(driveStreet12(Vehicle, Street), Time).
 
 
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:148
 % [horse,vehicle,street,time]
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:149
 % Happens(PullStreet21(horse,vehicle,street),time) ->
 % Happens(DriveStreet21(vehicle,street),time).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:150
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:150
-happens(pullStreet21(Horse, Vehicle, Street), Time) ->
-    happens(driveStreet21(Vehicle, Street), Time).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:150
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:150
-reactive_rule([ happens(pullStreet21(Horse,
-				     Vehicle,
-				     Street),
-			Time)
-	      ],
-	      [ happens(driveStreet21(Vehicle,Street),
-			Time)
-	      ]).
+happens_at(pullStreet21(Horse, Vehicle, Street), Time) ->
+    happens_at(driveStreet21(Vehicle, Street), Time).
 
 
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:152
 % [horse,vehicle,street,time]
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:153
 % Happens(PullStreet12(horse,vehicle,street),time) ->
 % HoldsAt(At(horse,Side1(street)),time).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:154
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:154
-happens(pullStreet12(Horse, Vehicle, Street), Time) ->
-    holds_at(at(Horse, side1(Street)), Time).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:154
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:154
-reactive_rule([ happens(pullStreet12(Horse,
-				     Vehicle,
-				     Street),
-			Time)
-	      ],
-	      [ holds(loc_at(Horse,side1(Street)),
-		      Time)
-	      ]).
+happens_at(pullStreet12(Horse, Vehicle, Street), Time) ->
+    holds_at(at_loc(Horse, side1(Street)), Time).
 
 
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:156
 % [horse,vehicle,street,time]
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:157
 % Happens(PullStreet21(horse,vehicle,street),time) ->
 % HoldsAt(At(horse,Side2(street)),time).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:158
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:158
-happens(pullStreet21(Horse, Vehicle, Street), Time) ->
-    holds_at(at(Horse, side2(Street)), Time).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:158
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:158
-reactive_rule([ happens(pullStreet21(Horse,
-				     Vehicle,
-				     Street),
-			Time)
-	      ],
-	      [ holds(loc_at(Horse,side2(Street)),
-		      Time)
-	      ]).
+happens_at(pullStreet21(Horse, Vehicle, Street), Time) ->
+    holds_at(at_loc(Horse, side2(Street)), Time).
 
 
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:160
 % [horse,vehicle,street,location,time]
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:161
 % Side2(street)=location ->
 % Initiates(PullStreet12(horse,vehicle,street),At(horse,location),time).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:162
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:162
-equals(side2(Street), Location) ->
-    initiates(pullStreet12(Horse, Vehicle, Street),
-              at(Horse, Location),
-              Time).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:162
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:162
-reactive_rule([equals(side2(Street),Location)],
-	      [ initiates(pullStreet12(Horse,
-				       Vehicle,
-				       Street),
-			  at(loc_at(Horse,Location),
-			     Time))
-	      ]).
+side2(Street)=Location ->
+    initiates_at(pullStreet12(Horse, Vehicle, Street),
+                 at_loc(Horse, Location),
+                 Time).
 
 
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:164
 % [horse,vehicle,street,location,time]
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:165
 % Side1(street)=location ->
 % Initiates(PullStreet21(horse,vehicle,street),At(horse,location),time).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:166
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:166
-equals(side1(Street), Location) ->
-    initiates(pullStreet21(Horse, Vehicle, Street),
-              at(Horse, Location),
-              Time).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:166
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:166
-reactive_rule([equals(side1(Street),Location)],
-	      [ initiates(pullStreet21(Horse,
-				       Vehicle,
-				       Street),
-			  at(loc_at(Horse,Location),
-			     Time))
-	      ]).
+side1(Street)=Location ->
+    initiates_at(pullStreet21(Horse, Vehicle, Street),
+                 at_loc(Horse, Location),
+                 Time).
 
 
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:168
 % [horse,vehicle,street,location,time]
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:169
 % Side1(street)=location ->
 % Terminates(PullStreet12(horse,vehicle,street),At(horse,location),time).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:170
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:170
-equals(side1(Street), Location) ->
-    terminates(pullStreet12(Horse, Vehicle, Street),
-               at(Horse, Location),
-               Time).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:170
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:170
-reactive_rule([equals(side1(Street),Location)],
-	      [ terminates(pullStreet12(Horse,
-					Vehicle,
-					Street),
-			   at(loc_at(Horse,Location),
-			      Time))
-	      ]).
+side1(Street)=Location ->
+    terminates_at(pullStreet12(Horse, Vehicle, Street),
+                  at_loc(Horse, Location),
+                  Time).
 
 
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:172
 % [horse,vehicle,street,location,time]
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:173
 % Side2(street)=location ->
 % Terminates(PullStreet21(horse,vehicle,street),At(horse,location),time).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:174
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:174
-equals(side2(Street), Location) ->
-    terminates(pullStreet21(Horse, Vehicle, Street),
-               at(Horse, Location),
-               Time).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:174
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:174
-reactive_rule([equals(side2(Street),Location)],
-	      [ terminates(pullStreet21(Horse,
-					Vehicle,
-					Street),
-			   at(loc_at(Horse,Location),
-			      Time))
-	      ]).
+side2(Street)=Location ->
+    terminates_at(pullStreet21(Horse, Vehicle, Street),
+                  at_loc(Horse, Location),
+                  Time).
 
 
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:176
 %; OnVehicle
 
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:178
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',179).
 % fluent OnVehicle(object,vehicleon)
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:179
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:179
 fluent(onVehicle(object,vehicleon)).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:179
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:179
-fluents([onVehicle/2]).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:179
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:179
-fluents([onVehicle/2]).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:179
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:179
-meta_argtypes(onVehicle(object,vehicleon)).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:179
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:179
-meta_argtypes(onVehicle(object,vehicleon)).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:179
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:179
-mpred_prop(onVehicle(object,vehicleon),fluent).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:179
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:179
-mpred_prop(onVehicle(object,vehicleon),fluent).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:179
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:179
-meta_argtypes(onVehicle(object,vehicleon)).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:179
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:179
-meta_argtypes(onVehicle(object,vehicleon)).
 
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:180
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',181).
 % event GetOnVehicle(agent,vehicleon)
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:181
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:181
 event(getOnVehicle(agent,vehicleon)).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:181
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:181
-actions([getOnVehicle/2]).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:181
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:181
-actions([getOnVehicle/2]).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:181
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:181
-meta_argtypes(getOnVehicle(agent,vehicleon)).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:181
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:181
-meta_argtypes(getOnVehicle(agent,vehicleon)).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:181
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:181
-mpred_prop(getOnVehicle(agent,vehicleon),event).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:181
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:181
-mpred_prop(getOnVehicle(agent,vehicleon),event).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:181
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:181
-meta_argtypes(getOnVehicle(agent,vehicleon)).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:181
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:181
-meta_argtypes(getOnVehicle(agent,vehicleon)).
 
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:182
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',183).
 % event GetOffVehicle(agent,vehicleon)
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:183
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:183
 event(getOffVehicle(agent,vehicleon)).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:183
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:183
-actions([getOffVehicle/2]).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:183
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:183
-actions([getOffVehicle/2]).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:183
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:183
-meta_argtypes(getOffVehicle(agent,vehicleon)).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:183
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:183
-meta_argtypes(getOffVehicle(agent,vehicleon)).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:183
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:183
-mpred_prop(getOffVehicle(agent,vehicleon),event).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:183
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:183
-mpred_prop(getOffVehicle(agent,vehicleon),event).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:183
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:183
-meta_argtypes(getOffVehicle(agent,vehicleon)).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:183
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:183
-meta_argtypes(getOffVehicle(agent,vehicleon)).
 
 
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:184
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',185).
 % [vehicleon1,vehicleon2,time]
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:185
 % HoldsAt(OnVehicle(vehicleon1,vehicleon2),time) ->
 % vehicleon1!=vehicleon2.
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:186
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:186
 holds_at(onVehicle(Vehicleon1, Vehicleon2), Time) ->
-    diff(Vehicleon1, Vehicleon2).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:186
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:186
-reactive_rule([ holds(onVehicle(Vehicleon1,Vehicleon2),
-		      Time)
-	      ],
-	      [diff(Vehicleon1,Vehicleon2)]).
+    Vehicleon1\=Vehicleon2.
 
 
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:188
 % [vehicleon1,vehicleon2,time]
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:189
 % HoldsAt(OnVehicle(vehicleon1,vehicleon2),time) ->
 % !HoldsAt(OnVehicle(vehicleon2,vehicleon1),time).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:190
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:190
 holds_at(onVehicle(Vehicleon1, Vehicleon2), Time) ->
-    holds_at(neg(onVehicle(Vehicleon2, Vehicleon1)), Time).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:190
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:190
-reactive_rule([ holds(onVehicle(Vehicleon1,Vehicleon2),
-		      Time)
-	      ],
-	      [ holds(not(onVehicle(Vehicleon2,Vehicleon1)),
-		      Time)
-	      ]).
+    holds_at(not(onVehicle(Vehicleon2, Vehicleon1)), Time).
 
 
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:192
 % [agent,vehicleon,time]
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:193
 % Initiates(GetOnVehicle(agent,vehicleon),OnVehicle(agent,vehicleon),time).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:193
-
- /*  [] ->
-       ta(Time,
-          tvs1=[Time],
-          tvs2=[Time],
-          initiates(getOnVehicle(Agent, Vehicleon),
-                    onVehicle(Agent, Vehicleon),
-                    Time)).
- */
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:193
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:193
-initiates(getOnVehicle(A,Getonvehicle),
-	  onVehicle(A,Getonvehicle),
-	  Initiates).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:193
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:193
-initiated(happens(getOnVehicle(A,Getonvehicle),
-		  Maptime,
-		  Happens),
-	  onVehicle(A,Getonvehicle),
-	  []).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',194).
+initiates_at(getOnVehicle(Agent,Vehicleon),
+	     onVehicle(Agent,Vehicleon),
+	     Time).
 
 
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:195
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',196).
 % [agent,vehicleon,time]
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:196
 % Happens(GetOnVehicle(agent,vehicleon),time) ->
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:197
 % {location}% 
 %  HoldsAt(At(agent,location),time) &
 %  HoldsAt(At(vehicleon,location),time).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:199
-
- /*  exists([Location],
-    happens(getOnVehicle(Agent, Vehicleon), Time) ->
-       holds_at(at(Agent, Location), Time),
-       holds_at(at(Vehicleon, Location), Time)).
- */
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:199
-
- /*  not(happens(getOnVehicle(Agent, Vehicleon), Time)) :-
-       (   not(holds_at(at(Agent, Exists_Location), Time))
-       ;   not(holds_at(at(Vehicleon, Exists_Location), Time))
-       ),
-       some(Exists_Location,
-            '$kolem_Fn_112'(Agent, Vehicleon, Time)).
- */
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:199
-
- /*  [(holds_at(neg(at(Agent, Exists_Location)), Time);holds_at(neg(at(Vehicleon, Exists_Location)), Time)), some(Exists_Location, '$kolem_Fn_112'(Agent, Vehicleon, Time))] ->
-       ta(Time,
-          tvs1=[Time],
-          tvs2=[Time],
-          not(happens(getOnVehicle(Agent, Vehicleon), Time))).
- */
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:199
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:199
-(holds_at(neg(at(Kolem_Fn_112P_Num3_V, Location5)), Time6);holds_at(neg(at(Getonvehicle, Location5)), Time6)), some(Location5, '$kolem_Fn_112'(Kolem_Fn_112P_Num3_V, Getonvehicle, Time6)) ->
-    not(happens(getOnVehicle(Kolem_Fn_112P_Num3_V, Getonvehicle),
-                Time6)).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:199
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:199
- reactive_rule([  (at(not(loc_at(Kolem_Fn_112P_Num3_V, Location5)), Time6);at(not(loc_at(Getonvehicle, Location5)), Time6)),
-                   some(Location5,
-                        '$kolem_Fn_112'(Kolem_Fn_112P_Num3_V,
-                                        Getonvehicle,
-                                        Time6))
-                 ],
-                 [ not(happens(getOnVehicle(Kolem_Fn_112P_Num3_V,
-                                            Getonvehicle),
-                               Time6))
-                 ]).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:199
-
- /*  holds_at(at(Agent, Exists_Location), Time) :-
-       happens(getOnVehicle(Agent, Vehicleon), Time),
-       some(Exists_Location,
-            '$kolem_Fn_112'(Agent, Vehicleon, Time)).
- */
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:199
-
- /*  [happens(getOnVehicle(Agent, Vehicleon), Time), some(Exists_Location, '$kolem_Fn_112'(Agent, Vehicleon, Time))] ->
-       ta(Time,
-          tvs1=[Time],
-          tvs2=[Time],
-          holds_at(at(Agent, Exists_Location), Time)).
- */
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:199
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:199
-happens(getOnVehicle(Kolem_Fn_112P_Num3_V12, Getonvehicle11), Maptime), some(Location10, '$kolem_Fn_112'(Kolem_Fn_112P_Num3_V12, Getonvehicle11, Maptime)) ->
-    holds_at(at(Kolem_Fn_112P_Num3_V12, Location10), Maptime).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:199
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:199
-reactive_rule([ happens(getOnVehicle(Kolem_Fn_112P_Num3_V12,
-				     Getonvehicle11),
-			Maptime),
-		some(Location10,
-		     '$kolem_Fn_112'(Kolem_Fn_112P_Num3_V12,
-				     Getonvehicle11,
-				     Maptime))
-	      ],
-	      [ holds(loc_at(Kolem_Fn_112P_Num3_V12,
-			     Location10),
-		      Maptime)
-	      ]).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:199
-
- /*  holds_at(at(Vehicleon, Exists_Location), Time) :-
-       happens(getOnVehicle(Agent, Vehicleon), Time),
-       some(Exists_Location,
-            '$kolem_Fn_112'(Agent, Vehicleon, Time)).
- */
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:199
-
- /*  [happens(getOnVehicle(Agent, Vehicleon), Time), some(Exists_Location, '$kolem_Fn_112'(Agent, Vehicleon, Time))] ->
-       ta(Time,
-          tvs1=[Time],
-          tvs2=[Time],
-          holds_at(at(Vehicleon, Exists_Location), Time)).
- */
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:199
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:199
-happens(getOnVehicle(Kolem_Fn_112P_Num3_V16, Getonvehicle15), Maptime13), some(Location14, '$kolem_Fn_112'(Kolem_Fn_112P_Num3_V16, Getonvehicle15, Maptime13)) ->
-    holds_at(at(Getonvehicle15, Location14), Maptime13).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:199
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:199
-reactive_rule([ happens(getOnVehicle(Kolem_Fn_112P_Num3_V16,
-				     Getonvehicle15),
-			Maptime13),
-		some(Location14,
-		     '$kolem_Fn_112'(Kolem_Fn_112P_Num3_V16,
-				     Getonvehicle15,
-				     Maptime13))
-	      ],
-	      [ holds(loc_at(Getonvehicle15,Location14),
-		      Maptime13)
-	      ]).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',198).
+exists([Location],  (happens_at(getOnVehicle(Agent, Vehicleon), Time)->holds_at(at_loc(Agent, Location), Time), holds_at(at_loc(Vehicleon, Location), Time))).
 
 
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:201
 % [agent,vehicleon,time]
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:202
 % Terminates(GetOffVehicle(agent,vehicleon),OnVehicle(agent,vehicleon),time).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:202
-
- /*  [] ->
-       ta(Time,
-          tvs1=[Time],
-          tvs2=[Time],
-          terminates(getOffVehicle(Agent, Vehicleon),
-                     onVehicle(Agent, Vehicleon),
-                     Time)).
- */
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:202
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:202
-terminates(getOffVehicle(A,Getoffvehicle),
-	   onVehicle(A,Getoffvehicle),
-	   Terminates).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:202
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:202
-terminated(happens(getOffVehicle(A,Getoffvehicle),
-		   Maptime,
-		   Happens),
-	   onVehicle(A,Getoffvehicle),
-	   []).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',203).
+terminates_at(getOffVehicle(Agent,Vehicleon),
+	      onVehicle(Agent,Vehicleon),
+	      Time).
 
 
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:204
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',205).
 % [agent,vehicleon,time]
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:205
 % Happens(GetOffVehicle(agent,vehicleon),time) ->
 % HoldsAt(OnVehicle(agent,vehicleon),time).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:206
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:206
-happens(getOffVehicle(Agent, Vehicleon), Time) ->
+happens_at(getOffVehicle(Agent, Vehicleon), Time) ->
     holds_at(onVehicle(Agent, Vehicleon), Time).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:206
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:206
-reactive_rule([ happens(getOffVehicle(Agent,Vehicleon),
-			Time)
-	      ],
-	      [ holds(onVehicle(Agent,Vehicleon),
-		      Time)
-	      ]).
 
 
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:208
 % [agent,vehicleon,location,time]
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:209
 % Releases(GetOnVehicle(agent,vehicleon),
 %          At(agent,location),
 %          time).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:211
-
- /*  [] ->
-       ta(Time,
-          tvs1=[Time],
-          tvs2=[Time],
-          releases(getOnVehicle(Agent, Vehicleon),
-                   at(Agent, Location),
-                   Time)).
- */
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:211
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:211
-releases(getOnVehicle(A,Getonvehicle),
-	 at(A,Location4),
-	 Releases).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:211
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:211
-releases(getOnVehicle(A,Getonvehicle),
-	 loc_at(A,Location4),
-	 Releases).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:211
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:211
-releases(getOnVehicle(A,Getonvehicle),
-	 loc_at(A,Location4),
-	 Releases).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',210).
+releases_at(getOnVehicle(Agent,Vehicleon),
+	    at_loc(Agent,Location),
+	    Time).
 
 
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:213
 %;[agent,vehicleon,location1,location2,time]
 %;HoldsAt(At(vehicleon,location1),time) &
 %;location1 != location2 ->
@@ -1388,403 +427,100 @@ releases(getOnVehicle(A,Getonvehicle),
 %;           At(agent,location2),
 %;           time).
 % [agent,vehicleon,location,time]
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:221
 % HoldsAt(At(vehicleon,location),time) ->
 % Initiates(GetOffVehicle(agent,vehicleon),
 %           At(agent,location),
 %           time).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:224
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:224
-holds_at(at(Vehicleon, Location), Time) ->
-    initiates(getOffVehicle(Agent, Vehicleon),
-              at(Agent, Location),
-              Time).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:224
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:224
-reactive_rule([ holds(loc_at(Vehicleon,Location),
-		      Time)
-	      ],
-	      [ initiates(getOffVehicle(Agent,Vehicleon),
-			  at(loc_at(Agent,Location),
-			     Time))
-	      ]).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',221).
+holds_at(at_loc(Vehicleon, Location), Time) ->
+    initiates_at(getOffVehicle(Agent, Vehicleon),
+                 at_loc(Agent, Location),
+                 Time).
 
 
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:226
 % [object,vehicleon,location,time]
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:227
 % HoldsAt(OnVehicle(object,vehicleon),time) &
 % HoldsAt(At(vehicleon,location),time) ->
 % HoldsAt(At(object,location),time).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:229
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:229
-holds_at(onVehicle(Object, Vehicleon), Time), holds_at(at(Vehicleon, Location), Time) ->
-    holds_at(at(Object, Location), Time).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:229
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:229
-reactive_rule([ holds(onVehicle(Object,Vehicleon),
-		      Time),
-		holds(loc_at(Vehicleon,Location),
-		      Time)
-	      ],
-	      [holds(loc_at(Object,Location),Time)]).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',228).
+holds_at(onVehicle(Object, Vehicleon), Time), holds_at(at_loc(Vehicleon, Location), Time) ->
+    holds_at(at_loc(Object, Location), Time).
 
 
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:231
 %; InVehicle
 
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:233
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',234).
 % fluent InVehicle(object,vehiclein)
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:234
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:234
 fluent(inVehicle(object,vehiclein)).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:234
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:234
-fluents([inVehicle/2]).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:234
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:234
-fluents([inVehicle/2]).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:234
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:234
-meta_argtypes(inVehicle(object,vehiclein)).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:234
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:234
-meta_argtypes(inVehicle(object,vehiclein)).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:234
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:234
-mpred_prop(inVehicle(object,vehiclein),fluent).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:234
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:234
-mpred_prop(inVehicle(object,vehiclein),fluent).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:234
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:234
-meta_argtypes(inVehicle(object,vehiclein)).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:234
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:234
-meta_argtypes(inVehicle(object,vehiclein)).
 
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:235
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',236).
 % event GetInVehicle(agent,vehiclein)
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:236
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:236
 event(getInVehicle(agent,vehiclein)).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:236
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:236
-actions([getInVehicle/2]).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:236
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:236
-actions([getInVehicle/2]).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:236
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:236
-meta_argtypes(getInVehicle(agent,vehiclein)).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:236
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:236
-meta_argtypes(getInVehicle(agent,vehiclein)).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:236
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:236
-mpred_prop(getInVehicle(agent,vehiclein),event).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:236
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:236
-mpred_prop(getInVehicle(agent,vehiclein),event).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:236
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:236
-meta_argtypes(getInVehicle(agent,vehiclein)).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:236
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:236
-meta_argtypes(getInVehicle(agent,vehiclein)).
 
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:237
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',238).
 % event GetOutOfVehicle(agent,vehiclein)
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:238
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:238
 event(getOutOfVehicle(agent,vehiclein)).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:238
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:238
-actions([getOutOfVehicle/2]).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:238
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:238
-actions([getOutOfVehicle/2]).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:238
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:238
-meta_argtypes(getOutOfVehicle(agent,vehiclein)).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:238
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:238
-meta_argtypes(getOutOfVehicle(agent,vehiclein)).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:238
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:238
-mpred_prop(getOutOfVehicle(agent,vehiclein),event).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:238
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:238
-mpred_prop(getOutOfVehicle(agent,vehiclein),event).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:238
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:238
-meta_argtypes(getOutOfVehicle(agent,vehiclein)).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:238
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:238
-meta_argtypes(getOutOfVehicle(agent,vehiclein)).
 
 
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:239
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',240).
 % [vehiclein1,vehiclein2,time]
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:240
 % HoldsAt(InVehicle(vehiclein1,vehiclein2),time) ->
 % vehiclein1!=vehiclein2.
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:241
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:241
 holds_at(inVehicle(Vehiclein1, Vehiclein2), Time) ->
-    diff(Vehiclein1, Vehiclein2).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:241
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:241
-reactive_rule([ holds(inVehicle(Vehiclein1,Vehiclein2),
-		      Time)
-	      ],
-	      [diff(Vehiclein1,Vehiclein2)]).
+    Vehiclein1\=Vehiclein2.
 
 
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:243
 % [vehiclein1,vehiclein2,time]
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:244
 % HoldsAt(InVehicle(vehiclein1,vehiclein2),time) ->
 % !HoldsAt(InVehicle(vehiclein2,vehiclein1),time).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:245
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:245
 holds_at(inVehicle(Vehiclein1, Vehiclein2), Time) ->
-    holds_at(neg(inVehicle(Vehiclein2, Vehiclein1)), Time).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:245
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:245
-reactive_rule([ holds(inVehicle(Vehiclein1,Vehiclein2),
-		      Time)
-	      ],
-	      [ holds(not(inVehicle(Vehiclein2,Vehiclein1)),
-		      Time)
-	      ]).
+    holds_at(not(inVehicle(Vehiclein2, Vehiclein1)), Time).
 
 
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:247
 % [agent,vehiclein,time]
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:248
 % Initiates(GetInVehicle(agent,vehiclein),InVehicle(agent,vehiclein),time).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:248
-
- /*  [] ->
-       ta(Time,
-          tvs1=[Time],
-          tvs2=[Time],
-          initiates(getInVehicle(Agent, Vehiclein),
-                    inVehicle(Agent, Vehiclein),
-                    Time)).
- */
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:248
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:248
-initiates(getInVehicle(A,Getinvehicle),
-	  inVehicle(A,Getinvehicle),
-	  Initiates).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:248
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:248
-initiated(happens(getInVehicle(A,Getinvehicle),
-		  Maptime,
-		  Happens),
-	  inVehicle(A,Getinvehicle),
-	  []).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',249).
+initiates_at(getInVehicle(Agent,Vehiclein),
+	     inVehicle(Agent,Vehiclein),
+	     Time).
 
 
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:250
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',251).
 % [agent,vehiclein,time]
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:251
 % Happens(GetInVehicle(agent,vehiclein),time) ->
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:252
 % {location}% 
 %  HoldsAt(At(agent,location),time) &
 %  HoldsAt(At(vehiclein,location),time).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:254
-
- /*  exists([Location],
-    happens(getInVehicle(Agent, Vehiclein), Time) ->
-       holds_at(at(Agent, Location), Time),
-       holds_at(at(Vehiclein, Location), Time)).
- */
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:254
-
- /*  not(happens(getInVehicle(Agent, Vehiclein), Time)) :-
-       (   not(holds_at(at(Agent, Exists_Location), Time))
-       ;   not(holds_at(at(Vehiclein, Exists_Location), Time))
-       ),
-       some(Exists_Location,
-            '$kolem_Fn_113'(Agent, Vehiclein, Time)).
- */
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:254
-
- /*  [(holds_at(neg(at(Agent, Exists_Location)), Time);holds_at(neg(at(Vehiclein, Exists_Location)), Time)), some(Exists_Location, '$kolem_Fn_113'(Agent, Vehiclein, Time))] ->
-       ta(Time,
-          tvs1=[Time],
-          tvs2=[Time],
-          not(happens(getInVehicle(Agent, Vehiclein), Time))).
- */
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:254
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:254
-(holds_at(neg(at(Kolem_Fn_113P_Num3_V, Location5)), Time6);holds_at(neg(at(Getinvehicle, Location5)), Time6)), some(Location5, '$kolem_Fn_113'(Kolem_Fn_113P_Num3_V, Getinvehicle, Time6)) ->
-    not(happens(getInVehicle(Kolem_Fn_113P_Num3_V, Getinvehicle),
-                Time6)).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:254
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:254
- reactive_rule([  (at(not(loc_at(Kolem_Fn_113P_Num3_V, Location5)), Time6);at(not(loc_at(Getinvehicle, Location5)), Time6)),
-                   some(Location5,
-                        '$kolem_Fn_113'(Kolem_Fn_113P_Num3_V,
-                                        Getinvehicle,
-                                        Time6))
-                 ],
-                 [ not(happens(getInVehicle(Kolem_Fn_113P_Num3_V,
-                                            Getinvehicle),
-                               Time6))
-                 ]).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:254
-
- /*  holds_at(at(Agent, Exists_Location), Time) :-
-       happens(getInVehicle(Agent, Vehiclein), Time),
-       some(Exists_Location,
-            '$kolem_Fn_113'(Agent, Vehiclein, Time)).
- */
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:254
-
- /*  [happens(getInVehicle(Agent, Vehiclein), Time), some(Exists_Location, '$kolem_Fn_113'(Agent, Vehiclein, Time))] ->
-       ta(Time,
-          tvs1=[Time],
-          tvs2=[Time],
-          holds_at(at(Agent, Exists_Location), Time)).
- */
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:254
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:254
-happens(getInVehicle(Kolem_Fn_113P_Num3_V12, Getinvehicle11), Maptime), some(Location10, '$kolem_Fn_113'(Kolem_Fn_113P_Num3_V12, Getinvehicle11, Maptime)) ->
-    holds_at(at(Kolem_Fn_113P_Num3_V12, Location10), Maptime).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:254
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:254
-reactive_rule([ happens(getInVehicle(Kolem_Fn_113P_Num3_V12,
-				     Getinvehicle11),
-			Maptime),
-		some(Location10,
-		     '$kolem_Fn_113'(Kolem_Fn_113P_Num3_V12,
-				     Getinvehicle11,
-				     Maptime))
-	      ],
-	      [ holds(loc_at(Kolem_Fn_113P_Num3_V12,
-			     Location10),
-		      Maptime)
-	      ]).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:254
-
- /*  holds_at(at(Vehiclein, Exists_Location), Time) :-
-       happens(getInVehicle(Agent, Vehiclein), Time),
-       some(Exists_Location,
-            '$kolem_Fn_113'(Agent, Vehiclein, Time)).
- */
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:254
-
- /*  [happens(getInVehicle(Agent, Vehiclein), Time), some(Exists_Location, '$kolem_Fn_113'(Agent, Vehiclein, Time))] ->
-       ta(Time,
-          tvs1=[Time],
-          tvs2=[Time],
-          holds_at(at(Vehiclein, Exists_Location), Time)).
- */
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:254
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:254
-happens(getInVehicle(Kolem_Fn_113P_Num3_V16, Getinvehicle15), Maptime13), some(Location14, '$kolem_Fn_113'(Kolem_Fn_113P_Num3_V16, Getinvehicle15, Maptime13)) ->
-    holds_at(at(Getinvehicle15, Location14), Maptime13).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:254
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:254
-reactive_rule([ happens(getInVehicle(Kolem_Fn_113P_Num3_V16,
-				     Getinvehicle15),
-			Maptime13),
-		some(Location14,
-		     '$kolem_Fn_113'(Kolem_Fn_113P_Num3_V16,
-				     Getinvehicle15,
-				     Maptime13))
-	      ],
-	      [ holds(loc_at(Getinvehicle15,Location14),
-		      Maptime13)
-	      ]).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',253).
+exists([Location],  (happens_at(getInVehicle(Agent, Vehiclein), Time)->holds_at(at_loc(Agent, Location), Time), holds_at(at_loc(Vehiclein, Location), Time))).
 
 
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:256
 % [agent,vehiclein,time]
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:257
 % Terminates(GetOutOfVehicle(agent,vehiclein),InVehicle(agent,vehiclein),time).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:257
-
- /*  [] ->
-       ta(Time,
-          tvs1=[Time],
-          tvs2=[Time],
-          terminates(getOutOfVehicle(Agent, Vehiclein),
-                     inVehicle(Agent, Vehiclein),
-                     Time)).
- */
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:257
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:257
-terminates(getOutOfVehicle(A,Getoutofvehicle),
-	   inVehicle(A,Getoutofvehicle),
-	   Terminates).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:257
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:257
-terminated(happens(getOutOfVehicle(A,Getoutofvehicle),
-		   Maptime,
-		   Happens),
-	   inVehicle(A,Getoutofvehicle),
-	   []).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',258).
+terminates_at(getOutOfVehicle(Agent,Vehiclein),
+	      inVehicle(Agent,Vehiclein),
+	      Time).
 
 
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:259
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',260).
 % [agent,vehiclein,time]
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:260
 % Happens(GetOutOfVehicle(agent,vehiclein),time) ->
 % HoldsAt(InVehicle(agent,vehiclein),time).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:261
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:261
-happens(getOutOfVehicle(Agent, Vehiclein), Time) ->
+happens_at(getOutOfVehicle(Agent, Vehiclein), Time) ->
     holds_at(inVehicle(Agent, Vehiclein), Time).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:261
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:261
-reactive_rule([ happens(getOutOfVehicle(Agent,Vehiclein),
-			Time)
-	      ],
-	      [ holds(inVehicle(Agent,Vehiclein),
-		      Time)
-	      ]).
 
 
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:263
 % [agent,vehiclein,location,time]
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:264
 % Releases(GetInVehicle(agent,vehiclein),
 %          At(agent,location),
 %          time).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:266
-
- /*  [] ->
-       ta(Time,
-          tvs1=[Time],
-          tvs2=[Time],
-          releases(getInVehicle(Agent, Vehiclein),
-                   at(Agent, Location),
-                   Time)).
- */
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:266
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:266
-releases(getInVehicle(A,Getinvehicle),
-	 at(A,Location4),
-	 Releases).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:266
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:266
-releases(getInVehicle(A,Getinvehicle),
-	 loc_at(A,Location4),
-	 Releases).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:266
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:266
-releases(getInVehicle(A,Getinvehicle),
-	 loc_at(A,Location4),
-	 Releases).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',265).
+releases_at(getInVehicle(Agent,Vehiclein),
+	    at_loc(Agent,Location),
+	    Time).
 
 
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:268
 %;[agent,vehiclein,location1,location2,time]
 %;HoldsAt(At(vehiclein,location1),time) &
 %;location1 != location2 ->
@@ -1792,557 +528,195 @@ releases(getInVehicle(A,Getinvehicle),
 %;           At(agent,location2),
 %;           time).
 % [agent,vehiclein,location,time]
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:276
 % HoldsAt(At(vehiclein,location),time) ->
 % Initiates(GetOutOfVehicle(agent,vehiclein),
 %           At(agent,location),
 %           time).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:279
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:279
-holds_at(at(Vehiclein, Location), Time) ->
-    initiates(getOutOfVehicle(Agent, Vehiclein),
-              at(Agent, Location),
-              Time).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:279
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:279
-reactive_rule([ holds(loc_at(Vehiclein,Location),
-		      Time)
-	      ],
-	      [ initiates(getOutOfVehicle(Agent,Vehiclein),
-			  at(loc_at(Agent,Location),
-			     Time))
-	      ]).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',276).
+holds_at(at_loc(Vehiclein, Location), Time) ->
+    initiates_at(getOutOfVehicle(Agent, Vehiclein),
+                 at_loc(Agent, Location),
+                 Time).
 
 
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:281
 % [object,vehiclein,location,time]
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:282
 % HoldsAt(InVehicle(object,vehiclein),time) &
 % HoldsAt(At(vehiclein,location),time) ->
 % HoldsAt(At(object,location),time).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:284
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:284
-holds_at(inVehicle(Object, Vehiclein), Time), holds_at(at(Vehiclein, Location), Time) ->
-    holds_at(at(Object, Location), Time).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:284
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:284
-reactive_rule([ holds(inVehicle(Object,Vehiclein),
-		      Time),
-		holds(loc_at(Vehiclein,Location),
-		      Time)
-	      ],
-	      [holds(loc_at(Object,Location),Time)]).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',283).
+holds_at(inVehicle(Object, Vehiclein), Time), holds_at(at_loc(Vehiclein, Location), Time) ->
+    holds_at(at_loc(Object, Location), Time).
 
 
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:286
 %; vehicle door
 %; door does not have to be open for entry; passenger can jump in
 
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:289
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',290).
 % event VehicleDoorOpen(agent,vehicledoor)
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:290
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:290
 event(vehicleDoorOpen(agent,vehicledoor)).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:290
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:290
-actions([vehicleDoorOpen/2]).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:290
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:290
-actions([vehicleDoorOpen/2]).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:290
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:290
-meta_argtypes(vehicleDoorOpen(agent,vehicledoor)).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:290
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:290
-meta_argtypes(vehicleDoorOpen(agent,vehicledoor)).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:290
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:290
-mpred_prop(vehicleDoorOpen(agent,vehicledoor),event).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:290
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:290
-mpred_prop(vehicleDoorOpen(agent,vehicledoor),event).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:290
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:290
-meta_argtypes(vehicleDoorOpen(agent,vehicledoor)).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:290
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:290
-meta_argtypes(vehicleDoorOpen(agent,vehicledoor)).
 
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:291
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',292).
 % event VehicleDoorClose(agent,vehicledoor)
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:292
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:292
 event(vehicleDoorClose(agent,vehicledoor)).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:292
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:292
-actions([vehicleDoorClose/2]).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:292
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:292
-actions([vehicleDoorClose/2]).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:292
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:292
-meta_argtypes(vehicleDoorClose(agent,vehicledoor)).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:292
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:292
-meta_argtypes(vehicleDoorClose(agent,vehicledoor)).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:292
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:292
-mpred_prop(vehicleDoorClose(agent,vehicledoor),event).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:292
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:292
-mpred_prop(vehicleDoorClose(agent,vehicledoor),event).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:292
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:292
-meta_argtypes(vehicleDoorClose(agent,vehicledoor)).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:292
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:292
-meta_argtypes(vehicleDoorClose(agent,vehicledoor)).
 
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:293
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',294).
 % fluent VehicleDoorIsOpen(vehicledoor)
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:294
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:294
 fluent(vehicleDoorIsOpen(vehicledoor)).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:294
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:294
-fluents([vehicleDoorIsOpen/1]).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:294
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:294
-fluents([vehicleDoorIsOpen/1]).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:294
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:294
-meta_argtypes(vehicleDoorIsOpen(vehicledoor)).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:294
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:294
-meta_argtypes(vehicleDoorIsOpen(vehicledoor)).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:294
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:294
-mpred_prop(vehicleDoorIsOpen(vehicledoor),fluent).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:294
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:294
-mpred_prop(vehicleDoorIsOpen(vehicledoor),fluent).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:294
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:294
-meta_argtypes(vehicleDoorIsOpen(vehicledoor)).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:294
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:294
-meta_argtypes(vehicleDoorIsOpen(vehicledoor)).
 
 
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:295
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',296).
 % [agent,vehicledoor,time]
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:296
 % Happens(VehicleDoorOpen(agent,vehicledoor),time) ->
 % HoldsAt(Awake(agent),time) &
 % !HoldsAt(VehicleDoorIsOpen(vehicledoor),time).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:298
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:298
-happens(vehicleDoorOpen(Agent, Vehicledoor), Time) ->
+happens_at(vehicleDoorOpen(Agent, Vehicledoor), Time) ->
     holds_at(awake(Agent), Time),
-    holds_at(neg(vehicleDoorIsOpen(Vehicledoor)), Time).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:298
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:298
-reactive_rule([ happens(vehicleDoorOpen(Agent,Vehicledoor),
-			Time)
-	      ],
-	      [ holds(awake(Agent),Time),
-		holds(not(vehicleDoorIsOpen(Vehicledoor)),
-		      Time)
-	      ]).
+    holds_at(not(vehicleDoorIsOpen(Vehicledoor)), Time).
 
 
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:300
 % [agent,vehicledoor,time]
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:301
 % Initiates(VehicleDoorOpen(agent,vehicledoor),
 %           VehicleDoorIsOpen(vehicledoor),
 %           time).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:303
-
- /*  [] ->
-       ta(Time,
-          tvs1=[Time],
-          tvs2=[Time],
-          initiates(vehicleDoorOpen(Agent, Vehicledoor),
-                    vehicleDoorIsOpen(Vehicledoor),
-                    Time)).
- */
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:303
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:303
-initiates(vehicleDoorOpen(_,Vehicledooropen),
-	  vehicleDoorIsOpen(Vehicledooropen),
-	  Initiates).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:303
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:303
-initiated(happens(vehicleDoorOpen(_,Vehicledooropen),
-		  Maptime,
-		  Happens),
-	  vehicleDoorIsOpen(Vehicledooropen),
-	  []).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',302).
+initiates_at(vehicleDoorOpen(Agent,Vehicledoor),
+	     vehicleDoorIsOpen(Vehicledoor),
+	     Time).
 
 
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:305
 % [agent,vehicledoor,time]
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:306
 % Happens(VehicleDoorClose(agent,vehicledoor),time) ->
 % HoldsAt(Awake(agent),time) &
 % HoldsAt(VehicleDoorIsOpen(vehicledoor),time).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:308
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:308
-happens(vehicleDoorClose(Agent, Vehicledoor), Time) ->
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',307).
+happens_at(vehicleDoorClose(Agent, Vehicledoor), Time) ->
     holds_at(awake(Agent), Time),
     holds_at(vehicleDoorIsOpen(Vehicledoor), Time).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:308
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:308
-reactive_rule([ happens(vehicleDoorClose(Agent,Vehicledoor),
-			Time)
-	      ],
-	      [ holds(awake(Agent),Time),
-		holds(vehicleDoorIsOpen(Vehicledoor),Time)
-	      ]).
 
 
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:310
 % [agent,vehicledoor,time]
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:311
 % Terminates(VehicleDoorClose(agent,vehicledoor),
 %            VehicleDoorIsOpen(vehicledoor),
 %            time).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:313
-
- /*  [] ->
-       ta(Time,
-          tvs1=[Time],
-          tvs2=[Time],
-          terminates(vehicleDoorClose(Agent, Vehicledoor),
-                     vehicleDoorIsOpen(Vehicledoor),
-                     Time)).
- */
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:313
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:313
-terminates(vehicleDoorClose(_,Vehicledoorclose),
-	   vehicleDoorIsOpen(Vehicledoorclose),
-	   Terminates).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:313
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:313
-terminated(happens(vehicleDoorClose(_,Vehicledoorclose),
-		   Maptime,
-		   Happens),
-	   vehicleDoorIsOpen(Vehicledoorclose),
-	   []).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',312).
+terminates_at(vehicleDoorClose(Agent,Vehicledoor),
+	      vehicleDoorIsOpen(Vehicledoor),
+	      Time).
 
 
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:315
 %; ticketagent
 
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:317
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',318).
 % sort ticketagent: agent
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:318
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:318
-subsort(ticketagent,agent).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:318
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:318
 subsort(ticketagent,agent).
 
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:319
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',320).
 % fluent BeTicketAgent0(ticketagent)
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:320
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:320
 fluent(beTicketAgent0(ticketagent)).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:320
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:320
-fluents([beTicketAgent0/1]).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:320
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:320
-fluents([beTicketAgent0/1]).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:320
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:320
-meta_argtypes(beTicketAgent0(ticketagent)).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:320
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:320
-meta_argtypes(beTicketAgent0(ticketagent)).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:320
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:320
-mpred_prop(beTicketAgent0(ticketagent),fluent).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:320
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:320
-mpred_prop(beTicketAgent0(ticketagent),fluent).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:320
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:320
-meta_argtypes(beTicketAgent0(ticketagent)).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:320
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:320
-meta_argtypes(beTicketAgent0(ticketagent)).
 
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:320
 % fluent BeTicketAgent1(ticketagent)
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:321
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:321
 fluent(beTicketAgent1(ticketagent)).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:321
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:321
-fluents([beTicketAgent1/1]).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:321
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:321
-fluents([beTicketAgent1/1]).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:321
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:321
-meta_argtypes(beTicketAgent1(ticketagent)).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:321
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:321
-meta_argtypes(beTicketAgent1(ticketagent)).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:321
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:321
-mpred_prop(beTicketAgent1(ticketagent),fluent).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:321
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:321
-mpred_prop(beTicketAgent1(ticketagent),fluent).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:321
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:321
-meta_argtypes(beTicketAgent1(ticketagent)).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:321
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:321
-meta_argtypes(beTicketAgent1(ticketagent)).
 
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:321
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',322).
 % fluent BeTicketAgent2(ticketagent)
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:322
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:322
 fluent(beTicketAgent2(ticketagent)).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:322
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:322
-fluents([beTicketAgent2/1]).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:322
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:322
-fluents([beTicketAgent2/1]).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:322
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:322
-meta_argtypes(beTicketAgent2(ticketagent)).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:322
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:322
-meta_argtypes(beTicketAgent2(ticketagent)).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:322
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:322
-mpred_prop(beTicketAgent2(ticketagent),fluent).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:322
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:322
-mpred_prop(beTicketAgent2(ticketagent),fluent).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:322
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:322
-meta_argtypes(beTicketAgent2(ticketagent)).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:322
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:322
-meta_argtypes(beTicketAgent2(ticketagent)).
 
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:323
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',324).
 % xor BeTicketAgent0, BeTicketAgent1, BeTicketAgent2
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:324
-
- /*  fix_axiom_head(Time) ->
-       [  (==>)xor[beTicketAgent0, beTicketAgent1, beTicketAgent2],
-          (->),
-         holds_at((==>)xor[beTicketAgent0, beTicketAgent1, beTicketAgent2],
-                  Time)
-       ].
- */
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:324
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:324
-holds_at(==>xor[beTicketAgent0,beTicketAgent1,beTicketAgent2],
-	 Time1).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:324
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:324
-l_int(holds(==>xor[beTicketAgent0,beTicketAgent1,beTicketAgent2],
-	    Time1),
-      []).
+xor([beTicketAgent0,beTicketAgent1,beTicketAgent2]).
 
 
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:325
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',326).
 % [ticketagent,agent,ticket,time]
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:326
 % HoldsAt(BeTicketAgent0(ticketagent),time) ->
 % Terminates(Request(agent,ticketagent,ticket),
 %            BeTicketAgent0(ticketagent),
 %            time).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:329
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:329
 holds_at(beTicketAgent0(Ticketagent), Time) ->
-    terminates(request(Agent, Ticketagent, Ticket),
-               beTicketAgent0(Ticketagent),
-               Time).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:329
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:329
-reactive_rule([holds(beTicketAgent0(Ticketagent),Time)],
-	      [ terminates(request(Agent,
-				   Ticketagent,
-				   Ticket),
-			   at(beTicketAgent0(Ticketagent),
-			      Time))
-	      ]).
+    terminates_at(request(Agent, Ticketagent, Ticket),
+                  beTicketAgent0(Ticketagent),
+                  Time).
 
 
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:331
 % [ticketagent,agent,ticket,time]
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:332
 % HoldsAt(BeTicketAgent0(ticketagent),time) ->
 % Initiates(Request(agent,ticketagent,ticket),
 %           BeTicketAgent1(ticketagent),
 %           time).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:335
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:335
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',333).
 holds_at(beTicketAgent0(Ticketagent), Time) ->
-    initiates(request(Agent, Ticketagent, Ticket),
-              beTicketAgent1(Ticketagent),
-              Time).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:335
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:335
-reactive_rule([holds(beTicketAgent0(Ticketagent),Time)],
-	      [ initiates(request(Agent,
-				  Ticketagent,
-				  Ticket),
-			  at(beTicketAgent1(Ticketagent),
-			     Time))
-	      ]).
+    initiates_at(request(Agent, Ticketagent, Ticket),
+                 beTicketAgent1(Ticketagent),
+                 Time).
 
 
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:337
 % [ticketagent,agent,ticket,time]
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:338
 % HoldsAt(BeTicketAgent1(ticketagent),time) &
 % HoldsAt(KnowRequest(ticketagent,agent,ticket),time) ->
 % Happens(PickUp(ticketagent,ticket),time).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:340
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:340
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',339).
 holds_at(beTicketAgent1(Ticketagent), Time), holds_at(knowRequest(Ticketagent, Agent, Ticket), Time) ->
-    happens(pickUp(Ticketagent, Ticket), Time).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:340
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:340
-reactive_rule([ holds(beTicketAgent1(Ticketagent),Time),
-		holds(knowRequest(Ticketagent,
-				  Agent,
-				  Ticket),
-		      Time)
-	      ],
-	      [ happens(pickUp(Ticketagent,Ticket),
-			Time)
-	      ]).
+    happens_at(pickUp(Ticketagent, Ticket), Time).
 
 
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:342
 % [ticketagent,ticket,time]
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:343
 % HoldsAt(BeTicketAgent1(ticketagent),time) ->
 % Terminates(PickUp(ticketagent,ticket),
 %            BeTicketAgent1(ticketagent),
 %            time).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:346
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:346
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',344).
 holds_at(beTicketAgent1(Ticketagent), Time) ->
-    terminates(pickUp(Ticketagent, Ticket),
-               beTicketAgent1(Ticketagent),
-               Time).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:346
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:346
-reactive_rule([holds(beTicketAgent1(Ticketagent),Time)],
-	      [ terminates(pickUp(Ticketagent,Ticket),
-			   at(beTicketAgent1(Ticketagent),
-			      Time))
-	      ]).
+    terminates_at(pickUp(Ticketagent, Ticket),
+                  beTicketAgent1(Ticketagent),
+                  Time).
 
 
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:348
 % [ticketagent,ticket,time]
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:349
 % HoldsAt(BeTicketAgent1(ticketagent),time) ->
 % Initiates(PickUp(ticketagent,ticket),
 %           BeTicketAgent2(ticketagent),
 %           time).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:352
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:352
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',350).
 holds_at(beTicketAgent1(Ticketagent), Time) ->
-    initiates(pickUp(Ticketagent, Ticket),
-              beTicketAgent2(Ticketagent),
-              Time).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:352
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:352
-reactive_rule([holds(beTicketAgent1(Ticketagent),Time)],
-	      [ initiates(pickUp(Ticketagent,Ticket),
-			  at(beTicketAgent2(Ticketagent),
-			     Time))
-	      ]).
+    initiates_at(pickUp(Ticketagent, Ticket),
+                 beTicketAgent2(Ticketagent),
+                 Time).
 
 
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:354
 % [ticketagent,agent,ticket,time]
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:355
 % HoldsAt(BeTicketAgent2(ticketagent),time) &
 % HoldsAt(KnowRequest(ticketagent,agent,ticket),time) ->
 % Happens(HandTo(ticketagent,agent,ticket),time).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:357
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:357
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',356).
 holds_at(beTicketAgent2(Ticketagent), Time), holds_at(knowRequest(Ticketagent, Agent, Ticket), Time) ->
-    happens(handTo(Ticketagent, Agent, Ticket), Time).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:357
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:357
-reactive_rule([ holds(beTicketAgent2(Ticketagent),Time),
-		holds(knowRequest(Ticketagent,
-				  Agent,
-				  Ticket),
-		      Time)
-	      ],
-	      [ happens(handTo(Ticketagent,
-			       Agent,
-			       Ticket),
-			Time)
-	      ]).
+    happens_at(handTo(Ticketagent, Agent, Ticket), Time).
 
 
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:359
 % [ticketagent,ticket,agent,time]
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:360
 % HoldsAt(BeTicketAgent2(ticketagent),time) ->
 % Terminates(HandTo(ticketagent,agent,ticket),
 %            BeTicketAgent2(ticketagent),
 %            time).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:363
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:363
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',361).
 holds_at(beTicketAgent2(Ticketagent), Time) ->
-    terminates(handTo(Ticketagent, Agent, Ticket),
-               beTicketAgent2(Ticketagent),
-               Time).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:363
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:363
-reactive_rule([holds(beTicketAgent2(Ticketagent),Time)],
-	      [ terminates(handTo(Ticketagent,
-				  Agent,
-				  Ticket),
-			   at(beTicketAgent2(Ticketagent),
-			      Time))
-	      ]).
+    terminates_at(handTo(Ticketagent, Agent, Ticket),
+                  beTicketAgent2(Ticketagent),
+                  Time).
 
 
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:365
 % [ticketagent,ticket,agent,time]
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:366
 % HoldsAt(BeTicketAgent2(ticketagent),time) ->
 % Initiates(HandTo(ticketagent,agent,ticket),
 %           BeTicketAgent0(ticketagent),
 %           time).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:369
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:369
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',367).
 holds_at(beTicketAgent2(Ticketagent), Time) ->
-    initiates(handTo(Ticketagent, Agent, Ticket),
-              beTicketAgent0(Ticketagent),
-              Time).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:369
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:369
-reactive_rule([holds(beTicketAgent2(Ticketagent),Time)],
-	      [ initiates(handTo(Ticketagent,
-				 Agent,
-				 Ticket),
-			  at(beTicketAgent0(Ticketagent),
-			     Time))
-	      ]).
+    initiates_at(handTo(Ticketagent, Agent, Ticket),
+                 beTicketAgent0(Ticketagent),
+                 Time).
 
 
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e:371
 %; End of file.
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',371).
+:- call_pel_directive(translate(ending,
+                                '/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.pel')).

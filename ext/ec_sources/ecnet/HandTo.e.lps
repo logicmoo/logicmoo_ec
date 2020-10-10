@@ -1,9 +1,18 @@
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e',82).
-% translate: unskipped  File: /pack/logicmoo_ec/ext/ec_sources/ecnet/HandTo.e.lps 
+% From E: 
+% 
+% :-call_pel_directive(translate(unskipped,'/pack/logicmoo_ec/ext/ec_sources/ecnet/HandTo.e.lps')).
+:- call_pel_directive(translate(unskipped,
+                                '/pack/logicmoo_ec/ext/ec_sources/ecnet/HandTo.e.lps')).
 :-include(library('ec_planner/ec_test_incl')).
 :-expects_dialect(lps).
-% translate: begining  File: /pack/logicmoo_ec/ext/ec_sources/ecnet/HandTo.e.lps 
-% Thu, 08 Oct 2020 21:36:20 GMT File: <stream>(0x55894c1e0d00)%;
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e',82).
+% From E: 
+% 
+% :-call_pel_directive(translate(begining,'/pack/logicmoo_ec/ext/ec_sources/ecnet/HandTo.e.lps')).
+:- call_pel_directive(translate(begining,
+                                '/pack/logicmoo_ec/ext/ec_sources/ecnet/HandTo.e.lps')).
+% Sat, 10 Oct 2020 14:56:05 GMT File: <stream>(0x5597f2c00e00)%;
 %; Copyright (c) 2005 IBM Corporation and others.
 %; All rights reserved. This program and the accompanying materials
 %; are made available under the terms of the Common Public License v1.0
@@ -14,16 +23,15 @@
 %; IBM - Initial implementation
 %;
 
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/HandTo.e',12).
 % event HandTo(agent,agent,physobj)
-% event(
-%    handTo(agent,agent,physobj)).
-actions([handTo/3]).
-% mpred_prop(
-%    handTo(agent,agent,physobj), 
-%    event).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/HandTo.e',12).
-mpred_prop(handTo(agent,agent,physobj),event).
+% From E: 
+% 
+% event(handTo(agent,agent,physobj)).
+events([handTo/3]).
+mpred_prop(handTo(agent,agent,physobj),action).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/HandTo.e',12).
+actions([handTo/3]).
 
 
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/HandTo.e',14).
@@ -31,10 +39,13 @@ mpred_prop(handTo(agent,agent,physobj),event).
 % Initiates(HandTo(agent1,agent2,physobj),
 %           Holding(agent2,physobj),
 %           time).
-% initiates(
+% From E: 
+% 
+% initiates_at(
 %    handTo(Agent1,Agent2,Physobj), 
 %    holding(Agent2,Physobj), 
 %    Time).
+ %   [Time].
 handTo(Agent1, Agent2, Physobj)initiates holding(Agent2, Physobj).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/HandTo.e',14).
 
@@ -51,10 +62,14 @@ handTo(Agent1, Agent2, Physobj)initiates holding(Agent2, Physobj).
 % Terminates(HandTo(agent1,agent2,physobj),
 %            Holding(agent1,physobj),
 %            time).
-% terminates(
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/HandTo.e',20).
+% From E: 
+% 
+% terminates_at(
 %    handTo(Agent1,Agent2,Physobj), 
 %    holding(Agent1,Physobj), 
 %    Time).
+ %   [Time].
 handTo(Agent1, Agent2, Physobj)terminates holding(Agent1, Physobj).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/HandTo.e',20).
 
@@ -70,71 +85,45 @@ handTo(Agent1, Agent2, Physobj)terminates holding(Agent1, Physobj).
 % [agent1,agent2,physobj,time]
 % Happens(HandTo(agent1,agent2,physobj),time) ->
 % HoldsAt(Holding(agent1,physobj),time).
-% '->'(
-%    metreqs(
-%       handTo(Agent1,Agent2,Physobj)), 
-%    requires(
-%       handTo(Agent1,Agent2,Physobj), 
-%       When_Time)).
-if handTo(Agent1, Agent2, Physobj)then requires(handTo(Agent1, Agent2, Physobj), When_Time).
-
- /*  reactive_rule([ happens(handTo(Agent1,Agent2,Physobj),
-   			Time_From,
-   			Time_Until)
-   	      ],
-   	      [ requires(handTo(Agent1,
-   				Agent2,
-   				Physobj),
-   			 When_Time)
-   	      ]).
- */
- %  "% =================================".
-% '->'(
-%    holding(Agent1,Physobj), 
-%    metreqs(
-%       handTo(Agent1,Agent2,Physobj))).
-handTo(Agent1, Agent2, Physobj)if holding(Agent1, Physobj).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/HandTo.e',25).
-
- /*  l_events(happens(handTo(Agent1,Agent2,Physobj),
-   		 Time_From7,
-   		 Time_From7),
-   	 [holds(holding(Agent1,Physobj),Time_From7)]).
- */
- %  "% =================================".
+% From E: 
+% 
 % '->'(
-%    not(
-%       holding(Agent1,Physobj)), 
-%    not(
-%       handTo(Agent1,Agent2,Physobj))).
-if not holding(Agent1, Physobj)then not handTo(Agent1, Agent2, Physobj).
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/HandTo.e',25).
+%    happens_at(handTo(Agent1,Agent2,Physobj),Time), 
+%    holds_at(holding(Agent1,Physobj),Time)).
+ %   [Time].
+holding(Agent1, Physobj)if handTo(Agent1, Agent2, Physobj).
 
- /*  reactive_rule([ holds(not(holding(Agent1,Physobj)),
-   		      Time_At)
-   	      ],
-   	      [not(handTo(Agent1,Agent2,Physobj))]).
+ /*  l_int(holds(holding(Agent1,Physobj),Time_At),
+         [ happens(handTo(Agent1,Agent2,Physobj),
+   		Time_At,
+   		Time_At)
+         ]).
  */
  %  "% =================================".
 
 % event ShakeHands(agent,agent)
-% event(
-%    shakeHands(agent,agent)).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/HandTo.e',27).
+% From E: 
+% 
+% event(shakeHands(agent,agent)).
+events([shakeHands/2]).
+mpred_prop(shakeHands(agent,agent),action).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/HandTo.e',27).
 actions([shakeHands/2]).
-% mpred_prop(
-%    shakeHands(agent,agent), 
-%    event).
-mpred_prop(shakeHands(agent,agent),event).
 
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/HandTo.e',30).
 % event WriteOn(agent,paper,pen)
-% event(
-%    writeOn(agent,paper,pen)).
-actions([writeOn/3]).
-% mpred_prop(
-%    writeOn(agent,paper,pen), 
-%    event).
+% From E: 
+% 
+% event(writeOn(agent,paper,pen)).
+events([writeOn/3]).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/HandTo.e',30).
-mpred_prop(writeOn(agent,paper,pen),event).
-% translate: ending  File: /pack/logicmoo_ec/ext/ec_sources/ecnet/HandTo.e.lps 
+mpred_prop(writeOn(agent,paper,pen),action).
+actions([writeOn/3]).
+% From E: 
+% 
+% :-call_pel_directive(translate(ending,'/pack/logicmoo_ec/ext/ec_sources/ecnet/HandTo.e.lps')).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/HandTo.e',30).
+:- call_pel_directive(translate(ending,
+                                '/pack/logicmoo_ec/ext/ec_sources/ecnet/HandTo.e.lps')).

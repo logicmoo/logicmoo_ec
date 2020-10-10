@@ -1,9 +1,18 @@
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Sleeping.e',87).
-% translate: unskipped  File: /pack/logicmoo_ec/ext/ec_sources/ecnet/SmallFire.e.lps 
+% From E: 
+% 
+% :-call_pel_directive(translate(unskipped,'/pack/logicmoo_ec/ext/ec_sources/ecnet/SmallFire.e.lps')).
+:- call_pel_directive(translate(unskipped,
+                                '/pack/logicmoo_ec/ext/ec_sources/ecnet/SmallFire.e.lps')).
 :-include(library('ec_planner/ec_test_incl')).
 :-expects_dialect(lps).
-% translate: begining  File: /pack/logicmoo_ec/ext/ec_sources/ecnet/SmallFire.e.lps 
-% Thu, 08 Oct 2020 21:37:14 GMT File: <stream>(0x55894c2e1e00)%;
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Sleeping.e',87).
+% From E: 
+% 
+% :-call_pel_directive(translate(begining,'/pack/logicmoo_ec/ext/ec_sources/ecnet/SmallFire.e.lps')).
+:- call_pel_directive(translate(begining,
+                                '/pack/logicmoo_ec/ext/ec_sources/ecnet/SmallFire.e.lps')).
+% Sat, 10 Oct 2020 14:56:14 GMT File: <stream>(0x5597f2c00b00)%;
 %; Copyright (c) 2005 IBM Corporation and others.
 %; All rights reserved. This program and the accompanying materials
 %; are made available under the terms of the Common Public License v1.0
@@ -16,58 +25,51 @@
 %; SmallFire: matches, lighters, cigarettes, etc.
 %;
 
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/SmallFire.e',14).
 % event Light(agent,physobj)
-% event(
-%    light(agent,physobj)).
-actions([light/2]).
-% mpred_prop(
-%    light(agent,physobj), 
-%    event).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/SmallFire.e',14).
-mpred_prop(light(agent,physobj),event).
+% From E: 
+% 
+% event(light(agent,physobj)).
+events([light/2]).
+mpred_prop(light(agent,physobj),action).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/SmallFire.e',14).
+actions([light/2]).
 
 % event LightWith(agent,physobj,physobj)
-% event(
-%    lightWith(agent,physobj,physobj)).
+% From E: 
+% 
+% event(lightWith(agent,physobj,physobj)).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/SmallFire.e',14).
+events([lightWith/3]).
+mpred_prop(lightWith(agent,physobj,physobj),action).
 actions([lightWith/3]).
-% mpred_prop(
-%    lightWith(agent,physobj,physobj), 
-%    event).
-mpred_prop(lightWith(agent,physobj,physobj),event).
 
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/SmallFire.e',16).
 % event PutOut(agent,physobj)
-% event(
-%    putOut(agent,physobj)).
-actions([putOut/2]).
-% mpred_prop(
-%    putOut(agent,physobj), 
-%    event).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/SmallFire.e',16).
-mpred_prop(putOut(agent,physobj),event).
+% From E: 
+% 
+% event(putOut(agent,physobj)).
+events([putOut/2]).
+mpred_prop(putOut(agent,physobj),action).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/SmallFire.e',16).
+actions([putOut/2]).
 
 % event BlowOut(agent,physobj)
-% event(
-%    blowOut(agent,physobj)).
+% From E: 
+% 
+% event(blowOut(agent,physobj)).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/SmallFire.e',16).
+events([blowOut/2]).
+mpred_prop(blowOut(agent,physobj),action).
 actions([blowOut/2]).
-% mpred_prop(
-%    blowOut(agent,physobj), 
-%    event).
-mpred_prop(blowOut(agent,physobj),event).
 
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/SmallFire.e',18).
 % fluent IsBurning(physobj)
-% fluent(
-%    isBurning(physobj)).
-fluents([isBurning/1]).
-% mpred_prop(
-%    isBurning(physobj), 
-%    fluent).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/SmallFire.e',18).
+% From E: 
+% 
+% fluent(isBurning(physobj)).
 mpred_prop(isBurning(physobj),fluent).
+fluents([isBurning/1]).
 
 
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/SmallFire.e',20).
@@ -76,22 +78,23 @@ mpred_prop(isBurning(physobj),fluent).
 % Initiates(LightWith(agent,physobj1,physobj2),
 %           IsBurning(physobj1),
 %           time).
+% From E: 
+% 
 % '->'(
-%    isBurning(Physobj2), 
-%    initiates(
+%    holds_at(isBurning(Physobj2),Time), 
+%    initiates_at(
 %       lightWith(Agent,Physobj1,Physobj2), 
 %       isBurning(Physobj1), 
 %       Time)).
-if isBurning(Physobj2)then initiates(lightWith(Agent, Physobj1, Physobj2), isBurning(Physobj1)at Time, _).
+ %   [Time].
+lightWith(Agent, Physobj1, Physobj2)initiates isBurning(Physobj1)if isBurning(Physobj2).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/SmallFire.e',20).
 
- /*  reactive_rule([holds(isBurning(Physobj2),Time_At)],
-   	      [ initiates(lightWith(Agent,
-   				    Physobj1,
-   				    Physobj2),
-   			  at(isBurning(Physobj1),Time),
-   			  Initiates)
-   	      ]).
+ /*  initiated(happens(lightWith(Agent,Physobj1,Physobj2),
+   		  Time_From,
+   		  Time_Until),
+   	  isBurning(Physobj1),
+   	  [holds(isBurning(Physobj2),Time_From)]).
  */
  %  "% =================================".
 
@@ -101,33 +104,16 @@ if isBurning(Physobj2)then initiates(lightWith(Agent, Physobj1, Physobj2), isBur
 % HoldsAt(Holding(agent,physobj1),time) &
 % HoldsAt(Holding(agent,physobj2),time) &
 % !HoldsAt(IsBurning(physobj1),time).
-% '->'(
-%    ';'(
-%       not(
-%          holding(Agent,Physobj1)), 
-%       ';'(
-%          not(
-%             holding(Agent,Physobj2)), 
-%          not(
-%             not(
-%                isBurning(Physobj1))))), 
-%    not(
-%       lightWith(Agent,Physobj1,Physobj2))).
-if not holding(Agent, Physobj1);not holding(Agent, Physobj2);not not isBurning(Physobj1)then not lightWith(Agent, Physobj1, Physobj2).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/SmallFire.e',27).
-
- /*   reactive_rule([  (not(holding(Agent, Physobj1));not(holding(Agent, Physobj2));not(not(isBurning(Physobj1))))
-                    ],
-                    [not(lightWith(Agent, Physobj1, Physobj2))]).
- */
- %  "% =================================".
+% From E: 
+% 
 % '->'(
-%    metreqs(
-%       lightWith(Agent,Physobj1,Physobj2)), 
-%    requires(
-%       lightWith(Agent,Physobj1,Physobj2), 
-%       When_Time)).
-if lightWith(Agent, Physobj1, Physobj2)then requires(lightWith(Agent, Physobj1, Physobj2), When_Time).
+%    happens_at(lightWith(Agent,Physobj1,Physobj2),Time), 
+%    (holds_at(holding(Agent,Physobj1),Time) , 
+%      holds_at(holding(Agent,Physobj2),Time) , 
+%     holds_at(not(isBurning(Physobj1)),Time))).
+ %   [Time].
+if lightWith(Agent, Physobj1, Physobj2)then holding(Agent, Physobj1), holding(Agent, Physobj2), not isBurning(Physobj1).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/SmallFire.e',27).
 
  /*  reactive_rule([ happens(lightWith(Agent,
@@ -136,95 +122,12 @@ if lightWith(Agent, Physobj1, Physobj2)then requires(lightWith(Agent, Physobj1, 
    			Time_From,
    			Time_Until)
    	      ],
-   	      [ requires(lightWith(Agent,
-   				   Physobj1,
-   				   Physobj2),
-   			 When_Time)
+   	      [ holds(holding(Agent,Physobj1),
+   		      Time_At),
+   		holds(holding(Agent,Physobj2),
+   		      Time_At),
+   		holds(not(isBurning(Physobj1)),Time_At)
    	      ]).
- */
- %  "% =================================".
-% '->'(
-%    holding(Agent,Physobj1), 
-%    metreqs(
-%       lightWith(Agent,Physobj1,Physobj2))).
-lightWith(Agent, Physobj1, Physobj2)if holding(Agent, Physobj1).
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/SmallFire.e',27).
-
- /*  l_events(happens(lightWith(Agent,Physobj1,Physobj2),
-   		 Time_From7,
-   		 Time_From7),
-   	 [holds(holding(Agent,Physobj1),Time_From7)]).
- */
- %  "% =================================".
-% '->'(
-%    metreqs(
-%       lightWith(Agent,Physobj1,Physobj2)), 
-%    requires(
-%       lightWith(Agent,Physobj1,Physobj2), 
-%       When_Time)).
-if lightWith(Agent, Physobj1, Physobj2)then requires(lightWith(Agent, Physobj1, Physobj2), When_Time).
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/SmallFire.e',27).
-
- /*  reactive_rule([ happens(lightWith(Agent,
-   				  Physobj1,
-   				  Physobj2),
-   			Time_From8,
-   			Time_Until9)
-   	      ],
-   	      [ requires(lightWith(Agent,
-   				   Physobj1,
-   				   Physobj2),
-   			 When_Time)
-   	      ]).
- */
- %  "% =================================".
-% '->'(
-%    holding(Agent,Physobj2), 
-%    metreqs(
-%       lightWith(Agent,Physobj1,Physobj2))).
-lightWith(Agent, Physobj1, Physobj2)if holding(Agent, Physobj2).
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/SmallFire.e',27).
-
- /*  l_events(happens(lightWith(Agent,Physobj1,Physobj2),
-   		 Time_From10,
-   		 Time_From10),
-   	 [holds(holding(Agent,Physobj2),Time_From10)]).
- */
- %  "% =================================".
-% '->'(
-%    metreqs(
-%       lightWith(Agent,Physobj1,Physobj2)), 
-%    requires(
-%       lightWith(Agent,Physobj1,Physobj2), 
-%       When_Time)).
-if lightWith(Agent, Physobj1, Physobj2)then requires(lightWith(Agent, Physobj1, Physobj2), When_Time).
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/SmallFire.e',27).
-
- /*  reactive_rule([ happens(lightWith(Agent,
-   				  Physobj1,
-   				  Physobj2),
-   			Time_From11,
-   			Time_Until12)
-   	      ],
-   	      [ requires(lightWith(Agent,
-   				   Physobj1,
-   				   Physobj2),
-   			 When_Time)
-   	      ]).
- */
- %  "% =================================".
-% '->'(
-%    not(
-%       isBurning(Physobj1)), 
-%    metreqs(
-%       lightWith(Agent,Physobj1,Physobj2))).
-lightWith(Agent, Physobj1, Physobj2)if not isBurning(Physobj1).
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/SmallFire.e',27).
-
- /*  l_events(happens(lightWith(Agent,Physobj1,Physobj2),
-   		 Time_From13,
-   		 Time_From13),
-   	 [holds(not(isBurning(Physobj1)),Time_From13)]).
  */
  %  "% =================================".
 
@@ -233,10 +136,14 @@ lightWith(Agent, Physobj1, Physobj2)if not isBurning(Physobj1).
 % Initiates(Light(agent,physobj),
 %           IsBurning(physobj),
 %           time).
-% initiates(
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/SmallFire.e',33).
+% From E: 
+% 
+% initiates_at(
 %    light(Agent,Physobj), 
 %    isBurning(Physobj), 
 %    Time).
+ %   [Time].
 light(Agent, Physobj)initiates isBurning(Physobj).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/SmallFire.e',33).
 
@@ -253,84 +160,24 @@ light(Agent, Physobj)initiates isBurning(Physobj).
 % Happens(Light(agent,physobj),time) ->
 % HoldsAt(Holding(agent,physobj),time) &
 % !HoldsAt(IsBurning(physobj),time).
-% '->'(
-%    ';'(
-%       not(
-%          holding(Agent,Physobj)), 
-%       not(
-%          not(
-%             isBurning(Physobj)))), 
-%    not(
-%       light(Agent,Physobj))).
-if not holding(Agent, Physobj);not not isBurning(Physobj)then not light(Agent, Physobj).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/SmallFire.e',38).
-
- /*   reactive_rule([  (not(holding(Agent, Physobj));not(not(isBurning(Physobj))))
-                    ],
-                    [not(light(Agent, Physobj))]).
- */
- %  "% =================================".
+% From E: 
+% 
 % '->'(
-%    metreqs(
-%       light(Agent,Physobj)), 
-%    requires(
-%       light(Agent,Physobj), 
-%       When_Time)).
-if light(Agent, Physobj)then requires(light(Agent, Physobj), When_Time).
+%    happens_at(light(Agent,Physobj),Time), 
+%    (holds_at(holding(Agent,Physobj),Time) , 
+%     holds_at(not(isBurning(Physobj)),Time))).
+ %   [Time].
+if light(Agent, Physobj)then holding(Agent, Physobj), not isBurning(Physobj).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/SmallFire.e',38).
 
  /*  reactive_rule([ happens(light(Agent,Physobj),
    			Time_From,
    			Time_Until)
    	      ],
-   	      [ requires(light(Agent,Physobj),
-   			 When_Time)
+   	      [ holds(holding(Agent,Physobj),Time_At),
+   		holds(not(isBurning(Physobj)),Time_At)
    	      ]).
- */
- %  "% =================================".
-% '->'(
-%    holding(Agent,Physobj), 
-%    metreqs(
-%       light(Agent,Physobj))).
-light(Agent, Physobj)if holding(Agent, Physobj).
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/SmallFire.e',38).
-
- /*  l_events(happens(light(Agent,Physobj),
-   		 Time_From6,
-   		 Time_From6),
-   	 [holds(holding(Agent,Physobj),Time_From6)]).
- */
- %  "% =================================".
-% '->'(
-%    metreqs(
-%       light(Agent,Physobj)), 
-%    requires(
-%       light(Agent,Physobj), 
-%       When_Time)).
-if light(Agent, Physobj)then requires(light(Agent, Physobj), When_Time).
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/SmallFire.e',38).
-
- /*  reactive_rule([ happens(light(Agent,Physobj),
-   			Time_From7,
-   			Time_Until8)
-   	      ],
-   	      [ requires(light(Agent,Physobj),
-   			 When_Time)
-   	      ]).
- */
- %  "% =================================".
-% '->'(
-%    not(
-%       isBurning(Physobj)), 
-%    metreqs(
-%       light(Agent,Physobj))).
-light(Agent, Physobj)if not isBurning(Physobj).
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/SmallFire.e',38).
-
- /*  l_events(happens(light(Agent,Physobj),
-   		 Time_From9,
-   		 Time_From9),
-   	 [holds(not(isBurning(Physobj)),Time_From9)]).
  */
  %  "% =================================".
 
@@ -339,10 +186,14 @@ light(Agent, Physobj)if not isBurning(Physobj).
 % Terminates(PutOut(agent,physobj),
 %            IsBurning(physobj),
 %            time).
-% terminates(
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/SmallFire.e',43).
+% From E: 
+% 
+% terminates_at(
 %    putOut(Agent,Physobj), 
 %    isBurning(Physobj), 
 %    Time).
+ %   [Time].
 putOut(Agent, Physobj)terminates isBurning(Physobj).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/SmallFire.e',43).
 
@@ -359,82 +210,24 @@ putOut(Agent, Physobj)terminates isBurning(Physobj).
 % Happens(PutOut(agent,physobj),time) ->
 % HoldsAt(Holding(agent,physobj),time) &
 % HoldsAt(IsBurning(physobj),time).
-% '->'(
-%    ';'(
-%       not(
-%          holding(Agent,Physobj)), 
-%       not(
-%          isBurning(Physobj))), 
-%    not(
-%       putOut(Agent,Physobj))).
-if not holding(Agent, Physobj);not isBurning(Physobj)then not putOut(Agent, Physobj).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/SmallFire.e',48).
-
- /*   reactive_rule([  (not(holding(Agent, Physobj));not(isBurning(Physobj)))
-                    ],
-                    [not(putOut(Agent, Physobj))]).
- */
- %  "% =================================".
+% From E: 
+% 
 % '->'(
-%    metreqs(
-%       putOut(Agent,Physobj)), 
-%    requires(
-%       putOut(Agent,Physobj), 
-%       When_Time)).
-if putOut(Agent, Physobj)then requires(putOut(Agent, Physobj), When_Time).
+%    happens_at(putOut(Agent,Physobj),Time), 
+%    (holds_at(holding(Agent,Physobj),Time) , 
+%     holds_at(isBurning(Physobj),Time))).
+ %   [Time].
+if putOut(Agent, Physobj)then holding(Agent, Physobj), isBurning(Physobj).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/SmallFire.e',48).
 
  /*  reactive_rule([ happens(putOut(Agent,Physobj),
    			Time_From,
    			Time_Until)
    	      ],
-   	      [ requires(putOut(Agent,Physobj),
-   			 When_Time)
+   	      [ holds(holding(Agent,Physobj),Time_At),
+   		holds(isBurning(Physobj),Time_At)
    	      ]).
- */
- %  "% =================================".
-% '->'(
-%    holding(Agent,Physobj), 
-%    metreqs(
-%       putOut(Agent,Physobj))).
-putOut(Agent, Physobj)if holding(Agent, Physobj).
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/SmallFire.e',48).
-
- /*  l_events(happens(putOut(Agent,Physobj),
-   		 Time_From6,
-   		 Time_From6),
-   	 [holds(holding(Agent,Physobj),Time_From6)]).
- */
- %  "% =================================".
-% '->'(
-%    metreqs(
-%       putOut(Agent,Physobj)), 
-%    requires(
-%       putOut(Agent,Physobj), 
-%       When_Time)).
-if putOut(Agent, Physobj)then requires(putOut(Agent, Physobj), When_Time).
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/SmallFire.e',48).
-
- /*  reactive_rule([ happens(putOut(Agent,Physobj),
-   			Time_From7,
-   			Time_Until8)
-   	      ],
-   	      [ requires(putOut(Agent,Physobj),
-   			 When_Time)
-   	      ]).
- */
- %  "% =================================".
-% '->'(
-%    isBurning(Physobj), 
-%    metreqs(
-%       putOut(Agent,Physobj))).
-putOut(Agent, Physobj)if isBurning(Physobj).
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/SmallFire.e',48).
-
- /*  l_events(happens(putOut(Agent,Physobj),
-   		 Time_From9,
-   		 Time_From9),
-   	 [holds(isBurning(Physobj),Time_From9)]).
  */
  %  "% =================================".
 
@@ -443,10 +236,14 @@ putOut(Agent, Physobj)if isBurning(Physobj).
 % Terminates(BlowOut(agent,physobj),
 %            IsBurning(physobj),
 %            time).
-% terminates(
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/SmallFire.e',53).
+% From E: 
+% 
+% terminates_at(
 %    blowOut(Agent,Physobj), 
 %    isBurning(Physobj), 
 %    Time).
+ %   [Time].
 blowOut(Agent, Physobj)terminates isBurning(Physobj).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/SmallFire.e',53).
 
@@ -463,86 +260,32 @@ blowOut(Agent, Physobj)terminates isBurning(Physobj).
 % Happens(BlowOut(agent,physobj),time) ->
 % HoldsAt(Holding(agent,physobj),time) &
 % HoldsAt(IsBurning(physobj),time).
-% '->'(
-%    ';'(
-%       not(
-%          holding(Agent,Physobj)), 
-%       not(
-%          isBurning(Physobj))), 
-%    not(
-%       blowOut(Agent,Physobj))).
-if not holding(Agent, Physobj);not isBurning(Physobj)then not blowOut(Agent, Physobj).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/SmallFire.e',58).
-
- /*   reactive_rule([  (not(holding(Agent, Physobj));not(isBurning(Physobj)))
-                    ],
-                    [not(blowOut(Agent, Physobj))]).
- */
- %  "% =================================".
+% From E: 
+% 
 % '->'(
-%    metreqs(
-%       blowOut(Agent,Physobj)), 
-%    requires(
-%       blowOut(Agent,Physobj), 
-%       When_Time)).
-if blowOut(Agent, Physobj)then requires(blowOut(Agent, Physobj), When_Time).
+%    happens_at(blowOut(Agent,Physobj),Time), 
+%    (holds_at(holding(Agent,Physobj),Time) , 
+%     holds_at(isBurning(Physobj),Time))).
+ %   [Time].
+if blowOut(Agent, Physobj)then holding(Agent, Physobj), isBurning(Physobj).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/SmallFire.e',58).
 
  /*  reactive_rule([ happens(blowOut(Agent,Physobj),
    			Time_From,
    			Time_Until)
    	      ],
-   	      [ requires(blowOut(Agent,Physobj),
-   			 When_Time)
+   	      [ holds(holding(Agent,Physobj),Time_At),
+   		holds(isBurning(Physobj),Time_At)
    	      ]).
- */
- %  "% =================================".
-% '->'(
-%    holding(Agent,Physobj), 
-%    metreqs(
-%       blowOut(Agent,Physobj))).
-blowOut(Agent, Physobj)if holding(Agent, Physobj).
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/SmallFire.e',58).
-
- /*  l_events(happens(blowOut(Agent,Physobj),
-   		 Time_From6,
-   		 Time_From6),
-   	 [holds(holding(Agent,Physobj),Time_From6)]).
- */
- %  "% =================================".
-% '->'(
-%    metreqs(
-%       blowOut(Agent,Physobj)), 
-%    requires(
-%       blowOut(Agent,Physobj), 
-%       When_Time)).
-if blowOut(Agent, Physobj)then requires(blowOut(Agent, Physobj), When_Time).
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/SmallFire.e',58).
-
- /*  reactive_rule([ happens(blowOut(Agent,Physobj),
-   			Time_From7,
-   			Time_Until8)
-   	      ],
-   	      [ requires(blowOut(Agent,Physobj),
-   			 When_Time)
-   	      ]).
- */
- %  "% =================================".
-% '->'(
-%    isBurning(Physobj), 
-%    metreqs(
-%       blowOut(Agent,Physobj))).
-blowOut(Agent, Physobj)if isBurning(Physobj).
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/SmallFire.e',58).
-
- /*  l_events(happens(blowOut(Agent,Physobj),
-   		 Time_From9,
-   		 Time_From9),
-   	 [holds(isBurning(Physobj),Time_From9)]).
  */
  %  "% =================================".
 
 
 %; End of file.
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/SmallFire.e',61).
-% translate: ending  File: /pack/logicmoo_ec/ext/ec_sources/ecnet/SmallFire.e.lps 
+% From E: 
+% 
+% :-call_pel_directive(translate(ending,'/pack/logicmoo_ec/ext/ec_sources/ecnet/SmallFire.e.lps')).
+:- call_pel_directive(translate(ending,
+                                '/pack/logicmoo_ec/ext/ec_sources/ecnet/SmallFire.e.lps')).

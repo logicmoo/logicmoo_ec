@@ -1,9 +1,18 @@
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OTSpace.e',481).
-% translate: unskipped  File: /pack/logicmoo_ec/ext/ec_sources/ecnet/PlayNeed.e.lps 
+% From E: 
+% 
+% :-call_pel_directive(translate(unskipped,'/pack/logicmoo_ec/ext/ec_sources/ecnet/PlayNeed.e.lps')).
+:- call_pel_directive(translate(unskipped,
+                                '/pack/logicmoo_ec/ext/ec_sources/ecnet/PlayNeed.e.lps')).
 :-include(library('ec_planner/ec_test_incl')).
 :-expects_dialect(lps).
-% translate: begining  File: /pack/logicmoo_ec/ext/ec_sources/ecnet/PlayNeed.e.lps 
-% Thu, 08 Oct 2020 21:36:34 GMT File: <stream>(0x55894c2e0200)%;
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OTSpace.e',481).
+% From E: 
+% 
+% :-call_pel_directive(translate(begining,'/pack/logicmoo_ec/ext/ec_sources/ecnet/PlayNeed.e.lps')).
+:- call_pel_directive(translate(begining,
+                                '/pack/logicmoo_ec/ext/ec_sources/ecnet/PlayNeed.e.lps')).
+% Sat, 10 Oct 2020 14:56:08 GMT File: <stream>(0x5597f296bf00)%;
 %; Copyright (c) 2005 IBM Corporation and others.
 %; All rights reserved. This program and the accompanying materials
 %; are made available under the terms of the Common Public License v1.0
@@ -35,14 +44,12 @@
 %; agent has an unsatisfied need to play.
 
 % fluent HungryToPlay(agent)
-% fluent(
-%    hungryToPlay(agent)).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/PlayNeed.e',32).
-fluents([hungryToPlay/1]).
-% mpred_prop(
-%    hungryToPlay(agent), 
-%    fluent).
+% From E: 
+% 
+% fluent(hungryToPlay(agent)).
 mpred_prop(hungryToPlay(agent),fluent).
+fluents([hungryToPlay/1]).
 
 
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/PlayNeed.e',32).
@@ -50,28 +57,24 @@ mpred_prop(hungryToPlay(agent),fluent).
 
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/PlayNeed.e',35).
 % fluent IntentionToPlay(agent,outside)
-% fluent(
-%    intentionToPlay(agent,outside)).
-fluents([intentionToPlay/2]).
-% mpred_prop(
-%    intentionToPlay(agent,outside), 
-%    fluent).
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/PlayNeed.e',35).
+% From E: 
+% 
+% fluent(intentionToPlay(agent,outside)).
 mpred_prop(intentionToPlay(agent,outside),fluent).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/PlayNeed.e',35).
+fluents([intentionToPlay/2]).
 
 
 %; agent has a satisfied need to play.
 
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/PlayNeed.e',37).
 % fluent SatiatedFromPlay(agent)
-% fluent(
-%    satiatedFromPlay(agent)).
-fluents([satiatedFromPlay/1]).
-% mpred_prop(
-%    satiatedFromPlay(agent), 
-%    fluent).
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/PlayNeed.e',37).
+% From E: 
+% 
+% fluent(satiatedFromPlay(agent)).
 mpred_prop(satiatedFromPlay(agent),fluent).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/PlayNeed.e',37).
+fluents([satiatedFromPlay/1]).
 
 
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/PlayNeed.e',39).
@@ -80,58 +83,53 @@ mpred_prop(satiatedFromPlay(agent),fluent).
 
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/PlayNeed.e',41).
 % xor HungryToPlay, IntentionToPlay, SatiatedFromPlay
-% xor(
-%    ==>, 
-%    [ hungryToPlay, 
-%      intentionToPlay, 
-%      satiatedFromPlay ]).
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/PlayNeed.e',41).
-==>xor[hungryToPlay,intentionToPlay,satiatedFromPlay].
+% From E: 
+% 
+% xor([hungryToPlay,intentionToPlay,satiatedFromPlay]).
+xor([hungryToPlay,intentionToPlay,satiatedFromPlay]).
 %; agent intends to play at location outside.
 
 % event IntendToPlay(agent,outside)
-% event(
-%    intendToPlay(agent,outside)).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/PlayNeed.e',43).
+% From E: 
+% 
+% event(intendToPlay(agent,outside)).
+events([intendToPlay/2]).
+mpred_prop(intendToPlay(agent,outside),action).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/PlayNeed.e',43).
 actions([intendToPlay/2]).
-% mpred_prop(
-%    intendToPlay(agent,outside), 
-%    event).
-mpred_prop(intendToPlay(agent,outside),event).
 
 
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/PlayNeed.e',43).
 %; agent plays at location outside.
 
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/PlayNeed.e',46).
 % event Play(agent,outside)
-% event(
-%    play(agent,outside)).
-actions([play/2]).
-% mpred_prop(
-%    play(agent,outside), 
-%    event).
+% From E: 
+% 
+% event(play(agent,outside)).
+events([play/2]).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/PlayNeed.e',46).
-mpred_prop(play(agent,outside),event).
+mpred_prop(play(agent,outside),action).
+actions([play/2]).
 
 
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/PlayNeed.e',48).
 %; agent acts on the intention to play outside.
 
 % fluent ActOnIntentionToPlay(agent,outside)
-% fluent(
-%    actOnIntentionToPlay(agent,outside)).
+% From E: 
+% 
+% fluent(actOnIntentionToPlay(agent,outside)).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/PlayNeed.e',48).
-fluents([actOnIntentionToPlay/2]).
-% mpred_prop(
-%    actOnIntentionToPlay(agent,outside), 
-%    fluent).
 mpred_prop(actOnIntentionToPlay(agent,outside),fluent).
+fluents([actOnIntentionToPlay/2]).
 
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/PlayNeed.e',50).
 % noninertial ActOnIntentionToPlay
-% noninertial(actOnIntentionToPlay).
-noninertial(actOnIntentionToPlay).
+% From E: 
+% 
+% :-call_pel_directive(noninertial(actOnIntentionToPlay)).
+:- call_pel_directive(noninertial(actOnIntentionToPlay)).
 %; A trigger axiom activates an intention for an agent to play when
 %; the agent has an unsatisfied need for play, the agent likes snow,
 %; the agent is awake, and
@@ -145,20 +143,19 @@ noninertial(actOnIntentionToPlay).
 % HoldsAt(Awake(agent),time) &
 % HoldsAt(Snowing(outside),time) ->
 % Happens(IntendToPlay(agent,outside),time).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/PlayNeed.e',57).
+% From E: 
+% 
 % '->'(
-%    ','(
-%       hungryToPlay(Agent), 
-%       ','(
-%          likeSnow(Agent), 
-%          ','(
-%             at(Agent,Room), 
-%             ','(
-%                lookOutOntoPred(Room,Outside), 
-%                ','(
-%                   awake(Agent), 
-%                   snowing(Outside)))))), 
-%    intendToPlay(Agent,Outside)).
-intendToPlay(Agent, Outside)if hungryToPlay(Agent), likeSnow(Agent), loc_at(Agent, Room), lookOutOntoPred(Room, Outside), awake(Agent), snowing(Outside).
+%    (holds_at(hungryToPlay(Agent),Time) , 
+%      holds_at(likeSnow(Agent),Time) , 
+%      holds_at(at_loc(Agent,Room),Time) , 
+%      lookOutOnto(Room)=Outside , 
+%      holds_at(awake(Agent),Time) , 
+%     holds_at(snowing(Outside),Time)), 
+%    happens_at(intendToPlay(Agent,Outside),Time)).
+ %   [Time].
+intendToPlay(Agent, Outside)if hungryToPlay(Agent), likeSnow(Agent), at_loc(Agent, Room), lookOutOnto(Room, Outside), awake(Agent), snowing(Outside).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/PlayNeed.e',57).
 
  /*  l_events(happens(intendToPlay(Agent,Outside),
@@ -166,179 +163,11 @@ intendToPlay(Agent, Outside)if hungryToPlay(Agent), likeSnow(Agent), loc_at(Agen
    		 Time_From),
    	 [ holds(hungryToPlay(Agent),Time_From),
    	   likeSnow(Agent),
-   	   loc_at(Agent,Room),
-   	   lookOutOntoPred(Room,Outside),
-   	   awake(Agent),
+   	   holds(at_loc(Agent,Room),Time_From),
+   	   lookOutOnto(Room,Outside),
+   	   holds(awake(Agent),Time_From),
    	   snowing(Outside)
    	 ]).
- */
- %  "% =================================".
-% '->'(
-%    ','(
-%       likeSnow(Agent), 
-%       ','(
-%          at(Agent,Room), 
-%          ','(
-%             lookOutOntoPred(Room,Outside), 
-%             ','(
-%                awake(Agent), 
-%                ','(
-%                   snowing(Outside), 
-%                   not(
-%                      intendToPlay(Agent,Outside))))))), 
-%    not(
-%       hungryToPlay(Agent))).
-not hungryToPlay(Agent)if likeSnow(Agent), loc_at(Agent, Room), lookOutOntoPred(Room, Outside), awake(Agent), snowing(Outside), not intendToPlay(Agent, Outside).
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/PlayNeed.e',57).
-
- /*  l_int(holds(not(hungryToPlay(Agent)),Time_At),
-         [ likeSnow(Agent),
-   	loc_at(Agent,Room),
-   	lookOutOntoPred(Room,Outside),
-   	awake(Agent),
-   	snowing(Outside),
-   	not(intendToPlay(Agent,Outside))
-         ]).
- */
- %  "% =================================".
-% '->'(
-%    ','(
-%       at(Agent,Room), 
-%       ','(
-%          lookOutOntoPred(Room,Outside), 
-%          ','(
-%             awake(Agent), 
-%             ','(
-%                snowing(Outside), 
-%                ','(
-%                   hungryToPlay(Agent), 
-%                   not(
-%                      intendToPlay(Agent,Outside))))))), 
-%    not(
-%       likeSnow(Agent))).
-if loc_at(Agent, Room), lookOutOntoPred(Room, Outside), awake(Agent), snowing(Outside), hungryToPlay(Agent), not intendToPlay(Agent, Outside)then not likeSnow(Agent).
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/PlayNeed.e',57).
-
- /*  reactive_rule([ loc_at(Agent,Room),
-   		lookOutOntoPred(Room,Outside),
-   		awake(Agent),
-   		snowing(Outside),
-   		holds(hungryToPlay(Agent),Time_At6),
-   		not(intendToPlay(Agent,Outside))
-   	      ],
-   	      [not(likeSnow(Agent))]).
- */
- %  "% =================================".
-% '->'(
-%    ','(
-%       lookOutOntoPred(Room,Outside), 
-%       ','(
-%          awake(Agent), 
-%          ','(
-%             snowing(Outside), 
-%             ','(
-%                likeSnow(Agent), 
-%                ','(
-%                   hungryToPlay(Agent), 
-%                   not(
-%                      intendToPlay(Agent,Outside))))))), 
-%    not(
-%       at(Agent,Room))).
-if lookOutOntoPred(Room, Outside), awake(Agent), snowing(Outside), likeSnow(Agent), hungryToPlay(Agent), not intendToPlay(Agent, Outside)then not loc_at(Agent, Room).
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/PlayNeed.e',57).
-
- /*  reactive_rule([ lookOutOntoPred(Room,Outside),
-   		awake(Agent),
-   		snowing(Outside),
-   		likeSnow(Agent),
-   		holds(hungryToPlay(Agent),Time_At7),
-   		not(intendToPlay(Agent,Outside))
-   	      ],
-   	      [not(loc_at(Agent,Room))]).
- */
- %  "% =================================".
-% '->'(
-%    ','(
-%       awake(Agent), 
-%       ','(
-%          snowing(Outside), 
-%          ','(
-%             at(Agent,Room), 
-%             ','(
-%                likeSnow(Agent), 
-%                ','(
-%                   hungryToPlay(Agent), 
-%                   not(
-%                      intendToPlay(Agent,Outside))))))), 
-%    not(
-%       lookOutOntoPred(Room,Outside))).
-if awake(Agent), snowing(Outside), loc_at(Agent, Room), likeSnow(Agent), hungryToPlay(Agent), not intendToPlay(Agent, Outside)then not lookOutOntoPred(Room, Outside).
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/PlayNeed.e',57).
-
- /*  reactive_rule([ awake(Agent),
-   		snowing(Outside),
-   		loc_at(Agent,Room),
-   		likeSnow(Agent),
-   		holds(hungryToPlay(Agent),Time_At8),
-   		not(intendToPlay(Agent,Outside))
-   	      ],
-   	      [not(lookOutOntoPred(Room,Outside))]).
- */
- %  "% =================================".
-% '->'(
-%    ','(
-%       snowing(Outside), 
-%       ','(
-%          lookOutOntoPred(Room,Outside), 
-%          ','(
-%             at(Agent,Room), 
-%             ','(
-%                likeSnow(Agent), 
-%                ','(
-%                   hungryToPlay(Agent), 
-%                   not(
-%                      intendToPlay(Agent,Outside))))))), 
-%    not(
-%       awake(Agent))).
-if snowing(Outside), lookOutOntoPred(Room, Outside), loc_at(Agent, Room), likeSnow(Agent), hungryToPlay(Agent), not intendToPlay(Agent, Outside)then not awake(Agent).
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/PlayNeed.e',57).
-
- /*  reactive_rule([ snowing(Outside),
-   		lookOutOntoPred(Room,Outside),
-   		loc_at(Agent,Room),
-   		likeSnow(Agent),
-   		holds(hungryToPlay(Agent),Time_At9),
-   		not(intendToPlay(Agent,Outside))
-   	      ],
-   	      [not(awake(Agent))]).
- */
- %  "% =================================".
-% '->'(
-%    ','(
-%       awake(Agent), 
-%       ','(
-%          lookOutOntoPred(Room,Outside), 
-%          ','(
-%             at(Agent,Room), 
-%             ','(
-%                likeSnow(Agent), 
-%                ','(
-%                   hungryToPlay(Agent), 
-%                   not(
-%                      intendToPlay(Agent,Outside))))))), 
-%    not(
-%       snowing(Outside))).
-if awake(Agent), lookOutOntoPred(Room, Outside), loc_at(Agent, Room), likeSnow(Agent), hungryToPlay(Agent), not intendToPlay(Agent, Outside)then not snowing(Outside).
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/PlayNeed.e',57).
-
- /*  reactive_rule([ awake(Agent),
-   		lookOutOntoPred(Room,Outside),
-   		loc_at(Agent,Room),
-   		likeSnow(Agent),
-   		holds(hungryToPlay(Agent),Time_At10),
-   		not(intendToPlay(Agent,Outside))
-   	      ],
-   	      [not(snowing(Outside))]).
  */
  %  "% =================================".
 
@@ -382,10 +211,14 @@ if awake(Agent), lookOutOntoPred(Room, Outside), loc_at(Agent, Room), likeSnow(A
 %; and will no longer be in the hungry-to-play state:
 % [agent,outside,time]
 % Initiates(IntendToPlay(agent,outside),IntentionToPlay(agent,outside),time).
-% initiates(
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/PlayNeed.e',104).
+% From E: 
+% 
+% initiates_at(
 %    intendToPlay(Agent,Outside), 
 %    intentionToPlay(Agent,Outside), 
 %    Time).
+ %   [Time].
 intendToPlay(Agent, Outside)initiates intentionToPlay(Agent, Outside).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/PlayNeed.e',104).
 
@@ -400,10 +233,14 @@ intendToPlay(Agent, Outside)initiates intentionToPlay(Agent, Outside).
 
 % [agent,outside,time]
 % Terminates(IntendToPlay(agent,outside),HungryToPlay(agent),time).
-% terminates(
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/PlayNeed.e',108).
+% From E: 
+% 
+% terminates_at(
 %    intendToPlay(Agent,Outside), 
 %    hungryToPlay(Agent), 
 %    Time).
+ %   [Time].
 intendToPlay(Agent, Outside)terminates hungryToPlay(Agent).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/PlayNeed.e',108).
 
@@ -427,14 +264,16 @@ intendToPlay(Agent, Outside)terminates hungryToPlay(Agent).
 % HoldsAt(ActOnIntentionToPlay(agent,outside),time) &
 % HoldsAt(At(agent,outside),time) ->
 % Happens(Play(agent,outside),time).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/PlayNeed.e',115).
+% From E: 
+% 
 % '->'(
-%    ','(
-%       intentionToPlay(Agent,Outside), 
-%       ','(
-%          actOnIntentionToPlay(Agent,Outside), 
-%          at(Agent,Outside))), 
-%    play(Agent,Outside)).
-play(Agent, Outside)if intentionToPlay(Agent, Outside), actOnIntentionToPlay(Agent, Outside), loc_at(Agent, Outside).
+%    (holds_at(intentionToPlay(Agent,Outside),Time) , 
+%      holds_at(actOnIntentionToPlay(Agent,Outside),Time) , 
+%     holds_at(at_loc(Agent,Outside),Time)), 
+%    happens_at(play(Agent,Outside),Time)).
+ %   [Time].
+play(Agent, Outside)if intentionToPlay(Agent, Outside), actOnIntentionToPlay(Agent, Outside), at_loc(Agent, Outside).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/PlayNeed.e',115).
 
  /*  l_events(happens(play(Agent,Outside),
@@ -443,68 +282,8 @@ play(Agent, Outside)if intentionToPlay(Agent, Outside), actOnIntentionToPlay(Age
    	 [ holds(intentionToPlay(Agent,Outside),
    		 Time_From),
    	   actOnIntentionToPlay(Agent,Outside),
-   	   loc_at(Agent,Outside)
+   	   holds(at_loc(Agent,Outside),Time_From)
    	 ]).
- */
- %  "% =================================".
-% '->'(
-%    ','(
-%       actOnIntentionToPlay(Agent,Outside), 
-%       ','(
-%          at(Agent,Outside), 
-%          not(
-%             play(Agent,Outside)))), 
-%    not(
-%       intentionToPlay(Agent,Outside))).
-not intentionToPlay(Agent, Outside)if actOnIntentionToPlay(Agent, Outside), loc_at(Agent, Outside), not play(Agent, Outside).
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/PlayNeed.e',115).
-
- /*  l_int(holds(not(intentionToPlay(Agent,Outside)),
-   	    Time_At),
-         [ actOnIntentionToPlay(Agent,Outside),
-   	loc_at(Agent,Outside),
-   	not(play(Agent,Outside))
-         ]).
- */
- %  "% =================================".
-% '->'(
-%    ','(
-%       at(Agent,Outside), 
-%       ','(
-%          intentionToPlay(Agent,Outside), 
-%          not(
-%             play(Agent,Outside)))), 
-%    not(
-%       actOnIntentionToPlay(Agent,Outside))).
-if loc_at(Agent, Outside), intentionToPlay(Agent, Outside), not play(Agent, Outside)then not actOnIntentionToPlay(Agent, Outside).
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/PlayNeed.e',115).
-
- /*  reactive_rule([ loc_at(Agent,Outside),
-   		holds(intentionToPlay(Agent,Outside),
-   		      Time_At5),
-   		not(play(Agent,Outside))
-   	      ],
-   	      [not(actOnIntentionToPlay(Agent,Outside))]).
- */
- %  "% =================================".
-% '->'(
-%    ','(
-%       actOnIntentionToPlay(Agent,Outside), 
-%       ','(
-%          intentionToPlay(Agent,Outside), 
-%          not(
-%             play(Agent,Outside)))), 
-%    not(
-%       at(Agent,Outside))).
-if actOnIntentionToPlay(Agent, Outside), intentionToPlay(Agent, Outside), not play(Agent, Outside)then not loc_at(Agent, Outside).
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/PlayNeed.e',115).
-
- /*  reactive_rule([ actOnIntentionToPlay(Agent,Outside),
-   		holds(intentionToPlay(Agent,Outside),
-   		      Time_At6),
-   		not(play(Agent,Outside))
-   	      ],
-   	      [not(loc_at(Agent,Outside))]).
  */
  %  "% =================================".
 
@@ -515,10 +294,14 @@ if actOnIntentionToPlay(Agent, Outside), intentionToPlay(Agent, Outside), not pl
 %; the outside area:
 % [agent,outside,time]
 % Initiates(Play(agent,outside),SatiatedFromPlay(agent),time).
-% initiates(
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/PlayNeed.e',125).
+% From E: 
+% 
+% initiates_at(
 %    play(Agent,Outside), 
 %    satiatedFromPlay(Agent), 
 %    Time).
+ %   [Time].
 play(Agent, Outside)initiates satiatedFromPlay(Agent).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/PlayNeed.e',125).
 
@@ -533,10 +316,14 @@ play(Agent, Outside)initiates satiatedFromPlay(Agent).
 
 % [agent,outside,time]
 % Terminates(Play(agent,outside),IntentionToPlay(agent,outside),time).
-% terminates(
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/PlayNeed.e',129).
+% From E: 
+% 
+% terminates_at(
 %    play(Agent,Outside), 
 %    intentionToPlay(Agent,Outside), 
 %    Time).
+ %   [Time].
 play(Agent, Outside)terminates intentionToPlay(Agent, Outside).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/PlayNeed.e',129).
 
@@ -551,4 +338,8 @@ play(Agent, Outside)terminates intentionToPlay(Agent, Outside).
 
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/PlayNeed.e',131).
 %; End of file.
-% translate: ending  File: /pack/logicmoo_ec/ext/ec_sources/ecnet/PlayNeed.e.lps 
+% From E: 
+% 
+% :-call_pel_directive(translate(ending,'/pack/logicmoo_ec/ext/ec_sources/ecnet/PlayNeed.e.lps')).
+:- call_pel_directive(translate(ending,
+                                '/pack/logicmoo_ec/ext/ec_sources/ecnet/PlayNeed.e.lps')).

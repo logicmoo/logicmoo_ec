@@ -1,9 +1,18 @@
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Fire.e',124).
-% translate: unskipped  File: /pack/logicmoo_ec/ext/ec_sources/ecnet/GSpace.e.lps 
+% From E: 
+% 
+% :-call_pel_directive(translate(unskipped,'/pack/logicmoo_ec/ext/ec_sources/ecnet/GSpace.e.lps')).
+:- call_pel_directive(translate(unskipped,
+                                '/pack/logicmoo_ec/ext/ec_sources/ecnet/GSpace.e.lps')).
 :-include(library('ec_planner/ec_test_incl')).
 :-expects_dialect(lps).
-% translate: begining  File: /pack/logicmoo_ec/ext/ec_sources/ecnet/GSpace.e.lps 
-% Thu, 08 Oct 2020 21:36:18 GMT File: <stream>(0x55894c1dc800)%;
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Fire.e',124).
+% From E: 
+% 
+% :-call_pel_directive(translate(begining,'/pack/logicmoo_ec/ext/ec_sources/ecnet/GSpace.e.lps')).
+:- call_pel_directive(translate(begining,
+                                '/pack/logicmoo_ec/ext/ec_sources/ecnet/GSpace.e.lps')).
+% Sat, 10 Oct 2020 14:56:04 GMT File: <stream>(0x5597f2b73b00)%;
 %; Copyright (c) 2005 IBM Corporation and others.
 %; All rights reserved. This program and the accompanying materials
 %; are made available under the terms of the Common Public License v1.0
@@ -24,26 +33,28 @@
 %; }
 %;
 
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/GSpace.e',22).
 % sort coord: integer
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/GSpace.e',22).
+% From E: 
+% 
 % subsort(coord,integer).
 subsort(coord,integer).
 
 % sort grid
-% sort(grid).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/GSpace.e',22).
+% From E: 
+% 
+% sort(grid).
 sort(grid).
 %; object is at (coord1, coord2) in grid.
 
 % fluent GridAt(grid,object,coord,coord)
-% fluent(
-%    gridAt(grid,object,coord,coord)).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/GSpace.e',25).
-fluents([gridAt/4]).
-% mpred_prop(
-%    gridAt(grid,object,coord,coord), 
-%    fluent).
+% From E: 
+% 
+% fluent(gridAt(grid,object,coord,coord)).
 mpred_prop(gridAt(grid,object,coord,coord),fluent).
+fluents([gridAt/4]).
 
 
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/GSpace.e',28).
@@ -52,14 +63,12 @@ mpred_prop(gridAt(grid,object,coord,coord),fluent).
 
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/GSpace.e',30).
 % event GridWalk(grid,agent,coord,coord,coord,coord)
-% event(
-%    gridWalk(grid,agent,coord,coord,coord,coord)).
-events([gridWalk/6]).
-% mpred_prop(
-%    gridWalk(grid,agent,coord,coord,coord,coord), 
-%    event).
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/GSpace.e',30).
+% From E: 
+% 
+% event(gridWalk(grid,agent,coord,coord,coord,coord)).
 mpred_prop(gridWalk(grid,agent,coord,coord,coord,coord),event).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/GSpace.e',30).
+events([gridWalk/6]).
 
 
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/GSpace.e',32).
@@ -69,48 +78,19 @@ mpred_prop(gridWalk(grid,agent,coord,coord,coord,coord),event).
 % HoldsAt(GridAt(grid,object,coord1,coord2),time) &
 % HoldsAt(GridAt(grid,object,coord3,coord4),time) ->
 % coord1=coord3 & coord2=coord4.
-% '->'(
-%    ','(
-%       gridAt(Grid,Object,Coord3,Coord4), 
-%       ';'(
-%          not(
-%             equals(Coord1,Coord3)), 
-%          not(
-%             equals(Coord2,Coord4)))), 
-%    not(
-%       gridAt(Grid,Object,Coord1,Coord2))).
-not gridAt(Grid, Object, Coord1, Coord2)if gridAt(Grid, Object, Coord3, Coord4), (not equals(Coord1, Coord3);not equals(Coord2, Coord4)).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/GSpace.e',34).
-
- /*   l_int(holds(not(gridAt(Grid, Object, Coord1, Coord2)),
-                  Time_At),
-            [ holds(gridAt(Grid, Object, Coord3, Coord4),
-                    Time_At),
-               (not(equals(Coord1, Coord3));not(equals(Coord2, Coord4)))
-            ]).
- */
- %  "% =================================".
+% From E: 
+% 
 % '->'(
-%    ','(
-%       gridAt(Grid,Object,Coord1,Coord2), 
-%       ';'(
-%          not(
-%             equals(Coord3,Coord1)), 
-%          not(
-%             equals(Coord4,Coord2)))), 
-%    not(
-%       gridAt(Grid,Object,Coord3,Coord4))).
-not gridAt(Grid, Object, Coord3, Coord4)if gridAt(Grid, Object, Coord1, Coord2), (not equals(Coord3, Coord1);not equals(Coord4, Coord2)).
+%    (holds_at(gridAt(Grid,Object,Coord1,Coord2),Time) , 
+%     holds_at(gridAt(Grid,Object,Coord3,Coord4),Time)), 
+%    (Coord1=Coord3 , 
+%     Coord2=Coord4)).
+ %   [Time].
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/GSpace.e',34).
-
- /*   l_int(holds(not(gridAt(Grid, Object, Coord3, Coord4)),
-                  Time_At8),
-            [ holds(gridAt(Grid, Object, Coord1, Coord2),
-                    Time_At8),
-               (not(equals(Coord3, Coord1));not(equals(Coord4, Coord2)))
-            ]).
- */
- %  "% =================================".
+gridAt(Grid, Object, Coord1, Coord2), gridAt(Grid, Object, Coord3, Coord4) ->
+    Coord1=Coord3,
+    Coord2=Coord4.
 
 
 %; An effect axiom states that
@@ -120,10 +100,14 @@ not gridAt(Grid, Object, Coord3, Coord4)if gridAt(Grid, Object, Coord1, Coord2),
 % Initiates(GridWalk(grid,agent,coord1,coord2,coord3,coord4),
 %           GridAt(grid,agent,coord3,coord4),
 %           time).
-% initiates(
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/GSpace.e',42).
+% From E: 
+% 
+% initiates_at(
 %    gridWalk(Grid,Agent,Coord1,Coord2,Coord3,Coord4), 
 %    gridAt(Grid,Agent,Coord3,Coord4), 
 %    Time).
+ %   [Time].
 gridWalk(Grid, Agent, Coord1, Coord2, Coord3, Coord4)initiates gridAt(Grid, Agent, Coord3, Coord4).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/GSpace.e',42).
 
@@ -148,10 +132,14 @@ gridWalk(Grid, Agent, Coord1, Coord2, Coord3, Coord4)initiates gridAt(Grid, Agen
 % Terminates(GridWalk(grid,agent,coord1,coord2,coord3,coord4),
 %            GridAt(grid,agent,coord1,coord2),
 %            time).
-% terminates(
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/GSpace.e',50).
+% From E: 
+% 
+% terminates_at(
 %    gridWalk(Grid,Agent,Coord1,Coord2,Coord3,Coord4), 
 %    gridAt(Grid,Agent,Coord1,Coord2), 
 %    Time).
+ %   [Time].
 gridWalk(Grid, Agent, Coord1, Coord2, Coord3, Coord4)terminates gridAt(Grid, Agent, Coord1, Coord2).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/GSpace.e',50).
 
@@ -184,243 +172,41 @@ gridWalk(Grid, Agent, Coord1, Coord2, Coord3, Coord4)terminates gridAt(Grid, Age
 % (coord2=coord4 |
 %  coord2=coord4+1 |
 %  coord2=coord4-1).
-% '->'(
-%    ';'(
-%       not(
-%          gridAt(Grid,Agent,Coord1,Coord2)), 
-%       ';'(
-%          gridAt(Grid,Object,Coord3,Coord4), 
-%          ';'(
-%             ','(
-%                not(
-%                   equals(Coord1,Coord3)), 
-%                ','(
-%                   not(
-%                      '+Pred'(Coord3,1,Coord1)), 
-%                   not(
-%                      '-Pred'(Coord3,1,Coord1)))), 
-%             ','(
-%                not(
-%                   equals(Coord2,Coord4)), 
-%                ','(
-%                   not(
-%                      '+Pred'(Coord4,1,Coord2)), 
-%                   not(
-%                      '-Pred'(Coord4,1,Coord2))))))), 
-%    not(
-%       gridWalk(Grid,Agent,Coord1,Coord2,Coord3,Coord4))).
-if not gridAt(Grid, Agent, Coord1, Coord2);gridAt(Grid, Object, Coord3, Coord4);not equals(Coord1, Coord3), not'+Pred'(Coord3, 1, Coord1), not'-Pred'(Coord3, 1, Coord1);not equals(Coord2, Coord4), not'+Pred'(Coord4, 1, Coord2), not'-Pred'(Coord4, 1, Coord2)then not gridWalk(Grid, Agent, Coord1, Coord2, Coord3, Coord4).
- %  reactive_rule([(not(gridAt(Grid, Agent, Coord1, Coord2));gridAt(Grid, Object, Coord3, Coord4);not(equals(Coord1, Coord3)), not('+Pred'(Coord3, 1, Coord1)), not('-Pred'(Coord3, 1, Coord1));not(equals(Coord2, Coord4)), not('+Pred'(Coord4, 1, Coord2)), not('-Pred'(Coord4, 1, Coord2)))], [not(gridWalk(Grid, Agent, Coord1, Coord2, Coord3, Coord4))]).
- %  "% =================================".
-% '->'(
-%    metreqs(
-%       gridWalk(Grid,Agent,Coord1,Coord2,Coord3,Coord4)), 
-%    requires(
-%       gridWalk(Grid,Agent,Coord1,Coord2,Coord3,Coord4), 
-%       When_Time)).
-if gridWalk(Grid, Agent, Coord1, Coord2, Coord3, Coord4)then requires(gridWalk(Grid, Agent, Coord1, Coord2, Coord3, Coord4), When_Time).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/GSpace.e',60).
-
- /*  reactive_rule([ happens(gridWalk(Grid,
-   				 Agent,
-   				 Coord1,
-   				 Coord2,
-   				 Coord3,
-   				 Coord4),
-   			Time_From,
-   			Time_Until)
-   	      ],
-   	      [ requires(gridWalk(Grid,
-   				  Agent,
-   				  Coord1,
-   				  Coord2,
-   				  Coord3,
-   				  Coord4),
-   			 When_Time)
-   	      ]).
- */
- %  "% =================================".
+% From E: 
+% 
 % '->'(
-%    gridAt(Grid,Agent,Coord1,Coord2), 
-%    metreqs(
-%       gridWalk(Grid,Agent,Coord1,Coord2,Coord3,Coord4))).
-gridWalk(Grid, Agent, Coord1, Coord2, Coord3, Coord4)if gridAt(Grid, Agent, Coord1, Coord2).
+%    happens_at(gridWalk(Grid,Agent,Coord1,Coord2,Coord3,Coord4),Time), 
+%    (holds_at(gridAt(Grid,Agent,Coord1,Coord2),Time) , 
+%      not(
+%         exists(
+%            [Object], 
+%            holds_at(gridAt(Grid,Object,Coord3,Coord4),Time))) , 
+%      (Coord1=Coord3 ; 
+%        Coord1=Coord3+1 ; 
+%       Coord1=Coord3-1) , 
+%     (Coord2=Coord4 ; 
+%       Coord2=Coord4+1 ; 
+%      Coord2=Coord4-1))).
+ %   [Time].
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/GSpace.e',60).
-
- /*  l_events(happens(gridWalk(Grid,
-   			  Agent,
-   			  Coord1,
-   			  Coord2,
-   			  Coord3,
-   			  Coord4),
-   		 Time_From11,
-   		 Time_From11),
-   	 [ holds(gridAt(Grid,
-   			Agent,
-   			Coord1,
-   			Coord2),
-   		 Time_From11)
-   	 ]).
- */
- %  "% =================================".
-% '->'(
-%    metreqs(
-%       gridWalk(Grid,Agent,Coord1,Coord2,Coord3,Coord4)), 
-%    requires(
-%       gridWalk(Grid,Agent,Coord1,Coord2,Coord3,Coord4), 
-%       When_Time)).
-if gridWalk(Grid, Agent, Coord1, Coord2, Coord3, Coord4)then requires(gridWalk(Grid, Agent, Coord1, Coord2, Coord3, Coord4), When_Time).
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/GSpace.e',60).
-
- /*  reactive_rule([ happens(gridWalk(Grid,
-   				 Agent,
-   				 Coord1,
-   				 Coord2,
-   				 Coord3,
-   				 Coord4),
-   			Time_From12,
-   			Time_Until13)
-   	      ],
-   	      [ requires(gridWalk(Grid,
-   				  Agent,
-   				  Coord1,
-   				  Coord2,
-   				  Coord3,
-   				  Coord4),
-   			 When_Time)
-   	      ]).
- */
- %  "% =================================".
-% '->'(
-%    not(
-%       gridAt(Grid,Object,Coord3,Coord4)), 
-%    metreqs(
-%       gridWalk(Grid,Agent,Coord1,Coord2,Coord3,Coord4))).
-gridWalk(Grid, Agent, Coord1, Coord2, Coord3, Coord4)if not gridAt(Grid, Object, Coord3, Coord4).
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/GSpace.e',60).
-
- /*  l_events(happens(gridWalk(Grid,
-   			  Agent,
-   			  Coord1,
-   			  Coord2,
-   			  Coord3,
-   			  Coord4),
-   		 Time_From14,
-   		 Time_From14),
-   	 [ holds(not(gridAt(Grid,
-   			    Object,
-   			    Coord3,
-   			    Coord4)),
-   		 Time_From14)
-   	 ]).
- */
- %  "% =================================".
-% '->'(
-%    ','(
-%       not(
-%          '-Pred'(Coord3,1,Coord1)), 
-%       ','(
-%          not(
-%             equals(Coord1,Coord3)), 
-%          gridWalk(Grid,Agent,Coord1,Coord2,Coord3,Coord4))), 
-%    '+Pred'(Coord3,1,Coord1)).
-if not'-Pred'(Coord3, 1, Coord1), not equals(Coord1, Coord3), gridWalk(Grid, Agent, Coord1, Coord2, Coord3, Coord4)then'+Pred'(Coord3, 1, Coord1).
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/GSpace.e',60).
-
- /*  reactive_rule([ not('-Pred'(Coord3,1,Coord1)),
-   		not(equals(Coord1,Coord3)),
-   		happens(gridWalk(Grid,
-   				 Agent,
-   				 Coord1,
-   				 Coord2,
-   				 Coord3,
-   				 Coord4),
-   			Time_From15,
-   			Time_Until16)
-   	      ],
-   	      ['+Pred'(Coord3,1,Coord1)]).
- */
- %  "% =================================".
-% '->'(
-%    ','(
-%       not(
-%          '+Pred'(Coord3,1,Coord1)), 
-%       ','(
-%          not(
-%             equals(Coord1,Coord3)), 
-%          gridWalk(Grid,Agent,Coord1,Coord2,Coord3,Coord4))), 
-%    '-Pred'(Coord3,1,Coord1)).
-if not'+Pred'(Coord3, 1, Coord1), not equals(Coord1, Coord3), gridWalk(Grid, Agent, Coord1, Coord2, Coord3, Coord4)then'-Pred'(Coord3, 1, Coord1).
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/GSpace.e',60).
-
- /*  reactive_rule([ not('+Pred'(Coord3,1,Coord1)),
-   		not(equals(Coord1,Coord3)),
-   		happens(gridWalk(Grid,
-   				 Agent,
-   				 Coord1,
-   				 Coord2,
-   				 Coord3,
-   				 Coord4),
-   			Time_From17,
-   			Time_Until18)
-   	      ],
-   	      ['-Pred'(Coord3,1,Coord1)]).
- */
- %  "% =================================".
-% '->'(
-%    ','(
-%       not(
-%          '-Pred'(Coord4,1,Coord2)), 
-%       ','(
-%          not(
-%             equals(Coord2,Coord4)), 
-%          gridWalk(Grid,Agent,Coord1,Coord2,Coord3,Coord4))), 
-%    '+Pred'(Coord4,1,Coord2)).
-if not'-Pred'(Coord4, 1, Coord2), not equals(Coord2, Coord4), gridWalk(Grid, Agent, Coord1, Coord2, Coord3, Coord4)then'+Pred'(Coord4, 1, Coord2).
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/GSpace.e',60).
-
- /*  reactive_rule([ not('-Pred'(Coord4,1,Coord2)),
-   		not(equals(Coord2,Coord4)),
-   		happens(gridWalk(Grid,
-   				 Agent,
-   				 Coord1,
-   				 Coord2,
-   				 Coord3,
-   				 Coord4),
-   			Time_From19,
-   			Time_Until20)
-   	      ],
-   	      ['+Pred'(Coord4,1,Coord2)]).
- */
- %  "% =================================".
-% '->'(
-%    ','(
-%       not(
-%          '+Pred'(Coord4,1,Coord2)), 
-%       ','(
-%          not(
-%             equals(Coord2,Coord4)), 
-%          gridWalk(Grid,Agent,Coord1,Coord2,Coord3,Coord4))), 
-%    '-Pred'(Coord4,1,Coord2)).
-if not'+Pred'(Coord4, 1, Coord2), not equals(Coord2, Coord4), gridWalk(Grid, Agent, Coord1, Coord2, Coord3, Coord4)then'-Pred'(Coord4, 1, Coord2).
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/GSpace.e',60).
-
- /*  reactive_rule([ not('+Pred'(Coord4,1,Coord2)),
-   		not(equals(Coord2,Coord4)),
-   		happens(gridWalk(Grid,
-   				 Agent,
-   				 Coord1,
-   				 Coord2,
-   				 Coord3,
-   				 Coord4),
-   			Time_From21,
-   			Time_Until22)
-   	      ],
-   	      ['-Pred'(Coord4,1,Coord2)]).
- */
- %  "% =================================".
+gridWalk(Grid, Agent, Coord1, Coord2, Coord3, Coord4) ->
+    gridAt(Grid, Agent, Coord1, Coord2),
+    not(gridAt(Grid, Object, Coord3, Coord4)),
+    (   Coord1=Coord3
+    ;   Coord1=Coord3+1
+    ;   Coord1=Coord3-1
+    ),
+    (   Coord2=Coord4
+    ;   Coord2=Coord4+1
+    ;   Coord2=Coord4-1
+    ).
 
 
 %; End of file.
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/GSpace.e',70).
-% translate: ending  File: /pack/logicmoo_ec/ext/ec_sources/ecnet/GSpace.e.lps 
+% From E: 
+% 
+% :-call_pel_directive(translate(ending,'/pack/logicmoo_ec/ext/ec_sources/ecnet/GSpace.e.lps')).
+:- call_pel_directive(translate(ending,
+                                '/pack/logicmoo_ec/ext/ec_sources/ecnet/GSpace.e.lps')).

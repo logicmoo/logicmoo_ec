@@ -1,9 +1,18 @@
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Ontology.e',105).
-% translate: unskipped  File: /pack/logicmoo_ec/ext/ec_sources/ecnet/OTSpace.e.lps 
+% From E: 
+% 
+% :-call_pel_directive(translate(unskipped,'/pack/logicmoo_ec/ext/ec_sources/ecnet/OTSpace.e.lps')).
+:- call_pel_directive(translate(unskipped,
+                                '/pack/logicmoo_ec/ext/ec_sources/ecnet/OTSpace.e.lps')).
 :-include(library('ec_planner/ec_test_incl')).
 :-expects_dialect(lps).
-% translate: begining  File: /pack/logicmoo_ec/ext/ec_sources/ecnet/OTSpace.e.lps 
-% Thu, 08 Oct 2020 21:36:30 GMT File: <stream>(0x55894c1dcc00)%;
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Ontology.e',105).
+% From E: 
+% 
+% :-call_pel_directive(translate(begining,'/pack/logicmoo_ec/ext/ec_sources/ecnet/OTSpace.e.lps')).
+:- call_pel_directive(translate(begining,
+                                '/pack/logicmoo_ec/ext/ec_sources/ecnet/OTSpace.e.lps')).
+% Sat, 10 Oct 2020 14:56:07 GMT File: <stream>(0x5597f2969600)%;
 %; Copyright (c) 2005 IBM Corporation and others.
 %; All rights reserved. This program and the accompanying materials
 %; are made available under the terms of the Common Public License v1.0
@@ -23,14 +32,12 @@
 %; physobj is a part of object.
 
 % predicate PartOf(physobj,object)
-% predicate(
-%    partOf(physobj,object)).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OTSpace.e',20).
-predicates([partOf/2]).
-% mpred_prop(
-%    partOf(physobj,object), 
-%    predicate).
+% From E: 
+% 
+% predicate(partOf(physobj,object)).
 mpred_prop(partOf(physobj,object),predicate).
+predicates([partOf/2]).
 
 
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OTSpace.e',23).
@@ -41,50 +48,21 @@ mpred_prop(partOf(physobj,object),predicate).
 % PartOf(physobj,object) &
 % HoldsAt(At(object,location),time) ->
 % HoldsAt(At(physobj,location),time).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OTSpace.e',26).
+% From E: 
+% 
 % '->'(
-%    ','(
-%       partOf(Physobj,Object), 
-%       at(Object,Location)), 
-%    at(Physobj,Location)).
-if partOf(Physobj, Object), loc_at(Object, Location)then loc_at(Physobj, Location).
+%    (partOf(Physobj,Object) , 
+%     holds_at(at_loc(Object,Location),Time)), 
+%    holds_at(at_loc(Physobj,Location),Time)).
+ %   [Time].
+at_loc(Physobj, Location)if partOf(Physobj, Object), at_loc(Object, Location).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OTSpace.e',26).
 
- /*  reactive_rule([ partOf(Physobj,Object),
-   		loc_at(Object,Location)
-   	      ],
-   	      [loc_at(Physobj,Location)]).
- */
- %  "% =================================".
-% '->'(
-%    ','(
-%       at(Object,Location), 
-%       not(
-%          at(Physobj,Location))), 
-%    not(
-%       partOf(Physobj,Object))).
-if loc_at(Object, Location), not loc_at(Physobj, Location)then not partOf(Physobj, Object).
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OTSpace.e',26).
-
- /*  reactive_rule([ loc_at(Object,Location),
-   		not(loc_at(Physobj,Location))
-   	      ],
-   	      [not(partOf(Physobj,Object))]).
- */
- %  "% =================================".
-% '->'(
-%    ','(
-%       partOf(Physobj,Object), 
-%       not(
-%          at(Physobj,Location))), 
-%    not(
-%       at(Object,Location))).
-if partOf(Physobj, Object), not loc_at(Physobj, Location)then not loc_at(Object, Location).
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OTSpace.e',26).
-
- /*  reactive_rule([ partOf(Physobj,Object),
-   		not(loc_at(Physobj,Location))
-   	      ],
-   	      [not(loc_at(Object,Location))]).
+ /*  l_int(holds(at_loc(Physobj,Location),Time_At),
+         [ partOf(Physobj,Object),
+   	holds(at_loc(Object,Location),Time_At)
+         ]).
  */
  %  "% =================================".
 
@@ -93,29 +71,26 @@ if partOf(Physobj, Object), not loc_at(Physobj, Location)then not loc_at(Object,
 %; agent rolls stuff1 along stuff2.
 
 % event RollAlong(agent,stuff,stuff)
-% event(
-%    rollAlong(agent,stuff,stuff)).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OTSpace.e',33).
+% From E: 
+% 
+% event(rollAlong(agent,stuff,stuff)).
+events([rollAlong/3]).
+mpred_prop(rollAlong(agent,stuff,stuff),action).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OTSpace.e',33).
 actions([rollAlong/3]).
-% mpred_prop(
-%    rollAlong(agent,stuff,stuff), 
-%    event).
-mpred_prop(rollAlong(agent,stuff,stuff),event).
 
 
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OTSpace.e',33).
 %; The diameter of ball is diameter.
 
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OTSpace.e',36).
 % fluent Diameter(ball,diameter)
-% fluent(
-%    diameter(ball,diameter)).
-fluents([diameter/2]).
-% mpred_prop(
-%    diameter(ball,diameter), 
-%    fluent).
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OTSpace.e',36).
+% From E: 
+% 
+% fluent(diameter(ball,diameter)).
 mpred_prop(diameter(ball,diameter),fluent).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OTSpace.e',36).
+fluents([diameter/2]).
 
 
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OTSpace.e',38).
@@ -124,36 +99,21 @@ mpred_prop(diameter(ball,diameter),fluent).
 % HoldsAt(Diameter(ball,diameter1),time) &
 % HoldsAt(Diameter(ball,diameter2),time) ->
 % diameter1=diameter2.
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OTSpace.e',40).
+% From E: 
+% 
 % '->'(
-%    ','(
-%       diameter(Ball,Diameter2), 
-%       not(
-%          equals(Diameter1,Diameter2))), 
-%    not(
-%       diameter(Ball,Diameter1))).
-if diameter(Ball, Diameter2), not equals(Diameter1, Diameter2)then not diameter(Ball, Diameter1).
+%    (holds_at(diameter(Ball,Diameter1),Time) , 
+%     holds_at(diameter(Ball,Diameter2),Time)), 
+%    Diameter1=Diameter2).
+ %   [Time].
+false not equals(Diameter1, Diameter2), diameter(Ball, Diameter1), diameter(Ball, Diameter2).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OTSpace.e',40).
 
- /*  reactive_rule([ diameter(Ball,Diameter2),
-   		not(equals(Diameter1,Diameter2))
-   	      ],
-   	      [not(diameter(Ball,Diameter1))]).
- */
- %  "% =================================".
-% '->'(
-%    ','(
-%       diameter(Ball,Diameter1), 
-%       not(
-%          equals(Diameter2,Diameter1))), 
-%    not(
-%       diameter(Ball,Diameter2))).
-if diameter(Ball, Diameter1), not equals(Diameter2, Diameter1)then not diameter(Ball, Diameter2).
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OTSpace.e',40).
-
- /*  reactive_rule([ diameter(Ball,Diameter1),
-   		not(equals(Diameter2,Diameter1))
-   	      ],
-   	      [not(diameter(Ball,Diameter2))]).
+ /*  d_pre([ not(equals(Diameter1,Diameter2)),
+   	holds(diameter(Ball,Diameter1),Time_At),
+   	holds(diameter(Ball,Diameter2),Time_At)
+         ]).
  */
  %  "% =================================".
 
@@ -166,29 +126,21 @@ if diameter(Ball, Diameter1), not equals(Diameter2, Diameter1)then not diameter(
 % Initiates(RollAlong(agent,snow1,snow2),
 %           Diameter(snow1,diameter2),
 %           time).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OTSpace.e',46).
+% From E: 
+% 
 % '->'(
-%    ','(
-%       diameter(Snow1,Diameter1), 
-%       '+Pred'(Diameter1,1,Diameter2)), 
-%    initiates(
+%    (holds_at(diameter(Snow1,Diameter1),Time) , 
+%     Diameter2=Diameter1+1), 
+%    initiates_at(
 %       rollAlong(Agent,Snow1,Snow2), 
 %       diameter(Snow1,Diameter2), 
 %       Time)).
-if diameter(Snow1, Diameter1), '+Pred'(Diameter1, 1, Diameter2)then initiates(rollAlong(Agent, Snow1, Snow2), diameter(Snow1, Diameter2)at Time, _).
+ %   [Time].
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OTSpace.e',46).
-
- /*  reactive_rule([ diameter(Snow1,Diameter1),
-   		'+Pred'(Diameter1,1,Diameter2)
-   	      ],
-   	      [ initiates(rollAlong(Agent,
-   				    Snow1,
-   				    Snow2),
-   			  at(diameter(Snow1,Diameter2),
-   			     Time),
-   			  Initiates)
-   	      ]).
- */
- %  "% =================================".
+diameter(Snow1, Diameter1), Diameter2=Diameter1+1 ->
+    initiates(rollAlong(Agent, Snow1, Snow2),
+              diameter(Snow1, Diameter2)).
 
 
 % [agent,snow1,snow2,diameter1,time]
@@ -196,23 +148,26 @@ if diameter(Snow1, Diameter1), '+Pred'(Diameter1, 1, Diameter2)then initiates(ro
 % Terminates(RollAlong(agent,snow1,snow2),
 %            Diameter(snow1,diameter1),
 %            time).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OTSpace.e',54).
+% From E: 
+% 
 % '->'(
-%    diameter(Snow1,Diameter1), 
-%    terminates(
+%    holds_at(diameter(Snow1,Diameter1),Time), 
+%    terminates_at(
 %       rollAlong(Agent,Snow1,Snow2), 
 %       diameter(Snow1,Diameter1), 
 %       Time)).
-if diameter(Snow1, Diameter1)then terminates(rollAlong(Agent, Snow1, Snow2), diameter(Snow1, Diameter1)at Time, _).
+ %   [Time].
+rollAlong(Agent, Snow1, Snow2)terminates diameter(Snow1, Diameter1)if diameter(Snow1, Diameter1).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OTSpace.e',54).
 
- /*  reactive_rule([diameter(Snow1,Diameter1)],
-   	      [ terminates(rollAlong(Agent,
-   				     Snow1,
-   				     Snow2),
-   			   at(diameter(Snow1,Diameter1),
-   			      Time),
-   			   Terminates)
-   	      ]).
+ /*  terminated(happens(rollAlong(Agent,Snow1,Snow2),
+   		   Time_From,
+   		   Time_Until),
+   	   diameter(Snow1,Diameter1),
+   	   [ holds(diameter(Snow1,Diameter1),
+   		   Time_From)
+   	   ]).
  */
  %  "% =================================".
 
@@ -233,14 +188,12 @@ if diameter(Snow1, Diameter1)then terminates(rollAlong(Agent, Snow1, Snow2), dia
 %; object moves (in place).
 
 % event Move(object)
-% event(
-%    move(object)).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OTSpace.e',74).
-events([move/1]).
-% mpred_prop(
-%    move(object), 
-%    event).
+% From E: 
+% 
+% event(move(object)).
 mpred_prop(move(object),event).
+events([move/1]).
 
 
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OTSpace.e',77).
@@ -248,14 +201,12 @@ mpred_prop(move(object),event).
 %; agent is holding physobj.
 
 % fluent Holding(agent,physobj)
-% fluent(
-%    holding(agent,physobj)).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OTSpace.e',79).
-fluents([holding/2]).
-% mpred_prop(
-%    holding(agent,physobj), 
-%    fluent).
+% From E: 
+% 
+% fluent(holding(agent,physobj)).
 mpred_prop(holding(agent,physobj),fluent).
+fluents([holding/2]).
 
 
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OTSpace.e',79).
@@ -263,42 +214,39 @@ mpred_prop(holding(agent,physobj),fluent).
 
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OTSpace.e',82).
 % event Hold(agent,physobj)
-% event(
-%    hold(agent,physobj)).
-actions([hold/2]).
-% mpred_prop(
-%    hold(agent,physobj), 
-%    event).
+% From E: 
+% 
+% event(hold(agent,physobj)).
+events([hold/2]).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OTSpace.e',82).
-mpred_prop(hold(agent,physobj),event).
+mpred_prop(hold(agent,physobj),action).
+actions([hold/2]).
 
 
 %; agent picks up some stuff1 from stuff2.
 
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OTSpace.e',84).
 % event HoldSome(agent,stuff,stuff)
-% event(
-%    holdSome(agent,stuff,stuff)).
-actions([holdSome/3]).
-% mpred_prop(
-%    holdSome(agent,stuff,stuff), 
-%    event).
+% From E: 
+% 
+% event(holdSome(agent,stuff,stuff)).
+events([holdSome/3]).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OTSpace.e',84).
-mpred_prop(holdSome(agent,stuff,stuff),event).
+mpred_prop(holdSome(agent,stuff,stuff),action).
+actions([holdSome/3]).
 
 
 %; agent releases or lets go of physobj.
 
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OTSpace.e',86).
 % event LetGoOf(agent,physobj)
-% event(
-%    letGoOf(agent,physobj)).
-actions([letGoOf/2]).
-% mpred_prop(
-%    letGoOf(agent,physobj), 
-%    event).
+% From E: 
+% 
+% event(letGoOf(agent,physobj)).
+events([letGoOf/2]).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OTSpace.e',86).
-mpred_prop(letGoOf(agent,physobj),event).
+mpred_prop(letGoOf(agent,physobj),action).
+actions([letGoOf/2]).
 
 
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OTSpace.e',88).
@@ -307,10 +255,14 @@ mpred_prop(letGoOf(agent,physobj),event).
 %; physical object:
 % [agent,physobj,time]
 % Initiates(Hold(agent,physobj),Holding(agent,physobj),time).
-% initiates(
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OTSpace.e',91).
+% From E: 
+% 
+% initiates_at(
 %    hold(Agent,Physobj), 
 %    holding(Agent,Physobj), 
 %    Time).
+ %   [Time].
 hold(Agent, Physobj)initiates holding(Agent, Physobj).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OTSpace.e',91).
 
@@ -338,10 +290,14 @@ hold(Agent, Physobj)initiates holding(Agent, Physobj).
 %; the physical object:
 % [agent,physobj,time]
 % Terminates(LetGoOf(agent,physobj),Holding(agent,physobj),time).
-% terminates(
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OTSpace.e',108).
+% From E: 
+% 
+% terminates_at(
 %    letGoOf(Agent,Physobj), 
 %    holding(Agent,Physobj), 
 %    Time).
+ %   [Time].
 letGoOf(Agent, Physobj)terminates holding(Agent, Physobj).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OTSpace.e',108).
 
@@ -360,49 +316,21 @@ letGoOf(Agent, Physobj)terminates holding(Agent, Physobj).
 % [agent,physobj,time]
 % Happens(LetGoOf(agent,physobj),time) ->
 % HoldsAt(Holding(agent,physobj),time).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OTSpace.e',114).
+% From E: 
+% 
 % '->'(
-%    metreqs(
-%       letGoOf(Agent,Physobj)), 
-%    requires(
-%       letGoOf(Agent,Physobj), 
-%       When_Time)).
-if letGoOf(Agent, Physobj)then requires(letGoOf(Agent, Physobj), When_Time).
+%    happens_at(letGoOf(Agent,Physobj),Time), 
+%    holds_at(holding(Agent,Physobj),Time)).
+ %   [Time].
+holding(Agent, Physobj)if letGoOf(Agent, Physobj).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OTSpace.e',114).
 
- /*  reactive_rule([ happens(letGoOf(Agent,Physobj),
-   			Time_From,
-   			Time_Until)
-   	      ],
-   	      [ requires(letGoOf(Agent,Physobj),
-   			 When_Time)
-   	      ]).
- */
- %  "% =================================".
-% '->'(
-%    holding(Agent,Physobj), 
-%    metreqs(
-%       letGoOf(Agent,Physobj))).
-letGoOf(Agent, Physobj)if holding(Agent, Physobj).
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OTSpace.e',114).
-
- /*  l_events(happens(letGoOf(Agent,Physobj),
-   		 Time_From6,
-   		 Time_From6),
-   	 [holds(holding(Agent,Physobj),Time_From6)]).
- */
- %  "% =================================".
-% '->'(
-%    not(
-%       holding(Agent,Physobj)), 
-%    not(
-%       letGoOf(Agent,Physobj))).
-if not holding(Agent, Physobj)then not letGoOf(Agent, Physobj).
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OTSpace.e',114).
-
- /*  reactive_rule([ holds(not(holding(Agent,Physobj)),
-   		      Time_At)
-   	      ],
-   	      [not(letGoOf(Agent,Physobj))]).
+ /*  l_int(holds(holding(Agent,Physobj),Time_At),
+         [ happens(letGoOf(Agent,Physobj),
+   		Time_At,
+   		Time_At)
+         ]).
  */
  %  "% =================================".
 
@@ -413,14 +341,17 @@ if not holding(Agent, Physobj)then not letGoOf(Agent, Physobj).
 %; from inertia:
 % [agent,physobj,location,time]
 % Releases(Hold(agent,physobj),At(physobj,location),time).
-% releases(
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OTSpace.e',122).
+% From E: 
+% 
+% releases_at(
 %    hold(Agent,Physobj), 
-%    at(Physobj,Location), 
+%    at_loc(Physobj,Location), 
 %    Time).
+ %   [Time].
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OTSpace.e',122).
 releases(hold(Agent,Physobj),
-	 loc_at(Physobj,Location),
-	 Time).
+	 at_loc(Physobj,Location)).
 
 
 %; A state constraint says that if an agent is holding
@@ -430,51 +361,21 @@ releases(hold(Agent,Physobj),
 % HoldsAt(Holding(agent,physobj),time) &
 % HoldsAt(At(agent,location),time) ->
 % HoldsAt(At(physobj,location),time).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OTSpace.e',128).
+% From E: 
+% 
 % '->'(
-%    ','(
-%       holding(Agent,Physobj), 
-%       at(Agent,Location)), 
-%    at(Physobj,Location)).
-if holding(Agent, Physobj), loc_at(Agent, Location)then loc_at(Physobj, Location).
+%    (holds_at(holding(Agent,Physobj),Time) , 
+%     holds_at(at_loc(Agent,Location),Time)), 
+%    holds_at(at_loc(Physobj,Location),Time)).
+ %   [Time].
+at_loc(Physobj, Location)if holding(Agent, Physobj), at_loc(Agent, Location).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OTSpace.e',128).
 
- /*  reactive_rule([ holds(holding(Agent,Physobj),Time_At),
-   		loc_at(Agent,Location)
-   	      ],
-   	      [loc_at(Physobj,Location)]).
- */
- %  "% =================================".
-% '->'(
-%    ','(
-%       at(Agent,Location), 
-%       not(
-%          at(Physobj,Location))), 
-%    not(
-%       holding(Agent,Physobj))).
-not holding(Agent, Physobj)if loc_at(Agent, Location), not loc_at(Physobj, Location).
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OTSpace.e',128).
-
- /*  l_int(holds(not(holding(Agent,Physobj)),Time_At5),
-         [ loc_at(Agent,Location),
-   	not(loc_at(Physobj,Location))
+ /*  l_int(holds(at_loc(Physobj,Location),Time_At),
+         [ holds(holding(Agent,Physobj),Time_At),
+   	holds(at_loc(Agent,Location),Time_At)
          ]).
- */
- %  "% =================================".
-% '->'(
-%    ','(
-%       holding(Agent,Physobj), 
-%       not(
-%          at(Physobj,Location))), 
-%    not(
-%       at(Agent,Location))).
-if holding(Agent, Physobj), not loc_at(Physobj, Location)then not loc_at(Agent, Location).
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OTSpace.e',128).
-
- /*  reactive_rule([ holds(holding(Agent,Physobj),
-   		      Time_At6),
-   		not(loc_at(Physobj,Location))
-   	      ],
-   	      [not(loc_at(Agent,Location))]).
  */
  %  "% =================================".
 
@@ -486,19 +387,22 @@ if holding(Agent, Physobj), not loc_at(Physobj, Location)then not loc_at(Agent, 
 % [agent,physobj1,physobj2,location,time]
 % PartOf(physobj1,physobj2) ->
 % Releases(Hold(agent,physobj2),At(physobj1,location),time).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OTSpace.e',137).
+% From E: 
+% 
 % '->'(
 %    partOf(Physobj1,Physobj2), 
-%    releases(
+%    releases_at(
 %       hold(Agent,Physobj2), 
-%       at(Physobj1,Location), 
+%       at_loc(Physobj1,Location), 
 %       Time)).
-if partOf(Physobj1, Physobj2)then releases(hold(Agent, Physobj2), loc_at(Physobj1, Location), Time).
+ %   [Time].
+if partOf(Physobj1, Physobj2)then releases(hold(Agent, Physobj2), at_loc(Physobj1, Location)).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OTSpace.e',137).
 
  /*  reactive_rule([partOf(Physobj1,Physobj2)],
    	      [ releases(hold(Agent,Physobj2),
-   			 loc_at(Physobj1,Location),
-   			 Time)
+   			 at_loc(Physobj1,Location))
    	      ]).
  */
  %  "% =================================".
@@ -511,19 +415,22 @@ if partOf(Physobj1, Physobj2)then releases(hold(Agent, Physobj2), loc_at(Physobj
 % [agent,physobj1,physobj2,location,time]
 % PartOf(physobj1,physobj2) ->
 % Releases(Hold(agent,physobj1),At(physobj2,location),time).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OTSpace.e',145).
+% From E: 
+% 
 % '->'(
 %    partOf(Physobj1,Physobj2), 
-%    releases(
+%    releases_at(
 %       hold(Agent,Physobj1), 
-%       at(Physobj2,Location), 
+%       at_loc(Physobj2,Location), 
 %       Time)).
-if partOf(Physobj1, Physobj2)then releases(hold(Agent, Physobj1), loc_at(Physobj2, Location), Time).
+ %   [Time].
+if partOf(Physobj1, Physobj2)then releases(hold(Agent, Physobj1), at_loc(Physobj2, Location)).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OTSpace.e',145).
 
  /*  reactive_rule([partOf(Physobj1,Physobj2)],
    	      [ releases(hold(Agent,Physobj1),
-   			 loc_at(Physobj2,Location),
-   			 Time)
+   			 at_loc(Physobj2,Location))
    	      ]).
  */
  %  "% =================================".
@@ -538,26 +445,30 @@ if partOf(Physobj1, Physobj2)then releases(hold(Agent, Physobj1), loc_at(Physobj
 % (!{object} PartOf(physobj,object)) &
 % HoldsAt(At(agent,location),time) ->
 % Initiates(LetGoOf(agent,physobj),At(physobj,location),time).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OTSpace.e',155).
+% From E: 
+% 
 % '->'(
-%    ','(
-%       not(
-%          partOf(Physobj,Object)), 
-%       at(Agent,Location)), 
-%    initiates(
+%    (not(
+%        exists(
+%           [Object], 
+%           partOf(Physobj,Object))) , 
+%     holds_at(at_loc(Agent,Location),Time)), 
+%    initiates_at(
 %       letGoOf(Agent,Physobj), 
-%       at(Physobj,Location), 
+%       at_loc(Physobj,Location), 
 %       Time)).
-if not partOf(Physobj, Object), loc_at(Agent, Location)then initiates(letGoOf(Agent, Physobj), loc_at(Physobj, Location)at Time, _).
+ %   [Time].
+letGoOf(Agent, Physobj)initiates at_loc(Physobj, Location)if not partOf(Physobj, Object), at_loc(Agent, Location).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OTSpace.e',155).
 
- /*  reactive_rule([ not(partOf(Physobj,Object)),
-   		loc_at(Agent,Location)
-   	      ],
-   	      [ initiates(letGoOf(Agent,Physobj),
-   			  at(loc_at(Physobj,Location),
-   			     Time),
-   			  Initiates)
-   	      ]).
+ /*  initiated(happens(letGoOf(Agent,Physobj),
+   		  Time_From,
+   		  Time_Until),
+   	  at_loc(Physobj,Location),
+   	  [ not(partOf(Physobj,Object)),
+   	    holds(at_loc(Agent,Location),Time_From)
+   	  ]).
  */
  %  "% =================================".
 
@@ -573,29 +484,32 @@ if not partOf(Physobj, Object), loc_at(Agent, Location)then initiates(letGoOf(Ag
 % (!{object} PartOf(physobj2,object)) &
 % HoldsAt(At(agent,location),time) ->
 % Initiates(LetGoOf(agent,physobj1),At(physobj2,location),time).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OTSpace.e',167).
+% From E: 
+% 
 % '->'(
-%    ','(
-%       partOf(Physobj1,Physobj2), 
-%       ','(
-%          not(
-%             partOf(Physobj2,Object)), 
-%          at(Agent,Location))), 
-%    initiates(
+%    (partOf(Physobj1,Physobj2) , 
+%      not(
+%         exists(
+%            [Object], 
+%            partOf(Physobj2,Object))) , 
+%     holds_at(at_loc(Agent,Location),Time)), 
+%    initiates_at(
 %       letGoOf(Agent,Physobj1), 
-%       at(Physobj2,Location), 
+%       at_loc(Physobj2,Location), 
 %       Time)).
-if partOf(Physobj1, Physobj2), not partOf(Physobj2, Object), loc_at(Agent, Location)then initiates(letGoOf(Agent, Physobj1), loc_at(Physobj2, Location)at Time, _).
+ %   [Time].
+letGoOf(Agent, Physobj1)initiates at_loc(Physobj2, Location)if partOf(Physobj1, Physobj2), not partOf(Physobj2, Object), at_loc(Agent, Location).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OTSpace.e',167).
 
- /*  reactive_rule([ partOf(Physobj1,Physobj2),
-   		not(partOf(Physobj2,Object)),
-   		loc_at(Agent,Location)
-   	      ],
-   	      [ initiates(letGoOf(Agent,Physobj1),
-   			  at(loc_at(Physobj2,Location),
-   			     Time),
-   			  Initiates)
-   	      ]).
+ /*  initiated(happens(letGoOf(Agent,Physobj1),
+   		  Time_From,
+   		  Time_Until),
+   	  at_loc(Physobj2,Location),
+   	  [ partOf(Physobj1,Physobj2),
+   	    not(partOf(Physobj2,Object)),
+   	    holds(at_loc(Agent,Location),Time_From)
+   	  ]).
  */
  %  "% =================================".
 
@@ -606,21 +520,24 @@ if partOf(Physobj1, Physobj2), not partOf(Physobj2, Object), loc_at(Agent, Locat
 % [agent,physobj,location,time]
 % HoldsAt(At(agent,location),time) ->
 % Initiates(LetGoOf(agent,physobj),At(physobj,location),time).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OTSpace.e',176).
+% From E: 
+% 
 % '->'(
-%    at(Agent,Location), 
-%    initiates(
+%    holds_at(at_loc(Agent,Location),Time), 
+%    initiates_at(
 %       letGoOf(Agent,Physobj), 
-%       at(Physobj,Location), 
+%       at_loc(Physobj,Location), 
 %       Time)).
-if loc_at(Agent, Location)then initiates(letGoOf(Agent, Physobj), loc_at(Physobj, Location)at Time, _).
+ %   [Time].
+letGoOf(Agent, Physobj)initiates at_loc(Physobj, Location)if at_loc(Agent, Location).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OTSpace.e',176).
 
- /*  reactive_rule([loc_at(Agent,Location)],
-   	      [ initiates(letGoOf(Agent,Physobj),
-   			  at(loc_at(Physobj,Location),
-   			     Time),
-   			  Initiates)
-   	      ]).
+ /*  initiated(happens(letGoOf(Agent,Physobj),
+   		  Time_From,
+   		  Time_Until),
+   	  at_loc(Physobj,Location),
+   	  [holds(at_loc(Agent,Location),Time_From)]).
  */
  %  "% =================================".
 
@@ -632,10 +549,14 @@ if loc_at(Agent, Location)then initiates(letGoOf(Agent, Physobj), loc_at(Physobj
 % Initiates(HoldSome(agent,stuff1,stuff2),
 %           Holding(agent,stuff1),
 %           time).
-% initiates(
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OTSpace.e',183).
+% From E: 
+% 
+% initiates_at(
 %    holdSome(Agent,Stuff1,Stuff2), 
 %    holding(Agent,Stuff1), 
 %    Time).
+ %   [Time].
 holdSome(Agent, Stuff1, Stuff2)initiates holding(Agent, Stuff1).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OTSpace.e',183).
 
@@ -662,125 +583,20 @@ holdSome(Agent, Stuff1, Stuff2)initiates holding(Agent, Stuff1).
 %   HoldsAt(At(agent,location),time) &
 %   HoldsAt(At(stuff1,location),time) &
 %   HoldsAt(At(stuff2,location),time).
-% '->'(
-%    ','(
-%       ';'(
-%          not(
-%             partOf(Stuff1,Stuff2)), 
-%          ';'(
-%             not(
-%                at(Agent,Exists_Location)), 
-%             ';'(
-%                not(
-%                   at(Stuff1,Exists_Location)), 
-%                not(
-%                   at(Stuff2,Exists_Location))))), 
-%       some(
-%          Exists_Location, 
-%          '$kolem_Fn_697'(Agent,Stuff1,Stuff2,Time))), 
-%    not(
-%       holdSome(Agent,Stuff1,Stuff2))).
-if (not partOf(Stuff1, Stuff2);not loc_at(Agent, Exists_Location);not loc_at(Stuff1, Exists_Location);not loc_at(Stuff2, Exists_Location)), some(Exists_Location, '$kolem_Fn_697'(Agent, Stuff1, Stuff2, Time))then not holdSome(Agent, Stuff1, Stuff2).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OTSpace.e',197).
-
- /*   reactive_rule([  (not(partOf(Stuff1, Stuff2));not(loc_at(Agent, Exists_Location));not(loc_at(Stuff1, Exists_Location));not(loc_at(Stuff2, Exists_Location))),
-                      some(Exists_Location,
-                           '$kolem_Fn_697'(Agent,
-                                           Stuff1,
-                                           Stuff2,
-                                           Time))
-                    ],
-                    [not(holdSome(Agent, Stuff1, Stuff2))]).
- */
- %  "% =================================".
-% '->'(
-%    ','(
-%       holdSome(Agent,Stuff1,Stuff2), 
-%       some(
-%          Exists_Location, 
-%          '$kolem_Fn_697'(Agent,Stuff1,Stuff2,Time))), 
-%    partOf(Stuff1,Stuff2)).
-if holdSome(Agent, Stuff1, Stuff2), some(Exists_Location, '$kolem_Fn_697'(Agent, Stuff1, Stuff2, Time))then partOf(Stuff1, Stuff2).
+% From E: 
+% 
+% exists(
+%    [Location], 
+%    '->'(
+%       happens_at(holdSome(Agent,Stuff1,Stuff2),Time), 
+%       (partOf(Stuff1,Stuff2) , 
+%         holds_at(at_loc(Agent,Location),Time) , 
+%         holds_at(at_loc(Stuff1,Location),Time) , 
+%        holds_at(at_loc(Stuff2,Location),Time)))).
+ %   [Time].
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OTSpace.e',197).
-
- /*  reactive_rule([ happens(holdSome(Agent,Stuff1,Stuff2),
-   			Time_From,
-   			Time_Until),
-   		some(Exists_Location,
-   		     '$kolem_Fn_697'(Agent,
-   				     Stuff1,
-   				     Stuff2,
-   				     Time))
-   	      ],
-   	      [partOf(Stuff1,Stuff2)]).
- */
- %  "% =================================".
-% '->'(
-%    ','(
-%       holdSome(Agent,Stuff1,Stuff2), 
-%       some(
-%          Exists_Location, 
-%          '$kolem_Fn_697'(Agent,Stuff1,Stuff2,Time))), 
-%    at(Agent,Exists_Location)).
-if holdSome(Agent, Stuff1, Stuff2), some(Exists_Location, '$kolem_Fn_697'(Agent, Stuff1, Stuff2, Time))then loc_at(Agent, Exists_Location).
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OTSpace.e',197).
-
- /*  reactive_rule([ happens(holdSome(Agent,Stuff1,Stuff2),
-   			Time_From8,
-   			Time_Until9),
-   		some(Exists_Location,
-   		     '$kolem_Fn_697'(Agent,
-   				     Stuff1,
-   				     Stuff2,
-   				     Time))
-   	      ],
-   	      [loc_at(Agent,Exists_Location)]).
- */
- %  "% =================================".
-% '->'(
-%    ','(
-%       holdSome(Agent,Stuff1,Stuff2), 
-%       some(
-%          Exists_Location, 
-%          '$kolem_Fn_697'(Agent,Stuff1,Stuff2,Time))), 
-%    at(Stuff1,Exists_Location)).
-if holdSome(Agent, Stuff1, Stuff2), some(Exists_Location, '$kolem_Fn_697'(Agent, Stuff1, Stuff2, Time))then loc_at(Stuff1, Exists_Location).
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OTSpace.e',197).
-
- /*  reactive_rule([ happens(holdSome(Agent,Stuff1,Stuff2),
-   			Time_From10,
-   			Time_Until11),
-   		some(Exists_Location,
-   		     '$kolem_Fn_697'(Agent,
-   				     Stuff1,
-   				     Stuff2,
-   				     Time))
-   	      ],
-   	      [loc_at(Stuff1,Exists_Location)]).
- */
- %  "% =================================".
-% '->'(
-%    ','(
-%       holdSome(Agent,Stuff1,Stuff2), 
-%       some(
-%          Exists_Location, 
-%          '$kolem_Fn_697'(Agent,Stuff1,Stuff2,Time))), 
-%    at(Stuff2,Exists_Location)).
-if holdSome(Agent, Stuff1, Stuff2), some(Exists_Location, '$kolem_Fn_697'(Agent, Stuff1, Stuff2, Time))then loc_at(Stuff2, Exists_Location).
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OTSpace.e',197).
-
- /*  reactive_rule([ happens(holdSome(Agent,Stuff1,Stuff2),
-   			Time_From12,
-   			Time_Until13),
-   		some(Exists_Location,
-   		     '$kolem_Fn_697'(Agent,
-   				     Stuff1,
-   				     Stuff2,
-   				     Time))
-   	      ],
-   	      [loc_at(Stuff2,Exists_Location)]).
- */
- %  "% =================================".
+exists([Location], if((partOf(Stuff1, Stuff2), at_loc(Agent, Location), at_loc(Stuff1, Location), at_loc(Stuff2, Location)), holdSome(Agent, Stuff1, Stuff2))).
 
 
 %; A releases axiom states that if an agent picks up some
@@ -789,28 +605,29 @@ if holdSome(Agent, Stuff1, Stuff2), some(Exists_Location, '$kolem_Fn_697'(Agent,
 %; from inertia:
 % [agent,stuff1,stuff2,location,time]
 % Releases(HoldSome(agent,stuff1,stuff2),At(stuff1,location),time).
-% releases(
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OTSpace.e',206).
+% From E: 
+% 
+% releases_at(
 %    holdSome(Agent,Stuff1,Stuff2), 
-%    at(Stuff1,Location), 
+%    at_loc(Stuff1,Location), 
 %    Time).
+ %   [Time].
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OTSpace.e',206).
 releases(holdSome(Agent,Stuff1,Stuff2),
-	 loc_at(Stuff1,Location),
-	 Time).
+	 at_loc(Stuff1,Location)).
 
 
 %; Inside
 %; physobj1 is inside physobj2.
 
 % fluent Inside(physobj,physobj)
-% fluent(
-%    inside(physobj,physobj)).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OTSpace.e',211).
-fluents([inside/2]).
-% mpred_prop(
-%    inside(physobj,physobj), 
-%    fluent).
+% From E: 
+% 
+% fluent(inside(physobj,physobj)).
 mpred_prop(inside(physobj,physobj),fluent).
+fluents([inside/2]).
 
 
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OTSpace.e',211).
@@ -818,28 +635,26 @@ mpred_prop(inside(physobj,physobj),fluent).
 
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OTSpace.e',214).
 % event PutInside(agent,physobj,physobj)
-% event(
-%    putInside(agent,physobj,physobj)).
-actions([putInside/3]).
-% mpred_prop(
-%    putInside(agent,physobj,physobj), 
-%    event).
+% From E: 
+% 
+% event(putInside(agent,physobj,physobj)).
+events([putInside/3]).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OTSpace.e',214).
-mpred_prop(putInside(agent,physobj,physobj),event).
+mpred_prop(putInside(agent,physobj,physobj),action).
+actions([putInside/3]).
 
 
 %; agent takes physobj1 out of physobj2.
 
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OTSpace.e',216).
 % event TakeOutOf(agent,physobj,physobj)
-% event(
-%    takeOutOf(agent,physobj,physobj)).
-actions([takeOutOf/3]).
-% mpred_prop(
-%    takeOutOf(agent,physobj,physobj), 
-%    event).
+% From E: 
+% 
+% event(takeOutOf(agent,physobj,physobj)).
+events([takeOutOf/3]).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OTSpace.e',216).
-mpred_prop(takeOutOf(agent,physobj,physobj),event).
+mpred_prop(takeOutOf(agent,physobj,physobj),action).
+actions([takeOutOf/3]).
 
 
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OTSpace.e',218).
@@ -848,17 +663,16 @@ mpred_prop(takeOutOf(agent,physobj,physobj),event).
 % [physobj1,physobj2,time]
 % HoldsAt(Inside(physobj1,physobj2),time) ->
 % physobj1!=physobj2.
-% '->'(
-%    equals(Physobj1,Physobj2), 
-%    not(
-%       inside(Physobj1,Physobj2))).
-not inside(Physobj1, Physobj2)if equals(Physobj1, Physobj2).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OTSpace.e',220).
-
- /*  l_int(holds(not(inside(Physobj1,Physobj2)),Time_At),
-         [equals(Physobj1,Physobj2)]).
- */
- %  "% =================================".
+% From E: 
+% 
+% '->'(
+%    holds_at(inside(Physobj1,Physobj2),Time), 
+%    Physobj1\=Physobj2).
+ %   [Time].
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OTSpace.e',220).
+inside(Physobj1, Physobj2) ->
+    Physobj1\=Physobj2.
 
 
 %; A state constraint says that if a physical object is
@@ -867,32 +681,18 @@ not inside(Physobj1, Physobj2)if equals(Physobj1, Physobj2).
 % [physobj1,physobj2,time]
 % HoldsAt(Inside(physobj1,physobj2),time) ->
 % !HoldsAt(Inside(physobj2,physobj1),time).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OTSpace.e',227).
+% From E: 
+% 
 % '->'(
-%    inside(Physobj1,Physobj2), 
-%    not(
-%       inside(Physobj2,Physobj1))).
+%    holds_at(inside(Physobj1,Physobj2),Time), 
+%    holds_at(not(inside(Physobj2,Physobj1)),Time)).
+ %   [Time].
 not inside(Physobj2, Physobj1)if inside(Physobj1, Physobj2).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OTSpace.e',227).
 
  /*  l_int(holds(not(inside(Physobj2,Physobj1)),Time_At),
          [holds(inside(Physobj1,Physobj2),Time_At)]).
- */
- %  "% =================================".
-% '->'(
-%    not(
-%       not(
-%          inside(Physobj2,Physobj1))), 
-%    not(
-%       inside(Physobj1,Physobj2))).
-not inside(Physobj1, Physobj2)if not not inside(Physobj2, Physobj1).
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OTSpace.e',227).
-
- /*  l_int(holds(not(inside(Physobj1,Physobj2)),Time_At4),
-         [ holds(not([ holds(not(inside(Physobj2,Physobj1)),
-   			  Time_At4)
-   		  ]),
-   	      Time_At4)
-         ]).
  */
  %  "% =================================".
 
@@ -903,10 +703,14 @@ not inside(Physobj1, Physobj2)if not not inside(Physobj2, Physobj1).
 % [agent,physobj1,physobj2,time]
 % Initiates(PutInside(agent,physobj1,physobj2),
 %           Inside(physobj1,physobj2),time).
-% initiates(
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OTSpace.e',234).
+% From E: 
+% 
+% initiates_at(
 %    putInside(Agent,Physobj1,Physobj2), 
 %    inside(Physobj1,Physobj2), 
 %    Time).
+ %   [Time].
 putInside(Agent, Physobj1, Physobj2)initiates inside(Physobj1, Physobj2).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OTSpace.e',234).
 
@@ -925,10 +729,14 @@ putInside(Agent, Physobj1, Physobj2)initiates inside(Physobj1, Physobj2).
 % [agent,physobj1,physobj2,time]
 % Terminates(PutInside(agent,physobj1,physobj2),
 %            Holding(agent,physobj1),time).
-% terminates(
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OTSpace.e',241).
+% From E: 
+% 
+% terminates_at(
 %    putInside(Agent,Physobj1,Physobj2), 
 %    holding(Agent,Physobj1), 
 %    Time).
+ %   [Time].
 putInside(Agent, Physobj1, Physobj2)terminates holding(Agent, Physobj1).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OTSpace.e',241).
 
@@ -961,10 +769,14 @@ putInside(Agent, Physobj1, Physobj2)terminates holding(Agent, Physobj1).
 % [agent,physobj1,physobj2,time]
 % Terminates(TakeOutOf(agent,physobj1,physobj2),
 %            Inside(physobj1,physobj2),time).
-% terminates(
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OTSpace.e',263).
+% From E: 
+% 
+% terminates_at(
 %    takeOutOf(Agent,Physobj1,Physobj2), 
 %    inside(Physobj1,Physobj2), 
 %    Time).
+ %   [Time].
 takeOutOf(Agent, Physobj1, Physobj2)terminates inside(Physobj1, Physobj2).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OTSpace.e',263).
 
@@ -993,131 +805,20 @@ takeOutOf(Agent, Physobj1, Physobj2)terminates inside(Physobj1, Physobj2).
 %  HoldsAt(At(agent,location),time) &
 %  HoldsAt(At(physobj1,location),time) &
 %  HoldsAt(At(physobj2,location),time).
-% '->'(
-%    ','(
-%       ';'(
-%          not(
-%             inside(Physobj1,Physobj2)), 
-%          ';'(
-%             not(
-%                at(Agent,Exists_Location)), 
-%             ';'(
-%                not(
-%                   at(Physobj1,Exists_Location)), 
-%                not(
-%                   at(Physobj2,Exists_Location))))), 
-%       some(
-%          Exists_Location, 
-%          '$kolem_Fn_698'(Agent,Physobj1,Physobj2,Time))), 
-%    not(
-%       takeOutOf(Agent,Physobj1,Physobj2))).
-if (not inside(Physobj1, Physobj2);not loc_at(Agent, Exists_Location);not loc_at(Physobj1, Exists_Location);not loc_at(Physobj2, Exists_Location)), some(Exists_Location, '$kolem_Fn_698'(Agent, Physobj1, Physobj2, Time))then not takeOutOf(Agent, Physobj1, Physobj2).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OTSpace.e',278).
-
- /*   reactive_rule([  (not(inside(Physobj1, Physobj2));not(loc_at(Agent, Exists_Location));not(loc_at(Physobj1, Exists_Location));not(loc_at(Physobj2, Exists_Location))),
-                      some(Exists_Location,
-                           '$kolem_Fn_698'(Agent,
-                                           Physobj1,
-                                           Physobj2,
-                                           Time))
-                    ],
-                    [not(takeOutOf(Agent, Physobj1, Physobj2))]).
- */
- %  "% =================================".
-% '->'(
-%    ','(
-%       takeOutOf(Agent,Physobj1,Physobj2), 
-%       some(
-%          Exists_Location, 
-%          '$kolem_Fn_698'(Agent,Physobj1,Physobj2,Time))), 
-%    inside(Physobj1,Physobj2)).
-inside(Physobj1, Physobj2)if takeOutOf(Agent, Physobj1, Physobj2), some(Exists_Location, '$kolem_Fn_698'(Agent, Physobj1, Physobj2, Time)).
+% From E: 
+% 
+% exists(
+%    [Location], 
+%    '->'(
+%       happens_at(takeOutOf(Agent,Physobj1,Physobj2),Time), 
+%       (holds_at(inside(Physobj1,Physobj2),Time) , 
+%         holds_at(at_loc(Agent,Location),Time) , 
+%         holds_at(at_loc(Physobj1,Location),Time) , 
+%        holds_at(at_loc(Physobj2,Location),Time)))).
+ %   [Time].
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OTSpace.e',278).
-
- /*  l_int(holds(inside(Physobj1,Physobj2),Time_At),
-         [ happens(takeOutOf(Agent,Physobj1,Physobj2),
-   		Time_At,
-   		Time_At),
-   	some(Exists_Location,
-   	     '$kolem_Fn_698'(Agent,
-   			     Physobj1,
-   			     Physobj2,
-   			     Time))
-         ]).
- */
- %  "% =================================".
-% '->'(
-%    ','(
-%       takeOutOf(Agent,Physobj1,Physobj2), 
-%       some(
-%          Exists_Location, 
-%          '$kolem_Fn_698'(Agent,Physobj1,Physobj2,Time))), 
-%    at(Agent,Exists_Location)).
-if takeOutOf(Agent, Physobj1, Physobj2), some(Exists_Location, '$kolem_Fn_698'(Agent, Physobj1, Physobj2, Time))then loc_at(Agent, Exists_Location).
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OTSpace.e',278).
-
- /*  reactive_rule([ happens(takeOutOf(Agent,
-   				  Physobj1,
-   				  Physobj2),
-   			Time_From,
-   			Time_Until),
-   		some(Exists_Location,
-   		     '$kolem_Fn_698'(Agent,
-   				     Physobj1,
-   				     Physobj2,
-   				     Time))
-   	      ],
-   	      [loc_at(Agent,Exists_Location)]).
- */
- %  "% =================================".
-% '->'(
-%    ','(
-%       takeOutOf(Agent,Physobj1,Physobj2), 
-%       some(
-%          Exists_Location, 
-%          '$kolem_Fn_698'(Agent,Physobj1,Physobj2,Time))), 
-%    at(Physobj1,Exists_Location)).
-if takeOutOf(Agent, Physobj1, Physobj2), some(Exists_Location, '$kolem_Fn_698'(Agent, Physobj1, Physobj2, Time))then loc_at(Physobj1, Exists_Location).
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OTSpace.e',278).
-
- /*  reactive_rule([ happens(takeOutOf(Agent,
-   				  Physobj1,
-   				  Physobj2),
-   			Time_From9,
-   			Time_Until10),
-   		some(Exists_Location,
-   		     '$kolem_Fn_698'(Agent,
-   				     Physobj1,
-   				     Physobj2,
-   				     Time))
-   	      ],
-   	      [loc_at(Physobj1,Exists_Location)]).
- */
- %  "% =================================".
-% '->'(
-%    ','(
-%       takeOutOf(Agent,Physobj1,Physobj2), 
-%       some(
-%          Exists_Location, 
-%          '$kolem_Fn_698'(Agent,Physobj1,Physobj2,Time))), 
-%    at(Physobj2,Exists_Location)).
-if takeOutOf(Agent, Physobj1, Physobj2), some(Exists_Location, '$kolem_Fn_698'(Agent, Physobj1, Physobj2, Time))then loc_at(Physobj2, Exists_Location).
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OTSpace.e',278).
-
- /*  reactive_rule([ happens(takeOutOf(Agent,
-   				  Physobj1,
-   				  Physobj2),
-   			Time_From11,
-   			Time_Until12),
-   		some(Exists_Location,
-   		     '$kolem_Fn_698'(Agent,
-   				     Physobj1,
-   				     Physobj2,
-   				     Time))
-   	      ],
-   	      [loc_at(Physobj2,Exists_Location)]).
- */
- %  "% =================================".
+exists([Location], if((inside(Physobj1, Physobj2), at_loc(Agent, Location), at_loc(Physobj1, Location), at_loc(Physobj2, Location)), takeOutOf(Agent, Physobj1, Physobj2))).
 
 
 %; A releases axiom states that if an agent puts a physical
@@ -1127,14 +828,17 @@ if takeOutOf(Agent, Physobj1, Physobj2), some(Exists_Location, '$kolem_Fn_698'(A
 % [agent,physobj1,physobj2,location,time]
 % Releases(PutInside(agent,physobj1,physobj2),
 %          At(physobj1,location),time).
-% releases(
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OTSpace.e',287).
+% From E: 
+% 
+% releases_at(
 %    putInside(Agent,Physobj1,Physobj2), 
-%    at(Physobj1,Location), 
+%    at_loc(Physobj1,Location), 
 %    Time).
+ %   [Time].
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OTSpace.e',287).
 releases(putInside(Agent,Physobj1,Physobj2),
-	 loc_at(Physobj1,Location),
-	 Time).
+	 at_loc(Physobj1,Location)).
 
 
 %; A state constraint says that if a physical object is inside
@@ -1144,52 +848,21 @@ releases(putInside(Agent,Physobj1,Physobj2),
 % HoldsAt(Inside(physobj1,physobj2),time) &
 % HoldsAt(At(physobj2,location),time) ->
 % HoldsAt(At(physobj1,location),time).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OTSpace.e',294).
+% From E: 
+% 
 % '->'(
-%    ','(
-%       inside(Physobj1,Physobj2), 
-%       at(Physobj2,Location)), 
-%    at(Physobj1,Location)).
-if inside(Physobj1, Physobj2), loc_at(Physobj2, Location)then loc_at(Physobj1, Location).
+%    (holds_at(inside(Physobj1,Physobj2),Time) , 
+%     holds_at(at_loc(Physobj2,Location),Time)), 
+%    holds_at(at_loc(Physobj1,Location),Time)).
+ %   [Time].
+at_loc(Physobj1, Location)if inside(Physobj1, Physobj2), at_loc(Physobj2, Location).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OTSpace.e',294).
 
- /*  reactive_rule([ holds(inside(Physobj1,Physobj2),
-   		      Time_At),
-   		loc_at(Physobj2,Location)
-   	      ],
-   	      [loc_at(Physobj1,Location)]).
- */
- %  "% =================================".
-% '->'(
-%    ','(
-%       at(Physobj2,Location), 
-%       not(
-%          at(Physobj1,Location))), 
-%    not(
-%       inside(Physobj1,Physobj2))).
-not inside(Physobj1, Physobj2)if loc_at(Physobj2, Location), not loc_at(Physobj1, Location).
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OTSpace.e',294).
-
- /*  l_int(holds(not(inside(Physobj1,Physobj2)),Time_At5),
-         [ loc_at(Physobj2,Location),
-   	not(loc_at(Physobj1,Location))
+ /*  l_int(holds(at_loc(Physobj1,Location),Time_At),
+         [ holds(inside(Physobj1,Physobj2),Time_At),
+   	holds(at_loc(Physobj2,Location),Time_At)
          ]).
- */
- %  "% =================================".
-% '->'(
-%    ','(
-%       inside(Physobj1,Physobj2), 
-%       not(
-%          at(Physobj1,Location))), 
-%    not(
-%       at(Physobj2,Location))).
-if inside(Physobj1, Physobj2), not loc_at(Physobj1, Location)then not loc_at(Physobj2, Location).
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OTSpace.e',294).
-
- /*  reactive_rule([ holds(inside(Physobj1,Physobj2),
-   		      Time_At6),
-   		not(loc_at(Physobj1,Location))
-   	      ],
-   	      [not(loc_at(Physobj2,Location))]).
  */
  %  "% =================================".
 
@@ -1201,10 +874,14 @@ if inside(Physobj1, Physobj2), not loc_at(Physobj1, Location)then not loc_at(Phy
 % Initiates(TakeOutOf(agent,physobj1,physobj2),
 %           Holding(agent,physobj1),
 %           time).
-% initiates(
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OTSpace.e',302).
+% From E: 
+% 
+% initiates_at(
 %    takeOutOf(Agent,Physobj1,Physobj2), 
 %    holding(Agent,Physobj1), 
 %    Time).
+ %   [Time].
 takeOutOf(Agent, Physobj1, Physobj2)initiates holding(Agent, Physobj1).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OTSpace.e',302).
 
@@ -1221,28 +898,25 @@ takeOutOf(Agent, Physobj1, Physobj2)initiates holding(Agent, Physobj1).
 %; physobj1 is on physobj2.
 
 % fluent On(physobj,physobj)
-% fluent(
-%    on(physobj,physobj)).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OTSpace.e',309).
-fluents([on/2]).
-% mpred_prop(
-%    on(physobj,physobj), 
-%    fluent).
+% From E: 
+% 
+% fluent(on(physobj,physobj)).
 mpred_prop(on(physobj,physobj),fluent).
+fluents([on/2]).
 
 
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OTSpace.e',312).
 %; agent places physobj1 on physobj2.
 
 % event PlaceOn(agent,physobj,physobj)
-% event(
-%    placeOn(agent,physobj,physobj)).
+% From E: 
+% 
+% event(placeOn(agent,physobj,physobj)).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OTSpace.e',312).
+events([placeOn/3]).
+mpred_prop(placeOn(agent,physobj,physobj),action).
 actions([placeOn/3]).
-% mpred_prop(
-%    placeOn(agent,physobj,physobj), 
-%    event).
-mpred_prop(placeOn(agent,physobj,physobj),event).
 
 
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OTSpace.e',312).
@@ -1250,14 +924,13 @@ mpred_prop(placeOn(agent,physobj,physobj),event).
 
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OTSpace.e',315).
 % event TakeOffOf(agent,physobj,physobj)
-% event(
-%    takeOffOf(agent,physobj,physobj)).
-actions([takeOffOf/3]).
-% mpred_prop(
-%    takeOffOf(agent,physobj,physobj), 
-%    event).
+% From E: 
+% 
+% event(takeOffOf(agent,physobj,physobj)).
+events([takeOffOf/3]).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OTSpace.e',315).
-mpred_prop(takeOffOf(agent,physobj,physobj),event).
+mpred_prop(takeOffOf(agent,physobj,physobj),action).
+actions([takeOffOf/3]).
 
 
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OTSpace.e',317).
@@ -1266,17 +939,16 @@ mpred_prop(takeOffOf(agent,physobj,physobj),event).
 % [physobj1,physobj2,time]
 % HoldsAt(On(physobj1,physobj2),time) ->
 % physobj1!=physobj2.
-% '->'(
-%    equals(Physobj1,Physobj2), 
-%    not(
-%       on(Physobj1,Physobj2))).
-not on(Physobj1, Physobj2)if equals(Physobj1, Physobj2).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OTSpace.e',319).
-
- /*  l_int(holds(not(on(Physobj1,Physobj2)),Time_At),
-         [equals(Physobj1,Physobj2)]).
- */
- %  "% =================================".
+% From E: 
+% 
+% '->'(
+%    holds_at(on(Physobj1,Physobj2),Time), 
+%    Physobj1\=Physobj2).
+ %   [Time].
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OTSpace.e',319).
+on(Physobj1, Physobj2) ->
+    Physobj1\=Physobj2.
 
 
 %; A state constraint says that if a physical object is
@@ -1285,32 +957,18 @@ not on(Physobj1, Physobj2)if equals(Physobj1, Physobj2).
 % [physobj1,physobj2,time]
 % HoldsAt(On(physobj1,physobj2),time) ->
 % !HoldsAt(On(physobj2,physobj1),time).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OTSpace.e',326).
+% From E: 
+% 
 % '->'(
-%    on(Physobj1,Physobj2), 
-%    not(
-%       on(Physobj2,Physobj1))).
+%    holds_at(on(Physobj1,Physobj2),Time), 
+%    holds_at(not(on(Physobj2,Physobj1)),Time)).
+ %   [Time].
 not on(Physobj2, Physobj1)if on(Physobj1, Physobj2).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OTSpace.e',326).
 
  /*  l_int(holds(not(on(Physobj2,Physobj1)),Time_At),
          [holds(on(Physobj1,Physobj2),Time_At)]).
- */
- %  "% =================================".
-% '->'(
-%    not(
-%       not(
-%          on(Physobj2,Physobj1))), 
-%    not(
-%       on(Physobj1,Physobj2))).
-not on(Physobj1, Physobj2)if not not on(Physobj2, Physobj1).
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OTSpace.e',326).
-
- /*  l_int(holds(not(on(Physobj1,Physobj2)),Time_At4),
-         [ holds(not([ holds(not(on(Physobj2,Physobj1)),
-   			  Time_At4)
-   		  ]),
-   	      Time_At4)
-         ]).
  */
  %  "% =================================".
 
@@ -1321,10 +979,14 @@ not on(Physobj1, Physobj2)if not not on(Physobj2, Physobj1).
 % [agent,physobj1,physobj2,time]
 % Initiates(PlaceOn(agent,physobj1,physobj2),
 %           On(physobj1,physobj2),time).
-% initiates(
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OTSpace.e',333).
+% From E: 
+% 
+% initiates_at(
 %    placeOn(Agent,Physobj1,Physobj2), 
 %    on(Physobj1,Physobj2), 
 %    Time).
+ %   [Time].
 placeOn(Agent, Physobj1, Physobj2)initiates on(Physobj1, Physobj2).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OTSpace.e',333).
 
@@ -1343,10 +1005,14 @@ placeOn(Agent, Physobj1, Physobj2)initiates on(Physobj1, Physobj2).
 % [agent,physobj1,physobj2,time]
 % Terminates(PlaceOn(agent,physobj1,physobj2),
 %            Holding(agent,physobj1),time).
-% terminates(
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OTSpace.e',340).
+% From E: 
+% 
+% terminates_at(
 %    placeOn(Agent,Physobj1,Physobj2), 
 %    holding(Agent,Physobj1), 
 %    Time).
+ %   [Time].
 placeOn(Agent, Physobj1, Physobj2)terminates holding(Agent, Physobj1).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OTSpace.e',340).
 
@@ -1379,10 +1045,14 @@ placeOn(Agent, Physobj1, Physobj2)terminates holding(Agent, Physobj1).
 % [agent,physobj1,physobj2,time]
 % Terminates(TakeOffOf(agent,physobj1,physobj2),
 %            On(physobj1,physobj2),time).
-% terminates(
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OTSpace.e',362).
+% From E: 
+% 
+% terminates_at(
 %    takeOffOf(Agent,Physobj1,Physobj2), 
 %    on(Physobj1,Physobj2), 
 %    Time).
+ %   [Time].
 takeOffOf(Agent, Physobj1, Physobj2)terminates on(Physobj1, Physobj2).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OTSpace.e',362).
 
@@ -1401,10 +1071,14 @@ takeOffOf(Agent, Physobj1, Physobj2)terminates on(Physobj1, Physobj2).
 % [agent,physobj1,physobj2,time]
 % Initiates(TakeOffOf(agent,physobj1,physobj2),
 %           Holding(agent,physobj1),time).
-% initiates(
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OTSpace.e',369).
+% From E: 
+% 
+% initiates_at(
 %    takeOffOf(Agent,Physobj1,Physobj2), 
 %    holding(Agent,Physobj1), 
 %    Time).
+ %   [Time].
 takeOffOf(Agent, Physobj1, Physobj2)initiates holding(Agent, Physobj1).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OTSpace.e',369).
 
@@ -1433,131 +1107,20 @@ takeOffOf(Agent, Physobj1, Physobj2)initiates holding(Agent, Physobj1).
 %  HoldsAt(At(agent,location),time) &
 %  HoldsAt(At(physobj1,location),time) &
 %  HoldsAt(At(physobj2,location),time).
-% '->'(
-%    ','(
-%       ';'(
-%          not(
-%             on(Physobj1,Physobj2)), 
-%          ';'(
-%             not(
-%                at(Agent,Exists_Location)), 
-%             ';'(
-%                not(
-%                   at(Physobj1,Exists_Location)), 
-%                not(
-%                   at(Physobj2,Exists_Location))))), 
-%       some(
-%          Exists_Location, 
-%          '$kolem_Fn_699'(Agent,Physobj1,Physobj2,Time))), 
-%    not(
-%       takeOffOf(Agent,Physobj1,Physobj2))).
-if (not on(Physobj1, Physobj2);not loc_at(Agent, Exists_Location);not loc_at(Physobj1, Exists_Location);not loc_at(Physobj2, Exists_Location)), some(Exists_Location, '$kolem_Fn_699'(Agent, Physobj1, Physobj2, Time))then not takeOffOf(Agent, Physobj1, Physobj2).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OTSpace.e',384).
-
- /*   reactive_rule([  (not(on(Physobj1, Physobj2));not(loc_at(Agent, Exists_Location));not(loc_at(Physobj1, Exists_Location));not(loc_at(Physobj2, Exists_Location))),
-                      some(Exists_Location,
-                           '$kolem_Fn_699'(Agent,
-                                           Physobj1,
-                                           Physobj2,
-                                           Time))
-                    ],
-                    [not(takeOffOf(Agent, Physobj1, Physobj2))]).
- */
- %  "% =================================".
-% '->'(
-%    ','(
-%       takeOffOf(Agent,Physobj1,Physobj2), 
-%       some(
-%          Exists_Location, 
-%          '$kolem_Fn_699'(Agent,Physobj1,Physobj2,Time))), 
-%    on(Physobj1,Physobj2)).
-on(Physobj1, Physobj2)if takeOffOf(Agent, Physobj1, Physobj2), some(Exists_Location, '$kolem_Fn_699'(Agent, Physobj1, Physobj2, Time)).
+% From E: 
+% 
+% exists(
+%    [Location], 
+%    '->'(
+%       happens_at(takeOffOf(Agent,Physobj1,Physobj2),Time), 
+%       (holds_at(on(Physobj1,Physobj2),Time) , 
+%         holds_at(at_loc(Agent,Location),Time) , 
+%         holds_at(at_loc(Physobj1,Location),Time) , 
+%        holds_at(at_loc(Physobj2,Location),Time)))).
+ %   [Time].
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OTSpace.e',384).
-
- /*  l_int(holds(on(Physobj1,Physobj2),Time_At),
-         [ happens(takeOffOf(Agent,Physobj1,Physobj2),
-   		Time_At,
-   		Time_At),
-   	some(Exists_Location,
-   	     '$kolem_Fn_699'(Agent,
-   			     Physobj1,
-   			     Physobj2,
-   			     Time))
-         ]).
- */
- %  "% =================================".
-% '->'(
-%    ','(
-%       takeOffOf(Agent,Physobj1,Physobj2), 
-%       some(
-%          Exists_Location, 
-%          '$kolem_Fn_699'(Agent,Physobj1,Physobj2,Time))), 
-%    at(Agent,Exists_Location)).
-if takeOffOf(Agent, Physobj1, Physobj2), some(Exists_Location, '$kolem_Fn_699'(Agent, Physobj1, Physobj2, Time))then loc_at(Agent, Exists_Location).
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OTSpace.e',384).
-
- /*  reactive_rule([ happens(takeOffOf(Agent,
-   				  Physobj1,
-   				  Physobj2),
-   			Time_From,
-   			Time_Until),
-   		some(Exists_Location,
-   		     '$kolem_Fn_699'(Agent,
-   				     Physobj1,
-   				     Physobj2,
-   				     Time))
-   	      ],
-   	      [loc_at(Agent,Exists_Location)]).
- */
- %  "% =================================".
-% '->'(
-%    ','(
-%       takeOffOf(Agent,Physobj1,Physobj2), 
-%       some(
-%          Exists_Location, 
-%          '$kolem_Fn_699'(Agent,Physobj1,Physobj2,Time))), 
-%    at(Physobj1,Exists_Location)).
-if takeOffOf(Agent, Physobj1, Physobj2), some(Exists_Location, '$kolem_Fn_699'(Agent, Physobj1, Physobj2, Time))then loc_at(Physobj1, Exists_Location).
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OTSpace.e',384).
-
- /*  reactive_rule([ happens(takeOffOf(Agent,
-   				  Physobj1,
-   				  Physobj2),
-   			Time_From9,
-   			Time_Until10),
-   		some(Exists_Location,
-   		     '$kolem_Fn_699'(Agent,
-   				     Physobj1,
-   				     Physobj2,
-   				     Time))
-   	      ],
-   	      [loc_at(Physobj1,Exists_Location)]).
- */
- %  "% =================================".
-% '->'(
-%    ','(
-%       takeOffOf(Agent,Physobj1,Physobj2), 
-%       some(
-%          Exists_Location, 
-%          '$kolem_Fn_699'(Agent,Physobj1,Physobj2,Time))), 
-%    at(Physobj2,Exists_Location)).
-if takeOffOf(Agent, Physobj1, Physobj2), some(Exists_Location, '$kolem_Fn_699'(Agent, Physobj1, Physobj2, Time))then loc_at(Physobj2, Exists_Location).
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OTSpace.e',384).
-
- /*  reactive_rule([ happens(takeOffOf(Agent,
-   				  Physobj1,
-   				  Physobj2),
-   			Time_From11,
-   			Time_Until12),
-   		some(Exists_Location,
-   		     '$kolem_Fn_699'(Agent,
-   				     Physobj1,
-   				     Physobj2,
-   				     Time))
-   	      ],
-   	      [loc_at(Physobj2,Exists_Location)]).
- */
- %  "% =================================".
+exists([Location], if((on(Physobj1, Physobj2), at_loc(Agent, Location), at_loc(Physobj1, Location), at_loc(Physobj2, Location)), takeOffOf(Agent, Physobj1, Physobj2))).
 
 
 %; A releases axiom states that if an agent places a physical
@@ -1568,14 +1131,17 @@ if takeOffOf(Agent, Physobj1, Physobj2), some(Exists_Location, '$kolem_Fn_699'(A
 % Releases(PlaceOn(agent,physobj1,physobj2),
 %          At(physobj1,location),
 %          time).
-% releases(
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OTSpace.e',393).
+% From E: 
+% 
+% releases_at(
 %    placeOn(Agent,Physobj1,Physobj2), 
-%    at(Physobj1,Location), 
+%    at_loc(Physobj1,Location), 
 %    Time).
+ %   [Time].
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OTSpace.e',393).
 releases(placeOn(Agent,Physobj1,Physobj2),
-	 loc_at(Physobj1,Location),
-	 Time).
+	 at_loc(Physobj1,Location)).
 
 
 %; A state constraint says that if a physical object is on
@@ -1585,94 +1151,60 @@ releases(placeOn(Agent,Physobj1,Physobj2),
 % HoldsAt(On(physobj1,physobj2),time) &
 % HoldsAt(At(physobj2,location),time) ->
 % HoldsAt(At(physobj1,location),time).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OTSpace.e',401).
+% From E: 
+% 
 % '->'(
-%    ','(
-%       on(Physobj1,Physobj2), 
-%       at(Physobj2,Location)), 
-%    at(Physobj1,Location)).
-if on(Physobj1, Physobj2), loc_at(Physobj2, Location)then loc_at(Physobj1, Location).
+%    (holds_at(on(Physobj1,Physobj2),Time) , 
+%     holds_at(at_loc(Physobj2,Location),Time)), 
+%    holds_at(at_loc(Physobj1,Location),Time)).
+ %   [Time].
+at_loc(Physobj1, Location)if on(Physobj1, Physobj2), at_loc(Physobj2, Location).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OTSpace.e',401).
 
- /*  reactive_rule([ holds(on(Physobj1,Physobj2),Time_At),
-   		loc_at(Physobj2,Location)
-   	      ],
-   	      [loc_at(Physobj1,Location)]).
- */
- %  "% =================================".
-% '->'(
-%    ','(
-%       at(Physobj2,Location), 
-%       not(
-%          at(Physobj1,Location))), 
-%    not(
-%       on(Physobj1,Physobj2))).
-not on(Physobj1, Physobj2)if loc_at(Physobj2, Location), not loc_at(Physobj1, Location).
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OTSpace.e',401).
-
- /*  l_int(holds(not(on(Physobj1,Physobj2)),Time_At5),
-         [ loc_at(Physobj2,Location),
-   	not(loc_at(Physobj1,Location))
+ /*  l_int(holds(at_loc(Physobj1,Location),Time_At),
+         [ holds(on(Physobj1,Physobj2),Time_At),
+   	holds(at_loc(Physobj2,Location),Time_At)
          ]).
- */
- %  "% =================================".
-% '->'(
-%    ','(
-%       on(Physobj1,Physobj2), 
-%       not(
-%          at(Physobj1,Location))), 
-%    not(
-%       at(Physobj2,Location))).
-if on(Physobj1, Physobj2), not loc_at(Physobj1, Location)then not loc_at(Physobj2, Location).
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OTSpace.e',401).
-
- /*  reactive_rule([ holds(on(Physobj1,Physobj2),Time_At6),
-   		not(loc_at(Physobj1,Location))
-   	      ],
-   	      [not(loc_at(Physobj2,Location))]).
  */
  %  "% =================================".
 
 % fluent Near(agent,object)
-% fluent(
-%    near(agent,object)).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OTSpace.e',405).
-fluents([near/2]).
-% mpred_prop(
-%    near(agent,object), 
-%    fluent).
+% From E: 
+% 
+% fluent(near(agent,object)).
 mpred_prop(near(agent,object),fluent).
+fluents([near/2]).
 
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OTSpace.e',407).
 % event WalkFromTo(agent,object,object)
-% event(
-%    walkFromTo(agent,object,object)).
-actions([walkFromTo/3]).
-% mpred_prop(
-%    walkFromTo(agent,object,object), 
-%    event).
+% From E: 
+% 
+% event(walkFromTo(agent,object,object)).
+events([walkFromTo/3]).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OTSpace.e',407).
-mpred_prop(walkFromTo(agent,object,object),event).
+mpred_prop(walkFromTo(agent,object,object),action).
+actions([walkFromTo/3]).
 
 % event WalkFrom(agent,object)
-% event(
-%    walkFrom(agent,object)).
+% From E: 
+% 
+% event(walkFrom(agent,object)).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OTSpace.e',407).
+events([walkFrom/2]).
+mpred_prop(walkFrom(agent,object),action).
 actions([walkFrom/2]).
-% mpred_prop(
-%    walkFrom(agent,object), 
-%    event).
-mpred_prop(walkFrom(agent,object),event).
 
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OTSpace.e',409).
 % event RunFromTo(agent,object,object)
-% event(
-%    runFromTo(agent,object,object)).
-actions([runFromTo/3]).
-% mpred_prop(
-%    runFromTo(agent,object,object), 
-%    event).
+% From E: 
+% 
+% event(runFromTo(agent,object,object)).
+events([runFromTo/3]).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OTSpace.e',409).
-mpred_prop(runFromTo(agent,object,object),event).
+mpred_prop(runFromTo(agent,object,object),action).
+actions([runFromTo/3]).
 
 
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OTSpace.e',411).
@@ -1680,10 +1212,13 @@ mpred_prop(runFromTo(agent,object,object),event).
 % Initiates(WalkFromTo(agent,object1,object2),
 %           Near(agent,object2),
 %           time).
-% initiates(
+% From E: 
+% 
+% initiates_at(
 %    walkFromTo(Agent,Object1,Object2), 
 %    near(Agent,Object2), 
 %    Time).
+ %   [Time].
 walkFromTo(Agent, Object1, Object2)initiates near(Agent, Object2).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OTSpace.e',411).
 
@@ -1700,10 +1235,14 @@ walkFromTo(Agent, Object1, Object2)initiates near(Agent, Object2).
 % Terminates(WalkFromTo(agent,object1,object2),
 %            Near(agent,object1),
 %            time).
-% terminates(
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OTSpace.e',417).
+% From E: 
+% 
+% terminates_at(
 %    walkFromTo(Agent,Object1,Object2), 
 %    near(Agent,Object1), 
 %    Time).
+ %   [Time].
 walkFromTo(Agent, Object1, Object2)terminates near(Agent, Object1).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OTSpace.e',417).
 
@@ -1722,116 +1261,33 @@ walkFromTo(Agent, Object1, Object2)terminates near(Agent, Object1).
 % HoldsAt(At(agent,location),time) &
 % HoldsAt(At(object1,location),time) &
 % HoldsAt(At(object2,location),time).
-% '->'(
-%    ','(
-%       ';'(
-%          not(
-%             at(Agent,Exists_Location)), 
-%          ';'(
-%             not(
-%                at(Object1,Exists_Location)), 
-%             not(
-%                at(Object2,Exists_Location)))), 
-%       some(
-%          Exists_Location, 
-%          '$kolem_Fn_700'(Agent,Object1,Object2,Time))), 
-%    not(
-%       walkFromTo(Agent,Object1,Object2))).
-if (not loc_at(Agent, Exists_Location);not loc_at(Object1, Exists_Location);not loc_at(Object2, Exists_Location)), some(Exists_Location, '$kolem_Fn_700'(Agent, Object1, Object2, Time))then not walkFromTo(Agent, Object1, Object2).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OTSpace.e',422).
-
- /*   reactive_rule([  (not(loc_at(Agent, Exists_Location));not(loc_at(Object1, Exists_Location));not(loc_at(Object2, Exists_Location))),
-                      some(Exists_Location,
-                           '$kolem_Fn_700'(Agent,
-                                           Object1,
-                                           Object2,
-                                           Time))
-                    ],
-                    [not(walkFromTo(Agent, Object1, Object2))]).
- */
- %  "% =================================".
-% '->'(
-%    ','(
-%       walkFromTo(Agent,Object1,Object2), 
-%       some(
-%          Exists_Location, 
-%          '$kolem_Fn_700'(Agent,Object1,Object2,Time))), 
-%    at(Agent,Exists_Location)).
-if walkFromTo(Agent, Object1, Object2), some(Exists_Location, '$kolem_Fn_700'(Agent, Object1, Object2, Time))then loc_at(Agent, Exists_Location).
+% From E: 
+% 
+% exists(
+%    [Location], 
+%    '->'(
+%       happens_at(walkFromTo(Agent,Object1,Object2),Time), 
+%       (holds_at(at_loc(Agent,Location),Time) , 
+%         holds_at(at_loc(Object1,Location),Time) , 
+%        holds_at(at_loc(Object2,Location),Time)))).
+ %   [Time].
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OTSpace.e',422).
-
- /*  reactive_rule([ happens(walkFromTo(Agent,
-   				   Object1,
-   				   Object2),
-   			Time_From,
-   			Time_Until),
-   		some(Exists_Location,
-   		     '$kolem_Fn_700'(Agent,
-   				     Object1,
-   				     Object2,
-   				     Time))
-   	      ],
-   	      [loc_at(Agent,Exists_Location)]).
- */
- %  "% =================================".
-% '->'(
-%    ','(
-%       walkFromTo(Agent,Object1,Object2), 
-%       some(
-%          Exists_Location, 
-%          '$kolem_Fn_700'(Agent,Object1,Object2,Time))), 
-%    at(Object1,Exists_Location)).
-if walkFromTo(Agent, Object1, Object2), some(Exists_Location, '$kolem_Fn_700'(Agent, Object1, Object2, Time))then loc_at(Object1, Exists_Location).
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OTSpace.e',422).
-
- /*  reactive_rule([ happens(walkFromTo(Agent,
-   				   Object1,
-   				   Object2),
-   			Time_From8,
-   			Time_Until9),
-   		some(Exists_Location,
-   		     '$kolem_Fn_700'(Agent,
-   				     Object1,
-   				     Object2,
-   				     Time))
-   	      ],
-   	      [loc_at(Object1,Exists_Location)]).
- */
- %  "% =================================".
-% '->'(
-%    ','(
-%       walkFromTo(Agent,Object1,Object2), 
-%       some(
-%          Exists_Location, 
-%          '$kolem_Fn_700'(Agent,Object1,Object2,Time))), 
-%    at(Object2,Exists_Location)).
-if walkFromTo(Agent, Object1, Object2), some(Exists_Location, '$kolem_Fn_700'(Agent, Object1, Object2, Time))then loc_at(Object2, Exists_Location).
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OTSpace.e',422).
-
- /*  reactive_rule([ happens(walkFromTo(Agent,
-   				   Object1,
-   				   Object2),
-   			Time_From10,
-   			Time_Until11),
-   		some(Exists_Location,
-   		     '$kolem_Fn_700'(Agent,
-   				     Object1,
-   				     Object2,
-   				     Time))
-   	      ],
-   	      [loc_at(Object2,Exists_Location)]).
- */
- %  "% =================================".
+exists([Location], if((at_loc(Agent, Location), at_loc(Object1, Location), at_loc(Object2, Location)), walkFromTo(Agent, Object1, Object2))).
 
 
 % [agent,object1,object2,time]
 % Initiates(RunFromTo(agent,object1,object2),
 %           Near(agent,object2),
 %           time).
-% initiates(
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OTSpace.e',429).
+% From E: 
+% 
+% initiates_at(
 %    runFromTo(Agent,Object1,Object2), 
 %    near(Agent,Object2), 
 %    Time).
+ %   [Time].
 runFromTo(Agent, Object1, Object2)initiates near(Agent, Object2).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OTSpace.e',429).
 
@@ -1848,10 +1304,14 @@ runFromTo(Agent, Object1, Object2)initiates near(Agent, Object2).
 % Terminates(RunFromTo(agent,object1,object2),
 %            Near(agent,object1),
 %            time).
-% terminates(
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OTSpace.e',434).
+% From E: 
+% 
+% terminates_at(
 %    runFromTo(Agent,Object1,Object2), 
 %    near(Agent,Object1), 
 %    Time).
+ %   [Time].
 runFromTo(Agent, Object1, Object2)terminates near(Agent, Object1).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OTSpace.e',434).
 
@@ -1870,116 +1330,33 @@ runFromTo(Agent, Object1, Object2)terminates near(Agent, Object1).
 % HoldsAt(At(agent,location),time) &
 % HoldsAt(At(object1,location),time) &
 % HoldsAt(At(object2,location),time).
-% '->'(
-%    ','(
-%       ';'(
-%          not(
-%             at(Agent,Exists_Location)), 
-%          ';'(
-%             not(
-%                at(Object1,Exists_Location)), 
-%             not(
-%                at(Object2,Exists_Location)))), 
-%       some(
-%          Exists_Location, 
-%          '$kolem_Fn_701'(Agent,Object1,Object2,Time))), 
-%    not(
-%       runFromTo(Agent,Object1,Object2))).
-if (not loc_at(Agent, Exists_Location);not loc_at(Object1, Exists_Location);not loc_at(Object2, Exists_Location)), some(Exists_Location, '$kolem_Fn_701'(Agent, Object1, Object2, Time))then not runFromTo(Agent, Object1, Object2).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OTSpace.e',439).
-
- /*   reactive_rule([  (not(loc_at(Agent, Exists_Location));not(loc_at(Object1, Exists_Location));not(loc_at(Object2, Exists_Location))),
-                      some(Exists_Location,
-                           '$kolem_Fn_701'(Agent,
-                                           Object1,
-                                           Object2,
-                                           Time))
-                    ],
-                    [not(runFromTo(Agent, Object1, Object2))]).
- */
- %  "% =================================".
-% '->'(
-%    ','(
-%       runFromTo(Agent,Object1,Object2), 
-%       some(
-%          Exists_Location, 
-%          '$kolem_Fn_701'(Agent,Object1,Object2,Time))), 
-%    at(Agent,Exists_Location)).
-if runFromTo(Agent, Object1, Object2), some(Exists_Location, '$kolem_Fn_701'(Agent, Object1, Object2, Time))then loc_at(Agent, Exists_Location).
+% From E: 
+% 
+% exists(
+%    [Location], 
+%    '->'(
+%       happens_at(runFromTo(Agent,Object1,Object2),Time), 
+%       (holds_at(at_loc(Agent,Location),Time) , 
+%         holds_at(at_loc(Object1,Location),Time) , 
+%        holds_at(at_loc(Object2,Location),Time)))).
+ %   [Time].
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OTSpace.e',439).
-
- /*  reactive_rule([ happens(runFromTo(Agent,
-   				  Object1,
-   				  Object2),
-   			Time_From,
-   			Time_Until),
-   		some(Exists_Location,
-   		     '$kolem_Fn_701'(Agent,
-   				     Object1,
-   				     Object2,
-   				     Time))
-   	      ],
-   	      [loc_at(Agent,Exists_Location)]).
- */
- %  "% =================================".
-% '->'(
-%    ','(
-%       runFromTo(Agent,Object1,Object2), 
-%       some(
-%          Exists_Location, 
-%          '$kolem_Fn_701'(Agent,Object1,Object2,Time))), 
-%    at(Object1,Exists_Location)).
-if runFromTo(Agent, Object1, Object2), some(Exists_Location, '$kolem_Fn_701'(Agent, Object1, Object2, Time))then loc_at(Object1, Exists_Location).
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OTSpace.e',439).
-
- /*  reactive_rule([ happens(runFromTo(Agent,
-   				  Object1,
-   				  Object2),
-   			Time_From8,
-   			Time_Until9),
-   		some(Exists_Location,
-   		     '$kolem_Fn_701'(Agent,
-   				     Object1,
-   				     Object2,
-   				     Time))
-   	      ],
-   	      [loc_at(Object1,Exists_Location)]).
- */
- %  "% =================================".
-% '->'(
-%    ','(
-%       runFromTo(Agent,Object1,Object2), 
-%       some(
-%          Exists_Location, 
-%          '$kolem_Fn_701'(Agent,Object1,Object2,Time))), 
-%    at(Object2,Exists_Location)).
-if runFromTo(Agent, Object1, Object2), some(Exists_Location, '$kolem_Fn_701'(Agent, Object1, Object2, Time))then loc_at(Object2, Exists_Location).
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OTSpace.e',439).
-
- /*  reactive_rule([ happens(runFromTo(Agent,
-   				  Object1,
-   				  Object2),
-   			Time_From10,
-   			Time_Until11),
-   		some(Exists_Location,
-   		     '$kolem_Fn_701'(Agent,
-   				     Object1,
-   				     Object2,
-   				     Time))
-   	      ],
-   	      [loc_at(Object2,Exists_Location)]).
- */
- %  "% =================================".
+exists([Location], if((at_loc(Agent, Location), at_loc(Object1, Location), at_loc(Object2, Location)), runFromTo(Agent, Object1, Object2))).
 
 
 % [agent,object,time]
 % Terminates(WalkFrom(agent,object),
 %            Near(agent,object),
 %            time).
-% terminates(
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OTSpace.e',446).
+% From E: 
+% 
+% terminates_at(
 %    walkFrom(Agent,Object), 
 %    near(Agent,Object), 
 %    Time).
+ %   [Time].
 walkFrom(Agent, Object)terminates near(Agent, Object).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OTSpace.e',446).
 
@@ -1999,166 +1376,31 @@ walkFrom(Agent, Object)terminates near(Agent, Object).
 % Side1(door)=location &
 % Happens(WalkThroughDoor12(agent,door),time) ->
 % Happens(WalkFrom(agent,object),time).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OTSpace.e',451).
+% From E: 
+% 
 % '->'(
-%    ','(
-%       near(Agent,Object), 
-%       ','(
-%          at(Agent,Location), 
-%          ','(
-%             at(Object,Location), 
-%             ','(
-%                side1Pred(Door,Location), 
-%                walkThroughDoor12(Agent,Door))))), 
-%    walkFrom(Agent,Object)).
-walkFrom(Agent, Object)if near(Agent, Object), loc_at(Agent, Location), loc_at(Object, Location), side1Pred(Door, Location), walkThroughDoor12(Agent, Door).
+%    (holds_at(near(Agent,Object),Time) , 
+%      holds_at(at_loc(Agent,Location),Time) , 
+%      holds_at(at_loc(Object,Location),Time) , 
+%      side1(Door)=Location , 
+%     happens_at(walkThroughDoor12(Agent,Door),Time)), 
+%    happens_at(walkFrom(Agent,Object),Time)).
+ %   [Time].
+walkFrom(Agent, Object)if near(Agent, Object), at_loc(Agent, Location), at_loc(Object, Location), side1(Door, Location), walkThroughDoor12(Agent, Door).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OTSpace.e',451).
 
  /*  l_events(happens(walkFrom(Agent,Object),
    		 Time_From,
    		 Time_Until),
    	 [ holds(near(Agent,Object),Time_From),
-   	   loc_at(Agent,Location),
-   	   loc_at(Object,Location),
-   	   side1Pred(Door,Location),
+   	   holds(at_loc(Agent,Location),Time_From),
+   	   holds(at_loc(Object,Location),Time_From),
+   	   side1(Door,Location),
    	   happens(walkThroughDoor12(Agent,Door),
    		   Time_From,
    		   Time_Until)
    	 ]).
- */
- %  "% =================================".
-% '->'(
-%    ','(
-%       at(Agent,Location), 
-%       ','(
-%          at(Object,Location), 
-%          ','(
-%             side1Pred(Door,Location), 
-%             ','(
-%                walkThroughDoor12(Agent,Door), 
-%                not(
-%                   walkFrom(Agent,Object)))))), 
-%    not(
-%       near(Agent,Object))).
-not near(Agent, Object)if loc_at(Agent, Location), loc_at(Object, Location), side1Pred(Door, Location), walkThroughDoor12(Agent, Door), not walkFrom(Agent, Object).
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OTSpace.e',451).
-
- /*  l_int(holds(not(near(Agent,Object)),Time_At),
-         [ loc_at(Agent,Location),
-   	loc_at(Object,Location),
-   	side1Pred(Door,Location),
-   	happens(walkThroughDoor12(Agent,Door),
-   		Time_At,
-   		Time_At),
-   	not(walkFrom(Agent,Object))
-         ]).
- */
- %  "% =================================".
-% '->'(
-%    ','(
-%       at(Object,Location), 
-%       ','(
-%          side1Pred(Door,Location), 
-%          ','(
-%             walkThroughDoor12(Agent,Door), 
-%             ','(
-%                near(Agent,Object), 
-%                not(
-%                   walkFrom(Agent,Object)))))), 
-%    not(
-%       at(Agent,Location))).
-if loc_at(Object, Location), side1Pred(Door, Location), walkThroughDoor12(Agent, Door), near(Agent, Object), not walkFrom(Agent, Object)then not loc_at(Agent, Location).
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OTSpace.e',451).
-
- /*  reactive_rule([ loc_at(Object,Location),
-   		side1Pred(Door,Location),
-   		happens(walkThroughDoor12(Agent,Door),
-   			Time_From8,
-   			Time_Until9),
-   		holds(near(Agent,Object),Time_Until9),
-   		not(walkFrom(Agent,Object))
-   	      ],
-   	      [not(loc_at(Agent,Location))]).
- */
- %  "% =================================".
-% '->'(
-%    ','(
-%       side1Pred(Door,Location), 
-%       ','(
-%          walkThroughDoor12(Agent,Door), 
-%          ','(
-%             at(Agent,Location), 
-%             ','(
-%                near(Agent,Object), 
-%                not(
-%                   walkFrom(Agent,Object)))))), 
-%    not(
-%       at(Object,Location))).
-if side1Pred(Door, Location), walkThroughDoor12(Agent, Door), loc_at(Agent, Location), near(Agent, Object), not walkFrom(Agent, Object)then not loc_at(Object, Location).
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OTSpace.e',451).
-
- /*  reactive_rule([ side1Pred(Door,Location),
-   		happens(walkThroughDoor12(Agent,Door),
-   			Time_From10,
-   			Time_Until11),
-   		loc_at(Agent,Location),
-   		holds(near(Agent,Object),
-   		      Time_Until11),
-   		not(walkFrom(Agent,Object))
-   	      ],
-   	      [not(loc_at(Object,Location))]).
- */
- %  "% =================================".
-% '->'(
-%    ','(
-%       walkThroughDoor12(Agent,Door), 
-%       ','(
-%          at(Object,Location), 
-%          ','(
-%             at(Agent,Location), 
-%             ','(
-%                near(Agent,Object), 
-%                not(
-%                   walkFrom(Agent,Object)))))), 
-%    not(
-%       side1Pred(Door,Location))).
-if walkThroughDoor12(Agent, Door), loc_at(Object, Location), loc_at(Agent, Location), near(Agent, Object), not walkFrom(Agent, Object)then not side1Pred(Door, Location).
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OTSpace.e',451).
-
- /*  reactive_rule([ happens(walkThroughDoor12(Agent,Door),
-   			Time_From12,
-   			Time_Until13),
-   		loc_at(Object,Location),
-   		loc_at(Agent,Location),
-   		holds(near(Agent,Object),
-   		      Time_Until13),
-   		not(walkFrom(Agent,Object))
-   	      ],
-   	      [not(side1Pred(Door,Location))]).
- */
- %  "% =================================".
-% '->'(
-%    ','(
-%       side1Pred(Door,Location), 
-%       ','(
-%          at(Object,Location), 
-%          ','(
-%             at(Agent,Location), 
-%             ','(
-%                near(Agent,Object), 
-%                not(
-%                   walkFrom(Agent,Object)))))), 
-%    not(
-%       walkThroughDoor12(Agent,Door))).
-if side1Pred(Door, Location), loc_at(Object, Location), loc_at(Agent, Location), near(Agent, Object), not walkFrom(Agent, Object)then not walkThroughDoor12(Agent, Door).
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OTSpace.e',451).
-
- /*  reactive_rule([ side1Pred(Door,Location),
-   		loc_at(Object,Location),
-   		loc_at(Agent,Location),
-   		holds(near(Agent,Object),Time_At14),
-   		not(walkFrom(Agent,Object))
-   	      ],
-   	      [not(walkThroughDoor12(Agent,Door))]).
  */
  %  "% =================================".
 
@@ -2170,166 +1412,31 @@ if side1Pred(Door, Location), loc_at(Object, Location), loc_at(Agent, Location),
 % Side2(door)=location &
 % Happens(WalkThroughDoor21(agent,door),time) ->
 % Happens(WalkFrom(agent,object),time).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OTSpace.e',459).
+% From E: 
+% 
 % '->'(
-%    ','(
-%       near(Agent,Object), 
-%       ','(
-%          at(Agent,Location), 
-%          ','(
-%             at(Object,Location), 
-%             ','(
-%                side2Pred(Door,Location), 
-%                walkThroughDoor21(Agent,Door))))), 
-%    walkFrom(Agent,Object)).
-walkFrom(Agent, Object)if near(Agent, Object), loc_at(Agent, Location), loc_at(Object, Location), side2Pred(Door, Location), walkThroughDoor21(Agent, Door).
+%    (holds_at(near(Agent,Object),Time) , 
+%      holds_at(at_loc(Agent,Location),Time) , 
+%      holds_at(at_loc(Object,Location),Time) , 
+%      side2(Door)=Location , 
+%     happens_at(walkThroughDoor21(Agent,Door),Time)), 
+%    happens_at(walkFrom(Agent,Object),Time)).
+ %   [Time].
+walkFrom(Agent, Object)if near(Agent, Object), at_loc(Agent, Location), at_loc(Object, Location), side2(Door, Location), walkThroughDoor21(Agent, Door).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OTSpace.e',459).
 
  /*  l_events(happens(walkFrom(Agent,Object),
    		 Time_From,
    		 Time_Until),
    	 [ holds(near(Agent,Object),Time_From),
-   	   loc_at(Agent,Location),
-   	   loc_at(Object,Location),
-   	   side2Pred(Door,Location),
+   	   holds(at_loc(Agent,Location),Time_From),
+   	   holds(at_loc(Object,Location),Time_From),
+   	   side2(Door,Location),
    	   happens(walkThroughDoor21(Agent,Door),
    		   Time_From,
    		   Time_Until)
    	 ]).
- */
- %  "% =================================".
-% '->'(
-%    ','(
-%       at(Agent,Location), 
-%       ','(
-%          at(Object,Location), 
-%          ','(
-%             side2Pred(Door,Location), 
-%             ','(
-%                walkThroughDoor21(Agent,Door), 
-%                not(
-%                   walkFrom(Agent,Object)))))), 
-%    not(
-%       near(Agent,Object))).
-not near(Agent, Object)if loc_at(Agent, Location), loc_at(Object, Location), side2Pred(Door, Location), walkThroughDoor21(Agent, Door), not walkFrom(Agent, Object).
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OTSpace.e',459).
-
- /*  l_int(holds(not(near(Agent,Object)),Time_At),
-         [ loc_at(Agent,Location),
-   	loc_at(Object,Location),
-   	side2Pred(Door,Location),
-   	happens(walkThroughDoor21(Agent,Door),
-   		Time_At,
-   		Time_At),
-   	not(walkFrom(Agent,Object))
-         ]).
- */
- %  "% =================================".
-% '->'(
-%    ','(
-%       at(Object,Location), 
-%       ','(
-%          side2Pred(Door,Location), 
-%          ','(
-%             walkThroughDoor21(Agent,Door), 
-%             ','(
-%                near(Agent,Object), 
-%                not(
-%                   walkFrom(Agent,Object)))))), 
-%    not(
-%       at(Agent,Location))).
-if loc_at(Object, Location), side2Pred(Door, Location), walkThroughDoor21(Agent, Door), near(Agent, Object), not walkFrom(Agent, Object)then not loc_at(Agent, Location).
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OTSpace.e',459).
-
- /*  reactive_rule([ loc_at(Object,Location),
-   		side2Pred(Door,Location),
-   		happens(walkThroughDoor21(Agent,Door),
-   			Time_From8,
-   			Time_Until9),
-   		holds(near(Agent,Object),Time_Until9),
-   		not(walkFrom(Agent,Object))
-   	      ],
-   	      [not(loc_at(Agent,Location))]).
- */
- %  "% =================================".
-% '->'(
-%    ','(
-%       side2Pred(Door,Location), 
-%       ','(
-%          walkThroughDoor21(Agent,Door), 
-%          ','(
-%             at(Agent,Location), 
-%             ','(
-%                near(Agent,Object), 
-%                not(
-%                   walkFrom(Agent,Object)))))), 
-%    not(
-%       at(Object,Location))).
-if side2Pred(Door, Location), walkThroughDoor21(Agent, Door), loc_at(Agent, Location), near(Agent, Object), not walkFrom(Agent, Object)then not loc_at(Object, Location).
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OTSpace.e',459).
-
- /*  reactive_rule([ side2Pred(Door,Location),
-   		happens(walkThroughDoor21(Agent,Door),
-   			Time_From10,
-   			Time_Until11),
-   		loc_at(Agent,Location),
-   		holds(near(Agent,Object),
-   		      Time_Until11),
-   		not(walkFrom(Agent,Object))
-   	      ],
-   	      [not(loc_at(Object,Location))]).
- */
- %  "% =================================".
-% '->'(
-%    ','(
-%       walkThroughDoor21(Agent,Door), 
-%       ','(
-%          at(Object,Location), 
-%          ','(
-%             at(Agent,Location), 
-%             ','(
-%                near(Agent,Object), 
-%                not(
-%                   walkFrom(Agent,Object)))))), 
-%    not(
-%       side2Pred(Door,Location))).
-if walkThroughDoor21(Agent, Door), loc_at(Object, Location), loc_at(Agent, Location), near(Agent, Object), not walkFrom(Agent, Object)then not side2Pred(Door, Location).
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OTSpace.e',459).
-
- /*  reactive_rule([ happens(walkThroughDoor21(Agent,Door),
-   			Time_From12,
-   			Time_Until13),
-   		loc_at(Object,Location),
-   		loc_at(Agent,Location),
-   		holds(near(Agent,Object),
-   		      Time_Until13),
-   		not(walkFrom(Agent,Object))
-   	      ],
-   	      [not(side2Pred(Door,Location))]).
- */
- %  "% =================================".
-% '->'(
-%    ','(
-%       side2Pred(Door,Location), 
-%       ','(
-%          at(Object,Location), 
-%          ','(
-%             at(Agent,Location), 
-%             ','(
-%                near(Agent,Object), 
-%                not(
-%                   walkFrom(Agent,Object)))))), 
-%    not(
-%       walkThroughDoor21(Agent,Door))).
-if side2Pred(Door, Location), loc_at(Object, Location), loc_at(Agent, Location), near(Agent, Object), not walkFrom(Agent, Object)then not walkThroughDoor21(Agent, Door).
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OTSpace.e',459).
-
- /*  reactive_rule([ side2Pred(Door,Location),
-   		loc_at(Object,Location),
-   		loc_at(Agent,Location),
-   		holds(near(Agent,Object),Time_At14),
-   		not(walkFrom(Agent,Object))
-   	      ],
-   	      [not(walkThroughDoor21(Agent,Door))]).
  */
  %  "% =================================".
 
@@ -2341,166 +1448,31 @@ if side2Pred(Door, Location), loc_at(Object, Location), loc_at(Agent, Location),
 % Side1(staircase)=room &
 % Happens(WalkUpStaircase(agent,staircase),time) ->
 % Happens(WalkFrom(agent,object),time).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OTSpace.e',467).
+% From E: 
+% 
 % '->'(
-%    ','(
-%       near(Agent,Object), 
-%       ','(
-%          at(Agent,Room), 
-%          ','(
-%             at(Object,Room), 
-%             ','(
-%                side1Pred(Staircase,Room), 
-%                walkUpStaircase(Agent,Staircase))))), 
-%    walkFrom(Agent,Object)).
-walkFrom(Agent, Object)if near(Agent, Object), loc_at(Agent, Room), loc_at(Object, Room), side1Pred(Staircase, Room), walkUpStaircase(Agent, Staircase).
+%    (holds_at(near(Agent,Object),Time) , 
+%      holds_at(at_loc(Agent,Room),Time) , 
+%      holds_at(at_loc(Object,Room),Time) , 
+%      side1(Staircase)=Room , 
+%     happens_at(walkUpStaircase(Agent,Staircase),Time)), 
+%    happens_at(walkFrom(Agent,Object),Time)).
+ %   [Time].
+walkFrom(Agent, Object)if near(Agent, Object), at_loc(Agent, Room), at_loc(Object, Room), side1(Staircase, Room), walkUpStaircase(Agent, Staircase).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OTSpace.e',467).
 
  /*  l_events(happens(walkFrom(Agent,Object),
    		 Time_From,
    		 Time_Until),
    	 [ holds(near(Agent,Object),Time_From),
-   	   loc_at(Agent,Room),
-   	   loc_at(Object,Room),
-   	   side1Pred(Staircase,Room),
+   	   holds(at_loc(Agent,Room),Time_From),
+   	   holds(at_loc(Object,Room),Time_From),
+   	   side1(Staircase,Room),
    	   happens(walkUpStaircase(Agent,Staircase),
    		   Time_From,
    		   Time_Until)
    	 ]).
- */
- %  "% =================================".
-% '->'(
-%    ','(
-%       at(Agent,Room), 
-%       ','(
-%          at(Object,Room), 
-%          ','(
-%             side1Pred(Staircase,Room), 
-%             ','(
-%                walkUpStaircase(Agent,Staircase), 
-%                not(
-%                   walkFrom(Agent,Object)))))), 
-%    not(
-%       near(Agent,Object))).
-not near(Agent, Object)if loc_at(Agent, Room), loc_at(Object, Room), side1Pred(Staircase, Room), walkUpStaircase(Agent, Staircase), not walkFrom(Agent, Object).
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OTSpace.e',467).
-
- /*  l_int(holds(not(near(Agent,Object)),Time_At),
-         [ loc_at(Agent,Room),
-   	loc_at(Object,Room),
-   	side1Pred(Staircase,Room),
-   	happens(walkUpStaircase(Agent,Staircase),
-   		Time_At,
-   		Time_At),
-   	not(walkFrom(Agent,Object))
-         ]).
- */
- %  "% =================================".
-% '->'(
-%    ','(
-%       at(Object,Room), 
-%       ','(
-%          side1Pred(Staircase,Room), 
-%          ','(
-%             walkUpStaircase(Agent,Staircase), 
-%             ','(
-%                near(Agent,Object), 
-%                not(
-%                   walkFrom(Agent,Object)))))), 
-%    not(
-%       at(Agent,Room))).
-if loc_at(Object, Room), side1Pred(Staircase, Room), walkUpStaircase(Agent, Staircase), near(Agent, Object), not walkFrom(Agent, Object)then not loc_at(Agent, Room).
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OTSpace.e',467).
-
- /*  reactive_rule([ loc_at(Object,Room),
-   		side1Pred(Staircase,Room),
-   		happens(walkUpStaircase(Agent,Staircase),
-   			Time_From8,
-   			Time_Until9),
-   		holds(near(Agent,Object),Time_Until9),
-   		not(walkFrom(Agent,Object))
-   	      ],
-   	      [not(loc_at(Agent,Room))]).
- */
- %  "% =================================".
-% '->'(
-%    ','(
-%       side1Pred(Staircase,Room), 
-%       ','(
-%          walkUpStaircase(Agent,Staircase), 
-%          ','(
-%             at(Agent,Room), 
-%             ','(
-%                near(Agent,Object), 
-%                not(
-%                   walkFrom(Agent,Object)))))), 
-%    not(
-%       at(Object,Room))).
-if side1Pred(Staircase, Room), walkUpStaircase(Agent, Staircase), loc_at(Agent, Room), near(Agent, Object), not walkFrom(Agent, Object)then not loc_at(Object, Room).
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OTSpace.e',467).
-
- /*  reactive_rule([ side1Pred(Staircase,Room),
-   		happens(walkUpStaircase(Agent,Staircase),
-   			Time_From10,
-   			Time_Until11),
-   		loc_at(Agent,Room),
-   		holds(near(Agent,Object),
-   		      Time_Until11),
-   		not(walkFrom(Agent,Object))
-   	      ],
-   	      [not(loc_at(Object,Room))]).
- */
- %  "% =================================".
-% '->'(
-%    ','(
-%       walkUpStaircase(Agent,Staircase), 
-%       ','(
-%          at(Object,Room), 
-%          ','(
-%             at(Agent,Room), 
-%             ','(
-%                near(Agent,Object), 
-%                not(
-%                   walkFrom(Agent,Object)))))), 
-%    not(
-%       side1Pred(Staircase,Room))).
-if walkUpStaircase(Agent, Staircase), loc_at(Object, Room), loc_at(Agent, Room), near(Agent, Object), not walkFrom(Agent, Object)then not side1Pred(Staircase, Room).
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OTSpace.e',467).
-
- /*  reactive_rule([ happens(walkUpStaircase(Agent,Staircase),
-   			Time_From12,
-   			Time_Until13),
-   		loc_at(Object,Room),
-   		loc_at(Agent,Room),
-   		holds(near(Agent,Object),
-   		      Time_Until13),
-   		not(walkFrom(Agent,Object))
-   	      ],
-   	      [not(side1Pred(Staircase,Room))]).
- */
- %  "% =================================".
-% '->'(
-%    ','(
-%       side1Pred(Staircase,Room), 
-%       ','(
-%          at(Object,Room), 
-%          ','(
-%             at(Agent,Room), 
-%             ','(
-%                near(Agent,Object), 
-%                not(
-%                   walkFrom(Agent,Object)))))), 
-%    not(
-%       walkUpStaircase(Agent,Staircase))).
-if side1Pred(Staircase, Room), loc_at(Object, Room), loc_at(Agent, Room), near(Agent, Object), not walkFrom(Agent, Object)then not walkUpStaircase(Agent, Staircase).
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OTSpace.e',467).
-
- /*  reactive_rule([ side1Pred(Staircase,Room),
-   		loc_at(Object,Room),
-   		loc_at(Agent,Room),
-   		holds(near(Agent,Object),Time_At14),
-   		not(walkFrom(Agent,Object))
-   	      ],
-   	      [not(walkUpStaircase(Agent,Staircase))]).
  */
  %  "% =================================".
 
@@ -2512,170 +1484,39 @@ if side1Pred(Staircase, Room), loc_at(Object, Room), loc_at(Agent, Room), near(A
 % Side2(staircase)=room &
 % Happens(WalkDownStaircase(agent,staircase),time) ->
 % Happens(WalkFrom(agent,object),time).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OTSpace.e',475).
+% From E: 
+% 
 % '->'(
-%    ','(
-%       near(Agent,Object), 
-%       ','(
-%          at(Agent,Room), 
-%          ','(
-%             at(Object,Room), 
-%             ','(
-%                side2Pred(Staircase,Room), 
-%                walkDownStaircase(Agent,Staircase))))), 
-%    walkFrom(Agent,Object)).
-walkFrom(Agent, Object)if near(Agent, Object), loc_at(Agent, Room), loc_at(Object, Room), side2Pred(Staircase, Room), walkDownStaircase(Agent, Staircase).
+%    (holds_at(near(Agent,Object),Time) , 
+%      holds_at(at_loc(Agent,Room),Time) , 
+%      holds_at(at_loc(Object,Room),Time) , 
+%      side2(Staircase)=Room , 
+%     happens_at(walkDownStaircase(Agent,Staircase),Time)), 
+%    happens_at(walkFrom(Agent,Object),Time)).
+ %   [Time].
+walkFrom(Agent, Object)if near(Agent, Object), at_loc(Agent, Room), at_loc(Object, Room), side2(Staircase, Room), walkDownStaircase(Agent, Staircase).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OTSpace.e',475).
 
  /*  l_events(happens(walkFrom(Agent,Object),
    		 Time_From,
    		 Time_Until),
    	 [ holds(near(Agent,Object),Time_From),
-   	   loc_at(Agent,Room),
-   	   loc_at(Object,Room),
-   	   side2Pred(Staircase,Room),
+   	   holds(at_loc(Agent,Room),Time_From),
+   	   holds(at_loc(Object,Room),Time_From),
+   	   side2(Staircase,Room),
    	   happens(walkDownStaircase(Agent,Staircase),
    		   Time_From,
    		   Time_Until)
    	 ]).
  */
  %  "% =================================".
-% '->'(
-%    ','(
-%       at(Agent,Room), 
-%       ','(
-%          at(Object,Room), 
-%          ','(
-%             side2Pred(Staircase,Room), 
-%             ','(
-%                walkDownStaircase(Agent,Staircase), 
-%                not(
-%                   walkFrom(Agent,Object)))))), 
-%    not(
-%       near(Agent,Object))).
-not near(Agent, Object)if loc_at(Agent, Room), loc_at(Object, Room), side2Pred(Staircase, Room), walkDownStaircase(Agent, Staircase), not walkFrom(Agent, Object).
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OTSpace.e',475).
-
- /*  l_int(holds(not(near(Agent,Object)),Time_At),
-         [ loc_at(Agent,Room),
-   	loc_at(Object,Room),
-   	side2Pred(Staircase,Room),
-   	happens(walkDownStaircase(Agent,Staircase),
-   		Time_At,
-   		Time_At),
-   	not(walkFrom(Agent,Object))
-         ]).
- */
- %  "% =================================".
-% '->'(
-%    ','(
-%       at(Object,Room), 
-%       ','(
-%          side2Pred(Staircase,Room), 
-%          ','(
-%             walkDownStaircase(Agent,Staircase), 
-%             ','(
-%                near(Agent,Object), 
-%                not(
-%                   walkFrom(Agent,Object)))))), 
-%    not(
-%       at(Agent,Room))).
-if loc_at(Object, Room), side2Pred(Staircase, Room), walkDownStaircase(Agent, Staircase), near(Agent, Object), not walkFrom(Agent, Object)then not loc_at(Agent, Room).
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OTSpace.e',475).
-
- /*  reactive_rule([ loc_at(Object,Room),
-   		side2Pred(Staircase,Room),
-   		happens(walkDownStaircase(Agent,Staircase),
-   			Time_From8,
-   			Time_Until9),
-   		holds(near(Agent,Object),Time_Until9),
-   		not(walkFrom(Agent,Object))
-   	      ],
-   	      [not(loc_at(Agent,Room))]).
- */
- %  "% =================================".
-% '->'(
-%    ','(
-%       side2Pred(Staircase,Room), 
-%       ','(
-%          walkDownStaircase(Agent,Staircase), 
-%          ','(
-%             at(Agent,Room), 
-%             ','(
-%                near(Agent,Object), 
-%                not(
-%                   walkFrom(Agent,Object)))))), 
-%    not(
-%       at(Object,Room))).
-if side2Pred(Staircase, Room), walkDownStaircase(Agent, Staircase), loc_at(Agent, Room), near(Agent, Object), not walkFrom(Agent, Object)then not loc_at(Object, Room).
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OTSpace.e',475).
-
- /*  reactive_rule([ side2Pred(Staircase,Room),
-   		happens(walkDownStaircase(Agent,Staircase),
-   			Time_From10,
-   			Time_Until11),
-   		loc_at(Agent,Room),
-   		holds(near(Agent,Object),
-   		      Time_Until11),
-   		not(walkFrom(Agent,Object))
-   	      ],
-   	      [not(loc_at(Object,Room))]).
- */
- %  "% =================================".
-% '->'(
-%    ','(
-%       walkDownStaircase(Agent,Staircase), 
-%       ','(
-%          at(Object,Room), 
-%          ','(
-%             at(Agent,Room), 
-%             ','(
-%                near(Agent,Object), 
-%                not(
-%                   walkFrom(Agent,Object)))))), 
-%    not(
-%       side2Pred(Staircase,Room))).
-if walkDownStaircase(Agent, Staircase), loc_at(Object, Room), loc_at(Agent, Room), near(Agent, Object), not walkFrom(Agent, Object)then not side2Pred(Staircase, Room).
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OTSpace.e',475).
-
- /*  reactive_rule([ happens(walkDownStaircase(Agent,Staircase),
-   			Time_From12,
-   			Time_Until13),
-   		loc_at(Object,Room),
-   		loc_at(Agent,Room),
-   		holds(near(Agent,Object),
-   		      Time_Until13),
-   		not(walkFrom(Agent,Object))
-   	      ],
-   	      [not(side2Pred(Staircase,Room))]).
- */
- %  "% =================================".
-% '->'(
-%    ','(
-%       side2Pred(Staircase,Room), 
-%       ','(
-%          at(Object,Room), 
-%          ','(
-%             at(Agent,Room), 
-%             ','(
-%                near(Agent,Object), 
-%                not(
-%                   walkFrom(Agent,Object)))))), 
-%    not(
-%       walkDownStaircase(Agent,Staircase))).
-if side2Pred(Staircase, Room), loc_at(Object, Room), loc_at(Agent, Room), near(Agent, Object), not walkFrom(Agent, Object)then not walkDownStaircase(Agent, Staircase).
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OTSpace.e',475).
-
- /*  reactive_rule([ side2Pred(Staircase,Room),
-   		loc_at(Object,Room),
-   		loc_at(Agent,Room),
-   		holds(near(Agent,Object),Time_At14),
-   		not(walkFrom(Agent,Object))
-   	      ],
-   	      [not(walkDownStaircase(Agent,Staircase))]).
- */
- %  "% =================================".
 
 
 %; End of file.
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OTSpace.e',481).
-% translate: ending  File: /pack/logicmoo_ec/ext/ec_sources/ecnet/OTSpace.e.lps 
+% From E: 
+% 
+% :-call_pel_directive(translate(ending,'/pack/logicmoo_ec/ext/ec_sources/ecnet/OTSpace.e.lps')).
+:- call_pel_directive(translate(ending,
+                                '/pack/logicmoo_ec/ext/ec_sources/ecnet/OTSpace.e.lps')).

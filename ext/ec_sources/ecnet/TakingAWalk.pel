@@ -1,7 +1,10 @@
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/TakingATrain.e',212).
+:- call_pel_directive(translate(unskipped,
+                                '/pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.pel')).
 :-include(library('ec_planner/ec_test_incl')).
-:-expects_dialect(pfc).
-% Tue, 06 Oct 2020 05:02:26 GMT
- %  loading(load_e_pl,'/pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e').
+:-expects_dialect(ecalc).
+:- call_pel_directive(translate(begining,
+                                '/pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.pel')).
 %;
 %; Copyright (c) 2005 IBM Corporation and others.
 %; All rights reserved. This program and the accompanying materials
@@ -23,1232 +26,329 @@
 %; }
 %;
 
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:21
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e',22).
 % option modeldiff on
+:- call_pel_directive(option(modeldiff, on)).
 
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:22
 % option renaming off
+:- call_pel_directive(option(renaming, off)).
 
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:24
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e',25).
 % ignore Love, ThreatenedBy
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:25
+:- call_pel_directive(ignore(love)).
+:- call_pel_directive(ignore(threatenedBy)).
 
- /*  [] ->
-       ta(TaP_Num4_V, tvs1=[], tvs2=[], ignore(love)).
- */
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:25
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:25
-ignore(love).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:25
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:25
-ignore(love).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:25
-
- /*  [] ->
-       ta(TaP_Num4_V1, tvs1=[], tvs2=[], ignore(threatenedBy)).
- */
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:25
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:25
-ignore(threatenedBy).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:25
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:25
-ignore(threatenedBy).
-
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:25
 % ignore LookOutOnto, Floor, BuildingOf, SkyOf, GroundOf
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:26
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e',25).
+:- call_pel_directive(ignore(lookOutOnto)).
+:- call_pel_directive(ignore(floor)).
+:- call_pel_directive(ignore(buildingOf)).
+:- call_pel_directive(ignore(skyOf)).
+:- call_pel_directive(ignore(groundOf)).
 
- /*  [] ->
-       ta(TaP_Num4_V, tvs1=[], tvs2=[], ignore(lookOutOnto)).
- */
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:26
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:26
-ignore(lookOutOnto).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:26
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:26
-ignore(lookOutOnto).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:26
-
- /*  [] ->
-       ta(TaP_Num4_V1, tvs1=[], tvs2=[], ignore(floor)).
- */
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:26
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:26
-ignore(floor).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:26
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:26
-ignore(floor).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:26
-
- /*  [] ->
-       ta(TaP_Num4_V2, tvs1=[], tvs2=[], ignore(buildingOf)).
- */
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:26
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:26
-ignore(buildingOf).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:26
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:26
-ignore(buildingOf).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:26
-
- /*  [] ->
-       ta(TaP_Num4_V3, tvs1=[], tvs2=[], ignore(skyOf)).
- */
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:26
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:26
-ignore(skyOf).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:26
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:26
-ignore(skyOf).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:26
-
- /*  [] ->
-       ta(TaP_Num4_V4, tvs1=[], tvs2=[], ignore(groundOf)).
- */
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:26
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:26
-ignore(groundOf).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:26
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:26
-ignore(groundOf).
-
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:26
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e',27).
 % ignore Inside, PutInside, On, PlaceOn
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:27
+:- call_pel_directive(ignore(inside)).
+:- call_pel_directive(ignore(putInside)).
+:- call_pel_directive(ignore(on)).
+:- call_pel_directive(ignore(placeOn)).
 
- /*  [] ->
-       ta(TaP_Num4_V, tvs1=[], tvs2=[], ignore(inside)).
- */
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:27
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:27
-ignore(inside).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:27
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:27
-ignore(inside).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:27
-
- /*  [] ->
-       ta(TaP_Num4_V1, tvs1=[], tvs2=[], ignore(putInside)).
- */
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:27
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:27
-ignore(putInside).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:27
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:27
-ignore(putInside).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:27
-
- /*  [] ->
-       ta(TaP_Num4_V2, tvs1=[], tvs2=[], ignore(on)).
- */
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:27
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:27
-ignore(on).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:27
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:27
-ignore(on).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:27
-
- /*  [] ->
-       ta(TaP_Num4_V3, tvs1=[], tvs2=[], ignore(placeOn)).
- */
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:27
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:27
-ignore(placeOn).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:27
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:27
-ignore(placeOn).
-
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:27
 % ignore Like, Happy, BecomeAngryAt
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:28
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e',27).
+:- call_pel_directive(ignore(like)).
+:- call_pel_directive(ignore(happy)).
+:- call_pel_directive(ignore(becomeAngryAt)).
 
- /*  [] ->
-       ta(TaP_Num4_V, tvs1=[], tvs2=[], ignore(like)).
- */
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:28
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:28
-ignore(like).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:28
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:28
-ignore(like).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:28
-
- /*  [] ->
-       ta(TaP_Num4_V1, tvs1=[], tvs2=[], ignore(happy)).
- */
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:28
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:28
-ignore(happy).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:28
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:28
-ignore(happy).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:28
-
- /*  [] ->
-       ta(TaP_Num4_V2, tvs1=[], tvs2=[], ignore(becomeAngryAt)).
- */
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:28
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:28
-ignore(becomeAngryAt).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:28
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:28
-ignore(becomeAngryAt).
-
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:28
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e',29).
 % ignore Near, WalkFrom, WalkFromTo, RunFromTo
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:29
+:- call_pel_directive(ignore(near)).
+:- call_pel_directive(ignore(walkFrom)).
+:- call_pel_directive(ignore(walkFromTo)).
+:- call_pel_directive(ignore(runFromTo)).
 
- /*  [] ->
-       ta(TaP_Num4_V, tvs1=[], tvs2=[], ignore(near)).
- */
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:29
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:29
-ignore(near).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:29
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:29
-ignore(near).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:29
-
- /*  [] ->
-       ta(TaP_Num4_V1, tvs1=[], tvs2=[], ignore(walkFrom)).
- */
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:29
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:29
-ignore(walkFrom).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:29
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:29
-ignore(walkFrom).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:29
-
- /*  [] ->
-       ta(TaP_Num4_V2, tvs1=[], tvs2=[], ignore(walkFromTo)).
- */
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:29
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:29
-ignore(walkFromTo).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:29
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:29
-ignore(walkFromTo).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:29
-
- /*  [] ->
-       ta(TaP_Num4_V3, tvs1=[], tvs2=[], ignore(runFromTo)).
- */
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:29
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:29
-ignore(runFromTo).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:29
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:29
-ignore(runFromTo).
-
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:29
 % ignore ActOnIntentionToWalkIn, IntentionToWalkIn, InvitedIn, InviteIn
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:30
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e',29).
+:- call_pel_directive(ignore(actOnIntentionToWalkIn)).
+:- call_pel_directive(ignore(intentionToWalkIn)).
+:- call_pel_directive(ignore(invitedIn)).
+:- call_pel_directive(ignore(inviteIn)).
 
- /*  [] ->
-       ta(TaP_Num4_V, tvs1=[], tvs2=[], ignore(actOnIntentionToWalkIn)).
- */
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:30
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:30
-ignore(actOnIntentionToWalkIn).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:30
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:30
-ignore(actOnIntentionToWalkIn).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:30
-
- /*  [] ->
-       ta(TaP_Num4_V1, tvs1=[], tvs2=[], ignore(intentionToWalkIn)).
- */
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:30
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:30
-ignore(intentionToWalkIn).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:30
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:30
-ignore(intentionToWalkIn).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:30
-
- /*  [] ->
-       ta(TaP_Num4_V2, tvs1=[], tvs2=[], ignore(invitedIn)).
- */
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:30
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:30
-ignore(invitedIn).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:30
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:30
-ignore(invitedIn).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:30
-
- /*  [] ->
-       ta(TaP_Num4_V3, tvs1=[], tvs2=[], ignore(inviteIn)).
- */
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:30
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:30
-ignore(inviteIn).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:30
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:30
-ignore(inviteIn).
-
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:30
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e',31).
 % ignore TakeOffOf, TakeOutOf, LetGoOf
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:31
+:- call_pel_directive(ignore(takeOffOf)).
+:- call_pel_directive(ignore(takeOutOf)).
+:- call_pel_directive(ignore(letGoOf)).
 
- /*  [] ->
-       ta(TaP_Num4_V, tvs1=[], tvs2=[], ignore(takeOffOf)).
- */
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:31
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:31
-ignore(takeOffOf).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:31
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:31
-ignore(takeOffOf).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:31
-
- /*  [] ->
-       ta(TaP_Num4_V1, tvs1=[], tvs2=[], ignore(takeOutOf)).
- */
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:31
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:31
-ignore(takeOutOf).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:31
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:31
-ignore(takeOutOf).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:31
-
- /*  [] ->
-       ta(TaP_Num4_V2, tvs1=[], tvs2=[], ignore(letGoOf)).
- */
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:31
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:31
-ignore(letGoOf).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:31
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:31
-ignore(letGoOf).
-
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:31
 % ignore Greet, SayGoodbye, Order, KnowOrder
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:32
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e',31).
+:- call_pel_directive(ignore(greet)).
+:- call_pel_directive(ignore(sayGoodbye)).
+:- call_pel_directive(ignore(order)).
+:- call_pel_directive(ignore(knowOrder)).
 
- /*  [] ->
-       ta(TaP_Num4_V, tvs1=[], tvs2=[], ignore(greet)).
- */
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:32
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:32
-ignore(greet).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:32
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:32
-ignore(greet).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:32
-
- /*  [] ->
-       ta(TaP_Num4_V1, tvs1=[], tvs2=[], ignore(sayGoodbye)).
- */
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:32
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:32
-ignore(sayGoodbye).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:32
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:32
-ignore(sayGoodbye).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:32
-
- /*  [] ->
-       ta(TaP_Num4_V2, tvs1=[], tvs2=[], ignore(order)).
- */
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:32
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:32
-ignore(order).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:32
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:32
-ignore(order).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:32
-
- /*  [] ->
-       ta(TaP_Num4_V3, tvs1=[], tvs2=[], ignore(knowOrder)).
- */
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:32
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:32
-ignore(knowOrder).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:32
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:32
-ignore(knowOrder).
-
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:32
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e',33).
 % ignore LieOn, SitOn, RiseFrom, LyingOn, SittingOn
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:33
+:- call_pel_directive(ignore(lieOn)).
+:- call_pel_directive(ignore(sitOn)).
+:- call_pel_directive(ignore(riseFrom)).
+:- call_pel_directive(ignore(lyingOn)).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e',33).
+:- call_pel_directive(ignore(sittingOn)).
 
- /*  [] ->
-       ta(TaP_Num4_V, tvs1=[], tvs2=[], ignore(lieOn)).
- */
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:33
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:33
-ignore(lieOn).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:33
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:33
-ignore(lieOn).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:33
-
- /*  [] ->
-       ta(TaP_Num4_V1, tvs1=[], tvs2=[], ignore(sitOn)).
- */
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:33
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:33
-ignore(sitOn).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:33
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:33
-ignore(sitOn).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:33
-
- /*  [] ->
-       ta(TaP_Num4_V2, tvs1=[], tvs2=[], ignore(riseFrom)).
- */
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:33
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:33
-ignore(riseFrom).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:33
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:33
-ignore(riseFrom).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:33
-
- /*  [] ->
-       ta(TaP_Num4_V3, tvs1=[], tvs2=[], ignore(lyingOn)).
- */
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:33
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:33
-ignore(lyingOn).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:33
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:33
-ignore(lyingOn).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:33
-
- /*  [] ->
-       ta(TaP_Num4_V4, tvs1=[], tvs2=[], ignore(sittingOn)).
- */
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:33
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:33
-ignore(sittingOn).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:33
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:33
-ignore(sittingOn).
-
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:34
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e',35).
 % load foundations/Root.e
+:- call_pel_directive(load('foundations/Root.e')).
 
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:35
 % load foundations/EC.e
+:- call_pel_directive(load('foundations/EC.e')).
 
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:36
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e',37).
 % load answers/Mueller2003/Ontology.e
+:- call_pel_directive(load('answers/Mueller2003/Ontology.e')).
 
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:37
 % load answers/Mueller2004c/OTSpaceM.e
- %  load(changed,'answers/Mueller2004c/OTSpaceM.e').
+:- call_pel_directive(load('answers/Mueller2004c/OTSpaceM.e')).
 
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:38
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e',39).
 % load answers/Mueller2004c/RTSpaceM.e
- %  load(changed,'answers/Mueller2004c/RTSpaceM.e').
+:- call_pel_directive(load('answers/Mueller2004c/RTSpaceM.e')).
 
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:39
 % load answers/Mueller2003/Sleep.e
+:- call_pel_directive(load('answers/Mueller2003/Sleep.e')).
 
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:40
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e',41).
 % load answers/Mueller2004c/Dress.e
+:- call_pel_directive(load('answers/Mueller2004c/Dress.e')).
 
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:41
 % load answers/Mueller2004c/Rain.e
+:- call_pel_directive(load('answers/Mueller2004c/Rain.e')).
 
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:43
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e',44).
 % room Origin1
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:44
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:44
 t(room,origin1).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:44
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:44
-room(origin1).
 
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:45
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e',46).
 % door OriginDoor1
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:46
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:46
 t(door,originDoor1).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:46
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:46
-door(originDoor1).
 
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:47
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e',48).
 % outside OriginOutside1
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:48
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:48
 t(outside,originOutside1).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:48
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:48
-l_int(holds(outside(originOutside1),Holds),[]).
 
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:49
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e',50).
 % street StreetFromOriginToMiddle1
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:50
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:50
 t(street,streetFromOriginToMiddle1).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:50
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:50
-street(streetFromOriginToMiddle1).
 
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:51
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e',52).
 % outside Middle1
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:52
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:52
 t(outside,middle1).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:52
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:52
-l_int(holds(outside(middle1),Holds),[]).
 
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:53
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e',54).
 % street StreetFromMiddleToDestination1
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:54
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:54
 t(street,streetFromMiddleToDestination1).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:54
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:54
-street(streetFromMiddleToDestination1).
 
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:55
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e',56).
 % outside DestinationOutside1
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:56
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:56
 t(outside,destinationOutside1).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:56
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:56
-l_int(holds(outside(destinationOutside1),Holds),[]).
 
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:57
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e',58).
 % door DestinationDoor1
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:58
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:58
 t(door,destinationDoor1).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:58
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:58
-door(destinationDoor1).
 
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:59
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e',60).
 % room Destination1
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:60
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:60
 t(room,destination1).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:60
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:60
-room(destination1).
 
 
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:61
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:61
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e',62).
 % Side1(OriginDoor1)=OriginOutside1.
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:61
-
- /*  [] ->
-       ta(TaP_Num4_V,
-          tvs1=[],
-          tvs2=[],
-          equals(side1(originDoor1), originOutside1)).
- */
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:61
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:61
-equals(side1(originDoor1),originOutside1).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:61
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:61
-equals(side1(originDoor1),originOutside1).
+side1(originDoor1)=originOutside1.
 
 
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:62
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:62
 % Side2(OriginDoor1)=Origin1.
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:62
-
- /*  [] ->
-       ta(TaP_Num4_V, tvs1=[], tvs2=[], equals(side2(originDoor1), origin1)).
- */
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:62
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:62
-equals(side2(originDoor1),origin1).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:62
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:62
-equals(side2(originDoor1),origin1).
+side2(originDoor1)=origin1.
 
 
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:64
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:64
 % Side1(StreetFromOriginToMiddle1)=OriginOutside1.
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:64
-
- /*  [] ->
-       ta(TaP_Num4_V,
-          tvs1=[],
-          tvs2=[],
-          equals(side1(streetFromOriginToMiddle1), originOutside1)).
- */
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:64
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:64
-equals(side1(streetFromOriginToMiddle1),originOutside1).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:64
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:64
-equals(side1(streetFromOriginToMiddle1),originOutside1).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e',64).
+side1(streetFromOriginToMiddle1)=originOutside1.
 
 
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:65
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:65
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e',66).
 % Side2(StreetFromOriginToMiddle1)=Middle1.
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:65
-
- /*  [] ->
-       ta(TaP_Num4_V,
-          tvs1=[],
-          tvs2=[],
-          equals(side2(streetFromOriginToMiddle1), middle1)).
- */
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:65
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:65
-equals(side2(streetFromOriginToMiddle1),middle1).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:65
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:65
-equals(side2(streetFromOriginToMiddle1),middle1).
+side2(streetFromOriginToMiddle1)=middle1.
 
 
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:67
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:67
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e',68).
 % Side1(StreetFromMiddleToDestination1)=Middle1.
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:67
-
- /*  [] ->
-       ta(TaP_Num4_V,
-          tvs1=[],
-          tvs2=[],
-          equals(side1(streetFromMiddleToDestination1), middle1)).
- */
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:67
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:67
-equals(side1(streetFromMiddleToDestination1),middle1).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:67
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:67
-equals(side1(streetFromMiddleToDestination1),middle1).
+side1(streetFromMiddleToDestination1)=middle1.
 
 
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:68
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:68
 % Side2(StreetFromMiddleToDestination1)=DestinationOutside1.
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:68
-
- /*  [] ->
-       ta(TaP_Num4_V,
-          tvs1=[],
-          tvs2=[],
-          equals(side2(streetFromMiddleToDestination1), destinationOutside1)).
- */
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:68
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:68
-equals(side2(streetFromMiddleToDestination1),destinationOutside1).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:68
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:68
-equals(side2(streetFromMiddleToDestination1),destinationOutside1).
+side2(streetFromMiddleToDestination1)=destinationOutside1.
 
 
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:70
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:70
 % Side1(DestinationDoor1)=DestinationOutside1.
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:70
-
- /*  [] ->
-       ta(TaP_Num4_V,
-          tvs1=[],
-          tvs2=[],
-          equals(side1(destinationDoor1), destinationOutside1)).
- */
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:70
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:70
-equals(side1(destinationDoor1),destinationOutside1).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:70
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:70
-equals(side1(destinationDoor1),destinationOutside1).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e',70).
+side1(destinationDoor1)=destinationOutside1.
 
 
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:71
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:71
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e',72).
 % Side2(DestinationDoor1)=Destination1.
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:71
+side2(destinationDoor1)=destination1.
 
- /*  [] ->
-       ta(TaP_Num4_V,
-          tvs1=[],
-          tvs2=[],
-          equals(side2(destinationDoor1), destination1)).
- */
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:71
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:71
-equals(side2(destinationDoor1),destination1).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:71
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:71
-equals(side2(destinationDoor1),destination1).
-
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:73
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e',74).
 % agent Walker1
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:74
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:74
 t(agent,walker1).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:74
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:74
-agent(walker1).
 
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:75
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e',76).
 % clothing Clothes1
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:76
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:76
 t(clothing,clothes1).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:76
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:76
-clothing(clothes1).
 
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:77
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e',78).
 % umbrella Umbrella1
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:78
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:78
 t(umbrella,umbrella1).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:78
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:78
-umbrella(umbrella1).
 %; initial state
 % [agent,object]
- 
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:80
-% !HoldsAt(Holding(agent,object),0).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:80
-
- /*  [] ->
-       ta(TaP_Num4_V,
-          tvs1=[],
-          tvs2=[],
-          initially(neg(holding(Agent, Object)))).
- */
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:80
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:80
-initially(neg(holding(_,Holding))).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:80
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:80
-initial_state([not(holding(_,Holding))]).
+ % !HoldsAt(Holding(agent,object),0).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e',80).
+holds_at(not(holding(Agent,Object)),0).
 
 
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:81
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e',82).
 % [agent]
- 
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:81
-% HoldsAt(Dressed(agent),0).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:81
-
- /*  [] ->
-       ta(TaP_Num4_V, tvs1=[], tvs2=[], initially(dressed(Agent))).
- */
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:81
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:81
-initially(dressed(Dressed)).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:81
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:81
-initial_state([dressed(Dressed)]).
+ % HoldsAt(Dressed(agent),0).
+holds_at(dressed(Agent),0).
 
 
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:82
 % [agent]
- 
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:82
-% HoldsAt(Awake(agent),0).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:82
-
- /*  [] ->
-       ta(TaP_Num4_V, tvs1=[], tvs2=[], initially(awake(Agent))).
- */
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:82
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:82
-initially(awake(Awake)).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:82
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:82
-initial_state([awake(Awake)]).
+ % HoldsAt(Awake(agent),0).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e',82).
+holds_at(awake(Agent),0).
 
 
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:83
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e',84).
 % [agent]
- 
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:83
-% HoldsAt(Sleep3(agent),0).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:83
-
- /*  [] ->
-       ta(TaP_Num4_V, tvs1=[], tvs2=[], initially(sleep3(Agent))).
- */
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:83
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:83
-initially(sleep3(Sleep3)).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:83
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:83
-initial_state([sleep3(Sleep3)]).
+ % HoldsAt(Sleep3(agent),0).
+holds_at(sleep3(Agent),0).
 
 
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:84
 % [agent]
- 
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:84
-% HoldsAt(Standing(agent),0).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:84
-
- /*  [] ->
-       ta(TaP_Num4_V, tvs1=[], tvs2=[], initially(standing(Agent))).
- */
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:84
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:84
-initially(standing(Standing)).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:84
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:84
-initial_state([standing(Standing)]).
+ % HoldsAt(Standing(agent),0).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e',84).
+holds_at(standing(Agent),0).
 
 
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:85
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:85
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e',86).
 % HoldsAt(DoorUnlocked(OriginDoor1),0).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:85
-
- /*  [] ->
-       ta(TaP_Num4_V, tvs1=[], tvs2=[], initially(doorUnlocked(originDoor1))).
- */
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:85
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:85
-initially(doorUnlocked(originDoor1)).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:85
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:85
-initial_state([doorUnlocked(originDoor1)]).
+holds_at(doorUnlocked(originDoor1),0).
 
 
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:86
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:86
 % !HoldsAt(DoorIsOpen(OriginDoor1),0).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:86
-
- /*  [] ->
-       ta(TaP_Num4_V,
-          tvs1=[],
-          tvs2=[],
-          initially(neg(doorIsOpen(originDoor1)))).
- */
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:86
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:86
-initially(neg(doorIsOpen(originDoor1))).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:86
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:86
-initial_state([not(doorIsOpen(originDoor1))]).
+holds_at(not(doorIsOpen(originDoor1)),0).
 
 
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:87
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:87
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e',88).
 % HoldsAt(DoorUnlocked(DestinationDoor1),0).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:87
-
- /*  [] ->
-       ta(TaP_Num4_V,
-          tvs1=[],
-          tvs2=[],
-          initially(doorUnlocked(destinationDoor1))).
- */
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:87
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:87
-initially(doorUnlocked(destinationDoor1)).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:87
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:87
-initial_state([doorUnlocked(destinationDoor1)]).
+holds_at(doorUnlocked(destinationDoor1),0).
 
 
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:88
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:88
 % !HoldsAt(DoorIsOpen(DestinationDoor1),0).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:88
-
- /*  [] ->
-       ta(TaP_Num4_V,
-          tvs1=[],
-          tvs2=[],
-          initially(neg(doorIsOpen(destinationDoor1)))).
- */
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:88
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:88
-initially(neg(doorIsOpen(destinationDoor1))).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:88
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:88
-initial_state([not(doorIsOpen(destinationDoor1))]).
+holds_at(not(doorIsOpen(destinationDoor1)),0).
 
 
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:89
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:89
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e',90).
 % HoldsAt(At(Walker1,Origin1),0).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:89
-
- /*  [] ->
-       ta(TaP_Num4_V, tvs1=[], tvs2=[], initially(at(walker1, origin1))).
- */
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:89
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:89
-initially(at(walker1,origin1)).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:89
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:89
-initial_state([loc_at(walker1,origin1)]).
+holds_at(at_loc(walker1,origin1),0).
 
 
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:90
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:90
 % HoldsAt(At(Clothes1,Origin1),0).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:90
-
- /*  [] ->
-       ta(TaP_Num4_V, tvs1=[], tvs2=[], initially(at(clothes1, origin1))).
- */
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:90
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:90
-initially(at(clothes1,origin1)).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:90
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:90
-initial_state([loc_at(clothes1,origin1)]).
+holds_at(at_loc(clothes1,origin1),0).
 
 
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:91
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:91
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e',92).
 % HoldsAt(At(Umbrella1,Origin1),0).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:91
-
- /*  [] ->
-       ta(TaP_Num4_V, tvs1=[], tvs2=[], initially(at(umbrella1, origin1))).
- */
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:91
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:91
-initially(at(umbrella1,origin1)).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:91
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:91
-initial_state([loc_at(umbrella1,origin1)]).
+holds_at(at_loc(umbrella1,origin1),0).
 
 
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:92
 % [outside,time]
- 
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:92
-% HoldsAt(Raining(outside),time).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:92
-
- /*  [] ->
-       ta(Time,
-          tvs1=[Time],
-          tvs2=[Time],
-          holds_at(raining(Outside), Time)).
- */
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:92
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:92
-holds_at(raining(Raining),Time2).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:92
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:92
-l_int(holds(raining(Raining),Time2),[]).
+ % HoldsAt(Raining(outside),time).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e',92).
+holds_at(raining(Outside),Time).
 
 
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:93
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e',94).
 % [object]
- 
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:93
-% !HoldsAt(Wet(object),0).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:93
-
- /*  [] ->
-       ta(TaP_Num4_V, tvs1=[], tvs2=[], initially(neg(wet(Object)))).
- */
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:93
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:93
-initially(neg(wet(Wet))).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:93
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:93
-initial_state([not(wet(Wet))]).
+ % !HoldsAt(Wet(object),0).
+holds_at(not(wet(Object)),0).
 
 
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:95
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e',96).
 %; narrative
 
 
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:96
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:96
 % Happens(PutOn(Walker1,Clothes1),0).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:96
-
- /*  [] ->
-       ta(TaP_Num4_V,
-          tvs1=[start],
-          tvs2=[start],
-          happens(putOn(walker1, clothes1), start)).
- */
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:96
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:96
-happens(putOn(walker1,clothes1),start).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:96
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:96
-observe(at(putOn(walker1,clothes1),start)).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:96
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:96
-observe(at(putOn(walker1,clothes1),start)).
+happens_at(putOn(walker1,clothes1),0).
 
 
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:97
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:97
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e',98).
 % Happens(PickUp(Walker1,Umbrella1),1).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:97
-
- /*  [b(start, Maptime), ignore(start+1==Maptime)] ->
-       ta(TaP_Num4_V,
-          tvs1=[start+1],
-          tvs2=[Maptime, start],
-          happens(pickUp(walker1, umbrella1), Maptime)).
- */
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:97
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:97
-b(start, Maptime2) ->
-    happens(pickUp(walker1, umbrella1), Maptime2).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:97
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:97
-reactive_rule([b(start,Maptime2)],
-	      [happens(pickUp(walker1,umbrella1),Maptime2)]).
+happens_at(pickUp(walker1,umbrella1),1).
 
 
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:98
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:98
 % Happens(DoorOpen(Walker1,OriginDoor1),2).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:98
-
- /*  [b(start, Start_Num2), toffset(start, 2, Start_Num2), ignore(start+2==Start_Num2)] ->
-       ta(TaP_Num4_V,
-          tvs1=[start+2],
-          tvs2=[Start_Num2, start],
-          happens(doorOpen(walker1, originDoor1), Start_Num2)).
- */
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:98
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:98
-b(start, Maptime), toffset(start, 2, Maptime) ->
-    happens(doorOpen(walker1, originDoor1), Maptime).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:98
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:98
-reactive_rule([b(start,Maptime),toffset(start,2,Maptime)],
-	      [happens(doorOpen(walker1,originDoor1),Maptime)]).
+happens_at(doorOpen(walker1,originDoor1),2).
 
 
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:99
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:99
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e',100).
 % Happens(WalkThroughDoor21(Walker1,OriginDoor1),3).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:99
-
- /*  [b(start, Start_Num3), toffset(start, 3, Start_Num3), ignore(start+3==Start_Num3)] ->
-       ta(TaP_Num4_V,
-          tvs1=[start+3],
-          tvs2=[Start_Num3, start],
-          happens(walkThroughDoor21(walker1, originDoor1), Start_Num3)).
- */
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:99
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:99
-b(start, Maptime), toffset(start, 3, Maptime) ->
-    happens(walkThroughDoor21(walker1, originDoor1), Maptime).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:99
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:99
-reactive_rule([b(start,Maptime),toffset(start,3,Maptime)],
-	      [ happens(walkThroughDoor21(walker1,originDoor1),
-			Maptime)
-	      ]).
+happens_at(walkThroughDoor21(walker1,originDoor1),3).
 
 
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:100
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:100
 % Happens(DoorClose(Walker1,OriginDoor1),4).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:100
-
- /*  [b(start, Start_Num4), toffset(start, 4, Start_Num4), ignore(start+4==Start_Num4)] ->
-       ta(TaP_Num4_V,
-          tvs1=[start+4],
-          tvs2=[Start_Num4, start],
-          happens(doorClose(walker1, originDoor1), Start_Num4)).
- */
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:100
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:100
-b(start, Maptime), toffset(start, 4, Maptime) ->
-    happens(doorClose(walker1, originDoor1), Maptime).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:100
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:100
-reactive_rule([b(start,Maptime),toffset(start,4,Maptime)],
-	      [happens(doorClose(walker1,originDoor1),Maptime)]).
+happens_at(doorClose(walker1,originDoor1),4).
 
 
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:101
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:101
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e',102).
 % Happens(WalkStreet12(Walker1,StreetFromOriginToMiddle1),5).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:101
-
- /*  [b(start, Start_Num5), toffset(start, 5, Start_Num5), ignore(start+5==Start_Num5)] ->
-       ta(TaP_Num4_V,
-          tvs1=[start+5],
-          tvs2=[Start_Num5, start],
-          happens(walkStreet12(walker1, streetFromOriginToMiddle1),
-                  Start_Num5)).
- */
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:101
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:101
-b(start, Maptime), toffset(start, 5, Maptime) ->
-    happens(walkStreet12(walker1, streetFromOriginToMiddle1), Maptime).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:101
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:101
-reactive_rule([b(start,Maptime),toffset(start,5,Maptime)],
-	      [ happens(walkStreet12(walker1,streetFromOriginToMiddle1),
-			Maptime)
-	      ]).
+happens_at(walkStreet12(walker1,streetFromOriginToMiddle1),5).
 
 
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:102
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:102
 % Happens(WalkStreet12(Walker1,StreetFromMiddleToDestination1),6).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:102
-
- /*  [b(start, Start_Num6), toffset(start, 6, Start_Num6), ignore(start+6==Start_Num6)] ->
-       ta(TaP_Num4_V,
-          tvs1=[start+6],
-          tvs2=[Start_Num6, start],
-          happens(walkStreet12(walker1, streetFromMiddleToDestination1),
-                  Start_Num6)).
- */
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:102
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:102
-b(start, Maptime), toffset(start, 6, Maptime) ->
-    happens(walkStreet12(walker1, streetFromMiddleToDestination1),
-            Maptime).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:102
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:102
-reactive_rule([b(start,Maptime),toffset(start,6,Maptime)],
-	      [ happens(walkStreet12(walker1,
-				     streetFromMiddleToDestination1),
-			Maptime)
-	      ]).
+happens_at(walkStreet12(walker1,streetFromMiddleToDestination1),6).
 
 
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:103
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:103
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e',104).
 % Happens(DoorOpen(Walker1,DestinationDoor1),7).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:103
-
- /*  [b(start, Start_Num7), toffset(start, 7, Start_Num7), ignore(start+7==Start_Num7)] ->
-       ta(TaP_Num4_V,
-          tvs1=[start+7],
-          tvs2=[Start_Num7, start],
-          happens(doorOpen(walker1, destinationDoor1), Start_Num7)).
- */
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:103
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:103
-b(start, Maptime), toffset(start, 7, Maptime) ->
-    happens(doorOpen(walker1, destinationDoor1), Maptime).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:103
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:103
-reactive_rule([b(start,Maptime),toffset(start,7,Maptime)],
-	      [ happens(doorOpen(walker1,destinationDoor1),
-			Maptime)
-	      ]).
+happens_at(doorOpen(walker1,destinationDoor1),7).
 
 
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:104
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:104
 % Happens(WalkThroughDoor12(Walker1,DestinationDoor1),8).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:104
-
- /*  [b(start, Start_Num8), toffset(start, 8, Start_Num8), ignore(start+8==Start_Num8)] ->
-       ta(TaP_Num4_V,
-          tvs1=[start+8],
-          tvs2=[Start_Num8, start],
-          happens(walkThroughDoor12(walker1, destinationDoor1), Start_Num8)).
- */
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:104
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:104
-b(start, Maptime), toffset(start, 8, Maptime) ->
-    happens(walkThroughDoor12(walker1, destinationDoor1), Maptime).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:104
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:104
-reactive_rule([b(start,Maptime),toffset(start,8,Maptime)],
-	      [ happens(walkThroughDoor12(walker1,destinationDoor1),
-			Maptime)
-	      ]).
+happens_at(walkThroughDoor12(walker1,destinationDoor1),8).
 
 
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:105
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:105
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e',106).
 % Happens(DoorClose(Walker1,DestinationDoor1),9).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:105
-
- /*  [b(start, Start_Num9), toffset(start, 9, Start_Num9), ignore(start+9==Start_Num9)] ->
-       ta(TaP_Num4_V,
-          tvs1=[start+9],
-          tvs2=[Start_Num9, start],
-          happens(doorClose(walker1, destinationDoor1), Start_Num9)).
- */
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:105
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:105
-b(start, Maptime), toffset(start, 9, Maptime) ->
-    happens(doorClose(walker1, destinationDoor1), Maptime).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:105
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:105
-reactive_rule([b(start,Maptime),toffset(start,9,Maptime)],
-	      [ happens(doorClose(walker1,destinationDoor1),
-			Maptime)
-	      ]).
+happens_at(doorClose(walker1,destinationDoor1),9).
 
 
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:106
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:106
 % Happens(TakeOff(Walker1,Clothes1),10).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:106
+happens_at(takeOff(walker1,clothes1),10).
 
- /*  [b(start, Start_Num10), toffset(start, 10, Start_Num10), ignore(start+10==Start_Num10)] ->
-       ta(TaP_Num4_V,
-          tvs1=[start+10],
-          tvs2=[Start_Num10, start],
-          happens(takeOff(walker1, clothes1), Start_Num10)).
- */
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:106
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:106
-b(start, Maptime), toffset(start, 10, Maptime) ->
-    happens(takeOff(walker1, clothes1), Maptime).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:106
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:106
-reactive_rule([b(start,Maptime),toffset(start,10,Maptime)],
-	      [happens(takeOff(walker1,clothes1),Maptime)]).
-
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:108
 % range time 0 11
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:109
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:109
-range(time,0,11).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:109
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:109
-range(time,0,11).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e',108).
+:- call_pel_directive(range(time, 0, 11)).
 
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:109
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e',110).
 % range offset 0 0
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:110
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:110
-range(offset,0,0).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:110
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:110
-range(offset,0,0).
+:- call_pel_directive(range(offset, 0, 0)).
 
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:110
 % range diameter 0 0
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:111
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:111
-range(diameter,0,0).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:111
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:111
-range(diameter,0,0).
+:- call_pel_directive(range(diameter, 0, 0)).
 
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:112
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e',113).
 % completion Happens
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:113
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:113
-completion(happens).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:113
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.e:113
-completion(happens).
+:- call_pel_directive(completion(happens_at)).
 %; End of file.
+:- call_pel_directive(translate(ending,
+                                '/pack/logicmoo_ec/ext/ec_sources/ecnet/TakingAWalk.pel')).

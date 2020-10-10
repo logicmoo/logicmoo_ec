@@ -1,1277 +1,214 @@
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/Pendulum_Prediction.e',70).
+:- call_pel_directive(translate(unskipped,
+                                '/pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/PickUp.pel')).
 :-include(library('ec_planner/ec_test_incl')).
-:-expects_dialect(pfc).
-% Tue, 06 Oct 2020 04:59:12 GMT
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/PickUp.pel:4
+:-expects_dialect(ecalc).
+:- call_pel_directive(translate(begining,
+                                '/pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/PickUp.pel')).
 
- /*  loading(load_e_pl,
-   	'/pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/PickUp.e').
- */
-
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/PickUp.e:0
 % load foundations/Root.e
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/PickUp.e',1).
+:- call_pel_directive(load('foundations/Root.e')).
 
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/PickUp.e:1
 % load foundations/DEC.e
- %  loading(changed,'/pack/logicmoo_ec/ext/ec_sources/foundations/DEC.e').
-%;
-%; Copyright (c) 2005 IBM Corporation and others.
-%; All rights reserved. This program and the accompanying materials
-%; are made available under the terms of the Common Public License v1.0
-%; which accompanies this distribution, and is available at
-%; http://www.eclipse.org/legal/cpl-v10.html
-%;
-%; Contributors:
-%; IBM - Initial implementation
-%;
-%; Discrete Event Calculus (DEC)
-%;
-%; @article{Mueller:2004a,
-%;   author = "Erik T. Mueller",
-%;   year = "2004",
-%;   title = "Event calculus reasoning through satisfiability",
-%;   journal = "Journal of Logic and Computation",
-%;   volume = "14",
-%;   number = "5",
-%;   pages = "703--730",
-%; }
-%;
+:- call_pel_directive(load('foundations/DEC.e')).
 
-% From /pack/logicmoo_ec/ext/ec_sources/foundations/DEC.e:23
-% sort time: integer
-% From /pack/logicmoo_ec/ext/ec_sources/foundations/DEC.e:24
-% From /pack/logicmoo_ec/ext/ec_sources/foundations/DEC.e:24
-subsort(time,integer).
-% From /pack/logicmoo_ec/ext/ec_sources/foundations/DEC.e:24
-% From /pack/logicmoo_ec/ext/ec_sources/foundations/DEC.e:24
-subsort(time,integer).
-
-% From /pack/logicmoo_ec/ext/ec_sources/foundations/DEC.e:24
-% sort offset: integer
-% From /pack/logicmoo_ec/ext/ec_sources/foundations/DEC.e:25
-% From /pack/logicmoo_ec/ext/ec_sources/foundations/DEC.e:25
-subsort(offset,integer).
-% From /pack/logicmoo_ec/ext/ec_sources/foundations/DEC.e:25
-% From /pack/logicmoo_ec/ext/ec_sources/foundations/DEC.e:25
-subsort(offset,integer).
-
-% From /pack/logicmoo_ec/ext/ec_sources/foundations/DEC.e:26
-% reified sort fluent
-% From /pack/logicmoo_ec/ext/ec_sources/foundations/DEC.e:27
-% From /pack/logicmoo_ec/ext/ec_sources/foundations/DEC.e:27
-reified_sort(fluent).
-% From /pack/logicmoo_ec/ext/ec_sources/foundations/DEC.e:27
-% From /pack/logicmoo_ec/ext/ec_sources/foundations/DEC.e:27
-reified_sorts([fluent/0]).
-% From /pack/logicmoo_ec/ext/ec_sources/foundations/DEC.e:27
-% From /pack/logicmoo_ec/ext/ec_sources/foundations/DEC.e:27
-reified_sorts([fluent/0]).
-% From /pack/logicmoo_ec/ext/ec_sources/foundations/DEC.e:27
-% From /pack/logicmoo_ec/ext/ec_sources/foundations/DEC.e:27
-mpred_prop(fluent,reified_sort).
-% From /pack/logicmoo_ec/ext/ec_sources/foundations/DEC.e:27
-% From /pack/logicmoo_ec/ext/ec_sources/foundations/DEC.e:27
-mpred_prop(fluent,reified_sort).
-
-% From /pack/logicmoo_ec/ext/ec_sources/foundations/DEC.e:27
-% reified sort event
-% From /pack/logicmoo_ec/ext/ec_sources/foundations/DEC.e:28
-% From /pack/logicmoo_ec/ext/ec_sources/foundations/DEC.e:28
-reified_sort(event).
-% From /pack/logicmoo_ec/ext/ec_sources/foundations/DEC.e:28
-% From /pack/logicmoo_ec/ext/ec_sources/foundations/DEC.e:28
-reified_sorts([event/0]).
-% From /pack/logicmoo_ec/ext/ec_sources/foundations/DEC.e:28
-% From /pack/logicmoo_ec/ext/ec_sources/foundations/DEC.e:28
-reified_sorts([event/0]).
-% From /pack/logicmoo_ec/ext/ec_sources/foundations/DEC.e:28
-% From /pack/logicmoo_ec/ext/ec_sources/foundations/DEC.e:28
-mpred_prop(event,reified_sort).
-% From /pack/logicmoo_ec/ext/ec_sources/foundations/DEC.e:28
-% From /pack/logicmoo_ec/ext/ec_sources/foundations/DEC.e:28
-mpred_prop(event,reified_sort).
-
-% From /pack/logicmoo_ec/ext/ec_sources/foundations/DEC.e:29
-% predicate Happens(event,time)
-% From /pack/logicmoo_ec/ext/ec_sources/foundations/DEC.e:30
-% From /pack/logicmoo_ec/ext/ec_sources/foundations/DEC.e:30
-predicate(happens(event,time)).
-% From /pack/logicmoo_ec/ext/ec_sources/foundations/DEC.e:30
-% From /pack/logicmoo_ec/ext/ec_sources/foundations/DEC.e:30
-actions([observe/1]).
-% From /pack/logicmoo_ec/ext/ec_sources/foundations/DEC.e:30
-% From /pack/logicmoo_ec/ext/ec_sources/foundations/DEC.e:30
-actions([observe/1]).
-% From /pack/logicmoo_ec/ext/ec_sources/foundations/DEC.e:30
-% From /pack/logicmoo_ec/ext/ec_sources/foundations/DEC.e:30
-meta_argtypes(observe(at(event,time))).
-% From /pack/logicmoo_ec/ext/ec_sources/foundations/DEC.e:30
-% From /pack/logicmoo_ec/ext/ec_sources/foundations/DEC.e:30
-meta_argtypes(observe(at(event,time))).
-% From /pack/logicmoo_ec/ext/ec_sources/foundations/DEC.e:30
-% From /pack/logicmoo_ec/ext/ec_sources/foundations/DEC.e:30
-mpred_prop(happens(event,time),predicate).
-% From /pack/logicmoo_ec/ext/ec_sources/foundations/DEC.e:30
-% From /pack/logicmoo_ec/ext/ec_sources/foundations/DEC.e:30
-mpred_prop(observe(at(event,time)),predicate).
-% From /pack/logicmoo_ec/ext/ec_sources/foundations/DEC.e:30
-% From /pack/logicmoo_ec/ext/ec_sources/foundations/DEC.e:30
-mpred_prop(observe(at(event,time)),predicate).
-% From /pack/logicmoo_ec/ext/ec_sources/foundations/DEC.e:30
-% From /pack/logicmoo_ec/ext/ec_sources/foundations/DEC.e:30
-meta_argtypes(happens(event,time)).
-% From /pack/logicmoo_ec/ext/ec_sources/foundations/DEC.e:30
-% From /pack/logicmoo_ec/ext/ec_sources/foundations/DEC.e:30
-meta_argtypes(observe(at(event,time))).
-% From /pack/logicmoo_ec/ext/ec_sources/foundations/DEC.e:30
-% From /pack/logicmoo_ec/ext/ec_sources/foundations/DEC.e:30
-meta_argtypes(observe(at(event,time))).
-
-% From /pack/logicmoo_ec/ext/ec_sources/foundations/DEC.e:30
-% predicate HoldsAt(fluent,time)
-% From /pack/logicmoo_ec/ext/ec_sources/foundations/DEC.e:31
-% From /pack/logicmoo_ec/ext/ec_sources/foundations/DEC.e:31
-predicate(holds_at(fluent,time)).
-% From /pack/logicmoo_ec/ext/ec_sources/foundations/DEC.e:31
-% From /pack/logicmoo_ec/ext/ec_sources/foundations/DEC.e:31
-actions([at/2]).
-% From /pack/logicmoo_ec/ext/ec_sources/foundations/DEC.e:31
-% From /pack/logicmoo_ec/ext/ec_sources/foundations/DEC.e:31
-actions([at/2]).
-% From /pack/logicmoo_ec/ext/ec_sources/foundations/DEC.e:31
-% From /pack/logicmoo_ec/ext/ec_sources/foundations/DEC.e:31
-meta_argtypes(at(fluent,time)).
-% From /pack/logicmoo_ec/ext/ec_sources/foundations/DEC.e:31
-% From /pack/logicmoo_ec/ext/ec_sources/foundations/DEC.e:31
-meta_argtypes(at(fluent,time)).
-% From /pack/logicmoo_ec/ext/ec_sources/foundations/DEC.e:31
-% From /pack/logicmoo_ec/ext/ec_sources/foundations/DEC.e:31
-mpred_prop(holds_at(fluent,time),predicate).
-% From /pack/logicmoo_ec/ext/ec_sources/foundations/DEC.e:31
-% From /pack/logicmoo_ec/ext/ec_sources/foundations/DEC.e:31
-mpred_prop(at(fluent,time),predicate).
-% From /pack/logicmoo_ec/ext/ec_sources/foundations/DEC.e:31
-% From /pack/logicmoo_ec/ext/ec_sources/foundations/DEC.e:31
-mpred_prop(at(fluent,time),predicate).
-% From /pack/logicmoo_ec/ext/ec_sources/foundations/DEC.e:31
-% From /pack/logicmoo_ec/ext/ec_sources/foundations/DEC.e:31
-meta_argtypes(holds_at(fluent,time)).
-% From /pack/logicmoo_ec/ext/ec_sources/foundations/DEC.e:31
-% From /pack/logicmoo_ec/ext/ec_sources/foundations/DEC.e:31
-meta_argtypes(at(fluent,time)).
-% From /pack/logicmoo_ec/ext/ec_sources/foundations/DEC.e:31
-% From /pack/logicmoo_ec/ext/ec_sources/foundations/DEC.e:31
-meta_argtypes(at(fluent,time)).
-
-% From /pack/logicmoo_ec/ext/ec_sources/foundations/DEC.e:31
-% predicate ReleasedAt(fluent,time)
-% From /pack/logicmoo_ec/ext/ec_sources/foundations/DEC.e:32
-% From /pack/logicmoo_ec/ext/ec_sources/foundations/DEC.e:32
-predicate(releasedAt(fluent,time)).
-% From /pack/logicmoo_ec/ext/ec_sources/foundations/DEC.e:32
-% From /pack/logicmoo_ec/ext/ec_sources/foundations/DEC.e:32
-actions([releasedAt/2]).
-% From /pack/logicmoo_ec/ext/ec_sources/foundations/DEC.e:32
-% From /pack/logicmoo_ec/ext/ec_sources/foundations/DEC.e:32
-actions([releasedAt/2]).
-% From /pack/logicmoo_ec/ext/ec_sources/foundations/DEC.e:32
-% From /pack/logicmoo_ec/ext/ec_sources/foundations/DEC.e:32
-meta_argtypes(releasedAt(fluent,time)).
-% From /pack/logicmoo_ec/ext/ec_sources/foundations/DEC.e:32
-% From /pack/logicmoo_ec/ext/ec_sources/foundations/DEC.e:32
-meta_argtypes(releasedAt(fluent,time)).
-% From /pack/logicmoo_ec/ext/ec_sources/foundations/DEC.e:32
-% From /pack/logicmoo_ec/ext/ec_sources/foundations/DEC.e:32
-mpred_prop(releasedAt(fluent,time),predicate).
-% From /pack/logicmoo_ec/ext/ec_sources/foundations/DEC.e:32
-% From /pack/logicmoo_ec/ext/ec_sources/foundations/DEC.e:32
-mpred_prop(releasedAt(fluent,time),predicate).
-% From /pack/logicmoo_ec/ext/ec_sources/foundations/DEC.e:32
-% From /pack/logicmoo_ec/ext/ec_sources/foundations/DEC.e:32
-meta_argtypes(releasedAt(fluent,time)).
-% From /pack/logicmoo_ec/ext/ec_sources/foundations/DEC.e:32
-% From /pack/logicmoo_ec/ext/ec_sources/foundations/DEC.e:32
-meta_argtypes(releasedAt(fluent,time)).
-
-% From /pack/logicmoo_ec/ext/ec_sources/foundations/DEC.e:33
-% predicate Initiates(event,fluent,time)
-% From /pack/logicmoo_ec/ext/ec_sources/foundations/DEC.e:34
-% From /pack/logicmoo_ec/ext/ec_sources/foundations/DEC.e:34
-predicate(initiates(event,fluent,time)).
-% From /pack/logicmoo_ec/ext/ec_sources/foundations/DEC.e:34
-% From /pack/logicmoo_ec/ext/ec_sources/foundations/DEC.e:34
-actions([initiates/2]).
-% From /pack/logicmoo_ec/ext/ec_sources/foundations/DEC.e:34
-% From /pack/logicmoo_ec/ext/ec_sources/foundations/DEC.e:34
-actions([initiates/2]).
-% From /pack/logicmoo_ec/ext/ec_sources/foundations/DEC.e:34
-% From /pack/logicmoo_ec/ext/ec_sources/foundations/DEC.e:34
-meta_argtypes(initiates(event,at(fluent,time))).
-% From /pack/logicmoo_ec/ext/ec_sources/foundations/DEC.e:34
-% From /pack/logicmoo_ec/ext/ec_sources/foundations/DEC.e:34
-meta_argtypes(initiates(event,at(fluent,time))).
-% From /pack/logicmoo_ec/ext/ec_sources/foundations/DEC.e:34
-% From /pack/logicmoo_ec/ext/ec_sources/foundations/DEC.e:34
-mpred_prop(initiates(event,fluent,time),predicate).
-% From /pack/logicmoo_ec/ext/ec_sources/foundations/DEC.e:34
-% From /pack/logicmoo_ec/ext/ec_sources/foundations/DEC.e:34
-mpred_prop(initiates(event,at(fluent,time)),predicate).
-% From /pack/logicmoo_ec/ext/ec_sources/foundations/DEC.e:34
-% From /pack/logicmoo_ec/ext/ec_sources/foundations/DEC.e:34
-mpred_prop(initiates(event,at(fluent,time)),predicate).
-% From /pack/logicmoo_ec/ext/ec_sources/foundations/DEC.e:34
-% From /pack/logicmoo_ec/ext/ec_sources/foundations/DEC.e:34
-meta_argtypes(initiates(event,fluent,time)).
-% From /pack/logicmoo_ec/ext/ec_sources/foundations/DEC.e:34
-% From /pack/logicmoo_ec/ext/ec_sources/foundations/DEC.e:34
-meta_argtypes(initiates(event,at(fluent,time))).
-% From /pack/logicmoo_ec/ext/ec_sources/foundations/DEC.e:34
-% From /pack/logicmoo_ec/ext/ec_sources/foundations/DEC.e:34
-meta_argtypes(initiates(event,at(fluent,time))).
-
-% From /pack/logicmoo_ec/ext/ec_sources/foundations/DEC.e:34
-% predicate Terminates(event,fluent,time)
-% From /pack/logicmoo_ec/ext/ec_sources/foundations/DEC.e:35
-% From /pack/logicmoo_ec/ext/ec_sources/foundations/DEC.e:35
-predicate(terminates(event,fluent,time)).
-% From /pack/logicmoo_ec/ext/ec_sources/foundations/DEC.e:35
-% From /pack/logicmoo_ec/ext/ec_sources/foundations/DEC.e:35
-actions([terminates/2]).
-% From /pack/logicmoo_ec/ext/ec_sources/foundations/DEC.e:35
-% From /pack/logicmoo_ec/ext/ec_sources/foundations/DEC.e:35
-actions([terminates/2]).
-% From /pack/logicmoo_ec/ext/ec_sources/foundations/DEC.e:35
-% From /pack/logicmoo_ec/ext/ec_sources/foundations/DEC.e:35
-meta_argtypes(terminates(event,at(fluent,time))).
-% From /pack/logicmoo_ec/ext/ec_sources/foundations/DEC.e:35
-% From /pack/logicmoo_ec/ext/ec_sources/foundations/DEC.e:35
-meta_argtypes(terminates(event,at(fluent,time))).
-% From /pack/logicmoo_ec/ext/ec_sources/foundations/DEC.e:35
-% From /pack/logicmoo_ec/ext/ec_sources/foundations/DEC.e:35
-mpred_prop(terminates(event,fluent,time),predicate).
-% From /pack/logicmoo_ec/ext/ec_sources/foundations/DEC.e:35
-% From /pack/logicmoo_ec/ext/ec_sources/foundations/DEC.e:35
-mpred_prop(terminates(event,at(fluent,time)),predicate).
-% From /pack/logicmoo_ec/ext/ec_sources/foundations/DEC.e:35
-% From /pack/logicmoo_ec/ext/ec_sources/foundations/DEC.e:35
-mpred_prop(terminates(event,at(fluent,time)),predicate).
-% From /pack/logicmoo_ec/ext/ec_sources/foundations/DEC.e:35
-% From /pack/logicmoo_ec/ext/ec_sources/foundations/DEC.e:35
-meta_argtypes(terminates(event,fluent,time)).
-% From /pack/logicmoo_ec/ext/ec_sources/foundations/DEC.e:35
-% From /pack/logicmoo_ec/ext/ec_sources/foundations/DEC.e:35
-meta_argtypes(terminates(event,at(fluent,time))).
-% From /pack/logicmoo_ec/ext/ec_sources/foundations/DEC.e:35
-% From /pack/logicmoo_ec/ext/ec_sources/foundations/DEC.e:35
-meta_argtypes(terminates(event,at(fluent,time))).
-
-% From /pack/logicmoo_ec/ext/ec_sources/foundations/DEC.e:35
-% predicate Releases(event,fluent,time)
-% From /pack/logicmoo_ec/ext/ec_sources/foundations/DEC.e:36
-% From /pack/logicmoo_ec/ext/ec_sources/foundations/DEC.e:36
-predicate(releases(event,fluent,time)).
-% From /pack/logicmoo_ec/ext/ec_sources/foundations/DEC.e:36
-% From /pack/logicmoo_ec/ext/ec_sources/foundations/DEC.e:36
-actions([releases/3]).
-% From /pack/logicmoo_ec/ext/ec_sources/foundations/DEC.e:36
-% From /pack/logicmoo_ec/ext/ec_sources/foundations/DEC.e:36
-actions([releases/3]).
-% From /pack/logicmoo_ec/ext/ec_sources/foundations/DEC.e:36
-% From /pack/logicmoo_ec/ext/ec_sources/foundations/DEC.e:36
-meta_argtypes(releases(event,fluent,time)).
-% From /pack/logicmoo_ec/ext/ec_sources/foundations/DEC.e:36
-% From /pack/logicmoo_ec/ext/ec_sources/foundations/DEC.e:36
-meta_argtypes(releases(event,fluent,time)).
-% From /pack/logicmoo_ec/ext/ec_sources/foundations/DEC.e:36
-% From /pack/logicmoo_ec/ext/ec_sources/foundations/DEC.e:36
-mpred_prop(releases(event,fluent,time),predicate).
-% From /pack/logicmoo_ec/ext/ec_sources/foundations/DEC.e:36
-% From /pack/logicmoo_ec/ext/ec_sources/foundations/DEC.e:36
-mpred_prop(releases(event,fluent,time),predicate).
-% From /pack/logicmoo_ec/ext/ec_sources/foundations/DEC.e:36
-% From /pack/logicmoo_ec/ext/ec_sources/foundations/DEC.e:36
-meta_argtypes(releases(event,fluent,time)).
-% From /pack/logicmoo_ec/ext/ec_sources/foundations/DEC.e:36
-% From /pack/logicmoo_ec/ext/ec_sources/foundations/DEC.e:36
-meta_argtypes(releases(event,fluent,time)).
-
-
-% From /pack/logicmoo_ec/ext/ec_sources/foundations/DEC.e:37
-% [fluent,time]
-% From /pack/logicmoo_ec/ext/ec_sources/foundations/DEC.e:38
-% (HoldsAt(fluent,time) &
-%  !ReleasedAt(fluent,time+1) &
-%  !({event} Happens(event,time) & Terminates(event,fluent,time))) ->
-% HoldsAt(fluent,time+1).
-% From /pack/logicmoo_ec/ext/ec_sources/foundations/DEC.e:41
-% From /pack/logicmoo_ec/ext/ec_sources/foundations/DEC.e:41
-holds_at(Fluent, Time), not(releasedAt(Fluent, Time+1)), not(exists([Event],  (happens(Event, Time), terminates(Event, Fluent, Time)))) ->
-    holds_at(Fluent, Time+1).
-% From /pack/logicmoo_ec/ext/ec_sources/foundations/DEC.e:41
-% From /pack/logicmoo_ec/ext/ec_sources/foundations/DEC.e:41
- reactive_rule([ holds(not(Not), Time),
-                   holds(not(releasedAt(not(Not), Time+1)),
-                         Holds),
-                   not((happens(Event, Time), terminates(Event, at(not(Not), Time))))
-                 ],
-                 [holds(not(Not), Time+1)]).
-
-
-% From /pack/logicmoo_ec/ext/ec_sources/foundations/DEC.e:43
-% [fluent,time]
-% From /pack/logicmoo_ec/ext/ec_sources/foundations/DEC.e:44
-% (!HoldsAt(fluent,time) &
-%  !ReleasedAt(fluent,time+1) &
-%  !({event} Happens(event,time) & Initiates(event,fluent,time))) ->
-% !HoldsAt(fluent,time+1).
-% From /pack/logicmoo_ec/ext/ec_sources/foundations/DEC.e:47
-% From /pack/logicmoo_ec/ext/ec_sources/foundations/DEC.e:47
-holds_at(neg(Fluent), Time), not(releasedAt(Fluent, Time+1)), not(exists([Event],  (happens(Event, Time), initiates(Event, Fluent, Time)))) ->
-    holds_at(neg(Fluent), Time+1).
-% From /pack/logicmoo_ec/ext/ec_sources/foundations/DEC.e:47
-% From /pack/logicmoo_ec/ext/ec_sources/foundations/DEC.e:47
- reactive_rule([ holds(neg(Fluent), Time),
-                   holds(not(releasedAt(Fluent, Time+1)),
-                         Holds),
-                   not((happens(Event, Time), initiates(Event, at(Fluent, Time))))
-                 ],
-                 [holds(neg(Fluent), Time+1)]).
-
-
-% From /pack/logicmoo_ec/ext/ec_sources/foundations/DEC.e:49
-% [fluent,time]
-% From /pack/logicmoo_ec/ext/ec_sources/foundations/DEC.e:50
-% (!ReleasedAt(fluent,time) &
-%  !({event} Happens(event,time) & Releases(event,fluent,time))) ->
-% !ReleasedAt(fluent,time+1).
-% From /pack/logicmoo_ec/ext/ec_sources/foundations/DEC.e:52
-% From /pack/logicmoo_ec/ext/ec_sources/foundations/DEC.e:52
-not(releasedAt(Fluent, Time)), not(exists([Event],  (happens(Event, Time), releases(Event, Fluent, Time)))) ->
-    not(releasedAt(Fluent, Time+1)).
-% From /pack/logicmoo_ec/ext/ec_sources/foundations/DEC.e:52
-% From /pack/logicmoo_ec/ext/ec_sources/foundations/DEC.e:52
- reactive_rule([ holds(not(releasedAt(Fluent, Time)), Holds),
-                   not((happens(Event, Time), releases(Event, Fluent, Time)))
-                 ],
-                 [ holds(not(releasedAt(Fluent, Time+1)),
-                         Holds4)
-                 ]).
-
-
-% From /pack/logicmoo_ec/ext/ec_sources/foundations/DEC.e:54
-% [fluent,time]
-% From /pack/logicmoo_ec/ext/ec_sources/foundations/DEC.e:55
-% (ReleasedAt(fluent,time) &
-%  !({event} Happens(event,time) &
-%    (Initiates(event,fluent,time) |
-%     Terminates(event,fluent,time)))) ->
-% ReleasedAt(fluent,time+1).
-% From /pack/logicmoo_ec/ext/ec_sources/foundations/DEC.e:59
-% From /pack/logicmoo_ec/ext/ec_sources/foundations/DEC.e:59
-releasedAt(Fluent, Time), not(exists([Event],  (happens(Event, Time), (initiates(Event, Fluent, Time);terminates(Event, Fluent, Time))))) ->
-    releasedAt(Fluent, Time+1).
-% From /pack/logicmoo_ec/ext/ec_sources/foundations/DEC.e:59
-% From /pack/logicmoo_ec/ext/ec_sources/foundations/DEC.e:59
- reactive_rule([ holds(releasedAt(Fluent, Time), Holds),
-                   not((happens(Event, Time), (initiates(Event, at(Fluent, Time));terminates(Event, at(Fluent, Time)))))
-                 ],
-                 [holds(releasedAt(Fluent, Time+1), Holds4)]).
-
-
-% From /pack/logicmoo_ec/ext/ec_sources/foundations/DEC.e:61
-% [event,fluent,time]
-% From /pack/logicmoo_ec/ext/ec_sources/foundations/DEC.e:62
-% (Happens(event,time) & Initiates(event,fluent,time)) ->
-% (HoldsAt(fluent,time+1) & !ReleasedAt(fluent,time+1)).
-% From /pack/logicmoo_ec/ext/ec_sources/foundations/DEC.e:63
-% From /pack/logicmoo_ec/ext/ec_sources/foundations/DEC.e:63
-happens(Event, Time), initiates(Event, Fluent, Time) ->
-    holds_at(Fluent, Time+1),
-    not(releasedAt(Fluent, Time+1)).
-% From /pack/logicmoo_ec/ext/ec_sources/foundations/DEC.e:63
-% From /pack/logicmoo_ec/ext/ec_sources/foundations/DEC.e:63
-reactive_rule([ happens(Event,Time),
-		initiates(Event,at(not(Not),Time))
-	      ],
-	      [ holds(not(Not),Time+1),
-		holds(not(releasedAt(not(Not),Time+1)),
-		      Holds)
-	      ]).
-
-
-% From /pack/logicmoo_ec/ext/ec_sources/foundations/DEC.e:65
-% [event,fluent,time]
-% From /pack/logicmoo_ec/ext/ec_sources/foundations/DEC.e:66
-% (Happens(event,time) & Terminates(event,fluent,time)) ->
-% (!HoldsAt(fluent,time+1) & !ReleasedAt(fluent,time+1)).
-% From /pack/logicmoo_ec/ext/ec_sources/foundations/DEC.e:67
-% From /pack/logicmoo_ec/ext/ec_sources/foundations/DEC.e:67
-happens(Event, Time), terminates(Event, Fluent, Time) ->
-    holds_at(neg(Fluent), Time+1),
-    not(releasedAt(Fluent, Time+1)).
-% From /pack/logicmoo_ec/ext/ec_sources/foundations/DEC.e:67
-% From /pack/logicmoo_ec/ext/ec_sources/foundations/DEC.e:67
-reactive_rule([ happens(Event,Time),
-		terminates(Event,at(Fluent,Time))
-	      ],
-	      [ holds(neg(Fluent),Time+1),
-		holds(not(releasedAt(Fluent,Time+1)),
-		      Holds)
-	      ]).
-
-
-% From /pack/logicmoo_ec/ext/ec_sources/foundations/DEC.e:69
-% [event,fluent,time]
-% From /pack/logicmoo_ec/ext/ec_sources/foundations/DEC.e:70
-% (Happens(event,time) & Releases(event,fluent,time)) ->
-% ReleasedAt(fluent,time+1).
-% From /pack/logicmoo_ec/ext/ec_sources/foundations/DEC.e:71
-% From /pack/logicmoo_ec/ext/ec_sources/foundations/DEC.e:71
-happens(Event, Time), releases(Event, Fluent, Time) ->
-    releasedAt(Fluent, Time+1).
-% From /pack/logicmoo_ec/ext/ec_sources/foundations/DEC.e:71
-% From /pack/logicmoo_ec/ext/ec_sources/foundations/DEC.e:71
-reactive_rule([ happens(Event,Time),
-		releases(Event,Fluent,Time)
-	      ],
-	      [ holds(releasedAt(Fluent,Time+1),
-		      Holds)
-	      ]).
-
-
-% From /pack/logicmoo_ec/ext/ec_sources/foundations/DEC.e:73
-%; End of file.
-
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/PickUp.e:3
 % sort object
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/PickUp.e:4
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/PickUp.e:4
-sort(object).
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/PickUp.e:4
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/PickUp.e:4
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/PickUp.e',4).
 sort(object).
 
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/PickUp.e:4
 % sort agent: object
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/PickUp.e:5
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/PickUp.e:5
-subsort(agent,object).
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/PickUp.e:5
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/PickUp.e:5
 subsort(agent,object).
 
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/PickUp.e:5
 % sort physobj: object
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/PickUp.e:6
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/PickUp.e:6
-subsort(physobj,object).
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/PickUp.e:6
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/PickUp.e:6
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/PickUp.e',6).
 subsort(physobj,object).
 
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/PickUp.e:6
 % sort location
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/PickUp.e:7
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/PickUp.e:7
-sort(location).
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/PickUp.e:7
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/PickUp.e:7
 sort(location).
 
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/PickUp.e:8
 % agent James
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/PickUp.e:9
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/PickUp.e:9
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/PickUp.e',9).
 t(agent,james).
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/PickUp.e:9
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/PickUp.e:9
-agent(james).
 
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/PickUp.e:9
 % physobj Coin
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/PickUp.e:10
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/PickUp.e:10
 t(physobj,coin).
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/PickUp.e:10
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/PickUp.e:10
-physobj(coin).
 
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/PickUp.e:10
 % location L1,L2,L3,L4
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/PickUp.e:11
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/PickUp.e:11
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/PickUp.e',11).
 t(location,l1).
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/PickUp.e:11
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/PickUp.e:11
-location(l1).
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/PickUp.e:11
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/PickUp.e:11
 t(location,l2).
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/PickUp.e:11
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/PickUp.e:11
-location(l2).
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/PickUp.e:11
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/PickUp.e:11
 t(location,l3).
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/PickUp.e:11
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/PickUp.e:11
-location(l3).
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/PickUp.e:11
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/PickUp.e:11
 t(location,l4).
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/PickUp.e:11
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/PickUp.e:11
-location(l4).
 
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/PickUp.e:13
 % fluent At(object,location)
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/PickUp.e:14
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/PickUp.e:14
-fluent(at(object,location)).
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/PickUp.e:14
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/PickUp.e:14
-fluents([loc_at/2]).
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/PickUp.e:14
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/PickUp.e:14
-fluents([loc_at/2]).
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/PickUp.e:14
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/PickUp.e:14
-meta_argtypes(loc_at(object,location)).
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/PickUp.e:14
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/PickUp.e:14
-meta_argtypes(loc_at(object,location)).
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/PickUp.e:14
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/PickUp.e:14
-mpred_prop(at(object,location),fluent).
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/PickUp.e:14
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/PickUp.e:14
-mpred_prop(loc_at(object,location),fluent).
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/PickUp.e:14
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/PickUp.e:14
-mpred_prop(loc_at(object,location),fluent).
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/PickUp.e:14
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/PickUp.e:14
-meta_argtypes(at(object,location)).
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/PickUp.e:14
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/PickUp.e:14
-meta_argtypes(loc_at(object,location)).
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/PickUp.e:14
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/PickUp.e:14
-meta_argtypes(loc_at(object,location)).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/PickUp.e',13).
+fluent(at_loc(object,location)).
 
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/PickUp.e:14
 % fluent Holding(agent,physobj)
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/PickUp.e:15
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/PickUp.e:15
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/PickUp.e',15).
 fluent(holding(agent,physobj)).
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/PickUp.e:15
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/PickUp.e:15
-fluents([holding/2]).
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/PickUp.e:15
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/PickUp.e:15
-fluents([holding/2]).
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/PickUp.e:15
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/PickUp.e:15
-meta_argtypes(holding(agent,physobj)).
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/PickUp.e:15
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/PickUp.e:15
-meta_argtypes(holding(agent,physobj)).
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/PickUp.e:15
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/PickUp.e:15
-mpred_prop(holding(agent,physobj),fluent).
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/PickUp.e:15
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/PickUp.e:15
-mpred_prop(holding(agent,physobj),fluent).
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/PickUp.e:15
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/PickUp.e:15
-meta_argtypes(holding(agent,physobj)).
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/PickUp.e:15
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/PickUp.e:15
-meta_argtypes(holding(agent,physobj)).
 
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/PickUp.e:15
 % event PickUp(agent,physobj)
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/PickUp.e:16
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/PickUp.e:16
 event(pickUp(agent,physobj)).
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/PickUp.e:16
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/PickUp.e:16
-actions([pickUp/2]).
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/PickUp.e:16
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/PickUp.e:16
-actions([pickUp/2]).
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/PickUp.e:16
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/PickUp.e:16
-meta_argtypes(pickUp(agent,physobj)).
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/PickUp.e:16
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/PickUp.e:16
-meta_argtypes(pickUp(agent,physobj)).
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/PickUp.e:16
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/PickUp.e:16
-mpred_prop(pickUp(agent,physobj),event).
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/PickUp.e:16
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/PickUp.e:16
-mpred_prop(pickUp(agent,physobj),event).
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/PickUp.e:16
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/PickUp.e:16
-meta_argtypes(pickUp(agent,physobj)).
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/PickUp.e:16
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/PickUp.e:16
-meta_argtypes(pickUp(agent,physobj)).
 
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/PickUp.e:16
 % event SetDown(agent,physobj)
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/PickUp.e:17
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/PickUp.e:17
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/PickUp.e',17).
 event(setDown(agent,physobj)).
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/PickUp.e:17
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/PickUp.e:17
-actions([setDown/2]).
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/PickUp.e:17
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/PickUp.e:17
-actions([setDown/2]).
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/PickUp.e:17
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/PickUp.e:17
-meta_argtypes(setDown(agent,physobj)).
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/PickUp.e:17
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/PickUp.e:17
-meta_argtypes(setDown(agent,physobj)).
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/PickUp.e:17
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/PickUp.e:17
-mpred_prop(setDown(agent,physobj),event).
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/PickUp.e:17
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/PickUp.e:17
-mpred_prop(setDown(agent,physobj),event).
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/PickUp.e:17
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/PickUp.e:17
-meta_argtypes(setDown(agent,physobj)).
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/PickUp.e:17
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/PickUp.e:17
-meta_argtypes(setDown(agent,physobj)).
 
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/PickUp.e:17
 % event Move(agent,location,location)
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/PickUp.e:18
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/PickUp.e:18
 event(move(agent,location,location)).
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/PickUp.e:18
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/PickUp.e:18
-actions([move/3]).
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/PickUp.e:18
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/PickUp.e:18
-actions([move/3]).
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/PickUp.e:18
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/PickUp.e:18
-meta_argtypes(move(agent,location,location)).
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/PickUp.e:18
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/PickUp.e:18
-meta_argtypes(move(agent,location,location)).
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/PickUp.e:18
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/PickUp.e:18
-mpred_prop(move(agent,location,location),event).
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/PickUp.e:18
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/PickUp.e:18
-mpred_prop(move(agent,location,location),event).
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/PickUp.e:18
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/PickUp.e:18
-meta_argtypes(move(agent,location,location)).
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/PickUp.e:18
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/PickUp.e:18
-meta_argtypes(move(agent,location,location)).
 
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/PickUp.e:19
 % range time 0 9
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/PickUp.e:20
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/PickUp.e:20
-range(time,0,9).
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/PickUp.e:20
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/PickUp.e:20
-range(time,0,9).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/PickUp.e',20).
+:- call_pel_directive(range(time, 0, 9)).
 
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/PickUp.e:20
 % range offset 1 1
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/PickUp.e:21
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/PickUp.e:21
-range(offset,1,1).
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/PickUp.e:21
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/PickUp.e:21
-range(offset,1,1).
+:- call_pel_directive(range(offset, 1, 1)).
 %; state constraints
 % [agent,location,physobj,time]
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/PickUp.e:25
 % (HoldsAt(At(agent,location),time) &
 % HoldsAt(Holding(agent,physobj),time) ->
 % HoldsAt(At(physobj,location),time)).
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/PickUp.e:27
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/PickUp.e:27
-holds_at(at(Agent, Location), Time), holds_at(holding(Agent, Physobj), Time) ->
-    holds_at(at(Physobj, Location), Time).
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/PickUp.e:27
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/PickUp.e:27
-reactive_rule([ holds(loc_at(Agent,Location),Time),
-		holds(holding(Agent,Physobj),Time)
-	      ],
-	      [holds(loc_at(Physobj,Location),Time)]).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/PickUp.e',25).
+holds_at(at_loc(Agent, Location), Time), holds_at(holding(Agent, Physobj), Time) ->
+    holds_at(at_loc(Physobj, Location), Time).
 
 
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/PickUp.e:29
 % [object,location1,location2,time]
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/PickUp.e:30
 % (HoldsAt(At(object,location1),time) &
 % HoldsAt(At(object,location2),time) ->
 % location1=location2).
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/PickUp.e:32
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/PickUp.e:32
-holds_at(at(Object, Location1), Time), holds_at(at(Object, Location2), Time) ->
-    equals(Location1, Location2).
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/PickUp.e:32
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/PickUp.e:32
-reactive_rule([ holds(loc_at(Object,Location1),Time),
-		holds(loc_at(Object,Location2),Time)
-	      ],
-	      [equals(Location1,Location2)]).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/PickUp.e',31).
+holds_at(at_loc(Object, Location1), Time), holds_at(at_loc(Object, Location2), Time) ->
+    Location1=Location2.
 
 
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/PickUp.e:34
 %; effect axioms
 % [agent,location1,location2,time]
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/PickUp.e:37
 % (Initiates(Move(agent,location1,location2),At(agent,location2),time)).
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/PickUp.e:37
-
- /*  [] ->
-       ta(Time,
-          tvs1=[Time],
-          tvs2=[Time],
-          initiates(move(Agent, Location1, Location2),
-                    at(Agent, Location2),
-                    Time)).
- */
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/PickUp.e:37
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/PickUp.e:37
-initiates(move(MoveP_Num3_V,_,Location),
-	  at(MoveP_Num3_V,Location),
-	  Initiates).
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/PickUp.e:37
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/PickUp.e:37
-initiated(happens(move(MoveP_Num3_V,_,Location),
-		  Maptime,
-		  Happens),
-	  loc_at(MoveP_Num3_V,Location),
-	  []).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/PickUp.e',37).
+initiates_at(move(Agent,Location1,Location2),
+	     at_loc(Agent,Location2),
+	     Time).
 
 
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/PickUp.e:39
 % [agent,location1,location2,time]
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/PickUp.e:40
 % (Terminates(Move(agent,location1,location2),At(agent,location1),time)).
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/PickUp.e:40
-
- /*  [] ->
-       ta(Time,
-          tvs1=[Time],
-          tvs2=[Time],
-          terminates(move(Agent, Location1, Location2),
-                     at(Agent, Location1),
-                     Time)).
- */
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/PickUp.e:40
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/PickUp.e:40
-terminates(move(MoveP_Num3_V,Location,Move),
-	   at(MoveP_Num3_V,Location),
-	   Terminates).
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/PickUp.e:40
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/PickUp.e:40
-terminated(happens(move(MoveP_Num3_V,Location,Move),
-		   Maptime,
-		   Happens),
-	   loc_at(MoveP_Num3_V,Location),
-	   []).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/PickUp.e',41).
+terminates_at(move(Agent,Location1,Location2),
+	      at_loc(Agent,Location1),
+	      Time).
 
 
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/PickUp.e:42
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/PickUp.e',43).
 % [agent,physobj,time]
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/PickUp.e:43
 % (Initiates(PickUp(agent,physobj),Holding(agent,physobj),time)).
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/PickUp.e:43
-
- /*  [] ->
-       ta(Time,
-          tvs1=[Time],
-          tvs2=[Time],
-          initiates(pickUp(Agent, Physobj),
-                    holding(Agent, Physobj),
-                    Time)).
- */
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/PickUp.e:43
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/PickUp.e:43
-initiates(pickUp(A,Pickup),
-	  holding(A,Pickup),
-	  Initiates).
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/PickUp.e:43
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/PickUp.e:43
-initiated(happens(pickUp(A,Pickup),
-		  Maptime,
-		  Happens),
-	  holding(A,Pickup),
-	  []).
+initiates_at(pickUp(Agent,Physobj),
+	     holding(Agent,Physobj),
+	     Time).
 
 
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/PickUp.e:45
 % [agent,physobj,time]
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/PickUp.e:46
 % (Terminates(SetDown(agent,physobj),Holding(agent,physobj),time)).
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/PickUp.e:46
-
- /*  [] ->
-       ta(Time,
-          tvs1=[Time],
-          tvs2=[Time],
-          terminates(setDown(Agent, Physobj),
-                     holding(Agent, Physobj),
-                     Time)).
- */
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/PickUp.e:46
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/PickUp.e:46
-terminates(setDown(A,Setdown),
-	   holding(A,Setdown),
-	   Terminates).
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/PickUp.e:46
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/PickUp.e:46
-terminated(happens(setDown(A,Setdown),
-		   Maptime,
-		   Happens),
-	   holding(A,Setdown),
-	   []).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/PickUp.e',47).
+terminates_at(setDown(Agent,Physobj),
+	      holding(Agent,Physobj),
+	      Time).
 
 
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/PickUp.e:48
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/PickUp.e',49).
 %; preconditions
 % [agent,location1,location2,time]
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/PickUp.e:51
 % (Happens(Move(agent,location1,location2),time) ->
 % HoldsAt(At(agent,location1),time)).
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/PickUp.e:52
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/PickUp.e:52
-happens(move(Agent, Location1, Location2), Time) ->
-    holds_at(at(Agent, Location1), Time).
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/PickUp.e:52
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/PickUp.e:52
-reactive_rule([ happens(move(Agent,
-			     Location1,
-			     Location2),
-			Time)
-	      ],
-	      [holds(loc_at(Agent,Location1),Time)]).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/PickUp.e',51).
+happens_at(move(Agent, Location1, Location2), Time) ->
+    holds_at(at_loc(Agent, Location1), Time).
 
 
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/PickUp.e:54
 % [agent,physobj,time]
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/PickUp.e:55
 % (Happens(PickUp(agent,physobj),time) ->
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/PickUp.e:56
 % {location}%  (HoldsAt(At(agent,location),time) &
 %            HoldsAt(At(physobj,location),time))).
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/PickUp.e:57
-
- /*  exists([Location],
-    happens(pickUp(Agent, Physobj), Time) ->
-       holds_at(at(Agent, Location), Time),
-       holds_at(at(Physobj, Location), Time)).
- */
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/PickUp.e:57
-
- /*  not(happens(pickUp(Agent, Physobj), Time)) :-
-       (   not(holds_at(at(Agent, Exists_Location), Time))
-       ;   not(holds_at(at(Physobj, Exists_Location), Time))
-       ),
-       some(Exists_Location,
-            '$kolem_Fn_55'(Agent, Physobj, Time)).
- */
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/PickUp.e:57
-
- /*  [(holds_at(neg(at(Agent, Exists_Location)), Time);holds_at(neg(at(Physobj, Exists_Location)), Time)), some(Exists_Location, '$kolem_Fn_55'(Agent, Physobj, Time))] ->
-       ta(Time,
-          tvs1=[Time],
-          tvs2=[Time],
-          not(happens(pickUp(Agent, Physobj), Time))).
- */
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/PickUp.e:57
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/PickUp.e:57
-(holds_at(neg(at(Kolem_Fn_55P_Num3_V, Location5)), Time6);holds_at(neg(at(Pickup, Location5)), Time6)), some(Location5, '$kolem_Fn_55'(Kolem_Fn_55P_Num3_V, Pickup, Time6)) ->
-    not(happens(pickUp(Kolem_Fn_55P_Num3_V, Pickup), Time6)).
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/PickUp.e:57
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/PickUp.e:57
- reactive_rule([  (at(not(loc_at(Kolem_Fn_55P_Num3_V, Location5)), Time6);at(not(loc_at(Pickup, Location5)), Time6)),
-                   some(Location5,
-                        '$kolem_Fn_55'(Kolem_Fn_55P_Num3_V,
-                                       Pickup,
-                                       Time6))
-                 ],
-                 [ not(happens(pickUp(Kolem_Fn_55P_Num3_V, Pickup),
-                               Time6))
-                 ]).
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/PickUp.e:57
-
- /*  holds_at(at(Agent, Exists_Location), Time) :-
-       happens(pickUp(Agent, Physobj), Time),
-       some(Exists_Location,
-            '$kolem_Fn_55'(Agent, Physobj, Time)).
- */
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/PickUp.e:57
-
- /*  [happens(pickUp(Agent, Physobj), Time), some(Exists_Location, '$kolem_Fn_55'(Agent, Physobj, Time))] ->
-       ta(Time,
-          tvs1=[Time],
-          tvs2=[Time],
-          holds_at(at(Agent, Exists_Location), Time)).
- */
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/PickUp.e:57
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/PickUp.e:57
-happens(pickUp(Kolem_Fn_55P_Num3_V12, Pickup11), Maptime), some(Location10, '$kolem_Fn_55'(Kolem_Fn_55P_Num3_V12, Pickup11, Maptime)) ->
-    holds_at(at(Kolem_Fn_55P_Num3_V12, Location10), Maptime).
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/PickUp.e:57
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/PickUp.e:57
-reactive_rule([ happens(pickUp(Kolem_Fn_55P_Num3_V12,
-			       Pickup11),
-			Maptime),
-		some(Location10,
-		     '$kolem_Fn_55'(Kolem_Fn_55P_Num3_V12,
-				    Pickup11,
-				    Maptime))
-	      ],
-	      [ holds(loc_at(Kolem_Fn_55P_Num3_V12,
-			     Location10),
-		      Maptime)
-	      ]).
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/PickUp.e:57
-
- /*  holds_at(at(Physobj, Exists_Location), Time) :-
-       happens(pickUp(Agent, Physobj), Time),
-       some(Exists_Location,
-            '$kolem_Fn_55'(Agent, Physobj, Time)).
- */
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/PickUp.e:57
-
- /*  [happens(pickUp(Agent, Physobj), Time), some(Exists_Location, '$kolem_Fn_55'(Agent, Physobj, Time))] ->
-       ta(Time,
-          tvs1=[Time],
-          tvs2=[Time],
-          holds_at(at(Physobj, Exists_Location), Time)).
- */
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/PickUp.e:57
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/PickUp.e:57
-happens(pickUp(Kolem_Fn_55P_Num3_V16, Pickup15), Maptime13), some(Location14, '$kolem_Fn_55'(Kolem_Fn_55P_Num3_V16, Pickup15, Maptime13)) ->
-    holds_at(at(Pickup15, Location14), Maptime13).
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/PickUp.e:57
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/PickUp.e:57
-reactive_rule([ happens(pickUp(Kolem_Fn_55P_Num3_V16,
-			       Pickup15),
-			Maptime13),
-		some(Location14,
-		     '$kolem_Fn_55'(Kolem_Fn_55P_Num3_V16,
-				    Pickup15,
-				    Maptime13))
-	      ],
-	      [ holds(loc_at(Pickup15,Location14),
-		      Maptime13)
-	      ]).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/PickUp.e',56).
+exists([Location],  (happens_at(pickUp(Agent, Physobj), Time)->holds_at(at_loc(Agent, Location), Time), holds_at(at_loc(Physobj, Location), Time))).
 
 
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/PickUp.e:59
 %; releases
 % [agent,physobj,location,time]
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/PickUp.e:62
 % (Releases(PickUp(agent,physobj),At(physobj,location),time)).
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/PickUp.e:62
-
- /*  [] ->
-       ta(Time,
-          tvs1=[Time],
-          tvs2=[Time],
-          releases(pickUp(Agent, Physobj),
-                   at(Physobj, Location),
-                   Time)).
- */
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/PickUp.e:62
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/PickUp.e:62
-releases(pickUp(_,Pickup),
-	 at(Pickup,Location4),
-	 Releases).
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/PickUp.e:62
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/PickUp.e:62
-releases(pickUp(_,Pickup),
-	 loc_at(Pickup,Location4),
-	 Releases).
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/PickUp.e:62
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/PickUp.e:62
-releases(pickUp(_,Pickup),
-	 loc_at(Pickup,Location4),
-	 Releases).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/PickUp.e',62).
+releases_at(pickUp(Agent,Physobj),
+	    at_loc(Physobj,Location),
+	    Time).
 
 
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/PickUp.e:64
 % [agent,physobj,location,time]
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/PickUp.e:65
 % (HoldsAt(At(agent,location),time) ->
 % Initiates(SetDown(agent,physobj),At(physobj,location),time)).
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/PickUp.e:66
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/PickUp.e:66
-holds_at(at(Agent, Location), Time) ->
-    initiates(setDown(Agent, Physobj),
-              at(Physobj, Location),
-              Time).
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/PickUp.e:66
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/PickUp.e:66
-reactive_rule([holds(loc_at(Agent,Location),Time)],
-	      [ initiates(setDown(Agent,Physobj),
-			  at(loc_at(Physobj,Location),
-			     Time))
-	      ]).
+holds_at(at_loc(Agent, Location), Time) ->
+    initiates_at(setDown(Agent, Physobj),
+                 at_loc(Physobj, Location),
+                 Time).
 
 
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/PickUp.e:69
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/PickUp.e:69
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/PickUp.e',70).
 % !HoldsAt(Holding(James,Coin),0).
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/PickUp.e:69
-
- /*  [] ->
-       ta(TaP_Num4_V, tvs1=[], tvs2=[], initially(neg(holding(james, coin)))).
- */
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/PickUp.e:69
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/PickUp.e:69
-initially(neg(holding(james,coin))).
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/PickUp.e:69
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/PickUp.e:69
-initial_state([not(holding(james,coin))]).
+holds_at(not(holding(james,coin)),0).
 
 
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/PickUp.e:70
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/PickUp.e:70
 % HoldsAt(At(Coin,L4),0).
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/PickUp.e:70
-
- /*  [] ->
-       ta(TaP_Num4_V, tvs1=[], tvs2=[], initially(at(coin, l4))).
- */
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/PickUp.e:70
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/PickUp.e:70
-initially(at(coin,l4)).
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/PickUp.e:70
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/PickUp.e:70
-initial_state([loc_at(coin,l4)]).
+holds_at(at_loc(coin,l4),0).
 
 
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/PickUp.e:71
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/PickUp.e:71
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/PickUp.e',72).
 % HoldsAt(At(James,L1),0).
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/PickUp.e:71
-
- /*  [] ->
-       ta(TaP_Num4_V, tvs1=[], tvs2=[], initially(at(james, l1))).
- */
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/PickUp.e:71
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/PickUp.e:71
-initially(at(james,l1)).
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/PickUp.e:71
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/PickUp.e:71
-initial_state([loc_at(james,l1)]).
+holds_at(at_loc(james,l1),0).
 
 
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/PickUp.e:72
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/PickUp.e:72
 % Happens(Move(James,L1,L2),0).
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/PickUp.e:72
-
- /*  [] ->
-       ta(TaP_Num4_V,
-          tvs1=[start],
-          tvs2=[start],
-          happens(move(james, l1, l2), start)).
- */
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/PickUp.e:72
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/PickUp.e:72
-happens(move(james,l1,l2),start).
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/PickUp.e:72
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/PickUp.e:72
-observe(at(move(james,l1,l2),start)).
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/PickUp.e:72
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/PickUp.e:72
-observe(at(move(james,l1,l2),start)).
+happens_at(move(james,l1,l2),0).
 
 
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/PickUp.e:73
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/PickUp.e:73
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/PickUp.e',74).
 % Happens(Move(James,L2,L3),1).
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/PickUp.e:73
-
- /*  [b(start, Maptime), ignore(start+1==Maptime)] ->
-       ta(TaP_Num4_V,
-          tvs1=[start+1],
-          tvs2=[Maptime, start],
-          happens(move(james, l2, l3), Maptime)).
- */
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/PickUp.e:73
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/PickUp.e:73
-b(start, Maptime2) ->
-    happens(move(james, l2, l3), Maptime2).
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/PickUp.e:73
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/PickUp.e:73
-reactive_rule([b(start,Maptime2)],
-	      [happens(move(james,l2,l3),Maptime2)]).
+happens_at(move(james,l2,l3),1).
 
 
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/PickUp.e:74
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/PickUp.e:74
 % Happens(Move(James,L3,L4),2).
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/PickUp.e:74
-
- /*  [b(start, Start_Num2), toffset(start, 2, Start_Num2), ignore(start+2==Start_Num2)] ->
-       ta(TaP_Num4_V,
-          tvs1=[start+2],
-          tvs2=[Start_Num2, start],
-          happens(move(james, l3, l4), Start_Num2)).
- */
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/PickUp.e:74
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/PickUp.e:74
-b(start, Maptime), toffset(start, 2, Maptime) ->
-    happens(move(james, l3, l4), Maptime).
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/PickUp.e:74
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/PickUp.e:74
-reactive_rule([b(start,Maptime),toffset(start,2,Maptime)],
-	      [happens(move(james,l3,l4),Maptime)]).
+happens_at(move(james,l3,l4),2).
 
 
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/PickUp.e:75
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/PickUp.e:75
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/PickUp.e',76).
 % Happens(PickUp(James,Coin),3).
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/PickUp.e:75
-
- /*  [b(start, Start_Num3), toffset(start, 3, Start_Num3), ignore(start+3==Start_Num3)] ->
-       ta(TaP_Num4_V,
-          tvs1=[start+3],
-          tvs2=[Start_Num3, start],
-          happens(pickUp(james, coin), Start_Num3)).
- */
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/PickUp.e:75
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/PickUp.e:75
-b(start, Maptime), toffset(start, 3, Maptime) ->
-    happens(pickUp(james, coin), Maptime).
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/PickUp.e:75
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/PickUp.e:75
-reactive_rule([b(start,Maptime),toffset(start,3,Maptime)],
-	      [happens(pickUp(james,coin),Maptime)]).
+happens_at(pickUp(james,coin),3).
 
 
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/PickUp.e:76
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/PickUp.e:76
 % Happens(Move(James,L4,L3),4).
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/PickUp.e:76
-
- /*  [b(start, Start_Num4), toffset(start, 4, Start_Num4), ignore(start+4==Start_Num4)] ->
-       ta(TaP_Num4_V,
-          tvs1=[start+4],
-          tvs2=[Start_Num4, start],
-          happens(move(james, l4, l3), Start_Num4)).
- */
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/PickUp.e:76
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/PickUp.e:76
-b(start, Maptime), toffset(start, 4, Maptime) ->
-    happens(move(james, l4, l3), Maptime).
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/PickUp.e:76
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/PickUp.e:76
-reactive_rule([b(start,Maptime),toffset(start,4,Maptime)],
-	      [happens(move(james,l4,l3),Maptime)]).
+happens_at(move(james,l4,l3),4).
 
 
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/PickUp.e:77
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/PickUp.e:77
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/PickUp.e',78).
 % Happens(Move(James,L3,L2),5).
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/PickUp.e:77
-
- /*  [b(start, Start_Num5), toffset(start, 5, Start_Num5), ignore(start+5==Start_Num5)] ->
-       ta(TaP_Num4_V,
-          tvs1=[start+5],
-          tvs2=[Start_Num5, start],
-          happens(move(james, l3, l2), Start_Num5)).
- */
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/PickUp.e:77
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/PickUp.e:77
-b(start, Maptime), toffset(start, 5, Maptime) ->
-    happens(move(james, l3, l2), Maptime).
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/PickUp.e:77
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/PickUp.e:77
-reactive_rule([b(start,Maptime),toffset(start,5,Maptime)],
-	      [happens(move(james,l3,l2),Maptime)]).
+happens_at(move(james,l3,l2),5).
 
 
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/PickUp.e:78
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/PickUp.e:78
 % Happens(SetDown(James,Coin),6).
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/PickUp.e:78
-
- /*  [b(start, Start_Num6), toffset(start, 6, Start_Num6), ignore(start+6==Start_Num6)] ->
-       ta(TaP_Num4_V,
-          tvs1=[start+6],
-          tvs2=[Start_Num6, start],
-          happens(setDown(james, coin), Start_Num6)).
- */
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/PickUp.e:78
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/PickUp.e:78
-b(start, Maptime), toffset(start, 6, Maptime) ->
-    happens(setDown(james, coin), Maptime).
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/PickUp.e:78
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/PickUp.e:78
-reactive_rule([b(start,Maptime),toffset(start,6,Maptime)],
-	      [happens(setDown(james,coin),Maptime)]).
+happens_at(setDown(james,coin),6).
 
 
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/PickUp.e:79
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/PickUp.e:79
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/PickUp.e',80).
 % Happens(Move(James,L2,L3),7).
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/PickUp.e:79
-
- /*  [b(start, Start_Num7), toffset(start, 7, Start_Num7), ignore(start+7==Start_Num7)] ->
-       ta(TaP_Num4_V,
-          tvs1=[start+7],
-          tvs2=[Start_Num7, start],
-          happens(move(james, l2, l3), Start_Num7)).
- */
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/PickUp.e:79
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/PickUp.e:79
-b(start, Maptime), toffset(start, 7, Maptime) ->
-    happens(move(james, l2, l3), Maptime).
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/PickUp.e:79
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/PickUp.e:79
-reactive_rule([b(start,Maptime),toffset(start,7,Maptime)],
-	      [happens(move(james,l2,l3),Maptime)]).
+happens_at(move(james,l2,l3),7).
 
 
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/PickUp.e:80
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/PickUp.e:80
 % Happens(Move(James,L3,L4),8).
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/PickUp.e:80
+happens_at(move(james,l3,l4),8).
 
- /*  [b(start, Start_Num8), toffset(start, 8, Start_Num8), ignore(start+8==Start_Num8)] ->
-       ta(TaP_Num4_V,
-          tvs1=[start+8],
-          tvs2=[Start_Num8, start],
-          happens(move(james, l3, l4), Start_Num8)).
- */
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/PickUp.e:80
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/PickUp.e:80
-b(start, Maptime), toffset(start, 8, Maptime) ->
-    happens(move(james, l3, l4), Maptime).
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/PickUp.e:80
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/PickUp.e:80
-reactive_rule([b(start,Maptime),toffset(start,8,Maptime)],
-	      [happens(move(james,l3,l4),Maptime)]).
-
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/PickUp.e:83
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/PickUp.e',84).
 % completion Happens
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/PickUp.e:84
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/PickUp.e:84
-completion(happens).
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/PickUp.e:84
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/PickUp.e:84
-completion(happens).
+:- call_pel_directive(completion(happens_at)).
 %; End of file.
+:- call_pel_directive(translate(ending,
+                                '/pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/PickUp.pel')).

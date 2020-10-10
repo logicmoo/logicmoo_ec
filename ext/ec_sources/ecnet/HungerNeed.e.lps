@@ -1,9 +1,18 @@
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/HandTo.e',30).
-% translate: unskipped  File: /pack/logicmoo_ec/ext/ec_sources/ecnet/HungerNeed.e.lps 
+% From E: 
+% 
+% :-call_pel_directive(translate(unskipped,'/pack/logicmoo_ec/ext/ec_sources/ecnet/HungerNeed.e.lps')).
+:- call_pel_directive(translate(unskipped,
+                                '/pack/logicmoo_ec/ext/ec_sources/ecnet/HungerNeed.e.lps')).
 :-include(library('ec_planner/ec_test_incl')).
 :-expects_dialect(lps).
-% translate: begining  File: /pack/logicmoo_ec/ext/ec_sources/ecnet/HungerNeed.e.lps 
-% Thu, 08 Oct 2020 21:36:20 GMT File: <stream>(0x55894c217300)
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/HandTo.e',30).
+% From E: 
+% 
+% :-call_pel_directive(translate(begining,'/pack/logicmoo_ec/ext/ec_sources/ecnet/HungerNeed.e.lps')).
+:- call_pel_directive(translate(begining,
+                                '/pack/logicmoo_ec/ext/ec_sources/ecnet/HungerNeed.e.lps')).
+% Sat, 10 Oct 2020 14:56:05 GMT File: <stream>(0x5597f2bfd200)
 
 
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/HandTo.e',30).
@@ -22,97 +31,63 @@
 
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/HungerNeed.e',14).
 % fluent Hungry(agent)
-% fluent(
-%    hungry(agent)).
-fluents([hungry/1]).
-% mpred_prop(
-%    hungry(agent), 
-%    fluent).
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/HungerNeed.e',14).
+% From E: 
+% 
+% fluent(hungry(agent)).
 mpred_prop(hungry(agent),fluent).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/HungerNeed.e',14).
+fluents([hungry/1]).
 
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/HungerNeed.e',16).
 % fluent Satiated(agent)
-% fluent(
-%    satiated(agent)).
-fluents([satiated/1]).
-% mpred_prop(
-%    satiated(agent), 
-%    fluent).
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/HungerNeed.e',16).
+% From E: 
+% 
+% fluent(satiated(agent)).
 mpred_prop(satiated(agent),fluent).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/HungerNeed.e',16).
+fluents([satiated/1]).
 
 % noninertial Satiated
-% noninertial(satiated).
-noninertial(satiated).
+% From E: 
+% 
+% :-call_pel_directive(noninertial(satiated)).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/HungerNeed.e',16).
+:- call_pel_directive(noninertial(satiated)).
 
 
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/HungerNeed.e',19).
 % [agent,time]
  % HoldsAt(Hungry(agent),time) <-> !HoldsAt(Satiated(agent),time).
-
- /*  holds_at(hungry(Agent), Time) <->
-       holds_at(neg(satiated(Agent)), Time).
- */
-% '->'(
-%    hungry(Agent), 
-%    not(
-%       satiated(Agent))).
-if hungry(Agent)then not satiated(Agent).
+% From E: 
+% 
+% <->(
+%    holds_at(hungry(Agent),Time), 
+%    holds_at(not(satiated(Agent)),Time)).
+ %   [Time].
+not satiated(Agent)if hungry(Agent).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/HungerNeed.e',19).
 
- /*  reactive_rule([holds(hungry(Agent),Time_At)],
-   	      [not(satiated(Agent))]).
+ /*  l_int(holds(not(satiated(Agent)),Time_At),
+         [holds(hungry(Agent),Time_At)]).
  */
  %  "% =================================".
-% '->'(
-%    not(
-%       not(
-%          satiated(Agent))), 
-%    not(
-%       hungry(Agent))).
-not hungry(Agent)if not not satiated(Agent).
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/HungerNeed.e',19).
-
- /*  l_int(holds(not(hungry(Agent)),Time_At3),
-         [not(not(satiated(Agent)))]).
- */
- %  "% =================================".
-% '->'(
-%    not(
-%       satiated(Agent)), 
-%    hungry(Agent)).
 hungry(Agent)if not satiated(Agent).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/HungerNeed.e',19).
 
- /*  l_int(holds(hungry(Agent),Time_At4),
-         [not(satiated(Agent))]).
- */
- %  "% =================================".
-% '->'(
-%    not(
-%       hungry(Agent)), 
-%    not(
-%       not(
-%          satiated(Agent)))).
-if not hungry(Agent)then not not satiated(Agent).
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/HungerNeed.e',19).
-
- /*  reactive_rule([holds(not(hungry(Agent)),Time_At5)],
-   	      [not(not(satiated(Agent)))]).
+ /*  l_int(holds(hungry(Agent),Time_At3),
+         [holds(not(satiated(Agent)),Time_At3)]).
  */
  %  "% =================================".
 
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/HungerNeed.e',21).
 % event Eat(agent,food)
-% event(
-%    eat(agent,food)).
-actions([eat/2]).
-% mpred_prop(
-%    eat(agent,food), 
-%    event).
+% From E: 
+% 
+% event(eat(agent,food)).
+events([eat/2]).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/HungerNeed.e',21).
-mpred_prop(eat(agent,food),event).
+mpred_prop(eat(agent,food),action).
+actions([eat/2]).
 
 
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/HungerNeed.e',23).
@@ -121,74 +96,30 @@ mpred_prop(eat(agent,food),event).
 % {location}% 
 % HoldsAt(At(agent,location),time) &
 % HoldsAt(At(food,location),time).
-% '->'(
-%    ','(
-%       ';'(
-%          not(
-%             at(Agent,Exists_Location)), 
-%          not(
-%             at(Food,Exists_Location))), 
-%       some(
-%          Exists_Location, 
-%          '$kolem_Fn_692'(Agent,Food,Time))), 
-%    not(
-%       eat(Agent,Food))).
-if (not loc_at(Agent, Exists_Location);not loc_at(Food, Exists_Location)), some(Exists_Location, '$kolem_Fn_692'(Agent, Food, Time))then not eat(Agent, Food).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/HungerNeed.e',25).
-
- /*   reactive_rule([  (not(loc_at(Agent, Exists_Location));not(loc_at(Food, Exists_Location))),
-                      some(Exists_Location,
-                           '$kolem_Fn_692'(Agent, Food, Time))
-                    ],
-                    [not(eat(Agent, Food))]).
- */
- %  "% =================================".
-% '->'(
-%    ','(
-%       eat(Agent,Food), 
-%       some(
-%          Exists_Location, 
-%          '$kolem_Fn_692'(Agent,Food,Time))), 
-%    at(Agent,Exists_Location)).
-if eat(Agent, Food), some(Exists_Location, '$kolem_Fn_692'(Agent, Food, Time))then loc_at(Agent, Exists_Location).
+% From E: 
+% 
+% exists(
+%    [Location], 
+%    '->'(
+%       happens_at(eat(Agent,Food),Time), 
+%       (holds_at(at_loc(Agent,Location),Time) , 
+%        holds_at(at_loc(Food,Location),Time)))).
+ %   [Time].
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/HungerNeed.e',25).
-
- /*  reactive_rule([ happens(eat(Agent,Food),
-   			Time_From,
-   			Time_Until),
-   		some(Exists_Location,
-   		     '$kolem_Fn_692'(Agent,Food,Time))
-   	      ],
-   	      [loc_at(Agent,Exists_Location)]).
- */
- %  "% =================================".
-% '->'(
-%    ','(
-%       eat(Agent,Food), 
-%       some(
-%          Exists_Location, 
-%          '$kolem_Fn_692'(Agent,Food,Time))), 
-%    at(Food,Exists_Location)).
-if eat(Agent, Food), some(Exists_Location, '$kolem_Fn_692'(Agent, Food, Time))then loc_at(Food, Exists_Location).
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/HungerNeed.e',25).
-
- /*  reactive_rule([ happens(eat(Agent,Food),
-   			Time_From7,
-   			Time_Until8),
-   		some(Exists_Location,
-   		     '$kolem_Fn_692'(Agent,Food,Time))
-   	      ],
-   	      [loc_at(Food,Exists_Location)]).
- */
- %  "% =================================".
+exists([Location], if((at_loc(Agent, Location), at_loc(Food, Location)), eat(Agent, Food))).
 
 
 % [agent,food,time]
 % Terminates(Eat(agent,food),Hungry(agent),time).
-% terminates(
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/HungerNeed.e',30).
+% From E: 
+% 
+% terminates_at(
 %    eat(Agent,Food), 
 %    hungry(Agent), 
 %    Time).
+ %   [Time].
 eat(Agent, Food)terminates hungry(Agent).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/HungerNeed.e',30).
 
@@ -203,4 +134,8 @@ eat(Agent, Food)terminates hungry(Agent).
 
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/HungerNeed.e',32).
 %; End of file.
-% translate: ending  File: /pack/logicmoo_ec/ext/ec_sources/ecnet/HungerNeed.e.lps 
+% From E: 
+% 
+% :-call_pel_directive(translate(ending,'/pack/logicmoo_ec/ext/ec_sources/ecnet/HungerNeed.e.lps')).
+:- call_pel_directive(translate(ending,
+                                '/pack/logicmoo_ec/ext/ec_sources/ecnet/HungerNeed.e.lps')).

@@ -1,9 +1,18 @@
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Bomb.e',183).
-% translate: unskipped  File: /pack/logicmoo_ec/ext/ec_sources/ecnet/Book.e.lps 
+% From E: 
+% 
+% :-call_pel_directive(translate(unskipped,'/pack/logicmoo_ec/ext/ec_sources/ecnet/Book.e.lps')).
+:- call_pel_directive(translate(unskipped,
+                                '/pack/logicmoo_ec/ext/ec_sources/ecnet/Book.e.lps')).
 :-include(library('ec_planner/ec_test_incl')).
 :-expects_dialect(lps).
-% translate: begining  File: /pack/logicmoo_ec/ext/ec_sources/ecnet/Book.e.lps 
-% Thu, 08 Oct 2020 21:35:55 GMT File: <stream>(0x55894c218d00)%;
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Bomb.e',183).
+% From E: 
+% 
+% :-call_pel_directive(translate(begining,'/pack/logicmoo_ec/ext/ec_sources/ecnet/Book.e.lps')).
+:- call_pel_directive(translate(begining,
+                                '/pack/logicmoo_ec/ext/ec_sources/ecnet/Book.e.lps')).
+% Sat, 10 Oct 2020 14:56:01 GMT File: <stream>(0x5597f296af00)%;
 %; Copyright (c) 2005 IBM Corporation and others.
 %; All rights reserved. This program and the accompanying materials
 %; are made available under the terms of the Common Public License v1.0
@@ -16,75 +25,75 @@
 %; Book: book (a sort of device)
 %;
 
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Book.e',14).
 % sort page: integer
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Book.e',14).
+% From E: 
+% 
 % subsort(page,integer).
 subsort(page,integer).
 %; agent opens book to page.
 
 % event BookOpenTo(agent,book,page)
-% event(
-%    bookOpenTo(agent,book,page)).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Book.e',16).
+% From E: 
+% 
+% event(bookOpenTo(agent,book,page)).
+events([bookOpenTo/3]).
+mpred_prop(bookOpenTo(agent,book,page),action).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Book.e',16).
 actions([bookOpenTo/3]).
-% mpred_prop(
-%    bookOpenTo(agent,book,page), 
-%    event).
-mpred_prop(bookOpenTo(agent,book,page),event).
 
 
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Book.e',19).
 %; agent closes book.
 
 % event BookClose(agent,book)
-% event(
-%    bookClose(agent,book)).
+% From E: 
+% 
+% event(bookClose(agent,book)).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Book.e',19).
+events([bookClose/2]).
+mpred_prop(bookClose(agent,book),action).
 actions([bookClose/2]).
-% mpred_prop(
-%    bookClose(agent,book), 
-%    event).
-mpred_prop(bookClose(agent,book),event).
 
 
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Book.e',22).
 %; book is open to page.
 
 % fluent BookIsOpenTo(book,page)
-% fluent(
-%    bookIsOpenTo(book,page)).
+% From E: 
+% 
+% fluent(bookIsOpenTo(book,page)).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Book.e',22).
-fluents([bookIsOpenTo/2]).
-% mpred_prop(
-%    bookIsOpenTo(book,page), 
-%    fluent).
 mpred_prop(bookIsOpenTo(book,page),fluent).
+fluents([bookIsOpenTo/2]).
 
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Book.e',25).
 % fluent BookClosed(book)
-% fluent(
-%    bookClosed(book)).
-fluents([bookClosed/1]).
-% mpred_prop(
-%    bookClosed(book), 
-%    fluent).
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Book.e',25).
+% From E: 
+% 
+% fluent(bookClosed(book)).
 mpred_prop(bookClosed(book),fluent).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Book.e',25).
+fluents([bookClosed/1]).
 
 % noninertial BookClosed
-% noninertial(bookClosed).
-noninertial(bookClosed).
+% From E: 
+% 
+% :-call_pel_directive(noninertial(bookClosed)).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Book.e',25).
+:- call_pel_directive(noninertial(bookClosed)).
 %; agent turns page of book to page.
 
 % event BookTurnPageTo(agent,book,page)
-% event(
-%    bookTurnPageTo(agent,book,page)).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Book.e',28).
+% From E: 
+% 
+% event(bookTurnPageTo(agent,book,page)).
+events([bookTurnPageTo/3]).
+mpred_prop(bookTurnPageTo(agent,book,page),action).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Book.e',28).
 actions([bookTurnPageTo/3]).
-% mpred_prop(
-%    bookTurnPageTo(agent,book,page), 
-%    event).
-mpred_prop(bookTurnPageTo(agent,book,page),event).
 
 
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Book.e',31).
@@ -92,35 +101,19 @@ mpred_prop(bookTurnPageTo(agent,book,page),event).
 % HoldsAt(BookIsOpenTo(book,page1),time) &
 % HoldsAt(BookIsOpenTo(book,page2),time) ->
 % page1=page2.
+% From E: 
+% 
 % '->'(
-%    ','(
-%       bookIsOpenTo(Book,Page2), 
-%       not(
-%          equals(Page1,Page2))), 
-%    not(
-%       bookIsOpenTo(Book,Page1))).
-not bookIsOpenTo(Book, Page1)if bookIsOpenTo(Book, Page2), not equals(Page1, Page2).
+%    (holds_at(bookIsOpenTo(Book,Page1),Time) , 
+%     holds_at(bookIsOpenTo(Book,Page2),Time)), 
+%    Page1=Page2).
+ %   [Time].
+false not equals(Page1, Page2), bookIsOpenTo(Book, Page1), bookIsOpenTo(Book, Page2).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Book.e',31).
 
- /*  l_int(holds(not(bookIsOpenTo(Book,Page1)),Time_At),
-         [ holds(bookIsOpenTo(Book,Page2),Time_At),
-   	not(equals(Page1,Page2))
-         ]).
- */
- %  "% =================================".
-% '->'(
-%    ','(
-%       bookIsOpenTo(Book,Page1), 
-%       not(
-%          equals(Page2,Page1))), 
-%    not(
-%       bookIsOpenTo(Book,Page2))).
-not bookIsOpenTo(Book, Page2)if bookIsOpenTo(Book, Page1), not equals(Page2, Page1).
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Book.e',31).
-
- /*  l_int(holds(not(bookIsOpenTo(Book,Page2)),Time_At5),
-         [ holds(bookIsOpenTo(Book,Page1),Time_At5),
-   	not(equals(Page2,Page1))
+ /*  d_pre([ not(equals(Page1,Page2)),
+   	holds(bookIsOpenTo(Book,Page1),Time_At),
+   	holds(bookIsOpenTo(Book,Page2),Time_At)
          ]).
  */
  %  "% =================================".
@@ -129,57 +122,29 @@ not bookIsOpenTo(Book, Page2)if bookIsOpenTo(Book, Page1), not equals(Page2, Pag
 % [book,time]
 % HoldsAt(BookClosed(book),time) <->
 % !{page} HoldsAt(BookIsOpenTo(book,page),time).
-
- /*  holds_at(bookClosed(Book), Time) <->
-       not(exists([Page],
-                  holds_at(bookIsOpenTo(Book, Page), Time))).
- */
-% '->'(
-%    bookClosed(Book), 
-%    not(
-%       bookIsOpenTo(Book,Page))).
-not bookIsOpenTo(Book, Page)if bookClosed(Book).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Book.e',37).
+% From E: 
+% 
+% <->(
+%    holds_at(bookClosed(Book),Time), 
+%    not(
+%       exists(
+%          [Page], 
+%          holds_at(bookIsOpenTo(Book,Page),Time)))).
+ %   [Time].
+not bookIsOpenTo(Book, Page)if bookClosed(Book).
 
  /*  l_int(holds(not(bookIsOpenTo(Book,Page)),Time_At),
          [bookClosed(Book)]).
  */
  %  "% =================================".
-% '->'(
-%    bookIsOpenTo(Book,Page), 
-%    not(
-%       bookClosed(Book))).
-if bookIsOpenTo(Book, Page)then not bookClosed(Book).
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Book.e',37).
-
- /*  reactive_rule([ holds(bookIsOpenTo(Book,Page),
-   		      Time_At4)
-   	      ],
-   	      [not(bookClosed(Book))]).
- */
- %  "% =================================".
-% '->'(
-%    not(
-%       bookIsOpenTo(Book,Page)), 
-%    bookClosed(Book)).
 if not bookIsOpenTo(Book, Page)then bookClosed(Book).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Book.e',37).
 
  /*  reactive_rule([ holds(not(bookIsOpenTo(Book,Page)),
-   		      Time_At5)
+   		      Time_At4)
    	      ],
    	      [bookClosed(Book)]).
- */
- %  "% =================================".
-% '->'(
-%    not(
-%       bookClosed(Book)), 
-%    bookIsOpenTo(Book,Page)).
-bookIsOpenTo(Book, Page)if not bookClosed(Book).
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Book.e',37).
-
- /*  l_int(holds(bookIsOpenTo(Book,Page),Time_At6),
-         [not(bookClosed(Book))]).
  */
  %  "% =================================".
 
@@ -194,116 +159,26 @@ bookIsOpenTo(Book, Page)if not bookClosed(Book).
 % HoldsAt(Awake(agent),time) &
 % HoldsAt(BookClosed(book),time) &
 % HoldsAt(Holding(agent,book),time).
-% '->'(
-%    ';'(
-%       not(
-%          awake(Agent)), 
-%       ';'(
-%          not(
-%             bookClosed(Book)), 
-%          not(
-%             holding(Agent,Book)))), 
-%    not(
-%       bookOpenTo(Agent,Book,Page))).
-if not awake(Agent);not bookClosed(Book);not holding(Agent, Book)then not bookOpenTo(Agent, Book, Page).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Book.e',45).
-
- /*   reactive_rule([  (not(awake(Agent));not(bookClosed(Book));not(holding(Agent, Book)))
-                    ],
-                    [not(bookOpenTo(Agent, Book, Page))]).
- */
- %  "% =================================".
+% From E: 
+% 
 % '->'(
-%    metreqs(
-%       bookOpenTo(Agent,Book,Page)), 
-%    requires(
-%       bookOpenTo(Agent,Book,Page), 
-%       When_Time)).
-if bookOpenTo(Agent, Book, Page)then requires(bookOpenTo(Agent, Book, Page), When_Time).
+%    happens_at(bookOpenTo(Agent,Book,Page),Time), 
+%    (holds_at(awake(Agent),Time) , 
+%      holds_at(bookClosed(Book),Time) , 
+%     holds_at(holding(Agent,Book),Time))).
+ %   [Time].
+if bookOpenTo(Agent, Book, Page)then awake(Agent), bookClosed(Book), holding(Agent, Book).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Book.e',45).
 
  /*  reactive_rule([ happens(bookOpenTo(Agent,Book,Page),
    			Time_From,
    			Time_Until)
    	      ],
-   	      [ requires(bookOpenTo(Agent,Book,Page),
-   			 When_Time)
+   	      [ holds(awake(Agent),Time_At),
+   		bookClosed(Book),
+   		holds(holding(Agent,Book),Time_At)
    	      ]).
- */
- %  "% =================================".
-% '->'(
-%    awake(Agent), 
-%    metreqs(
-%       bookOpenTo(Agent,Book,Page))).
-bookOpenTo(Agent, Book, Page)if awake(Agent).
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Book.e',45).
-
- /*  l_events(happens(bookOpenTo(Agent,Book,Page),
-   		 Time_From7,
-   		 Time_From7),
-   	 [awake(Agent)]).
- */
- %  "% =================================".
-% '->'(
-%    metreqs(
-%       bookOpenTo(Agent,Book,Page)), 
-%    requires(
-%       bookOpenTo(Agent,Book,Page), 
-%       When_Time)).
-if bookOpenTo(Agent, Book, Page)then requires(bookOpenTo(Agent, Book, Page), When_Time).
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Book.e',45).
-
- /*  reactive_rule([ happens(bookOpenTo(Agent,Book,Page),
-   			Time_From8,
-   			Time_Until9)
-   	      ],
-   	      [ requires(bookOpenTo(Agent,Book,Page),
-   			 When_Time)
-   	      ]).
- */
- %  "% =================================".
-% '->'(
-%    bookClosed(Book), 
-%    metreqs(
-%       bookOpenTo(Agent,Book,Page))).
-bookOpenTo(Agent, Book, Page)if bookClosed(Book).
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Book.e',45).
-
- /*  l_events(happens(bookOpenTo(Agent,Book,Page),
-   		 Time_From10,
-   		 Time_From10),
-   	 [bookClosed(Book)]).
- */
- %  "% =================================".
-% '->'(
-%    metreqs(
-%       bookOpenTo(Agent,Book,Page)), 
-%    requires(
-%       bookOpenTo(Agent,Book,Page), 
-%       When_Time)).
-if bookOpenTo(Agent, Book, Page)then requires(bookOpenTo(Agent, Book, Page), When_Time).
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Book.e',45).
-
- /*  reactive_rule([ happens(bookOpenTo(Agent,Book,Page),
-   			Time_From11,
-   			Time_Until12)
-   	      ],
-   	      [ requires(bookOpenTo(Agent,Book,Page),
-   			 When_Time)
-   	      ]).
- */
- %  "% =================================".
-% '->'(
-%    holding(Agent,Book), 
-%    metreqs(
-%       bookOpenTo(Agent,Book,Page))).
-bookOpenTo(Agent, Book, Page)if holding(Agent, Book).
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Book.e',45).
-
- /*  l_events(happens(bookOpenTo(Agent,Book,Page),
-   		 Time_From13,
-   		 Time_From13),
-   	 [holds(holding(Agent,Book),Time_From13)]).
  */
  %  "% =================================".
 
@@ -313,10 +188,14 @@ bookOpenTo(Agent, Book, Page)if holding(Agent, Book).
 %; the book will be open to the page:
 % [agent,book,page,time]
 % Initiates(BookOpenTo(agent,book,page),BookIsOpenTo(book,page),time).
-% initiates(
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Book.e',54).
+% From E: 
+% 
+% initiates_at(
 %    bookOpenTo(Agent,Book,Page), 
 %    bookIsOpenTo(Book,Page), 
 %    Time).
+ %   [Time].
 bookOpenTo(Agent, Book, Page)initiates bookIsOpenTo(Book, Page).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Book.e',54).
 
@@ -339,118 +218,26 @@ bookOpenTo(Agent, Book, Page)initiates bookIsOpenTo(Book, Page).
 % HoldsAt(Awake(agent),time) &
 % !HoldsAt(BookClosed(book),time) &
 % HoldsAt(Holding(agent,book),time).
-% '->'(
-%    ';'(
-%       not(
-%          awake(Agent)), 
-%       ';'(
-%          not(
-%             not(
-%                bookClosed(Book))), 
-%          not(
-%             holding(Agent,Book)))), 
-%    not(
-%       bookClose(Agent,Book))).
-if not awake(Agent);not not bookClosed(Book);not holding(Agent, Book)then not bookClose(Agent, Book).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Book.e',62).
-
- /*   reactive_rule([  (not(awake(Agent));not(not(bookClosed(Book)));not(holding(Agent, Book)))
-                    ],
-                    [not(bookClose(Agent, Book))]).
- */
- %  "% =================================".
+% From E: 
+% 
 % '->'(
-%    metreqs(
-%       bookClose(Agent,Book)), 
-%    requires(
-%       bookClose(Agent,Book), 
-%       When_Time)).
-if bookClose(Agent, Book)then requires(bookClose(Agent, Book), When_Time).
+%    happens_at(bookClose(Agent,Book),Time), 
+%    (holds_at(awake(Agent),Time) , 
+%      holds_at(not(bookClosed(Book)),Time) , 
+%     holds_at(holding(Agent,Book),Time))).
+ %   [Time].
+if bookClose(Agent, Book)then awake(Agent), not bookClosed(Book), holding(Agent, Book).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Book.e',62).
 
  /*  reactive_rule([ happens(bookClose(Agent,Book),
    			Time_From,
    			Time_Until)
    	      ],
-   	      [ requires(bookClose(Agent,Book),
-   			 When_Time)
+   	      [ holds(awake(Agent),Time_At),
+   		not(bookClosed(Book)),
+   		holds(holding(Agent,Book),Time_At)
    	      ]).
- */
- %  "% =================================".
-% '->'(
-%    awake(Agent), 
-%    metreqs(
-%       bookClose(Agent,Book))).
-bookClose(Agent, Book)if awake(Agent).
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Book.e',62).
-
- /*  l_events(happens(bookClose(Agent,Book),
-   		 Time_From6,
-   		 Time_From6),
-   	 [awake(Agent)]).
- */
- %  "% =================================".
-% '->'(
-%    metreqs(
-%       bookClose(Agent,Book)), 
-%    requires(
-%       bookClose(Agent,Book), 
-%       When_Time)).
-if bookClose(Agent, Book)then requires(bookClose(Agent, Book), When_Time).
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Book.e',62).
-
- /*  reactive_rule([ happens(bookClose(Agent,Book),
-   			Time_From7,
-   			Time_Until8)
-   	      ],
-   	      [ requires(bookClose(Agent,Book),
-   			 When_Time)
-   	      ]).
- */
- %  "% =================================".
-% '->'(
-%    not(
-%       bookClosed(Book)), 
-%    metreqs(
-%       bookClose(Agent,Book))).
-bookClose(Agent, Book)if not bookClosed(Book).
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Book.e',62).
-
- /*  l_events(happens(bookClose(Agent,Book),
-   		 Time_From9,
-   		 Time_From9),
-   	 [not(bookClosed(Book))]).
- */
- %  "% =================================".
-% '->'(
-%    metreqs(
-%       bookClose(Agent,Book)), 
-%    requires(
-%       bookClose(Agent,Book), 
-%       When_Time)).
-if bookClose(Agent, Book)then requires(bookClose(Agent, Book), When_Time).
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Book.e',62).
-
- /*  reactive_rule([ happens(bookClose(Agent,Book),
-   			Time_From10,
-   			Time_Until11)
-   	      ],
-   	      [ requires(bookClose(Agent,Book),
-   			 When_Time)
-   	      ]).
- */
- %  "% =================================".
-% '->'(
-%    holding(Agent,Book), 
-%    metreqs(
-%       bookClose(Agent,Book))).
-bookClose(Agent, Book)if holding(Agent, Book).
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Book.e',62).
-
- /*  l_events(happens(bookClose(Agent,Book),
-   		 Time_From12,
-   		 Time_From12),
-   	 [holds(holding(Agent,Book),Time_From12)]).
  */
  %  "% =================================".
 
@@ -460,10 +247,14 @@ bookClose(Agent, Book)if holding(Agent, Book).
 %; the book will no longer be open:
 % [agent,book,page,time]
 % Terminates(BookClose(agent,book),BookIsOpenTo(book,page),time).
-% terminates(
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Book.e',71).
+% From E: 
+% 
+% terminates_at(
 %    bookClose(Agent,Book), 
 %    bookIsOpenTo(Book,Page), 
 %    Time).
+ %   [Time].
 bookClose(Agent, Book)terminates bookIsOpenTo(Book, Page).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Book.e',71).
 
@@ -481,142 +272,36 @@ bookClose(Agent, Book)terminates bookIsOpenTo(Book, Page).
 % HoldsAt(Awake(agent),time) &
 % ({page1} page1 != page & HoldsAt(BookIsOpenTo(book,page1),time)) &
 % HoldsAt(Holding(agent,book),time).
-% '->'(
-%    ';'(
-%       not(
-%          awake(Agent)), 
-%       ';'(
-%          not(
-%             holding(Agent,Book)), 
-%          ';'(
-%             equals(Page,Page1), 
-%             not(
-%                bookIsOpenTo(Book,Page1))))), 
-%    not(
-%       bookTurnPageTo(Agent,Book,Page))).
-if not awake(Agent);not holding(Agent, Book);equals(Page, Page1);not bookIsOpenTo(Book, Page1)then not bookTurnPageTo(Agent, Book, Page).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Book.e',75).
-
- /*   reactive_rule([  (not(awake(Agent));not(holding(Agent, Book));equals(Page, Page1);not(bookIsOpenTo(Book, Page1)))
-                    ],
-                    [not(bookTurnPageTo(Agent, Book, Page))]).
- */
- %  "% =================================".
+% From E: 
+% 
 % '->'(
-%    metreqs(
-%       bookTurnPageTo(Agent,Book,Page)), 
-%    requires(
-%       bookTurnPageTo(Agent,Book,Page), 
-%       When_Time)).
-if bookTurnPageTo(Agent, Book, Page)then requires(bookTurnPageTo(Agent, Book, Page), When_Time).
+%    happens_at(bookTurnPageTo(Agent,Book,Page),Time), 
+%    (holds_at(awake(Agent),Time) , 
+%      exists(
+%         [Page1], 
+%         (Page1\=Page , 
+%          holds_at(bookIsOpenTo(Book,Page1),Time))) , 
+%     holds_at(holding(Agent,Book),Time))).
+ %   [Time].
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Book.e',75).
-
- /*  reactive_rule([ happens(bookTurnPageTo(Agent,
-   				       Book,
-   				       Page),
-   			Time_From,
-   			Time_Until)
-   	      ],
-   	      [ requires(bookTurnPageTo(Agent,
-   					Book,
-   					Page),
-   			 When_Time)
-   	      ]).
- */
- %  "% =================================".
-% '->'(
-%    awake(Agent), 
-%    metreqs(
-%       bookTurnPageTo(Agent,Book,Page))).
-bookTurnPageTo(Agent, Book, Page)if awake(Agent).
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Book.e',75).
-
- /*  l_events(happens(bookTurnPageTo(Agent,Book,Page),
-   		 Time_From8,
-   		 Time_From8),
-   	 [awake(Agent)]).
- */
- %  "% =================================".
-% '->'(
-%    metreqs(
-%       bookTurnPageTo(Agent,Book,Page)), 
-%    requires(
-%       bookTurnPageTo(Agent,Book,Page), 
-%       When_Time)).
-if bookTurnPageTo(Agent, Book, Page)then requires(bookTurnPageTo(Agent, Book, Page), When_Time).
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Book.e',75).
-
- /*  reactive_rule([ happens(bookTurnPageTo(Agent,
-   				       Book,
-   				       Page),
-   			Time_From9,
-   			Time_Until10)
-   	      ],
-   	      [ requires(bookTurnPageTo(Agent,
-   					Book,
-   					Page),
-   			 When_Time)
-   	      ]).
- */
- %  "% =================================".
-% '->'(
-%    holding(Agent,Book), 
-%    metreqs(
-%       bookTurnPageTo(Agent,Book,Page))).
-bookTurnPageTo(Agent, Book, Page)if holding(Agent, Book).
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Book.e',75).
-
- /*  l_events(happens(bookTurnPageTo(Agent,Book,Page),
-   		 Time_From11,
-   		 Time_From11),
-   	 [holds(holding(Agent,Book),Time_From11)]).
- */
- %  "% =================================".
-% '->'(
-%    metreqs(
-%       bookTurnPageTo(Agent,Book,Page)), 
-%    requires(
-%       bookTurnPageTo(Agent,Book,Page), 
-%       When_Time)).
-if bookTurnPageTo(Agent, Book, Page)then requires(bookTurnPageTo(Agent, Book, Page), When_Time).
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Book.e',75).
-
- /*  reactive_rule([ happens(bookTurnPageTo(Agent,
-   				       Book,
-   				       Page),
-   			Time_From12,
-   			Time_Until13)
-   	      ],
-   	      [ requires(bookTurnPageTo(Agent,
-   					Book,
-   					Page),
-   			 When_Time)
-   	      ]).
- */
- %  "% =================================".
-% '->'(
-%    bookIsOpenTo(Book,Page1), 
-%    metreqs(
-%       bookTurnPageTo(Agent,Book,Page))).
-bookTurnPageTo(Agent, Book, Page)if bookIsOpenTo(Book, Page1).
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Book.e',75).
-
- /*  l_events(happens(bookTurnPageTo(Agent,Book,Page),
-   		 Time_From14,
-   		 Time_From14),
-   	 [ holds(bookIsOpenTo(Book,Page1),
-   		 Time_From14)
-   	 ]).
- */
- %  "% =================================".
+bookTurnPageTo(Agent, Book, Page) ->
+    awake(Agent),
+    exists([Page1],
+            (Page1\=Page, bookIsOpenTo(Book, Page1))),
+    holding(Agent, Book).
 
 
 % [agent,book,page,time]
 % Initiates(BookTurnPageTo(agent,book,page),BookIsOpenTo(book,page),time).
-% initiates(
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Book.e',81).
+% From E: 
+% 
+% initiates_at(
 %    bookTurnPageTo(Agent,Book,Page), 
 %    bookIsOpenTo(Book,Page), 
 %    Time).
+ %   [Time].
 bookTurnPageTo(Agent, Book, Page)initiates bookIsOpenTo(Book, Page).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Book.e',81).
 
@@ -634,32 +319,26 @@ bookTurnPageTo(Agent, Book, Page)initiates bookIsOpenTo(Book, Page).
 % HoldsAt(BookIsOpenTo(book,page1),time) &
 % page1 != page2 ->
 % Terminates(BookTurnPageTo(agent,book,page2),BookIsOpenTo(book,page1),time).
+% From E: 
+% 
 % '->'(
-%    ','(
-%       bookIsOpenTo(Book,Page1), 
-%       diff(Page1,Page2)), 
-%    terminates(
+%    (holds_at(bookIsOpenTo(Book,Page1),Time) , 
+%     Page1\=Page2), 
+%    terminates_at(
 %       bookTurnPageTo(Agent,Book,Page2), 
 %       bookIsOpenTo(Book,Page1), 
 %       Time)).
-if bookIsOpenTo(Book, Page1), diff(Page1, Page2)then terminates(bookTurnPageTo(Agent, Book, Page2), bookIsOpenTo(Book, Page1)at Time, _).
+ %   [Time].
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Book.e',83).
-
- /*  reactive_rule([ holds(bookIsOpenTo(Book,Page1),
-   		      Time_At),
-   		diff(Page1,Page2)
-   	      ],
-   	      [ terminates(bookTurnPageTo(Agent,
-   					  Book,
-   					  Page2),
-   			   at(bookIsOpenTo(Book,Page1),
-   			      Time),
-   			   Terminates)
-   	      ]).
- */
- %  "% =================================".
+bookIsOpenTo(Book, Page1), Page1\=Page2 ->
+    terminates(bookTurnPageTo(Agent, Book, Page2),
+               bookIsOpenTo(Book, Page1)).
 
 
 %; End of file.
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Book.e',87).
-% translate: ending  File: /pack/logicmoo_ec/ext/ec_sources/ecnet/Book.e.lps 
+% From E: 
+% 
+% :-call_pel_directive(translate(ending,'/pack/logicmoo_ec/ext/ec_sources/ecnet/Book.e.lps')).
+:- call_pel_directive(translate(ending,
+                                '/pack/logicmoo_ec/ext/ec_sources/ecnet/Book.e.lps')).

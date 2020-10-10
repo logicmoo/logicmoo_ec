@@ -1,9 +1,18 @@
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',371).
-% translate: unskipped  File: /pack/logicmoo_ec/ext/ec_sources/ecnet/Vision.e.lps 
+% From E: 
+% 
+% :-call_pel_directive(translate(unskipped,'/pack/logicmoo_ec/ext/ec_sources/ecnet/Vision.e.lps')).
+:- call_pel_directive(translate(unskipped,
+                                '/pack/logicmoo_ec/ext/ec_sources/ecnet/Vision.e.lps')).
 :-include(library('ec_planner/ec_test_incl')).
 :-expects_dialect(lps).
-% translate: begining  File: /pack/logicmoo_ec/ext/ec_sources/ecnet/Vision.e.lps 
-% Thu, 08 Oct 2020 21:37:34 GMT File: <stream>(0x55894c177f00)%;
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',371).
+% From E: 
+% 
+% :-call_pel_directive(translate(begining,'/pack/logicmoo_ec/ext/ec_sources/ecnet/Vision.e.lps')).
+:- call_pel_directive(translate(begining,
+                                '/pack/logicmoo_ec/ext/ec_sources/ecnet/Vision.e.lps')).
+% Sat, 10 Oct 2020 14:56:17 GMT File: <stream>(0x5597f2963300)%;
 %; Copyright (c) 2005 IBM Corporation and others.
 %; All rights reserved. This program and the accompanying materials
 %; are made available under the terms of the Common Public License v1.0
@@ -19,28 +28,26 @@
 %; agent looks at object.
 
 % event LookAt(agent,object)
-% event(
-%    lookAt(agent,object)).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vision.e',15).
+% From E: 
+% 
+% event(lookAt(agent,object)).
+events([lookAt/2]).
+mpred_prop(lookAt(agent,object),action).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vision.e',15).
 actions([lookAt/2]).
-% mpred_prop(
-%    lookAt(agent,object), 
-%    event).
-mpred_prop(lookAt(agent,object),event).
 
 
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vision.e',18).
 %; agent sees object.
 
 % fluent See(agent,object)
-% fluent(
-%    see(agent,object)).
+% From E: 
+% 
+% fluent(see(agent,object)).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vision.e',18).
-fluents([see/2]).
-% mpred_prop(
-%    see(agent,object), 
-%    fluent).
 mpred_prop(see(agent,object),fluent).
+fluents([see/2]).
 
 
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vision.e',21).
@@ -50,10 +57,14 @@ mpred_prop(see(agent,object),fluent).
 % Initiates(LookAt(agent,object),
 %           See(agent,object),
 %           time).
-% initiates(
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vision.e',23).
+% From E: 
+% 
+% initiates_at(
 %    lookAt(Agent,Object), 
 %    see(Agent,Object), 
 %    Time).
+ %   [Time].
 lookAt(Agent, Object)initiates see(Agent, Object).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vision.e',23).
 
@@ -92,23 +103,20 @@ lookAt(Agent, Object)initiates see(Agent, Object).
 % Terminates(LookAt(agent,object1),
 %            See(agent,object2),
 %            time).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vision.e',50).
+% From E: 
+% 
 % '->'(
-%    diff(Object1,Object2), 
-%    terminates(
+%    Object1\=Object2, 
+%    terminates_at(
 %       lookAt(Agent,Object1), 
 %       see(Agent,Object2), 
 %       Time)).
-if diff(Object1, Object2)then terminates(lookAt(Agent, Object1), see(Agent, Object2)at Time, _).
+ %   [Time].
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vision.e',50).
-
- /*  reactive_rule([diff(Object1,Object2)],
-   	      [ terminates(lookAt(Agent,Object1),
-   			   at(see(Agent,Object2),
-   			      Time),
-   			   Terminates)
-   	      ]).
- */
- %  "% =================================".
+Object1\=Object2 ->
+    terminates(lookAt(Agent, Object1),
+               see(Agent, Object2)).
 
 
 %; Several effect axioms state that if an
@@ -118,10 +126,14 @@ if diff(Object1, Object2)then terminates(lookAt(Agent, Object1), see(Agent, Obje
 % Terminates(WalkThroughDoor12(agent,door),
 %            See(agent,object),
 %            time).
-% terminates(
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vision.e',59).
+% From E: 
+% 
+% terminates_at(
 %    walkThroughDoor12(Agent,Door), 
 %    see(Agent,Object), 
 %    Time).
+ %   [Time].
 walkThroughDoor12(Agent, Door)terminates see(Agent, Object).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vision.e',59).
 
@@ -139,10 +151,13 @@ walkThroughDoor12(Agent, Door)terminates see(Agent, Object).
 % Terminates(WalkThroughDoor21(agent,door),
 %            See(agent,object),
 %            time).
-% terminates(
+% From E: 
+% 
+% terminates_at(
 %    walkThroughDoor21(Agent,Door), 
 %    see(Agent,Object), 
 %    Time).
+ %   [Time].
 walkThroughDoor21(Agent, Door)terminates see(Agent, Object).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vision.e',63).
 
@@ -160,10 +175,13 @@ walkThroughDoor21(Agent, Door)terminates see(Agent, Object).
 % Terminates(WalkUpStaircase(agent,door),
 %            See(agent,object),
 %            time).
-% terminates(
+% From E: 
+% 
+% terminates_at(
 %    walkUpStaircase(Agent,Door), 
 %    see(Agent,Object), 
 %    Time).
+ %   [Time].
 walkUpStaircase(Agent, Door)terminates see(Agent, Object).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vision.e',67).
 
@@ -181,10 +199,13 @@ walkUpStaircase(Agent, Door)terminates see(Agent, Object).
 % Terminates(WalkDownStaircase(agent,door),
 %            See(agent,object),
 %            time).
-% terminates(
+% From E: 
+% 
+% terminates_at(
 %    walkDownStaircase(Agent,Door), 
 %    see(Agent,Object), 
 %    Time).
+ %   [Time].
 walkDownStaircase(Agent, Door)terminates see(Agent, Object).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vision.e',71).
 
@@ -199,4 +220,8 @@ walkDownStaircase(Agent, Door)terminates see(Agent, Object).
 
 %; End of file.
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vision.e',75).
-% translate: ending  File: /pack/logicmoo_ec/ext/ec_sources/ecnet/Vision.e.lps 
+% From E: 
+% 
+% :-call_pel_directive(translate(ending,'/pack/logicmoo_ec/ext/ec_sources/ecnet/Vision.e.lps')).
+:- call_pel_directive(translate(ending,
+                                '/pack/logicmoo_ec/ext/ec_sources/ecnet/Vision.e.lps')).

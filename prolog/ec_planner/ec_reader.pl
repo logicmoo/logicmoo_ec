@@ -48,22 +48,26 @@ verbatum_functor(next_axiom_uses).
 
 is_reified_sort(S):- S==belief.
 
-non_list_functor(ignore).
-non_list_functor(manualrelease).
+non_list_functor(P):- pel_directive(P).
 non_list_functor(sort).
-non_list_functor(reified_sort).
-non_list_functor(belief).
-non_list_functor(reified).
-non_list_functor(noninertial).
-non_list_functor(mutex).
-non_list_functor(completion).
 non_list_functor(next_axiom_uses).
+non_list_functor(reified_sort).
 
-is_non_sort(range).
-is_non_sort(option).
-is_non_sort(load).
-is_non_sort(include).
+pel_directive(ignore).
+pel_directive(manualrelease).
+%non_list_functor(belief).
+pel_directive(reified).
+pel_directive(noninertial).
+pel_directive(mutex).
+pel_directive(completion).
+
+pel_directive(range).
+pel_directive(option).
+pel_directive(load).
+pel_directive(include).
 is_non_sort(xor).
+
+is_non_sort(P):- pel_directive(P).
 is_non_sort(P):- verbatum_functor(P).
 is_non_sort(NoListF):- non_list_functor(NoListF).
 
@@ -147,7 +151,7 @@ with_e_sample_tests(Out) :-
 % 
 % :- meta_predicate ec_reader:must(0).
 
-raise_translation_event(Proc1,What,OutputName):- call(Proc1,translate(What,OutputName)).
+raise_translation_event(Proc1,What,OutputName):-  call(Proc1,:- call_pel_directive(translate(What,OutputName))).
 
 
 dedupe_files(SL0,SL):- maplist(relative_file_name,SL0,SL1), list_to_set(SL1,SL2),maplist(absolute_file_name_or_dir,SL2,SLO),!,
@@ -214,7 +218,7 @@ chop_e(InputName,InputName).
 :- export(calc_where_to/3).
 calc_where_to(outdir(Dir, Ext), InputNameE, OutputFile):- 
     chop_e(InputNameE,InputName),
-    atomic_list_concat([InputName, '.', Ext], OutputName),
+    atomic_list_concat([InputName, '.e.', Ext], OutputName),
     make_directory_path(Dir),
     absolute_file_name(OutputName, OutputFile, [relative_to(Dir)]).
 
@@ -333,7 +337,7 @@ trans_e(FileType,Mod,Proc1,OutputName,Outs,Ins):-
    ignore((filetype_to_dialect(FileType,Dialect)->
      format(Outs,'~N~q.~n',[ :- expects_dialect(Dialect)]))),
    raise_translation_event(Proc1,begining,OutputName),
-   get_date_atom(DateAtom),format(Outs,'% ~w File: ~w',[DateAtom,Ins]),     
+   ignore((FileType\==pel,get_date_atom(DateAtom),format(Outs,'% ~w File: ~w',[DateAtom,Ins]))),
    locally(t_l:is_ec_cvt(FileType), with_output_to(Outs,with_e_file(Mod:Proc1,Outs,Ins))),
    raise_translation_event(Proc1,ending,OutputName),!.
 
@@ -551,65 +555,77 @@ fix_predname('=>', '->').
 fix_predname('if', '->').
 
 fix_predname(holds_at, holds_at).
+fix_predname(happens, happens_at).
+fix_predname(initiates, initiates_at).
+fix_predname(terminates, terminates_at).
+fix_predname(releases, releases_at).
+
 fix_predname(holdsat, holds_at).
+fix_predname(releasedat, released_at).
+fix_predname(at, at_loc).
+fix_predname(holds, pred_holds).
+fix_predname(is, pred_is).
 
 fix_predname(Happens, Happens):- builtin_pred(Happens).
 
 fix_predname(F, New):- downcase_atom(F, DC), F\==DC, !, fix_predname(DC, New).
 
 
+call_pel_directive(B):- pprint_ecp_cmt(red,call_pel_directive(B)).
 
 
 my_unCamelcase(X, Y):- atom(X), fix_predname(X, Y), !.
 my_unCamelcase(X, Y):- atom(X), upcase_atom(X, X), !, downcase_atom(X, Y).
 my_unCamelcase(X, Y):- unCamelcase(X, Y), !.
 
-:- export(e_to_ec/2).
-e_to_ec(C, C):- \+ callable(C), !.
-e_to_ec('$VAR'(HT), '$VAR'(HT)):-!.
-e_to_ec(X, Y):- \+ compound(X), !, must(my_unCamelcase(X, Y)).
-e_to_ec(X, Y):- compound_name_arity(X, F, 0), !, my_unCamelcase(F, FF), compound_name_arity(Y, FF, 0).
-e_to_ec(not(Term),not(O)):- !, e_to_ec(Term, O).
-e_to_ec(Prop,O):- 
+:- export(e_to_pel/2).
+e_to_pel(C, C):- \+ callable(C), !.
+e_to_pel('$VAR'(HT), '$VAR'(HT)):-!.
+e_to_pel(X, Y):- \+ compound(X), !, must(my_unCamelcase(X, Y)).
+e_to_pel(X, Y):- compound_name_arity(X, F, 0), !, my_unCamelcase(F, FF), compound_name_arity(Y, FF, 0).
+e_to_pel(not(Term),not(Term)):- var(Term),!.
+e_to_pel(not(holds_at(Term,Time)),holds_at(O,Time)):-  !, e_to_pel(not(Term), O).
+e_to_pel(not(Term),not(O)):- !, e_to_pel(Term, O).
+e_to_pel(Prop,O):- 
   Prop =.. [ThereExists,NotVars,Term0],
   is_quantifier_type(ThereExists,_Exists),
   conjuncts_to_list(NotVars,NotVarsL), select(NotVs,NotVarsL,Rest),compound(NotVs),not(Vars)=NotVs,
   is_list(Vars),%forall(member(E,Vars),ground(E)),!,
   (Rest==[]->Term1= Term0 ; list_to_conjuncts(Rest,NotVarsRest),conjoin(NotVarsRest,Term0,Term1)), 
   QProp =.. [ThereExists,Vars,Term1], 
-  e_to_ec(not(QProp),O).
-e_to_ec(Prop,O):- 
+  e_to_pel(not(QProp),O).
+e_to_pel(Prop,O):- 
   Prop =.. [ThereExists,Vars,Term0], 
   is_quantifier_type(ThereExists,Exists),
   is_list(Vars), forall(member(E,Vars),ground(E)),
   QProp =.. [Exists,Vars,Term0],
   insert_vars(QProp, Vars, Term, _Has),
-  e_to_ec(Term,O),!.
+  e_to_pel(Term,O),!.
 
-%e_to_ec(X, Y):- e_to_ax(X, Y),X\=@=Y,!,e_to_ec(X, Y).
-%e_to_ec(neg(C),O):-e_to_ec(holds_at(neg(N),V),O):- compound(C),holds_at(N,V)=C,
-%e_to_ec(neg(holds_at(N,V)),O):-e_to_ec((holds_at(neg(N),V)),O).
-e_to_ec(t(X, [Y]), O):- nonvar(Y), !, e_to_ec(t(X, Y), O).
-e_to_ec(load(X), load(X)):-!.
-e_to_ec(include(X), include(X)):-!.
-e_to_ec(option([N, V]), O):- !, e_to_ec(option(N, V), O).
-e_to_ec(range([N, V, H]), O):- !, e_to_ec(range(N, V, H), O).
+%e_to_pel(X, Y):- e_to_ax(X, Y),X\=@=Y,!,e_to_pel(X, Y).
+%e_to_pel(neg(C),O):-e_to_pel(holds_at(neg(N),V),O):- compound(C),holds_at(N,V)=C,
+%e_to_pel(neg(holds_at(N,V)),O):-e_to_pel((holds_at(neg(N),V)),O).
+e_to_pel(t(X, [Y]), O):- nonvar(Y), !, e_to_pel(t(X, Y), O).
+e_to_pel(load(X), load(X)):-!.
+e_to_pel(include(X), include(X)):-!.
+e_to_pel(option([N, V]), O):- !, e_to_pel(option(N, V), O).
+e_to_pel(range([N, V, H]), O):- !, e_to_pel(range(N, V, H), O).
 
-e_to_ec(t(X, Y), O):- atom(X), is_non_sort(X), !, SS=..[X, Y], e_to_ec(SS, O).
-e_to_ec(t(X, Y), O):- atom(X), is_list(Y), is_non_sort(X), SS=..[X|Y], e_to_ec(SS, O).
-e_to_ec(t(X, Y), O):- atom(X), is_list(Y), SS=..[X, Y], e_to_ec(SS, O).
-e_to_ec(sort(col([S1, S2])), O):- !, e_to_ec(subsort(S1, S2), O).
-e_to_ec(function(F, [M]), O):- e_to_ec(function(F, M), O).
-%e_to_ec(Compound=Value, equals(Compound,Value)).
+e_to_pel(t(X, Y), O):- atom(X), is_non_sort(X), !, SS=..[X, Y], e_to_pel(SS, O).
+e_to_pel(t(X, Y), O):- atom(X), is_list(Y), is_non_sort(X), SS=..[X|Y], e_to_pel(SS, O).
+e_to_pel(t(X, Y), O):- atom(X), is_list(Y), SS=..[X, Y], e_to_pel(SS, O).
+e_to_pel(sort(col([S1, S2])), O):- !, e_to_pel(subsort(S1, S2), O).
+e_to_pel(function(F, [M]), O):- e_to_pel(function(F, M), O).
+%e_to_pel(Compound=Value, equals(Compound,Value)).
 /*
-e_to_ec(Term1, Term):- 
+e_to_pel(Term1, Term):- 
 %  map_callables(my_unCamelcase, Term1, HTTermO),
 %  Term1\=@=HTTermO,!,
-%  e_to_ec(HTTermO, Term). 
+%  e_to_pel(HTTermO, Term). 
 */
-e_to_ec(HT, HTTermO):- !, 
+e_to_pel(HT, HTTermO):- !, 
  compound_name_arguments(HT, F, L), 
- maplist(e_to_ec,L,LL),
+ maplist(e_to_pel,L,LL),
  compound_name_arguments(HTTerm, F, LL),
  map_callables(my_unCamelcase, HTTerm, HTTermO).
 
@@ -641,7 +657,7 @@ e_read1(String, Term, Vs):-
    e_read2(String, Term0), !, 
    add_ec_vars(Term0, Term1, Vs), !,
    retractall(etmp:temp_varnames(_,_)),
-   e_to_ec(Term1, Term), !.
+   e_to_pel(Term1, Term), !.
 
 if_string_replace(T, B, A, NewT):-   
    atomics_to_string(List, B, T), List=[_,_|_], !,
@@ -704,12 +720,16 @@ cont_one_e_compound(S, InCodes, WasLast, Term):-
 :- meta_predicate ec_on_each_read(1,*,*).
 
 ec_on_read(Proc1, EOF):- EOF == end_of_file, !,  must(call(Proc1, EOF)).
-ec_on_read(Proc1, SL):- e_to_ec(SL, SO) -> SL\=@=SO, !, ec_on_read(Proc1, SO).
+ec_on_read(Proc1, SL):- e_to_pel(SL, SO) -> SL\=@=SO, !, ec_on_read(Proc1, SO).
 ec_on_read(Proc1, Cmp):- compound_gt(Cmp, 0), 
   Cmp =.. [NonlistF, List], is_list(List), non_list_functor(NonlistF),!, 
   maplist(ec_on_each_read(Proc1,NonlistF), List).
+ec_on_read(Proc1, SL):- e_to_pel2(SL,SO) -> SL\=@=SO, !, ec_on_read(Proc1, SO).
 ec_on_read(Proc1, S):- must(glean_data(Proc1, S)), must(call(Proc1, S)).
 
+e_to_pel2(X,Y):- compound(X),compound_name_arguments(X,N,[_A|_Args]),N=translate,!,Y= (:- call_pel_directive(X)).
+e_to_pel2(X,Y):- compound(X),compound_name_arguments(X,N,[_A|_Args]),pel_directive(N),!,Y= (:- call_pel_directive(X)).
+e_to_pel2(X,X).
 
 :- use_module(library(logicmoo/misc_terms)).
 

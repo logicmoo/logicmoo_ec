@@ -71,7 +71,7 @@ modal_cleansup(Cla0,Cla):-
 tolerate_elaboration(I,O):-  fail,
  numbervars(I,0,_,[attvar(bind)]),!,
   tolerate_elaboration0(I,O).
-tolerate_elaboration(I,I).
+tolerate_elaboration(I,I):-!.
 tolerate_elaboration(I,O):- 
   with_vars_locked(I,tolerate_elaboration0(I,O)),!.
 
@@ -242,7 +242,7 @@ nnf1(Fml,NNF) :-
 % Fml,NNF:    See above.
 % FreeV:      List of free variables in Fml.
 % Paths:      Number of disjunctive paths in Fml.
-nnf(Fml,_FreeV,Fml,1):- var_or_atomic(Fml), !.
+nnf(Fml,_FreeV,Fml,1):- var_or_atomic(FmlO), !, Fml=FmlO,!.
 nnf(not(Fml),_FreeV,not(Fml),1):- var_or_atomic(Fml), !.
 nnf(box(BP,F),FreeV,BOX,Paths) :- !,
 	nnf(F,FreeV,NNF,Paths), cnf(NNF,CNF), boxRule(box(BP,CNF), BOX).
@@ -298,6 +298,9 @@ nnf(';'(A,B),FreeV,NNF,Paths) :- !,
 	Paths is Paths1 + Paths2,
 	(Paths1 > Paths2 -> NNF = ';'(NNF2,NNF1);
 		            NNF = ';'(NNF1,NNF2)).
+
+nnf('<-'(B,A),FreeV,NNF,Paths) :- !,
+         nnf(( not(A); B ),FreeV,NNF,Paths).
 
 nnf('->'(A,B),FreeV,NNF,Paths) :- !,
          nnf(( not(A); B ),FreeV,NNF,Paths).
@@ -395,7 +398,7 @@ pnf(F,PNF) :- pnf(F,[],PNF).
 
 % pnf(+Fml, +Vars, ?PNF)
 
-fnf(Fml,_, Fml):- var_or_atomic(Fml),!.
+pnf(Fml,_, Fml):- var_or_atomic(Fml),!.
 
 pnf(     all(X,F),Vs,   all(X,PNF)) :- !, pnf(F,[X|Vs], PNF).
 pnf(  exists(X,F),Vs,exists(X,PNF)) :- !, pnf(F,[X|Vs], PNF).
@@ -2040,7 +2043,7 @@ nnf(not(F),even,FF) :- !,xlit(F,FF).
 nnf(F,odd,FF):- xlit(F,FF).
 nnf(F,even,not(FF)):- xlit(F,FF).
 
-xlit(F,F):- \+ compound(F).
+xlit(F,F):- \+ compound(F),!.
 xlit({X},{X}).
 xlit(=(A,B),equals(A,B)).
 xlit(neq(A,B),{dif(A,B)}).

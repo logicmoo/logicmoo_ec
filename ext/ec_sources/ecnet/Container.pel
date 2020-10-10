@@ -1,7 +1,10 @@
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Condition.e',77).
+:- call_pel_directive(translate(unskipped,
+                                '/pack/logicmoo_ec/ext/ec_sources/ecnet/Container.pel')).
 :-include(library('ec_planner/ec_test_incl')).
-:-expects_dialect(pfc).
-% Tue, 06 Oct 2020 05:00:44 GMT
- %  loading(load_e_pl,'/pack/logicmoo_ec/ext/ec_sources/ecnet/Container.e').
+:-expects_dialect(ecalc).
+:- call_pel_directive(translate(begining,
+                                '/pack/logicmoo_ec/ext/ec_sources/ecnet/Container.pel')).
 %;
 %; Copyright (c) 2005 IBM Corporation and others.
 %; All rights reserved. This program and the accompanying materials
@@ -17,335 +20,113 @@
 %;
 %; linkage to OTSpace(M):
 % [agent,container1,container2,time]
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Container.e:16
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Container.e',17).
 % Happens(TakeOutOf(agent,container1,container2),time) ->
 % HoldsAt(ContainerIsOpen(container2),time).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Container.e:17
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Container.e:17
-happens(takeOutOf(Agent, Container1, Container2), Time) ->
+happens_at(takeOutOf(Agent, Container1, Container2), Time) ->
     holds_at(containerIsOpen(Container2), Time).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Container.e:17
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Container.e:17
-reactive_rule([ happens(takeOutOf(Agent,
-				  Container1,
-				  Container2),
-			Time)
-	      ],
-	      [holds(containerIsOpen(Container2),Time)]).
 
 
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Container.e:19
 % [agent,container1,container2,time]
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Container.e:20
 % Happens(PutInside(agent,container1,container2),time) ->
 % HoldsAt(ContainerIsOpen(container2),time).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Container.e:21
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Container.e:21
-happens(putInside(Agent, Container1, Container2), Time) ->
+happens_at(putInside(Agent, Container1, Container2), Time) ->
     holds_at(containerIsOpen(Container2), Time).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Container.e:21
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Container.e:21
-reactive_rule([ happens(putInside(Agent,
-				  Container1,
-				  Container2),
-			Time)
-	      ],
-	      [holds(containerIsOpen(Container2),Time)]).
 
 
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Container.e:23
 %; agent opens container.
 
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Container.e:24
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Container.e',25).
 % event ContainerOpen(agent,container)
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Container.e:25
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Container.e:25
 event(containerOpen(agent,container)).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Container.e:25
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Container.e:25
-actions([containerOpen/2]).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Container.e:25
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Container.e:25
-actions([containerOpen/2]).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Container.e:25
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Container.e:25
-meta_argtypes(containerOpen(agent,container)).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Container.e:25
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Container.e:25
-meta_argtypes(containerOpen(agent,container)).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Container.e:25
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Container.e:25
-mpred_prop(containerOpen(agent,container),event).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Container.e:25
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Container.e:25
-mpred_prop(containerOpen(agent,container),event).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Container.e:25
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Container.e:25
-meta_argtypes(containerOpen(agent,container)).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Container.e:25
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Container.e:25
-meta_argtypes(containerOpen(agent,container)).
 
 
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Container.e:26
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Container.e',27).
 %; agent closes container.
 
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Container.e:27
 % event ContainerClose(agent,container)
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Container.e:28
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Container.e:28
 event(containerClose(agent,container)).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Container.e:28
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Container.e:28
-actions([containerClose/2]).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Container.e:28
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Container.e:28
-actions([containerClose/2]).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Container.e:28
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Container.e:28
-meta_argtypes(containerClose(agent,container)).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Container.e:28
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Container.e:28
-meta_argtypes(containerClose(agent,container)).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Container.e:28
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Container.e:28
-mpred_prop(containerClose(agent,container),event).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Container.e:28
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Container.e:28
-mpred_prop(containerClose(agent,container),event).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Container.e:28
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Container.e:28
-meta_argtypes(containerClose(agent,container)).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Container.e:28
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Container.e:28
-meta_argtypes(containerClose(agent,container)).
 
 
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Container.e:29
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Container.e',30).
 %; container is open.
 
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Container.e:30
 % fluent ContainerIsOpen(container)
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Container.e:31
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Container.e:31
 fluent(containerIsOpen(container)).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Container.e:31
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Container.e:31
-fluents([containerIsOpen/1]).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Container.e:31
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Container.e:31
-fluents([containerIsOpen/1]).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Container.e:31
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Container.e:31
-meta_argtypes(containerIsOpen(container)).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Container.e:31
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Container.e:31
-meta_argtypes(containerIsOpen(container)).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Container.e:31
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Container.e:31
-mpred_prop(containerIsOpen(container),fluent).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Container.e:31
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Container.e:31
-mpred_prop(containerIsOpen(container),fluent).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Container.e:31
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Container.e:31
-meta_argtypes(containerIsOpen(container)).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Container.e:31
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Container.e:31
-meta_argtypes(containerIsOpen(container)).
 
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Container.e:32
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Container.e',33).
 % fluent ContainerClosed(container)
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Container.e:33
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Container.e:33
 fluent(containerClosed(container)).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Container.e:33
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Container.e:33
-fluents([containerClosed/1]).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Container.e:33
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Container.e:33
-fluents([containerClosed/1]).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Container.e:33
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Container.e:33
-meta_argtypes(containerClosed(container)).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Container.e:33
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Container.e:33
-meta_argtypes(containerClosed(container)).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Container.e:33
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Container.e:33
-mpred_prop(containerClosed(container),fluent).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Container.e:33
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Container.e:33
-mpred_prop(containerClosed(container),fluent).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Container.e:33
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Container.e:33
-meta_argtypes(containerClosed(container)).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Container.e:33
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Container.e:33
-meta_argtypes(containerClosed(container)).
 
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Container.e:33
 % noninertial ContainerClosed
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Container.e:34
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Container.e:34
-noninertial(containerClosed).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Container.e:34
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Container.e:34
-noninertial(containerClosed).
+:- call_pel_directive(noninertial(containerClosed)).
 
 
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Container.e:35
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Container.e',36).
 % [container,time]
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Container.e:36
 % HoldsAt(ContainerClosed(container),time) <->
 % !HoldsAt(ContainerIsOpen(container),time).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Container.e:37
-
- /*  holds_at(containerClosed(Container), Time) <->
-       holds_at(neg(containerIsOpen(Container)), Time).
- */
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Container.e:37
-
- /*  [holds_at, containerClosed] <->
-       [holds_at, neg, containerIsOpen].
- */
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Container.e:37
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Container.e:37
-holds_at(containerClosed(Container), Time) ->
-    holds_at(neg(containerIsOpen(Container)), Time).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Container.e:37
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Container.e:37
-reactive_rule([holds(containerClosed(Container),Time)],
-	      [holds(not(containerIsOpen(Container)),Time)]).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Container.e:37
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Container.e:37
-holds_at(neg(containerIsOpen(Container)), Time) ->
-    holds_at(containerClosed(Container), Time).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Container.e:37
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Container.e:37
-reactive_rule([holds(not(containerIsOpen(Container)),Time)],
-	      [holds(containerClosed(Container),Time)]).
+holds_at(containerClosed(Container), Time) <->
+    holds_at(not(containerIsOpen(Container)), Time).
 
 
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Container.e:39
 %; A precondition axiom states that
 %; for an agent to open a container,
 %; the agent must be awake,
 %; the container must not already be open, and
 %; the agent must be holding the container.
 % [agent,container,time]
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Container.e:45
 % Happens(ContainerOpen(agent,container),time) ->
 % HoldsAt(Awake(agent),time) &
 % !HoldsAt(ContainerIsOpen(container),time) &
 % HoldsAt(Holding(agent,container),time).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Container.e:48
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Container.e:48
-happens(containerOpen(Agent, Container), Time) ->
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Container.e',45).
+happens_at(containerOpen(Agent, Container), Time) ->
     holds_at(awake(Agent), Time),
-    holds_at(neg(containerIsOpen(Container)), Time),
+    holds_at(not(containerIsOpen(Container)), Time),
     holds_at(holding(Agent, Container), Time).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Container.e:48
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Container.e:48
-reactive_rule([ happens(containerOpen(Agent,Container),
-			Time)
-	      ],
-	      [ holds(awake(Agent),Time),
-		holds(not(containerIsOpen(Container)),Time),
-		holds(holding(Agent,Container),Time)
-	      ]).
 
 
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Container.e:50
 %; An effect axiom states that
 %; if an agent opens a container,
 %; the container will be open:
 % [agent,container,time]
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Container.e:54
 % Initiates(ContainerOpen(agent,container),ContainerIsOpen(container),time).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Container.e:54
-
- /*  [] ->
-       ta(Time,
-          tvs1=[Time],
-          tvs2=[Time],
-          initiates(containerOpen(Agent, Container),
-                    containerIsOpen(Container),
-                    Time)).
- */
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Container.e:54
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Container.e:54
-initiates(containerOpen(_,Containeropen),
-	  containerIsOpen(Containeropen),
-	  Initiates).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Container.e:54
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Container.e:54
-initiated(happens(containerOpen(_,Containeropen),
-		  Maptime,
-		  Happens),
-	  containerIsOpen(Containeropen),
-	  []).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Container.e',54).
+initiates_at(containerOpen(Agent,Container),
+	     containerIsOpen(Container),
+	     Time).
 
 
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Container.e:56
 %; A precondition axiom states that
 %; for an agent to close a container,
 %; the agent must be awake,
 %; the container must be open, and
 %; the agent must be holding the container.
 % [agent,container,time]
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Container.e:62
 % Happens(ContainerClose(agent,container),time) ->
 % HoldsAt(Awake(agent),time) &
 % HoldsAt(ContainerIsOpen(container),time) &
 % HoldsAt(Holding(agent,container),time).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Container.e:65
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Container.e:65
-happens(containerClose(Agent, Container), Time) ->
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Container.e',62).
+happens_at(containerClose(Agent, Container), Time) ->
     holds_at(awake(Agent), Time),
     holds_at(containerIsOpen(Container), Time),
     holds_at(holding(Agent, Container), Time).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Container.e:65
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Container.e:65
-reactive_rule([ happens(containerClose(Agent,Container),
-			Time)
-	      ],
-	      [ holds(awake(Agent),Time),
-		holds(containerIsOpen(Container),Time),
-		holds(holding(Agent,Container),Time)
-	      ]).
 
 
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Container.e:67
 %; An effect axiom states that
 %; if an agent closes a container,
 %; the container will no longer be open:
 % [agent,container,time]
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Container.e:71
 % Terminates(ContainerClose(agent,container),ContainerIsOpen(container),time).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Container.e:71
-
- /*  [] ->
-       ta(Time,
-          tvs1=[Time],
-          tvs2=[Time],
-          terminates(containerClose(Agent, Container),
-                     containerIsOpen(Container),
-                     Time)).
- */
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Container.e:71
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Container.e:71
-terminates(containerClose(_,Containerclose),
-	   containerIsOpen(Containerclose),
-	   Terminates).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Container.e:71
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Container.e:71
-terminated(happens(containerClose(_,Containerclose),
-		   Maptime,
-		   Happens),
-	   containerIsOpen(Containerclose),
-	   []).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Container.e',71).
+terminates_at(containerClose(Agent,Container),
+	      containerIsOpen(Container),
+	      Time).
 
 
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Container.e:73
 %; End of file.
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Container.e',73).
+:- call_pel_directive(translate(ending,
+                                '/pack/logicmoo_ec/ext/ec_sources/ecnet/Container.pel')).

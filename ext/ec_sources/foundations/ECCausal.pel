@@ -1,11 +1,10 @@
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/foundations/DEC.e',73).
+:- call_pel_directive(translate(unskipped,
+                                '/pack/logicmoo_ec/ext/ec_sources/foundations/ECCausal.pel')).
 :-include(library('ec_planner/ec_test_incl')).
-:-expects_dialect(pfc).
-% Tue, 06 Oct 2020 05:02:42 GMT
-% From /pack/logicmoo_ec/ext/ec_sources/foundations/ECCausal.pel:4
-
- /*  loading(load_e_pl,
-   	'/pack/logicmoo_ec/ext/ec_sources/foundations/ECCausal.e').
- */
+:-expects_dialect(ecalc).
+:- call_pel_directive(translate(begining,
+                                '/pack/logicmoo_ec/ext/ec_sources/foundations/ECCausal.pel')).
 %;
 %; Copyright (c) 2005 IBM Corporation and others.
 %; All rights reserved. This program and the accompanying materials
@@ -29,294 +28,69 @@
 %; }
 %;
 
-% From /pack/logicmoo_ec/ext/ec_sources/foundations/ECCausal.e:23
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/foundations/ECCausal.e',24).
 % predicate Started(fluent,time)
-% From /pack/logicmoo_ec/ext/ec_sources/foundations/ECCausal.e:24
-% From /pack/logicmoo_ec/ext/ec_sources/foundations/ECCausal.e:24
 predicate(started(fluent,time)).
-% From /pack/logicmoo_ec/ext/ec_sources/foundations/ECCausal.e:24
-% From /pack/logicmoo_ec/ext/ec_sources/foundations/ECCausal.e:24
-actions([started/2]).
-% From /pack/logicmoo_ec/ext/ec_sources/foundations/ECCausal.e:24
-% From /pack/logicmoo_ec/ext/ec_sources/foundations/ECCausal.e:24
-actions([started/2]).
-% From /pack/logicmoo_ec/ext/ec_sources/foundations/ECCausal.e:24
-% From /pack/logicmoo_ec/ext/ec_sources/foundations/ECCausal.e:24
-meta_argtypes(started(fluent,time)).
-% From /pack/logicmoo_ec/ext/ec_sources/foundations/ECCausal.e:24
-% From /pack/logicmoo_ec/ext/ec_sources/foundations/ECCausal.e:24
-meta_argtypes(started(fluent,time)).
-% From /pack/logicmoo_ec/ext/ec_sources/foundations/ECCausal.e:24
-% From /pack/logicmoo_ec/ext/ec_sources/foundations/ECCausal.e:24
-mpred_prop(started(fluent,time),predicate).
-% From /pack/logicmoo_ec/ext/ec_sources/foundations/ECCausal.e:24
-% From /pack/logicmoo_ec/ext/ec_sources/foundations/ECCausal.e:24
-mpred_prop(started(fluent,time),predicate).
-% From /pack/logicmoo_ec/ext/ec_sources/foundations/ECCausal.e:24
-% From /pack/logicmoo_ec/ext/ec_sources/foundations/ECCausal.e:24
-meta_argtypes(started(fluent,time)).
-% From /pack/logicmoo_ec/ext/ec_sources/foundations/ECCausal.e:24
-% From /pack/logicmoo_ec/ext/ec_sources/foundations/ECCausal.e:24
-meta_argtypes(started(fluent,time)).
 
-% From /pack/logicmoo_ec/ext/ec_sources/foundations/ECCausal.e:24
 % predicate Stopped(fluent,time)
-% From /pack/logicmoo_ec/ext/ec_sources/foundations/ECCausal.e:25
-% From /pack/logicmoo_ec/ext/ec_sources/foundations/ECCausal.e:25
 predicate(stopped(fluent,time)).
-% From /pack/logicmoo_ec/ext/ec_sources/foundations/ECCausal.e:25
-% From /pack/logicmoo_ec/ext/ec_sources/foundations/ECCausal.e:25
-actions([stopped/2]).
-% From /pack/logicmoo_ec/ext/ec_sources/foundations/ECCausal.e:25
-% From /pack/logicmoo_ec/ext/ec_sources/foundations/ECCausal.e:25
-actions([stopped/2]).
-% From /pack/logicmoo_ec/ext/ec_sources/foundations/ECCausal.e:25
-% From /pack/logicmoo_ec/ext/ec_sources/foundations/ECCausal.e:25
-meta_argtypes(stopped(fluent,time)).
-% From /pack/logicmoo_ec/ext/ec_sources/foundations/ECCausal.e:25
-% From /pack/logicmoo_ec/ext/ec_sources/foundations/ECCausal.e:25
-meta_argtypes(stopped(fluent,time)).
-% From /pack/logicmoo_ec/ext/ec_sources/foundations/ECCausal.e:25
-% From /pack/logicmoo_ec/ext/ec_sources/foundations/ECCausal.e:25
-mpred_prop(stopped(fluent,time),predicate).
-% From /pack/logicmoo_ec/ext/ec_sources/foundations/ECCausal.e:25
-% From /pack/logicmoo_ec/ext/ec_sources/foundations/ECCausal.e:25
-mpred_prop(stopped(fluent,time),predicate).
-% From /pack/logicmoo_ec/ext/ec_sources/foundations/ECCausal.e:25
-% From /pack/logicmoo_ec/ext/ec_sources/foundations/ECCausal.e:25
-meta_argtypes(stopped(fluent,time)).
-% From /pack/logicmoo_ec/ext/ec_sources/foundations/ECCausal.e:25
-% From /pack/logicmoo_ec/ext/ec_sources/foundations/ECCausal.e:25
-meta_argtypes(stopped(fluent,time)).
 
 
-% From /pack/logicmoo_ec/ext/ec_sources/foundations/ECCausal.e:26
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/foundations/ECCausal.e',27).
 % [fluent,time]
-% From /pack/logicmoo_ec/ext/ec_sources/foundations/ECCausal.e:27
 % Started(fluent,time) <->
 % (HoldsAt(fluent,time) |
 %  ({event} Happens(event,time) & Initiates(event,fluent,time))).
-% From /pack/logicmoo_ec/ext/ec_sources/foundations/ECCausal.e:29
-
- /*  started(Fluent, Time) <->
-       (   holds_at(Fluent, Time)
-       ;   exists([Event],
-                   (happens(Event, Time), initiates(Event, Fluent, Time)))
-       ).
- */
-% From /pack/logicmoo_ec/ext/ec_sources/foundations/ECCausal.e:29
-
- /*  [started] <->
-       [;, holds_at, exists, happens, initiates].
- */
-% From /pack/logicmoo_ec/ext/ec_sources/foundations/ECCausal.e:29
-% From /pack/logicmoo_ec/ext/ec_sources/foundations/ECCausal.e:29
-started(Fluent, Time) ->
+started(Fluent, Time) <->
     (   holds_at(Fluent, Time)
     ;   exists([Event],
-                (happens(Event, Time), initiates(Event, Fluent, Time)))
+                (happens_at(Event, Time), initiates_at(Event, Fluent, Time)))
     ).
-% From /pack/logicmoo_ec/ext/ec_sources/foundations/ECCausal.e:29
-% From /pack/logicmoo_ec/ext/ec_sources/foundations/ECCausal.e:29
- reactive_rule([started(Fluent, Time)],
-                 [  (at(Fluent, Time);exists([Event],  (happens(Event, Time), initiates(Event, at(Fluent, Time)))))
-                 ]).
-% From /pack/logicmoo_ec/ext/ec_sources/foundations/ECCausal.e:29
-% From /pack/logicmoo_ec/ext/ec_sources/foundations/ECCausal.e:29
-holds_at(Fluent, Time);exists([Event],  (happens(Event, Time), initiates(Event, Fluent, Time))) ->
-    started(Fluent, Time).
-% From /pack/logicmoo_ec/ext/ec_sources/foundations/ECCausal.e:29
-% From /pack/logicmoo_ec/ext/ec_sources/foundations/ECCausal.e:29
- reactive_rule([  (at(Fluent, Time);exists([Event],  (happens(Event, Time), initiates(Event, at(Fluent, Time)))))
-                 ],
-                 [started(Fluent, Time)]).
 
 
-% From /pack/logicmoo_ec/ext/ec_sources/foundations/ECCausal.e:31
 % [fluent,time]
-% From /pack/logicmoo_ec/ext/ec_sources/foundations/ECCausal.e:32
 % Stopped(fluent,time) <->
 % (!HoldsAt(fluent,time) |
 %  ({event} Happens(event,time) & Terminates(event,fluent,time))).
-% From /pack/logicmoo_ec/ext/ec_sources/foundations/ECCausal.e:34
-
- /*  stopped(Fluent, Time) <->
-       (   holds_at(neg(Fluent), Time)
-       ;   exists([Event],
-                   (happens(Event, Time), terminates(Event, Fluent, Time)))
-       ).
- */
-% From /pack/logicmoo_ec/ext/ec_sources/foundations/ECCausal.e:34
-
- /*  [stopped] <->
-       [;, holds_at, neg, exists, happens, terminates].
- */
-% From /pack/logicmoo_ec/ext/ec_sources/foundations/ECCausal.e:34
-% From /pack/logicmoo_ec/ext/ec_sources/foundations/ECCausal.e:34
-stopped(Fluent, Time) ->
-    (   holds_at(neg(Fluent), Time)
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/foundations/ECCausal.e',33).
+stopped(Fluent, Time) <->
+    (   holds_at(not(Fluent), Time)
     ;   exists([Event],
-                (happens(Event, Time), terminates(Event, Fluent, Time)))
+                (happens_at(Event, Time), terminates_at(Event, Fluent, Time)))
     ).
-% From /pack/logicmoo_ec/ext/ec_sources/foundations/ECCausal.e:34
-% From /pack/logicmoo_ec/ext/ec_sources/foundations/ECCausal.e:34
- reactive_rule([stopped(Fluent, Time)],
-                 [  (at(neg(Fluent), Time);exists([Event],  (happens(Event, Time), terminates(Event, at(Fluent, Time)))))
-                 ]).
-% From /pack/logicmoo_ec/ext/ec_sources/foundations/ECCausal.e:34
-% From /pack/logicmoo_ec/ext/ec_sources/foundations/ECCausal.e:34
-holds_at(neg(Fluent), Time);exists([Event],  (happens(Event, Time), terminates(Event, Fluent, Time))) ->
-    stopped(Fluent, Time).
-% From /pack/logicmoo_ec/ext/ec_sources/foundations/ECCausal.e:34
-% From /pack/logicmoo_ec/ext/ec_sources/foundations/ECCausal.e:34
- reactive_rule([  (at(neg(Fluent), Time);exists([Event],  (happens(Event, Time), terminates(Event, at(Fluent, Time)))))
-                 ],
-                 [stopped(Fluent, Time)]).
 
-% From /pack/logicmoo_ec/ext/ec_sources/foundations/ECCausal.e:36
 % predicate Initiated(fluent,time)
-% From /pack/logicmoo_ec/ext/ec_sources/foundations/ECCausal.e:37
-% From /pack/logicmoo_ec/ext/ec_sources/foundations/ECCausal.e:37
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/foundations/ECCausal.e',36).
 predicate(initiated(fluent,time)).
-% From /pack/logicmoo_ec/ext/ec_sources/foundations/ECCausal.e:37
-% From /pack/logicmoo_ec/ext/ec_sources/foundations/ECCausal.e:37
-actions([initiated/2]).
-% From /pack/logicmoo_ec/ext/ec_sources/foundations/ECCausal.e:37
-% From /pack/logicmoo_ec/ext/ec_sources/foundations/ECCausal.e:37
-actions([initiated/2]).
-% From /pack/logicmoo_ec/ext/ec_sources/foundations/ECCausal.e:37
-% From /pack/logicmoo_ec/ext/ec_sources/foundations/ECCausal.e:37
-meta_argtypes(initiated(fluent,time)).
-% From /pack/logicmoo_ec/ext/ec_sources/foundations/ECCausal.e:37
-% From /pack/logicmoo_ec/ext/ec_sources/foundations/ECCausal.e:37
-meta_argtypes(initiated(fluent,time)).
-% From /pack/logicmoo_ec/ext/ec_sources/foundations/ECCausal.e:37
-% From /pack/logicmoo_ec/ext/ec_sources/foundations/ECCausal.e:37
-mpred_prop(initiated(fluent,time),predicate).
-% From /pack/logicmoo_ec/ext/ec_sources/foundations/ECCausal.e:37
-% From /pack/logicmoo_ec/ext/ec_sources/foundations/ECCausal.e:37
-mpred_prop(initiated(fluent,time),predicate).
-% From /pack/logicmoo_ec/ext/ec_sources/foundations/ECCausal.e:37
-% From /pack/logicmoo_ec/ext/ec_sources/foundations/ECCausal.e:37
-meta_argtypes(initiated(fluent,time)).
-% From /pack/logicmoo_ec/ext/ec_sources/foundations/ECCausal.e:37
-% From /pack/logicmoo_ec/ext/ec_sources/foundations/ECCausal.e:37
-meta_argtypes(initiated(fluent,time)).
 
-% From /pack/logicmoo_ec/ext/ec_sources/foundations/ECCausal.e:37
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/foundations/ECCausal.e',38).
 % predicate Terminated(fluent,time)
-% From /pack/logicmoo_ec/ext/ec_sources/foundations/ECCausal.e:38
-% From /pack/logicmoo_ec/ext/ec_sources/foundations/ECCausal.e:38
 predicate(terminated(fluent,time)).
-% From /pack/logicmoo_ec/ext/ec_sources/foundations/ECCausal.e:38
-% From /pack/logicmoo_ec/ext/ec_sources/foundations/ECCausal.e:38
-actions([terminated/2]).
-% From /pack/logicmoo_ec/ext/ec_sources/foundations/ECCausal.e:38
-% From /pack/logicmoo_ec/ext/ec_sources/foundations/ECCausal.e:38
-actions([terminated/2]).
-% From /pack/logicmoo_ec/ext/ec_sources/foundations/ECCausal.e:38
-% From /pack/logicmoo_ec/ext/ec_sources/foundations/ECCausal.e:38
-meta_argtypes(terminated(fluent,time)).
-% From /pack/logicmoo_ec/ext/ec_sources/foundations/ECCausal.e:38
-% From /pack/logicmoo_ec/ext/ec_sources/foundations/ECCausal.e:38
-meta_argtypes(terminated(fluent,time)).
-% From /pack/logicmoo_ec/ext/ec_sources/foundations/ECCausal.e:38
-% From /pack/logicmoo_ec/ext/ec_sources/foundations/ECCausal.e:38
-mpred_prop(terminated(fluent,time),predicate).
-% From /pack/logicmoo_ec/ext/ec_sources/foundations/ECCausal.e:38
-% From /pack/logicmoo_ec/ext/ec_sources/foundations/ECCausal.e:38
-mpred_prop(terminated(fluent,time),predicate).
-% From /pack/logicmoo_ec/ext/ec_sources/foundations/ECCausal.e:38
-% From /pack/logicmoo_ec/ext/ec_sources/foundations/ECCausal.e:38
-meta_argtypes(terminated(fluent,time)).
-% From /pack/logicmoo_ec/ext/ec_sources/foundations/ECCausal.e:38
-% From /pack/logicmoo_ec/ext/ec_sources/foundations/ECCausal.e:38
-meta_argtypes(terminated(fluent,time)).
 
 
-% From /pack/logicmoo_ec/ext/ec_sources/foundations/ECCausal.e:39
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/foundations/ECCausal.e',40).
 % [fluent,time]
-% From /pack/logicmoo_ec/ext/ec_sources/foundations/ECCausal.e:40
 % Initiated(fluent,time) <->
 % (Started(fluent,time) &
 %  !({event} Happens(event,time) & Terminates(event,fluent,time))).
-% From /pack/logicmoo_ec/ext/ec_sources/foundations/ECCausal.e:42
-
- /*  initiated(Fluent, Time) <->
-       started(Fluent, Time),
-       not(exists([Event],
-                   (happens(Event, Time), terminates(Event, Fluent, Time)))).
- */
-% From /pack/logicmoo_ec/ext/ec_sources/foundations/ECCausal.e:42
-
- /*  [initiated] <->
-       [started, not, exists, happens, terminates].
- */
-% From /pack/logicmoo_ec/ext/ec_sources/foundations/ECCausal.e:42
-% From /pack/logicmoo_ec/ext/ec_sources/foundations/ECCausal.e:42
-initiated(Fluent, Time) ->
+initiated(Fluent, Time) <->
     started(Fluent, Time),
     not(exists([Event],
-                (happens(Event, Time), terminates(Event, Fluent, Time)))).
-% From /pack/logicmoo_ec/ext/ec_sources/foundations/ECCausal.e:42
-% From /pack/logicmoo_ec/ext/ec_sources/foundations/ECCausal.e:42
- reactive_rule([initiated(Fluent, Time)],
-                 [ started(Fluent, Time),
-                   not((happens(Event, Time), terminates(Event, at(Fluent, Time))))
-                 ]).
-% From /pack/logicmoo_ec/ext/ec_sources/foundations/ECCausal.e:42
-% From /pack/logicmoo_ec/ext/ec_sources/foundations/ECCausal.e:42
-started(Fluent, Time), not(exists([Event],  (happens(Event, Time), terminates(Event, Fluent, Time)))) ->
-    initiated(Fluent, Time).
-% From /pack/logicmoo_ec/ext/ec_sources/foundations/ECCausal.e:42
-% From /pack/logicmoo_ec/ext/ec_sources/foundations/ECCausal.e:42
- reactive_rule([ started(Fluent, Time),
-                   not((happens(Event, Time), terminates(Event, at(Fluent, Time))))
-                 ],
-                 [initiated(Fluent, Time)]).
+                (happens_at(Event, Time), terminates_at(Event, Fluent, Time)))).
 
 
-% From /pack/logicmoo_ec/ext/ec_sources/foundations/ECCausal.e:44
 % [fluent,time]
-% From /pack/logicmoo_ec/ext/ec_sources/foundations/ECCausal.e:45
 % Terminated(fluent,time) <->
 % (Stopped(fluent,time) &
 %  !({event} Happens(event,time) & Initiates(event,fluent,time))).
-% From /pack/logicmoo_ec/ext/ec_sources/foundations/ECCausal.e:47
-
- /*  terminated(Fluent, Time) <->
-       stopped(Fluent, Time),
-       not(exists([Event],
-                   (happens(Event, Time), initiates(Event, Fluent, Time)))).
- */
-% From /pack/logicmoo_ec/ext/ec_sources/foundations/ECCausal.e:47
-
- /*  [terminated] <->
-       [stopped, not, exists, happens, initiates].
- */
-% From /pack/logicmoo_ec/ext/ec_sources/foundations/ECCausal.e:47
-% From /pack/logicmoo_ec/ext/ec_sources/foundations/ECCausal.e:47
-terminated(Fluent, Time) ->
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/foundations/ECCausal.e',46).
+terminated(Fluent, Time) <->
     stopped(Fluent, Time),
     not(exists([Event],
-                (happens(Event, Time), initiates(Event, Fluent, Time)))).
-% From /pack/logicmoo_ec/ext/ec_sources/foundations/ECCausal.e:47
-% From /pack/logicmoo_ec/ext/ec_sources/foundations/ECCausal.e:47
- reactive_rule([terminated(Fluent, Time)],
-                 [ stopped(Fluent, Time),
-                   not((happens(Event, Time), initiates(Event, at(Fluent, Time))))
-                 ]).
-% From /pack/logicmoo_ec/ext/ec_sources/foundations/ECCausal.e:47
-% From /pack/logicmoo_ec/ext/ec_sources/foundations/ECCausal.e:47
-stopped(Fluent, Time), not(exists([Event],  (happens(Event, Time), initiates(Event, Fluent, Time)))) ->
-    terminated(Fluent, Time).
-% From /pack/logicmoo_ec/ext/ec_sources/foundations/ECCausal.e:47
-% From /pack/logicmoo_ec/ext/ec_sources/foundations/ECCausal.e:47
- reactive_rule([ stopped(Fluent, Time),
-                   not((happens(Event, Time), initiates(Event, at(Fluent, Time))))
-                 ],
-                 [terminated(Fluent, Time)]).
+                (happens_at(Event, Time), initiates_at(Event, Fluent, Time)))).
 
 
-% From /pack/logicmoo_ec/ext/ec_sources/foundations/ECCausal.e:49
 %; End of file.
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/foundations/ECCausal.e',49).
+:- call_pel_directive(translate(ending,
+                                '/pack/logicmoo_ec/ext/ec_sources/foundations/ECCausal.pel')).

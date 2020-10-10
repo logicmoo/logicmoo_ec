@@ -1,7 +1,10 @@
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Smoke.e',40).
+:- call_pel_directive(translate(unskipped,
+                                '/pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.pel')).
 :-include(library('ec_planner/ec_test_incl')).
-:-expects_dialect(pfc).
-% Tue, 06 Oct 2020 05:02:14 GMT
- %  loading(load_e_pl,'/pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e').
+:-expects_dialect(ecalc).
+:- call_pel_directive(translate(begining,
+                                '/pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.pel')).
 %;
 %; Copyright (c) 2005 IBM Corporation and others.
 %; All rights reserved. This program and the accompanying materials
@@ -23,1265 +26,345 @@
 %; }
 %;
 
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:21
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e',22).
 % option modeldiff on
+:- call_pel_directive(option(modeldiff, on)).
 
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:23
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e',24).
 % ignore Love, ThreatenedBy
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:24
+:- call_pel_directive(ignore(love)).
+:- call_pel_directive(ignore(threatenedBy)).
 
- /*  [] ->
-       ta(TaP_Num4_V, tvs1=[], tvs2=[], ignore(love)).
- */
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:24
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:24
-ignore(love).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:24
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:24
-ignore(love).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:24
-
- /*  [] ->
-       ta(TaP_Num4_V1, tvs1=[], tvs2=[], ignore(threatenedBy)).
- */
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:24
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:24
-ignore(threatenedBy).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:24
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:24
-ignore(threatenedBy).
-
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:24
 % ignore LookOutOnto, Floor, BuildingOf, SkyOf, GroundOf
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:25
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e',24).
+:- call_pel_directive(ignore(lookOutOnto)).
+:- call_pel_directive(ignore(floor)).
+:- call_pel_directive(ignore(buildingOf)).
+:- call_pel_directive(ignore(skyOf)).
+:- call_pel_directive(ignore(groundOf)).
 
- /*  [] ->
-       ta(TaP_Num4_V, tvs1=[], tvs2=[], ignore(lookOutOnto)).
- */
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:25
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:25
-ignore(lookOutOnto).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:25
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:25
-ignore(lookOutOnto).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:25
-
- /*  [] ->
-       ta(TaP_Num4_V1, tvs1=[], tvs2=[], ignore(floor)).
- */
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:25
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:25
-ignore(floor).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:25
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:25
-ignore(floor).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:25
-
- /*  [] ->
-       ta(TaP_Num4_V2, tvs1=[], tvs2=[], ignore(buildingOf)).
- */
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:25
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:25
-ignore(buildingOf).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:25
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:25
-ignore(buildingOf).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:25
-
- /*  [] ->
-       ta(TaP_Num4_V3, tvs1=[], tvs2=[], ignore(skyOf)).
- */
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:25
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:25
-ignore(skyOf).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:25
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:25
-ignore(skyOf).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:25
-
- /*  [] ->
-       ta(TaP_Num4_V4, tvs1=[], tvs2=[], ignore(groundOf)).
- */
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:25
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:25
-ignore(groundOf).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:25
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:25
-ignore(groundOf).
-
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:25
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e',26).
 % ignore Near, WalkFrom, WalkFromTo, RunFromTo
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:26
+:- call_pel_directive(ignore(near)).
+:- call_pel_directive(ignore(walkFrom)).
+:- call_pel_directive(ignore(walkFromTo)).
+:- call_pel_directive(ignore(runFromTo)).
 
- /*  [] ->
-       ta(TaP_Num4_V, tvs1=[], tvs2=[], ignore(near)).
- */
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:26
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:26
-ignore(near).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:26
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:26
-ignore(near).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:26
-
- /*  [] ->
-       ta(TaP_Num4_V1, tvs1=[], tvs2=[], ignore(walkFrom)).
- */
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:26
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:26
-ignore(walkFrom).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:26
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:26
-ignore(walkFrom).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:26
-
- /*  [] ->
-       ta(TaP_Num4_V2, tvs1=[], tvs2=[], ignore(walkFromTo)).
- */
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:26
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:26
-ignore(walkFromTo).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:26
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:26
-ignore(walkFromTo).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:26
-
- /*  [] ->
-       ta(TaP_Num4_V3, tvs1=[], tvs2=[], ignore(runFromTo)).
- */
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:26
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:26
-ignore(runFromTo).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:26
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:26
-ignore(runFromTo).
-
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:26
 % ignore Side1, Side2
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:27
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e',26).
+:- call_pel_directive(ignore(side1)).
+:- call_pel_directive(ignore(side2)).
 
- /*  [] ->
-       ta(TaP_Num4_V, tvs1=[], tvs2=[], ignore(side1)).
- */
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:27
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:27
-ignore(side1).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:27
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:27
-ignore(side1).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:27
-
- /*  [] ->
-       ta(TaP_Num4_V1, tvs1=[], tvs2=[], ignore(side2)).
- */
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:27
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:27
-ignore(side2).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:27
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:27
-ignore(side2).
-
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:28
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e',29).
 % load foundations/Root.e
+:- call_pel_directive(load('foundations/Root.e')).
 
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:29
 % load foundations/EC.e
+:- call_pel_directive(load('foundations/EC.e')).
 
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:30
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e',31).
 % load answers/Mueller2003/Ontology.e
+:- call_pel_directive(load('answers/Mueller2003/Ontology.e')).
 
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:31
 % load answers/Mueller2004c/RTSpaceM.e
- %  load(changed,'answers/Mueller2004c/RTSpaceM.e').
+:- call_pel_directive(load('answers/Mueller2004c/RTSpaceM.e')).
 
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:32
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e',33).
 % load answers/Mueller2004c/OTSpaceM.e
- %  load(changed,'answers/Mueller2004c/OTSpaceM.e').
+:- call_pel_directive(load('answers/Mueller2004c/OTSpaceM.e')).
 
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:33
 % load answers/Mueller2004c/Container.e
+:- call_pel_directive(load('answers/Mueller2004c/Container.e')).
 
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:34
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e',35).
 % load answers/Mueller2003/Sleep.e
+:- call_pel_directive(load('answers/Mueller2003/Sleep.e')).
 
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:35
 % load answers/Mueller2004c/SmallFire.e
+:- call_pel_directive(load('answers/Mueller2004c/SmallFire.e')).
 
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:36
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e',37).
 % load answers/Mueller2004c/Smoke.e
+:- call_pel_directive(load('answers/Mueller2004c/Smoke.e')).
 
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:38
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e',39).
 % location Location1
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:39
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:39
 t(location,location1).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:39
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:39
-location(location1).
 
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:40
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e',41).
 % portal DummyPortal1
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:41
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:41
 t(portal,dummyPortal1).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:41
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:41
-portal(dummyPortal1).
 
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:42
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e',43).
 % agent Smoker1
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:43
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:43
 t(agent,smoker1).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:43
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:43
-agent(smoker1).
 
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:44
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e',45).
 % cigarette Cigarette1
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:45
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:45
 t(cigarette,cigarette1).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:45
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:45
-cigarette(cigarette1).
 
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:46
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e',47).
 % container Package1
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:47
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:47
 t(container,package1).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:47
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:47
-container(package1).
 
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:48
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e',49).
 % physobj Surface1
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:49
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:49
 t(physobj,surface1).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:49
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:49
-physobj(surface1).
 
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:50
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e',51).
 % physobj LightingDevice1
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:51
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:51
 t(physobj,lightingDevice1).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:51
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:51
-physobj(lightingDevice1).
 
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:52
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e',53).
 % ashtray AshTray1
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:53
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:53
 t(ashtray,ashTray1).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:53
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:53
-ashtray(ashTray1).
 
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:54
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e',55).
 % physobj Trash1
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:55
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:55
 t(physobj,trash1).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:55
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:55
-physobj(trash1).
 
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:56
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e',57).
 % smoke Smoke1
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:57
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:57
 t(smoke,smoke1).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:57
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:57
-smoke(smoke1).
 %; prune
 
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:59
 % sort ona, onb
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:60
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:60
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e',59).
 sort(ona).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:60
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:60
-sort(ona).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:60
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:60
-sort(onb).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:60
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:60
 sort(onb).
 
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:60
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e',61).
 % fluent! On(ona,onb)
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:61
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:61
 fluent(on(ona,onb)).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:61
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:61
-fluents([on/2]).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:61
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:61
-fluents([on/2]).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:61
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:61
-meta_argtypes(on(ona,onb)).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:61
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:61
-meta_argtypes(on(ona,onb)).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:61
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:61
-mpred_prop(on(ona,onb),fluent).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:61
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:61
-mpred_prop(on(ona,onb),fluent).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:61
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:61
-meta_argtypes(on(ona,onb)).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:61
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:61
-meta_argtypes(on(ona,onb)).
 
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:61
 % event! PlaceOn(agent,ona,onb)
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:62
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:62
 event(placeOn(agent,ona,onb)).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:62
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:62
-actions([placeOn/3]).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:62
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:62
-actions([placeOn/3]).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:62
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:62
-meta_argtypes(placeOn(agent,ona,onb)).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:62
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:62
-meta_argtypes(placeOn(agent,ona,onb)).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:62
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:62
-mpred_prop(placeOn(agent,ona,onb),event).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:62
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:62
-mpred_prop(placeOn(agent,ona,onb),event).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:62
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:62
-meta_argtypes(placeOn(agent,ona,onb)).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:62
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:62
-meta_argtypes(placeOn(agent,ona,onb)).
 
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:62
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e',63).
 % event! TakeOffOf(agent,ona,onb)
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:63
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:63
 event(takeOffOf(agent,ona,onb)).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:63
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:63
-actions([takeOffOf/3]).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:63
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:63
-actions([takeOffOf/3]).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:63
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:63
-meta_argtypes(takeOffOf(agent,ona,onb)).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:63
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:63
-meta_argtypes(takeOffOf(agent,ona,onb)).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:63
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:63
-mpred_prop(takeOffOf(agent,ona,onb),event).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:63
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:63
-mpred_prop(takeOffOf(agent,ona,onb),event).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:63
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:63
-meta_argtypes(takeOffOf(agent,ona,onb)).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:63
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:63
-meta_argtypes(takeOffOf(agent,ona,onb)).
 
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:63
 % ona! LightingDevice1, Package1, Cigarette1
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:64
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:64
 t(ona,lightingDevice1).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:64
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:64
-ona(lightingDevice1).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:64
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:64
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e',63).
 t(ona,package1).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:64
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:64
-ona(package1).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:64
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:64
 t(ona,cigarette1).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:64
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:64
-ona(cigarette1).
 
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:64
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e',65).
 % onb! Surface1, AshTray1
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:65
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:65
 t(onb,surface1).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:65
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:65
-onb(surface1).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:65
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:65
 t(onb,ashTray1).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:65
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:65
-onb(ashTray1).
 
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:66
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e',67).
 % sort insidea, insideb
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:67
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:67
 sort(insidea).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:67
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:67
-sort(insidea).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:67
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:67
-sort(insideb).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:67
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:67
 sort(insideb).
 
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:67
 % fluent! Inside(insidea,insideb)
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:68
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:68
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e',67).
 fluent(inside(insidea,insideb)).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:68
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:68
-fluents([inside/2]).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:68
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:68
-fluents([inside/2]).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:68
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:68
-meta_argtypes(inside(insidea,insideb)).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:68
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:68
-meta_argtypes(inside(insidea,insideb)).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:68
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:68
-mpred_prop(inside(insidea,insideb),fluent).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:68
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:68
-mpred_prop(inside(insidea,insideb),fluent).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:68
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:68
-meta_argtypes(inside(insidea,insideb)).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:68
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:68
-meta_argtypes(inside(insidea,insideb)).
 
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:68
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e',69).
 % event! PutInside(agent,insidea,insideb)
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:69
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:69
 event(putInside(agent,insidea,insideb)).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:69
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:69
-actions([putInside/3]).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:69
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:69
-actions([putInside/3]).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:69
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:69
-meta_argtypes(putInside(agent,insidea,insideb)).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:69
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:69
-meta_argtypes(putInside(agent,insidea,insideb)).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:69
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:69
-mpred_prop(putInside(agent,insidea,insideb),event).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:69
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:69
-mpred_prop(putInside(agent,insidea,insideb),event).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:69
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:69
-meta_argtypes(putInside(agent,insidea,insideb)).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:69
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:69
-meta_argtypes(putInside(agent,insidea,insideb)).
 
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:69
 % event! TakeOutOf(agent,insidea,insideb)
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:70
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:70
 event(takeOutOf(agent,insidea,insideb)).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:70
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:70
-actions([takeOutOf/3]).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:70
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:70
-actions([takeOutOf/3]).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:70
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:70
-meta_argtypes(takeOutOf(agent,insidea,insideb)).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:70
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:70
-meta_argtypes(takeOutOf(agent,insidea,insideb)).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:70
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:70
-mpred_prop(takeOutOf(agent,insidea,insideb),event).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:70
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:70
-mpred_prop(takeOutOf(agent,insidea,insideb),event).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:70
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:70
-meta_argtypes(takeOutOf(agent,insidea,insideb)).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:70
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:70
-meta_argtypes(takeOutOf(agent,insidea,insideb)).
 
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:70
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e',71).
 % insidea! Cigarette1
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:71
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:71
 t(insidea,cigarette1).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:71
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:71
-insidea(cigarette1).
 
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:71
 % insideb! Package1, Trash1
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:72
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:72
 t(insideb,package1).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:72
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:72
-insideb(package1).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:72
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:72
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e',71).
 t(insideb,trash1).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:72
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:72
-insideb(trash1).
 
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:73
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e',74).
 % sort lighta, lightb, lightc
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:74
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:74
 sort(lighta).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:74
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:74
-sort(lighta).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:74
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:74
 sort(lightb).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:74
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:74
-sort(lightb).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:74
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:74
-sort(lightc).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:74
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:74
 sort(lightc).
 
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:74
 % event! LightWith(lighta,lightb,lightc)
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:75
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:75
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e',74).
 event(lightWith(lighta,lightb,lightc)).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:75
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:75
-events([lightWith/3]).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:75
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:75
-events([lightWith/3]).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:75
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:75
-meta_argtypes(lightWith(lighta,lightb,lightc)).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:75
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:75
-meta_argtypes(lightWith(lighta,lightb,lightc)).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:75
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:75
-mpred_prop(lightWith(lighta,lightb,lightc),event).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:75
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:75
-mpred_prop(lightWith(lighta,lightb,lightc),event).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:75
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:75
-meta_argtypes(lightWith(lighta,lightb,lightc)).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:75
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:75
-meta_argtypes(lightWith(lighta,lightb,lightc)).
 
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:75
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e',76).
 % lighta! Smoker1
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:76
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:76
 t(lighta,smoker1).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:76
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:76
-lighta(smoker1).
 
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:76
 % lightb! Cigarette1
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:77
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:77
 t(lightb,cigarette1).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:77
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:77
-lightb(cigarette1).
 
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:77
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e',78).
 % lightc! LightingDevice1
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:78
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:78
 t(lightc,lightingDevice1).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:78
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:78
-lightc(lightingDevice1).
 %; initial state
 % [agent,object]
- 
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:80
-% !HoldsAt(Holding(agent,object),0).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:80
-
- /*  [] ->
-       ta(TaP_Num4_V,
-          tvs1=[],
-          tvs2=[],
-          initially(neg(holding(Agent, Object)))).
- */
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:80
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:80
-initially(neg(holding(_,Holding))).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:80
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:80
-initial_state([not(holding(_,Holding))]).
+ % !HoldsAt(Holding(agent,object),0).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e',80).
+holds_at(not(holding(Agent,Object)),0).
 
 
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:81
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e',82).
 % [agent,physobj]
- 
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:81
-% !HoldsAt(SittingOn(agent,physobj),0).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:81
-
- /*  [] ->
-       ta(TaP_Num4_V,
-          tvs1=[],
-          tvs2=[],
-          initially(neg(sittingOn(Agent, Physobj)))).
- */
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:81
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:81
-initially(neg(sittingOn(_,Sittingon))).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:81
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:81
-initial_state([not(sittingOn(_,Sittingon))]).
+ % !HoldsAt(SittingOn(agent,physobj),0).
+holds_at(not(sittingOn(Agent,Physobj)),0).
 
 
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:82
 % [agent,physobj]
- 
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:82
-% !HoldsAt(LyingOn(agent,physobj),0).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:82
-
- /*  [] ->
-       ta(TaP_Num4_V,
-          tvs1=[],
-          tvs2=[],
-          initially(neg(lyingOn(Agent, Physobj)))).
- */
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:82
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:82
-initially(neg(lyingOn(_,Lyingon))).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:82
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:82
-initial_state([not(lyingOn(_,Lyingon))]).
+ % !HoldsAt(LyingOn(agent,physobj),0).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e',82).
+holds_at(not(lyingOn(Agent,Physobj)),0).
 
 
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:83
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:83
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e',84).
 % HoldsAt(On(Package1,Surface1),0).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:83
-
- /*  [] ->
-       ta(TaP_Num4_V, tvs1=[], tvs2=[], initially(on(package1, surface1))).
- */
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:83
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:83
-initially(on(package1,surface1)).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:83
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:83
-initial_state([on(package1,surface1)]).
+holds_at(on(package1,surface1),0).
 
 
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:84
 % [physobj1,physobj2]
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:85
 % !(physobj1=Package1 & physobj2=Surface1) ->
 % !HoldsAt(On(physobj1, physobj2),0).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:86
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:86
-not((equals(Physobj1, package1), equals(Physobj2, surface1))) ->
-    initially(neg(on(Physobj1, Physobj2))).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:86
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:86
- reactive_rule([ not((equals(Physobj1, package1), equals(Physobj2, surface1)))
-                 ],
-                 [initially(not(on(Physobj1, Physobj2)))]).
+not((Physobj1=package1, Physobj2=surface1)) ->
+    holds_at(not(on(Physobj1, Physobj2)), 0).
 
 
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:87
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:87
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e',88).
 % HoldsAt(Dressed(Smoker1),0).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:87
-
- /*  [] ->
-       ta(TaP_Num4_V, tvs1=[], tvs2=[], initially(dressed(smoker1))).
- */
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:87
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:87
-initially(dressed(smoker1)).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:87
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:87
-initial_state([dressed(smoker1)]).
+holds_at(dressed(smoker1),0).
 
 
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:88
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:88
 % HoldsAt(Awake(Smoker1),0).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:88
-
- /*  [] ->
-       ta(TaP_Num4_V, tvs1=[], tvs2=[], initially(awake(smoker1))).
- */
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:88
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:88
-initially(awake(smoker1)).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:88
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:88
-initial_state([awake(smoker1)]).
+holds_at(awake(smoker1),0).
 
 
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:89
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:89
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e',90).
 % HoldsAt(Sleep3(Smoker1),0).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:89
-
- /*  [] ->
-       ta(TaP_Num4_V, tvs1=[], tvs2=[], initially(sleep3(smoker1))).
- */
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:89
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:89
-initially(sleep3(smoker1)).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:89
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:89
-initial_state([sleep3(smoker1)]).
+holds_at(sleep3(smoker1),0).
 
 
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:90
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:90
 % HoldsAt(Standing(Smoker1),0).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:90
-
- /*  [] ->
-       ta(TaP_Num4_V, tvs1=[], tvs2=[], initially(standing(smoker1))).
- */
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:90
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:90
-initially(standing(smoker1)).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:90
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:90
-initial_state([standing(smoker1)]).
+holds_at(standing(smoker1),0).
 
 
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:91
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:91
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e',92).
 % HoldsAt(CraveNicotine(Smoker1),0).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:91
-
- /*  [] ->
-       ta(TaP_Num4_V, tvs1=[], tvs2=[], initially(craveNicotine(smoker1))).
- */
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:91
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:91
-initially(craveNicotine(smoker1)).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:91
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:91
-initial_state([craveNicotine(smoker1)]).
+holds_at(craveNicotine(smoker1),0).
 
 
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:92
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:92
 % HoldsAt(ContainerClosed(Package1),0).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:92
-
- /*  [] ->
-       ta(TaP_Num4_V, tvs1=[], tvs2=[], initially(containerClosed(package1))).
- */
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:92
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:92
-initially(containerClosed(package1)).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:92
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:92
-initial_state([containerClosed(package1)]).
+holds_at(containerClosed(package1),0).
 
 
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:93
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e',94).
 % [physobj]
- 
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:93
-% !HoldsAt(IsBurning(physobj),0).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:93
-
- /*  [] ->
-       ta(TaP_Num4_V,
-          tvs1=[],
-          tvs2=[],
-          initially(neg(isBurning(Physobj)))).
- */
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:93
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:93
-initially(neg(isBurning(Isburning))).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:93
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:93
-initial_state([not(isBurning(Isburning))]).
+ % !HoldsAt(IsBurning(physobj),0).
+holds_at(not(isBurning(Physobj)),0).
 
 
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:94
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:94
 % HoldsAt(Inside(Cigarette1,Package1),0).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:94
-
- /*  [] ->
-       ta(TaP_Num4_V,
-          tvs1=[],
-          tvs2=[],
-          initially(inside(cigarette1, package1))).
- */
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:94
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:94
-initially(inside(cigarette1,package1)).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:94
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:94
-initial_state([inside(cigarette1,package1)]).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e',94).
+holds_at(inside(cigarette1,package1),0).
 
 
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:95
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e',96).
 % [physobj1,physobj2]
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:96
 % !(physobj1=Cigarette1 & physobj2=Package1) ->
 % !HoldsAt(Inside(physobj1, physobj2),0).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:97
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:97
-not((equals(Physobj1, cigarette1), equals(Physobj2, package1))) ->
-    initially(neg(inside(Physobj1, Physobj2))).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:97
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:97
- reactive_rule([ not((equals(Physobj1, cigarette1), equals(Physobj2, package1)))
-                 ],
-                 [initially(not(inside(Physobj1, Physobj2)))]).
+not((Physobj1=cigarette1, Physobj2=package1)) ->
+    holds_at(not(inside(Physobj1, Physobj2)), 0).
 
 
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:99
 %; narrative
 
 
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:100
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:100
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e',101).
 % Happens(TakeOffOf(Smoker1,Package1,Surface1),0).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:100
-
- /*  [] ->
-       ta(TaP_Num4_V,
-          tvs1=[start],
-          tvs2=[start],
-          happens(takeOffOf(smoker1, package1, surface1), start)).
- */
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:100
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:100
-happens(takeOffOf(smoker1,package1,surface1),start).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:100
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:100
-observe(at(takeOffOf(smoker1,package1,surface1),start)).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:100
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:100
-observe(at(takeOffOf(smoker1,package1,surface1),start)).
+happens_at(takeOffOf(smoker1,package1,surface1),0).
 
 
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:101
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:101
 % Happens(ContainerOpen(Smoker1,Package1),1).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:101
-
- /*  [b(start, Maptime), ignore(start+1==Maptime)] ->
-       ta(TaP_Num4_V,
-          tvs1=[start+1],
-          tvs2=[Maptime, start],
-          happens(containerOpen(smoker1, package1), Maptime)).
- */
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:101
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:101
-b(start, Maptime2) ->
-    happens(containerOpen(smoker1, package1), Maptime2).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:101
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:101
-reactive_rule([b(start,Maptime2)],
-	      [happens(containerOpen(smoker1,package1),Maptime2)]).
+happens_at(containerOpen(smoker1,package1),1).
 
 
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:102
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:102
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e',103).
 % Happens(TakeOutOf(Smoker1,Cigarette1,Package1),2).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:102
-
- /*  [b(start, Start_Num2), toffset(start, 2, Start_Num2), ignore(start+2==Start_Num2)] ->
-       ta(TaP_Num4_V,
-          tvs1=[start+2],
-          tvs2=[Start_Num2, start],
-          happens(takeOutOf(smoker1, cigarette1, package1), Start_Num2)).
- */
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:102
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:102
-b(start, Maptime), toffset(start, 2, Maptime) ->
-    happens(takeOutOf(smoker1, cigarette1, package1), Maptime).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:102
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:102
-reactive_rule([b(start,Maptime),toffset(start,2,Maptime)],
-	      [ happens(takeOutOf(smoker1,cigarette1,package1),
-			Maptime)
-	      ]).
+happens_at(takeOutOf(smoker1,cigarette1,package1),2).
 
 
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:103
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:103
 % Happens(PickUp(Smoker1,LightingDevice1),3).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:103
-
- /*  [b(start, Start_Num3), toffset(start, 3, Start_Num3), ignore(start+3==Start_Num3)] ->
-       ta(TaP_Num4_V,
-          tvs1=[start+3],
-          tvs2=[Start_Num3, start],
-          happens(pickUp(smoker1, lightingDevice1), Start_Num3)).
- */
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:103
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:103
-b(start, Maptime), toffset(start, 3, Maptime) ->
-    happens(pickUp(smoker1, lightingDevice1), Maptime).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:103
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:103
-reactive_rule([b(start,Maptime),toffset(start,3,Maptime)],
-	      [happens(pickUp(smoker1,lightingDevice1),Maptime)]).
+happens_at(pickUp(smoker1,lightingDevice1),3).
 
 
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:104
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:104
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e',105).
 % Happens(Light(Smoker1,LightingDevice1),4).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:104
-
- /*  [b(start, Start_Num4), toffset(start, 4, Start_Num4), ignore(start+4==Start_Num4)] ->
-       ta(TaP_Num4_V,
-          tvs1=[start+4],
-          tvs2=[Start_Num4, start],
-          happens(light(smoker1, lightingDevice1), Start_Num4)).
- */
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:104
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:104
-b(start, Maptime), toffset(start, 4, Maptime) ->
-    happens(light(smoker1, lightingDevice1), Maptime).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:104
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:104
-reactive_rule([b(start,Maptime),toffset(start,4,Maptime)],
-	      [happens(light(smoker1,lightingDevice1),Maptime)]).
+happens_at(light(smoker1,lightingDevice1),4).
 
 
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:105
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:105
 % Happens(LightWith(Smoker1,Cigarette1,LightingDevice1),5).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:105
-
- /*  [b(start, Start_Num5), toffset(start, 5, Start_Num5), ignore(start+5==Start_Num5)] ->
-       ta(TaP_Num4_V,
-          tvs1=[start+5],
-          tvs2=[Start_Num5, start],
-          happens(lightWith(smoker1, cigarette1, lightingDevice1), Start_Num5)).
- */
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:105
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:105
-b(start, Maptime), toffset(start, 5, Maptime) ->
-    happens(lightWith(smoker1, cigarette1, lightingDevice1), Maptime).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:105
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:105
-reactive_rule([b(start,Maptime),toffset(start,5,Maptime)],
-	      [ happens(lightWith(smoker1,cigarette1,lightingDevice1),
-			Maptime)
-	      ]).
+happens_at(lightWith(smoker1,cigarette1,lightingDevice1),5).
 
 
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:106
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:106
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e',107).
 % Happens(BlowOut(Smoker1,LightingDevice1),6).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:106
-
- /*  [b(start, Start_Num6), toffset(start, 6, Start_Num6), ignore(start+6==Start_Num6)] ->
-       ta(TaP_Num4_V,
-          tvs1=[start+6],
-          tvs2=[Start_Num6, start],
-          happens(blowOut(smoker1, lightingDevice1), Start_Num6)).
- */
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:106
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:106
-b(start, Maptime), toffset(start, 6, Maptime) ->
-    happens(blowOut(smoker1, lightingDevice1), Maptime).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:106
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:106
-reactive_rule([b(start,Maptime),toffset(start,6,Maptime)],
-	      [happens(blowOut(smoker1,lightingDevice1),Maptime)]).
+happens_at(blowOut(smoker1,lightingDevice1),6).
 
 
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:107
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:107
 % Happens(PlaceOn(Smoker1,LightingDevice1,Surface1),7).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:107
-
- /*  [b(start, Start_Num7), toffset(start, 7, Start_Num7), ignore(start+7==Start_Num7)] ->
-       ta(TaP_Num4_V,
-          tvs1=[start+7],
-          tvs2=[Start_Num7, start],
-          happens(placeOn(smoker1, lightingDevice1, surface1), Start_Num7)).
- */
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:107
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:107
-b(start, Maptime), toffset(start, 7, Maptime) ->
-    happens(placeOn(smoker1, lightingDevice1, surface1), Maptime).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:107
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:107
-reactive_rule([b(start,Maptime),toffset(start,7,Maptime)],
-	      [ happens(placeOn(smoker1,lightingDevice1,surface1),
-			Maptime)
-	      ]).
+happens_at(placeOn(smoker1,lightingDevice1,surface1),7).
 
 
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:108
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:108
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e',109).
 % Happens(PlaceOn(Smoker1,Package1,Surface1),8).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:108
-
- /*  [b(start, Start_Num8), toffset(start, 8, Start_Num8), ignore(start+8==Start_Num8)] ->
-       ta(TaP_Num4_V,
-          tvs1=[start+8],
-          tvs2=[Start_Num8, start],
-          happens(placeOn(smoker1, package1, surface1), Start_Num8)).
- */
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:108
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:108
-b(start, Maptime), toffset(start, 8, Maptime) ->
-    happens(placeOn(smoker1, package1, surface1), Maptime).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:108
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:108
-reactive_rule([b(start,Maptime),toffset(start,8,Maptime)],
-	      [ happens(placeOn(smoker1,package1,surface1),
-			Maptime)
-	      ]).
+happens_at(placeOn(smoker1,package1,surface1),8).
 
 
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:109
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:109
 % Happens(Puff(Smoker1,Cigarette1),9).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:109
-
- /*  [b(start, Start_Num9), toffset(start, 9, Start_Num9), ignore(start+9==Start_Num9)] ->
-       ta(TaP_Num4_V,
-          tvs1=[start+9],
-          tvs2=[Start_Num9, start],
-          happens(puff(smoker1, cigarette1), Start_Num9)).
- */
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:109
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:109
-b(start, Maptime), toffset(start, 9, Maptime) ->
-    happens(puff(smoker1, cigarette1), Maptime).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:109
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:109
-reactive_rule([b(start,Maptime),toffset(start,9,Maptime)],
-	      [happens(puff(smoker1,cigarette1),Maptime)]).
+happens_at(puff(smoker1,cigarette1),9).
 
 
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:110
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:110
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e',111).
 % Happens(BlowOutSmoke(Smoker1,Smoke1),10).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:110
-
- /*  [b(start, Start_Num10), toffset(start, 10, Start_Num10), ignore(start+10==Start_Num10)] ->
-       ta(TaP_Num4_V,
-          tvs1=[start+10],
-          tvs2=[Start_Num10, start],
-          happens(blowOutSmoke(smoker1, smoke1), Start_Num10)).
- */
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:110
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:110
-b(start, Maptime), toffset(start, 10, Maptime) ->
-    happens(blowOutSmoke(smoker1, smoke1), Maptime).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:110
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:110
-reactive_rule([b(start,Maptime),toffset(start,10,Maptime)],
-	      [happens(blowOutSmoke(smoker1,smoke1),Maptime)]).
+happens_at(blowOutSmoke(smoker1,smoke1),10).
 
 
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:111
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:111
 % Happens(PlaceOn(Smoker1,Cigarette1,AshTray1),11).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:111
-
- /*  [b(start, Start_Num11), toffset(start, 11, Start_Num11), ignore(start+11==Start_Num11)] ->
-       ta(TaP_Num4_V,
-          tvs1=[start+11],
-          tvs2=[Start_Num11, start],
-          happens(placeOn(smoker1, cigarette1, ashTray1), Start_Num11)).
- */
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:111
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:111
-b(start, Maptime), toffset(start, 11, Maptime) ->
-    happens(placeOn(smoker1, cigarette1, ashTray1), Maptime).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:111
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:111
-reactive_rule([b(start,Maptime),toffset(start,11,Maptime)],
-	      [ happens(placeOn(smoker1,cigarette1,ashTray1),
-			Maptime)
-	      ]).
+happens_at(placeOn(smoker1,cigarette1,ashTray1),11).
 
 
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:112
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:112
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e',113).
 % Happens(TakeOffOf(Smoker1,Cigarette1,AshTray1),12).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:112
-
- /*  [b(start, Start_Num12), toffset(start, 12, Start_Num12), ignore(start+12==Start_Num12)] ->
-       ta(TaP_Num4_V,
-          tvs1=[start+12],
-          tvs2=[Start_Num12, start],
-          happens(takeOffOf(smoker1, cigarette1, ashTray1), Start_Num12)).
- */
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:112
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:112
-b(start, Maptime), toffset(start, 12, Maptime) ->
-    happens(takeOffOf(smoker1, cigarette1, ashTray1), Maptime).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:112
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:112
-reactive_rule([b(start,Maptime),toffset(start,12,Maptime)],
-	      [ happens(takeOffOf(smoker1,cigarette1,ashTray1),
-			Maptime)
-	      ]).
+happens_at(takeOffOf(smoker1,cigarette1,ashTray1),12).
 
 
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:113
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:113
 % Happens(Puff(Smoker1,Cigarette1),13).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:113
-
- /*  [b(start, Start_Num13), toffset(start, 13, Start_Num13), ignore(start+13==Start_Num13)] ->
-       ta(TaP_Num4_V,
-          tvs1=[start+13],
-          tvs2=[Start_Num13, start],
-          happens(puff(smoker1, cigarette1), Start_Num13)).
- */
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:113
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:113
-b(start, Maptime), toffset(start, 13, Maptime) ->
-    happens(puff(smoker1, cigarette1), Maptime).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:113
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:113
-reactive_rule([b(start,Maptime),toffset(start,13,Maptime)],
-	      [happens(puff(smoker1,cigarette1),Maptime)]).
+happens_at(puff(smoker1,cigarette1),13).
 
 
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:114
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:114
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e',115).
 % Happens(PutOut(Smoker1,Cigarette1),14).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:114
-
- /*  [b(start, Start_Num14), toffset(start, 14, Start_Num14), ignore(start+14==Start_Num14)] ->
-       ta(TaP_Num4_V,
-          tvs1=[start+14],
-          tvs2=[Start_Num14, start],
-          happens(putOut(smoker1, cigarette1), Start_Num14)).
- */
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:114
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:114
-b(start, Maptime), toffset(start, 14, Maptime) ->
-    happens(putOut(smoker1, cigarette1), Maptime).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:114
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:114
-reactive_rule([b(start,Maptime),toffset(start,14,Maptime)],
-	      [happens(putOut(smoker1,cigarette1),Maptime)]).
+happens_at(putOut(smoker1,cigarette1),14).
 
 
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:115
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:115
 % Happens(PutInside(Smoker1,Cigarette1,Trash1),15).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:115
+happens_at(putInside(smoker1,cigarette1,trash1),15).
 
- /*  [b(start, Start_Num15), toffset(start, 15, Start_Num15), ignore(start+15==Start_Num15)] ->
-       ta(TaP_Num4_V,
-          tvs1=[start+15],
-          tvs2=[Start_Num15, start],
-          happens(putInside(smoker1, cigarette1, trash1), Start_Num15)).
- */
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:115
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:115
-b(start, Maptime), toffset(start, 15, Maptime) ->
-    happens(putInside(smoker1, cigarette1, trash1), Maptime).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:115
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:115
-reactive_rule([b(start,Maptime),toffset(start,15,Maptime)],
-	      [ happens(putInside(smoker1,cigarette1,trash1),
-			Maptime)
-	      ]).
-
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:117
 % range time 0 16
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:118
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:118
-range(time,0,16).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:118
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:118
-range(time,0,16).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e',117).
+:- call_pel_directive(range(time, 0, 16)).
 
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:118
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e',119).
 % range offset 0 0
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:119
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:119
-range(offset,0,0).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:119
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:119
-range(offset,0,0).
+:- call_pel_directive(range(offset, 0, 0)).
 
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:119
 % range diameter 0 0
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:120
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:120
-range(diameter,0,0).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:120
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:120
-range(diameter,0,0).
+:- call_pel_directive(range(diameter, 0, 0)).
 
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:121
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e',122).
 % completion Happens
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:122
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:122
-completion(happens).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:122
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.e:122
-completion(happens).
+:- call_pel_directive(completion(happens_at)).
 %; End of file.
+:- call_pel_directive(translate(ending,
+                                '/pack/logicmoo_ec/ext/ec_sources/ecnet/Smoking.pel')).

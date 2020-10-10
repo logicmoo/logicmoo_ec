@@ -1,7 +1,10 @@
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Container.e',73).
+:- call_pel_directive(translate(unskipped,
+                                '/pack/logicmoo_ec/ext/ec_sources/ecnet/CTime.pel')).
 :-include(library('ec_planner/ec_test_incl')).
-:-expects_dialect(pfc).
-% Tue, 06 Oct 2020 05:00:44 GMT
- %  loading(load_e_pl,'/pack/logicmoo_ec/ext/ec_sources/ecnet/CTime.e').
+:-expects_dialect(ecalc).
+:- call_pel_directive(translate(begining,
+                                '/pack/logicmoo_ec/ext/ec_sources/ecnet/CTime.pel')).
 %;
 %; Copyright (c) 2005 IBM Corporation and others.
 %; All rights reserved. This program and the accompanying materials
@@ -17,387 +20,85 @@
 %; part of the day
 %; time is in the daytime.
 
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/CTime.e:17
 % predicate Daytime(time)
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/CTime.e:18
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/CTime.e:18
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/CTime.e',17).
 predicate(daytime(time)).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/CTime.e:18
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/CTime.e:18
-actions([daytime/1]).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/CTime.e:18
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/CTime.e:18
-actions([daytime/1]).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/CTime.e:18
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/CTime.e:18
-meta_argtypes(daytime(time)).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/CTime.e:18
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/CTime.e:18
-meta_argtypes(daytime(time)).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/CTime.e:18
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/CTime.e:18
-mpred_prop(daytime(time),predicate).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/CTime.e:18
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/CTime.e:18
-mpred_prop(daytime(time),predicate).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/CTime.e:18
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/CTime.e:18
-meta_argtypes(daytime(time)).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/CTime.e:18
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/CTime.e:18
-meta_argtypes(daytime(time)).
 
 
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/CTime.e:18
 %; time is in the nighttime.
 
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/CTime.e:19
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/CTime.e',20).
 % predicate Nighttime(time)
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/CTime.e:20
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/CTime.e:20
 predicate(nighttime(time)).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/CTime.e:20
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/CTime.e:20
-actions([nighttime/1]).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/CTime.e:20
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/CTime.e:20
-actions([nighttime/1]).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/CTime.e:20
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/CTime.e:20
-meta_argtypes(nighttime(time)).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/CTime.e:20
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/CTime.e:20
-meta_argtypes(nighttime(time)).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/CTime.e:20
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/CTime.e:20
-mpred_prop(nighttime(time),predicate).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/CTime.e:20
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/CTime.e:20
-mpred_prop(nighttime(time),predicate).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/CTime.e:20
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/CTime.e:20
-meta_argtypes(nighttime(time)).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/CTime.e:20
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/CTime.e:20
-meta_argtypes(nighttime(time)).
 
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/CTime.e:20
 % xor Daytime, Nighttime
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/CTime.e:21
-
- /*  fix_axiom_head(Time) ->
-       [  (==>)xor[daytime, nighttime],
-          (->),
-         holds_at((==>)xor[daytime, nighttime], Time)
-       ].
- */
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/CTime.e:21
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/CTime.e:21
-holds_at((==>)xor[daytime,nighttime],Time1).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/CTime.e:21
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/CTime.e:21
-l_int(holds((==>)xor[daytime,nighttime],Time1),[]).
+xor([daytime,nighttime]).
 %; time is in the morning.
 
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/CTime.e:23
 % predicate Morning(time)
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/CTime.e:24
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/CTime.e:24
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/CTime.e',23).
 predicate(morning(time)).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/CTime.e:24
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/CTime.e:24
-actions([morning/1]).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/CTime.e:24
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/CTime.e:24
-actions([morning/1]).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/CTime.e:24
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/CTime.e:24
-meta_argtypes(morning(time)).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/CTime.e:24
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/CTime.e:24
-meta_argtypes(morning(time)).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/CTime.e:24
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/CTime.e:24
-mpred_prop(morning(time),predicate).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/CTime.e:24
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/CTime.e:24
-mpred_prop(morning(time),predicate).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/CTime.e:24
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/CTime.e:24
-meta_argtypes(morning(time)).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/CTime.e:24
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/CTime.e:24
-meta_argtypes(morning(time)).
 
 
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/CTime.e:24
 %; time is in the afternoon.
 
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/CTime.e:25
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/CTime.e',26).
 % predicate Afternoon(time)
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/CTime.e:26
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/CTime.e:26
 predicate(afternoon(time)).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/CTime.e:26
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/CTime.e:26
-actions([afternoon/1]).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/CTime.e:26
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/CTime.e:26
-actions([afternoon/1]).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/CTime.e:26
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/CTime.e:26
-meta_argtypes(afternoon(time)).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/CTime.e:26
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/CTime.e:26
-meta_argtypes(afternoon(time)).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/CTime.e:26
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/CTime.e:26
-mpred_prop(afternoon(time),predicate).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/CTime.e:26
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/CTime.e:26
-mpred_prop(afternoon(time),predicate).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/CTime.e:26
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/CTime.e:26
-meta_argtypes(afternoon(time)).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/CTime.e:26
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/CTime.e:26
-meta_argtypes(afternoon(time)).
 
 
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/CTime.e:26
 %; time is in the evening.
 
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/CTime.e:27
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/CTime.e',28).
 % predicate Evening(time)
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/CTime.e:28
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/CTime.e:28
 predicate(evening(time)).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/CTime.e:28
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/CTime.e:28
-actions([evening/1]).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/CTime.e:28
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/CTime.e:28
-actions([evening/1]).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/CTime.e:28
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/CTime.e:28
-meta_argtypes(evening(time)).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/CTime.e:28
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/CTime.e:28
-meta_argtypes(evening(time)).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/CTime.e:28
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/CTime.e:28
-mpred_prop(evening(time),predicate).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/CTime.e:28
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/CTime.e:28
-mpred_prop(evening(time),predicate).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/CTime.e:28
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/CTime.e:28
-meta_argtypes(evening(time)).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/CTime.e:28
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/CTime.e:28
-meta_argtypes(evening(time)).
 
 
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/CTime.e:28
 %; time is in the night.
 
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/CTime.e:29
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/CTime.e',30).
 % predicate Night(time)
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/CTime.e:30
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/CTime.e:30
 predicate(night(time)).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/CTime.e:30
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/CTime.e:30
-actions([night/1]).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/CTime.e:30
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/CTime.e:30
-actions([night/1]).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/CTime.e:30
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/CTime.e:30
-meta_argtypes(night(time)).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/CTime.e:30
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/CTime.e:30
-meta_argtypes(night(time)).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/CTime.e:30
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/CTime.e:30
-mpred_prop(night(time),predicate).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/CTime.e:30
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/CTime.e:30
-mpred_prop(night(time),predicate).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/CTime.e:30
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/CTime.e:30
-meta_argtypes(night(time)).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/CTime.e:30
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/CTime.e:30
-meta_argtypes(night(time)).
 
 
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/CTime.e:30
 %; time is in the late night.
 
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/CTime.e:31
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/CTime.e',32).
 % predicate LateNight(time)
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/CTime.e:32
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/CTime.e:32
 predicate(lateNight(time)).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/CTime.e:32
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/CTime.e:32
-actions([lateNight/1]).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/CTime.e:32
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/CTime.e:32
-actions([lateNight/1]).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/CTime.e:32
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/CTime.e:32
-meta_argtypes(lateNight(time)).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/CTime.e:32
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/CTime.e:32
-meta_argtypes(lateNight(time)).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/CTime.e:32
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/CTime.e:32
-mpred_prop(lateNight(time),predicate).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/CTime.e:32
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/CTime.e:32
-mpred_prop(lateNight(time),predicate).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/CTime.e:32
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/CTime.e:32
-meta_argtypes(lateNight(time)).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/CTime.e:32
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/CTime.e:32
-meta_argtypes(lateNight(time)).
 
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/CTime.e:32
 % xor Morning, Afternoon, Evening, Night, LateNight
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/CTime.e:33
-
- /*  fix_axiom_head(Time) ->
-       [  (==>)xor[morning, afternoon, evening, night, lateNight],
-          (->),
-         holds_at((==>)xor[morning, afternoon, evening, night, lateNight], Time)
-       ].
- */
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/CTime.e:33
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/CTime.e:33
-holds_at(==>xor[morning,afternoon,evening,night,lateNight],
-	 Time1).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/CTime.e:33
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/CTime.e:33
-l_int(holds(==>xor[morning,afternoon,evening,night,lateNight],
-	    Time1),
-      []).
+xor([morning,afternoon,evening,night,lateNight]).
 
 
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/CTime.e:34
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/CTime.e',35).
 % [time]
- 
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/CTime.e:34
-% Daytime(time) <-> Morning(time)|Afternoon(time)|Evening(time).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/CTime.e:34
-
- /*  daytime(Time) <->
-       (   morning(Time)
-       ;   afternoon(Time)
-       ;   evening(Time)
-       ).
- */
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/CTime.e:34
-
- /*  [daytime] <->
-       [;, morning, ;, afternoon, evening].
- */
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/CTime.e:34
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/CTime.e:34
-daytime(Time) ->
+ % Daytime(time) <-> Morning(time)|Afternoon(time)|Evening(time).
+daytime(Time) <->
     (   morning(Time)
     ;   afternoon(Time)
     ;   evening(Time)
     ).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/CTime.e:34
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/CTime.e:34
- reactive_rule([daytime(Time)],
-                 [  (morning(Time);afternoon(Time);evening(Time))
-                 ]).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/CTime.e:34
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/CTime.e:34
-morning(Time);afternoon(Time);evening(Time) ->
-    daytime(Time).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/CTime.e:34
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/CTime.e:34
- reactive_rule([  (morning(Time);afternoon(Time);evening(Time))
-                 ],
-                 [daytime(Time)]).
 
 
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/CTime.e:35
 % [time]
- 
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/CTime.e:35
-% Nighttime(time) <-> Night(time)|LateNight(time).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/CTime.e:35
-
- /*  nighttime(Time) <->
-       (   night(Time)
-       ;   lateNight(Time)
-       ).
- */
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/CTime.e:35
-
- /*  [nighttime] <->
-       [;, night, lateNight].
- */
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/CTime.e:35
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/CTime.e:35
-nighttime(Time) ->
+ % Nighttime(time) <-> Night(time)|LateNight(time).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/CTime.e',35).
+nighttime(Time) <->
     (   night(Time)
     ;   lateNight(Time)
     ).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/CTime.e:35
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/CTime.e:35
- reactive_rule([nighttime(Time)],
-                 [(night(Time);lateNight(Time))]).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/CTime.e:35
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/CTime.e:35
-night(Time);lateNight(Time) ->
-    nighttime(Time).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/CTime.e:35
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/CTime.e:35
- reactive_rule([(night(Time);lateNight(Time))],
-                 [nighttime(Time)]).
 
 
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/CTime.e:37
 %; dreams
 %; time is part of a dream sequence.
 
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/CTime.e:40
 % predicate DreamSequence(time)
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/CTime.e:41
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/CTime.e:41
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/CTime.e',40).
 predicate(dreamSequence(time)).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/CTime.e:41
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/CTime.e:41
-actions([dreamSequence/1]).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/CTime.e:41
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/CTime.e:41
-actions([dreamSequence/1]).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/CTime.e:41
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/CTime.e:41
-meta_argtypes(dreamSequence(time)).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/CTime.e:41
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/CTime.e:41
-meta_argtypes(dreamSequence(time)).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/CTime.e:41
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/CTime.e:41
-mpred_prop(dreamSequence(time),predicate).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/CTime.e:41
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/CTime.e:41
-mpred_prop(dreamSequence(time),predicate).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/CTime.e:41
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/CTime.e:41
-meta_argtypes(dreamSequence(time)).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/CTime.e:41
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/CTime.e:41
-meta_argtypes(dreamSequence(time)).
 
 
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/CTime.e:42
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/CTime.e',43).
 %; End of file.
+:- call_pel_directive(translate(ending,
+                                '/pack/logicmoo_ec/ext/ec_sources/ecnet/CTime.pel')).

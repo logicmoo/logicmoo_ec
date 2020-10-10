@@ -1,7 +1,10 @@
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/GSpace.e',70).
+:- call_pel_directive(translate(unskipped,
+                                '/pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.pel')).
 :-include(library('ec_planner/ec_test_incl')).
-:-expects_dialect(pfc).
-% Tue, 06 Oct 2020 05:01:11 GMT
- %  loading(load_e_pl,'/pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e').
+:-expects_dialect(ecalc).
+:- call_pel_directive(translate(begining,
+                                '/pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.pel')).
 %;
 %; Copyright (c) 2005 IBM Corporation and others.
 %; All rights reserved. This program and the accompanying materials
@@ -13,450 +16,153 @@
 %; IBM - Initial implementation
 %;
 
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e:11
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e',12).
 % fluent Loaded(gun,bullet)
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e:12
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e:12
 fluent(loaded(gun,bullet)).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e:12
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e:12
-fluents([loaded/2]).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e:12
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e:12
-fluents([loaded/2]).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e:12
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e:12
-meta_argtypes(loaded(gun,bullet)).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e:12
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e:12
-meta_argtypes(loaded(gun,bullet)).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e:12
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e:12
-mpred_prop(loaded(gun,bullet),fluent).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e:12
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e:12
-mpred_prop(loaded(gun,bullet),fluent).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e:12
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e:12
-meta_argtypes(loaded(gun,bullet)).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e:12
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e:12
-meta_argtypes(loaded(gun,bullet)).
 
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e:12
 % noninertial Loaded
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e:13
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e:13
-noninertial(loaded).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e:13
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e:13
-noninertial(loaded).
+:- call_pel_directive(noninertial(loaded)).
 
 
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e:14
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e',15).
 % [gun,bullet,time]
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e:15
 % HoldsAt(Inside(bullet,gun),time) <->
 % HoldsAt(Loaded(gun,bullet),time).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e:16
-
- /*  holds_at(inside(Bullet, Gun), Time) <->
-       holds_at(loaded(Gun, Bullet), Time).
- */
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e:16
-
- /*  [holds_at, inside] <->
-       [holds_at, loaded].
- */
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e:16
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e:16
-holds_at(inside(Bullet, Gun), Time) ->
+holds_at(inside(Bullet, Gun), Time) <->
     holds_at(loaded(Gun, Bullet), Time).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e:16
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e:16
-reactive_rule([holds(inside(Bullet,Gun),Time)],
-	      [holds(loaded(Gun,Bullet),Time)]).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e:16
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e:16
-holds_at(loaded(Gun, Bullet), Time) ->
-    holds_at(inside(Bullet, Gun), Time).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e:16
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e:16
-reactive_rule([holds(loaded(Gun,Bullet),Time)],
-	      [holds(inside(Bullet,Gun),Time)]).
 
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e:18
 % event Shoot(agent,gun,object)
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e:19
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e:19
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e',18).
 event(shoot(agent,gun,object)).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e:19
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e:19
-actions([shoot/3]).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e:19
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e:19
-actions([shoot/3]).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e:19
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e:19
-meta_argtypes(shoot(agent,gun,object)).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e:19
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e:19
-meta_argtypes(shoot(agent,gun,object)).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e:19
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e:19
-mpred_prop(shoot(agent,gun,object),event).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e:19
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e:19
-mpred_prop(shoot(agent,gun,object),event).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e:19
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e:19
-meta_argtypes(shoot(agent,gun,object)).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e:19
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e:19
-meta_argtypes(shoot(agent,gun,object)).
 
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e:20
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e',21).
 % event ShootInjure(agent,gun,agent)
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e:21
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e:21
 event(shootInjure(agent,gun,agent)).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e:21
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e:21
-actions([shootInjure/3]).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e:21
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e:21
-actions([shootInjure/3]).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e:21
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e:21
-meta_argtypes(shootInjure(agent,gun,agent)).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e:21
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e:21
-meta_argtypes(shootInjure(agent,gun,agent)).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e:21
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e:21
-mpred_prop(shootInjure(agent,gun,agent),event).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e:21
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e:21
-mpred_prop(shootInjure(agent,gun,agent),event).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e:21
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e:21
-meta_argtypes(shootInjure(agent,gun,agent)).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e:21
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e:21
-meta_argtypes(shootInjure(agent,gun,agent)).
 
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e:22
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e',23).
 % event ShootKill(agent,gun,agent)
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e:23
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e:23
 event(shootKill(agent,gun,agent)).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e:23
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e:23
-actions([shootKill/3]).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e:23
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e:23
-actions([shootKill/3]).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e:23
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e:23
-meta_argtypes(shootKill(agent,gun,agent)).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e:23
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e:23
-meta_argtypes(shootKill(agent,gun,agent)).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e:23
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e:23
-mpred_prop(shootKill(agent,gun,agent),event).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e:23
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e:23
-mpred_prop(shootKill(agent,gun,agent),event).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e:23
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e:23
-meta_argtypes(shootKill(agent,gun,agent)).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e:23
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e:23
-meta_argtypes(shootKill(agent,gun,agent)).
 
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e:24
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e',25).
 % event ShootDamage(agent,gun,physobj)
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e:25
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e:25
 event(shootDamage(agent,gun,physobj)).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e:25
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e:25
-actions([shootDamage/3]).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e:25
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e:25
-actions([shootDamage/3]).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e:25
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e:25
-meta_argtypes(shootDamage(agent,gun,physobj)).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e:25
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e:25
-meta_argtypes(shootDamage(agent,gun,physobj)).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e:25
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e:25
-mpred_prop(shootDamage(agent,gun,physobj),event).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e:25
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e:25
-mpred_prop(shootDamage(agent,gun,physobj),event).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e:25
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e:25
-meta_argtypes(shootDamage(agent,gun,physobj)).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e:25
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e:25
-meta_argtypes(shootDamage(agent,gun,physobj)).
 
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e:26
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e',27).
 % event ShootDestroy(agent,gun,physobj)
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e:27
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e:27
 event(shootDestroy(agent,gun,physobj)).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e:27
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e:27
-actions([shootDestroy/3]).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e:27
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e:27
-actions([shootDestroy/3]).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e:27
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e:27
-meta_argtypes(shootDestroy(agent,gun,physobj)).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e:27
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e:27
-meta_argtypes(shootDestroy(agent,gun,physobj)).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e:27
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e:27
-mpred_prop(shootDestroy(agent,gun,physobj),event).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e:27
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e:27
-mpred_prop(shootDestroy(agent,gun,physobj),event).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e:27
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e:27
-meta_argtypes(shootDestroy(agent,gun,physobj)).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e:27
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e:27
-meta_argtypes(shootDestroy(agent,gun,physobj)).
 
 
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e:28
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e',29).
 % [agent,gun,bullet,object,time]
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e:29
 % HoldsAt(Inside(bullet,gun),time) ->
 % Terminates(Shoot(agent,gun,object),
 %            Inside(bullet,gun),
 %            time).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e:32
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e:32
 holds_at(inside(Bullet, Gun), Time) ->
-    terminates(shoot(Agent, Gun, Object),
-               inside(Bullet, Gun),
-               Time).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e:32
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e:32
-reactive_rule([holds(inside(Bullet,Gun),Time)],
-	      [ terminates(shoot(Agent,Gun,Object),
-			   at(inside(Bullet,Gun),
-			      Time))
-	      ]).
+    terminates_at(shoot(Agent, Gun, Object),
+                  inside(Bullet, Gun),
+                  Time).
 
 
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e:34
 % [agent,gun,bullet,object,location1,location2,time]
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e:35
 % HoldsAt(Inside(bullet,gun),time) &
 % HoldsAt(At(gun,location1),time) &
 % location1 != location2 ->
 % Terminates(Shoot(agent,gun,object),At(bullet,location2),time).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e:38
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e:38
-holds_at(inside(Bullet, Gun), Time), holds_at(at(Gun, Location1), Time), diff(Location1, Location2) ->
-    terminates(shoot(Agent, Gun, Object),
-               at(Bullet, Location2),
-               Time).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e:38
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e:38
-reactive_rule([ holds(inside(Bullet,Gun),Time),
-		holds(loc_at(Gun,Location1),Time),
-		diff(Location1,Location2)
-	      ],
-	      [ terminates(shoot(Agent,Gun,Object),
-			   at(loc_at(Bullet,Location2),
-			      Time))
-	      ]).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e',36).
+holds_at(inside(Bullet, Gun), Time), holds_at(at_loc(Gun, Location1), Time), Location1\=Location2 ->
+    terminates_at(shoot(Agent, Gun, Object),
+                  at_loc(Bullet, Location2),
+                  Time).
 
 
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e:40
 % [agent,gun,bullet,object,location,time]
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e:41
 % HoldsAt(At(object,location),time) &
 % HoldsAt(Inside(bullet,gun),time) ->
 % Initiates(Shoot(agent,gun,object),At(bullet,location),time).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e:43
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e:43
-holds_at(at(Object, Location), Time), holds_at(inside(Bullet, Gun), Time) ->
-    initiates(shoot(Agent, Gun, Object),
-              at(Bullet, Location),
-              Time).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e:43
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e:43
-reactive_rule([ holds(loc_at(Object,Location),Time),
-		holds(inside(Bullet,Gun),Time)
-	      ],
-	      [ initiates(shoot(Agent,Gun,Object),
-			  at(loc_at(Bullet,Location),
-			     Time))
-	      ]).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e',42).
+holds_at(at_loc(Object, Location), Time), holds_at(inside(Bullet, Gun), Time) ->
+    initiates_at(shoot(Agent, Gun, Object),
+                 at_loc(Bullet, Location),
+                 Time).
 
 
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e:45
 % [agent,gun,object,time]
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e:46
 % Happens(Shoot(agent,gun,object),time) ->
 % HoldsAt(Holding(agent,gun),time) &
 % ({bullet} HoldsAt(Loaded(gun,bullet),time)) &
 % ({location} HoldsAt(At(agent,location),time) &
 %             HoldsAt(At(object,location),time)).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e:50
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e:50
-happens(shoot(Agent, Gun, Object), Time) ->
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e',47).
+happens_at(shoot(Agent, Gun, Object), Time) ->
     holds_at(holding(Agent, Gun), Time),
     exists([Bullet], holds_at(loaded(Gun, Bullet), Time)),
     exists([Location],
-            (holds_at(at(Agent, Location), Time), holds_at(at(Object, Location), Time))).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e:50
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e:50
- reactive_rule([ happens(shoot(Agent, Gun, Object),
-                           Time)
-                 ],
-                 [ holds(holding(Agent, Gun), Time),
-                   exists([Bullet],
-                          at(loaded(Gun, Bullet), Time)),
-                   exists([Location],
-                           (at(loc_at(Agent, Location), Time), at(loc_at(Object, Location), Time)))
-                 ]).
+            (holds_at(at_loc(Agent, Location), Time), holds_at(at_loc(Object, Location), Time))).
 
 
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e:52
 % [agent1,gun,agent2,time]
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e:53
 % Happens(Shoot(agent1,gun,agent2),time) ->
 % Happens(ShootInjure(agent1,gun,agent2),time) |
 % Happens(ShootKill(agent1,gun,agent2),time).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e:55
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e:55
-happens(shoot(Agent1, Gun, Agent2), Time) ->
-    (   happens(shootInjure(Agent1, Gun, Agent2), Time)
-    ;   happens(shootKill(Agent1, Gun, Agent2), Time)
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e',54).
+happens_at(shoot(Agent1, Gun, Agent2), Time) ->
+    (   happens_at(shootInjure(Agent1, Gun, Agent2),
+                   Time)
+    ;   happens_at(shootKill(Agent1, Gun, Agent2), Time)
     ).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e:55
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e:55
- reactive_rule([ happens(shoot(Agent1, Gun, Agent2),
-                           Time)
-                 ],
-                 [  (happens(shootInjure(Agent1, Gun, Agent2), Time);happens(shootKill(Agent1, Gun, Agent2), Time))
-                 ]).
 
 
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e:57
 % [agent1,gun,bullet,agent2,time]
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e:58
 % HoldsAt(Inside(bullet,gun),time) &
 % Happens(ShootKill(agent1,gun,agent2),time) ->
 % Happens(Kill(bullet,agent2),time).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e:60
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e:60
-holds_at(inside(Bullet, Gun), Time), happens(shootKill(Agent1, Gun, Agent2), Time) ->
-    happens(kill(Bullet, Agent2), Time).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e:60
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e:60
-reactive_rule([ holds(inside(Bullet,Gun),Time),
-		happens(shootKill(Agent1,Gun,Agent2),
-			Time)
-	      ],
-	      [happens(kill(Bullet,Agent2),Time)]).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e',59).
+holds_at(inside(Bullet, Gun), Time), happens_at(shootKill(Agent1, Gun, Agent2), Time) ->
+    happens_at(kill(Bullet, Agent2), Time).
 
 
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e:62
 % [agent1,gun,bullet,agent2,time]
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e:63
 % HoldsAt(Inside(bullet,gun),time) &
 % Happens(ShootInjure(agent1,gun,agent2),time) ->
 % Happens(Injure(bullet,agent2),time).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e:65
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e:65
-holds_at(inside(Bullet, Gun), Time), happens(shootInjure(Agent1, Gun, Agent2), Time) ->
-    happens(injure(Bullet, Agent2), Time).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e:65
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e:65
-reactive_rule([ holds(inside(Bullet,Gun),Time),
-		happens(shootInjure(Agent1,
-				    Gun,
-				    Agent2),
-			Time)
-	      ],
-	      [happens(injure(Bullet,Agent2),Time)]).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e',64).
+holds_at(inside(Bullet, Gun), Time), happens_at(shootInjure(Agent1, Gun, Agent2), Time) ->
+    happens_at(injure(Bullet, Agent2), Time).
 
 
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e:67
 % [agent,gun,physobj,time]
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e:68
 % Happens(Shoot(agent,gun,physobj),time) ->
 % Happens(ShootDamage(agent,gun,physobj),time) |
 % Happens(ShootDestroy(agent,gun,physobj),time).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e:70
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e:70
-happens(shoot(Agent, Gun, Physobj), Time) ->
-    (   happens(shootDamage(Agent, Gun, Physobj), Time)
-    ;   happens(shootDestroy(Agent, Gun, Physobj), Time)
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e',69).
+happens_at(shoot(Agent, Gun, Physobj), Time) ->
+    (   happens_at(shootDamage(Agent, Gun, Physobj),
+                   Time)
+    ;   happens_at(shootDestroy(Agent, Gun, Physobj),
+                   Time)
     ).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e:70
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e:70
- reactive_rule([ happens(shoot(Agent, Gun, Physobj),
-                           Time)
-                 ],
-                 [  (happens(shootDamage(Agent, Gun, Physobj), Time);happens(shootDestroy(Agent, Gun, Physobj), Time))
-                 ]).
 
 
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e:72
 % [agent,gun,bullet,physobj,time]
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e:73
 % HoldsAt(Inside(bullet,gun),time) &
 % Happens(ShootDamage(agent,gun,physobj),time) ->
 % Happens(Damage(bullet,physobj),time).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e:75
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e:75
-holds_at(inside(Bullet, Gun), Time), happens(shootDamage(Agent, Gun, Physobj), Time) ->
-    happens(damage(Bullet, Physobj), Time).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e:75
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e:75
-reactive_rule([ holds(inside(Bullet,Gun),Time),
-		happens(shootDamage(Agent,
-				    Gun,
-				    Physobj),
-			Time)
-	      ],
-	      [happens(damage(Bullet,Physobj),Time)]).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e',74).
+holds_at(inside(Bullet, Gun), Time), happens_at(shootDamage(Agent, Gun, Physobj), Time) ->
+    happens_at(damage(Bullet, Physobj), Time).
 
 
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e:77
 % [agent,gun,bullet,physobj,time]
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e:78
 % HoldsAt(Inside(bullet,gun),time) &
 % Happens(ShootDestroy(agent,gun,physobj),time) ->
 % Happens(Destroy(bullet,physobj),time).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e:80
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e:80
-holds_at(inside(Bullet, Gun), Time), happens(shootDestroy(Agent, Gun, Physobj), Time) ->
-    happens(destroy(Bullet, Physobj), Time).
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e:80
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e:80
-reactive_rule([ holds(inside(Bullet,Gun),Time),
-		happens(shootDestroy(Agent,
-				     Gun,
-				     Physobj),
-			Time)
-	      ],
-	      [happens(destroy(Bullet,Physobj),Time)]).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e',79).
+holds_at(inside(Bullet, Gun), Time), happens_at(shootDestroy(Agent, Gun, Physobj), Time) ->
+    happens_at(destroy(Bullet, Physobj), Time).
 
 
-% From /pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e:82
 %; End of file.
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e',82).
+:- call_pel_directive(translate(ending,
+                                '/pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.pel')).

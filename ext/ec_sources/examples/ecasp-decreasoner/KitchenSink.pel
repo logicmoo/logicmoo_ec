@@ -1,441 +1,150 @@
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/HotAirBalloon3.e',95).
+:- call_pel_directive(translate(unskipped,
+                                '/pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/KitchenSink.pel')).
 :-include(library('ec_planner/ec_test_incl')).
-:-expects_dialect(pfc).
-% Tue, 06 Oct 2020 04:59:08 GMT
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/KitchenSink.pel:4
+:-expects_dialect(ecalc).
+:- call_pel_directive(translate(begining,
+                                '/pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/KitchenSink.pel')).
 
- /*  loading(load_e_pl,
-   	'/pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/KitchenSink.e').
- */
-
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/KitchenSink.e:0
 % load foundations/Root.e
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/KitchenSink.e',1).
+:- call_pel_directive(load('foundations/Root.e')).
 
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/KitchenSink.e:1
 % load foundations/EC.e
+:- call_pel_directive(load('foundations/EC.e')).
 
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/KitchenSink.e:3
 % sort height: integer
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/KitchenSink.e:4
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/KitchenSink.e:4
-subsort(height,integer).
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/KitchenSink.e:4
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/KitchenSink.e:4
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/KitchenSink.e',4).
 subsort(height,integer).
 
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/KitchenSink.e:5
 % event TapOn()
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/KitchenSink.e:6
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/KitchenSink.e:6
-event(tapOn).
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/KitchenSink.e:6
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/KitchenSink.e:6
-events([tapOn/0]).
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/KitchenSink.e:6
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/KitchenSink.e:6
-events([tapOn/0]).
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/KitchenSink.e:6
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/KitchenSink.e:6
-mpred_prop(tapOn,event).
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/KitchenSink.e:6
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/KitchenSink.e:6
-mpred_prop(tapOn,event).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/KitchenSink.e',6).
+event(tapOn()).
 
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/KitchenSink.e:6
 % event TapOff()
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/KitchenSink.e:7
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/KitchenSink.e:7
-event(tapOff).
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/KitchenSink.e:7
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/KitchenSink.e:7
-events([tapOff/0]).
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/KitchenSink.e:7
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/KitchenSink.e:7
-events([tapOff/0]).
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/KitchenSink.e:7
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/KitchenSink.e:7
-mpred_prop(tapOff,event).
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/KitchenSink.e:7
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/KitchenSink.e:7
-mpred_prop(tapOff,event).
+event(tapOff()).
 
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/KitchenSink.e:7
 % event Overflow()
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/KitchenSink.e:8
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/KitchenSink.e:8
-event(overflow).
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/KitchenSink.e:8
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/KitchenSink.e:8
-events([overflow/0]).
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/KitchenSink.e:8
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/KitchenSink.e:8
-events([overflow/0]).
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/KitchenSink.e:8
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/KitchenSink.e:8
-mpred_prop(overflow,event).
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/KitchenSink.e:8
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/KitchenSink.e:8
-mpred_prop(overflow,event).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/KitchenSink.e',8).
+event(overflow()).
 
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/KitchenSink.e:9
 % fluent Filling()
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/KitchenSink.e:10
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/KitchenSink.e:10
-fluent(filling).
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/KitchenSink.e:10
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/KitchenSink.e:10
-fluents([filling/0]).
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/KitchenSink.e:10
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/KitchenSink.e:10
-fluents([filling/0]).
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/KitchenSink.e:10
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/KitchenSink.e:10
-mpred_prop(filling,fluent).
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/KitchenSink.e:10
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/KitchenSink.e:10
-mpred_prop(filling,fluent).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/KitchenSink.e',10).
+fluent(filling()).
 
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/KitchenSink.e:10
 % fluent HasHeight(height)
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/KitchenSink.e:11
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/KitchenSink.e:11
 fluent(hasHeight(height)).
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/KitchenSink.e:11
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/KitchenSink.e:11
-fluents([hasHeight/1]).
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/KitchenSink.e:11
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/KitchenSink.e:11
-fluents([hasHeight/1]).
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/KitchenSink.e:11
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/KitchenSink.e:11
-meta_argtypes(hasHeight(height)).
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/KitchenSink.e:11
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/KitchenSink.e:11
-meta_argtypes(hasHeight(height)).
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/KitchenSink.e:11
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/KitchenSink.e:11
-mpred_prop(hasHeight(height),fluent).
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/KitchenSink.e:11
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/KitchenSink.e:11
-mpred_prop(hasHeight(height),fluent).
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/KitchenSink.e:11
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/KitchenSink.e:11
-meta_argtypes(hasHeight(height)).
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/KitchenSink.e:11
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/KitchenSink.e:11
-meta_argtypes(hasHeight(height)).
 
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/KitchenSink.e:11
 % fluent Spilling()
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/KitchenSink.e:12
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/KitchenSink.e:12
-fluent(spilling).
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/KitchenSink.e:12
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/KitchenSink.e:12
-fluents([spilling/0]).
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/KitchenSink.e:12
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/KitchenSink.e:12
-fluents([spilling/0]).
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/KitchenSink.e:12
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/KitchenSink.e:12
-mpred_prop(spilling,fluent).
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/KitchenSink.e:12
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/KitchenSink.e:12
-mpred_prop(spilling,fluent).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/KitchenSink.e',12).
+fluent(spilling()).
 
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/KitchenSink.e:13
 % range time 0 25
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/KitchenSink.e:14
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/KitchenSink.e:14
-range(time,0,25).
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/KitchenSink.e:14
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/KitchenSink.e:14
-range(time,0,25).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/KitchenSink.e',14).
+:- call_pel_directive(range(time, 0, 25)).
 
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/KitchenSink.e:14
 % range height 0 20
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/KitchenSink.e:15
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/KitchenSink.e:15
-range(height,0,20).
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/KitchenSink.e:15
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/KitchenSink.e:15
-range(height,0,20).
+:- call_pel_directive(range(height, 0, 20)).
 
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/KitchenSink.e:15
 % range offset 1 20
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/KitchenSink.e:16
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/KitchenSink.e:16
-range(offset,1,20).
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/KitchenSink.e:16
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/KitchenSink.e:16
-range(offset,1,20).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/KitchenSink.e',16).
+:- call_pel_directive(range(offset, 1, 20)).
 
 
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/KitchenSink.e:18
 % [time]
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/KitchenSink.e:19
 % (Initiates(TapOn(), Filling(), time)).
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/KitchenSink.e:19
-
- /*  [] ->
-       ta(Time,
-          tvs1=[Time],
-          tvs2=[Time],
-          initiates(tapOn, filling, Time)).
- */
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/KitchenSink.e:19
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/KitchenSink.e:19
-initiates(tapOn,filling,Initiates).
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/KitchenSink.e:19
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/KitchenSink.e:19
-initiated(happens(tapOn,Maptime,Happens),filling,[]).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/KitchenSink.e',20).
+initiates_at(tapOn(),filling(),Time).
 
 
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/KitchenSink.e:21
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/KitchenSink.e',22).
 % [time]
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/KitchenSink.e:22
 % (Terminates(TapOff(), Filling(), time)).
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/KitchenSink.e:22
-
- /*  [] ->
-       ta(Time,
-          tvs1=[Time],
-          tvs2=[Time],
-          terminates(tapOff, filling, Time)).
- */
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/KitchenSink.e:22
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/KitchenSink.e:22
-terminates(tapOff,filling,Terminates).
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/KitchenSink.e:22
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/KitchenSink.e:22
-terminated(happens(tapOff,Maptime,Happens),filling,[]).
+terminates_at(tapOff(),filling(),Time).
 
 
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/KitchenSink.e:24
 % [height, time]
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/KitchenSink.e:25
 % (Releases(TapOn(), HasHeight(height), time)).
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/KitchenSink.e:25
-
- /*  [] ->
-       ta(Time,
-          tvs1=[Time],
-          tvs2=[Time],
-          releases(tapOn, hasHeight(Height), Time)).
- */
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/KitchenSink.e:25
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/KitchenSink.e:25
-releases(tapOn,hasHeight(Hasheight),Releases).
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/KitchenSink.e:25
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/KitchenSink.e:25
-releases(tapOn,hasHeight(Hasheight),Releases).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/KitchenSink.e',26).
+releases_at(tapOn(),hasHeight(Height),Time).
 
 
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/KitchenSink.e:27
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/KitchenSink.e',28).
 % [height, time]
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/KitchenSink.e:28
 % (HoldsAt(HasHeight(height), time) ->
 % Initiates(TapOff(), HasHeight(height), time)).
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/KitchenSink.e:29
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/KitchenSink.e:29
 holds_at(hasHeight(Height), Time) ->
-    initiates(tapOff, hasHeight(Height), Time).
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/KitchenSink.e:29
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/KitchenSink.e:29
-reactive_rule([holds(hasHeight(Height),Time)],
-	      [ initiates(tapOff,
-			  at(hasHeight(Height),Time))
-	      ]).
+    initiates_at(tapOff(), hasHeight(Height), Time).
 
 
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/KitchenSink.e:31
 % [time]
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/KitchenSink.e:32
 % (Terminates(Overflow(), Filling(), time)).
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/KitchenSink.e:32
-
- /*  [] ->
-       ta(Time,
-          tvs1=[Time],
-          tvs2=[Time],
-          terminates(overflow, filling, Time)).
- */
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/KitchenSink.e:32
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/KitchenSink.e:32
-terminates(overflow,filling,Terminates).
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/KitchenSink.e:32
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/KitchenSink.e:32
-terminated(happens(overflow,Maptime,Happens),filling,[]).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/KitchenSink.e',33).
+terminates_at(overflow(),filling(),Time).
 
 
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/KitchenSink.e:34
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/KitchenSink.e',35).
 % [height, time]
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/KitchenSink.e:35
 % (HoldsAt(HasHeight(height), time) ->
 % Initiates(Overflow(), HasHeight(height), time)).
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/KitchenSink.e:36
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/KitchenSink.e:36
 holds_at(hasHeight(Height), Time) ->
-    initiates(overflow, hasHeight(Height), Time).
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/KitchenSink.e:36
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/KitchenSink.e:36
-reactive_rule([holds(hasHeight(Height),Time)],
-	      [ initiates(overflow,
-			  at(hasHeight(Height),Time))
-	      ]).
+    initiates_at(overflow(), hasHeight(Height), Time).
 
 
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/KitchenSink.e:38
 % [time]
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/KitchenSink.e:39
 % (Initiates(Overflow(), Spilling(), time)).
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/KitchenSink.e:39
-
- /*  [] ->
-       ta(Time,
-          tvs1=[Time],
-          tvs2=[Time],
-          initiates(overflow, spilling, Time)).
- */
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/KitchenSink.e:39
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/KitchenSink.e:39
-initiates(overflow,spilling,Initiates).
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/KitchenSink.e:39
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/KitchenSink.e:39
-initiated(happens(overflow,Maptime,Happens),spilling,[]).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/KitchenSink.e',40).
+initiates_at(overflow(),spilling(),Time).
 
 
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/KitchenSink.e:41
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/KitchenSink.e',42).
 % [height1, height2, offset, time]
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/KitchenSink.e:42
 % (HoldsAt(HasHeight(height1), time) &
 % height2 = (height1 + offset) ->
 % Trajectory(Filling(), time, HasHeight(height2), offset)).
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/KitchenSink.e:44
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/KitchenSink.e:44
-holds_at(hasHeight(Height1), Time), equals(Height2, Height1+Offset) ->
-    trajectory(filling, Time, hasHeight(Height2), Offset).
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/KitchenSink.e:44
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/KitchenSink.e:44
-reactive_rule([ holds(hasHeight(Height1),Time),
-		equals(Height2,Height1+Offset)
-	      ],
-	      [ trajectory(filling,
-			   Time,
-			   hasHeight(Height2),
-			   Offset)
-	      ]).
+holds_at(hasHeight(Height1), Time), Height2=Height1+Offset ->
+    trajectory(filling(), Time, hasHeight(Height2), Offset).
 
 
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/KitchenSink.e:46
 % [height1, height2, time]
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/KitchenSink.e:47
 % (HoldsAt(HasHeight(height1), time) &
 % HoldsAt(HasHeight(height2), time) ->
 % height1=height2).
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/KitchenSink.e:49
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/KitchenSink.e:49
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/KitchenSink.e',48).
 holds_at(hasHeight(Height1), Time), holds_at(hasHeight(Height2), Time) ->
-    equals(Height1, Height2).
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/KitchenSink.e:49
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/KitchenSink.e:49
-reactive_rule([ holds(hasHeight(Height1),Time),
-		holds(hasHeight(Height2),Time)
-	      ],
-	      [equals(Height1,Height2)]).
+    Height1=Height2.
 
 
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/KitchenSink.e:51
 % [time]
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/KitchenSink.e:52
 % (HoldsAt(HasHeight(10), time) &
 % HoldsAt(Filling(), time) ->
 % Happens(Overflow(), time)).
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/KitchenSink.e:54
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/KitchenSink.e:54
-holds_at(hasHeight(10), Time), holds_at(filling, Time) ->
-    happens(overflow, Time).
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/KitchenSink.e:54
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/KitchenSink.e:54
-reactive_rule([ holds(hasHeight(10),Time),
-		holds(filling,Time)
-	      ],
-	      [happens(overflow,Time)]).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/KitchenSink.e',53).
+holds_at(hasHeight(10), Time), holds_at(filling(), Time) ->
+    happens_at(overflow(), Time).
 
 
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/KitchenSink.e:57
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/KitchenSink.e:57
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/KitchenSink.e',58).
 % HoldsAt(HasHeight(0), 0).
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/KitchenSink.e:57
-
- /*  [] ->
-       ta(TaP_Num4_V, tvs1=[], tvs2=[], initially(hasHeight(0))).
- */
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/KitchenSink.e:57
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/KitchenSink.e:57
-initially(hasHeight(0)).
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/KitchenSink.e:57
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/KitchenSink.e:57
-initial_state([hasHeight(0)]).
+holds_at(hasHeight(0),0).
 
 
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/KitchenSink.e:58
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/KitchenSink.e:58
 % !HoldsAt(Filling(), 0).
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/KitchenSink.e:58
-
- /*  [] ->
-       ta(TaP_Num4_V, tvs1=[], tvs2=[], initially(neg(filling))).
- */
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/KitchenSink.e:58
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/KitchenSink.e:58
-initially(neg(filling)).
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/KitchenSink.e:58
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/KitchenSink.e:58
-initial_state([not(filling)]).
+holds_at(not(filling()),0).
 
 
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/KitchenSink.e:59
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/KitchenSink.e:59
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/KitchenSink.e',60).
 % !HoldsAt(Spilling(), 0).
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/KitchenSink.e:59
-
- /*  [] ->
-       ta(TaP_Num4_V, tvs1=[], tvs2=[], initially(neg(spilling))).
- */
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/KitchenSink.e:59
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/KitchenSink.e:59
-initially(neg(spilling)).
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/KitchenSink.e:59
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/KitchenSink.e:59
-initial_state([not(spilling)]).
+holds_at(not(spilling()),0).
 
 
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/KitchenSink.e:61
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/KitchenSink.e:61
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/KitchenSink.e',62).
 % Happens(TapOn(), 5).
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/KitchenSink.e:61
+happens_at(tapOn(),5).
 
- /*  [b(start, Start_Num5), toffset(start, 5, Start_Num5), ignore(start+5==Start_Num5)] ->
-       ta(TaP_Num4_V,
-          tvs1=[start+5],
-          tvs2=[Start_Num5, start],
-          happens(tapOn, Start_Num5)).
- */
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/KitchenSink.e:61
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/KitchenSink.e:61
-b(start, Maptime), toffset(start, 5, Maptime) ->
-    happens(tapOn, Maptime).
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/KitchenSink.e:61
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/KitchenSink.e:61
-reactive_rule([b(start,Maptime),toffset(start,5,Maptime)],
-	      [happens(tapOn,Maptime)]).
-
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/KitchenSink.e:63
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/KitchenSink.e',64).
 % completion Happens
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/KitchenSink.e:64
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/KitchenSink.e:64
-completion(happens).
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/KitchenSink.e:64
-% From /pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/KitchenSink.e:64
-completion(happens).
+:- call_pel_directive(completion(happens_at)).
 %; End of File
+:- call_pel_directive(translate(ending,
+                                '/pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/KitchenSink.pel')).

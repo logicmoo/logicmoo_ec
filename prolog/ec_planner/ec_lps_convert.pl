@@ -6,20 +6,21 @@
    assert_lps/1,
    test_logicmoo_ec_lps_reader/0,
    test_lps_ereader/0,
-   test_logicmoo_ec_reader_2/0,test_logicmoo_ec_lps_reader/1]).
+   test_logicmoo_ec_reader_2/0,
+   test_logicmoo_ec_lps_reader/2,test_logicmoo_ec_lps_reader/1]).
 
 
 :- use_module(library(logicmoo_common)).
 
 :- use_module(library(ec_planner/ec_loader)).
 
-system:ec_current_domain(X):- wdmsg(ec_current_domain(X)),fail.
 /*export_transparent(P):-
   export(P),
   module_transparent(P).
 */
 :- use_module(library(logicmoo_lps)).
-%:- user:use_module(library('ec_planner/ec_planner_dmiles')).
+% system:ec_current_domain(X):- wdmsg(ec_current_domain(X)),fail.
+:- user:use_module(library('ec_planner/ec_planner_dmiles')).
 :- use_module(library(ec_planner/ec_reader)).
 
 :- use_module(library(lps_corner)).
@@ -33,27 +34,40 @@ assert_lps(axiom(Stuff,Nil)):- Nil==[],!,assert_lps(Stuff).
 assert_lps(axiom(Stuff,List)):- !,must_or_rtrace(list_to_conjuncts(List,Body)),!,assert_lps(->(Body,Stuff)).
 assert_lps(Stuff):- assert_ep(lps_test_mod,Stuff).
 
-print_tree_cmt(C,P):- 
+print_tree_cmt(C,P):-
+ mention_o_s_l,
  notrace((echo_format('~N'),  
-  with_output_to(string(S), in_cmt( print_tree(P))),
+  with_output_to(string(S), in_cmt((
+    format('~NFrom E: \n\n',[]),
+    print_tree(P)))),
   to_ansi(C, C0),
   real_ansi_format(C0, '~s', [S]))).
 
+already_lps(Form):- var(Form),!,throw(var_already_lps(Form)).
+already_lps(:- _):-!.
+already_lps(option(_,_)):-!.
+already_lps(false(_)):-!.
+already_lps(mpred_prop(_,_)):-!.
+already_lps(sort(_)):-!.
+already_lps(subsort(_,_)):-!.
+
+
 assert_ep( _M,Form):- print_tree_cmt(white,Form),fail.
-assert_ep(Mod,option(N,V)):- assert_lps(Mod,option(N,V),option(N,V)).
-assert_ep(Mod,Form):- 
+assert_ep(Mod,Form):- already_lps(Form),assert_post(Mod,Form,Form).
+assert_ep(Mod,Form):-
   format('~N',[]),
   must_or_rtrace(ep_to_lps(Form,Lps)),
   major_debug(ignore((Form\==Lps->pprint_ecp_cmt(hfg(green),Form)))),
-  must_or_rtrace(assert_lps(Mod,Form,Lps)),!.
+  must_or_rtrace(assert_post(Mod,Form,Lps)),!.
 
-assert_lps(Mod,_,include(F)):- include_e_lps_file_now(Mod:F). % with_e_file(assert_ep(Mod),current_output, [F]). 
-assert_lps(Mod,_,load(F)):- include_e_lps_file_now(Mod:F). % with_e_file(assert_ep(Mod),current_output, [F]). 
-%assert_lps(Mod,_,include(F)):- !, with_e_file(assert_ep(Mod),current_output, [ec(F)]). 
-%assert_lps(Mod,_,load(X)):- nop(assert_ep(Mod,include(X))),!.
-assert_lps(Mod,Form,Lps):- nortrace, is_list(Lps),!, maplist(assert_lps(Mod,Form),Lps).
-assert_lps(Mod,t(Type,Inst),_):- atom(Type), M=..[Type,Inst],!,assert_lps(Mod,M,M),!.
-assert_lps(Mod,_Form,Lps):- 
+
+%assert_post(Mod,_,include(F)):- include_e_lps_file_now(Type,Mod:F).
+%assert_post(Mod,_,load(F)):- include_e_lps_file_now(Type,Mod:F). 
+%assert_post(Mod,_,include(F)):- !, with_e_file(assert_ep(Mod),current_output, [ec(F)]). 
+%assert_post(Mod,_,load(X)):- nop(assert_ep(Mod,include(X))),!.
+assert_post(Mod,Form,Lps):- nortrace, is_list(Lps),!, maplist(assert_post(Mod,Form),Lps).
+assert_post(Mod,t(Type,Inst),_):- atom(Type), M=..[Type,Inst],!,assert_post(Mod,M,M),!.
+assert_post(Mod,_Form,Lps):- 
   lps_xform(Mod,Lps,Prolog),!,
   must_or_rtrace((Lps\==Prolog->(ignore(( /*(Form\==Prolog,Lps==Prolog)-> */
     print_lps_syntax(yellow,Lps),
@@ -87,25 +101,26 @@ assert_prolog(Mod,Prolog):- is_list(Prolog),!, maplist(assert_prolog(Mod),Prolog
 assert_prolog(_Mod,Prolog):- % get_source_location(File,Line),
    major_debug(pprint_ecp_pl(yellow,Prolog)).
 
-include_e_lps_file_now(MFile):- strip_module(MFile,M,File), include_e_lps_file_now(M,File).
-include_e_lps_file_now(M,File):- absolute_file_name(File,AbsFile),File\==AbsFile,!,include_e_lps_file_now(M,AbsFile).
+include_e_lps_file_now(Type,MFile):- strip_module(MFile,M,File), include_e_lps_file_now(Type,M,File).
+include_e_lps_file_now(Type,M,File):- absolute_file_name(File,AbsFile),File\==AbsFile,exists_file(AbsFile), !,include_e_lps_file_now(Type,M,AbsFile).
 
-include_e_lps_file_now(Mod,File):- 
-   atom_concat(File,'.lps',LPSFile),
-   translate_e_to_filetype(Mod:'lps',File,LPSFile).
+include_e_lps_file_now(Type,Mod,File):- 
+   translate_e_to_filetype(Mod:Type,File).
 
-load_e_lps_file(File):- retractall(etmp:ec_option(load(_), _)), include_e_lps_file(File).
+load_e_lps_file(Type,File):- retractall(etmp:ec_option(load(_), _)), include_e_lps_file(Type,File).
+load_e_lps_file(Type,File):- retractall(etmp:ec_option(load(_), _)), include_e_lps_file(Type,File).
   
-include_e_lps_file(File):- is_list(File), !, maplist(include_e_lps_file,File).
-include_e_lps_file(File):- wdmsg(include_e_lps_file(File)),fail.
-include_e_lps_file(File):- needs_resolve_local_files(File,Resolved),!,include_e_lps_file(Resolved).
-include_e_lps_file(File):- absolute_file_name(File,DB), exists_file(DB),!, 
+include_e_lps_file(Type,File):- is_list(File), !, maplist(include_e_lps_file(Type),File).
+include_e_lps_file(Type,File):- wdmsg(include_e_lps_file(Type,File)),fail.
+include_e_lps_file(Type,File):- needs_resolve_local_files(File,Resolved),!,include_e_lps_file(Type,Resolved).
+include_e_lps_file(Type,File):- absolute_file_name(File,DB), exists_file(DB),!, 
   update_changed_files,   
-  strip_module(_,M,_), prolog_statistics:time(M:include_e_lps_file_now(File)),!.
-include_e_lps_file(File):- throw(with_abs_paths(include_e_lps_file,File)).
+  strip_module(_,M,_), prolog_statistics:time(M:include_e_lps_file_now(Type,File)),!.
+include_e_lps_file(Type,File):- throw(with_abs_paths(include_e_lps_file(Type),File)).
 
 
-test_logicmoo_ec_lps_reader(File):- load_e_lps_file(File).
+test_logicmoo_ec_lps_reader(File):- test_logicmoo_ec_lps_reader(lps, File).
+test_logicmoo_ec_lps_reader(Proc1,File):- load_e_lps_file(Proc1,File).
 
 test_logicmoo_ec_lps_reader:- 
  test_logicmoo_ec_lps_reader([ec('ecnet/Diving.e'), ec('foundations/*.e'), ec('ecnet/*.e')]).
@@ -121,57 +136,130 @@ test_lps_ereader:-
    '../ext/ec_sources/ecnet/*.e',
    '../test/ec_planner/*/*/*/*.e']).
 
+get_time_arg(Holds1,T1):- compound_gt(Holds1,1),
+   functor(Holds1,F,_),
+   time_arg(F,N),
+   arg(N,Holds1,T1),can_be_time_arg(T1),( var(T1); compound(T1)),!.
 
+ep_to_lps_remove_time(FormI,Form):- bagof(Time,Sub^(sub_term(Sub,FormI),get_time_arg(Sub,Time)),TArgs),
+  sort(TArgs,STArgs),  
+  pprint_ecp_cmt(green,STArgs),
+  ((STArgs=[Time],var(Time)) -> (remove_time_arg(Time,FormI,Form), \+ sub_var(Time,Form)) ; FormI=Form),!.
+ep_to_lps_remove_time(FormI,FormI).
 
 ep_to_lps(Form,Lps):- \+ compound(Form),!,Lps=Form.
+ep_to_lps(Form,Lps):- already_lps(Form),!,Lps=Form.
 ep_to_lps(t(Type,Inst),Lps):- atom(Type), M=..[Type,Inst],!,ep_to_lps(M,Lps).
-ep_to_lps(Form,LpsO):- ep_to_lps_arg([],Form,Lps),
-  must_or_rtrace((fix_axiom_head(_Global,Lps,LpsM),over_pass([],LpsM,LpsO))).
+ep_to_lps(FormI,LpsO):-
+  ep_to_lps_remove_time(FormI,Form),
+  ep_to_lps_arg(1,[],Form,Lps), ep_to_lps_arg(2,[],Lps,LpsO),!.
 
-ep_to_lps_arg(_Top,Form,Lps):- \+ compound(Form),!,Lps=Form.
-ep_to_lps_arg( Top,Form,Lps):- 
+%ep_to_lps_pass2(Lps,LpsO):- subst(Lps,holds_at,holds,LpsO).
+ep_to_lps_pass2(Lps,LpsO):- subst(Lps,holds_at,at,LpsO).
+ep_to_lps_pass2(Lps,LpsO):- must_or_rtrace((fix_axiom_head(_Global,Lps,LpsM),over_pass(2,[],LpsM,LpsO))),!.
+
+ep_to_lps_arg(_Pass,_Top,Form,Lps):- \+ compound(Form),!,Lps=Form.
+ep_to_lps_arg(_Pass,_Top,Form,Lps):- already_lps(Form),!,Lps=Form.
+%ep_to_lps_arg(Pass, Top,Form,Lps):- (over_pass(Pass,Top,Form,LpsM) -> Form\=@=LpsM),!,ep_to_lps_arg(Pass, Top,LpsM,Lps).
+ep_to_lps_arg(Pass, Top,Form,Lps):- 
    compound_name_arguments(Form,F,Args),
-   maplist(ep_to_lps_arg([F|Top]),Args,ArgsO),
+   maplist(ep_to_lps_arg(Pass,[F|Top]),Args,ArgsO),
    compound_name_arguments_maybe_zero(LpsM,F,ArgsO),
-   over_pass(Top,LpsM,Lps),!.
+   over_pass(Pass,Top,LpsM,Lps),!.
 
 compound_name_arguments_maybe_zero(F,F,[]):- !.
 compound_name_arguments_maybe_zero(LpsM,F,ArgsO):- compound_name_arguments(LpsM,F,ArgsO).
 
 :- use_module(library(lps_syntax)).
 
-over_pass(_Top, X, X):- \+ compound(X),!.
-over_pass(_Top, X, X):- functor(X,_,1), arg(1,X,Var), is_ftVar(Var),!.
-over_pass(_Top,at(X,Y),loc_at(X,Y)).
-over_pass(_Top,metreqs(X),X).
+over_pass_ex(_Top, X, _):- \+ compound(X),!,fail.
+over_pass_ex(_Top,'->'(at(F1,T1),initiates(E,F2,T2)),Becomes):- T1==T2,  
+   Becomes = (F1->initiates(E,F2)).
+over_pass_ex(_Top,'->'(at(F1,T1),terminates(E,F2,T2)),Becomes):- T1==T2,  
+  Becomes = (F1->terminates(E,F2)).
+over_pass_ex(_Top,'->'(holds_at(F1,T1),initiates(E,F2,T2)),Becomes):- T1==T2,  
+   Becomes = (F1->initiates(E,F2)).
+over_pass_ex(_Top,'->'(holds_at(F1,T1),terminates(E,F2,T2)),Becomes):- T1==T2,  
+  Becomes = (F1->terminates(E,F2)).
 
-over_pass(Top,neg(X),Rest):- ep_to_lps_arg(Top,not(X),Rest).
-over_pass(_Top,holds_at(Fluent, Time),initially(Fluent)):- Time==start, !.
-over_pass(_Top,holds_at(Fluent, Time),initially(Fluent)):- Time==0, !.
-over_pass(_Top,holds_at(Fluent, Time),at(Fluent, Time)):- !.
-over_pass(_Top,happens(Event,Time),(observe Event at Time)):- nonvar(Time), !.
+over_pass(_Pass,_Top, X, X):- \+ compound(X),!.
+over_pass(_Pass,_Top, X, X):- functor(X,_,1), arg(1,X,Var), is_ftVar(Var),!.
+over_pass(_Pass,_Top,at(X,Y),loc_at(X,Y)).
+over_pass(_Pass,_Top,metreqs(X),X).
+
+over_pass(2,Top, X, Y):- over_pass_ex(Top, X, Y),!.
+
+% [waiter,agent,food,time]
+% HoldsAt(BeWaiter1(waiter),time) ->
+% Initiates(Order(agent,waiter,food),
+%           BeWaiter2(waiter),
+%           time).
+
+
+over_pass(Pass,Top,neg(X),Rest):- ep_to_lps_arg(Pass,Top,not(X),Rest).
+over_pass(2,_Top,holds_at(Fluent, Time),initially(Fluent)):- Time==start, !.
+over_pass(2,_Top,holds_at(Fluent, Time),initially(Fluent)):- Time==0, !.
+%over_pass(_Pass,_Top,holds_at(Fluent, Time),at(Fluent, Time)):- !.
+over_pass(2,[],happens_at(Event,Time),(observe Event at Time)):- !.
+over_pass(2,_Top,happens(Event,Time),(Event at Time)):- !.
 % observe(from(muestra_del_general('+86-555000001'),to(2,3)))
-over_pass(  [],initiates(Event,Fluent,Time),initiates(Event,Fluent)):- is_ftVar(Time), !.
-over_pass(  [],terminates(Event,Fluent,Time),terminates(Event,Fluent)):- is_ftVar(Time), !.
+over_pass(2,  [],initiates_at(Event,Fluent,Time),initiates(Event,Fluent)):- is_ftVar(Time), !.
+over_pass(2,  [],terminates_at(Event,Fluent,Time),terminates(Event,Fluent)):- is_ftVar(Time), !.
 
-over_pass(_Top, not(exists(_,X)), not(X)):-!.
-over_pass(_Top, not(initially(X)),(initially not X)):-!.
-over_pass(_Top, not(holds_at(X,T)),at(not(X),T)).
-over_pass(_Top, not(at(X,T)),at(not(X),T)).
+over_pass(2,_Top,initiates_at(Event,Fluent,Time),(Event initiates Fluent at Time)):- !.
+over_pass(2,_Top,terminates_at(Event,Fluent,Time),(Event terminates Fluent at Time)):- !.
+
+over_pass(1,_Top, not(exists(_,X)), not(X)):-!.
+%over_pass(_Pass,_Top, not(initially(X)),(initially not X)):-!.
+%over_pass(_Pass,_Top, not(holds_at(X,T)),holds_at(not(X),T)).
+
+over_pass(2,_Top, holds_at(Fluent, From, To),holds(Fluent, From, To)):- !.
 
 
 
-over_pass(_Top,initiates(Event,Fluent,Time),(Event initiates Fluent at Time)):- !.
-over_pass(_Top,terminates(Event,Fluent,Time),(Event terminates Fluent at Time)):- !.
-%over_pass(_Top,happensAt(Event,Time),at(observe(Event),Time)):- !.
-over_pass(_Top,Form,LpsO):- Form=..[EFP,X], argtype_pred(EFP,_), protify(EFP,X,Lps),!,flatten([Lps],LpsO).
-over_pass(_Top,X=Y,Lps):- callable(X),append_term(X,Y,Lps).
-over_pass(Top,'<->'(X1,X2),[Lps1,Lps2]):- over_pass(Top,'->'(X1,X2),Lps1),over_pass(Top,'->'(X2,X1),Lps2).
-over_pass(_Top,'->'(X1,X2),(X2 if X1)):-!.
+%over_pass(_Pass,_Top,happensAt(Event,Time),at(observe(Event),Time)):- !.
+over_pass(_Pass,_Top,Form,LpsO):- Form=..[EFP,X], argtype_pred(EFP,_), protify(EFP,X,Lps),!,flatten([Lps],LpsO).
+over_pass(_Pass,_Top,X=Y,Lps):- callable(X),append_term(X,Y,Lps).
+over_pass(Pass,Top,','(X1,X2),(Lps1,Lps2)):- over_pass(Pass,Top,X1,Lps1),over_pass(Pass,Top,X2,Lps2).
+over_pass(Pass,Top,'<->'(X1,X2),[Lps1,Lps2]):- simply_atomic_or_conj(X1),simply_atomic_or_conj(X2), over_pass(Pass,Top,'->'(X1,X2),Lps1),over_pass(Pass,Top,'->'(X2,X1),Lps2).
+over_pass(_Pass,_Top,'->'(X1,X2),(X2 if X1)):- simply_atomic_or_conj(X1),simply_atomic_or_conj(X2),!.
+over_pass(_Pass,_Top,X1,X1):- simply_atomic(X1),!.
+over_pass(_Pass,_Top,X1,false(Lps)):- \+ (X1 = false(_)), into_false_conj(X1,Lps),Lps\=not(_),!.
+over_pass(_Pass,_Top,X,X):-!.
 
-over_pass(_Top,X,X).  
+into_false_conj(X1,Lps):- \+ (X1 = false(_)), into_pnf_conj(X1,Lps) -> Lps\=not(_),simply_atomic_or_conj(Lps).
+into_pnf_conj(X1,Lps):- pnf(X1,X2),nnf(X2,X3),conjuncts_to_list(X3,X3L),list_to_conjuncts(X3L,X4), Lps = X4.
 
-assert_lps_try_harder_now((X2 if X1),(if X1 then X2)).
+removes_at(F,_):- sent_op_f(F),!,fail.
+removes_at(F,F1):- atom_concat(F1,'_at',F),!.
+%removes_at(F,F1):- F=F1.
+remove_time_arg(_Time,Holds,Holds):- \+ compound_gt(Holds,0),!.
+remove_time_arg(Time,Holds,HoldsMT):- \+ sub_var(Time,Holds),!,Holds=HoldsMT.
+remove_time_arg(Time,not(Holds),not(HoldsMT)):-!, remove_time_arg(Time,Holds,HoldsMT).
+remove_time_arg(Time,happens_at(Holds,T1),Holds):- T1==Time.
+remove_time_arg(Time,holds_at(Holds,T1),Holds):- T1==Time.
+remove_time_arg(Time,at(Holds,T1),Holds):- T1==Time.
+remove_time_arg(_Time,Holds,Holds):- \+ compound_gt(Holds,1),!.
+remove_time_arg(Time,Holds,HoldsMT):- Holds=..[F|Args],append(Left,[T1],Args),T1==Time,removes_at(F,F1),HoldsMT=..[F1|Left],!.
+remove_time_arg(Time,Holds,HoldsMT):- Holds=..[F|Args],maplist(remove_time_arg(Time),Args,Left),HoldsMT=..[F|Left],!.
+
+simply_atomic_or_conj(X1):- var(X1),!,fail.
+simply_atomic_or_conj((X1,X2)):- !, simply_atomic_or_conj(X1),simply_atomic_or_conj(X2).
+simply_atomic_or_conj(X1):- simply_atomic(X1).
+
+simply_atomic(X1):- var(X1),!,fail.
+simply_atomic(X1):- \+ compound_gt(X1,0),!.
+simply_atomic(not(X1)):-!, simply_atomic(X1).
+simply_atomic(at(X1,_)):-!, simply_atomic(X1).
+simply_atomic((_;_)):- !, fail.
+simply_atomic(X1):- compound_name_arguments(X1,F,Args), simply_atomic_f(F), maplist(simply_atomic_arg,Args).
+simply_atomic_f(F):- \+ sent_op_f(F).
+
+sent_op_f(F):- upcase_atom(F,FU),FU=F.
+
+simply_atomic_arg(A):- var(A);simply_atomic(A). 
+
+assert_lps_try_harder_now((X2 if X1),(if X1 then X2)):- simply_atomic_or_conj(X1), simply_atomic_or_conj(X2).
 assert_lps_try_harder(Prolog):- assert_lps_try_harder_now(Prolog,Again),
   lps_xform(lps_test_mod,Again,PrologAgain),Again\==PrologAgain,!, 
    print_lps_syntax(yellow,Again),
@@ -186,12 +274,21 @@ argtype_pred(action,actions).
 argtype_pred(predicate,predicates).
 argtype_pred(Action,Actions):- arg_info(domain,Action,arginfo),atom_concat(Action,"s",Actions).
 
+protify(both,Form,[Lps1,Lps2]):- protify(events,Form,Lps1),protify(action,Form,Lps2).
 protify(Type,Form,Lps):- is_list(Form),!,maplist(protify(Type),Form,Lps).
 protify(Type,Form,Lps):- argtype_pred(Type,LPSType), \+ callable(Form),!,Lps=..[LPSType,[Form]].
 protify(Type,Form,Lps):- argtype_pred(Type,LPSType), \+ compound(Form),!,Lps=..[LPSType,[Form/0]].
+protify(Type,F/A, Lps):- argtype_pred(Type,LPSType), integer(A),!,Lps=..[LPSType,[F/A]].
 protify(Type,(X1,X2),[Lps1,Lps2]):- !, protify(Type,X1,Lps1),protify(Type,X2,Lps2).
 %protify(Type,X,Lps):- cfunctor(X,F,A),Lps=(F/A).
-protify(Event,X,LPS):- ((event) == Event), compound(X), arg(1,X,Agent),agent==Agent,!,protify(action,X,LPS).
-protify(Type,X,LPS):- argtype_pred(Type,LPSType), cfunctor(X,F,A),cfunctor(_Lps,F,A),!,Pred=..[LPSType,[F/A]],LPS=[Pred/*,mpred_prop(X,Type)*/].
+protify(Event,X,LPS):- ((event) == Event), compound(X), arg(1,X,Agent),
+  is_agent(Agent),
+  !,protify(both,X,LPS).
+protify(Type,X,[mpred_prop(X,Type),LPS]):- argtype_pred(Type,LPSType),protify(LPSType,X,LPS).
+protify(LPSType,X,LPS):- cfunctor(X,F,A),cfunctor(_Lps,F,A),!,Pred=..[LPSType,[F/A]],LPS=[Pred].
 
+is_agent(Agent):- \+ atom(Agent),!,fail.
+is_agent(diver).
+is_agent(agent).
+is_agent(Agent):- call_u(subsort(Agent,agent)),!.
 

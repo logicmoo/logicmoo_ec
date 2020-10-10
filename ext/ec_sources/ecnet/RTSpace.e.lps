@@ -1,9 +1,18 @@
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RidingInACarriage.e',185).
-% translate: unskipped  File: /pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e.lps 
+% From E: 
+% 
+% :-call_pel_directive(translate(unskipped,'/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e.lps')).
+:- call_pel_directive(translate(unskipped,
+                                '/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e.lps')).
 :-include(library('ec_planner/ec_test_incl')).
 :-expects_dialect(lps).
-% translate: begining  File: /pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e.lps 
-% Thu, 08 Oct 2020 21:37:01 GMT File: <stream>(0x55894c2e3600)%;
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RidingInACarriage.e',185).
+% From E: 
+% 
+% :-call_pel_directive(translate(begining,'/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e.lps')).
+:- call_pel_directive(translate(begining,
+                                '/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e.lps')).
+% Sat, 10 Oct 2020 14:56:12 GMT File: <stream>(0x5597f2bfec00)%;
 %; Copyright (c) 2005 IBM Corporation and others.
 %; All rights reserved. This program and the accompanying materials
 %; are made available under the terms of the Common Public License v1.0
@@ -26,72 +35,37 @@
 %; object is at location.
 
 % fluent At(object,location)
-% fluent(
-%    at(object,location)).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',22).
-fluents([loc_at/2]).
-% mpred_prop(
-%    at(object,location), 
-%    fluent).
-mpred_prop(loc_at(object,location),fluent).
+% From E: 
+% 
+% fluent(at_loc(object,location)).
+mpred_prop(at_loc(object,location),fluent).
+fluents([at_loc/2]).
 
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',24).
 % manualrelease At
-% manualrelease(at).
-manualrelease(at).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',24).
+% From E: 
+% 
+% :-call_pel_directive(manualrelease(at_loc)).
+:- call_pel_directive(manualrelease(at_loc)).
 
 
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',26).
 % [object1,location,time]
 % (% {object2} PartOf(object1,object2)) ->
 % ReleasedAt(At(object1,location),time).
-% '->'(
-%    ','(
-%       partOf(Object1,Exists_Object2), 
-%       some(
-%          Exists_Object2, 
-%          '$kolem_Fn_729'(Object1,Location,Time))), 
-%    releasedAt(
-%       at(Object1,Location), 
-%       Time)).
-if partOf(Object1, Exists_Object2), some(Exists_Object2, '$kolem_Fn_729'(Object1, Location, Time))then releasedAt(loc_at(Object1, Location), Time).
+% From E: 
+% 
+% exists(
+%    [Object2], 
+%    '->'(
+%       partOf(Object1,Object2), 
+%       released_at(at_loc(Object1,Location),Time))).
+ %   [Time].
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',26).
-
- /*  reactive_rule([ partOf(Object1,Exists_Object2),
-   		some(Exists_Object2,
-   		     '$kolem_Fn_729'(Object1,
-   				     Location,
-   				     Time))
-   	      ],
-   	      [ releasedAt(loc_at(Object1,Location),
-   			   Time)
-   	      ]).
- */
- %  "% =================================".
-% '->'(
-%    ','(
-%       not(
-%          releasedAt(
-%             at(Object1,Location), 
-%             Time)), 
-%       some(
-%          Exists_Object2, 
-%          '$kolem_Fn_729'(Object1,Location,Time))), 
-%    not(
-%       partOf(Object1,Exists_Object2))).
-if not releasedAt(loc_at(Object1, Location), Time), some(Exists_Object2, '$kolem_Fn_729'(Object1, Location, Time))then not partOf(Object1, Exists_Object2).
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',26).
-
- /*  reactive_rule([ not(releasedAt(loc_at(Object1,Location),
-   			       Time)),
-   		some(Exists_Object2,
-   		     '$kolem_Fn_729'(Object1,
-   				     Location,
-   				     Time))
-   	      ],
-   	      [not(partOf(Object1,Exists_Object2))]).
- */
- %  "% =================================".
+exists([Object2],
+ if(released(at_loc(Object1,Location)),
+   partOf(Object1,Object2))).
 
 
 %; A state constraint says that an object
@@ -100,36 +74,21 @@ if not releasedAt(loc_at(Object1, Location), Time), some(Exists_Object2, '$kolem
 % HoldsAt(At(object,location1),time) &
 % HoldsAt(At(object,location2),time) ->
 % location1=location2.
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',32).
+% From E: 
+% 
 % '->'(
-%    ','(
-%       at(Object,Location2), 
-%       not(
-%          equals(Location1,Location2))), 
-%    not(
-%       at(Object,Location1))).
-if loc_at(Object, Location2), not equals(Location1, Location2)then not loc_at(Object, Location1).
+%    (holds_at(at_loc(Object,Location1),Time) , 
+%     holds_at(at_loc(Object,Location2),Time)), 
+%    Location1=Location2).
+ %   [Time].
+false not equals(Location1, Location2), at_loc(Object, Location1), at_loc(Object, Location2).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',32).
 
- /*  reactive_rule([ loc_at(Object,Location2),
-   		not(equals(Location1,Location2))
-   	      ],
-   	      [not(loc_at(Object,Location1))]).
- */
- %  "% =================================".
-% '->'(
-%    ','(
-%       at(Object,Location1), 
-%       not(
-%          equals(Location2,Location1))), 
-%    not(
-%       at(Object,Location2))).
-if loc_at(Object, Location1), not equals(Location2, Location1)then not loc_at(Object, Location2).
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',32).
-
- /*  reactive_rule([ loc_at(Object,Location1),
-   		not(equals(Location2,Location1))
-   	      ],
-   	      [not(loc_at(Object,Location2))]).
+ /*  d_pre([ not(equals(Location1,Location2)),
+   	holds(at_loc(Object,Location1),Time_At),
+   	holds(at_loc(Object,Location2),Time_At)
+         ]).
  */
  %  "% =================================".
 
@@ -138,109 +97,43 @@ if loc_at(Object, Location1), not equals(Location2, Location1)then not loc_at(Ob
 %; Side one of portal is location.
 
 % function Side1(portal): location
-% function(
-%    side1(portal)).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',39).
-functions([side1/1]).
-% mpred_prop(
-%    side1(portal), 
-%    function).
-mpred_prop(side1(portal),function).
-% predicate(
-%    side1Pred(portal,location)).
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',39).
-predicates([side1Pred/2]).
-% mpred_prop(
-%    side1Pred(portal,location), 
-%    predicate).
-mpred_prop(side1Pred(portal,location),predicate).
-% functional_predicate(side1,side1Pred).
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',39).
-functional_predicate(side1,side1Pred).
-% function_argtypes(
-%    side1Pred, 
-%    side1(portal), 
-%    location).
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',39).
-function_argtypes(side1Pred,side1(portal),location).
-% resultIsa(side1,location).
-resultIsa(side1,location).
+% From E: 
+% 
+% function(side1(portal),location).
+function(side1(portal),location).
 %; Side two of portal is location.
 
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',42).
 % function Side2(portal): location
-% function(
-%    side2(portal)).
-functions([side2/1]).
-% mpred_prop(
-%    side2(portal), 
-%    function).
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',42).
-mpred_prop(side2(portal),function).
-% predicate(
-%    side2Pred(portal,location)).
-predicates([side2Pred/2]).
-% mpred_prop(
-%    side2Pred(portal,location), 
-%    predicate).
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',42).
-mpred_prop(side2Pred(portal,location),predicate).
-% functional_predicate(side2,side2Pred).
-functional_predicate(side2,side2Pred).
-% function_argtypes(
-%    side2Pred, 
-%    side2(portal), 
-%    location).
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',42).
-function_argtypes(side2Pred,side2(portal),location).
-% resultIsa(side2,location).
-resultIsa(side2,location).
+% From E: 
+% 
+% function(side2(portal),location).
+function(side2(portal),location).
 %; The building of room is building.
 
 % function BuildingOf(room): building
-% function(
-%    buildingOf(room)).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',44).
-functions([buildingOf/1]).
-% mpred_prop(
-%    buildingOf(room), 
-%    function).
-mpred_prop(buildingOf(room),function).
-% predicate(
-%    building(room,building)).
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',44).
-predicates([building/2]).
-% mpred_prop(
-%    building(room,building), 
-%    predicate).
-mpred_prop(building(room,building),predicate).
-% functional_predicate(buildingOf,building).
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',44).
-functional_predicate(buildingOf,building).
-% function_argtypes(
-%    building, 
-%    buildingOf(room), 
-%    building).
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',44).
-function_argtypes(building,buildingOf(room),building).
-% resultIsa(buildingOf,building).
-resultIsa(buildingOf,building).
+% From E: 
+% 
+% function(buildingOf(room),building).
+function(buildingOf(room),building).
 %; object is at a location that has portal.
 
 % fluent NearPortal(object,portal)
-% fluent(
-%    nearPortal(object,portal)).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',47).
-fluents([nearPortal/2]).
-% mpred_prop(
-%    nearPortal(object,portal), 
-%    fluent).
+% From E: 
+% 
+% fluent(nearPortal(object,portal)).
 mpred_prop(nearPortal(object,portal),fluent).
+fluents([nearPortal/2]).
 
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',49).
 % noninertial NearPortal
-% noninertial(nearPortal).
-noninertial(nearPortal).
+% From E: 
+% 
+% :-call_pel_directive(noninertial(nearPortal)).
+:- call_pel_directive(noninertial(nearPortal)).
 %; A state constraint says that an object is near
 %; a portal if and only if there is a location such that
 %; the object is at the location and one of the sides
@@ -252,226 +145,58 @@ noninertial(nearPortal).
 %  (Side1(portal)=location|
 %   Side2(portal)=location) &
 %  HoldsAt(At(object,location),time).
-% '->'(
-%    ','(
-%       ';'(
-%          ','(
-%             not(
-%                side1Pred(Portal,Exists_Location)), 
-%             not(
-%                side2Pred(Portal,Exists_Location))), 
-%          not(
-%             at(Object,Exists_Location))), 
-%       some(
-%          Exists_Location, 
-%          '$kolem_Fn_730'(Object,Portal,Time))), 
-%    not(
-%       nearPortal(Object,Portal))).
-if (not side1Pred(Portal, Exists_Location), not side2Pred(Portal, Exists_Location);not loc_at(Object, Exists_Location)), some(Exists_Location, '$kolem_Fn_730'(Object, Portal, Time))then not nearPortal(Object, Portal).
- %  reactive_rule([(not(side1Pred(Portal, Exists_Location)), not(side2Pred(Portal, Exists_Location));not(loc_at(Object, Exists_Location))), some(Exists_Location, '$kolem_Fn_730'(Object, Portal, Time))], [not(nearPortal(Object, Portal))]).
- %  "% =================================".
-% '->'(
-%    ','(
-%       not(
-%          side2Pred(Portal,Exists_Location)), 
-%       ','(
-%          nearPortal(Object,Portal), 
-%          some(
-%             Exists_Location, 
-%             '$kolem_Fn_730'(Object,Portal,Time)))), 
-%    side1Pred(Portal,Exists_Location)).
-if not side2Pred(Portal, Exists_Location), nearPortal(Object, Portal), some(Exists_Location, '$kolem_Fn_730'(Object, Portal, Time))then side1Pred(Portal, Exists_Location).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',57).
-
- /*  reactive_rule([ not(side2Pred(Portal,Exists_Location)),
-   		nearPortal(Object,Portal),
-   		some(Exists_Location,
-   		     '$kolem_Fn_730'(Object,
-   				     Portal,
-   				     Time))
-   	      ],
-   	      [side1Pred(Portal,Exists_Location)]).
- */
- %  "% =================================".
-% '->'(
-%    ','(
-%       not(
-%          side1Pred(Portal,Exists_Location)), 
-%       ','(
-%          nearPortal(Object,Portal), 
-%          some(
-%             Exists_Location, 
-%             '$kolem_Fn_730'(Object,Portal,Time)))), 
-%    side2Pred(Portal,Exists_Location)).
-if not side1Pred(Portal, Exists_Location), nearPortal(Object, Portal), some(Exists_Location, '$kolem_Fn_730'(Object, Portal, Time))then side2Pred(Portal, Exists_Location).
+% From E: 
+% 
+% exists(
+%    [Location], 
+%    <->(
+%       holds_at(nearPortal(Object,Portal),Time), 
+%       ((side1(Portal)=Location ; 
+%         side2(Portal)=Location) , 
+%        holds_at(at_loc(Object,Location),Time)))).
+ %   [Time].
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',57).
-
- /*  reactive_rule([ not(side1Pred(Portal,Exists_Location)),
-   		nearPortal(Object,Portal),
-   		some(Exists_Location,
-   		     '$kolem_Fn_730'(Object,
-   				     Portal,
-   				     Time))
-   	      ],
-   	      [side2Pred(Portal,Exists_Location)]).
- */
- %  "% =================================".
-% '->'(
-%    ','(
-%       nearPortal(Object,Portal), 
-%       some(
-%          Exists_Location, 
-%          '$kolem_Fn_730'(Object,Portal,Time))), 
-%    at(Object,Exists_Location)).
-if nearPortal(Object, Portal), some(Exists_Location, '$kolem_Fn_730'(Object, Portal, Time))then loc_at(Object, Exists_Location).
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',57).
-
- /*  reactive_rule([ nearPortal(Object,Portal),
-   		some(Exists_Location,
-   		     '$kolem_Fn_730'(Object,
-   				     Portal,
-   				     Time))
-   	      ],
-   	      [loc_at(Object,Exists_Location)]).
- */
- %  "% =================================".
-% '->'(
-%    ','(
-%       at(Object,Exists_Location), 
-%       ','(
-%          ';'(
-%             side1Pred(Portal,Exists_Location), 
-%             side2Pred(Portal,Exists_Location)), 
-%          some(
-%             Exists_Location, 
-%             '$kolem_Fn_730'(Object,Portal,Time)))), 
-%    nearPortal(Object,Portal)).
-if loc_at(Object, Exists_Location), (side1Pred(Portal, Exists_Location);side2Pred(Portal, Exists_Location)), some(Exists_Location, '$kolem_Fn_730'(Object, Portal, Time))then nearPortal(Object, Portal).
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',57).
-
- /*   reactive_rule([ loc_at(Object, Exists_Location),
-                       (side1Pred(Portal, Exists_Location);side2Pred(Portal, Exists_Location)),
-                      some(Exists_Location,
-                           '$kolem_Fn_730'(Object, Portal, Time))
-                    ],
-                    [nearPortal(Object, Portal)]).
- */
- %  "% =================================".
-% '->'(
-%    ','(
-%       ';'(
-%          side1Pred(Portal,Exists_Location), 
-%          side2Pred(Portal,Exists_Location)), 
-%       ','(
-%          not(
-%             nearPortal(Object,Portal)), 
-%          some(
-%             Exists_Location, 
-%             '$kolem_Fn_730'(Object,Portal,Time)))), 
-%    not(
-%       at(Object,Exists_Location))).
-if (side1Pred(Portal, Exists_Location);side2Pred(Portal, Exists_Location)), not nearPortal(Object, Portal), some(Exists_Location, '$kolem_Fn_730'(Object, Portal, Time))then not loc_at(Object, Exists_Location).
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',57).
-
- /*   reactive_rule([  (side1Pred(Portal, Exists_Location);side2Pred(Portal, Exists_Location)),
-                      not(nearPortal(Object, Portal)),
-                      some(Exists_Location,
-                           '$kolem_Fn_730'(Object, Portal, Time))
-                    ],
-                    [not(loc_at(Object, Exists_Location))]).
- */
- %  "% =================================".
-% '->'(
-%    ','(
-%       at(Object,Exists_Location), 
-%       ','(
-%          not(
-%             nearPortal(Object,Portal)), 
-%          some(
-%             Exists_Location, 
-%             '$kolem_Fn_730'(Object,Portal,Time)))), 
-%    not(
-%       side1Pred(Portal,Exists_Location))).
-if loc_at(Object, Exists_Location), not nearPortal(Object, Portal), some(Exists_Location, '$kolem_Fn_730'(Object, Portal, Time))then not side1Pred(Portal, Exists_Location).
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',57).
-
- /*  reactive_rule([ loc_at(Object,Exists_Location),
-   		not(nearPortal(Object,Portal)),
-   		some(Exists_Location,
-   		     '$kolem_Fn_730'(Object,
-   				     Portal,
-   				     Time))
-   	      ],
-   	      [not(side1Pred(Portal,Exists_Location))]).
- */
- %  "% =================================".
-% '->'(
-%    ','(
-%       at(Object,Exists_Location), 
-%       ','(
-%          not(
-%             nearPortal(Object,Portal)), 
-%          some(
-%             Exists_Location, 
-%             '$kolem_Fn_730'(Object,Portal,Time)))), 
-%    not(
-%       side2Pred(Portal,Exists_Location))).
-if loc_at(Object, Exists_Location), not nearPortal(Object, Portal), some(Exists_Location, '$kolem_Fn_730'(Object, Portal, Time))then not side2Pred(Portal, Exists_Location).
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',57).
-
- /*  reactive_rule([ loc_at(Object,Exists_Location),
-   		not(nearPortal(Object,Portal)),
-   		some(Exists_Location,
-   		     '$kolem_Fn_730'(Object,
-   				     Portal,
-   				     Time))
-   	      ],
-   	      [not(side2Pred(Portal,Exists_Location))]).
- */
- %  "% =================================".
+exists([Location],  (nearPortal(Object, Portal)<->false((not(side1(Portal, Location)), not(side2(Portal, Location)))), at_loc(Object, Location))).
 
 
 %; locking and unlocking doors
 %; agent unlocks door.
 
 % event DoorUnlock(agent,door)
-% event(
-%    doorUnlock(agent,door)).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',64).
+% From E: 
+% 
+% event(doorUnlock(agent,door)).
+events([doorUnlock/2]).
+mpred_prop(doorUnlock(agent,door),action).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',64).
 actions([doorUnlock/2]).
-% mpred_prop(
-%    doorUnlock(agent,door), 
-%    event).
-mpred_prop(doorUnlock(agent,door),event).
 
 
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',64).
 %; agent locks door.
 
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',67).
 % event DoorLock(agent,door)
-% event(
-%    doorLock(agent,door)).
-actions([doorLock/2]).
-% mpred_prop(
-%    doorLock(agent,door), 
-%    event).
+% From E: 
+% 
+% event(doorLock(agent,door)).
+events([doorLock/2]).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',67).
-mpred_prop(doorLock(agent,door),event).
+mpred_prop(doorLock(agent,door),action).
+actions([doorLock/2]).
 
 
 %; door is unlocked.
 
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',69).
 % fluent DoorUnlocked(door)
-% fluent(
-%    doorUnlocked(door)).
-fluents([doorUnlocked/1]).
-% mpred_prop(
-%    doorUnlocked(door), 
-%    fluent).
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',69).
+% From E: 
+% 
+% fluent(doorUnlocked(door)).
 mpred_prop(doorUnlocked(door),fluent).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',69).
+fluents([doorUnlocked/1]).
 
 
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',71).
@@ -485,118 +210,26 @@ mpred_prop(doorUnlocked(door),fluent).
 % HoldsAt(Awake(agent),time) &
 % !HoldsAt(DoorUnlocked(door),time) &
 % HoldsAt(NearPortal(agent,door),time).
-% '->'(
-%    ';'(
-%       not(
-%          awake(Agent)), 
-%       ';'(
-%          not(
-%             not(
-%                doorUnlocked(Door))), 
-%          not(
-%             nearPortal(Agent,Door)))), 
-%    not(
-%       doorUnlock(Agent,Door))).
-if not awake(Agent);not not doorUnlocked(Door);not nearPortal(Agent, Door)then not doorUnlock(Agent, Door).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',76).
-
- /*   reactive_rule([  (not(awake(Agent));not(not(doorUnlocked(Door)));not(nearPortal(Agent, Door)))
-                    ],
-                    [not(doorUnlock(Agent, Door))]).
- */
- %  "% =================================".
+% From E: 
+% 
 % '->'(
-%    metreqs(
-%       doorUnlock(Agent,Door)), 
-%    requires(
-%       doorUnlock(Agent,Door), 
-%       When_Time)).
-if doorUnlock(Agent, Door)then requires(doorUnlock(Agent, Door), When_Time).
+%    happens_at(doorUnlock(Agent,Door),Time), 
+%    (holds_at(awake(Agent),Time) , 
+%      holds_at(not(doorUnlocked(Door)),Time) , 
+%     holds_at(nearPortal(Agent,Door),Time))).
+ %   [Time].
+if doorUnlock(Agent, Door)then awake(Agent), not doorUnlocked(Door), nearPortal(Agent, Door).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',76).
 
  /*  reactive_rule([ happens(doorUnlock(Agent,Door),
    			Time_From,
    			Time_Until)
    	      ],
-   	      [ requires(doorUnlock(Agent,Door),
-   			 When_Time)
+   	      [ holds(awake(Agent),Time_At),
+   		holds(not(doorUnlocked(Door)),Time_At),
+   		nearPortal(Agent,Door)
    	      ]).
- */
- %  "% =================================".
-% '->'(
-%    awake(Agent), 
-%    metreqs(
-%       doorUnlock(Agent,Door))).
-doorUnlock(Agent, Door)if awake(Agent).
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',76).
-
- /*  l_events(happens(doorUnlock(Agent,Door),
-   		 Time_From6,
-   		 Time_From6),
-   	 [awake(Agent)]).
- */
- %  "% =================================".
-% '->'(
-%    metreqs(
-%       doorUnlock(Agent,Door)), 
-%    requires(
-%       doorUnlock(Agent,Door), 
-%       When_Time)).
-if doorUnlock(Agent, Door)then requires(doorUnlock(Agent, Door), When_Time).
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',76).
-
- /*  reactive_rule([ happens(doorUnlock(Agent,Door),
-   			Time_From7,
-   			Time_Until8)
-   	      ],
-   	      [ requires(doorUnlock(Agent,Door),
-   			 When_Time)
-   	      ]).
- */
- %  "% =================================".
-% '->'(
-%    not(
-%       doorUnlocked(Door)), 
-%    metreqs(
-%       doorUnlock(Agent,Door))).
-doorUnlock(Agent, Door)if not doorUnlocked(Door).
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',76).
-
- /*  l_events(happens(doorUnlock(Agent,Door),
-   		 Time_From9,
-   		 Time_From9),
-   	 [holds(not(doorUnlocked(Door)),Time_From9)]).
- */
- %  "% =================================".
-% '->'(
-%    metreqs(
-%       doorUnlock(Agent,Door)), 
-%    requires(
-%       doorUnlock(Agent,Door), 
-%       When_Time)).
-if doorUnlock(Agent, Door)then requires(doorUnlock(Agent, Door), When_Time).
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',76).
-
- /*  reactive_rule([ happens(doorUnlock(Agent,Door),
-   			Time_From10,
-   			Time_Until11)
-   	      ],
-   	      [ requires(doorUnlock(Agent,Door),
-   			 When_Time)
-   	      ]).
- */
- %  "% =================================".
-% '->'(
-%    nearPortal(Agent,Door), 
-%    metreqs(
-%       doorUnlock(Agent,Door))).
-doorUnlock(Agent, Door)if nearPortal(Agent, Door).
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',76).
-
- /*  l_events(happens(doorUnlock(Agent,Door),
-   		 Time_From12,
-   		 Time_From12),
-   	 [nearPortal(Agent,Door)]).
  */
  %  "% =================================".
 
@@ -606,10 +239,14 @@ doorUnlock(Agent, Door)if nearPortal(Agent, Door).
 %; the door will be unlocked:
 % [agent,door,time]
 % Initiates(DoorUnlock(agent,door),DoorUnlocked(door),time).
-% initiates(
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',85).
+% From E: 
+% 
+% initiates_at(
 %    doorUnlock(Agent,Door), 
 %    doorUnlocked(Door), 
 %    Time).
+ %   [Time].
 doorUnlock(Agent, Door)initiates doorUnlocked(Door).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',85).
 
@@ -632,116 +269,26 @@ doorUnlock(Agent, Door)initiates doorUnlocked(Door).
 % HoldsAt(Awake(agent),time) &
 % HoldsAt(DoorUnlocked(door),time) &
 % HoldsAt(NearPortal(agent,door),time).
-% '->'(
-%    ';'(
-%       not(
-%          awake(Agent)), 
-%       ';'(
-%          not(
-%             doorUnlocked(Door)), 
-%          not(
-%             nearPortal(Agent,Door)))), 
-%    not(
-%       doorLock(Agent,Door))).
-if not awake(Agent);not doorUnlocked(Door);not nearPortal(Agent, Door)then not doorLock(Agent, Door).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',93).
-
- /*   reactive_rule([  (not(awake(Agent));not(doorUnlocked(Door));not(nearPortal(Agent, Door)))
-                    ],
-                    [not(doorLock(Agent, Door))]).
- */
- %  "% =================================".
+% From E: 
+% 
 % '->'(
-%    metreqs(
-%       doorLock(Agent,Door)), 
-%    requires(
-%       doorLock(Agent,Door), 
-%       When_Time)).
-if doorLock(Agent, Door)then requires(doorLock(Agent, Door), When_Time).
+%    happens_at(doorLock(Agent,Door),Time), 
+%    (holds_at(awake(Agent),Time) , 
+%      holds_at(doorUnlocked(Door),Time) , 
+%     holds_at(nearPortal(Agent,Door),Time))).
+ %   [Time].
+if doorLock(Agent, Door)then awake(Agent), doorUnlocked(Door), nearPortal(Agent, Door).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',93).
 
  /*  reactive_rule([ happens(doorLock(Agent,Door),
    			Time_From,
    			Time_Until)
    	      ],
-   	      [ requires(doorLock(Agent,Door),
-   			 When_Time)
+   	      [ holds(awake(Agent),Time_At),
+   		holds(doorUnlocked(Door),Time_At),
+   		nearPortal(Agent,Door)
    	      ]).
- */
- %  "% =================================".
-% '->'(
-%    awake(Agent), 
-%    metreqs(
-%       doorLock(Agent,Door))).
-doorLock(Agent, Door)if awake(Agent).
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',93).
-
- /*  l_events(happens(doorLock(Agent,Door),
-   		 Time_From6,
-   		 Time_From6),
-   	 [awake(Agent)]).
- */
- %  "% =================================".
-% '->'(
-%    metreqs(
-%       doorLock(Agent,Door)), 
-%    requires(
-%       doorLock(Agent,Door), 
-%       When_Time)).
-if doorLock(Agent, Door)then requires(doorLock(Agent, Door), When_Time).
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',93).
-
- /*  reactive_rule([ happens(doorLock(Agent,Door),
-   			Time_From7,
-   			Time_Until8)
-   	      ],
-   	      [ requires(doorLock(Agent,Door),
-   			 When_Time)
-   	      ]).
- */
- %  "% =================================".
-% '->'(
-%    doorUnlocked(Door), 
-%    metreqs(
-%       doorLock(Agent,Door))).
-doorLock(Agent, Door)if doorUnlocked(Door).
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',93).
-
- /*  l_events(happens(doorLock(Agent,Door),
-   		 Time_From9,
-   		 Time_From9),
-   	 [holds(doorUnlocked(Door),Time_From9)]).
- */
- %  "% =================================".
-% '->'(
-%    metreqs(
-%       doorLock(Agent,Door)), 
-%    requires(
-%       doorLock(Agent,Door), 
-%       When_Time)).
-if doorLock(Agent, Door)then requires(doorLock(Agent, Door), When_Time).
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',93).
-
- /*  reactive_rule([ happens(doorLock(Agent,Door),
-   			Time_From10,
-   			Time_Until11)
-   	      ],
-   	      [ requires(doorLock(Agent,Door),
-   			 When_Time)
-   	      ]).
- */
- %  "% =================================".
-% '->'(
-%    nearPortal(Agent,Door), 
-%    metreqs(
-%       doorLock(Agent,Door))).
-doorLock(Agent, Door)if nearPortal(Agent, Door).
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',93).
-
- /*  l_events(happens(doorLock(Agent,Door),
-   		 Time_From12,
-   		 Time_From12),
-   	 [nearPortal(Agent,Door)]).
  */
  %  "% =================================".
 
@@ -751,10 +298,14 @@ doorLock(Agent, Door)if nearPortal(Agent, Door).
 %; the door will no longer be unlocked.
 % [agent,door,time]
 % Terminates(DoorLock(agent,door),DoorUnlocked(door),time).
-% terminates(
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',102).
+% From E: 
+% 
+% terminates_at(
 %    doorLock(Agent,Door), 
 %    doorUnlocked(Door), 
 %    Time).
+ %   [Time].
 doorLock(Agent, Door)terminates doorUnlocked(Door).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',102).
 
@@ -771,26 +322,18 @@ doorLock(Agent, Door)terminates doorUnlocked(Door).
 %; it is unlocked:
 % [door,time]
 % HoldsAt(DoorIsOpen(door),time) -> HoldsAt(DoorUnlocked(door),time).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',107).
+% From E: 
+% 
 % '->'(
-%    doorIsOpen(Door), 
-%    doorUnlocked(Door)).
+%    holds_at(doorIsOpen(Door),Time), 
+%    holds_at(doorUnlocked(Door),Time)).
+ %   [Time].
 doorUnlocked(Door)if doorIsOpen(Door).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',107).
 
  /*  l_int(holds(doorUnlocked(Door),Time_At),
          [holds(doorIsOpen(Door),Time_At)]).
- */
- %  "% =================================".
-% '->'(
-%    not(
-%       doorUnlocked(Door)), 
-%    not(
-%       doorIsOpen(Door))).
-not doorIsOpen(Door)if not doorUnlocked(Door).
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',107).
-
- /*  l_int(holds(not(doorIsOpen(Door)),Time_At3),
-         [holds(not(doorUnlocked(Door)),Time_At3)]).
  */
  %  "% =================================".
 
@@ -799,43 +342,39 @@ not doorIsOpen(Door)if not doorUnlocked(Door).
 %; agent opens door.
 
 % event DoorOpen(agent,door)
-% event(
-%    doorOpen(agent,door)).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',112).
+% From E: 
+% 
+% event(doorOpen(agent,door)).
+events([doorOpen/2]).
+mpred_prop(doorOpen(agent,door),action).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',112).
 actions([doorOpen/2]).
-% mpred_prop(
-%    doorOpen(agent,door), 
-%    event).
-mpred_prop(doorOpen(agent,door),event).
 
 
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',112).
 %; agent closes door.
 
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',115).
 % event DoorClose(agent,door)
-% event(
-%    doorClose(agent,door)).
-actions([doorClose/2]).
-% mpred_prop(
-%    doorClose(agent,door), 
-%    event).
+% From E: 
+% 
+% event(doorClose(agent,door)).
+events([doorClose/2]).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',115).
-mpred_prop(doorClose(agent,door),event).
+mpred_prop(doorClose(agent,door),action).
+actions([doorClose/2]).
 
 
 %; door is open.
 
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',117).
 % fluent DoorIsOpen(door)
-% fluent(
-%    doorIsOpen(door)).
-fluents([doorIsOpen/1]).
-% mpred_prop(
-%    doorIsOpen(door), 
-%    fluent).
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',117).
+% From E: 
+% 
+% fluent(doorIsOpen(door)).
 mpred_prop(doorIsOpen(door),fluent).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',117).
+fluents([doorIsOpen/1]).
 
 
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',119).
@@ -851,152 +390,28 @@ mpred_prop(doorIsOpen(door),fluent).
 % !HoldsAt(DoorIsOpen(door),time) &
 % HoldsAt(DoorUnlocked(door),time) &
 % HoldsAt(NearPortal(agent,door),time).
-% '->'(
-%    ';'(
-%       not(
-%          awake(Agent)), 
-%       ';'(
-%          not(
-%             not(
-%                doorIsOpen(Door))), 
-%          ';'(
-%             not(
-%                doorUnlocked(Door)), 
-%             not(
-%                nearPortal(Agent,Door))))), 
-%    not(
-%       doorOpen(Agent,Door))).
-if not awake(Agent);not not doorIsOpen(Door);not doorUnlocked(Door);not nearPortal(Agent, Door)then not doorOpen(Agent, Door).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',125).
-
- /*   reactive_rule([  (not(awake(Agent));not(not(doorIsOpen(Door)));not(doorUnlocked(Door));not(nearPortal(Agent, Door)))
-                    ],
-                    [not(doorOpen(Agent, Door))]).
- */
- %  "% =================================".
+% From E: 
+% 
 % '->'(
-%    metreqs(
-%       doorOpen(Agent,Door)), 
-%    requires(
-%       doorOpen(Agent,Door), 
-%       When_Time)).
-if doorOpen(Agent, Door)then requires(doorOpen(Agent, Door), When_Time).
+%    happens_at(doorOpen(Agent,Door),Time), 
+%    (holds_at(awake(Agent),Time) , 
+%      holds_at(not(doorIsOpen(Door)),Time) , 
+%      holds_at(doorUnlocked(Door),Time) , 
+%     holds_at(nearPortal(Agent,Door),Time))).
+ %   [Time].
+if doorOpen(Agent, Door)then awake(Agent), not doorIsOpen(Door), doorUnlocked(Door), nearPortal(Agent, Door).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',125).
 
  /*  reactive_rule([ happens(doorOpen(Agent,Door),
    			Time_From,
    			Time_Until)
    	      ],
-   	      [ requires(doorOpen(Agent,Door),
-   			 When_Time)
+   	      [ holds(awake(Agent),Time_At),
+   		holds(not(doorIsOpen(Door)),Time_At),
+   		holds(doorUnlocked(Door),Time_At),
+   		nearPortal(Agent,Door)
    	      ]).
- */
- %  "% =================================".
-% '->'(
-%    awake(Agent), 
-%    metreqs(
-%       doorOpen(Agent,Door))).
-doorOpen(Agent, Door)if awake(Agent).
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',125).
-
- /*  l_events(happens(doorOpen(Agent,Door),
-   		 Time_From6,
-   		 Time_From6),
-   	 [awake(Agent)]).
- */
- %  "% =================================".
-% '->'(
-%    metreqs(
-%       doorOpen(Agent,Door)), 
-%    requires(
-%       doorOpen(Agent,Door), 
-%       When_Time)).
-if doorOpen(Agent, Door)then requires(doorOpen(Agent, Door), When_Time).
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',125).
-
- /*  reactive_rule([ happens(doorOpen(Agent,Door),
-   			Time_From7,
-   			Time_Until8)
-   	      ],
-   	      [ requires(doorOpen(Agent,Door),
-   			 When_Time)
-   	      ]).
- */
- %  "% =================================".
-% '->'(
-%    not(
-%       doorIsOpen(Door)), 
-%    metreqs(
-%       doorOpen(Agent,Door))).
-doorOpen(Agent, Door)if not doorIsOpen(Door).
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',125).
-
- /*  l_events(happens(doorOpen(Agent,Door),
-   		 Time_From9,
-   		 Time_From9),
-   	 [holds(not(doorIsOpen(Door)),Time_From9)]).
- */
- %  "% =================================".
-% '->'(
-%    metreqs(
-%       doorOpen(Agent,Door)), 
-%    requires(
-%       doorOpen(Agent,Door), 
-%       When_Time)).
-if doorOpen(Agent, Door)then requires(doorOpen(Agent, Door), When_Time).
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',125).
-
- /*  reactive_rule([ happens(doorOpen(Agent,Door),
-   			Time_From10,
-   			Time_Until11)
-   	      ],
-   	      [ requires(doorOpen(Agent,Door),
-   			 When_Time)
-   	      ]).
- */
- %  "% =================================".
-% '->'(
-%    doorUnlocked(Door), 
-%    metreqs(
-%       doorOpen(Agent,Door))).
-doorOpen(Agent, Door)if doorUnlocked(Door).
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',125).
-
- /*  l_events(happens(doorOpen(Agent,Door),
-   		 Time_From12,
-   		 Time_From12),
-   	 [holds(doorUnlocked(Door),Time_From12)]).
- */
- %  "% =================================".
-% '->'(
-%    metreqs(
-%       doorOpen(Agent,Door)), 
-%    requires(
-%       doorOpen(Agent,Door), 
-%       When_Time)).
-if doorOpen(Agent, Door)then requires(doorOpen(Agent, Door), When_Time).
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',125).
-
- /*  reactive_rule([ happens(doorOpen(Agent,Door),
-   			Time_From13,
-   			Time_Until14)
-   	      ],
-   	      [ requires(doorOpen(Agent,Door),
-   			 When_Time)
-   	      ]).
- */
- %  "% =================================".
-% '->'(
-%    nearPortal(Agent,Door), 
-%    metreqs(
-%       doorOpen(Agent,Door))).
-doorOpen(Agent, Door)if nearPortal(Agent, Door).
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',125).
-
- /*  l_events(happens(doorOpen(Agent,Door),
-   		 Time_From15,
-   		 Time_From15),
-   	 [nearPortal(Agent,Door)]).
  */
  %  "% =================================".
 
@@ -1006,10 +421,14 @@ doorOpen(Agent, Door)if nearPortal(Agent, Door).
 %; the door will be open:
 % [agent,door,time]
 % Initiates(DoorOpen(agent,door),DoorIsOpen(door),time).
-% initiates(
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',135).
+% From E: 
+% 
+% initiates_at(
 %    doorOpen(Agent,Door), 
 %    doorIsOpen(Door), 
 %    Time).
+ %   [Time].
 doorOpen(Agent, Door)initiates doorIsOpen(Door).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',135).
 
@@ -1034,150 +453,28 @@ doorOpen(Agent, Door)initiates doorIsOpen(Door).
 % HoldsAt(DoorIsOpen(door),time) &
 % HoldsAt(DoorUnlocked(door),time) &
 % HoldsAt(NearPortal(agent,door),time).
-% '->'(
-%    ';'(
-%       not(
-%          awake(Agent)), 
-%       ';'(
-%          not(
-%             doorIsOpen(Door)), 
-%          ';'(
-%             not(
-%                doorUnlocked(Door)), 
-%             not(
-%                nearPortal(Agent,Door))))), 
-%    not(
-%       doorClose(Agent,Door))).
-if not awake(Agent);not doorIsOpen(Door);not doorUnlocked(Door);not nearPortal(Agent, Door)then not doorClose(Agent, Door).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',144).
-
- /*   reactive_rule([  (not(awake(Agent));not(doorIsOpen(Door));not(doorUnlocked(Door));not(nearPortal(Agent, Door)))
-                    ],
-                    [not(doorClose(Agent, Door))]).
- */
- %  "% =================================".
+% From E: 
+% 
 % '->'(
-%    metreqs(
-%       doorClose(Agent,Door)), 
-%    requires(
-%       doorClose(Agent,Door), 
-%       When_Time)).
-if doorClose(Agent, Door)then requires(doorClose(Agent, Door), When_Time).
+%    happens_at(doorClose(Agent,Door),Time), 
+%    (holds_at(awake(Agent),Time) , 
+%      holds_at(doorIsOpen(Door),Time) , 
+%      holds_at(doorUnlocked(Door),Time) , 
+%     holds_at(nearPortal(Agent,Door),Time))).
+ %   [Time].
+if doorClose(Agent, Door)then awake(Agent), doorIsOpen(Door), doorUnlocked(Door), nearPortal(Agent, Door).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',144).
 
  /*  reactive_rule([ happens(doorClose(Agent,Door),
    			Time_From,
    			Time_Until)
    	      ],
-   	      [ requires(doorClose(Agent,Door),
-   			 When_Time)
+   	      [ holds(awake(Agent),Time_At),
+   		holds(doorIsOpen(Door),Time_At),
+   		holds(doorUnlocked(Door),Time_At),
+   		nearPortal(Agent,Door)
    	      ]).
- */
- %  "% =================================".
-% '->'(
-%    awake(Agent), 
-%    metreqs(
-%       doorClose(Agent,Door))).
-doorClose(Agent, Door)if awake(Agent).
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',144).
-
- /*  l_events(happens(doorClose(Agent,Door),
-   		 Time_From6,
-   		 Time_From6),
-   	 [awake(Agent)]).
- */
- %  "% =================================".
-% '->'(
-%    metreqs(
-%       doorClose(Agent,Door)), 
-%    requires(
-%       doorClose(Agent,Door), 
-%       When_Time)).
-if doorClose(Agent, Door)then requires(doorClose(Agent, Door), When_Time).
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',144).
-
- /*  reactive_rule([ happens(doorClose(Agent,Door),
-   			Time_From7,
-   			Time_Until8)
-   	      ],
-   	      [ requires(doorClose(Agent,Door),
-   			 When_Time)
-   	      ]).
- */
- %  "% =================================".
-% '->'(
-%    doorIsOpen(Door), 
-%    metreqs(
-%       doorClose(Agent,Door))).
-doorClose(Agent, Door)if doorIsOpen(Door).
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',144).
-
- /*  l_events(happens(doorClose(Agent,Door),
-   		 Time_From9,
-   		 Time_From9),
-   	 [holds(doorIsOpen(Door),Time_From9)]).
- */
- %  "% =================================".
-% '->'(
-%    metreqs(
-%       doorClose(Agent,Door)), 
-%    requires(
-%       doorClose(Agent,Door), 
-%       When_Time)).
-if doorClose(Agent, Door)then requires(doorClose(Agent, Door), When_Time).
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',144).
-
- /*  reactive_rule([ happens(doorClose(Agent,Door),
-   			Time_From10,
-   			Time_Until11)
-   	      ],
-   	      [ requires(doorClose(Agent,Door),
-   			 When_Time)
-   	      ]).
- */
- %  "% =================================".
-% '->'(
-%    doorUnlocked(Door), 
-%    metreqs(
-%       doorClose(Agent,Door))).
-doorClose(Agent, Door)if doorUnlocked(Door).
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',144).
-
- /*  l_events(happens(doorClose(Agent,Door),
-   		 Time_From12,
-   		 Time_From12),
-   	 [holds(doorUnlocked(Door),Time_From12)]).
- */
- %  "% =================================".
-% '->'(
-%    metreqs(
-%       doorClose(Agent,Door)), 
-%    requires(
-%       doorClose(Agent,Door), 
-%       When_Time)).
-if doorClose(Agent, Door)then requires(doorClose(Agent, Door), When_Time).
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',144).
-
- /*  reactive_rule([ happens(doorClose(Agent,Door),
-   			Time_From13,
-   			Time_Until14)
-   	      ],
-   	      [ requires(doorClose(Agent,Door),
-   			 When_Time)
-   	      ]).
- */
- %  "% =================================".
-% '->'(
-%    nearPortal(Agent,Door), 
-%    metreqs(
-%       doorClose(Agent,Door))).
-doorClose(Agent, Door)if nearPortal(Agent, Door).
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',144).
-
- /*  l_events(happens(doorClose(Agent,Door),
-   		 Time_From15,
-   		 Time_From15),
-   	 [nearPortal(Agent,Door)]).
  */
  %  "% =================================".
 
@@ -1187,10 +484,14 @@ doorClose(Agent, Door)if nearPortal(Agent, Door).
 %; the door will no longer be open:
 % [agent,door,time]
 % Terminates(DoorClose(agent,door),DoorIsOpen(door),time).
-% terminates(
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',154).
+% From E: 
+% 
+% terminates_at(
 %    doorClose(Agent,Door), 
 %    doorIsOpen(Door), 
 %    Time).
+ %   [Time].
 doorClose(Agent, Door)terminates doorIsOpen(Door).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',154).
 
@@ -1207,29 +508,27 @@ doorClose(Agent, Door)terminates doorIsOpen(Door).
 %; agent walks through side one of door.
 
 % event WalkThroughDoor12(agent,door)
-% event(
-%    walkThroughDoor12(agent,door)).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',159).
+% From E: 
+% 
+% event(walkThroughDoor12(agent,door)).
+events([walkThroughDoor12/2]).
+mpred_prop(walkThroughDoor12(agent,door),action).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',159).
 actions([walkThroughDoor12/2]).
-% mpred_prop(
-%    walkThroughDoor12(agent,door), 
-%    event).
-mpred_prop(walkThroughDoor12(agent,door),event).
 
 
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',159).
 %; agent walks through side two of door.
 
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',162).
 % event WalkThroughDoor21(agent,door)
-% event(
-%    walkThroughDoor21(agent,door)).
-actions([walkThroughDoor21/2]).
-% mpred_prop(
-%    walkThroughDoor21(agent,door), 
-%    event).
+% From E: 
+% 
+% event(walkThroughDoor21(agent,door)).
+events([walkThroughDoor21/2]).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',162).
-mpred_prop(walkThroughDoor21(agent,door),event).
+mpred_prop(walkThroughDoor21(agent,door),action).
+actions([walkThroughDoor21/2]).
 
 
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',164).
@@ -1245,154 +544,29 @@ mpred_prop(walkThroughDoor21(agent,door),event).
 % HoldsAt(Standing(agent),time) &
 % HoldsAt(DoorIsOpen(door),time) &
 % HoldsAt(At(agent,Side1(door)),time).
-% '->'(
-%    ';'(
-%       not(
-%          awake(Agent)), 
-%       ';'(
-%          not(
-%             standing(Agent)), 
-%          ';'(
-%             not(
-%                doorIsOpen(Door)), 
-%             not(
-%                at(
-%                   Agent, 
-%                   side1(Door)))))), 
-%    not(
-%       walkThroughDoor12(Agent,Door))).
-if not awake(Agent);not standing(Agent);not doorIsOpen(Door);not loc_at(Agent, side1(Door))then not walkThroughDoor12(Agent, Door).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',170).
-
- /*   reactive_rule([  (not(awake(Agent));not(standing(Agent));not(doorIsOpen(Door));not(loc_at(Agent, side1(Door))))
-                    ],
-                    [not(walkThroughDoor12(Agent, Door))]).
- */
- %  "% =================================".
+% From E: 
+% 
 % '->'(
-%    metreqs(
-%       walkThroughDoor12(Agent,Door)), 
-%    requires(
-%       walkThroughDoor12(Agent,Door), 
-%       When_Time)).
-if walkThroughDoor12(Agent, Door)then requires(walkThroughDoor12(Agent, Door), When_Time).
+%    happens_at(walkThroughDoor12(Agent,Door),Time), 
+%    (holds_at(awake(Agent),Time) , 
+%      holds_at(standing(Agent),Time) , 
+%      holds_at(doorIsOpen(Door),Time) , 
+%     holds_at(at_loc(Agent,side1(Door)),Time))).
+ %   [Time].
+if walkThroughDoor12(Agent, Door)then awake(Agent), standing(Agent), doorIsOpen(Door), at_loc(Agent, side1(Door)).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',170).
 
  /*  reactive_rule([ happens(walkThroughDoor12(Agent,Door),
    			Time_From,
    			Time_Until)
    	      ],
-   	      [ requires(walkThroughDoor12(Agent,Door),
-   			 When_Time)
+   	      [ holds(awake(Agent),Time_At),
+   		holds(standing(Agent),Time_At),
+   		holds(doorIsOpen(Door),Time_At),
+   		holds(at_loc(Agent,side1(Door)),
+   		      Time_At)
    	      ]).
- */
- %  "% =================================".
-% '->'(
-%    awake(Agent), 
-%    metreqs(
-%       walkThroughDoor12(Agent,Door))).
-walkThroughDoor12(Agent, Door)if awake(Agent).
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',170).
-
- /*  l_events(happens(walkThroughDoor12(Agent,Door),
-   		 Time_From6,
-   		 Time_From6),
-   	 [awake(Agent)]).
- */
- %  "% =================================".
-% '->'(
-%    metreqs(
-%       walkThroughDoor12(Agent,Door)), 
-%    requires(
-%       walkThroughDoor12(Agent,Door), 
-%       When_Time)).
-if walkThroughDoor12(Agent, Door)then requires(walkThroughDoor12(Agent, Door), When_Time).
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',170).
-
- /*  reactive_rule([ happens(walkThroughDoor12(Agent,Door),
-   			Time_From7,
-   			Time_Until8)
-   	      ],
-   	      [ requires(walkThroughDoor12(Agent,Door),
-   			 When_Time)
-   	      ]).
- */
- %  "% =================================".
-% '->'(
-%    standing(Agent), 
-%    metreqs(
-%       walkThroughDoor12(Agent,Door))).
-walkThroughDoor12(Agent, Door)if standing(Agent).
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',170).
-
- /*  l_events(happens(walkThroughDoor12(Agent,Door),
-   		 Time_From9,
-   		 Time_From9),
-   	 [holds(standing(Agent),Time_From9)]).
- */
- %  "% =================================".
-% '->'(
-%    metreqs(
-%       walkThroughDoor12(Agent,Door)), 
-%    requires(
-%       walkThroughDoor12(Agent,Door), 
-%       When_Time)).
-if walkThroughDoor12(Agent, Door)then requires(walkThroughDoor12(Agent, Door), When_Time).
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',170).
-
- /*  reactive_rule([ happens(walkThroughDoor12(Agent,Door),
-   			Time_From10,
-   			Time_Until11)
-   	      ],
-   	      [ requires(walkThroughDoor12(Agent,Door),
-   			 When_Time)
-   	      ]).
- */
- %  "% =================================".
-% '->'(
-%    doorIsOpen(Door), 
-%    metreqs(
-%       walkThroughDoor12(Agent,Door))).
-walkThroughDoor12(Agent, Door)if doorIsOpen(Door).
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',170).
-
- /*  l_events(happens(walkThroughDoor12(Agent,Door),
-   		 Time_From12,
-   		 Time_From12),
-   	 [holds(doorIsOpen(Door),Time_From12)]).
- */
- %  "% =================================".
-% '->'(
-%    metreqs(
-%       walkThroughDoor12(Agent,Door)), 
-%    requires(
-%       walkThroughDoor12(Agent,Door), 
-%       When_Time)).
-if walkThroughDoor12(Agent, Door)then requires(walkThroughDoor12(Agent, Door), When_Time).
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',170).
-
- /*  reactive_rule([ happens(walkThroughDoor12(Agent,Door),
-   			Time_From13,
-   			Time_Until14)
-   	      ],
-   	      [ requires(walkThroughDoor12(Agent,Door),
-   			 When_Time)
-   	      ]).
- */
- %  "% =================================".
-% '->'(
-%    at(
-%       Agent, 
-%       side1(Door)), 
-%    metreqs(
-%       walkThroughDoor12(Agent,Door))).
-walkThroughDoor12(Agent, Door)if loc_at(Agent, side1(Door)).
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',170).
-
- /*  l_events(happens(walkThroughDoor12(Agent,Door),
-   		 Time_From15,
-   		 Time_From15),
-   	 [loc_at(Agent,side1(Door))]).
  */
  %  "% =================================".
 
@@ -1403,154 +577,29 @@ walkThroughDoor12(Agent, Door)if loc_at(Agent, side1(Door)).
 % HoldsAt(Standing(agent),time) &
 % HoldsAt(DoorIsOpen(door),time) &
 % HoldsAt(At(agent,Side2(door)),time).
-% '->'(
-%    ';'(
-%       not(
-%          awake(Agent)), 
-%       ';'(
-%          not(
-%             standing(Agent)), 
-%          ';'(
-%             not(
-%                doorIsOpen(Door)), 
-%             not(
-%                at(
-%                   Agent, 
-%                   side2(Door)))))), 
-%    not(
-%       walkThroughDoor21(Agent,Door))).
-if not awake(Agent);not standing(Agent);not doorIsOpen(Door);not loc_at(Agent, side2(Door))then not walkThroughDoor21(Agent, Door).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',178).
-
- /*   reactive_rule([  (not(awake(Agent));not(standing(Agent));not(doorIsOpen(Door));not(loc_at(Agent, side2(Door))))
-                    ],
-                    [not(walkThroughDoor21(Agent, Door))]).
- */
- %  "% =================================".
+% From E: 
+% 
 % '->'(
-%    metreqs(
-%       walkThroughDoor21(Agent,Door)), 
-%    requires(
-%       walkThroughDoor21(Agent,Door), 
-%       When_Time)).
-if walkThroughDoor21(Agent, Door)then requires(walkThroughDoor21(Agent, Door), When_Time).
+%    happens_at(walkThroughDoor21(Agent,Door),Time), 
+%    (holds_at(awake(Agent),Time) , 
+%      holds_at(standing(Agent),Time) , 
+%      holds_at(doorIsOpen(Door),Time) , 
+%     holds_at(at_loc(Agent,side2(Door)),Time))).
+ %   [Time].
+if walkThroughDoor21(Agent, Door)then awake(Agent), standing(Agent), doorIsOpen(Door), at_loc(Agent, side2(Door)).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',178).
 
  /*  reactive_rule([ happens(walkThroughDoor21(Agent,Door),
    			Time_From,
    			Time_Until)
    	      ],
-   	      [ requires(walkThroughDoor21(Agent,Door),
-   			 When_Time)
+   	      [ holds(awake(Agent),Time_At),
+   		holds(standing(Agent),Time_At),
+   		holds(doorIsOpen(Door),Time_At),
+   		holds(at_loc(Agent,side2(Door)),
+   		      Time_At)
    	      ]).
- */
- %  "% =================================".
-% '->'(
-%    awake(Agent), 
-%    metreqs(
-%       walkThroughDoor21(Agent,Door))).
-walkThroughDoor21(Agent, Door)if awake(Agent).
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',178).
-
- /*  l_events(happens(walkThroughDoor21(Agent,Door),
-   		 Time_From6,
-   		 Time_From6),
-   	 [awake(Agent)]).
- */
- %  "% =================================".
-% '->'(
-%    metreqs(
-%       walkThroughDoor21(Agent,Door)), 
-%    requires(
-%       walkThroughDoor21(Agent,Door), 
-%       When_Time)).
-if walkThroughDoor21(Agent, Door)then requires(walkThroughDoor21(Agent, Door), When_Time).
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',178).
-
- /*  reactive_rule([ happens(walkThroughDoor21(Agent,Door),
-   			Time_From7,
-   			Time_Until8)
-   	      ],
-   	      [ requires(walkThroughDoor21(Agent,Door),
-   			 When_Time)
-   	      ]).
- */
- %  "% =================================".
-% '->'(
-%    standing(Agent), 
-%    metreqs(
-%       walkThroughDoor21(Agent,Door))).
-walkThroughDoor21(Agent, Door)if standing(Agent).
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',178).
-
- /*  l_events(happens(walkThroughDoor21(Agent,Door),
-   		 Time_From9,
-   		 Time_From9),
-   	 [holds(standing(Agent),Time_From9)]).
- */
- %  "% =================================".
-% '->'(
-%    metreqs(
-%       walkThroughDoor21(Agent,Door)), 
-%    requires(
-%       walkThroughDoor21(Agent,Door), 
-%       When_Time)).
-if walkThroughDoor21(Agent, Door)then requires(walkThroughDoor21(Agent, Door), When_Time).
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',178).
-
- /*  reactive_rule([ happens(walkThroughDoor21(Agent,Door),
-   			Time_From10,
-   			Time_Until11)
-   	      ],
-   	      [ requires(walkThroughDoor21(Agent,Door),
-   			 When_Time)
-   	      ]).
- */
- %  "% =================================".
-% '->'(
-%    doorIsOpen(Door), 
-%    metreqs(
-%       walkThroughDoor21(Agent,Door))).
-walkThroughDoor21(Agent, Door)if doorIsOpen(Door).
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',178).
-
- /*  l_events(happens(walkThroughDoor21(Agent,Door),
-   		 Time_From12,
-   		 Time_From12),
-   	 [holds(doorIsOpen(Door),Time_From12)]).
- */
- %  "% =================================".
-% '->'(
-%    metreqs(
-%       walkThroughDoor21(Agent,Door)), 
-%    requires(
-%       walkThroughDoor21(Agent,Door), 
-%       When_Time)).
-if walkThroughDoor21(Agent, Door)then requires(walkThroughDoor21(Agent, Door), When_Time).
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',178).
-
- /*  reactive_rule([ happens(walkThroughDoor21(Agent,Door),
-   			Time_From13,
-   			Time_Until14)
-   	      ],
-   	      [ requires(walkThroughDoor21(Agent,Door),
-   			 When_Time)
-   	      ]).
- */
- %  "% =================================".
-% '->'(
-%    at(
-%       Agent, 
-%       side2(Door)), 
-%    metreqs(
-%       walkThroughDoor21(Agent,Door))).
-walkThroughDoor21(Agent, Door)if loc_at(Agent, side2(Door)).
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',178).
-
- /*  l_events(happens(walkThroughDoor21(Agent,Door),
-   		 Time_From15,
-   		 Time_From15),
-   	 [loc_at(Agent,side2(Door))]).
  */
  %  "% =================================".
 
@@ -1561,21 +610,24 @@ walkThroughDoor21(Agent, Door)if loc_at(Agent, side2(Door)).
 % [agent,door,location,time]
 % Side2(door)=location ->
 % Initiates(WalkThroughDoor12(agent,door),At(agent,location),time).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',187).
+% From E: 
+% 
 % '->'(
-%    side2Pred(Door,Location), 
-%    initiates(
+%    side2(Door)=Location, 
+%    initiates_at(
 %       walkThroughDoor12(Agent,Door), 
-%       at(Agent,Location), 
+%       at_loc(Agent,Location), 
 %       Time)).
-if side2Pred(Door, Location)then initiates(walkThroughDoor12(Agent, Door), loc_at(Agent, Location)at Time, _).
+ %   [Time].
+walkThroughDoor12(Agent, Door)initiates at_loc(Agent, Location)if side2(Door, Location).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',187).
 
- /*  reactive_rule([side2Pred(Door,Location)],
-   	      [ initiates(walkThroughDoor12(Agent,Door),
-   			  at(loc_at(Agent,Location),
-   			     Time),
-   			  Initiates)
-   	      ]).
+ /*  initiated(happens(walkThroughDoor12(Agent,Door),
+   		  Time_From,
+   		  Time_Until),
+   	  at_loc(Agent,Location),
+   	  [side2(Door,Location)]).
  */
  %  "% =================================".
 
@@ -1583,20 +635,23 @@ if side2Pred(Door, Location)then initiates(walkThroughDoor12(Agent, Door), loc_a
 % [agent,door,location,time]
 % Side1(door)=location ->
 % Initiates(WalkThroughDoor21(agent,door),At(agent,location),time).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',192).
+% From E: 
+% 
 % '->'(
-%    side1Pred(Door,Location), 
-%    initiates(
+%    side1(Door)=Location, 
+%    initiates_at(
 %       walkThroughDoor21(Agent,Door), 
-%       at(Agent,Location), 
+%       at_loc(Agent,Location), 
 %       Time)).
-if side1Pred(Door, Location)then initiates(walkThroughDoor21(Agent, Door), loc_at(Agent, Location)at Time, _).
+ %   [Time].
+walkThroughDoor21(Agent, Door)initiates at_loc(Agent, Location)if side1(Door, Location).
 
- /*  reactive_rule([side1Pred(Door,Location)],
-   	      [ initiates(walkThroughDoor21(Agent,Door),
-   			  at(loc_at(Agent,Location),
-   			     Time),
-   			  Initiates)
-   	      ]).
+ /*  initiated(happens(walkThroughDoor21(Agent,Door),
+   		  Time_From,
+   		  Time_Until),
+   	  at_loc(Agent,Location),
+   	  [side1(Door,Location)]).
  */
  %  "% =================================".
 
@@ -1604,20 +659,23 @@ if side1Pred(Door, Location)then initiates(walkThroughDoor21(Agent, Door), loc_a
 % [agent,door,location,time]
 % Side1(door)=location ->
 % Terminates(WalkThroughDoor12(agent,door),At(agent,location),time).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',196).
+% From E: 
+% 
 % '->'(
-%    side1Pred(Door,Location), 
-%    terminates(
+%    side1(Door)=Location, 
+%    terminates_at(
 %       walkThroughDoor12(Agent,Door), 
-%       at(Agent,Location), 
+%       at_loc(Agent,Location), 
 %       Time)).
-if side1Pred(Door, Location)then terminates(walkThroughDoor12(Agent, Door), loc_at(Agent, Location)at Time, _).
+ %   [Time].
+walkThroughDoor12(Agent, Door)terminates at_loc(Agent, Location)if side1(Door, Location).
 
- /*  reactive_rule([side1Pred(Door,Location)],
-   	      [ terminates(walkThroughDoor12(Agent,Door),
-   			   at(loc_at(Agent,Location),
-   			      Time),
-   			   Terminates)
-   	      ]).
+ /*  terminated(happens(walkThroughDoor12(Agent,Door),
+   		   Time_From,
+   		   Time_Until),
+   	   at_loc(Agent,Location),
+   	   [side1(Door,Location)]).
  */
  %  "% =================================".
 
@@ -1625,20 +683,23 @@ if side1Pred(Door, Location)then terminates(walkThroughDoor12(Agent, Door), loc_
 % [agent,door,location,time]
 % Side2(door)=location ->
 % Terminates(WalkThroughDoor21(agent,door),At(agent,location),time).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',200).
+% From E: 
+% 
 % '->'(
-%    side2Pred(Door,Location), 
-%    terminates(
+%    side2(Door)=Location, 
+%    terminates_at(
 %       walkThroughDoor21(Agent,Door), 
-%       at(Agent,Location), 
+%       at_loc(Agent,Location), 
 %       Time)).
-if side2Pred(Door, Location)then terminates(walkThroughDoor21(Agent, Door), loc_at(Agent, Location)at Time, _).
+ %   [Time].
+walkThroughDoor21(Agent, Door)terminates at_loc(Agent, Location)if side2(Door, Location).
 
- /*  reactive_rule([side2Pred(Door,Location)],
-   	      [ terminates(walkThroughDoor21(Agent,Door),
-   			   at(loc_at(Agent,Location),
-   			      Time),
-   			   Terminates)
-   	      ]).
+ /*  terminated(happens(walkThroughDoor21(Agent,Door),
+   		   Time_From,
+   		   Time_Until),
+   	   at_loc(Agent,Location),
+   	   [side2(Door,Location)]).
  */
  %  "% =================================".
 
@@ -1647,29 +708,27 @@ if side2Pred(Door, Location)then terminates(walkThroughDoor21(Agent, Door), loc_
 %; agent walks from the first end of street to the second end.
 
 % event WalkStreet12(agent,street)
-% event(
-%    walkStreet12(agent,street)).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',205).
+% From E: 
+% 
+% event(walkStreet12(agent,street)).
+events([walkStreet12/2]).
+mpred_prop(walkStreet12(agent,street),action).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',205).
 actions([walkStreet12/2]).
-% mpred_prop(
-%    walkStreet12(agent,street), 
-%    event).
-mpred_prop(walkStreet12(agent,street),event).
 
 
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',205).
 %; agent walks from the second end of street to the first end.
 
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',208).
 % event WalkStreet21(agent,street)
-% event(
-%    walkStreet21(agent,street)).
-actions([walkStreet21/2]).
-% mpred_prop(
-%    walkStreet21(agent,street), 
-%    event).
+% From E: 
+% 
+% event(walkStreet21(agent,street)).
+events([walkStreet21/2]).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',208).
-mpred_prop(walkStreet21(agent,street),event).
+mpred_prop(walkStreet21(agent,street),action).
+actions([walkStreet21/2]).
 
 
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',210).
@@ -1683,120 +742,27 @@ mpred_prop(walkStreet21(agent,street),event).
 % HoldsAt(Awake(agent),time) &
 % HoldsAt(Standing(agent),time) &
 % HoldsAt(At(agent,Side1(street)),time).
-% '->'(
-%    ';'(
-%       not(
-%          awake(Agent)), 
-%       ';'(
-%          not(
-%             standing(Agent)), 
-%          not(
-%             at(
-%                Agent, 
-%                side1(Street))))), 
-%    not(
-%       walkStreet12(Agent,Street))).
-if not awake(Agent);not standing(Agent);not loc_at(Agent, side1(Street))then not walkStreet12(Agent, Street).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',215).
-
- /*   reactive_rule([  (not(awake(Agent));not(standing(Agent));not(loc_at(Agent, side1(Street))))
-                    ],
-                    [not(walkStreet12(Agent, Street))]).
- */
- %  "% =================================".
+% From E: 
+% 
 % '->'(
-%    metreqs(
-%       walkStreet12(Agent,Street)), 
-%    requires(
-%       walkStreet12(Agent,Street), 
-%       When_Time)).
-if walkStreet12(Agent, Street)then requires(walkStreet12(Agent, Street), When_Time).
+%    happens_at(walkStreet12(Agent,Street),Time), 
+%    (holds_at(awake(Agent),Time) , 
+%      holds_at(standing(Agent),Time) , 
+%     holds_at(at_loc(Agent,side1(Street)),Time))).
+ %   [Time].
+if walkStreet12(Agent, Street)then awake(Agent), standing(Agent), at_loc(Agent, side1(Street)).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',215).
 
  /*  reactive_rule([ happens(walkStreet12(Agent,Street),
    			Time_From,
    			Time_Until)
    	      ],
-   	      [ requires(walkStreet12(Agent,Street),
-   			 When_Time)
+   	      [ holds(awake(Agent),Time_At),
+   		holds(standing(Agent),Time_At),
+   		holds(at_loc(Agent,side1(Street)),
+   		      Time_At)
    	      ]).
- */
- %  "% =================================".
-% '->'(
-%    awake(Agent), 
-%    metreqs(
-%       walkStreet12(Agent,Street))).
-walkStreet12(Agent, Street)if awake(Agent).
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',215).
-
- /*  l_events(happens(walkStreet12(Agent,Street),
-   		 Time_From6,
-   		 Time_From6),
-   	 [awake(Agent)]).
- */
- %  "% =================================".
-% '->'(
-%    metreqs(
-%       walkStreet12(Agent,Street)), 
-%    requires(
-%       walkStreet12(Agent,Street), 
-%       When_Time)).
-if walkStreet12(Agent, Street)then requires(walkStreet12(Agent, Street), When_Time).
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',215).
-
- /*  reactive_rule([ happens(walkStreet12(Agent,Street),
-   			Time_From7,
-   			Time_Until8)
-   	      ],
-   	      [ requires(walkStreet12(Agent,Street),
-   			 When_Time)
-   	      ]).
- */
- %  "% =================================".
-% '->'(
-%    standing(Agent), 
-%    metreqs(
-%       walkStreet12(Agent,Street))).
-walkStreet12(Agent, Street)if standing(Agent).
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',215).
-
- /*  l_events(happens(walkStreet12(Agent,Street),
-   		 Time_From9,
-   		 Time_From9),
-   	 [holds(standing(Agent),Time_From9)]).
- */
- %  "% =================================".
-% '->'(
-%    metreqs(
-%       walkStreet12(Agent,Street)), 
-%    requires(
-%       walkStreet12(Agent,Street), 
-%       When_Time)).
-if walkStreet12(Agent, Street)then requires(walkStreet12(Agent, Street), When_Time).
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',215).
-
- /*  reactive_rule([ happens(walkStreet12(Agent,Street),
-   			Time_From10,
-   			Time_Until11)
-   	      ],
-   	      [ requires(walkStreet12(Agent,Street),
-   			 When_Time)
-   	      ]).
- */
- %  "% =================================".
-% '->'(
-%    at(
-%       Agent, 
-%       side1(Street)), 
-%    metreqs(
-%       walkStreet12(Agent,Street))).
-walkStreet12(Agent, Street)if loc_at(Agent, side1(Street)).
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',215).
-
- /*  l_events(happens(walkStreet12(Agent,Street),
-   		 Time_From12,
-   		 Time_From12),
-   	 [loc_at(Agent,side1(Street))]).
  */
  %  "% =================================".
 
@@ -1806,120 +772,27 @@ walkStreet12(Agent, Street)if loc_at(Agent, side1(Street)).
 % HoldsAt(Awake(agent),time) &
 % HoldsAt(Standing(agent),time) &
 % HoldsAt(At(agent,Side2(street)),time).
-% '->'(
-%    ';'(
-%       not(
-%          awake(Agent)), 
-%       ';'(
-%          not(
-%             standing(Agent)), 
-%          not(
-%             at(
-%                Agent, 
-%                side2(Street))))), 
-%    not(
-%       walkStreet21(Agent,Street))).
-if not awake(Agent);not standing(Agent);not loc_at(Agent, side2(Street))then not walkStreet21(Agent, Street).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',222).
-
- /*   reactive_rule([  (not(awake(Agent));not(standing(Agent));not(loc_at(Agent, side2(Street))))
-                    ],
-                    [not(walkStreet21(Agent, Street))]).
- */
- %  "% =================================".
+% From E: 
+% 
 % '->'(
-%    metreqs(
-%       walkStreet21(Agent,Street)), 
-%    requires(
-%       walkStreet21(Agent,Street), 
-%       When_Time)).
-if walkStreet21(Agent, Street)then requires(walkStreet21(Agent, Street), When_Time).
+%    happens_at(walkStreet21(Agent,Street),Time), 
+%    (holds_at(awake(Agent),Time) , 
+%      holds_at(standing(Agent),Time) , 
+%     holds_at(at_loc(Agent,side2(Street)),Time))).
+ %   [Time].
+if walkStreet21(Agent, Street)then awake(Agent), standing(Agent), at_loc(Agent, side2(Street)).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',222).
 
  /*  reactive_rule([ happens(walkStreet21(Agent,Street),
    			Time_From,
    			Time_Until)
    	      ],
-   	      [ requires(walkStreet21(Agent,Street),
-   			 When_Time)
+   	      [ holds(awake(Agent),Time_At),
+   		holds(standing(Agent),Time_At),
+   		holds(at_loc(Agent,side2(Street)),
+   		      Time_At)
    	      ]).
- */
- %  "% =================================".
-% '->'(
-%    awake(Agent), 
-%    metreqs(
-%       walkStreet21(Agent,Street))).
-walkStreet21(Agent, Street)if awake(Agent).
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',222).
-
- /*  l_events(happens(walkStreet21(Agent,Street),
-   		 Time_From6,
-   		 Time_From6),
-   	 [awake(Agent)]).
- */
- %  "% =================================".
-% '->'(
-%    metreqs(
-%       walkStreet21(Agent,Street)), 
-%    requires(
-%       walkStreet21(Agent,Street), 
-%       When_Time)).
-if walkStreet21(Agent, Street)then requires(walkStreet21(Agent, Street), When_Time).
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',222).
-
- /*  reactive_rule([ happens(walkStreet21(Agent,Street),
-   			Time_From7,
-   			Time_Until8)
-   	      ],
-   	      [ requires(walkStreet21(Agent,Street),
-   			 When_Time)
-   	      ]).
- */
- %  "% =================================".
-% '->'(
-%    standing(Agent), 
-%    metreqs(
-%       walkStreet21(Agent,Street))).
-walkStreet21(Agent, Street)if standing(Agent).
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',222).
-
- /*  l_events(happens(walkStreet21(Agent,Street),
-   		 Time_From9,
-   		 Time_From9),
-   	 [holds(standing(Agent),Time_From9)]).
- */
- %  "% =================================".
-% '->'(
-%    metreqs(
-%       walkStreet21(Agent,Street)), 
-%    requires(
-%       walkStreet21(Agent,Street), 
-%       When_Time)).
-if walkStreet21(Agent, Street)then requires(walkStreet21(Agent, Street), When_Time).
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',222).
-
- /*  reactive_rule([ happens(walkStreet21(Agent,Street),
-   			Time_From10,
-   			Time_Until11)
-   	      ],
-   	      [ requires(walkStreet21(Agent,Street),
-   			 When_Time)
-   	      ]).
- */
- %  "% =================================".
-% '->'(
-%    at(
-%       Agent, 
-%       side2(Street)), 
-%    metreqs(
-%       walkStreet21(Agent,Street))).
-walkStreet21(Agent, Street)if loc_at(Agent, side2(Street)).
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',222).
-
- /*  l_events(happens(walkStreet21(Agent,Street),
-   		 Time_From12,
-   		 Time_From12),
-   	 [loc_at(Agent,side2(Street))]).
  */
  %  "% =================================".
 
@@ -1930,21 +803,24 @@ walkStreet21(Agent, Street)if loc_at(Agent, side2(Street)).
 % [agent,street,location,time]
 % Side2(street)=location ->
 % Initiates(WalkStreet12(agent,street),At(agent,location),time).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',230).
+% From E: 
+% 
 % '->'(
-%    side2Pred(Street,Location), 
-%    initiates(
+%    side2(Street)=Location, 
+%    initiates_at(
 %       walkStreet12(Agent,Street), 
-%       at(Agent,Location), 
+%       at_loc(Agent,Location), 
 %       Time)).
-if side2Pred(Street, Location)then initiates(walkStreet12(Agent, Street), loc_at(Agent, Location)at Time, _).
+ %   [Time].
+walkStreet12(Agent, Street)initiates at_loc(Agent, Location)if side2(Street, Location).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',230).
 
- /*  reactive_rule([side2Pred(Street,Location)],
-   	      [ initiates(walkStreet12(Agent,Street),
-   			  at(loc_at(Agent,Location),
-   			     Time),
-   			  Initiates)
-   	      ]).
+ /*  initiated(happens(walkStreet12(Agent,Street),
+   		  Time_From,
+   		  Time_Until),
+   	  at_loc(Agent,Location),
+   	  [side2(Street,Location)]).
  */
  %  "% =================================".
 
@@ -1952,20 +828,23 @@ if side2Pred(Street, Location)then initiates(walkStreet12(Agent, Street), loc_at
 % [agent,street,location,time]
 % Side1(street)=location ->
 % Initiates(WalkStreet21(agent,street),At(agent,location),time).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',235).
+% From E: 
+% 
 % '->'(
-%    side1Pred(Street,Location), 
-%    initiates(
+%    side1(Street)=Location, 
+%    initiates_at(
 %       walkStreet21(Agent,Street), 
-%       at(Agent,Location), 
+%       at_loc(Agent,Location), 
 %       Time)).
-if side1Pred(Street, Location)then initiates(walkStreet21(Agent, Street), loc_at(Agent, Location)at Time, _).
+ %   [Time].
+walkStreet21(Agent, Street)initiates at_loc(Agent, Location)if side1(Street, Location).
 
- /*  reactive_rule([side1Pred(Street,Location)],
-   	      [ initiates(walkStreet21(Agent,Street),
-   			  at(loc_at(Agent,Location),
-   			     Time),
-   			  Initiates)
-   	      ]).
+ /*  initiated(happens(walkStreet21(Agent,Street),
+   		  Time_From,
+   		  Time_Until),
+   	  at_loc(Agent,Location),
+   	  [side1(Street,Location)]).
  */
  %  "% =================================".
 
@@ -1973,20 +852,23 @@ if side1Pred(Street, Location)then initiates(walkStreet21(Agent, Street), loc_at
 % [agent,street,location,time]
 % Side1(street)=location ->
 % Terminates(WalkStreet12(agent,street),At(agent,location),time).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',239).
+% From E: 
+% 
 % '->'(
-%    side1Pred(Street,Location), 
-%    terminates(
+%    side1(Street)=Location, 
+%    terminates_at(
 %       walkStreet12(Agent,Street), 
-%       at(Agent,Location), 
+%       at_loc(Agent,Location), 
 %       Time)).
-if side1Pred(Street, Location)then terminates(walkStreet12(Agent, Street), loc_at(Agent, Location)at Time, _).
+ %   [Time].
+walkStreet12(Agent, Street)terminates at_loc(Agent, Location)if side1(Street, Location).
 
- /*  reactive_rule([side1Pred(Street,Location)],
-   	      [ terminates(walkStreet12(Agent,Street),
-   			   at(loc_at(Agent,Location),
-   			      Time),
-   			   Terminates)
-   	      ]).
+ /*  terminated(happens(walkStreet12(Agent,Street),
+   		   Time_From,
+   		   Time_Until),
+   	   at_loc(Agent,Location),
+   	   [side1(Street,Location)]).
  */
  %  "% =================================".
 
@@ -1994,20 +876,23 @@ if side1Pred(Street, Location)then terminates(walkStreet12(Agent, Street), loc_a
 % [agent,street,location,time]
 % Side2(street)=location ->
 % Terminates(WalkStreet21(agent,street),At(agent,location),time).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',243).
+% From E: 
+% 
 % '->'(
-%    side2Pred(Street,Location), 
-%    terminates(
+%    side2(Street)=Location, 
+%    terminates_at(
 %       walkStreet21(Agent,Street), 
-%       at(Agent,Location), 
+%       at_loc(Agent,Location), 
 %       Time)).
-if side2Pred(Street, Location)then terminates(walkStreet21(Agent, Street), loc_at(Agent, Location)at Time, _).
+ %   [Time].
+walkStreet21(Agent, Street)terminates at_loc(Agent, Location)if side2(Street, Location).
 
- /*  reactive_rule([side2Pred(Street,Location)],
-   	      [ terminates(walkStreet21(Agent,Street),
-   			   at(loc_at(Agent,Location),
-   			      Time),
-   			   Terminates)
-   	      ]).
+ /*  terminated(happens(walkStreet21(Agent,Street),
+   		   Time_From,
+   		   Time_Until),
+   	   at_loc(Agent,Location),
+   	   [side2(Street,Location)]).
  */
  %  "% =================================".
 
@@ -2016,60 +901,36 @@ if side2Pred(Street, Location)then terminates(walkStreet21(Agent, Street), loc_a
 %; The floor of room is integer.
 
 % function Floor(room): integer
-% function(
-%    floor(room)).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',248).
-functions([floor/1]).
-% mpred_prop(
-%    floor(room), 
-%    function).
-mpred_prop(floor(room),function).
-% predicate(
-%    floorPred(room,integer)).
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',248).
-predicates([floorPred/2]).
-% mpred_prop(
-%    floorPred(room,integer), 
-%    predicate).
-mpred_prop(floorPred(room,integer),predicate).
-% functional_predicate(floor,floorPred).
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',248).
-functional_predicate(floor,floorPred).
-% function_argtypes(
-%    floorPred, 
-%    floor(room), 
-%    integer).
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',248).
-function_argtypes(floorPred,floor(room),integer).
-% resultIsa(floor,integer).
-resultIsa(floor,integer).
+% From E: 
+% 
+% function(floor(room),integer).
+function(floor(room),integer).
 %; walking up and down staircases
 %; agent walks down staircase.
 
 % event WalkDownStaircase(agent,staircase)
-% event(
-%    walkDownStaircase(agent,staircase)).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',253).
+% From E: 
+% 
+% event(walkDownStaircase(agent,staircase)).
+events([walkDownStaircase/2]).
+mpred_prop(walkDownStaircase(agent,staircase),action).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',253).
 actions([walkDownStaircase/2]).
-% mpred_prop(
-%    walkDownStaircase(agent,staircase), 
-%    event).
-mpred_prop(walkDownStaircase(agent,staircase),event).
 
 
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',253).
 %; agent walks up staircase.
 
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',256).
 % event WalkUpStaircase(agent,staircase)
-% event(
-%    walkUpStaircase(agent,staircase)).
-actions([walkUpStaircase/2]).
-% mpred_prop(
-%    walkUpStaircase(agent,staircase), 
-%    event).
+% From E: 
+% 
+% event(walkUpStaircase(agent,staircase)).
+events([walkUpStaircase/2]).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',256).
-mpred_prop(walkUpStaircase(agent,staircase),event).
+mpred_prop(walkUpStaircase(agent,staircase),action).
+actions([walkUpStaircase/2]).
 
 
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',258).
@@ -2082,120 +943,27 @@ mpred_prop(walkUpStaircase(agent,staircase),event).
 % HoldsAt(Awake(agent),time) &
 % HoldsAt(Standing(agent),time) &
 % HoldsAt(At(agent,Side2(staircase)),time).
-% '->'(
-%    ';'(
-%       not(
-%          awake(Agent)), 
-%       ';'(
-%          not(
-%             standing(Agent)), 
-%          not(
-%             at(
-%                Agent, 
-%                side2(Staircase))))), 
-%    not(
-%       walkDownStaircase(Agent,Staircase))).
-if not awake(Agent);not standing(Agent);not loc_at(Agent, side2(Staircase))then not walkDownStaircase(Agent, Staircase).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',262).
-
- /*   reactive_rule([  (not(awake(Agent));not(standing(Agent));not(loc_at(Agent, side2(Staircase))))
-                    ],
-                    [not(walkDownStaircase(Agent, Staircase))]).
- */
- %  "% =================================".
+% From E: 
+% 
 % '->'(
-%    metreqs(
-%       walkDownStaircase(Agent,Staircase)), 
-%    requires(
-%       walkDownStaircase(Agent,Staircase), 
-%       When_Time)).
-if walkDownStaircase(Agent, Staircase)then requires(walkDownStaircase(Agent, Staircase), When_Time).
+%    happens_at(walkDownStaircase(Agent,Staircase),Time), 
+%    (holds_at(awake(Agent),Time) , 
+%      holds_at(standing(Agent),Time) , 
+%     holds_at(at_loc(Agent,side2(Staircase)),Time))).
+ %   [Time].
+if walkDownStaircase(Agent, Staircase)then awake(Agent), standing(Agent), at_loc(Agent, side2(Staircase)).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',262).
 
  /*  reactive_rule([ happens(walkDownStaircase(Agent,Staircase),
    			Time_From,
    			Time_Until)
    	      ],
-   	      [ requires(walkDownStaircase(Agent,Staircase),
-   			 When_Time)
+   	      [ holds(awake(Agent),Time_At),
+   		holds(standing(Agent),Time_At),
+   		holds(at_loc(Agent,side2(Staircase)),
+   		      Time_At)
    	      ]).
- */
- %  "% =================================".
-% '->'(
-%    awake(Agent), 
-%    metreqs(
-%       walkDownStaircase(Agent,Staircase))).
-walkDownStaircase(Agent, Staircase)if awake(Agent).
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',262).
-
- /*  l_events(happens(walkDownStaircase(Agent,Staircase),
-   		 Time_From6,
-   		 Time_From6),
-   	 [awake(Agent)]).
- */
- %  "% =================================".
-% '->'(
-%    metreqs(
-%       walkDownStaircase(Agent,Staircase)), 
-%    requires(
-%       walkDownStaircase(Agent,Staircase), 
-%       When_Time)).
-if walkDownStaircase(Agent, Staircase)then requires(walkDownStaircase(Agent, Staircase), When_Time).
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',262).
-
- /*  reactive_rule([ happens(walkDownStaircase(Agent,Staircase),
-   			Time_From7,
-   			Time_Until8)
-   	      ],
-   	      [ requires(walkDownStaircase(Agent,Staircase),
-   			 When_Time)
-   	      ]).
- */
- %  "% =================================".
-% '->'(
-%    standing(Agent), 
-%    metreqs(
-%       walkDownStaircase(Agent,Staircase))).
-walkDownStaircase(Agent, Staircase)if standing(Agent).
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',262).
-
- /*  l_events(happens(walkDownStaircase(Agent,Staircase),
-   		 Time_From9,
-   		 Time_From9),
-   	 [holds(standing(Agent),Time_From9)]).
- */
- %  "% =================================".
-% '->'(
-%    metreqs(
-%       walkDownStaircase(Agent,Staircase)), 
-%    requires(
-%       walkDownStaircase(Agent,Staircase), 
-%       When_Time)).
-if walkDownStaircase(Agent, Staircase)then requires(walkDownStaircase(Agent, Staircase), When_Time).
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',262).
-
- /*  reactive_rule([ happens(walkDownStaircase(Agent,Staircase),
-   			Time_From10,
-   			Time_Until11)
-   	      ],
-   	      [ requires(walkDownStaircase(Agent,Staircase),
-   			 When_Time)
-   	      ]).
- */
- %  "% =================================".
-% '->'(
-%    at(
-%       Agent, 
-%       side2(Staircase)), 
-%    metreqs(
-%       walkDownStaircase(Agent,Staircase))).
-walkDownStaircase(Agent, Staircase)if loc_at(Agent, side2(Staircase)).
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',262).
-
- /*  l_events(happens(walkDownStaircase(Agent,Staircase),
-   		 Time_From12,
-   		 Time_From12),
-   	 [loc_at(Agent,side2(Staircase))]).
  */
  %  "% =================================".
 
@@ -2205,120 +973,27 @@ walkDownStaircase(Agent, Staircase)if loc_at(Agent, side2(Staircase)).
 % HoldsAt(Awake(agent),time) &
 % HoldsAt(Standing(agent),time) &
 % HoldsAt(At(agent,Side1(staircase)),time).
-% '->'(
-%    ';'(
-%       not(
-%          awake(Agent)), 
-%       ';'(
-%          not(
-%             standing(Agent)), 
-%          not(
-%             at(
-%                Agent, 
-%                side1(Staircase))))), 
-%    not(
-%       walkUpStaircase(Agent,Staircase))).
-if not awake(Agent);not standing(Agent);not loc_at(Agent, side1(Staircase))then not walkUpStaircase(Agent, Staircase).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',269).
-
- /*   reactive_rule([  (not(awake(Agent));not(standing(Agent));not(loc_at(Agent, side1(Staircase))))
-                    ],
-                    [not(walkUpStaircase(Agent, Staircase))]).
- */
- %  "% =================================".
+% From E: 
+% 
 % '->'(
-%    metreqs(
-%       walkUpStaircase(Agent,Staircase)), 
-%    requires(
-%       walkUpStaircase(Agent,Staircase), 
-%       When_Time)).
-if walkUpStaircase(Agent, Staircase)then requires(walkUpStaircase(Agent, Staircase), When_Time).
+%    happens_at(walkUpStaircase(Agent,Staircase),Time), 
+%    (holds_at(awake(Agent),Time) , 
+%      holds_at(standing(Agent),Time) , 
+%     holds_at(at_loc(Agent,side1(Staircase)),Time))).
+ %   [Time].
+if walkUpStaircase(Agent, Staircase)then awake(Agent), standing(Agent), at_loc(Agent, side1(Staircase)).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',269).
 
  /*  reactive_rule([ happens(walkUpStaircase(Agent,Staircase),
    			Time_From,
    			Time_Until)
    	      ],
-   	      [ requires(walkUpStaircase(Agent,Staircase),
-   			 When_Time)
+   	      [ holds(awake(Agent),Time_At),
+   		holds(standing(Agent),Time_At),
+   		holds(at_loc(Agent,side1(Staircase)),
+   		      Time_At)
    	      ]).
- */
- %  "% =================================".
-% '->'(
-%    awake(Agent), 
-%    metreqs(
-%       walkUpStaircase(Agent,Staircase))).
-walkUpStaircase(Agent, Staircase)if awake(Agent).
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',269).
-
- /*  l_events(happens(walkUpStaircase(Agent,Staircase),
-   		 Time_From6,
-   		 Time_From6),
-   	 [awake(Agent)]).
- */
- %  "% =================================".
-% '->'(
-%    metreqs(
-%       walkUpStaircase(Agent,Staircase)), 
-%    requires(
-%       walkUpStaircase(Agent,Staircase), 
-%       When_Time)).
-if walkUpStaircase(Agent, Staircase)then requires(walkUpStaircase(Agent, Staircase), When_Time).
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',269).
-
- /*  reactive_rule([ happens(walkUpStaircase(Agent,Staircase),
-   			Time_From7,
-   			Time_Until8)
-   	      ],
-   	      [ requires(walkUpStaircase(Agent,Staircase),
-   			 When_Time)
-   	      ]).
- */
- %  "% =================================".
-% '->'(
-%    standing(Agent), 
-%    metreqs(
-%       walkUpStaircase(Agent,Staircase))).
-walkUpStaircase(Agent, Staircase)if standing(Agent).
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',269).
-
- /*  l_events(happens(walkUpStaircase(Agent,Staircase),
-   		 Time_From9,
-   		 Time_From9),
-   	 [holds(standing(Agent),Time_From9)]).
- */
- %  "% =================================".
-% '->'(
-%    metreqs(
-%       walkUpStaircase(Agent,Staircase)), 
-%    requires(
-%       walkUpStaircase(Agent,Staircase), 
-%       When_Time)).
-if walkUpStaircase(Agent, Staircase)then requires(walkUpStaircase(Agent, Staircase), When_Time).
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',269).
-
- /*  reactive_rule([ happens(walkUpStaircase(Agent,Staircase),
-   			Time_From10,
-   			Time_Until11)
-   	      ],
-   	      [ requires(walkUpStaircase(Agent,Staircase),
-   			 When_Time)
-   	      ]).
- */
- %  "% =================================".
-% '->'(
-%    at(
-%       Agent, 
-%       side1(Staircase)), 
-%    metreqs(
-%       walkUpStaircase(Agent,Staircase))).
-walkUpStaircase(Agent, Staircase)if loc_at(Agent, side1(Staircase)).
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',269).
-
- /*  l_events(happens(walkUpStaircase(Agent,Staircase),
-   		 Time_From12,
-   		 Time_From12),
-   	 [loc_at(Agent,side1(Staircase))]).
  */
  %  "% =================================".
 
@@ -2329,21 +1004,24 @@ walkUpStaircase(Agent, Staircase)if loc_at(Agent, side1(Staircase)).
 % [agent,staircase,room,time]
 % Side1(staircase)=room ->
 % Initiates(WalkDownStaircase(agent,staircase),At(agent,room),time).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',277).
+% From E: 
+% 
 % '->'(
-%    side1Pred(Staircase,Room), 
-%    initiates(
+%    side1(Staircase)=Room, 
+%    initiates_at(
 %       walkDownStaircase(Agent,Staircase), 
-%       at(Agent,Room), 
+%       at_loc(Agent,Room), 
 %       Time)).
-if side1Pred(Staircase, Room)then initiates(walkDownStaircase(Agent, Staircase), loc_at(Agent, Room)at Time, _).
+ %   [Time].
+walkDownStaircase(Agent, Staircase)initiates at_loc(Agent, Room)if side1(Staircase, Room).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',277).
 
- /*  reactive_rule([side1Pred(Staircase,Room)],
-   	      [ initiates(walkDownStaircase(Agent,
-   					    Staircase),
-   			  at(loc_at(Agent,Room),Time),
-   			  Initiates)
-   	      ]).
+ /*  initiated(happens(walkDownStaircase(Agent,Staircase),
+   		  Time_From,
+   		  Time_Until),
+   	  at_loc(Agent,Room),
+   	  [side1(Staircase,Room)]).
  */
  %  "% =================================".
 
@@ -2351,21 +1029,23 @@ if side1Pred(Staircase, Room)then initiates(walkDownStaircase(Agent, Staircase),
 % [agent,staircase,room,time]
 % Side2(staircase)=room ->
 % Terminates(WalkDownStaircase(agent,staircase),At(agent,room),time).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',282).
+% From E: 
+% 
 % '->'(
-%    side2Pred(Staircase,Room), 
-%    terminates(
+%    side2(Staircase)=Room, 
+%    terminates_at(
 %       walkDownStaircase(Agent,Staircase), 
-%       at(Agent,Room), 
+%       at_loc(Agent,Room), 
 %       Time)).
-if side2Pred(Staircase, Room)then terminates(walkDownStaircase(Agent, Staircase), loc_at(Agent, Room)at Time, _).
+ %   [Time].
+walkDownStaircase(Agent, Staircase)terminates at_loc(Agent, Room)if side2(Staircase, Room).
 
- /*  reactive_rule([side2Pred(Staircase,Room)],
-   	      [ terminates(walkDownStaircase(Agent,
-   					     Staircase),
-   			   at(loc_at(Agent,Room),
-   			      Time),
-   			   Terminates)
-   	      ]).
+ /*  terminated(happens(walkDownStaircase(Agent,Staircase),
+   		   Time_From,
+   		   Time_Until),
+   	   at_loc(Agent,Room),
+   	   [side2(Staircase,Room)]).
  */
  %  "% =================================".
 
@@ -2373,19 +1053,23 @@ if side2Pred(Staircase, Room)then terminates(walkDownStaircase(Agent, Staircase)
 % [agent,staircase,room,time]
 % Side2(staircase)=room ->
 % Initiates(WalkUpStaircase(agent,staircase),At(agent,room),time).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',286).
+% From E: 
+% 
 % '->'(
-%    side2Pred(Staircase,Room), 
-%    initiates(
+%    side2(Staircase)=Room, 
+%    initiates_at(
 %       walkUpStaircase(Agent,Staircase), 
-%       at(Agent,Room), 
+%       at_loc(Agent,Room), 
 %       Time)).
-if side2Pred(Staircase, Room)then initiates(walkUpStaircase(Agent, Staircase), loc_at(Agent, Room)at Time, _).
+ %   [Time].
+walkUpStaircase(Agent, Staircase)initiates at_loc(Agent, Room)if side2(Staircase, Room).
 
- /*  reactive_rule([side2Pred(Staircase,Room)],
-   	      [ initiates(walkUpStaircase(Agent,Staircase),
-   			  at(loc_at(Agent,Room),Time),
-   			  Initiates)
-   	      ]).
+ /*  initiated(happens(walkUpStaircase(Agent,Staircase),
+   		  Time_From,
+   		  Time_Until),
+   	  at_loc(Agent,Room),
+   	  [side2(Staircase,Room)]).
  */
  %  "% =================================".
 
@@ -2393,20 +1077,23 @@ if side2Pred(Staircase, Room)then initiates(walkUpStaircase(Agent, Staircase), l
 % [agent,staircase,room,time]
 % Side1(staircase)=room ->
 % Terminates(WalkUpStaircase(agent,staircase),At(agent,room),time).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',290).
+% From E: 
+% 
 % '->'(
-%    side1Pred(Staircase,Room), 
-%    terminates(
+%    side1(Staircase)=Room, 
+%    terminates_at(
 %       walkUpStaircase(Agent,Staircase), 
-%       at(Agent,Room), 
+%       at_loc(Agent,Room), 
 %       Time)).
-if side1Pred(Staircase, Room)then terminates(walkUpStaircase(Agent, Staircase), loc_at(Agent, Room)at Time, _).
+ %   [Time].
+walkUpStaircase(Agent, Staircase)terminates at_loc(Agent, Room)if side1(Staircase, Room).
 
- /*  reactive_rule([side1Pred(Staircase,Room)],
-   	      [ terminates(walkUpStaircase(Agent,Staircase),
-   			   at(loc_at(Agent,Room),
-   			      Time),
-   			   Terminates)
-   	      ]).
+ /*  terminated(happens(walkUpStaircase(Agent,Staircase),
+   		   Time_From,
+   		   Time_Until),
+   	   at_loc(Agent,Room),
+   	   [side1(Staircase,Room)]).
  */
  %  "% =================================".
 
@@ -2416,26 +1103,18 @@ if side1Pred(Staircase, Room)then terminates(walkUpStaircase(Agent, Staircase), 
 % [agent,outside,time]
 % HoldsAt(At(agent,outside),time) ->
 % HoldsAt(Dressed(agent),time).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',295).
+% From E: 
+% 
 % '->'(
-%    at(Agent,Outside), 
-%    dressed(Agent)).
-dressed(Agent)if loc_at(Agent, Outside).
+%    holds_at(at_loc(Agent,Outside),Time), 
+%    holds_at(dressed(Agent),Time)).
+ %   [Time].
+dressed(Agent)if at_loc(Agent, Outside).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',295).
 
  /*  l_int(holds(dressed(Agent),Time_At),
-         [loc_at(Agent,Outside)]).
- */
- %  "% =================================".
-% '->'(
-%    not(
-%       dressed(Agent)), 
-%    not(
-%       at(Agent,Outside))).
-if not dressed(Agent)then not loc_at(Agent, Outside).
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',295).
-
- /*  reactive_rule([holds(not(dressed(Agent)),Time_At4)],
-   	      [not(loc_at(Agent,Outside))]).
+         [holds(at_loc(Agent,Outside),Time_At)]).
  */
  %  "% =================================".
 
@@ -2444,43 +1123,19 @@ if not dressed(Agent)then not loc_at(Agent, Outside).
 
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',300).
 % function LookOutOnto(room): outside
-% function(
-%    lookOutOnto(room)).
-functions([lookOutOnto/1]).
-% mpred_prop(
-%    lookOutOnto(room), 
-%    function).
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',300).
-mpred_prop(lookOutOnto(room),function).
-% predicate(
-%    lookOutOntoPred(room,outside)).
-predicates([lookOutOntoPred/2]).
-% mpred_prop(
-%    lookOutOntoPred(room,outside), 
-%    predicate).
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',300).
-mpred_prop(lookOutOntoPred(room,outside),predicate).
-% functional_predicate(lookOutOnto,lookOutOntoPred).
-functional_predicate(lookOutOnto,lookOutOntoPred).
-% function_argtypes(
-%    lookOutOntoPred, 
-%    lookOutOnto(room), 
-%    outside).
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',300).
-function_argtypes(lookOutOntoPred,lookOutOnto(room),outside).
-% resultIsa(lookOutOnto,outside).
-resultIsa(lookOutOnto,outside).
+% From E: 
+% 
+% function(lookOutOnto(room),outside).
+function(lookOutOnto(room),outside).
 %; location1 is adjacent to location2.
 
 % predicate Adjacent(location,location)
-% predicate(
-%    adjacent(location,location)).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',302).
-predicates([adjacent/2]).
-% mpred_prop(
-%    adjacent(location,location), 
-%    predicate).
+% From E: 
+% 
+% predicate(adjacent(location,location)).
 mpred_prop(adjacent(location,location),predicate).
+predicates([adjacent/2]).
 
 
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',305).
@@ -2496,321 +1151,53 @@ mpred_prop(adjacent(location,location),predicate).
 %  Side2(portal)=location2) |
 % (Side2(portal)=location1 &
 %  Side1(portal)=location2).
-% '->'(
-%    ','(
-%       ';'(
-%          ','(
-%             side1Pred(Exists_Portal,Location1), 
-%             side2Pred(Exists_Portal,Location2)), 
-%          ','(
-%             side2Pred(Exists_Portal,Location1), 
-%             side1Pred(Exists_Portal,Location2))), 
-%       some(
-%          Exists_Portal, 
-%          '$kolem_Fn_731'(Location1,Location2))), 
-%    adjacent(Location1,Location2)).
-if (side1Pred(Exists_Portal, Location1), side2Pred(Exists_Portal, Location2);side2Pred(Exists_Portal, Location1), side1Pred(Exists_Portal, Location2)), some(Exists_Portal, '$kolem_Fn_731'(Location1, Location2))then adjacent(Location1, Location2).
- %  reactive_rule([(side1Pred(Exists_Portal, Location1), side2Pred(Exists_Portal, Location2);side2Pred(Exists_Portal, Location1), side1Pred(Exists_Portal, Location2)), some(Exists_Portal, '$kolem_Fn_731'(Location1, Location2))], [adjacent(Location1, Location2)]).
- %  "% =================================".
-% '->'(
-%    ','(
-%       side2Pred(Exists_Portal,Location2), 
-%       ','(
-%          not(
-%             adjacent(Location1,Location2)), 
-%          some(
-%             Exists_Portal, 
-%             '$kolem_Fn_731'(Location1,Location2)))), 
-%    not(
-%       side1Pred(Exists_Portal,Location1))).
-if side2Pred(Exists_Portal, Location2), not adjacent(Location1, Location2), some(Exists_Portal, '$kolem_Fn_731'(Location1, Location2))then not side1Pred(Exists_Portal, Location1).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',308).
-
- /*  reactive_rule([ side2Pred(Exists_Portal,Location2),
-   		not(adjacent(Location1,Location2)),
-   		some(Exists_Portal,
-   		     '$kolem_Fn_731'(Location1,Location2))
-   	      ],
-   	      [not(side1Pred(Exists_Portal,Location1))]).
- */
- %  "% =================================".
-% '->'(
-%    ','(
-%       side1Pred(Exists_Portal,Location1), 
-%       ','(
-%          not(
-%             adjacent(Location1,Location2)), 
-%          some(
-%             Exists_Portal, 
-%             '$kolem_Fn_731'(Location1,Location2)))), 
-%    not(
-%       side2Pred(Exists_Portal,Location2))).
-if side1Pred(Exists_Portal, Location1), not adjacent(Location1, Location2), some(Exists_Portal, '$kolem_Fn_731'(Location1, Location2))then not side2Pred(Exists_Portal, Location2).
+% From E: 
+% 
+% exists(
+%    [Portal], 
+%    <->(
+%       adjacent(Location1,Location2), 
+%       ((side1(Portal)=Location1 , 
+%         side2(Portal)=Location2) ; 
+%        (side2(Portal)=Location1 , 
+%         side1(Portal)=Location2)))).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',308).
-
- /*  reactive_rule([ side1Pred(Exists_Portal,Location1),
-   		not(adjacent(Location1,Location2)),
-   		some(Exists_Portal,
-   		     '$kolem_Fn_731'(Location1,Location2))
-   	      ],
-   	      [not(side2Pred(Exists_Portal,Location2))]).
- */
- %  "% =================================".
-% '->'(
-%    ','(
-%       side1Pred(Exists_Portal,Location2), 
-%       ','(
-%          not(
-%             adjacent(Location1,Location2)), 
-%          some(
-%             Exists_Portal, 
-%             '$kolem_Fn_731'(Location1,Location2)))), 
-%    not(
-%       side2Pred(Exists_Portal,Location1))).
-if side1Pred(Exists_Portal, Location2), not adjacent(Location1, Location2), some(Exists_Portal, '$kolem_Fn_731'(Location1, Location2))then not side2Pred(Exists_Portal, Location1).
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',308).
-
- /*  reactive_rule([ side1Pred(Exists_Portal,Location2),
-   		not(adjacent(Location1,Location2)),
-   		some(Exists_Portal,
-   		     '$kolem_Fn_731'(Location1,Location2))
-   	      ],
-   	      [not(side2Pred(Exists_Portal,Location1))]).
- */
- %  "% =================================".
-% '->'(
-%    ','(
-%       side2Pred(Exists_Portal,Location1), 
-%       ','(
-%          not(
-%             adjacent(Location1,Location2)), 
-%          some(
-%             Exists_Portal, 
-%             '$kolem_Fn_731'(Location1,Location2)))), 
-%    not(
-%       side1Pred(Exists_Portal,Location2))).
-if side2Pred(Exists_Portal, Location1), not adjacent(Location1, Location2), some(Exists_Portal, '$kolem_Fn_731'(Location1, Location2))then not side1Pred(Exists_Portal, Location2).
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',308).
-
- /*  reactive_rule([ side2Pred(Exists_Portal,Location1),
-   		not(adjacent(Location1,Location2)),
-   		some(Exists_Portal,
-   		     '$kolem_Fn_731'(Location1,Location2))
-   	      ],
-   	      [not(side1Pred(Exists_Portal,Location2))]).
- */
- %  "% =================================".
-% '->'(
-%    ','(
-%       ';'(
-%          not(
-%             side1Pred(Exists_Portal,Location1)), 
-%          not(
-%             side2Pred(Exists_Portal,Location2))), 
-%       ','(
-%          ';'(
-%             not(
-%                side2Pred(Exists_Portal,Location1)), 
-%             not(
-%                side1Pred(Exists_Portal,Location2))), 
-%          some(
-%             Exists_Portal, 
-%             '$kolem_Fn_731'(Location1,Location2)))), 
-%    not(
-%       adjacent(Location1,Location2))).
-if (not side1Pred(Exists_Portal, Location1);not side2Pred(Exists_Portal, Location2)), (not side2Pred(Exists_Portal, Location1);not side1Pred(Exists_Portal, Location2)), some(Exists_Portal, '$kolem_Fn_731'(Location1, Location2))then not adjacent(Location1, Location2).
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',308).
-
- /*   reactive_rule([  (not(side1Pred(Exists_Portal, Location1));not(side2Pred(Exists_Portal, Location2))),
-                       (not(side2Pred(Exists_Portal, Location1));not(side1Pred(Exists_Portal, Location2))),
-                      some(Exists_Portal,
-                           '$kolem_Fn_731'(Location1, Location2))
-                    ],
-                    [not(adjacent(Location1, Location2))]).
- */
- %  "% =================================".
-% '->'(
-%    ','(
-%       ';'(
-%          not(
-%             side2Pred(Exists_Portal,Location1)), 
-%          not(
-%             side1Pred(Exists_Portal,Location2))), 
-%       ','(
-%          adjacent(Location1,Location2), 
-%          some(
-%             Exists_Portal, 
-%             '$kolem_Fn_731'(Location1,Location2)))), 
-%    side1Pred(Exists_Portal,Location1)).
-if (not side2Pred(Exists_Portal, Location1);not side1Pred(Exists_Portal, Location2)), adjacent(Location1, Location2), some(Exists_Portal, '$kolem_Fn_731'(Location1, Location2))then side1Pred(Exists_Portal, Location1).
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',308).
-
- /*   reactive_rule([  (not(side2Pred(Exists_Portal, Location1));not(side1Pred(Exists_Portal, Location2))),
-                      adjacent(Location1, Location2),
-                      some(Exists_Portal,
-                           '$kolem_Fn_731'(Location1, Location2))
-                    ],
-                    [side1Pred(Exists_Portal, Location1)]).
- */
- %  "% =================================".
-% '->'(
-%    ','(
-%       ';'(
-%          not(
-%             side2Pred(Exists_Portal,Location1)), 
-%          not(
-%             side1Pred(Exists_Portal,Location2))), 
-%       ','(
-%          adjacent(Location1,Location2), 
-%          some(
-%             Exists_Portal, 
-%             '$kolem_Fn_731'(Location1,Location2)))), 
-%    side2Pred(Exists_Portal,Location2)).
-if (not side2Pred(Exists_Portal, Location1);not side1Pred(Exists_Portal, Location2)), adjacent(Location1, Location2), some(Exists_Portal, '$kolem_Fn_731'(Location1, Location2))then side2Pred(Exists_Portal, Location2).
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',308).
-
- /*   reactive_rule([  (not(side2Pred(Exists_Portal, Location1));not(side1Pred(Exists_Portal, Location2))),
-                      adjacent(Location1, Location2),
-                      some(Exists_Portal,
-                           '$kolem_Fn_731'(Location1, Location2))
-                    ],
-                    [side2Pred(Exists_Portal, Location2)]).
- */
- %  "% =================================".
-% '->'(
-%    ','(
-%       ';'(
-%          not(
-%             side1Pred(Exists_Portal,Location1)), 
-%          not(
-%             side2Pred(Exists_Portal,Location2))), 
-%       ','(
-%          adjacent(Location1,Location2), 
-%          some(
-%             Exists_Portal, 
-%             '$kolem_Fn_731'(Location1,Location2)))), 
-%    side2Pred(Exists_Portal,Location1)).
-if (not side1Pred(Exists_Portal, Location1);not side2Pred(Exists_Portal, Location2)), adjacent(Location1, Location2), some(Exists_Portal, '$kolem_Fn_731'(Location1, Location2))then side2Pred(Exists_Portal, Location1).
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',308).
-
- /*   reactive_rule([  (not(side1Pred(Exists_Portal, Location1));not(side2Pred(Exists_Portal, Location2))),
-                      adjacent(Location1, Location2),
-                      some(Exists_Portal,
-                           '$kolem_Fn_731'(Location1, Location2))
-                    ],
-                    [side2Pred(Exists_Portal, Location1)]).
- */
- %  "% =================================".
-% '->'(
-%    ','(
-%       ';'(
-%          not(
-%             side1Pred(Exists_Portal,Location1)), 
-%          not(
-%             side2Pred(Exists_Portal,Location2))), 
-%       ','(
-%          adjacent(Location1,Location2), 
-%          some(
-%             Exists_Portal, 
-%             '$kolem_Fn_731'(Location1,Location2)))), 
-%    side1Pred(Exists_Portal,Location2)).
-if (not side1Pred(Exists_Portal, Location1);not side2Pred(Exists_Portal, Location2)), adjacent(Location1, Location2), some(Exists_Portal, '$kolem_Fn_731'(Location1, Location2))then side1Pred(Exists_Portal, Location2).
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',308).
-
- /*   reactive_rule([  (not(side1Pred(Exists_Portal, Location1));not(side2Pred(Exists_Portal, Location2))),
-                      adjacent(Location1, Location2),
-                      some(Exists_Portal,
-                           '$kolem_Fn_731'(Location1, Location2))
-                    ],
-                    [side1Pred(Exists_Portal, Location2)]).
- */
- %  "% =================================".
+exists([Portal],  (adjacent(Location1, Location2)<->side1(Portal, Location1), side2(Portal, Location2);side2(Portal, Location1), side1(Portal, Location2))).
 
 
 %; The ground of outside is ground.
 
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',316).
 % function GroundOf(outside): ground
-% function(
-%    groundOf(outside)).
-functions([groundOf/1]).
-% mpred_prop(
-%    groundOf(outside), 
-%    function).
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',316).
-mpred_prop(groundOf(outside),function).
-% predicate(
-%    ground(outside,ground)).
-predicates([ground/2]).
-% mpred_prop(
-%    ground(outside,ground), 
-%    predicate).
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',316).
-mpred_prop(ground(outside,ground),predicate).
-% functional_predicate(groundOf,ground).
-functional_predicate(groundOf,ground).
-% function_argtypes(
-%    ground, 
-%    groundOf(outside), 
-%    ground).
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',316).
-function_argtypes(ground,groundOf(outside),ground).
-% resultIsa(groundOf,ground).
-resultIsa(groundOf,ground).
+% From E: 
+% 
+% function(groundOf(outside),ground).
+function(groundOf(outside),ground).
 %; The sky of outside is sky.
 
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',318).
 % function SkyOf(outside): sky
-% function(
-%    skyOf(outside)).
-functions([skyOf/1]).
-% mpred_prop(
-%    skyOf(outside), 
-%    function).
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',318).
-mpred_prop(skyOf(outside),function).
-% predicate(
-%    sky(outside,sky)).
-predicates([sky/2]).
-% mpred_prop(
-%    sky(outside,sky), 
-%    predicate).
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',318).
-mpred_prop(sky(outside,sky),predicate).
-% functional_predicate(skyOf,sky).
-functional_predicate(skyOf,sky).
-% function_argtypes(
-%    sky, 
-%    skyOf(outside), 
-%    sky).
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',318).
-function_argtypes(sky,skyOf(outside),sky).
-% resultIsa(skyOf,sky).
-resultIsa(skyOf,sky).
+% From E: 
+% 
+% function(skyOf(outside),sky).
+function(skyOf(outside),sky).
  %; State constraints fix the location of ground and sky:
 % [outside,ground,time]
 % GroundOf(outside) = ground ->
 % HoldsAt(At(ground,outside),time).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',322).
+% From E: 
+% 
 % '->'(
-%    ground(Outside,Ground), 
-%    at(Ground,Outside)).
-if ground(Outside, Ground)then loc_at(Ground, Outside).
+%    groundOf(Outside)=Ground, 
+%    holds_at(at_loc(Ground,Outside),Time)).
+ %   [Time].
+at_loc(Ground, Outside)if groundOf(Outside, Ground).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',322).
 
- /*  reactive_rule([ground(Outside,Ground)],
-   	      [loc_at(Ground,Outside)]).
- */
- %  "% =================================".
-% '->'(
-%    not(
-%       at(Ground,Outside)), 
-%    not(
-%       ground(Outside,Ground))).
-if not loc_at(Ground, Outside)then not ground(Outside, Ground).
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',322).
-
- /*  reactive_rule([not(loc_at(Ground,Outside))],
-   	      [not(ground(Outside,Ground))]).
+ /*  l_int(holds(at_loc(Ground,Outside),Time_At),
+         [groundOf(Outside,Ground)]).
  */
  %  "% =================================".
 
@@ -2818,29 +1205,25 @@ if not loc_at(Ground, Outside)then not ground(Outside, Ground).
 % [outside,sky,time]
 % SkyOf(outside) = sky ->
 % HoldsAt(At(sky,outside),time).
-% '->'(
-%    sky(Outside,Sky), 
-%    at(Sky,Outside)).
-if sky(Outside, Sky)then loc_at(Sky, Outside).
-
- /*  reactive_rule([sky(Outside,Sky)],
-   	      [loc_at(Sky,Outside)]).
- */
- %  "% =================================".
-% '->'(
-%    not(
-%       at(Sky,Outside)), 
-%    not(
-%       sky(Outside,Sky))).
-if not loc_at(Sky, Outside)then not sky(Outside, Sky).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',327).
+% From E: 
+% 
+% '->'(
+%    skyOf(Outside)=Sky, 
+%    holds_at(at_loc(Sky,Outside),Time)).
+ %   [Time].
+at_loc(Sky, Outside)if skyOf(Outside, Sky).
 
- /*  reactive_rule([not(loc_at(Sky,Outside))],
-   	      [not(sky(Outside,Sky))]).
+ /*  l_int(holds(at_loc(Sky,Outside),Time_At),
+         [skyOf(Outside,Sky)]).
  */
  %  "% =================================".
 
 
 %; End of file.
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',329).
-% translate: ending  File: /pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e.lps 
+% From E: 
+% 
+% :-call_pel_directive(translate(ending,'/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e.lps')).
+:- call_pel_directive(translate(ending,
+                                '/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e.lps')).
