@@ -12,7 +12,7 @@
 % :-call_pel_directive(translate(begining,'/pack/logicmoo_ec/ext/ec_sources/ecnet/Condition.e.lps')).
 :- call_pel_directive(translate(begining,
                                 '/pack/logicmoo_ec/ext/ec_sources/ecnet/Condition.e.lps')).
-% Sat, 10 Oct 2020 14:56:01 GMT File: <stream>(0x5597f2963700)
+% Sat, 10 Oct 2020 15:31:34 GMT File: <stream>(0x559e4b1d8500)
 
 
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Cognition.e',20).
@@ -100,18 +100,10 @@ actions([healInjured/1]).
 %    holds_at(not(dead(Agent)),Time)).
  %   [Time].
 if alive(Agent)then not dead(Agent).
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Condition.e',24).
-
- /*  reactive_rule([holds(alive(Agent),Time_At)],
-   	      [not(dead(Agent))]).
- */
+ %  reactive_rule([alive(Agent)],[not(dead(Agent))]).
  %  "% =================================".
-alive(Agent)if not dead(Agent).
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Condition.e',24).
-
- /*  l_int(holds(alive(Agent),Time_At3),
-         [not(dead(Agent))]).
- */
+if not dead(Agent)then alive(Agent).
+ %  reactive_rule([not(dead(Agent))],[alive(Agent)]).
  %  "% =================================".
 
 
@@ -124,12 +116,8 @@ alive(Agent)if not dead(Agent).
 %    holds_at(injured(Agent),Time), 
 %    holds_at(alive(Agent),Time)).
  %   [Time].
-alive(Agent)if injured(Agent).
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Condition.e',24).
-
- /*  l_int(holds(alive(Agent),Time_At),
-         [holds(injured(Agent),Time_At)]).
- */
+if injured(Agent)then alive(Agent).
+ %  reactive_rule([injured(Agent)],[alive(Agent)]).
  %  "% =================================".
 
 
@@ -274,14 +262,11 @@ events([repair/2]).
 %    happens_at(damage(Object,Physobj),Time), 
 %    holds_at(intact(Physobj),Time)).
  %   [Time].
-intact(Physobj)if damage(Object, Physobj).
+if damage(Object, Physobj)then intact(Physobj).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Condition.e',51).
 
- /*  l_int(holds(intact(Physobj),Time_At),
-         [ happens(damage(Object,Physobj),
-   		Time_At,
-   		Time_At)
-         ]).
+ /*  reactive_rule([damage(Object,Physobj)],
+   	      [intact(Physobj)]).
  */
  %  "% =================================".
 

@@ -12,7 +12,7 @@
 % :-call_pel_directive(translate(begining,'/pack/logicmoo_ec/ext/ec_sources/examples/Mueller2004b/OffOn.e.lps')).
 :- call_pel_directive(translate(begining,
                                 '/pack/logicmoo_ec/ext/ec_sources/examples/Mueller2004b/OffOn.e.lps')).
-% Sat, 10 Oct 2020 14:56:43 GMT File: <stream>(0x5597f2999c00)%;
+% Sat, 10 Oct 2020 15:32:01 GMT File: <stream>(0x559e4af67800)%;
 %; Copyright (c) 2005 IBM Corporation and others.
 %; All rights reserved. This program and the accompanying materials
 %; are made available under the terms of the Common Public License v1.0
@@ -34,8 +34,8 @@
 %; }
 %;
 
-% load foundations/Root.e
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/examples/Mueller2004b/OffOn.e',23).
+% load foundations/Root.e
 % From E: 
 % 
 % :-call_pel_directive(load('foundations/Root.e')).
@@ -48,8 +48,8 @@
 % :-call_pel_directive(load('foundations/EC.e')).
 :- call_pel_directive(load('foundations/EC.e')).
 
-% sort agent
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/examples/Mueller2004b/OffOn.e',26).
+% sort agent
 % From E: 
 % 
 % sort(agent).
@@ -62,30 +62,31 @@ sort(agent).
 % sort(switch).
 sort(switch).
 
-% fluent On(switch)
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/examples/Mueller2004b/OffOn.e',29).
+% fluent On(switch)
 % From E: 
 % 
 % fluent(on(switch)).
 mpred_prop(on(switch),fluent).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/examples/Mueller2004b/OffOn.e',29).
 fluents([on/1]).
 
 % fluent Off(switch)
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/examples/Mueller2004b/OffOn.e',29).
 % From E: 
 % 
 % fluent(off(switch)).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/examples/Mueller2004b/OffOn.e',29).
 mpred_prop(off(switch),fluent).
 fluents([off/1]).
 
-% event TurnOn(agent,switch)
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/examples/Mueller2004b/OffOn.e',31).
+% event TurnOn(agent,switch)
 % From E: 
 % 
 % event(turnOn(agent,switch)).
 events([turnOn/2]).
-mpred_prop(turnOn(agent,switch),action).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/examples/Mueller2004b/OffOn.e',31).
+mpred_prop(turnOn(agent,switch),action).
 actions([turnOn/2]).
 
 % event TurnOff(agent,switch)
@@ -97,8 +98,8 @@ events([turnOff/2]).
 mpred_prop(turnOff(agent,switch),action).
 actions([turnOff/2]).
 
-% noninertial Off
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/examples/Mueller2004b/OffOn.e',34).
+% noninertial Off
 % From E: 
 % 
 % :-call_pel_directive(noninertial(off)).
@@ -114,15 +115,11 @@ actions([turnOff/2]).
 %    holds_at(off(Switch),Time), 
 %    holds_at(not(on(Switch)),Time)).
  %   [Time].
-not on(Switch)if off(Switch).
- %  l_int(holds(not(on(Switch)),Time_At),[off(Switch)]).
+if off(Switch)then not on(Switch).
+ %  reactive_rule([off(Switch)],[not(on(Switch))]).
  %  "% =================================".
 if not on(Switch)then off(Switch).
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/examples/Mueller2004b/OffOn.e',36).
-
- /*  reactive_rule([holds(not(on(Switch)),Time_At3)],
-   	      [off(Switch)]).
- */
+ %  reactive_rule([not(on(Switch))],[off(Switch)]).
  %  "% =================================".
 
 

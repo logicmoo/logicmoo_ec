@@ -12,7 +12,7 @@
 % :-call_pel_directive(translate(begining,'/pack/logicmoo_ec/ext/ec_sources/ecnet/Book.e.lps')).
 :- call_pel_directive(translate(begining,
                                 '/pack/logicmoo_ec/ext/ec_sources/ecnet/Book.e.lps')).
-% Sat, 10 Oct 2020 14:56:01 GMT File: <stream>(0x5597f296af00)%;
+% Sat, 10 Oct 2020 15:31:34 GMT File: <stream>(0x559e4b469300)%;
 %; Copyright (c) 2005 IBM Corporation and others.
 %; All rights reserved. This program and the accompanying materials
 %; are made available under the terms of the Common Public License v1.0
@@ -25,8 +25,8 @@
 %; Book: book (a sort of device)
 %;
 
-% sort page: integer
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Book.e',14).
+% sort page: integer
 % From E: 
 % 
 % subsort(page,integer).
@@ -112,8 +112,8 @@ false not equals(Page1, Page2), bookIsOpenTo(Book, Page1), bookIsOpenTo(Book, Pa
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Book.e',31).
 
  /*  d_pre([ not(equals(Page1,Page2)),
-   	holds(bookIsOpenTo(Book,Page1),Time_At),
-   	holds(bookIsOpenTo(Book,Page2),Time_At)
+   	bookIsOpenTo(Book,Page1),
+   	bookIsOpenTo(Book,Page2)
          ]).
  */
  %  "% =================================".
@@ -132,18 +132,16 @@ false not equals(Page1, Page2), bookIsOpenTo(Book, Page1), bookIsOpenTo(Book, Pa
 %          [Page], 
 %          holds_at(bookIsOpenTo(Book,Page),Time)))).
  %   [Time].
-not bookIsOpenTo(Book, Page)if bookClosed(Book).
+if bookClosed(Book)then not bookIsOpenTo(Book, Page).
 
- /*  l_int(holds(not(bookIsOpenTo(Book,Page)),Time_At),
-         [bookClosed(Book)]).
+ /*  reactive_rule([bookClosed(Book)],
+   	      [not(bookIsOpenTo(Book,Page))]).
  */
  %  "% =================================".
 if not bookIsOpenTo(Book, Page)then bookClosed(Book).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Book.e',37).
 
- /*  reactive_rule([ holds(not(bookIsOpenTo(Book,Page)),
-   		      Time_At4)
-   	      ],
+ /*  reactive_rule([not(bookIsOpenTo(Book,Page))],
    	      [bookClosed(Book)]).
  */
  %  "% =================================".
@@ -171,13 +169,10 @@ if not bookIsOpenTo(Book, Page)then bookClosed(Book).
 if bookOpenTo(Agent, Book, Page)then awake(Agent), bookClosed(Book), holding(Agent, Book).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Book.e',45).
 
- /*  reactive_rule([ happens(bookOpenTo(Agent,Book,Page),
-   			Time_From,
-   			Time_Until)
-   	      ],
-   	      [ holds(awake(Agent),Time_At),
+ /*  reactive_rule([bookOpenTo(Agent,Book,Page)],
+   	      [ awake(Agent),
    		bookClosed(Book),
-   		holds(holding(Agent,Book),Time_At)
+   		holding(Agent,Book)
    	      ]).
  */
  %  "% =================================".
@@ -230,13 +225,10 @@ bookOpenTo(Agent, Book, Page)initiates bookIsOpenTo(Book, Page).
 if bookClose(Agent, Book)then awake(Agent), not bookClosed(Book), holding(Agent, Book).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Book.e',62).
 
- /*  reactive_rule([ happens(bookClose(Agent,Book),
-   			Time_From,
-   			Time_Until)
-   	      ],
-   	      [ holds(awake(Agent),Time_At),
+ /*  reactive_rule([bookClose(Agent,Book)],
+   	      [ awake(Agent),
    		not(bookClosed(Book)),
-   		holds(holding(Agent,Book),Time_At)
+   		holding(Agent,Book)
    	      ]).
  */
  %  "% =================================".

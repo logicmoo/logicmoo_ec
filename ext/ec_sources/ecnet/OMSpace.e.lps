@@ -12,7 +12,7 @@
 % :-call_pel_directive(translate(begining,'/pack/logicmoo_ec/ext/ec_sources/ecnet/OMSpace.e.lps')).
 :- call_pel_directive(translate(begining,
                                 '/pack/logicmoo_ec/ext/ec_sources/ecnet/OMSpace.e.lps')).
-% Sat, 10 Oct 2020 14:56:06 GMT File: <stream>(0x5597f26a6000)
+% Sat, 10 Oct 2020 15:31:39 GMT File: <stream>(0x559e4b325b00)
 
 
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Money.e',12).
@@ -94,8 +94,8 @@ false not equals(Height1, Height2), height(Object, Height1), height(Object, Heig
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OMSpace.e',45).
 
  /*  d_pre([ not(equals(Height1,Height2)),
-   	holds(height(Object,Height1),Time_At),
-   	holds(height(Object,Height2),Time_At)
+   	height(Object,Height1),
+   	height(Object,Height2)
          ]).
  */
  %  "% =================================".
@@ -212,8 +212,8 @@ false not equals(Height1, Height2), startFallingFromTo(Physobj1, Physobj2, Physo
    				   Physobj3),
    		Time_From,
    		Time_Until),
-   	holds(height(Physobj1,Height1),Time_From),
-   	holds(height(Physobj2,Height2),Time_From)
+   	height(Physobj1,Height1),
+   	height(Physobj2,Height2)
          ]).
  */
  %  "% =================================".
@@ -340,19 +340,17 @@ holds_at(height(Physobj1, Height1), Time), Height2=Height1-Offset ->
 %     holds_at(height(Physobj3,Height),Time)), 
 %    happens_at(collideWith(Physobj1,Physobj3),Time)).
  %   [Time].
-collideWith(Physobj1, Physobj3)if fallingFromTo(Physobj1, Physobj2, Physobj3), height(Physobj1, Height), height(Physobj3, Height).
+if fallingFromTo(Physobj1, Physobj2, Physobj3), height(Physobj1, Height), height(Physobj3, Height)then collideWith(Physobj1, Physobj3).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OMSpace.e',130).
 
- /*  l_events(happens(collideWith(Physobj1,Physobj3),
-   		 Time_From,
-   		 Time_From),
-   	 [ holds(fallingFromTo(Physobj1,
-   			       Physobj2,
-   			       Physobj3),
-   		 Time_From),
-   	   holds(height(Physobj1,Height),Time_From),
-   	   holds(height(Physobj3,Height),Time_From)
-   	 ]).
+ /*  reactive_rule([ holds(fallingFromTo(Physobj1,
+   				    Physobj2,
+   				    Physobj3),
+   		      Time_At),
+   		height(Physobj1,Height),
+   		height(Physobj3,Height)
+   	      ],
+   	      [collideWith(Physobj1,Physobj3)]).
  */
  %  "% =================================".
 
@@ -671,19 +669,18 @@ holds_at(height(Agent, Height1), Time), Height2=Height1+Offset ->
 %     holds_at(height(Physobj2,Height),Time)), 
 %    happens_at(reach(Agent,Physobj2),Time)).
  %   [Time].
-reach(Agent, Physobj2)if flyingFromTo(Agent, Physobj1, Physobj2), height(Agent, Height), height(Physobj2, Height).
+if flyingFromTo(Agent, Physobj1, Physobj2), height(Agent, Height), height(Physobj2, Height)then reach(Agent, Physobj2).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OMSpace.e',248).
 
- /*  l_events(happens(reach(Agent,Physobj2),
-   		 Time_From,
-   		 Time_From),
-   	 [ holds(flyingFromTo(Agent,
-   			      Physobj1,
-   			      Physobj2),
-   		 Time_From),
-   	   holds(height(Agent,Height),Time_From),
-   	   holds(height(Physobj2,Height),Time_From)
-   	 ]).
+ /*  reactive_rule([ holds(flyingFromTo(Agent,
+   				   Physobj1,
+   				   Physobj2),
+   		      Time_At),
+   		holds(height(Agent,Height),Time_At),
+   		holds(height(Physobj2,Height),
+   		      Time_At)
+   	      ],
+   	      [reach(Agent,Physobj2)]).
  */
  %  "% =================================".
 

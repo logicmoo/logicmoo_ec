@@ -12,40 +12,40 @@
 % :-call_pel_directive(translate(begining,'/pack/logicmoo_ec/test/ec_planner/ectest/ec_reader_test_includes.e.lps')).
 :- call_pel_directive(translate(begining,
                                 '/pack/logicmoo_ec/test/ec_planner/ectest/ec_reader_test_includes.e.lps')).
-% Sat, 10 Oct 2020 14:57:13 GMT File: <stream>(0x5597f28d8000)%; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+% Sat, 10 Oct 2020 15:32:28 GMT File: <stream>(0x559e4b1d7100)%; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 %; FILE: includes/SaaSPatterns/sorts.e
 %; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-% sort rule,subject,object,action,ruleeffect,policy,policyset
 :-was_s_l('/pack/logicmoo_ec/test/ec_planner/ectest/ec_reader_test_includes.e',7).
+% sort rule,subject,object,action,ruleeffect,policy,policyset
 % From E: 
 % 
 % sort(rule).
 sort(rule).
+:-was_s_l('/pack/logicmoo_ec/test/ec_planner/ectest/ec_reader_test_includes.e',7).
 % From E: 
 % 
 % sort(subject).
-:-was_s_l('/pack/logicmoo_ec/test/ec_planner/ectest/ec_reader_test_includes.e',7).
 sort(subject).
 % From E: 
 % 
 % sort(object).
-sort(object).
 :-was_s_l('/pack/logicmoo_ec/test/ec_planner/ectest/ec_reader_test_includes.e',7).
+sort(object).
 % From E: 
 % 
 % sort(action).
 sort(action).
+:-was_s_l('/pack/logicmoo_ec/test/ec_planner/ectest/ec_reader_test_includes.e',7).
 % From E: 
 % 
 % sort(ruleeffect).
-:-was_s_l('/pack/logicmoo_ec/test/ec_planner/ectest/ec_reader_test_includes.e',7).
 sort(ruleeffect).
 % From E: 
 % 
 % sort(policy).
-sort(policy).
 :-was_s_l('/pack/logicmoo_ec/test/ec_planner/ectest/ec_reader_test_includes.e',7).
+sort(policy).
 % From E: 
 % 
 % sort(policyset).
@@ -54,35 +54,37 @@ sort(policyset).
 %; FILE: includes/SaaSPatterns/RulesPatterns/ruleOutput.e
 %; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-% fluent F_RuleDenied(rule)
 :-was_s_l('/pack/logicmoo_ec/test/ec_planner/ectest/ec_reader_test_includes.e',25).
+% fluent F_RuleDenied(rule)
 % From E: 
 % 
 % fluent(f_ruleDenied(rule)).
 mpred_prop(f_ruleDenied(rule),fluent).
+:-was_s_l('/pack/logicmoo_ec/test/ec_planner/ectest/ec_reader_test_includes.e',25).
 fluents([f_ruleDenied/1]).
 
 % fluent F_RulePermitted(rule)
-:-was_s_l('/pack/logicmoo_ec/test/ec_planner/ectest/ec_reader_test_includes.e',25).
 % From E: 
 % 
 % fluent(f_rulePermitted(rule)).
+:-was_s_l('/pack/logicmoo_ec/test/ec_planner/ectest/ec_reader_test_includes.e',25).
 mpred_prop(f_rulePermitted(rule),fluent).
 fluents([f_rulePermitted/1]).
 
-% event Epermit(rule)
 :-was_s_l('/pack/logicmoo_ec/test/ec_planner/ectest/ec_reader_test_includes.e',28).
+% event Epermit(rule)
 % From E: 
 % 
 % event(epermit(rule)).
 mpred_prop(epermit(rule),event).
+:-was_s_l('/pack/logicmoo_ec/test/ec_planner/ectest/ec_reader_test_includes.e',28).
 events([epermit/1]).
 
 % event EDeny(rule)
-:-was_s_l('/pack/logicmoo_ec/test/ec_planner/ectest/ec_reader_test_includes.e',28).
 % From E: 
 % 
 % event(eDeny(rule)).
+:-was_s_l('/pack/logicmoo_ec/test/ec_planner/ectest/ec_reader_test_includes.e',28).
 mpred_prop(eDeny(rule),event).
 events([eDeny/1]).
 
@@ -774,15 +776,15 @@ e_policysetDontApply(Policyset)initiates f_policySetNotApplicable(Policyset).
 %     policysetHaspolicies(Policyset,Policy)), 
 %    holds_at(f_policyPermitted(Policy),Time)).
  %   [Time].
-f_policyPermitted(Policy)if e_policysetPermit(Policyset), policysetHaspolicies(Policyset, Policy).
+if e_policysetPermit(Policyset), policysetHaspolicies(Policyset, Policy)then f_policyPermitted(Policy).
 :-was_s_l('/pack/logicmoo_ec/test/ec_planner/ectest/ec_reader_test_includes.e',195).
 
- /*  l_int(holds(f_policyPermitted(Policy),Time_At),
-         [ happens(e_policysetPermit(Policyset),
-   		Time_At,
-   		Time_At),
-   	policysetHaspolicies(Policyset,Policy)
-         ]).
+ /*  reactive_rule([ happens(e_policysetPermit(Policyset),
+   			Time_From,
+   			Time_Until),
+   		policysetHaspolicies(Policyset,Policy)
+   	      ],
+   	      [f_policyPermitted(Policy)]).
  */
  %  "% =================================".
 
@@ -817,15 +819,15 @@ e_policysetDeny(Policyset) ->
 %     policysetHaspolicies(Policyset,Policy)), 
 %    holds_at(f_policyNotApplicable(Policy),Time)).
  %   [Time].
-f_policyNotApplicable(Policy)if e_policysetDontApply(Policyset), policysetHaspolicies(Policyset, Policy).
+if e_policysetDontApply(Policyset), policysetHaspolicies(Policyset, Policy)then f_policyNotApplicable(Policy).
 :-was_s_l('/pack/logicmoo_ec/test/ec_planner/ectest/ec_reader_test_includes.e',203).
 
- /*  l_int(holds(f_policyNotApplicable(Policy),Time_At),
-         [ happens(e_policysetDontApply(Policyset),
-   		Time_At,
-   		Time_At),
-   	policysetHaspolicies(Policyset,Policy)
-         ]).
+ /*  reactive_rule([ happens(e_policysetDontApply(Policyset),
+   			Time_From,
+   			Time_Until),
+   		policysetHaspolicies(Policyset,Policy)
+   	      ],
+   	      [f_policyNotApplicable(Policy)]).
  */
  %  "% =================================".
 

@@ -12,7 +12,7 @@
 % :-call_pel_directive(translate(begining,'/pack/logicmoo_ec/ext/ec_sources/ecnet/Smoke.e.lps')).
 :- call_pel_directive(translate(begining,
                                 '/pack/logicmoo_ec/ext/ec_sources/ecnet/Smoke.e.lps')).
-% Sat, 10 Oct 2020 14:56:14 GMT File: <stream>(0x5597f2c03300)%;
+% Sat, 10 Oct 2020 15:31:44 GMT File: <stream>(0x559e4b39e900)%;
 %; Copyright (c) 2005 IBM Corporation and others.
 %; All rights reserved. This program and the accompanying materials
 %; are made available under the terms of the Common Public License v1.0
@@ -25,27 +25,29 @@
 %; Smoking: smoking cigarettes and cigars
 %;
 
-% fluent CraveNicotine(agent)
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Smoke.e',14).
+% fluent CraveNicotine(agent)
 % From E: 
 % 
 % fluent(craveNicotine(agent)).
 mpred_prop(craveNicotine(agent),fluent).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Smoke.e',14).
 fluents([craveNicotine/1]).
 
-% fluent NicotineCravingSatisfied(agent)
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Smoke.e',16).
+% fluent NicotineCravingSatisfied(agent)
 % From E: 
 % 
 % fluent(nicotineCravingSatisfied(agent)).
 mpred_prop(nicotineCravingSatisfied(agent),fluent).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Smoke.e',16).
 fluents([nicotineCravingSatisfied/1]).
 
 % noninertial NicotineCravingSatisfied
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Smoke.e',16).
 % From E: 
 % 
 % :-call_pel_directive(noninertial(nicotineCravingSatisfied)).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Smoke.e',16).
 :- call_pel_directive(noninertial(nicotineCravingSatisfied)).
 
 
@@ -62,15 +64,15 @@ fluents([nicotineCravingSatisfied/1]).
 if craveNicotine(Agent)then not nicotineCravingSatisfied(Agent).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Smoke.e',19).
 
- /*  reactive_rule([holds(craveNicotine(Agent),Time_At)],
+ /*  reactive_rule([craveNicotine(Agent)],
    	      [not(nicotineCravingSatisfied(Agent))]).
  */
  %  "% =================================".
-craveNicotine(Agent)if not nicotineCravingSatisfied(Agent).
+if not nicotineCravingSatisfied(Agent)then craveNicotine(Agent).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Smoke.e',19).
 
- /*  l_int(holds(craveNicotine(Agent),Time_At3),
-         [not(nicotineCravingSatisfied(Agent))]).
+ /*  reactive_rule([not(nicotineCravingSatisfied(Agent))],
+   	      [craveNicotine(Agent)]).
  */
  %  "% =================================".
 
@@ -99,10 +101,7 @@ holding(Agent, Cigarette)if smoke(Agent, Cigarette).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Smoke.e',25).
 
  /*  l_int(holds(holding(Agent,Cigarette),Time_At),
-         [ happens(smoke(Agent,Cigarette),
-   		Time_At,
-   		Time_At)
-         ]).
+         [smoke(Agent,Cigarette)]).
  */
  %  "% =================================".
 
@@ -154,11 +153,8 @@ smoke(Agent, Cigarette)if puff(Agent, Cigarette).
 
  /*  l_events(happens(smoke(Agent,Cigarette),
    		 Time_From,
-   		 Time_Until),
-   	 [ happens(puff(Agent,Cigarette),
-   		   Time_From,
-   		   Time_Until)
-   	 ]).
+   		 Time_From),
+   	 [puff(Agent,Cigarette)]).
  */
  %  "% =================================".
 

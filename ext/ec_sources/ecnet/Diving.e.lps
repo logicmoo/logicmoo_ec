@@ -12,7 +12,7 @@
 % :-call_pel_directive(translate(begining,'/pack/logicmoo_ec/ext/ec_sources/ecnet/Diving.e.lps')).
 :- call_pel_directive(translate(begining,
                                 '/pack/logicmoo_ec/ext/ec_sources/ecnet/Diving.e.lps')).
-% Sat, 10 Oct 2020 14:56:01 GMT File: <stream>(0x5597f2b70500)%;
+% Sat, 10 Oct 2020 15:31:35 GMT File: <stream>(0x559e4b227800)%;
 %; Copyright (c) 2005 IBM Corporation and others.
 %; All rights reserved. This program and the accompanying materials
 %; are made available under the terms of the Common Public License v1.0
@@ -25,8 +25,8 @@
 %; scuba diving
 %;
 
-% sort object
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Diving.e',14).
+% sort object
 % From E: 
 % 
 % sort(object).
@@ -39,8 +39,8 @@ sort(object).
 % subsort(agent,object).
 subsort(agent,object).
 
-% sort diver: agent
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Diving.e',16).
+% sort diver: agent
 % From E: 
 % 
 % subsort(diver,agent).
@@ -53,8 +53,8 @@ subsort(diver,agent).
 % subsort(depth,integer).
 subsort(depth,integer).
 
-% sort boat: object
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Diving.e',18).
+% sort boat: object
 % From E: 
 % 
 % subsort(boat,object).
@@ -68,8 +68,8 @@ subsort(boat,object).
 % subsort(line,object).
 subsort(line,object).
 
-% sort equipment: object
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Diving.e',23).
+% sort equipment: object
 % From E: 
 % 
 % subsort(equipment,object).
@@ -82,8 +82,8 @@ subsort(equipment,object).
 % subsort(weight,equipment).
 subsort(weight,equipment).
 
-% sort fin: equipment
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Diving.e',25).
+% sort fin: equipment
 % From E: 
 % 
 % subsort(fin,equipment).
@@ -98,8 +98,8 @@ subsort(airtank,equipment).
 %; buoyancy compensator (BC)
 %; buoyancy control device (BCD)
 
-% sort computer: equipment
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Diving.e',30).
+% sort computer: equipment
 % From E: 
 % 
 % subsort(computer,equipment).
@@ -112,12 +112,13 @@ subsort(computer,equipment).
 % subsort(bc,equipment).
 subsort(bc,equipment).
 
-% fluent AtDepth(object,depth)
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Diving.e',33).
+% fluent AtDepth(object,depth)
 % From E: 
 % 
 % fluent(atDepth(object,depth)).
 mpred_prop(atDepth(object,depth),fluent).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Diving.e',33).
 fluents([atDepth/2]).
 
 
@@ -137,8 +138,8 @@ false not equals(Depth1, Depth2), atDepth(Object, Depth1), atDepth(Object, Depth
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Diving.e',35).
 
  /*  d_pre([ not(equals(Depth1,Depth2)),
-   	holds(atDepth(Object,Depth1),Time_At),
-   	holds(atDepth(Object,Depth2),Time_At)
+   	atDepth(Object,Depth1),
+   	atDepth(Object,Depth2)
          ]).
  */
  %  "% =================================".
@@ -180,10 +181,8 @@ false not comparison(Depth2, Depth1, >), atDepth(Diver, Depth1), descend(Diver, 
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Diving.e',44).
 
  /*  d_pre([ not(comparison(Depth2,Depth1,>)),
-   	holds(atDepth(Diver,Depth1),Time_At),
-   	happens(descend(Diver,Depth2),
-   		Time_At,
-   		Time_Until)
+   	atDepth(Diver,Depth1),
+   	descend(Diver,Depth2)
          ]).
  */
  %  "% =================================".
@@ -205,10 +204,8 @@ false not comparison(Depth2, Depth1, <), atDepth(Diver, Depth1), ascend(Diver, D
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Diving.e',50).
 
  /*  d_pre([ not(comparison(Depth2,Depth1,<)),
-   	holds(atDepth(Diver,Depth1),Time_At),
-   	happens(ascend(Diver,Depth2),
-   		Time_At,
-   		Time_Until)
+   	atDepth(Diver,Depth1),
+   	ascend(Diver,Depth2)
          ]).
  */
  %  "% =================================".
@@ -389,14 +386,11 @@ releases(putOn(Diver,Equipment),
 %          [Diver1], 
 %          holds_at(wearing(Diver1,Equipment),Time)))).
  %   [Time].
-not wearing(Diver1, Equipment)if putOn(Diver, Equipment).
+if putOn(Diver, Equipment)then not wearing(Diver1, Equipment).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Diving.e',82).
 
- /*  l_int(holds(not(wearing(Diver1,Equipment)),Time_At),
-         [ happens(putOn(Diver,Equipment),
-   		Time_At,
-   		Time_At)
-         ]).
+ /*  reactive_rule([putOn(Diver,Equipment)],
+   	      [not(wearing(Diver1,Equipment))]).
  */
  %  "% =================================".
 
@@ -506,7 +500,7 @@ takeOff(Diver, Equipment)initiates atDepth(Equipment, Depth)if atDepth(Diver, De
    		  Time_Until),
    	  atDepth(Equipment,Depth),
    	  [ holds(atDepth(Diver,Depth),Time_From),
-   	    holds(wearing(Diver,Equipment),Time_From)
+   	    wearing(Diver,Equipment)
    	  ]).
  */
  %  "% =================================".
@@ -536,8 +530,7 @@ takeOff(Diver, Equipment)terminates atDepth(Equipment, Depth)if not atDepth(Dive
    	   atDepth(Equipment,Depth),
    	   [ holds(not(atDepth(Diver,Depth)),
    		   Time_From),
-   	     holds(wearing(Diver,Equipment),
-   		   Time_From)
+   	     wearing(Diver,Equipment)
    	   ]).
  */
  %  "% =================================".
@@ -614,7 +607,7 @@ lose(Diver, Equipment)initiates atDepth(Equipment, Depth)if atDepth(Diver, Depth
    		  Time_Until),
    	  atDepth(Equipment,Depth),
    	  [ holds(atDepth(Diver,Depth),Time_From),
-   	    holds(wearing(Diver,Equipment),Time_From)
+   	    wearing(Diver,Equipment)
    	  ]).
  */
  %  "% =================================".
@@ -644,8 +637,7 @@ lose(Diver, Equipment)terminates atDepth(Equipment, Depth)if not atDepth(Diver, 
    	   atDepth(Equipment,Depth),
    	   [ holds(not(atDepth(Diver,Depth)),
    		   Time_From),
-   	     holds(wearing(Diver,Equipment),
-   		   Time_From)
+   	     wearing(Diver,Equipment)
    	   ]).
  */
  %  "% =================================".
@@ -717,11 +709,11 @@ fluents([holding/2]).
 %    holds_at(holding(Diver1,Diver2),Time), 
 %    holds_at(not(holding(Diver2,Diver1)),Time)).
  %   [Time].
-not holding(Diver2, Diver1)if holding(Diver1, Diver2).
+if holding(Diver1, Diver2)then not holding(Diver2, Diver1).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Diving.e',144).
 
- /*  l_int(holds(not(holding(Diver2,Diver1)),Time_At),
-         [holds(holding(Diver1,Diver2),Time_At)]).
+ /*  reactive_rule([holding(Diver1,Diver2)],
+   	      [not(holding(Diver2,Diver1))]).
  */
  %  "% =================================".
 
@@ -1086,7 +1078,7 @@ rotatePitch(Diver)initiates horizontalDown(Diver)if vertical(Diver).
    		  Time_From,
    		  Time_Until),
    	  horizontalDown(Diver),
-   	  [holds(vertical(Diver),Time_From)]).
+   	  [vertical(Diver)]).
  */
  %  "% =================================".
 
@@ -1726,10 +1718,7 @@ actions([pressInflateButton/2]).
 if pressDeflateButton(Diver, Bc)then vertical(Diver), underWater(Bc).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Diving.e',320).
 
- /*  reactive_rule([ happens(pressDeflateButton(Diver,Bc),
-   			Time_From,
-   			Time_Until)
-   	      ],
+ /*  reactive_rule([pressDeflateButton(Diver,Bc)],
    	      [ holds(vertical(Diver),Time_At),
    		holds(underWater(Bc),Time_At)
    	      ]).
@@ -1752,10 +1741,7 @@ if pressDeflateButton(Diver, Bc)then vertical(Diver), underWater(Bc).
 if pressDumpButton(Diver, Bc)then vertical(Diver), underWater(Bc).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Diving.e',326).
 
- /*  reactive_rule([ happens(pressDumpButton(Diver,Bc),
-   			Time_From,
-   			Time_Until)
-   	      ],
+ /*  reactive_rule([pressDumpButton(Diver,Bc)],
    	      [ holds(vertical(Diver),Time_At),
    		holds(underWater(Bc),Time_At)
    	      ]).
@@ -1773,14 +1759,11 @@ if pressDumpButton(Diver, Bc)then vertical(Diver), underWater(Bc).
 %    happens_at(pressDumpButton(Diver,Bc),Time), 
 %    holds_at(uncontrolledBuoyancy(Diver),Time)).
  %   [Time].
-uncontrolledBuoyancy(Diver)if pressDumpButton(Diver, Bc).
+if pressDumpButton(Diver, Bc)then uncontrolledBuoyancy(Diver).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Diving.e',329).
 
- /*  l_int(holds(uncontrolledBuoyancy(Diver),Time_At),
-         [ happens(pressDumpButton(Diver,Bc),
-   		Time_At,
-   		Time_At)
-         ]).
+ /*  reactive_rule([pressDumpButton(Diver,Bc)],
+   	      [uncontrolledBuoyancy(Diver)]).
  */
  %  "% =================================".
 
@@ -2113,10 +2096,7 @@ predicates([isInexperiencedDiver/1]).
 if loseBuoyancyControl(Diver)then isInexperiencedDiver(Diver).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Diving.e',387).
 
- /*  reactive_rule([ happens(loseBuoyancyControl(Diver),
-   			Time_From,
-   			Time_Until)
-   	      ],
+ /*  reactive_rule([loseBuoyancyControl(Diver)],
    	      [isInexperiencedDiver(Diver)]).
  */
  %  "% =================================".
@@ -2974,11 +2954,14 @@ fluents([signalingLowOnAir/3]).
 %    holds_at(signalingLowOnAir(Computer,Airtank,Diver),Time), 
 %    holds_at(lowOnAir(Airtank),Time)).
  %   [Time].
-lowOnAir(Airtank)if signalingLowOnAir(Computer, Airtank, Diver).
+if signalingLowOnAir(Computer, Airtank, Diver)then lowOnAir(Airtank).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Diving.e',591).
 
- /*  l_int(holds(lowOnAir(Airtank),Time_At),
-         [signalingLowOnAir(Computer,Airtank,Diver)]).
+ /*  reactive_rule([ signalingLowOnAir(Computer,
+   				  Airtank,
+   				  Diver)
+   	      ],
+   	      [lowOnAir(Airtank)]).
  */
  %  "% =================================".
 
@@ -3350,11 +3333,11 @@ fluents([separated/2]).
 %    holds_at(separated(Diver1,Diver2),Time), 
 %    holds_at(separated(Diver2,Diver1),Time)).
  %   [Time].
-separated(Diver2, Diver1)if separated(Diver1, Diver2).
+if separated(Diver1, Diver2)then separated(Diver2, Diver1).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Diving.e',662).
 
- /*  l_int(holds(separated(Diver2,Diver1),Time_At),
-         [holds(separated(Diver1,Diver2),Time_At)]).
+ /*  reactive_rule([separated(Diver1,Diver2)],
+   	      [separated(Diver2,Diver1)]).
  */
  %  "% =================================".
 

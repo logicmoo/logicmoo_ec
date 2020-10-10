@@ -12,7 +12,7 @@
 % :-call_pel_directive(translate(begining,'/pack/logicmoo_ec/test/ec_planner/ectest/ec_reader_test_examples.e.lps')).
 :- call_pel_directive(translate(begining,
                                 '/pack/logicmoo_ec/test/ec_planner/ectest/ec_reader_test_examples.e.lps')).
-% Sat, 10 Oct 2020 14:57:00 GMT File: <stream>(0x5597f26f7b00)%; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+% Sat, 10 Oct 2020 15:32:16 GMT File: <stream>(0x559e4af4d100)%; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 %; FILE: examples/Mueller2004a/Holding.e
 %; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 %;
@@ -36,15 +36,15 @@
 %; }
 %;
 
-% option encoding 3
 :-was_s_l('/pack/logicmoo_ec/test/ec_planner/ectest/ec_reader_test_examples.e',28).
+% option encoding 3
 % From E: 
 % 
 % :-call_pel_directive(option(encoding,3)).
 :- call_pel_directive(option(encoding, 3)).
 
-% load foundations/Root.e
 :-was_s_l('/pack/logicmoo_ec/test/ec_planner/ectest/ec_reader_test_examples.e',30).
+% load foundations/Root.e
 % From E: 
 % 
 % :-call_pel_directive(load('foundations/Root.e')).
@@ -57,8 +57,8 @@
 % :-call_pel_directive(load('foundations/EC.e')).
 :- call_pel_directive(load('foundations/EC.e')).
 
-% sort person
 :-was_s_l('/pack/logicmoo_ec/test/ec_planner/ectest/ec_reader_test_examples.e',33).
+% sort person
 % From E: 
 % 
 % sort(person).
@@ -71,24 +71,25 @@ sort(person).
 % sort(object).
 sort(object).
 
-% event Hold(person,object)
 :-was_s_l('/pack/logicmoo_ec/test/ec_planner/ectest/ec_reader_test_examples.e',36).
+% event Hold(person,object)
 % From E: 
 % 
 % event(hold(person,object)).
 mpred_prop(hold(person,object),event).
+:-was_s_l('/pack/logicmoo_ec/test/ec_planner/ectest/ec_reader_test_examples.e',36).
 events([hold/2]).
 
 % fluent Holding(person,object)
-:-was_s_l('/pack/logicmoo_ec/test/ec_planner/ectest/ec_reader_test_examples.e',36).
 % From E: 
 % 
 % fluent(holding(person,object)).
+:-was_s_l('/pack/logicmoo_ec/test/ec_planner/ectest/ec_reader_test_examples.e',36).
 mpred_prop(holding(person,object),fluent).
 fluents([holding/2]).
 
-% person P1
 :-was_s_l('/pack/logicmoo_ec/test/ec_planner/ectest/ec_reader_test_examples.e',39).
+% person P1
 % From E: 
 % 
 % t(person,p1).
@@ -5001,10 +5002,7 @@ releaseShutter(Camera)initiates properlyExposedPicture(Camera)if triggerFlash(Ca
    		  Time_From,
    		  Time_Until),
    	  properlyExposedPicture(Camera),
-   	  [ happens(triggerFlash(Camera),
-   		    Time_From,
-   		    Time_Until)
-   	  ]).
+   	  [triggerFlash(Camera)]).
  */
  %  "% =================================".
 
@@ -12148,8 +12146,6 @@ relay(r).
 % 
 % t(light,l).
 light(l).
- %  l_events(happens(light(l),Time_From,Time_Until),[]).
- %  "% =================================".
 
 :-was_s_l('/pack/logicmoo_ec/test/ec_planner/ectest/ec_reader_test_examples.e',3242).
 % event Light(light)
@@ -20630,8 +20626,8 @@ false not (transfer(Account1, Account2, Value3)terminates balance(Account2, Valu
    				Account2,
    				Value3),
    		       balance(Account2,Value2))),
-   	holds(balance(Account1,Value1),Time_At),
-   	holds(balance(Account2,Value2),Time_At),
+   	balance(Account1,Value1),
+   	balance(Account2,Value2),
    	comparison(Value3,0,>),
    	comparison(Value1,Value3,>=)
          ]).
@@ -20692,8 +20688,8 @@ false not (transfer(Account1, Account2, Value3)terminates balance(Account1, Valu
    				Account2,
    				Value3),
    		       balance(Account1,Value1))),
-   	holds(balance(Account1,Value1),Time_At),
-   	holds(balance(Account2,Value2),Time_At),
+   	balance(Account1,Value1),
+   	balance(Account2,Value2),
    	comparison(Value3,0,>),
    	comparison(Value1,Value3,>=)
          ]).
@@ -21126,15 +21122,11 @@ directive(delta).
 %     holds_at(inputLine(Counter),Time)), 
 %    happens_at(falseToTrue(Counter),Time)).
  %   [Time].
-falseToTrue(Counter)if not true(Counter), inputLine(Counter).
+if not true(Counter), inputLine(Counter)then falseToTrue(Counter).
 :-was_s_l('/pack/logicmoo_ec/test/ec_planner/ectest/ec_reader_test_examples.e',5408).
 
- /*  l_events(happens(falseToTrue(Counter),
-   		 Time_From,
-   		 Time_From),
-   	 [ holds(not(true(Counter)),Time_From),
-   	   inputLine(Counter)
-   	 ]).
+ /*  reactive_rule([not(true(Counter)),inputLine(Counter)],
+   	      [falseToTrue(Counter)]).
  */
  %  "% =================================".
 
@@ -21159,15 +21151,11 @@ directive(delta).
 %     holds_at(not(inputLine(Counter)),Time)), 
 %    happens_at(trueToFalse(Counter),Time)).
  %   [Time].
-trueToFalse(Counter)if true(Counter), not inputLine(Counter).
+if true(Counter), not inputLine(Counter)then trueToFalse(Counter).
 :-was_s_l('/pack/logicmoo_ec/test/ec_planner/ectest/ec_reader_test_examples.e',5414).
 
- /*  l_events(happens(trueToFalse(Counter),
-   		 Time_From,
-   		 Time_From),
-   	 [ holds(true(Counter),Time_From),
-   	   not(inputLine(Counter))
-   	 ]).
+ /*  reactive_rule([true(Counter),not(inputLine(Counter))],
+   	      [trueToFalse(Counter)]).
  */
  %  "% =================================".
 
@@ -21805,9 +21793,7 @@ false not (placeOnPalette(Palette, Color1)initiates onPalette(Palette, Color2)),
 
  /*  d_pre([ not(initiates(placeOnPalette(Palette,Color1),
    		      onPalette(Palette,Color2))),
-   	happens(placeOnPalette(Palette,yellow),
-   		Time_From,
-   		Time_Until),
+   	placeOnPalette(Palette,yellow),
    	equals(Color1,blue),
    	equals(Color2,green)
          ]).
@@ -23958,8 +23944,7 @@ jump(Agent, Surface1, Surface2)initiates on(Agent, Surface2)if on(Agent, Surface
    		  Time_Until),
    	  on(Agent,Surface2),
    	  [ holds(on(Agent,Surface1),Time_From),
-   	    holds(canJump(Surface1,Surface2),
-   		  Time_From)
+   	    canJump(Surface1,Surface2)
    	  ]).
  */
  %  "% =================================".
@@ -23988,8 +23973,7 @@ jump(Agent, Surface1, Surface2)terminates on(Agent, Surface1)if on(Agent, Surfac
    		   Time_Until),
    	   on(Agent,Surface1),
    	   [ holds(on(Agent,Surface1),Time_From),
-   	     holds(canJump(Surface1,Surface2),
-   		   Time_From)
+   	     canJump(Surface1,Surface2)
    	   ]).
  */
  %  "% =================================".

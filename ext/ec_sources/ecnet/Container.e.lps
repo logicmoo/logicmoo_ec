@@ -12,7 +12,7 @@
 % :-call_pel_directive(translate(begining,'/pack/logicmoo_ec/ext/ec_sources/ecnet/Container.e.lps')).
 :- call_pel_directive(translate(begining,
                                 '/pack/logicmoo_ec/ext/ec_sources/ecnet/Container.e.lps')).
-% Sat, 10 Oct 2020 14:56:01 GMT File: <stream>(0x5597f2b7da00)%;
+% Sat, 10 Oct 2020 15:31:34 GMT File: <stream>(0x559e4b325000)%;
 %; Copyright (c) 2005 IBM Corporation and others.
 %; All rights reserved. This program and the accompanying materials
 %; are made available under the terms of the Common Public License v1.0
@@ -27,25 +27,23 @@
 %;
 %; linkage to OTSpace(M):
 % [agent,container1,container2,time]
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Container.e',17).
 % Happens(TakeOutOf(agent,container1,container2),time) ->
 % HoldsAt(ContainerIsOpen(container2),time).
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Container.e',17).
 % From E: 
 % 
 % '->'(
 %    happens_at(takeOutOf(Agent,Container1,Container2),Time), 
 %    holds_at(containerIsOpen(Container2),Time)).
  %   [Time].
-containerIsOpen(Container2)if takeOutOf(Agent, Container1, Container2).
+if takeOutOf(Agent, Container1, Container2)then containerIsOpen(Container2).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Container.e',17).
 
- /*  l_int(holds(containerIsOpen(Container2),Time_At),
-         [ happens(takeOutOf(Agent,
+ /*  reactive_rule([ takeOutOf(Agent,
    			  Container1,
-   			  Container2),
-   		Time_At,
-   		Time_At)
-         ]).
+   			  Container2)
+   	      ],
+   	      [containerIsOpen(Container2)]).
  */
  %  "% =================================".
 
@@ -60,15 +58,13 @@ containerIsOpen(Container2)if takeOutOf(Agent, Container1, Container2).
 %    happens_at(putInside(Agent,Container1,Container2),Time), 
 %    holds_at(containerIsOpen(Container2),Time)).
  %   [Time].
-containerIsOpen(Container2)if putInside(Agent, Container1, Container2).
+if putInside(Agent, Container1, Container2)then containerIsOpen(Container2).
 
- /*  l_int(holds(containerIsOpen(Container2),Time_At),
-         [ happens(putInside(Agent,
+ /*  reactive_rule([ putInside(Agent,
    			  Container1,
-   			  Container2),
-   		Time_At,
-   		Time_At)
-         ]).
+   			  Container2)
+   	      ],
+   	      [containerIsOpen(Container2)]).
  */
  %  "% =================================".
 
@@ -137,19 +133,17 @@ fluents([containerClosed/1]).
 %    holds_at(containerClosed(Container),Time), 
 %    holds_at(not(containerIsOpen(Container)),Time)).
  %   [Time].
-not containerIsOpen(Container)if containerClosed(Container).
+if containerClosed(Container)then not containerIsOpen(Container).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Container.e',36).
 
- /*  l_int(holds(not(containerIsOpen(Container)),Time_At),
-         [containerClosed(Container)]).
+ /*  reactive_rule([containerClosed(Container)],
+   	      [not(containerIsOpen(Container))]).
  */
  %  "% =================================".
 if not containerIsOpen(Container)then containerClosed(Container).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Container.e',36).
 
- /*  reactive_rule([ holds(not(containerIsOpen(Container)),
-   		      Time_At3)
-   	      ],
+ /*  reactive_rule([not(containerIsOpen(Container))],
    	      [containerClosed(Container)]).
  */
  %  "% =================================".
@@ -177,15 +171,10 @@ if not containerIsOpen(Container)then containerClosed(Container).
 if containerOpen(Agent, Container)then awake(Agent), not containerIsOpen(Container), holding(Agent, Container).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Container.e',45).
 
- /*  reactive_rule([ happens(containerOpen(Agent,Container),
-   			Time_From,
-   			Time_Until)
-   	      ],
-   	      [ holds(awake(Agent),Time_At),
-   		holds(not(containerIsOpen(Container)),
-   		      Time_At),
-   		holds(holding(Agent,Container),
-   		      Time_At)
+ /*  reactive_rule([containerOpen(Agent,Container)],
+   	      [ awake(Agent),
+   		not(containerIsOpen(Container)),
+   		holding(Agent,Container)
    	      ]).
  */
  %  "% =================================".
@@ -238,14 +227,10 @@ containerOpen(Agent, Container)initiates containerIsOpen(Container).
 if containerClose(Agent, Container)then awake(Agent), containerIsOpen(Container), holding(Agent, Container).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Container.e',62).
 
- /*  reactive_rule([ happens(containerClose(Agent,Container),
-   			Time_From,
-   			Time_Until)
-   	      ],
-   	      [ holds(awake(Agent),Time_At),
+ /*  reactive_rule([containerClose(Agent,Container)],
+   	      [ awake(Agent),
    		holds(containerIsOpen(Container),Time_At),
-   		holds(holding(Agent,Container),
-   		      Time_At)
+   		holding(Agent,Container)
    	      ]).
  */
  %  "% =================================".

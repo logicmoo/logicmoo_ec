@@ -12,7 +12,7 @@
 % :-call_pel_directive(translate(begining,'/pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e.lps')).
 :- call_pel_directive(translate(begining,
                                 '/pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e.lps')).
-% Sat, 10 Oct 2020 14:56:04 GMT File: <stream>(0x5597f2b70600)%;
+% Sat, 10 Oct 2020 15:31:38 GMT File: <stream>(0x559e4b1d9800)%;
 %; Copyright (c) 2005 IBM Corporation and others.
 %; All rights reserved. This program and the accompanying materials
 %; are made available under the terms of the Common Public License v1.0
@@ -23,19 +23,20 @@
 %; IBM - Initial implementation
 %;
 
-% fluent Loaded(gun,bullet)
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e',12).
+% fluent Loaded(gun,bullet)
 % From E: 
 % 
 % fluent(loaded(gun,bullet)).
 mpred_prop(loaded(gun,bullet),fluent).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e',12).
 fluents([loaded/2]).
 
 % noninertial Loaded
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e',12).
 % From E: 
 % 
 % :-call_pel_directive(noninertial(loaded)).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e',12).
 :- call_pel_directive(noninertial(loaded)).
 
 
@@ -52,15 +53,15 @@ fluents([loaded/2]).
 if inside(Bullet, Gun)then loaded(Gun, Bullet).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e',15).
 
- /*  reactive_rule([holds(inside(Bullet,Gun),Time_At)],
+ /*  reactive_rule([inside(Bullet,Gun)],
    	      [loaded(Gun,Bullet)]).
  */
  %  "% =================================".
-inside(Bullet, Gun)if loaded(Gun, Bullet).
+if loaded(Gun, Bullet)then inside(Bullet, Gun).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Gun.e',15).
 
- /*  l_int(holds(inside(Bullet,Gun),Time_At4),
-         [loaded(Gun,Bullet)]).
+ /*  reactive_rule([loaded(Gun,Bullet)],
+   	      [inside(Bullet,Gun)]).
  */
  %  "% =================================".
 
@@ -256,11 +257,9 @@ kill(Bullet, Agent2)if inside(Bullet, Gun), shootKill(Agent1, Gun, Agent2).
 
  /*  l_events(happens(kill(Bullet,Agent2),
    		 Time_From,
-   		 Time_Until),
+   		 Time_From),
    	 [ holds(inside(Bullet,Gun),Time_From),
-   	   happens(shootKill(Agent1,Gun,Agent2),
-   		   Time_From,
-   		   Time_Until)
+   	   shootKill(Agent1,Gun,Agent2)
    	 ]).
  */
  %  "% =================================".
@@ -350,11 +349,9 @@ destroy(Bullet, Physobj)if inside(Bullet, Gun), shootDestroy(Agent, Gun, Physobj
 
  /*  l_events(happens(destroy(Bullet,Physobj),
    		 Time_From,
-   		 Time_Until),
+   		 Time_From),
    	 [ holds(inside(Bullet,Gun),Time_From),
-   	   happens(shootDestroy(Agent,Gun,Physobj),
-   		   Time_From,
-   		   Time_Until)
+   	   shootDestroy(Agent,Gun,Physobj)
    	 ]).
  */
  %  "% =================================".

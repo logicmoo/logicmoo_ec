@@ -12,7 +12,7 @@
 % :-call_pel_directive(translate(begining,'/pack/logicmoo_ec/ext/ec_sources/ecnet/IPRel.e.lps')).
 :- call_pel_directive(translate(begining,
                                 '/pack/logicmoo_ec/ext/ec_sources/ecnet/IPRel.e.lps')).
-% Sat, 10 Oct 2020 14:56:05 GMT File: <stream>(0x5597f2bfed00)%;
+% Sat, 10 Oct 2020 15:31:38 GMT File: <stream>(0x559e4b325800)%;
 %; Copyright (c) 2005 IBM Corporation and others.
 %; All rights reserved. This program and the accompanying materials
 %; are made available under the terms of the Common Public License v1.0
@@ -25,38 +25,41 @@
 %; IPRel: interpersonal relations
 %;
 
-% fluent FriendOf(agent,agent)
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/IPRel.e',14).
+% fluent FriendOf(agent,agent)
 % From E: 
 % 
 % fluent(friendOf(agent,agent)).
 mpred_prop(friendOf(agent,agent),fluent).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/IPRel.e',14).
 fluents([friendOf/2]).
 
-% fluent NeutralOf(agent,agent)
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/IPRel.e',16).
+% fluent NeutralOf(agent,agent)
 % From E: 
 % 
 % fluent(neutralOf(agent,agent)).
 mpred_prop(neutralOf(agent,agent),fluent).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/IPRel.e',16).
 fluents([neutralOf/2]).
 
-% fluent EnemyOf(agent,agent)
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/IPRel.e',18).
+% fluent EnemyOf(agent,agent)
 % From E: 
 % 
 % fluent(enemyOf(agent,agent)).
 mpred_prop(enemyOf(agent,agent),fluent).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/IPRel.e',18).
 fluents([enemyOf/2]).
 
-% event BecomeFriends(agent,agent)
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/IPRel.e',20).
+% event BecomeFriends(agent,agent)
 % From E: 
 % 
 % event(becomeFriends(agent,agent)).
 events([becomeFriends/2]).
-mpred_prop(becomeFriends(agent,agent),action).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/IPRel.e',20).
+mpred_prop(becomeFriends(agent,agent),action).
 actions([becomeFriends/2]).
 
 % event BecomeNeutral(agent,agent)
@@ -68,14 +71,14 @@ events([becomeNeutral/2]).
 mpred_prop(becomeNeutral(agent,agent),action).
 actions([becomeNeutral/2]).
 
-% event BecomeEnemies(agent,agent)
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/IPRel.e',22).
+% event BecomeEnemies(agent,agent)
 % From E: 
 % 
 % event(becomeEnemies(agent,agent)).
 events([becomeEnemies/2]).
-mpred_prop(becomeEnemies(agent,agent),action).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/IPRel.e',22).
+mpred_prop(becomeEnemies(agent,agent),action).
 actions([becomeEnemies/2]).
 
 
@@ -134,10 +137,10 @@ if holds_at(neutralOf(Agent1, Agent2), Time)then not pred_holds(enemyOf(Agent1, 
 %    holds_at(friendOf(Agent1,Agent2),Time), 
 %    holds_at(friendOf(Agent2,Agent1),Time)).
  %   [Time].
-friendOf(Agent2, Agent1)if friendOf(Agent1, Agent2).
+if friendOf(Agent1, Agent2)then friendOf(Agent2, Agent1).
 
- /*  l_int(holds(friendOf(Agent2,Agent1),Time_At),
-         [holds(friendOf(Agent1,Agent2),Time_At)]).
+ /*  reactive_rule([friendOf(Agent1,Agent2)],
+   	      [friendOf(Agent2,Agent1)]).
  */
  %  "% =================================".
 
@@ -152,10 +155,10 @@ friendOf(Agent2, Agent1)if friendOf(Agent1, Agent2).
 %    holds_at(neutralOf(Agent1,Agent2),Time), 
 %    holds_at(neutralOf(Agent2,Agent1),Time)).
  %   [Time].
-neutralOf(Agent2, Agent1)if neutralOf(Agent1, Agent2).
+if neutralOf(Agent1, Agent2)then neutralOf(Agent2, Agent1).
 
- /*  l_int(holds(neutralOf(Agent2,Agent1),Time_At),
-         [holds(neutralOf(Agent1,Agent2),Time_At)]).
+ /*  reactive_rule([neutralOf(Agent1,Agent2)],
+   	      [neutralOf(Agent2,Agent1)]).
  */
  %  "% =================================".
 
@@ -170,10 +173,10 @@ neutralOf(Agent2, Agent1)if neutralOf(Agent1, Agent2).
 %    holds_at(enemyOf(Agent1,Agent2),Time), 
 %    holds_at(enemyOf(Agent2,Agent1),Time)).
  %   [Time].
-enemyOf(Agent2, Agent1)if enemyOf(Agent1, Agent2).
+if enemyOf(Agent1, Agent2)then enemyOf(Agent2, Agent1).
 
- /*  l_int(holds(enemyOf(Agent2,Agent1),Time_At),
-         [holds(enemyOf(Agent1,Agent2),Time_At)]).
+ /*  reactive_rule([enemyOf(Agent1,Agent2)],
+   	      [enemyOf(Agent2,Agent1)]).
  */
  %  "% =================================".
 
@@ -627,9 +630,8 @@ fluents([acquaintanceOf/2]).
 % 
 % holds_at(acquaintanceOf(Agent,Agent),Time).
  %   [Time].
-acquaintanceOf(Agent, Agent).
- %  l_int(holds(acquaintanceOf(Agent,Agent),Time_At),[]).
- %  "% =================================".
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/IPRel.e',108).
+acquaintanceOf(Agent,Agent).
 
 
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/IPRel.e',110).
@@ -642,11 +644,11 @@ acquaintanceOf(Agent, Agent).
 %    holds_at(acquaintanceOf(Agent1,Agent2),Time), 
 %    holds_at(acquaintanceOf(Agent2,Agent1),Time)).
  %   [Time].
-acquaintanceOf(Agent2, Agent1)if acquaintanceOf(Agent1, Agent2).
+if acquaintanceOf(Agent1, Agent2)then acquaintanceOf(Agent2, Agent1).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/IPRel.e',110).
 
- /*  l_int(holds(acquaintanceOf(Agent2,Agent1),Time_At),
-         [holds(acquaintanceOf(Agent1,Agent2),Time_At)]).
+ /*  reactive_rule([acquaintanceOf(Agent1,Agent2)],
+   	      [acquaintanceOf(Agent2,Agent1)]).
  */
  %  "% =================================".
 

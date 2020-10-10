@@ -12,7 +12,7 @@
 % :-call_pel_directive(translate(begining,'/pack/logicmoo_ec/ext/ec_sources/ecnet/Dress.e.lps')).
 :- call_pel_directive(translate(begining,
                                 '/pack/logicmoo_ec/ext/ec_sources/ecnet/Dress.e.lps')).
-% Sat, 10 Oct 2020 14:56:03 GMT File: <stream>(0x5597f2969a00)%;
+% Sat, 10 Oct 2020 15:31:36 GMT File: <stream>(0x559e4b46b700)%;
 %; Copyright (c) 2005 IBM Corporation and others.
 %; All rights reserved. This program and the accompanying materials
 %; are made available under the terms of the Common Public License v1.0
@@ -26,32 +26,33 @@
 %; (cf Sleep)
 %;
 
-% event PutOn(agent,clothing)
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Dress.e',15).
+% event PutOn(agent,clothing)
 % From E: 
 % 
 % event(putOn(agent,clothing)).
 events([putOn/2]).
-mpred_prop(putOn(agent,clothing),action).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Dress.e',15).
+mpred_prop(putOn(agent,clothing),action).
 actions([putOn/2]).
 
-% event TakeOff(agent,clothing)
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Dress.e',17).
+% event TakeOff(agent,clothing)
 % From E: 
 % 
 % event(takeOff(agent,clothing)).
 events([takeOff/2]).
-mpred_prop(takeOff(agent,clothing),action).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Dress.e',17).
+mpred_prop(takeOff(agent,clothing),action).
 actions([takeOff/2]).
 
-% fluent Wearing(agent,clothing)
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Dress.e',19).
+% fluent Wearing(agent,clothing)
 % From E: 
 % 
 % fluent(wearing(agent,clothing)).
 mpred_prop(wearing(agent,clothing),fluent).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Dress.e',19).
 fluents([wearing/2]).
 
 
@@ -172,13 +173,14 @@ releases(putOn(Agent,Clothing),
 %     holds_at(at_loc(Agent,Location),Time)), 
 %    holds_at(at_loc(Clothing,Location),Time)).
  %   [Time].
-at_loc(Clothing, Location)if wearing(Agent, Clothing), at_loc(Agent, Location).
+if wearing(Agent, Clothing), at_loc(Agent, Location)then at_loc(Clothing, Location).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Dress.e',44).
 
- /*  l_int(holds(at_loc(Clothing,Location),Time_At),
-         [ holds(wearing(Agent,Clothing),Time_At),
-   	holds(at_loc(Agent,Location),Time_At)
-         ]).
+ /*  reactive_rule([ holds(wearing(Agent,Clothing),
+   		      Time_At),
+   		at_loc(Agent,Location)
+   	      ],
+   	      [at_loc(Clothing,Location)]).
  */
  %  "% =================================".
 

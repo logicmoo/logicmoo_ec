@@ -12,7 +12,7 @@
 % :-call_pel_directive(translate(begining,'/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e.lps')).
 :- call_pel_directive(translate(begining,
                                 '/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e.lps')).
-% Sat, 10 Oct 2020 14:56:12 GMT File: <stream>(0x5597f2bfec00)%;
+% Sat, 10 Oct 2020 15:31:43 GMT File: <stream>(0x559e4b1d9100)%;
 %; Copyright (c) 2005 IBM Corporation and others.
 %; All rights reserved. This program and the accompanying materials
 %; are made available under the terms of the Common Public License v1.0
@@ -42,8 +42,8 @@
 mpred_prop(at_loc(object,location),fluent).
 fluents([at_loc/2]).
 
-% manualrelease At
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',24).
+% manualrelease At
 % From E: 
 % 
 % :-call_pel_directive(manualrelease(at_loc)).
@@ -222,12 +222,9 @@ fluents([doorUnlocked/1]).
 if doorUnlock(Agent, Door)then awake(Agent), not doorUnlocked(Door), nearPortal(Agent, Door).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',76).
 
- /*  reactive_rule([ happens(doorUnlock(Agent,Door),
-   			Time_From,
-   			Time_Until)
-   	      ],
-   	      [ holds(awake(Agent),Time_At),
-   		holds(not(doorUnlocked(Door)),Time_At),
+ /*  reactive_rule([doorUnlock(Agent,Door)],
+   	      [ awake(Agent),
+   		not(doorUnlocked(Door)),
    		nearPortal(Agent,Door)
    	      ]).
  */
@@ -281,11 +278,8 @@ doorUnlock(Agent, Door)initiates doorUnlocked(Door).
 if doorLock(Agent, Door)then awake(Agent), doorUnlocked(Door), nearPortal(Agent, Door).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',93).
 
- /*  reactive_rule([ happens(doorLock(Agent,Door),
-   			Time_From,
-   			Time_Until)
-   	      ],
-   	      [ holds(awake(Agent),Time_At),
+ /*  reactive_rule([doorLock(Agent,Door)],
+   	      [ awake(Agent),
    		holds(doorUnlocked(Door),Time_At),
    		nearPortal(Agent,Door)
    	      ]).
@@ -333,7 +327,7 @@ doorUnlocked(Door)if doorIsOpen(Door).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',107).
 
  /*  l_int(holds(doorUnlocked(Door),Time_At),
-         [holds(doorIsOpen(Door),Time_At)]).
+         [doorIsOpen(Door)]).
  */
  %  "% =================================".
 
@@ -403,12 +397,9 @@ fluents([doorIsOpen/1]).
 if doorOpen(Agent, Door)then awake(Agent), not doorIsOpen(Door), doorUnlocked(Door), nearPortal(Agent, Door).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',125).
 
- /*  reactive_rule([ happens(doorOpen(Agent,Door),
-   			Time_From,
-   			Time_Until)
-   	      ],
-   	      [ holds(awake(Agent),Time_At),
-   		holds(not(doorIsOpen(Door)),Time_At),
+ /*  reactive_rule([doorOpen(Agent,Door)],
+   	      [ awake(Agent),
+   		not(doorIsOpen(Door)),
    		holds(doorUnlocked(Door),Time_At),
    		nearPortal(Agent,Door)
    	      ]).
@@ -466,11 +457,8 @@ doorOpen(Agent, Door)initiates doorIsOpen(Door).
 if doorClose(Agent, Door)then awake(Agent), doorIsOpen(Door), doorUnlocked(Door), nearPortal(Agent, Door).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',144).
 
- /*  reactive_rule([ happens(doorClose(Agent,Door),
-   			Time_From,
-   			Time_Until)
-   	      ],
-   	      [ holds(awake(Agent),Time_At),
+ /*  reactive_rule([doorClose(Agent,Door)],
+   	      [ awake(Agent),
    		holds(doorIsOpen(Door),Time_At),
    		holds(doorUnlocked(Door),Time_At),
    		nearPortal(Agent,Door)
@@ -561,7 +549,7 @@ if walkThroughDoor12(Agent, Door)then awake(Agent), standing(Agent), doorIsOpen(
    			Time_From,
    			Time_Until)
    	      ],
-   	      [ holds(awake(Agent),Time_At),
+   	      [ awake(Agent),
    		holds(standing(Agent),Time_At),
    		holds(doorIsOpen(Door),Time_At),
    		holds(at_loc(Agent,side1(Door)),
@@ -594,7 +582,7 @@ if walkThroughDoor21(Agent, Door)then awake(Agent), standing(Agent), doorIsOpen(
    			Time_From,
    			Time_Until)
    	      ],
-   	      [ holds(awake(Agent),Time_At),
+   	      [ awake(Agent),
    		holds(standing(Agent),Time_At),
    		holds(doorIsOpen(Door),Time_At),
    		holds(at_loc(Agent,side2(Door)),
@@ -758,7 +746,7 @@ if walkStreet12(Agent, Street)then awake(Agent), standing(Agent), at_loc(Agent, 
    			Time_From,
    			Time_Until)
    	      ],
-   	      [ holds(awake(Agent),Time_At),
+   	      [ awake(Agent),
    		holds(standing(Agent),Time_At),
    		holds(at_loc(Agent,side1(Street)),
    		      Time_At)
@@ -788,7 +776,7 @@ if walkStreet21(Agent, Street)then awake(Agent), standing(Agent), at_loc(Agent, 
    			Time_From,
    			Time_Until)
    	      ],
-   	      [ holds(awake(Agent),Time_At),
+   	      [ awake(Agent),
    		holds(standing(Agent),Time_At),
    		holds(at_loc(Agent,side2(Street)),
    		      Time_At)
@@ -959,7 +947,7 @@ if walkDownStaircase(Agent, Staircase)then awake(Agent), standing(Agent), at_loc
    			Time_From,
    			Time_Until)
    	      ],
-   	      [ holds(awake(Agent),Time_At),
+   	      [ awake(Agent),
    		holds(standing(Agent),Time_At),
    		holds(at_loc(Agent,side2(Staircase)),
    		      Time_At)
@@ -985,11 +973,8 @@ if walkDownStaircase(Agent, Staircase)then awake(Agent), standing(Agent), at_loc
 if walkUpStaircase(Agent, Staircase)then awake(Agent), standing(Agent), at_loc(Agent, side1(Staircase)).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',269).
 
- /*  reactive_rule([ happens(walkUpStaircase(Agent,Staircase),
-   			Time_From,
-   			Time_Until)
-   	      ],
-   	      [ holds(awake(Agent),Time_At),
+ /*  reactive_rule([walkUpStaircase(Agent,Staircase)],
+   	      [ awake(Agent),
    		holds(standing(Agent),Time_At),
    		holds(at_loc(Agent,side1(Staircase)),
    		      Time_At)
@@ -1110,11 +1095,11 @@ walkUpStaircase(Agent, Staircase)terminates at_loc(Agent, Room)if side1(Staircas
 %    holds_at(at_loc(Agent,Outside),Time), 
 %    holds_at(dressed(Agent),Time)).
  %   [Time].
-dressed(Agent)if at_loc(Agent, Outside).
+if at_loc(Agent, Outside)then dressed(Agent).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RTSpace.e',295).
 
- /*  l_int(holds(dressed(Agent),Time_At),
-         [holds(at_loc(Agent,Outside),Time_At)]).
+ /*  reactive_rule([holds(at_loc(Agent,Outside),Time_At)],
+   	      [dressed(Agent)]).
  */
  %  "% =================================".
 

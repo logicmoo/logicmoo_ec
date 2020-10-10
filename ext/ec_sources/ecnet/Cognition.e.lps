@@ -12,7 +12,7 @@
 % :-call_pel_directive(translate(begining,'/pack/logicmoo_ec/ext/ec_sources/ecnet/Cognition.e.lps')).
 :- call_pel_directive(translate(begining,
                                 '/pack/logicmoo_ec/ext/ec_sources/ecnet/Cognition.e.lps')).
-% Sat, 10 Oct 2020 14:56:01 GMT File: <stream>(0x5597f296a100)%;
+% Sat, 10 Oct 2020 15:31:34 GMT File: <stream>(0x559e4b46ac00)%;
 %; Copyright (c) 2005 IBM Corporation and others.
 %; All rights reserved. This program and the accompanying materials
 %; are made available under the terms of the Common Public License v1.0
@@ -23,14 +23,14 @@
 %; IBM - Initial implementation
 %;
 
-% event Read(agent,text,content)
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Cognition.e',11).
+% event Read(agent,text,content)
 % From E: 
 % 
 % event(read(agent,text,content)).
 events([read/3]).
-mpred_prop(read(agent,text,content),action).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Cognition.e',11).
+mpred_prop(read(agent,text,content),action).
 actions([read/3]).
 
 % event ThinkAbout(agent,content)
@@ -42,14 +42,14 @@ events([thinkAbout/2]).
 mpred_prop(thinkAbout(agent,content),action).
 actions([thinkAbout/2]).
 
-% event Think(agent)
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Cognition.e',13).
+% event Think(agent)
 % From E: 
 % 
 % event(think(agent)).
 events([think/1]).
-mpred_prop(think(agent),action).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Cognition.e',13).
+mpred_prop(think(agent),action).
 actions([think/1]).
 
 % event Understand(agent,content)
@@ -61,14 +61,14 @@ events([understand/2]).
 mpred_prop(understand(agent,content),action).
 actions([understand/2]).
 
-% event Dream(agent)
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Cognition.e',15).
+% event Dream(agent)
 % From E: 
 % 
 % event(dream(agent)).
 events([dream/1]).
-mpred_prop(dream(agent),action).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Cognition.e',15).
+mpred_prop(dream(agent),action).
 actions([dream/1]).
 
 
@@ -82,14 +82,11 @@ actions([dream/1]).
 %    happens_at(read(Agent,Text,Content),Time), 
 %    holds_at(see(Agent,Text),Time)).
  %   [Time].
-see(Agent, Text)if read(Agent, Text, Content).
+if read(Agent, Text, Content)then see(Agent, Text).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Cognition.e',17).
 
- /*  l_int(holds(see(Agent,Text),Time_At),
-         [ happens(read(Agent,Text,Content),
-   		Time_At,
-   		Time_At)
-         ]).
+ /*  reactive_rule([read(Agent,Text,Content)],
+   	      [see(Agent,Text)]).
  */
  %  "% =================================".
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Cognition.e',20).

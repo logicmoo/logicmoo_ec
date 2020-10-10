@@ -12,7 +12,7 @@
 % :-call_pel_directive(translate(begining,'/pack/logicmoo_ec/ext/ec_sources/examples/Mueller2004a/Leaf.e.lps')).
 :- call_pel_directive(translate(begining,
                                 '/pack/logicmoo_ec/ext/ec_sources/examples/Mueller2004a/Leaf.e.lps')).
-% Sat, 10 Oct 2020 14:56:42 GMT File: <stream>(0x5597f2923100)%;
+% Sat, 10 Oct 2020 15:32:01 GMT File: <stream>(0x559e4b323600)%;
 %; Copyright (c) 2005 IBM Corporation and others.
 %; All rights reserved. This program and the accompanying materials
 %; are made available under the terms of the Common Public License v1.0
@@ -33,15 +33,15 @@
 %; }
 %;
 
-% option trajectory on
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/examples/Mueller2004a/Leaf.e',22).
+% option trajectory on
 % From E: 
 % 
 % :-call_pel_directive(option(trajectory,on)).
 :- call_pel_directive(option(trajectory, on)).
 
-% load foundations/Root.e
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/examples/Mueller2004a/Leaf.e',24).
+% load foundations/Root.e
 % From E: 
 % 
 % :-call_pel_directive(load('foundations/Root.e')).
@@ -54,8 +54,8 @@
 % :-call_pel_directive(load('foundations/EC.e')).
 :- call_pel_directive(load('foundations/EC.e')).
 
-% sort object
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/examples/Mueller2004a/Leaf.e',27).
+% sort object
 % From E: 
 % 
 % sort(object).
@@ -68,35 +68,37 @@ sort(object).
 % subsort(height,integer).
 subsort(height,integer).
 
-% fluent Height(object,height)
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/examples/Mueller2004a/Leaf.e',30).
+% fluent Height(object,height)
 % From E: 
 % 
 % fluent(height(object,height)).
 mpred_prop(height(object,height),fluent).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/examples/Mueller2004a/Leaf.e',30).
 fluents([height/2]).
 
 % fluent Falling(object)
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/examples/Mueller2004a/Leaf.e',30).
 % From E: 
 % 
 % fluent(falling(object)).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/examples/Mueller2004a/Leaf.e',30).
 mpred_prop(falling(object),fluent).
 fluents([falling/1]).
 
-% event StartFalling(object)
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/examples/Mueller2004a/Leaf.e',32).
+% event StartFalling(object)
 % From E: 
 % 
 % event(startFalling(object)).
 mpred_prop(startFalling(object),event).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/examples/Mueller2004a/Leaf.e',32).
 events([startFalling/1]).
 
 % event HitsGround(object)
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/examples/Mueller2004a/Leaf.e',32).
 % From E: 
 % 
 % event(hitsGround(object)).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/examples/Mueller2004a/Leaf.e',32).
 mpred_prop(hitsGround(object),event).
 events([hitsGround/1]).
 
@@ -196,15 +198,13 @@ holds_at(height(Object, Height1), Time), Height2=Height1-Offset*Offset ->
 %     holds_at(height(Object,0),Time)), 
 %    happens_at(hitsGround(Object),Time)).
  %   [Time].
-hitsGround(Object)if falling(Object), height(Object, 0).
+if falling(Object), height(Object, 0)then hitsGround(Object).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/examples/Mueller2004a/Leaf.e',52).
 
- /*  l_events(happens(hitsGround(Object),
-   		 Time_From,
-   		 Time_From),
-   	 [ holds(falling(Object),Time_From),
-   	   holds(height(Object,0),Time_From)
-   	 ]).
+ /*  reactive_rule([ holds(falling(Object),Time_At),
+   		holds(height(Object,0),Time_At)
+   	      ],
+   	      [hitsGround(Object)]).
  */
  %  "% =================================".
 

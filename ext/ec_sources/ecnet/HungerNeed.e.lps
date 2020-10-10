@@ -12,7 +12,7 @@
 % :-call_pel_directive(translate(begining,'/pack/logicmoo_ec/ext/ec_sources/ecnet/HungerNeed.e.lps')).
 :- call_pel_directive(translate(begining,
                                 '/pack/logicmoo_ec/ext/ec_sources/ecnet/HungerNeed.e.lps')).
-% Sat, 10 Oct 2020 14:56:05 GMT File: <stream>(0x5597f2bfd200)
+% Sat, 10 Oct 2020 15:31:38 GMT File: <stream>(0x559e4b324400)
 
 
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/HandTo.e',30).
@@ -64,19 +64,11 @@ fluents([satiated/1]).
 %    holds_at(hungry(Agent),Time), 
 %    holds_at(not(satiated(Agent)),Time)).
  %   [Time].
-not satiated(Agent)if hungry(Agent).
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/HungerNeed.e',19).
-
- /*  l_int(holds(not(satiated(Agent)),Time_At),
-         [holds(hungry(Agent),Time_At)]).
- */
+if hungry(Agent)then not satiated(Agent).
+ %  reactive_rule([hungry(Agent)],[not(satiated(Agent))]).
  %  "% =================================".
-hungry(Agent)if not satiated(Agent).
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/HungerNeed.e',19).
-
- /*  l_int(holds(hungry(Agent),Time_At3),
-         [holds(not(satiated(Agent)),Time_At3)]).
- */
+if not satiated(Agent)then hungry(Agent).
+ %  reactive_rule([not(satiated(Agent))],[hungry(Agent)]).
  %  "% =================================".
 
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/HungerNeed.e',21).

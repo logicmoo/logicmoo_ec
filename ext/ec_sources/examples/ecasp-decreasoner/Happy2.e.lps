@@ -12,7 +12,7 @@
 % :-call_pel_directive(translate(begining,'/pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/Happy2.e.lps')).
 :- call_pel_directive(translate(begining,
                                 '/pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/Happy2.e.lps')).
-% Sat, 10 Oct 2020 14:56:27 GMT File: <stream>(0x5597f2965d00)%;
+% Sat, 10 Oct 2020 15:31:52 GMT File: <stream>(0x559e4b401200)%;
 %; Copyright (c) 2005 IBM Corporation and others.
 %; All rights reserved. This program and the accompanying materials
 %; are made available under the terms of the Common Public License v1.0
@@ -43,8 +43,8 @@
 %; timestamps
 %;
 
-% load foundations/Root.e
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/Happy2.e',32).
+% load foundations/Root.e
 % From E: 
 % 
 % :-call_pel_directive(load('foundations/Root.e')).
@@ -57,8 +57,8 @@
 % :-call_pel_directive(load('foundations/EC.e')).
 :- call_pel_directive(load('foundations/EC.e')).
 
-% sort person
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/Happy2.e',35).
+% sort person
 % From E: 
 % 
 % sort(person).
@@ -72,40 +72,42 @@ sort(person).
 mpred_prop(feed(person),event).
 events([feed/1]).
 
-% event Clothe(person)
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/Happy2.e',37).
+% event Clothe(person)
 % From E: 
 % 
 % event(clothe(person)).
 mpred_prop(clothe(person),event).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/Happy2.e',37).
 events([clothe/1]).
 
 % fluent Happy(person)
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/Happy2.e',37).
 % From E: 
 % 
 % fluent(happy(person)).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/Happy2.e',37).
 mpred_prop(happy(person),fluent).
 fluents([happy/1]).
 
-% fluent Hungry(person)
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/Happy2.e',39).
+% fluent Hungry(person)
 % From E: 
 % 
 % fluent(hungry(person)).
 mpred_prop(hungry(person),fluent).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/Happy2.e',39).
 fluents([hungry/1]).
 
 % fluent Cold(person)
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/Happy2.e',39).
 % From E: 
 % 
 % fluent(cold(person)).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/Happy2.e',39).
 mpred_prop(cold(person),fluent).
 fluents([cold/1]).
 
-% noninertial Happy
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/examples/ecasp-decreasoner/Happy2.e',41).
+% noninertial Happy
 % From E: 
 % 
 % :-call_pel_directive(noninertial(happy)).
@@ -129,7 +131,7 @@ if happy(Person)then not hungry(Person), not cold(Person).
 
  /*  reactive_rule([holds(happy(Person),Time_At)],
    	      [ holds(not(hungry(Person)),Time_At3),
-   		holds(not(cold(Person)),Time_At3)
+   		not(cold(Person))
    	      ]).
  */
  %  "% =================================".
@@ -138,7 +140,7 @@ happy(Person)if not hungry(Person), not cold(Person).
 
  /*  l_int(holds(happy(Person),Time_At4),
          [ holds(not(hungry(Person)),Time_At4),
-   	holds(not(cold(Person)),Time_At4)
+   	not(cold(Person))
          ]).
  */
  %  "% =================================".

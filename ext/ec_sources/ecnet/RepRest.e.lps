@@ -12,7 +12,7 @@
 % :-call_pel_directive(translate(begining,'/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e.lps')).
 :- call_pel_directive(translate(begining,
                                 '/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e.lps')).
-% Sat, 10 Oct 2020 14:56:09 GMT File: <stream>(0x5597f26a6000)%;
+% Sat, 10 Oct 2020 15:31:41 GMT File: <stream>(0x559e4a3f4300)%;
 %; Copyright (c) 2005 IBM Corporation and others.
 %; All rights reserved. This program and the accompanying materials
 %; are made available under the terms of the Common Public License v1.0
@@ -114,32 +114,32 @@
 %;sort script
 %;
 
-% fluent Holding(agent,physobj)
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',103).
+% fluent Holding(agent,physobj)
 % From E: 
 % 
 % fluent(holding(agent,physobj)).
 mpred_prop(holding(agent,physobj),fluent).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',103).
 fluents([holding/2]).
 
 % event PickUp(agent,physobj)
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',103).
 % From E: 
 % 
 % event(pickUp(agent,physobj)).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',103).
 events([pickUp/2]).
 mpred_prop(pickUp(agent,physobj),action).
-:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',103).
 actions([pickUp/2]).
 
-% event LetGoOf(agent,physobj)
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',105).
+% event LetGoOf(agent,physobj)
 % From E: 
 % 
 % event(letGoOf(agent,physobj)).
 events([letGoOf/2]).
-mpred_prop(letGoOf(agent,physobj),action).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',105).
+mpred_prop(letGoOf(agent,physobj),action).
 actions([letGoOf/2]).
 
 
@@ -683,7 +683,7 @@ if walkThroughDoor12(Agent, Door)then standing(Agent), at_loc(Agent, side1(Door)
    			Time_From,
    			Time_Until)
    	      ],
-   	      [ holds(standing(Agent),Time_At),
+   	      [ standing(Agent),
    		holds(at_loc(Agent,side1(Door)),
    		      Time_At)
    	      ]).
@@ -710,7 +710,7 @@ if walkThroughDoor21(Agent, Door)then standing(Agent), at_loc(Agent, side2(Door)
    			Time_From,
    			Time_Until)
    	      ],
-   	      [ holds(standing(Agent),Time_At),
+   	      [ standing(Agent),
    		holds(at_loc(Agent,side2(Door)),
    		      Time_At)
    	      ]).
@@ -847,18 +847,18 @@ fluents([satiated/1]).
 %    holds_at(hungry(Agent),Time), 
 %    holds_at(not(satiated(Agent)),Time)).
  %   [Time].
-not satiated(Agent)if hungry(Agent).
+if hungry(Agent)then not satiated(Agent).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',257).
 
- /*  l_int(holds(not(satiated(Agent)),Time_At),
-         [holds(hungry(Agent),Time_At)]).
+ /*  reactive_rule([holds(hungry(Agent),Time_At)],
+   	      [not(satiated(Agent))]).
  */
  %  "% =================================".
 hungry(Agent)if not satiated(Agent).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',257).
 
  /*  l_int(holds(hungry(Agent),Time_At3),
-         [holds(not(satiated(Agent)),Time_At3)]).
+         [not(satiated(Agent))]).
  */
  %  "% =================================".
 
@@ -1456,7 +1456,7 @@ walkThroughDoor21(Waiter, kitchenDoorOf(Restaurant))if waiterOf(Restaurant, Wait
    		 Time_From,
    		 Time_From),
    	 [ waiterOf(Restaurant,Waiter),
-   	   holds(beWaiter5(Waiter),Time_From)
+   	   beWaiter5(Waiter)
    	 ]).
  */
  %  "% =================================".
@@ -1995,8 +1995,7 @@ foodPrepare(Cook, Food)if beCook1(Cook), knowOrder(Cook, Agent, Food).
    		 Time_From,
    		 Time_From),
    	 [ holds(beCook1(Cook),Time_From),
-   	   holds(knowOrder(Cook,Agent,Food),
-   		 Time_From)
+   	   knowOrder(Cook,Agent,Food)
    	 ]).
  */
  %  "% =================================".
@@ -2222,7 +2221,7 @@ xor([lying,sitting,standing]).
 if lyingOn(Agent, Physobj)then lying(Agent).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',560).
 
- /*  reactive_rule([holds(lyingOn(Agent,Physobj),Time_At)],
+ /*  reactive_rule([lyingOn(Agent,Physobj)],
    	      [lying(Agent)]).
  */
  %  "% =================================".
@@ -2240,9 +2239,7 @@ if lyingOn(Agent, Physobj)then lying(Agent).
  %   [Time].
 if sittingOn(Agent, Physobj)then sitting(Agent).
 
- /*  reactive_rule([ holds(sittingOn(Agent,Physobj),
-   		      Time_At)
-   	      ],
+ /*  reactive_rule([sittingOn(Agent,Physobj)],
    	      [sitting(Agent)]).
  */
  %  "% =================================".
@@ -2264,8 +2261,8 @@ false not equals(Physobj1, Physobj2), lyingOn(Agent, Physobj1), lyingOn(Agent, P
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',569).
 
  /*  d_pre([ not(equals(Physobj1,Physobj2)),
-   	holds(lyingOn(Agent,Physobj1),Time_At),
-   	holds(lyingOn(Agent,Physobj2),Time_At)
+   	lyingOn(Agent,Physobj1),
+   	lyingOn(Agent,Physobj2)
          ]).
  */
  %  "% =================================".
@@ -2287,8 +2284,8 @@ false not equals(Physobj1, Physobj2), sittingOn(Agent, Physobj1), sittingOn(Agen
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/RepRest.e',574).
 
  /*  d_pre([ not(equals(Physobj1,Physobj2)),
-   	holds(sittingOn(Agent,Physobj1),Time_At),
-   	holds(sittingOn(Agent,Physobj2),Time_At)
+   	sittingOn(Agent,Physobj1),
+   	sittingOn(Agent,Physobj2)
          ]).
  */
  %  "% =================================".
@@ -2316,7 +2313,7 @@ lieOn(Agent, Physobj)initiates lyingOn(Agent, Physobj)if standing(Agent).
    		  Time_From,
    		  Time_Until),
    	  lyingOn(Agent,Physobj),
-   	  [holds(standing(Agent),Time_From)]).
+   	  [standing(Agent)]).
  */
  %  "% =================================".
 

@@ -12,7 +12,7 @@
 % :-call_pel_directive(translate(begining,'/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e.lps')).
 :- call_pel_directive(translate(begining,
                                 '/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e.lps')).
-% Sat, 10 Oct 2020 14:56:17 GMT File: <stream>(0x5597f2963b00)%;
+% Sat, 10 Oct 2020 15:31:46 GMT File: <stream>(0x559e4b469600)%;
 %; Copyright (c) 2005 IBM Corporation and others.
 %; All rights reserved. This program and the accompanying materials
 %; are made available under the terms of the Common Public License v1.0
@@ -25,8 +25,8 @@
 %; Vehicle: transportation vehicles
 %;
 
-% sort vehicle: physobj
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',14).
+% sort vehicle: physobj
 % From E: 
 % 
 % subsort(vehicle,physobj).
@@ -39,8 +39,8 @@ subsort(vehicle,physobj).
 % subsort(vehiclein,vehicle).
 subsort(vehiclein,vehicle).
 
-% sort vehicleon: vehicle
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',16).
+% sort vehicleon: vehicle
 % From E: 
 % 
 % subsort(vehicleon,vehicle).
@@ -53,35 +53,37 @@ subsort(vehicleon,vehicle).
 % subsort(train,vehicleon).
 subsort(train,vehicleon).
 
-% sort carriage: vehiclein
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',18).
+% sort carriage: vehiclein
 % From E: 
 % 
 % subsort(carriage,vehiclein).
 subsort(carriage,vehiclein).
 
-% sort vehicledoor
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',20).
+% sort vehicledoor
 % From E: 
 % 
 % sort(vehicledoor).
 sort(vehicledoor).
 %; RideTrack
 
-% event RideTrack12(train,track)
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',24).
+% event RideTrack12(train,track)
 % From E: 
 % 
 % event(rideTrack12(train,track)).
 mpred_prop(rideTrack12(train,track),event).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',24).
 events([rideTrack12/2]).
 
-% event RideTrack21(train,track)
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',26).
+% event RideTrack21(train,track)
 % From E: 
 % 
 % event(rideTrack21(train,track)).
 mpred_prop(rideTrack21(train,track),event).
+:-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',26).
 events([rideTrack21/2]).
 
 
@@ -120,10 +122,7 @@ at_loc(Train, side1(Track))if rideTrack12(Train, Track).
 at_loc(Train, side2(Track))if rideTrack21(Train, Track).
 
  /*  l_int(holds(at_loc(Train,side2(Track)),Time_At),
-         [ happens(rideTrack21(Train,Track),
-   		Time_At,
-   		Time_At)
-         ]).
+         [rideTrack21(Train,Track)]).
  */
  %  "% =================================".
 
@@ -259,10 +258,7 @@ at_loc(Vehicle, side1(Street))if driveStreet12(Vehicle, Street).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',58).
 
  /*  l_int(holds(at_loc(Vehicle,side1(Street)),Time_At),
-         [ happens(driveStreet12(Vehicle,Street),
-   		Time_At,
-   		Time_At)
-         ]).
+         [driveStreet12(Vehicle,Street)]).
  */
  %  "% =================================".
 
@@ -280,10 +276,7 @@ at_loc(Vehicle, side1(Street))if driveStreet12(Vehicle, Street).
 at_loc(Vehicle, side2(Street))if driveStreet21(Vehicle, Street).
 
  /*  l_int(holds(at_loc(Vehicle,side2(Street)),Time_At),
-         [ happens(driveStreet21(Vehicle,Street),
-   		Time_At,
-   		Time_At)
-         ]).
+         [driveStreet21(Vehicle,Street)]).
  */
  %  "% =================================".
 
@@ -422,8 +415,8 @@ false not equals(Street1, Street2), pointedToward(Horse, Street1), pointedToward
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/Vehicle.e',88).
 
  /*  d_pre([ not(equals(Street1,Street2)),
-   	holds(pointedToward(Horse,Street1),Time_At),
-   	holds(pointedToward(Horse,Street2),Time_At)
+   	pointedToward(Horse,Street1),
+   	pointedToward(Horse,Street2)
          ]).
  */
  %  "% =================================".
@@ -921,13 +914,10 @@ onVehicle(Vehicleon1, Vehicleon2) ->
 %    holds_at(onVehicle(Vehicleon1,Vehicleon2),Time), 
 %    holds_at(not(onVehicle(Vehicleon2,Vehicleon1)),Time)).
  %   [Time].
-not onVehicle(Vehicleon2, Vehicleon1)if onVehicle(Vehicleon1, Vehicleon2).
+if onVehicle(Vehicleon1, Vehicleon2)then not onVehicle(Vehicleon2, Vehicleon1).
 
- /*  l_int(holds(not(onVehicle(Vehicleon2,Vehicleon1)),
-   	    Time_At),
-         [ holds(onVehicle(Vehicleon1,Vehicleon2),
-   	      Time_At)
-         ]).
+ /*  reactive_rule([onVehicle(Vehicleon1,Vehicleon2)],
+   	      [not(onVehicle(Vehicleon2,Vehicleon1))]).
  */
  %  "% =================================".
 
@@ -1150,13 +1140,10 @@ inVehicle(Vehiclein1, Vehiclein2) ->
 %    holds_at(inVehicle(Vehiclein1,Vehiclein2),Time), 
 %    holds_at(not(inVehicle(Vehiclein2,Vehiclein1)),Time)).
  %   [Time].
-not inVehicle(Vehiclein2, Vehiclein1)if inVehicle(Vehiclein1, Vehiclein2).
+if inVehicle(Vehiclein1, Vehiclein2)then not inVehicle(Vehiclein2, Vehiclein1).
 
- /*  l_int(holds(not(inVehicle(Vehiclein2,Vehiclein1)),
-   	    Time_At),
-         [ holds(inVehicle(Vehiclein1,Vehiclein2),
-   	      Time_At)
-         ]).
+ /*  reactive_rule([inVehicle(Vehiclein1,Vehiclein2)],
+   	      [not(inVehicle(Vehiclein2,Vehiclein1))]).
  */
  %  "% =================================".
 
@@ -1374,9 +1361,8 @@ if vehicleDoorOpen(Agent, Vehicledoor)then awake(Agent), not vehicleDoorIsOpen(V
    			Time_From,
    			Time_Until)
    	      ],
-   	      [ holds(awake(Agent),Time_At),
-   		holds(not(vehicleDoorIsOpen(Vehicledoor)),
-   		      Time_At)
+   	      [ awake(Agent),
+   		not(vehicleDoorIsOpen(Vehicledoor))
    	      ]).
  */
  %  "% =================================".
@@ -1425,7 +1411,7 @@ if vehicleDoorClose(Agent, Vehicledoor)then awake(Agent), vehicleDoorIsOpen(Vehi
    			Time_From,
    			Time_Until)
    	      ],
-   	      [ holds(awake(Agent),Time_At),
+   	      [ awake(Agent),
    		holds(vehicleDoorIsOpen(Vehicledoor),
    		      Time_At)
    	      ]).

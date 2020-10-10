@@ -12,7 +12,7 @@
 % :-call_pel_directive(translate(begining,'/pack/logicmoo_ec/ext/ec_sources/ecnet/SpeechAct.e.lps')).
 :- call_pel_directive(translate(begining,
                                 '/pack/logicmoo_ec/ext/ec_sources/ecnet/SpeechAct.e.lps')).
-% Sat, 10 Oct 2020 14:56:15 GMT File: <stream>(0x5597f2b7c200)%;
+% Sat, 10 Oct 2020 15:31:45 GMT File: <stream>(0x559e4b46b600)%;
 %; Copyright (c) 2005 IBM Corporation and others.
 %; All rights reserved. This program and the accompanying materials
 %; are made available under the terms of the Common Public License v1.0
@@ -183,18 +183,15 @@ fluents([actOnIntentionToWalkIn/2]).
 %     holds_at(not(intentionToWalkIn(Agent1,Room)),Time)), 
 %    happens_at(intendToWalkIn(Agent1,Room),Time)).
  %   [Time].
-intendToWalkIn(Agent1, Room)if invitedIn(Agent1, Room, Agent2), like(Agent1, Agent2), not intentionToWalkIn(Agent1, Room).
+if invitedIn(Agent1, Room, Agent2), like(Agent1, Agent2), not intentionToWalkIn(Agent1, Room)then intendToWalkIn(Agent1, Room).
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/SpeechAct.e',71).
 
- /*  l_events(happens(intendToWalkIn(Agent1,Room),
-   		 Time_From,
-   		 Time_From),
-   	 [ holds(invitedIn(Agent1,Room,Agent2),
-   		 Time_From),
-   	   like(Agent1,Agent2),
-   	   holds(not(intentionToWalkIn(Agent1,Room)),
-   		 Time_From)
-   	 ]).
+ /*  reactive_rule([ holds(invitedIn(Agent1,Room,Agent2),
+   		      Time_At),
+   		like(Agent1,Agent2),
+   		not(intentionToWalkIn(Agent1,Room))
+   	      ],
+   	      [intendToWalkIn(Agent1,Room)]).
  */
  %  "% =================================".
 

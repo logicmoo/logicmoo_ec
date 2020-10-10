@@ -12,7 +12,7 @@
 % :-call_pel_directive(translate(begining,'/pack/logicmoo_ec/ext/ec_sources/ecnet/OTSpace.e.lps')).
 :- call_pel_directive(translate(begining,
                                 '/pack/logicmoo_ec/ext/ec_sources/ecnet/OTSpace.e.lps')).
-% Sat, 10 Oct 2020 14:56:07 GMT File: <stream>(0x5597f2969600)%;
+% Sat, 10 Oct 2020 15:31:39 GMT File: <stream>(0x559e4b43d700)%;
 %; Copyright (c) 2005 IBM Corporation and others.
 %; All rights reserved. This program and the accompanying materials
 %; are made available under the terms of the Common Public License v1.0
@@ -111,8 +111,8 @@ false not equals(Diameter1, Diameter2), diameter(Ball, Diameter1), diameter(Ball
 :-was_s_l('/pack/logicmoo_ec/ext/ec_sources/ecnet/OTSpace.e',40).
 
  /*  d_pre([ not(equals(Diameter1,Diameter2)),
-   	holds(diameter(Ball,Diameter1),Time_At),
-   	holds(diameter(Ball,Diameter2),Time_At)
+   	diameter(Ball,Diameter1),
+   	diameter(Ball,Diameter2)
          ]).
  */
  %  "% =================================".
@@ -1464,14 +1464,12 @@ walkFrom(Agent, Object)if near(Agent, Object), at_loc(Agent, Room), at_loc(Objec
 
  /*  l_events(happens(walkFrom(Agent,Object),
    		 Time_From,
-   		 Time_Until),
+   		 Time_From),
    	 [ holds(near(Agent,Object),Time_From),
    	   holds(at_loc(Agent,Room),Time_From),
    	   holds(at_loc(Object,Room),Time_From),
    	   side1(Staircase,Room),
-   	   happens(walkUpStaircase(Agent,Staircase),
-   		   Time_From,
-   		   Time_Until)
+   	   walkUpStaircase(Agent,Staircase)
    	 ]).
  */
  %  "% =================================".

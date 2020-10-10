@@ -676,17 +676,17 @@ must_filematch(A,B):-must((filematch(A,B))).
 test_all:-test_all(7).
 
 test_all(N):- 
-  must_filematch(('./test/?*?/domain*.pddl'),_),!,
-  (forall(must_filematch(('./test/?*?/domain*.pddl'),E),
+  must_filematch(('../test/pddl_tests/orig_pddl_parser/test/?*?/domain*.pddl'),_),!,
+  (forall(must_filematch(('../test/pddl_tests/orig_pddl_parser/test/?*?/domain*.pddl'),E),
                                                  once(test_domain(E,N)))).
 
 
 test_all(N):- 
-  must_filematch(('./test/?*?/domain*.pddl'),_),!,
-  (forall(must_filematch(('./test/?*?/domain*.pddl'),E),
+  must_filematch(('../test/pddl_tests/orig_pddl_parser/test/?*?/domain*.pddl'),_),!,
+  (forall(must_filematch(('../test/pddl_tests/orig_pddl_parser/test/?*?/domain*.pddl'),E),
                                                  once(test_domain(E,N)))).
 
-test_all(N):- expand_file_name(('./test/?*?/domain*.pddl'),RList),RList\=[],!,reverse(RList,List),
+test_all(N):- expand_file_name(('../test/pddl_tests/orig_pddl_parser/test/?*?/domain*.pddl'),RList),RList\=[],!,reverse(RList,List),
   forall(member(E,List),once(test_domain(E,N))).
 
 % test_primaryobjects:-  (forall(must_filematch(pddl('primaryobjects_strips/?*?/domain*.*'),E),once(test_domain(E)))). 
@@ -740,13 +740,13 @@ test_blocks:- solve_files(('./test/blocks/domain-blocks.pddl'),
    ('./test/blocks/blocks-03-0.pddl')), fail.
 test_blocks:- fail, expand_file_name(('./test/blocks/domain*.pddl'),RList),reverse(RList,List),
         forall(member(E,List),once(test_domain(E))).
-test_blocks:- expand_file_name(('./test/?*?/domain*.pddl'),RList),reverse(RList,List),
+test_blocks:- expand_file_name(('../test/pddl_tests/orig_pddl_parser/test/?*?/domain*.pddl'),RList),reverse(RList,List),
         forall(member(E,List),once(test_domain(E))).
 test_blocks.
 
 
 % :- solve_files(pddl('benchmarks/mystery/domain.pddl'),pddl('benchmarks/mystery/prob01.pddl')).
-:-thread_local(t_l:loading_files).
+:-thread_local(t_l:loading_files/0).
 :-thread_local(t_l:hyhtn_solve/1).
 % t_l:other_planner(hyhtn_solve).
 
