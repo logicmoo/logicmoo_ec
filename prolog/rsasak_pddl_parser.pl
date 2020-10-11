@@ -28,11 +28,22 @@
 %%%             (:requirements :strips :typing :action-costs)
 %%%             (:types block)
 %%%             (:predicates (on ?x - block ?y - block)
-%%%           ...
+%%%           ...))
 %%%           L = ['(', define, '(', domain, blocks, ')', '(', :, requirements|...].
+
+% :- expects_dialect(sicstus).
+
+fix_wordcase(Word,WordC):-upcase_atom(Word,UC),UC=Word,!,downcase_atom(Word,WordC).
+fix_wordcase(Word,Word).
+
+
 %
 %read_file(+File, -List).
-read_file(File, Words) :- seeing(Old), see(File), get_code(C), read_rest(C, Words), seen, see(Old).
+%
+read_file(string(String), Words, textDoc) :- must(open_string(String,In)),!, current_input(Old),call_cleanup(( set_input(In), get_code(C), (read_rest(C, Words))),( set_input(Old))),!.
+read_file( File, Words) :- atom(File), exists_file(File), !, seeing(Old),call_cleanup(( see(File), get_code(C), (read_rest(C, Words))),( seen, see(Old))),!.
+read_file(File0, Words) :- must((must_filematch(File0,File),exists_file(File),read_file( File, Words))),!.
+
 
 /* Ends the input. */
 read_rest(-1,[]) :- !.
@@ -53,16 +64,16 @@ read_rest(59, Words) :- get_code(Next), !,
 			      read_rest(Last, Words).
 
 /* Otherwise get all of the next word. */
-read_rest(C,[Word|Words]) :- read_word(C,Chars,Next),
-                             name(Word,Chars),
+read_rest(C,[WordC|Words]) :- read_word(C,Chars,Next),
+                             name(Word,Chars),fix_wordcase(Word,WordC),
                              read_rest(Next,Words).
 
-/* Space, comma, newline, period, end-of-file or question mark separate words. */
+/* Space, comma, newline, backspace, carriage-return, 46 , 63,  ( ) period, end-of-file or question mark separate words. */
 read_word(C,[],C) :- ( C=32 ; C=44 ; C=10 ; C=9 ; C=13 ;
                          C=46 ; C=63 ; C=40 ; C=41 ; C=58 ; C= -1 ) , !.
 
 /* Otherwise, get characters and convert to lower case. */
-read_word(C,[LC|Chars],Last) :- lower_case(C, LC),
+read_word(C,[LC|Chars],Last) :- C=LC, % lower_case(C, LC),
 				get_code(Next),
                                 read_word(Next,Chars,Last).
 
@@ -88,7 +99,7 @@ question_mark(63).
 */
 
 
-
+% FILENAME:  parseDomain.pl 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% parseDomain.pl
 %%   Simple parser of PDDL domain file into prolog syntax.

@@ -2,6 +2,7 @@
 
 :- style_check(-singleton).
 
+:- use_module(library(logicmoo_common)).
 :- use_module(logicmoo_planner).
 
 :- expects_dialect(sicstus).
@@ -233,8 +234,8 @@ concat_atom([H|T], D, O):-
 copy_term_spec(A,B):-			cp(A,[],B,_).
 
 cp(A,Vars,A,Vars):-		atomic(A), A\= ?(_).
-cp(?(V),Vars,NV,NVars):-	atomic(V), register_var(V,Vars,NV,NVars).
-cp(V,Vars,NV,NVars):-		var(V),register_var(V,Vars,NV,NVars).
+cp(?(V),Vars,NV,NVars):-	atomic(V), register_var_pddl(V,Vars,NV,NVars).
+cp(V,Vars,NV,NVars):-		var(V),register_var_pddl(V,Vars,NV,NVars).
 
 cp(Term,Vars,NTerm,NVars):-
 		compound(Term),
@@ -248,12 +249,12 @@ cp_args([],Vars,[],Vars).
 
 % During copying one has to remeber copies of variables which can be used further during copying.
 % Therefore the register of variable copies is maintained.
-register_var(V,[X/H|T],N,[X/H|NT]):-
+register_var_pddl(V,[X/H|T],N,[X/H|NT]):-
 		V\==X,         % different variables
-		register_var(V,T,N,NT).
-register_var(V,[X/H|T],H,[X/H|T]):-
+		register_var_pddl(V,T,N,NT).
+register_var_pddl(V,[X/H|T],H,[X/H|T]):-
 		V==X.          % same variables
-register_var(V,[],N,[V/N]).
+register_var_pddl(V,[],N,[V/N]).
 
 
 
@@ -736,9 +737,9 @@ save_type_named(Type,Named,O):- doall(retract((is_saved_type(Type,Named,_):-_)))
 save_sterm(O):-nop((gensym(sterm,Named),save_type_named(sterm,Named,O))).
 
 
-test_blocks:- solve_files(('./test/blocks/domain-blocks.pddl'), 
-   ('./test/blocks/blocks-03-0.pddl')), fail.
-test_blocks:- fail, expand_file_name(('./test/blocks/domain*.pddl'),RList),reverse(RList,List),
+test_blocks:- solve_files(('../test/pddl_tests/orig_pddl_parser/test/blocks/domain-blocks.pddl'), 
+   ('../test/pddl_tests/orig_pddl_parser/test/blocks/blocks-03-0.pddl')), fail.
+test_blocks:- fail, expand_file_name(('../test/pddl_tests/orig_pddl_parser/test/blocks/domain*.pddl'),RList),reverse(RList,List),
         forall(member(E,List),once(test_domain(E))).
 test_blocks:- expand_file_name(('../test/pddl_tests/orig_pddl_parser/test/?*?/domain*.pddl'),RList),reverse(RList,List),
         forall(member(E,List),once(test_domain(E))).
@@ -755,6 +756,7 @@ test_blocks.
 :- flag(time_used,_,0).
 :- flag(time_used_other,_,0).
 
-probfreecell:- solve_files('../pddl/benchmarks/freecell/domain.pddl', '../pddl/benchmarks/freecell/probfreecell-9-5.pddl').
+probfreecell:- solve_files('../test/pddl_tests/benchmarks/freecell/domain.pddl', '../test/pddl_tests/benchmarks/freecell/probfreecell-9-5.pddl').
 % :- debug,(must(test_blocks)).
 
+:- fixup_exports.

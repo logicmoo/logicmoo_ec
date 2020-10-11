@@ -1,20 +1,18 @@
 :- module(logicmoo_ocl_and_pddl,[test_blocks/0,test_domain/1,test_all/0,test_rest/0,test_sas/0,test_dir_files_sas/1,test_dir_files_sas/3]).
 
+:- use_module(logicmoo_planner).
+
 %:- set_prolog_flag(gc,true).
 :- op(100,xfy,'=>').
 %:- debug.
 
 :- style_check(-singleton).
-
-:file_search_path(pddl,Y)))).
-:- endif.
-
+ 
 % [Required] Load the Logicmoo Library Utils
 :- ensure_loaded(library(logicmoo_utils)).
 :- ensure_loaded(library(multimodal_dcg)).
-
-:- use_module(logicmoo_planner).
-
+:- ensure_loaded(library(statistics)).
+:- use_module(library(wam_cl/sreader)).
 
 :- dynamic(use_local_pddl/0).
 
@@ -57,26 +55,26 @@ user:my_pfc_add(A):-if_defined(pfc_add(A),assert_if_new(A)).
 
 
 
-:- expects_dialect(sicstus).
-:- use_module(library(timeout)).
-:- use_module(library(lists)).
-:- ensure_loaded(library(logicmoo_util_structs)).
-:- ensure_loaded(library(sexpr_reader)).
+:- ensure_loaded(library(logicmoo/util_structs)).
+% :- ensure_loaded(library(sexpr_reader)).
+%:- ensure_loaded(library(se)).
 
 :- decl_struct(domain(domain_name, requires, types, constants, predicates, functions, constraints, actions, dict(extraprops))).
 :- decl_struct(problem(problem_name, domain_name, requires, objects, init, goal, constraints, metric, length, dict(extraprops))).
-
 
 :- decl_struct(action5(parameters=unk,sorted(preconditions),sorted(positiv_effect),sorted(negativ_effect),dict(extraprops))).
 
 :- decl_argtypes(action(parameters=unk,sorted(preconditions),sorted(positiv_effect),sorted(negativ_effect),
     assign_effect,list(parameter_types),string(domain_name),list(varnames),
      dict(extraprops))).
-:- decl_struct(
-   action(string(action_name),list(parameter_types),sorted(preconditions),sorted(positiv_effect),sorted(negativ_effect),sorted(assign_effect),
+:- decl_struct(action(string(action_name),list(parameter_types),sorted(preconditions),sorted(positiv_effect),sorted(negativ_effect),sorted(assign_effect),
         callable(parameters),callable(constraints),dict(extraprops))).
 
 
+:- expects_dialect(sicstus).
+:- system:use_module(library(timeout)).
+:- use_module(library(lists)).
+:- use_module(library(listing)).
 
 % command_line_sas/0
 %
@@ -86,9 +84,9 @@ user:my_pfc_add(A):-if_defined(pfc_add(A),assert_if_new(A)).
 %   second problem file
 %
 
-:-set_prolog_stack(global, limit(16*10**9)).
-:-set_prolog_stack(local, limit(16*10**9)).
-:-set_prolog_stack(trail, limit(16*10**9)).
+%:-set_prolog_stack(global, limit(16*10**9)).
+%:-set_prolog_stack(local, limit(16*10**9)).
+%:-set_prolog_stack(trail, limit(16*10**9)).
 
 command_line_sas:-
     prolog_flag(argv, [D,P]),!,
@@ -102,7 +100,8 @@ slow_on('blocks-08-0.pddl').
 slow_on('blocks-09-0.pddl').
 
 must_filematch(string(A),string(B)):-!.
-must_filematch(A,B):-must((filematch(A,B))).
+must_filematch(A,B):- filematch(A,B).
+must_filematch(A,B):- throw(must_filematch(A,B)).
 
 
 test_all:-test_all(7).
@@ -126,8 +125,8 @@ first_n_elements(ListR,Num,List):-length(ListR,PosNum),min_sas(PosNum,Num,MinNum
 test_domain(DP):- t_l:loading_files,!,must(load_domain(DP)).
 test_domain(DP):- test_domain(DP,12).
 
-test_domain(DP,Num):- \+ atom(DP),forall((filematch(DP,FOUND),exists_file(FOUND)),test_domain(FOUND,Num)),!.
-test_domain(DP,Num):- \+ exists_file(DP),!, forall(filematch(DP,MATCH),(exists_file(MATCH),test_domain(MATCH,Num))).
+test_domain(DP,Num):- \+ atom(DP),forall((must_filematch(DP,FOUND),exists_file(FOUND)),test_domain(FOUND,Num)),!.
+test_domain(DP,Num):- \+ exists_file(DP),!, forall(must_filematch(DP,MATCH),(exists_file(MATCH),test_domain(MATCH,Num))).
 test_domain(DP,Num):-
    format('~q.~n',[test_domain(DP)]),
   directory_file_path(D,_,DP),directory_files(D,RList),reverse(RList,ListR),
@@ -145,12 +144,21 @@ load_domain(DP):-
 
 load_file(F):- must(read_file(F, L, Filename)),load_file_rest(Filename,L).
 load_file_rest(_,[]):-!.
-load_file_rest(F,L):- first_n_elements(L,10,ES),
-   (
-   (append(_,['define','(','domain',Named|_],ES),must_det_l((domainBNF(O, L, R1),prop_set(filename,O,F)))) ->  save_type_named(domain,Named,O);
-   (append(_,['(','problem',Named|_],ES),must_det_l((problem(O, L, R1),prop_set(filename,O,F)))) ->  save_type_named(problem,Named,O);
-    must((ensure_struct(sexpr_file,O),prop_set(filename,O,F),sterm(SO, L, R1),prop_set(sterm_value,O,SO)))),
+load_file_rest_es10(F,L):- first_n_elements(L,10,ES),load_file_rest(F,L,ES).
+
+load_file_rest_es10(F,L,ES):-  append(_,['define','(','domain',Named|_],ES),!,
+   domainBNF(O, L, R1),prop_set(filename,O,F),
+   save_type_named(domain,Named,O),
    load_file_rest(F,R1).
+load_file_rest_es10(F,L,ES):- append(_,['(','problem',Named|_],ES),!,
+   problem(O, L, R1), prop_set(filename,O,F),
+   save_type_named(domain,Named,O),
+   load_file_rest(F,R1).
+load_file_rest_es10(F,L,_ES):- 
+   ensure_struct(sexpr_file,O),prop_set(filename,O,F),
+   sterm(SO, L, R1),prop_set(sterm_value,O,SO),
+   load_file_rest(F,R1).
+
 
 :-export(z2p/2).
 z2p(A,A).
@@ -162,9 +170,9 @@ test_frolog:- test_dir_files_sas('frolog','p02-domain.pddl','p02.pddl'),
     test_dir_files_sas('frolog','tPddlAgent01-domain.pddl','tPddlAgent01.pddl'),
     !. % test_dir_files_sas('frolog','tPddlAgent02-domain.pddl','tPddlAgent02.pddl').
 
-test_blocks:- solve_files(pddl('RobertSasak_Prolog-Planning-Library_test/blocks/domain-blocks.pddl'), 
-  pddl('RobertSasak_Prolog-Planning-Library_test/blocks/blocks-03-0.pddl')), fail.
-test_blocks:- fail, expand_file_name(pddl('RobertSasak_Prolog-Planning-Library_test/blocks/domain*.pddl'),RList),reverse(RList,List),
+test_blocks:- solve_files(pddl('orig_pddl_parser/test/blocks/domain-blocks.pddl'), 
+  pddl('orig_pddl_parser/test/blocks/blocks-03-0.pddl')), fail.
+test_blocks:- fail, expand_file_name(pddl('orig_pddl_parser/test/blocks/domain*.pddl'),RList),reverse(RList,List),
   forall(member(E,List),once(test_domain(E))).
 test_blocks.
 
@@ -178,7 +186,7 @@ solve_files(DomainFile, ProblemFile):-
  forall(must(must_filematch(DomainFile,DomainFile0)),
    forall(must(must_filematch(ProblemFile,ProblemFile0)),
      (time(show_call(solve_files_0(DomainFile0, ProblemFile0))),
-      time(show_call(solve_files_w_ocl(DomainFile0, ProblemFile0)))))).
+      nop(time(show_call(solve_files_w_ocl(DomainFile0, ProblemFile0))))))).
 
 solve_files_0(DomainFile, ProblemFile):-
    must_det_l(( 
@@ -282,10 +290,12 @@ record_time(G,Runtime,TimeUsed):- statistics(Runtime, [B,_]),G,statistics(Runtim
 
 try_solve(PN,D,P,S):- t_l:loading_files,!,pmsg((loading_files(PN):-try_solve(D,P,S))),!.
 % try_solve(PN,D,P,S):- once(time_out(solve(PN,D, P, S), 3000, Result)), Result == time_out, portray_clause(hard_working:-try_solve(PN,D,P,S)),fail.
-try_solve(PN,D,P,S):- gripe_time(14,time_out((solve(PN,D, P, S)), 30000, Result)),!, % time limit for a planner (was 500000)
+try_solve(PN,D,P,S):- gripe_time(14,time_out((solve(PN,D, P, S)), 30000, Result)),!, % time limit for a planner (was 500000)  30000
    ((\+ is_list(S)
      -> portray_clause('failed'(Result):-try_solve(PN,D,P,S)) ;
-       ((Result=time_out)->portray_clause('failed'(Result):-try_solve(PN,D,P,S));true))),!.
+       ((Result=time_out)->portray_clause('failed'(Result):-try_solve(PN,D,P,S));true))),fail.
+
+try_solve(PN,D,P,S):- solve(PN,D, P, S),fail.
 
 try_solve(PN,D,P,S):-dmsg('utter_failed'(warn):-try_solve(PN,D,P,S)),!.
 
@@ -480,47 +490,6 @@ tk(K,X):- clause(error:has_type(K, X),B),!,show_call(B).
 tk(_,_).
 
 
-
-%% get_param_types0(+Df, +ListOfParams, -NameOrVarList, -TypeList).
-%
-get_param_types(Df,H,P,K):-must((get_param_types0(Df,H,P,K),length(P,L),length(K,L))).
-
-
-use_default(s(var),'?'(H),H).
-use_default(s(var),(H),H).
-use_default(s(val),'?'(H),'?'(H)).
-use_default(s(val),H,H).
-use_default(Df,_,Df).
-
-adjust_types(T,GsNs,Ps):- must((get_param_types0(T, GsNs,Ps, _))).
-adjust_types(T,GsNs,L):- must((get_param_types0(T, GsNs,Ps, Ks),pairs_keys_values(L,Ps, Ks))).
-
-get_param_types0(_,[], [] ,[]).
-
-get_param_types0(Df,[H|T],[P1|Ps],[K|Ks]):- 
-    svar_fixvarname(H,Name),!,
-    P1 = '?'(Name),
-    use_default(Df,P1,K),
-    get_param_types0(Df,T, Ps, Ks).
-get_param_types0(Df,[H|T],[P1|Ps],[K|Ks]):-
-    compound(H), H =.. [K, P1],not(is_list(P1)),!,
-    get_param_types0(Df,T, Ps, Ks).
-get_param_types0(Df,[H|T],[P1|Ps],[K|Ks]):-
-    compound(H), H =.. [K, [P1]],!,    
-    get_param_types0(Df,T, Ps, Ks).
-get_param_types0(Df,[H|T],[P1,P2|Ps],[K,K|Ks]):-
-    compound(H), H =.. [K, [P1,P2]],!,
-    get_param_types0(Df,T, Ps, Ks).
-
-get_param_types0(Df,[H|T],[P1,P2,P3|Ps],[K,K,K|Ks]):-
-    compound(H), H =.. [K, [P1,P2,P3]],!,
-    get_param_types0(Df,T, Ps, Ks).
-
-
-get_param_types0(Df,[H|T],[H|Ps],[K|Ks]):-  must(atom(H)),use_default(Df,H,K),
-    get_param_types0(Df,T, Ps, Ks).
-
-
 % setInit(+Init, -State)
 %
 setInit([], []).
@@ -592,6 +561,7 @@ replc_structure_vars(A,AA):- copy_term(A,AC),
 %   All occurs of ?(x) are replaced with real prolog variables.
 %   Modified version of code published by Bartak: http://kti.mff.cuni.cz/~bartak/prolog/data_struct.html
 %
+copy_term_spec(A,B):-			cp(A,[],B,_).
 
 varnames_for_assert(A,B,After):-
      b_getval('$variable_names',Before),
@@ -602,13 +572,13 @@ copy_term_for_assert(A,B):-
     b_setval('$variable_names',After).
 
 cp( VAR,Vars,VAR,Vars):- var(VAR),!.
-cp( VAR,Vars,NV,NVars):- logicmoo_i_sexp_reader:svar(VAR,_),!,must((svar_fixvarname(VAR,Name),atom(Name))),!, must(register_var(Name=NV,Vars,NVars)).
+cp( VAR,Vars,NV,NVars):- /*logicmoo_i_sexp_reader:*/svar(VAR,_),!,must((svar_fixvarname(VAR,Name),atom(Name))),!, must(register_var(Name=NV,Vars,NVars)).
 cp([],Vars,[],Vars).
 cp( Term,Vars,Term,Vars):- \+compound(Term),!.
 cp([H|T],Vars,[NH|NT],NVars):- !, cp(H,Vars,NH,SVars), cp(T,SVars,NT,NVars).
 cp( Term,Vars,NTerm,NVars):-    
     Term=..[F|Args],    % decompose term
-    (logicmoo_i_sexp_reader:svar(F,_)-> cp( [F|Args],Vars,NTerm,NVars);
+    (/*logicmoo_i_sexp_reader:*/svar(F,_)-> cp( [F|Args],Vars,NTerm,NVars);
     % construct copy term
     (cp(Args,Vars,NArgs,NVars), NTerm=..[F|NArgs])).  
 
@@ -1101,6 +1071,145 @@ h_diff(S, E):-
  
 init_heuristics(_).
 
+
+
+%% get_param_types0(+Df, +ListOfParams, -NameOrVarList, -TypeList).
+%
+get_param_types(Df,H,P,K):-must((get_param_types0(Df,H,P,K),length(P,L),length(K,L))).
+
+
+use_default(s(var),'?'(H),H).
+use_default(s(var),(H),H).
+use_default(s(val),'?'(H),'?'(H)).
+use_default(s(val),H,H).
+use_default(Df,_,Df).
+
+adjust_types(T,GsNs,Ps):- must((get_param_types0(T, GsNs,Ps, _))).
+adjust_types(T,GsNs,L):- must((get_param_types0(T, GsNs,Ps, Ks),pairs_keys_values(L,Ps, Ks))).
+
+get_param_types0(_,[], [] ,[]).
+
+get_param_types0(Df,[H|T],[P1|Ps],[K|Ks]):- 
+    svar_fixvarname(H,Name),!,
+    P1 = '?'(Name),
+    use_default(Df,P1,K),
+    get_param_types0(Df,T, Ps, Ks).
+get_param_types0(Df,[H|T],[P1|Ps],[K|Ks]):-
+    compound(H), H =.. [K, P1],not(is_list(P1)),!,
+    get_param_types0(Df,T, Ps, Ks).
+get_param_types0(Df,[H|T],[P1|Ps],[K|Ks]):-
+    compound(H), H =.. [K, [P1]],!,    
+    get_param_types0(Df,T, Ps, Ks).
+get_param_types0(Df,[H|T],[P1,P2|Ps],[K,K|Ks]):-
+    compound(H), H =.. [K, [P1,P2]],!,
+    get_param_types0(Df,T, Ps, Ks).
+
+get_param_types0(Df,[H|T],[P1,P2,P3|Ps],[K,K,K|Ks]):-
+    compound(H), H =.. [K, [P1,P2,P3]],!,
+    get_param_types0(Df,T, Ps, Ks).
+
+
+get_param_types0(Df,[H|T],[H|Ps],[K|Ks]):-  must(atom(H)),use_default(Df,H,K),
+    get_param_types0(Df,T, Ps, Ks).
+
+
+% FILENAME:  readFile.pl 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%  read_file
+%%%  This is a modified version for parsing pddl files.
+%%%  Read the input file character by character and parse it
+%%%  into a list. Brackets, comma, period and question marks
+%%%  are treated as separate words. White spaces separed 
+%%%  words. 
+%%%
+%%%  Similar to read_sent in Pereira and Shieber, Prolog and
+%%%        Natural Language Analysis, CSLI, 1987.
+%%%
+%%%  Examples:
+%%%           :- read_file('input.txt', L).
+%%%           input.txt> The sky was blue, after the rain.
+%%%           L = [the, sky, was, blue, (','), after, the, rain, '.']
+%%%
+%%%           :- read_file('domain.pddl', L).
+%%%           domain.pddl>
+%%%           (define (domain BLOCKS)
+%%%             (:requirements :strips :typing :action-costs)
+%%%             (:types block)
+%%%             (:predicates (on ?x - block ?y - block)
+%%%           ...))
+%%%           L = ['(', define, '(', domain, blocks, ')', '(', :, requirements|...].
+
+% :- expects_dialect(sicstus).
+
+fix_wordcase(Word,WordC):-upcase_atom(Word,UC),UC=Word,!,downcase_atom(Word,WordC).
+fix_wordcase(Word,Word).
+
+
+%
+% read_file(+File, -List).
+%
+read_file(File, Words) :- seeing(Old), see(File), get_code(C), !,read_rest(C, Words), seen, see(Old).
+read_file( File, Words) :- atom(File), exists_file(File), !, seeing(Old),call_cleanup(( see(File), get_code(C), (read_rest(C, Words))),( seen, see(Old))),!.
+read_file(File0, Words) :-  must((must_filematch(File0,File),exists_file(File),read_file( File, Words))),!.
+read_file(string(String), Words, textDoc) :- must(open_string(String,In)),!, current_input(Old),call_cleanup(( set_input(In), get_code(C), (read_rest(C, Words))),( set_input(Old))),!.
+read_file( File, Words , File) :-  atom(File), exists_file(File), !, seeing(Old),call_cleanup(( see(File), get_code(C), (read_rest(C, Words))),( seen, see(Old))),!.
+read_file(File0, Words,FinalName) :-  must((must_filematch(File0,File),exists_file(File),read_file( File, Words, FinalName))),!.
+
+
+/* Ends the input. */
+read_rest(-1,[]) :- !.
+
+/* Spaces, tabs and newlines between words are ignored. */
+read_rest(C,Words) :- ( C=32 ; C=10 ; C=9 ; C=13 ; C=92 ) , !,
+                     get_code(C1),
+                     read_rest(C1,Words).
+
+/* Brackets, comma, period or question marks are treated as separed words */
+read_rest(C, [Char|Words]) :- ( C=40 ; C=41 ; C=44 ; C=45 ; C=46 ; C=63 ; C=58 ) , name(Char, [C]), !,
+			get_code(C1),
+			read_rest(C1, Words).
+
+/* Read comments to the end of line */
+read_rest(59, Words) :- get_code(Next), !, 
+			      read_comment(Next, Last),
+			      read_rest(Last, Words).
+
+/* Otherwise get all of the next word. */
+read_rest(C,[WordC|Words]) :- read_word(C,Chars,Next),
+                             name(Word,Chars),fix_wordcase(Word,WordC),
+                             read_rest(Next,Words).
+
+/* Space, comma, newline, backspace, carriage-return, 46 , 63,  ( ) period, end-of-file or question mark separate words. */
+read_word(C,[],C) :- ( C=32 ; C=44 ; C=10 ; C=9 ; C=13 ;
+                         C=46 ; C=63 ; C=40 ; C=41 ; C=58 ; C= -1 ) , !.
+
+/* Otherwise, get characters and convert to lower case. */
+read_word(C,[LC|Chars],Last) :- C=LC, % lower_case(C, LC),
+				get_code(Next),
+                                read_word(Next,Chars,Last).
+
+/* Convert to lower case if necessary. */
+lower_case(C,C) :- ( C <  65 ; C > 90 ) , !.
+lower_case(C,LC) :- LC is C + 32.
+
+
+/* Keep reading as long you dont find end-of-line or end-of-file */
+read_comment(10, 10) :- !.
+read_comment(-1, -1) :- !.
+read_comment(_, Last) :- get_code(Next),
+			 read_comment(Next, Last).
+
+%get0(C):-get_code(C), !.
+
+/* for reference ... 
+newline(10).
+comma(44).
+space(32).
+period(46).
+question_mark(63).
+*/
+
+
 % FILENAME:  parseDomain.pl 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% parseDomain.pl
@@ -1144,20 +1253,20 @@ parseDomain(F, O):- parseDomain(F, O, R), load_file_rest(F,R),!.
 %
 parseDomain(File, Output, R) :-  
     read_file(File, List, Filename),!,
-    ensure_struct(domain,Output),
-     prop_set(filename,Output,Filename),
-     bb_put(filename,Filename),
+    ensure_struct(domain,Output),    
+    % trace,must_or_rtrace(prop_set(filename,Output,Filename)),
+    bb_put(filename,Filename),
     domainBNF(Output, List, R),!.
 
 
-:-thread_local(t_l:allow_sterm).
+:-thread_local(t_l:allow_sterm/0).
 
-domainBNF(Output, List, R):- locally(tlbugger:skipMust, debugOnError0(domainBNF_dcg(Output, List, R))),!.
-domainBNF(Output, List, R):- locally(t_l:allow_sterm,locally(tlbugger:skipMust, debugOnError0(domainBNF_dcg(Output, List, R)))),!,
+domainBNF(Output, List, R):- locally(tlbugger:skipMust, on_x_debug(domainBNF_dcg(Output, List, R))),!.
+domainBNF(Output, List, R):- locally(t_l:allow_sterm,locally(tlbugger:skipMust, on_x_debug(domainBNF_dcg(Output, List, R)))),!,
    portray_clause((domainBNF:-t_l:allow_sterm,Output)).
 domainBNF(Output, List, R):-  sterm(O, List, R), must_det_l((sterm2pterm(O,P),prop_put_extra_extra(Output,P),portray_clause((ed(Output):-P)))).
 domainBNF(Output, List, R):- % trace,
-             locally(-tlbugger:skipMust, debugOnError0(domainBNF_dcg(Output, List, R))),!.
+             locally(-tlbugger:skipMust, on_x_debug(domainBNF_dcg(Output, List, R))),!.
 
 :-export(domainBNF_dcg//1).
 
@@ -1220,7 +1329,7 @@ dcgStructSetOptTraced(Struct,Name,DCG,H,T) :-(( call(DCG,Value,H,T)-> prop_set(N
 
 % domainBNF_dcg(domain(N, R, T, C, P, F, C, S))
 %
-%   DCG rules describing structure of domain file in language PDDL.
+% List of DCG rules describing structure of domain file in language PDDL.
 %   BNF description was obtain from http://www.cs.yale.edu/homes/dvm/papers/pddl-bnf.pdf
 %   This parser do not fully NOT support PDDL 3.0
 %   However you will find comment out lines ready for futher development.
@@ -1274,7 +1383,7 @@ atomic_formula_skeleton(Struct) -->
 predicate(_) --> [P], {P==not,!,fail}.
 predicate(P)                    --> name(P).
 
-variable(V)                     --> ['?'], name(N), { logicmoo_i_sexp_reader:fix_varcase(N,N0), V =.. [?, N0]}.
+variable(V)                     --> ['?'], name(N), { /*logicmoo_i_sexp_reader:*/fix_varcase(N,N0), V =.. [?, N0]}.
 
 % atomic_function_skeleton(f(S, L)) --> ['('], function_symbol(S), typed_list(variable, L), [')'].
 atomic_function_skeleton(f(S,Struct)) -->
@@ -1287,12 +1396,11 @@ atomic_function_skeleton(f(S,Struct)) -->
 typed_list_keys(Type, OUT) -->  typed_list(name, L), 
  {must_det_l((get_param_types(Type, L,PIs,PTs), pairs_keys_values(OUT,PIs,PTs)))}.
 
-
 function_symbol(S)              --> name(S).
 functions_def(F)                --> ['(',':',functions], function_typed_list(atomic_function_skeleton, F), [')'].              %:fluents
 dconstraints_def(C)                 --> ['(',':',constraints], con_GD(C), [')'].                                                   %:constraints
 structure_def(A)                --> action_def(A).
-structure_def(D)               --> durative_action_def(D).                                                                    %:durativeactions
+structure_def(D)               --> durative_action_def(D). %:durativeactions                                                                 %:durativeactions
 %structure_def(D)               --> derived_def(D).                                                                            %:derivedpredicates
 structure_def(D)         --> allowed_sterm(structure_def,D).
 %typed_list(W, G)               --> oneOrMore(W, N), ['-'], type(T), {G =.. [T, N]}.
@@ -1318,6 +1426,7 @@ function_typed_list(W, [F|Ls])
 function_typed_list(W, L)       --> zeroOrMore(W, L).
 
 function_type(number)           --> [number].
+
 emptyOr(_)                      --> ['(',')'].
 emptyOr(W)                      --> W.
 
@@ -1426,6 +1535,7 @@ binary_comp('=')                --> ['='].
 binary_comp('>=')               --> ['>='].
 binary_comp('<=')               --> ['<='].
 number_sas(N)                       --> [N], {number(N),!}.
+
 effect(P, N, A)                 --> ['(',and], c_effect(P, N, A), [')'].
 effect(P, [M|N], A)                 --> ['(',not], c_effect([M|P], N, A), [')'].
 effect(P, N, A)                 --> c_effect(P, N, A).
@@ -1449,8 +1559,7 @@ assign_op(decrease)             --> [decrease].
 % BNF description include operator <term>+ to mark zero or more replacements.
 % This DCG extension to overcome this. 
 oneOrMore(W, [R|Rs], A, C) :- call(W, R, A, B),  (
-                                                         oneOrMore(W, Rs, B, C)
-                                                         ;
+                                                         oneOrMore(W, Rs, B, C)                                                          ;
                                                          (Rs = [] , C = B) 
                                                      ).
 % BNF operator <term>*
@@ -1510,8 +1619,8 @@ parseProblem(F, O, R) :-
 % Support for reading file as a list.
 % :- [readFile].
 
-problem(Output, List, R):- locally(tlbugger:skipMust, debugOnError0(problem_dcg(Output, List, R))),!.
-problem(Output, List, R):- locally(t_l:allow_sterm,locally(tlbugger:skipMust, debugOnError0(problem_dcg(Output, List, R)))),!,
+problem(Output, List, R):- locally(tlbugger:skipMust, on_x_debug(problem_dcg(Output, List, R))),!.
+problem(Output, List, R):- locally(t_l:allow_sterm,locally(tlbugger:skipMust, on_x_debug(problem_dcg(Output, List, R)))),!,
    portray_clause((problem:-t_l:allow_sterm,Output)).
 % problem(P     , List, R):- dtrace,trace,must(sterm(O, List, R)),!,must(sterm2pterm(O,P)),!,portray_clause((ed:-P)).
 problem(Output, List, R):- must(problem_dcg(Output, List, R)),!.
@@ -1594,102 +1703,6 @@ metric_f_exp(is_violated(N,V))    --> ['(','*','(','is-violated'], pref_name(N),
 
 % Work arround
 length_spec([])                 --> [not_defined].      % there is no definition???
-
-
-% FILENAME:  readFile.pl 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%  read_file
-%%%  This is a modified version for parsing pddl files.
-%%%  Read the input file character by character and parse it
-%%%  into a list. Brackets, comma, period and question marks
-%%%  are treated as separate words. White spaces separed 
-%%%  words. 
-%%%
-%%%  Similar to read_sent in Pereira and Shieber, Prolog and
-%%%        Natural Language Analysis, CSLI, 1987.
-%%%
-%%%  Examples:
-%%%           :- read_file('input.txt', L).
-%%%           input.txt> The sky was blue, after the rain.
-%%%           L = [the, sky, was, blue, (','), after, the, rain, '.']
-%%%
-%%%           :- read_file('domain.pddl', L).
-%%%           domain.pddl>
-%%%           (define (domain BLOCKS)
-%%%             (:requirements :strips :typing :action-costs)
-%%%             (:types block)
-%%%             (:predicates (on ?x - block ?y - block)
-%%%           ...))
-%%%           L = ['(', define, '(', domain, blocks, ')', '(', :, requirements|...].
-
-% :- expects_dialect(sicstus).
-
-fix_wordcase(Word,WordC):-upcase_atom(Word,UC),UC=Word,!,downcase_atom(Word,WordC).
-fix_wordcase(Word,Word).
-
-
-%
-% read_file(+File, -List).
-%
-read_file( File, Words) :-  exists_file(File), !, seeing(Old),call_cleanup(( see(File), get_code(C), (read_rest(C, Words))),( seen, see(Old))),!.
-read_file(File0, Words) :-  must((must_filematch(File0,File),exists_file(File),read_file( File, Words))),!.
-read_file(string(String), Words, textDoc) :- must(open_string(String,In)),!, current_input(Old),call_cleanup(( set_input(In), get_code(C), (read_rest(C, Words))),( set_input(Old))),!.
-read_file( File, Words , File) :-  exists_file(File), !, seeing(Old),call_cleanup(( see(File), get_code(C), (read_rest(C, Words))),( seen, see(Old))),!.
-read_file(File0, Words,FinalName) :-  must((must_filematch(File0,File),exists_file(File),read_file( File, Words, FinalName))),!.
-
-
-/* Ends the input. */
-read_rest(-1,[]) :- !.
-
-/* Spaces, tabs and newlines between words are ignored. */
-read_rest(C,Words) :- ( C=32 ; C=10 ; C=9 ; C=13 ; C=92 ) , !,
-                     get_code(C1),
-                     read_rest(C1,Words).
-
-/* Brackets, comma, period or question marks are treated as separed words */
-read_rest(C, [Char|Words]) :- ( C=40 ; C=41 ; C=44 ; C=45 ; C=46 ; C=63 ; C=58 ) , name(Char, [C]), !,
-			get_code(C1),
-			read_rest(C1, Words).
-
-/* Read comments to the end of line */
-read_rest(59, Words) :- get_code(Next), !, 
-			      read_comment(Next, Last),
-			      read_rest(Last, Words).
-
-/* Otherwise get all of the next word. */
-read_rest(C,[WordC|Words]) :- read_word(C,Chars,Next),
-                             name(Word,Chars),fix_wordcase(Word,WordC),
-                             read_rest(Next,Words).
-
-/* Space, comma, newline, backspace, carriage-return, 46 , 63,  ( ) period, end-of-file or question mark separate words. */
-read_word(C,[],C) :- ( C=32 ; C=44 ; C=10 ; C=9 ; C=13 ;
-                         C=46 ; C=63 ; C=40 ; C=41 ; C=58 ; C= -1 ) , !.
-
-/* Otherwise, get characters and convert to lower case. */
-read_word(C,[LC|Chars],Last) :- C=LC, % lower_case(C, LC),
-				get_code(Next),
-                                read_word(Next,Chars,Last).
-
-/* Convert to lower case if necessary. */
-lower_case(C,C) :- ( C <  65 ; C > 90 ) , !.
-lower_case(C,LC) :- LC is C + 32.
-
-
-/* Keep reading as long you dont find end-of-line or end-of-file */
-read_comment(10, 10) :- !.
-read_comment(-1, -1) :- !.
-read_comment(_, Last) :- get_code(Next),
-			 read_comment(Next, Last).
-
-%get0(C):-get_code(C), !.
-
-/* for reference ... 
-newline(10).
-comma(44).
-space(32).
-period(46).
-question_mark(63).
-*/
 
 
 
@@ -2267,7 +2280,7 @@ mysame_key(M0, [M-N|T0], [N|TN], T) :-
  	mysame_key(M, T0, TN, T).
 mysame_key(_, L, [], L).
 
-:-thread_local(t_l:loading_files).
+:-thread_local(t_l:loading_files/0).
 :-thread_local(t_l:hyhtn_solve/1).
 % t_l:other_planner(hyhtn_solve).
 
@@ -2276,8 +2289,13 @@ mysame_key(_, L, [], L).
 :- flag(time_used,_,0).
 :- flag(time_used_other,_,0).
 
-:- debug,(must(test_blocks)).
+:- fixup_exports.
 
+end_of_file.
+
+:- break.
+
+:- debug,(must(test_blocks)).
 
 
 :- solve_files(pddl('benchmarks/mystery/domain.pddl'),pddl('benchmarks/mystery/prob01.pddl')).
@@ -2290,7 +2308,7 @@ mysame_key(_, L, [], L).
 
 :- if(gethostname(c3po);gethostname(ubuntu);gethostname(titan)).
 
-:- test_domain(pddl('domains_ocl/chameleonWorld/domain*')).
+:- test_domain(pddl('../domains_ocl/chameleonWorld/domain*')).
 :- test_all(5). % should be 7
 
 /*
@@ -2322,7 +2340,7 @@ twhy
 
 /*
 
-:- test_domain(pddl('domains_ocl/toasterWorldv2/domain*')).
+:- test_domain(pddl('../domains_ocl/toasterWorldv2/domain*')).
 
 :- solve_files(pddl('regression-tests/issue58-domain.pddl'),pddl('regression-tests/issue58-problem.pddl')).
 :- forall(must_filematch(pddl('hsp-planners-master/?*?/pddl/?*?/?*domain*.*'),E),once(test_domain(E,4))).
