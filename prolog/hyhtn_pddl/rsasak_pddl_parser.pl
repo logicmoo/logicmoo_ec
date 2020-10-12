@@ -5,7 +5,7 @@
 :- style_check(-singleton).
 
 :- meta_predicate emptyOr(//,?,?).
-old_rsasak.
+old_rsasak:- fail.
 
 
 %% get_param_types0(+Df, +ListOfParams, -NameOrVarList, -TypeList).

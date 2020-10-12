@@ -1,13 +1,4 @@
-
-
-
-
-
-
-
-
-
-
+:- module(logicmoo_ocl_and_pddl,[test_blocks/0,test_domain/1,test_all/0,test_rest/0,test_sas/0,test_dir_files_sas/1,test_dir_files_sas/3]).
 
 
 
@@ -397,91 +388,7 @@ solvable([H|T], FV, [M|S]):-
  
  
  
-% FILENAME:  test_validate_input_2009.pl 
-% :- expects_dialect(sicstus).
-% :-[parseProblem, parseDomain].
 
-%nop(_).
-
-%parse_file(+File).
-test_parse_file(F,O):- must(read_file(F, L, _Filename)),!,((domainBNF(O, L, _R1); must(((problem(O, L, _R2)))))),!.
-
-test_parse_file(F):- test_parse_file(F,L),arg(2,L,List),!,
- (not(member('(',List))->true;
-    ((absolute_file_name(F,A),
-	write('Parsing file failed. '), write('('), write(F:A), write(')'), nl))),!.
-
-
-test_dir_sas(DirIn):-forall(must_filematch(DirIn,DirInM),test_dir_m(DirInM)).
-test_dir_m(DIR):-
-  working_directory(WAS,WAS),
-     call_cleanup(( 
-        cd(DIR),
-	write('Testing ':DIR), nl,
-	test_dir_files_sas(DIR)),
-        cd(WAS)).
-
-test_sas:- 
-      test_dir_sas('ipc2008-no-cybersec/seq-sat/elevators-strips/'),!, % NO FIRST ANSWER
-      !.
-
-test_sas_sanity:- 
-      test_dir_sas('ipc2008-no-cybersec/seq-opt/openstacks-strips/'), %PASSES BUT RUNS SLOW
-       test_dir_sas('ipc2008-no-cybersec/seq-opt/transport-strips/'), %PASSES BUT RUNS
-      test_dir_sas('ipc2008-no-cybersec/netben-opt/elevators-strips/'), % FAIL ALL
-      !.
-
-pddl_dir(PDDLDir,Dir):- atom(PDDLDir),absolute_file_name(PDDLDir,Dir0),expand_file_name(Dir0,DirS),DirS\==[],!,member(Dir,DirS).
-pddl_dir(PDDLDir,Dir):- atom(PDDLDir),absolute_file_name(pddl(PDDLDir),Dir0),expand_file_name(Dir0,DirS),DirS\==[],!,member(Dir,DirS).
-pddl_dir(PDDLDir,Dir):- absolute_file_name(PDDLDir,Dir),expand_file_name(Dir0,DirS),member(Dir,DirS).
-
-test_rest:-	
-	test_dir_sas('ipc2008-no-cybersec/seq-opt/parcprinter-strips/'),
-	test_dir_sas('ipc2008-no-cybersec/seq-opt/pegsol-strips/'),
-	test_dir_sas('ipc2008-no-cybersec/seq-opt/scanalyzer-strips/'),
-	test_dir_sas('ipc2008-no-cybersec/seq-opt/sokoban-strips/'),  % NO FIRST ANSWER
-       
-	test_dir_sas('ipc2008-no-cybersec/seq-opt/woodworking-strips/'),
-	
-        
-        expand_file_name('../pddl/ipc2008-no-cybersec/?*?/*/',O),
-        forall(member(E,O),test_dir_sas(E)).
-
-test_dir_files_sas(PDDLDir,D,P):- pddl_dir(PDDLDir,Dir), directory_file_path(Dir,D,DF), directory_file_path(Dir,P,PF),
-        test_parse_file(DF),test_parse_file(PF),
-        solve_files(DF,PF),!.
-
-test_dir_files_sas(Dir):-   
-	test_dir_files_sas(Dir,'p01-domain.pddl','p01.pddl'),
-	test_dir_files_sas(Dir,'p02-domain.pddl','p02.pddl'),
-	test_dir_files_sas(Dir,'p03-domain.pddl','p03.pddl'),
-	test_dir_files_sas(Dir,'p04-domain.pddl','p04.pddl'),
-	test_dir_files_sas(Dir,'p05-domain.pddl','p05.pddl'),
-	test_dir_files_sas(Dir,'p06-domain.pddl','p06.pddl'),
-	test_dir_files_sas(Dir,'p07-domain.pddl','p07.pddl'),
-	test_dir_files_sas(Dir,'p08-domain.pddl','p08.pddl'),
-	test_dir_files_sas(Dir,'p09-domain.pddl','p09.pddl'),
-	test_dir_files_sas(Dir,'p10-domain.pddl','p10.pddl'),
-	test_dir_files_sas(Dir,'p11-domain.pddl','p11.pddl'),
-	test_dir_files_sas(Dir,'p12-domain.pddl','p12.pddl'),
-	test_dir_files_sas(Dir,'p13-domain.pddl','p13.pddl'),
-	test_dir_files_sas(Dir,'p14-domain.pddl','p14.pddl'),
-	test_dir_files_sas(Dir,'p15-domain.pddl','p15.pddl'),
-	test_dir_files_sas(Dir,'p16-domain.pddl','p16.pddl'),
-	test_dir_files_sas(Dir,'p17-domain.pddl','p17.pddl'),
-	test_dir_files_sas(Dir,'p18-domain.pddl','p18.pddl'),
-	test_dir_files_sas(Dir,'p19-domain.pddl','p19.pddl'),
-	test_dir_files_sas(Dir,'p20-domain.pddl','p20.pddl'),
-	test_dir_files_sas(Dir,'p21-domain.pddl','p21.pddl'),
-	test_dir_files_sas(Dir,'p22-domain.pddl','p22.pddl'),
-	test_dir_files_sas(Dir,'p23-domain.pddl','p23.pddl'),
-	test_dir_files_sas(Dir,'p24-domain.pddl','p24.pddl'),
-	test_dir_files_sas(Dir,'p25-domain.pddl','p25.pddl'),
-	test_dir_files_sas(Dir,'p26-domain.pddl','p26.pddl'),
-	test_dir_files_sas(Dir,'p27-domain.pddl','p27.pddl'),
-	test_dir_files_sas(Dir,'p28-domain.pddl','p28.pddl'),
-	test_dir_files_sas(Dir,'p29-domain.pddl','p29.pddl'),
-	test_dir_files_sas(Dir,'p30-domain.pddl','p30.pddl').
 
 prop_merge_svo(Struct,Name,Value):-prop_merge(Name,Struct,Value).
 
@@ -882,10 +789,15 @@ mysame_key(M0, [M-N|T0], [N|TN], T) :-
  	mysame_key(M, T0, TN, T).
 mysame_key(_, L, [], L).
 
+:-thread_local(t_l:hyhtn_solve/1).
+% t_l:other_planner(hyhtn_solve).
 
 
 
+:- flag(time_used,_,0).
+:- flag(time_used_other,_,0).
 
+:- fixup_exports.
 
 :- debug,(must(test_blocks)).
 
@@ -1060,7 +972,93 @@ identical_but_for_variables(X, Y) :-
 			numbervars(Y, 0, N),
 			Z = Y
 		).% Dostupne veci:
-		
+
+
+% FILENAME:  test_validate_input_2009.pl 
+% :- expects_dialect(sicstus).
+% :-[parseProblem, parseDomain].
+
+%nop(_).
+
+%parse_file(+File).
+test_parse_file(F,O):- must(read_file(F, L, _Filename)),!,((domainBNF(O, L, _R1); must(((problem(O, L, _R2)))))),!.
+
+test_parse_file(F):- test_parse_file(F,L),arg(2,L,List),!,
+ (not(member('(',List))->true;
+    ((absolute_file_name(F,A),
+	write('Parsing file failed. '), write('('), write(F:A), write(')'), nl))),!.
+
+
+test_dir_sas(DirIn):-forall(must_filematch(DirIn,DirInM),test_dir_m(DirInM)).
+test_dir_m(DIR):-
+  working_directory(WAS,WAS),
+     call_cleanup(( 
+        cd(DIR),
+	write('Testing ':DIR), nl,
+	test_dir_files_sas(DIR)),
+        cd(WAS)).
+
+test_sas:- 
+      test_dir_sas('ipc2008-no-cybersec/seq-sat/elevators-strips/'),!, % NO FIRST ANSWER
+      !.
+
+test_sas_sanity:- 
+      test_dir_sas('ipc2008-no-cybersec/seq-opt/openstacks-strips/'), %PASSES BUT RUNS SLOW
+       test_dir_sas('ipc2008-no-cybersec/seq-opt/transport-strips/'), %PASSES BUT RUNS
+      test_dir_sas('ipc2008-no-cybersec/netben-opt/elevators-strips/'), % FAIL ALL
+      !.
+
+pddl_dir(PDDLDir,Dir):- atom(PDDLDir),absolute_file_name(PDDLDir,Dir0),expand_file_name(Dir0,DirS),DirS\==[],!,member(Dir,DirS).
+pddl_dir(PDDLDir,Dir):- atom(PDDLDir),absolute_file_name(pddl(PDDLDir),Dir0),expand_file_name(Dir0,DirS),DirS\==[],!,member(Dir,DirS).
+pddl_dir(PDDLDir,Dir):- absolute_file_name(PDDLDir,Dir),expand_file_name(Dir0,DirS),member(Dir,DirS).
+
+test_rest:-	
+	test_dir_sas('ipc2008-no-cybersec/seq-opt/parcprinter-strips/'),
+	test_dir_sas('ipc2008-no-cybersec/seq-opt/pegsol-strips/'),
+	test_dir_sas('ipc2008-no-cybersec/seq-opt/scanalyzer-strips/'),
+	test_dir_sas('ipc2008-no-cybersec/seq-opt/sokoban-strips/'),  % NO FIRST ANSWER
+       
+	test_dir_sas('ipc2008-no-cybersec/seq-opt/woodworking-strips/'),
+	
+        
+        expand_file_name('../pddl/ipc2008-no-cybersec/?*?/*/',O),
+        forall(member(E,O),test_dir_sas(E)).
+
+test_dir_files_sas(PDDLDir,D,P):- pddl_dir(PDDLDir,Dir), directory_file_path(Dir,D,DF), directory_file_path(Dir,P,PF),
+        test_parse_file(DF),test_parse_file(PF),
+        solve_files(DF,PF),!.
+
+test_dir_files_sas(Dir):-   
+	test_dir_files_sas(Dir,'p01-domain.pddl','p01.pddl'),
+	test_dir_files_sas(Dir,'p02-domain.pddl','p02.pddl'),
+	test_dir_files_sas(Dir,'p03-domain.pddl','p03.pddl'),
+	test_dir_files_sas(Dir,'p04-domain.pddl','p04.pddl'),
+	test_dir_files_sas(Dir,'p05-domain.pddl','p05.pddl'),
+	test_dir_files_sas(Dir,'p06-domain.pddl','p06.pddl'),
+	test_dir_files_sas(Dir,'p07-domain.pddl','p07.pddl'),
+	test_dir_files_sas(Dir,'p08-domain.pddl','p08.pddl'),
+	test_dir_files_sas(Dir,'p09-domain.pddl','p09.pddl'),
+	test_dir_files_sas(Dir,'p10-domain.pddl','p10.pddl'),
+	test_dir_files_sas(Dir,'p11-domain.pddl','p11.pddl'),
+	test_dir_files_sas(Dir,'p12-domain.pddl','p12.pddl'),
+	test_dir_files_sas(Dir,'p13-domain.pddl','p13.pddl'),
+	test_dir_files_sas(Dir,'p14-domain.pddl','p14.pddl'),
+	test_dir_files_sas(Dir,'p15-domain.pddl','p15.pddl'),
+	test_dir_files_sas(Dir,'p16-domain.pddl','p16.pddl'),
+	test_dir_files_sas(Dir,'p17-domain.pddl','p17.pddl'),
+	test_dir_files_sas(Dir,'p18-domain.pddl','p18.pddl'),
+	test_dir_files_sas(Dir,'p19-domain.pddl','p19.pddl'),
+	test_dir_files_sas(Dir,'p20-domain.pddl','p20.pddl'),
+	test_dir_files_sas(Dir,'p21-domain.pddl','p21.pddl'),
+	test_dir_files_sas(Dir,'p22-domain.pddl','p22.pddl'),
+	test_dir_files_sas(Dir,'p23-domain.pddl','p23.pddl'),
+	test_dir_files_sas(Dir,'p24-domain.pddl','p24.pddl'),
+	test_dir_files_sas(Dir,'p25-domain.pddl','p25.pddl'),
+	test_dir_files_sas(Dir,'p26-domain.pddl','p26.pddl'),
+	test_dir_files_sas(Dir,'p27-domain.pddl','p27.pddl'),
+	test_dir_files_sas(Dir,'p28-domain.pddl','p28.pddl'),
+	test_dir_files_sas(Dir,'p29-domain.pddl','p29.pddl'),
+	test_dir_files_sas(Dir,'p30-domain.pddl','p30.pddl').
 
 
 

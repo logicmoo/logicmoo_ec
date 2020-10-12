@@ -1,5 +1,6 @@
 :-module(rsasak_forward_wa_star_h_add,[solve_files/2]).
 use_ocl :-fail.
+pddl_structs.
 
 % [Required] Load the Logicmoo Library Utils
 :- use_module(library(logicmoo_common)).
@@ -653,6 +654,8 @@ my_ord_member(S, [_|T]):-
 :-use_module(library(ordsets)).
 
 
+
+
 make_solution(S, S).
     
 %
@@ -676,6 +679,8 @@ step(Mt,State, ActionDef, NewState):-
   ord_subtract(State, NE, State2),
  %   get_positiv_effect(A, PE), 
   ord_union(State2, PE, NewState).
+
+
 
 
 is_goal(_Mt,S):-
