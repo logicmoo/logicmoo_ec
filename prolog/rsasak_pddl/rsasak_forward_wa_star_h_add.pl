@@ -1,5 +1,6 @@
 :-module(rsasak_forward_wa_star_h_add,[solve_files/2]).
 use_ocl :-fail.
+pddl_structs:- fail.
  
 % [Required] Load the Logicmoo Library Utils
 :- use_module(library(logicmoo_common)).
@@ -132,7 +133,7 @@ solve_files(DomainFile, ProblemFile):-
 % time(show_call(solve_files_w_ocl(DomainFile0, ProblemFile0))),
 		
 % Reads files and set timelimit for planner
-solve_files_0(DomainFile, ProblemFile):- 
+solve_files_0(DomainFile, ProblemFile):- \+ pddl_structs, !,
        update_changed_files,
        directory_file_path(_,File,ProblemFile),
        wdmsg(solve_files(DomainFile, ProblemFile)),
@@ -148,7 +149,7 @@ solve_files_0(DomainFile, ProblemFile):- use_ocl,
      solve_files_ddpp(DD, PP).
 
 
-solve_files_0(DomainFile, ProblemFile):-
+solve_files_0(DomainFile, ProblemFile):- pddl_structs,
    must_det_l(( 
   format('~q.~n',[solve_files(DomainFile, ProblemFile)]),
       parseDomain(DomainFile, D),
