@@ -1,21 +1,83 @@
 :-module(rsasak_forward_wa_star_h_add,[solve_files/2]).
-
-:- style_check(-singleton).
-
+use_ocl :-fail.
+ 
+% [Required] Load the Logicmoo Library Utils
 :- use_module(library(logicmoo_common)).
 :- use_module(library(logicmoo_planner)).
-
+:- ensure_loaded(library(multimodal_dcg)).
+:- ensure_loaded(library(statistics)).
 :- expects_dialect(sicstus).
 :-use_module(library(timeout)).
 :-use_module(library(lists)).
+
+%:- set_prolog_flag(gc,true).
+:- op(100,xfy,'=>').
+%:- debug.
+
+:- style_check(-singleton).
+
+
 :-use_module(rsasak_pddl_parser).
 
-%% pairfrom(?Set, ?Element1, ?Element2, ?Residue) is semidet.
-% is true when Set is a list, Element1 occurs in list, Element2 occurs 
-% in list after Element1, and Residue is everything in Set bar the two 
-% Elements. The point of this thing is to select_20_faster pairs of elements from 
-% a set without selecting the same pair twice in different orders. 
+:- dynamic(use_local_pddl/0).
+use_local_pddl:-throw(uses_local_pddl).
 
+:- if((false,(gethostname(c3po);gethostname(titan)))).
+
+:- initialization(user:use_module(library(swi/pce_profile))).
+:- initialization( profiler(_,walltime) ).
+
+:- endif.
+
+% :- use_module(library(clpfd)).
+:- use_module(library(dif)).
+:-export(user:my_pfc_add/1).
+user:my_pfc_add(A):-if_defined(pfc_add(A),assert_if_new(A)).
+
+
+% :- qcompile_libraries.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% FILENAME:  common.pl 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% This file contain common predicates that are used in planners
+
+% :- dynamic(domain/3).
+% :- dynamic(pairfrom/4).
+
+:- dynamic(is_saved_type/3).
+
+
+
+:- if(\+current_predicate(init_locl_planner_interface0/4)).
+% :- with_no_mpred_expansions(ensure_loaded(library(logicmoo_hyhtn))).
+:- endif.
+% :- set_prolog_flag(gc,true).
+
+:- initialization( profiler(_,cputime) ).
+:- initialization(user:use_module(library(swi/pce_profile))).
+
+
+
+:- ensure_loaded(library(logicmoo/util_structs)).
+% :- ensure_loaded(library(sexpr_reader)).
+%:- ensure_loaded(library(se)).
+
+:- decl_struct(domain(domain_name, requires, types, constants, predicates, functions, constraints, actions, dict(extraprops))).
+:- decl_struct(problem(problem_name, domain_name, requires, objects, init, goal, constraints, metric, length, dict(extraprops))).
+
+:- decl_struct(action5(parameters=unk,sorted(preconditions),sorted(positiv_effect),sorted(negativ_effect),dict(extraprops))).
+
+:- decl_argtypes(action(parameters=unk,sorted(preconditions),sorted(positiv_effect),sorted(negativ_effect),
+    assign_effect,list(parameter_types),string(domain_name),list(varnames),
+     dict(extraprops))).
+:- decl_struct(action(string(action_name),list(parameter_types),sorted(preconditions),sorted(positiv_effect),sorted(negativ_effect),sorted(assign_effect),
+        callable(parameters),callable(constraints),dict(extraprops))).
+
+
+:- system:use_module(library(timeout)).
+:- use_module(library(lists)).
+:- use_module(library(listing)).
 
 
 
@@ -57,26 +119,15 @@ select_20_faster(X, [A,B,C|L], [A,B,C|R]) :-
     stuck with it now.  Ah, hindsight.
 */
 
-% This file contain common predicates that are used in planners
-
-% takes two params from input
-% first is a domain file and second problem file
-% and run planner for it.
-command_line:-
-		prolog_flag(argv, [D,P]),
-		solve_files(D, P),
-		halt.
-
 % solve_files(+DomainFile, +ProblemFile)
 %
 %   Reads files and set timelimit for planner
 %
-
-
 solve_files(DomainFile, ProblemFile):- 
  forall(must(must_filematch(DomainFile,DomainFile0)),
    forall(must(must_filematch(ProblemFile,ProblemFile0)),
-     (time(show_call(solve_files_0(DomainFile0, ProblemFile0)))))),!.
+     (time(show_call(solve_files_0(DomainFile0, ProblemFile0)))))),!,
+     nop(time(show_call(solve_files_w_ocl(DomainFile0, ProblemFile0)))).
 
 % time(show_call(solve_files_w_ocl(DomainFile0, ProblemFile0))),
 		
@@ -86,10 +137,10 @@ solve_files_0(DomainFile, ProblemFile):-
        directory_file_path(_,File,ProblemFile),
        wdmsg(solve_files(DomainFile, ProblemFile)),
        solve_files(DomainFile, ProblemFile, File),!.
-/*
 
 
-solve_files_0(DomainFile, ProblemFile):-
+
+solve_files_0(DomainFile, ProblemFile):- use_ocl,
    must_det_l(( 
       format('~q.~n',[solve_files(DomainFile, ProblemFile)]))),
    parseDomain(DomainFile, DD),
@@ -115,7 +166,6 @@ solve_files_0(DomainFile, ProblemFile):-
     show_statistic(P, S),
     !.
 
-*/
 
 solve_files(DomainFile, ProblemFile, File):- slow_on(File),!,wdmsg(slow_on(DomainFile, ProblemFile)).
 solve_files(DomainFile, ProblemFile, File):-
@@ -123,12 +173,22 @@ solve_files(DomainFile, ProblemFile, File):-
 		parseProblem(ProblemFile, PP, _),
 		term_to_ord_term(DD, D),
 		term_to_ord_term(PP, P),
-		reset_statistic,
+		reset_statistic,		
 		!,
 		time_out(solve(D, P, S), 500000, _Result), % time limit for a planner
 		show_statistic(P, S),
 		!.
-
+		
+solve_files_ddpp(DD, PP):-
+   must_det_l(( 
+    term_to_ord_term(DD, D),prop_get(domain_name,D,DName),save_type_named(domain,DName,D),
+    term_to_ord_term(PP, P),prop_get(problem_name,P,PName),save_type_named(problem,PName,P),    
+    reset_statistic)),
+    !,
+    record_time(try_solve(PName, D,P,S),SolverTime),
+    flag(time_used,X,X + SolverTime),
+    show_statistic(P, S),
+    !.
 
 		
 %solve(+Domain, +Problem, -Solution).
@@ -141,38 +201,16 @@ solve(D, P, Solution):-
 		get_objects(P, O),	bb_put(objects, O),
 		make_init_state(IS),
 		search(IS, G, Solution).
+		
 
 
-%term_to_ord_term(+Term, -OrdTerm)
-% Go throught the term and look for sets, return the same term
-% with all sets become ordered.
-term_to_ord_term([], []).
-term_to_ord_term(A, A):-atomic(A), !.
-term_to_ord_term([H|T], R):-
-                term_to_ord_term(H, OH),
-                term_to_ord_term(T, OT),
-                 ord_add_element(OT, OH, R), !.
-%               write(OH), write(OT), write('   '), write(R), nl.
-term_to_ord_term(T, OT):-
-                T =.. [F,P], !,
-                term_to_ord_term(P, OP),
-                OT =..[F,OP].
-term_to_ord_term(T, OT):-
-                T =.. [F,P|Ps],
-                NT=.. [F|Ps],
-                term_to_ord_term(P, OP),
-                term_to_ord_term(NT, ONT),
-                ONT =.. [_|OPs],
-                OT =.. [F,OP|OPs], !.
-
-
-
-% mysubset(+Subset, +Set)
+%% mysubset(+Subset, +Set)
+%
 % It is similar to subset/2. Subset can include free variables that are 
 % grounded with atoms of Set.
+%
 mysubset([], _).
 mysubset([X|R], S):- member(X, S), mysubset(R, S).
-
 
 
 % Colenction shortcuts functions.
@@ -213,31 +251,40 @@ untype([H|T], [U|Us]):- compound(H), H =.. [_T, [U]], !, untype(T, Us).
 untype([H|T], [H|Us]):- untype(T, Us).
 
 %setInit(+Init, -State)
+%
 setInit([], []).
 setInit([set(F, V)|Ls], S):-
 	F =.. A,
-	concat_atom(A, '-', CA),
+	concat_atom_iio(A, '-', CA),
 	bb_put(CA, V),
 %	write(CA),write(' '), write(V),  nl,
 	setInit(Ls, S), !.
 setInit([A|Ls], [A|Ss]):-
 	setInit(Ls, Ss).
 
-% concat_atom(+List, +Delimiter, -ConcatenateAtom)
-concat_atom([E1, E2], D, O):-
+
+% concat_atom_iio(+List, +Delimiter, -ConcatenateAtom)
+%
+
+concat_atom_iio([E1, E2], D, O):-
 		atom_concat(E1, D, Temp),
 		atom_concat(Temp, E2, O).
-concat_atom([H|T], D, O):-
-		concat_atom(T, D, Ts),
+concat_atom_iio([H|T], D, O):-
+    concat_atom_iio(T, D, PTs),
 		atom_concat(H, D, Temp),
-		atom_concat(Temp, Ts, O).
+    atom_concat(Temp, PTs, O).
 
 
+
+% copy_term_spec(+Term, -Term)
+%
 % Special version of copy_term. variable x represented as ?(x)
 % All occurs of ?(x) are replaced with real prolog variables.
 % Modified version of code published by Bartak: http://kti.mff.cuni.cz/~bartak/prolog/data_struct.html
+%
 copy_term_spec(A,B):-			cp(A,[],B,_).
 
+cp( VAR,Vars,VAR,Vars):- var(VAR),!.
 cp(A,Vars,A,Vars):-		atomic(A), A\= ?(_).
 cp(?(V),Vars,NV,NVars):-	atomic(V), register_var_pddl(V,Vars,NV,NVars).
 cp(V,Vars,NV,NVars):-		var(V),register_var_pddl(V,Vars,NV,NVars).
@@ -252,6 +299,8 @@ cp_args([H|T],Vars,[NH|NT],NVars):-	cp(H,Vars,NH,SVars),
 cp_args(T,SVars,NT,NVars).
 cp_args([],Vars,[],Vars).
 
+% register_var_pddl(?, ?, ?)
+%
 % During copying one has to remeber copies of variables which can be used further during copying.
 % Therefore the register of variable copies is maintained.
 register_var_pddl(V,[X/H|T],N,[X/H|NT]):-
@@ -287,7 +336,9 @@ show_statistic:-
 		T is T1-T0,
 		format('~3d sec      ~d nodes        ~d bytes~n', [T, N, M]).
 
-%show_statistic(+Problem, +Solution).
+
+%% show_statistic(+Problem, +Solution).
+%
 show_statistic(P, S):-
 		ground(S),
 		get_problem_name(P, Name),
@@ -296,7 +347,7 @@ show_statistic(P, S):-
 		statistics(runtime, [T1,_]),
 		statistics(memory, [M, _]),
 		T is T1-T0,
-		length(S, L),
+        (is_list(S)-> length(S, L) ; L = -1),
 		format('~a ~3d ~d ~d ~d', [Name,T, N, M, L]),
 		solution_to_lisp(S),
 		nl, !.
@@ -307,14 +358,14 @@ solution_to_lisp([H|T]):-
 		H =.. [F|P],
 		write(' ('),
 		write(F),
-		write_list(P),
+		write_list_sas(P),
 		write(')'),
 		solution_to_lisp(T).
 	
-write_list([]).
-write_list([H|T]):-
+write_list_sas([]).
+write_list_sas([H|T]):-
 		write(' '), write(H),
-		write_list(T).
+		write_list_sas(T).
 
 
 stat_node:-
@@ -336,9 +387,15 @@ writel([H|T]):-
 		writel(T).
 
 w(X):-
+    var(X),
+    domain(X, D, F),
+    !,
+    write(X=D-F).   
+    
+w(X):-
     attvar(X),
-   % domain(X, D, F),!,write(X=D-F).
-    get_attrs(X,Attrs),!,write(=(X,Attrs)).
+    get_attrs(X,Attrs),!,
+    write(=(X,Attrs)).
     
 w(X):-
     var(X),!,
@@ -369,10 +426,14 @@ w_list([H|T]):-
     write(','),
     w_list(T).
 
+
 %state_record(State, PreviousState, Action, Deep, StateRecord)
+%
 state_record(S, PS, A, D, [S, PS, A, D]).
 
+
 %solution(+StateRecord, +Visited, -ListOfActions)
+%
 solution(SR, V, L):-
 		solution(SR, V, [], L).
 solution(SR, _, L, L):-
@@ -384,102 +445,6 @@ solution(SR, V, R, L):-
 		solution(Previous, V, [AD|R], L).
 
 
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%% Handling mutexes
-
- make_mutex(M):-
-		bagof(R1, forbiden_pair(R1), MA),
-		bagof(R2, forbiden_pair(MA, R2), MB),
-%		writel(MA),nl,
-%		writel(MB),nl,
-		union(MA, MB, M0),
-%		list_to_set(M0_, M0),
-%		write('Cistim:'),nl,	
-		clear_mutex1(M0, M1),
-		clear_mutex2(M1, M2),
-		clear_duplicates(M2, M).
-		%write('Ocistene:'),nl,writel(M),nl, length(M, L), write('Pocet: '), write(L),nl.
-
-clear_duplicates([], []).
-clear_duplicates([H|T], R):-
-    member(M, T),
-    identical_but_for_variables(H, M),
-    !,
-    clear_duplicates(T, R).
-clear_duplicates([H|T], [H|R]):-
-    clear_duplicates(T, R).
-
-forbiden_pair(R):-
-		get_action(A),
-		get_positiv_effect(A, PE),
-		get_negativ_effect(A, NE),
-		member(P, PE),
-		member(Q, NE),
-		copy_term_spec(P-Q, R).
-forbiden_pair(MA, NR):-
-		member(P-Q, MA),
-		get_action(A),
-		get_precondition(A, Precond),
-		get_positiv_effect(A, PE),
-		member(R, Precond),
-		member(P, PE),
-		copy_term_spec(R-Q, NR).
-
-clear_mutex1([], []):-!.
-clear_mutex1([PP-QQ|T], M):-
-		(P-Q = PP-QQ ; P-Q = QQ-PP),
-		get_init(I),
-		select_20_faster(P, I, R),
-		member(Q, R),
-%		write('Rule1: '), write(PP-QQ),nl,
-		clear_mutex1(T, M), !.
-clear_mutex1([P-Q|R], [P-Q|M]):-
-		clear_mutex1(R, M).
-
-clear_mutex2(M0, M):-
-		(select_20_faster(P-Q, M0, R) ; select_20_faster(Q-P, M0, R)),
-		get_action(A, _Def), get_precondition(A, Precond), get_positiv_effect(A, PE), get_negativ_effect(A, NE),
-		select_20_faster(P, PE, RPE),
-		\+ member(Q, NE),
-		(
-			member(Q, RPE)%, write('prva cast')
-			;
-			all_not_in(Precond, P, Q, M0)%, write('druha cast')
-		),
-%		write('Rule2: '), write(P-Q-_Def),nl,
-
-		clear_mutex2(R, M), !.
-clear_mutex2(M0, M0).
-
-all_not_in([], _, _, _).
-all_not_in([P|T], P, Q, M):-
-	all_not_in(T, P, Q, M).
-all_not_in([R|T], P, Q, M):-
-		\+ (member(R-Q, M) ; member(Q-R, M)),
-		%write(precon-R),nl,
-		all_not_in(T, P, Q, M).
-
-
-
-%check_mutex(+State).
-check_mutex(S):-
-		bb_get(mutex, M),
-		pairfrom(S, P, Q, _),
-		(member(P-Q, M) ; member(Q-P, M)),
-%		write('Mutex pair.'), write(P-Q), nl,
-		!, fail.
-check_mutex(_).
-
-
-identical_but_for_variables(X, Y) :-
-		\+ \+ (
-			copy_term(X, Z),
-			numbervars(Z, 0, N),
-			numbervars(Y, 0, N),
-			Z = Y
-		).% Dostupne veci:
-%step(+State, -NewState)
 %is_goal(State)
 %h(State, Value) 
 %repeating(+State, +AnotherState)
@@ -487,12 +452,15 @@ identical_but_for_variables(X, Y) :-
 :-use_module(library(ordsets)).
 :-use_module(library(heaps)).
 
-%search(InitState, GoalState, -Solution)
+
+% search(+InitState, +GoalState, -Solution)
+%
 search(I, _, Solution):-
 		a_star(I, Solution, _).
 		
 		
 % a_star(+InitState, -Actions, -Cost).
+%
 a_star(S, A, C):-
 		state_record(S, nil, nil, 0, SR),
 		list_to_heap([0-SR], PQ),
@@ -517,9 +485,8 @@ a_star(PQ, V, Solution, C):-
 		(bagof(K-NS, next_node(SR, PQ, NV, K, NS), NextNodes) ; NextNodes=[]),
 %		state_record(S, _, _, D, SR), write(_K-D), write('   '),write(S),length(NextNodes, L), write(L),nl,
 %		write(NextNodes),nl,
-
 		add_list_to_heap(RPQ, NextNodes, NPQ),
-		
+	
 		stat_node,
 		a_star(NPQ, NV, Solution, C).
 
@@ -537,6 +504,7 @@ next_node(SR, Q, V, E, NewSR):-
 		state_record(NewS, S, A, ND, NewSR).
 
 %add_list_to_heap(+OldHeap, List, NewHeap)
+%
 add_list_to_heap(OH, [], OH).
 add_list_to_heap(OH, [K-D|T], NH):-
 		add_to_heap(OH, K, D, H),
@@ -549,13 +517,17 @@ my_ord_member(S, [SR|_]):-
 my_ord_member(S, [_|T]):-
 		my_ord_member(S, T).
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%% This file must implements following predicates:
-%% step(+State, -ActionDef, -NewState)
-%%   Return descendant of State and ActionDefinition that was used.
-%% is_goal(State) - is true when State is a goal state.  
-%%	repeating(Goal1, Goal2):-  Goal1 is the same as Goal2.
+% This file must implements following predicates:
+%
+%% step(Mt,+State, -ActionDef, -NewState)
+%   Return descendant of State and ActionDefinition that was used.
+%
+% is_goal(State) - is true when State is a goal state.  
+%
+% repeating(Goal1, Goal2):-  Goal1 is the same as Goal2.
+%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
+% :- expects_dialect(sicstus).
 :-use_module(library(ordsets)).
 
 make_init_state(I):-
@@ -566,11 +538,16 @@ make_init_state(I):-
 
 make_solution(S, S).
 		
+%% step(Mt,+State, -ActionDef, -NewState)
+%
+%   Return descendant of State and ActionDefinition that was used.
+%
 step(State, ActionDef, NewState):-
 		get_action(A, ActionDef),
 		get_precondition(A, P),    mysubset(P, State),	% choose suitable action
 		get_negativ_effect(A, NE), ord_subtract(State, NE, State2),	
 		get_positiv_effect(A, PE), ord_union(State2, PE, NewState).
+
 
 is_goal(S):-
 		get_goal(G),
@@ -578,11 +555,12 @@ is_goal(S):-
 
 repeating(S1, S2):-
 		S1 =  S2.
-		
-%h(State, EstimatedValue)
-% Estimated distance to achive Goal.
 % :-use_module(library(sets)).
+		
+% Estimated distance to achive Goal.
 
+%h(+State, -EstimatedValue)
+%
 h(S, E):-h_add(S, E).
 % h(S, E):-h_addb(S, E).
 % h(S, E):-h_diff(S, E).
@@ -603,25 +581,17 @@ h_add(S, E):-
 relax(_, [], 0):-!.
 relax(S, G, E):-
     subtract(G, S, Delta),
-		setof(P, relax_step(S, P), RS),
-		ord_union([S|RS], NS),
+    setof(P, relax_step(S, P), RS),
+    ord_union([S|RS], NS),
     relax(NS, Delta, NE),
-		length(Delta, LD),
-		E is LD+NE.
+    length(Delta, LD),
+    E is LD+NE.
 
 relax_step(State, PE):-
 		get_action(A),	get_precondition(A, P),
 		mysubset(P, State),
 		get_positiv_effect(A, PE).
 
-
-
-h_addb([], 0).
-h_addb([H|T], E):-
-		bb_get(predicatesPrices, Ps),
-		member(H-Price, Ps),
-		h(T, Sum),
-    E is Sum + Price.
 
 
 %init_heuristics(+InitState).
@@ -647,18 +617,12 @@ relax_addb(S, Delta, D, Ps):-
 
 
 
-% command_line_sas/0
 %
 %   run planner
 %   takes two params from command line arguments
 %   first is a domain file 
 %   second problem file
-%
-/*
-:-set_prolog_stack(global, limit(16*10**9)).
-:-set_prolog_stack(local, limit(16*10**9)).
-:-set_prolog_stack(trail, limit(16*10**9)).
-*/
+	
 
 command_line_sas:-
     prolog_flag(argv, [D,P]),!,
@@ -676,9 +640,9 @@ slow_on('hanoi8.pddl').
 min_sas(A,B,A):-A =< B,!.
 min_sas(_,A,A).
 
-
 must_filematch(string(A),string(B)):-!.
-must_filematch(A,B):-must((filematch(A,B))).
+must_filematch(A,B):- filematch(A,B) *-> true ; throw(must_filematch(A,B)).
+
 
 must_filematch_list(Match,List):- findall(File, must_filematch(Match,File), List).
 
@@ -692,7 +656,9 @@ test_all(N):-
 test_all(N):- must_filematch_list(pddl('orig_pddl_parser/test/?*?/domain*.pddl'),RList),RList\=[],!,reverse(RList,List),
   forall(member(E,List),once(test_domain(E,N))).
 
-% test_primaryobjects:-  (forall(must_filematch(pddl('primaryobjects_strips/?*?/domain*.*'),E),once(test_domain(E)))). 
+test_primaryobjects:- 
+  (forall(must_filematch(pddl('primaryobjects_strips/?*?/domain*.*'),E),once(test_domain(E)))). 
+
 
 
 first_n_elements(ListR,Num,List):-length(ListR,PosNum),min_sas(PosNum,Num,MinNum),length(List,MinNum),append(List,_,ListR),!.
@@ -736,6 +702,7 @@ load_domain(DP):-
    forall(member(T,RList),ignore((directory_file_path(D,T,TP),exists_file(TP),must(call(call,load_file,TP))))).
 
 
+
 :-export(z2p/2).
 z2p(A,A).
 
@@ -752,6 +719,9 @@ test_blocks0:- must_filematch_list(pddl('orig_pddl_parser/test/?*?/domain*.pddl'
         forall(member(E,List),once(test_domain(E))),fail.
 test_blocks0:- !.
 
+test_frolog:- test_dir_files_sas('frolog','p02-domain.pddl','p02.pddl'),
+    test_dir_files_sas('frolog','tPddlAgent01-domain.pddl','tPddlAgent01.pddl'),
+    !. % test_dir_files_sas('frolog','tPddlAgent02-domain.pddl','tPddlAgent02.pddl').
 
 % :- solve_files(pddl('benchmarks/mystery/domain.pddl'),pddl('benchmarks/mystery/prob01.pddl')).
 :-thread_local(t_l:loading_files/0).
@@ -767,3 +737,30 @@ probfreecell:- solve_filespddl('benchmarks/freecell/domain.pddl', '../test/pddl_
 % :- debug,(must(test_blocks)).
 
 :- fixup_exports.
+
+end_of_file.
+
+/*
+
+%term_to_ord_term(+Term, -OrdTerm)
+% Go throught the term and look for sets, return the same term
+% with all sets become ordered.
+term_to_ord_term([], []).
+term_to_ord_term(A, A):-atomic(A), !.
+term_to_ord_term([H|T], R):-
+                term_to_ord_term(H, OH),
+                term_to_ord_term(T, OT),
+                 ord_add_element(OT, OH, R), !.
+%               write(OH), write(OT), write('   '), write(R), nl.
+term_to_ord_term(T, OT):-
+                T =.. [F,P], !,
+                term_to_ord_term(P, OP),
+                OT =..[F,OP].
+term_to_ord_term(T, OT):-
+                T =.. [F,P|Ps],
+                NT=.. [F|Ps],
+                term_to_ord_term(P, OP),
+                term_to_ord_term(NT, ONT),
+                ONT =.. [_|OPs],
+                OT =.. [F,OP|OPs], !.
+*/
