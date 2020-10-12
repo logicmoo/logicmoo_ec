@@ -27,8 +27,10 @@
 % [Required] Load the Logicmoo Library Utils
 % :- ensure_loaded(library(logicmoo_hyhtn)).
 % 
-load_planner_api:- ensure_loaded(library(rsasak_forward_wa_star_h_add)).
+% load_planner_api:- ensure_loaded(library(rsasak_forward_wa_star_h_add)).
 %:- initialization(load_planner, program).
+load_planner_api.
+
 :- fixup_exports.
 
 

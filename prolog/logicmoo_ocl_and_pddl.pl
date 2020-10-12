@@ -12,7 +12,6 @@
 :- ensure_loaded(library(logicmoo_utils)).
 :- ensure_loaded(library(multimodal_dcg)).
 :- ensure_loaded(library(statistics)).
-:- use_module(library(wam_cl/sreader)).
 
 :- dynamic(use_local_pddl/0).
 
@@ -1144,16 +1143,13 @@ get_param_types0(Df,[H|T],[H|Ps],[K|Ks]):-  must(atom(H)),use_default(Df,H,K),
 fix_wordcase(Word,WordC):-upcase_atom(Word,UC),UC=Word,!,downcase_atom(Word,WordC).
 fix_wordcase(Word,Word).
 
-
+:- use_module(library(wam_cl/sreader)).
 %
 % read_file(+File, -List).
 %
-read_file(File, Words) :- seeing(Old), see(File), get_code(C), !,read_rest(C, Words), seen, see(Old).
+read_file(string(String), Words, textDoc) :- must(open_string(String,In)),!, current_input(Old),call_cleanup(( set_input(In), get_code(C), (read_rest(C, Words))),( set_input(Old))),!.
 read_file( File, Words) :- atom(File), exists_file(File), !, seeing(Old),call_cleanup(( see(File), get_code(C), (read_rest(C, Words))),( seen, see(Old))),!.
 read_file(File0, Words) :-  must((must_filematch(File0,File),exists_file(File),read_file( File, Words))),!.
-read_file(string(String), Words, textDoc) :- must(open_string(String,In)),!, current_input(Old),call_cleanup(( set_input(In), get_code(C), (read_rest(C, Words))),( set_input(Old))),!.
-read_file( File, Words , File) :-  atom(File), exists_file(File), !, seeing(Old),call_cleanup(( see(File), get_code(C), (read_rest(C, Words))),( seen, see(Old))),!.
-read_file(File0, Words,FinalName) :-  must((must_filematch(File0,File),exists_file(File),read_file( File, Words, FinalName))),!.
 
 
 /* Ends the input. */
@@ -1259,18 +1255,10 @@ parseDomain(File, Output, R) :-
     domainBNF(Output, List, R),!.
 
 
+
+
+
 :-thread_local(t_l:allow_sterm/0).
-
-domainBNF(Output, List, R):- locally(tlbugger:skipMust, on_x_debug(domainBNF_dcg(Output, List, R))),!.
-domainBNF(Output, List, R):- locally(t_l:allow_sterm,locally(tlbugger:skipMust, on_x_debug(domainBNF_dcg(Output, List, R)))),!,
-   portray_clause((domainBNF:-t_l:allow_sterm,Output)).
-domainBNF(Output, List, R):-  sterm(O, List, R), must_det_l((sterm2pterm(O,P),prop_put_extra_extra(Output,P),portray_clause((ed(Output):-P)))).
-domainBNF(Output, List, R):- % trace,
-             locally(-tlbugger:skipMust, on_x_debug(domainBNF_dcg(Output, List, R))),!.
-
-:-export(domainBNF_dcg//1).
-
-
 
 sterm2pterm(VAR,VAR):-var(VAR),!.
 sterm2pterm(In,Out):-nonvar(Out),!,sterm2pterm(In,OutM),must(Out=OutM).
@@ -1334,6 +1322,14 @@ dcgStructSetOptTraced(Struct,Name,DCG,H,T) :-(( call(DCG,Value,H,T)-> prop_set(N
 %   This parser do not fully NOT support PDDL 3.0
 %   However you will find comment out lines ready for futher development.
 %
+domainBNF(Output, List, R):- locally(tlbugger:skipMust, on_x_debug(domainBNF_dcg(Output, List, R))),!.
+domainBNF(Output, List, R):- locally(t_l:allow_sterm,locally(tlbugger:skipMust, on_x_debug(domainBNF_dcg(Output, List, R)))),!,
+   portray_clause((domainBNF:-t_l:allow_sterm,Output)).
+domainBNF(Output, List, R):-  sterm(O, List, R), must_det_l((sterm2pterm(O,P),prop_put_extra_extra(Output,P),portray_clause((ed(Output):-P)))).
+domainBNF(Output, List, R):- % trace,
+             locally(-tlbugger:skipMust, on_x_debug(domainBNF_dcg(Output, List, R))),!.
+
+:-export(domainBNF_dcg//1).
 domainBNF_dcg(Struct)
                         --> ['(','define'],([':'];[]),['(','domain'], name(N), [')'],                   
                           {ensure_struct(domain,Struct) ,prop_set(domain_name, Struct,N),!},
@@ -1596,8 +1592,6 @@ bad_name(N):-arg(_,v('(',')',?,(-)),N).
 %%              _G1449                                                                          % length_specification-not implemented
 %%              )
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-% :- expects_dialect(sicstus).
 
 % parseProblem(+File, -Output).
 %

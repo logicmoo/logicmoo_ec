@@ -1,11 +1,54 @@
 :- module(rsasak_pddl_parser,[parseProblem/3,parseDomain/3]).
 
-:- use_module(logicmoo_planner).
+:- use_module(library(logicmoo_planner)).
 
 :- style_check(-singleton).
 
 :- meta_predicate emptyOr(//,?,?).
 
+
+
+%% get_param_types0(+Df, +ListOfParams, -NameOrVarList, -TypeList).
+%
+get_param_types(Df,H,P,K):-must((get_param_types0(Df,H,P,K),length(P,L),length(K,L))).
+
+
+use_default(s(var),'?'(H),H).
+use_default(s(var),(H),H).
+use_default(s(val),'?'(H),'?'(H)).
+use_default(s(val),H,H).
+use_default(Df,_,Df).
+
+adjust_types(T,GsNs,Ps):- must((get_param_types0(T, GsNs,Ps, _))).
+adjust_types(T,GsNs,L):- must((get_param_types0(T, GsNs,Ps, Ks),pairs_keys_values(L,Ps, Ks))).
+
+get_param_types0(_,[], [] ,[]).
+
+get_param_types0(Df,[H|T],[P1|Ps],[K|Ks]):- 
+    svar_fixvarname(H,Name),!,
+    P1 = '?'(Name),
+    use_default(Df,P1,K),
+    get_param_types0(Df,T, Ps, Ks).
+get_param_types0(Df,[H|T],[P1|Ps],[K|Ks]):-
+    compound(H), H =.. [K, P1],not(is_list(P1)),!,
+    get_param_types0(Df,T, Ps, Ks).
+get_param_types0(Df,[H|T],[P1|Ps],[K|Ks]):-
+    compound(H), H =.. [K, [P1]],!,    
+    get_param_types0(Df,T, Ps, Ks).
+get_param_types0(Df,[H|T],[P1,P2|Ps],[K,K|Ks]):-
+    compound(H), H =.. [K, [P1,P2]],!,
+    get_param_types0(Df,T, Ps, Ks).
+
+get_param_types0(Df,[H|T],[P1,P2,P3|Ps],[K,K,K|Ks]):-
+    compound(H), H =.. [K, [P1,P2,P3]],!,
+    get_param_types0(Df,T, Ps, Ks).
+
+
+get_param_types0(Df,[H|T],[H|Ps],[K|Ks]):-  must(atom(H)),use_default(Df,H,K),
+    get_param_types0(Df,T, Ps, Ks).
+
+
+% FILENAME:  readFile.pl 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%  read_file
 %%%  This is a modified version for parsing pddl files.
@@ -36,7 +79,7 @@
 fix_wordcase(Word,WordC):-upcase_atom(Word,UC),UC=Word,!,downcase_atom(Word,WordC).
 fix_wordcase(Word,Word).
 
-
+:- use_module(library(wam_cl/sreader)).
 %
 %read_file(+File, -List).
 %
@@ -140,9 +183,17 @@ parseDomain(File, Output, R) :-
 % Support for reading file as a list.
 % :-[readFile].
 
+
 % Defining operator ?. It is a syntax sugar for marking variables: ?x
 :-op(300, fy, ?).
 
+
+dcgStructSetOpt(Struct,Name,DCG,H,T) :- call(DCG,Value,H,T)-> prop_set(Name,Struct,Value); H=T.
+
+dcgStructSetOptTraced(Struct,Name,DCG,H,T) :-(( call(DCG,Value,H,T)-> prop_set(Name,Struct,Value); H=T)).
+
+% domainBNF_dcg(domain(N, R, T, C, P, F, C, S))
+%
 % List of DCG rules describing structure of domain file in language PDDL.
 % BNF description was obtain from http://www.cs.yale.edu/homes/dvm/papers/pddl-bnf.pdf
 % This parser do not fully NOT support PDDL 3.0
@@ -305,6 +356,7 @@ name(N)				--> [N].
 
 
 
+% FILENAME:  parseProblem.pl 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% parseDomain.pl
 %%   Simple parser of PDDL domain file into prolog syntax.
@@ -325,10 +377,11 @@ name(N)				--> [N].
 %%              _G1449										%length_specification-not implemented
 %%              )
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-:-catch(guitracer,E,writeq(E)),nl.
 
 % parseProblem(+File, -Output).
+%
 % Parse PDDL problem File and return rewritten prolog syntax. 
+%
 parseProblem(F, O):-parseProblem(F, O, _).
 
 % parseProblem(+File, -Output, -RestOfFile).
@@ -342,11 +395,13 @@ parseProblem(F, O, R) :-
 
 
 
-% List of DCG rules describing structure of problem file in language PDDL.
+% DCG rules describing structure of problem file in language PDDL.
+%
 % BNF description was obtain from http://www.cs.yale.edu/homes/dvm/papers/pddl-bnf.pdf
 % This parser do not fully NOT support PDDL 3.0
 % However you will find comment out lines ready for futher development.
 % Some of the rules are already implemented in parseDomain.pl
+%
 % :-[parseDomain]. %make sure that it is loaded.
 problem(problem(Name, Domain, R, OD, I, G, _, MS, LS))   
 				--> ['(',define,'(',problem,Name,')',
@@ -384,7 +439,7 @@ con_GD(forall(L, P))		--> ['(',forall,'('], typed_list(variable, L),[')'], con_G
 con_GD(at_end(P))		--> ['(',at,end],	gd(P), [')'].
 con_GD(always(P))		--> ['(',always],	gd(P), [')'].
 con_GD(sometime(P))		--> ['(',sometime],	gd(P), [')'].
-con_GD(within(N, P))		--> ['(',within], number(N), gd(P), [')'].
+con_GD(within(N, P))            --> ['(',within], number_sas(N), gd(P), [')'].
 
 con_GD(at_most_once(P))		--> ['(','at-most-once'], gd(P),[')'].
 con_GD(some_time_after(P1, P2))	--> ['(','sometime-after'], gd(P1), gd(P2), [')'].
@@ -401,11 +456,14 @@ optimization(maximize)		--> [maximize].
 metric_f_exp(E)			--> ['('], binary_op(O), metric_f_exp(E1), metric_f_exp(E2), [')'], {E =..[O, E1, E2]}.
 metric_f_exp(multi_op(O,[E1|E]))--> ['('], multi_op(O), metric_f_exp(E1), oneOrMore(metric_f_exp, E), [')']. % I dont see meanful of this rule, in additional is missing in f-exp
 metric_f_exp(E)			--> ['(','-'], metric_f_exp(E1), [')'], {E=..[-, E1]}.
-metric_f_exp(N)			--> number(N).
-metric_f_exp(F)			--> ['('], function_symbol(S), zeroOrMore(name, Ns), [')'], { F=..[S|Ns]}.%concat_atom([S|Ns], '-', F) }.
+metric_f_exp(N)                 --> number_sas(N).
+metric_f_exp(F)                 --> ['('], function_symbol(S), zeroOrMore(name, Ns), [')'], { F=..[S|Ns]}.%concat_atom_iio([S|Ns], '-', F) }.
 metric_f_exp(function(S))	--> function_symbol(S).
 metric_f_exp(total_time)	--> ['total-time'].
 metric_f_exp(is_violated(N))	--> ['(','is-violated'], pref_name(N), [')'].
+
+% Work arround
+metric_f_exp(is_violated(N,V))    --> ['(','*','(','is-violated'], pref_name(N), [')'],number_sas(V),[')'].
 
 % Work arround
 length_spec([])			--> [not_defined].	% there is no definition???
