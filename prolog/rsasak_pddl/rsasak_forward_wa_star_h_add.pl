@@ -67,13 +67,25 @@ command_line:-
 		solve_files(D, P),
 		halt.
 
-
-
 % solve_files(+DomainFile, +ProblemFile)
 %
 %   Reads files and set timelimit for planner
 %
 
+
+solve_files(DomainFile, ProblemFile):- 
+ forall(must(must_filematch(DomainFile,DomainFile0)),
+   forall(must(must_filematch(ProblemFile,ProblemFile0)),
+     (time(show_call(solve_files_0(DomainFile0, ProblemFile0)))))),!.
+
+% time(show_call(solve_files_w_ocl(DomainFile0, ProblemFile0))),
+		
+% Reads files and set timelimit for planner
+solve_files_0(DomainFile, ProblemFile):- 
+       update_changed_files,
+       directory_file_path(_,File,ProblemFile),
+       wdmsg(solve_files(DomainFile, ProblemFile)),
+       solve_files(DomainFile, ProblemFile, File),!.
 /*
 
 
@@ -104,20 +116,6 @@ solve_files_0(DomainFile, ProblemFile):-
     !.
 
 */
-
-solve_files(DomainFile, ProblemFile):- 
- forall(must(must_filematch(DomainFile,DomainFile0)),
-   forall(must(must_filematch(ProblemFile,ProblemFile0)),
-     (time(show_call(solve_files_0(DomainFile0, ProblemFile0)))))),!.
-
-% time(show_call(solve_files_w_ocl(DomainFile0, ProblemFile0))),
-		
-% Reads files and set timelimit for planner
-solve_files_0(DomainFile, ProblemFile):- 
-       update_changed_files,
-       directory_file_path(_,File,ProblemFile),
-       wdmsg(solve_files(DomainFile, ProblemFile)),
-       solve_files(DomainFile, ProblemFile, File),!.
 
 solve_files(DomainFile, ProblemFile, File):- slow_on(File),!,wdmsg(slow_on(DomainFile, ProblemFile)).
 solve_files(DomainFile, ProblemFile, File):-
