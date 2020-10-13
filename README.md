@@ -10,6 +10,40 @@ Installation using SWI-Prolog 7.3 or later:
 ![#f03c15](https://placehold.it/15/f03c15/000000?text=+) **TODO**: Andrew Dougherty - Ensure whatever is needed from the interfaces to VAL etc 
 
 
+# Solvers
+
+ocl  = OCL Planner called HyHTN (.ocl) 
+pddl = PDDL Planner by RSasak (.pddl)
+dec  = Discrete Event Calc Reasoner (DEC) Shannan''s Event Calc Solver rewritten by DMiles to decreasoner .e files
+lps  = Logic Production System (LPS) By LogicalContracts (.lps)
+icl  = Independent Choice Logic (ICL) by David Pool
+
+
+# Conversions
+   Conv       Done%
+ * pddl_to_ocl 90% - Needs tests
+ * pddl_to_lps 50% - In Progress
+ * dec_to_lps  90% - Needs tests
+ * dec_to_icl  75% - In Progress
+ * e_to_dec   100% - not working (lol)
+ * ocl_to_lps   0% 
+ * lps_to_e     0% 
+ * lps_to_icl   0% - Will tell us if LPS is fastest
+
+# Modules
+
+logicmoo_ec
+logicmoo_rsasak = Prolog native PDDL solver
+logicmoo_ocl =  OCL/PDDL Sover 
+logicmoo_dec = DEC Solver
+logicmoo_icl = ICL Solver
+logicmoo_lps = LPS Solver for PDDL/DEC Files
+
+
+
+
+
+
 # Getting Started with PDDL
 
 ![#f03c15](https://placehold.it/15/f03c15/000000?text=+) **NOTICE**: This is a work in progress and is being updated weekly.
