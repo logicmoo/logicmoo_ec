@@ -32,6 +32,6 @@ test_logicmoo_ec:-
 :- user:use_module(library(ec_planner/ec_lps_convert)).
 :- user:reexport(library(ec_planner/ec_lps_convert)).
 
-:- use_module(library(eggdrop)).
-:- egg_go.
+%:- use_module(library(eggdrop)).
+%:- egg_go.
 
