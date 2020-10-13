@@ -46,9 +46,6 @@ user:my_pfc_add(A):-if_defined(pfc_add(A),assert_if_new(A)).
 % :- dynamic(domain/3).
 % :- dynamic(pairfrom/4).
 
-:- dynamic(is_saved_type/3).
-
-
 
 :- if(\+current_predicate(init_locl_planner_interface0/4)).
 % :- with_no_mpred_expansions(ensure_loaded(library(logicmoo_hyhtn))).
@@ -632,53 +629,10 @@ command_line_sas:-
 
 command_line_sas:- test_blocks, test_all.
 
-slow_on('blocks-07-0.pddl').
-slow_on('blocks-08-0.pddl').
-slow_on('blocks-09-0.pddl').
-slow_on('hanoi7.pddl').
-slow_on('hanoi8.pddl').
-
-min_sas(A,B,A):-A =< B,!.
-min_sas(_,A,A).
-
-must_filematch(string(A),string(B)):-!.
-must_filematch(A,B):- filematch(A,B) *-> true ; throw(must_filematch(A,B)).
-
-
-must_filematch_list(Match,List):- findall(File, must_filematch(Match,File), List).
-
-test_all:-test_all(7).
-
-test_all(N):- 
-  must_filematch(pddl('orig_pddl_parser/test/?*?/domain*.pddl'),_),!,
-  (forall(must_filematch(pddl('orig_pddl_parser/test/?*?/domain*.pddl'),E),
-                                                 once(test_domain(E,N)))).
-
-test_all(N):- must_filematch_list(pddl('orig_pddl_parser/test/?*?/domain*.pddl'),RList),RList\=[],!,reverse(RList,List),
-  forall(member(E,List),once(test_domain(E,N))).
-
-test_primaryobjects:- 
-  (forall(must_filematch(pddl('primaryobjects_strips/?*?/domain*.*'),E),once(test_domain(E)))). 
 
 
 
-first_n_elements(ListR,Num,List):-length(ListR,PosNum),min_sas(PosNum,Num,MinNum),length(List,MinNum),append(List,_,ListR),!.
 
-test_domain(DP):- t_l:loading_files,!,must(load_domain(DP)).
-test_domain(DP):- test_domain(DP,12).
-
-test_domain(DP,Num):- \+ atom(DP),forall((filematch(DP,FOUND),exists_file(FOUND)),test_domain(FOUND,Num)),!.
-test_domain(DP,Num):- \+ exists_file(DP),!, forall(must_filematch(DP,MATCH),(exists_file(MATCH),test_domain(MATCH,Num))).
-test_domain(DP,Num):-
-   format('~q.~n',[test_domain(DP)]),
-  directory_file_path(D,_,DP),directory_files(D,RList),reverse(RList,ListR),
-   sort(ListR,ListS),length(ListR,PosNum),min_sas(PosNum,Num,MinNum),length(List,MinNum),append(List,_,ListS),!,
-   test_domain_num(DP,List,Num).
-
-test_domain_num(DP,List,Num):-
-  directory_file_path(D,_,DP),
-  forall(member(T,List),ignore((directory_file_path(D,T,TP),exists_file(TP),not(same_file(DP,TP)),
-  solve_files(DP,TP)))).
 
 
 /*
@@ -704,25 +658,8 @@ load_domain(DP):-
 
 
 
-:-export(z2p/2).
-z2p(A,A).
 
-save_type_named(Type,Named,O):- doall(retract((is_saved_type(Type,Named,_):-_))),nop(ain((is_saved_type(Type,Named,A):-z2p(O,A)))).
-save_sterm(O):-nop((gensym(sterm,Named),save_type_named(sterm,Named,O))).
 
-test_blocks:- time(notrace(test_blocks0)).
-
-test_blocks0:- solve_files(pddl('orig_pddl_parser/test/blocks/domain-blocks.pddl'), 
-   pddl('orig_pddl_parser/test/blocks/blocks-03-0.pddl')), fail.
-test_blocks0:- fail, must_filematch_list(pddl('orig_pddl_parser/test/blocks/domain*.pddl'),RList),reverse(RList,List),
-        forall(member(E,List),once(test_domain(E))),fail.
-test_blocks0:- must_filematch_list(pddl('orig_pddl_parser/test/?*?/domain*.pddl'),RList),reverse(RList,List),
-        forall(member(E,List),once(test_domain(E))),fail.
-test_blocks0:- !.
-
-test_frolog:- test_dir_files_sas('frolog','p02-domain.pddl','p02.pddl'),
-    test_dir_files_sas('frolog','tPddlAgent01-domain.pddl','tPddlAgent01.pddl'),
-    !. % test_dir_files_sas('frolog','tPddlAgent02-domain.pddl','tPddlAgent02.pddl').
 
 % :- solve_files(pddl('benchmarks/mystery/domain.pddl'),pddl('benchmarks/mystery/prob01.pddl')).
 :-thread_local(t_l:loading_files/0).

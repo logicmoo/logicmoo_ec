@@ -43,10 +43,6 @@ is_e_toplevel :- prolog_load_context(source,File),prolog_load_context(file,File)
 :- baseKB:export(baseKB:spft/4).
 :- system:import(baseKB:spft/4).
 
-:- module_transparent(export_transparent/1).
-export_transparent(P):-
-  export(P),
-  module_transparent(P).
 %:- reexport(library('ec_planner/ec_planner_dmiles')).
 :- reexport(library('ec_planner/ec_reader')).
 

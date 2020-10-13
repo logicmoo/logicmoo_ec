@@ -8,6 +8,29 @@
 old_rsasak:- fail.
 
 
+:- expects_dialect(sicstus).
+:-use_module(library(timeout)).
+:-use_module(library(lists)).
+
+:- ensure_loaded(library(logicmoo/util_structs)).
+% :- ensure_loaded(library(sexpr_reader)).
+%:- ensure_loaded(library(se)).
+
+:- decl_struct(domain(domain_name, requires, types, constants, predicates, functions, constraints, actions, dict(extraprops))).
+:- decl_struct(problem(problem_name, domain_name, requires, objects, init, goal, constraints, metric, length, dict(extraprops))).
+
+:- decl_struct(action5(parameters=unk,sorted(preconditions),sorted(positiv_effect),sorted(negativ_effect),dict(extraprops))).
+
+:- decl_argtypes(action(parameters=unk,sorted(preconditions),sorted(positiv_effect),sorted(negativ_effect),
+     assign_effect,list(parameter_types),string(domain_name),list(varnames),
+     dict(extraprops))).
+:- decl_struct(action(string(action_name),list(parameter_types),sorted(preconditions),sorted(positiv_effect),sorted(negativ_effect),sorted(assign_effect),
+        callable(parameters),callable(constraints),dict(extraprops))).
+
+
+
+
+
 %% get_param_types0(+Df, +ListOfParams, -NameOrVarList, -TypeList).
 %
 get_param_types(Df,H,P,K):-must((get_param_types0(Df,H,P,K),length(P,L),length(K,L))).
@@ -83,9 +106,11 @@ fix_wordcase(Word,Word).
 %
 %read_file(+File, -List).
 %
+read_file(File, Words):- read_file(File, Words, _),!.
 read_file(string(String), Words, textDoc) :- must(open_string(String,In)),!, current_input(Old),call_cleanup(( set_input(In), get_code(C), (read_rest(C, Words))),( set_input(Old))),!.
-read_file( File, Words) :-  atom(File), exists_file(File), !, seeing(Old),call_cleanup(( see(File), get_code(C), (read_rest(C, Words))),( seen, see(Old))),!.
-read_file(File0, Words) :-  must((must_filematch(File0,File),exists_file(File),read_file( File, Words))),!.
+read_file( File, Words, File) :-  atom(File), exists_file(File), !, must(seeing(Old)),
+  setup_call_cleanup( see(File), (get_code(C), read_rest(C, Words)),( seen, see(Old))),!.
+read_file(File0, Words, File) :-  must((must_filematch(File0,File),exists_file(File),read_file( File, Words))),!.
 
 
 /* Ends the input. */
@@ -175,20 +200,54 @@ question_mark(63).
 %
 % Parse PDDL domain File and return it rewritten prolog syntax.   
 %
-parseDomain(F, O):- parseDomain(F, O, R), load_file_rest(F,R),!.
+parseDomain(F, O):- parseDomain(F, O1, R), load_file_rest(F,O2,R),!,append_struct_list(O1,O2,O).
 
-load_file_rest(_,[]).
+
+:-export(z2p/2).
+z2p(A,A).
+:- dynamic(is_saved_type/3).
+save_type_named(Type,Named,O):- doall(retract((is_saved_type(Type,Named,_):-_))),nop(ain((is_saved_type(Type,Named,A):-z2p(O,A)))).
+save_sterm(O):-nop((gensym(sterm,Named),save_type_named(sterm,Named,O))).
+
+append_struct_list(O1,O2,O):- listify(O1,L1),listify(O2,L2),append(L1,L2,O).
+
+first_n_elements(ListR,Num,List):-length(ListR,PosNum),min_sas(PosNum,Num,MinNum),length(List,MinNum),append(List,_,ListR),!.
+
+load_file(F):- must(read_file(F, L, Filename)),load_file_rest(Filename,O,L).
+
+load_file_rest(_,[],[]):-!.
+load_file_rest(F,O,L):- first_n_elements(L,10,ES),load_file_rest_es10(F,O,L,ES).
+load_file_rest(F,O,L):- throw(load_file_rest(F,O,L)).
+
+load_file_rest_es10(F,O,L,ES):-  append(_,['define','(','domain',Named|_],ES),!,
+   domainBNF(O1, L, R1),prop_set(filename,O,F),
+   save_type_named(domain,Named,O),
+   load_file_rest(F,O2,R1),
+   append_struct_list(O1,O2,O).
+load_file_rest_es10(F,O,L,ES):- append(_,['(','problem',Named|_],ES),!,
+   problem(O1, L, R1), prop_set(filename,O,F),
+   save_type_named(domain,Named,O),
+   load_file_rest(F,O2,R1),
+   append_struct_list(O1,O2,O).
+load_file_rest_es10(F,O,L,_ES):- 
+   ensure_struct(sexpr_file,O1),prop_set(filename,O,F),
+   sterm(SO, L, R1),prop_set(sterm_value,O1,SO),
+   load_file_rest(F,O2,R1),
+   append_struct_list(O1,O2,O).
+
+
+load_domain(string(DP)):-!,load_file(string(DP)).
+
 
 % parseDomain(+File, -Output, -RestOfFile)
 %
 % The same as above and also return rest of file. Can be useful when domain and problem are in one file.
 %
-parseDomain(File, Output, R) :- 
-        old_rsasak,!,
-		read_file(File, List),
-		domainBNF(Output, List, R).
+parseDomain(File, Output, R) :- old_rsasak,!,
+    read_file(File, List),
+    domainBNF(Output, List, R).
 parseDomain(File, Output, R) :-
-    read_file(File, List, Filename),!,
+    read_file(File, List, Filename),
     ensure_struct(domain,Output),    
     % trace,must_or_rtrace(prop_set(filename,Output,Filename)),
     bb_put(filename,Filename),
@@ -383,7 +442,7 @@ emptyOr(_)			--> ['(',')'].
 emptyOr(W)			--> W.
 
 % Actions definitons
-action_def(Struct) --> {\+ old_rsasak},!, action_def(Struct).
+action_def(Struct) --> {\+ old_rsasak},!, action_def_struct(Struct).
 action_def(action(S, L, Precon, Pos, Neg, Assign))
 				--> ['(',':',action], action_symbol(S),
 						[':',parameters,'('], typed_list(variable, L), [')'],
@@ -500,19 +559,23 @@ binary_comp('=')		--> ['='].
 binary_comp('>=')		--> ['>='].
 binary_comp('<=')		--> ['<='].
 number_sas(N)                       --> [N], {number(N),!}.
-number(N)                       --> number_sas(N).
+number(N)			--> number_sas(N).
 
 effect(P, N, A)			--> ['(',and], c_effect(P, N, A), [')'].
-effect(P, [M|N], A)                 --> ['(',not], c_effect([M|P], N, A), [')'].
+effect(P, [M|N], A)             --> ['(',not], c_effect([M|P], N, A), [')'].
 effect(P, N, A)			--> c_effect(P, N, A).
+
 c_effect(forall(Es))            --> pddl_3_0, ['(',forall,'('], effected_typed_list(variable,Es), [')', ')'].    %:conditional-effects
 c_effect(when(P, E))           --> pddl_3_0, ['(',when], gd(P), cond_effect(E), [')'].                   %:conditional-effects
 c_effect(P, N, A)		--> p_effect(P, N, A).
 p_effect([], [], [])		--> [].
-p_effect(Ps, Ns, [F|As])        --> ['('], assign_op(O), f_head(H), f_exp(E), [')'], p_effect(Ps, Ns, As), {F =.. [O, H, E]}.
+p_effect(Ps, Ns, [F|As])       
+     --> ['('], assign_op(O), f_head(H), f_exp(E), [')'], p_effect(Ps, Ns, As), {F =.. [O, H, E]}.
 p_effect(Ps, [F|Ns], As)        --> neg_atomic_formula(term,F), p_effect(Ps, Ns, As).
 p_effect([F|Ps], Ns, As)	--> atomic_formula(term, F), p_effect(Ps, Ns, As).
-%p_effect(op(O, H, E))          --> pddl_3_0(op/3), ['('], assign_op(O), dcgMust((f_head(H), f_exp(E), [')'])).            %:fluents , What is difference between rule 3 lines above???
+
+p_effect(op(O, H, E))          --> pddl_3_0(op/3), ['('], assign_op(O), dcgMust((f_head(H), f_exp(E), [')'])).            %:fluents , What is difference between rule 3 lines above???
+
 cond_effect(E)                 --> ['(',and], zeroOrMore(p_effect, E), [')'].                  %:conditional-effects
 cond_effect(E)                 --> p_effect(E).                                                %:conditional-effects
 assign_op(assign)		--> [assign].
@@ -573,7 +636,7 @@ bad_name(N):-arg(_,v('(',')',?,(-)),N).
 %
 % Parse PDDL problem File and return rewritten prolog syntax. 
 %
-parseProblem(F, O):-parseProblem(F, O, R), load_file_rest(F,R),!.
+parseProblem(F, O):-parseProblem(F, O, R), load_file_rest(F,_O,R),!.
 
 
 % parseProblem(+File, -Output, -RestOfFile).

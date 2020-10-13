@@ -153,75 +153,6 @@ with_e_sample_tests(Out) :-
 
 raise_translation_event(Proc1,What,OutputName):-  call(Proc1,:- call_pel_directive(translate(What,OutputName))).
 
-
-dedupe_files(SL0,SL):- maplist(relative_file_name,SL0,SL1), list_to_set(SL1,SL2),maplist(absolute_file_name_or_dir,SL2,SLO),!,
-  list_to_set(SLO,SL),!.
-
-  relative_file_name(A,S):-  prolog_canonical_source(A,L), file_name_on_path(L,S), atom(S), \+ name(S,[]), (exists_file(S);exists_directory(S)),!.
-  relative_file_name(A,A).          
-
-exists_all_filenames(S0, SL, Options):- 
-  findall(N, (relative_from(D), 
-     absolute_file_name_or_dir(S0, N, 
-        [relative_to(D), file_errors(fail), access(read), solutions(all)|Options])), SL0),
-  dedupe_files(SL0,SL),!.
-
-
-absolute_file_name_or_dir(S0,N):-absolute_file_name_or_dir(S0,N,[file_errors(fail), access(read), solutions(all)]).
-absolute_file_name_or_dir(S0,N,Options):- 
-  absolute_file_name(S0,N,Options)*-> true
-  ;(\+ member(file_ext(_),Options),
-    \+ member(file_type(_),Options),!,
-      (absolute_file_name(S0,N,[file_type(directory)|Options]) *-> true
-     ; absolute_file_name(S0,N,[file_type(txt)|Options]))).
-
-absolute_file_name_or_dir(S0,N,Options):- absolute_file_name(S0,N,Options).
-
-:- export(resolve_local_files/2).
-resolve_local_files(S0,SL):- is_list(S0), !, maplist(resolve_local_files,S0,SS), append(SS,SF),dedupe_files(SF,SL).
-resolve_local_files(S0,SL):- atom(S0), exists_file(S0), !, SL = [S0].
-resolve_local_files(S0,SS):- atom(S0),atom_concat(AA,'M.e',S0),atom_concat(AA,'.e',SL),resolve_local_files(SL,SS),!.
-resolve_local_files(S0,SS):- atom(S0),atom_concat('answers/Mueller2004c/',AA,S0),atom_concat("ecnet/",AA,SL),resolve_local_files(SL,SS),!.
-%resolve_local_files(S0,SS):- atom(S0),atom_concat("answers/",AA,S0),atom_concat("examples/",AA,SL),resolve_local_files(SL,SS),!.
-resolve_local_files(S0,SS):- findall(S1,resolve_local_files_1(S0,S1),SL),flatten(SL,SF),dedupe_files(SF,SS),SS\==[], !.
-% expand_file_search_path
-%resolve_local_files(S0,SS):- atom(S0), findall(S1,resolve_local_files_1(ec(S0),S1),SL),flatten(SL,SF),dedupe_files(SF,SS),!.
-   
-resolve_local_files_1(S0,SL):- atom(S0), expand_file_name(S0,SL), SL = [E|_], exists_file(E), !.
-resolve_local_files_1(S0,SL):- exists_all_filenames(S0,SL, [expand(false)]), SL \= [].
-resolve_local_files_1(S0,SL):- exists_all_filenames(S0,SL, [expand(true)]), SL \= [].
-resolve_local_files_1(S0,SL):- expand_file_search_path(S0,S1),S0\==S1,resolve_local_files(S1,SL).
-resolve_local_files_1(S0,SS):- atom(S0), file_base_name(S0,S1), S0\==S1, resolve_local_files(S1,SS).
-%resolve_local_files_1(S0,SL):- atom(S0), resolve_local_files(ec(S0),SL).
-
-relative_from(F):- nb_current('$ec_input_file', F).
-relative_from(D):- working_directory(D,D).
-relative_from(F):- stream_property(_,file_name(F)).
-relative_from(D):- expand_file_search_path(library('ec_planner'),D),exists_directory(D).
-relative_from(D):- expand_file_search_path(library('ec_planner/../../ext/ec_sources'),D),exists_directory(D).
-
-user:file_search_path(ec,D):- findall(D,relative_from(D),L),dedupe_files(L,S),member(D,S).
-/*
-resolve_file(S0,SS):- atom(S0), exists_file(S0), !, SS=S0. 
-resolve_file(S0,SS):- absolute_file_name(S0, SS, [expand(true), file_errors(fail), access(read)]), !.
-resolve_file(S0,SS):- relative_from(F), absolute_file_name(S0, SS, [relative_to(F),file_errors(fail),access(read)]), !.
-resolve_file(S0,SS):- atom(S0), file_base_name(S0,S1), S0\==S1, resolve_file(S1,SS).
-*/
-
-:- export(needs_resolve_local_files/2).
-needs_resolve_local_files(F, L):- \+ is_stream(F), \+ is_filename(F),
-  resolve_local_files(F, L), !,  L \= [], L \= [F].
-
-chop_e(InputNameE,InputName):- atom_concat(InputName,'.e',InputNameE),!.
-chop_e(InputName,InputName).
-
-:- export(calc_where_to/3).
-calc_where_to(outdir(Dir, Ext), InputNameE, OutputFile):- 
-    chop_e(InputNameE,InputName),
-    atomic_list_concat([InputName, '.e.', Ext], OutputName),
-    make_directory_path(Dir),
-    absolute_file_name(OutputName, OutputFile, [relative_to(Dir)]).
-
 :- set_ec_option(overwrite_translated_files,false).
 
 :- export(should_update/1).
@@ -241,12 +172,7 @@ convert_e(Out, F):- with_e_file(do_convert_e, Out, F).
 :- export(convert_e/3).
 convert_e(Proc1, Out, F):- with_e_file(Proc1, Out, F).
 
-
-
-:- export(is_filename/1).
-is_filename(F):- atom(F), \+ is_stream(F),
-  (exists_file(F);is_absolute_file_name(F)).
-
+  
 %with_e_file(Proc1, Out, F):- dmsg(with_e_file(Proc1, Out, F)), fail.
 
 with_e_file(Proc1, OutputName, Ins):- wdmsg(with_e_file(Proc1, OutputName, Ins)),fail.
@@ -427,7 +353,7 @@ process_e_stream(_, S):- process_stream_comment(S), !.
 
 process_e_stream(Proc1, S):-   
    OR = [to_lower('.'), to_lower('('), end_of_line, to_lower('='),to_lower('>'), space, to_lower(':')], 
-   locally(b_setval(e_echo, nil),
+   locally(b_setval(e_echo, nil),           
          read_stream_until_true(S, [], char_type_inverse(Was, or(OR)), Text)), 
    unpad_codes(Text, Codes), 
    maybe_o_s_l,
