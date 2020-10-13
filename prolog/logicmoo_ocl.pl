@@ -9,7 +9,7 @@
 % Dec 13, 2035
 %
 */
-:-module(logicmoo_hyhtn,[]).
+:-module(logicmoo_ocl,[]).
 
 :- use_module(logicmoo_planner).
 :- style_check(-singleton).
@@ -39,8 +39,8 @@ do_non_ss_in_file.
 term_expansion(A,B):-env_term_expansion(A,B).
 
 
-:- ensure_loaded(logicmoo_hyhtn_code).
-:- ensure_loaded(library(logicmoo_ocl_and_pddl)).
+:- ensure_loaded(hyhtn_pddl/hyhtn_code).
+:- ensure_loaded(hyhtn_pddl/pddl_as_ocl)).
 % :-include(logicmoo_hyhtn_works).
 
 :- fixup_exports.
