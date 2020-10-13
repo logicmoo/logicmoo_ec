@@ -5,7 +5,7 @@
 
 :- reexport(logicmoo_planner).
 
-:- use_module(logicmoo_lps).
+:- use_module(library(logicmoo_lps)).
 
 
 /*

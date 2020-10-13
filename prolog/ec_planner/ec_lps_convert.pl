@@ -6,9 +6,14 @@
    assert_lps/1,
    test_logicmoo_ec_lps_reader/0,
    test_lps_ereader/0,
+   test_logicmoo_ec_sanity/0,
    test_logicmoo_ec_reader_2/0,
    test_logicmoo_ec_lps_reader/2,test_logicmoo_ec_lps_reader/1]).
 
+skip_tests. 
+
+test_logicmoo_ec_sanity:- skip_tests,!. 
+test_logicmoo_ec_sanity:- test_lps_ereader. 
 
 :- use_module(library(logicmoo_common)).
 
@@ -122,19 +127,18 @@ include_e_lps_file(Type,File):- throw(with_abs_paths(include_e_lps_file(Type),Fi
 test_logicmoo_ec_lps_reader(File):- test_logicmoo_ec_lps_reader(lps, File).
 test_logicmoo_ec_lps_reader(Proc1,File):- load_e_lps_file(Proc1,File).
 
+test_logicmoo_ec_lps_reader:- skip_tests, !.
 test_logicmoo_ec_lps_reader:- 
  test_logicmoo_ec_lps_reader([ec('ecnet/Diving.e'), ec('foundations/*.e'), ec('ecnet/*.e')]).
 
 test_logicmoo_ec_reader_2:- 
  test_logicmoo_ec_lps_reader(library('../test/ec_planner/*/*/*/*.e')).
 
-
+test_lps_ereader:- skip_tests, !.
 test_lps_ereader:- 
  convert_e(assert_ep(test_lps_mod),user_error,
-  ['../ext/ec_sources/ecnet/Diving.e',
-   '../ext/ec_sources/foundations/*.e',
-   '../ext/ec_sources/ecnet/*.e',
-   '../test/ec_planner/*/*/*/*.e']).
+ [ec('ecnet/Diving.e'), ec('foundations/*.e'), ec('ecnet/*.e'),
+   library('../test/ec_planner/*/*/*/*.e')]).
 
 get_time_arg(Holds1,T1):- compound_gt(Holds1,1),
    functor(Holds1,F,_),

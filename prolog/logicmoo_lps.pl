@@ -11,7 +11,11 @@
 :- reexport(logicmoo_planner).
 
 :- if(\+ exists_source(swish(lib/render))).
-:- add_absolute_search_folder(swish,'../../logicmoo_webui/swish').
+   :- if(exists_directory('../logicmoo_webui/swish')).
+      :- add_absolute_search_folder(swish,'../logicmoo_webui/swish').
+   :- else. :- if(exists_directory('../../logicmoo_webui/swish')).
+      :- add_absolute_search_folder(swish,'../../logicmoo_webui/swish').
+   :- endif. :- endif.
 :- endif.
 
 

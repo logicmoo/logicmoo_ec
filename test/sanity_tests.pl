@@ -1,12 +1,22 @@
 
-:- use_module('../prolog/logicmoo_common').
+:- use_module(library(logicmoo_common)).
+
+:- multifile(prolog_trace_interception/4).
+:- dynamic(prolog_trace_interception/4).
+:- multifile(user:prolog_trace_interception/4).
+:- dynamic(user:prolog_trace_interception/4).
+
 :- use_module(library(plunit)).
+:- use_module(library(test_cover)).
+:- use_module(library(listing)).
 
 :- set_prolog_flag(must_saftey,3).
 :- set_prolog_flag(must_debug,0).
 :- set_prolog_flag(must_speed,0).
 :- set_prolog_flag(must_type,keep_going).
 
+:- listing(prolog_trace_interception/4).
+:- listing(user:prolog_trace_interception/4).
 
 :- prolog_load_context(source,Loader),
   ( \+ prolog_load_context(file,Loader) -> assert(t_l:santiy_tests_includer(Loader)) ; true).
