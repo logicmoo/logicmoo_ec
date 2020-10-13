@@ -249,8 +249,9 @@ parseDomain(File, Output, R) :- old_rsasak,!,
 parseDomain(File, Output, R) :-
     read_file(File, List, Filename),
     ensure_struct(domain,Output),    
-    % trace,must_or_rtrace(prop_set(filename,Output,Filename)),
-    bb_put(filename,Filename),
+    % trace,
+    must_or_rtrace(prop_set(filename,Output,Filename)),
+    % rtrace(bb_put(filename,Filename)),
     domainBNF(Output, List, R),!.
 
 
