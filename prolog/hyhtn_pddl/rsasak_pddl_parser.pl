@@ -24,7 +24,8 @@ old_rsasak:- fail.
 :- decl_argtypes(action(parameters=unk,sorted(preconditions),sorted(positiv_effect),sorted(negativ_effect),
      assign_effect,list(parameter_types),string(domain_name),list(varnames),
      dict(extraprops))).
-:- decl_struct(action(string(action_name),list(parameter_types),sorted(preconditions),sorted(positiv_effect),sorted(negativ_effect),sorted(assign_effect),
+:- decl_struct(action(string(action_name),list(parameter_types),sorted(preconditions),sorted(positiv_effect),
+        sorted(negativ_effect),sorted(assign_effect),
         callable(parameters),callable(constraints),dict(extraprops))).
 
 
@@ -262,16 +263,23 @@ parseDomain(File, Output, R) :-
 
 sterm2pterm(VAR,VAR):-var(VAR),!.
 sterm2pterm(In,Out):-nonvar(Out),!,sterm2pterm(In,OutM),must(Out=OutM).
-sterm2pterm(VAR,'?'(UP)):-svar_fixvarname(VAR,UP),!.
+sterm2pterm('?'(Down),'?'(UP)):- svar_fixvarname(Down,UP),!.
+sterm2pterm(KVList,T):- append(_,[_Item,'-',_Type],KVList),sterm2pterm_list(KVList,T).
+%sterm2pterm(QDown,'?'(UP)):- \+ is_list(QDown),svar_fixvarname(QDown,UP),!.
 sterm2pterm([S],S):-atom(S),!. % ,atom_concat(':',_,S),!.
+sterm2pterm([Item,'-',Type],Item1):- atom(Type),Item1=..[Type,Item].
 sterm2pterm([S|SLIST],PTERM):-atom(S),atom_concat(':',_,S),
-            must_maplist(sterm2pterm,SLIST,PLIST),           
+            sterm2pterm_list(SLIST,PLIST),           
             PTERM=..[S,PLIST].
 sterm2pterm([S|SLIST],PTERM):-atom(S),\+ svar(S,_),!,
-            must_maplist(sterm2pterm,SLIST,PLIST),           
+            sterm2pterm_list(SLIST,PLIST),           
             PTERM=..[S|PLIST].
-sterm2pterm(SLIST,PLIST):- is_list(SLIST),!,must_maplist(sterm2pterm,SLIST,PLIST).
+sterm2pterm(SLIST,PLIST):- is_list(SLIST),!,sterm2pterm_list(SLIST,PLIST).
 sterm2pterm(VAR,VAR):-!.
+
+sterm2pterm_list([],[]).
+sterm2pterm_list([Item,'-',Type|List],[H|T]):- atom(Type),H=..[Type,Item],sterm2pterm_list(List,T).
+sterm2pterm_list([Item|List],[H|T]):- sterm2pterm(Item,H),sterm2pterm_list(List,T).
 
 sterm(_) --> [')'],{!,fail}.
 sterm([]) --> ['(',')'],!.

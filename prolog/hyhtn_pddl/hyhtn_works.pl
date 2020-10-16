@@ -19,15 +19,17 @@
 /* Denton, TX */
 /* ***********************************/
 
-:- ensure_loaded(logicmoo_planner_api).
+
 
 % [Required] Load the Logicmoo Library Utils
-:- ensure_loaded(library(logicmoo_utils)).
+:- ensure_loaded(library(logicmoo_common)).
+:- ensure_loaded(library(planner_api)).
+:- use_module(library(logicmoo_planner)).
 
 :- kb_shared(baseKB:mpred_prop/3).
 
-:- ensure_loaded(library(logicmoo_util_structs)).
-:- ensure_loaded(library(logicmoo_util_bb_env)).
+:- ensure_loaded(library(logicmoo/util_structs)).
+:- ensure_loaded(library(logicmoo/util_bb_env)).
 :- prolog_load_context(file,File),ain(user:env_source_file(File)).
 
 :-op(500,fx,env_call).
