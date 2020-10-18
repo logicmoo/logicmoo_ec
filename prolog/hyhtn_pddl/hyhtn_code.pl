@@ -31,6 +31,25 @@
 :- prolog_load_context(file,File),ain(user:env_source_file(File)).
 
 :-op(500,fx,env_call).
+/* htncode.pl */
+
+/* Donghong Liu */
+/* University of Huddersfield */
+/* September 2002 */
+/* **********************************/
+/* gipohyhtn.pl */
+/* HyHTN planning: do preprocess first  */
+/* make all method and operators primitive */
+
+
+planner_failure(Why,Info):-dmsg(error,Why-Info),banner_party(error,'FAILURE_PLANNER'),print_message(error,'FAILURE_PLANNER'(Why,Info)),!. %sleep(2).
+
+:-thread_local t_l:doing/1.
+
+statistics_runtime(CP):-statistics(runtime,[_,CP0]), (CP0==0 -> CP= 0.0000000000001 ; CP is (CP0/1000)) .  % runtime WAS process_cputime
+statistics_walltime(CP):-statistics(walltime,[_,CP0]), (CP0==0 -> CP= 0.0000000000001 ; CP is (CP0/1000)) .  % runtime WAS process_cputime
+
+
 
 /*
  * GIPO COPYRIGHT NOTICE, LICENSE AND DISCLAIMER.
@@ -102,8 +121,8 @@ on_call_decl_hyhtn :-
 
 call_decl_hyhtn:-must(doall(on_call_decl_hyhtn)).
 
-:- % 
-   call_decl_hyhtn.
+% :- % 
+  %  call_decl_hyhtn.
 
 
 
@@ -112,7 +131,7 @@ call_decl_hyhtn:-must(doall(on_call_decl_hyhtn)).
 % :- qcompile_libraries.
 
 
- :- rtrace.
+% :- rtrace.
 tryff(Call):- predicate_property(Call,_),!,once(tryf((Call,assert(passed_test_try(Call))))),fail.
 tryf(Call):- predicate_property(Call,_),!,catch(Call,E,dmsg(E = Call)).
 trye(Call):- catch(Call,E,((dmsg(error(E , Call)),throw(trace),Call))).
@@ -164,7 +183,7 @@ tasks:-
    setof(Call,Call,List),list_to_set(List,Set),!,
    env_info(kb(dom,file)),!,
    once((ignore(forall(member(Call,Set),
-     w_tl(t_l:doing(tasks(N,Goal)),
+     locally(t_l:doing(tasks(N,Goal)),
       ((
       must(nonvar(Goal)),must(nonvar(State)),
       ignore(N=Goal),      
@@ -255,7 +274,7 @@ post_header:- dmsg(post_header),fail, forall(clause(post_header_hook,G),G).
 
 run_tests(Call) :- 
   statistics_runtime(InTime),  
-  w_tl(doing(run_tests(Call)),
+  locally(doing(run_tests(Call)),
    call_cleanup(Call, 
   ((
  statistics_runtime(OutTime),
@@ -267,7 +286,7 @@ run_header_tests :- run_tests(forall(clause(header_tests,G),run_tests(G))).
 
 :-export(test_ocl/1).
 test_ocl(File):- forall(filematch(File,FM),test_ocl0(FM)).
-test_ocl0(File):- time(w_tl(t_l:doing(test_ocl(File)), 
+test_ocl0(File):- time(locally(t_l:doing(test_ocl(File)), 
    once((env_clear_doms_and_tasks,clean_problem,l_file(File),tasks)))).
 
 header_tests :-test_ocl('domains_ocl/*.ocl').
@@ -278,25 +297,6 @@ header_tests :-test_ocl('domains_ocl/*.ocl').
 %:-use_module(library(system)).
 
 %:- asserta(t_l:disable_px).
-
-
-/* Donghong Liu */
-/* University of Huddersfield */
-/* September 2002 */
-/* **********************************/
-/* gipohyhtn.pl */
-/* HyHTN planning: do preprocess first  */
-/* make all method and operators primitive */
-/* htncode.pl */
-
-planner_failure(Why,Info):-dmsg(error,Why-Info),banner_party(error,'FAILURE_PLANNER'),print_message(error,'FAILURE_PLANNER'(Why,Info)),!. %sleep(2).
-
-:-thread_local t_l:doing/1.
-
-statistics_runtime(CP):-statistics(runtime,[_,CP0]), (CP0==0 -> CP= 0.0000000000001 ; CP is (CP0/1000)) .  % runtime WAS process_cputime
-statistics_walltime(CP):-statistics(walltime,[_,CP0]), (CP0==0 -> CP= 0.0000000000001 ; CP is (CP0/1000)) .  % runtime WAS process_cputime
-
-
 
 % The following elements are expected in the sort engineered domain model
 % 
@@ -309,12 +309,6 @@ statistics_walltime(CP):-statistics(walltime,[_,CP0]), (CP0==0 -> CP= 0.00000000
 %   -ve invariants
 %   +ve invariants
 %  operators
-startOCL(Goal,Init):-
-  clean_problem,
-   dmsg('OCL-PLANNER-TASK'(Goal)),
-	must(planner_interface(Goal,Init,Sol,_,TNLst)),
-        show_result_and_clean(F,Id,Sol,TNLst).
-
 
 
 % for boot..
@@ -344,9 +338,17 @@ set_op_num(X):-flag(op_num,_,X).
 current_op_num(X):- flag(op_num,X,X).
 
 
-get_tasks(N,Goal,State):- ocl:htn_task(N,Goal,State).
+
+startOCL(Goal,Init):-
+  clean_problem,
+   dmsg('OCL-PLANNER-TASK'(Goal)),
+	must(planner_interface(Goal,Init,Sol,_,TNLst)),
+        show_result_and_clean(F,Id,Sol,TNLst).
+
+
+get_tasks(N,Goal,State):- htn_task(N,Goal,State).
+% get_tasks(N,Goal,State):- ocl:htn_task(N,Goal,State).
 get_tasks(N,Goal,State):- env_call planner_task(N,Goal,State).
-% get_tasks(N,Goal,State):- if_defined(htn_task(N,Goal,State)).
 
 :- set_op_num(0).
 :-asserta(my_stats(0)).
@@ -359,6 +361,9 @@ l_file(F):-
 
 solve_file(F):-with_filematch(l_file(wfm(F))), doall(solve(_)).
 solve:- solve_file(test_hyhtn).
+
+
+
 solve(Id) :-
 	no_repeats(get_tasks(Id,Goal,Init)),
 	planner_interface(Goal,Init,Sol,_,TNLst),
@@ -493,7 +498,7 @@ merge_ss(SS,S1,Obj1,L1,SS,S1,Obj2,L2,G):-append(L1,L2,LL),G=..[SS,S1,Obj1,LL].
    
 
 init_locol_planner_interface(G,I,Node):-   
-   w_tl(t_l:db_spy,
+   locally(t_l:db_spy,
      init_locol_planner_interface0(G,I,Node)).
 
 assert_itital_state(I0):- is_list(I0),!, must_maplist(assert_itital_state,I0),!.
@@ -547,6 +552,7 @@ init_locol_planner_interface2(G0,I0,Node):-
               to_ssify(Hints,ss,I0,I),
               wdmsg((goals:-G)),
               wdmsg((input:-I)),
+              
         change_obj_list(I),
 	ground_op,
 	assert_is_of_sort,
@@ -815,7 +821,7 @@ dir_apply_op(Name,HPid,ACH,Pre,Goal,State,Statics,Statics1):-
    statics_consist(Statics1),
 %   nl,write('step '),write(HPid),
 %   write('can be expand by operator '),write(Name),nl,
-   % eretract(op_num_GONE(N_GONE)),
+   % retract(op_num_GONE(N_GONE)),
    % N1_GONE is N_GONE+1,
    incr_op_num,!.
 
@@ -2357,8 +2363,8 @@ statics_append0(H,[X|Z],L1,L):-
 append_dcut([],L,L):-!.
 append_dcut([H|T],L,[H|Z]) :- append_dcut(T,L,Z),!.
 
-
-
+append_cut([],L,L) :- !.
+append_cut([H|T],L,[H|Z]) :- append_cut(T,L,Z),!.
 
 % append_st: append_dcut two statics
 % remove the constants that no need
@@ -3280,7 +3286,7 @@ xprod(A,B,C) :-
 xprod([],[]).
 xprod(A,E) :-
         xprod(A,B,C,D) ,
-        F =..[^,env_call(C),D] ,        
+        F =..[^,C,env_call(D)] ,        
         call(setof(B,F,E)) .
  
 xprod([X],[A],A,member(A,X)) .
@@ -3313,6 +3319,10 @@ lws(F):-tell(F),lws,told.
 :-export(rr1/0).
 rr:- test_ocl('domains_ocl/chameleonWorld.ocl').
 rr1:- test_ocl('domains_ocl/translog.ocl').
+
+:- fixup_exports.
+
+:- include(translog4).
 
 :-rr.
 

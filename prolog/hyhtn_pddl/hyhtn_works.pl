@@ -33,6 +33,7 @@
 :- prolog_load_context(file,File),ain(user:env_source_file(File)).
 
 :-op(500,fx,env_call).
+
 /*
  * GIPO COPYRIGHT NOTICE, LICENSE AND DISCLAIMER.
  *
@@ -60,11 +61,63 @@
 /* make all method and operators primitive */
 :-use_module(library(system)).
 /*********************** initialisation**************/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 :- dynamic op_num/1, my_stats/1. 
 :- dynamic node/7,final_node/1.
 :- dynamic methodC/7, opParent/6,operatorC/5,gOperator/3.
-:- dynamic tp_goal/3,tp_node/6,closed_node/6,solved_node/5.
+:- dynamic tp_goal/3,tp_node/6,closed_node/6,solved_node/5,solved_node/2.
 :- dynamic goal_related/4.
+:- dynamic goal_related/3.
 :- dynamic tn/6. % Used to store full expanded steps
 :- dynamic opCounter/1, temp/1. % Used for grounding operators
 :- dynamic objectsC/2,atomic_invariantsC/1.% Used only dynamic objects
@@ -72,6 +125,8 @@
 % for boot..
 :- dynamic kill_file/1,solution_file/1.
 %
+% :-expects_dialect(sicstus).
+:- style_check(-singleton).
 %:- prolog_flag(single_var_warnings, _, off).
 %:-set_prolog_flag(unknown,fail).
 %:- unknown(error,fail).
@@ -270,7 +325,7 @@ assert_node(Name,Pre,Decomp,Temp,Statics):-
    all_HP_expanded(Decomp),
    assert(final_node(node(Name,Pre,Decomp,Temp,Statics))),!.
 assert_node(Name,Pre,Dec,Temp,Statics):-
-   gensym(root,SYM),
+   gensym_special(root,SYM),
    assert(node(SYM,Pre,Dec,Temp,Statics)),!.
 
 all_HP_expanded([]):-!.
@@ -406,6 +461,44 @@ direct_expand_ach_goal(HPid,TN,ACH,Pre,Post,State,Statics,Statics):-
 %2. if an action's action meets an operator Pre and post
 direct_expand_ach_goal(HPid,OP,ACH,Pre,Post,State,Statics,Statics1):-
    dir_apply_op(OP,HPid,ACH,Pre,Post,State,Statics,Statics1).
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 %3. if an achieve action meets a method's pre and post,
 %    expand it and make it to that TNs
 direct_expand_ach_goal(HPid,TN,ACH,Pre,Post,State,Statics,Statics1):-
@@ -468,7 +561,7 @@ dir_apply_method(TN,HPid,ACH,Pre,Goal,State,Statics,Statics1):-
 % make decomposition steps when expand a method
 make_dec1(HPid,Pre,ACH,Statics,Temp,Dec,Temp1,Dec1):-
    var(HPid),
-   gensym(hp,HPid),
+   gensym_special(hp,HPid),
    make_dec1(HPid,Pre,ACH,Statics,Temp,Dec,Temp1,Dec1),!.
 make_dec1(HPid,Pre,ACH,Statics,Temp,Dec,Temp1,Dec1):-
    all_achieved(ACH,Statics,Pre),
@@ -559,7 +652,7 @@ expand_node(TP,TN,Statics,Statics1,Pre,State,from(PR),List,List1):-
 expand_node1(TN,Statics,Statics1,Pre,State,from(PR),List,List1):-
    tp_goal(_,Goal,_),
    direct_expand(HP,TN,achieve(Goal),Pre,Goal,State,Statics,Statics1),
-%   gensym(hp,HP),
+%   gensym_special(hp,HP),
    append_dcut(List,[step(HP,achieve(Goal),Pre,State,exp(TN))],List1),!.
 % -------direct expand -----------------------
 % if the goal canbe achieved by a method's pre and post,
@@ -582,7 +675,7 @@ apply_ground_op(operator(OP,Prev,Nec,Cond),Pre,State,List,List1):-
    state_achieved(Prev,Pre),
    nec_state_change(Pre,Nec,State2),
    cond_state_change(State2,Cond,State),
-   gensym(hp,HP),
+   gensym_special(hp,HP),
    append_dcut(List,[step(HP,OP,Pre,State,exp(OP))],List1),
    retract(op_num(N)),
    N1 is N+1,
@@ -595,7 +688,7 @@ apply_unground_op(OP,Pre0,Post0,Cond,ST,Statics,Statics1,Pre,State,List,List1):-
    cond_state_change(State2,Cond,State),
    statics_consist_instance(ST),
    remove_unneed(Statics2,[],Statics1),
-   gensym(hp,HP),
+   gensym_special(hp,HP),
    append_dcut(List,[step(HP,OP,Pre,State,exp(OP))],List1),
    retract(op_num(N)),
    N1 is N+1,
@@ -643,7 +736,7 @@ assert_tnode(TP,OP,PR,Score,Post,Statics,Steps):-
    get_score(PR,Post,Steps,Score),
 %   op_score(OP,SS),
 %   Score is Score1-SS,
-   gensym(tp,TP1),
+   gensym_special(tp,TP1),
 %   write(TP1),nl,
 %   write(Steps),nl,
    assert(tp_node(TP1,Post,Statics,from(TP),Score,Steps)),!.
@@ -652,13 +745,13 @@ combine_exp_steps(Post,Steps,step(HP,achieve(Goal),Pre,Post,exp(TN))):-
    tp_goal(Pre,Goal,Statics),
    get_action_list(Steps,[],ACTls),
    make_temp(ACTls,[],Temp),
-   gensym(hp,HP),
+   gensym_special(hp,HP),
    make_tn(TN,achieve(Goal),Pre,Post,Temp,Steps),!.
 
 % get the temperal from an ordered steps
 get_action_list([],ACTls,ACTls):-!.
 get_action_list([step(HP,_,_,_,_)|Steps],List,ACTls):-
-    append_cut(List,[HP],List1),
+    append_dcut(List,[HP],List1),
     get_action_list(Steps,List1,ACTls),!.
 
 make_temp([HP|[]],Temp,Temp):-!.
@@ -867,7 +960,7 @@ get_score(PR,Post,Steps,Score):-
     tp_goal(Pre,Goal,Statics),
     get_distance(Pre,Post,Goal,0,Dis),%length from Present to Goal
 %    length(Pre,Obj_Num),
-    get_length(PR,1,Len),
+    get_tnode_length(PR,1,Len),
 %    Num1 is Obj_Num*Dis,%distanse the smaller the better
 %    Num2 is Obj_Num*Len1,%length of the plan the smaller the better
 %    Score is Num1+Num2,!.
@@ -892,11 +985,11 @@ get_distance(Pre,[se(Sort,Obj,SE)|Post],Goal,Dis1,Dis):-
     Dis2 is Dis1+100,
     get_distance(Pre,Post,Goal,Dis2,Dis),!.
 
-get_length(init,Len,Len):-!.
-get_length(TP,Len1,Len):-
+get_tnode_length(init,Len,Len):-!.
+get_tnode_length(TP,Len1,Len):-
     closed_node(TP,_,_,from(PR),_,_),
     Len2 is Len1+1,
-    get_length(PR,Len2,Len),!.
+    get_tnode_length(PR,Len2,Len),!.
 
 
 % the states that can achieve a state
@@ -1268,64 +1361,6 @@ post_instant(Post0,Cond,Statics,[se(Sort,Obj,SE)|Post]):-
 post_instant(Post0,Cond,Statics,[se(Sort,Obj,SE)|Post]):-
     post_instant(Post0,Cond,Statics,Post),!.
 
-/********* check for statics consist without instanciate them***/
-% only instance the variable when there is one choice of from the ground lists
-statics_consist([]):-!.
-statics_consist(Statics):-
-   get_invariants(Invs),
-   statics_consist(Invs,Statics),!.
-statics_consist(Invs,[]):-!.
-statics_consist(Invs,[ne(A,B)|Statics]):-
-   not(A==B),!,
-   statics_consist(Invs,Statics).
-statics_consist(Invs,[is_of_sort(Obj,Sort)|Statics]):-
-   not(not(is_of_sort(Obj,Sort))),!,
-   statics_consist(Invs,Statics).
-statics_consist(Invs,[is_of_primitive_sort(Obj,Sort)|Statics]):-
-   not(not(is_of_primitive_sort(Obj,Sort))),!,
-   statics_consist(Invs,Statics).
-statics_consist(Invs,[Pred|Statics]):-
-   pred_member(Pred,Invs),!,
-   statics_consist(Invs,Statics).
-
-/*********check for statics consist and instanciate them***/
-statics_consist_instance([]):-!.
-statics_consist_instance(Statics):-
-   get_invariants(Invs),
-   statics_consist_instance(Invs,Statics).
-
-statics_consist_instance(Invs,[]):-!.
-statics_consist_instance(Invs,[is_of_sort(Obj,Sort)|Atom]):-
-   ground(Obj),
-   is_of_sort(Obj,Sort),!,
-   statics_consist_instance(Invs,Atom).
-statics_consist_instance(Invs,[is_of_sort(Obj,Sort)|Atom]):-
-   var(Obj),
-   is_of_sort(Obj,Sort),
-   statics_consist_instance(Invs,Atom).
-statics_consist_instance(Invs,[is_of_primitive_sort(Obj,Sort)|Atom]):-
-   ground(Obj),
-   is_of_primitive_sort(Obj,Sort),!,
-   statics_consist_instance(Invs,Atom).
-statics_consist_instance(Invs,[is_of_primitive_sort(Obj,Sort)|Atom]):-
-   var(Obj),
-   is_of_primitive_sort(Obj,Sort),
-   statics_consist_instance(Invs,Atom).
-statics_consist_instance(Invs,[ne_back(A,B)|Atom]):-
-   A\==B,
-   statics_consist_instance(Invs,Atom).
-statics_consist_instance(Invs,[ne(A,B)|Atom]):-
-   append_dcut(Atom,[ne_back(A,B)],Atom1),!,
-   statics_consist_instance(Invs,Atom1).
-statics_consist_instance(Invs,[Pred|Atom]):-
-   ground(Pred),
-   member(Pred,Invs),!,
-   statics_consist_instance(Invs,Atom).
-statics_consist_instance(Invs,[Pred|Atom]):-
-   not(ground(Pred)),
-   member(Pred,Invs),
-   statics_consist_instance(Invs,Atom).
-
 
 
 /*********************Initial process *********************/
@@ -1351,21 +1386,21 @@ make_problem_up([],[]):-!.
 make_problem_up([achieve(L)|R],[step(HP,achieve(L1),undefd,[L1],unexp)|RS]):- 
                              %preconditon here is undefd
     make_ss_to_se([L],[L1]),
-    gensym(hp,HP),
+    gensym_special(hp,HP),
     make_problem_up(R, RS),!.
 make_problem_up([achieve(L)|R],[step(HP,achieve(L1),undefd,L1,unexp)|RS]):- 
                              %preconditon here is undefd
     make_ss_to_se(L,L1),
-    gensym(hp,HP),
+    gensym_special(hp,HP),
     make_problem_up(R, RS),!.
 make_problem_up([O|R],[step(HP,O,undefd,undefd,unexp)|RS]):-
     methodC(O,Pre,Post,Statics1,Temp,ACH,Dec),
-    gensym(hp,HP),
+    gensym_special(hp,HP),
     make_problem_up(R, RS),!.
 make_problem_up([O|R],     
            [step(HP,O,undefd,undefd,unexp)|RS]):-
     operatorC(O,Pre,Post,Cond,Statics1),
-    gensym(hp,HP),
+    gensym_special(hp,HP),
     make_problem_up(R, RS),!.
 
 make_num_hp([],[]):-!.
@@ -1500,7 +1535,7 @@ make_dec(A,[HD|TD],TD1,Temp,Temp1,Achieval,Achieval1):-
 make_dec(A,[HD|TD],[HD|TD1],Temp,Temp1,Achieval,Achieval1):-
      HD=..[DecName|Goal],
      DecName\==achieve,
-     gensym(sm,SM),
+     gensym_special(sm,SM),
      current_num(sm,Num),
      make_dec(A,TD,TD1,Temp,Temp1,Achieval,Achieval1),!.
 
@@ -1573,7 +1608,7 @@ make_tn(TN,Name,Pre,Post,Temp,Dec):-
     find_only_changed(Pre,Post,[],Pre1,[],Post1),
     not(isemptylist(Post1)),
     not(exist_tn(Pre,Post)),
-    gensym(tn,TN),
+    gensym_special(tn,TN),
 %    tell(user),nl,write(tn(TN,Name,Pre1,Post1,Temp,Dec)),nl,told,
     assert(tn(TN,Name,Pre1,Post1,Temp,Dec)),!.
 
@@ -1703,6 +1738,7 @@ uppersorts(Obj,Sortls):-
   member(Obj, Objls),
   sort_up(Sort,[Sort],Sortls),!.
 
+
 sort_up(Sort, List,Sortslist):-
   sorts(NPSort, NPSortls),
   NPSort \== non_primitive_sorts,
@@ -1733,6 +1769,66 @@ split_prim_noprim([HS|TS],[HS|TP],NP):-
 split_prim_noprim([HS|TS],PS,[HS|NP]):-
      split_prim_noprim(TS,PS,NP),!.
 
+
+/********* check for statics consist without instanciate them***/
+
+
+% only instance the variable when there is one choice of from the ground lists
+statics_consist([]):-!.
+statics_consist(Statics):-
+   get_invariants(Invs),
+   statics_consist(Invs,Statics),!.
+statics_consist(Invs,[]):-!.
+statics_consist(Invs,[ne(A,B)|Statics]):-
+   not(A==B),!,
+   statics_consist(Invs,Statics).
+statics_consist(Invs,[is_of_sort(Obj,Sort)|Statics]):-
+   not(not(is_of_sort(Obj,Sort))),!,
+   statics_consist(Invs,Statics).
+statics_consist(Invs,[is_of_primitive_sort(Obj,Sort)|Statics]):-
+   not(not(is_of_primitive_sort(Obj,Sort))),!,
+   statics_consist(Invs,Statics).
+statics_consist(Invs,[Pred|Statics]):-
+   pred_member(Pred,Invs),!,
+   statics_consist(Invs,Statics).
+
+/*********check for statics consist and instanciate them***/
+statics_consist_instance([]):-!.
+statics_consist_instance(Statics):-
+   get_invariants(Invs),
+   statics_consist_instance(Invs,Statics).
+
+statics_consist_instance(Invs,[]):-!.
+statics_consist_instance(Invs,[is_of_sort(Obj,Sort)|Atom]):-
+   ground(Obj),
+   is_of_sort(Obj,Sort),!,
+   statics_consist_instance(Invs,Atom).
+statics_consist_instance(Invs,[is_of_sort(Obj,Sort)|Atom]):-
+   var(Obj),
+   is_of_sort(Obj,Sort),
+   statics_consist_instance(Invs,Atom).
+statics_consist_instance(Invs,[is_of_primitive_sort(Obj,Sort)|Atom]):-
+   ground(Obj),
+   is_of_primitive_sort(Obj,Sort),!,
+   statics_consist_instance(Invs,Atom).
+statics_consist_instance(Invs,[is_of_primitive_sort(Obj,Sort)|Atom]):-
+   var(Obj),
+   is_of_primitive_sort(Obj,Sort),
+   statics_consist_instance(Invs,Atom).
+statics_consist_instance(Invs,[ne_back(A,B)|Atom]):-
+   A\==B,
+   statics_consist_instance(Invs,Atom).
+statics_consist_instance(Invs,[ne(A,B)|Atom]):-
+   append_dcut(Atom,[ne_back(A,B)],Atom1),!,
+   statics_consist_instance(Invs,Atom1).
+statics_consist_instance(Invs,[Pred|Atom]):-
+   ground(Pred),
+   member(Pred,Invs),!,
+   statics_consist_instance(Invs,Atom).
+statics_consist_instance(Invs,[Pred|Atom]):-
+   not(ground(Pred)),
+   member(Pred,Invs),
+   statics_consist_instance(Invs,Atom).
 /***************** local utils *****************/
 
 /*********** DOMAIN MODEL FUNCTIONS *****************/
@@ -1855,7 +1951,7 @@ append_cut([H|T],L,[H|Z]) :- append_cut(T,L,Z),!.
 % instanciate the viables that all ready been bind
 % ------------------------------------------
 append_st(ST1,ST2,ST):-
-    append_cut(ST1,ST2,ST0),
+    append_dcut(ST1,ST2,ST0),
     remove_unneed(ST0,[],ST),!.
 
 % remove the constants that no need
@@ -1952,6 +2048,7 @@ not_exist(se(Sort,Obj,Head1),List2):-
     member(se(Sort,Obj,Head2),List2),
     is_diff(Head1,Head2),!.
 
+
 % set_append: list1 + list2 -> list
 % no duplicate, do instanciation
 % ------------------------------------------
@@ -1961,6 +2058,8 @@ set_append([A|B], Z, C) :-
         set_append(B, Z, C),! .
 set_append([A|B], Z, [A|C]) :-
         set_append(B, Z, C) .
+
+
 
 % set_append_e: list1 + list2 -> list
 % no duplicate, no instanciation
@@ -1993,12 +2092,14 @@ vequal([X|XLs],[Y|YLs]):-
 
 % subtract(A,B,C): subtract B from A
 % -------------------------------------
+/*
 subtract([],_,[]):-!.
 subtract([A|B],C,D) :-
         member(A,C),
         subtract(B,C,D),!.
 subtract([A|B],C,[A|D]) :-
         subtract(B,C,D),!.
+*/
 
 /* arg1 - arg2 = arg3 */
 
@@ -2018,7 +2119,7 @@ remove_el([A|B],C,[A|D]) :-
 
 /* generate symbol predicate  (from file futile)*/
 
-gensym(Root,Atom) :-
+gensym_special(Root,Atom) :-
                         getnum(Root,Num),
                         name(Root,Name1),
                         name(Num,Name2),
@@ -2031,6 +2132,7 @@ getnum(Root,Num) :-
                         asserta(current_num(Root,Num)).
 
 getnum(Root,1) :- asserta(current_num(Root,1)).
+
 
 gensym_num(Root,Num,Atom):-
      name(Root,Name),
@@ -2157,7 +2259,7 @@ stoppoint.
 state_related(Post,Cond,undefd):-!.
 state_related(Post,Cond,[]):-!.
 state_related(Post,Cond,State2):-
-     append_cut(Post,Cond,State1),
+     append_dcut(Post,Cond,State1),
      state_related(State1,State2).
 
 % all states in necc are primitive
@@ -2724,6 +2826,7 @@ assert_is_of_sort1(Type,Obj):-
 assert_is_of_primitive_sort(Type,Obj):-
 	assert(is_of_primitive_sort(Obj,Type)),!.
 
+
 % change substate_class to primary sort level
 % assert in prolog database as gsubstate_class(Sort,Obj,States)
 prim_substate_class:-
@@ -2779,6 +2882,8 @@ xprod([X|Y],[A|E],D,(F,G)) :-
         xprod(Y,E,C,G).
 
 
+
+
 :-retractall(solution_file(_)).
 :-asserta(solution_file(user)).
 
@@ -2798,5 +2903,10 @@ lws(F):-tell(F),lws,told.
 :-export(rr1/0).
 rr:- test_ocl('domains_ocl/chameleonWorld.ocl').
 rr1:- test_ocl('domains_ocl/translog.ocl').
+
+:- include(translog4).
+
 :- fixup_exports.
+
+% :-rr.
 

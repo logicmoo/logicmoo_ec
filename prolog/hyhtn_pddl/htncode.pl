@@ -1,3 +1,39 @@
+/** <module> htncode
+% Provides a prolog database *env*
+%
+%  
+%
+% Logicmoo Project PrologMUD: A MUD server written in Prolog
+% Maintainer: Douglas Miles
+% Denton, TX 2005, 2010, 2014 
+% Dec 13, 2035
+%
+*/
+:-module(htncode,[]).
+
+
+:-multifile(user:push_env_ctx/0).
+:-dynamic(user:push_env_ctx/0).
+
+/* ***********************************/
+/* Douglas Miles 2005, 2010, 2014 */
+/* Denton, TX */
+/* ***********************************/
+
+
+
+% [Required] Load the Logicmoo Library Utils
+:- ensure_loaded(library(logicmoo_common)).
+:- ensure_loaded(library(planner_api)).
+:- use_module(library(logicmoo_planner)).
+
+:- kb_shared(baseKB:mpred_prop/3).
+
+:- ensure_loaded(library(logicmoo/util_structs)).
+:- ensure_loaded(library(logicmoo/util_bb_env)).
+:- prolog_load_context(file,File),ain(user:env_source_file(File)).
+
+:-op(500,fx,env_call).
 /* htncode.pl */
 
 /* ***********************************/
@@ -42,7 +78,7 @@ htn_task(Id,Goal,Init):-planner_task(Id,Goal,Init).
   substate_classes/3,
   method/6,
   operator/4,
-  inconsistent_constraint/1,
+  inconsistent_constraint/1.
   
 %  ss class expressions
 %  invariants:
@@ -50,7 +86,7 @@ htn_task(Id,Goal,Init):-planner_task(Id,Goal,Init).
 %   -ve invariants
 %   +ve invariants
 %  operators
-  foo.
+%  foo.
 
 op_num(0).
 my_stats(0).
@@ -178,6 +214,9 @@ assert_node(Name,Pre,Dec,Temp,Statics):-
    gensym_special(root,SYM),
    assert(node(SYM,Pre,Dec,Temp,Statics)),!.
 
+all_HP_expanded([]):-!.
+all_HP_expanded([step(HPid,Name,_,_,exp(TN))|THPS]):-
+   all_HP_expanded(THPS),!.
 /************ expand every step *********************/
 expand_decomp([],Post,Post,Temp,Temp,Statics,Statics,[]):-!.
 %0-1 if the step has expand already, get the state change, go to next
@@ -237,6 +276,13 @@ expand_decomp([step(HPid,Name,undefd,undefd,unexp)|Decomp],Pre,Post,Temp,Temp1,S
    assert(op_num(N1)),
 %   write('can be expand by method '),write(Name),nl,
    expand_decomp(Decomp,State,Post,Temp,Temp1,Statics2,Statics1,Decomp1),!.
+
+
+
+
+
+
+
 
 % 3. if HP's name and it's Pre meet an operator, return operator's name
 expand_decomp([step(HPid,Name,undefd,undefd,unexp)|Decomp],Pre,Post,Temp,Temp1,Statics,Statics1,[step(HPid,Name,Pre0,Post0,exp(Name))|Decomp1]):-
@@ -498,7 +544,16 @@ apply_method(HPid,TN,Name,Pre,Pre0,Post0,State,Statics,Temp,Dec):-
 make_dec0(HPid,Dec,Temp,Dec0,Temp0):-
     make_dec01(HPid,1,Dec,Dec0),
     change_temp(HPid,Temp,[],Temp0),!.
-
+make_dec1(HPid,Pre,ACH,Statics,Temp,Dec,Temp1,Dec1):-
+   state_achieved(ACH,Pre,_),
+   make_dec01(HPid,1,Dec,Dec1),
+   change_temp(HPid,Temp,[],Temp1).
+make_dec1(HPid,Pre,ACH,Statics,Temp,Dec,[before(STID0,STID1)|Temp1],[step(STID0,achieve(ACH),Pre,ACH,unexp)|Dec1]):-
+   gensym_num(HPid,0,STID0),
+   gensym_num(HPid,1,STID1),
+   make_dec01(HPid,1,Dec,Dec1),
+   change_temp(HPid,Temp,[],Temp1),!.
+   
 make_dec01(HPid,_,[],[]):-!.
 make_dec01(HPid,Num,[HDec|TDec],[step(STID,HDec,undefd,undefd,unexp)|TDec0]):-
    operatorC(HDec,_,_,_,_),
@@ -574,15 +629,7 @@ apply_method1(HPid,TN,Name,Pre,Pre0,ACH,Post0,State,Statics,Temp,Dec):-
    assert(op_num(N1)),
    make_tn(TN,Name,Pre,State,Temp1,Dec1),!.
 
-make_dec1(HPid,Pre,ACH,Statics,Temp,Dec,Temp1,Dec1):-
-   state_achieved(ACH,Pre,_),
-   make_dec01(HPid,1,Dec,Dec1),
-   change_temp(HPid,Temp,[],Temp1).
-make_dec1(HPid,Pre,ACH,Statics,Temp,Dec,[before(STID0,STID1)|Temp1],[step(STID0,achieve(ACH),Pre,ACH,unexp)|Dec1]):-
-   gensym_num(HPid,0,STID0),
-   gensym_num(HPid,1,STID1),
-   make_dec01(HPid,1,Dec,Dec1),
-   change_temp(HPid,Temp,[],Temp1),!.
+
 % --------------------end of apply_method1/11---------------------
 
 % forward search for operators can't directly solved
@@ -775,6 +822,12 @@ existing_node([],[step(_,Name,Pre,_,unexp)|Rest],Statics):-
     append_st(Statics,Statics0,Statics1),
     all_equal(Pre,Pre0,Statics1).
 
+
+
+
+
+
+
 all_equal([],[],Statics):-
     statics_consist(Statics),!.
 all_equal([se(Sort,Obj,SE)|Pre],[se(Sort,Obj,SE1)|Pre1],Statics):-
@@ -939,6 +992,18 @@ is_achieved([H|T], State) :-
 is_achieved([H|T], State) :-
     member(H,State),
     is_achieved(T,State),!.
+
+% check if a predicate is statics or not
+is_statics(ne(A,B)):-!.
+is_statics(is_of_sort(A,B)):-!.
+is_statics(is_of_primitive_sort(A,B)):-!.
+is_statics(Pred):-
+    functor(Pred,FF,NN),
+    functor(Pred1,FF,NN),
+    atomic_invariants(Atom),
+    member(Pred1,Atom),!.
+    
+    
 %-------------------------------------------
 
 /************ state changes by actions ********/
@@ -1006,22 +1071,6 @@ all_achieved([se(Sort,Obj,SL)|Pre],Statics,Post):-
     is_achieved(SL,SR),
     statics_consist_instance(Statics),
     all_achieved(Pre,Statics,Post).
-
-% flatten with no duplicate
-set_flatten([HO|TO], List, O_List):-
-	set_append_e(HO, List, List_tmp),
-	set_flatten(TO, List_tmp, O_List),!.
-set_flatten([H|TO], List,O_List):-
-	set_append_e([H], List, List_tmp),
-	set_flatten(TO, List_tmp, O_List).
-set_flatten([], [HList|T], O_List):-
-	HList = [],
-	set_flatten(T, [], O_List).
-set_flatten([], [HList|T], O_List):-
-	list(HList),
-	set_flatten([HList|T],[], O_List),!.
-set_flatten([], L,L):-!.
-
 
 
 %-------------------------------------------
@@ -1141,209 +1190,23 @@ extract_solution(Node,PHPs,SIZE1) :-
    pprint(PHPs,1,SIZE),
    SIZE1 is SIZE -1,!.
 
-%***********print out solution**************************   
-push_to_primitive([],PHPs,PHPs) :-!.
-push_to_primitive([step(HPID,_,_,_,exp(TN))|HPs],List,PHPs) :-
-   tn(TN,Name,Pre,Post,Temp,Dec),
-   push_to_primitive(Dec,List,Dec1),
-   push_to_primitive(HPs,Dec1,PHPs),!.
-push_to_primitive([step(HPID,_,_,_,exp(Name))|HPs],List,PHPs):-
-   append(List,[Name],List1),
-   push_to_primitive(HPs,List1,PHPs),!.
-
-%*******************************************************   
-pprint([],SIZE,SIZE):-!.
-pprint([HS|TS],Size0,SIZE):-
-    list(HS),
-    pprint(HS,Size0,Size1),
-    pprint(TS,Size1,SIZE),!.
-pprint([HS|TS],Size0,SIZE):-
-%    write('step '),write(Size0),write(': '),
-%    write(HS),nl,
-    Size1 is Size0+1,
-    pprint(TS,Size1,SIZE),!.
-
-delete_all_nodes :-
-	retractall(node(_,_,_,_,_)),
-	retractall(final_node(_)),
-	retractall(tp_node(_,_,_,_,_,_)),
-	retractall(closed_node(_,_,_,_,_,_)),
-	retractall(solved_node(_,_,_)).
-delete_all_nodes :- !.
-
-/*********** TEMPORAL AND DECLOBBERING ************/
-
-possibly_before(I,J,Temps) :-
-    \+ necessarily_before(J,I,Temps), !.
-
-necessarily_before(J,I,Temps) :-
-    member(before(J,I),Temps),!.
-necessarily_before(J,I,Temps) :-
-    member(before(J,Z),Temps),
-    necessarily_before(Z,I,Temps),!.
-
-/********** retracting, asserting and reporting nodes *****************/
-
-/***** SOLUTION ******/
-select_node(node(Name,Pre,Temp,Decomp,Statics)) :-
-   retract(node(Name,Pre,Temp,Decomp,Statics)),
-%   nl,nl,write(Name),write(' RETRACTED'),nl,nl,
-%   tell(user),
-%   nl,nl,write(Name),write(' RETRACTED'),nl,nl,
-%   tell(FF),
-    !.
-
-all_HP_expanded([]):-!.
-all_HP_expanded([step(HPid,Name,_,_,exp(TN))|THPS]):-
-   all_HP_expanded(THPS),!.
 
 
-% check for statics consist and instanciate them
-statics_consist_instance([]):-!.
-statics_consist_instance(Statics) :-
-   get_invariants(Invs),
-   statics_consist_instance0(Invs,Statics).
-
-statics_consist_instance0(Invs,[]):-!.
-statics_consist_instance0(Invs,[ne_back(A,B)|TStatics]):-
-   not(A==B),
-   statics_consist_instance0(Invs,TStatics).
-statics_consist_instance0(Invs,[ne(A,B)|TStatics]):-
-   append(TStatics,[ne_back(A,B)],TStatics1),
-   statics_consist_instance0(Invs,TStatics1),!.
-statics_consist_instance0(Invs,[is_of_sort(Obj,Sort)|TStatics]):-
-   is_of_sort(Obj,Sort),
-   statics_consist_instance0(Invs,TStatics).
-statics_consist_instance0(Invs,[is_of_primitive_sort(Obj,Sort)|TStatics]):-
-   is_of_primitive_sort(Obj,Sort),
-   statics_consist_instance0(Invs,TStatics).
-statics_consist_instance0(Invs,[Pred|TStatics]):-
-   member(Pred,Invs),
-   statics_consist_instance0(Invs,TStatics).
-
-% check for statics consist without instanciate them
-% only instance the variable when there is one choice of from the ground lists
-statics_consist([]):-!.
-statics_consist(Statics):-
-   get_invariants(Invs),
-   statics_consist1(Invs,Statics),!.
-   
-statics_consist1(Invs,[]):-!.
-statics_consist1(Invs,[ne_back(A,B)|TStatics]):-
-   not(A==B),
-   statics_consist1(Invs,TStatics),!.
-statics_consist1(Invs,[ne(A,B)|TStatics]):-
-   append(TStatics,[ne_back(A,B)],TStatics1),
-   statics_consist1(Invs,TStatics1),!.
-statics_consist1(Invs,[is_of_sort(Obj,Sort)|TStatics]):-
-   get_sort_objects(Sort,Objs),
-   obj_member(Obj,Objs),
-   statics_consist1(Invs,TStatics),!.
-statics_consist1(Invs,[is_of_primitive_sort(Obj,Sort)|TStatics]):-
-   objects(Sort,Objs),
-   obj_member(Obj,Objs),
-   statics_consist1(Invs,TStatics),!.
-statics_consist1(Invs,[Pred|TStatics]):-
-   pred_member(Pred,Invs),
-   statics_consist1(Invs,TStatics),!.
-
-/***************** local utils *****************/
-
-/*********** DOMAIN MODEL FUNCTIONS *****************/
-get_invariants(Invs) :-
-    atomic_invariants(Invs),!.
-
-rem_statics([ss(S,X,Preds)|Post], [ss(S,X,PredR)|PostR],Rt1) :-
-    filter_list(Preds, is_a_dynamic_pred,PredR),
-    filter_list(Preds, is_a_static_pred, R),
-    rem_statics(Post, PostR,Rt),
-    append(Rt,[is_of_sort(X,S)|R],Rt1),!.
-rem_statics([se(S,X,Preds)|Post], [se(S,X,PredR)|PostR],Rt1) :-
-    filter_list(Preds, is_a_dynamic_pred,PredR),
-    filter_list(Preds, is_a_static_pred, R),
-    rem_statics(Post, PostR,Rt),
-    append(Rt,[is_of_sort(X,S)|R],Rt1),!.
-rem_statics([], [],[]) :-!.
-
-% check if a predicate is statics or not
-is_statics(ne(A,B)):-!.
-is_statics(is_of_sort(A,B)):-!.
-is_statics(is_of_primitive_sort(A,B)):-!.
-is_statics(Pred):-
-    functor(Pred,FF,NN),
-    functor(Pred1,FF,NN),
-    atomic_invariants(Atom),
-    member(Pred1,Atom),!.
 
 
-/***************** STATICS ************************/
-% u_mem in ob_utils is SLOW!?.
-% this is a fast impl.
-u_mem_cut(_,[]):-!,fail.
-u_mem_cut(X,[Y|_]) :- X == Y,!.
-u_mem_cut(X,[_|L]) :- u_mem_cut(X,L),!.
 
 
-is_of_primitive_sort(X,Y) :-
-    objects(Y,L),member(X,L).
-is_of_sort(X,Y) :-
-    is_of_primitive_sort(X,Y).
-is_of_sort(X,Y) :-
-    sorts(Y,SL),member(Z,SL),is_of_sort(X,Z).
 
-member_cut(X,[X|_]) :- !.
-member_cut(X,[_|Y]) :- member_cut(X,Y),!.
 
-% check if object X is a member of a objects list
-% 1. if it is not a variable, check if it is in the list
-% 2. X is a variable, and the list only has one objects, make X as that obj
-% 3. X is a variable, but the list has more than one objects, leave X unchange
-obj_member(X,[X|[]]):-!. 
-obj_member(X,List):-     
-    obj_member0(X,List),!.
-obj_member0(X,[Y|_]):-
-    var(X),!.%if X is var, but Y not, the leave X as that variable
-obj_member0(X,[Y|_]):-
-    X==Y,!.
-obj_member0(X,[_|Y]) :- obj_member0(X,Y),!.
 
-% check if a predicate is a member of a ground predicate list,
-% 1. when only one predicates found
-% just used in binding the predicates to a sort without instantiate it
-% for efficiency, instantiate the variable if the list only have one atom
-pred_member(ne(A,B),List):-
-    A\==B,!.
-pred_member(is_of_sort(A,B),List):-
-    get_sort_objects(B,Objls),
-    obj_member(A,Objls),!.
-pred_member(is_of_primitive_sort(A,B),List):-
-    objects(B,Objls),
-    obj_member(A,Objls),!.
-pred_member(X,List):-
-    setof(X,member(X,List),Refined),
-    pred_member0(X,Refined),!.
-pred_member0(X,[X|[]]):-!.
-pred_member0(X,Y):-
-    pred_member1(X,Y),!.
-pred_member1(X,[Y|_]):-
-    X=..[H|XLs],
-    Y=..[H|YLs],
-    vequal(XLs,YLs),!.
-pred_member1(X,[_|Y]):- pred_member1(X,Y),!.
-	
-vequal([],[]):-!.
-vequal([X|XLs],[Y|YLs]):-
-    var(X),
-    vequal(XLs,YLs),!.
-vequal([X|XLs],[Y|YLs]):-
-    var(Y),
-    vequal(XLs,YLs),!.
-vequal([X|XLs],[Y|YLs]):-
-    X==Y,	
-    vequal(XLs,YLs),!.
 
-append_cut([],L,L) :- !.
-append_cut([H|T],L,[H|Z]) :- append_cut(T,L,Z),!.
+
+
+
+
+
+
+
 
 
 /************ change_op_representation ***********/
@@ -1460,6 +1323,25 @@ change_laters([before(Num1,0)|Temp],Num,[before(Num1,0)|Temp0]):-
 change_laters([before(Num1,Num2)|Temp],Num,[before(Num1,Num2)|Temp0]):-
      change_laters(Temp,Num,Temp0).
 
+% change the states to primitive states
+make_se_primitive([],[]).
+make_se_primitive([se(Sort,Obj,ST)|SE],[se(Sort,Obj,ST)|SE0]):-
+    find_prim_sort(Sort,[Sort]),!,
+    make_se_primitive(SE,SE0).
+make_se_primitive([se(Sort,Obj,ST)|SE],[se(PSort,Obj,ST)|SE0]):-
+    find_prim_sort(Sort,PSorts),
+    member(PSort,PSorts),
+    make_se_primitive(SE,SE0).
+
+% change the state changes to primitive states
+make_sc_primitive([],[]).
+make_sc_primitive([sc(Sort,Obj,SE1=>SE2)|ST],[sc(Sort,Obj,SE1=>SE2)|ST0]):-
+    find_prim_sort(Sort,[Sort]),!,
+    make_sc_primitive(ST,ST0).
+make_sc_primitive([sc(Sort,Obj,SE1=>SE2)|ST],[sc(PSort,Obj,SE1=>SE2)|ST0]):-
+    find_prim_sort(Sort,PSorts),
+    member(PSort,PSorts),
+    make_sc_primitive(ST,ST0).
 % ------------ end of change operator ----------------------
 make_tn(TN,Name,Pre,Post,Temp,Dec):-
     gensym_special(tn,TN),
@@ -1491,51 +1373,196 @@ append_changed(se(Sort,Obj,ST),se(Sort1,Obj,ST1),Pre0,Pre3,Post0,Post3):-
     append(Pre0,[se(Sort,Obj,ST)],Pre3),
     append(Post0,[se(Sort,Obj,ST1)],Post3),!.
 
-% change the states to primitive states
-make_se_primitive([],[]).
-make_se_primitive([se(Sort,Obj,ST)|SE],[se(Sort,Obj,ST)|SE0]):-
-    find_prim_sort(Sort,[Sort]),!,
-    make_se_primitive(SE,SE0).
-make_se_primitive([se(Sort,Obj,ST)|SE],[se(PSort,Obj,ST)|SE0]):-
-    find_prim_sort(Sort,PSorts),
-    member(PSort,PSorts),
-    make_se_primitive(SE,SE0).
 
-% change the state changes to primitive states
-make_sc_primitive([],[]).
-make_sc_primitive([sc(Sort,Obj,SE1=>SE2)|ST],[sc(Sort,Obj,SE1=>SE2)|ST0]):-
-    find_prim_sort(Sort,[Sort]),!,
-    make_sc_primitive(ST,ST0).
-make_sc_primitive([sc(Sort,Obj,SE1=>SE2)|ST],[sc(PSort,Obj,SE1=>SE2)|ST0]):-
-    find_prim_sort(Sort,PSorts),
-    member(PSort,PSorts),
-    make_sc_primitive(ST,ST0).
 
-/************ end of change_op_representation ***********/
+%***********print out solution**************************   
+push_to_primitive([],PHPs,PHPs) :-!.
+push_to_primitive([step(HPID,_,_,_,exp(TN))|HPs],List,PHPs) :-
+   tn(TN,Name,Pre,Post,Temp,Dec),
+   push_to_primitive(Dec,List,Dec1),
+   push_to_primitive(HPs,Dec1,PHPs),!.
+push_to_primitive([step(HPID,_,_,_,exp(Name))|HPs],List,PHPs):-
+   append(List,[Name],List1),
+   push_to_primitive(HPs,List1,PHPs),!.
+
+
+/*********** TEMPORAL AND DECLOBBERING ************/
+
+possibly_before(I,J,Temps) :-
+    \+ necessarily_before(J,I,Temps), !.
+
+necessarily_before(J,I,Temps) :-
+    member(before(J,I),Temps),!.
+necessarily_before(J,I,Temps) :-
+    member(before(J,Z),Temps),
+    necessarily_before(Z,I,Temps),!.
+
+/********** retracting, asserting and reporting nodes *****************/
+
+/***** SOLUTION ******/
+select_node(node(Name,Pre,Temp,Decomp,Statics)) :-
+   retract(node(Name,Pre,Temp,Decomp,Statics)),
+%   nl,nl,write(Name),write(' RETRACTED'),nl,nl,
+%   tell(user),
+%   nl,nl,write(Name),write(' RETRACTED'),nl,nl,
+%   tell(FF),
+    !.
+
+is_of_primitive_sort(X,Y) :-
+    objects(Y,L),member(X,L).
+is_of_sort(X,Y) :-
+    is_of_primitive_sort(X,Y).
+is_of_sort(X,Y) :-
+    sorts(Y,SL),member(Z,SL),is_of_sort(X,Z).
+
+find_all_upper([],[]).
+find_all_upper([HVars|TV],[HSorts|TS]):-
+     uppersorts(HSorts,Upsorts),
+     member(HVars,Upsorts),
+     find_all_upper(TV,TS).
+     
+% find out primitive sorts of a sort.
+find_prim_sort(Sort,PS):-
+  subsorts(Sort,Subsorts),
+  split_prim_noprim(Subsorts,PS,NP),!.
+
+% find out the objects of a sort
+get_sort_objects(Sort,Objs):-
+   find_prim_sort(Sort,PSorts),
+   get_objects1(PSorts,Objls),
+   flatten(Objls,[],Objs),!.
+
+get_objects1([],[]):-!.
+get_objects1([PS1|RS],[Objls1|Objls]):-
+   objects(PS1,Objls1),
+   get_objects1(RS,Objls),!.
+
+% find subsorts of a sort(include).
+subsorts(Sort,Subsorts):-
+  sort_down([Sort],[Sort],Subsorts),!.
+
+sort_down([],Subsorts,Subsorts):-!.
+sort_down([HOpen|TOpen],List,Sortslist):-
+  sorts(HOpen,Sorts),
+  append(List,Sorts,List1),
+  append(TOpen,Sorts,Open1),
+  sort_down(Open1,List1,Sortslist),!.
+sort_down([HOpen|TOpen],List,Sortslist):-
+  sort_down(TOpen,List,Sortslist),!.
+  
+% find uppersorts of a sort or object(include).
+uppersorts(Sort,Uppersorts):-
+  objects(Sort,Objls),
+  sort_up(Sort,[Sort],Uppersorts),!.
+uppersorts(Sort,Uppersorts):-
+  sorts(Sort,Sortls),
+  sort_up(Sort,[Sort],Uppersorts),!.
+uppersorts(Obj,Sortls):-
+  objects(Sort,Objls),
+  member(Obj, Objls),
+  sort_up(Sort,[Sort],Sortls),!.
+
+sort_up(Sort, List,Sortslist):-
+  sorts(non_primitive_sorts,NPSorts),
+  sort_up1(Sort,NPSorts,NPSorts,List,Sortslist),!.
+
+sort_up1(Sort,[],NPSorts,Sortslist,Sortslist):-!.
+sort_up1(Sort,[HNPSorts|TNPSorts],NPSorts,List,Sortslist):-
+  sorts(HNPSorts,Sorts),
+  member(Sort,Sorts),
+  append(List, [HNPSorts], List1),
+  sort_up(HNPSorts,List1,Sortslist),!. 
+sort_up1(Sort,[HNPSorts|TNPSorts],NPSorts,List,Sortslist):-
+  sort_up1(Sort,TNPSorts,NPSorts,List,Sortslist),!.
+
+% find out primitive sorts from a sorts list.
+split_prim_noprim([],[],[]):-!.
+split_prim_noprim([HS|TS],[HS|TP],NP):-
+     objects(HS,Obj),
+     split_prim_noprim(TS,TP,NP),!.		
+split_prim_noprim([HS|TS],PS,[HS|NP]):-
+     split_prim_noprim(TS,PS,NP),!.
+
+
+
+
+
+% check for statics consist and instanciate them
+statics_consist_instance([]):-!.
+statics_consist_instance(Statics) :-
+   get_invariants(Invs),
+   statics_consist_instance0(Invs,Statics).
+
+statics_consist_instance0(Invs,[]):-!.
+statics_consist_instance0(Invs,[ne_back(A,B)|TStatics]):-
+   not(A==B),
+   statics_consist_instance0(Invs,TStatics).
+statics_consist_instance0(Invs,[ne(A,B)|TStatics]):-
+   append(TStatics,[ne_back(A,B)],TStatics1),
+   statics_consist_instance0(Invs,TStatics1),!.
+statics_consist_instance0(Invs,[is_of_sort(Obj,Sort)|TStatics]):-
+   is_of_sort(Obj,Sort),
+   statics_consist_instance0(Invs,TStatics).
+statics_consist_instance0(Invs,[is_of_primitive_sort(Obj,Sort)|TStatics]):-
+   is_of_primitive_sort(Obj,Sort),
+   statics_consist_instance0(Invs,TStatics).
+statics_consist_instance0(Invs,[Pred|TStatics]):-
+   member(Pred,Invs),
+   statics_consist_instance0(Invs,TStatics).
+
+% check for statics consist without instanciate them
+% only instance the variable when there is one choice of from the ground lists
+statics_consist([]):-!.
+statics_consist(Statics):-
+   get_invariants(Invs),
+   statics_consist1(Invs,Statics),!.
+   
+statics_consist1(Invs,[]):-!.
+statics_consist1(Invs,[ne_back(A,B)|TStatics]):-
+   not(A==B),
+   statics_consist1(Invs,TStatics),!.
+statics_consist1(Invs,[ne(A,B)|TStatics]):-
+   append(TStatics,[ne_back(A,B)],TStatics1),
+   statics_consist1(Invs,TStatics1),!.
+statics_consist1(Invs,[is_of_sort(Obj,Sort)|TStatics]):-
+   get_sort_objects(Sort,Objs),
+   obj_member(Obj,Objs),
+   statics_consist1(Invs,TStatics),!.
+statics_consist1(Invs,[is_of_primitive_sort(Obj,Sort)|TStatics]):-
+   objects(Sort,Objs),
+   obj_member(Obj,Objs),
+   statics_consist1(Invs,TStatics),!.
+statics_consist1(Invs,[Pred|TStatics]):-
+   pred_member(Pred,Invs),
+   statics_consist1(Invs,TStatics),!.
+
+/***************** local utils *****************/
+
+/*********** DOMAIN MODEL FUNCTIONS *****************/
+get_invariants(Invs) :-
+    atomic_invariants(Invs),!.
+
+rem_statics([ss(S,X,Preds)|Post], [ss(S,X,PredR)|PostR],Rt1) :-
+    filter_list(Preds, is_a_dynamic_pred,PredR),
+    filter_list(Preds, is_a_static_pred, R),
+    rem_statics(Post, PostR,Rt),
+    append(Rt,[is_of_sort(X,S)|R],Rt1),!.
+rem_statics([se(S,X,Preds)|Post], [se(S,X,PredR)|PostR],Rt1) :-
+    filter_list(Preds, is_a_dynamic_pred,PredR),
+    filter_list(Preds, is_a_static_pred, R),
+    rem_statics(Post, PostR,Rt),
+    append(Rt,[is_of_sort(X,S)|R],Rt1),!.
+rem_statics([], [],[]) :-!.
+
+
+
+/***************** STATICS ************************/
 
 isemptylist([]):-!.
 
-gensym_num(Root,Num,Atom):-
-     name(Root,Name),
-     name(Num,Name1),
-     append(Name,Name1,Name2),
-     name(Atom,Name2),!.
 
-% set_append_e: list1 + list2 -> list
-% no duplicate, no instanciation
-% ------------------------------------------
-set_append_e(A,B,C):-
-    append_cut(A,B,D),
-    remove_dup(D,[],C),!.
-
-% remove duplicate
-remove_dup([],C,C):-!.
-remove_dup([A|B],Z,C) :-
-    member_e(A, Z),
-    remove_dup(B, Z, C),! .
-remove_dup([A|B], Z, C):-
-    append(Z,[A],D),
-    remove_dup(B, D, C),!.
+member_cut(X,[X|_]) :- !.
+member_cut(X,[_|Y]) :- member_cut(X,Y),!.
 
 member_e(X,[Y|_]):-
      X==Y,!.
@@ -1549,8 +1576,55 @@ member_e(se(Sort,Obj,SE),[se(Sort,Obj1,SE)|_]):-
 member_e(sc(Sort,Obj,SE1=>SE2),[sc(Sort,Obj1,SE1=>SE2)|_]):-
      Obj==Obj1,!.
 member_e(X,[Y|L]):- member_e(X,L),!.
+% u_mem in ob_utils is SLOW!?.
+% this is a fast impl.
+u_mem_cut(_,[]):-!,fail.
+u_mem_cut(X,[Y|_]) :- X == Y,!.
+u_mem_cut(X,[_|L]) :- u_mem_cut(X,L),!.
 
-% append_st: append two statics
+
+% check if object X is a member of a objects list
+% 1. if it is not a variable, check if it is in the list
+% 2. X is a variable, and the list only has one objects, make X as that obj
+% 3. X is a variable, but the list has more than one objects, leave X unchange
+obj_member(X,[X|[]]):-!. 
+obj_member(X,List):-     
+    obj_member0(X,List),!.
+obj_member0(X,[Y|_]):-
+    var(X),!.%if X is var, but Y not, the leave X as that variable
+obj_member0(X,[Y|_]):-
+    X==Y,!.
+obj_member0(X,[_|Y]) :- obj_member0(X,Y),!.
+
+% check if a predicate is a member of a ground predicate list,
+% 1. when only one predicates found
+% just used in binding the predicates to a sort without instantiate it
+% for efficiency, instantiate the variable if the list only have one atom
+pred_member(ne(A,B),List):-
+    A\==B,!.
+pred_member(is_of_sort(A,B),List):-
+    get_sort_objects(B,Objls),
+    obj_member(A,Objls),!.
+pred_member(is_of_primitive_sort(A,B),List):-
+    objects(B,Objls),
+    obj_member(A,Objls),!.
+pred_member(X,List):-
+    setof(X,member(X,List),Refined),
+    pred_member0(X,Refined),!.
+pred_member0(X,[X|[]]):-!.
+pred_member0(X,Y):-
+    pred_member1(X,Y),!.
+pred_member1(X,[Y|_]):-
+    X=..[H|XLs],
+    Y=..[H|YLs],
+    vequal(XLs,YLs),!.
+pred_member1(X,[_|Y]):- pred_member1(X,Y),!.
+	
+
+
+append_cut([],L,L) :- !.
+append_cut([H|T],L,[H|Z]) :- append_cut(T,L,Z),!.
+
 % remove the constants that no need
 % instanciate the viables that all ready been bind
 % ------------------------------------------
@@ -1607,6 +1681,247 @@ same_var_member1([H1|T1],[H2|T2]):-
      H1==H2,
      same_var_member1(T1,T2),!.
 
+	
+% set_append_e: list1 + list2 -> list
+% no duplicate, no instanciation
+% ------------------------------------------
+set_append_e(A,B,C):-
+    append_cut(A,B,D),
+    remove_dup(D,[],C),!.
+
+% remove duplicate
+remove_dup([],C,C):-!.
+remove_dup([A|B],Z,C) :-
+    member_e(A, Z),
+    remove_dup(B, Z, C),! .
+remove_dup([A|B], Z, C):-
+    append(Z,[A],D),
+    remove_dup(B, D, C),!.
+
+vequal([],[]):-!.
+vequal([X|XLs],[Y|YLs]):-
+    var(X),
+    vequal(XLs,YLs),!.    
+vequal([X|XLs],[Y|YLs]):-
+    var(Y),
+    vequal(XLs,YLs),!.
+vequal([X|XLs],[Y|YLs]):-
+    X==Y,	
+    vequal(XLs,YLs),!.
+
+
+% append_st: append two statics
+
+/* is X is in the atomic_invariants then by defn its a static. */
+is_a_static_pred(X) :-
+        atomic_invariants( A ),
+        not( not( member(X,A) )),!.
+is_a_static_pred(ne(_,_)) :-!.
+is_a_static_pred(is_of_sort(_,_)) :-!.
+ 
+is_a_dynamic_pred(X) :-
+        not( is_a_static_pred(X) ),!.
+ 
+/* filter_list(X,condition(args),XO)
+ 
+ XO is reduced list */
+
+filter_list([X|Rest],Op,[X|Rest1]) :-
+        Op =.. OL,
+        append(OL,[X],OL1),
+        Pred =.. OL1,
+        call(Pred),
+        filter_list(Rest,Op,Rest1),!.
+filter_list([_|Rest],Op,Rest1) :-
+        filter_list(Rest,Op,Rest1),!.
+filter_list([],_,[]).
+
+
+
+% ----------------------utilities---------------------
+/*
+not(X):- \+X.
+member(X,[X|_]).
+member(X,[_|L]) :- member(X,L).
+append([],L,L):-!.
+append([H|T],L,[H|Z]) :- append(T,L,Z),!.
+ */
+
+file_exists(Filename):-exists_file(Filename).
+
+% subtract(A,B,C): subtract B from A
+% -------------------------------------
+subtract([],_,[]):-!.
+subtract([A|B],C,D) :-
+        member(A,C),
+        subtract(B,C,D),!.
+subtract([A|B],C,[A|D]) :-
+        subtract(B,C,D),!.
+
+/* arg1 - arg2 = arg3 */
+
+list_take(R,[E|R1],R2):-
+        remove_el(R,E,RR),
+        list_take(RR,R1,R2),!.
+list_take(R,[_|R1],R2):-
+        list_take(R,R1,R2),!.
+list_take(A,[],A) :- !.
+
+				% remove_el: list * el -> list-el 
+% ----------------------------------
+remove_el([],_,[]) :- ! .
+remove_el([A|B],A,B) :- ! .
+remove_el([A|B],C,[A|D]) :-
+        remove_el(B,C,D) .
+
+/* generate symbol predicate  (from file futile)*/
+
+gensym_special(Root,Atom) :-
+                        getnum(Root,Num),
+                        name(Root,Name1),
+                        name(Num,Name2),
+                        append(Name1,Name2,Name),
+                        name(Atom,Name).
+
+getnum(Root,Num) :-
+                        retract(current_num(Root,Num1)),!,
+                        Num is Num1+1,
+                        asserta(current_num(Root,Num)).
+
+getnum(Root,1) :- asserta(current_num(Root,1)).
+
+
+/************ end of change_op_representation ***********/
+
+gensym_num(Root,Num,Atom):-
+     name(Root,Name),
+     name(Num,Name1),
+     append(Name,Name1,Name2),
+     name(Atom,Name2),!.
+
+
+%*******************************************************   
+pprint([],SIZE,SIZE):-!.
+pprint([HS|TS],Size0,SIZE):-
+    list(HS),
+    pprint(HS,Size0,Size1),
+    pprint(TS,Size1,SIZE),!.
+pprint([HS|TS],Size0,SIZE):-
+%    write('step '),write(Size0),write(': '),
+%    write(HS),nl,
+    Size1 is Size0+1,
+    pprint(TS,Size1,SIZE),!.
+
+
+% list of lists -> list
+
+flatten([HO|TO], List, O_List):-
+	append(HO, List, List_tmp),
+	flatten(TO, List_tmp, O_List),!.
+flatten([H|TO], List,O_List):-
+	append([H], List, List_tmp),
+	flatten(TO, List_tmp, O_List).
+flatten([], [HList|T], O_List):-
+	HList = [],
+	flatten(T, [], O_List).
+flatten([], [HList|T], O_List):-
+	list(HList),
+	flatten([HList|T],[], O_List),!.
+flatten([], L,L):-!.
+
+% flatten with no duplicate
+set_flatten([HO|TO], List, O_List):-
+	set_append_e(HO, List, List_tmp),
+	set_flatten(TO, List_tmp, O_List),!.
+set_flatten([H|TO], List,O_List):-
+	set_append_e([H], List, List_tmp),
+	set_flatten(TO, List_tmp, O_List).
+set_flatten([], [HList|T], O_List):-
+	HList = [],
+	set_flatten(T, [], O_List).
+set_flatten([], [HList|T], O_List):-
+	list(HList),
+	set_flatten([HList|T],[], O_List),!.
+set_flatten([], L,L):-!.
+
+% list: [el1,el2, ...] --> bool
+% -----------------------------
+list(A) :-
+        var(A) ,
+        ! ,
+        fail .
+list(A) :-
+        functor(A,'.',_).
+% ***********************for multy tasks*****************
+:- assert(time_taken(0)).
+:- assert(soln_size(0)).
+:- assert(plan_used(0)).
+
+solve(N,FN):-
+   N < FN,
+   tell(user),
+   nl,write('task '), write(N),write(': '),nl,
+   solution_file(F),
+   tell(F),
+   nl,write('task '), write(N),write(': '),nl,
+   solve(N),
+   Ni is N+1,
+   solve(Ni,FN).
+solve(FN,FN):-
+   tell(user),nl,write('task '),
+   write(FN),write(': '),nl,
+   solution_file(F),
+   tell(F),
+   nl,write('task '),
+   write(FN),write(': '),nl,
+   solve(FN),
+   retractall(sum(_)),
+   assert(sum(0)),
+   sum_time(CP),
+   retractall(sum(_)),
+   assert(sum(0)),
+   sum_size(SIZE),
+   TIM is CP /1000,
+   retractall(sum(_)),
+   assert(sum(0)),
+   sum_plan(PLAN),
+   retractall(time_taken(_)),
+   retractall(soln_size(_)),
+   retractall(plan_used(_)),
+   nl,write('total time '),write(TIM),write(' seconds'),
+   nl,write('total size '),write(SIZE),
+   nl,write('plan used '),write(PLAN),
+   nl,
+   told.
+
+sum_time(TIM):-
+   time_taken(CP),
+   retract(sum(N)),
+   N1 is N +CP,
+   assert(sum(N1)),
+   fail.
+sum_time(TIM):-
+   sum(TIM).
+sum_size(SIZE):-
+   soln_size(S),
+   retract(sum(N)),
+   N1 is N +S,
+   assert(sum(N1)),
+   fail.
+sum_size(SIZE):-
+   sum(SIZE).
+   
+   
+sum_plan(Plan):-
+   plan_used(PL),
+   retract(sum(N)),
+   N1 is N +PL,
+   assert(sum(N1)),
+   fail.
+sum_plan(Plan):-
+   sum(Plan).
+   
+   
 %ground the hierarchy structure of HTN planning domain
 ground_hierarchy:-
      ground_predicates,
@@ -1747,150 +2062,14 @@ get_obj_sort([HVars|TV],[HObj|TS]):-
      member(HObj,Objls),
      get_obj_sort(TV,TS),!.
 
-find_all_upper([],[]).
-find_all_upper([HVars|TV],[HSorts|TS]):-
-     uppersorts(HSorts,Upsorts),
-     member(HVars,Upsorts),
-     find_all_upper(TV,TS).
-     
-% find out primitive sorts of a sort.
-find_prim_sort(Sort,PS):-
-  subsorts(Sort,Subsorts),
-  split_prim_noprim(Subsorts,PS,NP),!.
+delete_all_nodes :-
+	retractall(node(_,_,_,_,_)),
+	retractall(final_node(_)),
+	retractall(tp_node(_,_,_,_,_,_)),
+	retractall(closed_node(_,_,_,_,_,_)),
+	retractall(solved_node(_,_,_)).
+delete_all_nodes :- !.
 
-% find out the objects of a sort
-get_sort_objects(Sort,Objs):-
-   find_prim_sort(Sort,PSorts),
-   get_objects1(PSorts,Objls),
-   flatten(Objls,[],Objs),!.
-
-get_objects1([],[]):-!.
-get_objects1([PS1|RS],[Objls1|Objls]):-
-   objects(PS1,Objls1),
-   get_objects1(RS,Objls),!.
-
-% find subsorts of a sort(include).
-subsorts(Sort,Subsorts):-
-  sort_down([Sort],[Sort],Subsorts),!.
-
-sort_down([],Subsorts,Subsorts):-!.
-sort_down([HOpen|TOpen],List,Sortslist):-
-  sorts(HOpen,Sorts),
-  append(List,Sorts,List1),
-  append(TOpen,Sorts,Open1),
-  sort_down(Open1,List1,Sortslist),!.
-sort_down([HOpen|TOpen],List,Sortslist):-
-  sort_down(TOpen,List,Sortslist),!.
-  
-% find uppersorts of a sort or object(include).
-uppersorts(Sort,Uppersorts):-
-  objects(Sort,Objls),
-  sort_up(Sort,[Sort],Uppersorts),!.
-uppersorts(Sort,Uppersorts):-
-  sorts(Sort,Sortls),
-  sort_up(Sort,[Sort],Uppersorts),!.
-uppersorts(Obj,Sortls):-
-  objects(Sort,Objls),
-  member(Obj, Objls),
-  sort_up(Sort,[Sort],Sortls),!.
-
-sort_up(Sort, List,Sortslist):-
-  sorts(non_primitive_sorts,NPSorts),
-  sort_up1(Sort,NPSorts,NPSorts,List,Sortslist),!.
-
-sort_up1(Sort,[],NPSorts,Sortslist,Sortslist):-!.
-sort_up1(Sort,[HNPSorts|TNPSorts],NPSorts,List,Sortslist):-
-  sorts(HNPSorts,Sorts),
-  member(Sort,Sorts),
-  append(List, [HNPSorts], List1),
-  sort_up(HNPSorts,List1,Sortslist),!. 
-sort_up1(Sort,[HNPSorts|TNPSorts],NPSorts,List,Sortslist):-
-  sort_up1(Sort,TNPSorts,NPSorts,List,Sortslist),!.
-
-% find out primitive sorts from a sorts list.
-split_prim_noprim([],[],[]):-!.
-split_prim_noprim([HS|TS],[HS|TP],NP):-
-     objects(HS,Obj),
-     split_prim_noprim(TS,TP,NP),!.		
-split_prim_noprim([HS|TS],PS,[HS|NP]):-
-     split_prim_noprim(TS,PS,NP),!.
-
-
-% ----------------------utilities---------------------
-/*
-not(X):- \+X.
-member(X,[X|_]).
-member(X,[_|L]) :- member(X,L).
-append([],L,L):-!.
-append([H|T],L,[H|Z]) :- append(T,L,Z),!.
- */
-
-file_exists(Filename):-exists_file(Filename).
-
-% subtract(A,B,C): subtract B from A
-% -------------------------------------
-subtract([],_,[]):-!.
-subtract([A|B],C,D) :-
-        member(A,C),
-        subtract(B,C,D),!.
-subtract([A|B],C,[A|D]) :-
-        subtract(B,C,D),!.
-
-/* arg1 - arg2 = arg3 */
-
-list_take(R,[E|R1],R2):-
-        remove_el(R,E,RR),
-        list_take(RR,R1,R2),!.
-list_take(R,[_|R1],R2):-
-        list_take(R,R1,R2),!.
-list_take(A,[],A) :- !.
-
-				% remove_el: list * el -> list-el 
-% ----------------------------------
-remove_el([],_,[]) :- ! .
-remove_el([A|B],A,B) :- ! .
-remove_el([A|B],C,[A|D]) :-
-        remove_el(B,C,D) .
-
-/* generate symbol predicate  (from file futile)*/
-
-gensym_special(Root,Atom) :-
-                        getnum(Root,Num),
-                        name(Root,Name1),
-                        name(Num,Name2),
-                        append(Name1,Name2,Name),
-                        name(Atom,Name).
-
-getnum(Root,Num) :-
-                        retract(current_num(Root,Num1)),!,
-                        Num is Num1+1,
-                        asserta(current_num(Root,Num)).
-
-getnum(Root,1) :- asserta(current_num(Root,1)).
-
-/* is X is in the atomic_invariants then by defn its a static. */
-is_a_static_pred(X) :-
-        atomic_invariants( A ),
-        not( not( member(X,A) )),!.
-is_a_static_pred(ne(_,_)) :-!.
-is_a_static_pred(is_of_sort(_,_)) :-!.
- 
-is_a_dynamic_pred(X) :-
-        not( is_a_static_pred(X) ),!.
- 
-/* filter_list(X,condition(args),XO)
- 
- XO is reduced list */
-
-filter_list([X|Rest],Op,[X|Rest1]) :-
-        Op =.. OL,
-        append(OL,[X],OL1),
-        Pred =.. OL1,
-        call(Pred),
-        filter_list(Rest,Op,Rest1),!.
-filter_list([_|Rest],Op,Rest1) :-
-        filter_list(Rest,Op,Rest1),!.
-filter_list([],_,[]).
 
 % xprod: list * list --> (list X list)
 % -----------------------------------
@@ -1912,93 +2091,8 @@ xprod([X|Y],[A|E],D,(F,G)) :-
         D =..[^,A,C] ,
         F =..[member,A,X] ,
         xprod(Y,E,C,G).
-% list of lists -> list
 
-flatten([HO|TO], List, O_List):-
-	append(HO, List, List_tmp),
-	flatten(TO, List_tmp, O_List),!.
-flatten([H|TO], List,O_List):-
-	append([H], List, List_tmp),
-	flatten(TO, List_tmp, O_List).
-flatten([], [HList|T], O_List):-
-	HList = [],
-	flatten(T, [], O_List).
-flatten([], [HList|T], O_List):-
-	list(HList),
-	flatten([HList|T],[], O_List),!.
-flatten([], L,L):-!.
 
-% list: [el1,el2, ...] --> bool
-% -----------------------------
-list(A) :-
-        var(A) ,
-        ! ,
-        fail .
-list(A) :-
-        functor(A,'.',_).
-% ***********************for multy tasks*****************
-:- assert(time_taken(0)).
-:- assert(soln_size(0)).
-:- assert(plan_used(0)).
+:- include(translog4).
 
-solve(N,FN):-
-   N < FN,
-   tell(user),
-   nl,write('task '), write(N),write(': '),nl,
-   solution_file(F),
-   tell(F),
-   nl,write('task '), write(N),write(': '),nl,
-   solve(N),
-   Ni is N+1,
-   solve(Ni,FN).
-solve(FN,FN):-
-   tell(user),nl,write('task '),
-   write(FN),write(': '),nl,
-   solution_file(F),
-   tell(F),
-   nl,write('task '),
-   write(FN),write(': '),nl,
-   solve(FN),
-   retractall(sum(_)),
-   assert(sum(0)),
-   sum_time(CP),
-   retractall(sum(_)),
-   assert(sum(0)),
-   sum_size(SIZE),
-   TIM is CP /1000,
-   retractall(sum(_)),
-   assert(sum(0)),
-   sum_plan(PLAN),
-   retractall(time_taken(_)),
-   retractall(soln_size(_)),
-   retractall(plan_used(_)),
-   nl,write('total time '),write(TIM),write(' seconds'),
-   nl,write('total size '),write(SIZE),
-   nl,write('plan used '),write(PLAN),
-   nl,
-   told.
-
-sum_time(TIM):-
-   time_taken(CP),
-   retract(sum(N)),
-   N1 is N +CP,
-   assert(sum(N1)),
-   fail.
-sum_time(TIM):-
-   sum(TIM).
-sum_size(SIZE):-
-   soln_size(S),
-   retract(sum(N)),
-   N1 is N +S,
-   assert(sum(N1)),
-   fail.
-sum_size(SIZE):-
-   sum(SIZE).
-sum_plan(Plan):-
-   plan_used(PL),
-   retract(sum(N)),
-   N1 is N +PL,
-   assert(sum(N1)),
-   fail.
-sum_plan(Plan):-
-   sum(Plan).
+:- fixup_exports.   
