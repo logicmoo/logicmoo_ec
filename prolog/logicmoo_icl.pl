@@ -14,8 +14,8 @@ test_logicmoo_icl_sanity.
 
 
 %:- use_module(library(lps_corner)).
-:- user:use_module(library(ec_planner/code_icl)).
-:- user:reexport(library(ec_planner/code_icl)).
+:- user:use_module(library('ec_planner/code_icl/code_icl.tex')).
+:- user:reexport(library('ec_planner/code_icl/code_icl.tex')).
 
 %:- use_module(library(eggdrop)).
 %:- egg_go.
