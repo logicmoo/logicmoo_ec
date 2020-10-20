@@ -546,9 +546,7 @@ planner_copy_workspace(Workspace,NewWorkspace):-
 
 planner_load_file(W,FileName):- planner_missing(planner_load_file(W,FileName)).
 
-%! planner_workspace(+,+Workspace) is det.
-%! planner_workspace(-,+Workspace) is semidet.
-%! planner_workspace(?,?Workspace) is nondet.
+%! planner_workspace(+Opr,+Workspace) is det.
 %
 % + = Adds a workspace name
 % - = Deletes workspace freeing up resources
@@ -558,9 +556,7 @@ planner_workspace(Opr,Workspace):-
   call_settings_data(Opr,ws_data(Workspace,isa,tWorkspace)).
 
 
-%! planner_program(+,+Program) is det.
-%! planner_program(-,+Program) is semidet.
-%! planner_program(?,?Program) is nondet.
+%! planner_program(+Opr,?Program) is nondet.
 %
 % + = Adds a planner program name
 % - = Deletes program freeing up resources

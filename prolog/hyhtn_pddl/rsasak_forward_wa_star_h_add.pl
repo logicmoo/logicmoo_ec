@@ -46,7 +46,7 @@ user:my_pfc_add(A):-if_defined(pfc_add(A),assert_if_new(A)).
 % :- dynamic(domain/3).
 % :- dynamic(pairfrom/4).
 
-:- dynamic(is_saved_type/3).
+%:- dynamic(is_saved_type/3).
 
 
 
@@ -806,6 +806,7 @@ command_line_sas:-
 
 command_line_sas:- test_blocks, test_all.
 
+/*
 
 min_sas(A,B,A):-A =< B,!.
 min_sas(_,A,A).
@@ -849,7 +850,7 @@ z2p(A,A).
 
 save_type_named(Type,Named,O):- doall(retract((is_saved_type(Type,Named,_):-_))),nop(ain((is_saved_type(Type,Named,A):-z2p(O,A)))).
 save_sterm(O):-nop((gensym(sterm,Named),save_type_named(sterm,Named,O))).
-
+*/
 
 
 % :- solve_files(pddl('benchmarks/mystery/domain.pddl'),pddl('benchmarks/mystery/prob01.pddl')).
@@ -868,4 +869,5 @@ probfreecell:- solve_filespddl('benchmarks/freecell/domain.pddl', '../test/pddl_
 :- fixup_exports.
 
 end_of_file.
+
 

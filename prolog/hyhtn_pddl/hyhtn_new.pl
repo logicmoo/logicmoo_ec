@@ -2431,7 +2431,7 @@ xprod([X|Y],[A|E],D,(F,G)) :-
         xprod(Y,E,C,G).
 
 
-:- include(translog4_domain).
+:- include(translog4_domain). 
 :- include(translog4_ops).
 %:- include(translog4_ops2).
 %:- include(translog4_ops3).

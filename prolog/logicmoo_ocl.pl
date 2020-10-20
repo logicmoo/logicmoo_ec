@@ -31,16 +31,18 @@ do_ss0(A,B):- A=..[F|AA],must_maplist(do_ss0,AA,BB),B=..[F|BB].
 system:term_expansion(A,B):- do_ss, loop_check(do_ss(A,B)).
 system:goal_expansion(A,B):- do_ss, loop_check(do_ss(A,B)).
 
-:- ensure_loaded(library(logicmoo_util_structs)).
-:- ensure_loaded(library(logicmoo_util_bb_env)).
+:- ensure_loaded(library(logicmoo/util_structs)).
+:- ensure_loaded(library(logicmoo/util_bb_env)).
 %:-asserta(do_ss).
 %do_ss_in_file.
 do_non_ss_in_file.
 term_expansion(A,B):-env_term_expansion(A,B).
 
 
-:- ensure_loaded(hyhtn_pddl/hyhtn_code).
-:- ensure_loaded(hyhtn_pddl/pddl_as_ocl)).
-% :-include(logicmoo_hyhtn_works).
+:- ensure_loaded(hyhtn_pddl/hyhtn_new).
+
+%:- ensure_loaded(hyhtn_pddl/hyhtn_works).
+%:- ensure_loaded(hyhtn_pddl/pddl_as_ocl)).
+%% :-include(logicmoo_hyhtn_works).
 
 :- fixup_exports.

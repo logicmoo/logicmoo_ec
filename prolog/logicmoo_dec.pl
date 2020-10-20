@@ -1,4 +1,4 @@
-:- module(logicmoo_dec,[test_logicmoo_ec/0]).
+:- module(logicmoo_dec,[test_logicmoo_dec/0]).
 
 % [Required] Load the Logicmoo Library Utils
 :- ensure_loaded(library(logicmoo_common)).
@@ -8,7 +8,7 @@
 :- use_module(library(logicmoo_lps)).
 
 
-test_logicmoo_ec:- 
+test_logicmoo_dec:- 
    test_logicmoo_ec_sanity,
    test_logicmoo_ec_lps_reader.
 
