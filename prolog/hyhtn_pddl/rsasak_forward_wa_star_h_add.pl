@@ -25,7 +25,7 @@ use_local_pddl:-throw(uses_local_pddl).
 
 :- if((false,(gethostname(c3po);gethostname(titan)))).
 
-:- initialization(user:use_module(library(swi/pce_profile))).
+% :- initialization(user:use_module(library(swi/pce_profile))).
 :- initialization( profiler(_,walltime) ).
 
 :- endif.
@@ -560,7 +560,7 @@ solution(SR, V, R, L):-
 
 
 % is_goal(State)
-% h(State, Value) 
+% h_s_v(State, Value) 
 % repeating(+State, +AnotherState)
 :- expects_dialect(sicstus).
 :-use_module(library(ordsets)).
@@ -620,7 +620,7 @@ next_node(Mt,SR, Q, V, E, NewSR):-
     \+ my_ord_member(NewS, V),
     heap_to_list(Q, PQL),
     \+ member(Temp, PQL),
-    h(Mt,S, H),
+    h_s_v(Mt,S, H),
     E is H+D,
     ND is D+1,
     state_record(NewS, S, A, ND, NewSR).
@@ -713,10 +713,10 @@ repeating(S1, S2):-
 %
 % :- expects_dialect(sicstus).
 
-% h(+State, -EstimatedValue)
+% h_s_v(+State, -EstimatedValue)
 %
-h(Mt,S, H):- h_add(Mt,S, H).
-% h(S, H):- h_diff(S, H).
+h_s_v(Mt,S, H):- h_add(Mt,S, H).
+% h_s_v(S, H):- h_diff(S, H).
 
 % FILENAME:  h_diff.pl 
 %
@@ -783,7 +783,7 @@ h_addb([], 0).
 h_addb([H|T], E):-
 		bb_get(predicatesPrices, Ps),
 		member(H-Price, Ps),
-		h(T, Sum),
+		h_s_v(T, Sum),
     E is Sum + Price.
     
 
