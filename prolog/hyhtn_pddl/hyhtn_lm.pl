@@ -21,21 +21,38 @@
 :- dynamic is_hierarchy/1.      % the domain is hierarchy or not 
 :- dynamic odds_in_subset_substates/3. %save the substates have subsets
 :- dynamic max_length/1,lowest_score/1.
-:- unknown(error,fail).
+:- dynamic 
+    objectsD/2, solved_node/2, current_num/2,
+    gpred/2,gsstates/3,
+    sum/1.
 
+% :- unknown(error,fail).
+
+:- multifile(planner_task/3).
+:- dynamic(planner_task/3).
+% planner_task(A,B,C):- htn_task(A,B,C).
+:- multifile(htn_task/3).
+:- dynamic(htn_task/3).
 % for boot..
 :- dynamic kill_file/1,solution_file/1.
 solution_file('freds.pl').
 %
-:- prolog_flag(single_var_warnings, _, off).
+:- style_check(-singleton).
+:- expects_dialect(sicstus).
+%:- prolog_flag(single_var_warnings, _, off).
 %:-set_prolog_flag(unknown,fail).
 
 :- op(100,xfy,'=>').
 op_num(0).
 my_stats(0).
 
+:- discontiguous solve/1.
+
 solve(Id) :-
 	htn_task(Id,Goal,Init),
+	once(solve_once(Id,Goal,Init)).
+
+solve_once(Id,Goal,Init) :-	
 	planner_interface(Goal,Init,Sol,_,TNLst),
 	solution_file(F),
 	tell(F),
@@ -53,8 +70,12 @@ solve(Id) :-
 	display_sol(Sol),
 	write('END FILE'),nl,nl,
 	clean.
+	
 solve(Id) :-
 	planner_task(Id,Goal,Init),
+	once(solve_once_pt(Id,Goal,Init)).
+		
+solve_once_pt(Id,Goal,Init) :-	
 	planner_interface(Goal,Init,Sol,_,TNLst),
 	solution_file(F),
 	tell(F),
@@ -162,7 +183,8 @@ getN_statics(node(_,_,_,_,Statics),  Statics).
 %Ron  21/9/01 - Try to give a closedown method
 start_solve(SOLN,OPNUM,_):-
 	kill_file(Kill),
-	file_exists(Kill).
+	% file_exists(Kill).
+	exists_file(Kill).
 %	write('Found kill file'),nl.
 
 start_solve(Sol,OPNUM,TNList):-
@@ -224,6 +246,8 @@ all_HP_expanded([step(HPid,Name,_,_,exp(TN))|THPS]):-
 % Post is the ground states after the action
 % starts from Initial states to final ground states
 % 0. end, Post is the final ground states
+:- discontiguous expand_decomp/8.
+
 expand_decomp([],Post,Post,Temp,Temp,Statics,Statics,[]):-!.
 
 % 1. if the step has expand already, get the state change, go to next
@@ -549,6 +573,7 @@ expand_node(TP,done,Statics,Statics,Pre,Pre,from(PR),List,List):-
 expand_node(TP,TN,Statics,Statics1,Pre,State,from(PR),List,List1):-
    expand_node1(TN,Statics,Statics1,Pre,State,from(PR),List,List1).
 
+:- discontiguous expand_node1/8.
 % check the Post can be solved by direct expand (Operator or Method)
 expand_node1(TN,Statics,Statics1,Pre,State,from(PR),List,List1):-
    tp_goal(_,Goal,_),
@@ -3067,3 +3092,31 @@ assert_subset_substates(Sort,Obj,Odds):-
     assert(odds_in_subset_substates(Sort,Obj,Odds2)),!.
 assert_subset_substates(Sort,Obj,Odds):-
     assert(odds_in_subset_substates(Sort,Obj,[Odds])),!.
+
+:-retractall(solution_file(_)).
+:-asserta(solution_file('/pack/logicmoo_ec/test/domains_ocl/freds.out')).
+
+% :-sleep(1).
+% :-tell(user),run_header_tests.
+
+
+
+lws:- listing(ocl:[method,
+operator,implied_invariant,atomic_invariants,inconsistent_constraint,predicates,objects,substate_classes,sorts,domain_name,planner_task_slow,planner_task,
+htn_task,tp_node,tn,current_num,goal_related,goal_related_search,solved_node,closed_node,tp_goal,final_node,node,op_score,gsstates,gsubstate_classes,related_op,
+objectsOfSort,atomic_invariantsC,objectsD,objectsC,gOperator,operatorC,opParent,methodC,is_of_sort,is_of_primitive_sort,temp_assertIndivConds]).
+
+lws(F):-tell(F),lws,told.
+
+%:-export(rr/0).
+%:-export(rr1/0).
+%rr:- test_ocl('domains_ocl/chameleonWorld.ocl').
+%rr1:- test_ocl('domains_ocl/translog.ocl').
+
+%:- fixup_exports.
+
+%:- include(translog4).
+
+%:-rr.
+
+
