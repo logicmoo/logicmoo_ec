@@ -1,16 +1,3 @@
-/** <module> htncode
-% Provides a prolog database *env*
-%
-%  
-%
-% Logicmoo Project PrologMUD: A MUD server written in Prolog
-% Maintainer: Douglas Miles
-% Denton, TX 2005, 2010, 2014 
-% Dec 13, 2035
-%
-*/
-%:-module(htncode,[]).
-
 /* ***************hyhtn8.pl *****************************/
 /*                30 June 2003                          */
 /*      HyHTN planning: do preprocess first             */
@@ -19,7 +6,6 @@
 /* add one level to achieve all initial states          */
 /********************************************************/
 
-:- ensure_loaded(library(logicmoo_common)).
 :-use_module(library(system)).
 /*********************** initialisation**************/
 :- dynamic op_num/1, my_stats/1. 
@@ -32,68 +18,60 @@
 :- dynamic objectsC/2,atomic_invariantsC/1.% Used only dynamic objects
 :- dynamic objectsOfSort/2,is_of_sort/2,is_of_primitive_sort/2.
 				% Used to store all objects of a sort
+:- dynamic is_hierarchy/1.      % the domain is hierarchy or not 
+:- dynamic odds_in_subset_substates/3. %save the substates have subsets
+:- dynamic max_length/1,lowest_score/1.
+:- unknown(error,fail).
 
 % for boot..
 :- dynamic kill_file/1,solution_file/1.
 solution_file('freds.pl').
 %
-:- style_check(-singleton).
-:- expects_dialect(sicstus).
-%:- prolog_flag(single_var_warnings, _, off).
+:- prolog_flag(single_var_warnings, _, off).
 %:-set_prolog_flag(unknown,fail).
 
 :- op(100,xfy,'=>').
 op_num(0).
 my_stats(0).
 
-:- discontiguous solve/1.
-
 solve(Id) :-
 	htn_task(Id,Goal,Init),
-	pprint_ecp(red,htn_task(Id,Goal,Init)),
-	once(solve_once(Id,Goal,Init)).
-
-solve_once(Id,Goal,Init) :-	
 	planner_interface(Goal,Init,Sol,_,TNLst),
 	solution_file(F),
 	tell(F),
-	write('\nTASK htn_task '),write(Id),nl,
+	write('TASK '),write(Id),nl,
 	write('SOLUTION'),nl,
 	display_sol(Sol),
 	write('END FILE'),nl,nl,
-%	reverse(TNLst,TNForward),
-%	display_details(TNForward),
+	reverse(TNLst,TNForward),
+	display_details(TNForward),
 	write('END PLANNER RESULT'),
 	told,
 	tell(user),
-	write('\nTASK htn_task '),write(Id),nl,
+	write('TASK '),write(Id),nl,
 	write('SOLUTION'),nl,
 	display_sol(Sol),
 	write('END FILE'),nl,nl,
-	clean_problem.
+	clean.
 solve(Id) :-
 	planner_task(Id,Goal,Init),
-	pprint_ecp(green,planner_task(Id,Goal,Init)),
-	once(time(solve_once_pt(Id,Goal,Init))).
-		
-solve_once_pt(Id,Goal,Init) :-	
 	planner_interface(Goal,Init,Sol,_,TNLst),
 	solution_file(F),
 	tell(F),
-	write('\nTASK planner_task '),write(Id),nl,
+	write('TASK '),write(Id),nl,
 	write('SOLUTION'),nl,
 	display_sol(Sol),
 	write('END FILE'),nl,nl,
-%	reverse(TNLst,TNForward),
-%	display_details(TNForward),
+	reverse(TNLst,TNForward),
+	display_details(TNForward),
 	write('END PLANNER RESULT'),
 	told,
 tell(user),
-	write('\nTASK planner_task '),write(Id),nl,
+	write('TASK '),write(Id),nl,
 	write('SOLUTION'),nl,
 	display_sol(Sol),
 	write('END FILE'),nl,nl,
-	clean_problem.
+	clean.
 display_sol([]).
 display_sol([H|T]) :-
 	write(H),
@@ -120,7 +98,7 @@ revSlave([],RL,RL).
 revSlave([H|T],Sofar,Final) :-
 	revSlave(T,[H|Sofar],Final).
 
-clean_problem:-
+clean:-
 	retractall(op_num(_)),
 	retractall(my_stats(_)),
 	retractall(current_num(_,_)),
@@ -154,21 +132,20 @@ clean_problem:-
 	assert(my_stats(0)).
 
 planner_interface(G,I, SOLN,OPNUM,TNList):-
-	time_as('SETUP',(change_obj_list(I),
+	change_obj_list(I),
 	ground_op,
 	assert_is_of_sort,
 	change_op_representation,
 	check_for_substates,
 	check_if_hierarchy,
         retract(op_num(_)),
-        assert(op_num(0)))),
-        time_as('SOLVE',(
+        assert(op_num(0)),
         statistics(runtime,[_,Time]),
         (retract(my_stats(_)) ; true),
         assert(my_stats(Time)),
         make_problem_into_node(I, G, Node),
         assert(Node),
-	start_solve(SOLN,OPNUM,TNList))).
+	start_solve(SOLN,OPNUM,TNList).
 planner_interface(G,I, SOLN,OPNUM,TNList):-
 	tell(user),nl,write('failure in initial node'),!.
 
@@ -185,8 +162,7 @@ getN_statics(node(_,_,_,_,Statics),  Statics).
 %Ron  21/9/01 - Try to give a closedown method
 start_solve(SOLN,OPNUM,_):-
 	kill_file(Kill),
-	% file_exists(Kill).
-	exists_file(Kill).
+	file_exists(Kill).
 %	write('Found kill file'),nl.
 
 start_solve(Sol,OPNUM,TNList):-
@@ -204,7 +180,6 @@ start_solve(Sol,OPNUM,TNList):-
    write(' SECONDS'),nl,
    write('Solution SIZE = '),write(SIZE),nl,
    write('Operator Used = '),write(OPNUM),nl,
-   write('Solution:\n '),writeq(Sol),nl,
    write('***************************************'),
    assert(time_taken(CP)),  
    assert(soln_size(SIZE)),
@@ -217,7 +192,7 @@ start_solve(Sol,OPNUM,TNList):-
    start_solve(Sol,OPNUM,TNList).
 start_solve(Sol,OPNUM,TNList):-
     tell(user), write('+++ task FAILED +++'),
-    clean_problem.
+    clean.
 
 /******************************** MAIN LOOP **********/
 
@@ -236,7 +211,7 @@ assert_node(Name,Pre,Decomp,Temp,Statics):-
    all_HP_expanded(Decomp),
    assert(final_node(node(Name,Pre,Decomp,Temp,Statics))),!.
 assert_node(Name,Pre,Dec,Temp,Statics):-
-   gensym_special(root,SYM),
+   gensym(root,SYM),
    assert(node(SYM,Pre,Dec,Temp,Statics)),!.
 
 all_HP_expanded([]):-!.
@@ -249,8 +224,6 @@ all_HP_expanded([step(HPid,Name,_,_,exp(TN))|THPS]):-
 % Post is the ground states after the action
 % starts from Initial states to final ground states
 % 0. end, Post is the final ground states
-:- discontiguous expand_decomp/8.
-
 expand_decomp([],Post,Post,Temp,Temp,Statics,Statics,[]):-!.
 
 % 1. if the step has expand already, get the state change, go to next
@@ -470,7 +443,7 @@ dir_apply_method(TN,HPid,ACH,Pre,Post,State,Statics,Statics1):-
 % make decomposition steps when expand a method directly
 make_dec1(HPid,Pre,ACH,Statics,Temp,Dec,Temp1,Dec1):-
    var(HPid),
-   gensym_special(hp,HPid),
+   gensym(hp,HPid),
    make_dec1(HPid,Pre,ACH,Statics,Temp,Dec,Temp1,Dec1),!.
 make_dec1(HPid,Pre,ACH,Statics,Temp,Dec,Temp1,Dec1):-
    all_achieved(ACH,Statics,Pre),
@@ -485,7 +458,7 @@ make_dec1(HPid,Pre,ACH,Statics,Temp,Dec,[before(STID0,STID1)|Temp1],[step(STID0,
 % make decomposition steps when need fwsearch to expand a method
 make_dec2(HPid,Pre,ACH,Statics,Temp,Dec,Temp1,Dec1):-
    var(HPid),
-   gensym_special(hp,HPid),
+   gensym(hp,HPid),
    make_dec2(HPid,Pre,ACH,Statics,Temp,Dec,Temp1,Dec1),!.
 make_dec2(HPid,Pre,ACH,Statics,Temp,Dec,Temp1,Dec1):-
    all_achieved(ACH,Statics,Pre),
@@ -576,13 +549,12 @@ expand_node(TP,done,Statics,Statics,Pre,Pre,from(PR),List,List):-
 expand_node(TP,TN,Statics,Statics1,Pre,State,from(PR),List,List1):-
    expand_node1(TN,Statics,Statics1,Pre,State,from(PR),List,List1).
 
-:- discontiguous expand_node1/8.
 % check the Post can be solved by direct expand (Operator or Method)
 expand_node1(TN,Statics,Statics1,Pre,State,from(PR),List,List1):-
    tp_goal(_,Goal,_),
    make_se_primitive(Goal,PGoal),
    direct_expand(HP,TN,achieve(PGoal),Pre,PGoal,State,Statics,Statics1),
-%   gensym_special(hp,HP),
+%   gensym(hp,HP),
    append(List,[step(HP,achieve(PGoal),Pre,State,exp(TN))],List1),!.
 % -------direct expand -----------------------
 % if the goal canbe achieved by a method's pre and post,
@@ -605,7 +577,7 @@ apply_ground_op(operator(OP,Prev,Nec,Cond),Pre,State,List,List1):-
    state_achieved(Prev,Pre),
    nec_state_change(Pre,Nec,State2),
    cond_state_change(State2,Cond,State),
-   gensym_special(hp,HP),
+   gensym(hp,HP),
    append(List,[step(HP,OP,Pre,State,exp(OP))],List1),
    retract(op_num(N)),
    N1 is N+1,
@@ -618,7 +590,7 @@ apply_unground_op(OP,Pre0,Post0,Cond,ST,Statics,Statics1,Pre,State,List,List1):-
    cond_state_change(State2,Cond,State),
    statics_consist_instance(ST),
    remove_unneed(Statics2,[],Statics1),
-   gensym_special(hp,HP),
+   gensym(hp,HP),
    append(List,[step(HP,OP,Pre,State,exp(OP))],List1),
    retract(op_num(N)),
    N1 is N+1,
@@ -676,7 +648,7 @@ assert_tnode(TP,OP,PR,Score,Post,Statics,Steps):-
    get_score(PR,Post,Steps,Score),
 %   op_score(OP,SS),
 %   Score is Score1-SS,
-   gensym_special(tp,TP1),
+   gensym(tp,TP1),
 %   write(TP1),nl,
 %   write(Steps),nl,
 %   write(TP1),write(' '),write(Post),
@@ -698,7 +670,7 @@ combine_exp_steps(Post,Steps,step(HP,achieve(Goal),Pre,Post,exp(TN))):-
    tp_goal(Pre,Goal,Statics),
    get_action_list(Steps,[],ACTls),
    make_temp(ACTls,[],Temp),
-   gensym_special(hp,HP),
+   gensym(hp,HP),
    make_tn(TN,achieve(Goal),Pre,Post,Temp,Steps),!.
 % get the temperal from an ordered steps
 get_action_list([],ACTls,ACTls):-!.
@@ -1455,16 +1427,12 @@ statics_consist(Statics):-
    fixed_statics_consist(FixST),!.
 
 
-
-
 /*********check for statics consist and instanciate them***/
 statics_consist_instance([]):-!.
 statics_consist_instance(Statics) :-
    split_fixed(Statics,[],FixST,[],Atom),
    inv_statics_consist_instance(Atom),
    fixed_statics_consist_instance(FixST).
-
-
 
 % split out ne,is_of_sort
 split_fixed([],FixST,FixST,Atom,Atom):-!.
@@ -1537,9 +1505,6 @@ fixed_statics_consist_instance([is_of_primitive_sort(Obj,Sort)|TStatics]):-
    is_of_primitive_sort(Obj,Sort),
    fixed_statics_consist_instance(TStatics).
 
-
-
-
 /*********************Initial process *********************/
 %node(Name, Precond, Decomps, Temp, Statics)
 % When inputting new methods etc filter all statics into
@@ -1562,21 +1527,21 @@ make_problem_up([],[]):-!.
 make_problem_up([achieve(L)|R],[step(HP,achieve(L1),undefd,[L1],unexp)|RS]):- 
                              %preconditon here is undefd
     make_ss_to_se([L],[L1]),
-    gensym_special(hp,HP),
+    gensym(hp,HP),
     make_problem_up(R, RS),!.
 make_problem_up([achieve(L)|R],[step(HP,achieve(L1),undefd,L1,unexp)|RS]):- 
                              %preconditon here is undefd
     make_ss_to_se(L,L1),
-    gensym_special(hp,HP),
+    gensym(hp,HP),
     make_problem_up(R, RS),!.
 make_problem_up([O|R],[step(HP,O,undefd,undefd,unexp)|RS]):-
     methodC(O,Pre,Post,Statics1,Temp,ACH,Dec),
-    gensym_special(hp,HP),
+    gensym(hp,HP),
     make_problem_up(R, RS),!.
 make_problem_up([O|R],     
            [step(HP,O,undefd,undefd,unexp)|RS]):-
     operatorC(O,Pre,Post,Cond,Statics1),
-    gensym_special(hp,HP),
+    gensym(hp,HP),
     make_problem_up(R, RS),!.
 
 make_num_hp([],[]):-!.
@@ -1712,7 +1677,7 @@ make_dec(A,[HD|TD],TD1,Temp,Temp1,Achieval,Achieval1):-
 make_dec(A,[HD|TD],[HD|TD1],Temp,Temp1,Achieval,Achieval1):-
      HD=..[DecName|Goal],
      DecName\==achieve,
-     gensym_special(sm,SM),
+     gensym(sm,SM),
      current_num(sm,Num),
      make_dec(A,TD,TD1,Temp,Temp1,Achieval,Achieval1),!.
 
@@ -1783,7 +1748,7 @@ make_sc_primitive([sc(Sort,Obj,SE1=>SE2)|ST],[sc(PSort,Obj,SE1=>SE2)|ST0]):-
 % ------------ end of change operator ----------------------
 /********make_tn: save the expansion results*****/
 make_tn(TN,Name,Pre,Post,Temp,Dec):-
-    gensym_special(tn,TN),
+    gensym(tn,TN),
     find_only_changed(Pre,Post,[],Pre1,[],Post1),
 %    tell(user),nl,write(tn(TN,Name,Pre1,Post1,Temp,Dec)),nl,told,
     assert(tn(TN,Name,Pre1,Post1,Temp,Dec)),!.
@@ -2098,15 +2063,11 @@ rem_statics([], [],[]) :-!.
 
 % ----------------------utilities---------------------
 
-
+not(X):- \+X.
 isemptylist([]):-!.
 
-%instantiate variables
-/*
-not(X):- \+X.
 member(X,[X|_]).
 member(X,[_|L]) :- member(X,L).
-*/
 
 member_cut(X,[X|_]) :- !.
 member_cut(X,[_|Y]) :- member_cut(X,Y),!.
@@ -2231,7 +2192,6 @@ same_var_member1([H1|T1],[H2|T2]):-
      H1==H2,
      same_var_member1(T1,T2),!.
 
-
 % set_append_e: list1 + list2 -> list
 % no duplicate, no instanciation
 % ------------------------------------------
@@ -2286,7 +2246,7 @@ remove_el([A|B],C,[A|D]) :-
 
 /* generate symbol predicate  (from file futile)*/
 
-gensym_special(Root,Atom) :-
+gensym(Root,Atom) :-
                         getnum(Root,Num),
                         name(Root,Name1),
                         name(Num,Name2),
@@ -2530,7 +2490,7 @@ find_dynamic_objects(ss(Sort,Obj,_)):-
 ground_op :-
 	assert_sort_objects,
 	enumerateOps,
-	time_as('FORWARD SETUP',instOps).
+	instOps.
 %	opCounter(Top),
 %	write(Top),nl.
 
@@ -3107,116 +3067,3 @@ assert_subset_substates(Sort,Obj,Odds):-
     assert(odds_in_subset_substates(Sort,Obj,Odds2)),!.
 assert_subset_substates(Sort,Obj,Odds):-
     assert(odds_in_subset_substates(Sort,Obj,[Odds])),!.
-
-
-
-:- dynamic is_hierarchy/1.      % the domain is hierarchy or not 
-:- dynamic odds_in_subset_substates/3. %save the substates have subsets
-:- dynamic max_length/1,lowest_score/1.
-
-:- dynamic 
-    objectsD/2, solved_node/2, current_num/2,
-    gpred/2,gsstates/3,
-    sum/1.
-
-env_retractall(G):- retractall(G).
-env_retract(G):- retract(G).
-env_assert(G):- assertz(G).	
-env_asserta(G):- asserta(G).	
-env_call(G):- call(G).
-
-incr_op_num:- 
-   retract(op_num(N)),
-   N1 is N+1,
-   assertz(op_num(N1)).
-   
-% :- unknown(error,fail).
-with_domain_preds(Pred1):-
- maplist(Pred1,
-   [method/6,
-    atomic_invariants/1,
-    inconsistent_constraint/1,
-    objects/2,
-    operator/4,
-    predicates/1,
-    sorts/2,
-    substate_classes/3]).
-    
-:- with_domain_preds(abolish).    
-:- with_domain_preds(multifile).
-:- with_domain_preds(dynamic).
-
-
-
-:- multifile(planner_task/3).
-:- dynamic(planner_task/3).
-% planner_task(A,B,C):- htn_task(A,B,C).
-:- multifile(htn_task/3).
-:- dynamic(htn_task/3).
-
-:-retractall(solution_file(_)).
-:-asserta(solution_file('/pack/logicmoo_ec/test/domains_ocl/freds.out')).
-
-% :-sleep(1).
-% :-tell(user),run_header_tests.
-
-
-
-lws:- listing(ocl:[method,
-operator,implied_invariant,atomic_invariants,inconsistent_constraint,predicates,objects,substate_classes,sorts,domain_name,planner_task_slow,planner_task,
-htn_task,tp_node,tn,current_num,goal_related,goal_related_search,solved_node,closed_node,tp_goal,final_node,node,op_score,gsstates,gsubstate_classes,related_op,
-objectsOfSort,atomic_invariantsC,objectsD,objectsC,gOperator,operatorC,opParent,methodC,is_of_sort,is_of_primitive_sort,temp_assertIndivConds]).
-
-lws(F):-tell(F),lws,told.
-
-:-export(test_ocl/1).
-:- dynamic(unload_ocl/1).
-
-time_as(Goal):- sformat(Name,'~w',[Goal]),time_as(Name,Goal).
-time_as(Name,Goal):-
-  statistics(runtime,[CP,_]),
-  statistics(walltime,[WT,_]),
-  notrace(Goal),
-   statistics(runtime,[CPE,_]),
-   statistics(walltime,[WTE,_]),
-   RTIM is (CPE-CP) /1000,
-   WTIM is (WTE-WT) /1000,
-   format(user_error,'~N~n~w: ~f (wall ~f)~n',[Name,RTIM,WTIM]),!.
-
-test_ocl:- update_changed_files, 
-  forall(time(solve(_N)),nl).
-
-test_ocl(File):- forall(filematch(File,FM),test_ocl0(FM)).
-
-test_ocl0(File):- !,
-  ignore(forall(retract(unload_ocl(Was)),unload_file(Was))),
-  with_domain_preds(abolish),
-  consult(File),
-  asserta(unload_ocl(File)),!,
-  test_ocl.
-  
-test_ocl0(File):- 
-  time(locally(t_l:doing(test_ocl(File)), 
-    once((env_clear_doms_and_tasks,clean_problem,l_file(File),tasks)))).
-
-header_tests :-test_ocl('domains_ocl/*.ocl').
-  
-:-export(rr/0).
-:-export(rr1/0).
-:-export(t1/0).
-:-export(t2/0).
-rr:- test_ocl('domains_ocl/chameleonWorld.ocl').
-rr1:- test_ocl('domains_ocl/translog.ocl').
-
-t1:- test_ocl('test/domains_ocl/translogLM.pl').
-t2:- test_ocl('test/domains_ocl/translogLM4.ocl').
-t3:- test_ocl('test/domains_ocl/tyreLM.ocl').
-t4:- test_ocl('test/domains_ocl/translog.ocl').
-:- ensure_loaded(library(logicmoo_common)).
-:- fixup_exports.
-
-%:- include(translog4).
-
-%:-rr.
-
-

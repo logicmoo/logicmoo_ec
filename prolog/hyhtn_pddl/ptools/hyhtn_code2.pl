@@ -1,99 +1,92 @@
-/** <module> htncode
-% Provides a prolog database *env*
-%
-%  
-%
-% Logicmoo Project PrologMUD: A MUD server written in Prolog
-% Maintainer: Douglas Miles
-% Denton, TX 2005, 2010, 2014 
-% Dec 13, 2035
-%
-*/
-%:-module(htncode,[]).
-
-/* ***************hyhtn8.pl *****************************/
-/*                30 June 2003                          */
-/*      HyHTN planning: do preprocess first             */
-/* make all method and operators primitive              */
-/* derived from hyhtn4, do forward graphplan heuristic  */
-/* add one level to achieve all initial states          */
-/********************************************************/
-
-:- ensure_loaded(library(logicmoo_common)).
+/*
+ * GIPO COPYRIGHT NOTICE, LICENSE AND DISCLAIMER.
+ *
+ * Copyright 2001 - 2003 by R.M.Simpson W.Zhao T.L.McCLuskey D Liu D. Kitchin
+ *
+ * Permission to use, copy, modify, and distribute this software and its
+ * documentation for any purpose and without fee is hereby granted,
+ * provided that the above copyright notice appear in all copies and that
+ * both the copyright notice and this permission notice and warranty
+ * disclaimer appear in supporting documentation, and that the names of
+ * the authors or their employers not be used in advertising or publicity 
+ * pertaining to distribution of the software without specific, written 
+ * prior permission.
+ *
+ * The authors and their employers disclaim all warranties with regard to 
+ * this software, including all implied warranties of merchantability and 
+ * fitness.  In no event shall the authors or their employers be liable 
+ * for any special, indirect or consequential damages or any damages 
+ * whatsoever resulting from loss of use, data or profits, whether in an 
+ * action of contract, negligence or other tortious action, arising out of 
+ * or in connection with the use or performance of this software.
+ */
+ /* gipohyhtn.pl */
+/* HyHTN planning: do preprocess first  */
+/* make all method and operators primitive */
 :-use_module(library(system)).
 /*********************** initialisation**************/
 :- dynamic op_num/1, my_stats/1. 
 :- dynamic node/7,final_node/1.
 :- dynamic methodC/7, opParent/6,operatorC/5,gOperator/3.
 :- dynamic tp_goal/3,tp_node/6,closed_node/6,solved_node/5.
-:- dynamic goal_related/4,goal_related_search/1.
+:- dynamic goal_related/4.
 :- dynamic tn/6. % Used to store full expanded steps
-:- dynamic opCounter/1,temp/1. % Used for grounding operators
+:- dynamic opCounter/1, temp/1. % Used for grounding operators
 :- dynamic objectsC/2,atomic_invariantsC/1.% Used only dynamic objects
-:- dynamic objectsOfSort/2,is_of_sort/2,is_of_primitive_sort/2.
-				% Used to store all objects of a sort
-
+:- dynamic objectsOfSort/2.      % Used to store all objects of a sort
 % for boot..
 :- dynamic kill_file/1,solution_file/1.
-solution_file('freds.pl').
 %
-:- style_check(-singleton).
-:- expects_dialect(sicstus).
-%:- prolog_flag(single_var_warnings, _, off).
+:- prolog_flag(single_var_warnings, _, off).
 %:-set_prolog_flag(unknown,fail).
-
+:- unknown(error,fail).
 :- op(100,xfy,'=>').
+%---------------------structure--------------------
+% for whole search:
+% node(Nodeid, Precond, Decomps, Temp, Statics)
+% tn(Tnid, Name, Precond, Postcond,Temp, Decomps)
+% tn is a full expanded node, it has fixed decomps and postcondtion
+% step(HPid,ActName,Precond,Postcond,Expansion)
+% for fwsearch achieve(Goal) only:
+% tp_goal(Pre,Goal,Statics)
+% goal_related(se(Sort,Obj,SEpre),Opls,LengthToGoal)
+% tp_node(TPid,Pre,Statics,from(Parentid),Score,Steps)
+% closed_node(TPid,Pre,from(Parentid),Score,Steps)
+%---------------------structure end--------------------
+
 op_num(0).
 my_stats(0).
 
-:- discontiguous solve/1.
-
 solve(Id) :-
 	htn_task(Id,Goal,Init),
-	pprint_ecp(red,htn_task(Id,Goal,Init)),
-	once(solve_once(Id,Goal,Init)).
-
-solve_once(Id,Goal,Init) :-	
 	planner_interface(Goal,Init,Sol,_,TNLst),
 	solution_file(F),
 	tell(F),
-	write('\nTASK htn_task '),write(Id),nl,
+	write('TASK '),write(Id),nl,
 	write('SOLUTION'),nl,
 	display_sol(Sol),
 	write('END FILE'),nl,nl,
-%	reverse(TNLst,TNForward),
-%	display_details(TNForward),
+	reverse(TNLst,TNForward),
+	display_details(TNForward),
 	write('END PLANNER RESULT'),
 	told,
-	tell(user),
-	write('\nTASK htn_task '),write(Id),nl,
-	write('SOLUTION'),nl,
-	display_sol(Sol),
-	write('END FILE'),nl,nl,
-	clean_problem.
+	clean.
+
 solve(Id) :-
 	planner_task(Id,Goal,Init),
-	pprint_ecp(green,planner_task(Id,Goal,Init)),
-	once(time(solve_once_pt(Id,Goal,Init))).
-		
-solve_once_pt(Id,Goal,Init) :-	
 	planner_interface(Goal,Init,Sol,_,TNLst),
 	solution_file(F),
 	tell(F),
-	write('\nTASK planner_task '),write(Id),nl,
+	write('TASK '),write(Id),nl,
 	write('SOLUTION'),nl,
 	display_sol(Sol),
 	write('END FILE'),nl,nl,
-%	reverse(TNLst,TNForward),
-%	display_details(TNForward),
+	reverse(TNLst,TNForward),
+	display_details(TNForward),
 	write('END PLANNER RESULT'),
 	told,
-tell(user),
-	write('\nTASK planner_task '),write(Id),nl,
-	write('SOLUTION'),nl,
-	display_sol(Sol),
-	write('END FILE'),nl,nl,
-	clean_problem.
+	clean.
+
 display_sol([]).
 display_sol([H|T]) :-
 	write(H),
@@ -113,23 +106,19 @@ display_details([tn(TN,Name,Pre,Post,Temp,Dec)|Rest]) :-
     nl,
     display_details(Rest).
 
-reverse(L,RL) :-
-	revSlave(L,[],RL).
 
-revSlave([],RL,RL).
-revSlave([H|T],Sofar,Final) :-
-	revSlave(T,[H|Sofar],Final).
-
-clean_problem:-
+clean:-
 	retractall(op_num(_)),
 	retractall(my_stats(_)),
 	retractall(current_num(_,_)),
-	retractall(final_node(_)),
 	retractall(node(_,_,_,_,_)),
+	retractall(final_node(_)),
 	retractall(tn(_,_,_,_,_,_)),
 	retractall(methodC(_,_,_,_,_,_,_)),
 	retractall(operatorC(_,_,_,_,_)),
 	retractall(gOperator(_,_,_)),
+	retractall(goal_related(_,_,_)),
+	retractall(goal_related_search(_)),
 	retractall(opCounter(_)),
 	retractall(opParent(_,_,_,_,_,_)),
 	retractall(temp(_)),
@@ -137,38 +126,32 @@ clean_problem:-
 	retractall(related_op(_)),
 	retractall(op_score(_,_)),
 	retractall(objectsC(_,_)),
-	retractall(goal_related(_,_,_,_)),
-	retractall(goal_related_search(_)),
 	retractall(solved_node(_,_)),
 	retractall(tp_node(_,_,_,_,_,_)),
 	retractall(closed_node(_,_,_,_,_,_)),
-	retractall(is_hierarchy(_)),
-	retractall(lowest_score(_)),
-	retractall(max_length(_)),
+	retractall(score_list(_)),
 	retractall(atomic_invariantsC(_)),
+	retractall(gsubstate_classes(_,_,_)),
 	retractall(is_of_sort(_,_)),
 	retractall(is_of_primitive_sort(_,_)),
 	retractall(objectsD(_,_)),
-	retractall(odds_in_subset_substates(_,_,_)),
 	assert(op_num(0)),
 	assert(my_stats(0)).
 
 planner_interface(G,I, SOLN,OPNUM,TNList):-
-	time_as('SETUP',(change_obj_list(I),
+	change_obj_list(I),
 	ground_op,
 	assert_is_of_sort,
 	change_op_representation,
-	check_for_substates,
-	check_if_hierarchy,
+	prim_substate_class,
         retract(op_num(_)),
-        assert(op_num(0)))),
-        time_as('SOLVE',(
+        assert(op_num(0)),
         statistics(runtime,[_,Time]),
         (retract(my_stats(_)) ; true),
         assert(my_stats(Time)),
         make_problem_into_node(I, G, Node),
         assert(Node),
-	start_solve(SOLN,OPNUM,TNList))).
+	start_solve(SOLN,OPNUM,TNList).
 planner_interface(G,I, SOLN,OPNUM,TNList):-
 	tell(user),nl,write('failure in initial node'),!.
 
@@ -185,8 +168,7 @@ getN_statics(node(_,_,_,_,Statics),  Statics).
 %Ron  21/9/01 - Try to give a closedown method
 start_solve(SOLN,OPNUM,_):-
 	kill_file(Kill),
-	% file_exists(Kill).
-	exists_file(Kill).
+	file_exists(Kill).
 %	write('Found kill file'),nl.
 
 start_solve(Sol,OPNUM,TNList):-
@@ -204,11 +186,11 @@ start_solve(Sol,OPNUM,TNList):-
    write(' SECONDS'),nl,
    write('Solution SIZE = '),write(SIZE),nl,
    write('Operator Used = '),write(OPNUM),nl,
-   write('Solution:\n '),writeq(Sol),nl,
    write('***************************************'),
    assert(time_taken(CP)),  
    assert(soln_size(SIZE)),
-   retractall(tn(_,_,_,_,_,_)),!.
+   retractall(tn(_,_,_,_,_,_)),
+   !.
 start_solve(Sol,OPNUM,TNList):-
    select_node(Node),
 %   nl,write('processing '),write(Node),nl,
@@ -217,7 +199,7 @@ start_solve(Sol,OPNUM,TNList):-
    start_solve(Sol,OPNUM,TNList).
 start_solve(Sol,OPNUM,TNList):-
     tell(user), write('+++ task FAILED +++'),
-    clean_problem.
+    clean.
 
 /******************************** MAIN LOOP **********/
 
@@ -236,7 +218,7 @@ assert_node(Name,Pre,Decomp,Temp,Statics):-
    all_HP_expanded(Decomp),
    assert(final_node(node(Name,Pre,Decomp,Temp,Statics))),!.
 assert_node(Name,Pre,Dec,Temp,Statics):-
-   gensym_special(root,SYM),
+   gensym(root,SYM),
    assert(node(SYM,Pre,Dec,Temp,Statics)),!.
 
 all_HP_expanded([]):-!.
@@ -245,20 +227,17 @@ all_HP_expanded([step(HPid,Name,_,_,exp(TN))|THPS]):-
 
 /************ expand every step in Dec *********************/
 % expand_decomp(Dec,Pre,Post,Temps,Temp1,Statics,Statics1,Dec1)
-% Pre is the ground states before the action
-% Post is the ground states after the action
+% Pre and Post here is the current ground states changes
 % starts from Initial states to final ground states
 % 0. end, Post is the final ground states
-:- discontiguous expand_decomp/8.
-
 expand_decomp([],Post,Post,Temp,Temp,Statics,Statics,[]):-!.
 
 % 1. if the step has expand already, get the state change, go to next
-expand_decomp([step(HPid,Name,Pre,Post0,exp(TN))|Decomp],Pre,Post,Temp,Temp1,Statics,Statics1,[step(HPid,Name,Pre,Post0,exp(TN))|Decomp1]):-
-%   state_achieved(Pre0,Pre),
-%   state_change(Pre,Pre0,Post0,State),
+expand_decomp([step(HPid,Name,Pre0,Post0,exp(TN))|Decomp],Pre,Post,Temp,Temp1,Statics,Statics1,[step(HPid,Name,Pre,State,exp(TN))|Decomp1]):-
+   state_achieved(Pre0,Pre),
+   state_change(Pre,Pre0,Post0,State),
    statics_consist(Statics),
-   expand_decomp(Decomp,Post0,Post,Temp,Temp1,Statics,Statics1,Decomp1),!.
+   expand_decomp(Decomp,State,Post,Temp,Temp1,Statics,Statics1,Decomp1),!.
 
 % 2. if it is an achieve goal
 expand_decomp([step(HPid,ACH,Pre0,Post0,unexp)|Decomp],Pre,Post,Temp,Temp1,Statics,Statics1,Decomp1):-
@@ -272,78 +251,49 @@ expand_decomp([step(HPid,Name,undefd,undefd,unexp)|Decomp],Pre,Post,Temp,Temp1,S
    apply_op(Name,HPid,Name,Pre,undefd,State,Statics,Statics2),
    expand_decomp(Decomp,State,Post,Temp,Temp1,Statics2,Statics1,Decomp1),!.
 
-% 1. it's matches name
+% apply operator by known its name and post state
 apply_op(Name,HPid,Name,Pre,Post,State,Statics,Statics1):-
    operatorC(Name,Pre0,Post0,Cond,Statics0),
    statics_append(Statics0,Statics,Statics2),
-%   remove_unneed(Statics2,[],Statics1),
-   post_instant(Post0,Cond,Statics2,Post),
-   state_achieved(Pre0,Pre,Statics2),
+   state_achieved(Pre,Pre0,Statics2),
    state_change(Pre,Pre0,Post0,State2),
    cond_state_change(State2,Cond,State),
-   post_achieved(Post,State,Statics2),
+   all_achieved(Post,Statics2,State),
    remove_unneed(Statics2,[],Statics1),
+   statics_consist_instance(Statics1),
    statics_consist_instance(Statics0),
-%   nl,write('step '),write(HPid),
-%   write('can be expand by operator '),write(Name),nl,
    retract(op_num(N)),
    N1 is N+1,
    assert(op_num(N1)),!.
 
 % 4. if HP's name meet an method, and it's precondition  achieved
 % expand it and make it to that TNs
-% the method can be achieved directly(without doing fwsearch).
 expand_decomp([step(HPid,Name,undefd,undefd,unexp)|Decomp],Pre,Post,Temp,Temp1,Statics,Statics1,[step(HPid,Name,Pre,State,exp(TN))|Decomp1]):-
    apply_method(TN,HPid,Name,Pre,undefd,State,Statics,Statics2),
    expand_decomp(Decomp,State,Post,Temp,Temp1,Statics2,Statics1,Decomp1),!.
 
+% apply an method by its name
 apply_method(TN,HPid,Name,Pre,Post,State,Statics,Statics1):-
    methodC(Name,Pre0,Post0,Statics0,Temp0,achieve(ACH0),Dec0),
-   append_st(Statics0,Statics,Statics2),
+   statics_append(Statics0,Statics,Statics2),
    all_achieved(Pre0,Statics2,Pre),
-%   rough_state_change(Pre,Pre0,Post0,State2),%State2 just for check if the 
-%   may_achieved(Post,Statics2,State2),%method can directly apply or not
-%   remove_unneed(Statics2,[],Statics21),
-   make_dec1(HPid,Pre,ACH0,Statics2,Temp0,Dec0,Temp2,Dec2),
-   expand_decomp(Dec2,Pre,State,Temp2,Temp1,Statics2,Statics1,Dec1),
-   post_achieved(Post,State,Statics1),
-%   nl,write('step '),write(HPid),
-%   write('can be expand by method '),write(Name),nl,
+   remove_unneed(Statics2,[],Statics21),
+   make_dec1(HPid,Pre,ACH0,Statics21,Temp0,Dec0,Temp2,Dec2),
+   expand_decomp(Dec2,Pre,State,Temp2,Temp1,Statics21,Statics1,Dec1),
+   all_achieved(Post,Statics1,State),
    retract(op_num(N)),
    N1 is N+1,
    assert(op_num(N1)),
    make_tn(TN,Name,Pre,State,Temp1,Dec1),!.
 
-% 5. if HP's name meet an method, and it's precondition  achieved
-% expand it by add forward search,
-% and make it to that TNs
-expand_decomp([step(HPid,Name,undefd,undefd,unexp)|Decomp],Pre,Post,Temp,Temp1,Statics,Statics1,[step(HPid,Name,Pre,State,exp(TN))|Decomp1]):-
-   apply_method_undir(TN,HPid,Name,Pre,undefd,State,Statics,Statics2),
-   expand_decomp(Decomp,State,Post,Temp,Temp1,Statics2,Statics1,Decomp1),!.
-% if failed, fwsearch.
-apply_method_undir(TN,HPid,Name,Pre,Post,State,Statics,Statics1):-
-   methodC(Name,Pre0,Post0,Statics0,Temp0,achieve(ACH0),Dec0),
-   append_st(Statics0,Statics,Statics2),
-   all_achieved(Pre0,Statics2,Pre),
-%   rough_state_change(Pre,Pre0,Post0,State2),%State2 just for check if the 
-%   may_achieved(Post,Statics2,State2),%method can directly apply or not
-%   remove_unneed(Statics2,[],Statics21),
-   make_dec2(HPid,Pre,ACH0,Statics2,Temp0,Dec0,Temp2,Dec2),
-   expand_decomp(Dec2,Pre,State,Temp2,Temp1,Statics2,Statics1,Dec1),
-   post_achieved(Post,State,Statics1),
-%   nl,write('step '),write(HPid),
-%   write('can be expand by method '),write(Name),nl,
-   retract(op_num(N)),
-   N1 is N+1,
-   assert(op_num(N1)),
-   make_tn(TN,Name,Pre,State,Temp1,Dec1),!.
-% 6. get another step which matchs and not after it before it to give a try
+% 5. get another step which matchs and not after it before it to give a try
 expand_decomp([step(HP,N,Pre0,Post0,unexp)|Decomp],Pre,Post,Temp,Temp1,Statics,Statics1,Decomp1):-  
    get_another_step(step(HP2,N2,Pre2,Post2,Exp),Pre,Statics,
                                   HP,Temp,Temp2,Decomp,Decomp2),
    expand_decomp([step(HP2,N2,Pre2,Post2,Exp),step(HP,N,Pre0,Post0,unexp)|Decomp2],
                      Pre,Post,Temp2,Temp1,Statics,Statics1,Decomp1).
-% 7. all failed, expanding failed 
+
+% 6. all failed, expanding failed 
 /************ end of expand_decomp *********************/
 
 % get another step which is not after it before it
@@ -357,7 +307,7 @@ get_another_step(step(HP2,Name2,Pre2,Post2,Exp),Pre,Statics,HP,Temp,[before(HP2,
 % ***********expand the achieve goal***********
 % 1.if the ACH is achieved already
 %   remove it from decomposion and do the next
-expand_decomp_ach([step(HPid,ACH,Pre0,Post0,unexp)|Decomp],Pre,Post,Temp,Temp1,Statics,Statics1,Decomp1):-
+expand_decomp_ach([step(HPid,ACH,Pre,Post0,unexp)|Decomp],Pre,Post,Temp,Temp1,Statics,Statics1,Decomp1):-
    state_achieved(Post0,Pre),
 %   nl,write('step '),write(HPid),
 %   write('is already achieved'),nl,
@@ -378,7 +328,6 @@ expand_decomp_ach([step(HPid,ACH,Pre,Post0,unexp)|Decomp],Pre,Post,Temp,Temp1,St
 % 4. all failed, expanding failed 
 /************ end of expand_decomp_ach *********************/
        
-
 %************ expand an achive goal *********************/
 % 1. directly achieve goal's Pre and Post by operator,method or tn
 expand_ach_goal(HPid,TN,ACH,Pre,Post,State,Statics,Statics1):-
@@ -386,23 +335,20 @@ expand_ach_goal(HPid,TN,ACH,Pre,Post,State,Statics,Statics1):-
 
 % 2. else, nothing directly can achieve HP's Pre and Post
 % assert a temporely node for forward search
-% tp_node(Name, Precond, Postcond, Statics,Score,Temp,Decomps)
-% take out the already achieved states first before expanding
+% tp_node(TPid,Pre,Statics,from(Parentid),Score,Steps)
 expand_ach_goal(HPid,TN,ACH,Pre,Post,State,Statics,Statics1):-
    make_tpnodes(Pre,Post,Statics),
-%   statistics(runtime,[_,CP]),
-%   TIM is CP/1000, 
-%   nl, write('preprosses time CPU= '),write(CP),nl,
-%   write('preprosses time taken = '),write(TIM),
-%   nl,write('start fwsearch'),nl,
+%   tell(fred),
    fwsearch(TN,State),
+%   told,
+%   all_achieved(Post,Statics1,State),
    clean_temp_nodes.
 
 % 3. else, fail expand
 /************ end of expand_ach_goal *********************/
 
 % -------direct expand an achieve goal-----------------------
-%1. if an achieve action meets an TN Pre and post meet
+%1. if an achieve action meets an TN Pre and post
 direct_expand_ach_goal(HPid,TN,ACH,Pre,Post,State,Statics,Statics):-
    apply_tn(TN,HPid,ACH,Pre,Post,State,Statics,Statics).
 %2. if an action's action meets an operator Pre and post
@@ -412,32 +358,31 @@ direct_expand_ach_goal(HPid,OP,ACH,Pre,Post,State,Statics,Statics1):-
 %    expand it and make it to that TNs
 direct_expand_ach_goal(HPid,TN,ACH,Pre,Post,State,Statics,Statics1):-
    dir_apply_method(TN,HPid,ACH,Pre,Post,State,Statics,Statics1),!.
-%4. else, fail for direct expand an achieve goal------
+%4. else, failed for direct expand an achieve goal------
 
 % apply an TN to an achieve goal that matches both pre and post conditions
 apply_tn(Tn0,HPid,ACH,Pre,Post,State,Statics,Statics):-
    tn(Tn0,Name,Pre0,Post0,Temp0,Decomp0),
    state_achieved(Pre0,Pre),
    state_change(Pre,Pre0,Post0,State),
-   post_achieved(Post,State,Statics),
+   all_achieved(Post,Statics,State),
 %   nl,write('step '),write(HPid),
     retract(op_num(N)),
     N1 is N+1,
     assert(op_num(N1)),!.
 %    write('can be expand by tn '),write(Tn0),nl,!.
 
-% directly apply an operator
-% only when it's Pre and Post matches currect state and goal
-dir_apply_op(Name,HPid,ACH,Pre,Post,State,Statics,Statics1):-
+% directly apply an operator when its Pre and Post matches
+dir_apply_op(Name,HPid,ACH,Pre,Goal,State,Statics,Statics1):-
 %   ACH=..[achieve|Rest],
+   make_se_primitive(Goal,Post),
    operatorC(Name,Pre0,Post0,Cond,Statics0),
-   state_related(Post0,Cond,Post),
-   state_achieved(Pre0,Pre),
    statics_append(Statics0,Statics,Statics2),
-%   post_instant(Post0,Cond,Statics2,Post),
+   state_related(Post0,Cond,Post),
+%   state_achieved(Pre,Pre0,Statics2),% can't say because not full instatiate
    state_change(Pre,Pre0,Post0,State2),
    cond_state_change(State2,Cond,State),
-   post_achieved(Post,State,Statics2),
+   all_achieved(Post,Statics2,State),
    remove_unneed(Statics2,[],Statics1),
    statics_consist(Statics1),
 %   nl,write('step '),write(HPid),
@@ -446,20 +391,21 @@ dir_apply_op(Name,HPid,ACH,Pre,Post,State,Statics,Statics1):-
    N1 is N+1,
    assert(op_num(N1)),!.
 
-% apply an method,only Pre and Post condition matchs
-dir_apply_method(TN,HPid,ACH,Pre,Post,State,Statics,Statics1):-
+% apply mehtod when Pre and Post condition matchs
+dir_apply_method(TN,HPid,ACH,Pre,Goal,State,Statics,Statics1):-
 %   ACH=..[achieve|Rest],
+   make_se_primitive(Goal,Post),
    methodC(Name,Pre0,Post0,Statics0,Temp0,achieve(ACH0),Dec0),
-   append_st(Statics0,Statics,Statics2),
-%   all_achieved(Pre0,Statics2,Pre),
+   statics_append(Statics0,Statics,Statics2),
    state_related(Post0,Post),
-   post_instant(Post0,[],Statics2,Post),
-   rough_state_change(Pre,Pre0,Post0,State2),
+%   state_achieved(Pre0,Pre,Statics2),
+   state_change(Pre,Pre0,Post0,State2),
+%   rough_state_change(Pre,Pre0,Post0,State2),
    may_achieved(Post,Statics2,State2),
-   remove_unneed(Statics2,[],Statics21),
-   make_dec1(HPid,Pre,ACH0,Statics21,Temp0,Dec0,Temp2,Dec2),
-   expand_decomp(Dec2,Pre,State,Temp2,Temp1,Statics21,Statics1,Dec1),
-   post_achieved(Post,State,Statics1),
+%   remove_unneed(Statics2,[],Statics21),
+   make_dec1(HPid,Pre,ACH0,Statics2,Temp0,Dec0,Temp2,Dec2),
+   expand_decomp(Dec2,Pre,State,Temp2,Temp1,Statics2,Statics1,Dec1),
+   all_achieved(Post,Statics1,State),
 %   nl,write('step '),write(HPid),
 %   write('can be expand by method '),write(Name),nl,
    retract(op_num(N)),
@@ -467,35 +413,19 @@ dir_apply_method(TN,HPid,ACH,Pre,Post,State,Statics,Statics1):-
    assert(op_num(N1)),
    make_tn(TN,Name,Pre,State,Temp1,Dec1),!.
 
-% make decomposition steps when expand a method directly
+% make decomposition steps when expand a method
 make_dec1(HPid,Pre,ACH,Statics,Temp,Dec,Temp1,Dec1):-
    var(HPid),
-   gensym_special(hp,HPid),
+   gensym(hp,HPid),
    make_dec1(HPid,Pre,ACH,Statics,Temp,Dec,Temp1,Dec1),!.
 make_dec1(HPid,Pre,ACH,Statics,Temp,Dec,Temp1,Dec1):-
    all_achieved(ACH,Statics,Pre),
    make_dec01(HPid,1,Dec,Dec1),
    change_temp(HPid,Temp,[],Temp1),!.
-make_dec1(HPid,Pre,ACH,Statics,Temp,Dec,[before(STID0,STID1)|Temp1],[step(STID0,OP,Pre,Post,exp(OP))|Dec1]):-
-   gensym_num(HPid,0,STID0),
-   gensym_num(HPid,1,STID1),
-   dir_apply_op(OP,STID0,ACH,Pre,ACH,Post,Statics,_),
-   make_dec01(HPid,1,Dec,Dec1),
-   change_temp(HPid,Temp,[],Temp1),!.
-% make decomposition steps when need fwsearch to expand a method
-make_dec2(HPid,Pre,ACH,Statics,Temp,Dec,Temp1,Dec1):-
-   var(HPid),
-   gensym_special(hp,HPid),
-   make_dec2(HPid,Pre,ACH,Statics,Temp,Dec,Temp1,Dec1),!.
-make_dec2(HPid,Pre,ACH,Statics,Temp,Dec,Temp1,Dec1):-
-   all_achieved(ACH,Statics,Pre),
-   make_dec01(HPid,1,Dec,Dec1),
-   change_temp(HPid,Temp,[],Temp1),!.
-make_dec2(HPid,Pre,ACH,Statics,Temp,Dec,[before(STID0,STID1)|Temp1],[step(STID0,achieve(ACH),Pre,ACH,unexp)|Dec1]):-
+make_dec1(HPid,Pre,ACH,Statics,Temp,Dec,[before(STID0,STID1)|Temp1],[step(STID0,achieve(ACH),Pre,ACH,unexp)|Dec1]):-
    gensym_num(HPid,0,STID0),
    gensym_num(HPid,1,STID1),
    make_dec01(HPid,1,Dec,Dec1),
-%   dir_apply_op(OP,STID0,ACH,Pre,ACH,Post,Statics,_),
    change_temp(HPid,Temp,[],Temp1),!.
 
 make_dec01(HPid,_,[],[]):-!.
@@ -515,6 +445,8 @@ change_temp(HPid,[before(N1,N2)|Temp],Temp2,[before(ST1,ST2)|Temp0]):-
    gensym_num(HPid,N1,ST1),
    gensym_num(HPid,N2,ST2),
    change_temp(HPid,Temp,Temp2,Temp0),!.
+% --------------------end of dir_apply_method/8---------------------
+/************ end of direct_expand_ach_goal *********************/
 
 % ----------------forward searching--------------
 % make tp_node(TPID, Pre,Statics,from(Parent),Score,Steps)
@@ -523,22 +455,19 @@ make_tpnodes(Pre,Post, Statics):-
    Num>=1000,
    retractall(tp_goal(_,_,_)),
    retractall(related_op(_,_)),
-   retractall(lowest_score(_)),
    assert(tp_goal(Pre,Post,Statics)),
-   assert(lowest_score(0)),
    assert(tp_node(init,Pre,Statics,from(init),0,[])),!.
 
 make_tpnodes(Pre,Post, Statics):-
    retractall(tp_goal(_,_,_)),
    retractall(related_op(_,_)),
-   retractall(lowest_score(_)),
-   retractall(max_length(_)),
    assert(tp_goal(Pre,Post,Statics)),
    assert_goal_related_init(Pre,Post,Statics),
-   assert(lowest_score(0)),
-   find_all_related_goals(Post,Statics,1,N),
+   assert(op_score(goal,0)),
+   find_all_related_goals(Pre,Statics,1,N),
 %   find_all_related_op,
    assert(tp_node(init,Pre,Statics,from(init),0,[])),!.
+
 %tp_node(TP,Pre,Statics,from(Parent),Score,Steps)
 % forward search for operators can't directly solved
 fwsearch(TN,State):-
@@ -551,12 +480,12 @@ fwsearch(TN,State):-
    solved_node(_,_),%expand every possible way until find solution
    fwsearch(TN,State).
 fwsearch(TN,State):-
-   tp_node(_,_,_,_,_,_),
+   tp_node(TP,Pre,Statics,from(PR),Score,Steps),
    fwsearch(TN,State).
 
 clean_temp_nodes:-
    retractall(tp_goal(_,_)),
-   retractall(goal_related(_,_,_,_)),
+   retractall(goal_related(_,_,_)),
    retractall(goal_related_search(_)),
    retractall(related_op(_)),
    retractall(op_score(_,_)),
@@ -570,20 +499,16 @@ clean_temp_nodes:-
 % if Post is achieved by Pre, finish
 expand_node(TP,done,Statics,Statics,Pre,Pre,from(PR),List,List):-
    tp_goal(_,Goal,_),
-   make_se_primitive(Goal,PGoal),
-   post_achieved(PGoal,Pre,Statics),!.%post is uncomplet ss,so just see it
-				% can achieved Pre or not
+   state_achieved(Goal,Pre,Statics),!.
 expand_node(TP,TN,Statics,Statics1,Pre,State,from(PR),List,List1):-
    expand_node1(TN,Statics,Statics1,Pre,State,from(PR),List,List1).
 
-:- discontiguous expand_node1/8.
 % check the Post can be solved by direct expand (Operator or Method)
 expand_node1(TN,Statics,Statics1,Pre,State,from(PR),List,List1):-
    tp_goal(_,Goal,_),
-   make_se_primitive(Goal,PGoal),
-   direct_expand(HP,TN,achieve(PGoal),Pre,PGoal,State,Statics,Statics1),
-%   gensym_special(hp,HP),
-   append(List,[step(HP,achieve(PGoal),Pre,State,exp(TN))],List1),!.
+   direct_expand(HP,TN,achieve(Goal),Pre,Goal,State,Statics,Statics1),
+%   gensym(hp,HP),
+   append(List,[step(HP,achieve(Goal),Pre,State,exp(TN))],List1),!.
 % -------direct expand -----------------------
 % if the goal canbe achieved by a method's pre and post,
 %    expand it and make it to that TNs
@@ -597,7 +522,7 @@ expand_node1(ID,Statics,Statics,Pre,State,from(PR),List,List1):-
    gOperator(ID,_,OP),
    apply_ground_op(OP,Pre,State,List,List1).
 expand_node1(OP,Statics,Statics1,Pre,State,from(PR),List,List1):-
-   not(goal_related(_,_,_,_)),
+   not(goal_related(_,_,_)),
    operatorC(OP,Pre0,Post0,Cond,ST),
    apply_unground_op(OP,Pre0,Post0,Cond,ST,Statics,Statics1,Pre,State,List,List1).
 
@@ -605,20 +530,20 @@ apply_ground_op(operator(OP,Prev,Nec,Cond),Pre,State,List,List1):-
    state_achieved(Prev,Pre),
    nec_state_change(Pre,Nec,State2),
    cond_state_change(State2,Cond,State),
-   gensym_special(hp,HP),
+   gensym(hp,HP),
    append(List,[step(HP,OP,Pre,State,exp(OP))],List1),
    retract(op_num(N)),
    N1 is N+1,
    assert(op_num(N1)),!.
 
 apply_unground_op(OP,Pre0,Post0,Cond,ST,Statics,Statics1,Pre,State,List,List1):-
-   append_cut(ST,Statics,Statics2),
+   statics_append(ST,Statics,Statics2),
    state_achieved(Pre0,Pre,Statics2),
    state_change(Pre,Pre0,Post0,State2),
    cond_state_change(State2,Cond,State),
    statics_consist_instance(ST),
    remove_unneed(Statics2,[],Statics1),
-   gensym_special(hp,HP),
+   gensym(hp,HP),
    append(List,[step(HP,OP,Pre,State,exp(OP))],List1),
    retract(op_num(N)),
    N1 is N+1,
@@ -627,7 +552,7 @@ apply_unground_op(OP,Pre0,Post0,Cond,ST,Statics,Statics1,Pre,State,List,List1):-
 find_related_op([],Ops1,Ops):-
    remove_dup(Ops1,[],Ops),!.
 find_related_op([Head|Pre],List,Ops):-
-   setof(OPls,Head^Level^Post^goal_related(Head,Post,OPls,Level),OPs0),
+   setof(OPls,Head^Level^goal_related(Head,OPls,Level),OPs0),
    flatten(OPs0,[],OPs1),
    append(List,OPs1,List1),
    find_related_op(Pre,List1,Ops),!.
@@ -636,39 +561,29 @@ find_related_op([Head|Pre],List,Ops):-
 
 % select a tp_node with lowest score
 select_tnode(tp_node(TPid,Pre,Statics,Parents,Score,Dec)) :-
+   retractall(score_list(LS)),
+   assert(score_list([])),
    lowest_score(Score),
-   retract(tp_node(TPid,Pre,Statics,Parents,Score,Dec)),
-   update_lowest_score(Score),!.
+   retract(tp_node(TPid,Pre,Statics,Parents,Score,Dec)),!.
+%   tell(user),nl,write('new level'),nl,told,!.
 
 % find the lowest_score of tp_node
-update_lowest_score(Score):-
-     tp_node(HPid,Pre,Statics,Parents,Score,Dec),!.
-update_lowest_score(Score):-
-     tp_node(HPid,Pre,Statics,Parents,Score0,Dec),
-     Score1 is Score+1,
-     update_lowest_score1(Score1),!.
-% if there isn't any tp_node, set lowest score maximal
-update_lowest_score(Score):-
-     retract(lowest_score(_)),
-     assert(lowest_score(10000)),!.
-
-update_lowest_score1(Score):-
+lowest_score(LScore):-
      tp_node(HPid,Pre,Statics,Parents,Score,Dec),
-     retract(lowest_score(_)),
-     assert(lowest_score(Score)),!.
-update_lowest_score1(Score):-
-     Score1 is Score+1,
-     update_lowest_score1(Score1),!.
-
+     retract(score_list(LS)),
+     assert(score_list([Score|LS])),
+     fail.
+lowest_score(LScore):-
+     retract(score_list(D)),
+     sort(D,[LScore|SD]).
 
 % assert assert_tnode(TP,OP,PR,Score,Post,Statics1,Steps1),
-% if goal achieved, assert solved_node
+%if goal achieved, assert solved_node
 assert_tnode(TP,OP,PR,Score,Post,Statics,[]):-!.
 assert_tnode(TP,OP,PR,Score,Post,Statics,Steps):-
    tp_goal(Pre,Goal,Statics1),
-   post_achieved(Goal,Post,Statics),
+   state_achieved(Goal,Post,Statics),
    combine_exp_steps(Post,Steps,OneStep),
-%   write('solved_node '),write(OneStep),nl,
    assert(solved_node(Statics,OneStep)),!.
 assert_tnode(TP,OP,PR,Score,Post,Statics,Steps):-
    existing_node(Post,Statics),!.
@@ -676,30 +591,18 @@ assert_tnode(TP,OP,PR,Score,Post,Statics,Steps):-
    get_score(PR,Post,Steps,Score),
 %   op_score(OP,SS),
 %   Score is Score1-SS,
-   gensym_special(tp,TP1),
+   gensym(tp,TP1),
 %   write(TP1),nl,
 %   write(Steps),nl,
-%   write(TP1),write(' '),write(Post),
-%   write('from '),write(TP),
-%   write(' '),write(Score),nl,
-%   write(Steps),nl,
-   update_low_score(Score),
    assert(tp_node(TP1,Post,Statics,from(TP),Score,Steps)),!.
-
-% if current score small than lowest_score, update it
-update_low_score(Score):-
-   lowest_score(LS),
-   LS>Score,
-   retract(lowest_score(LS)),
-   assert(lowest_score(Score)),!.
-update_low_score(Score):-!.
 
 combine_exp_steps(Post,Steps,step(HP,achieve(Goal),Pre,Post,exp(TN))):-
    tp_goal(Pre,Goal,Statics),
    get_action_list(Steps,[],ACTls),
    make_temp(ACTls,[],Temp),
-   gensym_special(hp,HP),
+   gensym(hp,HP),
    make_tn(TN,achieve(Goal),Pre,Post,Temp,Steps),!.
+
 % get the temperal from an ordered steps
 get_action_list([],ACTls,ACTls):-!.
 get_action_list([step(HP,_,_,_,_)|Steps],List,ACTls):-
@@ -715,94 +618,54 @@ existing_node(Post,Statics):-
     tp_node(_,Post,_,_,_,_).
 existing_node(Post,Statics):-
     closed_node(_,Post,_,_,_,_).
+% ------------------related goals------------------
 
-%jun 20 start from beginning
-assert_goal_related_init([],Post,Statics):-!.
+assert_goal_related_init(Pre,[],Statics):-!.
 %assert_goal_related_init(Pre,[se(Sort,Obj,SE)|Post],Statics):-
 %    state_achieved([se(Sort,Obj,SE)],Pre,Statics),!.
-assert_goal_related_init([se(Sort,Obj,SE)|Pre],Post,Statics):-
-    find_related_goal_init(se(Sort,Obj,SE)),
+assert_goal_related_init(Pre,[se(Sort,Obj,SE)|Post],Statics):-
+    ground(Obj),
+    is_of_primitive_sort(Obj,SortP),
+    assert(goal_related(se(SortP,Obj,SE),[],0)),
     assert_goal_related_init(Pre,Post,Statics),!.
-
-find_related_goal_init(se(Sort,Obj,SE)):-
-    gOperator(OPID,ID,operator(Name,Prev,Nec,Cond)),
-            % no need check Prev, become it doen't change states
-    find_related_goal_nec_init(se(Sort,Obj,SE),OPID,Name,Nec),
-            % do cond after nec successed
-    find_related_goal_cond_init(se(Sort,Obj,SE),OPID,Name,Cond),
-    fail.
-find_related_goal_init(se(Sort,Obj,SE)):-
-    not(goal_related(se(Sort,Obj,_),_,_,_)),
-    assert(goal_related(se(Sort,Obj,SE),se(Sort,Obj,SE),[],0)).
-find_related_goal_init(se(Sort,Obj,SE)).
-
-% no backtract for ground nec
-find_related_goal_nec_init(se(Sort,Obj,SE),ID,Name,[]):-!.
-find_related_goal_nec_init(se(Sort,Obj,SE),ID,Name,[sc(Sort,Obj,LHS=>RHS)|Nec]):-
-    state_match(Sort,Obj,SE,RHS),
-    assert_goal_related(se(Sort,Obj,LHS),se(Sort,Obj,RHS),ID,0),!.
-find_related_goal_nec_init(se(Sort,Obj,SE),ID,Name,[sc(Sort,Obj,LHS=>RHS)|Nec]):-
-    find_related_goal_nec_init(se(Sort,Obj,SE),ID,Name,Nec).
-
-find_related_goal_cond_init(se(Sort,Obj,SE),ID,Name,[]):-!.
-find_related_goal_cond_init(se(Sort,Obj,SE),ID,Name,[sc(Sort,Obj,LHS=>RHS)|Cond]):-
-    is_hierarchy(false),
-    filterInvars(LHS,LInVars,LIsOfSorts,LNEs,FLHS),
-    filterInvars(RHS,RInVars,RIsOfSorts,RNEs,FRHS),
-    state_match(Sort,Obj,SE,FRHS),
-    checkInVars(LInVars),
-    checkInVars(RInVars),
-    checkIsOfSorts(LIsOfSorts),
-    checkIsOfSorts(RIsOfSorts),
-    obeysNEs(LNEs),
-    obeysNEs(RNEs),
-    assert_goal_related(se(Sort,Obj,FLHS),se(Sort,Obj,FRHS),ID,0),
-    find_related_goal_cond_init(se(Sort,Obj,SE),ID,Name,Cond).
-find_related_goal_cond_init(se(Sort,Obj,SE),ID,Name,[sc(Sort1,Obj,LHS=>RHS)|Cond]):-
-    is_hierarchy(true),
-    is_of_sort(Obj,Sort1),
-    is_of_sort(Obj,Sort), %Sort is a primitive sort changed at init
-    filterInvars(LHS,LInVars,LIsOfSorts,LNEs,FLHS),
-    filterInvars(RHS,RInVars,RIsOfSorts,RNEs,FRHS),
-    state_match(Sort,Obj,SE,FRHS),
-    checkInVars(LInVars),
-    checkInVars(RInVars),
-    checkIsOfSorts(LIsOfSorts),
-    checkIsOfSorts(RIsOfSorts),
-    obeysNEs(LNEs),
-    obeysNEs(RNEs),
-    assert_goal_related(se(Sort,Obj,FLHS),se(Sort,Obj,FRHS),ID,0),
-    find_related_goal_cond_init(se(Sort,Obj,SE),ID,Name,Cond).
-find_related_goal_cond_init(se(Sort,Obj,SE),ID,Name,[Head|Cond]):-
-    find_related_goal_cond_init(se(Sort,Obj,SE),ID,Name,Cond).
+assert_goal_related_init(Pre,[se(Sort,Obj,SE)|Post],Statics):-
+    assert_related_goals_varible(Sort,Obj,SE,goal,0),
+    assert_goal_related_init(Pre,Post,Statics),!.
 
 % find_all_related_goals: backward search
 % until all preconditions have found
-find_all_related_goals(Post,Statics,N,N):-
-    get_all_state(Post,States),
-    all_found(Post,States,Statics),
-    assert(max_length(N)),
-    assert(goal_related_search(succ)),!.
-find_all_related_goals(Post,Statics,I,N):-
+find_all_related_goals(Pre,Statics,N,N):-
+    get_all_state(States),
+    all_found(States,Pre,Statics),
+    assert(goal_related_search(succ)),
+    find_all_related_goals_final(Statics,N),!.
+find_all_related_goals(Pre,Statics,I,N):-
     I1 is I-1,
-    goal_related(_,_,_,I1),
-    find_related_goal(I1,I),
+    goal_related(_,_,I1),
+    find_related_goal(Statics,I1,I),
     I2 is I+1,
-    find_all_related_goals(Post,Statics,I2,N),!.
-find_all_related_goals(Post,Statics,N,N):-
-    I is N-1,
-    not(goal_related(_,_,_,I)),
+    find_all_related_goals(Pre,Statics,I2,N),!.
+find_all_related_goals(Pre,Statics,N,N):-
+    not(goal_related(_,_,N)),
     assert(goal_related_search(fail)),
     write('related goal search failed'),
-    retractall(goal_related(_,_,_,_)),!.
+    retractall(goal_related(_,_,_)),!.
     %fail to find out, don't search any more
     % fwsearch use all the ground ops.
 
+
+% final find the actions to recover initial states:
+% in case the initial states was deleted by other actions
+find_all_related_goals_final(Statics,N):-
+    N1 is N-1,
+    goal_related(Pre,_,N1),
+    find_related_goal(Statics,N1,N),!.
+find_all_related_goals_final(Statics,N):-!.
+
 % get all the found goal related states
-get_all_state([],[]):-!.
-get_all_state([se(Sort,Obj,ST)|Post],[se(Sort,Obj,SEPostall)|States]):-
-   setof(SEPost, Pre^Level^OP^goal_related(Pre,se(Sort,Obj,SEPost),OP,Level),SEPostall),
-   get_all_state(Post,States),!.
+get_all_state(States):-
+   setof(Goal, Statics^Level^OP^goal_related(Goal,OP,Level),States11),
+   put_one_obj_together(States11,[],States),!.
 
 put_one_obj_together([],States,States):-!.
 put_one_obj_together([se(Sort,Obj,ST)|States1],List,States):-
@@ -818,79 +681,47 @@ put_one_obj_together1(se(Sort,Obj,ST),[se(Sort1,Obj1,ST1)|List],[se(Sort1,Obj1,S
 
 % all the Precondition states in backward search can reach initial states
 all_found([],States,Statics):-!.
-all_found([se(Sort,Obj,SEPost)|Post],[se(Sort,Obj,STPost)|States],Statics):-
-   all_found1(Sort,Obj,SEPost,STPost,Statics),
-   all_found(Post,States,Statics),!.
+all_found([se(Sort,Obj,ST)|States],Pre,Statics):-
+   member(se(Sort,Obj,SPre),Pre),
+   subtract(SPre,ST,Diff),
+   isemptylist(Diff),
+   all_found(States,Pre,Statics),!.
 
-all_found1(Sort,Obj,SEPost,[Head|STPost],Statics):-
-   state_achieved([se(Sort,Obj,SEPost)],[se(Sort,Obj,Head)],Statics),!.
-all_found1(Sort,Obj,SEPost,[Head|STPost],Statics):-
-   all_found1(Sort,Obj,SEPost,STPost,Statics),!.
 % find all the states that can achieve the goal state
 % separete ground operators to related-op and unrelated op
-find_related_goal(I1,I):-
+find_related_goal(Statics,I1,I):-
     gOperator(OPID,ID,operator(Name,Prev,Nec,Cond)),
-            % no need check Prev, become it doen't change states
-    achieved_prev(Prev),
-    find_related_goal_nec(Nec,GRNec),
-    assert_related_goal_nec(OPID,GRNec,I),
-            % do cond after nec successed
-    find_related_goal_cond(OPID,Name,Cond,I1,I),
+    find_related_goal_nec(OPID,Name,Prev,Nec,Statics,I1,I),
+    find_related_goal_cond(OPID,Name,Prev,Nec,Cond,Statics,I1,I),
     fail.
-find_related_goal(I1,I).
+find_related_goal(Statics,I1,I).
 
-% prev didn't change states,just check if there is any previous state
-% achieves it
-achieved_prev([]):-!.
-achieved_prev([se(Sort,Obj,SEPrev)|Prev]):-
-    goal_related(_,se(Sort,Obj,SE),_,_),
-    state_match(Sort,Obj,SEPrev,SE),
-    achieved_prev(Prev),!.
-% for  nec
-find_related_goal_nec([],[]):-!.
-find_related_goal_nec([sc(Sort,Obj,Lhs=>Rhs)|Nec],[[se(Sort,Obj,SE),se(Sort,Obj,Rhs)]|GRNec]):-
-    goal_related(_,se(Sort,Obj,SE),_,_),
-    state_match(Sort,Obj,Lhs,SE),
-    find_related_goal_nec(Nec,GRNec).
-
-assert_related_goal_nec(ID,[],I):-!.
-assert_related_goal_nec(ID,[[se(Sort,Obj,SE),se(Sort,Obj,Rhs)]|GRNec],I):-
-    assert_goal_related(se(Sort,Obj,SE),se(Sort,Obj,Rhs),ID,I),
-    assert_related_goal_nec(ID,GRNec,I),!.
-
-find_related_goal_cond(ID,Name,[],I1,I):-!.
-find_related_goal_cond(ID,Name,[sc(Sort,Obj,LHS=>RHS)|Cond],I1,I):-
-    is_hierarchy(false),
-    goal_related(_,se(Sort,Obj,SE),Ops,_),
-    state_match(Sort,Obj,LHS,SE),
+find_related_goal_nec(ID,Name,Prev,Nec,Statics,I1,I):-
+    goal_related(se(Sort,Obj,SE),Ops,I1),
+    member(sc(Sort,Obj,Lhs=>Rhs),Nec),
+    state_match(Sort,Obj,SE,Rhs),
+    statics_consist(Statics),
+%    assert_op_score(ID,OPs),
+    assert_goal_related(Prev,Nec,ID,I).
+find_related_goal_cond(ID,Name,Prev,Nec,[],Statics,I1,I):-
+    !.
+find_related_goal_cond(ID,Name,Prev,Nec,Cond,Statics,I1,I):-
+    goal_related(se(Sort,Obj,SE),Ops,I1),
+    member(sc(Sort0,Obj,LHS=>RHS),Cond),
+    is_of_sort(Obj,Sort0),
+    is_of_sort(Obj,Sort),%Sort is a primitive sort changed at init
     filterInvars(LHS,LInVars,LIsOfSorts,LNEs,FLHS),
     filterInvars(RHS,RInVars,RIsOfSorts,RNEs,FRHS),
+    can_achieve_g([se(Sort,Obj,FRHS)],[se(Sort,Obj,SE)],Statics),
+    statics_consist(Statics),
     checkInVars(LInVars),
     checkInVars(RInVars),
     checkIsOfSorts(LIsOfSorts),
     checkIsOfSorts(RIsOfSorts),
     obeysNEs(LNEs),
     obeysNEs(RNEs),
-    assert_goal_related(se(Sort,Obj,SE),se(Sort,Obj,FRHS),ID,I),
-    fail.
-find_related_goal_cond(ID,Name,[sc(Sort1,Obj,LHS=>RHS)|Cond],I1,I):-
-    is_hierarchy(true),
-    goal_related(_,se(Sort,Obj,SE),Ops,_),
-    is_of_sort(Obj,Sort1),
-    is_of_sort(Obj,Sort), %Sort is a primitive sort changed at init
-    state_match(Sort,Obj,LHS,SE),
-    filterInvars(LHS,LInVars,LIsOfSorts,LNEs,FLHS),
-    filterInvars(RHS,RInVars,RIsOfSorts,RNEs,FRHS),
-    checkInVars(LInVars),
-    checkInVars(RInVars),
-    checkIsOfSorts(LIsOfSorts),
-    checkIsOfSorts(RIsOfSorts),
-    obeysNEs(LNEs),
-    obeysNEs(RNEs),
-    assert_goal_related(se(Sort,Obj,SE),se(Sort,Obj,FRHS),ID,I),
-    fail.
-find_related_goal_cond(ID,Name,[sc(Sort1,Obj,LHS=>RHS)|Cond],I1,I):-
-    find_related_goal_cond(ID,Name,Cond,I1,I).
+%    assert_op_score(ID,OPs),
+    assert_goal_related(Prev,[sc(Sort,Obj,FLHS=>FRHS)|Nec],ID,I).
 
 % filter out invars, is_of_sorts and nes from a state list
 filterInvars([],[],[],[],[]):-!.
@@ -910,7 +741,7 @@ filterInvars([Pred|State],[Pred|InVars],IsOfSorts,NEs,FState):-
     member_cut(Pred1,Atom),!,
     filterInvars(State,InVars,IsOfSorts,NEs,FState).
 filterInvars([Pred|State],InVars,IsOfSorts,NEs,[Pred|FState]):-
-    !,filterInvars(State,InVars,IsOfSorts,NEs,FState).
+    filterInvars(State,InVars,IsOfSorts,NEs,FState).
 
 % filter out nes from a state list
 filterNes([],[],[]):-!.
@@ -920,7 +751,11 @@ filterNes([ne(A,B)|State],[ne(A,B)|NEs],FState):-
 filterNes([Pred|State],NEs,[Pred|FState]):-
     filterNes(State,NEs,FState).	
 
-/*****************ground can_achieve_g**********************/
+assert_related_op(OP,I):-
+    related_op(OP,_),!.
+assert_related_op(OP,I):-
+    asserta(related_op(OP,I)),!.
+
 % State2 can be achieved by State1
 can_achieve_g([],State2,Statics):-!.
 can_achieve_g(State1,State2,Statics):-
@@ -931,66 +766,128 @@ can_achieve_g([se(Sort,Obj,ST1)|State1],[se(Sort,Obj,ST2)]):-
     state_match(Sort,Obj,ST2,ST1).
 can_achieve_g([Head|State1],State2):-
     can_achieve_g(State1,State2).
-/****************end of ground can_achieve_g**********/
 
 % assert:goal_related(Pre,Post,Op,DistanseFromGoal)
-assert_goal_related(se(Sort,Obj,SE),se(Sort,Obj,Rhs),ID,I):-
-    retract(goal_related(se(Sort,Obj,SE),se(Sort,Obj,Rhs),Ops,I1)),
-    set_append([ID],Ops,Ops1),
-    assert(goal_related(se(Sort,Obj,SE),se(Sort,Obj,Rhs),Ops1,I)),!.
-assert_goal_related(se(Sort,Obj,SE),se(Sort,Obj,Rhs),ID,I):-
-    assert(goal_related(se(Sort,Obj,SE),se(Sort,Obj,Rhs),[ID],I)),!.
+assert_goal_related(Prev,Nec,OP,I):-
+    assert_goal_related1(Prev,OP,I),!,
+    assert_goal_related1(Nec,OP,I).
+
+assert_goal_related1([],Op,I):-!.
+assert_goal_related1([se(Sort,Obj,SE)|Prev],Op,I):-
+    assert_goal_related2(se(Sort,Obj,SE),Op,I),
+    assert_goal_related1(Prev,Op,I),!.
+assert_goal_related1([sc(Sort,Obj,LH=>RH)|Nec],Op,I):-
+    ground(Obj),%because conditional didn't ground, so the Sort maybe nonprim
+    is_of_primitive_sort(Obj,PSort),!,
+    assert_goal_related2(se(PSort,Obj,LH),Op,I),
+    assert_goal_related1(Nec,Op,I).
+assert_goal_related1([sc(Sort,Obj,LH=>RH)|Nec],Op,I):-
+    var(Obj),
+    assert_related_goals_varible(Sort,Obj,LH,Op,I),
+    assert_goal_related1(Nec,Op,I).
+
+assert_goal_related2(se(Sort,Obj,SE),goal,I):-
+    assert(goal_related(se(Sort,Obj,SE),[],I)),!.
+assert_goal_related2(se(Sort,Obj,SE),Op,I):-
+    goal_related(se(Sort,Obj,SE1),Ops,I),
+    not(is_diff(SE,SE1)),
+    retract(goal_related(se(Sort,Obj,SE),Ops,I)),
+    assert(goal_related(se(Sort,Obj,SE),[Op|Ops],I)),!.
+assert_goal_related2(se(Sort,Obj,SE),Op,I):-
+    assert(goal_related(se(Sort,Obj,SE),[Op],I)),!.
+
+assert_related_goals_varible(Sort,Obj,SE,Op,I):-
+    find_prim_sort(Sort,PSorts),
+    member(Sort1,PSorts),
+    assert_goal_related2(se(Sort1,Obj,SE),Op,I),
+    fail.
+assert_related_goals_varible(Sort,Obj,SE,Op,I).
+
+%assert score for Op, the further from goal, the higher the score
+assert_op_score(OP,OPB):-
+     op_score(OP,_),!.
+assert_op_score(OP,OPB):-
+     op_score(OPB,I),
+     I1 is I+1,
+     assert(op_score(OP,I1)),!.
 
 get_score(PR,Post,Steps,Score):-
     tp_goal(Pre,Goal,Statics),
-    max_length(Max),
-    get_distance(Max,Post,Goal,0,Dis),%length from Present to Goal
-    length(Pre,Obj_Num),
+    get_distance(Pre,Post,Goal,0,Dis),%length from Present to Goal
+%    length(Pre,Obj_Num),
     get_length(PR,1,Len),
 %    Num1 is Obj_Num*Dis,%distanse the smaller the better
-    Num is Obj_Num*Len,%length of the plan the smaller the better
+%    Num2 is Obj_Num*Len1,%length of the plan the smaller the better
 %    Score is Num1+Num2,!.
-    Score is Dis+Num,!.
-get_score(PR,Post,Steps,Score):-
-    tp_goal(Pre,Goal,Statics),
-    get_distance(100,Post,Goal,0,Dis),%length from Present to Goal
-    length(Pre,Obj_Num),
-    get_length(PR,1,Len),
-%    Num1 is Obj_Num*Dis,%distanse the smaller the better
-    Num is Obj_Num*Len,%length of the plan the smaller the better
-%    Score is Num1+Num2,!.
-    Score is Dis+Num,!.
+    Score is Dis+Len,!.
 
-% get distance from Present to Goal
-% it is the total of the distance of every objects
-get_distance(Max,[],Goal,Dis,Dis):-!.
-get_distance(Max,[se(Sort,Obj,SE)|Post],Goal,Dis1,Dis):-
+get_distance(Pre,[],Goal,Dis,Dis):-!.
+get_distance(Pre,[se(Sort,Obj,SE)|Post],Goal,Dis1,Dis):-
     member(se(Sort,Obj,SE0),Goal),
-    post_achieved([se(Sort,Obj,SE0)],[se(Sort,Obj,SE)]),%if it achieved goal
-    get_distance(Max,Post,Goal,Dis1,Dis),!.
-% the distance is measured by goal_related
-get_distance(Max,[se(Sort,Obj,SE)|Post],Goal,Dis1,Dis):-
-    goal_related(_,se(Sort,Obj,SE),_,Level),
-    Dis2 is Max-Level,
-    Dis11 is Dis1+Dis2,
-    get_distance(Max,Post,Goal,Dis11,Dis),!.
-% if it is not found in goal_related,
-% but it is in initial states, the distance is 0
-get_distance(Max,[se(Sort,Obj,SE)|Post],Goal,Dis1,Dis):-
+    state_match(Sort,Obj,SE0,SE),%if it achieved goal
+    get_distance(Pre,Post,Goal,Dis1,Dis),!.
+get_distance(Pre,[se(Sort,Obj,SE)|Post],Goal,Dis1,Dis):-
+    goal_related(se(Sort,Obj,SE0),_,Level),
+    state_match(Sort,Obj,SE0,SE),
+    Dis2 is Dis1+Level,
+    get_distance(Pre,Post,Goal,Dis2,Dis),!.
+get_distance(Pre,[se(Sort,Obj,SE)|Post],Goal,Dis1,Dis):-
     member(se(Sort,Obj,SE0),Pre),
-    state_achieved([se(Sort,Obj,SE)],[se(Sort,Obj,SE0)]),
-    get_distance(Max,Post,Goal,Dis1,Dis),!.
-% if it is not found in goal_related,
-% and it is not initial states, the distance is infinity, we use 1000 in here
-get_distance(Max,[se(Sort,Obj,SE)|Post],Goal,Dis1,Dis):-
-    Dis2 is Dis1+1000,
-    get_distance(Max,Post,Goal,Dis2,Dis),!.
+    state_match(Sort,Obj,SE,SE0),%if it does't change initial state
+    Dis2 is Dis1+1,
+    get_distance(Pre,Post,Goal,Dis2,Dis),!.
+get_distance(Pre,[se(Sort,Obj,SE)|Post],Goal,Dis1,Dis):-
+    Dis2 is Dis1+100,
+    get_distance(Pre,Post,Goal,Dis2,Dis),!.
 
 get_length(init,Len,Len):-!.
 get_length(TP,Len1,Len):-
     closed_node(TP,_,_,from(PR),_,_),
     Len2 is Len1+1,
     get_length(PR,Len2,Len),!.
+
+
+% the states that can achieve a state
+% that is:
+% for a state in the rhs of operator
+% all the states in the lhs
+find_relate_state:-
+   operatorC(A,Pre,Post,Cond,ST),
+   assert_related_states(A,Pre,Post,Cond,ST),
+   fail.
+find_relate_state.
+
+assert_related_states(A,Pre,Post,Cond,ST):-
+   assert_related_states1(A,Pre,Post,ST),
+   assert_related_states2(A,Pre,Cond,ST).
+% find relate in nec
+% the sorts here are primitive
+assert_related_states1(A,Pre,[],ST):-!.
+%when prev
+assert_related_states1(A,Pre,[se(Sort,Obj,SE)|Post],ST):-
+   u_mem_cut(se(Sort,Obj,SE),Pre),
+   assert_related_states1(A,Pre,Post,ST),!.
+%when nec
+assert_related_states1(A,Pre,[se(Sort,Obj,SE)|Post],ST):-
+   assert(produce(se(Sort,Obj,SE),A,Pre,ST)),
+   assert_related_states1(A,Pre,Post,ST),!.
+
+% find relate in conditional
+% the sorts here are not primitive
+assert_related_states2(A,Pre,SC,ST):-
+   make_sc_primitive(SC,PSC),
+   assert_related_states21(A,Pre,PSC,ST).
+
+assert_related_states21(A,Pre,[],ST):-!.
+assert_related_states21(A,Pre,[sc(Sort,Obj,SE=>SS)|Trans],ST):-
+   rem_statics([se(Sort,Obj,SE)],[se(Sort,Obj,SER)],St1),
+   rem_statics([se(Sort,Obj,SS)],[se(Sort,Obj,SSR)],St2),
+   append_cut(ST,St1,ST1),
+   append_cut(ST1,St2,ST21),
+   remove_unneed(ST21,[],ST2),
+   append_cut(Pre,[se(Sort,Obj,SER)],Pre1),
+   assert(produce(se(Sort,Obj,SSR),A,Pre1,ST2)),
+   assert_related_states21(A,Pre,Trans,ST),!.
 
 %-------------------------------------------
 % remove HP1 from the temp list
@@ -1031,8 +928,7 @@ remove_dec(HPid,[step(A,B,C,D,F)|Dec],[step(A,B,C,D,F)|Dec1]):-
    
 /******************************************************/
 % State2 is achieved by State1
-% first split the states to the substate class of the sort level
-% then compare them in same sort level
+% the two states need to be primitive
 state_achieved(undefd,State,Statics):-!.
 state_achieved([],State2,Statics):-!.
 state_achieved(State1,State2,Statics):-
@@ -1041,107 +937,52 @@ state_achieved(State1,State2,Statics):-
 
 state_achieved(undefd,State):-!.
 state_achieved([],State2).
-state_achieved(State1,State2):-
-    is_hierarchy(false),
-    state_achievedf(State1,State2).
-state_achieved(State1,State2):-
-    is_hierarchy(true),
-    state_achievedh(State1,State2).
-
-% for flat domain
-state_achievedf([],State2).
-state_achievedf([se(Sort,Obj,ST1)|State1],State2):-
+state_achieved([se(Sort,Obj,ST1)|State1],State2):-
     member(se(Sort,Obj,ST2),State2),
+    is_of_sort(Obj,Sort),
     state_match(Sort,Obj,ST1,ST2),
     list_take(State2,[se(Sort,Obj,ST2)],State21),
-    state_achievedf(State1,State21).
-state_achievedf([se(Sort,Obj,ST1)|State1],State2):-
+    state_achieved(State1,State21).
+state_achieved([se(Sort,Obj,ST1)|State1],State2):-
     not(member(se(Sort,Obj,ST2),State2)),
-    state_achievedf(State1,State2).
+    state_achieved(State1,State2),!.
 
-% for hierarchical domain
-state_achievedh([],State2).
-state_achievedh([se(Sort,Obj,ST1)|State1],State2):-
-    member(se(Sort2,Obj,ST2),State2),
-    not(not(is_of_sort(Obj,Sort))),
-    not(not(is_of_sort(Obj,Sort2))),
-    state_achieved1([se(Sort2,Obj,ST1)],[se(Sort2,Obj,ST2)]),
-    list_take(State2,[se(Sort2,Obj,ST2)],State21),
-    state_achievedh(State1,State21).
-state_achievedh([se(Sort,Obj,ST1)|State1],State2):-
-    not(member(se(Sort2,Obj,ST2),State2)),
-    state_achievedh(State1,State2).
-
-% if the ST1 is a subset of ST2
-state_achieved1(State1,State2):-
-    split_level(State1,[],SPST1),
-    split_level(State2,[],SPST2),
-    state_achieved2(SPST1,SPST2).
-% compare the state in there level
-state_achieved2([],State2).
-state_achieved2([se(Sort,Obj,ST1)|State1],State2):-
-    member(se(Sort,Obj,ST2),State2),
-    state_match(Sort,Obj,ST1,ST2),
-    state_achieved2(State1,State2).
-state_achieved2([se(Sort,Obj,ST1)|State1],State2):-
-    not(member(se(Sort,Obj,ST2),State2)),
-    state_achieved2(State1,State2).
-
-/************ states ST1 matchs ST2  ********/
+/************ states ST matchs ST1  ********/
 % state_match: ST is achieved by ST1
-% ST and ST1 can in same substate classes
-% in some domain, one substate is another's subset,
-% so they cann't consider as match each other because they are different state
+% ST=ST1
+state_match(Sort,Obj,ST,ST1):-
+    not(is_diff(ST,ST1)),!.
+% when ST is the subset of ST1,
+% in some domain, one substateclass is anothers's subset
+% they cann't consider as match each other
 % for example [on_block(a,b)] and [on_block(a,b),clear(a)]
-state_match(Sort,Obj,ST,ST):-!.
 state_match(Sort,Obj,ST,ST1):-
     is_achieved(ST,ST1),
-    not(in_different_states(Sort,Obj,ST,ST1)),!.
+    gsubstate_classes(Sort,Obj,Substateclasses),
+    not(in_different_states(ST,ST1,Substateclasses)),!.
+% when ST is not the subset of ST1,
+% in hierarchical domain, maybe one is inhiered by the upperlevel
+state_match(Sort,Obj,ST,ST1):-
+    not(is_achieved(ST,ST1)),    
+    set_append(ST,ST1,ST0),
+    gsubstate_classes(Sort,Obj,Substateclasses),
+    in_same_sub_states(ST0,Substateclasses),!.
+
+% in_same_sub_states: check if ST1+ST2 in one states
+in_same_sub_states(ST0,[State|SCls]):-
+    is_achieved(ST0,State),!.
+in_same_sub_states(ST0, [State|SCls]):-
+    in_same_sub_states(ST0,SCls),!.
 
 % in_different_states: check if ST,ST1 in different states
-in_different_states(Sort,Obj,ST,ST1):-
-    odds_in_subset_substates(Sort,Obj,Odds),
-    diff_items(ST,ST1,Diff),
-    member_cut(Diff,Odds),!.
+in_different_states(ST,ST1, [State|SCls]):-
+    max_member(ST,Substateclasses,MSub, _),
+    max_member(ST1,Substateclasses,MSub1, _),
+    MSub\==MSub1,!.
 
-diff_items(ST,ST1,Diff):-
-    list_take(ST,ST1,Diff1),
-    list_take(ST1,ST,Diff2),
-    append(Diff1,Diff2,Diff),!.
-
-% split the hier substates to their relavant level
-% so that we can compare them later at same level
-split_level([],State,State):-!.
-split_level([se(Sort,Obj,[])|State],SPST1,SPST):-
-    split_level(State,SPST1,SPST),!.
-split_level([se(Sort,Obj,ST)|State],SPST1,SPST):-
-    substate_classes(Sort,Obj,Substateclasses),
-    max_member(ST,Substateclasses,MSub, Others),
-    not(isemptylist(MSub)),
-    append(SPST1,[se(Sort,Obj,MSub)],SPST11),
-    split_level([se(Sort,Obj, Others)|State],SPST11,SPST),!.
-split_level([se(Sort,Obj,ST)|State],SPST1,SPST):-   
-    subsortse(Sort,SSorts),
-    uppersortse(Sort,USorts),
-    append(SSorts,USorts,Sametree),
-    split_level1(Sametree,se(Sort,Obj,ST),SPST1,SPST11),
-    split_level(State,SPST11,SPST),!.
-
-split_level1([],se(OSort,Obj,_),SPST,SPST):-!.%it should be impossible.
-split_level1(_,se(OSort,Obj,[]),SPST,SPST):-!.
-split_level1([Sort|Sortls],se(OSort,Obj,ST),SPST,SPST1):-
-    substate_classes(Sort,Obj,Substateclasses),
-    max_member(ST,Substateclasses,MSub, Others),
-    not(isemptylist(MSub)),
-    split_level1(Sortls,se(OSort,Obj,Others),[se(Sort,Obj,MSub)|SPST],SPST1),!.
-split_level1([Sort|Sortls],se(OSort,Obj,ST),SPST,SPST1):-
-    split_level1(Sortls,se(OSort,Obj,ST),SPST,SPST1),!.
-
-% find out a list which has the max number of predicates in one substates class
-% and point out the whole substate
 max_member(State, Stateclass, MSub, Others):-
     max_member1(State, Stateclass, 0, [],MSub),
-    list_take(State,MSub,Others),!.
+    subtract(State,MSub,Others),!.
 
 % find out the biggest same items
 max_member1(State, [], Num, MSub, MSub):-!.
@@ -1162,60 +1003,6 @@ same_items([X|List1],List2,[X|Same]):-
 same_items([X|List1],List2,Same):-
     same_items(List1,List2,Same),!.
 
-% post achieved: for post (goal) achieved only
-post_achieved(undefd,State,Statics):-!.
-post_achieved([],State2,Statics):-!.
-post_achieved(State1,State2,Statics):-
-    post_achieved(State1,State2),
-    statics_consist(Statics).
-
-post_achieved(undefd,State):-!.
-post_achieved([],State2).
-post_achieved(State1,State2):-
-    is_hierarchy(false),
-    post_achievedf(State1,State2).
-post_achieved(State1,State2):-
-    is_hierarchy(true),
-    post_achievedh(State1,State2).
-
-% for flat domain
-post_achievedf([],State2).
-post_achievedf([se(Sort,Obj,ST1)|State1],State2):-
-    member(se(Sort,Obj,ST2),State2),
-    is_achieved(ST1,ST2),
-    list_take(State2,[se(Sort,Obj,ST2)],State21),
-    post_achievedf(State1,State21).
-post_achievedf([se(Sort,Obj,ST1)|State1],State2):-
-    not(member(se(Sort,Obj,ST2),State2)),
-    post_achievedf(State1,State2).
-
-% for hierarchical domain
-post_achievedh([],State2).
-post_achievedh([se(Sort,Obj,ST1)|State1],State2):-
-    member(se(Sort2,Obj,ST2),State2),
-    not(not(is_of_sort(Obj,Sort))),
-    not(not(is_of_sort(Obj,Sort2))),
-    post_achieved1([se(Sort2,Obj,ST1)],[se(Sort2,Obj,ST2)]),
-    list_take(State2,[se(Sort2,Obj,ST2)],State21),
-    post_achievedh(State1,State21).
-post_achievedh([se(Sort,Obj,ST1)|State1],State2):-
-    not(member(se(Sort2,Obj,ST2),State2)),
-    post_achievedh(State1,State2).
-
-% if the ST1 is a subset of ST2
-post_achieved1(State1,State2):-
-    split_level(State1,[],SPST1),
-    split_level(State2,[],SPST2),
-    post_achieved2(SPST1,SPST2).
-% compare the state in there level
-post_achieved2([],State2).
-post_achieved2([se(Sort,Obj,ST1)|State1],State2):-
-    member(se(Sort,Obj,ST2),State2),
-    is_achieved(ST1,ST2),
-    post_achieved2(State1,State2).
-post_achieved2([se(Sort,Obj,ST1)|State1],State2):-
-    not(member(se(Sort,Obj,ST2),State2)),
-    post_achieved2(State1,State2).
 
 % all the element in list1 are static or in list2
 is_achieved([],_):-!.
@@ -1233,100 +1020,51 @@ is_statics(is_of_primitive_sort(A,B)):-!.
 is_statics(Pred):-
     functor(Pred,FF,NN),
     functor(Pred1,FF,NN),
-    atomic_invariants(Atom),
-    member(Pred1,Atom),!.
-
+    atomic_invariantsC(Atom),
+    member_cut(Pred1,Atom),!.
 
 /************ state changes by actions ********/
-% if an object's state meet the precondition
+% on the condition that:
+% an object's state meet action's precondition
 % it change to the postcondition
-% Pre is the current ground states
-% Pre0 and Post0 are from an Operator or Method,
-% so the Sort inse(Sort,Obj,SS0) is also primitive
+% Pre is the current ground states(Sort is primitive)
+% Pre0 and Post0 are from an Operator or Method(
+% Sorts are all primitive
+state_change([],Pre0,Post0,[]):-!.
 state_change(Pre,[],[],Pre):-!.
-state_change(Pre,LHS,RHS,Post):-
-    is_hierarchy(false),
-    state_changef(Pre,LHS,RHS,Post).
-state_change(Pre,LHS,RHS,Post):-
-    is_hierarchy(true),
-    state_changeh(Pre,LHS,RHS,Post).
-
-% for flat domain
-state_changef(Pre,[],[],Pre):-!.
-state_changef([HPred|Pre],LHS,RHS,[HPost|Post]):-
-    state_changef1(HPred,LHS,RHS,LHS1,RHS1,HPost),
-    state_changef(Pre,LHS1,RHS1,Post).
-
-% if no Sort,Obj state exist in action, stay unchanged 
-state_changef1(se(Sort,Obj,SE),[],[],[],[],se(Sort,Obj,SE)):-!.
-% if there is an Sort,Obj state exist in action, changed to RHS
-state_changef1(se(Sort,Obj,SE),[se(Sort,Obj,LS)|LHS],[se(Sort,Obj,RS)|RHS],LHS,RHS,se(Sort,Obj,RS)):-
-    state_match(Sort,Obj,LS,SE).
-state_changef1(se(Sort,Obj,SE),[se(Sort0,Obj0,LS)|LHS],[se(Sort0,Obj0,RS)|RHS],[se(Sort0,Obj0,LS)|LHS1],[se(Sort0,Obj0,RS)|RHS1],Post):-
-    (Sort\==Sort0;Obj\==Obj0),
-    state_changef1(se(Sort,Obj,SE),LHS,RHS,LHS1,RHS1,Post).
-
-% for hierarchical domain
-state_changeh(Pre,[],[],Pre):-!.
-state_changeh(Pre,[se(Sort,Obj,SE0)|Pre0],[se(Sort,Obj,SS0)|Post0],[STPost|Post]):-
-    member(se(Sort,Obj,SE),Pre),
-    is_of_sort(Obj,Sort),
-    split_level([se(Sort,Obj,SE)],[],SPPre),
-    split_level([se(Sort,Obj,SE0)],[],SPPre0),
-    split_level([se(Sort,Obj,SS0)],[],SPPost0),
-    state_change1(Sort,Obj,SPPre,SPPre0,SPPost0,[],[STPost]),
-    list_take(Pre,[se(Sort,Obj,SE)],Pre11),
-    state_changeh(Pre11,Pre0,Post0,Post).
-state_changeh(Pre,[se(Sort,Obj,SE0)|Pre0],[se(Sort,Obj,SS0)|Post0],Post):-
-    not(member(se(Sort,Obj,SE),Pre)),
-    state_changeh(Pre,Pre0,Post0,Post),!.
-
-state_change1(PSort,Obj,Pre,Pre0,[],State,Post):-
-     merge_level(PSort,Obj,Pre,State,Post),!.
-state_change1(PSort,Obj,Pre,[],Post0,State,Post):-
-     merge_level(PSort,Obj,Post0,State,Post),!.
-state_change1(PSort,Obj,[],Pre0,Post0,State,Post):-
-     merge_level(PSort,Obj,Post0,State,Post),!.
-% if a obj pre achieves action's pre
+state_change([se(Sort,Obj,SPre)|Pre],Pre0,Post0,[se(Sort,Obj,STPost)|Post]):-
+    state_achieved([se(Sort,Obj,SPre)],Pre0),
+    state_change0(Sort,Obj,SPre,Pre0,Post0,Pre1,Post1,STPost),
+    state_change(Pre,Pre1,Post1,Post).
+state_change([se(Sort,Obj,SPre)|Pre],Pre0,Post0,[se(Sort,Obj,STPost)|Post]):-
+    not(member(se(Sort,Obj,SPre0),Pre0)),
+    state_change(Pre,Pre1,Post1,Post).
+		 
 % change the obj's post state with action's post
-state_change1(PSort,Obj,[se(Sort,Obj,SE)|Pre],Pre0,Post0,State,Post):-
-    member(se(Sort,Obj,SE0),Pre0),
-%    member(se(Sort,Obj,SS0),Post0),
-    state_match(Sort,Obj,SE0,SE),
-    list_take(Pre0,[se(Sort,Obj,SE0)],Pre1),
-%    list_take(Post0,[se(Sort,Obj,SS0)],Post1),
-    append_post([se(Sort,Obj,SE)],[se(Sort,Obj,SE0)],Post0,Post1,State,State1),
-    state_change1(PSort,Obj,Pre,Pre1,Post1,State1,Post),!.
-% if a obj state not defined in action's pre
-% move it to its post
-state_change1(PSort,Obj,[se(Sort,Obj,SE)|Pre],Pre0,Post0,State,Post):-
-    not(member(se(Sort,Obj,SE0),Pre0)),
-    append([se(Sort,Obj,SE)],State,State1),	
-    state_change1(PSort,Obj,Pre,Pre0,Post0,State1,Post),!.
+state_change0(Sort,Obj,SPre,[],[],[],[],SPre):-!.
+state_change0(Sort,Obj,SPre,[se(Sort,Obj,SPre0)|Pre0],[se(Sort,Obj,SPost0)|Post0],Pre0,Post0,STPost):-
+    state_change1(SPre,SPre0,SPost0,STPost).
+state_change0(Sort,Obj,SPre,[se(Sort1,Obj1,SPre0)|Pre0],[se(Sort1,Obj1,SPost0)|Post0],[se(Sort1,Obj1,SPre0)|Pre1],[se(Sort1,Obj1,SPost0)|Post1],STPost):-
+    Obj\==Obj1,
+    state_change0(Sort,Obj,SPre,Pre0,Post0,Pre1,Post1,STPost).
 
-% append post states
-append_post([se(Sort,Obj,SE)],[se(Sort,Obj,SE0)],Post0,Post1,State,State1):-
-    member(se(Sort,Obj,SS0),Post0),
-    list_take(SE,SE0,ST0),
-    set_append_e(ST0,SS0,SS1),
-    append([se(Sort,Obj,SS1)],State,State1),
-    list_take(Post0,[se(Sort,Obj,SS0)],Post1),!.
-append_post([se(Sort,Obj,SE)],[se(Sort,Obj,SE0)],Post0,Post0,State,State):-!.
-
-% merge the different level states to a whole state in its primitive sort
-merge_level(PSort,Obj,[],[],[]):-!.
-merge_level(PSort,Obj,State1,State2,State):-
-     append(State1,State2,State3),
-     merge_level1(PSort,Obj,State3,State),!.
-
-merge_level1(PSort,Obj,[],[]):-!.
-merge_level1(PSort,Obj,[se(Sort0,Obj,SS0)|List],State):-
-     merge_level2(PSort,Obj, List, [se(PSort,Obj,SS0)],State),!.
-
-merge_level2(PSort,Obj,[],State,State):-!.
-merge_level2(PSort,Obj,[se(Sort0,Obj,SS0)|List],[se(PSort,Obj,SS1)],State):-
-     append(SS0,SS1,SS),
-     merge_level2(PSort,Obj,List,[se(PSort,Obj,SS)],State),!.
+state_change1([],SPre0,SPost0,SPost0):-!.
+state_change1(Pre,[],[],Pre):-!.
+%if the pre state in action's pre, not in post, remove that
+state_change1([Head|SPre],SPre0,SPost0,STPost):-
+    member(Head,SPre0),
+    not(member(Head,SPost0)),
+    state_change1(SPre,SPre0,SPost0,STPost).
+% if the pre state is not action's pre, neither in post, add that
+state_change1([Head|SPre],SPre0,SPost0,[Head|STPost]):-
+    not(member(Head,SPre0)),
+    not(member(Head,SPost0)),
+    state_change1(SPre,SPre0,SPost0,STPost),!.
+% if the pre state is in post, don't need to add
+% because it will be add at last
+state_change1([Head|SPre],SPre0,SPost0,STPost):-
+    member(Head,SPost0),
+    state_change1(SPre,SPre0,SPost0,STPost).
 
 % rough change the obj's post state with action's post
 rough_state_change(Pre,[],[],Pre):-!.
@@ -1338,10 +1076,20 @@ rough_state_change([se(Sort,Obj,SE)|Pre],Pre0,Post0,[se(Sort,Obj,SS0)|Post]):-
     state_achieved([se(Sort,Obj,SE0)],[se(Sort,Obj,SE)]),
     list_take(Pre0,[se(Sort,Obj,SE0)],Pre01),
     list_take(Post0,[se(Sort,Obj,SS0)],Post01),
-    rough_state_change(Pre,Pre01,Post01,Post).
+    rough_state_change(Pre,Pre01,Post01,Post),!.
 rough_state_change([se(Sort,Obj,SE)|Pre],Pre0,Post0,[se(Sort,Obj,SE)|Post]):-
     rough_state_change(Pre,Pre0,Post0,Post),!.
 
+% a simple state_change for ground operators
+state_changeG([],Pre0,Post0,[]):-!.
+state_changeG([se(Sort,Obj,SE)|Pre],Pre0,Post0,[se(Sort,Obj,RHS)|State]):-
+   member(se(Sort,Obj,LHS),Pre0),
+   member(se(Sort,Obj,RHS),Post0),
+   state_match(Sort,Obj,SE,LHS),
+   state_changeG(Pre,Pre0,Post0,State),!.
+state_changeG([se(Sort,Obj,SE)|Pre],Pre0,Post0,[se(Sort,Obj,SE)|State]):-
+   not(member(se(Sort,Obj,LHS),Pre0)),
+   state_changeG(Pre,Pre0,Post0,State),!.
 
 find_lower_sort(Sort,Sort,Sort):-!.
 find_lower_sort(Sort,Sort1,Sort1):-
@@ -1350,7 +1098,7 @@ find_lower_sort(Sort,Sort1,Sort1):-
 find_lower_sort(Sort,Sort1,Sort):-
     subsorts(Sort1,Sortls),
     member(Sort,Sortls),!.
-%-------------------------------------------
+%-------------------------------------------------
 /************ state changes by necessery changes ********/
 % for all the object's state meet the precondition
 % it change to the postcondition
@@ -1358,12 +1106,12 @@ find_lower_sort(Sort,Sort1,Sort):-
 nec_state_change([],Nec,[]):-!.
 nec_state_change([se(Sort,Obj,SE)|Pre],Nec,[se(Sort,Obj,Post)|State]):-
     member(sc(Sort,Obj,Lhs=>Rhs),Nec),
-    state_change([se(Sort,Obj,SE)],[se(Sort,Obj,Lhs)],[se(Sort,Obj,Rhs)],[se(Sort,Obj,Post)]),
+    state_match(Sort,Obj,Lhs,SE),
+    state_change1(SE,Lhs,Rhs,Post),
     nec_state_change(Pre,Nec,State),!.
 nec_state_change([se(Sort,Obj,SE)|Pre],Nec,[se(Sort,Obj,SE)|State]):-
     not(member(sc(Sort,Obj,Lhs=>Rhs),Nec)),
     nec_state_change(Pre,Nec,State),!.
-
 %-------------------------------------------------
 /************ state changes by conditions ********/
 % for all the object's state meet the precondition
@@ -1371,31 +1119,63 @@ nec_state_change([se(Sort,Obj,SE)|Pre],Nec,[se(Sort,Obj,SE)|State]):-
 cond_state_change([],Cond,[]):-!.
 cond_state_change(State,[],State):-!.
 cond_state_change([se(Sort,Obj,SE)|Pre],Cond,[NewSS|State]):-
-    member(sc(Sort1,Obj,SE0=>SS0),Cond),
-    is_of_sort(Obj,Sort1),
-    is_of_sort(Obj,Sort),
+    member(sc(Sort1,Obj1,SE0=>SS0),Cond),
+%    var(Obj1),
+    subsorts(Sort1,Subsorts),
+    member(Sort,Subsorts),
+    copy_states(se(Sort1,Obj1,SE0),se(Sort,Obj,SE2)),
+    copy_states(se(Sort1,Obj1,SS0),se(Sort,Obj,SS2)),
 %    state_match(Sort,Obj,SE,SE0),
-    state_change([se(Sort,Obj,SE)],[se(Sort,Obj,SE0)],
-                              [se(Sort,Obj,SS0)],[NewSS]),
-    cond_state_change(Pre,Cond,State).
+    filterInvars(SE2,LInVars,LIsOfSorts,LNEs,FSE),
+    filterInvars(SS2,RInVars,RIsOfSorts,RNEs,FSS),
+    state_match(Sort,Obj,SE,FSE),
+    state_change([se(Sort,Obj,SE)],[se(Sort,Obj,FSE)],
+                              [se(Sort,Obj,FSS)],[NewSS]),
+    checkInVars(LInVars),
+    checkInVars(RInVars),
+    checkIsOfSorts(LIsOfSorts),
+    checkIsOfSorts(RIsOfSorts),
+    obeysNEs(LNEs),
+    obeysNEs(RNEs),    
+    cond_state_change(Pre,Cond,State),!.
 cond_state_change([se(Sort,Obj,SE)|Pre],Cond,[se(Sort,Obj,SE)|State]):-
     cond_state_change(Pre,Cond,State),!.
 
+% copy the states so that the Obj won't be instiated
+copy_states(se(Sort1,Obj1,SE0),se(Sort,Obj,SE2)):-
+    copy_states1(Obj1,SE0,Obj,SE2),!.
+copy_states1(Obj1,[],Obj,[]):-!.
+copy_states1(Obj1,[Pred|SE0],Obj,[Pred2|SE2]):-
+     functor(Pred,FF,NN),
+     functor(Pred2,FF,NN),
+     Pred=..[Name|Vars],
+     Pred2=..[Name|Vars2],
+     copy_pred(Obj1,Obj,Vars,Vars2),
+     copy_states1(Obj1,SE0,Obj,SE2),!.
 
+copy_pred(Obj1,Obj,[],[]):-!.
+copy_pred(Obj1,Obj,[Var|Vars],[Var2|Vars2]):-
+     Obj1==Var,
+     Var2=Obj,
+     copy_pred(Obj1,Obj,Vars,Vars2),!.
+copy_pred(Obj1,Obj,[Var|Vars],[Var|Vars2]):-
+     copy_pred(Obj1,Obj,Vars,Vars2),!.
 %-------------------------------------------
-% every states in Pre is achieved by Post
-all_achieved(undefd,Statics,Post):-!.
-all_achieved([],Statics,Post):-!.
-all_achieved(Pre,Statics,Post):-
-    all_achieved(Pre,Post),
+% every states in List1 is achieved by List2
+all_achieved(undefd,Statics,List2):-!.
+all_achieved([],Statics,List2):-!.
+all_achieved(List1,Statics,List2):-
+    all_achieved(List1,List2),
     statics_consist(Statics).
 
-all_achieved([],Post).
-all_achieved([se(Sort,Obj,SL)|Pre],Post):-
-    member(se(Sort,Obj,SR),Post),
-    not(not(is_of_sort(Obj,Sort))),
-    state_achieved1([se(Sort,Obj,SL)],[se(Sort,Obj,SR)]),
-    all_achieved(Pre,Post).
+all_achieved([],List2).
+all_achieved([se(Sort,Obj,SL)|List1],List2):-
+    member(se(Sort1,Obj,SR),List2),
+    is_of_sort(Obj,Sort1),
+    is_of_sort(Obj,Sort),
+    is_of_primitive_sort(Obj,PSort),
+    state_match(PSort,Obj,SL,SR),
+    all_achieved(List1,List2).
 %-------------------------------------------
 % may_achieved: every states in Pre is not conflict with Post
 may_achieved(undefd,Statics,Post):-!.
@@ -1406,26 +1186,16 @@ may_achieved(Pre,Statics,Post):-
 may_achieved([],Post).
 may_achieved([se(Sort,Obj,SL)|Pre],Post):-
     member(se(Sort1,Obj,SR),Post),
-    not(not(is_of_sort(Obj,Sort1))),
-    not(not(is_of_sort(Obj,Sort))),
-    state_may_achieved([se(Sort,Obj,SL)],[se(Sort1,Obj,SR)]),
+    is_of_sort(Obj,Sort1),
+    is_of_sort(Obj,Sort),
+    is_of_primitive_sort(Obj,PSort),
+    state_may_achieved(PSort,Obj,SL,SR),
     may_achieved(Pre,Post),!.
 
 % if the ST1 is a subset of ST2
-state_may_achieved(State,State):-!.
-state_may_achieved(State1,State2):-
-    split_level(State1,[],SPST1),
-    split_level(State2,[],SPST2),
-    state_may_achieved1(SPST1,SPST2),!.
-% compare the state in there level
-state_may_achieved1([],State2):-!.
-state_may_achieved1([se(Sort,Obj,ST1)|State1],State2):-
-    member(se(Sort,Obj,ST2),State2),
-    is_achieved(ST1,ST2),
-    state_may_achieved1(State1,State2),!.
-state_may_achieved1([se(Sort,Obj,ST1)|State1],State2):-
-    not(member(se(Sort,Obj,ST2),State2)),
-    state_may_achieved1(State1,State2),!.
+state_may_achieved(Sort,Obj,[],ST2):-!.
+state_may_achieved(Sort,Obj,ST1,ST2):-
+    is_achieved(ST1,ST2),!.
 %-------------------------------------------
 % instantiate a bit
 % use action's state change include the postcondition
@@ -1450,93 +1220,59 @@ post_instant(Post0,Cond,Statics,[se(Sort,Obj,SE)|Post]):-
 % only instance the variable when there is one choice of from the ground lists
 statics_consist([]):-!.
 statics_consist(Statics):-
-   split_fixed(Statics,[],FixST,[],Atom),
-   inv_statics_consist(Atom),
-   fixed_statics_consist(FixST),!.
-
-
-
+   get_invariants(Invs),
+   statics_consist(Invs,Statics),!.
+statics_consist(Invs,[]):-!.
+statics_consist(Invs,[ne(A,B)|Statics]):-
+   not(A==B),!,
+   statics_consist(Invs,Statics).
+statics_consist(Invs,[is_of_sort(Obj,Sort)|Statics]):-
+   not(not(is_of_sort(Obj,Sort))),!,
+   statics_consist(Invs,Statics).
+statics_consist(Invs,[is_of_primitive_sort(Obj,Sort)|Statics]):-
+   not(not(is_of_primitive_sort(Obj,Sort))),!,
+   statics_consist(Invs,Statics).
+statics_consist(Invs,[Pred|Statics]):-
+   pred_member(Pred,Invs),!,
+   statics_consist(Invs,Statics).
 
 /*********check for statics consist and instanciate them***/
 statics_consist_instance([]):-!.
-statics_consist_instance(Statics) :-
-   split_fixed(Statics,[],FixST,[],Atom),
-   inv_statics_consist_instance(Atom),
-   fixed_statics_consist_instance(FixST).
-
-
-
-% split out ne,is_of_sort
-split_fixed([],FixST,FixST,Atom,Atom):-!.
-split_fixed([ne(A,B)|TStatics],FixST0,FixST,Atom0,Atom):-
-  append_cut(FixST0,[ne(A,B)],FixST1),
-  split_fixed(TStatics,FixST1,FixST,Atom0,Atom),!.
-split_fixed([is_of_sort(Obj,Sort)|TStatics],FixST0,FixST,Atom0,Atom):-
-  append_cut([is_of_sort(Obj,Sort)],FixST0,FixST1),
-  split_fixed(TStatics,FixST1,FixST,Atom0,Atom),!.
-split_fixed([is_of_primitive_sort(Obj,Sort)|TStatics],FixST0,FixST,Atom0,Atom):-
-  append_cut([is_of_primitive_sort(Obj,Sort)],FixST0,FixST1),
-  split_fixed(TStatics,FixST1,FixST,Atom0,Atom),!.
-split_fixed([HST|TStatics],FixST0,FixST,Atom0,Atom):-
-  append_cut(Atom0,[HST],Atom1),
-  split_fixed(TStatics,FixST0,FixST,Atom1,Atom),!.
-
-% check invariants without instanciate them
-% only instance them when there is only one choice of from the ground lists
-inv_statics_consist([]):-!.
-inv_statics_consist(Atom):-
+statics_consist_instance(Statics):-
    get_invariants(Invs),
-   inv_statics_consist1(Invs,Atom),!.
-inv_statics_consist1(Invs,[]):-!.
-inv_statics_consist1(Invs,[Pred|Atom]):-
-   pred_member(Pred,Invs),
-   inv_statics_consist1(Invs,Atom),!.
+   statics_consist_instance(Invs,Statics).
 
-% check invariants and instanciate them
-inv_statics_consist_instance([]):-!.
-inv_statics_consist_instance(Atom):-
-   get_invariants(Invs),
-   inv_statics_consist_instance1(Invs,Atom).
-inv_statics_consist_instance1(Invs,[]).
-inv_statics_consist_instance1(Invs,[Pred|Atom]):-
-   member(Pred,Invs),
-   inv_statics_consist_instance1(Invs,Atom).
-
-% check invariants without instanciate them
-fixed_statics_consist([]):-!.
-fixed_statics_consist([ne(A,B)|TStatics]):-
-   not(A==B),
-   fixed_statics_consist(TStatics),!.
-fixed_statics_consist([is_of_sort(Obj,Sort)|TStatics]):-
-   is_of_sort0(Obj,Sort),
-   fixed_statics_consist(TStatics),!.
-fixed_statics_consist([is_of_primitive_sort(Obj,Sort)|TStatics]):-
-   is_of_primitive_sort0(Obj,Sort),
-   fixed_statics_consist(TStatics),!.
-
-% check sort info without instanciate them
-% but instanciate the obj when there is only one obj in the sort
-is_of_primitive_sort0(X,Y) :-
-   var(X),!.
-is_of_primitive_sort0(X,Y) :-
-    objectsC(Y,L),obj_member(X,L),!.
-is_of_sort0(X,Y) :-
-    is_of_primitive_sort0(X,Y).
-is_of_sort0(X,Y) :-
-    sorts(Y,SL),member(Z,SL),is_of_sort0(X,Z).
-
-% check invariants and instanciate them
-fixed_statics_consist_instance([]).
-fixed_statics_consist_instance([ne(A,B)|TStatics]):-
-   not(A==B),
-   fixed_statics_consist_instance(TStatics).
-fixed_statics_consist_instance([is_of_sort(Obj,Sort)|TStatics]):-
+statics_consist_instance(Invs,[]):-!.
+statics_consist_instance(Invs,[is_of_sort(Obj,Sort)|Atom]):-
+   ground(Obj),
+   is_of_sort(Obj,Sort),!,
+   statics_consist_instance(Invs,Atom).
+statics_consist_instance(Invs,[is_of_sort(Obj,Sort)|Atom]):-
+   var(Obj),
    is_of_sort(Obj,Sort),
-   fixed_statics_consist_instance(TStatics).
-fixed_statics_consist_instance([is_of_primitive_sort(Obj,Sort)|TStatics]):-
+   statics_consist_instance(Invs,Atom).
+statics_consist_instance(Invs,[is_of_primitive_sort(Obj,Sort)|Atom]):-
+   ground(Obj),
+   is_of_primitive_sort(Obj,Sort),!,
+   statics_consist_instance(Invs,Atom).
+statics_consist_instance(Invs,[is_of_primitive_sort(Obj,Sort)|Atom]):-
+   var(Obj),
    is_of_primitive_sort(Obj,Sort),
-   fixed_statics_consist_instance(TStatics).
-
+   statics_consist_instance(Invs,Atom).
+statics_consist_instance(Invs,[ne_back(A,B)|Atom]):-
+   A\==B,
+   statics_consist_instance(Invs,Atom).
+statics_consist_instance(Invs,[ne(A,B)|Atom]):-
+   append(Atom,[ne_back(A,B)],Atom1),!,
+   statics_consist_instance(Invs,Atom1).
+statics_consist_instance(Invs,[Pred|Atom]):-
+   ground(Pred),
+   member(Pred,Invs),!,
+   statics_consist_instance(Invs,Atom).
+statics_consist_instance(Invs,[Pred|Atom]):-
+   not(ground(Pred)),
+   member(Pred,Invs),
+   statics_consist_instance(Invs,Atom).
 
 
 
@@ -1557,26 +1293,27 @@ make_problem_into_node(I,L,  NN) :-
      sort_steps(STEPS,Temp,STEPS1),
      make_ss_to_se(I,I_Pre),
      NN = node(root,I_Pre,STEPS1 ,Temp, STATS),!.
+
 % make problem to steps
 make_problem_up([],[]):-!.
 make_problem_up([achieve(L)|R],[step(HP,achieve(L1),undefd,[L1],unexp)|RS]):- 
                              %preconditon here is undefd
     make_ss_to_se([L],[L1]),
-    gensym_special(hp,HP),
+    gensym(hp,HP),
     make_problem_up(R, RS),!.
 make_problem_up([achieve(L)|R],[step(HP,achieve(L1),undefd,L1,unexp)|RS]):- 
                              %preconditon here is undefd
     make_ss_to_se(L,L1),
-    gensym_special(hp,HP),
+    gensym(hp,HP),
     make_problem_up(R, RS),!.
 make_problem_up([O|R],[step(HP,O,undefd,undefd,unexp)|RS]):-
     methodC(O,Pre,Post,Statics1,Temp,ACH,Dec),
-    gensym_special(hp,HP),
+    gensym(hp,HP),
     make_problem_up(R, RS),!.
 make_problem_up([O|R],     
            [step(HP,O,undefd,undefd,unexp)|RS]):-
     operatorC(O,Pre,Post,Cond,Statics1),
-    gensym_special(hp,HP),
+    gensym(hp,HP),
     make_problem_up(R, RS),!.
 
 make_num_hp([],[]):-!.
@@ -1658,7 +1395,6 @@ change_op_representation :-
     append_cut(Stat,Statics,Statics1),
     remove_unneed(Statics1,[],Statics2),
     get_achieval(A,Dec,T,Dec1,T1,ACH),
-%    make_se_primitive(ACH1,ACH),
     assert(methodC(A,PreR,PostR,Statics2,T1,achieve(ACH),Dec1)),
     fail.
 change_op_representation :-
@@ -1712,7 +1448,7 @@ make_dec(A,[HD|TD],TD1,Temp,Temp1,Achieval,Achieval1):-
 make_dec(A,[HD|TD],[HD|TD1],Temp,Temp1,Achieval,Achieval1):-
      HD=..[DecName|Goal],
      DecName\==achieve,
-     gensym_special(sm,SM),
+     gensym(sm,SM),
      current_num(sm,Num),
      make_dec(A,TD,TD1,Temp,Temp1,Achieval,Achieval1),!.
 
@@ -1779,14 +1515,19 @@ make_sc_primitive([sc(Sort,Obj,SE1=>SE2)|ST],[sc(PSort,Obj,SE1=>SE2)|ST0]):-
     make_sc_primitive(ST,ST0).
 
 
-
 % ------------ end of change operator ----------------------
 /********make_tn: save the expansion results*****/
 make_tn(TN,Name,Pre,Post,Temp,Dec):-
-    gensym_special(tn,TN),
     find_only_changed(Pre,Post,[],Pre1,[],Post1),
+    not(isemptylist(Post1)),
+    not(exist_tn(Pre,Post)),
+    gensym(tn,TN),
 %    tell(user),nl,write(tn(TN,Name,Pre1,Post1,Temp,Dec)),nl,told,
     assert(tn(TN,Name,Pre1,Post1,Temp,Dec)),!.
+
+exist_tn(Pre,Post):-
+    tn(_,_,Pre,Post1,_,_),
+    state_achieved(Post,Post1),!.
 find_only_changed([],[],Pre,Pre,Post,Post):-!.
 % just a lazy check if they are in exactly same sequence
 find_only_changed([se(Sort,Obj,ST)|Pre],[se(Sort,Obj,ST)|Post],Pre0,Pre1,Post0,Post1):-
@@ -1803,28 +1544,6 @@ find_only_changed([se(Sort,Obj,ST)|Pre],Post,Pre0,Pre1,Post0,Post1):-
     find_only_changed(Pre,Post2,Pre3,Pre1,Post3,Post1),!.
 % other fail. 
 
-% append statics, and check its consistent
-statics_append([],L,L):-
-    statics_consist_instance(L),!.
-statics_append(L,[],L):-
-    statics_consist_instance(L),!.
-statics_append(List1,List2,L):-
-    statics_consist_instance(List1),
-    statics_consist_instance(List2),
-    statics_append1(List1,List2,[],L),
-    statics_consist_instance(L).
-
-statics_append1([],List2,L1,L):-
-    append(List2,L1,L),!.
-statics_append1([H|List1],List2,L,Z) :-
-    statics_append0(H,List2,L,L1),
-    statics_append1(List1,List2,L1,Z).
-
-statics_append0(H,[],L,[H|L]).
-statics_append0(H,[H|Z],L,L).
-statics_append0(H,[X|Z],L1,L):-
-    statics_append0(H,Z,L1,L).
-
 % append  only changed states
 % state_match here means not changed
 append_changed(se(Sort,Obj,ST),se(Sort1,Obj,ST1),Pre0,Pre0,Post0,Post0):-
@@ -1834,15 +1553,6 @@ append_changed(se(Sort,Obj,ST),se(Sort1,Obj,ST1),Pre0,Pre3,Post0,Post3):-
     append(Post0,[se(Sort,Obj,ST1)],Post3),!.
 
 %***********print out solution**************************   
-push_to_primitive([],PHPs,PHPs) :-!.
-push_to_primitive([step(HPID,_,_,_,exp(TN))|HPs],List,PHPs) :-
-   tn(TN,Name,Pre,Post,Temp,Dec),
-   push_to_primitive(Dec,List,Dec1),
-   push_to_primitive(HPs,Dec1,PHPs),!.
-push_to_primitive([step(HPID,_,_,_,exp(Name))|HPs],List,PHPs):-
-   append(List,[Name],List1),
-   push_to_primitive(HPs,List1,PHPs),!.
-
 push_to_primitive([],PHPs,PHPs,TNLst,TNLst) :-!.
 push_to_primitive([step(HPID,_,_,_,exp(TN))|HPs],List,PHPs,TNSoFar,TNFinal) :-
    tn(TN,Name,Pre,Post,Temp,Dec),
@@ -1870,106 +1580,6 @@ select_node(node(Name,Pre,Temp,Decomp,Statics)) :-
 %   nl,nl,write(Name),write(' RETRACTED'),nl,nl,
 %   tell(FF),
     !.
-
-
-
-/******************* hierarchy utilities**************************/
-% grounding predicates to object level
-% assert in prolog database as gpredicates(Pred,GPredls)
-ground_predicates:-
-     predicates(Preds),
-     grounding_preds(Preds),
-     collect_grounded_pred,!.
-
-grounding_preds([]).
-% if it is statics, only choose within atomic_invariants
-grounding_preds([HPred|TP]):-
-     functor(HPred,FF,NN),
-     functor(APred,FF,NN),
-     atomic_invariants(Atom),
-     member(APred,Atom),
-     ground_all_var_atom(HPred),
-     grounding_preds(TP).
-% else, combine all the objects
-grounding_preds([HPred|TP]):-
-     functor(HPred,FF,NN),
-     functor(GPred,FF,NN),
-     ground_all_var(GPred,HPred),
-     grounding_preds(TP).
-
-% collect all the grounded predicates together
-collect_grounded_pred:-
-     gpred(Pred,_),
-     setof(GPred,gpred(Pred,GPred),GPredls),
-     retractall(gpred(Pred,_)),
-     assert(gpredicates(Pred,GPredls)),
-     fail.
-collect_grounded_pred.
-
-
-ground_all_var_atom(HPred):-
-     functor(HPred,FF,NN),
-     functor(GPred,FF,NN),
-     functor(APred,FF,NN),
-     atomic_invariants(Atom),
-     member(APred,Atom),
-     GPred=..[Name|Vars],
-     APred=..[Name|Sorts],
-     ground_all_var_atom0(Vars,Sorts),
-     assert_gpred(GPred),
-     fail.
-ground_all_var_atom(HPred).
-
-ground_all_var_atom0([],[]).
-ground_all_var_atom0([HVars|TV],[HSorts|TS]):-
-     subsorts(HSorts,Subsorts),
-     split_prim_noprim(Subsorts,PSorts,NPSorts),
-     member(LS,PSorts),
-     objectsC(LS,Objls),
-     member(HVars,Objls),
-     ground_all_var_atom0(TV,TS).
-ground_all_var_atom0([HVar|TV],[HASorts|TS]):-
-     objectsC(Sorts,Objls),
-     member(HASorts,Objls),
-     HVar=HASorts,
-     ground_all_var_atom0(TV,TS).
-
-ground_all_var(GPred,HPred):-
-     GPred=..[Name|Vars],
-     HPred=..[Name|Sorts],
-     ground_all_var0(Vars,Sorts),
-     not(inconsistent_constraint([GPred])),
-     assert_gpred(GPred),
-     fail.
-ground_all_var(GPred,HPred).
-
-ground_all_var0([],[]).
-ground_all_var0([HVars|TV],[HSorts|TS]):-
-     objectsC(HSorts,Objls),
-     member(HVars,Objls),
-     ground_all_var0(TV,TS).
-ground_all_var0([HVars|TV],[HSorts|TS]):-
-     subsorts(HSorts,Subsorts),
-     split_prim_noprim(Subsorts,PSorts,NPSorts),
-     member(LS,PSorts),
-     objectsC(LS,Objls),
-     member(HVars,Objls),
-     ground_all_var0(TV,TS).
-
-% assert grounded predicates with related upper level predicates
-
-assert_gpred(GPred):-
-     functor(GPred,FF,NN),
-     functor(UPred,FF,NN),
-     assert_gpred0(GPred,UPred),!.
-
-assert_gpred0(GPred,UPred):-
-     GPred=..[Name|PSorts],
-     UPred=..[Name|Vars],
-     get_obj_prim_sort(Vars,PSorts),
-     assert(gpred(UPred,GPred)),
-     fail.
-assert_gpred0(GPred,UPred).
 
 get_obj_prim_sort([],[]):-!.
 get_obj_prim_sort([HSort|TV],[HObj|TS]):-
@@ -2008,7 +1618,7 @@ get_objects1([PS1|RS],[Objls1|Objls]):-
 % find subsorts of a sort(exclude).
 subsortse(Sort,Subsorts):-
   subsorts(Sort,Subsorts1),
-  list_take(Subsorts1,[Sort],Subsorts),!.
+  subtract(Subsorts1,[Sort],Subsorts),!.
 % find subsorts of a sort(include).
 subsorts(Sort,Subsorts):-
   sort_down([Sort],[],Subsorts),!.
@@ -2022,15 +1632,13 @@ sort_down([HOpen|TOpen],List,Sortslist):-
   sorts(HOpen,Sorts),
   sort_down(Sorts,List,List2),
   sort_down(TOpen,[HOpen|List2],Sortslist),!.
-sort_down([HOpen|TOpen],List,Subsorts):-
-	%if it is not defined as objects or sorts, assume it's primitive
-  append(List,[HOpen],List1),
-  sort_down(TOpen,List1,Subsorts),!.
+sort_down([HOpen|TOpen],List,Sortslist):-
+  sort_down(TOpen,List,Sortslist),!.
 
 % find uppersorts of a sort(excludes).
 uppersortse(Sort,Uppersorts):-
   uppersorts(Sort,Uppersortsf),
-  list_take(Uppersortsf,[Sort],Uppersorts),!.  
+  subtract(Uppersortsf,[Sort],Uppersorts),!.  
 % find uppersorts of a sort or object(include).
 uppersorts(Sort,Uppersorts):-
   objectsC(Sort,Objls),
@@ -2077,7 +1685,7 @@ split_prim_noprim([HS|TS],PS,[HS|NP]):-
 
 /*********** DOMAIN MODEL FUNCTIONS *****************/
 get_invariants(Invs) :-
-    atomic_invariants(Invs),!.
+    atomic_invariantsC(Invs),!.
 
 rem_statics([sc(S,X,Lhs=>Rhs)|ST], [sc(S,X,LhsR=>RhsR)|STR],Rt1) :-
     split_st_dy(Lhs,[],LR, [],LhsR),
@@ -2098,15 +1706,12 @@ rem_statics([], [],[]) :-!.
 
 % ----------------------utilities---------------------
 
-
+not(X):- \+X.
 isemptylist([]):-!.
 
 %instantiate variables
-/*
-not(X):- \+X.
 member(X,[X|_]).
 member(X,[_|L]) :- member(X,L).
-*/
 
 member_cut(X,[X|_]) :- !.
 member_cut(X,[_|Y]) :- member_cut(X,Y),!.
@@ -2144,12 +1749,17 @@ obj_member0(X,[Y|_]):-
     X==Y,!.
 obj_member0(X,[_|Y]) :- obj_member0(X,Y),!.
 
+
 % check if a predicate is a member of a ground predicate list,
 % just used in binding the predicates to a sort without instantiate it
 % for efficiency, instantiate the variable if the list only have one atom
 pred_member(X,List):-
+    ground(X),
+    member(X,List),!.
+pred_member(X,List):-
     setof(X,member(X,List),Refined),
     pred_member0(X,Refined),!.
+
 pred_member0(X,[X|[]]):-!.
 pred_member0(X,Y):-
     pred_member1(X,Y),!.
@@ -2158,21 +1768,33 @@ pred_member1(X,[Y|_]):-
     Y=..[H|YLs],
     vequal(XLs,YLs),!.
 pred_member1(X,[_|Y]):- pred_member1(X,Y),!.
-	
+
+statics_append([],L,L):-
+    statics_consist(L),!.
+statics_append(L,[],L):-
+    statics_consist(L),!.
+statics_append(List1,List2,L):-
+    statics_consist(List1),
+    statics_consist(List2),
+    statics_append1(List1,List2,[],L),
+    statics_consist(L),!.
+
+statics_append1([],List2,L1,L):-
+    append(List2,L1,L),!.
+statics_append1([H|List1],List2,L,Z) :-
+    statics_append0(H,List2,L,L1),
+    statics_append1(List1,List2,L1,Z),!.
+
+statics_append0(H,[],L,[H|L]):-!.
+statics_append0(H,[H|Z],L,L):-!.
+statics_append0(H,[X|Z],L1,L):-
+    statics_append0(H,Z,L1,L),!.
+
 append([],L,L):-!.
 append([H|T],L,[H|Z]) :- append(T,L,Z),!.
 
 append_cut([],L,L) :- !.
 append_cut([H|T],L,[H|Z]) :- append_cut(T,L,Z),!.
-
-% set_append: list * list -> list (no duplicates)
-% -----------------------------------------------
-set_append([], Z, Z):-! .
-set_append([A|B], Z, C) :-
-        not(not(member(A, Z))) ,
-        set_append(B, Z, C),! .
-set_append([A|B], Z, [A|C]) :-
-        set_append(B, Z, C) .
 
 % append_st: append two statics
 % remove the constants that no need
@@ -2231,6 +1853,60 @@ same_var_member1([H1|T1],[H2|T2]):-
      H1==H2,
      same_var_member1(T1,T2),!.
 
+% two states or lists are equal
+is_equal_list(List1,List2):-
+    List1==List2,!.
+is_equal_list([],[]):-!.
+is_equal_list(List1,List2):-
+    length(List1,L),
+    length(List2,L),
+    is_equal_list1(List1,List2),!.
+is_equal_list1([],[]):-!.
+is_equal_list1([Head1|List1],[Head2|List2]):-
+    Head1==Head2,
+    is_equal_list1(List1,List2),!.
+is_equal_list1([se(Sort,Obj,Head1)|List1],[se(Sort,Obj,Head2)|List2]):-
+    is_equal_list(Head1,Head2),
+    is_equal_list1(List1,List2),!.
+is_equal_list1([Head1|List1],[Head2|List2]):-
+    Head1=..[FF|Var1],
+    Head2=..[FF|Var2],
+    FF\==se,
+    vequal(Var1,Var2),
+    is_equal_list1(List1,List2),!.
+is_equal_list1([Head1|List1],List2):-
+    member(Head1,List2),
+    append_cut(List1,[Head1],List10),
+    is_equal_list1(List10,List2),!.
+
+% two states or lists are different
+is_diff(List1,List2):-
+    length(List1,L1),
+    length(List2,L2),
+    L1\==L2,!.
+is_diff([Head|List1],List2):-
+    not_exist(Head,List2),!.
+is_diff([Head|List1],List2):-
+    list_take(List2,[Head],List21),
+    is_diff(List1,List21),!.
+
+not_exist(Pred,List2):-
+    not(member(Pred,List2)),!.
+not_exist(se(Sort,Obj,Head1),List2):-
+    not(member(se(Sort,Obj,Head),List2)),!.
+not_exist(se(Sort,Obj,Head1),List2):-
+    member(se(Sort,Obj,Head2),List2),
+    is_diff(Head1,Head2),!.
+
+% set_append: list1 + list2 -> list
+% no duplicate, do instanciation
+% ------------------------------------------
+set_append([], Z, Z):-! .
+set_append([A|B], Z, C) :-
+        not(not(member(A, Z))) ,
+        set_append(B, Z, C),! .
+set_append([A|B], Z, [A|C]) :-
+        set_append(B, Z, C) .
 
 % set_append_e: list1 + list2 -> list
 % no duplicate, no instanciation
@@ -2248,16 +1924,18 @@ remove_dup([A|B], Z, C):-
     append(Z,[A],D),
     remove_dup(B, D, C),!.
 
+% two atom lists equals (without instantiate variables)
 vequal([],[]):-!.
+vequal([X|XLs],[Y|YLs]):-
+    X==Y,	
+    vequal(XLs,YLs),!.
 vequal([X|XLs],[Y|YLs]):-
     var(X),
     vequal(XLs,YLs),!.
 vequal([X|XLs],[Y|YLs]):-
     var(Y),
     vequal(XLs,YLs),!.
-vequal([X|XLs],[Y|YLs]):-
-    X==Y,	
-    vequal(XLs,YLs),!.
+
 
 % subtract(A,B,C): subtract B from A
 % -------------------------------------
@@ -2286,7 +1964,7 @@ remove_el([A|B],C,[A|D]) :-
 
 /* generate symbol predicate  (from file futile)*/
 
-gensym_special(Root,Atom) :-
+gensym(Root,Atom) :-
                         getnum(Root,Num),
                         name(Root,Name1),
                         name(Num,Name2),
@@ -2329,7 +2007,6 @@ split_st_dy([Pred|TStates],ST0,ST,DY0,DY):-
   append_cut(DY0,[Pred],DY1),
   split_st_dy(TStates,ST0,ST,DY1,DY),!.
 
-
 % list of lists -> list
 
 flatten([HO|TO], List, O_List):-
@@ -2370,6 +2047,14 @@ list(A) :-
         fail .
 list(A) :-
         functor(A,'.',_).
+
+reverse(L,RL) :-
+	revSlave(L,[],RL).
+
+revSlave([],RL,RL).
+revSlave([H|T],Sofar,Final) :-
+	revSlave(T,[H|Sofar],Final).
+
 % ***********************for multy tasks*****************
 :- assert(time_taken(0)).
 :- assert(soln_size(0)).
@@ -2394,7 +2079,7 @@ solve(FN,FN):-
    retractall(soln_size(_)),
    nl,write('total time '),write(TIM),write(' seconds'),
    nl,write('total size '),write(SIZE),nl.
-solve(FN,FN).
+solve(N,N).
 
 sum_time(TIM):-
    time_taken(CP),
@@ -2415,33 +2100,37 @@ sum_size(SIZE):-
 
 stoppoint.
 % State1 has relation with State2
-% there are objects in action that same with goal 
 state_related(Post,Cond,undefd):-!.
 state_related(Post,Cond,[]):-!.
 state_related(Post,Cond,State2):-
      append_cut(Post,Cond,State1),
      state_related(State1,State2).
 
-state_related([se(Sort1,Obj,SE1)|State1],State2):-
-     member(se(Sort2,Obj,SE2),State2),
-     is_of_sort(Obj,Sort1),
-     is_of_sort(Obj,Sort2).
+% all states in necc are primitive
+% so does the goal state--State2
+state_related([se(Sort,Obj,SE1)|State1],State2):-
+     member(se(Sort,Obj,SE2),State2),
+     state_related0(SE1,SE2).
+% states in Cond are not neccessary primitive
 state_related([sc(Sort1,Obj,SE1=>SS1)|State1],State2):-
-     member(se(Sort2,Obj,SE2),State2),
+     member(se(Sort,Obj,SE2),State2),
      is_of_sort(Obj,Sort1),
-     is_of_sort(Obj,Sort2).
-state_related([se(Sort1,Obj,SE1)|State1],State2):-
+     is_of_sort(Obj,Sort).
+state_related([se(Sort,Obj,SE)|State1],State2):-
      state_related(State1,State2),!.
-state_related([sc(Sort1,Obj,SE1=>SS1)|State1],State2):-
+state_related([sc(Sort,Obj,SE=>SS)|State1],State2):-
      state_related(State1,State2),!.
+
+%instatiate abit the variables
+state_related0([],SE2):-!.
+state_related0([Head|SE1],SE2):-
+     member(Head,SE2),
+     state_related0(SE1,SE2).
+state_related0([Head|SE1],SE2):-
+     state_related0(SE1,SE2).
 
 % change_obj_list: narrow down objects
 % by just using the objects occure in initial states(world state)
-change_obj_list:-
-    find_all_dynamic_objects,
-    change_obj_list1,
-    change_atomic_inv,!.
-
 change_obj_list(I):-
     find_dynamic_objects(I),
     collect_dynamic_obj,
@@ -2454,47 +2143,13 @@ change_obj_list1:-
     fail.
 change_obj_list1.
 
-% dynamic objects: only keep the dynamic objects that used in tasks
+% only keep the dynamic objects that used in tasks
 change_obj_list2(Sort):-
     objectsC(Sort,Objls),!.
 % statics objects: keep
 change_obj_list2(Sort):-
     objects(Sort,Objls),
     assert(objectsC(Sort,Objls)),!.
-
-find_all_dynamic_objects:-
-   setof(Init, Id^Goal^htn_task(Id,Goal,Init), All_Init),
-   find_dynamic_obj(All_Init),
-   collect_dynamic_obj.
-find_all_dynamic_objects:-
-   setof(Init, Id^Goal^planner_task(Id,Goal,Init), All_Init),
-   find_dynamic_obj(All_Init),
-   collect_dynamic_obj.
-
-find_dynamic_obj([]):-!.
-find_dynamic_obj([SE|Rest]):-
-    find_dynamic_obj(SE),
-    find_dynamic_obj(Rest),!.
-find_dynamic_obj(ss(Sort,Obj,_)):-
-    assert(objectsD(Sort,Obj)),!.
-
-collect_dynamic_obj:-
-    objectsD(Sort,_),
-    setof(Obj, objectsD(Sort,Obj), Objls),
-    retractall(objectsD(Sort,_)),
-    assert(objectsC(Sort,Objls)),
-    fail.
-collect_dynamic_obj.
-
-get_preconditions_g([],Prev,Prev,Prev) :-!.
-get_preconditions_g([sc(S,X,From =>To)|Rest],Prev,[se(S,X,From1)|Pre],[se(S,X,To1)|Post]):-
-     member_cut(se(S,X,PSE),Prev),
-     append_cut(PSE,From,From1),
-     append_cut(PSE,To,To1),
-     list_take(Prev,[se(S,X,PSE)],Prev1),
-     get_preconditions_g(Rest,Prev1, Pre,Post),!.
-get_preconditions_g([sc(S,X,From =>To)|Rest],Prev,[se(S,X,From)|Pre],[se(S,X,To)|Post]):-
-     get_preconditions_g(Rest,Prev, Pre,Post),!.
 
 % only keep the dynamic objects in atomic_invariants
 change_atomic_inv:-
@@ -2524,15 +2179,28 @@ find_dynamic_objects([SE|Rest]):-
 find_dynamic_objects(ss(Sort,Obj,_)):-
     assert(objectsD(Sort,Obj)),!.
 
+collect_dynamic_obj:-
+    objectsD(Sort,_),
+    setof(Obj, objectsD(Sort,Obj), Objls),
+    retractall(objectsD(Sort,_)),
+    assert(objectsC(Sort,Objls)),
+    fail.
+collect_dynamic_obj.
+
+get_preconditions_g([],Prev,Prev,Prev):-!.
+get_preconditions_g([sc(S,X,From =>To)|Rest],Prev,[se(S,X,From)|Pre],[se(S,X,To)|Post]):-
+     !,
+     get_preconditions_g(Rest,Prev, Pre,Post).
+
 % ********************************************************************
 % ground all operators% enumerateOps
 
 ground_op :-
 	assert_sort_objects,
 	enumerateOps,
-	time_as('FORWARD SETUP',instOps).
-%	opCounter(Top),
-%	write(Top),nl.
+	instOps,
+	opCounter(Top),
+	write(Top),nl.
 
 enumerateOps :-
 	retractall(opCounter),
@@ -2677,7 +2345,7 @@ instOps :-
 	assert(gOperator(Count,No,operator(Name,FPrev,FNec,Cond))),
 	Next is Count + 1,
 	assert(opCounter(Next)),
-	Next>2000.
+	fail.
 
 instOps.
 
@@ -2840,7 +2508,6 @@ all_objects(Type,Objs) :-
 	sorts(Type,SubSorts),
 	!,
 	collect_subsort_objects(SubSorts,Objs).
-all_objects(Type,[]) :-!.
 
 collect_subsort_objects([],[]).
 collect_subsort_objects([Sort|Rest],Objs ) :-
@@ -3056,167 +2723,3 @@ xprod([X|Y],[A|E],D,(F,G)) :-
         D =..[^,A,C] ,
         F =..[member,A,X] ,
         xprod(Y,E,C,G).
-
-% check the domain is hierarchy or not
-% by check its substate classes is primitive or not
-check_if_hierarchy:-
-    assert(is_hierarchy(false)),
-    check_if_hierarchy1.
-
-check_if_hierarchy1:-
-    substate_classes(Sort,Obj,SS),
-    not(is_of_primitive_sort(Obj,Sort)),
-    retract(is_hierarchy(_)),
-    assert(is_hierarchy(true)).
-check_if_hierarchy1.
-
-% caheck for substates that has one state is other states subset
-% like [on_block(A,B)] and [on_block(A,B),clear(A)]
-% which when check state achieve need extra work
-check_for_substates:-
-    substate_classes(Sort,Obj,SS),
-    check_for_substates1(Sort,Obj,SS),
-    fail.
-check_for_substates.
-
-check_for_substates1(Sort,Obj,[]).
-check_for_substates1(Sort,Obj,[Head|Tail]):-
-    check_for_substates2(Sort,Obj,Head,Tail),
-    check_for_substates1(Sort,Obj,Tail).
-
-check_for_substates2(Sort,Obj,State,[]).
-check_for_substates2(Sort,Obj,State,[Head|Tail]):-
-    is_achieved(State,Head),
-    subtract(Head,State,Others),
-    filterInvars(Others,_,_,_,Odds),
-    assert_subset_substates(Sort,Obj,Odds),
-    check_for_substates2(Sort,Obj,State,Tail),!.
-check_for_substates2(Sort,Obj,State,[Head|Tail]):-
-    is_achieved(Head,State),
-    subtract(State,Head,Others),
-    filterInvars(Others,_,_,_,Odds),
-    assert_subset_substates(Sort,Obj,Odds),
-    check_for_substates2(Sort,Obj,State,Tail),!.
-check_for_substates2(Sort,Obj,State,[Head|Tail]):-
-    check_for_substates2(Sort,Obj,State,Tail),!.
-
-assert_subset_substates(Sort,Obj,[]).
-assert_subset_substates(Sort,Obj,Odds):-
-    retract(odds_in_subset_substates(Sort,Obj,Odds1)),
-    set_append([Odds],Odds1,Odds2),
-    assert(odds_in_subset_substates(Sort,Obj,Odds2)),!.
-assert_subset_substates(Sort,Obj,Odds):-
-    assert(odds_in_subset_substates(Sort,Obj,[Odds])),!.
-
-
-
-:- dynamic is_hierarchy/1.      % the domain is hierarchy or not 
-:- dynamic odds_in_subset_substates/3. %save the substates have subsets
-:- dynamic max_length/1,lowest_score/1.
-
-:- dynamic 
-    objectsD/2, solved_node/2, current_num/2,
-    gpred/2,gsstates/3,
-    sum/1.
-
-env_retractall(G):- retractall(G).
-env_retract(G):- retract(G).
-env_assert(G):- assertz(G).	
-env_asserta(G):- asserta(G).	
-env_call(G):- call(G).
-
-incr_op_num:- 
-   retract(op_num(N)),
-   N1 is N+1,
-   assertz(op_num(N1)).
-   
-% :- unknown(error,fail).
-with_domain_preds(Pred1):-
- maplist(Pred1,
-   [method/6,
-    atomic_invariants/1,
-    inconsistent_constraint/1,
-    objects/2,
-    operator/4,
-    predicates/1,
-    sorts/2,
-    substate_classes/3]).
-    
-:- with_domain_preds(abolish).    
-:- with_domain_preds(multifile).
-:- with_domain_preds(dynamic).
-
-
-
-:- multifile(planner_task/3).
-:- dynamic(planner_task/3).
-% planner_task(A,B,C):- htn_task(A,B,C).
-:- multifile(htn_task/3).
-:- dynamic(htn_task/3).
-
-:-retractall(solution_file(_)).
-:-asserta(solution_file('/pack/logicmoo_ec/test/domains_ocl/freds.out')).
-
-% :-sleep(1).
-% :-tell(user),run_header_tests.
-
-
-
-lws:- listing(ocl:[method,
-operator,implied_invariant,atomic_invariants,inconsistent_constraint,predicates,objects,substate_classes,sorts,domain_name,planner_task_slow,planner_task,
-htn_task,tp_node,tn,current_num,goal_related,goal_related_search,solved_node,closed_node,tp_goal,final_node,node,op_score,gsstates,gsubstate_classes,related_op,
-objectsOfSort,atomic_invariantsC,objectsD,objectsC,gOperator,operatorC,opParent,methodC,is_of_sort,is_of_primitive_sort,temp_assertIndivConds]).
-
-lws(F):-tell(F),lws,told.
-
-:-export(test_ocl/1).
-:- dynamic(unload_ocl/1).
-
-time_as(Goal):- sformat(Name,'~w',[Goal]),time_as(Name,Goal).
-time_as(Name,Goal):-
-  statistics(runtime,[CP,_]),
-  statistics(walltime,[WT,_]),
-  notrace(Goal),
-   statistics(runtime,[CPE,_]),
-   statistics(walltime,[WTE,_]),
-   RTIM is (CPE-CP) /1000,
-   WTIM is (WTE-WT) /1000,
-   format(user_error,'~N~n~w: ~f (wall ~f)~n',[Name,RTIM,WTIM]),!.
-
-test_ocl:- update_changed_files, 
-  forall(time(solve(_N)),nl).
-
-test_ocl(File):- forall(filematch(File,FM),test_ocl0(FM)).
-
-test_ocl0(File):- !,
-  ignore(forall(retract(unload_ocl(Was)),unload_file(Was))),
-  with_domain_preds(abolish),
-  consult(File),
-  asserta(unload_ocl(File)),!,
-  test_ocl.
-  
-test_ocl0(File):- 
-  time(locally(t_l:doing(test_ocl(File)), 
-    once((env_clear_doms_and_tasks,clean_problem,l_file(File),tasks)))).
-
-header_tests :-test_ocl('domains_ocl/*.ocl').
-  
-:-export(rr/0).
-:-export(rr1/0).
-:-export(t1/0).
-:-export(t2/0).
-rr:- test_ocl('domains_ocl/chameleonWorld.ocl').
-rr1:- test_ocl('domains_ocl/translog.ocl').
-
-t1:- test_ocl('test/domains_ocl/translogLM.pl').
-t2:- test_ocl('test/domains_ocl/translogLM4.ocl').
-t3:- test_ocl('test/domains_ocl/tyreLM.ocl').
-t4:- test_ocl('test/domains_ocl/translog.ocl').
-:- ensure_loaded(library(logicmoo_common)).
-:- fixup_exports.
-
-%:- include(translog4).
-
-%:-rr.
-
-
