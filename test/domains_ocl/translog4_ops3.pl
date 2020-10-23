@@ -15,7 +15,7 @@
 
 method(
  % 1. name
-      transport(P,O,D),
+      transport3(P,O,D),
  % 2. dynamic constraints
       [ ],
  % 3. list of necessary substate changes
@@ -32,11 +32,11 @@ method(
        % list of static predicates before(N1,N2)
       [before(1,2),before(2,3)],
  % 6. decomposition
-      [ achieve( ss(package, P,[waiting(P),certified(P)]) ), carry_direct(P,O,D), deliver(P,D)]
+      [ achieve( ss(package, P,[waiting(P),certified(P)]) ), carry_direct3(P,O,D), deliver(P,D)]
  ).
 
 method(
-      transport(P,O,D),
+      transport3(P,O,D),
       [ ],
       [ sc(package, P, [at(P,O), is_of_sort(P,package)] =>
                        [at(P,D), delivered(P)]) ],
@@ -46,12 +46,12 @@ method(
        ],
       [before(1,2),before(2,3),before(3,4),before(4,5)],
       [ achieve( ss(package, P,[waiting(P),certified(P)]) ), 
-        carry_direct(P,O,A1), carry_via_ap(A1,A2,P), 
-        carry_direct(P,A2,D), deliver(P,D)]
+        carry_direct3(P,O,A1), carry_via_ap3(A1,A2,P), 
+        carry_direct3(P,A2,D), deliver(P,D)]
  ).
 
 method(
-   carry_via_ap(O,D,P),
+   carry_via_ap3(O,D,P),
   [ ],
   [ sc(package, P, [at(P,O),waiting(P),certified(P)] =>
                        [at(P,D),waiting(P),certified(P)]) ],
@@ -72,7 +72,7 @@ method(
 
 % carry in one city
 method(  
-  carry_direct(P,O,D),
+  carry_direct3(P,O,D),
  [ ],
   [ sc(package, P, [at(P,O),waiting(P),certified(P)] => 
                        [at(P,D),waiting(P),certified(P)]) ],
@@ -87,14 +87,14 @@ method(
        commission(V),
        achieve(ss(truck,V,[at(V,O)])),
        load_package(P,V,O),
-       move(V,O,D,local_roads),
+       move3(V,O,D,local_roads),
        unload_package(P,V,D)
        ]
 ).
 
 % carry between two cities by traincar
 method(
-  carry_direct(P,O,D),
+  carry_direct3(P,O,D),
  [ ],
   [ sc(package, P, [at(P,O),waiting(P),certified(P)] => 
                        [at(P,D),waiting(P),certified(P)]) ],
@@ -118,7 +118,7 @@ method(
 
 % carry between two cities by truck
 method(
-  carry_direct(P,O,D),
+  carry_direct3(P,O,D),
  [ ],
   [ sc(package, P, [at(P,O),waiting(P),certified(P)] => 
                        [at(P,D),waiting(P),certified(P)]) ],
@@ -136,13 +136,13 @@ method(
        commission(V),
        achieve(ss(truck,V,[at(V,O)])),
        load_package(P,V,O),
-       move(V,O,D,R),
+       move3(V,O,D,R),
        unload_package(P,V,D)
        ]
 ).
 
 method(
-  move_traincar(V, O, L, R2),
+  move_traincar3(V, O, L, R2),
  [ ],
          [sc(traincar,V,[at(V,O) ]
             =>[at(V,L)] )],
@@ -173,8 +173,8 @@ operator(fly(A,D1,D2),
 ).
 
 
-%move truck
-operator( move(V, O, L, R), 
+%move2 truck
+operator( move3(V, O, L, R), 
         [ ],
          [sc(truck,V,[at(V,O),
              is_of_sort(R,road_route),
@@ -188,8 +188,8 @@ operator( move(V, O, L, R),
             => [loaded(X,V),certified(X),at(X,L)])  ]
 ).
 
-%move truck inside city
-operator( move(V, O, L, local_roads), 
+%move2 truck inside city
+operator( move3(V, O, L, local_roads), 
          [],
          [sc(truck,V,[at(V,O),
              moveable(V),
@@ -200,7 +200,7 @@ operator( move(V, O, L, local_roads),
             =>[loaded(X,V),certified(X),at(X,L)])   ]
 ).
 
-%move traincar
+%move2 traincar
 operator( pull_traincar(Train,V1, O, L, Rt), 
          [  ],
          [ sc(train,Train,[at(Train,O),

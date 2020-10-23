@@ -6,6 +6,7 @@
 /* add one level to achieve all initial states          */
 /********************************************************/
 
+:- ensure_loaded(library(logicmoo_common)).
 :-use_module(library(system)).
 /*********************** initialisation**************/
 :- dynamic op_num/1, my_stats/1. 
@@ -26,7 +27,34 @@
     gpred/2,gsstates/3,
     sum/1.
 
+env_retractall(G):- retractall(G).
+env_retract(G):- retract(G).
+env_assert(G):- assertz(G).	
+env_asserta(G):- asserta(G).	
+env_call(G):- call(G).
+
+incr_op_num:- 
+   retract(op_num(N)),
+   N1 is N+1,
+   assertz(op_num(N1)).
+   
 % :- unknown(error,fail).
+with_domain_preds(Pred1):-
+ maplist(Pred1,
+   [method/6,
+    atomic_invariants/1,
+    inconsistent_constraint/1,
+    objects/2,
+    operator/4,
+    predicates/1,
+    sorts/2,
+    substate_classes/3]).
+    
+:- with_domain_preds(abolish).    
+:- with_domain_preds(multifile).
+:- with_domain_preds(dynamic).
+
+
 
 :- multifile(planner_task/3).
 :- dynamic(planner_task/3).
@@ -56,7 +84,7 @@ solve_once(Id,Goal,Init) :-
 	planner_interface(Goal,Init,Sol,_,TNLst),
 	solution_file(F),
 	tell(F),
-	write('TASK '),write(Id),nl,
+	write('\nTASK htn_task '),write(Id),nl,
 	write('SOLUTION'),nl,
 	display_sol(Sol),
 	write('END FILE'),nl,nl,
@@ -65,21 +93,20 @@ solve_once(Id,Goal,Init) :-
 	write('END PLANNER RESULT'),
 	told,
 	tell(user),
-	write('TASK '),write(Id),nl,
+	write('\nTASK htn_task '),write(Id),nl,
 	write('SOLUTION'),nl,
 	display_sol(Sol),
 	write('END FILE'),nl,nl,
-	clean.
-	
+	clean_problem.
 solve(Id) :-
 	planner_task(Id,Goal,Init),
-	once(solve_once_pt(Id,Goal,Init)).
+	once(time(solve_once_pt(Id,Goal,Init))).
 		
 solve_once_pt(Id,Goal,Init) :-	
 	planner_interface(Goal,Init,Sol,_,TNLst),
 	solution_file(F),
 	tell(F),
-	write('TASK '),write(Id),nl,
+	write('\nTASK planner_task '),write(Id),nl,
 	write('SOLUTION'),nl,
 	display_sol(Sol),
 	write('END FILE'),nl,nl,
@@ -88,11 +115,11 @@ solve_once_pt(Id,Goal,Init) :-
 	write('END PLANNER RESULT'),
 	told,
 tell(user),
-	write('TASK '),write(Id),nl,
+	write('\nTASK planner_task '),write(Id),nl,
 	write('SOLUTION'),nl,
 	display_sol(Sol),
 	write('END FILE'),nl,nl,
-	clean.
+	clean_problem.
 display_sol([]).
 display_sol([H|T]) :-
 	write(H),
@@ -119,7 +146,7 @@ revSlave([],RL,RL).
 revSlave([H|T],Sofar,Final) :-
 	revSlave(T,[H|Sofar],Final).
 
-clean:-
+clean_problem:-
 	retractall(op_num(_)),
 	retractall(my_stats(_)),
 	retractall(current_num(_,_)),
@@ -214,7 +241,7 @@ start_solve(Sol,OPNUM,TNList):-
    start_solve(Sol,OPNUM,TNList).
 start_solve(Sol,OPNUM,TNList):-
     tell(user), write('+++ task FAILED +++'),
-    clean.
+    clean_problem.
 
 /******************************** MAIN LOOP **********/
 
@@ -233,7 +260,7 @@ assert_node(Name,Pre,Decomp,Temp,Statics):-
    all_HP_expanded(Decomp),
    assert(final_node(node(Name,Pre,Decomp,Temp,Statics))),!.
 assert_node(Name,Pre,Dec,Temp,Statics):-
-   gensym(root,SYM),
+   gensym_special(root,SYM),
    assert(node(SYM,Pre,Dec,Temp,Statics)),!.
 
 all_HP_expanded([]):-!.
@@ -467,7 +494,7 @@ dir_apply_method(TN,HPid,ACH,Pre,Post,State,Statics,Statics1):-
 % make decomposition steps when expand a method directly
 make_dec1(HPid,Pre,ACH,Statics,Temp,Dec,Temp1,Dec1):-
    var(HPid),
-   gensym(hp,HPid),
+   gensym_special(hp,HPid),
    make_dec1(HPid,Pre,ACH,Statics,Temp,Dec,Temp1,Dec1),!.
 make_dec1(HPid,Pre,ACH,Statics,Temp,Dec,Temp1,Dec1):-
    all_achieved(ACH,Statics,Pre),
@@ -482,7 +509,7 @@ make_dec1(HPid,Pre,ACH,Statics,Temp,Dec,[before(STID0,STID1)|Temp1],[step(STID0,
 % make decomposition steps when need fwsearch to expand a method
 make_dec2(HPid,Pre,ACH,Statics,Temp,Dec,Temp1,Dec1):-
    var(HPid),
-   gensym(hp,HPid),
+   gensym_special(hp,HPid),
    make_dec2(HPid,Pre,ACH,Statics,Temp,Dec,Temp1,Dec1),!.
 make_dec2(HPid,Pre,ACH,Statics,Temp,Dec,Temp1,Dec1):-
    all_achieved(ACH,Statics,Pre),
@@ -579,7 +606,7 @@ expand_node1(TN,Statics,Statics1,Pre,State,from(PR),List,List1):-
    tp_goal(_,Goal,_),
    make_se_primitive(Goal,PGoal),
    direct_expand(HP,TN,achieve(PGoal),Pre,PGoal,State,Statics,Statics1),
-%   gensym(hp,HP),
+%   gensym_special(hp,HP),
    append(List,[step(HP,achieve(PGoal),Pre,State,exp(TN))],List1),!.
 % -------direct expand -----------------------
 % if the goal canbe achieved by a method's pre and post,
@@ -602,7 +629,7 @@ apply_ground_op(operator(OP,Prev,Nec,Cond),Pre,State,List,List1):-
    state_achieved(Prev,Pre),
    nec_state_change(Pre,Nec,State2),
    cond_state_change(State2,Cond,State),
-   gensym(hp,HP),
+   gensym_special(hp,HP),
    append(List,[step(HP,OP,Pre,State,exp(OP))],List1),
    retract(op_num(N)),
    N1 is N+1,
@@ -615,7 +642,7 @@ apply_unground_op(OP,Pre0,Post0,Cond,ST,Statics,Statics1,Pre,State,List,List1):-
    cond_state_change(State2,Cond,State),
    statics_consist_instance(ST),
    remove_unneed(Statics2,[],Statics1),
-   gensym(hp,HP),
+   gensym_special(hp,HP),
    append(List,[step(HP,OP,Pre,State,exp(OP))],List1),
    retract(op_num(N)),
    N1 is N+1,
@@ -673,7 +700,7 @@ assert_tnode(TP,OP,PR,Score,Post,Statics,Steps):-
    get_score(PR,Post,Steps,Score),
 %   op_score(OP,SS),
 %   Score is Score1-SS,
-   gensym(tp,TP1),
+   gensym_special(tp,TP1),
 %   write(TP1),nl,
 %   write(Steps),nl,
 %   write(TP1),write(' '),write(Post),
@@ -695,7 +722,7 @@ combine_exp_steps(Post,Steps,step(HP,achieve(Goal),Pre,Post,exp(TN))):-
    tp_goal(Pre,Goal,Statics),
    get_action_list(Steps,[],ACTls),
    make_temp(ACTls,[],Temp),
-   gensym(hp,HP),
+   gensym_special(hp,HP),
    make_tn(TN,achieve(Goal),Pre,Post,Temp,Steps),!.
 % get the temperal from an ordered steps
 get_action_list([],ACTls,ACTls):-!.
@@ -1552,21 +1579,21 @@ make_problem_up([],[]):-!.
 make_problem_up([achieve(L)|R],[step(HP,achieve(L1),undefd,[L1],unexp)|RS]):- 
                              %preconditon here is undefd
     make_ss_to_se([L],[L1]),
-    gensym(hp,HP),
+    gensym_special(hp,HP),
     make_problem_up(R, RS),!.
 make_problem_up([achieve(L)|R],[step(HP,achieve(L1),undefd,L1,unexp)|RS]):- 
                              %preconditon here is undefd
     make_ss_to_se(L,L1),
-    gensym(hp,HP),
+    gensym_special(hp,HP),
     make_problem_up(R, RS),!.
 make_problem_up([O|R],[step(HP,O,undefd,undefd,unexp)|RS]):-
     methodC(O,Pre,Post,Statics1,Temp,ACH,Dec),
-    gensym(hp,HP),
+    gensym_special(hp,HP),
     make_problem_up(R, RS),!.
 make_problem_up([O|R],     
            [step(HP,O,undefd,undefd,unexp)|RS]):-
     operatorC(O,Pre,Post,Cond,Statics1),
-    gensym(hp,HP),
+    gensym_special(hp,HP),
     make_problem_up(R, RS),!.
 
 make_num_hp([],[]):-!.
@@ -1702,7 +1729,7 @@ make_dec(A,[HD|TD],TD1,Temp,Temp1,Achieval,Achieval1):-
 make_dec(A,[HD|TD],[HD|TD1],Temp,Temp1,Achieval,Achieval1):-
      HD=..[DecName|Goal],
      DecName\==achieve,
-     gensym(sm,SM),
+     gensym_special(sm,SM),
      current_num(sm,Num),
      make_dec(A,TD,TD1,Temp,Temp1,Achieval,Achieval1),!.
 
@@ -1773,7 +1800,7 @@ make_sc_primitive([sc(Sort,Obj,SE1=>SE2)|ST],[sc(PSort,Obj,SE1=>SE2)|ST0]):-
 % ------------ end of change operator ----------------------
 /********make_tn: save the expansion results*****/
 make_tn(TN,Name,Pre,Post,Temp,Dec):-
-    gensym(tn,TN),
+    gensym_special(tn,TN),
     find_only_changed(Pre,Post,[],Pre1,[],Post1),
 %    tell(user),nl,write(tn(TN,Name,Pre1,Post1,Temp,Dec)),nl,told,
     assert(tn(TN,Name,Pre1,Post1,Temp,Dec)),!.
@@ -2088,11 +2115,15 @@ rem_statics([], [],[]) :-!.
 
 % ----------------------utilities---------------------
 
-not(X):- \+X.
+
 isemptylist([]):-!.
 
+%instantiate variables
+/*
+not(X):- \+X.
 member(X,[X|_]).
 member(X,[_|L]) :- member(X,L).
+*/
 
 member_cut(X,[X|_]) :- !.
 member_cut(X,[_|Y]) :- member_cut(X,Y),!.
@@ -2271,7 +2302,7 @@ remove_el([A|B],C,[A|D]) :-
 
 /* generate symbol predicate  (from file futile)*/
 
-gensym(Root,Atom) :-
+gensym_special(Root,Atom) :-
                         getnum(Root,Num),
                         name(Root,Name1),
                         name(Num,Name2),
@@ -3108,12 +3139,29 @@ objectsOfSort,atomic_invariantsC,objectsD,objectsC,gOperator,operatorC,opParent,
 
 lws(F):-tell(F),lws,told.
 
-%:-export(rr/0).
-%:-export(rr1/0).
-%rr:- test_ocl('domains_ocl/chameleonWorld.ocl').
-%rr1:- test_ocl('domains_ocl/translog.ocl').
+:- dynamic(unload_ocl/1).
 
-%:- fixup_exports.
+test_ocl:- update_changed_files, time(forall(solve(_N),nl)).
+test_ocl(File):-
+  ignore(forall(retract(unload_ocl(Was)),unload_file(Was))),
+  with_domain_preds(abolish),
+  consult(File),
+  asserta(unload_ocl(File)),!,
+  test_ocl.
+  
+:-export(rr/0).
+:-export(rr1/0).
+:-export(t1/0).
+:-export(t2/0).
+rr:- test_ocl('domains_ocl/chameleonWorld.ocl').
+rr1:- test_ocl('domains_ocl/translog.ocl').
+
+t1:- test_ocl('test/domains_ocl/translogLM.pl').
+t2:- test_ocl('test/domains_ocl/translogLM4.ocl').
+t3:- test_ocl('test/domains_ocl/tyreLM.ocl').
+t4:- test_ocl('test/domains_ocl/translog.ocl').
+:- ensure_loaded(library(logicmoo_common)).
+:- fixup_exports.
 
 %:- include(translog4).
 
