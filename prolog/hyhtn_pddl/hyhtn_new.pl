@@ -78,6 +78,23 @@ statistics_walltime(CP):-statistics(walltime,[_,CP0]), (CP0==0 -> CP= 0.00000000
 /* make all method and operators primitive */
 %:-use_module(library(system)).
 /*********************** initialisation**************/
+
+% :- unknown(error,fail).
+with_domain_preds(Pred1):-
+ maplist(htncode:Pred1,
+   [method/6,
+    atomic_invariants/1,
+    inconsistent_constraint/1,
+    objects/2,
+    operator/4,
+    predicates/1,
+    sorts/2,
+    substate_classes/3]).
+    
+:- with_domain_preds(abolish).    
+:- with_domain_preds(multifile).
+:- with_domain_preds(dynamic).
+
 :-dynamic my_stats/1. 
 
 
@@ -284,12 +301,7 @@ run_tests(Call) :-
 run_header_tests :- run_tests(forall(clause(header_tests,G),run_tests(G))).
 
 
-:-export(test_ocl/1).
-test_ocl(File):- forall(filematch(File,FM),test_ocl0(FM)).
-test_ocl0(File):- time(locally(t_l:doing(test_ocl(File)), 
-   once((env_clear_doms_and_tasks,clean_problem,l_file(File),tasks)))).
 
-header_tests :-test_ocl('domains_ocl/*.ocl').
 
 
 :- style_check(-singleton).
@@ -1746,6 +1758,122 @@ select_node(node(Name,Pre,Temp,Decomp,Statics)) :-
 %   tell(FF),
     !.
 
+  
+%ground the hierarchy structure of HTN planning domain
+ground_hierarchy:-
+     ground_predicates,
+     ground_substate_class,!.
+
+% grounding predicates to object level
+% assert in prolog database as gpredicates(Pred,GPredls)
+ground_predicates:-
+     predicates(Preds),
+     grounding_preds(Preds),
+     collect_grounded_pred,!.
+
+grounding_preds([]).
+% if it is statics, only choose within atomic_invariants
+grounding_preds([HPred|TP]):-
+     functor(HPred,FF,NN),
+     functor(APred,FF,NN),
+     atomic_invariants(Atom),
+     member(APred,Atom),
+     ground_all_var_atom(HPred),
+     grounding_preds(TP).
+% else, combine all the objects
+grounding_preds([HPred|TP]):-
+     functor(HPred,FF,NN),
+     functor(GPred,FF,NN),
+     ground_all_var(GPred,HPred),
+     grounding_preds(TP).
+
+% collect all the grounded predicates together
+collect_grounded_pred:-
+     gpred(Pred,_),
+     setof(GPred,gpred(Pred,GPred),GPredls),
+     retractall(gpred(Pred,_)),
+     assert(gpredicates(Pred,GPredls)),
+     fail.
+collect_grounded_pred.
+
+ground_all_var_atom(HPred):-
+     functor(HPred,FF,NN),
+     functor(GPred,FF,NN),
+     functor(APred,FF,NN),
+     atomic_invariants(Atom),
+     member(APred,Atom),
+     GPred=..[Name|Vars],
+     APred=..[Name|Sorts],
+     ground_all_var_atom0(Vars,Sorts),
+     assert_gpred(GPred),
+     fail.
+ground_all_var_atom(HPred).
+
+ground_all_var_atom0([],[]).
+ground_all_var_atom0([HVars|TV],[HSorts|TS]):-
+     subsorts(HSorts,Subsorts),
+     split_prim_noprim(Subsorts,PSorts,NPSorts),
+     member(LS,PSorts),
+     objects(LS,Objls),
+     member(HVars,Objls),
+     ground_all_var_atom0(TV,TS).
+ground_all_var_atom0([HVar|TV],[HASorts|TS]):-
+     objects(Sorts,Objls),
+     member(HASorts,Objls),
+     HVar=HASorts,
+     ground_all_var_atom0(TV,TS).
+
+ground_all_var(GPred,HPred):-
+     GPred=..[Name|Vars],
+     HPred=..[Name|Sorts],
+     ground_all_var0(Vars,Sorts),
+     not(inconsistent_constraint([GPred])),
+     assert_gpred(GPred),
+     fail.
+ground_all_var(GPred,HPred).
+
+ground_all_var0([],[]).
+ground_all_var0([HVars|TV],[HSorts|TS]):-
+     objects(HSorts,Objls),
+     member(HVars,Objls),
+     ground_all_var0(TV,TS).
+ground_all_var0([HVars|TV],[HSorts|TS]):-
+     subsorts(HSorts,Subsorts),
+     split_prim_noprim(Subsorts,PSorts,NPSorts),
+     member(LS,PSorts),
+     objects(LS,Objls),
+     member(HVars,Objls),
+     ground_all_var0(TV,TS).
+
+% assert grounded predicates with related upper level predicates
+
+assert_gpred(GPred):-
+     functor(GPred,FF,NN),
+     functor(UPred,FF,NN),
+     assert_gpred0(GPred,UPred),!.
+
+assert_gpred0(GPred,UPred):-
+     GPred=..[Name|PSorts],
+     UPred=..[Name|Vars],
+     get_obj_sort(Vars,PSorts),
+     assert(gpred(UPred,GPred)),
+     fail.
+assert_gpred0(GPred,UPred).
+
+get_obj_sort([],[]):-!.
+get_obj_sort([HVars|TV],[HObj|TS]):-
+     objects(HVars,Objls),
+     member(HObj,Objls),
+     get_obj_sort(TV,TS),!.
+
+delete_all_nodes :-
+	retractall(node(_,_,_,_,_)),
+	retractall(final_node(_)),
+	retractall(tp_node(_,_,_,_,_,_)),
+	retractall(closed_node(_,_,_,_,_,_)),
+	retractall(solved_node(_,_,_)).
+delete_all_nodes :- !.
+
 is_of_primitive_sort(X,Y) :-
     objects(Y,L),member(X,L).
 is_of_sort(X,Y) :-
@@ -1895,9 +2023,18 @@ rem_statics([], [],[]) :-!.
 
 
 /***************** STATICS ************************/
+% ----------------------utilities---------------------
+
 
 isemptylist([]):-!.
 
+/*
+not(X):- \+X.
+member(X,[X|_]).
+member(X,[_|L]) :- member(X,L).
+append([],L,L):-!.
+append([H|T],L,[H|Z]) :- append(T,L,Z),!.
+ */
 
 member_cut(X,[X|_]) :- !.
 member_cut(X,[_|Y]) :- member_cut(X,Y),!.
@@ -2076,14 +2213,7 @@ filter_list([],_,[]).
 
 
 
-% ----------------------utilities---------------------
-/*
-not(X):- \+X.
-member(X,[X|_]).
-member(X,[_|L]) :- member(X,L).
-append([],L,L):-!.
-append([H|T],L,[H|Z]) :- append(T,L,Z),!.
- */
+
 
 file_exists(Filename):-exists_file(Filename).
 
@@ -2259,43 +2389,6 @@ sum_plan(Plan):-
 sum_plan(Plan):-
    sum(Plan).
    
-   
-%ground the hierarchy structure of HTN planning domain
-ground_hierarchy:-
-     ground_predicates,
-     ground_substate_class,!.
-
-% grounding predicates to object level
-% assert in prolog database as gpredicates(Pred,GPredls)
-ground_predicates:-
-     predicates(Preds),
-     grounding_preds(Preds),
-     collect_grounded_pred,!.
-
-grounding_preds([]).
-% if it is statics, only choose within atomic_invariants
-grounding_preds([HPred|TP]):-
-     functor(HPred,FF,NN),
-     functor(APred,FF,NN),
-     atomic_invariants(Atom),
-     member(APred,Atom),
-     ground_all_var_atom(HPred),
-     grounding_preds(TP).
-% else, combine all the objects
-grounding_preds([HPred|TP]):-
-     functor(HPred,FF,NN),
-     functor(GPred,FF,NN),
-     ground_all_var(GPred,HPred),
-     grounding_preds(TP).
-
-% collect all the grounded predicates together
-collect_grounded_pred:-
-     gpred(Pred,_),
-     setof(GPred,gpred(Pred,GPred),GPredls),
-     retractall(gpred(Pred,_)),
-     assert(gpredicates(Pred,GPredls)),
-     fail.
-collect_grounded_pred.
 
 % grounding substate_class to primary sort level
 % assert in prolog database as gsubstate_class(Sort,Obj,States)
@@ -2329,86 +2422,7 @@ flat_interal([],[]):-!.
 flat_interal([HSS1|TSS1],[HSS|TSS]):-
      flatten(HSS1,[],HSS),
      flat_interal(TSS1,TSS),!.
-
-ground_all_var_atom(HPred):-
-     functor(HPred,FF,NN),
-     functor(GPred,FF,NN),
-     functor(APred,FF,NN),
-     atomic_invariants(Atom),
-     member(APred,Atom),
-     GPred=..[Name|Vars],
-     APred=..[Name|Sorts],
-     ground_all_var_atom0(Vars,Sorts),
-     assert_gpred(GPred),
-     fail.
-ground_all_var_atom(HPred).
-
-ground_all_var_atom0([],[]).
-ground_all_var_atom0([HVars|TV],[HSorts|TS]):-
-     subsorts(HSorts,Subsorts),
-     split_prim_noprim(Subsorts,PSorts,NPSorts),
-     member(LS,PSorts),
-     objects(LS,Objls),
-     member(HVars,Objls),
-     ground_all_var_atom0(TV,TS).
-ground_all_var_atom0([HVar|TV],[HASorts|TS]):-
-     objects(Sorts,Objls),
-     member(HASorts,Objls),
-     HVar=HASorts,
-     ground_all_var_atom0(TV,TS).
-
-ground_all_var(GPred,HPred):-
-     GPred=..[Name|Vars],
-     HPred=..[Name|Sorts],
-     ground_all_var0(Vars,Sorts),
-     not(inconsistent_constraint([GPred])),
-     assert_gpred(GPred),
-     fail.
-ground_all_var(GPred,HPred).
-
-ground_all_var0([],[]).
-ground_all_var0([HVars|TV],[HSorts|TS]):-
-     objects(HSorts,Objls),
-     member(HVars,Objls),
-     ground_all_var0(TV,TS).
-ground_all_var0([HVars|TV],[HSorts|TS]):-
-     subsorts(HSorts,Subsorts),
-     split_prim_noprim(Subsorts,PSorts,NPSorts),
-     member(LS,PSorts),
-     objects(LS,Objls),
-     member(HVars,Objls),
-     ground_all_var0(TV,TS).
-
-% assert grounded predicates with related upper level predicates
-
-assert_gpred(GPred):-
-     functor(GPred,FF,NN),
-     functor(UPred,FF,NN),
-     assert_gpred0(GPred,UPred),!.
-
-assert_gpred0(GPred,UPred):-
-     GPred=..[Name|PSorts],
-     UPred=..[Name|Vars],
-     get_obj_sort(Vars,PSorts),
-     assert(gpred(UPred,GPred)),
-     fail.
-assert_gpred0(GPred,UPred).
-
-get_obj_sort([],[]):-!.
-get_obj_sort([HVars|TV],[HObj|TS]):-
-     objects(HVars,Objls),
-     member(HObj,Objls),
-     get_obj_sort(TV,TS),!.
-
-delete_all_nodes :-
-	retractall(node(_,_,_,_,_)),
-	retractall(final_node(_)),
-	retractall(tp_node(_,_,_,_,_,_)),
-	retractall(closed_node(_,_,_,_,_,_)),
-	retractall(solved_node(_,_,_)).
-delete_all_nodes :- !.
-
-
+ 
 % xprod: list * list --> (list X list)
 % -----------------------------------
 xprod(A,B,C) :-
@@ -2431,10 +2445,61 @@ xprod([X|Y],[A|E],D,(F,G)) :-
         xprod(Y,E,C,G).
 
 
-:- include(translog4_domain). 
-:- include(translog4_ops).
-%:- include(translog4_ops2).
-%:- include(translog4_ops3).
-:- include(translog4_problems).
 
-:- fixup_exports.   
+
+
+
+:-retractall(solution_file(_)).
+:-asserta(solution_file('/pack/logicmoo_ec/test/domains_ocl/freds.out')).
+
+% :-sleep(1).
+% :-tell(user),run_header_tests.
+
+
+
+lws:- listing(ocl:[method,
+operator,implied_invariant,atomic_invariants,inconsistent_constraint,predicates,objects,substate_classes,sorts,domain_name,planner_task_slow,planner_task,
+htn_task,tp_node,tn,current_num,goal_related,goal_related_search,solved_node,closed_node,tp_goal,final_node,node,op_score,gsstates,gsubstate_classes,related_op,
+objectsOfSort,atomic_invariantsC,objectsD,objectsC,gOperator,operatorC,opParent,methodC,is_of_sort,is_of_primitive_sort,temp_assertIndivConds]).
+
+lws(F):-tell(F),lws,told.
+
+:-export(test_ocl/1).
+:- dynamic(unload_ocl/1).
+
+test_ocl:- update_changed_files, time(forall(solve(_N),nl)).
+
+test_ocl(File):- forall(filematch(File,FM),test_ocl0(FM)).
+
+test_ocl0(File):-
+  ignore(forall(retract(unload_ocl(Was)),unload_file(Was))),
+  with_domain_preds(abolish),
+  consult(File),
+  asserta(unload_ocl(File)),!,
+  time(test_ocl).
+
+test_ocl0(File):- 
+  time(locally(t_l:doing(test_ocl(File)), 
+   once((env_clear_doms_and_tasks,clean_problem,l_file(File),tasks)))).
+
+header_tests :-test_ocl('domains_ocl/*.ocl').
+  
+:-export(rr/0).
+:-export(rr1/0).
+:-export(t1/0).
+:-export(t2/0).
+rr:- test_ocl('domains_ocl/chameleonWorld.ocl').
+rr1:- test_ocl('domains_ocl/translog.ocl').
+
+t1:- test_ocl('test/domains_ocl/translogLM.pl').
+t2:- test_ocl('test/domains_ocl/translogLM4.ocl').
+t3:- test_ocl('test/domains_ocl/tyreLM.ocl').
+t4:- test_ocl('test/domains_ocl/translog.ocl').
+:- ensure_loaded(library(logicmoo_common)).
+:- fixup_exports.
+
+%:- include(translog4).
+
+%:-rr.
+
+

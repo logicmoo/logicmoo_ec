@@ -2248,6 +2248,7 @@ same_var_member1([H1|T1],[H2|T2]):-
      H1==H2,
      same_var_member1(T1,T2),!.
 
+
 % set_append_e: list1 + list2 -> list
 % no duplicate, no instanciation
 % ------------------------------------------
@@ -3139,15 +3140,25 @@ objectsOfSort,atomic_invariantsC,objectsD,objectsC,gOperator,operatorC,opParent,
 
 lws(F):-tell(F),lws,told.
 
+:-export(test_ocl/1).
 :- dynamic(unload_ocl/1).
 
 test_ocl:- update_changed_files, time(forall(solve(_N),nl)).
-test_ocl(File):-
+
+test_ocl(File):- forall(filematch(File,FM),test_ocl0(FM)).
+
+test_ocl0(File):-
   ignore(forall(retract(unload_ocl(Was)),unload_file(Was))),
   with_domain_preds(abolish),
   consult(File),
   asserta(unload_ocl(File)),!,
-  test_ocl.
+  time(test_ocl).
+  
+test_ocl0(File):- 
+  time(locally(t_l:doing(test_ocl(File)), 
+    once((env_clear_doms_and_tasks,clean_problem,l_file(File),tasks)))).
+
+header_tests :-test_ocl('domains_ocl/*.ocl').
   
 :-export(rr/0).
 :-export(rr1/0).
