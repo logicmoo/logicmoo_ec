@@ -186,7 +186,7 @@
 
    (:axiom
        :vars (?p - package ?v - vehicle ?l - location
-	      ?p-vol ?v-cap - number ?av-cargo - (fluent number))
+	      ?p-vol ?v-cap - number ?v-cargo - (fluent number))
        :context (and (at ?p ?l)
 		     (at ?v ?l)
 		     (capacity ?v cargo-area ?v-cap)
