@@ -79,7 +79,7 @@ assert_post(Mod,_Form,Lps):-
      nop(pprint_ecp(yellow,Lps)))),
     pprint_ecp_cmt(cyan,Prolog),pprint_ecp_cmt(white,"% ================================="))
    ;assert_lps_try_harder(Prolog))),
-  must_or_rtrace(assert_prolog(Mod,Prolog)),!.
+  must_or_rtrace(assert_pl(Mod,Prolog)),!.
 
 print_lps_syntax(Color,Lps):- 
  with_lps_operators2(user,
@@ -102,8 +102,9 @@ with_lps_operators(MGoal):-
   with_lps_operators2(user,ec_lps_convert:with_lps_operators2(M,M:Goal)).
 
 
-assert_prolog(Mod,Prolog):- is_list(Prolog),!, maplist(assert_prolog(Mod),Prolog).
-assert_prolog(_Mod,Prolog):- % get_source_location(File,Line),
+assert_pl(Mod,Prolog):- is_list(Prolog),!, maplist(assert_pl(Mod),Prolog).
+assert_pl(Mod,(P1,P2)):- !,assert_pl(Mod,P1),assert_pl(Mod,P2).
+assert_pl(_Mod,Prolog):- % get_source_location(File,Line),
    major_debug(pprint_ecp_pl(yellow,Prolog)).
 
 include_e_lps_file_now(Type,MFile):- strip_module(MFile,M,File), include_e_lps_file_now(Type,M,File).

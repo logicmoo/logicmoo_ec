@@ -55,8 +55,8 @@ user:my_pfc_add(A):-if_defined(pfc_add(A),assert_if_new(A)).
 :- endif.
 % :- set_prolog_flag(gc,true).
 
-:- initialization( profiler(_,cputime) ).
-:- initialization(user:use_module(library(swi/pce_profile))).
+%:- initialization( profiler(_,cputime) ).
+%:- initialization(user:use_module(library(swi/pce_profile))).
 
 
 

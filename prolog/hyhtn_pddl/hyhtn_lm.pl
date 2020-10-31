@@ -583,7 +583,7 @@ expand_node1(TN,Statics,Statics1,Pre,State,from(PR),List,List1):-
    make_se_primitive(Goal,PGoal),
    direct_expand(HP,TN,achieve(PGoal),Pre,PGoal,State,Statics,Statics1),
 %   gensym_special(hp,HP),
-   append(List,[step(HP,achieve(PGoal),Pre,State,exp(TN))],List1),!.
+   append_dcut(List,[step(HP,achieve(PGoal),Pre,State,exp(TN))],List1),!.
 % -------direct expand -----------------------
 % if the goal canbe achieved by a method's pre and post,
 %    expand it and make it to that TNs
@@ -606,7 +606,7 @@ apply_ground_op(operator(OP,Prev,Nec,Cond),Pre,State,List,List1):-
    nec_state_change(Pre,Nec,State2),
    cond_state_change(State2,Cond,State),
    gensym_special(hp,HP),
-   append(List,[step(HP,OP,Pre,State,exp(OP))],List1),
+   append_dcut(List,[step(HP,OP,Pre,State,exp(OP))],List1),
    retract(op_num(N)),
    N1 is N+1,
    assert(op_num(N1)),!.
@@ -619,7 +619,7 @@ apply_unground_op(OP,Pre0,Post0,Cond,ST,Statics,Statics1,Pre,State,List,List1):-
    statics_consist_instance(ST),
    remove_unneed(Statics2,[],Statics1),
    gensym_special(hp,HP),
-   append(List,[step(HP,OP,Pre,State,exp(OP))],List1),
+   append_dcut(List,[step(HP,OP,Pre,State,exp(OP))],List1),
    retract(op_num(N)),
    N1 is N+1,
    assert(op_num(N1)).
@@ -629,7 +629,7 @@ find_related_op([],Ops1,Ops):-
 find_related_op([Head|Pre],List,Ops):-
    setof(OPls,Head^Level^Post^goal_related(Head,Post,OPls,Level),OPs0),
    flatten(OPs0,[],OPs1),
-   append(List,OPs1,List1),
+   append_dcut(List,OPs1,List1),
    find_related_op(Pre,List1,Ops),!.
 find_related_op([Head|Pre],List,Ops):-
    find_related_op(Pre,List,Ops),!.
@@ -1107,7 +1107,7 @@ in_different_states(Sort,Obj,ST,ST1):-
 diff_items(ST,ST1,Diff):-
     list_take(ST,ST1,Diff1),
     list_take(ST1,ST,Diff2),
-    append(Diff1,Diff2,Diff),!.
+    append_dcut(Diff1,Diff2,Diff),!.
 
 % split the hier substates to their relavant level
 % so that we can compare them later at same level
@@ -1118,12 +1118,12 @@ split_level([se(Sort,Obj,ST)|State],SPST1,SPST):-
     substate_classes(Sort,Obj,Substateclasses),
     max_member(ST,Substateclasses,MSub, Others),
     not(isemptylist(MSub)),
-    append(SPST1,[se(Sort,Obj,MSub)],SPST11),
+    append_dcut(SPST1,[se(Sort,Obj,MSub)],SPST11),
     split_level([se(Sort,Obj, Others)|State],SPST11,SPST),!.
 split_level([se(Sort,Obj,ST)|State],SPST1,SPST):-   
     subsortse(Sort,SSorts),
     uppersortse(Sort,USorts),
-    append(SSorts,USorts,Sametree),
+    append_dcut(SSorts,USorts,Sametree),
     split_level1(Sametree,se(Sort,Obj,ST),SPST1,SPST11),
     split_level(State,SPST11,SPST),!.
 
@@ -1301,22 +1301,22 @@ state_change1(PSort,Obj,[se(Sort,Obj,SE)|Pre],Pre0,Post0,State,Post):-
 % move it to its post
 state_change1(PSort,Obj,[se(Sort,Obj,SE)|Pre],Pre0,Post0,State,Post):-
     not(member(se(Sort,Obj,SE0),Pre0)),
-    append([se(Sort,Obj,SE)],State,State1),	
+    append_dcut([se(Sort,Obj,SE)],State,State1),	
     state_change1(PSort,Obj,Pre,Pre0,Post0,State1,Post),!.
 
-% append post states
+% append_dcut post states
 append_post([se(Sort,Obj,SE)],[se(Sort,Obj,SE0)],Post0,Post1,State,State1):-
     member(se(Sort,Obj,SS0),Post0),
     list_take(SE,SE0,ST0),
     set_append_e(ST0,SS0,SS1),
-    append([se(Sort,Obj,SS1)],State,State1),
+    append_dcut([se(Sort,Obj,SS1)],State,State1),
     list_take(Post0,[se(Sort,Obj,SS0)],Post1),!.
 append_post([se(Sort,Obj,SE)],[se(Sort,Obj,SE0)],Post0,Post0,State,State):-!.
 
 % merge the different level states to a whole state in its primitive sort
 merge_level(PSort,Obj,[],[],[]):-!.
 merge_level(PSort,Obj,State1,State2,State):-
-     append(State1,State2,State3),
+     append_dcut(State1,State2,State3),
      merge_level1(PSort,Obj,State3,State),!.
 
 merge_level1(PSort,Obj,[],[]):-!.
@@ -1325,7 +1325,7 @@ merge_level1(PSort,Obj,[se(Sort0,Obj,SS0)|List],State):-
 
 merge_level2(PSort,Obj,[],State,State):-!.
 merge_level2(PSort,Obj,[se(Sort0,Obj,SS0)|List],[se(PSort,Obj,SS1)],State):-
-     append(SS0,SS1,SS),
+     append_dcut(SS0,SS1,SS),
      merge_level2(PSort,Obj,List,[se(PSort,Obj,SS)],State),!.
 
 % rough change the obj's post state with action's post
@@ -1615,10 +1615,10 @@ earliest_step(HP1,HPF,Temp,[HP2|TST],[HP2|TST1]):-
 
 % sort the steps, put the unordered steps in the front
 sort_steps2(OtherST,[],OrderedST1,OrderedST):-
-   append(OrderedST1,OtherST,OrderedST),!.
+   append_dcut(OrderedST1,OtherST,OrderedST),!.
 sort_steps2(Steps,[HP|THPS],List,OrderedST):-
    member(step(HP,N,Pre,Post,F),Steps),
-   append(List,[step(HP,N,Pre,Post,F)],List1),
+   append_dcut(List,[step(HP,N,Pre,Post,F)],List1),
    list_take(Steps,[step(HP,N,Pre,Post,F)],Steps1),
    sort_steps2(Steps1,THPS,List1,OrderedST),!.
 sort_steps2(Steps,[HP|THPS],List,OrderedST):-
@@ -1682,8 +1682,8 @@ change_op_representation:-
 get_preconditions([],Prev,Prev,Prev) :-!.
 get_preconditions([sc(S,X,From =>To)|Rest],Prev,[se(S,X,From1)|Pre],[se(S,X,To1)|Post]):-
      member_e(se(S,X,PSE),Prev),
-     append(PSE,From,From1),
-     append(PSE,To,To1),
+     append_dcut(PSE,From,From1),
+     append_dcut(PSE,To,To1),
      list_take(Prev,[se(S,X,PSE)],Prev1),
      get_preconditions(Rest,Prev1, Pre,Post),!.
 get_preconditions([sc(S,X,From =>To)|Rest],Prev,[se(S,X,From)|Pre],[se(S,X,To)|Post]):-
@@ -1700,14 +1700,14 @@ make_dec(A,[HD|TD],TD1,Temp,Temp1,Achieval,Achieval1):-
      current_num(sm,Num),
      replace_achieval_temp(Temp,Temp0,Num),
      make_ss_to_se(Goal,Goal0),
-     append(Achieval,Goal0,Achieval0),
+     append_dcut(Achieval,Goal0,Achieval0),
      make_dec(A,TD,TD1,Temp0,Temp1,Achieval0,Achieval1),!.
 make_dec(A,[HD|TD],TD1,Temp,Temp1,Achieval,Achieval1):-
      HD=..[achieve|Goal],
      not(current_num(sm,Num)),
      replace_achieval_temp(Temp,Temp0,1),
      make_ss_to_se(Goal,Goal0),
-     append(Achieval,Goal0,Achieval0),
+     append_dcut(Achieval,Goal0,Achieval0),
      make_dec(A,TD,TD1,Temp0,Temp1,Achieval0,Achieval1).
 make_dec(A,[HD|TD],[HD|TD1],Temp,Temp1,Achieval,Achieval1):-
      HD=..[DecName|Goal],
@@ -1803,7 +1803,7 @@ find_only_changed([se(Sort,Obj,ST)|Pre],Post,Pre0,Pre1,Post0,Post1):-
     find_only_changed(Pre,Post2,Pre3,Pre1,Post3,Post1),!.
 % other fail. 
 
-% append statics, and check its consistent
+% append_dcut statics, and check its consistent
 statics_append([],L,L):-
     statics_consist_instance(L),!.
 statics_append(L,[],L):-
@@ -1815,7 +1815,7 @@ statics_append(List1,List2,L):-
     statics_consist_instance(L).
 
 statics_append1([],List2,L1,L):-
-    append(List2,L1,L),!.
+    append_dcut(List2,L1,L),!.
 statics_append1([H|List1],List2,L,Z) :-
     statics_append0(H,List2,L,L1),
     statics_append1(List1,List2,L1,Z).
@@ -1825,13 +1825,13 @@ statics_append0(H,[H|Z],L,L).
 statics_append0(H,[X|Z],L1,L):-
     statics_append0(H,Z,L1,L).
 
-% append  only changed states
+% append_dcut  only changed states
 % state_match here means not changed
 append_changed(se(Sort,Obj,ST),se(Sort1,Obj,ST1),Pre0,Pre0,Post0,Post0):-
     state_match(Sort,Obj,ST,ST1),!.
 append_changed(se(Sort,Obj,ST),se(Sort1,Obj,ST1),Pre0,Pre3,Post0,Post3):-
-    append(Pre0,[se(Sort,Obj,ST)],Pre3),
-    append(Post0,[se(Sort,Obj,ST1)],Post3),!.
+    append_dcut(Pre0,[se(Sort,Obj,ST)],Pre3),
+    append_dcut(Post0,[se(Sort,Obj,ST1)],Post3),!.
 
 %***********print out solution**************************   
 push_to_primitive([],PHPs,PHPs) :-!.
@@ -1840,7 +1840,7 @@ push_to_primitive([step(HPID,_,_,_,exp(TN))|HPs],List,PHPs) :-
    push_to_primitive(Dec,List,Dec1),
    push_to_primitive(HPs,Dec1,PHPs),!.
 push_to_primitive([step(HPID,_,_,_,exp(Name))|HPs],List,PHPs):-
-   append(List,[Name],List1),
+   append_dcut(List,[Name],List1),
    push_to_primitive(HPs,List1,PHPs),!.
 
 push_to_primitive([],PHPs,PHPs,TNLst,TNLst) :-!.
@@ -1849,7 +1849,7 @@ push_to_primitive([step(HPID,_,_,_,exp(TN))|HPs],List,PHPs,TNSoFar,TNFinal) :-
    push_to_primitive(Dec,List,Dec1,[tn(TN,Name,Pre,Post,Temp,Dec)|TNSoFar],TNNext),
    push_to_primitive(HPs,Dec1,PHPs,TNNext,TNFinal),!.
 push_to_primitive([step(HPID,_,_,_,exp(Name))|HPs],List,PHPs,TNSoFar,TNFinal):-
-   append(List,[Name],List1),
+   append_dcut(List,[Name],List1),
    push_to_primitive(HPs,List1,PHPs,TNSoFar,TNFinal),!.
 
 /*********** TEMPORAL AND DECLOBBERING ************/
@@ -2016,7 +2016,7 @@ subsorts(Sort,Subsorts):-
 sort_down([],Subsorts,Subsorts):-!.
 sort_down([HOpen|TOpen],List,Subsorts):-
   objectsC(HOpen,Objls),
-  append(List,[HOpen],List1),
+  append_dcut(List,[HOpen],List1),
   sort_down(TOpen,List1,Subsorts),!.
 sort_down([HOpen|TOpen],List,Sortslist):-
   sorts(HOpen,Sorts),
@@ -2024,7 +2024,7 @@ sort_down([HOpen|TOpen],List,Sortslist):-
   sort_down(TOpen,[HOpen|List2],Sortslist),!.
 sort_down([HOpen|TOpen],List,Subsorts):-
 	%if it is not defined as objects or sorts, assume it's primitive
-  append(List,[HOpen],List1),
+  append_dcut(List,[HOpen],List1),
   sort_down(TOpen,List1,Subsorts),!.
 
 % find uppersorts of a sort(excludes).
@@ -2082,17 +2082,17 @@ get_invariants(Invs) :-
 rem_statics([sc(S,X,Lhs=>Rhs)|ST], [sc(S,X,LhsR=>RhsR)|STR],Rt1) :-
     split_st_dy(Lhs,[],LR, [],LhsR),
     split_st_dy(Rhs,[],RR,[],RhsR),
-    append(LR,RR,R),
+    append_dcut(LR,RR,R),
     rem_statics(ST, STR,Rt),
-    append(Rt,[is_of_sort(X,S)|R],Rt1),!.
+    append_dcut(Rt,[is_of_sort(X,S)|R],Rt1),!.
 rem_statics([ss(S,X,Preds)|Post], [ss(S,X,PredR)|PostR],Rt1) :-
     split_st_dy(Preds,[],R, [],PredR),
     rem_statics(Post, PostR,Rt),
-    append(Rt,[is_of_sort(X,S)|R],Rt1),!.
+    append_dcut(Rt,[is_of_sort(X,S)|R],Rt1),!.
 rem_statics([se(S,X,Preds)|Post], [se(S,X,PredR)|PostR],Rt1) :-
     split_st_dy(Preds,[],R, [],PredR),
     rem_statics(Post, PostR,Rt),
-    append(Rt,[is_of_sort(X,S)|R],Rt1),!.
+    append_dcut(Rt,[is_of_sort(X,S)|R],Rt1),!.
 rem_statics([], [],[]) :-!.
 
 
@@ -2159,8 +2159,8 @@ pred_member1(X,[Y|_]):-
     vequal(XLs,YLs),!.
 pred_member1(X,[_|Y]):- pred_member1(X,Y),!.
 	
-append([],L,L):-!.
-append([H|T],L,[H|Z]) :- append(T,L,Z),!.
+append_dcut([],L,L):-!.
+append_dcut([H|T],L,[H|Z]) :- append_dcut(T,L,Z),!.
 
 append_cut([],L,L) :- !.
 append_cut([H|T],L,[H|Z]) :- append_cut(T,L,Z),!.
@@ -2174,7 +2174,7 @@ set_append([A|B], Z, C) :-
 set_append([A|B], Z, [A|C]) :-
         set_append(B, Z, C) .
 
-% append_st: append two statics
+% append_st: append_dcut two statics
 % remove the constants that no need
 % instanciate the viables that all ready been bind
 % ------------------------------------------
@@ -2191,21 +2191,21 @@ remove_unneed([A|B], Z, C):-
     remove_unneed(B, Z, C),! .
 remove_unneed([A|B], Z, C):-
     var(A),
-    append(Z,[A],D),
+    append_dcut(Z,[A],D),
     remove_unneed(B, D, C),!.
 remove_unneed([A|B], Z, C):-
     ground(A),
     remove_unneed(B, Z, C),!.
 remove_unneed([A|B], Z, C):-
     A=..[ne|Paras],
-    append(Z,[A],D),
+    append_dcut(Z,[A],D),
     remove_unneed(B, D, C),!.
 remove_unneed([A|B], Z, C):-
     A=..[Pred|Paras],
     same_var_member(A,Z),
     remove_unneed(B, Z, C),!.
 remove_unneed([A|B], Z, C):-
-    append(Z,[A],D),
+    append_dcut(Z,[A],D),
     remove_unneed(B, D, C),!.
 
 same_var_member(Pred,[Pred1|List]):-
@@ -2245,7 +2245,7 @@ remove_dup([A|B],Z,C) :-
     member_e(A, Z),
     remove_dup(B, Z, C),! .
 remove_dup([A|B], Z, C):-
-    append(Z,[A],D),
+    append_dcut(Z,[A],D),
     remove_dup(B, D, C),!.
 
 vequal([],[]):-!.
@@ -2290,7 +2290,7 @@ gensym_special(Root,Atom) :-
                         getnum(Root,Num),
                         name(Root,Name1),
                         name(Num,Name2),
-                        append(Name1,Name2,Name),
+                        append_dcut(Name1,Name2,Name),
                         name(Atom,Name).
 
 getnum(Root,Num) :-
@@ -2303,7 +2303,7 @@ getnum(Root,1) :- asserta(current_num(Root,1)).
 gensym_num(Root,Num,Atom):-
      name(Root,Name),
      name(Num,Name1),
-     append(Name,Name1,Name2),
+     append_dcut(Name,Name1,Name2),
      name(Atom,Name2),!.
 
 
@@ -2333,10 +2333,10 @@ split_st_dy([Pred|TStates],ST0,ST,DY0,DY):-
 % list of lists -> list
 
 flatten([HO|TO], List, O_List):-
-	append(HO, List, List_tmp),
+	append_dcut(HO, List, List_tmp),
 	flatten(TO, List_tmp, O_List),!.
 flatten([H|TO], List,O_List):-
-	append([H], List, List_tmp),
+	append_dcut([H], List, List_tmp),
 	flatten(TO, List_tmp, O_List).
 flatten([], [HList|T], O_List):-
 	HList = [],
@@ -2566,8 +2566,8 @@ enumOps.
 findVarsAndTypes(operator(_,Pre,Nec,Cond),Vars,NEs) :-
 	vtPrevail(Pre,PreVars,PreNEs),
 	vtEffects(Nec,NecVars,NecNEs),
-	append(PreVars,NecVars,Vars),
-	append(PreNEs,NecNEs,NEs),
+	append_dcut(PreVars,NecVars,Vars),
+	append_dcut(PreNEs,NecNEs,NEs),
 	!.
 
 % collect all Vars and types in a changes clause
@@ -2577,10 +2577,10 @@ vtEffects([],[],[]).
 
 vtEffects([sc(Type,Obj1,Preds)|Rest],VT,NEs) :-
 	vtPreds(Preds,Related,NEs1),
-	append([Type,Obj1],Related,Obj1VT),
+	append_dcut([Type,Obj1],Related,Obj1VT),
 	vtEffects(Rest,RestVT,RestNEs),
-	append(Obj1VT,RestVT,VT),
-	append(NEs1,RestNEs,NEs).
+	append_dcut(Obj1VT,RestVT,VT),
+	append_dcut(NEs1,RestNEs,NEs).
 
 % collect all Vars and types in a Prevail clause
 %vtPrevail(+PrevailClause,-VarsTypes,-NEClauses).
@@ -2589,10 +2589,10 @@ vtPrevail([],[],[]).
 
 vtPrevail([se(Type,Obj1,Preds)|Rest],VT,NEs) :-
 	vtPLst(Preds,Related,NEs1),
-	append([Type,Obj1],Related,Obj1VT),
+	append_dcut([Type,Obj1],Related,Obj1VT),
 	vtPrevail(Rest,RestVT,RestNEs),
-	append(Obj1VT,RestVT,VT),
-	append(NEs1,RestNEs,NEs).
+	append_dcut(Obj1VT,RestVT,VT),
+	append_dcut(NEs1,RestNEs,NEs).
 
 % Deal with the change predicates in a changes clause
 % vtPreds(+ChangeProps,-VarsTypes,-NEClauses).
@@ -2600,8 +2600,8 @@ vtPrevail([se(Type,Obj1,Preds)|Rest],VT,NEs) :-
 vtPreds((Pre => Add),Res,NEs) :-
 	vtPLst(Pre,VTPre,NEs1),
 	vtPLst(Add,VTAdd,NEs2),
-	append(VTPre,VTAdd,Res),
-	append(NEs1,NEs2,NEs).
+	append_dcut(VTPre,VTAdd,Res),
+	append_dcut(NEs1,NEs2,NEs).
 
 % Deal with a list of literals
 % vtPLst(+Literals,-VarTypes,-NEClauses).
@@ -2635,7 +2635,7 @@ vtPLst([Pred|Preds],Res,NEs) :-
 	member(DummyPred,PList),
 	pair(VN,Rest,This),
 	vtPLst(Preds,RestPre,NEs),
-	append(This,RestPre,Res).
+	append_dcut(This,RestPre,Res).
 
 % Create a list of new uninstantiated variables
 % createVarList(+NoOfVariablesNeeded, -ListOfvariables).
@@ -2757,26 +2757,26 @@ assertIndivConds([H|T]) :-
 containsInvars(operator(Name,Prev,Nec,Cond),InVars,IsOfSorts,FPrev,FNec) :-
 	prevInvars(Prev,PInVars,PIsOfSorts,FPrev),
 	necInvars(Nec,NecInVars,NIsOfSorts,FNec),
-	append(NecInVars,PInVars,InVars),
-	append(PIsOfSorts,NIsOfSorts,IsOfSorts),
+	append_dcut(NecInVars,PInVars,InVars),
+	append_dcut(PIsOfSorts,NIsOfSorts,IsOfSorts),
 	!.
 
 prevInvars([],[],[],[]).
 prevInvars([se(Type,Obj,Props)|Rest],InVars,IsOfSorts,[se(Type,Obj,FProps)|RFPrev]) :-
 	   propsInvars(Props,PInvars,PIsOfSorts,FProps),
 	   prevInvars(Rest,RInVars,RIsOfSorts,RFPrev),
-	   append(PInVars,RInVars,InVars),
-	   append([is_of_sort(Obj,Type)|PIsOfSorts],RIsOfSorts,IsOfSorts).
+	   append_dcut(PInVars,RInVars,InVars),
+	   append_dcut([is_of_sort(Obj,Type)|PIsOfSorts],RIsOfSorts,IsOfSorts).
 
 necInvars([],[],[],[]).
 necInvars([sc(Type,Obj,(Props => Adds))|Rest],Invars,IsOfSorts,[sc(Type,Obj,(FProps => FAdds))|RFNec]) :-
 	   propsInvars(Props,PInvars,PIsOfSorts,FProps),
 	   propsInvars(Adds,AInvars,AIsOfSorts,FAdds),
 	   necInvars(Rest,RInvars,RIsOfSorts,RFNec),
-	   append(AInvars,PInvars,Temp),
-	   append(Temp,RInvars,Invars),
-	   append(PIsOfSorts,AIsOfSorts,SortsTemp),
-	   append([is_of_sort(Obj,Type)|SortsTemp],RIsOfSorts,IsOfSorts).
+	   append_dcut(AInvars,PInvars,Temp),
+	   append_dcut(Temp,RInvars,Invars),
+	   append_dcut(PIsOfSorts,AIsOfSorts,SortsTemp),
+	   append_dcut([is_of_sort(Obj,Type)|SortsTemp],RIsOfSorts,IsOfSorts).
 
 propsInvars([],[],[],[]).
 propsInvars([Prop|Props],[Prop|Rest],IsOfSorts,FProps) :-
@@ -2847,7 +2847,7 @@ collect_subsort_objects([Sort|Rest],Objs ) :-
 	all_objects(Sort,SortObjs),
 	!,
 	collect_subsort_objects(Rest,RestObjs),
-	append(SortObjs,RestObjs,Objs).
+	append_dcut(SortObjs,RestObjs,Objs).
 
 obeysNEs([]).
 
@@ -3140,12 +3140,12 @@ with_domain_preds(Pred1):-
     operator/4,
     predicates/1,
     sorts/2,
+    planner_task/3,
+    htn_task/3,
     substate_classes/3]).
     
-:- with_domain_preds(abolish).    
-:- with_domain_preds(multifile).
-:- with_domain_preds(dynamic).
-
+abolish_domain:- with_domain_preds(abolish), with_domain_preds(multifile), with_domain_preds(dynamic).
+:- abolish_domain.
 
 
 :- multifile(planner_task/3).
@@ -3176,7 +3176,7 @@ time_as(Goal):- sformat(Name,'~w',[Goal]),time_as(Name,Goal).
 time_as(Name,Goal):-
   statistics(runtime,[CP,_]),
   statistics(walltime,[WT,_]),
-  notrace(Goal),
+  call(Goal),
    statistics(runtime,[CPE,_]),
    statistics(walltime,[WTE,_]),
    RTIM is (CPE-CP) /1000,

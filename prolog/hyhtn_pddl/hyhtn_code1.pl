@@ -1,3 +1,4 @@
+
 /* htncode.pl */
 
 /* ***********************************/
@@ -14,13 +15,12 @@
 :- dynamic methodC/7, operatorC/5, my_stats/1.
 :- dynamic node/7,tp_node/6,tn/6,solved_node/5.
 :- dynamic produce/4,goal_related/1,achieved_goal/1.
-%:- unknown(error,fail).
 
 % for boot..
 :- dynamic kill_file/1,solution_file/1.
 %
+%:- unknown(error,fail).
 :- op(100,xfy,'=>').
-
 
 op_num(0).
 my_stats(0).
@@ -65,17 +65,20 @@ clean_problem:-
 	assert(my_stats(0)).
 
 planner_interface(G,I, SOLN,NODES):-
+    time_as('SETUP',(
 	ground_hierarchy,
 	change_op_representation,
 	find_relate_state,
         retract(op_num(_)),
         assert(op_num(0)),
+        true)),
+      time_as('SOLVE',(
         statistics(runtime,[_,Time]),
         (retract(my_stats(_)) ; true),
         assert(my_stats(Time)),
         make_problem_into_node(I, G, Node),
         assert(Node),
-	start_solve(SOLN,NODES).
+	start_solve(SOLN,NODES))).
 planner_interface(G,I, SOLN,NODES):-
 	tell(user),nl,write('failure in initial node'),!.
 
@@ -1981,3 +1984,119 @@ sum_plan(Plan):-
    fail.
 sum_plan(Plan):-
    sum(Plan).
+   
+
+
+startOCL(Goal,Init):-
+  clean_problem,
+   dmsg('OCL-PLANNER-TASK'(Goal)),
+	must(planner_interface(Goal,Init,Sol,_,TNLst)),
+        show_result_and_clean(F,Id,Sol,TNLst).
+
+
+get_tasks(N,Goal,State):- htn_task(N,Goal,State).
+% get_tasks(N,Goal,State):- ocl:htn_task(N,Goal,State).
+get_tasks(N,Goal,State):- planner_task(N,Goal,State).
+
+%:- set_op_num(0).
+:-asserta(my_stats(0)).
+
+l_file(File):- \+ exists_file(File),!,forall(filematch(File,FM),l_file(FM)).
+l_file(F):- env_consult(ocl:F).
+l_file(F):-
+   if_defined(/*ocluser*/ocl:force_reload_mpred_file(F),
+              if_defined(/*ocluser*/ocl:with_mpred_consult(/*ocluser*/ocl:consult(F)),/*ocluser*/ocl:consult(F))).
+
+solve_file(F):-with_filematch(l_file(wfm(F))), doall(solve(_)).
+solve:- solve_file(test_hyhtn).
+
+
+:- multifile htn_task/3.
+:- dynamic htn_task/3.
+:- multifile planner_task/3.
+:- dynamic planner_task/3.
+
+
+
+with_domain_preds(Pred1):-
+ maplist(Pred1,
+   [method/6,
+    atomic_invariants/1,
+    inconsistent_constraint/1,
+    objects/2,
+    operator/4,
+    predicates/1,
+    sorts/2,
+    substate_classes/3]).
+    
+:- with_domain_preds(abolish).    
+:- with_domain_preds(multifile).
+:- with_domain_preds(dynamic).
+
+
+:-retractall(solution_file(_)).
+:-asserta(solution_file('/pack/logicmoo_ec/test/domains_ocl/freds.out')).
+
+% :-sleep(1).
+% :-tell(user),run_header_tests.
+
+
+
+lws:- listing(ocl:[method,
+operator,implied_invariant,atomic_invariants,inconsistent_constraint,predicates,objects,substate_classes,sorts,domain_name,planner_task_slow,planner_task,
+htn_task,tp_node,tn,current_num,goal_related,goal_related_search,solved_node,closed_node,tp_goal,final_node,node,op_score,gsstates,gsubstate_classes,related_op,
+objectsOfSort,atomic_invariantsC,objectsD,objectsC,gOperator,operatorC,opParent,methodC,is_of_sort,is_of_primitive_sort,temp_assertIndivConds]).
+
+lws(F):-tell(F),lws,told.
+
+:-export(test_ocl/1).
+:- dynamic(unload_ocl/1).
+
+time_as(Goal):- sformat(Name,'~w',[Goal]),time_as(Name,Goal).
+time_as(Name,Goal):-
+  statistics(runtime,[CP,_]),
+  statistics(walltime,[WT,_]),
+  notrace(Goal),
+   statistics(runtime,[CPE,_]),
+   statistics(walltime,[WTE,_]),
+   RTIM is (CPE-CP) /1000,
+   WTIM is (WTE-WT) /1000,
+   format(user_error,'~N~n~w: ~f (wall ~f)~n',[Name,RTIM,WTIM]),!.
+
+test_ocl:- update_changed_files,   
+   forall(time(solve(_N)),nl).
+
+test_ocl(File):- forall(filematch(File,FM),test_ocl0(FM)).
+
+test_ocl0(File):- !,
+  ignore(forall(retract(unload_ocl(Was)),unload_file(Was))),
+  with_domain_preds(abolish),
+  consult(File),
+  asserta(unload_ocl(File)),!,
+  test_ocl.
+
+test_ocl0(File):- 
+  time(locally(t_l:doing(test_ocl(File)), 
+   once((env_clear_doms_and_tasks,clean_problem,l_file(File),tasks)))).
+
+header_tests :-test_ocl('domains_ocl/*.ocl').
+  
+:-export(rr/0).
+:-export(rr1/0).
+:-export(t1/0).
+:-export(t2/0).
+rr:- test_ocl('domains_ocl/chameleonWorld.ocl').
+rr1:- test_ocl('domains_ocl/translog.ocl').
+
+t1:- test_ocl('test/domains_ocl/translogLM.pl').
+t2:- test_ocl('test/domains_ocl/translogLM4.ocl').
+t3:- test_ocl('test/domains_ocl/tyreLM.ocl').
+t4:- test_ocl('test/domains_ocl/translog.ocl').
+:- ensure_loaded(library(logicmoo_common)).
+:- fixup_exports.
+
+%:- include(translog4).
+
+%:-rr.
+
+

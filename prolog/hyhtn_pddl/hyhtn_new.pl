@@ -10,10 +10,6 @@
 %
 */
 %:-module(htncode,[]).
-
-:-multifile(user:push_env_ctx/0).
-:-dynamic(user:push_env_ctx/0).
-
 /* ***********************************/
 /* Douglas Miles 2005, 2010, 2014 */
 /* Denton, TX */
@@ -25,31 +21,18 @@
 :- use_module(library(logicmoo_planner)).
 
 :- kb_shared(baseKB:mpred_prop/3).
-
+:- multifile(user:push_env_ctx/0).
+:- dynamic(user:push_env_ctx/0).
 :- ensure_loaded(library(logicmoo/util_structs)).
 :- ensure_loaded(library(logicmoo/util_bb_env)).
 :- prolog_load_context(file,File),ain(user:env_source_file(File)).
 
 :-op(500,fx,env_call).
-/* htncode.pl */
 
-/* Donghong Liu */
-/* University of Huddersfield */
-/* September 2002 */
-/* **********************************/
+
 /* gipohyhtn.pl */
 /* HyHTN planning: do preprocess first  */
 /* make all method and operators primitive */
-
-
-planner_failure(Why,Info):-dmsg(error,Why-Info),banner_party(error,'FAILURE_PLANNER'),print_message(error,'FAILURE_PLANNER'(Why,Info)),!. %sleep(2).
-
-:-thread_local t_l:doing/1.
-
-statistics_runtime(CP):-statistics(runtime,[_,CP0]), (CP0==0 -> CP= 0.0000000000001 ; CP is (CP0/1000)) .  % runtime WAS process_cputime
-statistics_walltime(CP):-statistics(walltime,[_,CP0]), (CP0==0 -> CP= 0.0000000000001 ; CP is (CP0/1000)) .  % runtime WAS process_cputime
-
-
 
 /*
  * GIPO COPYRIGHT NOTICE, LICENSE AND DISCLAIMER.
@@ -74,300 +57,30 @@ statistics_walltime(CP):-statistics(walltime,[_,CP0]), (CP0==0 -> CP= 0.00000000
  * or in connection with the use or performance of this software.
  */
  /* gipohyhtn.pl */
-/* HyHTN planning: do preprocess first  */
-/* make all method and operators primitive */
-%:-use_module(library(system)).
-/*********************** initialisation**************/
 
-% :- unknown(error,fail).
-with_domain_preds(Pred1):-
- maplist(Pred1,
-   [method/6,
-    atomic_invariants/1,
-    inconsistent_constraint/1,
-    objects/2,
-    operator/4,
-    predicates/1,
-    sorts/2,
-    substate_classes/3]).
-    
-:- with_domain_preds(abolish).    
-:- with_domain_preds(multifile).
-:- with_domain_preds(dynamic).
+/* htncode.pl */
 
-:-dynamic my_stats/1. 
-
-
-:-multifile(on_call_decl_hyhtn/0).
-:-export(on_call_decl_hyhtn/0).
-% Tasks
-on_call_decl_hyhtn :- decl_env_mpred_dom([kb(dom,tasks),stubType(dyn)], ( htn_task/3, planner_task/3, planner_task_slow/3 )).
-
-on_call_decl_hyhtn :- decl_env_mpred_dom([stubType(dyn),kb(dom,cache)],(temp_assertIndivConds/1)). % Used for grounding operators
-on_call_decl_hyhtn :- decl_env_mpred_dom([stubType(dyn),kb(dom,cache)],(is_of_primitive_sort/2, is_of_sort/2)).
-on_call_decl_hyhtn :- decl_env_mpred_dom([stubType(dyn),kb(dom,cache)],(methodC/7, opParent/6,operatorC/5,gOperator/3)).
-on_call_decl_hyhtn :- decl_env_mpred_dom([stubType(dyn),kb(dom,cache)],(objectsC/2,objectsD/2,atomic_invariantsC/1)).% Used only dynamic objects
-on_call_decl_hyhtn :- decl_env_mpred_dom([stubType(dyn),kb(dom,cache)],(objectsOfSort/2)).      % Used to store all objects of a sort
-on_call_decl_hyhtn :- decl_env_mpred_dom([stubType(dyn),kb(dom,cache) /*stubType(with_pred(bb_op(_)))*/],(related_op/2, gsubstate_classes/3, gsstates/3)).  
-
-on_call_decl_hyhtn :- decl_env_mpred_task([stubType(dyn),kb(node,cache)],(initial_state/1)). 
-on_call_decl_hyhtn :- decl_env_mpred_task([stubType(dyn),kb(node,cache) /*stubType(with_pred(bb_op(_)))*/],(op_score/2)). 
-on_call_decl_hyhtn :- decl_env_mpred_task([stubType(dyn),kb(node,cache)/*stubType(rec_db)*/],(node/5,final_node/1)).
-on_call_decl_hyhtn :- decl_env_mpred_task([stubType(dyn),kb(node,cache)],(tp_goal/3,closed_node/6,solved_node/2, goal_related_search/1)). 
-%on_call_decl_hyhtn :- decl_env_mpred_task([stubType(rec_db),kb(node,cache)],(goal_related/3)).
-on_call_decl_hyhtn :- decl_env_mpred_task([stubType(dyn),kb(node,cache)],(goal_related/3)).
-on_call_decl_hyhtn :- decl_env_mpred_task([stubType(dyn),kb(node,cache)],(current_num/2)).
-on_call_decl_hyhtn :- decl_env_mpred_task([stubType(dyn),kb(node,cache)],(tn/6)). % Used to store full expanded steps
-on_call_decl_hyhtn :- decl_env_mpred_task([stubType(dyn),kb(node,cache)],(tp_node/6)).
-% on_call_decl_hyhtn :- decl_env_mpred_task([stubType(dyn),kb(node,cache)],(tp_node_cached/6)).
-% on_call_decl_hyhtn :- decl_env_mpred_task([stubType(with_pred(gvar_list(tnodeSORTED))),kb(node,cache)],tp_node/6).
-
-% Tasks
-on_call_decl_hyhtn :- decl_env_mpred_dom([kb(dom,tasks),stubType(dyn)], ( htn_task/3, planner_task/3, planner_task_slow/3 )).
-
-% Contents of a OCLh Domain
-on_call_decl_hyhtn :-  
-  decl_env_mpred_dom([kb(dom,file),stubType(dyn)],[domain_name/1,sorts/2,substate_classes/3,objects/2,predicates/1,inconsistent_constraint/1,atomic_invariants/1,
-  implied_invariant/2,operator/4,
-   % oper/4,
-   method/6]).
-
-:-export(call_decl_hyhtn/0).
-
-% :- rtrace.
-
-call_decl_hyhtn:-must(doall(on_call_decl_hyhtn)).
-
-% :- % 
-  %  call_decl_hyhtn.
-
-
-
-%%% ON :- initialization( profiler(_,walltime) ).
-%%% ON :- initialization(user:use_module(library(swi/pce_profile))).
-% :- qcompile_libraries.
-
-
-% :- rtrace.
-tryff(Call):- predicate_property(Call,_),!,once(tryf((Call,assert(passed_test_try(Call))))),fail.
-tryf(Call):- predicate_property(Call,_),!,catch(Call,E,dmsg(E = Call)).
-trye(Call):- catch(Call,E,((dmsg(error(E , Call)),throw(trace),Call))).
-
-:-dynamic(passed_test_try/1).
-:-dynamic(testing_already/0).
-
-check_passed_any:-not(not(passed_test_try(_))),nl,listing(passed_test_try/1).
-
-ttm:-retractall(passed_test_try(_)),fail.
-ttm:-testing_already,!.
-ttm:-asserta(testing_already), make, retractall(testing_already),fail.
-
-
-:-export(banner_party/2).
-banner_party(E,BANNER):- 
-  ansicall(yellow,(
-      format("% xxxxxxxxxxxxxxx ~w xxxxxxxxxxxxxxxxxxx~n",[E]),            
-      forall(t_l:doing(X),dmsg(E,doing(X))),
-      dmsg5(E,BANNER), 
-       format("% xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx~n",[]))).
-      
-      
-subst_eq_h(A,B,C,D):- nd_subst(A,B,C,D),!.
-subst_eq_h(A,B,C,D):- throw(trace), nd_subst(A,B,C,D),!.
-
-
-:-export(term_expansion_alias/2).
-term_expansion_alias(In,Out):-term_expansion_alias([],In,Out).
-term_expansion_alias(Not,In,Out):-term_alias(I,O),not(member(I,Not)),subst_eq_h(In,I,O,M), In\=@=M,!, term_expansion_alias([I|Not],M,Out).
-term_expansion_alias(_Not,InOut,InOut).
-term_alias(cond,se).
-term_alias(se,se).
-term_alias(state,ss).
-term_alias(trans,sc).
-term_alias(ne,dif).
-term_alias(neq,dif).
-% term_alias(htn_task,planner_task).
-term_alias(startOcl,start).
-term_alias(startOCL,start).
-
-
-%get_tasks(B, C, D) :-%show_call(get_env_ctx(A)),!, 
-%  if_defined(get_tasks(_A, B, C, D)).
-
-
-tasks:- 
- Call = get_tasks(N,Goal,State),
-   setof(Call,Call,List),list_to_set(List,Set),!,
-   env_info(kb(dom,file)),!,
-   once((ignore(forall(member(Call,Set),
-     locally(t_l:doing(tasks(N,Goal)),
-      ((
-      must(nonvar(Goal)),must(nonvar(State)),
-      ignore(N=Goal),      
-      must((term_expansion_alias((Goal:-State),(GGoal:-GState)))),
-      must(nonvar(GGoal)),must(nonvar(GState)),
-      banner_party(informational,('GOAL'(N):-GGoal)),
-      must(((once( once(startOCL(GGoal,GState))*->banner_party(informational,'SUCCESSS');banner_party(error,'FAILUR!!!!!!!!!!!!!!!!!!!!!!!!!!!E')))))))))))).
-
-t:- once(run_header_tests).
-
-tt:-catch(ttm,E,dmsg(E)),!.
-
-tt:-tryff((tasks)).
-tt:-tryff((task1)).
-tt:-tryff((task2)).
-tt:-tryff((task3)).
-tt:-tryff((task4)).
-tt:-tryff((task5)).
-tt:-tryff((task6)).
-tt:-tryff((task7)).
-tt:-tryff((task8)).
-tt:-tryff((task9)).
-tt:-tryff((task10)).
-tt:-tryff((task11)).
-tt:-tryff((task22)).
-tt:-tryff((task33)).
-tt:-tryff((task44)).
-tt:-check_passed_any,!.
-
-
-tdom:-tdom([htn1,ty,ocl1,r3]).
-tdom2:-tdom([ocl2,htn2,htn3,htn4]).
-
-tdomfile(F):-tdomcall(load_data_file(F)).
-tdomcall(Call):- trye(once((env_clear_doms_and_tasks,trye(Call),tt))).
-
-tdom([]):-!.
-tdom([H|T]):- !, tdom(H),tdom(T).
-tdom(H):- predicate_property(H,_),!, throw(trace),call(H).
-tdom(F):- tdom1(F),!.
-tdom(F):- expand_file_name(F,List),List\=[],!,tdom1(List).
-tdom(F):- throw(tdom(F)).
-
-tdom1([]):-!.
-tdom1([H|T]):- !, tdom(H),tdom(T).
-tdom1(F):- tdom2(F),!.
-tdom1(FIn):- atom(FIn),tdom2(FIn).
-
-tdom2(FIn):- tdom3(FIn),!.
-tdom2(FIn):- atom_concat('domains_ocl/',FIn,F), tdom3(F),!.
-
-tdom3(FIn):- tdom4(FIn).
-tdom3(FIn):- atom_concat(FIn,'htn',F),tdom4(F).
-tdom3(FIn):- atom_concat(FIn,'ocl',F),tdom4(F).
-
-tdom4(F):- exists_file(F),!,tdomfile(F).
-
-
-:- discontiguous(post_header_hook/0).
-post_header_hook:-retractall(canDoTermExp).
-% user:term_expansion(In,Out):- canDoTermExp,term_expansion_hyhtn(In,M),In\=@=M,expand_term(M,Out).
-% user:goal_expansion(In,Out):- canDoTermExp,term_expansion_hyhtn(In,M),In\=@=M,expand_goal(M,Out).
-post_header_hook:-asserta(canDoTermExp).
-
-:-export(env_clear_doms_and_tasks/0).
-env_clear_doms_and_tasks:- env_clear(kb(dom,file)),env_clear(kb(dom,tasks)),env_clear(kb(dom,cache)),!.
-   
-:- op(100,xfy,( /*ocluser*/ocl:('=>'))).
-
-% :-set_prolog_flag(verbose_file_search,true).
-post_header_hook:-set_prolog_flag(verbose_load,full).
-post_header_hook:-use_module(library(lists)).
-
-% :- must((current_op(P,FXY,(-)),arg(_,v(fy,fx),FXY),P =< 300)).
-:- style_check(-singleton).
-:- style_check(+discontiguous).
-
-
-%post_header_hook:-use_module(library(system)).
-:-if(exists_source(library(gui_tracer))).
-post_header_hook:- user:use_module(library(gui_tracer)),catch(guitracer,_,true).
-:-endif.
-post_header:- !.
-post_header:- dmsg(post_header),fail, forall(clause(post_header_hook,G),G). 
-
-
-:- discontiguous(header_tests/0).
-
-run_tests(Call) :- 
-  statistics_runtime(InTime),  
-  locally(doing(run_tests(Call)),
-   call_cleanup(Call, 
-  ((
- statistics_runtime(OutTime),
-  Time is OutTime - InTime,
-  banner_party(informational,runtests(Call) = time(Time)))))).
- 
-run_header_tests :- run_tests(forall(clause(header_tests,G),run_tests(G))).
-
-
-
-
-
-:- style_check(-singleton).
-:- style_check(-discontiguous).
-%:-use_module(library(system)).
-
-%:- asserta(t_l:disable_px).
-
+/* ***********************************/
+/* Donghong Liu */
+/* University of Huddersfield */
+/* September 2002 */
+/* **********************************/
 
 :-use_module(library(system)).
 
+/*********************** initialisation**************/
+:- dynamic op_num/1. 
+:- dynamic initial_node/1, final_node/1.
+:- dynamic methodC/7, operatorC/5, my_stats/1.
+:- dynamic sum/1.
+%%:- dynamic node/7,solved_node/5.
+:- dynamic tp_node/6,tn/6.
+:- dynamic solved_node/2.
+:- dynamic closed_node/6.
+:- dynamic gsubstate_classes/3.
+:- dynamic current_num/2.
+:- dynamic produce/4,goal_related/1. %%,achieved_goal/1.
 
-
-:- dynamic htn_task/3.
-:- multifile htn_task/3.
-:- dynamic planner_task/3.
-
-% htn_task(Id,Goal,Init):-planner_task(Id,Goal,Init).
-
-% The following elements are expected in the sort engineered domain model
-% 
-:-dynamic  
-
-  domain_name/1,
-  sorts/2,
-  objects/2,
-  predicates/1,
-  atomic_invariants/1,
-  substate_classes/3,
-  method/6,
-  operator/4,
-  implied_invariant/2,
-  inconsistent_constraint/1.
-  
-:-discontiguous  
-  domain_name/1,
-  sorts/2,
-  objects/2,
-  predicates/1,
-  atomic_invariants/1,
-  substate_classes/3,
-  method/6,
-  operator/4,
-  implied_invariant/2,
-  inconsistent_constraint/1.
-
-
-%  ss class expressions
-%  invariants:
-%   atomic invariants
-%   -ve invariants
-%   +ve invariants
-%  operators
-
-
-% for boot..
-:- dynamic kill_file/1,solution_file/1.
-%
-my_stats(0).
-solution_file(fred).
-
-
-%:-set_prolog_flag(unknown,fail).
-%:- unknown(error,fail).
-:- dynamic gsstates/3, gpred/2.
-:- op(100,xfy,'=>').
 %---------------------structure--------------------
 % for whole search:
 % node(Nodeid, Precond, Decomps, Temp, Statics)
@@ -381,48 +94,24 @@ solution_file(fred).
 % closed_node(TPid,Pre,from(Parentid),Score,Steps)
 %---------------------structure end--------------------
 
-:- dynamic op_num/1. 
-:- dynamic sum/1.
-%:- dynamic initial_node/1, final_node/1.
-:- dynamic methodC/7, operatorC/5, my_stats/1.
-%%:- dynamic node/7,,solved_node/5.
-:- dynamic tp_node/6,tn/6.
-:- dynamic solved_node/2.
-:- dynamic closed_node/6.
-:- dynamic gsubstate_classes/3.
-:- dynamic current_num/2.
-:- dynamic produce/4,goal_related/1. %%,achieved_goal/1.
 
+:- dynamic gsstates/3, gpred/2.
 %incr_op_num:- retact(op_num,X,X+1).
 %set_op_num(X):-flag(op_num,_,X).
 %current_op_num(X):- flag(op_num,X,X).
 
 
-
-startOCL(Goal,Init):-
-  clean_problem,
-   dmsg('OCL-PLANNER-TASK'(Goal)),
-	must(planner_interface(Goal,Init,Sol,_,TNLst)),
-        show_result_and_clean(F,Id,Sol,TNLst).
-
-
-get_tasks(N,Goal,State):- htn_task(N,Goal,State).
-% get_tasks(N,Goal,State):- ocl:htn_task(N,Goal,State).
-get_tasks(N,Goal,State):- planner_task(N,Goal,State).
-
-%:- set_op_num(0).
-:-asserta(my_stats(0)).
-
-l_file(File):- \+ exists_file(File),!,forall(filematch(File,FM),l_file(FM)).
-l_file(F):- env_consult(ocl:F).
-l_file(F):-
-   if_defined(/*ocluser*/ocl:force_reload_mpred_file(F),
-              if_defined(/*ocluser*/ocl:with_mpred_consult(/*ocluser*/ocl:consult(F)),/*ocluser*/ocl:consult(F))).
-
-solve_file(F):-with_filematch(l_file(wfm(F))), doall(solve(_)).
-solve:- solve_file(test_hyhtn).
+% for boot..
+:- dynamic kill_file/1,solution_file/1.
+%
+%:- unknown(error,fail).
+:- op(100,xfy,'=>').
 
 op_num(0).
+my_stats(0).
+solution_file(fred).
+
+%:-set_prolog_flag(unknown,fail).
 
 :- discontiguous solve/1.
 
@@ -498,48 +187,13 @@ solve(Id) :-
 %	write('END FILE'),nl,
 %	told,
 	clean_problem.
-
-show_result_and_clean(F,Id,Sol,TNLst):-
-   %ignore(solution_file(F)),
-	tell(user),
-	format('~NSOLUTION for TASK ~w~n',[Id]),
-	display_sol(Sol),
-        %write_out_test_data('.preClean',Id),
-      %  write('END FILE'),nl,nl,
-	nop((reverse(TNLst,TNForward), display_details(TNForward), write('END PLANNER RESULT'))),
-	told,
-	clean_problem.        
-
-write_out_test_data(_MoreID,_Id):-!.
-write_out_test_data(MoreID,Id):-
-  must((
-    
-    (var(Id)->statistics(walltime,[Id,_]);true),
-    (push_env_ctx-> A= pushed_ ; A=nonpushed_ ),
-    atom_concat(A,Id,TN),atom_concat(TN,MoreID,TTN),
-      lws(TTN))),!.
-
+	
 display_sol([]).
 display_sol([H|T]) :-
 	write(H),
 	nl,
 	display_sol(T).
 
-display_details([]):-!.
-display_details([H|T]):-!,display_details(H),display_details(T),!.
-display_details(tn(TN,Name,Pre,Post,Temp,Dec)):-
-%    write('method::Description:'),write(';'),
-    nl,write('BEGIN METHOD'),nl,write(TN),write(';'),
-    nl,write('Name:'),write(Name),write(';'),
-    nl,write('Pre-condition:'),write(Pre),write(';'),
-%    write('Index Transitions:'),write(Pre),write('=>'),write(Post1),write(';'),
-    nl,write('Index Transitions:'),write('=>'),write(Post),write(';'),
-%    write('Static:'),write(';'),
-    nl,write('Temporal Constraints:'),write(Temp),write(';'),
-    nl,write('Decomposition:'),write(Dec),write(';'),
-    nl.
-
-display_details(H):-dmsg((display_details:-H)).
 
 clean_problem:-	retractall(op_num(_)),
 	retractall(current_num(_,_)),
@@ -875,7 +529,7 @@ take_out_achieved(Pre,[],Post,Post):-!.
 % only Post conditions have variables
 take_out_achieved(Pre,[se(Sort,Obj,ST)|Post],Post0,Post1):-
     var(Obj),
-    append(Post0,[se(Sort,Obj,ST)],Post2),
+    append_dcut(Post0,[se(Sort,Obj,ST)],Post2),
     take_out_achieved(Pre,Post,Post2,Post1),!.
 take_out_achieved(Pre,[se(Sort,Obj,ST)|Post],Post0,Post1):-
     member(se(Sort,Obj,ST1),Pre),
@@ -883,11 +537,11 @@ take_out_achieved(Pre,[se(Sort,Obj,ST)|Post],Post0,Post1):-
     list_take(Pre,[se(Sort,Obj,ST1)],Pre2),
     take_out_achieved(Pre2,Post,Post2,Post1),!.
  
-% append only the different one
+% append_dcut only the different one
 append_diff(Sort,Obj,ST,ST1,Post0,Post0):-
     not_conflict(Sort,Obj,ST,ST1,STN),!.
 append_diff(Sort,Obj,ST,ST1,Post0,Post1):-
-    append(Post0,[se(Sort,Obj,ST)],Post1),!.
+    append_dcut(Post0,[se(Sort,Obj,ST)],Post1),!.
 % ---------------------------------------------------
  
 %1. if an achieve action meets an TN Pre and post meet
@@ -1087,15 +741,15 @@ expand_node(Statics,Statics1,Pre,Post,[step(HP,Name,_,Post0,unexp)|Rest],List,De
    expand_node(Statics,Statics1,Pre,Post,Rest,List,Dec1),!.
 expand_node(Statics,Statics1,Pre,Post,[step(HP,Name,_,Post0,unexp)|Rest],List,Dec1):-
    direct_expand_hp(HP,TN,Name,Pre,Post0,State,Statics,Statics2),
-   append(List,[step(HP,Name,Pre,State,exp(TN))],List2),
+   append_dcut(List,[step(HP,Name,Pre,State,exp(TN))],List2),
    remove_achieved_rest(State,Statics2,Rest,Rest1),
    make_to_steps(State,Post,Steps,Rest1),
-   append(Rest1,Steps,Rest2),
+   append_dcut(Rest1,Steps,Rest2),
    expand_node(Statics2,Statics1,State,Post,Rest2,List2,Dec1).
 expand_node(Statics,Statics1,Pre,Post,[step(HP,Name,_,Post0,unexp)|Rest],List,Dec1):-
    apply_op(Statics,Statics1,[step(HP,Name,Pre,Post0,unexp)|Rest],List,Dec1).
 expand_node(Statics,Statics1,Pre,Post,[step(HP,Name,Pre0,Post0,exp(TN))|TDec],List,Dec1):-
-   append(List,[step(HP,Name,Pre0,Post0,exp(TN))],List2),
+   append_dcut(List,[step(HP,Name,Pre0,Post0,exp(TN))],List2),
    expand_node(Statics,Statics1,Post0,Post,TDec,List2,Dec1),!.
 
 remove_achieved_rest(State,Statics,[],[]):-!.
@@ -1117,8 +771,8 @@ apply_op(Statics,Statics1,[step(HP,Name,Pre,[se(Sort,Obj,SE)],unexp)|Rest],List,
     not(member(step(_,OP,_,_,_),Rest)),
     make_to_steps(Pre,OPre,Steps,Rest),
     change_head_state(Pre,Steps,Steps1),
-    append(List,Steps1,List2),
-    append(List2,[step(HP,OP,undefd,[se(Sort,Obj,SE)],unexp)|Rest],Dec).
+    append_dcut(List,Steps1,List2),
+    append_dcut(List2,[step(HP,OP,undefd,[se(Sort,Obj,SE)],unexp)|Rest],Dec).
 %    tell(user),write('+'),told.
 apply_op(Statics,Statics1,[step(HP,Name,Pre,[se(SortN,Obj,SE)],unexp)|Rest],List,Dec):-
     find_prim_sort(SortN,PSortls),
@@ -1132,8 +786,8 @@ apply_op(Statics,Statics1,[step(HP,Name,Pre,[se(SortN,Obj,SE)],unexp)|Rest],List
     not(member(step(_,OP,_,_,_),Rest)),
     make_to_steps(Pre,OPre,Steps,Rest),
     change_head_state(Pre,Steps,Steps1),
-    append(List,Steps1,List2),
-    append(List2,[step(HP,OP,undefd,[se(Sort,Obj,SE)],unexp)|Rest],Dec).
+    append_dcut(List,Steps1,List2),
+    append_dcut(List2,[step(HP,OP,undefd,[se(Sort,Obj,SE)],unexp)|Rest],Dec).
 %    tell(user),write('+'),told.
 
 % make the achieve goal states [se(..),se(..),..] to separate steps
@@ -1211,7 +865,7 @@ assert_tnode1(TP,Pre,Post,Statics,Score,ExpDec,UnexpDec):-
 assert_tnode1(TP,Pre,Post,Statics,Score,ExpDec,UnexpDec):-
    get_score(Score,ExpDec,UnexpDec,Score1),
    gensym_special(tp,TP1),
-   append(ExpDec,UnexpDec,Dec),
+   append_dcut(ExpDec,UnexpDec,Dec),
    assert(tp_node(TP1,Pre,Post,Statics,Score1,Dec)),!.
 
 % combine the expanded steps to one
@@ -1589,10 +1243,10 @@ earliest_step(HP1,HPF,Temp,[HP2|TST],[HP2|TST1]):-
 
 % sort the steps, put the unordered steps in the front
 sort_steps2(OtherST,[],OrderedST1,OrderedST):-
-   append(OrderedST1,OtherST,OrderedST),!.
+   append_dcut(OrderedST1,OtherST,OrderedST),!.
 sort_steps2(Steps,[HP|THPS],List,OrderedST):-
    member(step(HP,N,Pre,Post,F),Steps),
-   append(List,[step(HP,N,Pre,Post,F)],List1),
+   append_dcut(List,[step(HP,N,Pre,Post,F)],List1),
    list_take(Steps,[step(HP,N,Pre,Post,F)],Steps1),
    sort_steps2(Steps1,THPS,List1,OrderedST),!.
 sort_steps2(Steps,[HP|THPS],List,OrderedST):-
@@ -1624,7 +1278,7 @@ push_to_primitive([step(HPID,_,_,_,exp(TN))|HPs],List,PHPs) :-
    push_to_primitive(Dec,List,Dec1),
    push_to_primitive(HPs,Dec1,PHPs),!.
 push_to_primitive([step(HPID,_,_,_,exp(Name))|HPs],List,PHPs):-
-   append(List,[Name],List1),
+   append_dcut(List,[Name],List1),
    push_to_primitive(HPs,List1,PHPs),!.
 
 
@@ -1689,7 +1343,7 @@ statics_consist_instance0(Invs,[ne_back(A,B)|TStatics]):-
    not(A==B),
    statics_consist_instance0(Invs,TStatics).
 statics_consist_instance0(Invs,[ne(A,B)|TStatics]):-
-   append(TStatics,[ne_back(A,B)],TStatics1),
+   append_dcut(TStatics,[ne_back(A,B)],TStatics1),
    statics_consist_instance0(Invs,TStatics1),!.
 statics_consist_instance0(Invs,[is_of_sort(Obj,Sort)|TStatics]):-
    is_of_sort(Obj,Sort),
@@ -1715,7 +1369,7 @@ statics_consist1(Invs,[ne_back(A,B)|TStatics]):-
    not(A==B),
    statics_consist1(Invs,TStatics),!.
 statics_consist1(Invs,[ne(A,B)|TStatics]):-
-   append(TStatics,[ne_back(A,B)],TStatics1),
+   append_dcut(TStatics,[ne_back(A,B)],TStatics1),
    statics_consist1(Invs,TStatics1),!.
 statics_consist1(Invs,[is_of_sort(Obj,Sort)|TStatics]):-
    get_sort_objects(Sort,Objs),
@@ -1739,12 +1393,12 @@ rem_statics([ss(S,X,Preds)|Post], [ss(S,X,PredR)|PostR],Rt1) :-
     filter_list(Preds, is_a_dynamic_pred,PredR),
     filter_list(Preds, is_a_static_pred, R),
     rem_statics(Post, PostR,Rt),
-    append(Rt,[is_of_sort(X,S)|R],Rt1),!.
+    append_dcut(Rt,[is_of_sort(X,S)|R],Rt1),!.
 rem_statics([se(S,X,Preds)|Post], [se(S,X,PredR)|PostR],Rt1) :-
     filter_list(Preds, is_a_dynamic_pred,PredR),
     filter_list(Preds, is_a_static_pred, R),
     rem_statics(Post, PostR,Rt),
-    append(Rt,[is_of_sort(X,S)|R],Rt1),!.
+    append_dcut(Rt,[is_of_sort(X,S)|R],Rt1),!.
 rem_statics([], [],[]) :-!.
 
 % check if a predicate is statics or not
@@ -1868,8 +1522,8 @@ change_op_representation:-
 get_preconditions([],Prev,Prev,Prev) :-!.
 get_preconditions([sc(S,X,From =>To)|Rest],Prev,[se(S,X,From1)|Pre],[se(S,X,To1)|Post]):-
      member_e(se(S,X,PSE),Prev),
-     append(PSE,From,From1),
-     append(PSE,To,To1),
+     append_dcut(PSE,From,From1),
+     append_dcut(PSE,To,To1),
      list_take(Prev,[se(S,X,PSE)],Prev1),
      get_preconditions(Rest,Prev1, Pre,Post),!.
 get_preconditions([sc(S,X,From =>To)|Rest],Prev,[se(S,X,From)|Pre],[se(S,X,To)|Post]):-
@@ -1886,14 +1540,14 @@ make_dec(A,[HD|TD],TD1,Temp,Temp1,Achieval,Achieval1):-
      current_num(sm,Num),
      replace_achieval_temp(Temp,Temp0,Num),
      make_ss_to_se(Goal,Goal0),
-     append(Achieval,Goal0,Achieval0),
+     append_dcut(Achieval,Goal0,Achieval0),
      make_dec(A,TD,TD1,Temp0,Temp1,Achieval0,Achieval1),!.
 make_dec(A,[HD|TD],TD1,Temp,Temp1,Achieval,Achieval1):-
      HD=..[achieve|Goal],
      not(current_num(sm,Num)),
      replace_achieval_temp(Temp,Temp0,1),
      make_ss_to_se(Goal,Goal0),
-     append(Achieval,Goal0,Achieval0),
+     append_dcut(Achieval,Goal0,Achieval0),
      make_dec(A,TD,TD1,Temp0,Temp1,Achieval0,Achieval1).
 make_dec(A,[HD|TD],[HD|TD1],Temp,Temp1,Achieval,Achieval1):-
      HD=..[DecName|Goal],
@@ -1968,13 +1622,13 @@ find_only_changed([se(Sort,Obj,ST)|Pre],Post,Pre0,Pre1,Post0,Post1):-
     find_only_changed(Pre,Post2,Pre3,Pre1,Post3,Post1),!.
 % other fail. 
 
-% append  only changed states
+% append_dcut  only changed states
 % not_conflict here means not changed
 append_changed(se(Sort,Obj,ST),se(Sort1,Obj,ST1),Pre0,Pre0,Post0,Post0):-
     not_conflict(Sort,Obj,ST,ST1,_),!.
 append_changed(se(Sort,Obj,ST),se(Sort1,Obj,ST1),Pre0,Pre3,Post0,Post3):-
-    append(Pre0,[se(Sort,Obj,ST)],Pre3),
-    append(Post0,[se(Sort,Obj,ST1)],Post3),!.
+    append_dcut(Pre0,[se(Sort,Obj,ST)],Pre3),
+    append_dcut(Post0,[se(Sort,Obj,ST1)],Post3),!.
 
 % change the states to primitive states
 make_se_primitive([],[]).
@@ -2003,7 +1657,7 @@ isemptylist([]):-!.
 gensym_num(Root,Num,Atom):-
      name(Root,Name),
      name(Num,Name1),
-     append(Name,Name1,Name2),
+     append_dcut(Name,Name1,Name2),
      name(Atom,Name2),!.
 
 
@@ -2020,7 +1674,7 @@ remove_dup([A|B],Z,C) :-
     member_e(A, Z),
     remove_dup(B, Z, C),! .
 remove_dup([A|B], Z, C):-
-    append(Z,[A],D),
+    append_dcut(Z,[A],D),
     remove_dup(B, D, C),!.
 
 member_e(X,[Y|_]):-
@@ -2037,7 +1691,7 @@ member_e(sc(Sort,Obj,SE1=>SE2),[sc(Sort,Obj1,SE1=>SE2)|_]):-
 member_e(X,[Y|L]):- member_e(X,L),!.
 
 
-% append_st: append two statics
+% append_st: append_dcut two statics
 % remove the constants that no need
 % instanciate the viables that all ready been bind
 % ------------------------------------------
@@ -2054,21 +1708,21 @@ remove_unneed([A|B], Z, C):-
     remove_unneed(B, Z, C),! .
 remove_unneed([A|B], Z, C):-
     var(A),
-    append(Z,[A],D),
+    append_dcut(Z,[A],D),
     remove_unneed(B, D, C),!.
 remove_unneed([A|B], Z, C):-
     ground(A),
     remove_unneed(B, Z, C),!.
 remove_unneed([A|B], Z, C):-
     A=..[ne|Paras],
-    append(Z,[A],D),
+    append_dcut(Z,[A],D),
     remove_unneed(B, D, C),!.
 remove_unneed([A|B], Z, C):-
     A=..[Pred|Paras],
     same_var_member(A,Z),
     remove_unneed(B, Z, C),!.
 remove_unneed([A|B], Z, C):-
-    append(Z,[A],D),
+    append_dcut(Z,[A],D),
     remove_unneed(B, D, C),!.
 
 same_var_member(Pred,[Pred1|List]):-
@@ -2265,8 +1919,8 @@ subsorts(Sort,Subsorts):-
 sort_down([],Subsorts,Subsorts):-!.
 sort_down([HOpen|TOpen],List,Sortslist):-
   sorts(HOpen,Sorts),
-  append(List,Sorts,List1),
-  append(TOpen,Sorts,Open1),
+  append_dcut(List,Sorts,List1),
+  append_dcut(TOpen,Sorts,Open1),
   sort_down(Open1,List1,Sortslist),!.
 sort_down([HOpen|TOpen],List,Sortslist):-
   sort_down(TOpen,List,Sortslist),!.
@@ -2291,7 +1945,7 @@ sort_up1(Sort,[],NPSorts,Sortslist,Sortslist):-!.
 sort_up1(Sort,[HNPSorts|TNPSorts],NPSorts,List,Sortslist):-
   sorts(HNPSorts,Sorts),
   member(Sort,Sorts),
-  append(List, [HNPSorts], List1),
+  append_dcut(List, [HNPSorts], List1),
   sort_up(HNPSorts,List1,Sortslist),!. 
 sort_up1(Sort,[HNPSorts|TNPSorts],NPSorts,List,Sortslist):-
   sort_up1(Sort,TNPSorts,NPSorts,List,Sortslist),!.
@@ -2305,15 +1959,14 @@ split_prim_noprim([HS|TS],PS,[HS|NP]):-
      split_prim_noprim(TS,PS,NP),!.
 
 
-
-
 % ----------------------utilities---------------------
+
 /*
 not(X):- \+X.
 member(X,[X|_]).
 member(X,[_|L]) :- member(X,L).
-append([],L,L):-!.
-append([H|T],L,[H|Z]) :- append(T,L,Z),!.
+append_dcut([],L,L):-!.
+append_dcut([H|T],L,[H|Z]) :- append_dcut(T,L,Z),!.
  */
 
 
@@ -2355,7 +2008,7 @@ gensym_special(Root,Atom) :-
                         getnum(Root,Num),
                         name(Root,Name1),
                         name(Num,Name2),
-                        append(Name1,Name2,Name),
+                        append_dcut(Name1,Name2,Name),
                         name(Atom,Name).
 
 getnum(Root,Num) :-
@@ -2365,7 +2018,7 @@ getnum(Root,Num) :-
 
 getnum(Root,1) :- asserta(current_num(Root,1)).
 
-% append_st: append two statics
+% append_st: append_dcut two statics
 
 /* is X is in the atomic_invariants then by defn its a static. */
 is_a_static_pred(X) :-
@@ -2383,7 +2036,7 @@ is_a_dynamic_pred(X) :-
 
 filter_list([X|Rest],Op,[X|Rest1]) :-
         Op =.. OL,
-        append(OL,[X],OL1),
+        append_dcut(OL,[X],OL1),
         Pred =.. OL1,
         call(Pred),
         filter_list(Rest,Op,Rest1),!.
@@ -2416,10 +2069,10 @@ xprod([X|Y],[A|E],D,(F,G)) :-
 % list of lists -> list
 
 flatten([HO|TO], List, O_List):-
-	append(HO, List, List_tmp),
+	append_dcut(HO, List, List_tmp),
 	flatten(TO, List_tmp, O_List),!.
 flatten([H|TO], List,O_List):-
-	append([H], List, List_tmp),
+	append_dcut([H], List, List_tmp),
 	flatten(TO, List_tmp, O_List).
 flatten([], [HList|T], O_List):-
 	HList = [],
@@ -2504,12 +2157,377 @@ sum_plan(Plan):-
    fail.
 sum_plan(Plan):-
    sum(Plan).
+
+
+startOCL(Goal,Init):-
+  clean_problem,
+   dmsg('OCL-PLANNER-TASK'(Goal)),
+	must(planner_interface(Goal,Init,Sol,_,TNLst)),
+        show_result_and_clean(F,Id,Sol,TNLst).
+
+
+get_tasks(N,Goal,State):- htn_task(N,Goal,State).
+% get_tasks(N,Goal,State):- ocl:htn_task(N,Goal,State).
+get_tasks(N,Goal,State):- planner_task(N,Goal,State).
+
+%:- set_op_num(0).
+:-asserta(my_stats(0)).
+
+l_file(File):- \+ exists_file(File),!,forall(filematch(File,FM),l_file(FM)).
+l_file(F):- env_consult(ocl:F).
+l_file(F):-
+   if_defined(/*ocluser*/ocl:force_reload_mpred_file(F),
+              if_defined(/*ocluser*/ocl:with_mpred_consult(/*ocluser*/ocl:consult(F)),/*ocluser*/ocl:consult(F))).
+
+solve_file(F):-with_filematch(l_file(wfm(F))), doall(solve(_)).
+solve:- solve_file(test_hyhtn).
+
+
+:- multifile htn_task/3.
+:- dynamic htn_task/3.
+:- multifile planner_task/3.
+:- dynamic planner_task/3.
+
+
+
+% The following elements are expected in the sort engineered domain model
+% 
+:-dynamic  
+  domain_name/1,
+  sorts/2,
+  objects/2,
+  predicates/1,
+  atomic_invariants/1,
+  substate_classes/3,
+  method/6,
+  operator/4,
+  implied_invariant/2,
+  inconsistent_constraint/1.
+incr_op_num:- 
+   retract(op_num(N)),
+   N1 is N+1,
+   assertz(op_num(N1)).
    
+:- dynamic is_hierarchy/1.      % the domain is hierarchy or not 
+:- dynamic odds_in_subset_substates/3. %save the substates have subsets
+:- dynamic max_length/1,lowest_score/1.
+
+:- dynamic 
+    objectsD/2, solved_node/2, current_num/2,
+    gpred/2,gsstates/3,
+    sum/1.
+    
+/*
+env_retractall(G):- retractall(G).
+env_retract(G):- retract(G).
+env_assert(G):- assertz(G).	
+env_asserta(G):- asserta(G).	
+env_call(G):- call(G).
+*/
+
+with_domain_preds(Pred1):-
+ maplist(Pred1,
+   [domain_name/1,
+    method/6,
+    atomic_invariants/1,
+    inconsistent_constraint/1,
+    implied_invariant/2,
+    objects/2,
+    operator/4,
+    predicates/1,
+    sorts/2,
+    substate_classes/3]).
+    
+:- with_domain_preds(abolish).    
+:- with_domain_preds(multifile).
+:- with_domain_preds(dynamic).
+
+show_result_and_clean(F,Id,Sol,TNLst):-
+   %ignore(solution_file(F)),
+	tell(user),
+	format('~NSOLUTION for TASK ~w~n',[Id]),
+	display_sol(Sol),
+        %write_out_test_data('.preClean',Id),
+      %  write('END FILE'),nl,nl,
+	nop((reverse(TNLst,TNForward), display_details(TNForward), write('END PLANNER RESULT'))),
+	told,
+	clean_problem.        
+
+write_out_test_data(_MoreID,_Id):-!.
+write_out_test_data(MoreID,Id):-
+  must((    
+    (var(Id)->statistics(walltime,[Id,_]);true),
+    (push_env_ctx-> A= pushed_ ; A=nonpushed_ ),
+    atom_concat(A,Id,TN),atom_concat(TN,MoreID,TTN),
+      lws(TTN))),!.
+
+display_details([]):-!.
+display_details([H|T]):-!,display_details(H),display_details(T),!.
+display_details(tn(TN,Name,Pre,Post,Temp,Dec)):-
+%    write('method::Description:'),write(';'),
+    nl,write('BEGIN METHOD'),nl,write(TN),write(';'),
+    nl,write('Name:'),write(Name),write(';'),
+    nl,write('Pre-condition:'),write(Pre),write(';'),
+%    write('Index Transitions:'),write(Pre),write('=>'),write(Post1),write(';'),
+    nl,write('Index Transitions:'),write('=>'),write(Post),write(';'),
+%    write('Static:'),write(';'),
+    nl,write('Temporal Constraints:'),write(Temp),write(';'),
+    nl,write('Decomposition:'),write(Dec),write(';'),
+    nl.
+
+display_details(H):-dmsg((display_details:-H)).
 
 
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* HyHTN planning: do preprocess first  */
+/* make all method and operators primitive */
+%:-use_module(library(system)).
+
+% :- unknown(error,fail).
+
+:-dynamic my_stats/1. 
+
+
+:-multifile(on_call_decl_hyhtn/0).
+:-export(on_call_decl_hyhtn/0).
+% Tasks
+on_call_decl_hyhtn :- decl_env_mpred_dom([kb(dom,tasks),stubType(dyn)], ( htn_task/3, planner_task/3, planner_task_slow/3 )).
+
+on_call_decl_hyhtn :- decl_env_mpred_dom([stubType(dyn),kb(dom,cache)],(temp_assertIndivConds/1)). % Used for grounding operators
+on_call_decl_hyhtn :- decl_env_mpred_dom([stubType(dyn),kb(dom,cache)],(is_of_primitive_sort/2, is_of_sort/2)).
+on_call_decl_hyhtn :- decl_env_mpred_dom([stubType(dyn),kb(dom,cache)],(methodC/7, opParent/6,operatorC/5,gOperator/3)).
+on_call_decl_hyhtn :- decl_env_mpred_dom([stubType(dyn),kb(dom,cache)],(objectsC/2,objectsD/2,atomic_invariantsC/1)).% Used only dynamic objects
+on_call_decl_hyhtn :- decl_env_mpred_dom([stubType(dyn),kb(dom,cache)],(objectsOfSort/2)).      % Used to store all objects of a sort
+on_call_decl_hyhtn :- decl_env_mpred_dom([stubType(dyn),kb(dom,cache) /*stubType(with_pred(bb_op(_)))*/],(related_op/2, gsubstate_classes/3, gsstates/3)).  
+
+on_call_decl_hyhtn :- decl_env_mpred_task([stubType(dyn),kb(node,cache)],(initial_state/1)). 
+on_call_decl_hyhtn :- decl_env_mpred_task([stubType(dyn),kb(node,cache) /*stubType(with_pred(bb_op(_)))*/],(op_score/2)). 
+on_call_decl_hyhtn :- decl_env_mpred_task([stubType(dyn),kb(node,cache)/*stubType(rec_db)*/],(node/5,final_node/1)).
+on_call_decl_hyhtn :- decl_env_mpred_task([stubType(dyn),kb(node,cache)],(tp_goal/3,closed_node/6,solved_node/2, goal_related_search/1)). 
+%on_call_decl_hyhtn :- decl_env_mpred_task([stubType(rec_db),kb(node,cache)],(goal_related/3)).
+on_call_decl_hyhtn :- decl_env_mpred_task([stubType(dyn),kb(node,cache)],(goal_related/3)).
+on_call_decl_hyhtn :- decl_env_mpred_task([stubType(dyn),kb(node,cache)],(current_num/2)).
+on_call_decl_hyhtn :- decl_env_mpred_task([stubType(dyn),kb(node,cache)],(tn/6)). % Used to store full expanded steps
+on_call_decl_hyhtn :- decl_env_mpred_task([stubType(dyn),kb(node,cache)],(tp_node/6)).
+% on_call_decl_hyhtn :- decl_env_mpred_task([stubType(dyn),kb(node,cache)],(tp_node_cached/6)).
+% on_call_decl_hyhtn :- decl_env_mpred_task([stubType(with_pred(gvar_list(tnodeSORTED))),kb(node,cache)],tp_node/6).
+
+% Tasks
+on_call_decl_hyhtn :- decl_env_mpred_dom([kb(dom,tasks),stubType(dyn)], ( htn_task/3, planner_task/3, planner_task_slow/3 )).
+
+% Contents of a OCLh Domain
+on_call_decl_hyhtn :-  
+  decl_env_mpred_dom([kb(dom,file),stubType(dyn)],[domain_name/1,sorts/2,substate_classes/3,objects/2,predicates/1,inconsistent_constraint/1,atomic_invariants/1,
+  implied_invariant/2,operator/4,
+   % oper/4,
+   method/6]).
+
+:-export(call_decl_hyhtn/0).
+
+% :- rtrace.
+
+call_decl_hyhtn:-must(doall(on_call_decl_hyhtn)).
+
+% :- % 
+  %  call_decl_hyhtn.
+
+
+
+%%% ON :- initialization( profiler(_,walltime) ).
+%%% ON :- initialization(user:use_module(library(swi/pce_profile))).
+% :- qcompile_libraries.
+
+
+% :- rtrace.
+tryff(Call):- predicate_property(Call,_),!,once(tryf((Call,assert(passed_test_try(Call))))),fail.
+tryf(Call):- predicate_property(Call,_),!,catch(Call,E,dmsg(E = Call)).
+trye(Call):- catch(Call,E,((dmsg(error(E , Call)),throw(trace),Call))).
+
+:-dynamic(passed_test_try/1).
+:-dynamic(testing_already/0).
+
+check_passed_any:-not(not(passed_test_try(_))),nl,listing(passed_test_try/1).
+
+ttm:-retractall(passed_test_try(_)),fail.
+ttm:-testing_already,!.
+ttm:-asserta(testing_already), make, retractall(testing_already),fail.
+
+
+:-export(banner_party/2).
+banner_party(E,BANNER):- 
+  ansicall(yellow,(
+      format("% xxxxxxxxxxxxxxx ~w xxxxxxxxxxxxxxxxxxx~n",[E]),            
+      forall(t_l:doing(X),dmsg(E,doing(X))),
+      dmsg5(E,BANNER), 
+       format("% xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx~n",[]))).
+      
+      
+subst_eq_h(A,B,C,D):- nd_subst(A,B,C,D),!.
+subst_eq_h(A,B,C,D):- throw(trace), nd_subst(A,B,C,D),!.
+
+
+:-export(term_expansion_alias/2).
+term_expansion_alias(In,Out):-term_expansion_alias([],In,Out).
+term_expansion_alias(Not,In,Out):-term_alias(I,O),not(member(I,Not)),subst_eq_h(In,I,O,M), In\=@=M,!, term_expansion_alias([I|Not],M,Out).
+term_expansion_alias(_Not,InOut,InOut).
+term_alias(cond,se).
+term_alias(se,se).
+term_alias(state,ss).
+term_alias(trans,sc).
+term_alias(ne,dif).
+term_alias(neq,dif).
+% term_alias(htn_task,planner_task).
+term_alias(startOcl,start).
+term_alias(startOCL,start).
+
+
+%get_tasks(B, C, D) :-%show_call(get_env_ctx(A)),!, 
+%  if_defined(get_tasks(_A, B, C, D)).
+
+
+tasks:- 
+ Call = get_tasks(N,Goal,State),
+   setof(Call,Call,List),list_to_set(List,Set),!,
+   env_info(kb(dom,file)),!,
+   once((ignore(forall(member(Call,Set),
+     locally(t_l:doing(tasks(N,Goal)),
+      ((
+      must(nonvar(Goal)),must(nonvar(State)),
+      ignore(N=Goal),      
+      must((term_expansion_alias((Goal:-State),(GGoal:-GState)))),
+      must(nonvar(GGoal)),must(nonvar(GState)),
+      banner_party(informational,('GOAL'(N):-GGoal)),
+      must(((once( once(startOCL(GGoal,GState))*->banner_party(informational,'SUCCESSS');banner_party(error,'FAILUR!!!!!!!!!!!!!!!!!!!!!!!!!!!E')))))))))))).
+
+t:- once(run_header_tests).
+
+tt:-catch(ttm,E,dmsg(E)),!.
+
+tt:-tryff((tasks)).
+tt:-tryff((task1)).
+tt:-tryff((task2)).
+tt:-tryff((task3)).
+tt:-tryff((task4)).
+tt:-tryff((task5)).
+tt:-tryff((task6)).
+tt:-tryff((task7)).
+tt:-tryff((task8)).
+tt:-tryff((task9)).
+tt:-tryff((task10)).
+tt:-tryff((task11)).
+tt:-tryff((task22)).
+tt:-tryff((task33)).
+tt:-tryff((task44)).
+tt:-check_passed_any,!.
+
+
+tdom:-tdom([htn1,ty,ocl1,r3]).
+tdom2:-tdom([ocl2,htn2,htn3,htn4]).
+
+tdomfile(F):-tdomcall(load_data_file(F)).
+tdomcall(Call):- trye(once((env_clear_doms_and_tasks,trye(Call),tt))).
+
+tdom([]):-!.
+tdom([H|T]):- !, tdom(H),tdom(T).
+tdom(H):- predicate_property(H,_),!, throw(trace),call(H).
+tdom(F):- tdom1(F),!.
+tdom(F):- expand_file_name(F,List),List\=[],!,tdom1(List).
+tdom(F):- throw(tdom(F)).
+
+tdom1([]):-!.
+tdom1([H|T]):- !, tdom(H),tdom(T).
+tdom1(F):- tdom2(F),!.
+tdom1(FIn):- atom(FIn),tdom2(FIn).
+
+tdom2(FIn):- tdom3(FIn),!.
+tdom2(FIn):- atom_concat('domains_ocl/',FIn,F), tdom3(F),!.
+
+tdom3(FIn):- tdom4(FIn).
+tdom3(FIn):- atom_concat(FIn,'htn',F),tdom4(F).
+tdom3(FIn):- atom_concat(FIn,'ocl',F),tdom4(F).
+
+tdom4(F):- exists_file(F),!,tdomfile(F).
+
+
+:- discontiguous(post_header_hook/0).
+post_header_hook:-retractall(canDoTermExp).
+% user:term_expansion(In,Out):- canDoTermExp,term_expansion_hyhtn(In,M),In\=@=M,expand_term(M,Out).
+% user:goal_expansion(In,Out):- canDoTermExp,term_expansion_hyhtn(In,M),In\=@=M,expand_goal(M,Out).
+post_header_hook:-asserta(canDoTermExp).
+
+:-export(env_clear_doms_and_tasks/0).
+env_clear_doms_and_tasks:- env_clear(kb(dom,file)),env_clear(kb(dom,tasks)),env_clear(kb(dom,cache)),!.
+   
+:- op(100,xfy,( /*ocluser*/ocl:('=>'))).
+
+% :-set_prolog_flag(verbose_file_search,true).
+post_header_hook:-set_prolog_flag(verbose_load,full).
+post_header_hook:-use_module(library(lists)).
+
+% :- must((current_op(P,FXY,(-)),arg(_,v(fy,fx),FXY),P =< 300)).
+:- style_check(-singleton).
+:- style_check(+discontiguous).
+
+
+%post_header_hook:-use_module(library(system)).
+:-if(exists_source(library(gui_tracer))).
+post_header_hook:- user:use_module(library(gui_tracer)),catch(guitracer,_,true).
+:-endif.
+post_header:- !.
+post_header:- dmsg(post_header),fail, forall(clause(post_header_hook,G),G). 
+
+
+:- discontiguous(header_tests/0).
+
+run_tests(Call) :- 
+  statistics_runtime(InTime),  
+  locally(doing(run_tests(Call)),
+   call_cleanup(Call, 
+  ((
+ statistics_runtime(OutTime),
+  Time is OutTime - InTime,
+  banner_party(informational,runtests(Call) = time(Time)))))).
+ 
+run_header_tests :- run_tests(forall(clause(header_tests,G),run_tests(G))).
+
+
+
+%:- asserta(t_l:disable_px).
+
+% htn_task(Id,Goal,Init):-planner_task(Id,Goal,Init).
+
+
+
+
+%  ss class expressions
+%  invariants:
+%   atomic invariants
+%   -ve invariants
+%   +ve invariants
+%  operators
+
+:- multifile(planner_task/3).
+:- dynamic(planner_task/3).
+% planner_task(A,B,C):- htn_task(A,B,C).
+:- multifile(htn_task/3).
+:- dynamic(htn_task/3).
 
 :-retractall(solution_file(_)).
 :-asserta(solution_file('/pack/logicmoo_ec/test/domains_ocl/freds.out')).
@@ -2575,5 +2593,15 @@ t4:- test_ocl('test/domains_ocl/translog.ocl').
 %:- include(translog4).
 
 %:-rr.
+
+
+
+
+planner_failure(Why,Info):-dmsg(error,Why-Info),banner_party(error,'FAILURE_PLANNER'),print_message(error,'FAILURE_PLANNER'(Why,Info)),!. %sleep(2).
+
+:-thread_local t_l:doing/1.
+
+statistics_runtime(CP):-statistics(runtime,[_,CP0]), (CP0==0 -> CP= 0.0000000000001 ; CP is (CP0/1000)) .  % runtime WAS process_cputime
+statistics_walltime(CP):-statistics(walltime,[_,CP0]), (CP0==0 -> CP= 0.0000000000001 ; CP is (CP0/1000)) .  % runtime WAS process_cputime
 
 

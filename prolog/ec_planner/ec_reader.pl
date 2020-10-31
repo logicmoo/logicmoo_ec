@@ -497,7 +497,7 @@ fix_predname(Happens, Happens):- builtin_pred(Happens).
 fix_predname(F, New):- downcase_atom(F, DC), F\==DC, !, fix_predname(DC, New).
 
 
-call_pel_directive(B):- pprint_ecp_cmt(red,call_pel_directive(B)).
+system:call_pel_directive(B):- pprint_ecp_cmt(red,call_pel_directive(B)).
 
 
 my_unCamelcase(X, Y):- atom(X), fix_predname(X, Y), !.

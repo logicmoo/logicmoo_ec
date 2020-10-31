@@ -82,6 +82,10 @@ test_logicmoo_lps_sanity:-
   test_logicmoo_lps('../test/lps_user_examples/*goat*.pl'),!,
   nodebug(lps(term_expand)),!.
 
+:- dynamic user:prolog_file_type/2.
+:- multifile user:prolog_file_type/2.
+
+user:prolog_file_type(lps, prolog).
 
 
      
