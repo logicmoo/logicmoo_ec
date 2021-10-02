@@ -92,8 +92,8 @@ planner_solve_abs_file(DomainFile, ProblemFile):-
 planner_solve_abs_file(DomainFile, ProblemFile, File):- slow_on(File),!,wdmsg(slow_on(DomainFile, ProblemFile)).
 planner_solve_abs_file(DomainFile, ProblemFile, File):-
                 nop(time((test_solve_files(DomainFile, ProblemFile)))),
-                nop(time(show_call(solve_files_w_ocl(DomainFile, ProblemFile)))),
-                call(time(show_call(solve_files_w_lps(DomainFile, ProblemFile)))),
+                (time(show_call(logicmoo_ocl_and_pddl:solve_files_w_ocl(DomainFile, ProblemFile)))),
+                nop(time(show_call(solve_files_w_lps(DomainFile, ProblemFile)))),
                 !.
 
 test_solve_files(D,P):- call(call,solve_files,D,P).
@@ -238,16 +238,16 @@ pddl_test_unit(monkey) :- planner_solve_files(pddl('hakank-pddl/monkey-domain.pd
 :- flag(time_used,_,0).
 :- flag(time_used_other,_,0).
 
-:- if(gethostname(c3po);gethostname(ubuntu);gethostname(titan)).
+%:- if(gethostname(c3po);gethostname(ubuntu);gethostname(titan)).
 % :- debug,(must(test_blocks)).
 % :- test_all(5). % should be 7
 % :- test_all(7).
-:- endif.
+%:- endif.
 %:- show_call(flag(time_used_other,W,W)).
 %:- show_call(flag(time_used,W,W)).
 
-
-
+% :- xlisting(logicmoo_planner).
+% :- xlisting(test).
 
 :- fixup_exports.
 

@@ -5,12 +5,12 @@
 
 do_test_cakes(N) :- abdemo_special(loops,[holds_at(num_cakes(N),t)],R).
 
-%do_test(1) :- do_test_cakes(1).
-%do_test(0) :- do_test_cakes(0).
-do_test(4) :- do_test_cakes(4).
-do_test(5) :- do_test_cakes(5).
-do_test(6) :- \+ do_test_cakes(6).
-do_test(3) :- do_test_cakes(3).
+%do_ec_test(1) :- do_test_cakes(1).
+%do_ec_test(0) :- do_test_cakes(0).
+do_ec_test(4) :- do_test_cakes(4).
+do_ec_test(5) :- do_test_cakes(5).
+do_ec_test(6) :- \+ do_test_cakes(6).
+do_ec_test(3) :- do_test_cakes(3).
 
 fluent(num_cakes(_)).
 
@@ -32,11 +32,17 @@ axiom(terminates(eat_cakes(Eat),num_cakes(N),T), [call((number(E),Eat>0)),holds_
 abducible(dummy).
 
 
-:- listing(ec_current_domain_db).
+:- mpred_test(show_ec_current_domain_db).
 
 
-:- run_tests.
+:- run_ec_tests.
 
 
 
+
+
+% EDIT: https://github.com/logicmoo/logicmoo_workspace/edit/master/packs_sys/logicmoo_ec/test/ec_planner/ectest/test_eat_cake_2.pl 
+% JENKINS: https://jenkins.logicmoo.org/job/logicmoo_workspace/lastBuild/testReport/logicmoo.ec.ec_planner.ectest/TEST_EAT_CAKE_2/ 
+% ISSUE_SEARCH: https://github.com/logicmoo/logicmoo_workspace/issues?q=is%3Aissue+label%3ATEST_EAT_CAKE_2 
+% ISSUE: https://github.com/logicmoo/logicmoo_workspace/issues/ 
 

@@ -12,10 +12,10 @@
 
 */
 
-do_test(mail1)   :- abdemo_special(loops,[holds_at(inRoom(p1,r2),t)],R).
-do_test(mail2)   :- abdemo_special(loops,[holds_at(inRoom(p1,r3),t)],R).
-do_test(mail2T)   :- abdemo_special(loops,[holds_at(inRoom(p1,r3),T)],R).
-do_test(mail3)   :- abdemo_special(loops,[holds_at(inRoom(p1,r3),T),holds_at(neg(hasGot(agent(1),p1)),T)],R).
+do_ec_test(mail1)   :- abdemo_special(loops,[holds_at(inRoom(p1,r2),t)],R).
+do_ec_test(mail2)   :- abdemo_special(loops,[holds_at(inRoom(p1,r3),t)],R).
+do_ec_test(mail2T)   :- abdemo_special(loops,[holds_at(inRoom(p1,r3),T)],R).
+do_ec_test(mail3)   :- abdemo_special(loops,[holds_at(inRoom(p1,r3),T),holds_at(neg(hasGot(agent(1),p1)),T)],R).
 
 
 /* There should probably be some releases clauses for compound actions */
@@ -109,6 +109,12 @@ executable(do(Agnt,go_to_room(R))).
 */
 executable(do(Agn,Act)).
 
-:- run_tests.
+:- run_ec_tests.
 
 :- halt.
+
+% EDIT: https://github.com/logicmoo/logicmoo_workspace/edit/master/packs_sys/logicmoo_ec/test/ec_planner/ectest/test_mail_8.pl 
+% JENKINS: https://jenkins.logicmoo.org/job/logicmoo_workspace/lastBuild/testReport/logicmoo.ec.ec_planner.ectest/TEST_MAIL_8/ 
+% ISSUE_SEARCH: https://github.com/logicmoo/logicmoo_workspace/issues?q=is%3Aissue+label%3ATEST_MAIL_8 
+% ISSUE: https://github.com/logicmoo/logicmoo_workspace/issues/ 
+

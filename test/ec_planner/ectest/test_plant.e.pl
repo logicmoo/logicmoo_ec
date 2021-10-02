@@ -1,10 +1,10 @@
-:- include('../ec_test_incl').
+:- include('ec_test_incl').
 /*
    Test queries:
 
 */
 
-do_test(plant1) :- abdemo_special(easy,[holds_at(plant_safe,t)],R).
+do_ec_test(plant1) :- abdemo_special(easy,[holds_at(plant_safe,t)],R).
 
 
 axiom(holds_at(plant_safe,T),
@@ -39,7 +39,7 @@ executable(turn_off_boiler).
 
 
 
-:- run_tests.
+:- run_ec_tests.
 
-:- halt.
+% :- halt.
 
